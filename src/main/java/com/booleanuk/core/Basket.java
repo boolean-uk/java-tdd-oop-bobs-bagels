@@ -18,6 +18,9 @@ public class Basket {
         this.capacity = capacity;
     }
 
-
+    public boolean add(Item order){
+        this.items.add(order);
+        return true;
+    }
 
 }
