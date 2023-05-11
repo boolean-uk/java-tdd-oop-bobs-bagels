@@ -5,12 +5,12 @@ import java.util.ArrayList;
 public class Basket {
     ArrayList<Item> items;
     int capacity;
-    Inventory inventoryList;
+    Inventory inventory;
 
     public Basket() {
         this.items = new ArrayList<>();
-        this.capacity = 5;
-        this.inventoryList = new Inventory();
+        this.capacity = 3;
+        this.inventory = new Inventory();
     }
 
     public Basket(int capacity) {
@@ -19,8 +19,13 @@ public class Basket {
     }
 
     public boolean add(Item order){
+        if (!(this.items.size() < this.capacity)){
+            System.out.println("Could not add item, basket is full!");
+            return false;
+        }
+
+
         this.items.add(order);
         return true;
     }
-
 }
