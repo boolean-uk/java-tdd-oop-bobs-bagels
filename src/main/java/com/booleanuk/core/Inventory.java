@@ -1,6 +1,5 @@
 package com.booleanuk.core;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Inventory {
@@ -18,25 +17,25 @@ public class Inventory {
     Item creamCheeseFilling = new Item("Filling", 0.12, "FILX", "Cream Cheese");
     Item smokedSalmonFilling = new Item("Filling", 0.12, "FILS", "Smoked Salmon");
     Item hamFilling = new Item("Filling", 0.12, "FILH", "Ham");
-    HashMap<String, Item> listItems = new HashMap<>();
+    HashMap<String, Item> allItems = new HashMap<>();
     public Item getItem (String sku) {
-        listItems.put("BGLO", onionBagel);
-        listItems.put("BGLP", plainBagel);
-        listItems.put("BGLE", everythingBagel);
-        listItems.put("BGLS", sesameBagel);
-        listItems.put("COFB", blackCoffee);
-        listItems.put("COFW", whiteCoffee);
-        listItems.put("COFC", cappuccinoCoffee);
-        listItems.put("COFL", latteCoffee);
-        listItems.put("FILB", baconFilling);
-        listItems.put("FILE", eggFilling);
-        listItems.put("FILC", cheeseFilling);
-        listItems.put("FILX", creamCheeseFilling);
-        listItems.put("FILS", smokedSalmonFilling);
-        listItems.put("FILH", hamFilling);
+        allItems.put("BGLO", onionBagel);
+        allItems.put("BGLP", plainBagel);
+        allItems.put("BGLE", everythingBagel);
+        allItems.put("BGLS", sesameBagel);
+        allItems.put("COFB", blackCoffee);
+        allItems.put("COFW", whiteCoffee);
+        allItems.put("COFC", cappuccinoCoffee);
+        allItems.put("COFL", latteCoffee);
+        allItems.put("FILB", baconFilling);
+        allItems.put("FILE", eggFilling);
+        allItems.put("FILC", cheeseFilling);
+        allItems.put("FILX", creamCheeseFilling);
+        allItems.put("FILS", smokedSalmonFilling);
+        allItems.put("FILH", hamFilling);
 
-        if(listItems.containsKey(sku)) {
-            return listItems.get(sku);
+        if(allItems.containsKey(sku)) {
+            return allItems.get(sku);
         }
         System.out.println("This item does not exist");
         return null;

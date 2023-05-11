@@ -21,7 +21,7 @@ public class Basket {
 //        System.out.println("Basket is full, could not add bagel!");
 //        return false;
 //    }
-//
+
 //    public boolean removeItem(String sku) {
 //        if (this.items.contains(sku)) {
 //            this.items.remove(sku);
