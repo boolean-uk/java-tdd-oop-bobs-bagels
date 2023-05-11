@@ -8,14 +8,14 @@ public class BasketTest {
     public void testAddItem() {
         // Test for successfully added Bagel
         Basket basket = new Basket();
-        Assertions.assertTrue(basket.addItem("Avocado"));
-        Assertions.assertTrue(basket.items.contains("Avocado"));
+        Assertions.assertTrue(basket.addItem("BGLO".toUpperCase()));
+        Assertions.assertTrue(basket.items.contains("BGLO"));
 
         // Test for failure
-        basket.addItem("Smoked Salmon");
-        basket.addItem("Hummus");
-        Assertions.assertFalse(basket.addItem("Grondboontjeboter"));
-        Assertions.assertFalse(basket.items.contains("Grondboontjeboter"));
+        basket.addItem("BGLP");
+        basket.addItem("COFB");
+        Assertions.assertFalse(basket.addItem("NPZR"));
+        Assertions.assertFalse(basket.items.contains("NPZR"));
     }
 
     @Test
