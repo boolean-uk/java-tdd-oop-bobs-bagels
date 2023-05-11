@@ -49,4 +49,14 @@ public class BasketTest {
         Assertions.assertEquals(5, basket.capacity);
     }
 
+    @Test
+    public void testChangeCapacityFail(){
+        Basket basket = new Basket();
+        basket.changeCapacity(0);
+        Assertions.assertNotEquals(0, basket.capacity);
+        basket.changeCapacity(-1);
+        Assertions.assertNotEquals(-1, basket.capacity);
+
+    }
+
 }
