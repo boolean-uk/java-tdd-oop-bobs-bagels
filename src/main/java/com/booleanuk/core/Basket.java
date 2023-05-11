@@ -42,6 +42,11 @@ public class Basket {
         return true;
     }
 
+    public boolean changeCapacity(int newCapacity){
+        this.capacity = newCapacity;
+        return true;
+    }
+
 
 
 
