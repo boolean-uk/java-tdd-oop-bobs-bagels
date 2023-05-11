@@ -52,6 +52,7 @@ public class BasketTest {
     @Test
     public void testChangeCapacityFail(){
         Basket basket = new Basket();
+        Assertions.assertTrue(basket.changeCapacity(5));
         basket.changeCapacity(0);
         Assertions.assertNotEquals(0, basket.capacity);
         basket.changeCapacity(-1);

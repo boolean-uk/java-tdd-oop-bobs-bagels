@@ -43,6 +43,10 @@ public class Basket {
     }
 
     public boolean changeCapacity(int newCapacity){
+        if (newCapacity <= 0){
+            System.out.println("Cannot set the capacity lower than zero");
+            return false;
+        }
         this.capacity = newCapacity;
         return true;
     }
