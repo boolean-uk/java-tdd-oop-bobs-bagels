@@ -13,6 +13,8 @@ public class Item {
         this.type = type;
     }
 
-
-
+    public Item (String name, String type) {
+        this.name = name;
+        this.type = type;
+    }
 }

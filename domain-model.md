@@ -62,3 +62,13 @@ I want customers to only be able to order things that we stock in our inventory.
 | double price   |         |          |                  |
 | String type    |         |          |                  |
 |                |         |          |                  |
+
+## Inventory
+
+| Members                       | Methods | Scenario | Outcome / Output |
+|-------------------------------|---------|----------|------------------|
+| ArrayList<Item> inventoryList |         |          |                  |
+|                               |         |          |                  |
+|                               |         |          |                  |
+|                               |         |          |                  |
+
