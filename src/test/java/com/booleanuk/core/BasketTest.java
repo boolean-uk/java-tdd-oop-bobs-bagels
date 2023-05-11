@@ -10,6 +10,7 @@ public class BasketTest {
         Basket basket = new Basket();
         Assertions.assertTrue(basket.add(new Item("Bagel", "Plain")));
         Assertions.assertEquals(1, basket.items.size());
+        Assertions.assertEquals(0.39, basket.items.get(0).price);
     }
 
     @Test
@@ -25,13 +26,27 @@ public class BasketTest {
     public void testAddItemFailNotExistInInventory(){
         Basket basket = new Basket();
         Assertions.assertFalse(basket.add(new Item("Sandwich", "Plain")));
+        Assertions.assertFalse(basket.add(new Item("Bagel", "Poppy-seed")));
     }
 
     @Test
     public void testRemoveItemSuccess() {
         Basket basket = new Basket();
-        basket.add(new Item("Bagel", "Sesame"));
-        basket.add(new Item("Coffee", "Black"));
-        Assertions.assertTrue(basket.remove(new Item("Bagel", "Sesame")));
+        Item item1 = new Item("Bagel", "Plain");
+        Item item2 = new Item("Coffee", "Black");
+        Item item3 = new Item("Filling", "Egg");
+        basket.items.add(item1);
+        basket.items.add(item2);
+        basket.items.add(item3);
+        Assertions.assertTrue(basket.remove(item1));
+        Assertions.assertEquals(2, basket.items.size());
     }
+
+    @Test
+    public void testChangeCapacitySucces() {
+        Basket basket = new Basket();
+        basket.changeCapacity(5);
+        Assertions.assertEquals(5, basket.capacity);
+    }
+
 }

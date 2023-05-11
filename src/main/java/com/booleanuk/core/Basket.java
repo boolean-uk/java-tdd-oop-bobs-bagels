@@ -18,6 +18,7 @@ public class Basket {
         this.capacity = capacity;
     }
 
+
     public boolean add(Item order) {
         if (!(this.items.size() < this.capacity)) {
             System.out.println("Could not add item, basket is full.");
@@ -25,7 +26,7 @@ public class Basket {
         }
 
         for (Item item : inventory.inventoryList) {
-            if (item.name.equals(order.name)) {
+            if (item.name.equals(order.name) && item.type.equals(order.type)) {
                 this.items.add(item);
                 System.out.println("Item added to basket.");
                 return true;
@@ -40,5 +41,8 @@ public class Basket {
         System.out.println("Item removed from basket");
         return true;
     }
+
+
+
 
 }
