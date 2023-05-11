@@ -18,14 +18,20 @@ public class Basket {
         this.capacity = capacity;
     }
 
-    public boolean add(Item order){
-        if (!(this.items.size() < this.capacity)){
-            System.out.println("Could not add item, basket is full!");
+    public boolean add(Item order) {
+        if (!(this.items.size() < this.capacity)) {
+            System.out.println("Could not add item, basket is full.");
             return false;
         }
 
-
-        this.items.add(order);
-        return true;
+        for (Item item : inventory.inventoryList) {
+            if (item.name.equals(order.name)) {
+                this.items.add(item);
+                System.out.println("Item added to basket.");
+                return true;
+            }
+        }
+        System.out.println("Sorry, we don't have this item.");
+        return false;
     }
 }
