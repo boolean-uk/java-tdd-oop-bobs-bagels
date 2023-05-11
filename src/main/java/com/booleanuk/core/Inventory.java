@@ -1,6 +1,5 @@
 package com.booleanuk.core;
 
-import javax.lang.model.type.ArrayType;
 import java.util.ArrayList;
 
 public class Inventory {
