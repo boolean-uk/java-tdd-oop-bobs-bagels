@@ -16,4 +16,8 @@ public class Filling {
         this.price = price;
         this.SKU = SKU;
     }
+
+    public double getPrice() {
+        return price;
+    }
 }

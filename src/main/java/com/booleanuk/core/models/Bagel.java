@@ -5,7 +5,7 @@ import java.util.Arrays;
 
 public class Bagel {
     String variant;
-    double price;
+     double price;
     String SKU;
     ArrayList<Filling> fillings;
 
@@ -18,5 +18,13 @@ public class Bagel {
 
     public void addFillings(Filling[] fillings) {
         this.fillings.addAll(Arrays.asList(fillings));
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public ArrayList<Filling> getFillings() {
+        return fillings;
     }
 }

@@ -9,9 +9,9 @@ import java.util.List;
 
 public class Invetory {
 
-    List<String> bagels = new ArrayList<>();
-    List<String> coffees = new ArrayList<>();
-    List<String> fillings = new ArrayList<>();
+    List<Bagel> bagels = new ArrayList<>();
+    List<Coffee> coffees = new ArrayList<>();
+    List<Filling> fillings = new ArrayList<>();
 
     public Invetory() {
         Bagel bagel0 = new Bagel("Onion", 0.49, "BGLO");
@@ -31,21 +31,21 @@ public class Invetory {
         Coffee coffee2 = new Coffee("Capuccino", 1.29, "COFC");
         Coffee coffee3 = new Coffee("Latte", 1.29, "COFL");
 
-        bagels.add("BGLO");
-        bagels.add("BGLP");
-        bagels.add("BGLE");
-        bagels.add("BGLS");
+        bagels.add(bagel0);
+        bagels.add(bagel1);
+        bagels.add(bagel2);
+        bagels.add(bagel3);
 
-        coffees.add("COFB");
-        coffees.add("COFW");
-        coffees.add("COFC");
-        coffees.add("COFL");
+        coffees.add(coffee0);
+        coffees.add(coffee1);
+        coffees.add(coffee2);
+        coffees.add(coffee3);
 
-        fillings.add("FILB");
-        fillings.add("FILE");
-        fillings.add("FILC");
-        fillings.add("FILX");
-        fillings.add("FILS");
-        fillings.add("FILH");
+        fillings.add(filling0);
+        fillings.add(filling1);
+        fillings.add(filling2);
+        fillings.add(filling3);
+        fillings.add(filling4);
+        fillings.add(filling5);
     }
 }
