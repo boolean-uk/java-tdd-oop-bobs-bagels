@@ -1,5 +1,8 @@
 package com.booleanuk.core;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+
 public class Inventory {
     Item onionBagel = new Item("Bagel", 0.49, "BGLO", "Onion");
     Item plainBagel = new Item("Bagel", 0.39, "BGLP", "Plain");
@@ -15,5 +18,28 @@ public class Inventory {
     Item creamCheeseFilling = new Item("Filling", 0.12, "FILX", "Cream Cheese");
     Item smokedSalmonFilling = new Item("Filling", 0.12, "FILS", "Smoked Salmon");
     Item hamFilling = new Item("Filling", 0.12, "FILH", "Ham");
+    HashMap<String, Item> listItems = new HashMap<>();
+    public Item getItem (String sku) {
+        listItems.put("BGLO", onionBagel);
+        listItems.put("BGLP", plainBagel);
+        listItems.put("BGLE", everythingBagel);
+        listItems.put("BGLS", sesameBagel);
+        listItems.put("COFB", blackCoffee);
+        listItems.put("COFW", whiteCoffee);
+        listItems.put("COFC", cappuccinoCoffee);
+        listItems.put("COFL", latteCoffee);
+        listItems.put("FILB", baconFilling);
+        listItems.put("FILE", eggFilling);
+        listItems.put("FILC", cheeseFilling);
+        listItems.put("FILX", creamCheeseFilling);
+        listItems.put("FILS", smokedSalmonFilling);
+        listItems.put("FILH", hamFilling);
+
+        if(listItems.containsKey(sku)) {
+            return listItems.get(sku);
+        }
+        System.out.println("This item does not exist");
+        return null;
+    }
 
 }

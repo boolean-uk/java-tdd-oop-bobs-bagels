@@ -12,10 +12,10 @@ public class Basket {
         this.basketCapacity = 3;
         this.inventory = new Inventory();
     }
-//
+
 //    public boolean addItem(String sku){
 //        if (this.items.size() < this.basketCapacity){
-//            this.items.add(sku);
+//            this.items.add(inventory.getItem(sku.toUpperCase()));
 //            return true;
 //        }
 //        System.out.println("Basket is full, could not add bagel!");
