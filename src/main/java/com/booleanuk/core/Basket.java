@@ -35,5 +35,10 @@ public class Basket {
         return false;
     }
 
+    public boolean remove(Item order){
+        this.items.remove(order);
+        System.out.println("Item removed from basket");
+        return true;
+    }
 
 }
