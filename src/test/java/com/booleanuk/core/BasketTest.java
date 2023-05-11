@@ -87,4 +87,23 @@ public class BasketTest {
 
         Assertions.assertEquals(1, Basket.capacity);
     }
+
+    @Test
+    void totalCostShouldBe10() {
+        Basket.setCapacity(2);
+        Inventory.bagels.add(new Bagel());
+        Inventory.coffees.add(new Coffee());
+
+        Basket basket = new Basket();
+
+        Assertions.assertEquals(0.0, basket.totalCost());
+
+        basket.add(new Bagel());
+
+        Assertions.assertEquals(5.0, basket.totalCost());
+
+        basket.add(new Coffee());
+
+        Assertions.assertEquals(10.0, basket.totalCost());
+    }
 }

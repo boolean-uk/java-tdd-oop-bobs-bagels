@@ -67,4 +67,8 @@ public class Basket {
         capacity = size;
         return true;
     }
+
+    public double totalCost() {
+        return items.stream().reduce(0.0, (x, y) -> x + y.getCost(), Double::sum);
+    }
 }
