@@ -6,57 +6,66 @@ import org.junit.jupiter.api.Test;
 public class BasketTest {
     // addBagel() tests
     @Test
-    void addBagelShouldSucceed() {
+    void addShouldSucceed() {
+        Inventory inventory = new Inventory();
         Basket basket = new Basket();
+        Bagel bagel = new Bagel();
+
+        inventory.bagels.add(bagel);
 
         Assertions.assertEquals(1, Basket.capacity);
 
-        Bagel bagel = new Bagel();
-        Assertions.assertTrue(basket.addBagel(bagel));
+        Assertions.assertTrue(inventory.bagelAvailable(bagel.getType()));
 
-        Assertions.assertNotEquals(-1, basket.bagels.indexOf(bagel));
+        Assertions.assertTrue(basket.add(bagel));
+
+        Assertions.assertNotEquals(-1, basket.items.indexOf(bagel));
     }
     @Test
-    void addBagelShouldFail() {
+    void addShouldFail() {
+        Inventory inventory = new Inventory();
         Basket basket = new Basket();
         Bagel bagelA = new Bagel();
-        basket.addBagel(bagelA);
+
+        Assertions.assertFalse(inventory.bagelAvailable(bagelA.getType()));
+
+        basket.add(bagelA);
 
         Assertions.assertEquals(1, Basket.capacity);
 
         Bagel bagelB = new Bagel();
-        Assertions.assertFalse(basket.addBagel(bagelB));
+        Assertions.assertFalse(basket.add(bagelB));
 
-        Assertions.assertEquals(-1, basket.bagels.indexOf(bagelB));
+        Assertions.assertEquals(-1, basket.items.indexOf(bagelB));
 
         Assertions.assertEquals(NOTIFICATION.MAXCAPACITY, basket.notification);
     }
     // removeBagel() tests
     @Test
-    void removeBagelShouldSucceed() {
+    void removeShouldSucceed() {
         Basket basket = new Basket();
         Bagel bagel = new Bagel();
 
-        Assertions.assertEquals(-1, basket.bagels.indexOf(bagel));
+        Assertions.assertEquals(-1, basket.items.indexOf(bagel));
 
-        basket.addBagel(bagel);
+        basket.add(bagel);
 
-        Assertions.assertNotEquals(-1, basket.bagels.indexOf(bagel));
+        Assertions.assertNotEquals(-1, basket.items.indexOf(bagel));
 
-        Assertions.assertTrue(basket.removeBagel(bagel));
+        Assertions.assertTrue(basket.remove(bagel));
 
-        Assertions.assertEquals(-1, basket.bagels.indexOf(bagel));
+        Assertions.assertEquals(-1, basket.items.indexOf(bagel));
     }
     @Test
-    void removeBagelShouldFail() {
+    void removeShouldFail() {
         Basket basket = new Basket();
         Bagel bagel = new Bagel();
 
-        Assertions.assertEquals(-1, basket.bagels.indexOf(bagel));
+        Assertions.assertEquals(-1, basket.items.indexOf(bagel));
 
-        Assertions.assertFalse(basket.removeBagel(bagel));
+        Assertions.assertFalse(basket.remove(bagel));
 
-        Assertions.assertEquals(-1, basket.bagels.indexOf(bagel));
+        Assertions.assertEquals(-1, basket.items.indexOf(bagel));
 
         Assertions.assertEquals(NOTIFICATION.BAGELNOTFOUND, basket.notification);
     }

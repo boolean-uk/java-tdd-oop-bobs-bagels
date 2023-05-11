@@ -3,11 +3,11 @@ package com.booleanuk.core;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-public class FillingTest {
+public class CoffeeTest {
     @Test
     void getTypeShouldBeNormal() {
-        Filling filling = new Filling();
+        Coffee coffee = new Coffee();
 
-        Assertions.assertEquals(FILLINGTYPE.BACON, filling.getType());
+        Assertions.assertEquals(COFFEETYPE.BLACK, coffee.getType());
     }
 }

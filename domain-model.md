@@ -31,21 +31,23 @@
    So we don't get any weird requests,
    I want customers to only be able to order things that we stock in our inventory.
 
-| Classes   | Members                      | Methods                                | Scenario                          | Output      |
-|-----------|------------------------------|----------------------------------------|-----------------------------------|-------------|
-| Basket    | ArrayList\<Bagel> bagels     | addBagel(Bagel bagel, Filling filling) | If basket at capacity             | false       |
-|           |                              |                                        | If bagel/filling not in inventory | false       |
-|           |                              |                                        | Else                              | true        |
-|           |                              | removeBagel(Bagel bagel)               | If type exists                    | true        |
-|           |                              |                                        | Else                              | false       |
-|           |                              | totalCost()                            | Sum cost of all bagels            | double      |
-|           | static int capacity          | setCapacity(int size)                  | If size is less than 0            | false       |
-|           |                              |                                        | Else                              | true        |
-| Bagel     | double cost                  | getCost()                              |                                   | double      |
-|           | BAGELTYPE type               | getType()                              |                                   | BAGELTYPE   |
-| Filling   | double cost                  | getCost()                              |                                   | double      |
-|           | FILLINGTYPE type             | getType()                              |                                   | FILLINGTYPE |
-| Inventory | ArrayList\<Bagel> bagels     | bagelAvailable(Bagel bagel)            | If inventory contains bagel       | true        |
-|           |                              |                                        | Else                              | false       |
-|           | ArrayList\<Filling> fillings | fillingAvailable(Filling filling)      | If inventory contains filling     | true        |
-|           |                              |                                        | Else                              | false       |
+| Classes   | Members                      | Methods                           | Scenario                      | Output      |
+|-----------|------------------------------|-----------------------------------|-------------------------------|-------------|
+| Basket    | ArrayList\<Item> items       | add(Item item)                    | If basket at capacity         | false       |
+|           |                              |                                   | If item not in inventory      | false       |
+|           |                              |                                   | Else                          | true        |
+|           |                              | remove(Item item)                 | If type exists                | true        |
+|           |                              |                                   | Else                          | false       |
+|           |                              | totalCost()                       | Sum cost of all items         | double      |
+|           | static int capacity          | setCapacity(int size)             | If size is less than 0        | false       |
+|           |                              |                                   | Else                          | true        |
+| Item      | double cost                  | getCost()                         |                               | double      |
+| Bagel     | BAGELTYPE type               | getType()                         |                               | BAGELTYPE   |
+| Filling   | FILLINGTYPE type             | getType()                         |                               | FILLINGTYPE |
+| Coffee    | COFFEETYPE type              | getType()                         |                               | COFFEETYPE  |
+| Inventory | ArrayList\<Bagel> bagels     | bagelAvailable(Bagel bagel)       | If inventory contains bagel   | true        |
+|           |                              |                                   | Else                          | false       |
+|           | ArrayList\<Filling> fillings | fillingAvailable(Filling filling) | If inventory contains filling | true        |
+|           |                              |                                   | Else                          | false       |
+|           | ArrayList\<Coffee> Coffees   | coffeeAvailable(Coffee coffee)    | If inventory contains coffee  | true        |
+|           |                              |                                   | Else                          | false       |

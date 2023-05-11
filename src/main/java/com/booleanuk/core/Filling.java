@@ -1,13 +1,15 @@
 package com.booleanuk.core;
 
 enum FILLINGTYPE {
-    NORMAL
+    BACON,
+    EGG,
+    CHEESE,
+    CREAMCHEESE,
+    SMOKEDSALMON,
+    HAM
 }
-public class Filling {
-    private double cost;
+public class Filling extends Item {
     private FILLINGTYPE type;
-
-    public double getCost() { return cost; }
 
     public FILLINGTYPE getType() { return type; }
 }

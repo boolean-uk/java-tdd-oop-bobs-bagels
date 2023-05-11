@@ -1,14 +1,18 @@
 package com.booleanuk.core;
 
 enum BAGELTYPE {
-    NORMAL
+    ONION,
+    SESAME,
+    EVERYTHING
 }
-public class Bagel {
-    private double cost;
+public class Bagel extends Item {
     private BAGELTYPE type;
-    public Filling filling;
-
-    public double getCost() { return cost; }
 
     public BAGELTYPE getType() { return type; }
+
+    public String toString() {
+        return String.format(
+                "name: %s\ncost: %s", this.getClass().getSimpleName(), this.getCost()
+        );
+    }
 }

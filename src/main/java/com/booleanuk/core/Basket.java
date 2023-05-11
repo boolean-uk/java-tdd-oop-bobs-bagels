@@ -10,28 +10,28 @@ enum NOTIFICATION {
 }
 
 public class Basket {
-    ArrayList<Bagel> bagels;
+    ArrayList<Item> items;
     static int capacity = 1;
     NOTIFICATION notification;
 
     public Basket() {
-        this.bagels = new ArrayList<>(capacity);
+        this.items = new ArrayList<>(capacity);
         this.notification = NOTIFICATION.NOERROR;
     }
 
-    public boolean addBagel(Bagel bagel) {
-        if (bagels.size() >= capacity) {
+    public boolean add(Item item) {
+        if (items.size() >= capacity) {
             notification = NOTIFICATION.MAXCAPACITY;
             return false;
         }
 
         notification = NOTIFICATION.NOERROR;
-        bagels.add(bagel);
+        items.add(item);
         return true;
     }
 
-    public boolean removeBagel(Bagel bagel) {
-        int position = bagels.indexOf(bagel);
+    public boolean remove(Item item) {
+        int position = items.indexOf(item);
 
         if (position == -1) {
             notification = NOTIFICATION.BAGELNOTFOUND;
@@ -39,7 +39,7 @@ public class Basket {
         }
 
         notification = NOTIFICATION.NOERROR;
-        bagels.remove(position);
+        items.remove(position);
         return true;
     }
 

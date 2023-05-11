@@ -3,11 +3,12 @@ package com.booleanuk.core;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-public class BagelTest {
+public class ItemTest {
     @Test
-    void getTypeShouldBeNormal() {
+    void getCostShouldBe5() {
         Bagel bagel = new Bagel();
 
-        Assertions.assertEquals(BAGELTYPE.ONION, bagel.getType());
+        Assertions.assertEquals(5.0, bagel.getCost());
     }
+
 }
