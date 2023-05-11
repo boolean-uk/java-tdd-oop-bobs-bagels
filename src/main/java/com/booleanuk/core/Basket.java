@@ -65,4 +65,13 @@ public class Basket {
         return total;
     }
 
+   public double getPrice(Item order){
+        for (Item item : inventory.inventoryList) {
+           if (item.name.equals(order.name) && item.type.equals(order.type)) {
+               return item.price;
+           }
+       }
+        System.out.println("This item does not exist");
+        return 0.0;
+   }
 }

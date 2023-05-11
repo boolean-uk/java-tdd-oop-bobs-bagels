@@ -68,4 +68,11 @@ public class BasketTest {
         Assertions.assertEquals(1.60, basket.getTotal());
     }
 
+    @Test
+    public void testGetItemPrice() {
+        Basket basket = new Basket();
+        Item item = new Item("Bagel", "Sesame");
+        Assertions.assertEquals(0.49, basket.getPrice(item));
+    }
+
 }
