@@ -14,7 +14,7 @@
 | Bagel       | String variant                           |                                 | (Onion,Plain,Everything,Sesame)                   |        |
 |             | double price                             |                                 | (0.49,0.39,0.49,0.49)                             |        |
 |             | String SKU                               |                                 | (BGLO,BGLP,BGLE,BGLS)                             |        |
-|             | ArrayList<Filling> fillings              |                                 |                                                   |        |
+|             | `ArrayList<Filling> fillings`            |                                 |                                                   |        |
 |             |                                          | addFillings(Filling[] fillings) |                                                   |        |
 |             |                                          |                                 |                                                   |        |
 | Filling     | String variant                           |                                 | (Bacon,Egg,Cheese,Cream Cheese,Smoked Salmon,Ham) |        |

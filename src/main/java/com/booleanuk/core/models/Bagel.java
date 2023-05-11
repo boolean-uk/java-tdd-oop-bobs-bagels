@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Bagel {
-    private String variant;
-    private double price;
-    private String SKU;
-    private ArrayList<Filling> fillings;
+    String variant;
+    double price;
+    String SKU;
+    ArrayList<Filling> fillings;
 
     public Bagel(String variant, double price, String SKU ) {
         this.variant = variant;

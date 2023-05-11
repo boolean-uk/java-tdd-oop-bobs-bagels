@@ -18,4 +18,13 @@ public class Basket {
         sizeOfBasket = 0;
         total =0.0;
     }
+
+    public boolean add(Bagel bagel) {
+        if (bagel != null) {
+            shoppingBasket.put(bagel,1);
+            sizeOfBasket += 1;
+            return true;
+        }
+        return false;
+    }
 }
