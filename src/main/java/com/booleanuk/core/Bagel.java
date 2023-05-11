@@ -5,6 +5,7 @@ import java.util.Collection;
 
 public class Bagel extends Product {
     private ArrayList<Filling> fillings;
+    Inventory inventory = new Inventory();
     public Bagel(String SKU, double price, String variant) {
         super(SKU, "Bagel", price, variant);
         this.fillings = new ArrayList<Filling>();
@@ -13,9 +14,9 @@ public class Bagel extends Product {
     public ArrayList<Filling> getFillings() {
         return this.fillings;
     }
-    public boolean addFilling( String SKU){
 
-        Inventory inventory = new Inventory();
+    public boolean addFilling(String SKU){
+
         if(inventory.productIsInStock(SKU)){
             for (Filling filling:this.fillings) {
                 if (filling.getSKU().equals(SKU)) {

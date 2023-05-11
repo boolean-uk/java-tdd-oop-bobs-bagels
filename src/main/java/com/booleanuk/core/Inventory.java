@@ -36,7 +36,6 @@ public class Inventory {
         products.put(product7.getSKU(),product7);
         products.put(product8.getSKU(),product8);
         products.put(product9.getSKU(),product9);
-
     }
     public boolean productIsInStock(String SKU){
         return products.containsKey(SKU);
