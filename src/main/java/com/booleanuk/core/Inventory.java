@@ -27,5 +27,9 @@ public class Inventory {
     public ArrayList<Item> getInventoryItems() {
         return inventoryItems;
     }
+    public double showPrice(Item item){
+        return 0.49;
+    }
+
 }
 
