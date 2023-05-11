@@ -15,7 +15,9 @@ public class Item {
         this.price = price;
         this.name = name;
         this.variant = variant;
+        this.fillings = new ArrayList<>();
     }
+
 
     public String getSku() {
         return sku;
