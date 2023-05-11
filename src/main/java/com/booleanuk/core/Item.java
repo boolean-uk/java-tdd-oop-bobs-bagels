@@ -27,13 +27,14 @@ public class Item {
     }
 
     public double getPrice() {
+        for (Item item : this.getFillings()) {
+            this.price+=item.getPrice();
+        }
+
         return price;
     }
 
-    public void setPrice(double price) {
-
-        this.price = price;
-    }
+    public void setPrice(double price) {this.price = price; }
 
     public String getName() {
         return name;
