@@ -8,6 +8,6 @@ public class InventoryTest {
     public void testShowPrice(){
         Inventory inventory = new Inventory();
         Assertions.assertEquals(inventory.showPrice(new Item("BGLO",0.49,"Bagel","Onion")),0.49);
-        Assertions.assertEquals(inventory.showPrice(new Item("BGLP",0.39,"Bagel","Plain")),0.39); //this should fail
+        Assertions.assertEquals(inventory.showPrice(new Item("BGLP",0.39,"Bagel","Plain")),0.39);
     }
 }

@@ -27,9 +27,17 @@ public class Inventory {
     public ArrayList<Item> getInventoryItems() {
         return inventoryItems;
     }
-    public double showPrice(Item item){
-        return 0.49;
-    }
 
+    public double showPrice(Item item){
+        for(Item i:this.inventoryItems){
+            if(i.getSku().equals(item.getSku())){
+                System.out.println("Item price: "+item.getPrice());
+                return item.getPrice();
+
+            }
+        }
+        System.out.println("Item is not in inventory");
+        return -1.0;
+    }
 }
 
