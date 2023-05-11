@@ -19,13 +19,13 @@
 |           | String variant           |                       |           |                   |
 |           | ArrayList<Item> fillings |                       |           |                   |
 |           |                          | addFilling(Item item) | 8.,10     | returns a message |
-| Basket    | ArrayList<Item> bagels   |                       |           |                   |
+| Basket    | ArrayList<Item> items    |                       |           |                   |
 |           |                          | addItem(Item item)    | 1.,3.,10  | returns a message |
 |           |                          | removeItem(Item item) | 2.,5.     | returns a message |
 |           | int capacity             |                       | 4.        | returns an int    |
 |           |                          | getTotal()            | 6.,9.     | returns an int    |
 | Inventory | ArrayList<Items>         |                       |           |                   |
-|           |                          | showPrice(String sku) | 7.        | makes a print     |
+|           |                          | showPrice(Item item)  | 7.        | makes a print     |
 |           |                          |                       |           |                   |
 | Store     | Inventory inventory      |                       |           |                   |
 |           | Basket basket            |                       |           |                   |
