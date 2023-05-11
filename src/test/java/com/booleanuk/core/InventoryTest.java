@@ -8,49 +8,46 @@ import java.util.ArrayList;
 public class InventoryTest {
     @Test
     void bagelAvailableShouldSucceed() {
-        Inventory inventory = new Inventory();
+        Inventory.reset();
         Bagel bagel = new Bagel();
-        inventory.bagels = new ArrayList<>() {{ add(bagel); }};
+        Inventory.bagels = new ArrayList<>() {{ add(bagel); }};
 
-        Assertions.assertTrue(inventory.bagelAvailable(bagel.getType()));
+        Assertions.assertTrue(Inventory.bagelAvailable(bagel.getType()));
     }
     @Test
     void bagelAvailableShouldFail() {
-        Inventory inventory = new Inventory();
-        inventory.bagels = new ArrayList<>();
+        Inventory.reset();
 
-        Assertions.assertFalse(inventory.bagelAvailable(BAGELTYPE.ONION));
+        Assertions.assertFalse(Inventory.bagelAvailable(BAGELTYPE.ONION));
     }
 
     @Test
     void fillingAvailableShouldSucceed() {
-        Inventory inventory = new Inventory();
+        Inventory.reset();
         Filling filling = new Filling();
-        inventory.fillings = new ArrayList<>() {{ add(filling); }};
+        Inventory.fillings = new ArrayList<>() {{ add(filling); }};
 
-        Assertions.assertTrue(inventory.fillingAvailable(filling.getType()));
+        Assertions.assertTrue(Inventory.fillingAvailable(filling.getType()));
     }
     @Test
     void fillingAvailableShouldFail() {
-        Inventory inventory = new Inventory();
-        inventory.fillings = new ArrayList<>();
+        Inventory.reset();
 
-        Assertions.assertFalse(inventory.fillingAvailable(FILLINGTYPE.BACON));
+        Assertions.assertFalse(Inventory.fillingAvailable(FILLINGTYPE.BACON));
     }
 
     @Test
     void coffeeAvailableShouldSucceed() {
-        Inventory inventory = new Inventory();
+        Inventory.reset();
         Coffee coffee = new Coffee();
-        inventory.coffees = new ArrayList<>() {{ add(coffee); }};
+        Inventory.coffees = new ArrayList<>() {{ add(coffee); }};
 
-        Assertions.assertTrue(inventory.coffeeAvailable(coffee.getType()));
+        Assertions.assertTrue(Inventory.coffeeAvailable(coffee.getType()));
     }
     @Test
     void coffeeAvailableShouldFail() {
-        Inventory inventory = new Inventory();
-        inventory.coffees = new ArrayList<>();
+        Inventory.reset();
 
-        Assertions.assertFalse(inventory.coffeeAvailable(COFFEETYPE.BLACK));
+        Assertions.assertFalse(Inventory.coffeeAvailable(COFFEETYPE.BLACK));
     }
 }

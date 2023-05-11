@@ -7,7 +7,7 @@ enum COFFEETYPE {
     LATTE
 }
 public class Coffee extends Item {
-    private COFFEETYPE type;
+    private COFFEETYPE type = COFFEETYPE.BLACK;
 
     public COFFEETYPE getType() { return type; }
 }

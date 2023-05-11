@@ -6,7 +6,7 @@ enum BAGELTYPE {
     EVERYTHING
 }
 public class Bagel extends Item {
-    private BAGELTYPE type;
+    private BAGELTYPE type = BAGELTYPE.ONION;
 
     public BAGELTYPE getType() { return type; }
 

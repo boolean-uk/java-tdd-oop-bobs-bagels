@@ -6,6 +6,7 @@ enum NOTIFICATION {
     NOERROR,
     BAGELNOTFOUND,
     FILLINGNOTFOUND,
+    COFFEENOTFOUND,
     MAXCAPACITY
 }
 
@@ -24,6 +25,23 @@ public class Basket {
             notification = NOTIFICATION.MAXCAPACITY;
             return false;
         }
+
+        if(item instanceof Bagel)
+            if(!Inventory.bagelAvailable(((Bagel) item).getType())) {
+                notification = NOTIFICATION.BAGELNOTFOUND;
+                return false;
+            }
+        if(item instanceof Filling)
+            if(!Inventory.fillingAvailable(((Filling) item).getType())) {
+                notification = NOTIFICATION.FILLINGNOTFOUND;
+                return false;
+            }
+        if(item instanceof Coffee)
+            if(!Inventory.coffeeAvailable(((Coffee) item).getType())) {
+                notification = NOTIFICATION.COFFEENOTFOUND;
+                return false;
+            }
+
 
         notification = NOTIFICATION.NOERROR;
         items.add(item);

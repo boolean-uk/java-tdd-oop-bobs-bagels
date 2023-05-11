@@ -2,20 +2,35 @@ package com.booleanuk.core;
 
 import java.util.ArrayList;
 
-public class Inventory {
-    ArrayList<Bagel> bagels;
-    ArrayList<Filling> fillings;
-    ArrayList<Coffee> coffees;
+public abstract class Inventory {
+    static ArrayList<Bagel> bagels = new ArrayList<>();
+    static ArrayList<Filling> fillings = new ArrayList<>();
+    static ArrayList<Coffee> coffees = new ArrayList<>();
 
-    public Inventory() {
+//    public Inventory() {
+//        bagels = new ArrayList<>();
+//        fillings = new ArrayList<>();
+//        coffees = new ArrayList<>();
+//    }
+
+    public static void reset() {
         bagels = new ArrayList<>();
         fillings = new ArrayList<>();
         coffees = new ArrayList<>();
     }
 
-    public boolean bagelAvailable(BAGELTYPE type) { return true; }
+    public static boolean bagelAvailable(BAGELTYPE type) {
+        if(bagels.stream().anyMatch(x -> x.getType() == type)) return true;
+        return false;
+    }
 
-    public boolean fillingAvailable(FILLINGTYPE type) { return true; }
+    public static boolean fillingAvailable(FILLINGTYPE type) {
+        if(fillings.stream().anyMatch(x -> x.getType() == type)) return true;
+        return false;
+    }
 
-    public boolean coffeeAvailable(COFFEETYPE type) { return true; }
+    public static boolean coffeeAvailable(COFFEETYPE type) {
+        if(coffees.stream().anyMatch(x -> x.getType() == type)) return true;
+        return false;
+    }
 }
