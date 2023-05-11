@@ -37,9 +37,15 @@ public class Basket {
     }
 
     public boolean remove(Item order){
-        this.items.remove(order);
-        System.out.println("Item removed from basket");
-        return true;
+        for (Item item : inventory.inventoryList) {
+            if (item.name.equals(order.name) && item.type.equals(order.type)) {
+                this.items.remove(item);
+                System.out.println("Item removed from basket.");
+                return true;
+            }
+        }
+        System.out.println("This item does not exist in basket");
+        return false;
     }
 
     public boolean changeCapacity(int newCapacity){
@@ -51,7 +57,12 @@ public class Basket {
         return true;
     }
 
-
-
+    public double getTotal(){
+        double total = 0.0;
+        for (Item item : this.items) {
+            total += item.price;
+        }
+        return total;
+    }
 
 }
