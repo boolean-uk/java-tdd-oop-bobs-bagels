@@ -49,11 +49,10 @@ public class Basket {
         if(newCapacity <= 0) {
             System.out.println("Cannot update basket capacity to zero or less.");
             return false;
+        } else if (newCapacity < this.items.size()) {
+            System.out.println("Cannot update basket capacity to a size smaller than current basket size.");
+            return false;
         }
-//        else if (newCapacity < this.items.size()) {
-//            System.out.println("Cannot update basket capacity to a size smaller than current basket size.");
-//            return false;
-//        }
         this.basketCapacity = newCapacity;
         return true;
     }

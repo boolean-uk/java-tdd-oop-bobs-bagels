@@ -71,12 +71,12 @@ public class BasketTest {
         Assertions.assertFalse(basket.updateBasketCapacity(0));
         Assertions.assertFalse(basket.updateBasketCapacity(-1));
 
-//        //Test for failed updated capacity (capacity made smaller than basket size)
-//        basket.addItem("Avocado");
-//        basket.addItem("Smoked Salmon");
-//        basket.addItem("Hummus");
-//
-//        Assertions.assertFalse(basket.updateBasketCapacity(2));
+        //Test for failed updated capacity (capacity made smaller than basket size)
+        basket.addItem("COFB");
+        basket.addItem("BGLO");
+        basket.addItem("FILS");
+
+        Assertions.assertFalse(basket.updateBasketCapacity(2));
     }
 
 
