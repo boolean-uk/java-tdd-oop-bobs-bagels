@@ -22,8 +22,15 @@ public class BasketTest {
         // Test for failure
         basket.addItem("BGLP");
         basket.addItem("COFB");
-        Assertions.assertFalse(basket.addItem("NPZR"));
-        Assertions.assertFalse(basket.items.contains("NPZR"));
+        String testSku2 = "ABQ";
+        basket.addItem(testSku2);
+        testItem = false;
+        for (int i = 0; i < basket.items.size() ; i++) {
+            if (basket.items.get(i).sku.equals(testSku2)) {
+                testItem = true;
+            }
+        }
+        Assertions.assertFalse(testItem);
     }
 //
 //    @Test
