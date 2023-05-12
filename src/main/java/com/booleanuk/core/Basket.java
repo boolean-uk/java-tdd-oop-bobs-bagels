@@ -1,14 +1,18 @@
 package com.booleanuk.core;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.HashMap;
+
+import static com.booleanuk.core.Inventory.inventoryProducts;
+import static com.booleanuk.core.Inventory.productIsInStock;
 
 public class Basket {
 
     private ArrayList<Product> products;
     private HashMap<String, Integer> productCount;
     private int capacity;
-    Inventory inventory = new Inventory();
 
 
     public Basket(int capacity){
@@ -31,20 +35,20 @@ public class Basket {
     }
 
     public boolean add( String SKU){
-        if(inventory.productIsInStock(SKU) && getCapacity()>products.size()){
-            Product newProduct= new Product(SKU,inventory.products.get(SKU).getName(),inventory.products.get(SKU).getProductCost(),inventory.products.get(SKU).getVariant());
+        if(productIsInStock(SKU) && getCapacity()>products.size()){
+            Product newProduct= new Product(SKU,inventoryProducts.get(SKU).getName(),inventoryProducts.get(SKU).getProductCost(),inventoryProducts.get(SKU).getVariant());
             products.add(newProduct);
 
 //            //adds SKU to HashMap or updates its value
-//            int thisProductInBasketCount;
-//            if(productCount.containsKey(SKU)){
-//                thisProductInBasketCount = productCount.get(SKU);
-//            }else{
-//                thisProductInBasketCount = 0;
-//            }
-//
-//            thisProductInBasketCount++;
-//            productCount.put(SKU,thisProductInBasketCount);
+            int thisProductInBasketCount;
+            if(productCount.containsKey(SKU)){
+                thisProductInBasketCount = productCount.get(SKU);
+            }else{
+                thisProductInBasketCount = 0;
+            }
+
+            thisProductInBasketCount++;
+            productCount.put(SKU,thisProductInBasketCount);
             return true;
         }
         return false;
@@ -59,38 +63,40 @@ public class Basket {
         return false;
     }
 
-    public double getTotalCost(){
-        double sum=0;
 //
-//        int bagelCount = productCount.get("Bagel");
-//        int fillingCount = productCount.get("Filling");
-//        int coffeCount = productCount.get("Coffe");
-//
-//        for (String keySKU: productCount.keySet()) {
-//            int totalProductsOfThisSKU = productCount.get(keySKU);
-//            if(keySKU.equals("BGLP") && totalProductsOfThisSKU >= 12){
-//                sum += 3.99;
-//                for (int i = 0; i < 12; i++) {
-//                    products.remove(keySKU);
-//                }
-//                break;
-//            } else if (keySKU.equals("BGLO") || keySKU.equals("BGLO")){
-//                if(totalProductsOfThisSKU >= 6){
-//                    sum += 2.49;
-//                    for (int i = 0; i < 6; i++) {
-//                        products.remove(keySKU);
-//                    }
-//                    break;
-//                }
-//            }
-//        }
+public double getTotalCost() {
+    BigDecimal sum = BigDecimal.ZERO;
 
-        for (Bagel bagel : bagels) {
-            sum += bagel.getProductCost();
-            for (int j = 0; j < bagel.getFillings().size(); j++) {
-                sum += bagel.getFillings().get(j).getProductCost();
+    for (String keySKU : productCount.keySet()) {
+        int totalProductsOfThisSKU = productCount.get(keySKU);
+
+        if (keySKU.equals("BGLP") && totalProductsOfThisSKU >= 12) {
+            BigDecimal discount = BigDecimal.valueOf(totalProductsOfThisSKU / 12)
+                    .multiply(BigDecimal.valueOf(3.99));
+            BigDecimal remaining = BigDecimal.valueOf(totalProductsOfThisSKU % 12)
+                    .multiply(BigDecimal.valueOf(0.39));
+            sum = sum.add(discount).add(remaining);
+        } else if (keySKU.equals("BGLO") || keySKU.equals("BGLE")) {
+            BigDecimal discount = BigDecimal.valueOf(totalProductsOfThisSKU / 6)
+                    .multiply(BigDecimal.valueOf(2.49));
+            BigDecimal remaining = BigDecimal.valueOf(totalProductsOfThisSKU % 6)
+                    .multiply(BigDecimal.valueOf(0.49));
+            sum = sum.add(discount).add(remaining);
+        } else if (keySKU.substring(0,2).equals("COF") || productCount.containsKey("BGLP") || productCount.containsKey("BGLO") || productCount.containsKey("BGLE") || productCount.containsKey("BGLS")) {
+            // TODO: 12-May-23 count coffee and bagels to calculate discount
+        } else {
+            sum = sum.add(BigDecimal.valueOf(totalProductsOfThisSKU).multiply(BigDecimal.valueOf(0.49)));
+        }
+    }
+
+    for (Product product : products) {
+        if (product.getName().equals("Bagel")) {
+            for (Filling filling : product.getFillings()) {
+                sum = sum.add(BigDecimal.valueOf(filling.getProductCost()));
             }
         }
-        return sum;
     }
+
+    return sum.doubleValue();
+}
 }

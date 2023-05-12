@@ -3,25 +3,27 @@ package com.booleanuk.core;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.math.BigDecimal;
+
 public class BasketTest {
 
     @Test
     public void testAdd(){
         Basket basket = new Basket(2);
 
-        Assertions.assertEquals(0,basket.getBagels().size());
+        Assertions.assertEquals(0,basket.getProducts().size());
 
         Assertions.assertFalse(basket.add("wrongSKU"));
-        Assertions.assertEquals(0,basket.getBagels().size());
+        Assertions.assertEquals(0,basket.getProducts().size());
 
         Assertions.assertTrue(basket.add("BGLO"));
-        Assertions.assertEquals(1,basket.getBagels().size());
+        Assertions.assertEquals(1,basket.getProducts().size());
 
         Assertions.assertTrue(basket.add("BGLP"));
-        Assertions.assertEquals(2,basket.getBagels().size());
+        Assertions.assertEquals(2,basket.getProducts().size());
 
         Assertions.assertFalse(basket.add("BGLE"));
-        Assertions.assertEquals(2,basket.getBagels().size());
+        Assertions.assertEquals(2,basket.getProducts().size());
     }
 
     @Test
@@ -47,10 +49,29 @@ public class BasketTest {
         //sums up bagels and fillings cost
         Basket basket = new Basket(2);
         Assertions.assertTrue(basket.add("BGLO"));
-        basket.getBagels().get(0).addFilling("FILE");
-        basket.getBagels().get(0).addFilling("FILB");
+        Product bagel = basket.getProducts().get(0);
+        bagel.addFilling("FILE");
+        bagel.addFilling("FILB");
         Assertions.assertEquals(0.73, basket.getTotalCost());
         Assertions.assertTrue(basket.add("BGLS"));
         Assertions.assertEquals(1.22, basket.getTotalCost());
+    }
+
+    @Test
+    public void testTotalCostOfBasketSpecialOffer(){
+        //sums up bagels and fillings cost
+        Basket basket = new Basket(100);
+        Assertions.assertTrue(basket.add("BGLO"));
+        Assertions.assertTrue(basket.add("BGLO"));
+        Assertions.assertTrue(basket.add("BGLO"));
+        Assertions.assertTrue(basket.add("BGLO"));
+        Assertions.assertTrue(basket.add("BGLO"));
+        Assertions.assertTrue(basket.add("BGLO"));
+
+        Product bagel = basket.getProducts().get(0);
+        bagel.addFilling("FILH");
+        Assertions.assertEquals(2.61, basket.getTotalCost());
+        Assertions.assertTrue(basket.add("BGLS"));
+        Assertions.assertEquals(3.10, basket.getTotalCost());
     }
 }
