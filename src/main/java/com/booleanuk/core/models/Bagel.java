@@ -27,4 +27,5 @@ public class Bagel {
     public ArrayList<Filling> getFillings() {
         return fillings;
     }
+
 }
