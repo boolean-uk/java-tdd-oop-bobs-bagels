@@ -14,9 +14,9 @@ public class Basket {
     }
 
     public Basket(int capacity) {
-        setCapacity(capacity);
         this.items = new ArrayList<>();
         this.inventory = new Inventory();
+        setCapacity(capacity);
     }
 
     public ArrayList<Item> getItems() {
@@ -37,8 +37,25 @@ public class Basket {
         return this.capacity;
     }
 
-//    public void addItem(){
-//
-//    }
+    public void addItem(Item item){
+        if(this.items.size()>=capacity){
+            System.out.println("Your basket is full!");
+        }else if(!this.inventory.isValid(item)){
+            System.out.println("Item is not valid");
+        }else {
+            this.items.add(item);
+        }
+    }
+    public void addItem(String sku){
+        for(Item item:this.inventory.getInventoryItems()){
+            if(sku.equals(item.getSku())){
+                System.out.println("Added the item");
+                this.addItem(item);
+                return;
+            }
+        }
+        System.out.println("Invalid SKU");
+    }
+
 
 }

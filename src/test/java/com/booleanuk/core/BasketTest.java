@@ -7,8 +7,11 @@ public class BasketTest {
     @Test
     public void testAddItem(){
         Basket basket = new Basket();
-        basket.addItem(new Item("BGLO",0.39,"Bagel","Onion"));
-        Assertions.assertEquals(basket.getItems().size(),1);
+        basket.addItem(new Item("BGLO",0.49,"Bagel","Onion"));
+        basket.addItem(new Item("BGLO",0.49,"Bagel","Onion"));
+        basket.addItem(new Item("BGLW",0.49,"Bagel","Onion"));
+        basket.addItem("BGLO");//overloaded the addItem method
+        Assertions.assertEquals(3,basket.getItems().size());
     }
 
 }

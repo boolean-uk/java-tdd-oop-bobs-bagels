@@ -78,4 +78,7 @@ public class Item {
             System.out.println("Not a filling");
         }
     }
+    public String toString(){
+        return this.getName();
+    }
 }

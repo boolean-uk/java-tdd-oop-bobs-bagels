@@ -39,5 +39,14 @@ public class Inventory {
         System.out.println("Item is not in inventory");
         return -1.0;
     }
+    public boolean isValid(Item item){
+        for(Item i:this.inventoryItems){
+            if (i.getSku().equals(item.getSku()) && i.getName().equals(item.getName()) && i.getPrice() == item.getPrice() && i.getVariant().equals(item.getVariant())) {
+                return true;
+
+            }
+        }
+        return false;
+    }
 }
 
