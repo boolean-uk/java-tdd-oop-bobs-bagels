@@ -7,6 +7,7 @@ public class Basket {
     int capacity;
     Inventory inventory;
 
+
     public Basket() {
         this.items = new ArrayList<>();
         this.capacity = 3;
@@ -26,7 +27,7 @@ public class Basket {
         }
 
         for (Item item : inventory.inventoryList) {
-            if (item.name.equals(order.name) && item.type.equals(order.type)) {
+            if (item.getName().equals(order.getName()) && item.getType().equals(order.getType())) {
                 this.items.add(item);
                 System.out.println("Item added to basket.");
                 return true;
@@ -38,7 +39,7 @@ public class Basket {
 
     public boolean remove(Item order){
         for (Item item : inventory.inventoryList) {
-            if (item.name.equals(order.name) && item.type.equals(order.type)) {
+            if (item.getName().equals(order.getName()) && item.getType().equals(order.getType())) {
                 this.items.remove(item);
                 System.out.println("Item removed from basket.");
                 return true;
@@ -60,15 +61,15 @@ public class Basket {
     public double getTotal(){
         double total = 0.0;
         for (Item item : this.items) {
-            total += item.price;
+            total += item.getPrice();
         }
         return total;
     }
 
    public double getPrice(Item order){
         for (Item item : inventory.inventoryList) {
-           if (item.name.equals(order.name) && item.type.equals(order.type)) {
-               return item.price;
+           if (item.getName().equals(order.getName()) && item.getType().equals(order.getType())) {
+               return item.getPrice();
            }
        }
         System.out.println("This item does not exist");

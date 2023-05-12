@@ -10,7 +10,7 @@ public class BasketTest {
         Basket basket = new Basket();
         Assertions.assertTrue(basket.add(new Item("Bagel", "Plain")));
         Assertions.assertEquals(1, basket.items.size());
-        Assertions.assertEquals(0.39, basket.items.get(0).price);
+        Assertions.assertEquals(0.39, basket.items.get(0).getPrice());
     }
 
     @Test
@@ -74,5 +74,4 @@ public class BasketTest {
         Item item = new Item("Bagel", "Sesame");
         Assertions.assertEquals(0.49, basket.getPrice(item));
     }
-
 }
