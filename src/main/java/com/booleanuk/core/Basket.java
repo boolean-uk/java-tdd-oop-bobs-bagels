@@ -27,14 +27,23 @@ public class Basket {
             return false;
     }
 
-//    public boolean removeItem(String sku) {
-//        if (this.items.contains(sku)) {
-//            this.items.remove(sku);
-//            return true;
-//        }
-//        System.out.println("The bagel does not exist in the basket!");
-//        return false;
-//    }
+    public boolean removeItem(String sku) {
+        boolean itemExistsInBasket = false;
+        for (int i = 0; i < this.items.size(); i++) {
+            if (this.items.get(i).sku.equals(sku)) {
+                itemExistsInBasket = true;
+                break;
+            }
+        }
+
+        if(itemExistsInBasket) {
+            this.items.remove(this.inventory.getItem(sku));
+            return true;
+        }
+            System.out.println("The bagel does not exist in the basket!");
+            return false;
+
+    }
 //
 //    public boolean updateBasketCapacity(int newCapacity) {
 //        if(newCapacity <= 0) {

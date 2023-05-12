@@ -63,7 +63,7 @@ public class BasketTest {
 
 //        // Test for failure
 //        Assertions.assertFalse(basket.removeItem("Grondboontjeboter"));
-//    }
+    }
 
 //    @Test
 //    public void testUpdateBasketCapacity() {
