@@ -10,9 +10,19 @@ enum NOTIFICATION {
 }
 
 public class Basket {
-    ArrayList<Item> items;
-    static int capacity = 1;
-    NOTIFICATION notification;
+    final ArrayList<Item> items;
+    private static int capacity = 1;
+    private NOTIFICATION notification;
+
+    public ArrayList<Item> getItems() { return items; }
+    public static int getCapacity() { return capacity; }
+    public static boolean setCapacity(int size) {
+        if (size < 0) return false;
+
+        capacity = size;
+        return true;
+    }
+    public NOTIFICATION getNotification() { return notification; }
 
     public Basket() {
         this.items = new ArrayList<>(capacity);
@@ -50,12 +60,5 @@ public class Basket {
 
     public double totalCost() {
         return items.stream().reduce(0.0, (x, y) -> x + y.getCost(), Double::sum);
-    }
-
-    static boolean setCapacity(int size) {
-        if (size < 0) return false;
-
-        capacity = size;
-        return true;
     }
 }

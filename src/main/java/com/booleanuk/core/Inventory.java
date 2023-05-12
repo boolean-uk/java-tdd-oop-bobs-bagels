@@ -3,15 +3,13 @@ package com.booleanuk.core;
 import java.util.ArrayList;
 
 public abstract class Inventory {
-    static ArrayList<Bagel> bagels = new ArrayList<>();
-    static ArrayList<Filling> fillings = new ArrayList<>();
-    static ArrayList<Coffee> coffees = new ArrayList<>();
+    private static ArrayList<Bagel> bagels = new ArrayList<>();
+    private static ArrayList<Filling> fillings = new ArrayList<>();
+    private static ArrayList<Coffee> coffees = new ArrayList<>();
 
-//    public Inventory() {
-//        bagels = new ArrayList<>();
-//        fillings = new ArrayList<>();
-//        coffees = new ArrayList<>();
-//    }
+    public static ArrayList<Bagel> getBagels() { return bagels; }
+    public static ArrayList<Filling> getFillings() { return fillings; }
+    public static ArrayList<Coffee> getCoffees() { return coffees; }
 
     public static void reset() {
         bagels = new ArrayList<>();
@@ -19,18 +17,21 @@ public abstract class Inventory {
         coffees = new ArrayList<>();
     }
 
+    public static void add(Item item) {
+        if(item instanceof Bagel) bagels.add((Bagel) item);
+        if(item instanceof Filling) fillings.add((Filling) item);
+        if(item instanceof Coffee) coffees.add((Coffee) item);
+    }
+
     public static boolean bagelAvailable(BAGELTYPE type) {
-        if(bagels.stream().anyMatch(x -> x.getType() == type)) return true;
-        return false;
+        return bagels.stream().anyMatch(x -> x.getType() == type);
     }
 
     public static boolean fillingAvailable(FILLINGTYPE type) {
-        if(fillings.stream().anyMatch(x -> x.getType() == type)) return true;
-        return false;
+        return fillings.stream().anyMatch(x -> x.getType() == type);
     }
 
     public static boolean coffeeAvailable(COFFEETYPE type) {
-        if(coffees.stream().anyMatch(x -> x.getType() == type)) return true;
-        return false;
+        return coffees.stream().anyMatch(x -> x.getType() == type);
     }
 }
