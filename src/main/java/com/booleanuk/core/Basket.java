@@ -3,32 +3,57 @@ package com.booleanuk.core;
 import java.util.ArrayList;
 
 public class Basket {
-    ArrayList<Item> items;
-    int capacity;
-    Inventory inventory;
+    private ArrayList<Item> items;
+    private int capacity;
+    private Inventory inventory;
 
-
+    // Constructors
     public Basket() {
-        this.items = new ArrayList<>();
-        this.capacity = 3;
-        this.inventory = new Inventory();
+        this.setItems(new ArrayList<>());
+        this.setCapacity(3);
+        this.setInventory(new Inventory());
     }
 
     public Basket(int capacity) {
-        this.items = new ArrayList<>();
+        this.setItems(new ArrayList<>());
+        this.setCapacity(capacity);
+    }
+
+    // Getters & Setters
+    public ArrayList<Item> getItems() {
+        return items;
+    }
+
+    public void setItems(ArrayList<Item> items) {
+        this.items = items;
+    }
+
+    public int getCapacity() {
+        return capacity;
+    }
+
+    public void setCapacity(int capacity) {
         this.capacity = capacity;
     }
 
+    public Inventory getInventory() {
+        return inventory;
+    }
 
+    public void setInventory(Inventory inventory) {
+        this.inventory = inventory;
+    }
+
+    // Methods
     public boolean add(Item order) {
-        if (!(this.items.size() < this.capacity)) {
+        if (!(this.getItems().size() < this.getCapacity())) {
             System.out.println("Could not add item, basket is full.");
             return false;
         }
 
-        for (Item item : inventory.getInventoryList()) {
+        for (Item item : getInventory().getInventoryList()) {
             if (item.getName().equals(order.getName()) && item.getType().equals(order.getType())) {
-                this.items.add(item);
+                this.getItems().add(item);
                 System.out.println("Item added to basket.");
                 return true;
             }
@@ -38,9 +63,9 @@ public class Basket {
     }
 
     public boolean remove(Item order){
-        for (Item item : inventory.getInventoryList()) {
+        for (Item item : getInventory().getInventoryList()) {
             if (item.getName().equals(order.getName()) && item.getType().equals(order.getType())) {
-                this.items.remove(item);
+                this.getItems().remove(item);
                 System.out.println("Item removed from basket.");
                 return true;
             }
@@ -54,20 +79,20 @@ public class Basket {
             System.out.println("Cannot set the capacity lower than zero");
             return false;
         }
-        this.capacity = newCapacity;
+        this.setCapacity(newCapacity);
         return true;
     }
 
     public double getTotal(){
         double total = 0.0;
-        for (Item item : this.items) {
+        for (Item item : this.getItems()) {
             total += item.getPrice();
         }
         return total;
     }
 
    public double getPrice(Item order){
-        for (Item item : inventory.getInventoryList()) {
+        for (Item item : getInventory().getInventoryList()) {
            if (item.getName().equals(order.getName()) && item.getType().equals(order.getType())) {
                return item.getPrice();
            }

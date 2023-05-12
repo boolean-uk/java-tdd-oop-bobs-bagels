@@ -9,8 +9,8 @@ public class BasketTest {
     public void testAddItemSucces() {
         Basket basket = new Basket();
         Assertions.assertTrue(basket.add(new Item("Bagel", "Plain")));
-        Assertions.assertEquals(1, basket.items.size());
-        Assertions.assertEquals(0.39, basket.items.get(0).getPrice());
+        Assertions.assertEquals(1, basket.getItems().size());
+        Assertions.assertEquals(0.39, basket.getItems().get(0).getPrice());
     }
 
     @Test
@@ -39,14 +39,14 @@ public class BasketTest {
         basket.add(item2);
         basket.add(item3);
         Assertions.assertTrue(basket.remove(item1));
-        Assertions.assertEquals(2, basket.items.size());
+        Assertions.assertEquals(2, basket.getItems().size());
     }
 
     @Test
     public void testChangeCapacitySuccess() {
         Basket basket = new Basket();
         basket.changeCapacity(5);
-        Assertions.assertEquals(5, basket.capacity);
+        Assertions.assertEquals(5, basket.getCapacity());
     }
 
     @Test
@@ -54,9 +54,9 @@ public class BasketTest {
         Basket basket = new Basket();
         Assertions.assertTrue(basket.changeCapacity(5));
         basket.changeCapacity(0);
-        Assertions.assertNotEquals(0, basket.capacity);
+        Assertions.assertNotEquals(0, basket.getCapacity());
         basket.changeCapacity(-1);
-        Assertions.assertNotEquals(-1, basket.capacity);
+        Assertions.assertNotEquals(-1, basket.getCapacity());
     }
 
     @Test
