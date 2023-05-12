@@ -14,12 +14,17 @@ public class Basket {
     }
 
     public boolean addItem(String sku){
-        if (this.items.size() < this.basketCapacity){
-            this.items.add(inventory.getItem(sku.toUpperCase()));
-            return true;
-        }
+        if (this.items.size() < this.basketCapacity) {
+            if (inventory.getItem(sku) == null){
+                System.out.println("Can not add item because this item does not exist!");
+                return false;
+            } else if(inventory.getItem(sku).sku.equals(sku)) {
+                this.items.add(inventory.getItem(sku.toUpperCase()));
+                return true;
+            }
         System.out.println("Basket is full, could not add bagel!");
-        return false;
+        }
+            return false;
     }
 
 //    public boolean removeItem(String sku) {
