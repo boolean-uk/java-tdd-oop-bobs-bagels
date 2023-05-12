@@ -17,7 +17,7 @@
 |                         |                                                 | Basket capacity cannot be made smaller than current basket size. | Print error message + return false.                                                 | 4          |
 |                         | `double totalCost()`                            | The basket is empty.                                             | Return 0.00.                                                                        | 6          |
 |                         |                                                 | The basket contains items.                                       | Return total costs.                                                                 | 6          |
-|                         | `double getPrice(String sku)`                   | If item exists in inventory.                                     | Return price.                                                                       | 7 + 9      |
+|                         | `double itemPrice(String sku)`                  | If item exists in inventory.                                     | Return price.                                                                       | 7 + 9      |
 |                         |                                                 | If item does not exist in inventory.                             | Print item does not exist Return 0.00.                                              | 7  + 9     |
 
 

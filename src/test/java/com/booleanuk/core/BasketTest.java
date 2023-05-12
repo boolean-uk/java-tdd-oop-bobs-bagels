@@ -90,6 +90,12 @@ public class BasketTest {
         Assertions.assertEquals(0.61, basket.totalCost());
     }
 
+    @Test
+    public void testItemPrice() {
+        Basket basket = new Basket();
+        Assertions.assertEquals(0.39, basket.itemPrice("BGLP"));
+    }
+
 
 
 }

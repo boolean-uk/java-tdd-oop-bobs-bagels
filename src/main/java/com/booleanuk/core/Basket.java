@@ -64,4 +64,8 @@ public class Basket {
         return (double) (sumCosts / 100.0);
     }
 
+    public double itemPrice(String sku) {
+        return this.inventory.getItem(sku).price;
+    }
+
 }
