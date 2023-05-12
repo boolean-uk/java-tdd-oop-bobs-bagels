@@ -23,6 +23,12 @@ public class Inventory {
 
     Product product9 = new Product("FILH","Filling",0.12,"Ham");
 
+    Product product10 = new Product("COFB", "Coffee", 0.99, "Black");
+    Product product11 = new Product("COFW", "Coffee", 1.19, "White");
+    Product product12 = new Product("COFC", "Coffee", 1.29, "Capuccino");
+    Product product13 = new Product("COFL", "Coffee", 1.29, "Latte");
+
+
 
     public Inventory() {
         this.products = new HashMap<>();
@@ -36,7 +42,12 @@ public class Inventory {
         products.put(product7.getSKU(),product7);
         products.put(product8.getSKU(),product8);
         products.put(product9.getSKU(),product9);
+        products.put(product10.getSKU(),product10);
+        products.put(product11.getSKU(),product11);
+        products.put(product12.getSKU(),product12);
+        products.put(product13.getSKU(),product13);
     }
+
     public boolean productIsInStock(String SKU){
         return products.containsKey(SKU);
     }
