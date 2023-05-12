@@ -42,20 +42,15 @@ public class TestBasket {
         };
 
         Bagel newBagel = new Bagel("Onion", 0.49, new Inventory());
-        Bagel newBagel1 = new Bagel("Onion", 0.6, new Inventory() );
 
         boolean response = newBagel.addFilling(fillings.get(0));
         boolean response2 = newBagel.addFilling(fillings.get(1));
 
-
         Basket newBasket = new Basket(10);
-
-
-
-        Assertions.assertTrue(newBasket.add(newBagel));
+        newBasket.add(newBagel);
 
         boolean response3 = newBasket.remove(newBagel);
-        Assertions.assertTrue(response);
+        Assertions.assertTrue(response3);
     }
 
     @Test

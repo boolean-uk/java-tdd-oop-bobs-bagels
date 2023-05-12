@@ -6,21 +6,12 @@ import java.util.List;
 public class Bagel {
     private final String variant;
     private final double price;
-    private final List<Filling> fillings;
-
+    private final List<Filling> fillings = new ArrayList<>();;
     private Inventory inventory;
-
-    public Bagel(String variant, double price, List<Filling> fillings, Inventory inventory){
-        this.variant = variant;
-        this.price = price;
-        this.fillings = fillings;
-        this.inventory = inventory;
-    }
 
     public Bagel(String variant, double price, Inventory inventory){
         this.variant = variant;
         this.price = price;
-        this.fillings = new ArrayList<>();
         this.inventory = inventory;
     }
 

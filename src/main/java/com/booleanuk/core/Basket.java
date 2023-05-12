@@ -1,6 +1,7 @@
 package com.booleanuk.core;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 public class Basket {
@@ -30,22 +31,9 @@ public class Basket {
         return true;
     }
 
-    private boolean haveSameFillings(Bagel b, Bagel bagel) {
-        for (Filling f : b.getFillings()) {
-            for (Filling f2 : bagel.getFillings()) {
-                if (!f.getVariant().equals(f2.getVariant())) {
-                    return false;
-                }
-            }
-        }
-
-        return true;
-    }
-
     public boolean remove(Bagel bagel){
         for (Bagel b : this.bagels) {
-            if (b.getVariant().equals(bagel.getVariant()) && haveSameFillings(b, bagel)) {
-
+            if (b.getVariant().equals(bagel.getVariant()) && b.getFillings().containsAll(bagel.getFillings())) {
                 this.bagels.remove(b);
                 return true;
             }

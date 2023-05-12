@@ -9,7 +9,7 @@ public class TestBagel {
 
     @Test
     public void testGetName(){
-        Bagel newBagel = new Bagel("Onion", 0.49, new ArrayList<>(), new Inventory());
+        Bagel newBagel = new Bagel("Onion", 0.49, new Inventory());
 
         Assertions.assertEquals("Onion", newBagel.getVariant());
     }
@@ -29,7 +29,7 @@ public class TestBagel {
 
     @Test
     public void testAddFilling(){
-        Bagel newBagel = new Bagel("Onion", 0.49, new ArrayList<>(), new Inventory());
+        Bagel newBagel = new Bagel("Onion", 0.49, new Inventory());
 
         Filling filling = new Filling("Cheese", 0.12);
         boolean response = newBagel.addFilling(filling);
