@@ -1,19 +1,19 @@
 package com.booleanuk.core;
 
 public class Filling {
-    String type;
+    String variant;
     double price;
 
-    public Filling(String type, double price){
-        this.type = type;
+    public Filling(String variant, double price){
+        this.variant = variant;
         this.price = price;
     }
 
-    public String getType(){
-        return "";
+    public String getVariant(){
+        return this.variant;
     }
 
     public double getPrice(){
-        return 0;
+        return this.price;
     }
 }

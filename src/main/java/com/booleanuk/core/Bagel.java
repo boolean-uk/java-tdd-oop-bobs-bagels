@@ -1,41 +1,37 @@
 package com.booleanuk.core;
 
-
-
 import java.util.ArrayList;
 import java.util.List;
 
 public class Bagel {
-    private String type;
-    private double price;
-    private List<Filling> fillings;
+    private final String variant;
+    private final double price;
+    private final List<Filling> fillings;
 
-    public Bagel(String type, double price, List<Filling> fillings){
-        this.type = type;
+    public Bagel(String variant, double price, List<Filling> fillings){
+        this.variant = variant;
         this.price = price;
         this.fillings = fillings;
     }
 
-    public Bagel(String type, double price){
-        this.type = type;
+    public Bagel(String variant, double price){
+        this.variant = variant;
         this.price = price;
         this.fillings = new ArrayList<>();
     }
 
-    public String getType(){
-        return "";
+    public String getVariant(){
+        return this.variant;
     }
 
     public double getPrice(){
-        return 0.0;
+        return this.price +
+                this.fillings.stream().reduce(0.0, (sum, f) -> sum += f.getPrice(), Double::sum);
     }
 
-    public boolean addFilling(Filling filling){
+    public Filling addFilling(Filling filling){
+        this.fillings.add(filling);
 
-        return true;
+        return this.fillings.get(fillings.size() - 1);
     }
-
-
-
-
 }

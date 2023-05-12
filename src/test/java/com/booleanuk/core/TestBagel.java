@@ -11,7 +11,7 @@ public class TestBagel {
     public void testGetName(){
         Bagel newBagel = new Bagel("Onion", 0.49, new ArrayList<>());
 
-        Assertions.assertEquals("Onion", newBagel.getType());
+        Assertions.assertEquals("Onion", newBagel.getVariant());
     }
 
     @Test
@@ -19,6 +19,12 @@ public class TestBagel {
         Bagel newBagel = new Bagel("Onion", 0.49, new ArrayList<>());
 
         Assertions.assertEquals(0.49, newBagel.getPrice());
+
+        newBagel.addFilling(new Filling("f1", 0.1));
+        newBagel.addFilling(new Filling("f2", 0.4));
+        newBagel.addFilling(new Filling("f3", 0.5));
+
+        Assertions.assertEquals(1.49, newBagel.getPrice());
     }
 
     @Test
@@ -26,7 +32,8 @@ public class TestBagel {
         Bagel newBagel = new Bagel("Onion", 0.49, new ArrayList<>());
 
         Filling filling = new Filling("Cheese", 0.12);
-        boolean response = newBagel.addFilling(filling);
-        Assertions.assertTrue(response);
+        Filling response = newBagel.addFilling(filling);
+        Assertions.assertEquals(response.getVariant(), "Cheese");
+        Assertions.assertEquals(response.getPrice(), 0.12);
     }
 }

@@ -2,16 +2,16 @@ package com.booleanuk.core;
 
 public class Coffee {
 
-    String type;
+    String variant;
     double price;
 
-    public Coffee(String type, double price){
-        this.type = type;
+    public Coffee(String variant, double price){
+        this.variant = variant;
         this.price = price;
     }
 
-    public String getType(){
-        return this.type;
+    public String getVariant(){
+        return this.variant;
     }
 
     public double getPrice(){

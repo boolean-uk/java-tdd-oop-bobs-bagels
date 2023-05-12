@@ -18,7 +18,7 @@ public class TestCoffee {
     @Test void testGetType(){
         Coffee newCoffee = new Coffee("White", 1.19) ;
 
-        Assertions.assertEquals("White", newCoffee.getType());
+        Assertions.assertEquals("White", newCoffee.getVariant());
 
     }
 }

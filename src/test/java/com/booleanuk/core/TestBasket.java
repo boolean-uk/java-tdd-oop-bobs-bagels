@@ -9,23 +9,23 @@ public class TestBasket {
 
     @Test
     public void testAddBagel(){
-        Bagel newBagel = new Bagel("Onion", 0.49, new ArrayList<Filling>()) ;
-        Basket newBasket = new Basket(new ArrayList<Bagel>(), new ArrayList<Coffee>(), 10);
+        Bagel newBagel = new Bagel("Onion", 0.49) ;
+        Basket newBasket = new Basket(10);
         boolean response = newBasket.add(newBagel);
         Assertions.assertTrue(response);
     }
 
     @Test
     public void testRemoveBagel(){
-        Bagel newBagel = new Bagel("Onion", 0.49, new ArrayList<Filling>()) ;
-        Bagel newBagel2 = new Bagel("Plain", 0.39, new ArrayList<Filling>()) ;
-        Basket newBasket = new Basket(new ArrayList<Bagel>(), new ArrayList<Coffee>(), 10);
+        Bagel newBagel = new Bagel("Onion", 0.49) ;
+        Bagel newBagel2 = new Bagel("Plain", 0.39) ;
+        Basket newBasket = new Basket(10);
         boolean response = newBasket.add(newBagel);
         response = newBasket.add(newBagel2);
 
         response = newBasket.remove(newBagel2);
         Assertions.assertTrue(response);
-        Bagel newBagel3 = new Bagel("Honey", 0.49, new ArrayList<Filling>())
+        Bagel newBagel3 = new Bagel("Honey", 0.49);
         response = newBasket.remove(newBagel3);
         Assertions.assertFalse(response);
 

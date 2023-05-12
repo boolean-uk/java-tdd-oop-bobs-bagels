@@ -1,14 +1,12 @@
 package com.booleanuk.core;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Basket {
     List<Bagel> bagels;
-
     List<Coffee> coffees;
     int capacity;
-
-
 
     public Basket(List<Bagel> bagels,List<Coffee> coffees, int capacity ){
         this.bagels = bagels;
@@ -17,9 +15,9 @@ public class Basket {
     }
 
     public Basket(int capacity){
-        this.bagels = bagels;
         this.capacity = capacity;
-        this.coffees = coffees;
+        this.bagels = new ArrayList<>();
+        this.coffees = new ArrayList<>();
     }
 
     public boolean add(Bagel bagel){
@@ -47,7 +45,7 @@ public class Basket {
     }
 
     public double costBagel(Bagel bagel){
-        return 0.0
+        return 0.0;
     }
 
 }
