@@ -69,13 +69,13 @@ public class BasketTest {
         Basket basket = new Basket();
         Bagel bagel0 = invetory.bagels.get(0);
         Bagel bagel1 = invetory.bagels.get(1);
-        Assertions.assertEquals(0.0, basket.total);
+        Assertions.assertEquals(0.0, basket.getTotal());
         basket.add(bagel0);
-        Assertions.assertEquals(0.49, basket.total);
+        Assertions.assertEquals(0.49, basket.getTotal());
         basket.add(bagel0);
-        Assertions.assertEquals(0.98, basket.total);
+        Assertions.assertEquals(0.98, basket.getTotal());
         basket.remove(bagel0);
-        Assertions.assertEquals(0.49, basket.total);
+        Assertions.assertEquals(0.49, basket.getTotal());
     }
 
     @Test
@@ -85,9 +85,9 @@ public class BasketTest {
         Bagel bagel = invetory.bagels.get(1);
         bagel.addFillings(new Filling[]{invetory.fillings.get(0)});
         basket.add(bagel, 16);
-        Assertions.assertEquals(7.47, basket.total);
+        Assertions.assertEquals(7.47, basket.getTotal());
         basket.add(invetory.bagels.get(0), 1);
-        Assertions.assertEquals(7.96, basket.total);
+        Assertions.assertEquals(7.96, basket.getTotal());
     }
 
     @Test
@@ -97,9 +97,9 @@ public class BasketTest {
         Bagel bagel = invetory.bagels.get(1);
         bagel.addFillings(new Filling[]{invetory.fillings.get(0)});
         basket.add(bagel, 2);
-        Assertions.assertEquals(1.02, basket.total);
+        Assertions.assertEquals(1.02, basket.getTotal());
         basket.remove(bagel, 1);
-        Assertions.assertEquals(.51, basket.total);
+        Assertions.assertEquals(.51, basket.getTotal());
     }
 
     @Test
@@ -109,9 +109,13 @@ public class BasketTest {
         Bagel bagel0 = invetory.bagels.get(0);
         Bagel bagel1 = invetory.bagels.get(1);
         basket.add(bagel1, 16);
-        Assertions.assertEquals(5.55, basket.total);
+        Assertions.assertEquals(5.55, basket.getTotal());
+        Assertions.assertEquals(5.55, basket.getTotal());
+
         basket.add(bagel0, 6);
-        Assertions.assertEquals(8.04, basket.total);
+        Assertions.assertEquals(8.04, basket.getTotal());
+        Assertions.assertEquals(8.04, basket.getTotal());
+
     }
 
 
@@ -121,33 +125,32 @@ public class BasketTest {
         basket.setCapacity(50);
         Bagel bagel1 = invetory.bagels.get(1);
         basket.add(bagel1, 16);
-        Assertions.assertEquals(5.55, basket.total);
+        Assertions.assertEquals(5.55, basket.getTotal());
         basket.remove(bagel1, 4);
-        Assertions.assertEquals(3.99, basket.total);
+        Assertions.assertEquals(3.99, basket.getTotal());
         basket.remove(bagel1, 1);
-        Assertions.assertEquals(4.44, basket.total);
+        Assertions.assertEquals(4.44, basket.getTotal());
         basket.remove(bagel1, 11);
-        Assertions.assertEquals(0.0, basket.total);
+        Assertions.assertEquals(0.0, basket.getTotal());
     }
-
-
-
-
-
     @Test
     void testTotalWithDiscount() {
         Basket basket = new Basket();
         basket.setCapacity(50);
         basket.add(invetory.bagels.get(1), 16);
-        Assertions.assertEquals(5.55, basket.total);
+        Assertions.assertEquals(5.55, basket.getTotal());
         basket.add(invetory.bagels.get(0));
-        Assertions.assertEquals(6.04, basket.total);
+        Assertions.assertEquals(6.04, basket.getTotal());
         basket.add(invetory.bagels.get(0));
-        Assertions.assertEquals(6.53, basket.total);
+        Assertions.assertEquals(6.53, basket.getTotal());
         basket.add(invetory.bagels.get(0), 4);
-        Assertions.assertEquals(8.04, basket.total);
+        Assertions.assertEquals(8.04, basket.getTotal());
 
 
     }
 
+    @Test
+    void testGetTotal(){
+
+    }
 }
