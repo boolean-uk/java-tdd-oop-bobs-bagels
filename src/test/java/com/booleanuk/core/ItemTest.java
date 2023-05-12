@@ -5,10 +5,10 @@ import org.junit.jupiter.api.Test;
 
 public class ItemTest {
     @Test
-    void getCostShouldBe5() {
-        Bagel bagel = new Bagel();
+    void getCostShouldBe049() {
+        Bagel bagel = new Bagel(BAGELTYPE.ONION);
 
-        Assertions.assertEquals(5.0, bagel.getCost());
+        Assertions.assertEquals(0.49, bagel.getCost());
     }
 
 }

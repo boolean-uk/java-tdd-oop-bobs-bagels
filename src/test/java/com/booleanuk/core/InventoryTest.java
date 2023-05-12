@@ -9,7 +9,7 @@ public class InventoryTest {
     @Test
     void bagelAvailableShouldSucceed() {
         Inventory.reset();
-        Bagel bagel = new Bagel();
+        Bagel bagel = new Bagel(BAGELTYPE.ONION);
         Inventory.bagels = new ArrayList<>() {{ add(bagel); }};
 
         Assertions.assertTrue(Inventory.bagelAvailable(bagel.getType()));
@@ -24,7 +24,7 @@ public class InventoryTest {
     @Test
     void fillingAvailableShouldSucceed() {
         Inventory.reset();
-        Filling filling = new Filling();
+        Filling filling = new Filling(FILLINGTYPE.BACON);
         Inventory.fillings = new ArrayList<>() {{ add(filling); }};
 
         Assertions.assertTrue(Inventory.fillingAvailable(filling.getType()));
@@ -39,7 +39,7 @@ public class InventoryTest {
     @Test
     void coffeeAvailableShouldSucceed() {
         Inventory.reset();
-        Coffee coffee = new Coffee();
+        Coffee coffee = new Coffee(COFFEETYPE.BLACK);
         Inventory.coffees = new ArrayList<>() {{ add(coffee); }};
 
         Assertions.assertTrue(Inventory.coffeeAvailable(coffee.getType()));

@@ -8,7 +8,7 @@ public class BasketTest {
     void addShouldSucceed() {
         Inventory.reset();
         Basket basket = new Basket();
-        Bagel bagel = new Bagel();
+        Bagel bagel = new Bagel(BAGELTYPE.ONION);
 
         Inventory.bagels.add(bagel);
 
@@ -24,7 +24,7 @@ public class BasketTest {
     void addShouldFail() {
         Inventory.reset();
         Basket basket = new Basket();
-        Bagel bagelA = new Bagel();
+        Bagel bagelA = new Bagel(BAGELTYPE.ONION);
 
         Assertions.assertFalse(Inventory.bagelAvailable(bagelA.getType()));
 
@@ -32,7 +32,7 @@ public class BasketTest {
 
         Assertions.assertEquals(1, Basket.capacity);
 
-        Bagel bagelB = new Bagel();
+        Bagel bagelB = new Bagel(BAGELTYPE.ONION);
         Assertions.assertFalse(basket.add(bagelB));
 
         Assertions.assertEquals(-1, basket.items.indexOf(bagelB));
@@ -41,7 +41,7 @@ public class BasketTest {
     @Test
     void removeShouldSucceed() {
         Basket basket = new Basket();
-        Bagel bagel = new Bagel();
+        Bagel bagel = new Bagel(BAGELTYPE.ONION);
 
         Assertions.assertEquals(-1, basket.items.indexOf(bagel));
 
@@ -56,7 +56,7 @@ public class BasketTest {
     @Test
     void removeShouldFail() {
         Basket basket = new Basket();
-        Bagel bagel = new Bagel();
+        Bagel bagel = new Bagel(BAGELTYPE.ONION);
 
         Assertions.assertEquals(-1, basket.items.indexOf(bagel));
 
@@ -64,7 +64,7 @@ public class BasketTest {
 
         Assertions.assertEquals(-1, basket.items.indexOf(bagel));
 
-        Assertions.assertEquals(NOTIFICATION.BAGELNOTFOUND, basket.notification);
+        Assertions.assertEquals(NOTIFICATION.ITEMNOTFOUND, basket.notification);
     }
 
     @Test
@@ -89,21 +89,21 @@ public class BasketTest {
     }
 
     @Test
-    void totalCostShouldBe10() {
+    void totalCostShouldBe148() {
         Basket.setCapacity(2);
-        Inventory.bagels.add(new Bagel());
-        Inventory.coffees.add(new Coffee());
+        Inventory.bagels.add(new Bagel(BAGELTYPE.ONION));
+        Inventory.coffees.add(new Coffee(COFFEETYPE.BLACK));
 
         Basket basket = new Basket();
 
         Assertions.assertEquals(0.0, basket.totalCost());
 
-        basket.add(new Bagel());
+        basket.add(new Bagel(BAGELTYPE.ONION));
 
-        Assertions.assertEquals(5.0, basket.totalCost());
+        Assertions.assertEquals(0.49, basket.totalCost());
 
-        basket.add(new Coffee());
+        basket.add(new Coffee(COFFEETYPE.BLACK));
 
-        Assertions.assertEquals(10.0, basket.totalCost());
+        Assertions.assertEquals(1.48, basket.totalCost());
     }
 }

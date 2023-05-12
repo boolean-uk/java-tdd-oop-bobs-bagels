@@ -2,17 +2,27 @@ package com.booleanuk.core;
 
 enum BAGELTYPE {
     ONION,
-    SESAME,
-    EVERYTHING
+    PLAIN,
+    EVERYTHING,
+    SESAME
 }
 public class Bagel extends Item {
-    private BAGELTYPE type = BAGELTYPE.ONION;
+    final BAGELTYPE type;
 
     public BAGELTYPE getType() { return type; }
 
-    public String toString() {
-        return String.format(
-                "name: %s\ncost: %s", this.getClass().getSimpleName(), this.getCost()
-        );
+    public Bagel(BAGELTYPE type) {
+        this.type = type;
+        switch(type) {
+            case ONION:         this.SKU = "BGLO"; this.cost = 0.49; break;
+            case PLAIN:         this.SKU = "BGLP"; this.cost = 0.39; break;
+            case EVERYTHING:    this.SKU = "GBLE"; this.cost = 0.49; break;
+            case SESAME:        this.SKU = "BGLS"; this.cost = 0.49; break;
+        }
+    }
+
+    @Override
+    public boolean getAvailable() {
+        return Inventory.bagelAvailable(this.getType());
     }
 }

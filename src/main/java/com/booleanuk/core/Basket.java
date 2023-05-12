@@ -4,9 +4,8 @@ import java.util.ArrayList;
 
 enum NOTIFICATION {
     NOERROR,
-    BAGELNOTFOUND,
-    FILLINGNOTFOUND,
-    COFFEENOTFOUND,
+    ITEMNOTFOUND,
+    ITEMNOTAVAILABLE,
     MAXCAPACITY
 }
 
@@ -26,22 +25,10 @@ public class Basket {
             return false;
         }
 
-        if(item instanceof Bagel)
-            if(!Inventory.bagelAvailable(((Bagel) item).getType())) {
-                notification = NOTIFICATION.BAGELNOTFOUND;
-                return false;
-            }
-        if(item instanceof Filling)
-            if(!Inventory.fillingAvailable(((Filling) item).getType())) {
-                notification = NOTIFICATION.FILLINGNOTFOUND;
-                return false;
-            }
-        if(item instanceof Coffee)
-            if(!Inventory.coffeeAvailable(((Coffee) item).getType())) {
-                notification = NOTIFICATION.COFFEENOTFOUND;
-                return false;
-            }
-
+        if(!item.getAvailable()) {
+            notification = NOTIFICATION.ITEMNOTAVAILABLE;
+            return false;
+        }
 
         notification = NOTIFICATION.NOERROR;
         items.add(item);
@@ -52,7 +39,7 @@ public class Basket {
         int position = items.indexOf(item);
 
         if (position == -1) {
-            notification = NOTIFICATION.BAGELNOTFOUND;
+            notification = NOTIFICATION.ITEMNOTFOUND;
             return false;
         }
 
@@ -61,14 +48,14 @@ public class Basket {
         return true;
     }
 
+    public double totalCost() {
+        return items.stream().reduce(0.0, (x, y) -> x + y.getCost(), Double::sum);
+    }
+
     static boolean setCapacity(int size) {
         if (size < 0) return false;
 
         capacity = size;
         return true;
-    }
-
-    public double totalCost() {
-        return items.stream().reduce(0.0, (x, y) -> x + y.getCost(), Double::sum);
     }
 }
