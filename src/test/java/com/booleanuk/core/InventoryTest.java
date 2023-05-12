@@ -9,9 +9,9 @@ public class InventoryTest {
     public void TestGetItem() {
         //Success test
         Inventory inventory = new Inventory();
-        Assertions.assertEquals("Onion", inventory.getItem("BGLO").variant);
+        Assertions.assertEquals("Onion", inventory.searchItem("BGLO").variant);
 
         //Failure test
-        Assertions.assertNull(inventory.getItem("NXGP"));
+        Assertions.assertNull(inventory.searchItem("NXGP"));
     }
 }

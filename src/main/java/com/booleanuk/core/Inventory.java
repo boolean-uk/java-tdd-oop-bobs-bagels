@@ -18,7 +18,7 @@ public class Inventory {
     Item smokedSalmonFilling = new Item("Filling", 0.12, "FILS", "Smoked Salmon");
     Item hamFilling = new Item("Filling", 0.12, "FILH", "Ham");
     HashMap<String, Item> allItems = new HashMap<>();
-    public Item getItem (String sku) {
+    public Item searchItem(String sku) {
         allItems.put("BGLO", onionBagel);
         allItems.put("BGLP", plainBagel);
         allItems.put("BGLE", everythingBagel);

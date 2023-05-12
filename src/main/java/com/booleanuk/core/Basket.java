@@ -16,12 +16,12 @@ public class Basket {
 
     public boolean addItem(String sku){
         if (this.items.size() < this.basketCapacity) {
-            if (inventory.getItem(sku) == null){
+            if (inventory.searchItem(sku) == null){
                 System.out.println("Can not add item because this item does not exist!");
                 return false;
-            } else if(inventory.getItem(sku).sku.equals(sku)) {
-                this.items.add(inventory.getItem(sku.toUpperCase()));
-                sumCosts += (this.inventory.getItem(sku).price * 100);
+            } else if(inventory.searchItem(sku).sku.equals(sku)) {
+                this.items.add(inventory.searchItem(sku.toUpperCase()));
+                sumCosts += (this.inventory.searchItem(sku).price * 100);
                 return true;
             }
         System.out.println("Basket is full, could not add bagel!");
@@ -34,13 +34,13 @@ public class Basket {
         for (int i = 0; i < this.items.size(); i++) {
             if (this.items.get(i).sku.equals(sku)) {
                 itemExistsInBasket = true;
-                sumCosts -= (this.inventory.getItem(sku).price * 100);
+                sumCosts -= (this.inventory.searchItem(sku).price * 100);
                 break;
             }
         }
 
         if(itemExistsInBasket) {
-            this.items.remove(this.inventory.getItem(sku));
+            this.items.remove(this.inventory.searchItem(sku));
             return true;
         }
             System.out.println("The bagel does not exist in the basket!");
@@ -65,10 +65,10 @@ public class Basket {
     }
 
     public double itemPrice(String sku) {
-        if(this.inventory.getItem(sku) == null){
+        if(this.inventory.searchItem(sku) == null){
             return 0.00;
         }
-        return this.inventory.getItem(sku).price;
+        return this.inventory.searchItem(sku).price;
     }
 
 }
