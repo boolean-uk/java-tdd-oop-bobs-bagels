@@ -10,31 +10,54 @@ public class TestBasket {
     @Test
     public void testAddBagel(){
         Bagel newBagel = new Bagel("Onion", 0.49) ;
+
         Basket newBasket = new Basket(10);
+
         boolean response = newBasket.add(newBagel);
         Assertions.assertTrue(response);
     }
 
     @Test
     public void testRemoveBagel(){
-        Bagel newBagel = new Bagel("Onion", 0.49) ;
-        Bagel newBagel2 = new Bagel("Plain", 0.39) ;
+        Bagel newBagel = new Bagel("Onion", 0.49);
+        Bagel newBagel2 = new Bagel("Plain", 0.39);
+
         Basket newBasket = new Basket(10);
-        boolean response = newBasket.add(newBagel);
-        response = newBasket.add(newBagel2);
+        newBasket.add(newBagel);
 
-        response = newBasket.remove(newBagel2);
+        boolean response = newBasket.remove(newBagel);
         Assertions.assertTrue(response);
-        Bagel newBagel3 = new Bagel("Honey", 0.49);
-        response = newBasket.remove(newBagel3);
-        Assertions.assertFalse(response);
 
+        boolean response2 = newBasket.remove(newBagel2);
+        Assertions.assertFalse(response2);
+    }
+
+    @Test
+    public void testRemoveBagelWithFillings(){
+        ArrayList<Filling> fillings = new ArrayList<>() {
+            {
+                add(new Filling("filling1", 0.1));
+                add(new Filling("filling2", 0.1));
+            }
+        };
+
+        Bagel newBagel = new Bagel("Onion", 0.49);
+        Bagel newBagel1 = new Bagel("Onion", 0.6);
+
+        Basket newBasket = new Basket(10);
+
+        Assertions.assertTrue(newBasket.add(newBagel));
+
+//        boolean response = newBasket.remove(newBagel);
+//        Assertions.assertTrue(response);
     }
 
     @Test
     public void testAddCoffee(){
         Coffee newCoffee = new Coffee("White", 1.19) ;
-        Basket newBasket = new Basket(new ArrayList<Bagel>(), new ArrayList<Coffee>(), 10);
+
+        Basket newBasket = new Basket(10);
+
         boolean response = newBasket.add(newCoffee);
         Assertions.assertTrue(response);
     }
@@ -43,51 +66,56 @@ public class TestBasket {
     public void testRemoveCoffee(){
         Coffee newCoffee = new Coffee("White", 1.19) ;
         Coffee newCoffee2 = new Coffee("Capuccino", 0.99) ;
-        Basket newBasket = new Basket(new ArrayList<Bagel>(), new ArrayList<Coffee>(), 10);
-        boolean response = newBasket.add(newCoffee);
-        response = newBasket.add(newCoffee2);
+        Coffee newCoffee3 = new Coffee("Flat White", 0.49);
 
-        response = newBasket.remove(newCoffee2);
+        Basket newBasket = new Basket(10);
+        newBasket.add(newCoffee);
+        newBasket.add(newCoffee2);
+
+        boolean response = newBasket.remove(newCoffee2);
         Assertions.assertTrue(response);
-        Coffee newCoffee3= new Coffee("Flat White", 0.49);
-        response = newBasket.remove(newCoffee3);
-        Assertions.assertFalse(response);
 
+        boolean response2 = newBasket.remove(newCoffee3);
+        Assertions.assertFalse(response2);
     }
 
   @Test
   public void testUpdateCapacity(){
-      Basket newBasket = new Basket(new ArrayList<Bagel>(), new ArrayList<Coffee>(), 2);
-      Bagel newBagel = new Bagel("Onion", 0.49, new ArrayList<Filling>()) ;
-      Bagel newBagel2 = new Bagel("Plain", 0.39, new ArrayList<Filling>()) ;
-      boolean response = newBasket.add(newBagel);
-      response = newBasket.add(newBagel2);
-      response = newBasket.updateCapacity(3);
+      Bagel newBagel = new Bagel("Onion", 0.49) ;
+      Bagel newBagel2 = new Bagel("Plain", 0.39) ;
+
+      Basket newBasket = new Basket(2);
+      newBasket.add(newBagel);
+      newBasket.add(newBagel2);
+
+      boolean response = newBasket.updateCapacity(3);
       Assertions.assertTrue(response);
+
       response = newBasket.updateCapacity(1);
       Assertions.assertFalse(response);
-
   }
 
   @Test
     public void testCost(){
-      Basket newBasket = new Basket(new ArrayList<Bagel>(), new ArrayList<Coffee>(), 2);
-      Bagel newBagel = new Bagel("Onion", 0.49, new ArrayList<Filling>()) ;
-      Bagel newBagel2 = new Bagel("Plain", 0.39, new ArrayList<Filling>()) ;
-      boolean response = newBasket.add(newBagel);
-      response = newBasket.add(newBagel2);
+      Bagel newBagel = new Bagel("Onion", 0.49);
+      Bagel newBagel2 = new Bagel("Plain", 0.39);
+
+      Basket newBasket = new Basket(2);
+      newBasket.add(newBagel);
+      newBasket.add(newBagel2);
+
       Assertions.assertEquals(0.88, newBasket.cost());
   }
 
   @Test
     public void testCostBagel(){
-      Basket newBasket = new Basket(new ArrayList<Bagel>(), new ArrayList<Coffee>(), 2);
-      Bagel newBagel = new Bagel("Onion", 0.49, new ArrayList<Filling>()) ;
-      Bagel newBagel2 = new Bagel("Plain", 0.39, new ArrayList<Filling>()) ;
-      boolean response = newBasket.add(newBagel);
-      response = newBasket.add(newBagel2);
+      Bagel newBagel = new Bagel("Onion", 0.49);
+      Bagel newBagel2 = new Bagel("Plain", 0.39);
+
+      Basket newBasket = new Basket(2);
+      newBasket.add(newBagel);
+      newBasket.add(newBagel2);
+
       Assertions.assertEquals(0.39, newBasket.costBagel(newBagel));
   }
-
-
 }

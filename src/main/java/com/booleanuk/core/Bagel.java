@@ -24,14 +24,18 @@ public class Bagel {
         return this.variant;
     }
 
-    public double getPrice(){
+    public double getPrice() {
         return this.price +
                 this.fillings.stream().reduce(0.0, (sum, f) -> sum += f.getPrice(), Double::sum);
     }
 
-    public Filling addFilling(Filling filling){
+    public Filling addFilling(Filling filling) {
         this.fillings.add(filling);
 
         return this.fillings.get(fillings.size() - 1);
+    }
+
+    public List<Filling> getFillings() {
+        return this.fillings;
     }
 }
