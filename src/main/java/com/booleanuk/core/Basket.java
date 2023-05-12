@@ -65,6 +65,9 @@ public class Basket {
     }
 
     public double itemPrice(String sku) {
+        if(this.inventory.getItem(sku) == null){
+            return 0.00;
+        }
         return this.inventory.getItem(sku).price;
     }
 
