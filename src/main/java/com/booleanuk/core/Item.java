@@ -18,8 +18,12 @@ public class Item {
         this.setType(type);
     }
 
+    public Item (String SKU) {
+        this.setSKU(SKU);
+    }
+
     public String getSKU() {
-        return SKU;
+        return this.SKU;
     }
 
     public void setSKU(String SKU) {
@@ -27,7 +31,7 @@ public class Item {
     }
 
     public double getPrice() {
-        return price;
+        return this.price;
     }
 
     public void setPrice(double price) {
@@ -35,7 +39,7 @@ public class Item {
     }
 
     public String getName() {
-        return name;
+        return this.name;
     }
 
     public void setName(String name) {
@@ -43,7 +47,7 @@ public class Item {
     }
 
     public String getType() {
-        return type;
+        return this.type;
     }
 
     public void setType(String type) {

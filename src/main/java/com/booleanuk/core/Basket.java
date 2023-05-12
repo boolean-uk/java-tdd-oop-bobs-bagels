@@ -26,7 +26,7 @@ public class Basket {
             return false;
         }
 
-        for (Item item : inventory.inventoryList) {
+        for (Item item : inventory.getInventoryList()) {
             if (item.getName().equals(order.getName()) && item.getType().equals(order.getType())) {
                 this.items.add(item);
                 System.out.println("Item added to basket.");
@@ -38,7 +38,7 @@ public class Basket {
     }
 
     public boolean remove(Item order){
-        for (Item item : inventory.inventoryList) {
+        for (Item item : inventory.getInventoryList()) {
             if (item.getName().equals(order.getName()) && item.getType().equals(order.getType())) {
                 this.items.remove(item);
                 System.out.println("Item removed from basket.");
@@ -67,7 +67,7 @@ public class Basket {
     }
 
    public double getPrice(Item order){
-        for (Item item : inventory.inventoryList) {
+        for (Item item : inventory.getInventoryList()) {
            if (item.getName().equals(order.getName()) && item.getType().equals(order.getType())) {
                return item.getPrice();
            }
