@@ -6,7 +6,7 @@ public class Basket {
     ArrayList<Item> items;
     Inventory inventory;
     int basketCapacity;
-    double sumCosts;
+    int sumCosts;
 
     public Basket() {
         this.items = new ArrayList<>();
@@ -21,7 +21,7 @@ public class Basket {
                 return false;
             } else if(inventory.getItem(sku).sku.equals(sku)) {
                 this.items.add(inventory.getItem(sku.toUpperCase()));
-                sumCosts += this.inventory.getItem(sku).price;
+                sumCosts += (this.inventory.getItem(sku).price * 100);
                 return true;
             }
         System.out.println("Basket is full, could not add bagel!");
@@ -34,7 +34,7 @@ public class Basket {
         for (int i = 0; i < this.items.size(); i++) {
             if (this.items.get(i).sku.equals(sku)) {
                 itemExistsInBasket = true;
-                sumCosts -= this.inventory.getItem(sku).price;
+                sumCosts -= (this.inventory.getItem(sku).price * 100);
                 break;
             }
         }
@@ -58,6 +58,10 @@ public class Basket {
         }
         this.basketCapacity = newCapacity;
         return true;
+    }
+
+    public double totalCost () {
+        return (double) (sumCosts / 100.0);
     }
 
 }
