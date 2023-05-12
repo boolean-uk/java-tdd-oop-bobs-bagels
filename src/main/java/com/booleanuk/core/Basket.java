@@ -6,7 +6,7 @@ import java.util.ArrayList;
 public class Basket {
     private ArrayList<Item> items;
     private int capacity;
-    Inventory inventory;
+    private Inventory inventory;
     public Basket(){
         this.items = new ArrayList<>();
         this.capacity = 5; //default value?
@@ -36,5 +36,9 @@ public class Basket {
     public int getCapacity() {
         return this.capacity;
     }
+
+//    public void addItem(){
+//
+//    }
 
 }

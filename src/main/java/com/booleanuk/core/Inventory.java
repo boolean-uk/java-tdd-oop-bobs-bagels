@@ -32,7 +32,7 @@ public class Inventory {
         for(Item i:this.inventoryItems){
             if(i.getSku().equals(item.getSku())){
                 System.out.println("Item price: "+item.getPrice());
-                return item.getPrice();
+                return i.getPrice();
 
             }
         }
