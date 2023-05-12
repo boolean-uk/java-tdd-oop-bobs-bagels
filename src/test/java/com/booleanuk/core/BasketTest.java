@@ -14,4 +14,17 @@ public class BasketTest {
         Assertions.assertEquals(3,basket.getItems().size());
     }
 
+    @Test
+    public void testRemoveItem(){
+        Basket basket = new Basket();
+        basket.addItem(new Item("BGLO",0.49,"Bagel","Onion"));
+        basket.addItem(new Item("BGLO",0.49,"Bagel","Onion"));
+        basket.removeItem(new Item("BGLO",0.49,"Bagel","Onion"));
+        Assertions.assertEquals(1,basket.getItems().size());
+        // Remove item failed! message
+        basket.removeItem(new Item("BGL233",0.49,"Bagel","Onion"));
+        Assertions.assertEquals(1,basket.getItems().size());
+    }
+
+
 }
