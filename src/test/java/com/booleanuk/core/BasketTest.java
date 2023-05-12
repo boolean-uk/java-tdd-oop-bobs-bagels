@@ -92,8 +92,12 @@ public class BasketTest {
 
     @Test
     public void testItemPrice() {
+        // test success
         Basket basket = new Basket();
         Assertions.assertEquals(0.39, basket.itemPrice("BGLP"));
+
+        //test failure
+        Assertions.assertEquals(0.00, basket.itemPrice("ABCD"));
     }
 
 
