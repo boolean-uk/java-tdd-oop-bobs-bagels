@@ -79,6 +79,17 @@ public class BasketTest {
         Assertions.assertFalse(basket.updateBasketCapacity(2));
     }
 
+    @Test
+    public void testTotalCost() {
+        Basket basket = new Basket();
+        basket.addItem("COFB");
+        basket.addItem("BGLE");
+        basket.addItem("FILX");
+        basket.removeItem("COFB");
+
+        Assertions.assertEquals(0.61, basket.totalCost());
+    }
+
 
 
 }
