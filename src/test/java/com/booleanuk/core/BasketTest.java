@@ -45,19 +45,26 @@ public class BasketTest {
         Assertions.assertFalse(testItem);
     }
 
-//    @Test
-//    public void testRemoveItem() {
-//        // Test for successfully removed Bagel
-//        Basket basket = new Basket();
-//        basket.addItem("Avocado");
-//        basket.addItem("Hummus");
-//        Assertions.assertTrue(basket.removeItem("Avocado"));
-//        Assertions.assertFalse(basket.items.contains("Avocado"));
-//
+    @Test
+    public void testRemoveItem() {
+        // Test for successfully removed Bagel
+        Basket basket = new Basket();
+        boolean testItem = true;
+        basket.addItem("BGLP");
+        basket.addItem("COFB");
+        String testSku = "COFB";
+        basket.removeItem(testSku);
+        for (int i = 0; i < basket.items.size() ; i++) {
+            if (basket.items.get(i).sku.equals(testSku)) {
+                testItem = false;
+            }
+        }
+        Assertions.assertTrue(testItem);
+
 //        // Test for failure
 //        Assertions.assertFalse(basket.removeItem("Grondboontjeboter"));
 //    }
-//
+
 //    @Test
 //    public void testUpdateBasketCapacity() {
 //        //Test for successfully updated capacity
