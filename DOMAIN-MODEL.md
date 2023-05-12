@@ -1,14 +1,14 @@
 # User stories
-1. I'd like to add a specific type of bagel to my basket.
-2. I'd like to remove a bagel from my basket.
-3. I'd like to know when my basket is full when I try adding an item beyond my basket capacity.
+1. I'd like to add a specific type of bagel to my basket.(Done)
+2. I'd like to remove a bagel from my basket.(Done)
+3. I'd like to know when my basket is full when I try adding an item beyond my basket capacity.(Done)
 4. I’d like to change the capacity of baskets.
-5. I'd like to know if I try to remove an item that doesn't exist in my basket.
+5. I'd like to know if I try to remove an item that doesn't exist in my basket.(Done)
 6. I'd like to know the total cost of items in my basket.
 7. I'd like to know the cost of a bagel before I add it to my basket.
 8. I'd like to be able to choose fillings for my bagel.
 9. I'd like to know the cost of each filling before I add it to my bagel order.
-10. I want customers to only be able to order things that we stock in our inventory.
+10. I want customers to only be able to order things that we stock in our inventory.(Done)
 
 # Domain model
 | Class     | Attributes               | Methods               | Scenarios | Outcome           |
