@@ -9,8 +9,8 @@ public class BagelTest {
     @Test
     public void addFillingsTest() {
         Bagel bagel = new Bagel("Sesame", 0.49, "BGLS");
-        Filling fill1 = new Filling("Bacon", "FILB");
-        Filling fill2 = new Filling("Egg", "FILE");
+        Filling fill1 = new Filling("Bacon",0.12, "FILB");
+        Filling fill2 = new Filling("Egg",0.12, "FILE");
         Filling[] fills = {fill1, fill2};
 //        Invetory invetory = new Invetory();
 //        invetory.

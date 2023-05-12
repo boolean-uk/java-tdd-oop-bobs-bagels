@@ -1,6 +1,7 @@
 package com.booleanuk.core;
 
 import com.booleanuk.core.models.Bagel;
+import com.booleanuk.core.models.Coffee;
 import com.booleanuk.core.models.Filling;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -150,7 +151,14 @@ public class BasketTest {
     }
 
     @Test
-    void testGetTotal(){
+    void testDiscountCoffeeWithBagel(){
+        Basket basket = new Basket();
+        Coffee coffee =invetory.coffees.get(0);
+        Bagel bagel0 = invetory.bagels.get(1);
+        basket.add(coffee);
+        basket.add(bagel0);
+        Assertions.assertEquals(1.25,basket.getTotal());
+
 
     }
 }

@@ -1,6 +1,7 @@
 package com.booleanuk.core;
 
 import com.booleanuk.core.models.Bagel;
+import com.booleanuk.core.models.BasketItem;
 import com.booleanuk.core.models.Coffee;
 import com.booleanuk.core.models.Filling;
 
@@ -19,12 +20,12 @@ public class Invetory {
         Bagel bagel2 = new Bagel("Everything", 0.49, "BGLE");
         Bagel bagel3 = new Bagel("Sesame", 0.49, "BGLS");
 
-        Filling filling0 = new Filling("Bacon", "FILB");
-        Filling filling1 = new Filling("Egg", "FILE");
-        Filling filling2 = new Filling("Cheese", "FILC");
-        Filling filling3 = new Filling("Cream Cheese", "FILX");
-        Filling filling4 = new Filling("Smoked Salmon", "FILS");
-        Filling filling5 = new Filling("Ham", "FILH");
+        Filling filling0 = new Filling("Bacon",0.12, "FILB");
+        Filling filling1 = new Filling("Egg",0.12, "FILE");
+        Filling filling2 = new Filling("Cheese",0.12, "FILC");
+        Filling filling3 = new Filling("Cream Cheese",0.12, "FILX");
+        Filling filling4 = new Filling("Smoked Salmon",0.12, "FILS");
+        Filling filling5 = new Filling("Ham",0.12, "FILH");
 
         Coffee coffee0 = new Coffee("Black", 0.99, "COFB");
         Coffee coffee1 = new Coffee("White", 1.19, "COFW");
