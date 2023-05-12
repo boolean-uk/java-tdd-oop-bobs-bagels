@@ -53,25 +53,20 @@ public class BasketTest {
         basket.addItem("BGLP");
         basket.addItem("COFB");
         String testSku = "COFB";
-        basket.removeItem(testSku);
-        for (int i = 0; i < basket.items.size() ; i++) {
-            if (basket.items.get(i).sku.equals(testSku)) {
-                testItem = false;
-            }
-        }
-        Assertions.assertTrue(testItem);
+        Assertions.assertTrue(basket.removeItem(testSku));
 
-//        // Test for failure
-//        Assertions.assertFalse(basket.removeItem("Grondboontjeboter"));
+        // Test for failure
+        testSku = "COFW";
+        Assertions.assertFalse(basket.removeItem(testSku));
     }
 
-//    @Test
-//    public void testUpdateBasketCapacity() {
-//        //Test for successfully updated capacity
-//        Basket basket = new Basket();
-//        Assertions.assertTrue(basket.updateBasketCapacity(5));
-//        Assertions.assertEquals(5, basket.basketCapacity);
-//
+    @Test
+    public void testUpdateBasketCapacity() {
+        //Test for successfully updated capacity
+        Basket basket = new Basket();
+        Assertions.assertTrue(basket.updateBasketCapacity(5));
+        Assertions.assertEquals(5, basket.basketCapacity);
+
 //        //Test for failed updated capacity (0 or negative number)
 //        Assertions.assertFalse(basket.updateBasketCapacity(0));
 //        Assertions.assertFalse(basket.updateBasketCapacity(-1));
@@ -82,7 +77,7 @@ public class BasketTest {
 //        basket.addItem("Hummus");
 //
 //        Assertions.assertFalse(basket.updateBasketCapacity(2));
-//    }
+    }
 
 
 

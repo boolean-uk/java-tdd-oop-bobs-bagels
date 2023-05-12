@@ -44,8 +44,8 @@ public class Basket {
             return false;
 
     }
-//
-//    public boolean updateBasketCapacity(int newCapacity) {
+
+    public boolean updateBasketCapacity(int newCapacity) {
 //        if(newCapacity <= 0) {
 //            System.out.println("Cannot update basket capacity to zero or less.");
 //            return false;
@@ -53,8 +53,8 @@ public class Basket {
 //            System.out.println("Cannot update basket capacity to a size smaller than current basket size.");
 //            return false;
 //        }
-//        this.basketCapacity = newCapacity;
-//        return true;
-//    }
+        this.basketCapacity = newCapacity;
+        return true;
+    }
 
 }
