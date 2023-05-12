@@ -19,10 +19,8 @@ public class BasketTest {
         }
         Assertions.assertTrue(testItem);
 
-        // Test for failure
-        basket.addItem("BGLP");
-        basket.addItem("COFB");
-        String testSku2 = "ABQ";
+        // test for item does not exist
+        String testSku2 = "ABCD";
         basket.addItem(testSku2);
         testItem = false;
         for (int i = 0; i < basket.items.size() ; i++) {
@@ -31,8 +29,22 @@ public class BasketTest {
             }
         }
         Assertions.assertFalse(testItem);
+
+        // Test for failure and item can not be added because basket capacity
+        basket.addItem("BGLP");
+        basket.addItem("COFB");
+        String testSku3 = "COFW";
+        basket.addItem(testSku3);
+        testItem = false;
+        for (int i = 0; i < basket.items.size() ; i++) {
+            if (basket.items.get(i).sku.equals(testSku3)) {
+                testItem = true;
+            }
+        }
+        // item can not be added because basket capacity is full
+        Assertions.assertFalse(testItem);
     }
-//
+
 //    @Test
 //    public void testRemoveItem() {
 //        // Test for successfully removed Bagel
