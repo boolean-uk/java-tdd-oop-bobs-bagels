@@ -2,8 +2,8 @@ package com.booleanuk.core;
 
 public class Coffee {
 
-    String variant;
-    double price;
+    private String variant;
+    private double price;
 
     public Coffee(String variant, double price){
         this.variant = variant;

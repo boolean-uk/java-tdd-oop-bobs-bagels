@@ -9,7 +9,7 @@ public class TestBasket {
 
     @Test
     public void testAddBagel(){
-        Bagel newBagel = new Bagel("Onion", 0.49) ;
+        Bagel newBagel = new Bagel("Onion", 0.49, new Inventory()) ;
 
         Basket newBasket = new Basket(10);
 
@@ -19,8 +19,8 @@ public class TestBasket {
 
     @Test
     public void testRemoveBagel(){
-        Bagel newBagel = new Bagel("Onion", 0.49);
-        Bagel newBagel2 = new Bagel("Plain", 0.39);
+        Bagel newBagel = new Bagel("Onion", 0.49, new Inventory());
+        Bagel newBagel2 = new Bagel("Plain", 0.39, new Inventory());
 
         Basket newBasket = new Basket(10);
         newBasket.add(newBagel);
@@ -36,20 +36,26 @@ public class TestBasket {
     public void testRemoveBagelWithFillings(){
         ArrayList<Filling> fillings = new ArrayList<>() {
             {
-                add(new Filling("filling1", 0.1));
-                add(new Filling("filling2", 0.1));
+                add(new Filling("Bacon", 0.12));
+                add(new Filling("Egg", 0.12));
             }
         };
 
-        Bagel newBagel = new Bagel("Onion", 0.49);
-        Bagel newBagel1 = new Bagel("Onion", 0.6);
+        Bagel newBagel = new Bagel("Onion", 0.49, new Inventory());
+        Bagel newBagel1 = new Bagel("Onion", 0.6, new Inventory() );
+
+        boolean response = newBagel.addFilling(fillings.get(0));
+        boolean response2 = newBagel.addFilling(fillings.get(1));
+
 
         Basket newBasket = new Basket(10);
 
+
+
         Assertions.assertTrue(newBasket.add(newBagel));
 
-//        boolean response = newBasket.remove(newBagel);
-//        Assertions.assertTrue(response);
+        boolean response3 = newBasket.remove(newBagel);
+        Assertions.assertTrue(response);
     }
 
     @Test
@@ -81,8 +87,8 @@ public class TestBasket {
 
   @Test
   public void testUpdateCapacity(){
-      Bagel newBagel = new Bagel("Onion", 0.49) ;
-      Bagel newBagel2 = new Bagel("Plain", 0.39) ;
+      Bagel newBagel = new Bagel("Onion", 0.49, new Inventory()) ;
+      Bagel newBagel2 = new Bagel("Plain", 0.39, new Inventory()) ;
 
       Basket newBasket = new Basket(2);
       newBasket.add(newBagel);
@@ -97,8 +103,8 @@ public class TestBasket {
 
   @Test
     public void testCost(){
-      Bagel newBagel = new Bagel("Onion", 0.49);
-      Bagel newBagel2 = new Bagel("Plain", 0.39);
+      Bagel newBagel = new Bagel("Onion", 0.49, new Inventory());
+      Bagel newBagel2 = new Bagel("Plain", 0.39, new Inventory());
 
       Basket newBasket = new Basket(2);
       newBasket.add(newBagel);
@@ -109,13 +115,13 @@ public class TestBasket {
 
   @Test
     public void testCostBagel(){
-      Bagel newBagel = new Bagel("Onion", 0.49);
-      Bagel newBagel2 = new Bagel("Plain", 0.39);
+      Bagel newBagel = new Bagel("Onion", 0.49, new Inventory());
+      Bagel newBagel2 = new Bagel("Plain", 0.39, new Inventory());
 
       Basket newBasket = new Basket(2);
       newBasket.add(newBagel);
       newBasket.add(newBagel2);
 
-      Assertions.assertEquals(0.39, newBasket.costBagel(newBagel));
+      Assertions.assertEquals(0.39, newBasket.costBagel(newBagel2));
   }
 }

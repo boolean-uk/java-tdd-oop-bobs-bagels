@@ -5,10 +5,10 @@ import java.util.List;
 public class Inventory {
 
     List<Bagel> existingBagels = List.of(
-            new Bagel("Onion", 0.49),
-            new Bagel("Plain", 0.39),
-            new Bagel("Everything", 0.49),
-            new Bagel("Sesame", 0.49)
+            new Bagel("Onion", 0.49, this),
+            new Bagel("Plain", 0.39, this),
+            new Bagel("Everything", 0.49, this),
+            new Bagel("Sesame", 0.49, this)
     );
 
     List<Filling> existingFillings = List.of(
@@ -29,7 +29,7 @@ public class Inventory {
 
     public boolean contains(Bagel bagel){
         for (Bagel b : existingBagels) {
-            if (b.getVariant().equals(bagel.getVariant()) && b.getPrice() == bagel.getPrice()) {
+            if (b.getVariant().equals(bagel.getVariant())) {
                 return true;
             }
         }
@@ -39,7 +39,7 @@ public class Inventory {
 
     public boolean contains(Filling filling){
         for (Filling f : existingFillings) {
-            if (f.getVariant().equals(filling.getVariant()) && f.getPrice() == filling.getPrice()) {
+            if (f.getVariant().equals(filling.getVariant())) {
                 return true;
             }
         }
@@ -49,7 +49,7 @@ public class Inventory {
 
     public boolean contains(Coffee coffee){
         for (Coffee c : existingCoffees) {
-            if (c.getVariant().equals(coffee.getVariant()) && c.getPrice() == coffee.getPrice()) {
+            if (c.getVariant().equals(coffee.getVariant())) {
                 return true;
             }
         }

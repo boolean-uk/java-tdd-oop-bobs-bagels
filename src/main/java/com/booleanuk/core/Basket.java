@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Basket {
-    List<Bagel> bagels;
-    List<Coffee> coffees;
-    Inventory inventory;
-    int capacity;
+    private List<Bagel> bagels;
+    private List<Coffee> coffees;
+    private Inventory inventory;
+    private int capacity;
 
     public Basket(List<Bagel> bagels,List<Coffee> coffees, int capacity) {
         this.bagels = bagels;
@@ -33,7 +33,7 @@ public class Basket {
     private boolean haveSameFillings(Bagel b, Bagel bagel) {
         for (Filling f : b.getFillings()) {
             for (Filling f2 : bagel.getFillings()) {
-                if (!f.getVariant().equals(f2.getVariant()) || f.getPrice() != f2.getPrice()) {
+                if (!f.getVariant().equals(f2.getVariant())) {
                     return false;
                 }
             }
@@ -44,7 +44,8 @@ public class Basket {
 
     public boolean remove(Bagel bagel){
         for (Bagel b : this.bagels) {
-            if (b.getVariant().equals(bagel.getVariant()) && b.getPrice() == bagel.getPrice()) {
+            if (b.getVariant().equals(bagel.getVariant()) && haveSameFillings(b, bagel)) {
+
                 this.bagels.remove(b);
                 return true;
             }
@@ -52,6 +53,8 @@ public class Basket {
 
         return false;
     }
+
+
 
     public boolean add(Coffee coffee){
         if (!inventory.contains(coffee)) return false;
@@ -61,19 +64,38 @@ public class Basket {
     }
 
     public boolean remove(Coffee coffee){
-        return true;
+        for( Coffee c : this.coffees){
+            if(c.getVariant().equals(coffee.getVariant())){
+                this.coffees.remove(c);
+                return true;
+            }
+
+        }
+        return false;
+
+
+
     }
 
     public boolean updateCapacity(int capacity){
-        return true;
+        if(bagels.size() > capacity){
+            return false;
+        } else {
+           this.capacity = capacity;
+           return true;
+        }
     }
 
     public double cost(){
-        return 0.0;
+        double totalPrice = 0.0;
+        for (Bagel b : bagels){
+            totalPrice += b.getPrice();
+        }
+        return totalPrice;
     }
 
     public double costBagel(Bagel bagel){
-        return 0.0;
+        return bagel.getPrice();
     }
 
 }

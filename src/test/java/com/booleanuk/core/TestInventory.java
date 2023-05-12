@@ -11,8 +11,8 @@ public class TestInventory {
     public void testContainsItems(){
         Inventory newInventory = new Inventory();
 
-        Bagel newBagel = new Bagel("Onion", 0.49);
-        Bagel newBagel2 = new Bagel("Honey", 0.49);
+        Bagel newBagel = new Bagel("Onion", 0.49, new Inventory());
+        Bagel newBagel2 = new Bagel("Honey", 0.49, new Inventory());
 
         boolean response = newInventory.contains(newBagel);
         Assertions.assertTrue(response);

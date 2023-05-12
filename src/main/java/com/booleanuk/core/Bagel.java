@@ -8,16 +8,20 @@ public class Bagel {
     private final double price;
     private final List<Filling> fillings;
 
-    public Bagel(String variant, double price, List<Filling> fillings){
+    private Inventory inventory;
+
+    public Bagel(String variant, double price, List<Filling> fillings, Inventory inventory){
         this.variant = variant;
         this.price = price;
         this.fillings = fillings;
+        this.inventory = inventory;
     }
 
-    public Bagel(String variant, double price){
+    public Bagel(String variant, double price, Inventory inventory){
         this.variant = variant;
         this.price = price;
         this.fillings = new ArrayList<>();
+        this.inventory = inventory;
     }
 
     public String getVariant(){
@@ -29,10 +33,13 @@ public class Bagel {
                 this.fillings.stream().reduce(0.0, (sum, f) -> sum += f.getPrice(), Double::sum);
     }
 
-    public Filling addFilling(Filling filling) {
+    public boolean addFilling(Filling filling) {
+        if (!inventory.contains(filling)){
+            return false;
+        }
         this.fillings.add(filling);
 
-        return this.fillings.get(fillings.size() - 1);
+        return true;
     }
 
     public List<Filling> getFillings() {

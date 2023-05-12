@@ -9,31 +9,31 @@ public class TestBagel {
 
     @Test
     public void testGetName(){
-        Bagel newBagel = new Bagel("Onion", 0.49, new ArrayList<>());
+        Bagel newBagel = new Bagel("Onion", 0.49, new ArrayList<>(), new Inventory());
 
         Assertions.assertEquals("Onion", newBagel.getVariant());
     }
 
     @Test
     public void testGetPrice(){
-        Bagel newBagel = new Bagel("Onion", 0.49, new ArrayList<>());
+        Bagel newBagel = new Bagel("Onion", 0.49, new Inventory());
 
         Assertions.assertEquals(0.49, newBagel.getPrice());
 
-        newBagel.addFilling(new Filling("f1", 0.1));
-        newBagel.addFilling(new Filling("f2", 0.4));
-        newBagel.addFilling(new Filling("f3", 0.5));
+        newBagel.addFilling(new Filling("Bacon", 0.12));
+        newBagel.addFilling(  new Filling("Cheese", 0.12));
 
-        Assertions.assertEquals(1.49, newBagel.getPrice());
+
+        Assertions.assertEquals(0.73, newBagel.getPrice());
     }
 
     @Test
     public void testAddFilling(){
-        Bagel newBagel = new Bagel("Onion", 0.49, new ArrayList<>());
+        Bagel newBagel = new Bagel("Onion", 0.49, new ArrayList<>(), new Inventory());
 
         Filling filling = new Filling("Cheese", 0.12);
-        Filling response = newBagel.addFilling(filling);
-        Assertions.assertEquals(response.getVariant(), "Cheese");
-        Assertions.assertEquals(response.getPrice(), 0.12);
+        boolean response = newBagel.addFilling(filling);
+        Assertions.assertTrue(response);
+
     }
 }
