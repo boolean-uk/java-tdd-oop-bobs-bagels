@@ -4,19 +4,27 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 public class BasketTest {
-//    @Test
-//    public void testAddItem() {
-//         //Test for successfully added Bagel
-//        Basket basket = new Basket();
-//        Assertions.assertTrue(basket.addItem("BGLO"));
-//        Assertions.assertTrue(basket.items.contains("BGLO"));
-//
-//        // Test for failure
-//        basket.addItem("BGLP");
-//        basket.addItem("COFB");
-//        Assertions.assertFalse(basket.addItem("NPZR"));
-//        Assertions.assertFalse(basket.items.contains("NPZR"));
-//    }
+    @Test
+    public void testAddItem() {
+         //Test for successfully added Bagel
+        Basket basket = new Basket();
+        boolean testItem = false;
+        String testSku = "BGLO";
+        basket.addItem(testSku);
+
+        for (int i = 0; i < basket.items.size() ; i++) {
+            if(basket.items.get(i).sku.equals(testSku)){
+                testItem = true;
+            }
+        }
+        Assertions.assertTrue(testItem);
+
+        // Test for failure
+        basket.addItem("BGLP");
+        basket.addItem("COFB");
+        Assertions.assertFalse(basket.addItem("NPZR"));
+        Assertions.assertFalse(basket.items.contains("NPZR"));
+    }
 //
 //    @Test
 //    public void testRemoveItem() {

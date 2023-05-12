@@ -13,14 +13,14 @@ public class Basket {
         this.inventory = new Inventory();
     }
 
-//    public boolean addItem(String sku){
-//        if (this.items.size() < this.basketCapacity){
-//            this.items.add(inventory.getItem(sku.toUpperCase()));
-//            return true;
-//        }
-//        System.out.println("Basket is full, could not add bagel!");
-//        return false;
-//    }
+    public boolean addItem(String sku){
+        if (this.items.size() < this.basketCapacity){
+            this.items.add(inventory.getItem(sku.toUpperCase()));
+            return true;
+        }
+        System.out.println("Basket is full, could not add bagel!");
+        return false;
+    }
 
 //    public boolean removeItem(String sku) {
 //        if (this.items.contains(sku)) {
