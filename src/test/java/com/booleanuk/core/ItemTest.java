@@ -13,5 +13,13 @@ public class ItemTest {
         Assertions.assertEquals("Coffee", item.getType());
     }
 
+    @Test
+    public void testPrice () {
+        Item item = new Item("Bagel", 0.29, "BGLG", "Gluten-free");
+        Assertions.assertEquals(0.29, item.getPrice());
+        item.setPrice(0.50);
+        Assertions.assertEquals(0.50, item.getPrice());
+    }
+
 
 }
