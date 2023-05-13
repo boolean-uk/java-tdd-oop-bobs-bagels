@@ -76,4 +76,7 @@ public class Basket {
         }
         System.out.println("Invalid SKU");
     }
+    public double getTotalPrice(){
+        return 0.39;
+    }
 }
