@@ -27,6 +27,19 @@ public class BasketTest {
         basket.removeItem("BGLO"); //overloaded the remove item to take the sku as well
         Assertions.assertEquals(0,basket.getItems().size());
     }
-
+    @Test
+    public void testSetCapacity(){
+        Basket basket = new Basket();
+        Assertions.assertEquals(5,basket.getCapacity());
+        basket.setCapacity(10);
+        Assertions.assertEquals(10,basket.getCapacity());
+        basket.setCapacity(1);
+        Assertions.assertEquals(1,basket.getCapacity());
+        basket.addItem("BGLO");
+        basket.setCapacity(2);
+        basket.addItem("BGLE");
+        basket.setCapacity(1);
+        Assertions.assertEquals(2,basket.getCapacity());
+    }
 
 }
