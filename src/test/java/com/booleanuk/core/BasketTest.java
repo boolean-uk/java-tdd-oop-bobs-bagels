@@ -24,6 +24,8 @@ public class BasketTest {
         // Remove item failed! message
         basket.removeItem(new Item("BGL233",0.49,"Bagel","Onion"));
         Assertions.assertEquals(1,basket.getItems().size());
+        basket.removeItem("BGLO"); //overloaded the remove item to take the sku as well
+        Assertions.assertEquals(0,basket.getItems().size());
     }
 
 

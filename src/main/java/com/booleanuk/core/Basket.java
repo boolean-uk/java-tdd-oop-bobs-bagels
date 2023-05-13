@@ -66,4 +66,14 @@ public class Basket {
         }
         System.out.println("Remove item failed!");
     }
+    public void removeItem(String sku){
+        for(Item item:this.items){
+            if(sku.equals(item.getSku())){
+                System.out.println("Removed the item");
+                this.removeItem(item);
+                return;
+            }
+        }
+        System.out.println("Invalid SKU");
+    }
 }
