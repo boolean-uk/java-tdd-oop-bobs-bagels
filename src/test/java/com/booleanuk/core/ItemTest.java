@@ -27,6 +27,13 @@ public class ItemTest {
         Assertions.assertEquals("BGLG", item.getSku());
         item.setSku("BGBD");
         Assertions.assertEquals("BGBD", item.getSku());
+
+    }@Test
+    public void testVariant () {
+        Item item = new Item("Bagel", 0.29, "BGLG", "Gluten-free");
+        Assertions.assertEquals("Gluten-free", item.getVariant());
+        item.setVariant("Low GI");
+        Assertions.assertEquals("Low GI", item.getVariant());
     }
 
 
