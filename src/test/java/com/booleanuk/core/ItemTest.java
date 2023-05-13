@@ -21,5 +21,13 @@ public class ItemTest {
         Assertions.assertEquals(0.50, item.getPrice());
     }
 
+    @Test
+    public void testSKU () {
+        Item item = new Item("Bagel", 0.29, "BGLG", "Gluten-free");
+        Assertions.assertEquals("BGLG", item.getSku());
+        item.setSku("BGBD");
+        Assertions.assertEquals("BGBD", item.getSku());
+    }
+
 
 }
