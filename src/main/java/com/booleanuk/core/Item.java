@@ -52,7 +52,7 @@ public class Item {
         for (Item item : this.getFillings()) {
             this.price+= item.getPrice();
         }
-        return price;
+        return this.price;
     }
 
     public void setPrice(double price) {this.price = price; }
@@ -106,6 +106,6 @@ public class Item {
         System.out.println("Invalid SKU");
     }
     public String toString(){
-        return this.getName();
+        return this.getVariant()+" "+this.getName()+"\nCode: "+this.getSku()+"\nCost: $"+this.getPrice();
     }
 }

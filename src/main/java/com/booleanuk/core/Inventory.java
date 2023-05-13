@@ -33,7 +33,6 @@ public class Inventory {
             if(i.getSku().equals(item.getSku())){
                 System.out.println("Item price: "+item.getPrice());
                 return i.getPrice();
-
             }
         }
         System.out.println("Item is not in inventory");
@@ -47,6 +46,13 @@ public class Inventory {
             }
         }
         return false;
+    }
+    public void showFillings(){
+        for(Item item: this.inventoryItems){
+            if(item.getName().equals("Filling")){
+                System.out.println(item);
+            }
+        }
     }
 }
 
