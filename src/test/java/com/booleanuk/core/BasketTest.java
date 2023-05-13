@@ -47,7 +47,11 @@ public class BasketTest {
         Basket basket = new Basket();
         basket.addItem("BGLO");
         basket.addItem("BGLO");
-        Assertions.assertEquals(0.98,basket.getTotalPrice());
+        Item item = new Item("BGLE");
+        item.addFilling("FILB");
+        basket.addItem(item);
+        Assertions.assertEquals(1.59,basket.getTotalPrice(),0.0001);
+        //get total price works for items with fillings and calculated the price of the filling as well
     }
 
 }

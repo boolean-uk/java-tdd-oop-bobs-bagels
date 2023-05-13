@@ -41,7 +41,7 @@ public class Inventory {
     }
     public boolean isValid(Item item){
         for(Item i:this.inventoryItems){
-            if (i.getSku().equals(item.getSku()) && i.getName().equals(item.getName()) && i.getPrice() == item.getPrice() && i.getVariant().equals(item.getVariant())) {
+            if (i.getSku().equals(item.getSku()) && i.getName().equals(item.getName()) && i.getVariant().equals(item.getVariant())) {
                 return true;
 
             }

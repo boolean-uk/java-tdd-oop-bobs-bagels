@@ -28,6 +28,7 @@ public class Item {
                 this.setVariant(item.getVariant());
                 this.setName(item.getName());
                 this.setSku(sku);
+                this.fillings = new ArrayList<>();
                 return;
             }
         }
@@ -35,6 +36,7 @@ public class Item {
         this.setVariant(this.inventory.getInventoryItems().get(0).getVariant());
         this.setName(this.inventory.getInventoryItems().get(0).getName());
         this.setSku(this.inventory.getInventoryItems().get(0).getSku());
+        this.fillings = new ArrayList<>();
         System.out.println("Invalid SKU.");
     }
 
@@ -47,7 +49,6 @@ public class Item {
     }
 
     public double getPrice() {
-
         for (Item item : this.getFillings()) {
             this.price+= item.getPrice();
         }
@@ -95,6 +96,14 @@ public class Item {
         }else {
             System.out.println("Not a filling");
         }
+    }
+    public void addFilling(String sku){
+        for(Item item:this.inventory.getInventoryItems()){
+            if(item.getSku().equals(sku)){
+                this.addFilling(item);
+            }
+        }
+        System.out.println("Invalid SKU");
     }
     public String toString(){
         return this.getName();
