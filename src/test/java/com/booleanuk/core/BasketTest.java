@@ -46,7 +46,8 @@ public class BasketTest {
     public void testGetTotalCost(){
         Basket basket = new Basket();
         basket.addItem("BGLO");
-        Assertions.assertEquals(0.39,basket.getTotalPrice());
+        basket.addItem("BGLO");
+        Assertions.assertEquals(0.98,basket.getTotalPrice());
     }
 
 }
