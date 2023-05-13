@@ -6,10 +6,10 @@ import org.junit.jupiter.api.Test;
 public class InventoryTest {
 
     @Test
-    public void TestGetItem() {
+    public void testSearchItem() {
         //Success test
         Inventory inventory = new Inventory();
-        Assertions.assertEquals("Onion", inventory.searchItem("BGLO").variant);
+        Assertions.assertEquals("Onion", inventory.searchItem("BGLO").getVariant());
 
         //Failure test
         Assertions.assertNull(inventory.searchItem("NXGP"));

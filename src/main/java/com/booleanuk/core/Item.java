@@ -1,23 +1,54 @@
 package com.booleanuk.core;
 
 public class Item {
-    String type;
-    double price;
-    String sku;
-    String variant;
+    private String type;
+    private double price;
+    private String sku;
+    private String variant;
 
     public Item(String type, double price, String sku, String variant) {
-        this.type = type;
-        this.price = price;
-        this.sku = sku;
-        this.variant = variant;
+        this.setType(type);
+        this.setPrice(price);
+        this.setSku(sku);
+        this.setVariant(variant);
     }
 
     @Override
     public String toString() {
-        return "Item: " + this.variant + " " + this.type + "\n"
-                + "Price: " + this.price + "\n"
-                + "SKU: " + this.sku;
+        return "Item: " + this.getVariant() + " " + this.getType() + "\n"
+                + "Price: " + this.getPrice() + "\n"
+                + "SKU: " + this.getSku();
     }
 
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    public String getSku() {
+        return sku;
+    }
+
+    public void setSku(String sku) {
+        this.sku = sku;
+    }
+
+    public String getVariant() {
+        return variant;
+    }
+
+    public void setVariant(String variant) {
+        this.variant = variant;
+    }
 }

@@ -12,8 +12,8 @@ public class BasketTest {
         String testSku = "BGLO";
         basket.addItem(testSku);
 
-        for (int i = 0; i < basket.items.size() ; i++) {
-            if(basket.items.get(i).sku.equals(testSku)){
+        for (int i = 0; i < basket.getItems().size() ; i++) {
+            if(basket.getItems().get(i).getSku().equals(testSku)){
                 testItem = true;
             }
         }
@@ -23,8 +23,8 @@ public class BasketTest {
         String testSku2 = "ABCD";
         basket.addItem(testSku2);
         testItem = false;
-        for (int i = 0; i < basket.items.size() ; i++) {
-            if (basket.items.get(i).sku.equals(testSku2)) {
+        for (int i = 0; i < basket.getItems().size() ; i++) {
+            if (basket.getItems().get(i).getSku().equals(testSku2)) {
                 testItem = true;
             }
         }
@@ -36,8 +36,8 @@ public class BasketTest {
         String testSku3 = "COFW";
         basket.addItem(testSku3);
         testItem = false;
-        for (int i = 0; i < basket.items.size() ; i++) {
-            if (basket.items.get(i).sku.equals(testSku3)) {
+        for (int i = 0; i < basket.getItems().size() ; i++) {
+            if (basket.getItems().get(i).getSku().equals(testSku3)) {
                 testItem = true;
             }
         }
@@ -65,7 +65,7 @@ public class BasketTest {
         //Test for successfully updated capacity
         Basket basket = new Basket();
         Assertions.assertTrue(basket.updateBasketCapacity(5));
-        Assertions.assertEquals(5, basket.basketCapacity);
+        Assertions.assertEquals(5, basket.getBasketCapacity());
 
         //Test for failed updated capacity (0 or negative number)
         Assertions.assertFalse(basket.updateBasketCapacity(0));
