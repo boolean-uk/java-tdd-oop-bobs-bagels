@@ -42,4 +42,11 @@ public class BasketTest {
         Assertions.assertEquals(2,basket.getCapacity());
     }
 
+    @Test
+    public void testGetTotalCost(){
+        Basket basket = new Basket();
+        basket.addItem("BGLO");
+        Assertions.assertEquals(0.39,basket.getTotalPrice());
+    }
+
 }

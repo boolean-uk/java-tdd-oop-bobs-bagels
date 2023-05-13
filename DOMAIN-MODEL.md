@@ -2,7 +2,7 @@
 1. I'd like to add a specific type of bagel to my basket.(Done)
 2. I'd like to remove a bagel from my basket.(Done)
 3. I'd like to know when my basket is full when I try adding an item beyond my basket capacity.(Done)
-4. I’d like to change the capacity of baskets.
+4. I’d like to change the capacity of baskets. (Done)
 5. I'd like to know if I try to remove an item that doesn't exist in my basket.(Done)
 6. I'd like to know the total cost of items in my basket.
 7. I'd like to know the cost of a bagel before I add it to my basket.

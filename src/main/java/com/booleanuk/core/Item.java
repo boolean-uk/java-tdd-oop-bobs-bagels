@@ -11,6 +11,7 @@ public class Item {
 
     private String variant;
     private ArrayList<Item> fillings;
+    private Inventory inventory;
 
     public Item(String sku, double price, String name, String variant) {
         this.sku = sku;
@@ -18,6 +19,23 @@ public class Item {
         this.name = name;
         this.variant = variant;
         this.fillings = new ArrayList<>();
+    }
+    public Item(String sku){
+        this.inventory = new Inventory();
+        for(Item item:this.inventory.getInventoryItems()){
+            if(item.getSku().equals(sku)){
+                this.setPrice(item.getPrice());
+                this.setVariant(item.getVariant());
+                this.setName(item.getName());
+                this.setSku(sku);
+                return;
+            }
+        }
+        this.setPrice(this.inventory.getInventoryItems().get(0).getPrice());
+        this.setVariant(this.inventory.getInventoryItems().get(0).getVariant());
+        this.setName(this.inventory.getInventoryItems().get(0).getName());
+        this.setSku(this.inventory.getInventoryItems().get(0).getSku());
+        System.out.println("Invalid SKU.");
     }
 
     public String getSku() {
