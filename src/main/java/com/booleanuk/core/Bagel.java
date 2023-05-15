@@ -6,8 +6,8 @@ import java.util.List;
 public class Bagel {
     private final String variant;
     private final double price;
-    private final List<Filling> fillings = new ArrayList<>();;
-    private Inventory inventory;
+    private final List<Filling> fillings = new ArrayList<>();
+    private final Inventory inventory;
 
     public Bagel(String variant, double price, Inventory inventory){
         this.variant = variant;
@@ -25,9 +25,8 @@ public class Bagel {
     }
 
     public boolean addFilling(Filling filling) {
-        if (!inventory.contains(filling)){
-            return false;
-        }
+        if (!inventory.contains(filling)) return false;
+
         this.fillings.add(filling);
 
         return true;
