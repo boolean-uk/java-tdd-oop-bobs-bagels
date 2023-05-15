@@ -53,7 +53,7 @@ public class Basket {
         }
 
         for (Item item : getInventory().getInventoryList()) {
-            if (item.getName().equals(order.getName()) && item.getType().equals(order.getType())) {
+            if (item.getSku().equals(order.getSku())) {
                 this.getItems().add(item);
                 System.out.println("Item added to basket.");
                 return true;
@@ -65,7 +65,7 @@ public class Basket {
 
     public boolean remove(Item order){
         for (Item item : getInventory().getInventoryList()) {
-            if (item.getName().equals(order.getName()) && item.getType().equals(order.getType())) {
+            if (item.getSku().equals(order.getSku())) {
                 this.getItems().remove(item);
                 System.out.println("Item removed from basket.");
                 return true;
