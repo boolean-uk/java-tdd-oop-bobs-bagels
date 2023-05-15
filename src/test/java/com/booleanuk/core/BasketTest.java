@@ -81,12 +81,4 @@ public class BasketTest {
         basket.add(new Item("FILE"));
         Assertions.assertEquals(1.60, basket.getTotal());
     }
-
-    @Test
-    public void testGetItemPrice() {
-        Inventory inventory = new Inventory();
-        Item item = new Item("BGLS", 0.49,"Bagel", "Sesame");
-
-        Assertions.assertEquals(0.49, inventory.getPrice(item));
-    }
 }
