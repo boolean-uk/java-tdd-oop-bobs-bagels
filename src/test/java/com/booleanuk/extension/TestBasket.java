@@ -38,7 +38,7 @@ public class TestBasket {
         }
         b.add(newBagel2);
 
-        // 12 different bagels => cost = 11 * 0.49 + 0.39 = 5.78
+        // 12 different bagels => cost = 5 * 0.49 + 2.49 = 5.78
         Assertions.assertEquals(5.78, b.discountedCost());
 
         // 6 identical

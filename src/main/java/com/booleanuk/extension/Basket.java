@@ -1,6 +1,7 @@
 package com.booleanuk.extension;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 
 public class Basket {
@@ -92,21 +93,30 @@ public class Basket {
             bagelTypes.put(b.getVariant(), l);
         }
 
-        // 12 bagels offer
-        if (12 bagels offer) {
-            if (6 bagels offer) {
-                if (rest are less than or equal to coffee)
-            }
-        } else if (6 bagels offer) {
-            if (rest are less than or equal to coffee)
-        } else if (rest are less than or equal to coffee) {
-
-        }
-
         double sum = 0.0;
 
         for (ArrayList<Double> priceList : bagelTypes.values()) {
-            sum += (priceList.size() / 6) * 2.49 + (priceList.size() % 6) * priceList.get(0);
+            sum += (priceList.size()/12)*3.99;
+            int rest = priceList.size() % 12; // 11 % 12 = 11
+            sum += (rest/6)*2.49; // (11/6) = 1*2.49 = 2.49
+            int rest2 = rest%6; // (11%6) = 5
+            if (rest2 > coffees.size()){
+                int rest3 = (rest2 - coffees.size()); //5 // 3 bagels and 1 coffee
+                sum += coffees.size()*1.25;
+                sum += (rest3)*priceList.get(0);
+            } else {
+                 double[] priceCoffees = new double[coffees.size()];
+                 for (int i = 0; i< coffees.size(); i++ ){
+                     priceCoffees[i] = coffees.get(i).getPrice();
+                 }
+                 Arrays.sort(priceCoffees);
+                 sum += rest2* 2.49;
+                 int rest_of_coffees = coffees.size() -rest2;
+                 for (int i = 0; i<rest_of_coffees; i++){
+                     sum += priceCoffees[i];
+                 }
+            }
+
         }
 
         return (int) (sum * 100) / 100.0; // keep only 2 decimals
