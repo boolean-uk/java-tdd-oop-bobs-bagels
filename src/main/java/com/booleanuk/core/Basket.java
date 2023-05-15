@@ -8,10 +8,10 @@ public class Basket {
     private int basketCapacity;
     private int sumCosts;
 
-    public Basket() {
+    public Basket(Inventory inventory) {
         this.setItems(new ArrayList<>());
         this.setBasketCapacity(3);
-        this.setInventory(new Inventory());
+        this.setInventory(inventory);
     }
 
     public boolean addItem(String sku){

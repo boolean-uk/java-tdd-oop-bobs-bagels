@@ -1,14 +1,10 @@
 package com.booleanuk.core;
 
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
-
 import java.util.ArrayList;
+import java.util.HashMap;
 
-public class InventoryTest {
-    Inventory inventory;
-
-    public InventoryTest() {
+public class Main {
+    public static void main(String[] args) {
         ArrayList<Item> itemArrayList = new ArrayList<>();
         itemArrayList.add(new Item("Bagel", 0.49, "BGLO", "Onion"));
         itemArrayList.add(new Item("Bagel", 0.39, "BGLP", "Plain"));
@@ -25,15 +21,10 @@ public class InventoryTest {
         itemArrayList.add(new Item("Filling", 0.12, "FILS", "Smoked Salmon"));
         itemArrayList.add(new Item("Filling", 0.12, "FILH", "Ham"));
 
-        this.inventory = new Inventory(itemArrayList);
-    }
-    @Test
-    public void testSearchItem() {
-        //Success test
+        Inventory inventory = new Inventory(itemArrayList);
+        Basket basket = new Basket(inventory);
 
-        Assertions.assertEquals("Onion", this.inventory.searchItem("BGLO").getVariant());
 
-        //Failure test
-        Assertions.assertNull(this.inventory.searchItem("NXGP"));
     }
+
 }

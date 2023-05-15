@@ -3,11 +3,35 @@ package com.booleanuk.core;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+
 public class BasketTest {
+    Inventory inventory;
+
+    public BasketTest() {
+        ArrayList<Item> itemArrayList = new ArrayList<>();
+        itemArrayList.add(new Item("Bagel", 0.49, "BGLO", "Onion"));
+        itemArrayList.add(new Item("Bagel", 0.39, "BGLP", "Plain"));
+        itemArrayList.add(new Item("Bagel", 0.49, "BGLE", "Everything"));
+        itemArrayList.add(new Item("Bagel", 0.49, "BGLS", "Sesame"));
+        itemArrayList.add(new Item("Coffee", 0.99, "COFB", "Black"));
+        itemArrayList.add(new Item("Coffee", 1.19, "COFW", "White"));
+        itemArrayList.add(new Item("Coffee", 1.29, "COFC", "Cappuccino"));
+        itemArrayList.add(new Item("Coffee", 1.29, "COFL", "Latte"));
+        itemArrayList.add(new Item("Filling", 0.12, "FILB", "Bacon"));
+        itemArrayList.add(new Item("Filling", 0.12, "FILE", "Egg"));
+        itemArrayList.add(new Item("Filling", 0.12, "FILC", "Cheese"));
+        itemArrayList.add(new Item("Filling", 0.12, "FILX", "Cream Cheese"));
+        itemArrayList.add(new Item("Filling", 0.12, "FILS", "Smoked Salmon"));
+        itemArrayList.add(new Item("Filling", 0.12, "FILH", "Ham"));
+
+        this.inventory = new Inventory(itemArrayList);
+    }
+
     @Test
     public void testAddItem() {
          //Test for successfully added Bagel
-        Basket basket = new Basket();
+        Basket basket = new Basket(this.inventory);
         boolean testItem = false;
         String testSku = "BGLO";
         basket.addItem(testSku);
@@ -48,7 +72,7 @@ public class BasketTest {
     @Test
     public void testRemoveItem() {
         // Test for successfully removed Bagel
-        Basket basket = new Basket();
+        Basket basket = new Basket(this.inventory);
         boolean testItem = true;
         basket.addItem("BGLP");
         basket.addItem("COFB");
@@ -63,7 +87,7 @@ public class BasketTest {
     @Test
     public void testUpdateBasketCapacity() {
         //Test for successfully updated capacity
-        Basket basket = new Basket();
+        Basket basket = new Basket(this.inventory);
         Assertions.assertTrue(basket.updateBasketCapacity(5));
         Assertions.assertEquals(5, basket.getBasketCapacity());
 
@@ -81,7 +105,7 @@ public class BasketTest {
 
     @Test
     public void testTotalCost() {
-        Basket basket = new Basket();
+        Basket basket = new Basket(this.inventory);
         basket.addItem("COFB");
         basket.addItem("BGLE");
         basket.addItem("FILX");
@@ -93,7 +117,7 @@ public class BasketTest {
     @Test
     public void testItemPrice() {
         // test success
-        Basket basket = new Basket();
+        Basket basket = new Basket(this.inventory);
         Assertions.assertEquals(0.39, basket.itemPrice("BGLP"));
 
         //test failure
