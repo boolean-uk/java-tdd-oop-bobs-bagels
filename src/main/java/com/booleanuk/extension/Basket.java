@@ -1,16 +1,15 @@
 package com.booleanuk.extension;
 
 import java.util.ArrayList;
-import java.util.List;
-import java.util.function.BiFunction;
+import java.util.HashMap;
 
 public class Basket {
-    private final List<Bagel> bagels;
-    private final List<Coffee> coffees;
+    private final ArrayList<Bagel> bagels;
+    private final ArrayList<Coffee> coffees;
     private final Inventory inventory;
     private int capacity;
 
-    public Basket(List<Bagel> bagels, List<Coffee> coffees, int capacity) {
+    public Basket(ArrayList<Bagel> bagels, ArrayList<Coffee> coffees, int capacity) {
         this.bagels = bagels;
         this.capacity = capacity;
         this.coffees = coffees;
@@ -76,19 +75,40 @@ public class Basket {
         return true;
     }
 
-    private <T> double sumOf(List<T> list, BiFunction<Double, T, Double> accumulator) {
-        return list.stream().reduce(0.0, accumulator, Double::sum);
-    }
-
-    public double cost(){
-        double bagelsCost = sumOf(bagels, (sum, b) -> sum += b.getPrice());
-        double coffeesCost = sumOf(coffees, (sum, c) -> sum += c.getPrice());
-
-        return bagelsCost + coffeesCost;
+    private double CoffeeBagelComboPrice() {
+        return 1.25 * bagels.size();
     }
 
     public double discountedCost() {
+        if (bagels.size() == coffees.size())
+            return CoffeeBagelComboPrice();
 
-        return 0.0;
+        HashMap<String, ArrayList<Double>> bagelTypes = new HashMap<>();
+
+        for (Bagel b : bagels) {
+            ArrayList<Double> l = bagelTypes.getOrDefault(b.getVariant(), new ArrayList<>());
+            l.add(b.getPrice());
+
+            bagelTypes.put(b.getVariant(), l);
+        }
+
+        // 12 bagels offer
+        if (12 bagels offer) {
+            if (6 bagels offer) {
+                if (rest are less than or equal to coffee)
+            }
+        } else if (6 bagels offer) {
+            if (rest are less than or equal to coffee)
+        } else if (rest are less than or equal to coffee) {
+
+        }
+
+        double sum = 0.0;
+
+        for (ArrayList<Double> priceList : bagelTypes.values()) {
+            sum += (priceList.size() / 6) * 2.49 + (priceList.size() % 6) * priceList.get(0);
+        }
+
+        return (int) (sum * 100) / 100.0; // keep only 2 decimals
     }
 }
