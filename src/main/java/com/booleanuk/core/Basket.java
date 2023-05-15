@@ -4,6 +4,7 @@ package com.booleanuk.core;
 import com.booleanuk.core.models.Bagel;
 import com.booleanuk.core.models.Coffee;
 import com.booleanuk.core.models.Item;
+import com.booleanuk.core.Invetory;
 
 import java.util.ArrayList;
 
@@ -14,6 +15,9 @@ public class Basket {
     ArrayList<Integer> coffeeQuantity;
     int capacity;
     int sizeOfBasket;
+
+    Invetory invetory = new Invetory();
+
 
     public Basket() {
         bagels = new ArrayList<>();
@@ -46,17 +50,37 @@ public class Basket {
     }
 
     boolean add(Bagel bagel, int quantity) {
-        bagels.add(bagel);
-        bagelQuantity.add(quantity);
-        sizeOfBasket += quantity;
-        return true;
+        for (Bagel invBagel : invetory.bagels) {
+            if (invBagel.getSKU().equals(bagel.getSKU())) {
+                if (bagels.contains(bagel)) {
+                    int index = bagels.indexOf(bagel);
+                    bagelQuantity.set(index, bagelQuantity.get(index) + quantity);
+                } else {
+                    bagels.add(bagel);
+                    bagelQuantity.add(quantity);
+                }
+                sizeOfBasket += quantity;
+                return true;
+            }
+        }
+        return false;
     }
 
     boolean add(Coffee coffee, int quantity) {
-        coffees.add(coffee);
-        coffeeQuantity.add(quantity);
-        sizeOfBasket += quantity;
-        return true;
+        for (Coffee invCoffee : invetory.coffees) {
+            if (invCoffee.getSKU().equals(coffee.getSKU())) {
+                if (coffees.contains(coffee)) {
+                    int index = coffees.indexOf(coffee);
+                    coffeeQuantity.set(index, coffeeQuantity.get(index) + quantity);
+                } else {
+                    coffees.add(coffee);
+                    coffeeQuantity.add(quantity);
+                }
+                sizeOfBasket += quantity;
+                return true;
+            }
+        }
+        return false;
     }
     boolean remove(Bagel bagel,int quantity){
         if (!bagels.contains(bagel)){

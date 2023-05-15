@@ -1,8 +1,11 @@
 package com.booleanuk.core.models;
 
+import com.booleanuk.core.Invetory;
+
 import java.util.ArrayList;
 
 public class Bagel extends Item{
+
 
     ArrayList<Filling> fillings;
 
@@ -14,8 +17,16 @@ public class Bagel extends Item{
         return fillings;
     }
 
-    public void setFillings(ArrayList<Filling> fillings) {
-        this.fillings = fillings;
+    public boolean setFillings(ArrayList<Filling> fillings, Invetory invetory) {
+        for (Filling filling : fillings) {
+            for (Filling invFilling : invetory.getFillings()) {
+                if (invFilling.getSKU().equals(filling.getSKU())) {
+                    this.fillings = fillings;
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
 

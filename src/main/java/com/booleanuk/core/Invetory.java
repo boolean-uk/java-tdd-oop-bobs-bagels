@@ -45,4 +45,16 @@ public class Invetory {
         fillings.add(filling4);
         fillings.add(filling5);
     }
+
+    public List<Bagel> getBagels() {
+        return bagels;
+    }
+
+    public List<Coffee> getCoffees() {
+        return coffees;
+    }
+
+    public List<Filling> getFillings() {
+        return fillings;
+    }
 }
