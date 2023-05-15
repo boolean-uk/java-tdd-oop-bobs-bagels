@@ -5,7 +5,6 @@ import java.util.ArrayList;
 public class Inventory {
     private ArrayList<Item> inventoryList;
 
-
     public Inventory() {
         this.setInventoryList(new ArrayList<>());
         this.getInventoryList().add(new Item("BGLO",0.49,"Bagel", "Onion"));
@@ -23,7 +22,7 @@ public class Inventory {
         this.getInventoryList().add(new Item("FILS",0.12,"Filling", "Smoked Salmon"));
         this.getInventoryList().add(new Item("FILH",0.12,"Filling", "Ham"));
     }
-
+''
     public ArrayList<Item> getInventoryList() {
         return inventoryList;
     }

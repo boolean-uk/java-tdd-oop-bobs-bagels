@@ -7,7 +7,9 @@ public class BasketTest {
 
     @Test
     public void testAddItemSucces() {
-        Basket basket = new Basket();
+        Inventory inventory = new Inventory();
+        Basket basket = new Basket(inventory);
+
         Assertions.assertTrue(basket.add(new Item("Bagel", "Plain")));
         Assertions.assertEquals(1, basket.getItems().size());
         Assertions.assertEquals(0.39, basket.getItems().get(0).getPrice());
@@ -15,7 +17,9 @@ public class BasketTest {
 
     @Test
     public void testAddItemFailReachedMaxCapacity() {
-        Basket basket = new Basket();
+        Inventory inventory = new Inventory();
+        Basket basket = new Basket(inventory, 3);
+
         basket.add(new Item("Bagel", "Sesame"));
         basket.add(new Item("Coffee", "Black"));
         basket.add(new Item("Filling", "Egg"));
@@ -24,14 +28,18 @@ public class BasketTest {
 
     @Test
     public void testAddItemFailNotExistInInventory(){
-        Basket basket = new Basket();
+        Inventory inventory = new Inventory();
+        Basket basket = new Basket(inventory);
+
         Assertions.assertFalse(basket.add(new Item("Sandwich", "Plain")));
         Assertions.assertFalse(basket.add(new Item("Bagel", "Poppy-seed")));
     }
 
     @Test
     public void testRemoveItemSuccess() {
-        Basket basket = new Basket();
+        Inventory inventory = new Inventory();
+        Basket basket = new Basket(inventory);
+
         Item item1 = new Item("Bagel", "Plain");
         Item item2 = new Item("Coffee", "Black");
         Item item3 = new Item("Filling", "Egg");
@@ -44,14 +52,18 @@ public class BasketTest {
 
     @Test
     public void testChangeCapacitySuccess() {
-        Basket basket = new Basket();
+        Inventory inventory = new Inventory();
+        Basket basket = new Basket(inventory);
+
         basket.changeCapacity(5);
         Assertions.assertEquals(5, basket.getCapacity());
     }
 
     @Test
     public void testChangeCapacityFail(){
-        Basket basket = new Basket();
+        Inventory inventory = new Inventory();
+        Basket basket = new Basket(inventory);
+
         Assertions.assertTrue(basket.changeCapacity(5));
         basket.changeCapacity(0);
         Assertions.assertNotEquals(0, basket.getCapacity());
@@ -61,7 +73,9 @@ public class BasketTest {
 
     @Test
     public void testGetTotalCost() {
-        Basket basket = new Basket();
+        Inventory inventory = new Inventory();
+        Basket basket = new Basket(inventory);
+
         basket.add(new Item("Bagel", "Sesame"));
         basket.add(new Item("Coffee", "Black"));
         basket.add(new Item("Filling", "Egg"));
@@ -70,7 +84,9 @@ public class BasketTest {
 
     @Test
     public void testGetItemPrice() {
-        Basket basket = new Basket();
+        Inventory inventory = new Inventory();
+        Basket basket = new Basket(inventory);
+
         Item item = new Item("Bagel", "Sesame");
         Assertions.assertEquals(0.49, basket.getPrice(item));
     }

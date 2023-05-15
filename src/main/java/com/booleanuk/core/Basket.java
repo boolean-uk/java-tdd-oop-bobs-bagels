@@ -8,14 +8,15 @@ public class Basket {
     private Inventory inventory;
 
     // Constructors
-    public Basket() {
+    public Basket(Inventory inventory) {
         this.setItems(new ArrayList<>());
-        this.setCapacity(3);
-        this.setInventory(new Inventory());
+        this.setInventory(inventory);
+        this.setCapacity(5);
     }
 
-    public Basket(int capacity) {
+    public Basket(Inventory inventory, int capacity) {
         this.setItems(new ArrayList<>());
+        this.setInventory(inventory);
         this.setCapacity(capacity);
     }
 
