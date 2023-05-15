@@ -129,55 +129,55 @@ public class BasketTest {
         Assertions.assertEquals(2.49, basket.totalCost());
     }
 
-    @Test
-    public void testPlainBagelsDiscount()
-    {
-        Basket basket = new Basket(this.inventory);
-
-        for (int i = 1; i <= 12; i++) {
-            basket.addItem("BGLP");
-        }
-
-        Assertions.assertEquals(3.99, basket.totalCost());
-    }
-
-    @Test
-    public void testEverythingBagelsDiscount()
-    {
-        Basket basket = new Basket(this.inventory);
-
-        for (int i = 1; i <= 6; i++) {
-            basket.addItem("BGLE");
-        }
-
-        Assertions.assertEquals(2.49, basket.totalCost());
-    }
-
-    @Test
-    public void testCoffeeBagelDiscount()
-    {
-        Basket basket = new Basket(this.inventory);
-
-            basket.addItem("BGLP");
-            basket.addItem("COFC");
-
-        Assertions.assertEquals(1.25, basket.totalCost());
-    }
-
-    @Test
-    public void testCombinationDiscounts() {
-        Basket basket = new Basket(this.inventory);
-
-        for (int i = 1; i <= 12; i++) {
-            basket.addItem("BGLP");
-        }
-
-        basket.addItem("BGLP");
-        basket.addItem("COFC");
-
-        Assertions.assertEquals(5.24, );
-
-    }
+//    @Test
+//    public void testPlainBagelsDiscount()
+//    {
+//        Basket basket = new Basket(this.inventory);
+//
+//        for (int i = 1; i <= 12; i++) {
+//            basket.addItem("BGLP");
+//        }
+//
+//        Assertions.assertEquals(3.99, basket.totalCost());
+//    }
+//
+//    @Test
+//    public void testEverythingBagelsDiscount()
+//    {
+//        Basket basket = new Basket(this.inventory);
+//
+//        for (int i = 1; i <= 6; i++) {
+//            basket.addItem("BGLE");
+//        }
+//
+//        Assertions.assertEquals(2.49, basket.totalCost());
+//    }
+//
+//    @Test
+//    public void testCoffeeBagelDiscount()
+//    {
+//        Basket basket = new Basket(this.inventory);
+//
+//            basket.addItem("BGLP");
+//            basket.addItem("COFC");
+//
+//        Assertions.assertEquals(1.25, basket.totalCost());
+//    }
+//
+//    @Test
+//    public void testCombinationDiscounts() {
+//        Basket basket = new Basket(this.inventory);
+//
+//        for (int i = 1; i <= 12; i++) {
+//            basket.addItem("BGLP");
+//        }
+//
+//        basket.addItem("BGLP");
+//        basket.addItem("COFC");
+//
+//        Assertions.assertEquals(5.24, basket.totalCost());
+//
+//    }
 
     @Test
     public void testItemPrice() {

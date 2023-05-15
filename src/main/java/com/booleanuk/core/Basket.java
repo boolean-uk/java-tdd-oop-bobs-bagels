@@ -10,7 +10,7 @@ public class Basket {
 
     public Basket(Inventory inventory) {
         this.setItems(new ArrayList<>());
-        this.setBasketCapacity(3);
+        this.setBasketCapacity(100);
         this.setInventory(inventory);
     }
 
@@ -61,16 +61,37 @@ public class Basket {
     }
 
     public double totalCost () {
-//        if () {
-//
-//        } else if () {
-//
-//        } else if () {
-//
-//        } else if () {
-//
-//        }
-        return (double) (getSumCosts() / 100.0);
+        int countOnionBagels = 0;
+        int numOnionBagelDiscounts = 0;
+        int totalOnionBagelDiscount = 0;
+        int countPlainBagels = 0;
+        int numPlainBagelDiscounts = 0;
+        int totalPlainBagelDiscount = 0;
+        int countEverythingBagels = 0;
+        int numEverythingBagelDiscounts = 0;
+        int totalEverythingBagelDiscount = 0;
+        int countCappuccinoOrLatte = 0;
+        int numCappuccinoOrLatteDiscounts = 0;
+        int totalCappuccinoOrLatteDiscount = 0;
+
+
+        for (int i = 0; i < items.size(); i++) {
+            if (this.getItems().get(i).getSku().equals("BGLO")) {
+                countOnionBagels++;
+                numOnionBagelDiscounts = Math.round((float) countOnionBagels / 6);
+                totalOnionBagelDiscount = (int) (numOnionBagelDiscounts * 0.45 * 100);
+            } //else if (this.getItems().get(i).getSku().equals("BGLP")) {
+//                countPlainBagels++;
+//            } else if (this.getItems().get(i).getSku().equals("BGLE")) {
+//                countEverythingBagels++;
+//            } else if (this.getItems().get(i).getSku().equals("COFL") || this.getItems().get(i).getSku().equals("COFC")) {
+//                countCappuccinoOrLatte++;
+//            }
+        }
+        System.out.println(countOnionBagels);
+        System.out.println(numOnionBagelDiscounts);
+        System.out.println(totalOnionBagelDiscount);
+        return (double) ((getSumCosts() - totalOnionBagelDiscount) / 100.0);
     }
 
     public double itemPrice(String sku) {
