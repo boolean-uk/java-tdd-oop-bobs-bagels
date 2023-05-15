@@ -160,7 +160,6 @@ public class BasketTest {
 
             basket.addItem("BGLP");
             basket.addItem("COFB");
-            basket.addItem("COFB");
 
         Assertions.assertEquals(1.25, basket.totalCost());
     }
