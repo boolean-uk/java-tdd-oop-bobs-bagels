@@ -10,7 +10,7 @@ public class BasketTest {
         Inventory inventory = new Inventory();
         Basket basket = new Basket(inventory);
 
-        Assertions.assertTrue(basket.add(new Item("Bagel", "Plain")));
+        Assertions.assertTrue(basket.add(new Item("BGLP")));
         Assertions.assertEquals(1, basket.getItems().size());
         Assertions.assertEquals(0.39, basket.getItems().get(0).getPrice());
     }
@@ -20,10 +20,10 @@ public class BasketTest {
         Inventory inventory = new Inventory();
         Basket basket = new Basket(inventory, 3);
 
-        basket.add(new Item("Bagel", "Sesame"));
-        basket.add(new Item("Coffee", "Black"));
-        basket.add(new Item("Filling", "Egg"));
-        Assertions.assertFalse(basket.add(new Item("Bagel", "Plain")));
+        basket.add(new Item("BGLS"));
+        basket.add(new Item("COFB"));
+        basket.add(new Item("FILE"));
+        Assertions.assertFalse(basket.add(new Item("BGLP")));
     }
 
     @Test
@@ -31,8 +31,8 @@ public class BasketTest {
         Inventory inventory = new Inventory();
         Basket basket = new Basket(inventory);
 
-        Assertions.assertFalse(basket.add(new Item("Sandwich", "Plain")));
-        Assertions.assertFalse(basket.add(new Item("Bagel", "Poppy-seed")));
+        Assertions.assertFalse(basket.add(new Item("SNDP")));
+        Assertions.assertFalse(basket.add(new Item("BGLW")));
     }
 
     @Test
@@ -40,9 +40,9 @@ public class BasketTest {
         Inventory inventory = new Inventory();
         Basket basket = new Basket(inventory);
 
-        Item item1 = new Item("Bagel", "Plain");
-        Item item2 = new Item("Coffee", "Black");
-        Item item3 = new Item("Filling", "Egg");
+        Item item1 = new Item("BGLP");
+        Item item2 = new Item("COFB");
+        Item item3 = new Item("FILE");
         basket.add(item1);
         basket.add(item2);
         basket.add(item3);
@@ -76,9 +76,9 @@ public class BasketTest {
         Inventory inventory = new Inventory();
         Basket basket = new Basket(inventory);
 
-        basket.add(new Item("Bagel", "Sesame"));
-        basket.add(new Item("Coffee", "Black"));
-        basket.add(new Item("Filling", "Egg"));
+        basket.add(new Item("BGLS"));
+        basket.add(new Item("COFB"));
+        basket.add(new Item("FILE"));
         Assertions.assertEquals(1.60, basket.getTotal());
     }
 

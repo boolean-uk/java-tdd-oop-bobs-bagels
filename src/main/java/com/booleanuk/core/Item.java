@@ -1,35 +1,30 @@
 package com.booleanuk.core;
 
 public class Item {
-    private String SKU;
+    private String Sku;
     private double price;
     private String name;
     private String type;
 
     // Constructors
-    public Item (String SKU, double price, String name, String type) {
-        this.setSKU(SKU);
+    public Item (String Sku, double price, String name, String type) {
+        this.setSku(Sku);
         this.setPrice(price);
         this.setName(name);
         this.setType(type);
     }
 
-    public Item (String name, String type) {
-        this.setName(name);
-        this.setType(type);
-    }
-
-    public Item (String SKU) {
-        this.setSKU(SKU);
+    public Item (String Sku) {
+        this.setSku(Sku);
     }
 
     // Getters & Setters
-    public String getSKU() {
-        return this.SKU;
+    public String getSku() {
+        return this.Sku;
     }
 
-    public void setSKU(String SKU) {
-        this.SKU = SKU;
+    public void setSku(String Sku) {
+        this.Sku = Sku;
     }
 
     public double getPrice() {
@@ -44,9 +39,7 @@ public class Item {
         return this.name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
+    public void setName(String name) { this.name = name; }
 
     public String getType() {
         return this.type;

@@ -35,7 +35,7 @@ public class Inventory {
     // Methods
     public double getPrice(Item order){
         for (Item item : this.inventoryList) {
-            if (item.getSKU().equals(order.getSKU())) {
+            if (item.getSku().equals(order.getSku())) {
                 return item.getPrice();
             }
         }

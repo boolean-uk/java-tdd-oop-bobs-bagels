@@ -8,14 +8,14 @@ public class ItemTest {
     @Test
     public void testGetSKU() {
         Item item = new Item("ABC", 0.50, "Bagel", "Sesame");
-        Assertions.assertEquals("ABC", item.getSKU());
+        Assertions.assertEquals("ABC", item.getSku());
     }
 
     @Test
     public void testSetSKU() {
         Item item = new Item("ABC", 0.50, "Bagel", "Sesame");
-        item.setSKU("DEF");
-        Assertions.assertEquals("DEF", item.getSKU());
+        item.setSku("DEF");
+        Assertions.assertEquals("DEF", item.getSku());
     }
 
     @Test
