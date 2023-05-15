@@ -28,6 +28,12 @@
 |           | `String variant`                          |                                        |                                                |                                           |
 |           |                                           | `getProductCost(String SKU):double`    | 7,9.                                           | returns cost of the product               |
 | Discount  |                                           |                                        |                                                |                                           |
+| Receipt   | `String dateTime`                         |                                        |                                                |                                           |
+|           | `ArrayList<String> productsBought`        |                                        |                                                |                                           |
+|           |                                           | `getReceipt():boolean`                 |                                                | prints receipt                            |
+
+
+
 
 discounts[3] : ArrayList<sku> counter
 method(sku, counter) return double;

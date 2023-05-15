@@ -2,11 +2,14 @@ package com.booleanuk.core;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.time.format.DateTimeFormatterBuilder;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 import static com.booleanuk.core.Inventory.inventoryProducts;
 import static com.booleanuk.core.Inventory.productIsInStock;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class Basket {
 
@@ -99,4 +102,44 @@ public double getTotalCost() {
 
     return sum.doubleValue();
 }
+
+    public boolean printReceipt(){
+        String pound = "\u00a3";
+        LocalDateTime now = LocalDateTime.now();
+        DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        String formatDateTime = now.format(format);
+        System.out.println("~~~ Bob's Bagels ~~~"+ "\n" + formatDateTime +"\n");
+        double sum = 0;
+        for( String keySKU: productCount.keySet()){
+            for (int i = 0; i < products.size(); i++) {
+                Product currentProduct = products.get(i);
+                if (currentProduct.getSKU().equals(keySKU)){
+                    System.out.println(currentProduct.getVariant()+ " " +currentProduct.getName() +"    " +productCount.get(keySKU) +"     "+pound+ currentProduct.getProductCost()*productCount.get(keySKU));
+                    sum += (double)currentProduct.getProductCost()*productCount.get(keySKU);
+                    break;
+                }
+            }
+        }
+        for (int i = 0; i < getAllFillings().size(); i++) {
+            System.out.println(getAllFillings().get(i).getVariant()+ " " +getAllFillings().get(i).getName()  +"     "+pound+ getAllFillings().get(i).getProductCost());
+            sum += (double)getAllFillings().get(i).getProductCost();
+        }
+        System.out.println("Total   "+pound+ sum);
+        System.out.println();
+        System.out.println("Thank you for your order!");
+        return true;
+    }
+
+    public ArrayList<Filling> getAllFillings(){
+        ArrayList<Filling> allFillings = new ArrayList<>();
+        for (Product product : products) {
+            if (product.getName().equals("Bagel")) {
+                for (Filling filling : product.getFillings()) {
+                    allFillings.add(filling);
+                }
+            }
+        }
+
+        return allFillings;
+    }
 }

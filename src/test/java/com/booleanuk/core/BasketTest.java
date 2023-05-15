@@ -74,4 +74,21 @@ public class BasketTest {
         Assertions.assertTrue(basket.add("BGLS"));
         Assertions.assertEquals(3.10, basket.getTotalCost());
     }
+
+    @Test
+    public void testPrintReceipt(){
+        Basket basket = new Basket(100);
+        Assertions.assertTrue(basket.add("BGLO"));
+        Assertions.assertTrue(basket.add("BGLO"));
+        Assertions.assertTrue(basket.add("BGLO"));
+        Assertions.assertTrue(basket.add("BGLO"));
+        Assertions.assertTrue(basket.add("BGLO"));
+        Assertions.assertTrue(basket.add("BGLO"));
+        Product bagel = basket.getProducts().get(0);
+        bagel.addFilling("FILH");
+        Assertions.assertTrue(basket.printReceipt());
+    }
 }
+
+
+
