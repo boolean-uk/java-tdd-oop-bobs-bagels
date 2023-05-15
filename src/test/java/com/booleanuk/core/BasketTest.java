@@ -67,7 +67,6 @@ public class BasketTest {
         Assertions.assertTrue(basket.add("BGLP"));
         Assertions.assertTrue(basket.add("BGLP"));
         Assertions.assertTrue(basket.add("BGLP"));
-      //  Assertions.assertTrue(basket.add("COFB"));
         Assertions.assertEquals(2.34, basket.getTotalCost());
 
         Assertions.assertTrue(basket.add("BGLP"));
@@ -90,10 +89,7 @@ public class BasketTest {
         Product bagel = basket.getProducts().get(0);
         bagel.addFilling("FILH");
 
-
         Assertions.assertEquals(7.0, basket.getTotalCost());
-       // Assertions.assertTrue(basket.add("BGLS"));
-
     }
 
     @Test
@@ -105,8 +101,16 @@ public class BasketTest {
         Assertions.assertTrue(basket.add("BGLO"));
         Assertions.assertTrue(basket.add("BGLO"));
         Assertions.assertTrue(basket.add("BGLO"));
+        Assertions.assertTrue(basket.add("BGLS"));
+        Assertions.assertTrue(basket.add("COFB"));
+        Assertions.assertTrue(basket.add("COFB"));
+        Assertions.assertTrue(basket.add("COFW"));
         Product bagel = basket.getProducts().get(0);
         bagel.addFilling("FILH");
+        bagel.addFilling("FILS");
+        bagel = basket.getProducts().get(3);
+        bagel.addFilling("FILS");
+        bagel.addFilling("FILC");
         Assertions.assertTrue(basket.printReceipt());
     }
 }
