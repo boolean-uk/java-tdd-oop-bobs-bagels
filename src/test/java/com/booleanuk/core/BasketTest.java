@@ -154,6 +154,32 @@ public class BasketTest {
     }
 
     @Test
+    public void testCoffeeBagelDiscount()
+    {
+        Basket basket = new Basket(this.inventory);
+
+            basket.addItem("BGLP");
+            basket.addItem("COFC");
+
+        Assertions.assertEquals(1.25, basket.totalCost());
+    }
+
+    @Test
+    public void testCombinationDiscounts() {
+        Basket basket = new Basket(this.inventory);
+
+        for (int i = 1; i <= 12; i++) {
+            basket.addItem("BGLP");
+        }
+
+        basket.addItem("BGLP");
+        basket.addItem("COFC");
+
+        Assertions.assertEquals(5.24, );
+
+    }
+
+    @Test
     public void testItemPrice() {
         // test success
         Basket basket = new Basket(this.inventory);
