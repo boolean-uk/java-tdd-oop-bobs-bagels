@@ -1,25 +1,29 @@
 package com.booleanuk.core.models;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
-public class Bagel extends BasketItem {
+public class Bagel extends Item{
 
     ArrayList<Filling> fillings;
 
-    public Bagel(String variant, double price, String SKU) {
-        super(variant, price, SKU);
-        this.fillings = new ArrayList<>();
+    public Bagel(String SKU, double price, String variant) {
+        super(SKU, price, variant);
     }
-
-    public void addFillings(Filling[] fillings) {
-        this.fillings.addAll(Arrays.asList(fillings));
-    }
-
-
-
+//Maybe we dont neeed this!!
     public ArrayList<Filling> getFillings() {
         return fillings;
     }
 
+    public void setFillings(ArrayList<Filling> fillings) {
+        this.fillings = fillings;
+    }
+
+
+    public double getFillingsPrice() {
+        double totalPrice =0.0;
+        for (Filling filling : fillings) {
+            totalPrice+=filling.getPrice();
+        }
+        return totalPrice;
+    }
 }

@@ -1,7 +1,7 @@
 package com.booleanuk.core.models;
 
-public class Filling extends BasketItem {
-    public Filling(String variant, double price, String SKU) {
-        super(variant, price, SKU);
+public class Filling extends Item{
+    public Filling(String SKU, double price, String variant) {
+        super(SKU, price, variant);
     }
 }

@@ -1,12 +1,8 @@
 package com.booleanuk.core;
 
-import com.booleanuk.core.models.Bagel;
-import com.booleanuk.core.models.BasketItem;
-import com.booleanuk.core.models.Coffee;
-import com.booleanuk.core.models.Filling;
-
 import java.util.ArrayList;
 import java.util.List;
+import com.booleanuk.core.models.*;
 
 public class Invetory {
 
