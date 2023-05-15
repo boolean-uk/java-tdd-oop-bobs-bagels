@@ -61,17 +61,38 @@ public class BasketTest {
     public void testTotalCostOfBasketSpecialOffer(){
         //sums up bagels and fillings cost
         Basket basket = new Basket(100);
-        Assertions.assertTrue(basket.add("BGLO"));
-        Assertions.assertTrue(basket.add("BGLO"));
-        Assertions.assertTrue(basket.add("BGLO"));
-        Assertions.assertTrue(basket.add("BGLO"));
-        Assertions.assertTrue(basket.add("BGLO"));
-        Assertions.assertTrue(basket.add("BGLO"));
+        Assertions.assertTrue(basket.add("BGLP"));
+        Assertions.assertTrue(basket.add("BGLP"));
+        Assertions.assertTrue(basket.add("BGLP"));
+        Assertions.assertTrue(basket.add("BGLP"));
+        Assertions.assertTrue(basket.add("BGLP"));
+        Assertions.assertTrue(basket.add("BGLP"));
+      //  Assertions.assertTrue(basket.add("COFB"));
+        Assertions.assertEquals(2.34, basket.getTotalCost());
+
+        Assertions.assertTrue(basket.add("BGLP"));
+        Assertions.assertEquals(2.73, basket.getTotalCost());
+
+        Assertions.assertTrue(basket.add("BGLP"));
+        Assertions.assertTrue(basket.add("BGLP"));
+        Assertions.assertTrue(basket.add("BGLP"));
+        Assertions.assertTrue(basket.add("BGLP"));
+        Assertions.assertTrue(basket.add("BGLP"));
+        Assertions.assertEquals(3.99, basket.getTotalCost());
+
+        Assertions.assertTrue(basket.add("BGLP"));
+        Assertions.assertTrue(basket.add("BGLP"));
+        Assertions.assertTrue(basket.add("BGLP"));
+
+        Assertions.assertTrue(basket.add("COFB"));
+        Assertions.assertTrue(basket.add("COFB"));
 
         Product bagel = basket.getProducts().get(0);
         bagel.addFilling("FILH");
-        Assertions.assertEquals(2.61, basket.getTotalCost());
-        Assertions.assertTrue(basket.add("BGLS"));
-        Assertions.assertEquals(3.10, basket.getTotalCost());
+
+
+        Assertions.assertEquals(7.0, basket.getTotalCost());
+       // Assertions.assertTrue(basket.add("BGLS"));
+
     }
 }
