@@ -1,9 +1,8 @@
-package com.booleanuk.core;
+package com.booleanuk.extension;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.BiFunction;
-import java.util.function.Function;
 
 public class Basket {
     private final List<Bagel> bagels;
@@ -77,17 +76,19 @@ public class Basket {
         return true;
     }
 
+    private <T> double sumOf(List<T> list, BiFunction<Double, T, Double> accumulator) {
+        return list.stream().reduce(0.0, accumulator, Double::sum);
+    }
+
     public double cost(){
-        double totalPrice = 0.0;
+        double bagelsCost = sumOf(bagels, (sum, b) -> sum += b.getPrice());
+        double coffeesCost = sumOf(coffees, (sum, c) -> sum += c.getPrice());
 
-        for (Bagel b : bagels){
-            totalPrice += b.getPrice();
-        }
+        return bagelsCost + coffeesCost;
+    }
 
-        for (Coffee c : coffees){
-            totalPrice += c.getPrice();
-        }
+    public double discountedCost() {
 
-        return totalPrice;
+        return 0.0;
     }
 }

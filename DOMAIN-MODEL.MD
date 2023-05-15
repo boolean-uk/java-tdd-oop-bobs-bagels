@@ -38,6 +38,14 @@ I'd like to know the cost of each filling before I add it to my bagel order.
 So we don't get any weird requests,
 I want customers to only be able to order things that we stock in our inventory.
 
+11. (extension 1) As the manager,
+So we that we get more customers,
+I want to include special offers to my customers.
+Buying 6 bagels of the same variant reduces the total cost to 2.49.
+Buying 12 bagels of the same variant reduces the cost to 3.99.
+Buying coffee along with a bagel reduces the total cost to 1.25
+
+
 
 
 | Class       | Attributes                      | Methods                         | Scenario                                                                                                                              | Result                                                                    |
