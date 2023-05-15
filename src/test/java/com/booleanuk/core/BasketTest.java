@@ -142,6 +142,18 @@ public class BasketTest {
     }
 
     @Test
+    public void testEverythingBagelsDiscount()
+    {
+        Basket basket = new Basket(this.inventory);
+
+        for (int i = 1; i <= 6; i++) {
+            basket.addItem("BGLE");
+        }
+
+        Assertions.assertEquals(2.49, basket.totalCost());
+    }
+
+    @Test
     public void testItemPrice() {
         // test success
         Basket basket = new Basket(this.inventory);
