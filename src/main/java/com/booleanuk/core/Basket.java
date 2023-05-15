@@ -67,12 +67,13 @@ public class Basket {
         int countPlainBagels = 0;
         int numPlainBagelDiscounts = 0;
         int totalPlainBagelDiscount = 0;
+        int remainingPlainBagels = 0;
         int countEverythingBagels = 0;
         int numEverythingBagelDiscounts = 0;
         int totalEverythingBagelDiscount = 0;
-        int countCappuccinoOrLatte = 0;
-        int numCappuccinoOrLatteDiscounts = 0;
-        int totalCappuccinoOrLatteDiscount = 0;
+        int countBlackCoffee = 0;
+        int numBlackCoffeeDiscounts = 0;
+        int totalBlackCoffeeDiscount = 0;
 
 
         for (int i = 0; i < items.size(); i++) {
@@ -80,18 +81,24 @@ public class Basket {
                 countOnionBagels++;
                 numOnionBagelDiscounts = Math.round((float) countOnionBagels / 6);
                 totalOnionBagelDiscount = (int) (numOnionBagelDiscounts * 0.45 * 100);
-            } //else if (this.getItems().get(i).getSku().equals("BGLP")) {
-//                countPlainBagels++;
-//            } else if (this.getItems().get(i).getSku().equals("BGLE")) {
-//                countEverythingBagels++;
-//            } else if (this.getItems().get(i).getSku().equals("COFL") || this.getItems().get(i).getSku().equals("COFC")) {
-//                countCappuccinoOrLatte++;
-//            }
+            } else if (this.getItems().get(i).getSku().equals("BGLP")) {
+                countPlainBagels++;
+                numPlainBagelDiscounts = Math.round((float) countPlainBagels / 12);
+                totalPlainBagelDiscount = (int) (numPlainBagelDiscounts * 0.69 * 100);
+            } else if (this.getItems().get(i).getSku().equals("BGLE")) {
+                countEverythingBagels++;
+                numEverythingBagelDiscounts = Math.round((float) countEverythingBagels / 12);
+                totalEverythingBagelDiscount = (int) (numEverythingBagelDiscounts * 0.45 * 100);
+            } else if (this.getItems().get(i).getSku().equals("COFB")) {
+                countBlackCoffee++;
+                if (countPlainBagels % 12 > 0) {
+                    remainingPlainBagels = countPlainBagels % 12;
+                    numBlackCoffeeDiscounts = Math.min(countBlackCoffee, remainingPlainBagels);
+                    totalBlackCoffeeDiscount = (int) (numBlackCoffeeDiscounts * 0.13 * 100);
+                }
+            }
         }
-        System.out.println(countOnionBagels);
-        System.out.println(numOnionBagelDiscounts);
-        System.out.println(totalOnionBagelDiscount);
-        return (double) ((getSumCosts() - totalOnionBagelDiscount) / 100.0);
+        return (double) ((getSumCosts() - totalOnionBagelDiscount - totalPlainBagelDiscount - totalEverythingBagelDiscount - totalBlackCoffeeDiscount) / 100.0);
     }
 
     public double itemPrice(String sku) {
