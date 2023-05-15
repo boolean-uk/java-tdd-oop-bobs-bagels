@@ -85,9 +85,8 @@ public class BasketTest {
     @Test
     public void testGetItemPrice() {
         Inventory inventory = new Inventory();
-        Basket basket = new Basket(inventory);
+        Item item = new Item("BGLS", 0.49,"Bagel", "Sesame");
 
-        Item item = new Item("Bagel", "Sesame");
-        Assertions.assertEquals(0.49, basket.getPrice(item));
+        Assertions.assertEquals(0.49, inventory.getPrice(item));
     }
 }

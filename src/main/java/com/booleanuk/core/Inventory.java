@@ -22,12 +22,22 @@ public class Inventory {
         this.getInventoryList().add(new Item("FILS",0.12,"Filling", "Smoked Salmon"));
         this.getInventoryList().add(new Item("FILH",0.12,"Filling", "Ham"));
     }
-''
+
     public ArrayList<Item> getInventoryList() {
         return inventoryList;
     }
 
     public void setInventoryList(ArrayList<Item> inventoryList) {
         this.inventoryList = inventoryList;
+    }
+
+    public double getPrice(Item order){
+        for (Item item : this.inventoryList) {
+            if (item.getSKU().equals(order.getSKU())) {
+                return item.getPrice();
+            }
+        }
+        System.out.println("This item does not exist");
+        return 0.0;
     }
 }
