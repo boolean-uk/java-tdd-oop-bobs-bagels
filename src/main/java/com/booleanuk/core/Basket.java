@@ -61,6 +61,15 @@ public class Basket {
     }
 
     public double totalCost () {
+//        if () {
+//
+//        } else if () {
+//
+//        } else if () {
+//
+//        } else if () {
+//
+//        }
         return (double) (getSumCosts() / 100.0);
     }
 

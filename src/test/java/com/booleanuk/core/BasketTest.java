@@ -37,8 +37,9 @@ public class BasketTest {
         basket.addItem(testSku);
 
         for (int i = 0; i < basket.getItems().size() ; i++) {
-            if(basket.getItems().get(i).getSku().equals(testSku)){
+            if (basket.getItems().get(i).getSku().equals(testSku)) {
                 testItem = true;
+                break;
             }
         }
         Assertions.assertTrue(testItem);
@@ -50,6 +51,7 @@ public class BasketTest {
         for (int i = 0; i < basket.getItems().size() ; i++) {
             if (basket.getItems().get(i).getSku().equals(testSku2)) {
                 testItem = true;
+                break;
             }
         }
         Assertions.assertFalse(testItem);
@@ -63,6 +65,7 @@ public class BasketTest {
         for (int i = 0; i < basket.getItems().size() ; i++) {
             if (basket.getItems().get(i).getSku().equals(testSku3)) {
                 testItem = true;
+                break;
             }
         }
         // item can not be added because basket capacity is full
@@ -112,6 +115,18 @@ public class BasketTest {
         basket.removeItem("COFB");
 
         Assertions.assertEquals(0.61, basket.totalCost());
+    }
+
+    @Test
+    public void testOnionBagelsDiscount()
+    {
+        Basket basket = new Basket(this.inventory);
+
+        for (int i = 1; i <= 6; i++) {
+            basket.addItem("BGLO");
+        }
+
+        Assertions.assertEquals(2.49, basket.totalCost());
     }
 
     @Test
