@@ -92,13 +92,4 @@ public class Basket {
         return total;
     }
 
-   public double getPrice(Item order){
-        for (Item item : getInventory().getInventoryList()) {
-           if (item.getName().equals(order.getName()) && item.getType().equals(order.getType())) {
-               return item.getPrice();
-           }
-       }
-        System.out.println("This item does not exist");
-        return 0.0;
-   }
 }

@@ -6,6 +6,7 @@ public class Item {
     private String name;
     private String type;
 
+    // Constructors
     public Item (String SKU, double price, String name, String type) {
         this.setSKU(SKU);
         this.setPrice(price);
@@ -22,6 +23,7 @@ public class Item {
         this.setSKU(SKU);
     }
 
+    // Getters & Setters
     public String getSKU() {
         return this.SKU;
     }
