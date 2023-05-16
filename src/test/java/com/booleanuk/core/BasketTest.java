@@ -57,6 +57,7 @@ public class BasketTest {
         Assertions.assertFalse(testItem);
 
         // Test for failure and item can not be added because basket capacity
+        basket.setBasketCapacity(3);
         basket.addItem("BGLP");
         basket.addItem("COFB");
         String testSku3 = "COFW";
