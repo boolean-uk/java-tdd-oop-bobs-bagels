@@ -28,6 +28,18 @@ public class Basket {
         sizeOfBasket = 0;
     }
 
+    public List<Item> getBasket() {
+        return basket;
+    }
+
+    public ArrayList<Integer> getItemQuantityAfterDiscount() {
+        return itemQuantityAfterDiscount;
+    }
+
+    public ArrayList<Integer> getBasketQuantity() {
+        return basketQuantity;
+    }
+
     boolean add(Item item, int quantity) {
         if (quantity < 0) {
             return false;
