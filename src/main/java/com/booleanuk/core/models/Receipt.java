@@ -4,6 +4,7 @@ import com.booleanuk.core.Basket;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 
 public class Receipt {
 
@@ -26,6 +27,20 @@ public class Receipt {
 
 
         //TODO Loop through items
+        printSinglePrices();
+
+        System.out.println();
+        System.out.println();
+        System.out.println("----------------------------");
+        System.out.println("Total                 £" + basket.getTotalWithDiscountBasket());
+        System.out.println();
+        System.out.println("        Thank you");
+        System.out.println("      for your order!");
+        System.out.println();
+
+    }
+
+    private void printSinglePrices() {
         for (int i = 0; i < basket.getBasket().size(); i++) {
             Item item = basket.getBasket().get(i);
             int quantity = basket.getBasketQuantity().get(i);
@@ -33,39 +48,61 @@ public class Receipt {
             int quantityAfterDiscount = basket.getItemQuantityAfterDiscount().get(i);
 
 
-
-            System.out.print(item.getClass() == Bagel.class ? item.getVariant() + " " + "bagel": "Coffee");
-            System.out.print( "        " + quantity + "  " + "£");
+            System.out.print(item.getClass() == Bagel.class ? item.getVariant() + " " + "bagel" : "Coffee");
+            System.out.print("        " + quantity + "  " + "£");
             if (item.getClass() == Bagel.class) {
                 if (quantityAfterDiscount == quantity) {
-                    System.out.print((double)Math.round(item.getPrice() * quantity * 100) / 100);
+                    System.out.print((double) Math.round(item.getPrice() * quantity * 100) / 100);
                 } else {
                     double price = 0.0;
                     while (quantity >= 6) {
                         if (quantity >= 12) {
                             price += 3.99 * quantity / 12;
-                            quantity -= (int)(quantity / 12) * 12;
+                            quantity -= (int) (quantity / 12) * 12;
                         } else {
-                            price += 2.49 * (int)(quantity / 6);
+                            price += 2.49 * (int) (quantity / 6);
                             quantity -= (quantity / 6) * 6;
                         }
                     }
                     price += quantity * item.getPrice();
-                    System.out.print((double)Math.round(price * 100) / 100);
+                    System.out.print((double) Math.round(price * 100) / 100);
                 }
 
             }
         }
+    }
 
-        System.out.println();
-        System.out.println();
-        System.out.println("----------------------------");
-        System.out.println("Total                 £"+basket.getTotalWithDiscountBasket());
-        System.out.println();
-        System.out.println("        Thank you");
-        System.out.println("      for your order!");
-        System.out.println();
+    private void printSinglePricesWithDiscount() {
+        basket.getTotalWithDiscountBasket();
+//        ArrayList<Integer> itemQuantityAfterDiscount = basket.getItemQuantityAfterDiscount();
 
+        for (int i = 0; i < basket.getBasket().size(); i++) {
+            Item item = basket.getBasket().get(i);
+            int quantity = basket.getBasketQuantity().get(i);
+            int quantityAfterDiscount = basket.getItemQuantityAfterDiscount().get(i);
+
+
+            System.out.print(item.getClass() == Bagel.class ? item.getVariant() + " " + "bagel" : "Coffee");
+            System.out.print("        " + quantity + "  " + "£");
+            double price = 0.0;
+            if (item.getClass() == Bagel.class) {
+                if (quantityAfterDiscount != quantity) {
+                    while (quantity >= 6) {
+                        if (quantity >= 12) {
+                            price += 3.99 * quantity / 12;
+                            quantity -= (int) (quantity / 12) * 12;
+                        } else {
+                            price += 2.49 * (int) (quantity / 6);
+                            quantity -= (quantity / 6) * 6;
+                        }
+                    }
+                }
+            }
+
+            // if bagel the quantity is the bagelLeft!
+            price += quantity * item.getPrice();
+            System.out.print((double) Math.round(price * 100) / 100);
+        }
     }
 
 

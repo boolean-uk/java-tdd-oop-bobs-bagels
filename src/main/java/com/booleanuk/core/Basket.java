@@ -13,6 +13,7 @@ public class Basket {
     List<Item> basket;
     ArrayList<Integer> basketQuantity;
     private ArrayList<Integer> itemQuantityAfterDiscount;
+    private ArrayList<Double> itemPriceAfterDiscount;
     private int capacity;
     int sizeOfBasket;
 
@@ -24,12 +25,17 @@ public class Basket {
         basketQuantity = new ArrayList<>();
         inventory = new Inventory();
         itemQuantityAfterDiscount = new ArrayList<>();
+        itemPriceAfterDiscount = new ArrayList<>();
         capacity = 3;
         sizeOfBasket = 0;
     }
 
     public List<Item> getBasket() {
         return basket;
+    }
+
+    public ArrayList<Double> getItemPriceAfterDiscount() {
+        return itemPriceAfterDiscount;
     }
 
     public ArrayList<Integer> getItemQuantityAfterDiscount() {
@@ -113,6 +119,9 @@ public class Basket {
     public double getTotalWithDiscountBasket() {
         double totalPrice = 0.0;
         itemQuantityAfterDiscount.addAll(basketQuantity);
+        for (int i = 0; i < itemQuantityAfterDiscount.size(); i++) {
+            itemPriceAfterDiscount.add(0.0);
+        }
         //First check the bagel only and get the discount price
         for (Item item : basket) {
             if (Bagel.class != item.getClass()) {
@@ -128,12 +137,14 @@ public class Basket {
             //Price of Bagel+coffee
             double priceOFBagelPlusCoffee = getPriceOfBagelPlusCoffee(indexOfBasket);
 
+            itemPriceAfterDiscount.set(indexOfBasket,priceOfBagelFillings + priceAfterDiscount + priceOFBagelPlusCoffee);
             totalPrice += priceOfBagelFillings + priceAfterDiscount + priceOFBagelPlusCoffee;
         }
         //LeftOverItems
         for (Item item : basket) {
             int index = basket.indexOf(item);
             int quantity = itemQuantityAfterDiscount.get(index);
+            itemPriceAfterDiscount.set(index,itemPriceAfterDiscount.get(index)+item.getPrice() * quantity);
             totalPrice += item.getPrice() * quantity;
         }
         totalPrice = (double) Math.round(totalPrice * 100) / 100;

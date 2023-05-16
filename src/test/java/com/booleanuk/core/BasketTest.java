@@ -144,4 +144,22 @@ public class BasketTest {
 
     }
 
+    @Test
+    void agdfijashdklfjghas() {
+        Basket basket = new Basket();
+        basket.setCapacity(100);
+        Item bagel = inventory.bagels.get(0); //0.49
+        Item anotherBagel = inventory.bagels.get(1);//0.39
+        Item anotherOtherBagel = inventory.bagels.get(2);//0.49
+        Item coffee = inventory.coffees.get(0);//0.99
+        basket.add(bagel,12);
+        basket.add(anotherBagel,6);
+        basket.add(anotherOtherBagel,7);
+        basket.add(coffee,1);
+        basket.add(coffee,1);
+        basket.getTotalWithDiscountBasket(); //10.22
+        System.out.println("basket.getItemPriceAfterDiscount() = " + basket.getItemPriceAfterDiscount());
+
+    }
+
 }
