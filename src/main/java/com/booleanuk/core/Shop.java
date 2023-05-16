@@ -6,14 +6,19 @@ public class Shop {
 
     public static void main(String[] args) {
         Inventory inventory = new BagelShopInventory();
-        Basket basket = new Basket(inventory, 10);
+        Basket basket = new Basket(inventory, 30);
+        Receipt receipt = new Receipt(basket);
 
-        basket.add(new Coffee("COFB"));
         basket.add(new Bagel("BGLP"));
         basket.add(new Bagel("BGLP"));
+        basket.add(new Bagel("BGLO"));
+        basket.add(new Bagel("COFB"));
 
-        HashMap <String, Integer> amounts = basket.checkAmountOfItem();
-        amounts.forEach((key, value) -> System.out.println(key + " " + value));
+
+        basket.getAmountOfItems();
+        receipt.printReceipt();
+
+
 
     }
 }

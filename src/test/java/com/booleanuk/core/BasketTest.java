@@ -92,8 +92,8 @@ public class BasketTest {
         basket.add(new Coffee("COFB"));
         basket.add(new Bagel("BGLP"));
         basket.add(new Bagel("BGLP"));
-        Assertions.assertEquals(2, basket.checkAmountOfItem().get("Bagels"));
-        Assertions.assertEquals(1, basket.checkAmountOfItem().get("Coffees"));
+        Assertions.assertEquals(2, basket.getAmountOfItem().get("Bagels"));
+        Assertions.assertEquals(1, basket.getAmountOfItem().get("Coffees"));
 
     }
 }

@@ -1,5 +1,6 @@
 package com.booleanuk.core;
 
+import javax.print.attribute.HashDocAttributeSet;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -93,18 +94,15 @@ public class Basket {
         return total;
     }
 
-    public HashMap<String, Integer> checkAmountOfItem() {
-        HashMap <String, Integer> amounts = new HashMap<>();
-        amounts.put("Bagels", 0);
-        amounts.put("Coffees", 0);
+    public HashMap<Item, Integer> getAmountOfItems() {
+        HashMap<Item, Integer> items = new HashMap<>();
         for (Item item : getItems()){
-          if (item instanceof Bagel){
-              amounts.computeIfPresent("Bagels", (k, v) -> v + 1);
-          } else if(item instanceof Coffee){
-              amounts.computeIfPresent("Coffees", (k, v) -> v + 1);
-          }
+            if (!items.containsKey(item)){
+            items.put(item, 1);
+            } else {
+                items.computeIfPresent(item, (k, v) -> v + 1);
+            }
         }
-        return amounts;
+        return items;
     }
-
 }
