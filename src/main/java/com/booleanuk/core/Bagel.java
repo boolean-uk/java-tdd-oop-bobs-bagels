@@ -14,9 +14,7 @@ public class Bagel implements Item {
         this.setType(type);
     }
 
-    public Bagel (String Sku) {
-        this.setSku(Sku);
-    }
+    public Bagel (String Sku) { this.setSku(Sku); }
 
     // Getters & Setters
     public String getSku() {

@@ -1,6 +1,7 @@
 package com.booleanuk.core;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Basket {
     private ArrayList<Item> items;
@@ -87,11 +88,23 @@ public class Basket {
     public double getTotal(){
         double total = 0.0;
         for (Item item : this.getItems()) {
-            if(item instanceof Bagel){
-
-            }
+            total += item.getPrice();
         }
         return total;
+    }
+
+    public HashMap<String, Integer> checkAmountOfItem() {
+        HashMap <String, Integer> amounts = new HashMap<>();
+        amounts.put("Bagels", 0);
+        amounts.put("Coffees", 0);
+        for (Item item : getItems()){
+          if (item instanceof Bagel){
+              amounts.computeIfPresent("Bagels", (k, v) -> v + 1);
+          } else if(item instanceof Coffee){
+              amounts.computeIfPresent("Coffees", (k, v) -> v + 1);
+          }
+        }
+        return amounts;
     }
 
 }

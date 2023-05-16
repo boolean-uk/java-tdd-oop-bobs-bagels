@@ -14,9 +14,7 @@ public class Coffee implements Item {
         this.setType(type);
     }
 
-    public Coffee (String Sku) {
-        this.setSku(Sku);
-    }
+    public Coffee (String Sku) {this.setSku(Sku);}
 
     // Getters & Setters
     public String getSku() {
