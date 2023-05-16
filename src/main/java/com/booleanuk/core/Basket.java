@@ -134,17 +134,32 @@ public class Basket {
             //Fillings Price
             double priceOfBagelFillings = getPriceOfBagelFillings((Bagel) item, indexOfBasket);
 
-            //Price of Bagel+coffee
-            double priceOFBagelPlusCoffee = getPriceOfBagelPlusCoffee(indexOfBasket);
 
-            itemPriceAfterDiscount.set(indexOfBasket,priceOfBagelFillings + priceAfterDiscount + priceOFBagelPlusCoffee);
-            totalPrice += priceOfBagelFillings + priceAfterDiscount + priceOFBagelPlusCoffee;
+            itemPriceAfterDiscount.set(indexOfBasket, priceOfBagelFillings + priceAfterDiscount);
+            totalPrice += priceOfBagelFillings + priceAfterDiscount;
+        }
+        for (Item item : basket) {
+            if (Bagel.class != item.getClass()) {
+                continue;
+            }
+            int indexOfBasket = basket.indexOf(item);
+
+            //Price of Bagel+coffee check if there are any left
+            if (itemQuantityAfterDiscount.get(indexOfBasket) > 0) {
+                double priceOFBagelPlusCoffee = getPriceOfBagelPlusCoffee(indexOfBasket);
+                double v = itemPriceAfterDiscount.get(indexOfBasket) + priceOFBagelPlusCoffee;
+                v = (double) Math.round(v * 100) / 100;
+                itemPriceAfterDiscount.set(indexOfBasket, v);
+                totalPrice += priceOFBagelPlusCoffee;
+            }
         }
         //LeftOverItems
         for (Item item : basket) {
             int index = basket.indexOf(item);
             int quantity = itemQuantityAfterDiscount.get(index);
-            itemPriceAfterDiscount.set(index,itemPriceAfterDiscount.get(index)+item.getPrice() * quantity);
+            double v = itemPriceAfterDiscount.get(index) + item.getPrice() * quantity;
+            v = (double) Math.round(v * 100) / 100;
+            itemPriceAfterDiscount.set(index, v);
             totalPrice += item.getPrice() * quantity;
         }
         totalPrice = (double) Math.round(totalPrice * 100) / 100;
