@@ -7,15 +7,14 @@ public class InventoryTest {
 
     @Test
     public void testGetInventoryList(){
-        Inventory inventory = new Inventory();
+        Inventory inventory = new BagelShopInventory();
         Assertions.assertEquals(14, inventory.getInventoryList().size());
     }
 
     @Test
     public void testGetItemPrice() {
-        Inventory inventory = new Inventory();
+        Inventory inventory = new BagelShopInventory();
         Item item = new Bagel("BGLS", 0.49,"Bagel", "Sesame");
-
         Assertions.assertEquals(0.49, inventory.getPrice(item));
     }
 }

@@ -7,7 +7,7 @@ public class BasketTest {
 
     @Test
     public void testAddItemSucces() {
-        Inventory inventory = new Inventory();
+        Inventory inventory = new BagelShopInventory();
         Basket basket = new Basket(inventory);
 
         Assertions.assertTrue(basket.add(new Bagel("BGLP")));
@@ -17,7 +17,7 @@ public class BasketTest {
 
     @Test
     public void testAddItemFailReachedMaxCapacity() {
-        Inventory inventory = new Inventory();
+        Inventory inventory = new BagelShopInventory();
         Basket basket = new Basket(inventory, 3);
 
         basket.add(new Bagel("BGLS"));
@@ -28,7 +28,7 @@ public class BasketTest {
 
     @Test
     public void testAddItemFailNotExistInInventory(){
-        Inventory inventory = new Inventory();
+        Inventory inventory = new BagelShopInventory();
         Basket basket = new Basket(inventory);
 
         Assertions.assertFalse(basket.add(new Bagel("SNDP")));
@@ -37,7 +37,7 @@ public class BasketTest {
 
     @Test
     public void testRemoveItemSuccess() {
-        Inventory inventory = new Inventory();
+        Inventory inventory = new BagelShopInventory();
         Basket basket = new Basket(inventory);
 
         Item item1 = new Bagel("BGLP");
@@ -52,7 +52,7 @@ public class BasketTest {
 
     @Test
     public void testChangeCapacitySuccess() {
-        Inventory inventory = new Inventory();
+        Inventory inventory = new BagelShopInventory();
         Basket basket = new Basket(inventory);
 
         basket.changeCapacity(5);
@@ -61,7 +61,7 @@ public class BasketTest {
 
     @Test
     public void testChangeCapacityFail(){
-        Inventory inventory = new Inventory();
+        Inventory inventory = new BagelShopInventory();
         Basket basket = new Basket(inventory);
 
         Assertions.assertTrue(basket.changeCapacity(5));
@@ -73,7 +73,7 @@ public class BasketTest {
 
     @Test
     public void testGetTotalCost() {
-        Inventory inventory = new Inventory();
+        Inventory inventory = new BagelShopInventory();
         Basket basket = new Basket(inventory);
 
         basket.add(new Bagel("BGLS"));

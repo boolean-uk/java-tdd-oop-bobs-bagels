@@ -7,7 +7,7 @@ import com.booleanuk.core.Item;
 public class Shop {
 
     public static void main(String[] args) {
-        Inventory inventory = new Inventory();
+        Inventory inventory = new BagelShopInventory();
         Basket basket = new Basket(inventory);
 
         basket.add(new Coffee("COFB"));
