@@ -31,23 +31,23 @@
    So we don't get any weird requests,
    I want customers to only be able to order things that we stock in our inventory.
 
-| Classes   | Members                      | Methods                            | Scenario                   | Output      |
-|-----------|------------------------------|------------------------------------|----------------------------|-------------|
-| Basket    | ArrayList\<Item> items       | add(Item item)                     | If basket at capacity      | false       |
-|           |                              |                                    | If item not in inventory   | false       |
-|           |                              |                                    | Else                       | true        |
-|           |                              | remove(Item item)                  | If type exists             | true        |
-|           |                              |                                    | Else                       | false       |
-|           |                              | totalCost()                        | Sum cost of all items      | double      |
-|           | static int capacity          | setCapacity(int size)              | If size is less than 0     | false       |
-|           |                              |                                    | Else                       | true        |
-| Item      | double cost                  | getCost()                          |                            | double      |
-| Bagel     | BAGELTYPE type               | getType()                          |                            | BAGELTYPE   |
-| Filling   | FILLINGTYPE type             | getType()                          |                            | FILLINGTYPE |
-| Coffee    | COFFEETYPE type              | getType()                          |                            | COFFEETYPE  |
-| Inventory | ArrayList\<Bagel> bagels     | bagelAvailable(BAGELTYPE type)     | If inventory contains type | true        |
-|           |                              |                                    | Else                       | false       |
-|           | ArrayList\<Filling> fillings | fillingAvailable(FILLINGTYPE type) | If inventory contains type | true        |
-|           |                              |                                    | Else                       | false       |
-|           | ArrayList\<Coffee> Coffees   | coffeeAvailable(COFFEETYPE type)   | If inventory contains type | true        |
-|           |                              |                                    | Else                       | false       |
+| Classes   | Members                | Methods                     | Scenario                   | Output  |
+|-----------|------------------------|-----------------------------|----------------------------|---------|
+| Basket    | ArrayList\<Item> items | add(Item item)              | If basket at capacity      | false   |
+|           |                        |                             | If item not in inventory   | false   |
+|           |                        |                             | Else                       | true    |
+|           |                        | remove(Item item)           | If type exists             | true    |
+|           |                        |                             | Else                       | false   |
+|           |                        | totalCost()                 | Sum cost of all items      | double  |
+|           | static int capacity    | setCapacity(int size)       | If size is less than 0     | false   |
+|           |                        |                             | Else                       | true    |
+|           |                        | toString()                  | Formatted products         | String  |
+| IProduct  | double cost            | getCost()                   |                            | double  |
+|           |                        | getAvailable()              | Inventory.itemAvailable()  | boolean |
+| Item      |                        | toString()                  | Formatted item             | String  |
+| Package   | ArrayList\<Item> items |                             |                            |         |
+|           | double saving          |                             |                            |         |
+|           |                        | toString()                  | Formatted items            | String  |
+| Inventory | ArrayList\<Item> items | itemAvailable(Item item)    | If inventory contains item | true    |
+|           |                        |                             | Else                       | false   |
+| Checkout  |                        | printReceipt(Basket basket) | Print basket.toString()    |         |

@@ -8,34 +8,34 @@ public class BasketTest {
     void addShouldSucceed() {
         Inventory.reset();
         Basket basket = new Basket();
-        Bagel bagel = new Bagel(BAGELTYPE.ONION);
+        Item item = new Item("BGLO");
 
-        Inventory.getBagels().add(bagel);
+        Inventory.getItems().add(item);
 
         Assertions.assertEquals(1, Basket.getCapacity());
 
-        Assertions.assertTrue(Inventory.bagelAvailable(bagel.getType()));
+        Assertions.assertTrue(Inventory.itemAvailable(item));
 
-        Assertions.assertTrue(basket.add(bagel));
+        Assertions.assertTrue(basket.add(item));
 
-        Assertions.assertNotEquals(-1, basket.getItems().indexOf(bagel));
+        Assertions.assertNotEquals(-1, basket.getProducts().indexOf(item));
     }
     @Test
     void addShouldFail() {
         Inventory.reset();
         Basket basket = new Basket();
-        Bagel bagelA = new Bagel(BAGELTYPE.ONION);
+        Item itemA = new Item("BGLO");
 
-        Assertions.assertFalse(Inventory.bagelAvailable(bagelA.getType()));
+        Assertions.assertFalse(Inventory.itemAvailable(itemA));
 
-        basket.add(bagelA);
+        basket.add(itemA);
 
         Assertions.assertEquals(1, Basket.getCapacity());
 
-        Bagel bagelB = new Bagel(BAGELTYPE.ONION);
-        Assertions.assertFalse(basket.add(bagelB));
+        Item itemB = new Item("BGLO");
+        Assertions.assertFalse(basket.add(itemB));
 
-        Assertions.assertEquals(-1, basket.getItems().indexOf(bagelB));
+        Assertions.assertEquals(-1, basket.getProducts().indexOf(itemB));
 
         Assertions.assertEquals(NOTIFICATION.ITEMNOTAVAILABLE, basket.getNotification());
     }
@@ -43,28 +43,28 @@ public class BasketTest {
     @Test
     void removeShouldSucceed() {
         Basket basket = new Basket();
-        Bagel bagel = new Bagel(BAGELTYPE.ONION);
+        Item item = new Item("BGLO");
 
-        Assertions.assertEquals(-1, basket.getItems().indexOf(bagel));
+        Assertions.assertEquals(-1, basket.getProducts().indexOf(item));
 
-        basket.add(bagel);
+        basket.add(item);
 
-        Assertions.assertNotEquals(-1, basket.getItems().indexOf(bagel));
+        Assertions.assertNotEquals(-1, basket.getProducts().indexOf(item));
 
-        Assertions.assertTrue(basket.remove(bagel));
+        Assertions.assertTrue(basket.remove(item));
 
-        Assertions.assertEquals(-1, basket.getItems().indexOf(bagel));
+        Assertions.assertEquals(-1, basket.getProducts().indexOf(item));
     }
     @Test
     void removeShouldFail() {
         Basket basket = new Basket();
-        Bagel bagel = new Bagel(BAGELTYPE.ONION);
+        Item item = new Item("BGLO");
 
-        Assertions.assertEquals(-1, basket.getItems().indexOf(bagel));
+        Assertions.assertEquals(-1, basket.getProducts().indexOf(item));
 
-        Assertions.assertFalse(basket.remove(bagel));
+        Assertions.assertFalse(basket.remove(item));
 
-        Assertions.assertEquals(-1, basket.getItems().indexOf(bagel));
+        Assertions.assertEquals(-1, basket.getProducts().indexOf(item));
 
         Assertions.assertEquals(NOTIFICATION.ITEMNOTFOUND, basket.getNotification());
     }
@@ -93,18 +93,18 @@ public class BasketTest {
     @Test
     void totalCostShouldBe148() {
         Basket.setCapacity(2);
-        Inventory.getBagels().add(new Bagel(BAGELTYPE.ONION));
-        Inventory.getCoffees().add(new Coffee(COFFEETYPE.BLACK));
+        Inventory.getItems().add(new Item("BGLO"));
+        Inventory.getItems().add(new Item("COFB"));
 
         Basket basket = new Basket();
 
         Assertions.assertEquals(0.0, basket.totalCost());
 
-        basket.add(new Bagel(BAGELTYPE.ONION));
+        basket.add(new Item("BGLO"));
 
         Assertions.assertEquals(0.49, basket.totalCost());
 
-        basket.add(new Coffee(COFFEETYPE.BLACK));
+        basket.add(new Item("COFB"));
 
         Assertions.assertEquals(1.48, basket.totalCost());
     }

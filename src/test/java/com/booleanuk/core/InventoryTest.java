@@ -5,47 +5,18 @@ import org.junit.jupiter.api.Test;
 
 public class InventoryTest {
     @Test
-    void bagelAvailableShouldSucceed() {
+    void itemAvailableShouldSucceed() {
         Inventory.reset();
-        Bagel bagel = new Bagel(BAGELTYPE.ONION);
-        Inventory.add(bagel);
+        Item item = new Item("BGLO");
+        Inventory.add(item);
 
-        Assertions.assertTrue(Inventory.bagelAvailable(bagel.getType()));
+        Assertions.assertTrue(Inventory.itemAvailable(item));
     }
     @Test
-    void bagelAvailableShouldFail() {
+    void itemAvailableShouldFail() {
         Inventory.reset();
+        Item item = new Item("BGLO");
 
-        Assertions.assertFalse(Inventory.bagelAvailable(BAGELTYPE.ONION));
-    }
-
-    @Test
-    void fillingAvailableShouldSucceed() {
-        Inventory.reset();
-        Filling filling = new Filling(FILLINGTYPE.BACON);
-        Inventory.add(filling);
-
-        Assertions.assertTrue(Inventory.fillingAvailable(filling.getType()));
-    }
-    @Test
-    void fillingAvailableShouldFail() {
-        Inventory.reset();
-
-        Assertions.assertFalse(Inventory.fillingAvailable(FILLINGTYPE.BACON));
-    }
-
-    @Test
-    void coffeeAvailableShouldSucceed() {
-        Inventory.reset();
-        Coffee coffee = new Coffee(COFFEETYPE.BLACK);
-        Inventory.add(coffee);
-
-        Assertions.assertTrue(Inventory.coffeeAvailable(coffee.getType()));
-    }
-    @Test
-    void coffeeAvailableShouldFail() {
-        Inventory.reset();
-
-        Assertions.assertFalse(Inventory.coffeeAvailable(COFFEETYPE.BLACK));
+        Assertions.assertFalse(Inventory.itemAvailable(item));
     }
 }

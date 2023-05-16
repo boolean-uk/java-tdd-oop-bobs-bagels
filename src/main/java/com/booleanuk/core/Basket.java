@@ -10,11 +10,11 @@ enum NOTIFICATION {
 }
 
 public class Basket {
-    final ArrayList<Item> items;
+    final ArrayList<IProduct> products;
     private static int capacity = 1;
     private NOTIFICATION notification;
 
-    public ArrayList<Item> getItems() { return items; }
+    public ArrayList<IProduct> getProducts() { return products; }
     public static int getCapacity() { return capacity; }
     public static boolean setCapacity(int size) {
         if (size < 0) return false;
@@ -25,28 +25,28 @@ public class Basket {
     public NOTIFICATION getNotification() { return notification; }
 
     public Basket() {
-        this.items = new ArrayList<>(capacity);
+        this.products = new ArrayList<>(capacity);
         this.notification = NOTIFICATION.NOERROR;
     }
 
-    public boolean add(Item item) {
-        if (items.size() >= capacity) {
+    public boolean add(IProduct product) {
+        if (products.size() >= capacity) {
             notification = NOTIFICATION.MAXCAPACITY;
             return false;
         }
 
-        if(!item.getAvailable()) {
+        if(!product.getAvailable()) {
             notification = NOTIFICATION.ITEMNOTAVAILABLE;
             return false;
         }
 
         notification = NOTIFICATION.NOERROR;
-        items.add(item);
+        products.add(product);
         return true;
     }
 
-    public boolean remove(Item item) {
-        int position = items.indexOf(item);
+    public boolean remove(IProduct product) {
+        int position = products.indexOf(product);
 
         if (position == -1) {
             notification = NOTIFICATION.ITEMNOTFOUND;
@@ -54,11 +54,18 @@ public class Basket {
         }
 
         notification = NOTIFICATION.NOERROR;
-        items.remove(position);
+        products.remove(position);
         return true;
     }
 
     public double totalCost() {
-        return items.stream().reduce(0.0, (x, y) -> x + y.getCost(), Double::sum);
+        return products.stream().reduce(0.0, (x, y) -> x + y.getCost(), Double::sum);
+    }
+
+    @Override
+    public String toString() {
+        String result = products.stream().reduce("", (x, y) -> x.concat(y.toString()), String::concat);
+
+        return result;
     }
 }

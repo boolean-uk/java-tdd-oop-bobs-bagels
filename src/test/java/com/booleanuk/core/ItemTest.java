@@ -6,9 +6,8 @@ import org.junit.jupiter.api.Test;
 public class ItemTest {
     @Test
     void getCostShouldBe049() {
-        Bagel bagel = new Bagel(BAGELTYPE.ONION);
+        Item item = new Item("BGLO");
 
-        Assertions.assertEquals(0.49, bagel.getCost());
+        Assertions.assertEquals(0.49, item.getCost());
     }
-
 }
