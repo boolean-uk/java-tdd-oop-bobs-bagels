@@ -1,8 +1,6 @@
 package com.booleanuk.extension;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
+import java.util.*;
 
 public class Basket {
     private final ArrayList<Bagel> bagels;
@@ -93,30 +91,42 @@ public class Basket {
             bagelTypes.put(b.getVariant(), l);
         }
 
-        double sum = 0.0;
 
-        for (ArrayList<Double> priceList : bagelTypes.values()) {
+        double sum = 0.0;
+        int coffeeSize = coffees.size();
+        double[] priceCoffees = new double[coffeeSize];
+
+        for (int i = 0; i < coffeeSize; i++ ) {
+            priceCoffees[i] = coffees.get(i).getPrice();
+        }
+        Arrays.sort(priceCoffees);
+
+
+        List<ArrayList<Double>> sortedBagels = bagelTypes.values().stream().sorted(Comparator.comparing(l -> l.get(0), Comparator.reverseOrder())).toList();
+        // stream= list just an objects which has an useful methods of collectors, you can think of an arraylist
+        //what is an arraylist? can store some data and has useful methods.
+
+
+        for (ArrayList<Double> priceList : sortedBagels) {
             sum += (priceList.size()/12)*3.99;
             int rest = priceList.size() % 12; // 11 % 12 = 11
             sum += (rest/6)*2.49; // (11/6) = 1*2.49 = 2.49
             int rest2 = rest%6; // (11%6) = 5
-            if (rest2 > coffees.size()){
-                int rest3 = (rest2 - coffees.size()); //5 // 3 bagels and 1 coffee
-                sum += coffees.size()*1.25;
+            if (rest2 > coffeeSize){
+                int rest3 = (rest2 - coffeeSize); //5 // 3 bagels and 1 coffee
+                sum += coffeeSize*1.25;
                 sum += (rest3)*priceList.get(0);
+                coffeeSize = 0;
             } else {
-                 double[] priceCoffees = new double[coffees.size()];
-                 for (int i = 0; i< coffees.size(); i++ ){
-                     priceCoffees[i] = coffees.get(i).getPrice();
-                 }
-                 Arrays.sort(priceCoffees);
-                 sum += rest2* 2.49;
-                 int rest_of_coffees = coffees.size() -rest2;
-                 for (int i = 0; i<rest_of_coffees; i++){
-                     sum += priceCoffees[i];
-                 }
-            }
 
+
+                sum += rest2 * 1.25;
+                coffeeSize = coffeeSize - rest2;
+                //int rest_of_coffees = coffees.size() -rest2;
+            }
+        }
+        for (int i = 0; i<coffeeSize; i++){
+            sum += priceCoffees[i];
         }
 
         return (int) (sum * 100) / 100.0; // keep only 2 decimals
