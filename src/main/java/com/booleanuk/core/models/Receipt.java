@@ -32,13 +32,16 @@ public class Receipt {
 
             System.out.print(item.getClass() == Bagel.class ? item.getVariant() + " " + "bagel": "Coffee");
             System.out.print( "        " + quantity + "  " + "£");
-            if (quantity == 12) {
-                System.out.print("3.99");
-            } else if (quantity == 6 ) {
-                System.out.print("2.49");
-            } else {
-                System.out.print(item.getPrice() * quantity);
+            if (item.getClass() == Bagel.class) {
+                if (quantity == 12) {
+                    System.out.print("3.99");
+                } else if (quantity == 6 ) {
+                    System.out.print("2.49");
+                } else {
+                    System.out.print(item.getPrice() * quantity);
+                }
             }
+
 
         }
 
