@@ -28,10 +28,10 @@ public class Receipt {
         //TODO Loop through items
         for (int i = 0; i < basket.getBasket().size(); i++) {
             Item item = basket.getBasket().get(i);
+            int quantity = basket.getBasketQuantity().get(i);
 
-//            int quantityAfterDiscount = basket.getItemQuantityAfterDiscount().get(i);
             System.out.print(item.getClass() == Bagel.class ? item.getVariant() + " " + "bagel": "Coffee");
-//            System.out.print("quantityAfterDiscount" > 0 ? "        " + "quantityAfterDiscount" : "");
+            System.out.print( "        " + quantity + "  " + "£"+ item.getPrice()*quantity);
 
         }
 
