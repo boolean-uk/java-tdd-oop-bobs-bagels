@@ -10,13 +10,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BasketTest {
-    Invetory invetory = new Invetory();
+    Inventory inventory = new Inventory();
 
 
     @Test
     void addItem() {
         Basket basket = new Basket();
-        Item bagel = invetory.bagels.get(0);
+        Item bagel = inventory.bagels.get(0);
         List<Integer> quantityArray = new ArrayList<>();
         List<Item> itemArray = new ArrayList<>();
         itemArray.add(bagel);
@@ -32,9 +32,9 @@ public class BasketTest {
 
     @Test
     void removeItem() {
-        Item bagel = invetory.bagels.get(0);
-        Item anotherBagel = invetory.bagels.get(1);
-        Item coffee = invetory.coffees.get(0);
+        Item bagel = inventory.bagels.get(0);
+        Item anotherBagel = inventory.bagels.get(1);
+        Item coffee = inventory.coffees.get(0);
 
         List<Item> itemArray = new ArrayList<>();
         itemArray.add(anotherBagel);
@@ -66,7 +66,7 @@ public class BasketTest {
     @Test
     void SetGetCapacity() {
         Basket basket = new Basket();
-        Item bagel = invetory.bagels.get(0);
+        Item bagel = inventory.bagels.get(0);
         basket.setCapacity(10);
         Assertions.assertEquals(10, basket.getCapacity());
         Assertions.assertTrue(basket.add(bagel, 7));
@@ -81,18 +81,18 @@ public class BasketTest {
     void getTotalPriceOfBasket() {
         Basket basket = new Basket();
         basket.setCapacity(100);
-        Item bagel = invetory.bagels.get(0);
+        Item bagel = inventory.bagels.get(0);
 
-        Item coffee = invetory.coffees.get(0);
+        Item coffee = inventory.coffees.get(0);
         basket.add(bagel, 1);
         Assertions.assertEquals(basket.getTotalOfBasket(), 0.49);
         basket.add(coffee, 1);
         Assertions.assertEquals(basket.getTotalOfBasket(), 0.49 + 0.99);
         basket.add(bagel, 1);
         Assertions.assertEquals(basket.getTotalOfBasket(), 0.49 + 0.49 + 0.99);
-        Bagel bagelConstactor = invetory.bagels.get(0); //Price 0.49
+        Bagel bagelConstactor = inventory.bagels.get(0); //Price 0.49
         Bagel bagelWithFilling = new Bagel(bagelConstactor.getVariant(), bagelConstactor.getPrice(), bagelConstactor.getSKU());
-        Filling filling = invetory.fillings.get(0);//Price 0.12
+        Filling filling = inventory.fillings.get(0);//Price 0.12
         bagelWithFilling.setFillings(filling);
         Assertions.assertTrue(basket.add(bagelWithFilling, 1));
         Assertions.assertEquals(basket.getTotalOfBasket(), 0.49 + 0.49 + 0.99 + 0.49 + 0.12);
@@ -102,16 +102,16 @@ public class BasketTest {
     void getTotalWithDiscount() {
         Basket basket = new Basket();
         basket.setCapacity(100);
-        Item bagel = invetory.bagels.get(0);
+        Item bagel = inventory.bagels.get(0);
         basket.add(bagel, 6);
         Assertions.assertEquals(basket.getTotalWithDiscountBasket(), 2.49);
-        Item anotherBagel = invetory.bagels.get(1); //0.39
+        Item anotherBagel = inventory.bagels.get(1); //0.39
         basket.add(anotherBagel, 12);
         Assertions.assertEquals(basket.getTotalWithDiscountBasket(), 3.99 + 2.49);
         basket.add(anotherBagel, 1);
         Assertions.assertEquals(basket.getTotalWithDiscountBasket(), 3.99 + 2.49 + 0.39);
-        Filling filling = invetory.fillings.get(0);//Price 0.12
-        Bagel bagelWithFilling = invetory.bagels.get(3);
+        Filling filling = inventory.fillings.get(0);//Price 0.12
+        Bagel bagelWithFilling = inventory.bagels.get(3);
         bagelWithFilling.setFillings(filling);
         Assertions.assertTrue(basket.remove(bagel, 6));
         Assertions.assertTrue(basket.remove(anotherBagel, 13));
@@ -126,10 +126,10 @@ public class BasketTest {
     void getTotalWithDiscountAndCoffee() {
         Basket basket = new Basket();
         basket.setCapacity(100);
-        Item bagel = invetory.bagels.get(0); //0.49
-        Item anotherBagel = invetory.bagels.get(1);//0.39
-        Item anotherOtherBagel = invetory.bagels.get(2);//0.49
-        Item coffee = invetory.coffees.get(0);//0.99
+        Item bagel = inventory.bagels.get(0); //0.49
+        Item anotherBagel = inventory.bagels.get(1);//0.39
+        Item anotherOtherBagel = inventory.bagels.get(2);//0.49
+        Item coffee = inventory.coffees.get(0);//0.99
         basket.add(bagel, 6); //2.49
         basket.add(anotherBagel, 1);//2.88
         Assertions.assertEquals(basket.getTotalWithDiscountBasket(), 2.88);

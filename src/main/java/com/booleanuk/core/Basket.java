@@ -16,13 +16,13 @@ public class Basket {
     private int capacity;
     int sizeOfBasket;
 
-    private Invetory invetory;
+    private Inventory inventory;
 
 
     public Basket() {
         basket = new ArrayList<>();
         basketQuantity = new ArrayList<>();
-        invetory = new Invetory();
+        inventory = new Inventory();
         itemQuantityAfterDiscount = new ArrayList<>();
         capacity = 3;
         sizeOfBasket = 0;
@@ -100,7 +100,7 @@ public class Basket {
 
     public double getTotalWithDiscountBasket() {
         double totalPrice = 0.0;
-        itemQuantityAfterDiscount = (ArrayList<Integer>) basketQuantity.clone();
+        itemQuantityAfterDiscount.addAll(basketQuantity);
         //First check the bagel only and get the discount price
         for (Item item : basket) {
             if (Bagel.class != item.getClass()) {
@@ -181,7 +181,7 @@ public class Basket {
 
     private boolean isValidInvetoryItem(Item item) {
         boolean isValid = false;
-        for (Bagel bagel : invetory.bagels) {
+        for (Bagel bagel : inventory.bagels) {
             String sku = bagel.getSKU();
             if (Objects.equals(item.getSKU(), sku)) {
                 isValid = true;
@@ -189,7 +189,7 @@ public class Basket {
             }
         }
         if (!isValid) {
-            for (Coffee coffee : invetory.coffees) {
+            for (Coffee coffee : inventory.coffees) {
                 String sku = coffee.getSKU();
                 if (Objects.equals(item.getSKU(), sku)) {
                     isValid = true;

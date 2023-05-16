@@ -1,23 +1,25 @@
 package com.booleanuk.core.models;
 
-import com.booleanuk.core.Invetory;
+import com.booleanuk.core.Inventory;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-
 public class BagelTest {
+    Inventory inventory = new Inventory();
+
 
     @Test
     void setFillingsTest() {
-        Invetory invetory = new Invetory();
-        Bagel bagel = new Bagel("Onion", 0.49, "BGLO");
-        Filling fill1 = new Filling("Bacon",0.12, "FILB");
-        Filling fillError = new Filling("Random",0.0, "WRONG");
+        Bagel bagel = inventory.getBagels().get(0);
+        Filling fill1 = inventory.getFillings().get(0);
+        Filling fillError = new Filling("Error",0.0,"error");
 
-        Assertions.assertTrue(bagel.setFillings(new ArrayList<>(Arrays.asList(fill1)), invetory));
-        Assertions.assertFalse(bagel.setFillings(new ArrayList<>(Arrays.asList(fillError)), invetory));
+        Assertions.assertTrue(bagel.setFillings(fill1, inventory));
+        Assertions.assertFalse(bagel.setFillings(fillError, inventory));
+        Assertions.assertEquals(1, bagel.fillings.size());
+
+
+
 
     }
 }

@@ -7,7 +7,7 @@ import com.booleanuk.core.models.Filling;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Invetory {
+public class Inventory {
 
     List<Bagel> bagels = new ArrayList<>();
     List<Coffee> coffees = new ArrayList<>();
@@ -15,7 +15,7 @@ public class Invetory {
 
     List<String> skus = new ArrayList<>();
 
-    public Invetory() {
+    public Inventory() {
         Bagel bagel0 = new Bagel("Onion", 0.49, "BGLO");
         Bagel bagel1 = new Bagel("Plain", 0.39, "BGLP");
         Bagel bagel2 = new Bagel("Everything", 0.49, "BGLE");
