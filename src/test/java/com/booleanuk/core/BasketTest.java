@@ -90,7 +90,8 @@ public class BasketTest {
         Assertions.assertEquals(basket.getTotalOfBasket(), 0.49 + 0.99);
         basket.add(bagel, 1);
         Assertions.assertEquals(basket.getTotalOfBasket(), 0.49 + 0.49 + 0.99);
-        Bagel bagelWithFilling = invetory.bagels.get(0); //Price 0.49
+        Bagel bagelConstactor = invetory.bagels.get(0); //Price 0.49
+        Bagel bagelWithFilling =new Bagel(bagelConstactor.getVariant(),bagelConstactor.getPrice(),bagelConstactor.getSKU());
         Filling filling = invetory.fillings.get(0);//Price 0.12
         bagelWithFilling.setFillings(filling);
         Assertions.assertTrue(basket.add(bagelWithFilling, 1));

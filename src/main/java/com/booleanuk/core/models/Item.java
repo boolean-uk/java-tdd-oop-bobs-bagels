@@ -19,4 +19,8 @@ public class Item {
     public String getSKU() {
         return SKU;
     }
+
+    public String getVariant() {
+        return variant;
+    }
 }

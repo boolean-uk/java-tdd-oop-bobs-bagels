@@ -87,11 +87,13 @@ public class Basket {
             int quantityOfItem = basketQuantity.get(index);
             if (item.getClass() == Bagel.class) {
                 /* TODO: getPriceOfFillings*/
-                double priceOfFillings = ((Bagel) item).getFillingsPrice();
-                totalPrice += priceOfFillings * quantityOfItem;
+                double priceOfSingleBagelFilling = ((Bagel) item).getFillingsPrice();
+                totalPrice+=priceOfSingleBagelFilling*quantityOfItem+item.getPrice()*quantityOfItem;
+            } else {
+                totalPrice += item.getPrice() * quantityOfItem;
             }
-            totalPrice += item.getPrice() * quantityOfItem;
         }
+        totalPrice = (double) Math.round(totalPrice * 100) / 100;
         return totalPrice;
     }
 
