@@ -11,7 +11,8 @@ import java.util.Objects;
 
 public class Basket {
     List<Item> basket;
-    List<Integer> basketQuantity;
+    ArrayList<Integer> basketQuantity;
+    private ArrayList<Integer> itemQuantityAfterDiscount12_6;
     private int capacity;
     int sizeOfBasket;
 
@@ -22,6 +23,7 @@ public class Basket {
         basket = new ArrayList<>();
         basketQuantity = new ArrayList<>();
         invetory = new Invetory();
+        itemQuantityAfterDiscount12_6 = new ArrayList<>();
         capacity = 3;
         sizeOfBasket = 0;
     }
@@ -86,15 +88,81 @@ public class Basket {
             int index = basket.indexOf(item);
             int quantityOfItem = basketQuantity.get(index);
             if (item.getClass() == Bagel.class) {
-                /* TODO: getPriceOfFillings*/
-                double priceOfSingleBagelFilling = ((Bagel) item).getFillingsPrice();
-                totalPrice+=priceOfSingleBagelFilling*quantityOfItem+item.getPrice()*quantityOfItem;
+                double priceOfBagelFillings = getPriceOfBagelFillings((Bagel) item, index);
+                totalPrice += priceOfBagelFillings + item.getPrice() * quantityOfItem;
             } else {
                 totalPrice += item.getPrice() * quantityOfItem;
             }
         }
         totalPrice = (double) Math.round(totalPrice * 100) / 100;
         return totalPrice;
+    }
+
+    public double getTotalWithDiscountBasket() {
+        double totalPrice = 0.0;
+        itemQuantityAfterDiscount12_6 = (ArrayList<Integer>) basketQuantity.clone();
+        //First check the bagel only and get the discount price
+        for (Item item : basket) {
+            if (Bagel.class != item.getClass()) {
+                continue;
+            }
+            int indexOfBasket = basket.indexOf(item);
+            //Price with Discount
+            double priceAfterDiscount = discountBagelCalculator(indexOfBasket);
+
+            //Fillings Price
+            double priceOfBagelFillings = getPriceOfBagelFillings((Bagel) item, indexOfBasket);
+
+            //the Leftovers for now todo check for Coffee + Bagel Discount!
+            int quantityOfItemAfterDicount = itemQuantityAfterDiscount12_6.get(indexOfBasket);
+            double priceBagelWithoutDiscount = item.getPrice() * quantityOfItemAfterDicount;
+
+            totalPrice += priceOfBagelFillings + priceAfterDiscount + priceBagelWithoutDiscount;
+        }
+        totalPrice = (double) Math.round(totalPrice * 100) / 100;
+        return totalPrice;
+    }
+
+    private double getPriceOfBagelPlusCoffee(int indexOfBasket) {
+        double total = 0.0;
+        int BagelsLeft = itemQuantityAfterDiscount12_6.get(indexOfBasket);
+        for (Item item : basket) {
+            if (item.getClass() != Coffee.class) {
+                continue;
+            }
+
+            //todo get COffee+Bagel Back
+
+
+        }
+
+
+        return total;
+
+    }
+
+    private double getPriceOfBagelFillings(Bagel item, int indexOfBasket) {
+        int quantityOfItemForFillings = basketQuantity.get(indexOfBasket);
+        double priceOfBagelFillings = item.getFillingsPrice() * quantityOfItemForFillings;
+        return priceOfBagelFillings;
+    }
+
+    private double discountBagelCalculator(int index) {
+        double total = 0.0;
+        int q12 = 0;
+        int q6 = 0;
+        int quantity = basketQuantity.get(index);
+        while (quantity >= 12) {
+            q12 += 1;
+            quantity -= 12;
+        }
+        while (quantity >= 6) {
+            q6 += 1;
+            quantity -= 6;
+        }
+        itemQuantityAfterDiscount12_6.set(index, quantity);
+        total += 2.49 * q6 + 3.99 * q12;
+        return total;
     }
 
     private boolean isValidInvetoryItem(Item item) {
