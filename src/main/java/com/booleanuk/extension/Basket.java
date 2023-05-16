@@ -88,7 +88,11 @@ public class Basket {
         double total =0;
         for (AbstractItem item :items) {
             total += item.calculateDiscount();
-        }
+       }
+        // Farhang local logic to calculate bagels
+        // Then calculate Coffees
+        // finding out left bagels and calculate
+
         return total;
     }
 }
