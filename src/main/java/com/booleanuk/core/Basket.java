@@ -116,21 +116,13 @@ public class Basket {
             //Price of Bagel+coffee
             double priceOFBagelPlusCoffee = getPriceOfBagelPlusCoffee(indexOfBasket);
 
-//the Leftovers for now
-//            int quantityOfItemAfterDicount = itemQuantityAfterDiscount.get(indexOfBasket);
-//            double priceBagelWithoutDiscount = item.getPrice() * quantityOfItemAfterDicount;
-
             totalPrice += priceOfBagelFillings + priceAfterDiscount + priceOFBagelPlusCoffee;
         }
+        //LeftOverItems
         for (Item item : basket) {
             int index = basket.indexOf(item);
             int quantity = itemQuantityAfterDiscount.get(index);
-            if (item.getClass() == Bagel.class) {
-                double priceOfBagelFillings = getPriceOfBagelFillings((Bagel) item, index);
-                totalPrice += priceOfBagelFillings + item.getPrice() * quantity;
-            } else {
-                totalPrice += item.getPrice() * quantity;
-            }
+            totalPrice += item.getPrice() * quantity;
         }
         totalPrice = (double) Math.round(totalPrice * 100) / 100;
         return totalPrice;
@@ -148,7 +140,7 @@ public class Basket {
             if (bagelsLeft > quantityOfCoffee) {
                 itemQuantityAfterDiscount.set(indexOfBagel, bagelsLeft - quantityOfCoffee);
                 itemQuantityAfterDiscount.set(indexOfCoffee, 0);
-                total +=quantityOfCoffee * 1.25;
+                total += quantityOfCoffee * 1.25;
             } else if (bagelsLeft < quantityOfCoffee) {
                 itemQuantityAfterDiscount.set(indexOfBagel, 0);
                 itemQuantityAfterDiscount.set(indexOfCoffee, quantityOfCoffee - bagelsLeft);
