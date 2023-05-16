@@ -1,17 +1,26 @@
 package com.booleanuk.core;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Basket {
     private ArrayList<ItemInterface> items;
     private Inventory inventory;
     private int basketCapacity;
     private int sumCosts;
+    private HashMap<String, Integer> itemsMap;
+//    private LocalDateTime dateTime;
+//    public DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+//    private String dateString = dtf.format(dateTime);
+
 
     public Basket(Inventory inventory) {
         this.setItems(new ArrayList<>());
         this.setBasketCapacity(100);
         this.setInventory(inventory);
+        this.setItemsMap(new HashMap<>());
     }
 
     public boolean addItem(String sku){
@@ -108,6 +117,8 @@ public class Basket {
         return this.getInventory().searchItem(sku).getPrice();
     }
 
+
+
     public ArrayList<ItemInterface> getItems() {
         return items;
     }
@@ -139,4 +150,20 @@ public class Basket {
     public void setSumCosts(int sumCosts) {
         this.sumCosts = sumCosts;
     }
+
+    public HashMap<String, Integer> getItemsMap() {
+        return itemsMap;
+    }
+
+    public void setItemsMap(HashMap<String, Integer> itemsMap) {
+        this.itemsMap = itemsMap;
+    }
+
+//    public String getDateString() {
+//        return dateString;
+//    }
+//
+//    public void setDateString(String dateString) {
+//        this.dateString = dateString;
+//    }
 }

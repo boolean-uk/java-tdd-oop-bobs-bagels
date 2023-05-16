@@ -3,6 +3,8 @@ package com.booleanuk.core;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class BasketTest {
@@ -190,6 +192,13 @@ public class BasketTest {
         Assertions.assertEquals(0.00, basket.itemPrice("ABCD"));
     }
 
-
+    @Test
+    public void testDateTime()
+    {
+        LocalDateTime testDateTime = LocalDateTime.now();
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+        Basket basket = new Basket(this.inventory);
+        Assertions.assertEquals(dtf.format(testDateTime), basket.getDateString());
+    }
 
 }
