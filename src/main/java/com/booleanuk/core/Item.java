@@ -1,51 +1,21 @@
 package com.booleanuk.core;
 
-public class Item {
-    private String Sku;
-    private double price;
-    private String name;
-    private String type;
-
-    // Constructors
-    public Item (String Sku, double price, String name, String type) {
-        this.setSku(Sku);
-        this.setPrice(price);
-        this.setName(name);
-        this.setType(type);
-    }
-
-    public Item (String Sku) {
-        this.setSku(Sku);
-    }
+public interface Item {
 
     // Getters & Setters
-    public String getSku() {
-        return this.Sku;
-    }
+    String getSku();
 
-    public void setSku(String Sku) {
-        this.Sku = Sku;
-    }
+    void setSku(String Sku);
 
-    public double getPrice() {
-        return this.price;
-    }
+    double getPrice();
 
-    public void setPrice(double price) {
-        this.price = price;
-    }
+    void setPrice(double price);
 
-    public String getName() {
-        return this.name;
-    }
+    String getName();
 
-    public void setName(String name) { this.name = name; }
+    void setName(String name);
 
-    public String getType() {
-        return this.type;
-    }
+    String getType();
 
-    public void setType(String type) {
-        this.type = type;
-    }
+    void setType(String type);
 }

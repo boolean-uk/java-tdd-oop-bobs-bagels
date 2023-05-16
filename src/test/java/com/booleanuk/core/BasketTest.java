@@ -10,7 +10,7 @@ public class BasketTest {
         Inventory inventory = new Inventory();
         Basket basket = new Basket(inventory);
 
-        Assertions.assertTrue(basket.add(new Item("BGLP")));
+        Assertions.assertTrue(basket.add(new Bagel("BGLP")));
         Assertions.assertEquals(1, basket.getItems().size());
         Assertions.assertEquals(0.39, basket.getItems().get(0).getPrice());
     }
@@ -20,10 +20,10 @@ public class BasketTest {
         Inventory inventory = new Inventory();
         Basket basket = new Basket(inventory, 3);
 
-        basket.add(new Item("BGLS"));
-        basket.add(new Item("COFB"));
-        basket.add(new Item("FILE"));
-        Assertions.assertFalse(basket.add(new Item("BGLP")));
+        basket.add(new Bagel("BGLS"));
+        basket.add(new Coffee("COFB"));
+        basket.add(new Filling("FILE"));
+        Assertions.assertFalse(basket.add(new Bagel("BGLP")));
     }
 
     @Test
@@ -31,8 +31,8 @@ public class BasketTest {
         Inventory inventory = new Inventory();
         Basket basket = new Basket(inventory);
 
-        Assertions.assertFalse(basket.add(new Item("SNDP")));
-        Assertions.assertFalse(basket.add(new Item("BGLW")));
+        Assertions.assertFalse(basket.add(new Bagel("SNDP")));
+        Assertions.assertFalse(basket.add(new Filling("BGLW")));
     }
 
     @Test
@@ -40,9 +40,9 @@ public class BasketTest {
         Inventory inventory = new Inventory();
         Basket basket = new Basket(inventory);
 
-        Item item1 = new Item("BGLP");
-        Item item2 = new Item("COFB");
-        Item item3 = new Item("FILE");
+        Item item1 = new Bagel("BGLP");
+        Item item2 = new Coffee("COFB");
+        Item item3 = new Filling("FILE");
         basket.add(item1);
         basket.add(item2);
         basket.add(item3);
@@ -76,9 +76,9 @@ public class BasketTest {
         Inventory inventory = new Inventory();
         Basket basket = new Basket(inventory);
 
-        basket.add(new Item("BGLS"));
-        basket.add(new Item("COFB"));
-        basket.add(new Item("FILE"));
+        basket.add(new Bagel("BGLS"));
+        basket.add(new Coffee("COFB"));
+        basket.add(new Filling("FILE"));
         Assertions.assertEquals(1.60, basket.getTotal());
     }
 }
