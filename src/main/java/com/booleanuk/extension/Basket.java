@@ -4,7 +4,7 @@ package com.booleanuk.extension;
 import java.util.ArrayList;
 
 public class Basket {
-    private ArrayList<Item> items;
+    private ArrayList<AbstractItem> items;
     private int capacity;
     private Inventory inventory;
     public Basket(){
@@ -19,7 +19,7 @@ public class Basket {
         setCapacity(capacity);
     }
 
-    public ArrayList<Item> getItems() {
+    public ArrayList<AbstractItem> getItems() {
         return this.items;
     }
 
@@ -37,29 +37,38 @@ public class Basket {
         return this.capacity;
     }
 
-    public void addItem(Item item){
+    public void addItem(AbstractItem item){
         if(this.items.size()>=capacity){
             System.out.println("Your basket is full!");
         }else if(!this.inventory.isValid(item)){
             System.out.println("Item is not valid");
         }else {
-            this.items.add(item);
+            if (items.stream().anyMatch(i->i.getSku().equals(item.getSku()))){
+                items.forEach((i)->{
+                    if (i.getSku().equals(item.getSku())){
+                        i.setQuantity(i.getQuantity()+1);
+                    }});
+            }else {
+                this.items.add(item);
+            }
         }
     }
-    public void addItem(String sku){
-        for(Item item:this.inventory.getInventoryItems()){
+    public void addItem(Sku sku){
+        for(AbstractItem item:this.inventory.getInventoryItems()){
             if(sku.equals(item.getSku())){
-                System.out.println("Added the item");
                 this.addItem(item);
                 return;
             }
         }
         System.out.println("Invalid SKU");
     }
-    public void removeItem(Item item){
+    public void removeItem(AbstractItem item){
         for(int i=0; i < this.items.size();i++){
             if (this.items.get(i).getSku().equals(item.getSku())){
-                items.remove(i);
+                item.setQuantity(item.getQuantity()-1);
+                if (item.getQuantity() < 1){
+                   items.remove(i);
+                }
                 System.out.println("Remove item succeeded!");
                 return;
             }
@@ -67,9 +76,8 @@ public class Basket {
         System.out.println("Remove item failed!");
     }
     public void removeItem(String sku){
-        for(Item item:this.items){
+        for(AbstractItem item:this.items){
             if(sku.equals(item.getSku())){
-                System.out.println("Removed the item");
                 this.removeItem(item);
                 return;
             }
@@ -78,7 +86,7 @@ public class Basket {
     }
     public double getTotalPrice(){
         double total =0;
-        for(Item item: this.items){
+        for(AbstractItem item: this.items){
             total += item.getPrice();
         }
         return total;
