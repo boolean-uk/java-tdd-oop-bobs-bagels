@@ -11,7 +11,7 @@ public class ReceiptTest {
         Basket basket = new Basket();
         basket.setCapacity(100);
         Item bagel = inventory.bagels.get(0);
-        basket.add(bagel, 6);
+        basket.add(bagel, 7);
 
 
         Receipt receipt = new Receipt(basket);

@@ -29,20 +29,32 @@ public class Receipt {
         for (int i = 0; i < basket.getBasket().size(); i++) {
             Item item = basket.getBasket().get(i);
             int quantity = basket.getBasketQuantity().get(i);
+            basket.getTotalWithDiscountBasket();
+            int quantityAfterDiscount = basket.getItemQuantityAfterDiscount().get(i);
+
+
 
             System.out.print(item.getClass() == Bagel.class ? item.getVariant() + " " + "bagel": "Coffee");
             System.out.print( "        " + quantity + "  " + "£");
             if (item.getClass() == Bagel.class) {
-                if (quantity == 12) {
-                    System.out.print("3.99");
-                } else if (quantity == 6 ) {
-                    System.out.print("2.49");
+                if (quantityAfterDiscount == quantity) {
+                    System.out.print((double)Math.round(item.getPrice() * quantity * 100) / 100);
                 } else {
-                    System.out.print(item.getPrice() * quantity);
+                    double price = 0.0;
+                    while (quantity >= 6) {
+                        if (quantity >= 12) {
+                            price += 3.99 * quantity / 12;
+                            quantity -= (int)(quantity / 12) * 12;
+                        } else {
+                            price += 2.49 * (int)(quantity / 6);
+                            quantity -= (quantity / 6) * 6;
+                        }
+                    }
+                    price += quantity * item.getPrice();
+                    System.out.print((double)Math.round(price * 100) / 100);
                 }
+
             }
-
-
         }
 
         System.out.println();
