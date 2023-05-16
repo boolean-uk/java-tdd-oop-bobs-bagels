@@ -66,4 +66,5 @@ public abstract class AbstractItem {
         this.variant = variant;
     }
     abstract void display();
+    abstract double calculateDiscount();
 }

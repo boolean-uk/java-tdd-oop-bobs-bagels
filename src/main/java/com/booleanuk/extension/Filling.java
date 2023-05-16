@@ -1,6 +1,6 @@
 package com.booleanuk.extension;
 
-public class Filling extends AbstractItem implements CalculateDiscount {
+public class Filling extends AbstractItem {
     public Filling(Sku sku, double price, double saving, int quantity, String name, String variant)
     {
         super(sku,  price,  saving, quantity,  name, variant);

@@ -2,7 +2,7 @@ package com.booleanuk.extension;
 
 import java.util.ArrayList;
 
-public class Bagel extends AbstractItem implements CalculateDiscount {
+public class Bagel extends AbstractItem  {
     private ArrayList<Filling> fillings;
 
     public Bagel(Sku sku, double price, double saving, int quantity, String name, String variant)

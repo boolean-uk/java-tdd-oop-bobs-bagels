@@ -1,5 +1,5 @@
 package com.booleanuk.extension;
 
 public interface CalculateDiscount {
-    double calculateDiscount();
+    public double calculateDiscount();
 }

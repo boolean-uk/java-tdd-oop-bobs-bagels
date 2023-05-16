@@ -86,8 +86,8 @@ public class Basket {
     }
     public double getTotalPrice(){
         double total =0;
-        for(AbstractItem item: this.items){
-            total += item.getPrice();
+        for (AbstractItem item :items) {
+            total += item.calculateDiscount();
         }
         return total;
     }
