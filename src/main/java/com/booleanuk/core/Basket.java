@@ -87,7 +87,9 @@ public class Basket {
     public double getTotal(){
         double total = 0.0;
         for (Item item : this.getItems()) {
-            total += item.getPrice();
+            if(item instanceof Bagel){
+
+            }
         }
         return total;
     }

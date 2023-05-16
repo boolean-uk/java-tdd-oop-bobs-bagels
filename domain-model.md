@@ -31,26 +31,27 @@ I'd like to know the cost of each filling before I add it to my bagel order.
 
 10. As the manager, So we don't get any weird requests,
 I want customers to only be able to order things that we stock in our inventory.
+
  
 ## Basket Class
 
-| Members               | Methods                                   | Scenario                                                        | Outcome/Output                                        | User story |
-|-----------------------|-------------------------------------------|-----------------------------------------------------------------|-------------------------------------------------------|------------|
-| ArrayList<Item> items |                                           |                                                                 |                                                       |            |
-| int capacity          |                                           |                                                                 |                                                       |            |
-|                       |                                           |                                                                 |                                                       |            |
-|                       |                                           |                                                                 |                                                       |            |
-|                       | boolean add(Item item)                    | Add item to the basket                                          | Return true + print item is added to basket           | 1          |
-|                       |                                           | Item is not added because capacity has been reached             | Print message stating basket is full and return false | 1 + 3      |
-|                       |                                           | Item is not added because is not available in inventory         | Return false + print message not available            |            |
-|                       | boolean remove(Item item)                 | Remove item from the basket                                     | Return true                                           | 2          |
-|                       |                                           | Item not removed because it does not exist in the basket        | Return false + print message does not exist           | 2 + 5      |
-|                       | boolean changeCapacity(int newCapacity)   | Update the basket capacity to newCapacity                       | Return true                                           | 4          |
-|                       |                                           | Basket capacity cannot be updated to 0 or negative number       | Print error message + return false                    | 4          |
-|                       |                                           | Basket capacity cannot be made smaller than current basket size | Print error message + return false                    | 4          |
-|                       | boolean getTotal()                        | Get the total cost of all the items in the basket               | Return totalCost                                      | 6          |
-|                       | boolean getPrice(Item item)               | Get the price of an item                                        | Return int price + print item & price to screen       | 7 + 9      |
-|                       |                                           |                                                                 |                                                       |            |
+| Members               | Methods                                 | Scenario                                                        | Outcome/Output                                                | User story |
+|-----------------------|-----------------------------------------|-----------------------------------------------------------------|---------------------------------------------------------------|------------|
+| ArrayList<Item> items |                                         |                                                                 |                                                               |            |
+| int capacity          |                                         |                                                                 |                                                               |            |
+|                       |                                         |                                                                 |                                                               |            |
+|                       |                                         |                                                                 |                                                               |            |
+|                       | boolean add(Item item)                  | Add item to the basket                                          | Return true + print item is added to basket                   | 1          |
+|                       |                                         | Item is not added because capacity has been reached             | Print message stating basket is full and return false         | 1 + 3      |
+|                       |                                         | Item is not added because is not available in inventory         | Return false + print message not available                    |            |
+|                       | boolean remove(Item item)               | Remove item from the basket                                     | Return true                                                   | 2          |
+|                       |                                         | Item not removed because it does not exist in the basket        | Return false + print message does not exist                   | 2 + 5      |
+|                       | boolean changeCapacity(int newCapacity) | Update the basket capacity to newCapacity                       | Return true                                                   | 4          |
+|                       |                                         | Basket capacity cannot be updated to 0 or negative number       | Print error message + return false                            | 4          |
+|                       |                                         | Basket capacity cannot be made smaller than current basket size | Print error message + return false                            | 4          |
+|                       | boolean getTotal()                      | Get the total cost of all the items in the basket               | Return total cost of items in basket with discount subtracted | 6          |
+|                       | boolean getPrice(Item item)             | Get the price of an item                                        | Return int price + print item & price to screen               | 7 + 9      |
+|                       | boolean calculateDiscount()             | Get discount prices of items in basket                          | Return discount cost of discounted item                       | 7          |
 
 
 ## Item
