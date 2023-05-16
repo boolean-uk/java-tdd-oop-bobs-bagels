@@ -113,6 +113,50 @@ public class BasketTest {
         bagel.addFilling("FILC");
         Assertions.assertTrue(basket.printReceipt());
     }
+
+    @Test
+    public void testExtension3Savings(){
+        Basket basket = new Basket(30);
+        Assertions.assertTrue(basket.add("BGLP"));
+        Assertions.assertTrue(basket.add("BGLP"));
+        Assertions.assertTrue(basket.add("BGLP"));
+        Assertions.assertTrue(basket.add("BGLP"));
+        Assertions.assertTrue(basket.add("BGLP"));
+        Assertions.assertTrue(basket.add("BGLP"));
+        Assertions.assertTrue(basket.add("BGLP"));
+        Assertions.assertTrue(basket.add("BGLP"));
+        Assertions.assertTrue(basket.add("BGLP"));
+        Assertions.assertTrue(basket.add("BGLP"));
+        Assertions.assertTrue(basket.add("BGLP"));
+        Assertions.assertTrue(basket.add("BGLP"));
+//        Assertions.assertTrue(basket.add("BGLP"));
+//        Assertions.assertTrue(basket.add("BGLP"));
+
+
+        Assertions.assertTrue(basket.add("BGLO"));
+        Assertions.assertTrue(basket.add("BGLO"));
+        Assertions.assertTrue(basket.add("BGLO"));
+        Assertions.assertTrue(basket.add("BGLO"));
+        Assertions.assertTrue(basket.add("BGLO"));
+        Assertions.assertTrue(basket.add("BGLO"));
+        Assertions.assertTrue(basket.add("BGLP"));
+        Assertions.assertTrue(basket.add("BGLP"));
+        Assertions.assertTrue(basket.add("BGLP"));
+        Assertions.assertTrue(basket.add("BGLO"));
+
+        Assertions.assertTrue(basket.add("COFB"));
+        Assertions.assertTrue(basket.add("COFB"));
+        Assertions.assertTrue(basket.add("COFB"));
+        Assertions.assertTrue(basket.add("COFB"));
+
+        Product bagel = basket.getProducts().get(3);
+        bagel.addFilling("FILH");
+        bagel.addFilling("FILS");
+        bagel = basket.getProducts().get(7);
+        bagel.addFilling("FILS");
+
+        Assertions.assertTrue(basket.printReceipt());
+    }
 }
 
 

@@ -32,5 +32,9 @@
 | Discount  |                                           |                                        |                                                |                                                              |
 | Receipt   | `String dateTime`                         |                                        |                                                |                                                              |
 |           | `ArrayList<String> productsBought`        |                                        |                                                |                                                              |
+|           |                                           | `calculateDiscount():double`           |                                                | returns double                                               |
 
 ### Bagel and Filling classes inherit from Product class
+
+
+EX3:

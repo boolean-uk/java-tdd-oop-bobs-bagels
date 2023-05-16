@@ -10,6 +10,8 @@ import java.util.HashMap;
 
 import static com.booleanuk.core.Inventory.inventoryProducts;
 import static com.booleanuk.core.Inventory.productIsInStock;
+import static jdk.nashorn.internal.objects.NativeMath.round;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -20,6 +22,7 @@ public class Basket {
     private int capacity;
     Receipt receipt = new Receipt();
     String pound = "\u00a3";
+    double sumSaved = 0;
 
 
     public Basket(int capacity){
@@ -92,11 +95,22 @@ public class Basket {
         return false;
     }
 
+    public String calculateSavings(String SKU, int productsDiscounted, BigDecimal discount){
+        BigDecimal ammountSaved = BigDecimal.valueOf(productsDiscounted * inventoryProducts.get(SKU).getProductCost());
+        ammountSaved = ammountSaved.subtract(discount);
+        double ammountSavedDouble = ammountSaved.doubleValue();
+        sumSaved+= ammountSavedDouble;
+        //String ammountSavedStr = "\n\t\t\t\t\t  (-"+pound+ammountSavedDouble+")";
+        String ammountSavedStr = String.valueOf(ammountSavedDouble);
+        return ammountSavedStr;
+    }
+
     public double getTotalCost() {
         receipt = new Receipt();
         HashMap<String, Integer> productCountNew= new HashMap<>();
         productCountNew.putAll(productCount);
         BigDecimal sum = BigDecimal.ZERO;
+        sumSaved = 0;
 
         for (String keySKU : productCountNew.keySet()) {
             int totalProductsOfThisSKU = productCountNew.get(keySKU);
@@ -105,34 +119,40 @@ public class Basket {
             if (keySKU.equals("BGLP") && totalProductsOfThisSKU >= 12) {
                 BigDecimal discount = BigDecimal.valueOf(totalProductsOfThisSKU / 12).multiply(BigDecimal.valueOf(3.99));
 
-                //adds this discount to receipt
+                //calculates ammount saved from this special offer
+                String ammountSavedStr = calculateSavings(keySKU, (productCountNew.get(keySKU)/12)*12, discount);
+//                String ammountSavedStr = "(-"+pound+ammountSaved+")";
+//                sumSaved+=ammountSavedStr;
+                //adds the ammount saved and the discount used to the receipt
                 String discountPrice = pound+discount.toString();
-                String productToReceipt = currentProduct.getVariant() +" "+ currentProduct.getName() +"\t\t\t"+ ((int)(productCountNew.get(keySKU)/12)*12) +"\t"+ discountPrice;
+                String productToReceipt = currentProduct.getVariant() +" "+ currentProduct.getName() +"\t\t\t"+ ((productCountNew.get(keySKU)/12)*12) +"\t"+ discountPrice+ammountSavedStr;
                 receipt.getProductsBought().add(productToReceipt);
 
 
                 productCountNew.put("BGLP",productCountNew.get("BGLP")-((int)productCountNew.get("BGLP")/12)*12);
                 sum = sum.add(discount);
 
-            } else if (keySKU.equals("BGLO")) {
+            } else if (keySKU.equals("BGLO") && totalProductsOfThisSKU >= 6) {
                 BigDecimal discount = BigDecimal.valueOf(totalProductsOfThisSKU / 6).multiply(BigDecimal.valueOf(2.49));
 
                 //adds this discount to receipt
+                String ammountSavedStr = calculateSavings(keySKU, (productCountNew.get(keySKU)/6)*6, discount);
                 String discountPrice = pound+discount.toString();
-                String productToReceipt = currentProduct.getVariant() +" "+ currentProduct.getName() +"\t\t\t"+ ((int)(productCountNew.get(keySKU)/6)*6) +"\t"+ discountPrice;
+                String productToReceipt = currentProduct.getVariant() +" "+ currentProduct.getName() +"\t\t\t"+ ((productCountNew.get(keySKU)/6)*6) +"\t"+ discountPrice+ammountSavedStr;
                 receipt.getProductsBought().add(productToReceipt);
 
-                productCountNew.put("BGLO",productCountNew.get("BGLO")-((int)productCountNew.get("BGLO")/6)*6);
+                productCountNew.put("BGLO",productCountNew.get("BGLO")-(productCountNew.get("BGLO")/6)*6);
                 sum = sum.add(discount);
-            } else if (keySKU.equals("BGLE")) {
+            } else if (keySKU.equals("BGLE") && totalProductsOfThisSKU >= 6) {
                 BigDecimal discount = BigDecimal.valueOf(totalProductsOfThisSKU / 6).multiply(BigDecimal.valueOf(2.49));
 
                 //adds this discount to receipt
+                String ammountSavedStr = calculateSavings(keySKU, (productCountNew.get(keySKU)/6)*6, discount);
                 String discountPrice = pound+discount.toString();
-                String productToReceipt = currentProduct.getVariant() +" "+ currentProduct.getName() +"\t\t"+ ((int)(productCountNew.get(keySKU)/6)*6) +"\t\t"+ discountPrice;
+                String productToReceipt = currentProduct.getVariant() +" "+ currentProduct.getName() +"\t\t"+ ((productCountNew.get(keySKU)/6)*6) +"\t\t"+ discountPrice+ammountSavedStr;
                 receipt.getProductsBought().add(productToReceipt);
 
-                productCountNew.put("BGLE",productCountNew.get("BGLE")-((int)productCountNew.get("BGLE")/6)*6);
+                productCountNew.put("BGLE",productCountNew.get("BGLE")-(productCountNew.get("BGLE")/6)*6);
                 sum = sum.add(discount);
             }
         }
@@ -156,6 +176,41 @@ public class Basket {
                 }
             }
         }
+        double ammountSavedDouble = 0;
+
+        if (coffee_discounts>0){
+            if (productCountNew.getOrDefault("BGLP", 0) != bagels_remaining[0]){
+                int bagelsInCoffeDiscount = productCountNew.get("BGLP") - bagels_remaining[0];
+                BigDecimal discount = BigDecimal.valueOf(bagelsInCoffeDiscount * 0.16);
+                String ammountSavedStr = calculateSavings("BGLP", bagelsInCoffeDiscount, discount);
+                System.out.println(ammountSavedStr+"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+                ammountSavedDouble += Double.parseDouble(ammountSavedStr);
+            }
+            if (productCountNew.getOrDefault("BGLO", 0) != bagels_remaining[1]){
+                int bagelsInCoffeDiscount = productCountNew.get("BGLO") - bagels_remaining[1];
+                BigDecimal discount = BigDecimal.valueOf(bagelsInCoffeDiscount * 0.26);
+                String ammountSavedStr = calculateSavings("BGLO", bagelsInCoffeDiscount, discount);
+                ammountSavedDouble += Double.parseDouble(ammountSavedStr);
+            }
+            if (productCountNew.getOrDefault("BGLE", 0) != bagels_remaining[2]){
+                int bagelsInCoffeDiscount = productCountNew.get("BGLE") - bagels_remaining[2];
+                BigDecimal discount = BigDecimal.valueOf(bagelsInCoffeDiscount * 0.26);
+                String ammountSavedStr = calculateSavings("BGLE", bagelsInCoffeDiscount, discount);
+                ammountSavedDouble += Double.parseDouble(ammountSavedStr);
+            }
+            if (productCountNew.getOrDefault("BGLS", 0) != bagels_remaining[3]){
+                int bagelsInCoffeDiscount = productCountNew.get("BGLS") - bagels_remaining[3];
+                BigDecimal discount = BigDecimal.valueOf(bagelsInCoffeDiscount * 0.26);
+                String ammountSavedStr = calculateSavings("BGLS", bagelsInCoffeDiscount, discount);
+                ammountSavedDouble += Double.parseDouble(ammountSavedStr);
+            }
+//            BigDecimal discount = BigDecimal.valueOf(coffee_discounts * 0.99);
+//            String ammountSavedStr = calculateSavings("COFB", coffee_discounts, discount);
+//            ammountSavedDouble += Double.parseDouble(ammountSavedStr);
+        }
+
+
+
         //calculate new remainings of bagels without discount
         productCountNew.put("BGLP",bagels_remaining[0]);
         productCountNew.put("BGLO",bagels_remaining[1]);
@@ -169,7 +224,7 @@ public class Basket {
         //adds this discount to receipt
         if ( coffee_discounts > 0) {
             String discountPrice = pound+BigDecimal.valueOf((coffee_discounts*1.25)).toString();
-            String productToReceipt = "Coffee and Bagel\t" + coffee_discounts +"\t"+ discountPrice;
+            String productToReceipt = "Coffee and Bagel\t" + coffee_discounts +"\t"+ discountPrice+String.valueOf(ammountSavedDouble);
             receipt.getProductsBought().add(productToReceipt);
         }
 
