@@ -145,7 +145,7 @@ public class BasketTest {
     }
 
     @Test
-    void agdfijashdklfjghas() {
+    void checkItemPriceListUpdate() {
         Basket basket = new Basket();
         basket.setCapacity(100);
         Item bagel = inventory.bagels.get(0); //0.49
