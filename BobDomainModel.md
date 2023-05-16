@@ -55,3 +55,13 @@
 | `ArrayList<Item> itemArrayList` |        |          |                |           |
 | `Inventory inventory`           |        |          |                |           |
 | `Basket basket`                 |        |          |                |           |
+
+## ItemInterface
+
+| Classes                           | Method      |   |
+|-----------------------------------|-------------|---|
+| `Bagels`                          |             |   |
+| `Coffee`                          |             |   |
+| `Fillings`                        |             |   |
+|                                   | `getters`   |   |
+| Implement interface with classes. |             |   |

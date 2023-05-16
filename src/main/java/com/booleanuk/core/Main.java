@@ -6,6 +6,7 @@ import java.util.HashMap;
 public class Main {
     public static void main(String[] args) {
         ArrayList<Item> itemArrayList = new ArrayList<>();
+//        ItemInterface bagelItem = new Bagels();
         itemArrayList.add(new Item("Bagel", 0.49, "BGLO", "Onion"));
         itemArrayList.add(new Item("Bagel", 0.39, "BGLP", "Plain"));
         itemArrayList.add(new Item("Bagel", 0.49, "BGLE", "Everything"));

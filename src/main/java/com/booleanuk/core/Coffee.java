@@ -1,22 +1,12 @@
 package com.booleanuk.core;
 
-public class Item {
+public class Coffee implements ItemInterface{
     private String type;
     private double price;
     private String sku;
     private String variant;
 
-//    ItemInterface bagelItem;
-//    ItemInterface coffeeItem;
-//    ItemInterface fillingsItem;
-
-//    public Item(ItemInterface bagelItem, ItemInterface coffeeITem, ItemInterface fillingsItem) {
-//        this.bagelItem = bagelItem;
-//        this.coffeeItem = coffeeITem;
-//        this.fillingsItem = fillingsItem;
-//    }
-
-    public Item(String type, double price, String sku, String variant) {
+    public Coffee(String type, double price, String sku, String variant) {
         this.setType(type);
         this.setPrice(price);
         this.setSku(sku);
