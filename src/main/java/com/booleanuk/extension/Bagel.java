@@ -23,4 +23,5 @@ public class Bagel extends AbstractItem implements CalculateDiscount {
     public double calculateDiscount() {
         return 0;
     }
+
 }

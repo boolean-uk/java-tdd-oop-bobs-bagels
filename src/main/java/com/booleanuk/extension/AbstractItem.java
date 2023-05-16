@@ -1,5 +1,7 @@
 package com.booleanuk.extension;
 
+import java.util.ArrayList;
+
 public abstract class AbstractItem {
     private Sku sku;
 
@@ -64,6 +66,12 @@ public abstract class AbstractItem {
 
     public void setVariant(String variant) {
         this.variant = variant;
+    }
+    public double calculateDiscount(){
+        return this.price;
+    }
+    public ArrayList<Filling> getFillings(){
+        return new ArrayList<Filling>();
     }
     abstract void display();
 }
