@@ -85,11 +85,11 @@ public class Basket {
         System.out.println("Invalid SKU");
     }
     public double getTotalPrice(){
-         double total =0.0;
-         double costBeforeDiscount =0.0;
-         int leftoverBagels =0, numberOfCoffes =0;
-         for(AbstractItem item:this.items){
-             if(item.getName().equals("Bagel")){
+        double total =0.0;
+        double costBeforeDiscount =0.0;
+        int leftoverBagels =0, numberOfCoffes =0;
+        for(AbstractItem item:this.items){
+            if(item.getName().equals("Bagel")){
                 int quantity = item.getQuantity();
                 while(true){
                     if(quantity>=12){
@@ -106,34 +106,34 @@ public class Basket {
                         break;
                     }
                 }
-             }
-             if(item.getName().equals("Coffee")){
-                 numberOfCoffes+= item.getQuantity();
-             }
-             costBeforeDiscount += item.getPrice() * item.getQuantity();
+            }
+            if(item.getName().equals("Coffee")){
+                numberOfCoffes+= item.getQuantity();
+            }
+            costBeforeDiscount += item.getPrice() * item.getQuantity();
             System.out.println("Before discount: "+costBeforeDiscount);
-         }
-         if(leftoverBagels > numberOfCoffes){
-             leftoverBagels = numberOfCoffes;
-         }
-             for(int i=0;i<leftoverBagels;i++){
-                 total += 1.25;
-                 for(int j=0;j<this.items.size();j++){
-                     if(this.items.get(j).getName().equals("Bagel")){
-                         this.removeItem(this.items.get(j));
-                     }
-                 }
-                 for(int j=0;j<this.items.size();j++) {
-                     if (this.items.get(j).getName().equals("Coffee")) {
-                         this.removeItem(this.items.get(j));
-                     }
-                 }
-             }
-             for(AbstractItem item:this.items){
-                 total += item.getPrice() * item.getQuantity();
-             }
+        }
+        if(leftoverBagels > numberOfCoffes){
+            leftoverBagels = numberOfCoffes;
+        }
+        for(int i=0;i<leftoverBagels;i++){
+            total += 1.25;
+            for(int j=0;j<this.items.size();j++){
+                if(this.items.get(j).getName().equals("Bagel")){
+                    this.removeItem(this.items.get(j));
+                }
+            }
+            for(int j=0;j<this.items.size();j++) {
+                if (this.items.get(j).getName().equals("Coffee")) {
+                    this.removeItem(this.items.get(j));
+                }
+            }
+        }
+        for(AbstractItem item:this.items){
+            total += item.getPrice() * item.getQuantity();
+        }
 
-         return total;
+        return total;
     }
 
 }
