@@ -4,114 +4,115 @@ package com.booleanuk.core;
 import com.booleanuk.core.models.Bagel;
 import com.booleanuk.core.models.Coffee;
 import com.booleanuk.core.models.Item;
-import com.booleanuk.core.Invetory;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
 public class Basket {
-    ArrayList<Bagel> bagels;
-    ArrayList<Integer> bagelQuantity;
-    ArrayList<Coffee> coffees;
-    ArrayList<Integer> coffeeQuantity;
-    int capacity;
+    List<Item> basket;
+    List<Integer> basketQuantity;
+    private int capacity;
     int sizeOfBasket;
 
-    Invetory invetory = new Invetory();
+    private Invetory invetory;
 
 
     public Basket() {
-        bagels = new ArrayList<>();
-        bagelQuantity = new ArrayList<>();
-        coffees = new ArrayList<>();
-        coffeeQuantity = new ArrayList<>();
+        basket = new ArrayList<>();
+        basketQuantity = new ArrayList<>();
+        invetory = new Invetory();
         capacity = 3;
         sizeOfBasket = 0;
     }
 
     boolean add(Item item, int quantity) {
-        if (quantity + sizeOfBasket <= capacity) {
-            if (item.getClass() == Bagel.class) {
-                return add((Bagel) item, quantity);
-            } else if (item.getClass() == Coffee.class) {
-                return add((Coffee) item, quantity);
+        if (quantity < 0) {
+            return false;
+        }
+        if (quantity + sizeOfBasket >= capacity) {
+            return false;
+        }
+        //Check if its a item of the Invetory!
+        boolean isValid = isValidInvetoryItem(item);
+        if (isValid) {
+            if (basket.contains(item)) {
+                int index = basket.indexOf(item);
+                int previousQuantity = basketQuantity.get(index);
+                basketQuantity.set(index, previousQuantity + quantity);
+            } else {
+                basket.add(item);
+                basketQuantity.add(quantity);
+                sizeOfBasket += quantity;
             }
         }
-        return false;
+        return isValid;
     }
+
 
     boolean remove(Item item, int quantity) {
-        boolean result = false;
-        if (item.getClass() == Bagel.class) {
-            result = remove((Bagel) item, quantity);
-        } else if (item.getClass() == Coffee.class) {
-            result = remove((Coffee) item, quantity);
+        if (!basket.contains(item) || (quantity < 0)) {
+            return false;
         }
-        return result;
+        int index = basket.indexOf(item);
+        int previousQuantity = basketQuantity.get(index);
+        if (previousQuantity < quantity) {
+            return false;
+        } else if (previousQuantity == quantity) {
+            basket.remove(index);
+            basketQuantity.remove(index);
+        } else {
+            basketQuantity.set(index, previousQuantity - quantity);
+        }
+        sizeOfBasket -= quantity;
+        return true;
     }
 
-    boolean add(Bagel bagel, int quantity) {
-        for (Bagel invBagel : invetory.bagels) {
-            if (invBagel.getSKU().equals(bagel.getSKU())) {
-                if (bagels.contains(bagel)) {
-                    int index = bagels.indexOf(bagel);
-                    bagelQuantity.set(index, bagelQuantity.get(index) + quantity);
-                } else {
-                    bagels.add(bagel);
-                    bagelQuantity.add(quantity);
-                }
-                sizeOfBasket += quantity;
-                return true;
-            }
+    public int getCapacity() {
+        return capacity;
+    }
+
+    public boolean setCapacity(int newCapacity) {
+        if (sizeOfBasket <= newCapacity && newCapacity > 0) {
+            this.capacity = newCapacity;
+            return true;
         }
         return false;
     }
 
-    boolean add(Coffee coffee, int quantity) {
-        for (Coffee invCoffee : invetory.coffees) {
-            if (invCoffee.getSKU().equals(coffee.getSKU())) {
-                if (coffees.contains(coffee)) {
-                    int index = coffees.indexOf(coffee);
-                    coffeeQuantity.set(index, coffeeQuantity.get(index) + quantity);
-                } else {
-                    coffees.add(coffee);
-                    coffeeQuantity.add(quantity);
-                }
-                sizeOfBasket += quantity;
-                return true;
+    public double getTotalOfBasket() {
+        double totalPrice = 0.0;
+        for (Item item : basket) {
+            int index = basket.indexOf(item);
+            int quantityOfItem = basketQuantity.get(index);
+            if (item.getClass() == Bagel.class) {
+                /* TODO: getPriceOfFillings*/
+                double priceOfFillings = ((Bagel) item).getFillingsPrice();
+                totalPrice += priceOfFillings * quantityOfItem;
+            }
+            totalPrice += item.getPrice() * quantityOfItem;
+        }
+        return totalPrice;
+    }
+
+    private boolean isValidInvetoryItem(Item item) {
+        boolean isValid = false;
+        for (Bagel bagel : invetory.bagels) {
+            String sku = bagel.getSKU();
+            if (Objects.equals(item.getSKU(), sku)) {
+                isValid = true;
+                break;
             }
         }
-        return false;
-    }
-    boolean remove(Bagel bagel,int quantity){
-        if (!bagels.contains(bagel)){
-            return false;
+        if (!isValid) {
+            for (Coffee coffee : invetory.coffees) {
+                String sku = coffee.getSKU();
+                if (Objects.equals(item.getSKU(), sku)) {
+                    isValid = true;
+                    break;
+                }
+            }
         }
-        int index = bagels.indexOf(bagel);
-        if (bagelQuantity.get(index)<quantity){
-            return false;
-        }else if (bagelQuantity.get(index)>quantity){
-            bagelQuantity.set(index,bagelQuantity.get(index)-quantity);
-        }else {
-            bagels.remove(index);
-            bagelQuantity.remove(index);
-        }
-        sizeOfBasket-=quantity;
-        return true;
-    }
-    boolean remove(Coffee coffee,int quantity){
-        if (!coffees.contains(coffee)){
-            return false;
-        }
-        int index = coffees.indexOf(coffee);
-        if (coffeeQuantity.get(index)<quantity){
-            return false;
-        }else if (coffeeQuantity.get(index)>quantity){
-            coffeeQuantity.set(index,coffeeQuantity.get(index)-quantity);
-        }else {
-            coffees.remove(index);
-            coffeeQuantity.remove(index);
-        }
-        sizeOfBasket-=quantity;
-        return true;
+        return isValid;
     }
 }

@@ -1,7 +1,5 @@
 package com.booleanuk.core.models;
 
-import com.booleanuk.core.Invetory;
-
 public class Item {
     private String SKU;
     private double price;

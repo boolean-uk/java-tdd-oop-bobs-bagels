@@ -4,15 +4,17 @@ import com.booleanuk.core.Invetory;
 
 import java.util.ArrayList;
 
-public class Bagel extends Item{
+public class Bagel extends Item {
 
 
     ArrayList<Filling> fillings;
 
-    public Bagel(String SKU, double price, String variant) {
-        super(SKU, price, variant);
+    public Bagel(String variant, double price, String SKU) {
+        super(variant, price, SKU);
+        this.fillings=new ArrayList<>();
     }
-//Maybe we dont neeed this!!
+
+    //Maybe we dont neeed this!!
     public ArrayList<Filling> getFillings() {
         return fillings;
     }
@@ -29,11 +31,14 @@ public class Bagel extends Item{
         return false;
     }
 
+    public void setFillings(Filling filling) {
+        fillings.add(filling);
+    }
 
     public double getFillingsPrice() {
-        double totalPrice =0.0;
+        double totalPrice = 0.0;
         for (Filling filling : fillings) {
-            totalPrice+=filling.getPrice();
+            totalPrice += filling.getPrice();
         }
         return totalPrice;
     }

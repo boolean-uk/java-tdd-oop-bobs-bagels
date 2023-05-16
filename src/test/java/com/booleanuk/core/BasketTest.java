@@ -1,55 +1,101 @@
 package com.booleanuk.core;
 
 import com.booleanuk.core.models.Bagel;
-import com.booleanuk.core.models.Coffee;
 import com.booleanuk.core.models.Filling;
+import com.booleanuk.core.models.Item;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.List;
 
 public class BasketTest {
-
-    // Models Tests run first!!
+    Invetory invetory = new Invetory();
 
 
     @Test
-    void addBagelTest() {
+    void addItem() {
         Basket basket = new Basket();
-        Bagel bagel1 = basket.invetory.getBagels().get(0);
-        Bagel bagelError = new Bagel("Anything", 0.0, "ERROR");
-
-        Assertions.assertFalse(basket.add(bagelError,1));
-        Assertions.assertTrue(basket.add(bagel1,1));
-        Assertions.assertEquals(1 ,basket.sizeOfBasket);
-        Assertions.assertEquals(1, basket.bagelQuantity.get(0));
-        Assertions.assertEquals(bagel1,basket.bagels.get(0));
-
-        Bagel bagel2 = basket.invetory.getBagels().get(0);
-        Filling fill =  new Filling("Bacon",0.12, "FILB");
-        bagel2.setFillings(new ArrayList<>(Arrays.asList(fill)), basket.invetory);
-        Assertions.assertTrue(basket.add(bagel2,1));
-        Assertions.assertEquals(2, basket.sizeOfBasket);
-        Assertions.assertEquals(2, basket.bagelQuantity.size());
-        Assertions.assertEquals(bagel2,basket.bagels.get(1));
-
-        Bagel bagel3 = new Bagel("Onion", 0.49, "BGLO");
-        Assertions.assertTrue(basket.add(bagel2,1));
-        Assertions.assertEquals(3 ,basket.sizeOfBasket);
-        Assertions.assertEquals(2, basket.bagelQuantity.get(0));
+        Item bagel = invetory.bagels.get(0);
+        List<Integer> quantityArray = new ArrayList<>();
+        List<Item> itemArray = new ArrayList<>();
+        itemArray.add(bagel);
+        quantityArray.add(2);
+        Assertions.assertTrue(basket.add(bagel, 2));
+        Assertions.assertIterableEquals(quantityArray, basket.basketQuantity);
+        Assertions.assertIterableEquals(itemArray, basket.basket);
+        //no more than the capacity of the basket
+        Assertions.assertFalse(basket.add(bagel, 5));
+        //no item of the invetory!
+        Assertions.assertFalse(basket.add(new Item("newVariant", 10000.0, "invalidSKU"), 1));
     }
 
     @Test
-    void addCoffeeTest() {
-        Basket basket = new Basket();
-        Coffee coffee1 = new Coffee("Black", 0.99, "COFB");
-        Coffee coffeeError = new Coffee("Anything", 0.0, "ERROR");
+    void removeItem() {
+        Item bagel = invetory.bagels.get(0);
+        Item anotherBagel = invetory.bagels.get(1);
+        Item coffee = invetory.coffees.get(0);
 
-        Assertions.assertFalse(basket.add(coffeeError,1));
-        Assertions.assertTrue(basket.add(coffee1,1));
-        Assertions.assertEquals(1 ,basket.sizeOfBasket);
-        Assertions.assertEquals(1, basket.coffeeQuantity.get(0));
-        Assertions.assertEquals(coffee1,basket.coffees.get(0));
+        List<Item> itemArray = new ArrayList<>();
+        itemArray.add(anotherBagel);
+        itemArray.add(coffee);
+
+        List<Integer> quantityArray = new ArrayList<>();
+        quantityArray.add(1);
+        quantityArray.add(1);
+
+        Basket basket = new Basket();
+        basket.setCapacity(10);
+        basket.add(bagel, 3);
+        basket.add(anotherBagel, 1);
+        basket.add(coffee, 2);
+
+
+        Assertions.assertEquals(6, basket.sizeOfBasket);
+        Assertions.assertTrue(basket.remove(bagel, 3));
+        Assertions.assertIterableEquals(itemArray, basket.basket);
+        //attempt to remove item that is not in the list
+        Assertions.assertFalse(basket.remove(bagel, 3));
+        //attempt to remove more quantity
+        Assertions.assertFalse(basket.remove(anotherBagel, 3));
+        basket.remove(coffee, 1);
+        Assertions.assertIterableEquals(quantityArray, basket.basketQuantity);
+
     }
+
+    @Test
+    void SetGetCapacity() {
+        Basket basket = new Basket();
+        Item bagel = invetory.bagels.get(0);
+        basket.setCapacity(10);
+        Assertions.assertEquals(10,basket.getCapacity());
+        Assertions.assertTrue(basket.add(bagel, 7));
+        Assertions.assertFalse(basket.setCapacity(6));
+        Assertions.assertTrue(basket.setCapacity(8));
+        Assertions.assertEquals(8,basket.getCapacity());
+
+
+    }
+
+    @Test
+    void getTotalPriceOfBasket() {
+        Basket basket = new Basket();
+        basket.setCapacity(100);
+        Item bagel = invetory.bagels.get(0);
+
+        Item coffee = invetory.coffees.get(0);
+        basket.add(bagel, 1);
+        Assertions.assertEquals(basket.getTotalOfBasket(), 0.49);
+        basket.add(coffee, 1);
+        Assertions.assertEquals(basket.getTotalOfBasket(), 0.49 + 0.99);
+        basket.add(bagel, 1);
+        Assertions.assertEquals(basket.getTotalOfBasket(), 0.49 + 0.49 + 0.99);
+        Bagel bagelWithFilling = invetory.bagels.get(0); //Price 0.49
+        Filling filling = invetory.fillings.get(0);//Price 0.12
+        bagelWithFilling.setFillings(filling);
+        Assertions.assertTrue(basket.add(bagelWithFilling, 1));
+        Assertions.assertEquals(basket.getTotalOfBasket(), 0.49 + 0.49 + 0.99 + 0.49 + 0.12);
+    }
+
+
 }
