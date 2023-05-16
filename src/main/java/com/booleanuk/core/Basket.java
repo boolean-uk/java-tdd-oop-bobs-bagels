@@ -12,7 +12,7 @@ import java.util.Objects;
 public class Basket {
     List<Item> basket;
     ArrayList<Integer> basketQuantity;
-    private ArrayList<Integer> itemQuantityAfterDiscount12_6;
+    private ArrayList<Integer> itemQuantityAfterDiscount;
     private int capacity;
     int sizeOfBasket;
 
@@ -23,7 +23,7 @@ public class Basket {
         basket = new ArrayList<>();
         basketQuantity = new ArrayList<>();
         invetory = new Invetory();
-        itemQuantityAfterDiscount12_6 = new ArrayList<>();
+        itemQuantityAfterDiscount = new ArrayList<>();
         capacity = 3;
         sizeOfBasket = 0;
     }
@@ -45,8 +45,8 @@ public class Basket {
             } else {
                 basket.add(item);
                 basketQuantity.add(quantity);
-                sizeOfBasket += quantity;
             }
+            sizeOfBasket += quantity;
         }
         return isValid;
     }
@@ -100,7 +100,7 @@ public class Basket {
 
     public double getTotalWithDiscountBasket() {
         double totalPrice = 0.0;
-        itemQuantityAfterDiscount12_6 = (ArrayList<Integer>) basketQuantity.clone();
+        itemQuantityAfterDiscount = (ArrayList<Integer>) basketQuantity.clone();
         //First check the bagel only and get the discount price
         for (Item item : basket) {
             if (Bagel.class != item.getClass()) {
@@ -113,30 +113,52 @@ public class Basket {
             //Fillings Price
             double priceOfBagelFillings = getPriceOfBagelFillings((Bagel) item, indexOfBasket);
 
-            //the Leftovers for now todo check for Coffee + Bagel Discount!
-            int quantityOfItemAfterDicount = itemQuantityAfterDiscount12_6.get(indexOfBasket);
-            double priceBagelWithoutDiscount = item.getPrice() * quantityOfItemAfterDicount;
+            //Price of Bagel+coffee
+            double priceOFBagelPlusCoffee = getPriceOfBagelPlusCoffee(indexOfBasket);
 
-            totalPrice += priceOfBagelFillings + priceAfterDiscount + priceBagelWithoutDiscount;
+//the Leftovers for now
+//            int quantityOfItemAfterDicount = itemQuantityAfterDiscount.get(indexOfBasket);
+//            double priceBagelWithoutDiscount = item.getPrice() * quantityOfItemAfterDicount;
+
+            totalPrice += priceOfBagelFillings + priceAfterDiscount + priceOFBagelPlusCoffee;
+        }
+        for (Item item : basket) {
+            int index = basket.indexOf(item);
+            int quantity = itemQuantityAfterDiscount.get(index);
+            if (item.getClass() == Bagel.class) {
+                double priceOfBagelFillings = getPriceOfBagelFillings((Bagel) item, index);
+                totalPrice += priceOfBagelFillings + item.getPrice() * quantity;
+            } else {
+                totalPrice += item.getPrice() * quantity;
+            }
         }
         totalPrice = (double) Math.round(totalPrice * 100) / 100;
         return totalPrice;
     }
 
-    private double getPriceOfBagelPlusCoffee(int indexOfBasket) {
+    private double getPriceOfBagelPlusCoffee(int indexOfBagel) {
         double total = 0.0;
-        int BagelsLeft = itemQuantityAfterDiscount12_6.get(indexOfBasket);
+        int bagelsLeft = itemQuantityAfterDiscount.get(indexOfBagel);
         for (Item item : basket) {
             if (item.getClass() != Coffee.class) {
                 continue;
             }
-
-            //todo get COffee+Bagel Back
-
-
+            int indexOfCoffee = basket.indexOf(item);
+            int quantityOfCoffee = basketQuantity.get(indexOfCoffee);
+            if (bagelsLeft > quantityOfCoffee) {
+                itemQuantityAfterDiscount.set(indexOfBagel, bagelsLeft - quantityOfCoffee);
+                itemQuantityAfterDiscount.set(indexOfCoffee, 0);
+                total +=quantityOfCoffee * 1.25;
+            } else if (bagelsLeft < quantityOfCoffee) {
+                itemQuantityAfterDiscount.set(indexOfBagel, 0);
+                itemQuantityAfterDiscount.set(indexOfCoffee, quantityOfCoffee - bagelsLeft);
+                total += bagelsLeft * 1.25;
+            } else {
+                itemQuantityAfterDiscount.set(indexOfBagel, 0);
+                itemQuantityAfterDiscount.set(indexOfCoffee, 0);
+                total += quantityOfCoffee * 1.25;
+            }
         }
-
-
         return total;
 
     }
@@ -160,7 +182,7 @@ public class Basket {
             q6 += 1;
             quantity -= 6;
         }
-        itemQuantityAfterDiscount12_6.set(index, quantity);
+        itemQuantityAfterDiscount.set(index, quantity);
         total += 2.49 * q6 + 3.99 * q12;
         return total;
     }
