@@ -24,6 +24,7 @@ public class Inventory {
         this.getInventoryList().add(new Item("FILH",0.12,"Filling", "Ham"));
     }
 
+    // Getters & Setters
     public ArrayList<Item> getInventoryList() {
         return inventoryList;
     }
