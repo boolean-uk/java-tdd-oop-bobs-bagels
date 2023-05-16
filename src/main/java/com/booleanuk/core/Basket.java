@@ -3,7 +3,7 @@ package com.booleanuk.core;
 import java.util.ArrayList;
 
 public class Basket {
-    private ArrayList<Item> items;
+    private ArrayList<ItemInterface> items;
     private Inventory inventory;
     private int basketCapacity;
     private int sumCosts;
@@ -108,11 +108,11 @@ public class Basket {
         return this.getInventory().searchItem(sku).getPrice();
     }
 
-    public ArrayList<Item> getItems() {
+    public ArrayList<ItemInterface> getItems() {
         return items;
     }
 
-    public void setItems(ArrayList<Item> items) {
+    public void setItems(ArrayList<ItemInterface> items) {
         this.items = items;
     }
 
