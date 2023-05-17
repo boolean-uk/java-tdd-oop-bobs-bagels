@@ -1,8 +1,8 @@
 package com.booleanuk.core;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.stream.Collectors;
 
 enum CODE {
     NOCODE,
@@ -16,6 +16,8 @@ enum CODE {
 public class Basket {
     final private ArrayList<Item> items;
     final private ArrayList<Integer> quantitys;
+
+    private ArrayList<Integer> quantitysAfterDiscount;
     private int capacity = 3;
     private CODE code;
 
@@ -116,7 +118,7 @@ public class Basket {
     }
 
     public double getTotalWithDiscount() {
-        ArrayList<Integer> quantitysAfterDiscount = new ArrayList<>();
+        quantitysAfterDiscount = new ArrayList<>();
         double total = 0;
         // this get the bagel discount 6-12 and the fillings
         total = getBagelDiscount(quantitysAfterDiscount, total);
@@ -130,29 +132,27 @@ public class Basket {
     }
 
 
-
-
     public void getReceipt() {
-        ArrayList<Double> prices = new ArrayList<>();
+//        ArrayList<Double> prices = new ArrayList<>();
+        LocalDateTime dateTime = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        double total = getTotalWithDiscount(); // discount Quantities exist now!
+
 
         System.out.println("~~~ Bob's Bagels ~~~");
         System.out.println();
-        System.out.println(new Date()); //todo this need to be formated
+        System.out.println(dateTime.format(formatter));
         System.out.println();
         System.out.println("----------------------------");
         System.out.println();
-        //todo loop over items
-//        getSingleItemPrice(quantitysAfterDiscount, prices);
-        for (int i = 0; i < items.size(); i++) {
 
-        }
-
+        printSingleLadies();
 
 
         System.out.println();
         System.out.println("----------------------------");
         System.out.println();
-        System.out.println("Total                 £" + getTotalWithDiscount());
+        System.out.println("Total                 £" + total);
         System.out.println();
         System.out.println("Thank you");
         System.out.println("for your order!");
@@ -223,18 +223,158 @@ public class Basket {
         return total;
     }
 
+    //    private void printSinglePrices() {
+//        for (int i = 0; i < items.size(); i++) {
+//            Item item = items.get(i);
+//            int quantity = quantitys.get(i);
+////            basket.getTotalWithDiscountBasket();
+//            int quantityAfterDiscount = quantitysAfterDiscount.get(i);
+//
+//
+//            System.out.print(item instanceof Bagel ? ((Bagel) item).getType() + " " + "bagel" : "Coffee");
+//            System.out.print("        " + quantity + "  " + "£");
+//            if (item instanceof Bagel) { // Bagel discount 12/6
+//                if (quantityAfterDiscount == quantity) {
+//                    System.out.print((double) Math.round(item.getPrice() * quantity * 100) / 100);
+//                } else {
+//                    double price = 0.0;
+//                    while (quantity >= 6) {
+//                        if (quantity >= 12) {
+//                            price += 3.99 * quantity / 12;
+//                            quantity -= (int) (quantity / 12) * 12;
+//                        } else {
+//                            price += 2.49 * (int) (quantity / 6);
+//                            quantity -= (quantity / 6) * 6;
+//                        }
+//                    }
+//                    price += quantity * item.getPrice();
+//                    System.out.print((double) Math.round(price * 100) / 100);
+//                }
+//
+//            } else {
+//                System.out.print("hello there");
+//            }
+//            System.out.println();
+//        }
+//    }
+    private void printSingleLadies() {
+        ArrayList<Item> receiptItems = new ArrayList<>();
+        ArrayList<Integer> receiptQuantitys = new ArrayList<>();
+        ArrayList<Double> receiptPrices = new ArrayList<>();
+        ArrayList<Integer> helpQuantitys = new ArrayList<>();
+        helpQuantitys.addAll(quantitys);
+
+        for (int i = 0; i < items.size(); i++) {
+            Item item = items.get(i);
+            int quantity = helpQuantitys.get(i);
+            //todo discount12/6 OK! add()
+            double price = 0;
+            if (item instanceof Bagel) {
+                while (quantity >= 6) {
+                    if (quantity >= 12) {
+                        price += 3.99 * quantity / 12;
+                        quantity -= (int) (quantity / 12) * 12;
+                    } else {
+                        price += 2.49 * (int) (quantity / 6);
+                        quantity -= (quantity / 6) * 6;
+                    }
+                }
+                if (price != 0) {
+                    receiptItems.add(item);
+                    receiptQuantitys.add(helpQuantitys.get(i) - quantity);
+                    receiptPrices.add(price);
+                    helpQuantitys.set(i, quantity);
+                }
+            }
+        }
+//        for (int i = 0; i < items.size(); i++) {
+//            Item coffee = items.get(i);
+//            int quantityOfCoffee = quantitys.get(i);
+//            //todo COffee+Bagel!
+//            if (coffee instanceof Coffee) {
+//                for (int j = 0; j < items.size(); j++) {
+//                    Item bagel = items.get(j);
+//                    double price = 0;
+//                    if (bagel instanceof Bagel) {
+//                        int quantityOfBagel = helpQuantitys.get(j);
+//                        if (quantityOfCoffee > quantityOfBagel) {
+//                            price += 1.25 * quantityOfBagel;
+//                            helpQuantitys.set(j, 0);//bagels quantity
+//                            helpQuantitys.set(i, quantityOfCoffee - quantityOfBagel);//coffee quantity
+//
+//                            receiptItems.add(coffee);
+//                            receiptQuantitys.add(quantityOfCoffee - quantityOfBagel);
+//                            receiptPrices.add(price);
+//                        } else if (quantityOfCoffee < quantityOfBagel) {
+//                            price += 1.25 * quantityOfCoffee;
+//                            helpQuantitys.set(j, quantityOfBagel - quantityOfCoffee);//bagels quantity
+//                            helpQuantitys.set(i, 0);//coffee quantity
+//
+//                            receiptItems.add(coffee);
+//                            receiptQuantitys.add(quantityOfBagel - quantityOfCoffee);
+//                            receiptPrices.add(price);
+//                        } else {
+//                            price += 1.25 * quantityOfBagel;
+//                            helpQuantitys.set(j, 0);//bagels quantity
+//                            helpQuantitys.set(i, 0);//coffee quantity
+//
+//                            receiptItems.add(coffee);
+//                            receiptQuantitys.add(quantityOfBagel);
+//                            receiptPrices.add(price);
+//                        }
+//
+//
+//
+//                    }
+//                }
+//            }
+//
+//
+//        }
+        for (int i = 0; i < items.size(); i++) {
+            Item item = items.get(i);
+            int quantity = helpQuantitys.get(i);
+            //todo
+            if (receiptItems.contains(item)) {//hasCode
+                int position = receiptItems.indexOf(item);
+                int previousQuantity = receiptQuantitys.get(position);
+                double previousPrice = receiptPrices.get(position);
+                receiptQuantitys.set(position, previousQuantity + quantity);
+                receiptPrices.set(position, previousPrice + item.getPrice() * quantity);
+            } else {
+                receiptItems.add(item);
+                receiptQuantitys.add(helpQuantitys.get(i));
+                receiptPrices.add(item.getPrice() * helpQuantitys.get(i));
+            }
+
+
+        }
+        for (int i = 0; i < receiptItems.size(); i++) {
+            Item item =receiptItems.get(i);
+            int quantity =receiptQuantitys.get(i);
+            double price =receiptPrices.get(i);
+            System.out.print(item instanceof Bagel ? ((Bagel) item).getType() + " " + "bagel" : ((Coffee) item).getType()+" Coffee");
+            System.out.print("        " + quantity + "  " + "£");
+            System.out.print(price);
+            System.out.println();
+
+        }
+    }
+
 
     public static void main(String[] args) {
         Basket basket = new Basket();
         basket.setCapacity(100);
         Bagel bagel = new Bagel(BAGELTYPE.PLAIN); //0.39
-        Bagel bagelOther = new Bagel(BAGELTYPE.PLAIN);
-        Coffee coffee =new Coffee(COFFEETYPE.BLACK); //0.99
+        Bagel bagelOther = new Bagel(BAGELTYPE.EVERYTHING);
+        Coffee coffee = new Coffee(COFFEETYPE.BLACK); //0.99
         BobsInvetory.add(bagel);
         BobsInvetory.add(coffee);
+        BobsInvetory.add(bagelOther);
 
-        basket.add(bagel, 1);
+        basket.add(bagel, 6);
         basket.add(coffee, 1);
+        basket.add(bagelOther,4);
 
 
         basket.getReceipt();
