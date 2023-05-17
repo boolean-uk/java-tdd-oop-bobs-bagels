@@ -12,7 +12,6 @@ public class Basket {
     private int basketCapacity;
     private int sumCosts;
     public Map<String, Integer> itemsMap;
-
     public double totalDiscount;
 
     public Basket(Inventory inventory) {
