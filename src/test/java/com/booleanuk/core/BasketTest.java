@@ -222,14 +222,12 @@ public class BasketTest {
             basket.addItem("COFB");
         }
 
-        for (int i = 0; i < basket.getItems().size(); i++) {
-            if (testMap.containsKey(basket.getItems().get(i).getSku())) {
-                testMap.put(basket.getItems().get(i).getSku(), testMap.get(basket.getItems().get(i).getSku())+1);
-            } else {
-                testMap.put(basket.getItems().get(i).getSku(), 1);
-            }
-        }
-        System.out.println(testMap);
+        basket.printReceipt();
+        Assertions.assertEquals(2, basket.itemsMap.get("BGLO"));
+        Assertions.assertEquals(12, basket.itemsMap.get("BGLP"));
+        Assertions.assertEquals(6, basket.itemsMap.get("BGLE"));
+        Assertions.assertEquals(3, basket.itemsMap.get("COFB"));
+
     }
 
 }

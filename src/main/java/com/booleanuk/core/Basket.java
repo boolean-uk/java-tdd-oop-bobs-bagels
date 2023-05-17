@@ -4,19 +4,20 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 public class Basket {
     private ArrayList<ItemInterface> items;
     private Inventory inventory;
     private int basketCapacity;
     private int sumCosts;
-    private HashMap<String, Integer> itemsMap;
+    public Map<String, Integer> itemsMap;
 
     public Basket(Inventory inventory) {
         this.setItems(new ArrayList<>());
         this.setBasketCapacity(100);
         this.setInventory(inventory);
-        this.setItemsMap(new HashMap<>());
+        this.itemsMap = new HashMap<>();
     }
 
     public boolean addItem(String sku){
@@ -120,12 +121,22 @@ public class Basket {
     }
 
     public void printReceipt() {
-        System.out.println("    ~~~ Bob's Bagels ~~~\n");
-        System.out.println("     " + returnDateTime() + "\n");
-        System.out.println("----------------------------\n");
-        System.out.println("Onion Bagel     2      $0.98\n");
-        System.out.println("----------------------------\n");
-        System.out.println("Total                  $" + totalCost() + "\n");
+        for (int i = 0; i < getItems().size(); i++) {
+            if (itemsMap.containsKey(getItems().get(i).getSku())) {
+                itemsMap.put(getItems().get(i).getSku(), itemsMap.get(getItems().get(i).getSku())+1);
+            } else {
+                itemsMap.put(getItems().get(i).getSku(), 1);
+            }
+        }
+
+        System.out.println("\n        ~~~ Bob's Bagels ~~~\n");
+        System.out.println("         " + returnDateTime() + "\n");
+        System.out.println("----------------------------------");
+        itemsMap.forEach((key, value) -> {
+            System.out.printf("%-20s %-6d $ %.2f \n", inventory.searchItem(key).getVariant() + " " + inventory.searchItem(key).getType(), value, (float)(((itemPrice(key) * value) * 100) / 100.00));
+        });
+        System.out.println("----------------------------------\n");
+        System.out.println("Total                       $ " + totalCost() + "\n");
         System.out.println("Thank you for your order!");
     }
 
@@ -159,14 +170,6 @@ public class Basket {
 
     public void setSumCosts(int sumCosts) {
         this.sumCosts = sumCosts;
-    }
-
-    public HashMap<String, Integer> getItemsMap() {
-        return itemsMap;
-    }
-
-    public void setItemsMap(HashMap<String, Integer> itemsMap) {
-        this.itemsMap = itemsMap;
     }
 
 }
