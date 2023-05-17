@@ -1,6 +1,7 @@
 package com.booleanuk.core;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 enum CODE {
     NOCODE,
@@ -127,6 +128,26 @@ public class Basket {
         return total;
     }
 
+
+    public void getReceipt(){
+
+        System.out.println("~~~ Bob's Bagels ~~~");
+        System.out.println();
+        System.out.println(new Date()); //todo this need to be formated
+        System.out.println();
+        System.out.println("----------------------------");
+        System.out.println();
+        //todo loop over items
+        System.out.println();
+        System.out.println("----------------------------");
+        System.out.println();
+        System.out.println("Total                 £"+getTotalWithDiscount());
+        System.out.println();
+        System.out.println("Thank you");
+        System.out.println("for your order!");
+
+    }
+
     private double getLeftOverPrice(ArrayList<Integer> quantitysAfterDiscount, double total) {
         for (int i = 0; i < items.size(); i++) {
             double price = items.get(i).getPrice();
@@ -192,6 +213,7 @@ public class Basket {
     }
 
 
+
     public static void main(String[] args) {
         Basket basket = new Basket();
         Bagel bagel = new Bagel(BAGELTYPE.PLAIN);
@@ -200,12 +222,7 @@ public class Basket {
         BobsInvetory.add(coffee);
         basket.setCapacity(100);
         basket.add(bagel, 6);
-        basket.add(bagel, 2);
-        basket.add(coffee, 3);
-        double total = basket.getTotalWithDiscount();
-        System.out.println("total = " + total);
-        System.out.println("Manual = " + (2.49 + 2.50 + 0.99));
-
+        basket.getReceipt();
 
         System.out.println("basket = " + basket.getCode());
 
