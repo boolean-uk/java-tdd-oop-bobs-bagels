@@ -1,164 +1,89 @@
 package com.booleanuk.core;
 
-import com.booleanuk.core.models.Bagel;
-import com.booleanuk.core.models.Coffee;
-import com.booleanuk.core.models.Filling;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+
 public class BasketTest {
-    Invetory invetory = new Invetory();
 
-    @Test
-    void testAddWithoutQuantity() {
-        Basket basket = new Basket();
-        Bagel bagel0 = invetory.bagels.get(0);
-        Assertions.assertTrue(basket.add(bagel0));
-        Assertions.assertEquals(1, basket.shoppingBasket.size());
-        Assertions.assertEquals(1, basket.sizeOfBasket);
+    Basket basket = new Basket();
+    Bagel bagel = new Bagel(BAGELTYPE.PLAIN);
+    Coffee coffee = new Coffee(COFFEETYPE.BLACK);
+    Filling filling = new Filling(FILLINGTYPE.BACON);
+    Bagel bagelWithFilling = new Bagel(BAGELTYPE.PLAIN);
+
+    public static void main(String[] args) {
+        BasketTest basketTest = new BasketTest();
+        System.out.println(basketTest.bagelWithFilling);
+        System.out.println(basketTest.bagel);
+
+
     }
 
+
     @Test
-    void testAddWithMultiplyQuality() {
-        Basket basket = new Basket();
-        Bagel bagel0 = invetory.bagels.get(0);
+    void testGetSetCapacity() {
+        Assertions.assertEquals(3, basket.getCapacity());
         basket.setCapacity(10);
-        Assertions.assertTrue(basket.add(bagel0, 4));
-        Assertions.assertEquals(4, basket.sizeOfBasket);
-        Assertions.assertEquals(1, basket.shoppingBasket.size());
-    }
-
-    @Test
-    void testRemoveWithoutQuantity() {
-        Basket basket = new Basket();
-        Bagel bagel0 = invetory.bagels.get(0);
-        basket.add(bagel0);
-        basket.add(bagel0);
-        Assertions.assertEquals(2, basket.sizeOfBasket);
-        Assertions.assertFalse(basket.remove(new Bagel("new", 0, "SKU")));
-        Assertions.assertTrue(basket.remove(bagel0));
-        Assertions.assertEquals(1, basket.sizeOfBasket);
-        Assertions.assertEquals(1, basket.shoppingBasket.size());
-    }
-
-    @Test
-    void testRemoveMultiplyQuality() {
-        Basket basket = new Basket();
-        Bagel bagel = invetory.bagels.get(0);
-        basket.setCapacity(16);
-        basket.add(bagel, 16);
-        Assertions.assertFalse(basket.remove(bagel, 17));
-        basket.remove(bagel, 4);
-        Assertions.assertEquals(12, basket.sizeOfBasket);
-    }
-
-    @Test
-    void testSetCapacity() {
-        Basket basket = new Basket();
-        Bagel bagel0 = invetory.bagels.get(0);
-        Bagel bagel1 = invetory.bagels.get(1);
-        Bagel bagel2 = invetory.bagels.get(2);
+        Assertions.assertEquals(10, basket.getCapacity());
         Assertions.assertFalse(basket.setCapacity(0));
-        basket.add(bagel0);
-        basket.add(bagel1);
-        basket.add(bagel2);
-        Assertions.assertFalse(basket.setCapacity(2));
-        Assertions.assertTrue(basket.setCapacity(5));
-    }
-    @Test
-    void testTotalSingleAddAndRemove() {
-        Basket basket = new Basket();
-        Bagel bagel0 = invetory.bagels.get(0);
-        Bagel bagel1 = invetory.bagels.get(1);
-        Assertions.assertEquals(0.0, basket.getTotal());
-        basket.add(bagel0);
-        Assertions.assertEquals(0.49, basket.getTotal());
-        basket.add(bagel0);
-        Assertions.assertEquals(0.98, basket.getTotal());
-        basket.remove(bagel0);
-        Assertions.assertEquals(0.49, basket.getTotal());
-    }
-
-    @Test
-    void testTotalAddFunctionalityWithFillings() {
-        Basket basket = new Basket();
-        basket.setCapacity(50);
-        Bagel bagel = invetory.bagels.get(1);
-        bagel.addFillings(new Filling[]{invetory.fillings.get(0)});
-        basket.add(bagel, 16);
-        Assertions.assertEquals(7.47, basket.getTotal());
-        basket.add(invetory.bagels.get(0), 1);
-        Assertions.assertEquals(7.96, basket.getTotal());
-    }
-
-    @Test
-    void testTotalRemoveFunctionalityWithFillings() {
-        Basket basket = new Basket();
-        basket.setCapacity(50);
-        Bagel bagel = invetory.bagels.get(1);
-        bagel.addFillings(new Filling[]{invetory.fillings.get(0)});
+        // make bagel availiable
+        BobsInvetory.add(bagel);
         basket.add(bagel, 2);
-        Assertions.assertEquals(1.02, basket.getTotal());
-        basket.remove(bagel, 1);
-        Assertions.assertEquals(.51, basket.getTotal());
+        Assertions.assertFalse(basket.setCapacity(1));
+        BobsInvetory.resetBagelsAndCoffee();
     }
 
     @Test
-    void testTotalWithDiscountAddFunctionality() {
-        Basket basket = new Basket();
-        basket.setCapacity(50);
-        Bagel bagel0 = invetory.bagels.get(0);
-        Bagel bagel1 = invetory.bagels.get(1);
-        basket.add(bagel1, 16);
-        Assertions.assertEquals(5.55, basket.getTotal());
-        Assertions.assertEquals(5.55, basket.getTotal());
-
-        basket.add(bagel0, 6);
-        Assertions.assertEquals(8.04, basket.getTotal());
-        Assertions.assertEquals(8.04, basket.getTotal());
-
-    }
-
-
-    @Test
-    void testTotalWithDiscountRemoveFunctionality() {
-        Basket basket = new Basket();
-        basket.setCapacity(50);
-        Bagel bagel1 = invetory.bagels.get(1);
-        basket.add(bagel1, 16);
-        Assertions.assertEquals(5.55, basket.getTotal());
-        basket.remove(bagel1, 4);
-        Assertions.assertEquals(3.99, basket.getTotal());
-        basket.remove(bagel1, 1);
-        Assertions.assertEquals(4.44, basket.getTotal());
-        basket.remove(bagel1, 11);
-        Assertions.assertEquals(0.0, basket.getTotal());
-    }
-    @Test
-    void testTotalWithDiscount() {
-        Basket basket = new Basket();
-        basket.setCapacity(50);
-        basket.add(invetory.bagels.get(1), 16);
-        Assertions.assertEquals(5.55, basket.getTotal());
-        basket.add(invetory.bagels.get(0));
-        Assertions.assertEquals(6.04, basket.getTotal());
-        basket.add(invetory.bagels.get(0));
-        Assertions.assertEquals(6.53, basket.getTotal());
-        basket.add(invetory.bagels.get(0), 4);
-        Assertions.assertEquals(8.04, basket.getTotal());
-
-
+    void testAdd() {
+        BobsInvetory.add(bagel);
+        Assertions.assertTrue(basket.add(bagel, 3));
+        Assertions.assertFalse(basket.add(bagel, 1));
+        int position = basket.getItems().indexOf(bagel);
+        Assertions.assertEquals(bagel, basket.getItems().get(position));
+        Assertions.assertEquals(3, basket.getQuantity().get(position));
     }
 
     @Test
-    void testDiscountCoffeeWithBagel(){
-        Basket basket = new Basket();
-        Coffee coffee =invetory.coffees.get(0);
-        Bagel bagel0 = invetory.bagels.get(1);
-        basket.add(coffee);
-        basket.add(bagel0);
-        Assertions.assertEquals(1.25,basket.getTotal());
-
-
+    void testRemove() {
+        testAdd();
+        int position = basket.getItems().indexOf(bagel);
+        System.out.println(position);
+        Assertions.assertFalse(basket.remove(bagel, 4));
+        Assertions.assertFalse(basket.remove(coffee, 1));
+        Assertions.assertTrue(basket.remove(bagel, 2));
+        Assertions.assertEquals(1, basket.getQuantity().get(position));
+        Assertions.assertTrue(basket.remove(bagel, 1));
+        Assertions.assertEquals(0, basket.getItems().size());
+        BobsInvetory.resetBagelsAndCoffee();
     }
+
+    @Test
+    void testTotal() {
+        BobsInvetory.add(bagel);
+        BobsInvetory.add(bagelWithFilling);
+        BobsInvetory.add(coffee);
+        BobsInvetory.add(filling);
+        bagelWithFilling.setFillings(filling);
+        basket.setCapacity(100);
+        basket.add(bagel, 5);
+        Assertions.assertEquals(1.95, basket.getTotalWithDiscount());
+        basket.add(bagelWithFilling, 1);
+        Assertions.assertEquals(2.46, basket.getTotalWithDiscount());
+        basket.add(bagel, 1);
+        Assertions.assertEquals(3.0, basket.getTotalWithDiscount());
+        basket.add(coffee,1);
+        Assertions.assertEquals(3.86, basket.getTotalWithDiscount());
+        basket.add(coffee,1);
+        Assertions.assertEquals(4.85, basket.getTotalWithDiscount());
+        basket.remove(coffee,2);
+        basket.remove(bagel,6);
+        basket.remove(bagelWithFilling,1);
+        Assertions.assertEquals(0.0, basket.getTotalWithDiscount());
+        basket.add(bagel,12);
+        Assertions.assertEquals(3.99, basket.getTotalWithDiscount());
+    }
+
+
 }
