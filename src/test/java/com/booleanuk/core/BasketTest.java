@@ -6,6 +6,8 @@ import org.junit.jupiter.api.Test;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class BasketTest {
     Inventory inventory;
@@ -205,9 +207,29 @@ public class BasketTest {
     public void testPrintReceipt()
     {
         Basket basket = new Basket(this.inventory);
-        basket.addItem("BGLO");
-        basket.addItem("BGLO");
-        basket.printReceipt();
+        Map <String, Integer> testMap = new HashMap<>();
+
+        for (int i = 1; i <= 2; i++) {
+            basket.addItem("BGLO");
+        }
+        for (int i = 1; i <= 12; i++) {
+            basket.addItem("BGLP");
+        }
+        for (int i = 1; i <= 6; i++) {
+            basket.addItem("BGLE");
+        }
+        for (int i = 1; i <= 3; i++) {
+            basket.addItem("COFB");
+        }
+
+        for (int i = 0; i < basket.getItems().size(); i++) {
+            if (testMap.containsKey(basket.getItems().get(i).getSku())) {
+                testMap.put(basket.getItems().get(i).getSku(), testMap.get(basket.getItems().get(i).getSku())+1);
+            } else {
+                testMap.put(basket.getItems().get(i).getSku(), 1);
+            }
+        }
+        System.out.println(testMap);
     }
 
 }
