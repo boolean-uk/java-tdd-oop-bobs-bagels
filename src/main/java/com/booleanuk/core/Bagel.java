@@ -1,6 +1,7 @@
 package com.booleanuk.core;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 enum BAGELTYPE {
      ONION,
@@ -48,5 +49,18 @@ public class Bagel extends Item{
     @Override
     public boolean getAvailable() {
         return BobsInvetory.isBagelInInvetory(type);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Bagel bagel = (Bagel) o;
+        return type == bagel.type && Objects.equals(fillings, bagel.fillings);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(type, fillings);
     }
 }

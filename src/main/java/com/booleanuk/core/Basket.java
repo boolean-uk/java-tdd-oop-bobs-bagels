@@ -2,6 +2,7 @@ package com.booleanuk.core;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.stream.Collectors;
 
 enum CODE {
     NOCODE,
@@ -129,7 +130,10 @@ public class Basket {
     }
 
 
-    public void getReceipt(){
+
+
+    public void getReceipt() {
+        ArrayList<Double> prices = new ArrayList<>();
 
         System.out.println("~~~ Bob's Bagels ~~~");
         System.out.println();
@@ -138,10 +142,17 @@ public class Basket {
         System.out.println("----------------------------");
         System.out.println();
         //todo loop over items
+//        getSingleItemPrice(quantitysAfterDiscount, prices);
+        for (int i = 0; i < items.size(); i++) {
+
+        }
+
+
+
         System.out.println();
         System.out.println("----------------------------");
         System.out.println();
-        System.out.println("Total                 £"+getTotalWithDiscount());
+        System.out.println("Total                 £" + getTotalWithDiscount());
         System.out.println();
         System.out.println("Thank you");
         System.out.println("for your order!");
@@ -213,18 +224,22 @@ public class Basket {
     }
 
 
-
     public static void main(String[] args) {
         Basket basket = new Basket();
-        Bagel bagel = new Bagel(BAGELTYPE.PLAIN);
-        Coffee coffee = new Coffee(COFFEETYPE.BLACK);
+        basket.setCapacity(100);
+        Bagel bagel = new Bagel(BAGELTYPE.PLAIN); //0.39
+        Bagel bagelOther = new Bagel(BAGELTYPE.PLAIN);
+        Coffee coffee =new Coffee(COFFEETYPE.BLACK); //0.99
         BobsInvetory.add(bagel);
         BobsInvetory.add(coffee);
-        basket.setCapacity(100);
-        basket.add(bagel, 6);
+
+        basket.add(bagel, 1);
+        basket.add(coffee, 1);
+
+
         basket.getReceipt();
 
-        System.out.println("basket = " + basket.getCode());
+        System.out.println("after = " + basket.getCode());
 
 
     }

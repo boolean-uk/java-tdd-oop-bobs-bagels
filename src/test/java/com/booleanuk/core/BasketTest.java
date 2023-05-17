@@ -13,6 +13,14 @@ public class BasketTest {
     Filling filling = new Filling(FILLINGTYPE.BACON);
     Bagel bagelWithFilling = new Bagel(BAGELTYPE.PLAIN);
 
+    public static void main(String[] args) {
+        BasketTest basketTest = new BasketTest();
+        System.out.println(basketTest.bagelWithFilling);
+        System.out.println(basketTest.bagel);
+
+
+    }
+
 
     @Test
     void testGetSetCapacity() {

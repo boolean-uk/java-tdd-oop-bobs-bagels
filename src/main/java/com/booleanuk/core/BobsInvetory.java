@@ -8,17 +8,6 @@ public abstract class BobsInvetory {
     public static ArrayList<Coffee> coffees = new ArrayList<>();
     public static ArrayList<Filling> fillings = new ArrayList<>();
 
-    public static ArrayList<Bagel> getBagels() {
-        return bagels;
-    }
-
-    public static ArrayList<Coffee> getCoffees() {
-        return coffees;
-    }
-
-    public static ArrayList<Filling> getFillings() {
-        return fillings;
-    }
 
     public static void resetBagelsAndCoffee() {
         BobsInvetory.bagels = new ArrayList<>();
@@ -26,11 +15,11 @@ public abstract class BobsInvetory {
         BobsInvetory.fillings = new ArrayList<>();
     }
 
+    //At runtime change the invetory Items
     public static void add(Item item) {
         if (item instanceof Bagel) bagels.add((Bagel) item);
         if (item instanceof Coffee) coffees.add((Coffee) item);
         if (item instanceof Filling) fillings.add((Filling) item);
-
     }
 
     public static boolean isBagelInInvetory(BAGELTYPE type) {
