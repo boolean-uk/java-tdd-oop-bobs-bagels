@@ -9,10 +9,10 @@ public class TestDiscounts {
         Basket basket = new Basket();
         Bagel bagel = new Bagel(Sku.BGLO,0.49,0.0,2,"Bagel","Onion");
         Bagel bagel2 = new Bagel(Sku.BGLP,0.39,0.0,12,"Bagel","Plain");
-        bagel.getFillings().add(new Filling(Sku.FILB,0.12,0.0,0,"Filling","Bacon"));
+        bagel.getFillings().add(new Filling(Sku.FILB,0.12,0.0,1,"Filling","Bacon"));
         Bagel bagel3 = new Bagel(Sku.BGLE,0.49,0.0,6,"Bagel","Everything");
         Coffee coffee = new Coffee(Sku.COFC,1.29,0.0,3,"Coffee","Capuccino");
-        System.out.println(bagel.getPrice());
+//        System.out.println(bagel.getPrice());
         basket.addItem(bagel); // 3.99
         basket.addItem(bagel2);
         basket.addItem(bagel3);
