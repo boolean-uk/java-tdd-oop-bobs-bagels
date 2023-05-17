@@ -1,19 +1,11 @@
 package com.booleanuk.core;
 
-import java.lang.reflect.Array;
 import java.math.BigDecimal;
-import java.math.RoundingMode;
-import java.time.format.DateTimeFormatterBuilder;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 
 import static com.booleanuk.core.Inventory.inventoryProducts;
 import static com.booleanuk.core.Inventory.productIsInStock;
-import static jdk.nashorn.internal.objects.NativeMath.round;
-
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 public class Basket {
 
@@ -22,7 +14,7 @@ public class Basket {
     private int capacity;
     Receipt receipt = new Receipt();
     String pound = "\u00a3";
-    double sumSaved = 0;
+    BigDecimal sumSaved = BigDecimal.ZERO;
 
 
     public Basket(int capacity){
@@ -56,8 +48,6 @@ public class Basket {
         }
         return allFillings;
     }
-
-
 
     public boolean add( String SKU){
         if(productIsInStock(SKU) && getCapacity()>products.size()){
@@ -95,13 +85,17 @@ public class Basket {
         return false;
     }
 
-    public String calculateSavings(String SKU, int productsDiscounted, BigDecimal discount){
+    public double calculateSavings(String SKU, int productsDiscounted, BigDecimal discount){
         BigDecimal ammountSaved = BigDecimal.valueOf(productsDiscounted * inventoryProducts.get(SKU).getProductCost());
         ammountSaved = ammountSaved.subtract(discount);
+        sumSaved = sumSaved.add(ammountSaved);
         double ammountSavedDouble = ammountSaved.doubleValue();
-        sumSaved+= ammountSavedDouble;
-        //String ammountSavedStr = "\n\t\t\t\t\t  (-"+pound+ammountSavedDouble+")";
-        String ammountSavedStr = String.valueOf(ammountSavedDouble);
+
+        return ammountSavedDouble;
+    }
+
+    public String displayInReceipt(double saving){
+        String ammountSavedStr = "\n\t\t\t\t\t  (-"+pound+saving+")";
         return ammountSavedStr;
     }
 
@@ -110,7 +104,7 @@ public class Basket {
         HashMap<String, Integer> productCountNew= new HashMap<>();
         productCountNew.putAll(productCount);
         BigDecimal sum = BigDecimal.ZERO;
-        sumSaved = 0;
+        sumSaved = BigDecimal.ZERO;
 
         for (String keySKU : productCountNew.keySet()) {
             int totalProductsOfThisSKU = productCountNew.get(keySKU);
@@ -120,24 +114,23 @@ public class Basket {
                 BigDecimal discount = BigDecimal.valueOf(totalProductsOfThisSKU / 12).multiply(BigDecimal.valueOf(3.99));
 
                 //calculates ammount saved from this special offer
-                String ammountSavedStr = calculateSavings(keySKU, (productCountNew.get(keySKU)/12)*12, discount);
-//                String ammountSavedStr = "(-"+pound+ammountSaved+")";
-//                sumSaved+=ammountSavedStr;
+                double ammountSaved = calculateSavings(keySKU, (productCountNew.get(keySKU)/12)*12, discount);
+                String ammountSavedStr = displayInReceipt(ammountSaved);
                 //adds the ammount saved and the discount used to the receipt
-                String discountPrice = pound+discount.toString();
+                String discountPrice = pound+discount;
                 String productToReceipt = currentProduct.getVariant() +" "+ currentProduct.getName() +"\t\t\t"+ ((productCountNew.get(keySKU)/12)*12) +"\t"+ discountPrice+ammountSavedStr;
                 receipt.getProductsBought().add(productToReceipt);
 
-
-                productCountNew.put("BGLP",productCountNew.get("BGLP")-((int)productCountNew.get("BGLP")/12)*12);
+                productCountNew.put("BGLP",productCountNew.get("BGLP")-(productCountNew.get("BGLP")/12)*12);
                 sum = sum.add(discount);
 
             } else if (keySKU.equals("BGLO") && totalProductsOfThisSKU >= 6) {
                 BigDecimal discount = BigDecimal.valueOf(totalProductsOfThisSKU / 6).multiply(BigDecimal.valueOf(2.49));
 
                 //adds this discount to receipt
-                String ammountSavedStr = calculateSavings(keySKU, (productCountNew.get(keySKU)/6)*6, discount);
-                String discountPrice = pound+discount.toString();
+                double ammountSaved = calculateSavings(keySKU, (productCountNew.get(keySKU)/6)*6, discount);
+                String ammountSavedStr = displayInReceipt(ammountSaved);
+                String discountPrice = pound+discount;
                 String productToReceipt = currentProduct.getVariant() +" "+ currentProduct.getName() +"\t\t\t"+ ((productCountNew.get(keySKU)/6)*6) +"\t"+ discountPrice+ammountSavedStr;
                 receipt.getProductsBought().add(productToReceipt);
 
@@ -147,8 +140,9 @@ public class Basket {
                 BigDecimal discount = BigDecimal.valueOf(totalProductsOfThisSKU / 6).multiply(BigDecimal.valueOf(2.49));
 
                 //adds this discount to receipt
-                String ammountSavedStr = calculateSavings(keySKU, (productCountNew.get(keySKU)/6)*6, discount);
-                String discountPrice = pound+discount.toString();
+                double ammountSaved = calculateSavings(keySKU, (productCountNew.get(keySKU)/6)*6, discount);
+                String ammountSavedStr = displayInReceipt(ammountSaved);
+                String discountPrice = pound+discount;
                 String productToReceipt = currentProduct.getVariant() +" "+ currentProduct.getName() +"\t\t"+ ((productCountNew.get(keySKU)/6)*6) +"\t\t"+ discountPrice+ammountSavedStr;
                 receipt.getProductsBought().add(productToReceipt);
 
@@ -158,7 +152,7 @@ public class Basket {
         }
 
         int count_black_coffee = productCountNew.getOrDefault("COFB",0);
-        int[] bagels_remaining= {productCountNew.getOrDefault("BGLP",0), productCountNew.getOrDefault("BGLO",0), productCountNew.getOrDefault("BGLE",0),productCountNew.getOrDefault("BGLS",0)};
+        int[] bagels_remaining= {productCountNew.getOrDefault("BGLP",0), productCountNew.getOrDefault("BGLE",0), productCountNew.getOrDefault("BGLO",0),productCountNew.getOrDefault("BGLS",0)};
         int coffee_discounts=0;
         //count black coffee discounts
         for(int i=0;i<bagels_remaining.length;i++){
@@ -176,45 +170,23 @@ public class Basket {
                 }
             }
         }
-        double ammountSavedDouble = 0;
 
+
+        BigDecimal ammountSaved = BigDecimal.ZERO;
         if (coffee_discounts>0){
-            if (productCountNew.getOrDefault("BGLP", 0) != bagels_remaining[0]){
-                int bagelsInCoffeDiscount = productCountNew.get("BGLP") - bagels_remaining[0];
-                BigDecimal discount = BigDecimal.valueOf(bagelsInCoffeDiscount * 0.16);
-                String ammountSavedStr = calculateSavings("BGLP", bagelsInCoffeDiscount, discount);
-                System.out.println(ammountSavedStr+"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-                ammountSavedDouble += Double.parseDouble(ammountSavedStr);
+            BigDecimal discount = BigDecimal.valueOf(coffee_discounts * 1.25);
+            BigDecimal priceWithoutDiscount = BigDecimal.valueOf(coffee_discounts * 1.48);
+            ammountSaved = priceWithoutDiscount.subtract(discount);
+            if (productCountNew.getOrDefault("BGLP", 0) != bagels_remaining[0]) {
+                ammountSaved = ammountSaved.subtract(BigDecimal.valueOf(productCountNew.get("BGLP")-bagels_remaining[0]).multiply(BigDecimal.valueOf(0.1)));
             }
-            if (productCountNew.getOrDefault("BGLO", 0) != bagels_remaining[1]){
-                int bagelsInCoffeDiscount = productCountNew.get("BGLO") - bagels_remaining[1];
-                BigDecimal discount = BigDecimal.valueOf(bagelsInCoffeDiscount * 0.26);
-                String ammountSavedStr = calculateSavings("BGLO", bagelsInCoffeDiscount, discount);
-                ammountSavedDouble += Double.parseDouble(ammountSavedStr);
-            }
-            if (productCountNew.getOrDefault("BGLE", 0) != bagels_remaining[2]){
-                int bagelsInCoffeDiscount = productCountNew.get("BGLE") - bagels_remaining[2];
-                BigDecimal discount = BigDecimal.valueOf(bagelsInCoffeDiscount * 0.26);
-                String ammountSavedStr = calculateSavings("BGLE", bagelsInCoffeDiscount, discount);
-                ammountSavedDouble += Double.parseDouble(ammountSavedStr);
-            }
-            if (productCountNew.getOrDefault("BGLS", 0) != bagels_remaining[3]){
-                int bagelsInCoffeDiscount = productCountNew.get("BGLS") - bagels_remaining[3];
-                BigDecimal discount = BigDecimal.valueOf(bagelsInCoffeDiscount * 0.26);
-                String ammountSavedStr = calculateSavings("BGLS", bagelsInCoffeDiscount, discount);
-                ammountSavedDouble += Double.parseDouble(ammountSavedStr);
-            }
-//            BigDecimal discount = BigDecimal.valueOf(coffee_discounts * 0.99);
-//            String ammountSavedStr = calculateSavings("COFB", coffee_discounts, discount);
-//            ammountSavedDouble += Double.parseDouble(ammountSavedStr);
+            sumSaved = sumSaved.add(ammountSaved);
         }
-
-
 
         //calculate new remainings of bagels without discount
         productCountNew.put("BGLP",bagels_remaining[0]);
-        productCountNew.put("BGLO",bagels_remaining[1]);
-        productCountNew.put("BGLE",bagels_remaining[2]);
+        productCountNew.put("BGLE",bagels_remaining[1]);
+        productCountNew.put("BGLO",bagels_remaining[2]);
         productCountNew.put("BGLS",bagels_remaining[3]);
 
         //calculate black coffees remaining without discount
@@ -223,8 +195,9 @@ public class Basket {
 
         //adds this discount to receipt
         if ( coffee_discounts > 0) {
-            String discountPrice = pound+BigDecimal.valueOf((coffee_discounts*1.25)).toString();
-            String productToReceipt = "Coffee and Bagel\t" + coffee_discounts +"\t"+ discountPrice+String.valueOf(ammountSavedDouble);
+            String ammountSavedStr = displayInReceipt(ammountSaved.doubleValue());
+            String discountPrice = pound+BigDecimal.valueOf((coffee_discounts*1.25));
+            String productToReceipt = "Coffee and Bagel\t" + coffee_discounts +"\t"+ discountPrice+ammountSavedStr;
             receipt.getProductsBought().add(productToReceipt);
         }
 
@@ -235,7 +208,7 @@ public class Basket {
 
             if (costOfProduct.doubleValue()>0){
                 //adds rest of products to receipt
-                String discountPrice = pound+costOfProduct.toString();
+                String discountPrice = pound+costOfProduct;
                 String productToReceipt = currentProduct.getVariant() +" "+ currentProduct.getName() +"\t\t"+ productCountNew.get(SKU) +"\t"+ discountPrice;
                 receipt.getProductsBought().add(productToReceipt);
             }
@@ -251,7 +224,7 @@ public class Basket {
 
     public boolean printReceipt(){
         double totalPayed = getTotalCost();
-        System.out.printf("\t~~~ Bob's Bagels ~~~%n");
+        System.out.printf("\t ~~~ Bob's Bagels ~~~%n");
         System.out.printf("\t "+receipt.getDateTime()+"%n");
         System.out.printf("-----------------------------%n");
         for (int i = 0; i < receipt.getProductsBought().size(); i++) {
@@ -259,7 +232,8 @@ public class Basket {
         }
         System.out.printf("-----------------------------%n");
         System.out.printf("Total\t\t\t\t\t"+pound+ totalPayed+"%n");
-        System.out.printf("  Thank you for your order!%n");
+        System.out.println("\n   You saved a total of "+pound+sumSaved+"\n\t    on this shop");
+        System.out.printf("\n\t     Thank you \n\t  for your order!%n");
         return true;
     }
 
