@@ -11,10 +11,6 @@ public class Basket {
     private int basketCapacity;
     private int sumCosts;
     private HashMap<String, Integer> itemsMap;
-//    private LocalDateTime dateTime;
-//    public DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
-//    private String dateString = dtf.format(dateTime);
-
 
     public Basket(Inventory inventory) {
         this.setItems(new ArrayList<>());
@@ -117,6 +113,12 @@ public class Basket {
         return this.getInventory().searchItem(sku).getPrice();
     }
 
+    public String returnDateTime() {
+        LocalDateTime dateTime = LocalDateTime.now();
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+        return dtf.format(dateTime);
+    }
+
 
 
     public ArrayList<ItemInterface> getItems() {
@@ -159,11 +161,4 @@ public class Basket {
         this.itemsMap = itemsMap;
     }
 
-//    public String getDateString() {
-//        return dateString;
-//    }
-//
-//    public void setDateString(String dateString) {
-//        this.dateString = dateString;
-//    }
 }

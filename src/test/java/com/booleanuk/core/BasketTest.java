@@ -196,9 +196,11 @@ public class BasketTest {
     public void testDateTime()
     {
         LocalDateTime testDateTime = LocalDateTime.now();
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
         Basket basket = new Basket(this.inventory);
-        Assertions.assertEquals(dtf.format(testDateTime), basket.getDateString());
+        Assertions.assertEquals(dtf.format(testDateTime), basket.returnDateTime());
     }
+
+
 
 }
