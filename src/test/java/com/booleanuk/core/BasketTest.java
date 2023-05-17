@@ -201,6 +201,13 @@ public class BasketTest {
         Assertions.assertEquals(dtf.format(testDateTime), basket.returnDateTime());
     }
 
-
+    @Test
+    public void testPrintReceipt()
+    {
+        Basket basket = new Basket(this.inventory);
+        basket.addItem("BGLO");
+        basket.addItem("BGLO");
+        basket.printReceipt();
+    }
 
 }

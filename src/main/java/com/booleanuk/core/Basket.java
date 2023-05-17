@@ -119,7 +119,15 @@ public class Basket {
         return dtf.format(dateTime);
     }
 
-
+    public void printReceipt() {
+        System.out.println("    ~~~ Bob's Bagels ~~~\n");
+        System.out.println("     " + returnDateTime() + "\n");
+        System.out.println("----------------------------\n");
+        System.out.println("Onion Bagel     2      $0.98\n");
+        System.out.println("----------------------------\n");
+        System.out.println("Total                  $" + totalCost() + "\n");
+        System.out.println("Thank you for your order!");
+    }
 
     public ArrayList<ItemInterface> getItems() {
         return items;
