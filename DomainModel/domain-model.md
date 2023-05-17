@@ -33,6 +33,10 @@
 | Receipt   | `String dateTime`                         |                                        |                                                |                                                              |
 |           | `ArrayList<String> productsBought`        |                                        |                                                |                                                              |
 |           |                                           | `calculateDiscount():double`           |                                                | returns double                                               |
+| SMS       | `StringBuilder SMSContent`                |                                        |                                                |                                                              |
+|           | `String dateTime`                         |                                        |                                                |                                                              |
+|           |                                           | `printSMS():boolean`                   | ext. 4) part1  sms sent successfully           | return true, store it in history                             |
+|           |                                           |                                        | ext. 4) part1  sms failed                      | return false                                                 |
 
 ### Bagel and Filling classes inherit from Product class
 

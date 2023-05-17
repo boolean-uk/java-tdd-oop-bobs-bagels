@@ -178,6 +178,29 @@ public class BasketTest {
         Assertions.assertTrue(basket.printReceipt());
 
     }
+
+    @Test
+    public void placeOrder() {
+        Basket basket = new Basket(14);
+
+        Assertions.assertTrue(basket.add("BGLE"));
+        Assertions.assertTrue(basket.add("BGLS"));
+        Assertions.assertTrue(basket.add("BGLO"));
+
+        Assertions.assertTrue(basket.add("COFL"));
+        Assertions.assertTrue(basket.add("COFL"));
+        Assertions.assertTrue(basket.add("COFW"));
+        Assertions.assertTrue(basket.add("COFB"));
+
+        Product bagel = basket.getProducts().get(0);
+        bagel.addFilling("FILB");
+        bagel.addFilling("FILC");
+        bagel = basket.getProducts().get(2);
+        bagel.addFilling("FILH");
+        bagel.addFilling("FILX");
+
+        Assertions.assertTrue(basket.placeOrder());
+    }
 }
 
 

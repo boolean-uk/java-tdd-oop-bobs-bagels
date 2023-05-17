@@ -3,6 +3,7 @@ package com.booleanuk.core;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Random;
 
 import static com.booleanuk.core.Inventory.inventoryProducts;
 import static com.booleanuk.core.Inventory.productIsInStock;
@@ -224,16 +225,56 @@ public class Basket {
 
     public boolean printReceipt(){
         double totalPayed = getTotalCost();
-        System.out.printf("\t ~~~ Bob's Bagels ~~~%n");
-        System.out.printf("\t "+receipt.getDateTime()+"%n");
-        System.out.printf("-----------------------------%n");
+
+        StringBuilder output = new StringBuilder();
+
+        output.append("\t ~~~ Bob's Bagels ~~~\n");
+        output.append("\t ").append(receipt.getDateTime()).append("\n");
+        output.append("-----------------------------\n");
         for (int i = 0; i < receipt.getProductsBought().size(); i++) {
-            System.out.printf(receipt.getProductsBought().get(i)+"%n");
+            output.append(receipt.getProductsBought().get(i)).append("\n");
         }
-        System.out.printf("-----------------------------%n");
-        System.out.printf("Total\t\t\t\t\t"+pound+ totalPayed+"%n");
-        System.out.println("\n   You saved a total of "+pound+sumSaved+"\n\t    on this shop");
-        System.out.printf("\n\t     Thank you \n\t  for your order!%n");
+        output.append("-----------------------------\n");
+        output.append("Total\t\t\t\t\t").append(pound).append(totalPayed).append("\n");
+        output.append("\n   You saved a total of ").append(pound).append(sumSaved).append("\n\t    on this shop\n");
+        output.append("\n\t     Thank you \n\t  for your order!\n");
+
+        String outputString = output.toString();
+        System.out.println(outputString);
+//        System.out.printf("\t ~~~ Bob's Bagels ~~~%n");
+//        System.out.printf("\t "+receipt.getDateTime()+"%n");
+//        System.out.printf("-----------------------------%n");
+//        for (int i = 0; i < receipt.getProductsBought().size(); i++) {
+//            System.out.printf(receipt.getProductsBought().get(i)+"%n");
+//        }
+//        System.out.printf("-----------------------------%n");
+//        System.out.printf("Total\t\t\t\t\t"+pound+ totalPayed+"%n");
+//        System.out.println("\n   You saved a total of "+pound+sumSaved+"\n\t    on this shop");
+//        System.out.printf("\n\t     Thank you \n\t  for your order!%n");
+        return true;
+    }
+
+    public boolean placeOrder(){
+        double totalPayed = getTotalCost();
+        SMS orderSMS = new SMS();
+        StringBuilder SMSContent = new StringBuilder();
+        SMSContent.append("\t ~~~ Bob's Bagels ~~~\n");
+        SMSContent.append("\t ~~~ Order Summary ~~~\n");
+
+        SMSContent.append("\t ").append(receipt.getDateTime()).append("\n");
+        SMSContent.append("-----------------------------\n");
+        for (int i = 0; i < receipt.getProductsBought().size(); i++) {
+            SMSContent.append(receipt.getProductsBought().get(i)).append("\n");
+        }
+        SMSContent.append("-----------------------------\n");
+        SMSContent.append("Total\t\t\t\t\t").append(pound).append(totalPayed).append("\n");
+        SMSContent.append("\n   You saved a total of ").append(pound).append(sumSaved).append("\n\t    on this shop\n");
+        SMSContent.append("\n\t     Thank you \n\t  for your order!\n");
+        int estimatedTime = new Random().nextInt(51)+5;
+
+        SMSContent.append("Estimated delivery time: "+estimatedTime+" minutes.");
+        orderSMS.setSMSContent(SMSContent);
+        orderSMS.printSMS();// TODO: 17-May-23 send sms
         return true;
     }
 
