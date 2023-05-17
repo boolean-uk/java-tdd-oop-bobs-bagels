@@ -67,7 +67,7 @@ public class TestReceipt {
     }
 
     @Test
-    public void testAdd12IdenticalWithCoffees() {
+    public void testAdd12IdenticalWithLessCoffeesThanBagels() {
         Bagel newBagel = new Bagel("Onion", 0.49, new Inventory());
         Bagel newBagel2 = new Bagel("Plain", 0.39, new Inventory());
 
@@ -76,7 +76,6 @@ public class TestReceipt {
             b.add(newBagel2);
         }
         b.add(newBagel);
-
 
         Coffee newCoffee = new Coffee("White", 1.19) ;
         Coffee newCoffee2 = new Coffee("Capuccino", 0.99) ;
@@ -92,6 +91,28 @@ public class TestReceipt {
         // 11 bagels onion, 1 bagel plain and one cappucino and one white
         // 6 of the same, 5 of onion bagels, 1 plain
         // 2.49 + 3*1.25 + 2*0.39 + 0.39 = 6.63+0.98 = 7.61 YUHUUUUU YEIII!! 10-10=0 :)
+    }
+
+    @Test
+    public void testAdd12IdenticalWithMoreCoffeesThanBagels() {
+        Bagel newBagel = new Bagel("Onion", 0.49, new Inventory());
+        Bagel newBagel2 = new Bagel("Plain", 0.39, new Inventory());
+
+        Basket b = new Basket(100, new Inventory());
+        for (int i = 0; i < 7; i++) { //-> 7
+            b.add(newBagel2);
+        }
+        b.add(newBagel); // -> 8
+
+        Coffee newCoffee = new Coffee("White", 1.19);
+        Coffee newCoffee2 = new Coffee("Capuccino", 0.99);
+        Coffee newCoffee3 = new Coffee("White", 1.19);
+        b.add(newCoffee);
+        b.add(newCoffee2);
+        b.add(newCoffee3);
+
+        // 2.49 + 2.5 + 0.99
+        Assertions.assertEquals(5.98, b.discountedCost());
     }
 
 }
