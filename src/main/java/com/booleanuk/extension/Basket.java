@@ -2,22 +2,32 @@ package com.booleanuk.extension;
 
 
 import javax.swing.*;
+import java.text.DecimalFormat;
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Basket {
     private ArrayList<AbstractItem> items;
+
     private int capacity;
     private Inventory inventory;
+    String receipt;
     public Basket(){
         this.items = new ArrayList<>();
         this.capacity = 5; //default value?
         this.inventory = new Inventory();
+        receipt = "";
     }
 
     public Basket(int capacity) {
         this.items = new ArrayList<>();
         this.inventory = new Inventory();
         setCapacity(capacity);
+        receipt = "";
     }
 
     public ArrayList<AbstractItem> getItems() {
@@ -87,38 +97,54 @@ public class Basket {
     }
     public double getTotalPrice(){
         double total =0.0;
-        double costBeforeDiscount =0.0;
         int leftoverBagels =0, numberOfCoffes =0;
+
         for(AbstractItem item:this.items){
             if(item.getName().equals("Bagel")){
                 int quantity = item.getQuantity();
+                double price =0.0;
+                double beforeDiscount =item.getQuantity() * item.getQuantity() + ((Bagel)item).getFillingsTotalPrice();
+
+                receipt+=item.getVariant()+" Bagel \t"+quantity+"\t";
                 while(true){
                     if(quantity>=12){
                         total += 3.99;
+                        price += 3.99;
                         if (item.getFillings().size()>0){
                             total+=((Bagel)item).getFillingsTotalPrice();
+                            price += ((Bagel)item).getFillingsTotalPrice();
                         }
                         quantity -= 12;
                         item.setQuantity(quantity);
                     }else if(quantity>=6){
                         total += 2.49;
+                        price += 2.49;
                         if (item.getFillings().size()>0){
                             total+=((Bagel)item).getFillingsTotalPrice();
+                            price += ((Bagel)item).getFillingsTotalPrice();
                         }
                         quantity -= 6;
                         item.setQuantity(quantity);
                     }else {
+                        price += item.getQuantity()*item.getPrice();
+                        if (item.getFillings().size()>0){
+                            total+=((Bagel)item).getFillingsTotalPrice();
+                            price += ((Bagel)item).getFillingsTotalPrice();
+                        }
                         leftoverBagels += quantity;
                         item.setQuantity(quantity);
+
                         break;
                     }
                 }
+                this.receipt+="| $"+price+"\n\t\t\t(-$"+(beforeDiscount-price);
             }
             if(item.getName().equals("Coffee")){
                 numberOfCoffes+= item.getQuantity();
+
             }
-            costBeforeDiscount += item.getPrice() * item.getQuantity();
-            System.out.println("Before discount: "+costBeforeDiscount);
+//            costBeforeDiscount += item.getPrice() * item.getQuantity();
+//            System.out.println("Before discount: "+costBeforeDiscount);
         }
         if(leftoverBagels > numberOfCoffes){
             leftoverBagels = numberOfCoffes;
@@ -135,12 +161,49 @@ public class Basket {
                     this.removeItem(this.items.get(j));
                 }
             }
+            this.receipt+="Coffee and bagel for $1.25\n";
         }
         for(AbstractItem item:this.items){
             total += item.getPrice() * item.getQuantity();
+
         }
 
         return total;
     }
+    public static String convertEpochTimeToDateTime(long epochTimeInMillis) {
+        Instant instant = Instant.ofEpochMilli(epochTimeInMillis);
+        LocalDateTime dateTime = LocalDateTime.ofInstant(instant, ZoneId.systemDefault());
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        return dateTime.format(formatter);
+    }
+    public void printReceipt(){
 
+        String receipt ="~~~~~ Bob's Bagels ~~~~~";
+        receipt+= "\n\n"+convertEpochTimeToDateTime(System.currentTimeMillis())+"\n\n--------------------------\n";
+        for(AbstractItem item:this.items){
+            int quantity = item.getQuantity();
+            receipt+=item.toString()+"\n";
+        }
+
+        receipt +="\n--------------------------\n";
+        receipt+="Total:              $"+new DecimalFormat("#.##").format(this.getCostBeforeDiscount());
+        double total = this.getTotalPrice();
+        receipt+="\nAfter discount:     $"+new DecimalFormat("#.##").format(total);
+        receipt+="\nVAT:                $"+new DecimalFormat("#.##").format(total*0.13);
+        receipt+="\n\n      Thank you for\n   shopping with us :) \n\n";
+        System.out.println(receipt);
+    }
+    public double getCostBeforeDiscount(){
+        double cost =0.0;
+        for(AbstractItem item:this.items){
+            if(item.getName().equals("Bagel")){
+                for(Filling filling: item.getFillings()){
+                    cost += filling.getPrice() * filling.getQuantity();
+                }
+            }
+            cost += item.getPrice() * item.getQuantity();
+
+        }
+        return cost;
+    }
 }

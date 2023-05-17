@@ -74,5 +74,7 @@ public abstract class AbstractItem {
        return new ArrayList<Filling>();
    }
     abstract void display();
-
+    public String toString(){
+        return this.getVariant()+" "+this.getName()+"\t"+this.getQuantity()+"\t| $"+this.getPrice()*this.getQuantity();
+    }
 }
