@@ -13,6 +13,8 @@ public class Basket {
     private int sumCosts;
     public Map<String, Integer> itemsMap;
 
+    public double totalDiscount;
+
     public Basket(Inventory inventory) {
         this.setItems(new ArrayList<>());
         this.setBasketCapacity(100);
@@ -82,6 +84,7 @@ public class Basket {
         int totalBlackCoffeeDiscount = 0;
 
 
+
         for (int i = 0; i < items.size(); i++) {
             if (this.getItems().get(i).getSku().equals("BGLO")) {
                 countOnionBagels++;
@@ -104,7 +107,10 @@ public class Basket {
                 }
             }
         }
+        totalDiscount = (double)((totalOnionBagelDiscount + totalPlainBagelDiscount + totalEverythingBagelDiscount + totalBlackCoffeeDiscount)/100.0);
+
         return (double) ((getSumCosts() - totalOnionBagelDiscount - totalPlainBagelDiscount - totalEverythingBagelDiscount - totalBlackCoffeeDiscount) / 100.0);
+
     }
 
     public double itemPrice(String sku) {
@@ -137,7 +143,9 @@ public class Basket {
         });
         System.out.println("----------------------------------\n");
         System.out.println("Total                       $ " + totalCost() + "\n");
-        System.out.println("Thank you for your order!");
+        System.out.println("    You saved a total of $" + totalDiscount + "\n" +
+                "           on this shop\n");
+        System.out.println("      Thank you for your order!\n");
     }
 
     public ArrayList<ItemInterface> getItems() {
