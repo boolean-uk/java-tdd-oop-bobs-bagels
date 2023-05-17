@@ -81,5 +81,11 @@ public class Bagel extends AbstractItem  {
 //        }
         return totalPrice;
     }
-
+    public double  getFillingsTotalPrice(){
+        double subitemPrice=0.0;
+        for (Filling filling : this.getFillings()) {
+            subitemPrice+= filling.getPrice();
+        }
+        return subitemPrice;
+    }
 }

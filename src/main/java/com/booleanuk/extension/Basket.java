@@ -1,6 +1,7 @@
 package com.booleanuk.extension;
 
 
+import javax.swing.*;
 import java.util.ArrayList;
 
 public class Basket {
@@ -94,10 +95,16 @@ public class Basket {
                 while(true){
                     if(quantity>=12){
                         total += 3.99;
+                        if (item.getFillings().size()>0){
+                            total+=((Bagel)item).getFillingsTotalPrice();
+                        }
                         quantity -= 12;
                         item.setQuantity(quantity);
                     }else if(quantity>=6){
                         total += 2.49;
+                        if (item.getFillings().size()>0){
+                            total+=((Bagel)item).getFillingsTotalPrice();
+                        }
                         quantity -= 6;
                         item.setQuantity(quantity);
                     }else {
