@@ -13,6 +13,11 @@ public class Basket {
     private int sumCosts;
     public Map<String, Integer> itemsMap;
     public double totalDiscount;
+    public double onionBagelDiscount;
+    public double everythingBagelDiscount;
+    public double plainBagelDiscount;
+    public double coffeeDiscount;
+
 
     public Basket(Inventory inventory) {
         this.setItems(new ArrayList<>());
@@ -89,6 +94,7 @@ public class Basket {
                 countOnionBagels++;
                 numOnionBagelDiscounts = Math.round((float) countOnionBagels / 6);
                 totalOnionBagelDiscount = (int) (numOnionBagelDiscounts * 0.45 * 100);
+
             } else if (this.getItems().get(i).getSku().equals("BGLP")) {
                 countPlainBagels++;
                 numPlainBagelDiscounts = Math.round((float) countPlainBagels / 12);
@@ -107,6 +113,12 @@ public class Basket {
             }
         }
         totalDiscount = (double)((totalOnionBagelDiscount + totalPlainBagelDiscount + totalEverythingBagelDiscount + totalBlackCoffeeDiscount)/100.0);
+
+        onionBagelDiscount = (double)((totalOnionBagelDiscount)/100.0);
+        everythingBagelDiscount = (double)((totalEverythingBagelDiscount)/100.0);
+        plainBagelDiscount = (double)((totalPlainBagelDiscount)/100.0);
+        coffeeDiscount = (double)((totalBlackCoffeeDiscount)/100.0);
+
 
         return (double) ((getSumCosts() - totalOnionBagelDiscount - totalPlainBagelDiscount - totalEverythingBagelDiscount - totalBlackCoffeeDiscount) / 100.0);
 
@@ -134,12 +146,18 @@ public class Basket {
             }
         }
 
-        System.out.println("\n        ~~~ Bob's Bagels ~~~\n");
-        System.out.println("         " + returnDateTime() + "\n");
+        System.out.println("\n       ~~~ Bob's Bagels ~~~\n");
+        System.out.println("        " + returnDateTime() + "\n");
         System.out.println("----------------------------------");
         itemsMap.forEach((key, value) -> {
             System.out.printf("%-20s %-6d $ %.2f \n", inventory.searchItem(key).getVariant() + " " + inventory.searchItem(key).getType(), value, (float)(((itemPrice(key) * value) * 100) / 100.00));
         });
+        System.out.println("----------------------------------\n");
+        System.out.println("Discounts                   ");
+        System.out.println("Everything Bagel          (-$  " + everythingBagelDiscount + ")");
+        System.out.println("Plain Bagel               (-$  " + plainBagelDiscount + ")");
+        System.out.println("Onion Bagel               (-$  " + onionBagelDiscount + ")");
+        System.out.println("Coffee                    (-$  " + coffeeDiscount + ")\n");
         System.out.println("----------------------------------\n");
         System.out.println("Total                       $ " + totalCost() + "\n");
         System.out.println("    You saved a total of $" + totalDiscount + "\n" +
