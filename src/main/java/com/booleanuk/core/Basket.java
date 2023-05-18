@@ -11,6 +11,9 @@ import static com.booleanuk.core.Inventory.productIsInStock;
 public class Basket {
 
     private ArrayList<Product> products;
+
+
+
     private HashMap<String, Integer> productCount;  //keeps counter of every sku added to the Arraylist
     private int capacity;
     Receipt receipt = new Receipt();
@@ -36,7 +39,9 @@ public class Basket {
             this.capacity = capacity;
         }
     }
-
+    public HashMap<String, Integer> getProductCount() {
+        return productCount;
+    }
     //gets all fillings added to the bagels of the basket
     public ArrayList<Filling> getAllFillings(){
         ArrayList<Filling> allFillings = new ArrayList<>();
@@ -261,8 +266,13 @@ public class Basket {
 
         SMSContent.append("Estimated delivery time: "+estimatedTime+" minutes.");
         orderSMS.setSMSContent(SMSContent);
-        orderSMS.printSMS();// TODO: 17-May-23 send sms
+        orderSMS.printSMS();//TODO: 17-May-23 send sms
+
+        System.out.println("-------");
+
         return true;
     }
+
+
 
 }
