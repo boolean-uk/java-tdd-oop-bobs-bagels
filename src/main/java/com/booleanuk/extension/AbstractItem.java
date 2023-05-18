@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 public abstract class AbstractItem {
     private Sku sku;
-
     private double price;
     private double saving;
     private int quantity;

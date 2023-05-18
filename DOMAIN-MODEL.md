@@ -11,26 +11,40 @@
 10. I want customers to only be able to order things that we stock in our inventory.(Done)
 
 # Domain model
-| Class     | Attributes               | Methods               | Scenarios | Outcome                               |
-|-----------|--------------------------|-----------------------|-----------|---------------------------------------|
-| Item      | String sku               |                       |           |                                       |
-|           | double price             |                       |           |                                       |
-|           | String name              |                       |           |                                       |
-|           | String variant           |                       |           |                                       |
-|           | ArrayList<Item> fillings |                       |           |                                       |
-|           |                          | addFilling(Item item) | 8.,10     | returns a message                     |
-| Basket    | ArrayList<Item> items    |                       |           |                                       |
-|           |                          | addItem(Item item)    | 1.,3.,10  | returns a message                     |
-|           |                          | removeItem(Item item) | 2.,5.     | returns a message                     |
-|           | int capacity             |                       | 4.        | returns an int                        |
-|           |                          | getTotalCost()        | 6.,9.     | returns an int                        |
-| Inventory | ArrayList<Items>         |                       |           |                                       |
-|           |                          | showPrice(Item item)  | 7.        | makes a print                         |
-|           |                          | showFillings()        | 8.        | Show a list of all available fillings |
-|           |                          |                       |           |                                       |
-| Store     | Inventory inventory      |                       |           |                                       |
-|           | Basket basket            |                       |           |                                       |
-|           |                          |                       |           |                                       |
+| Class        | Attributes                              | Methods                    | Scenarios | Outcome                                         |
+|--------------|-----------------------------------------|----------------------------|-----------|-------------------------------------------------|
+| AbstractItem | String sku                              |                            |           |                                                 |
+|              | double price                            |                            |           |                                                 |
+|              | String name                             |                            |           |                                                 |
+|              | double saving                           |                            |           |                                                 |
+|              | int quantity                            |                            |           |                                                 |
+|              | String variant                          |                            |           |                                                 |
+| Bagel        | ArrayList<Filling> fillings             |                            |           |                                                 |
+|              |                                         |                            |           |                                                 |
+|              |                                         | calculateDiscount() ???    |           |                                                 |
+|              |                                         | getFillingsTotalPrice()    |           | returns total fillings price added to the bagel |
+|              |                                         |                            |           |                                                 |
+| Coffee       |                                         | calculateDiscount() ???    |           |                                                 |
+| Filling      |                                         | calculateDiscount() ???    |           |                                                 |
+|              |                                         |                            |           |                                                 |
+|              |                                         |                            |           |                                                 |
+|              |                                         |                            |           |                                                 |
+|              |                                         | addFilling(Item item)      | 8.,10     | returns a message                               |
+| Basket       | ArrayList<AbstractItem> items           |                            |           |                                                 |
+|              |                                         | addItem(Item item)         | 1.,3.,10  | returns a message                               |
+|              | Inventory inventory                     | removeItem(Item item)      | 2.,5.     | returns a message                               |
+|              | String receipt                          |                            |           |                                                 |
+|              | int capacity                            |                            |           |                                                 |
+|              |                                         | getTotalCost()             | 6.,9.     | returns an double                               |
+|              |                                         | printReceipt()             |           | displays a receipt to the console               |
+|              |                                         | getCostBeforeDiscount()    |           | returns double                                  |
+|              |                                         |                            |           |                                                 |
+| Inventory    | ArrayList<AbstractItems> inventoryItems |                            |           |                                                 |
+|              |                                         |                            |           |                                                 |
+|              |                                         | showPrice(Item item)       | 7.        | makes a print                                   |
+|              |                                         | showFillings()             | 8.        | Show a list of all available fillings           |
+|              |                                         | isValid(AbstractItem item) |           | returns true if item found else false           |
+| Sku          |                                         |                            |           | enum class containing Sku code                  |
 
 
 

@@ -12,7 +12,6 @@ import java.util.HashMap;
 
 public class Basket {
     private ArrayList<AbstractItem> items;
-
     private int capacity;
     private Inventory inventory;
     String receipt;
@@ -242,8 +241,6 @@ public class Basket {
         }
         return cost;
     }
-
-
 
     public static String formatLine(String description, int quantity, double price) {
         int maxDescriptionLength = 35;  // Adjust this value based on your needs
