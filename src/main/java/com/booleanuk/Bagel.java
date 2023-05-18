@@ -2,6 +2,7 @@ package com.booleanuk;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class Bagel extends Item {
     private final List<Filling> fillings = new ArrayList<>();
@@ -33,5 +34,10 @@ public class Bagel extends Item {
     @Override
     public boolean equals(Object obj) {
         return super.equals(obj) && this.getFillings().containsAll(((Bagel) obj).getFillings());
+    }
+
+    @Override
+    public int hashCode() {
+        return super.hashCode() + Objects.hash(this.fillings);
     }
 }

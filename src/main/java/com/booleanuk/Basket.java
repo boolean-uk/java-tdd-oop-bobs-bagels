@@ -54,4 +54,8 @@ public class Basket {
     public double discountedCost() {
        return receipt.discountedCost();
     }
+
+    public String receipt() {
+        return receipt.asString();
+    }
 }

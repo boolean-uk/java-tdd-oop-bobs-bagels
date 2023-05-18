@@ -1,5 +1,7 @@
 package com.booleanuk;
 
+import java.util.Objects;
+
 public class Item extends Object {
     private final String variant;
     private final double price;
@@ -26,5 +28,10 @@ public class Item extends Object {
         Item objItem = (Item) obj;
 
         return this.variant.equals(objItem.getVariant()) && this.price == objItem.getPrice();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(this.variant, this.price);
     }
 }

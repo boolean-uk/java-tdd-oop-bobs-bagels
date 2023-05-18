@@ -93,13 +93,13 @@ public class Receipt {
     }
 
 
-    private List<Double> costLists() {
-        List<Double> bagelsCost = new ArrayList<>();
-        List<Double> coffeesCost = new ArrayList<>();
+    private Map<CountableItem, Double> costLists() {
+        Map<CountableItem, Double> costs = new HashMap<>();
 
         if (size(bagels) == size(coffees)) {
-            bagelsCost.add(1.25 * size(bagels));
-            return bagelsCost;
+            for (CountableBagel bagel : bagels)
+                costs.put(bagel, 1.25 * size(bagels));
+            return costs;
         }
 
         // stream= list just an objects which has an useful methods of collectors, you can think of an arraylist
@@ -121,59 +121,45 @@ public class Receipt {
 
             // calculate the dozens
             sumBagels += (numberOfBagels / 12) * 3.99;//discount for every 12 bagels of the same sort
-            numberOfBagels = numberOfBagels % 12; // 11 % 12 = 11
+            numberOfBagels = numberOfBagels % 12;
 
             // calculate half dozens
             sumBagels += (numberOfBagels / 6) * 2.49; // discount for 6 bagels of the same sort
-            numberOfBagels = numberOfBagels % 6; // (11%6) = 5
+            numberOfBagels = numberOfBagels % 6;
 
             if (numberOfBagels >= coffeeSize){
-                numberOfBagels = numberOfBagels - coffeeSize; //5 // 3 bagels and 1 coffee
+                numberOfBagels = numberOfBagels - coffeeSize;
                 sumBagels += numberOfBagels * bagelPrice; // price of rest of bagels
 
-                sumBagelsCoffee += coffeeSize * 1.25;  // coffee and bagels together
+                sumBagels += coffeeSize * 1.25; // bagel-coffee discount
                 coffeeSize = 0;
             }  else {
-                sumBagelsCoffee += numberOfBagels * 1.25;
+
+                sumBagels += numberOfBagels * 1.25; // bagel-coffee discount
                 coffeeSize = coffeeSize - numberOfBagels;
             }
 
             // save the cost of each bagel
-            bagelsCost.add(sumBagels);
-
-            // save the cost of each coffee bagel combo
-            coffeesCost.add(sumBagelsCoffee);
+            costs.put(cBagel, sumBagels);
         }
 
+        for (CountableCoffee cf : sortedCoffees) {
+            int minCount = Math.min(cf.getAmount(), coffeeSize);
 
-        int i = 0;
-        while (coffeeSize > 0) {
-            CountableCoffee cf = sortedCoffees.get(i);
-            int count = cf.getAmount();
+            if (coffeeSize > 0) costs.put(cf, cf.getPrice() * minCount);
 
-            if (count > coffeeSize)
-                coffeesCost.add(cf.getPrice() * coffeeSize);
-            else
-                coffeesCost.add(cf.getPrice() * count);
-
-            coffeeSize -= count;
-            i++;
+            coffeeSize -= minCount;
         }
 
-        // all the sums in a list
-        List<Double> costList = new ArrayList<>();
-        costList.addAll(bagelsCost);
-        costList.addAll(coffeesCost);
-
-        return costList;
+        return costs;
     }
 
     public double discountedCost() {
-        List<Double> costLists = costLists();
+        Map<CountableItem, Double> costs = costLists();
 
         double sum = 0.0;
 
-        for (double price : costLists){
+        for (double price : costs.values()){
             sum += price;
         }
 
@@ -181,8 +167,11 @@ public class Receipt {
     }
 
     public String asString() {
-        List<Double> costLists = costLists();
+        Map<CountableItem, Double> costs = costLists();
+        StringBuilder sb = new StringBuilder();
 
-        return "almost done";
+        costs.forEach((key, value) -> sb.append(key.toString() + " " + value + "\n"));
+
+        return sb.toString();
     }
 }

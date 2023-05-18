@@ -111,6 +111,7 @@ public class TestReceipt {
         b.add(newCoffee2);
         b.add(newCoffee3);
 
+        System.out.println(b.receipt());
         // 2.49 + 2.5 + 0.99
         Assertions.assertEquals(5.98, b.discountedCost());
     }
