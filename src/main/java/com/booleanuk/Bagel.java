@@ -1,26 +1,20 @@
-package com.booleanuk.extension;
+package com.booleanuk;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Bagel {
-    private final String variant;
-    private final double price;
+public class Bagel extends Item {
     private final List<Filling> fillings = new ArrayList<>();
     private final Inventory inventory;
 
     public Bagel(String variant, double price, Inventory inventory){
-        this.variant = variant;
-        this.price = price;
+        super(variant, price);
         this.inventory = inventory;
     }
 
-    public String getVariant(){
-        return this.variant;
-    }
-
+    @Override
     public double getPrice() {
-        return this.price +
+        return super.getPrice() +
                 this.fillings.stream().reduce(0.0, (sum, f) -> sum += f.getPrice(), Double::sum);
     }
 
@@ -34,5 +28,10 @@ public class Bagel {
 
     public List<Filling> getFillings() {
         return this.fillings;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        return super.equals(obj) && this.getFillings().containsAll(((Bagel) obj).getFillings());
     }
 }

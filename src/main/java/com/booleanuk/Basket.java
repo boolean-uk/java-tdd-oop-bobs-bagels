@@ -1,21 +1,19 @@
-package com.booleanuk.extension;
-
-import java.util.*;
+package com.booleanuk;
 
 public class Basket {
 
-    private Receipt receipt = new Receipt();
+    private final Receipt receipt;
     private final Inventory inventory;
     private int capacity;
 
-
-    public Basket(int capacity, Inventory inventory) {
+    public Basket(int capacity, Inventory inventory, Receipt receipt) {
         this.capacity = capacity;
         this.inventory = inventory;
+        this.receipt = receipt;
     }
 
     private boolean canAddToCart() {
-        return (receipt.numberOfItems()) < capacity;
+        return receipt.numberOfItems() < capacity;
     }
 
     public boolean add(Bagel bagel){
