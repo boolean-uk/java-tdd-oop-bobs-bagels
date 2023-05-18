@@ -15,17 +15,16 @@
 |--------------|-----------------------------------------|----------------------------|-----------|-------------------------------------------------|
 | AbstractItem | String sku                              |                            |           |                                                 |
 |              | double price                            |                            |           |                                                 |
-|              | String name                             |                            |           |                                                 |
-|              | double saving                           |                            |           |                                                 |
+|              | String name                             |                            |           |                                                 ||              |                                         |                            |           |                                                 |
 |              | int quantity                            |                            |           |                                                 |
 |              | String variant                          |                            |           |                                                 |
 | Bagel        | ArrayList<Filling> fillings             |                            |           |                                                 |
 |              |                                         |                            |           |                                                 |
-|              |                                         | calculateDiscount() ???    |           |                                                 |
+|              |                                         |                            |           |                                                 |
 |              |                                         | getFillingsTotalPrice()    |           | returns total fillings price added to the bagel |
 |              |                                         |                            |           |                                                 |
-| Coffee       |                                         | calculateDiscount() ???    |           |                                                 |
-| Filling      |                                         | calculateDiscount() ???    |           |                                                 |
+| Coffee       |                                         |                            |           |                                                 |
+| Filling      |                                         |                            |           |                                                 |
 |              |                                         |                            |           |                                                 |
 |              |                                         |                            |           |                                                 |
 |              |                                         |                            |           |                                                 |
