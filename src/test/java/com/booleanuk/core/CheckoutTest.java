@@ -3,6 +3,8 @@ package com.booleanuk.core;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
+import java.util.Currency;
+import java.util.Locale;
 
 public class CheckoutTest {
     @Test
@@ -43,6 +45,8 @@ public class CheckoutTest {
         Inventory.reset();
         Basket.setCapacity(3);
 
+        Inventory.add(new Item("BGLE"));
+
         Inventory.add(new Item("BGLO"));
         Inventory.add(new Item("COFB"));
 
@@ -53,8 +57,7 @@ public class CheckoutTest {
         Package pack = new Package(items, 1.25, -0.23);
 
         Basket basket = new Basket();
-        basket.add(new Item("BGLO"));
-        basket.add(new Item("COFB"));
+        basket.add(new Item("BGLE"));
         basket.add(pack);
 
         Checkout.printReceipt(basket);

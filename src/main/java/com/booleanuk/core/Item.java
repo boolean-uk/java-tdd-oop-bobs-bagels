@@ -16,7 +16,7 @@ public class Item implements IProduct {
                 this.type = "Bagel"; this.variant = "Onion"; this.cost = 0.49; break;
             case "BGLP":
                 this.type = "Bagel"; this.variant = "Plain"; this.cost = 0.39; break;
-            case "GBLE":
+            case "BGLE":
                 this.type = "Bagel"; this.variant = "Everything"; this.cost = 0.49; break;
             case "BGLS":
                 this.type = "Bagel"; this.variant = "Sesame"; this.cost = 0.49; break;
