@@ -145,6 +145,7 @@ public class Basket {
                 itemsMap.put(getItems().get(i).getSku(), 1);
             }
         }
+        double storeTotalCosts = totalCost();
 
         System.out.println("\n       ~~~ Bob's Bagels ~~~\n");
         System.out.println("        " + returnDateTime() + "\n");
@@ -154,12 +155,12 @@ public class Basket {
         });
         System.out.println("----------------------------------\n");
         System.out.println("Discounts                   ");
-        System.out.println("Everything Bagel          (-$  " + everythingBagelDiscount + ")");
-        System.out.println("Plain Bagel               (-$  " + plainBagelDiscount + ")");
-        System.out.println("Onion Bagel               (-$  " + onionBagelDiscount + ")");
-        System.out.println("Coffee                    (-$  " + coffeeDiscount + ")\n");
+        System.out.println("Everything Bagel          (-$ " + everythingBagelDiscount + ")");
+        System.out.println("Plain Bagel               (-$ " + plainBagelDiscount + ")");
+        System.out.println("Onion Bagel               (-$ " + onionBagelDiscount + ")");
+        System.out.println("Coffee                    (-$ " + coffeeDiscount + ")\n");
         System.out.println("----------------------------------\n");
-        System.out.println("Total                       $ " + totalCost() + "\n");
+        System.out.println("Total                       $ " + storeTotalCosts + "\n");
         System.out.println("    You saved a total of $" + totalDiscount + "\n" +
                 "           on this shop\n");
         System.out.println("      Thank you for your order!\n");
