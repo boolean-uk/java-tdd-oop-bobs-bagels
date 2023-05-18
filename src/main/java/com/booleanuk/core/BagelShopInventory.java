@@ -45,6 +45,5 @@ public class BagelShopInventory implements Inventory {
             }
         }
         return "This item does not exist";
-
     }
 }

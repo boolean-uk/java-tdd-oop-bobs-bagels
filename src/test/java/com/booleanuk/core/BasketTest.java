@@ -3,8 +3,6 @@ package com.booleanuk.core;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import java.util.HashMap;
-
 public class BasketTest {
 
     @Test
@@ -81,7 +79,58 @@ public class BasketTest {
         basket.add(new Bagel("BGLS"));
         basket.add(new Coffee("COFB"));
         basket.add(new Filling("FILE"));
-        Assertions.assertEquals(1.60, basket.getTotal());
+        Assertions.assertEquals(1.60, basket.getTotalCosts());
+    }
+
+    @Test
+    public void test6BagelsDiscount() {
+        Inventory inventory = new BagelShopInventory();
+        Basket basket = new Basket(inventory);
+
+        basket.add(new Bagel("BGLO"));
+        basket.add(new Bagel("BGLO"));
+        basket.add(new Bagel("BGLO"));
+        basket.add(new Bagel("BGLO"));
+        basket.add(new Bagel("BGLO"));
+        basket.add(new Bagel("BGLO"));
+        Assertions.assertEquals(2.49, basket.getTotalCosts());
+    }
+
+    @Test
+    public void test12BagelsDiscount() {
+        Inventory inventory = new BagelShopInventory();
+        Basket basket = new Basket(inventory);
+
+        basket.add(new Bagel("BGLO"));
+        basket.add(new Bagel("BGLO"));
+        basket.add(new Bagel("BGLO"));
+        basket.add(new Bagel("BGLO"));
+        basket.add(new Bagel("BGLO"));
+        basket.add(new Bagel("BGLO"));
+        basket.add(new Bagel("BGLO"));
+        basket.add(new Bagel("BGLO"));
+        basket.add(new Bagel("BGLO"));
+        basket.add(new Bagel("BGLO"));
+        basket.add(new Bagel("BGLO"));
+        basket.add(new Bagel("BGLO"));
+        Assertions.assertEquals(3.99, basket.getTotalCosts());
+    }
+
+    @Test
+    public void test6BagelsAnd2RegularPriced(){
+        Inventory inventory = new BagelShopInventory();
+        Basket basket = new Basket(inventory);
+
+        basket.add(new Bagel("BGLO"));
+        basket.add(new Bagel("BGLO"));
+        basket.add(new Bagel("BGLO"));
+        basket.add(new Bagel("BGLO"));
+        basket.add(new Bagel("BGLO"));
+        basket.add(new Bagel("BGLO"));
+        basket.add(new Bagel("BGLO"));
+        basket.add(new Bagel("BGLO"));
+        basket.add(new Bagel("BGLO"));
+        Assertions.assertEquals(3.96, basket.getTotalCosts());
     }
 
     @Test
@@ -92,8 +141,20 @@ public class BasketTest {
         basket.add(new Coffee("COFB"));
         basket.add(new Bagel("BGLP"));
         basket.add(new Bagel("BGLP"));
-        Assertions.assertEquals(2, basket.getAmountOfItems().get("Bagels"));
-        Assertions.assertEquals(1, basket.getAmountOfItems().get("Coffees"));
+        Assertions.assertEquals(2, basket.getAmountOfItems().size());
+    }
 
+    @Test
+    public void testCalculateDiscount(){
+        Inventory inventory = new BagelShopInventory();
+        Basket basket = new Basket(inventory);
+
+        basket.add(new Bagel("BGLO"));
+        basket.add(new Bagel("BGLO"));
+        basket.add(new Bagel("BGLO"));
+        basket.add(new Bagel("BGLO"));
+        basket.add(new Bagel("BGLO"));
+        basket.add(new Bagel("BGLO"));
+        Assertions.assertEquals(0.45, basket.calculateDiscount());
     }
 }

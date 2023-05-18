@@ -9,13 +9,13 @@ public class Shop {
         Basket basket = new Basket(inventory, 30);
         Receipt receipt = new Receipt(basket);
 
-        basket.add(new Bagel("BGLP"));
-        basket.add(new Bagel("BGLP"));
-        basket.add(new Bagel("BGLP"));
-        basket.add(new Bagel("BGLP"));
-        basket.add(new Bagel("BGLP"));
-        basket.add(new Bagel("BGLP"));
         basket.add(new Bagel("BGLO"));
+        basket.add(new Bagel("BGLO"));
+        basket.add(new Bagel("BGLO"));
+        basket.add(new Bagel("BGLO"));
+        basket.add(new Bagel("BGLO"));
+        basket.add(new Bagel("BGLO"));
+        basket.add(new Coffee("COFB"));
         basket.add(new Coffee("COFB"));
 
         receipt.printReceipt();

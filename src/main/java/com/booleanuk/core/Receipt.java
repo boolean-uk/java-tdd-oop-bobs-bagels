@@ -21,12 +21,14 @@ public class Receipt {
         System.out.println("\n~~~ Bob's Bagels ~~~\n");
         System.out.println(getCurrentDateTime());
         System.out.println("\n--------------------\n");
-        basket.getAmountOfItems().forEach((key, value) -> System.out.println(value + "x " + key.getSku() + " = " + (double)(key.getPrice() * value))) ;
+        basket.getAmountOfItems().forEach((key, value) -> System.out.println(value + "x " + key.getSku() + " = £" + key.getPrice() * value));
         System.out.println("\n--------------------\n");
+        System.out.println("Subtotal:         " + basket.getPricesWithoutDiscount());
+        System.out.println("Discounts:      - " + basket.calculateDiscount());
         System.out.println("Total:            " + basket.getTotalCosts() + "\n");
+        System.out.println("You saved a total of £" + basket.calculateDiscount() + "\non this shop\n");
         System.out.println("Thank you");
         System.out.println("for your order! ");
-
     }
 
 }

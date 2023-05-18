@@ -14,7 +14,7 @@ public class Basket {
     public Basket(Inventory inventory) {
         this.setItems(new ArrayList<>());
         this.setInventory(inventory);
-        this.setCapacity(5);
+        this.setCapacity(20);
     }
 
     public Basket(Inventory inventory, int capacity) {
@@ -104,11 +104,11 @@ public class Basket {
         return items;
     }
 
-
     // Write a method that calculates discounted price for bagels if there are 12 or more bagels in the basket
     public double getTotalCosts(){
         double total = 0;
-        HashMap<Item, Integer> items = new HashMap<>();
+
+        HashMap<Item, Integer> items;
         items = getAmountOfItems();
 
         for (Item item : items.keySet()){
@@ -129,5 +129,30 @@ public class Basket {
         }
         return (double) Math.round(total * 100) / 100;
     }
-    // Write a method that calculates discounted price for coffee if there are 6 or more coffees in the basket
+
+    public double getPricesWithoutDiscount() {
+        double total = 0;
+        HashMap<Item, Integer> items;
+        items = getAmountOfItems();
+
+        for (Item item : items.keySet()) {
+            int quantity = items.get(item);
+            total += item.getPrice() * quantity;
+        }
+        return (double) Math.round(total * 100) / 100;
+    }
+
+
+    public double calculateDiscount(){
+        double originalCosts = 0;
+        double discountedCosts = 0;
+        HashMap<Item, Integer> items = new HashMap<>();
+        items = getAmountOfItems();
+        for (Item item : items.keySet()) {
+            originalCosts += item.getPrice() * items.get(item);
+        }
+        discountedCosts = getTotalCosts();
+        return (double) Math.round((originalCosts - discountedCosts) * 100) / 100;
+    }
+
 }
