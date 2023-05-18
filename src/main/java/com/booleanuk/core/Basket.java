@@ -268,6 +268,9 @@ public class Basket {
         orderSMS.setSMSContent(SMSContent);
         orderSMS.printSMS();//TODO: 17-May-23 send sms
 
+        String fromPhoneNumber = "+12543313160";
+        String toPhoneNumber = "+306981132165";
+        orderSMS.sendSMS(fromPhoneNumber,toPhoneNumber,SMSContent.toString());
         System.out.println("-------");
 
         return true;

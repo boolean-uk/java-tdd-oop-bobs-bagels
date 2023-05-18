@@ -5,7 +5,12 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import com.twilio.Twilio;
+import com.twilio.rest.api.v2010.account.Message;
+import com.twilio.type.PhoneNumber;
 import static com.booleanuk.core.Inventory.inventoryProducts;
+import static com.booleanuk.core.TwilioCredentials.ACCOUNT_SID;
+import static com.booleanuk.core.TwilioCredentials.AUTH_TOKEN;
 
 public class SMS {
 
@@ -140,5 +145,23 @@ public class SMS {
         }
         basket.placeOrder();
         return true;
+    }
+    public boolean sendSMS(String fromPhoneNumber, String toPhoneNumber,String messageBody){
+        Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
+
+        // Send a text message
+
+        Message message = Message.creator(
+                        new com.twilio.type.PhoneNumber(toPhoneNumber),
+                        new com.twilio.type.PhoneNumber(fromPhoneNumber),
+                        messageBody)
+                .create();
+
+        System.out.println(message.getSid());
+        return true;
+    }
+    public static void main(String[] args) {
+
+
     }
 }
