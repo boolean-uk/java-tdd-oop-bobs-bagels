@@ -10,10 +10,7 @@ public class Product {
     private String name;
     private double price;
     private String variant;
-    //Inventory inventory = new Inventory();
-
     private ArrayList<Filling> fillings;
-
 
 
     public Product(String SKU, String name, double price, String variant) {

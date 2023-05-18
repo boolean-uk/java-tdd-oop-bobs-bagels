@@ -5,7 +5,7 @@ import java.util.HashMap;
 public class Inventory {
     public static HashMap<String,Product> inventoryProducts;
 
-    static {
+    static {    //demo data, accessible from every class
         Product product = new Product("BGLO", "Bagel", 0.49, "Onion");
         Product product1 = new Product("BGLP", "Bagel", 0.39, "Plain");
         Product product2 = new Product("BGLE", "Bagel", 0.49, "Everything");
@@ -44,10 +44,6 @@ public class Inventory {
         inventoryProducts.put(product11.getSKU(),product11);
         inventoryProducts.put(product12.getSKU(),product12);
         inventoryProducts.put(product13.getSKU(),product13);
-    }
-
-    public  Inventory() {
-
     }
 
     public static boolean productIsInStock(String SKU){

@@ -3,8 +3,6 @@ package com.booleanuk.core;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import java.math.BigDecimal;
-
 public class BasketTest {
 
     @Test
@@ -47,14 +45,23 @@ public class BasketTest {
     @Test
     public void testTotalCostOfBasket(){
         //sums up bagels and fillings cost
-        Basket basket = new Basket(2);
+        Basket basket = new Basket(10);
         Assertions.assertTrue(basket.add("BGLO"));
         Product bagel = basket.getProducts().get(0);
         bagel.addFilling("FILE");
         bagel.addFilling("FILB");
+        Assertions.assertEquals(2, bagel.getFillings().size());
         Assertions.assertEquals(0.73, basket.getTotalCost());
+
         Assertions.assertTrue(basket.add("BGLS"));
         Assertions.assertEquals(1.22, basket.getTotalCost());
+
+        Assertions.assertTrue(basket.add("COFW"));
+        Assertions.assertEquals(2.41, basket.getTotalCost());
+
+        Assertions.assertTrue(basket.remove("BGLS"));
+        Assertions.assertEquals(1.92, basket.getTotalCost());
+
     }
 
     @Test
@@ -88,13 +95,29 @@ public class BasketTest {
 
         Product bagel = basket.getProducts().get(0);
         bagel.addFilling("FILH");
+        Assertions.assertEquals(7, basket.getTotalCost());
 
-        Assertions.assertEquals(7.0, basket.getTotalCost());
+        Assertions.assertTrue(basket.add("BGLO"));
+        Assertions.assertTrue(basket.add("BGLO"));
+        Assertions.assertTrue(basket.add("BGLO"));
+        Assertions.assertTrue(basket.add("BGLO"));
+        Assertions.assertTrue(basket.add("BGLO"));
+        Assertions.assertTrue(basket.add("BGLO"));
+        Assertions.assertEquals(9.49, basket.getTotalCost());
+
+    }
+
+
+    //used to see the output of the receipt
+    @Test
+    public void testPrintReceiptWithoutProductsShouldReturnFalse(){
+        Basket basket = new Basket(5);
+        Assertions.assertFalse(basket.printReceipt());  //does not print receipt
     }
 
     @Test
     public void testPrintReceipt(){
-        Basket basket = new Basket(100);
+        Basket basket = new Basket(25);
         Assertions.assertTrue(basket.add("BGLO"));
         Assertions.assertTrue(basket.add("BGLO"));
         Assertions.assertTrue(basket.add("BGLO"));

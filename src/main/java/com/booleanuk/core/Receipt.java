@@ -7,7 +7,8 @@ import java.util.ArrayList;
 public class Receipt {
     private String dateTime;
     private ArrayList<String> productsBought;
-    String pound = "\u00a3";
+
+    public static final String pound = "\u00a3";
 
     public Receipt(){
         LocalDateTime now = LocalDateTime.now();
