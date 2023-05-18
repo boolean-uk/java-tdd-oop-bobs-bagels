@@ -38,13 +38,13 @@ public class BagelShopInventory implements Inventory {
     }
 
     // Methods
-    public double getPrice(Item order){
+    public String showPrice(Item order){
         for (Item item : this.inventoryList) {
             if (item.getSku().equals(order.getSku())) {
-                return item.getPrice();
+                return "The price of " + item.getType() +  " " + item.getName() + " is " +  item.getPrice();
             }
         }
-        System.out.println("This item does not exist");
-        return 0.0;
+        return "This item does not exist";
+
     }
 }

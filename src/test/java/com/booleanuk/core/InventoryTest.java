@@ -15,6 +15,6 @@ public class InventoryTest {
     public void testGetItemPrice() {
         Inventory inventory = new BagelShopInventory();
         Item item = new Bagel("BGLS", 0.49,"Bagel", "Sesame");
-        Assertions.assertEquals(0.49, inventory.getPrice(item));
+        Assertions.assertEquals("The price of Sesame Bagel is 0.49", inventory.showPrice(item));
     }
 }

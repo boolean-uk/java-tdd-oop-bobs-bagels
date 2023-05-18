@@ -11,14 +11,13 @@ public class Shop {
 
         basket.add(new Bagel("BGLP"));
         basket.add(new Bagel("BGLP"));
+        basket.add(new Bagel("BGLP"));
+        basket.add(new Bagel("BGLP"));
+        basket.add(new Bagel("BGLP"));
+        basket.add(new Bagel("BGLP"));
         basket.add(new Bagel("BGLO"));
-        basket.add(new Bagel("COFB"));
+        basket.add(new Coffee("COFB"));
 
-
-        basket.getAmountOfItems();
         receipt.printReceipt();
-
-
-
     }
 }

@@ -9,5 +9,5 @@ public interface Inventory {
 
     void stockInventory();
 
-    double getPrice(Item order);
+    String showPrice(Item order);
 }
