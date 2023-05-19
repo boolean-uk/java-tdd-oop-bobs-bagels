@@ -50,6 +50,7 @@ public class TestReceipt {
         Bagel newBagel = new Bagel("Onion", 0.49, new Inventory());
         Bagel newBagel2 = new Bagel("Plain", 0.39, new Inventory());
 
+
         Basket b = new Basket(100, new Inventory());
         for (int i = 0; i < 11; i++) {
             b.add(newBagel);
@@ -113,6 +114,7 @@ public class TestReceipt {
 
         // 2.49 + 2.5 + 0.99
         Assertions.assertEquals(5.98, b.discountedCost());
+
     }
 
 }

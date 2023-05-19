@@ -6,6 +6,7 @@
 - Design a domain from user stories
 - Use test driven development to build an application
 - Use object-oriented concepts to manage the complexity of the project
+- CHANGED SOMETHING?
 
 ## Set up instructions
 - Fork this repository and clone the forked version to your machine

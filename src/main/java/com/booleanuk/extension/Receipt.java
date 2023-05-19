@@ -191,7 +191,12 @@ public class Receipt {
 
     public String asString() {
         List<Double> costLists = costLists();
-
+        System.out.println("Bagels:" + bagels);
+        System.out.println("Coffees:" + coffees);
+        System.out.println("Costs:" + costLists);
         return "almost done";
     }
+
+
+
 }
