@@ -246,7 +246,7 @@ public class Basket {
         return true;
     }
 
-    public boolean placeOrder(){
+    public boolean placeOrder(String fromPhoneNumber,String toPhoneNumber){
         double totalPayed = getTotalCost();
         SMS orderSMS = new SMS();
         StringBuilder SMSContent = new StringBuilder();
@@ -268,10 +268,15 @@ public class Basket {
         orderSMS.setSMSContent(SMSContent);
         orderSMS.printSMS();//TODO: 17-May-23 send sms
 
-        String fromPhoneNumber = "+12543313160";
-        String toPhoneNumber = "+306981132165";
-        orderSMS.sendSMS(fromPhoneNumber,toPhoneNumber,SMSContent.toString());
-        System.out.println("-------");
+
+        String response =orderSMS.sendSMS(fromPhoneNumber,toPhoneNumber,SMSContent.toString());
+        if(response!=null){
+            System.out.println("successful SMS SSID : "+response);
+
+        }else{
+            System.out.println("SMS failed");
+
+        }
 
         return true;
     }

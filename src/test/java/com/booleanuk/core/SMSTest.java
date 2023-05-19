@@ -12,9 +12,9 @@ class SMSTest {
         SMS newSMS = new SMS();
         String smsText = "ORDER:\n2 BGLO [FILC FILB]\n3 BGLE [FILS FILX FILH]\n2 COFB\n1 COFC";
 
-        Assertions.assertTrue(newSMS.placeOrderFromSMS(smsText));
+        Assertions.assertTrue(newSMS.placeOrderFromSMS(smsText,"",""));
         smsText = "ORDER:\n2 BGLO [FIL FILB]";
-        Assertions.assertFalse(newSMS.placeOrderFromSMS(smsText));
+        Assertions.assertFalse(newSMS.placeOrderFromSMS(smsText,"",""));
 
     }
 }

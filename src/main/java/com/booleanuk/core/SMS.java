@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import com.twilio.Twilio;
+import com.twilio.exception.ApiException;
 import com.twilio.rest.api.v2010.account.Message;
 import com.twilio.type.PhoneNumber;
 import static com.booleanuk.core.Inventory.inventoryProducts;
@@ -117,7 +118,7 @@ public class SMS {
 
         return orderItemsList;
     }
-    public boolean placeOrderFromSMS(String smsOrderText){
+    public boolean placeOrderFromSMS(String smsOrderText,String fromPhoneNumber ,String toPhoneNumber){
         Basket basket = new Basket(100);
 
 
@@ -143,10 +144,15 @@ public class SMS {
 
 
         }
-        basket.placeOrder();
+
+        basket.placeOrder(fromPhoneNumber,toPhoneNumber);
         return true;
     }
-    public boolean sendSMS(String fromPhoneNumber, String toPhoneNumber,String messageBody){
+    public String sendSMS(String fromPhoneNumber, String toPhoneNumber,String messageBody){
+
+        try {
+
+
         Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
 
         // Send a text message
@@ -158,10 +164,13 @@ public class SMS {
                 .create();
 
         System.out.println(message.getSid());
-        return true;
-    }
-    public static void main(String[] args) {
+        return message.getSid();
+        } catch (ApiException e) {
+            // Failed to send message
+            System.out.println("Failed to send message: " + e.getMessage());
+            return null;
+        }
 
-
     }
+
 }
