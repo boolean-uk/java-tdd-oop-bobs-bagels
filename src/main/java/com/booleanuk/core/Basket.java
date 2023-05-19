@@ -257,6 +257,8 @@ public class Basket {
 //            System.out.println();
 //        }
 //    }
+
+    //Printing items in the receipt.
     private void printSingleLadies() {
         ArrayList<Item> receiptItems = new ArrayList<>();
         ArrayList<Integer> receiptQuantitys = new ArrayList<>();
@@ -361,26 +363,26 @@ public class Basket {
         }
     }
 
-
-    public static void main(String[] args) {
-        Basket basket = new Basket();
-        basket.setCapacity(100);
-        Bagel bagel = new Bagel(BAGELTYPE.PLAIN); //0.39
-        Bagel bagelOther = new Bagel(BAGELTYPE.EVERYTHING);
-        Coffee coffee = new Coffee(COFFEETYPE.BLACK); //0.99
-        BobsInvetory.add(bagel);
-        BobsInvetory.add(coffee);
-        BobsInvetory.add(bagelOther);
-
-        basket.add(bagel, 6);
-        basket.add(coffee, 1);
-        basket.add(bagelOther,4);
-
-
-        basket.getReceipt();
-
-        System.out.println("after = " + basket.getCode());
-
-
-    }
+//For testing stuff
+//    public static void main(String[] args) {
+//        Basket basket = new Basket();
+//        basket.setCapacity(100);
+//        Bagel bagel = new Bagel(BAGELTYPE.PLAIN); //0.39
+//        Bagel bagelOther = new Bagel(BAGELTYPE.EVERYTHING);
+//        Coffee coffee = new Coffee(COFFEETYPE.BLACK); //0.99
+//        BobsInvetory.add(bagel);
+//        BobsInvetory.add(coffee);
+//        BobsInvetory.add(bagelOther);
+//
+//        basket.add(bagel, 6);
+//        basket.add(coffee, 1);
+//        basket.add(bagelOther,4);
+//
+//
+//        basket.getReceipt();
+//
+//        System.out.println("after = " + basket.getCode());
+//
+//
+//    }
 }
