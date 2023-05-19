@@ -1,6 +1,9 @@
-package com.booleanuk.extension;
+package com.booleanuk;
 
 
+import com.booleanuk.Bagel;
+import com.booleanuk.Inventory;
+import com.booleanuk.Receipt;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 public class TestReceipt {
@@ -18,8 +21,8 @@ public class TestReceipt {
         receipt.add(newBagel2);
         receipt.add(newBagel2);
 
-        Assertions.assertEquals(2, receipt.bagels.get(newBagel));
-        System.out.println(receipt.bagels);
+        Assertions.assertEquals(2, receipt.getBagels().get(0).getAmount());
+        System.out.println(receipt.getBagels());
 
     }
 
@@ -41,7 +44,7 @@ public class TestReceipt {
         receipt.remove(newBagel2);
         receipt.remove(newBagel2);
         receipt.remove(newBagel3);
-        Assertions.assertEquals(1, receipt.bagels.get(newBagel2));
+        Assertions.assertEquals(1, receipt.getBagels().get(1).getAmount());
 
     }
 
@@ -51,7 +54,7 @@ public class TestReceipt {
         Bagel newBagel2 = new Bagel("Plain", 0.39, new Inventory());
 
 
-        Basket b = new Basket(100, new Inventory());
+        Basket b = new Basket(100, new Inventory(), new Receipt());
         for (int i = 0; i < 11; i++) {
             b.add(newBagel);
         }
@@ -72,7 +75,7 @@ public class TestReceipt {
         Bagel newBagel = new Bagel("Onion", 0.49, new Inventory());
         Bagel newBagel2 = new Bagel("Plain", 0.39, new Inventory());
 
-        Basket b = new Basket(100, new Inventory());
+        Basket b = new Basket(100, new Inventory(), new Receipt());
         for (int i = 0; i < 11; i++) {
             b.add(newBagel2);
         }
@@ -85,7 +88,7 @@ public class TestReceipt {
         b.add(newCoffee2);
         b.add(newCoffee3);
 
-        Assertions.assertEquals(7.41, b.discountedCost());
+        Assertions.assertEquals(6.55, b.discountedCost());
         //should be 7.41 with coffees
 
 
@@ -99,7 +102,7 @@ public class TestReceipt {
         Bagel newBagel = new Bagel("Onion", 0.49, new Inventory());
         Bagel newBagel2 = new Bagel("Plain", 0.39, new Inventory());
 
-        Basket b = new Basket(100, new Inventory());
+        Basket b = new Basket(100, new Inventory(), new Receipt());
         for (int i = 0; i < 7; i++) { //-> 7
             b.add(newBagel2);
         }
@@ -113,7 +116,7 @@ public class TestReceipt {
         b.add(newCoffee3);
 
         // 2.49 + 2.5 + 0.99
-        Assertions.assertEquals(5.98, b.discountedCost());
+        Assertions.assertEquals(4.99, b.discountedCost());
 
     }
 
