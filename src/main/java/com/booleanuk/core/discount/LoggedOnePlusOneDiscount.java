@@ -16,7 +16,6 @@ public class LoggedOnePlusOneDiscount implements Discount {
     private final Category typeTwo;
     private final double discount;
     private final Receipt receipt;
-
     private final Format<Double> numberFormat;
 
     public LoggedOnePlusOneDiscount(double discount, Category typeOne, Category typeTwo, Receipt receipt) {
