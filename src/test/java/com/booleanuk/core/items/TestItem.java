@@ -43,7 +43,7 @@ public class TestItem {
         Assertions.assertEquals(10.2, i.cost());
 
         // test the equality of items
-        Item i2 = new Bagel("oreo", 10.2);
+        Item i2 = new BagelFilling("oreo", 10.2);
 
         Assertions.assertEquals(i, i2);
     }

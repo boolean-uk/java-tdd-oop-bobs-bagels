@@ -1,6 +1,8 @@
 package com.booleanuk.core.discount;
 
 import com.booleanuk.core.basket.Order;
+import com.booleanuk.core.format.Format;
+import com.booleanuk.core.format.TwoDecimalFormat;
 import com.booleanuk.core.items.Category;
 import com.booleanuk.core.receipt.Receipt;
 import com.booleanuk.core.receipt.ReceiptItem;
@@ -14,11 +16,19 @@ public class LoggedOnePlusOneDiscount implements Discount {
     private final Category typeTwo;
     private final double discount;
     private final Receipt receipt;
+
+    private final Format<Double> numberFormat;
+
     public LoggedOnePlusOneDiscount(double discount, Category typeOne, Category typeTwo, Receipt receipt) {
+        this(discount, typeOne, typeTwo, receipt, new TwoDecimalFormat());
+    }
+
+    public LoggedOnePlusOneDiscount(double discount, Category typeOne, Category typeTwo, Receipt receipt, Format<Double> numberFormat) {
         this.typeOne = typeOne;
         this.typeTwo = typeTwo;
         this.discount = discount;
         this.receipt = receipt;
+        this.numberFormat = numberFormat;
     }
 
     @Override
@@ -81,6 +91,6 @@ public class LoggedOnePlusOneDiscount implements Discount {
             }
         }
 
-        return cost;
+        return numberFormat.result(cost);
     }
 }

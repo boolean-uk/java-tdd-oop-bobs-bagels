@@ -1,6 +1,8 @@
 package com.booleanuk.core.discount;
 
 import com.booleanuk.core.basket.Order;
+import com.booleanuk.core.format.Format;
+import com.booleanuk.core.format.TwoDecimalFormat;
 import com.booleanuk.core.items.Category;
 
 import java.util.Iterator;
@@ -11,10 +13,17 @@ public class OnePlusOneDiscount implements Discount {
     private final Category typeOne;
     private final Category typeTwo;
     private final double discount;
+    private final Format<Double> numberFormat;
+
     public OnePlusOneDiscount(double discount, Category typeOne, Category typeTwo) {
+        this(discount, typeOne, typeTwo, new TwoDecimalFormat());
+    }
+
+    public OnePlusOneDiscount(double discount, Category typeOne, Category typeTwo, Format<Double> numberFormat) {
         this.typeOne = typeOne;
         this.typeTwo = typeTwo;
         this.discount = discount;
+        this.numberFormat = numberFormat;
     }
 
     @Override
@@ -58,6 +67,6 @@ public class OnePlusOneDiscount implements Discount {
             }
         }
 
-        return cost;
+        return numberFormat.result(cost);
     }
 }

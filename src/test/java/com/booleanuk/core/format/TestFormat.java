@@ -18,5 +18,7 @@ public class TestFormat {
         Format<Double> f = new TwoDecimalFormat();
 
         Assertions.assertEquals(200.46, f.result(100.2323123123123123) + f.result(100.2323123123123123));
+
+        Assertions.assertEquals(10.2, f.result(10.2));
     }
 }

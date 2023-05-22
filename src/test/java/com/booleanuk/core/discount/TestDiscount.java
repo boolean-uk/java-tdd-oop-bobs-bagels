@@ -5,6 +5,8 @@ import com.booleanuk.core.discount.Discount;
 import com.booleanuk.core.discount.NoDiscount;
 import com.booleanuk.core.discount.OnePlusOneDiscount;
 import com.booleanuk.core.discount.XItemsDiscount;
+import com.booleanuk.core.format.Format;
+import com.booleanuk.core.format.TwoDecimalFormat;
 import com.booleanuk.core.items.Bagel;
 import com.booleanuk.core.items.Category;
 import com.booleanuk.core.items.Coffee;
@@ -70,7 +72,9 @@ public class TestDiscount {
         Discount d2 = new OnePlusOneDiscount(1.25, Category.BAGEL, Category.COFFEE);
         Discount d3 = new NoDiscount();
 
+        Format<Double> f = new TwoDecimalFormat();
+
         double expected = 2 * 2.49 + 4 * 1.25 + 3 * 0.99;
-        Assertions.assertEquals(expected, d.appliedOn(orders) + d2.appliedOn(orders) + d3.appliedOn(orders));
+        Assertions.assertEquals(expected, f.result(d.appliedOn(orders) + d2.appliedOn(orders) + d3.appliedOn(orders)));
     }
 }
