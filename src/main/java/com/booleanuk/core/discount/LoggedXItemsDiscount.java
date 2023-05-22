@@ -26,7 +26,7 @@ public class LoggedXItemsDiscount implements Discount {
             int used = o.amount() - o.amount() % xItems;
             o.decreaseAmountBy(used);
             if (oCost != 0)
-                this.receipt.add(new ReceiptItem(o.name(), used, oCost));
+                this.receipt.add(new ReceiptItem(o.name(), used, oCost, o.itemCost()));
         }
 
         return cost;

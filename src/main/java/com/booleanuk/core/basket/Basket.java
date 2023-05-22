@@ -17,10 +17,14 @@ public class Basket {
     private final Inventory inventory;
     private final Offer offer;
     private final Receipt receipt;
-    private int capacity = 10;
+    private int capacity;
 
     public Basket(int capacity) {
         this(capacity, new BobsInventory(), new Offer(List.of(new NoDiscount())), new Receipt());
+    }
+
+    public Basket(int capacity, Offer offer) {
+        this(capacity, new BobsInventory(), offer, new Receipt());
     }
 
     public Basket(int capacity, Inventory inventory, Offer offer, Receipt receipt) {
@@ -66,6 +70,13 @@ public class Basket {
     }
 
     public double cost() {
-        return this.offer.discountedCost(orders, receipt);
+        return this.offer.discountedCost(orders);
+    }
+
+    public String receipt() {
+        return receipt.receipt();
+    }
+    public String detailedReceipt() {
+        return receipt.detailedReceipt();
     }
 }

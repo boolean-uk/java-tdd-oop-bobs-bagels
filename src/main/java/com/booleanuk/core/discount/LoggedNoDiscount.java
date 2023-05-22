@@ -7,7 +7,7 @@ import com.booleanuk.core.receipt.ReceiptItem;
 import java.util.List;
 
 public class LoggedNoDiscount implements Discount {
-    private Receipt receipt;
+    private final Receipt receipt;
 
     public LoggedNoDiscount(Receipt receipt) {
         this.receipt = receipt;
@@ -17,7 +17,7 @@ public class LoggedNoDiscount implements Discount {
         return orders.stream().filter(o -> o.amount() != 0)
                 .reduce(0.0, (sum, o) -> {
                     sum += o.cost();
-                    receipt.add(new ReceiptItem(o.name(), o.amount(), o.cost()));
+                    receipt.add(new ReceiptItem(o.name(), o.amount(), o.cost(), o.itemCost()));
                     return sum;
                 }, Double::sum);
     }

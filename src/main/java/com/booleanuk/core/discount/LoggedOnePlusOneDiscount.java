@@ -47,7 +47,7 @@ public class LoggedOnePlusOneDiscount implements Discount {
         while(!done) {
             if (o1.amount() >= o2.amount()) {
                 double currentCost = discount * o2.amount();
-                receipt.add(new ReceiptItem(o1.name() + " - " + o2.name(), o2.amount(), currentCost));
+                receipt.add(new ReceiptItem(o1.name() + " - " + o2.name(), o2.amount(), currentCost, o1.itemCost() + o2.itemCost()));
                 cost += currentCost;
                 o1.decreaseAmountBy(o2.amount());
                 o2.decreaseAmountBy(o2.amount());
@@ -55,7 +55,7 @@ public class LoggedOnePlusOneDiscount implements Discount {
                     o2 = orderTwoIt.next();
                 else
                     done = true;
-                System.out.println(o1.amount() == 0 && orderOneIt.hasNext());
+
                 if (o1.amount() == 0) {
                     if(orderOneIt.hasNext())
                         o1 = orderOneIt.next();
@@ -65,7 +65,7 @@ public class LoggedOnePlusOneDiscount implements Discount {
             } else {
                 double currentCost = discount * o1.amount();
                 cost += currentCost;
-                receipt.add(new ReceiptItem(o1.name() + " - " + o2.name(), o1.amount(), currentCost));
+                receipt.add(new ReceiptItem(o1.name() + " - " + o2.name(), o1.amount(), currentCost, o1.itemCost() + o2.itemCost()));
                 o2.decreaseAmountBy(o1.amount());
                 o1.decreaseAmountBy(o1.amount());
                 if (orderOneIt.hasNext())

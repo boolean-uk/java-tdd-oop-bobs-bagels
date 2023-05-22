@@ -8,13 +8,13 @@ import java.util.*;
 public abstract class Filling implements Item {
     private final String variant;
     private final double price;
-    private final Format format;
+    private final Format<String> format;
 
     public Filling(String variant, double price) {
         this(variant, price, new FirstLetterToUpperFormat());
     }
 
-    public Filling(String variant, double price, Format format) {
+    public Filling(String variant, double price, Format<String> format) {
         this.variant = variant;
         this.price = price;
         this.format = format;
@@ -27,7 +27,7 @@ public abstract class Filling implements Item {
 
     @Override
     public String variant() {
-        return format.text(this.variant);
+        return format.result(this.variant);
     }
 
     @Override

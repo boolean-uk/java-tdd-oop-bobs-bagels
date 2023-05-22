@@ -2,10 +2,7 @@ package com.booleanuk.core.basket;
 
 import com.booleanuk.core.basket.Basket;
 import com.booleanuk.core.basket.Order;
-import com.booleanuk.core.discount.NoDiscount;
-import com.booleanuk.core.discount.Offer;
-import com.booleanuk.core.discount.OnePlusOneDiscount;
-import com.booleanuk.core.discount.XItemsDiscount;
+import com.booleanuk.core.discount.*;
 import com.booleanuk.core.items.*;
 
 import com.booleanuk.core.receipt.Receipt;
@@ -97,7 +94,7 @@ public class TestBasket {
                 new NoDiscount()
         ));
 
-        Basket b1 = new Basket(100, new BobsInventory(), offer, new Receipt());
+        Basket b1 = new Basket(100, offer);
         b1.add(new Bagel("Onion", 0.49));
         b1.add(new Coffee("White", 1.19));
         b1.add(new Coffee("White", 1.19));
@@ -110,5 +107,39 @@ public class TestBasket {
 
         // 2.49 + 3.75 + 0.49
         Assertions.assertEquals(2.49 + 3.75 + 0.39, offer.discountedCost(orders));
+    }
+
+    @Test
+    public void testReceipt() {
+        List<Order> orders = List.of(
+                new Order(new Bagel("Onion", 0.49), 1),
+                new Order(new Coffee("White", 1.19), 2),
+                new Order(new Coffee("Black", 0.99), 1),
+                new Order(new Bagel("Plain", 0.39), 9)
+        );
+
+        Receipt receipt = new Receipt();
+
+        Offer offer = new Offer(List.of(
+                new LoggedXItemsDiscount(12, 3.99, receipt),
+                new LoggedXItemsDiscount(6, 2.49, receipt),
+                new LoggedOnePlusOneDiscount(1.25, Category.BAGEL, Category.COFFEE, receipt),
+                new LoggedNoDiscount(receipt)
+        ));
+
+        Basket b1 = new Basket(100, new BobsInventory(), offer, receipt);
+        b1.add(new Bagel("Onion", 0.49));
+        b1.add(new Coffee("White", 1.19));
+        b1.add(new Coffee("White", 1.19));
+        b1.add(new Coffee("Black", 0.99));
+
+        for (int i = 0; i < 10; i++) {
+            b1.add(new Bagel("Plain", 0.39));
+        }
+
+        // 2.49 + 3.75 + 0.49
+        Assertions.assertEquals(6.63, offer.discountedCost(orders));
+        System.out.println(b1.receipt());
+        System.out.println(b1.detailedReceipt());
     }
 }

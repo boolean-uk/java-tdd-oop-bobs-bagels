@@ -1,4 +1,4 @@
-package com.booleanuk.core.discount;
+package com.booleanuk.core.receipt;
 
 import com.booleanuk.core.basket.Order;
 import com.booleanuk.core.discount.*;
@@ -34,8 +34,8 @@ public class TestReceipt {
 
         // expected = 2 * 2.49 + 4 * 1.25 + 3 * 0.99;
         double expected = 12.95;
-        Assertions.assertEquals(expected, offer.discountedCost(orders, r));
+        Assertions.assertEquals(expected, offer.discountedCost(orders));
 
-        System.out.println(r.receipt());
+        System.out.println(r.detailedReceipt());
     }
 }
