@@ -1,1 +1,1 @@
-![](./uml_diagram.SVG)
+![](./uml_diagram.svg)
