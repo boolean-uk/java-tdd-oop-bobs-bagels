@@ -1,4 +1,4 @@
-package com.booleanuk.core.basket.format;
+package com.booleanuk.core.format;
 
 import com.booleanuk.core.format.FirstLetterToUpperFormat;
 import com.booleanuk.core.format.Format;

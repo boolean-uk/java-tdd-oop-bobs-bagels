@@ -1,5 +1,7 @@
 package com.booleanuk.core.basket;
 
+import com.booleanuk.core.basket.Basket;
+import com.booleanuk.core.basket.Order;
 import com.booleanuk.core.discount.NoDiscount;
 import com.booleanuk.core.discount.Offer;
 import com.booleanuk.core.discount.OnePlusOneDiscount;

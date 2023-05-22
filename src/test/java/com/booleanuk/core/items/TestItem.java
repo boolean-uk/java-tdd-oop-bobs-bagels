@@ -1,4 +1,4 @@
-package com.booleanuk.core.basket.items;
+package com.booleanuk.core.items;
 
 import com.booleanuk.core.items.*;
 import com.booleanuk.core.items.Filling;

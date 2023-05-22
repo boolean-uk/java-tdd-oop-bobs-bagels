@@ -2,6 +2,7 @@ package com.booleanuk.core.discount;
 
 import com.booleanuk.core.basket.Order;
 import com.booleanuk.core.receipt.Receipt;
+import com.booleanuk.core.receipt.ReceiptItem;
 
 import java.util.Comparator;
 import java.util.List;
@@ -22,7 +23,11 @@ public class Offer {
 
     public double discountedCost(List<Order> orders, Receipt receipt) {
         List<Order> sortedOrders = orders.stream().sorted(Comparator.comparing(Order::amount)).collect(Collectors.toList());
-        return this.discounts.stream()
+        double cost = this.discounts.stream()
                 .reduce(0.0, (sum, d) -> sum + d.appliedOn(sortedOrders), Double::sum);
+
+        receipt.add(new ReceiptItem("total", 0, cost));
+
+        return cost;
     }
 }

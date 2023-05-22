@@ -1,4 +1,4 @@
-package com.booleanuk.core.basket.discount;
+package com.booleanuk.core.discount;
 
 import com.booleanuk.core.basket.Order;
 import com.booleanuk.core.discount.*;
