@@ -39,7 +39,9 @@ public abstract class Filling implements Item {
     public boolean equals(Object obj) {
         if (this == obj) return true;
 
-        if (!(obj instanceof Item objItem)) return false;
+        if (!(obj instanceof Filling)) return false;
+
+        Filling objItem = (Filling) obj;
 
         return this.variant().equals(objItem.variant()) && this.cost() == objItem.cost();
     }

@@ -53,7 +53,9 @@ public abstract class FillableProduct<T extends Filling> implements FillableItem
     public boolean equals(Object obj) {
         if (this == obj) return true;
 
-        if (!(obj instanceof FillableProduct<?> objBagel)) return false;
+        if (!(obj instanceof FillableProduct<?>)) return false;
+
+        FillableProduct<?> objBagel = (FillableProduct<?>) obj;
 
         List<Item> thisFillings = fillings.stream().sorted(Comparator.comparing(Item::variant)).collect(Collectors.toList());
         List<Item> objBagelFillings = objBagel.fillings.stream().sorted(Comparator.comparing(Item::variant)).collect(Collectors.toList());

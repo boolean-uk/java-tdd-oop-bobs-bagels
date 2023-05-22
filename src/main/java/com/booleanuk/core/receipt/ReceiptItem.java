@@ -57,7 +57,9 @@ public class ReceiptItem {
     public boolean equals(Object obj) {
         if (this == obj) return true;
 
-        if (!(obj instanceof ReceiptItem objReceiptItem)) return false;
+        if (!(obj instanceof ReceiptItem)) return false;
+
+        ReceiptItem objReceiptItem = (ReceiptItem) obj;
 
         return this.name.equals(objReceiptItem.name);
     }
