@@ -23,7 +23,7 @@ class BasketTest {
 
     @BeforeEach
     public void setup() {
-        basket = new Basket(5);
+        basket = new Basket(15);
         bagel = new Bagel(PLAIN,BACON);
         coffee = new Coffee(BLACK);
         expectedItems = new HashMap<>();
@@ -132,8 +132,13 @@ class BasketTest {
     public void getTotalCostReturnsTotalCost() {
         basket.add(bagel);
         basket.add(coffee);
+        basket.add(bagel);
+        basket.add(bagel);
+        basket.add(bagel);
+        basket.add(bagel);
+        basket.add(bagel);
 
-        assertEquals(basket.getTotalCost(), (bagel.getPrice() + coffee.getPrice()) / 100.0);
+        assertEquals(basket.getTotalCost(), (249 + coffee.getPrice()) / 100.0);
     }
 
     @Test
