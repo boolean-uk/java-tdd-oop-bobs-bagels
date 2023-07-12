@@ -101,8 +101,13 @@ public class BasketTest {
     }
 
     @Test
-    public void testGettingAvailableFilling() {
+    public void testGettingAvailableFillings() {
         Basket basket = new Basket();
         assertEquals(6, basket.getAvailableFillings().size());
+    }
+
+    @Test
+    public void checkPriceOfFilling() {
+        assertEquals(BigDecimal.valueOf(0.12), Basket.checkPrice(new Filling(FILB)));
     }
 }
