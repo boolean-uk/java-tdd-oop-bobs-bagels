@@ -12,4 +12,8 @@ public class Product {
         this.name = name;
         this.variant = variant;
     }
+
+    public float getPrice() {
+        return price;
+    }
 }

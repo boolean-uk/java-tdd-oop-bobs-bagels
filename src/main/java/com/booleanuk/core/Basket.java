@@ -1,6 +1,7 @@
 package com.booleanuk.core;
 
 import java.util.HashMap;
+import java.util.Map;
 
 public class Basket {
     private HashMap<Product, Integer> products;
@@ -62,5 +63,15 @@ public class Basket {
 
         this.basketCapacity = newCapacity;
         return true;
+    }
+
+    public float getTotalCost() {
+        float totalCost = 0;
+
+        for(Map.Entry<Product, Integer> product : products.entrySet()){
+            totalCost += product.getKey().getPrice() * product.getValue();
+        }
+
+        return totalCost;
     }
 }
