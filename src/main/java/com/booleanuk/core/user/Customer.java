@@ -6,8 +6,21 @@ import com.booleanuk.core.products.Product;
 public class Customer extends User {
     private Basket basket;
 
-    private double checkProductPrice(Product product) {
+    public Customer(String fullName)
+    {
+        super(fullName);
+        basket = new Basket();
+    }
+
+
+
+    public double checkProductPrice(Product product) {
         return 0;
     }
+
+    public Basket getBasket() {
+        return basket;
+    }
+
 
 }

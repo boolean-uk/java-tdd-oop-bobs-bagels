@@ -38,4 +38,9 @@ public class Basket implements BasketOperations {
     public boolean isProductAvailable(Product product) {
         return false;
     }
+
+    @Override
+    public int getProductsAmount() {
+        return 0;
+    }
 }

@@ -11,7 +11,17 @@ public class Bagel extends Product {
         super(SKU, price);
     }
 
-    private double getPriceWithFilling() {
+    public double getPriceWithFilling() {
         return 0;
     }
+
+    public BagelVariant getVariant() {
+        return variant;
+    }
+
+    public List<Filling> getFillings() {
+        return fillings;
+    }
+
+
 }
