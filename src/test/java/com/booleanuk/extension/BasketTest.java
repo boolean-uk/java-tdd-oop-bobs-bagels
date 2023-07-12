@@ -173,7 +173,7 @@ class BasketTest {
     }
 
     @Test
-    public void getItemsReturnProperList() {
+    public void getItemsReturnProperMap() {
         basket.add(bagel);
 
         assertEquals(1, basket.getItems().size());
