@@ -74,4 +74,11 @@ public class Basket {
     public static BigDecimal checkPrice(Item item) {
         return item.getPrice();
     }
+
+    public List<SKU> getAvailableFillings() {
+        return Arrays.stream(SKU.values())
+                .filter(val -> val.getName().equals("Filling"))
+                .toList();
+
+    }
 }
