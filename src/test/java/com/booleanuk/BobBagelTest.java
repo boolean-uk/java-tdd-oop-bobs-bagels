@@ -5,8 +5,7 @@ import com.booleanuk.core.Basket;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class BobBagelTest {
 
@@ -22,6 +21,19 @@ public class BobBagelTest {
         basket.add(bagel,quantity);
         //then
         assertTrue(basket.getBasket().containsKey(bagel));
+    }
+
+    @Test
+    public void shouldRemoveBagelFromBasket(){
+        //when
+        Basket basket = new Basket();
+        Bagel bagel = new Bagel();
+        int quantity = 1;
+        basket.add(bagel,quantity);
+        //given
+        basket.removeProduct(1);
+        //then
+        assertFalse(basket.getBasket().containsKey(bagel));
     }
 
 
