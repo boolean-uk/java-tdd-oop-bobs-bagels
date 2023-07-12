@@ -38,4 +38,15 @@ public class Basket {
     public boolean isFull() {
         return bagels.size() >= capacity;
     }
+
+    public void setCapacity(int newCapacity) {
+        if (newCapacity <= 0 || newCapacity < bagels.size()) {
+            throw new IllegalArgumentException();
+        }
+        capacity = newCapacity;
+    }
+
+    public int getCapacity() {
+        return capacity;
+    }
 }
