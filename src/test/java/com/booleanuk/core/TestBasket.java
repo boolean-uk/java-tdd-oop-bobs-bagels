@@ -14,7 +14,7 @@ public class TestBasket {
     }
 
     @Test
-    public void whenAddToBasketExistingBagelType_bagelIsAddedToBasket(){
+    public void whenAddToBasketExistingBagelType_bagelIsAddedToBasket() throws Exception {
         //Setup
         Basket.BagelType typeOfBagel = Basket.BagelType.ONION;
         Bagel bagel = new Bagel(typeOfBagel);
@@ -24,7 +24,7 @@ public class TestBasket {
         Assertions.assertEquals(List.of(bagel), basket.getBagelList());
     }
     @Test
-    public void whenRemoveFromBasketBagelDoesExistInBasket_bagelIsRemovedFromBasket(){
+    public void whenRemoveFromBasketBagelDoesExistInBasket_bagelIsRemovedFromBasket() throws Exception {
         //Setup
         Basket.BagelType typeOfBagel = Basket.BagelType.ONION;
         Bagel bagel = new Bagel(typeOfBagel);
@@ -34,7 +34,7 @@ public class TestBasket {
     }
 
     @Test
-    public void whenIsBasketFullCalled_basketCapacityIsChecked(){
+    public void whenIsBasketFullCalled_basketCapacityIsChecked() throws Exception {
         //Setup
         basket.addToBasket(new Bagel(Basket.BagelType.ONION));
         basket.addToBasket(new Bagel(Basket.BagelType.PLAIN));
@@ -46,6 +46,11 @@ public class TestBasket {
         }
 
         Assertions.assertEquals("Basket is full", message);
+    }
+    @Test
+    public void whenSetBasketCapacityCorrectCapacity_capacityIsChanged(){
+        basket.setBasketCapacity(4);
+        Assertions.assertEquals(4,basket.getCapacity());
     }
 
 }

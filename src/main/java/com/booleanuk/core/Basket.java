@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Basket {
+    public static int capacity =2;
     enum BagelType { ONION, PLAIN, EVERYTHING, SESAME}
 
     private List<Bagel> bagelList = new ArrayList<Bagel>();
@@ -11,9 +12,14 @@ public class Basket {
     {
         return bagelList;
     }
-    public void  addToBasket(Bagel bagel)
+    public void  addToBasket(Bagel bagel) throws Exception
     {
-        bagelList.add(bagel);
+        if (bagelList.size()<capacity)
+        {
+            bagelList.add(bagel);
+        }
+        else throw new Exception("Basket is full");
+
     }
     public void removeFromBasket(Bagel bagel){
         bagelList.remove(bagel);
