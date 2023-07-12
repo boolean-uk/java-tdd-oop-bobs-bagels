@@ -15,11 +15,22 @@ public class TestBasket {
 
     @Test
     public void whenAddToBasketExistingBagelType_bagelIsAddedToBasket(){
+        //Setup
         Basket.BagelType typeOfBagel = Basket.BagelType.ONION;
         Bagel bagel = new Bagel(typeOfBagel);
-
+        //Execute
         basket.addToBasket(bagel);
 
         Assertions.assertEquals(List.of(bagel), basket.getBagelList());
     }
+    @Test
+    public void whenRemoveFromBasketBagelDoesExistInBasket_bagelIsRemovedFromBasket(){
+        //Setup
+        Basket.BagelType typeOfBagel = Basket.BagelType.ONION;
+        Bagel bagel = new Bagel(typeOfBagel);
+        basket.addToBasket(bagel);
+        basket.removeFromBasket(0);
+        Assertions.assertEquals(List.of(null),basket.getBagelList());
+    }
+
 }
