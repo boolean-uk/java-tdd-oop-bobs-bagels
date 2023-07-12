@@ -15,9 +15,13 @@ public class Basket {
 
 
     public void add(String name, String variant) {
-        Optional<Item> optional = Inventory.searchInventory(name,variant);
-        optional.ifPresentOrElse(item -> this.shoppingList.put(item, this.shoppingList.getOrDefault(item, 0) + 1),
-                () -> System.out.println("Item not found in inventory"));
+        if (!isBasketFull()) {
+            Optional<Item> optional = Inventory.searchInventory(name, variant);
+            optional.ifPresentOrElse(item -> this.shoppingList.put(item, this.shoppingList.getOrDefault(item, 0) + 1),
+                    () -> System.out.println("Item not found in inventory"));
+        } else {
+            System.out.println("Basket is full.");
+        }
     }
 
     public void remove(String name, String variant) {
@@ -46,6 +50,10 @@ public class Basket {
 
     public int getCapacity() {
         return capacity;
+    }
+
+    public boolean isBasketFull() {
+        return shoppingList.size() == capacity;
     }
 
     public Map<Item, Integer> getShoppingList() {
