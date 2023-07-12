@@ -1,6 +1,8 @@
 package com.booleanuk.core;
 
+import java.math.BigDecimal;
 import java.util.*;
+import java.util.Map.Entry;
 
 public class Basket {
     private final static int DEFAULT_CAPACITY = 10;
@@ -59,5 +61,13 @@ public class Basket {
 
     public boolean isInBasket(Item item) {
         return items.containsKey(item);
+    }
+
+    public BigDecimal getTotalPrice() {
+        BigDecimal totalPrice = BigDecimal.ZERO;
+        for (Entry<Item, Integer> entry : items.entrySet()) {
+            totalPrice = totalPrice.add(entry.getKey().getPrice().multiply(BigDecimal.valueOf(entry.getValue())));
+        }
+        return totalPrice;
     }
 }

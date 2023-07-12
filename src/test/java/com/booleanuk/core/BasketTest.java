@@ -2,6 +2,8 @@ package com.booleanuk.core;
 
 import org.junit.jupiter.api.Test;
 
+import java.math.BigDecimal;
+
 import static com.booleanuk.core.SKU.BGLO;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -79,6 +81,6 @@ public class BasketTest {
         basket.addItem(new Item(BGLO));
         basket.addItem(new Item(BGLO));
 
-        assertEquals(0.78, basket.getTotalPrice());
+        assertEquals(BigDecimal.valueOf(0.98), basket.getTotalPrice());
     }
 }

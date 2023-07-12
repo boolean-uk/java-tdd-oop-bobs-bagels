@@ -1,19 +1,23 @@
 package com.booleanuk.core;
 
 import java.math.BigDecimal;
-import java.util.UUID;
 
 public class Item {
-    private UUID id;
-    private BigDecimal price;
-    private SKU sku;
+    private final SKU sku;
 
     public Item(SKU sku) {
-        this.id = UUID.randomUUID();
         this.sku = sku;
     }
 
-    public UUID getId() {
-        return id;
+    public BigDecimal getPrice() {
+        return sku.getPrice();
+    }
+
+    public String getName() {
+        return sku.getName();
+    }
+
+    public String getVariant() {
+        return sku.getVariant();
     }
 }
