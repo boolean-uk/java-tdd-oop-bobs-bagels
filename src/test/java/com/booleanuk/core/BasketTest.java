@@ -156,4 +156,18 @@ public class BasketTest {
         //Then
         Assertions.assertFalse(result);
     }
+
+    @Test
+    public void testChangeBasketCapacity_WhenNewCapacityIsValidButItIsLessThanBasketQuantity_ShouldReturnFalse() {
+        //Given
+        Basket basket = new Basket(inventory, 10);
+        basket.addProduct("BGLO", 3);
+        basket.addProduct("BGLO", 2);
+
+        //When
+        boolean result = basket.changeBasketCapacity(4);
+
+        //Then
+        Assertions.assertFalse(result);
+    }
 }
