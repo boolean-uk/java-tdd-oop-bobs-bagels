@@ -85,4 +85,9 @@ public class BasketTest {
 
         assertEquals(BigDecimal.valueOf(0.98), basket.getTotalPrice());
     }
+
+    @Test
+    public void testCheckingBagelPrice() {
+        assertEquals(0.49, Basket.checkPrice(new Bagel(BGLO)));
+    }
 }
