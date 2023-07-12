@@ -6,7 +6,7 @@ public class Basket {
     private static int defaultCapacity = 4;
     private int capacity;
     private int currentAmount = 0;
-    private ArrayList<Item> items;
+    private final ArrayList<Item> items;
     public int getCapacity() {
         return capacity;
     }
@@ -22,9 +22,6 @@ public class Basket {
     public ArrayList<Item> getItems() {
         return items;
     }
-    public void setItems(ArrayList<Item> items) {
-        this.items = items;
-    }
     public static int getDefaultCapacity() {
         return defaultCapacity;
     }
@@ -36,31 +33,34 @@ public class Basket {
         capacity = defaultCapacity;
     }
 
-    public boolean addBagel(Bagel bagel) {
+    public boolean addItem(Item item) {
         if(isFull())
             return false;
-        items.add(bagel);
+        items.add(item);
         ++currentAmount;
         return true;
     }
-    public boolean addBagel(BagelType bagelType) {
+    public boolean addItem(IItemType itemType) {
         if(isFull())
             return false;
-        items.add(new Bagel(bagelType));
+        switch (itemType.getSku().substring(0, 3)) {
+            case "BGL" -> items.add(new Bagel((BagelType) itemType));
+            case "COF" -> items.add(new Item(itemType.getSku(), itemType.getPrice(), itemType.getVariant()));
+        }
         ++currentAmount;
         return true;
     }
-    public boolean removeBagel(Bagel bagel) {
-        if(!items.contains(bagel))
+    public boolean removeItem(Item item) {
+        if(!items.contains(item))
             return false;
         --currentAmount;
-        items.remove(bagel);
+        items.remove(item);
         return true;
     }
-    public boolean removeBagel(BagelType bagelType) {
+    public boolean removeItem(IItemType itemType) {
         Item toRemove = null;
         for(Item item : items) {
-            if(item.getSku().equals(bagelType.name()))
+            if(item.getSku().equals(itemType.getSku()))
                 toRemove = item;
         }
         if(toRemove != null) {
@@ -72,5 +72,11 @@ public class Basket {
     public boolean isFull() {
         return currentAmount == capacity;
     }
+    public double getTotalPrice() {
+        double totalPrice = 0;
+        for (Item item : items)
+            totalPrice += item.getPrice();
+        return totalPrice;
 
+    }
 }

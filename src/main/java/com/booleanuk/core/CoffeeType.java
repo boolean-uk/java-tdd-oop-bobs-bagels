@@ -1,32 +1,26 @@
 package com.booleanuk.core;
 
-public enum CoffeeType {
-    COFB(0.99, "Black"),
-    COFW(1.19, "White"),
-    COFL(1.29, "Cappuccino"),
-    COFC(1.29, "Latte");
+public enum CoffeeType implements IItemType {
+    COFB("COFB", 0.99, "Black"),
+    COFW("COFW", 1.19, "White"),
+    COFL("COFL", 1.29, "Cappuccino"),
+    COFC("COFC", 1.29, "Latte");
 
-    CoffeeType(double price, String variant) {
+    CoffeeType(String sku, double price, String variant) {
+        this.sku = sku;
         this.price = price;
         this.variant = variant;
     }
-
     public double getPrice() {
         return price;
     }
-
-    public void setPrice(double price) {
-        this.price = price;
-    }
-
     public String getVariant() {
         return variant;
     }
-
-    public void setVariant(String variant) {
-        this.variant = variant;
+    public String getSku() {
+        return sku;
     }
-
-    private double price;
-    private String variant;
+    public final String sku;
+    private final double price;
+    private final String variant;
 }

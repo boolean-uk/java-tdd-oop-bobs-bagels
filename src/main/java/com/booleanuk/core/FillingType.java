@@ -1,14 +1,15 @@
 package com.booleanuk.core;
 
-public enum FillingType {
-    FILB(0.12, "Bacon"),
-    FILE(0.12, "Egg"),
-    FILC(0.12, "Cheese"),
-    FILX(0.12, "Cream cheese"),
-    FILS(0.12, "Smoked salmon"),
-    FILH(0.12, "Ham");
+public enum FillingType implements IItemType {
+    FILB("FILB", 0.12, "Bacon"),
+    FILE("FILE", 0.12, "Egg"),
+    FILC("FILC", 0.12, "Cheese"),
+    FILX("FILX", 0.12, "Cream cheese"),
+    FILS("FILS", 0.12, "Smoked salmon"),
+    FILH("FILH", 0.12, "Ham");
 
-    FillingType(double price, String variant) {
+    FillingType(String sku, double price, String variant) {
+        this.sku = sku;
         this.price = price;
         this.variant = variant;
     }
@@ -16,20 +17,11 @@ public enum FillingType {
     public double getPrice() {
         return price;
     }
-
-    public void setPrice(double price) {
-        this.price = price;
-    }
-
-
     public String getVariant() {
         return variant;
     }
-
-    public void setVariant(String variant) {
-        this.variant = variant;
-    }
-
-    private double price;
-    private String variant;
+    public String getSku() { return sku; }
+    public final String sku;
+    private final double price;
+    private final String variant;
 }
