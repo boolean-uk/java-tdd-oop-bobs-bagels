@@ -21,6 +21,9 @@ public class Basket {
     }
 
     public boolean addItem(Bagel bagel) {
+        if (isFull()) {
+            return false;
+        }
         return bagels.add(bagel);
     }
 
