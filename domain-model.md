@@ -17,3 +17,9 @@
 |           | `price`   |               |                         |         |
 |           | `name`    |               |                         |         |
 |           | `variant` |               |                         |         |
+
+| Class       | Members                             | Methods                                                                        | Scenario                                 | Outputs |
+|-------------|-------------------------------------|--------------------------------------------------------------------------------|------------------------------------------|---------|
+| `Inventory` | `HashMap<String, Product> products` | `public void addProduct(String sku, float price, String name, String variant)` | adds product to inventory                | void    |
+|             |                                     | `getProduct(String sku)`                                                       | returns specific product from inventory  | Product |
+

@@ -4,8 +4,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Basket {
-    private HashMap<Product, Integer> products;
-    private Inventory inventory;
+    private final HashMap<Product, Integer> products;
+    private final Inventory inventory;
     private int basketCapacity;
     private int basketQuantity;
 
