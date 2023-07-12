@@ -91,4 +91,12 @@ public class BasketTest {
         assertEquals(BigDecimal.valueOf(0.49), Basket.checkPrice(new Bagel(BGLO)));
         assertEquals(BigDecimal.valueOf(0.61), Basket.checkPrice(new Bagel(BGLO, new Filling(FILB))));
     }
+
+    @Test
+    public void testAddingFillingToBagel() {
+        Bagel bagel = new Bagel(BGLO);
+
+        assertTrue(bagel.addFilling(new Filling(FILB)));
+        assertFalse(bagel.addFilling(new Filling(FILB)));
+    }
 }

@@ -21,4 +21,12 @@ public class Bagel extends Item {
     public BigDecimal getPrice() {
         return filling == null ? super.getPrice() : super.getPrice().add(filling.getPrice());
     }
+
+    public boolean addFilling(Filling filling) {
+        if (this.filling == null) {
+            this.filling = filling;
+            return true;
+        }
+        return false;
+    }
 }
