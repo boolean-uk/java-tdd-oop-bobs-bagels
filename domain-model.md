@@ -77,10 +77,11 @@ I want customers to only be able to order things that we stock in our inventory.
 | Abstract Product | SKU: String   |         |          |         |
 |                  | price: double |         |          |         |
 
-| Class                 | Attributes              | Methods                        | Scenario                                             | Outputs |
-|-----------------------|-------------------------|--------------------------------|------------------------------------------------------|---------|
-| Bagel extends Product | variant: BagelVariant   | getPriceWithFillings(): double | calculates totals price including all added fillings | double  |
-|                       | fillings: List<Filling> |                                |                                                      |         |
+| Class                 | Attributes              | Methods                             | Scenario                                             | Outputs |
+|-----------------------|-------------------------|-------------------------------------|------------------------------------------------------|---------|
+| Bagel extends Product | variant: BagelVariant   | getPriceWithFillings(): double      | calculates totals price including all added fillings | double  |
+|                       | fillings: List<Filling> | addFilling(Filling filling):boolean | If filling added correctly                           | true    |
+|                       |                         |                                     | If filling added incorrectly                         | false   |
 
 | Class                   | Attributes              | Methods | Scenario | Outputs |
 |-------------------------|-------------------------|---------|----------|---------|
@@ -113,3 +114,8 @@ I want customers to only be able to order things that we stock in our inventory.
 | Class   | Attributes | Methods                            | Scenario | Outputs |
 |---------|------------|------------------------------------|----------|---------|
 | Manager |            | checkProductPrice(Product product) |          |         |
+
+| Class | Attributes                       | Methods                                     | Scenario                    | Outputs |
+|-------|----------------------------------|---------------------------------------------|-----------------------------|---------|
+| Store | availableProducts:List<Products> | isProductAvailable(Product product):boolean | if product is available     | true    |
+|       |                                  | isProductAvailable(Product product):boolean | if product is not available | false   |
