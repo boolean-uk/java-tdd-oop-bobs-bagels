@@ -43,7 +43,30 @@ public class Basket {
         ++currentAmount;
         return true;
     }
-    public boolean removeBagel(Bagel bagel) {
+    public boolean addBagel(BagelType bagelType) {
+        if(currentAmount == capacity)
+            return false;
+        items.add(new Bagel(bagelType));
+        ++currentAmount;
         return true;
+    }
+    public boolean removeBagel(Bagel bagel) {
+        if(!items.contains(bagel))
+            return false;
+        --currentAmount;
+        items.remove(bagel);
+        return true;
+    }
+    public boolean removeBagel(BagelType bagelType) {
+        Item toRemove = null;
+        for(Item item : items) {
+            if(item.getSku().equals(bagelType.name()))
+                toRemove = item;
+        }
+        if(toRemove != null) {
+            items.remove(toRemove);
+            return true;
+        }
+        return false;
     }
 }
