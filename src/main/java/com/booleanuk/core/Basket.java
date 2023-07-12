@@ -13,7 +13,6 @@ public class Basket {
         this.capacity = capacity;
     }
 
-
     public void add(String name, String variant) {
         if (!isBasketFull()) {
             Optional<Item> optional = Inventory.searchInventory(name, variant);
@@ -54,6 +53,13 @@ public class Basket {
 
     public boolean isBasketFull() {
         return shoppingList.size() == capacity;
+    }
+
+    public double totalCost(){
+        return shoppingList.entrySet()
+                .stream()
+                .mapToDouble(entry -> entry.getValue() * entry.getKey().checkPrice())
+                .sum();
     }
 
     public Map<Item, Integer> getShoppingList() {
