@@ -180,6 +180,15 @@ public class BasketTest {
         Assertions.assertTrue(price.isPresent());
         double DELTA = 1e-9;
         Assertions.assertEquals(0.99, price.get(), DELTA);
+
+    }
+
+    @Test
+    public void shouldNotReturnPriceForNonExistingItem(){
+
+        Optional<Double> price2 = Inventory.getItemPrice("Covfefe", "Yellow");
+        Assertions.assertFalse(price2.isPresent());
+        Assertions.assertEquals(Optional.empty(), price2);
     }
 
 }
