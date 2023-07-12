@@ -1,23 +1,25 @@
 package com.booleanuk.core;
 
-public class Bagel extends Item {
-    private final BagelType type;
+import java.util.Comparator;
 
-    public Bagel(BagelType type) {
-        this.type = type;
+public class Bagel extends Item {
+    private final BagelVariant variant;
+
+    public Bagel(BagelVariant variant) {
+        this.variant = variant;
     }
 
-    enum BagelType {
+    enum BagelVariant {
         ONION("Onion"),
         PLAIN("Plain"),
         EVERYTHING("Everything"),
         SESAME("Sesame");
 
-        BagelType(String type) {
+        BagelVariant(String variant) {
         }
     }
 
-    public BagelType getType() {
-        return type;
+    public BagelVariant getVariant() {
+        return variant;
     }
 }

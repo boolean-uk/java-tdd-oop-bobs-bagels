@@ -31,7 +31,11 @@ public class Basket {
         Bagel bagel = bagels.stream()
                 .filter(b -> b.getId()
                 .equals(id))
-                .findFirst().get();
+                .findFirst()
+                .orElse(null);
+        if (!isInBasket(bagel)) {
+            return false;
+        }
         return bagels.remove(bagel);
     }
 
@@ -41,12 +45,16 @@ public class Basket {
 
     public void setCapacity(int newCapacity) {
         if (newCapacity <= 0 || newCapacity < bagels.size()) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("Incorrect capacity");
         }
         capacity = newCapacity;
     }
 
     public int getCapacity() {
         return capacity;
+    }
+
+    public boolean isInBasket(Bagel bagel) {
+        return bagels.stream().anyMatch(b -> b.getVariant().equals(bagel.getVariant()));
     }
 }
