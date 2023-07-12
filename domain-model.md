@@ -1,4 +1,4 @@
-##Basket
+## Basket
 | Class  | Attributes                                        | Methods                                 | Scenarios                                                      | Output                       |
 |--------|---------------------------------------------------|-----------------------------------------|----------------------------------------------------------------|------------------------------|
 | Basket | int capacity                                      | addItem(String name, String variant)    | user can add item to basket                                    | void : item added to map     |
@@ -13,7 +13,7 @@
 |        |                                                   |                                         | capacity less than number of items in a basket                 | print message                |
 |        |                                                   | totalCost()                             | user wants no know the total cost of basket                    | double                       |
 
-##Item
+## Item
 | Class | Attributes     | Methods    | Scenarios                             | Output |
 |-------|----------------|------------|---------------------------------------|--------|
 | Item  | String SKU     | checkPrice | user wants to check the price of item | double |
@@ -22,7 +22,7 @@
 |       | String variant |            |                                       |        |
 |       |                |            |                                       |        |
 
-##Bagel
+## Bagel
 | Class              | Attributes     | Methods | Scenarios | Output |
 |--------------------|----------------|---------|-----------|--------|
 | Bagel extends Item | String SKU     |         |           |        |
@@ -31,7 +31,7 @@
 |                    | String variant |         |           |        |
 
 
-#Coffee
+## Coffee
 | Class               | Attributes     | Methods | Scenarios | Output |
 |---------------------|----------------|---------|-----------|--------|
 | Coffee extends Item | String SKU     |         |           |        |
@@ -39,7 +39,7 @@
 |                     | double price   |         |           |        |
 |                     | String variant |         |           |        |
 
-#Filling
+## Filling
 | Class                | Attributes     | Methods | Scenarios | Output |
 |----------------------|----------------|---------|-----------|--------|
 | Filling extends Item | String SKU     |         |           |        |
