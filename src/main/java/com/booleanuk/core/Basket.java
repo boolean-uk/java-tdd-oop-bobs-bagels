@@ -28,6 +28,7 @@ public class Basket {
 
         if(products.containsKey(newProduct)) {
             products.replace(newProduct, quantity + products.get(newProduct));
+            basketQuantity += quantity;
             return true;
         }
         products.put(newProduct, quantity);
@@ -56,7 +57,7 @@ public class Basket {
     }
 
     public boolean changeBasketCapacity(int newCapacity) {
-        if(newCapacity < 0)
+        if(newCapacity < 0 || newCapacity < this.basketQuantity)
             return false;
 
         this.basketCapacity = newCapacity;
