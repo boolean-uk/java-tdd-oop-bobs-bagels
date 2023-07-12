@@ -24,8 +24,8 @@ public class FillingTest {
     }
 
     @Test
-    public void getFillingTest() {
-        Assertions.assertEquals("bacon", filling.getFilling());
-        Assertions.assertEquals("eggs", filling.getFilling());
+    public void getVariantTest() {
+        Assertions.assertEquals("bacon", filling.getVariant().toLowerCase());
+        Assertions.assertNotEquals("eggs", filling.getVariant().toLowerCase());
     }
 }

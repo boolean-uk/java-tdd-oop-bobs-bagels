@@ -19,4 +19,8 @@ public class Filling {
     public double getPrice() {
         return price;
     }
+
+    public String getVariant() {
+        return variant;
+    }
 }
