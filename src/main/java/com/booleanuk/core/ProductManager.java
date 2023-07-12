@@ -17,13 +17,16 @@ public class ProductManager {
     }
 
     public boolean orderBagel(String variant) {
-        for (Map.Entry<String, Product> entry : inventory.entrySet()) {
-            if (entry.getValue().getVariant().equals(variant)) {
-                basket.add(entry.getValue());
-                return true;
+        if (basket.getList().size() < basket.getCapacity()) {
+            for (Map.Entry<String, Product> entry : inventory.entrySet()) {
+                if (entry.getValue().getVariant().equals(variant)) {
+                    return basket.add(entry.getValue());
+                }
             }
+            System.out.println("Failed to find the product");
+            return false;
         }
-        System.out.println("Failed to find the product");
+        System.out.println("Can't add product. Basket is full!");
         return false;
     }
 
@@ -93,5 +96,9 @@ public class ProductManager {
 
     public Basket getBasket() {
         return basket;
+    }
+
+    public void changeBasketSize(int size) {
+        basket.setCapacity(size);
     }
 }

@@ -23,7 +23,7 @@ public class Basket {
         return list;
     }
 
-    public boolean remove(Product product){
+    public boolean remove(Product product) {
         if (list.contains(product)) {
             return list.remove(product);
         }
@@ -34,7 +34,11 @@ public class Basket {
         return capacity;
     }
 
-    public void setCapacity(int capacity) {
+    public boolean setCapacity(int capacity) {
+        if (capacity <= list.size()) {
+            return false;
+        }
         this.capacity = capacity;
+        return true;
     }
 }

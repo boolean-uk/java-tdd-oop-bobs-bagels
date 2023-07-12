@@ -61,4 +61,32 @@ public class ProductManagerTest {
         // Assert hard-coded for the inventory.txt file, remove for custom use
         Assertions.assertEquals("Onion", productManager.getInventory().get("BGLO").getVariant());
     }
+
+    @Test
+    public void shouldChangeBasketCapacity() {
+        //Setup
+        int expectedCapacity = 11;
+
+        //Execute
+        productManager.changeBasketSize(expectedCapacity);
+
+        //Verify
+        Assertions.assertEquals(expectedCapacity, productManager.getBasket().getCapacity());
+    }
+
+    @Test
+    public void shouldNotChangeBasketCapacity() {
+        //Setup
+        productManager.orderBagel("Plain");
+        productManager.orderBagel("Plain");
+        productManager.orderBagel("Plain");
+        int expectedCapacity = productManager.getBasket().getCapacity();
+        int newCapacity = 2;
+
+        //Execute
+        productManager.changeBasketSize(newCapacity);
+
+        //Verify
+        Assertions.assertEquals(expectedCapacity, productManager.getBasket().getCapacity());
+    }
 }
