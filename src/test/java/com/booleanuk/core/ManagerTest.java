@@ -13,10 +13,6 @@ public class ManagerTest {
             // new Product(...),
             // new Product(...)
     );
-    private final List<Filling> initialFillings = List.of(
-            // new Filling(...),
-            // new Filling(...)
-    );
 
     public ManagerTest() {
     }
@@ -24,7 +20,7 @@ public class ManagerTest {
     @BeforeEach
     public void setUp(){
         bob = new Manager(INITIAL_BASKET_CAPACITY,
-                initialInventory, initialFillings);
+                initialInventory);
     }
 
     @Test
@@ -35,20 +31,12 @@ public class ManagerTest {
     }
 
     @Test
-    public testGetInventory() {
+    public void testGetInventory() {
         // Execute
         List<Product> inventory = bob.getInventory();
 
         // Verify
         Assertions.assertEquals(initialInventory, inventory);
 
-    }
-
-    @Test
-    public testGetFillings() {
-        List<Filling> fillings = bob.getFillings();
-
-        Assertions.assertEquals(initialFillings, fillings);
-        Assertions.assertEquals(2, fillings.size());
     }
 }
