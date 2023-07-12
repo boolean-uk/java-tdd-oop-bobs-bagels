@@ -2,6 +2,7 @@ package com.booleanuk.core;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class ProductTest {
     private Product bagel;
@@ -14,14 +15,17 @@ public class ProductTest {
         bagel = new Bagel(SKU, PRICE, VARIANT);
     }
 
+    @Test
     public void testGetSKU(){
         Assertions.assertEquals(SKU, bagel.getSKU());
     }
 
+    @Test
     public void testGetPrice(){
         Assertions.assertEquals(PRICE, bagel.getPrice());
     }
 
+    @Test
     public void testGetVariant(){
         Assertions.assertEquals(VARIANT, bagel.getVariant());
     }

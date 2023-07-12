@@ -18,9 +18,10 @@ public class BagelTest {
 
     @BeforeEach
     public void setUp() {
-        bagel = new Bagel(SKU, PRICE, VARIANT);
+        bagel = new Bagel(SKU, PRICE, VARIANT, FILLINGS);
     }
 
+    @Test
     public void testGetFillings(){
         List<Filling> fillings = bagel.getFillings();
 
