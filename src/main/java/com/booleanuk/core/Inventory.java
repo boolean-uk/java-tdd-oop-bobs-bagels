@@ -12,6 +12,26 @@ public class Inventory {
         this.bagels = new ArrayList<>();
         this.coffees = new ArrayList<>();
         this.fillings = new ArrayList<>();
+        initializeInventory();
+    }
+
+    public void initializeInventory() {
+        Bagle bagle1 = new Bagle("BGLO",  	0.49,"Onion");
+        Bagle bagle2 = new Bagle("BGLP",  	0.39,"Plain");
+        Bagle bagle3 = new Bagle("BGLE",  	0.49,"Everything");
+        Bagle bagle4 = new Bagle("BGLS",  	0.49,"Sesame");
+        bagels.add(bagle1);
+        bagels.add(bagle2);
+        bagels.add(bagle3);
+        bagels.add(bagle4);
+        Filling filling1 = new Filling("FILB", 0.12, "Bacon");
+        Filling filling2 = new Filling("FILB", 0.12, "Bacon");
+        Filling filling3 = new Filling("FILB", 0.12, "Bacon");
+        Filling filling4 = new Filling("FILB", 0.12, "Bacon");
+        fillings.add(filling1);
+        fillings.add(filling2);
+        fillings.add(filling3);
+        fillings.add(filling4);
 
     }
     public void addBagel(Bagle bagel) {
