@@ -2,21 +2,53 @@ package com.booleanuk.core.basket;
 
 import com.booleanuk.core.products.Product;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Basket implements BasketOperations {
-    private List<Product> product;
+    private List<Product> products = new ArrayList<>(0);
     private int capacity;
 
+    public Basket() {
+
+    }
+
+    public Basket(int capacity) {
+        this.capacity = capacity;
+    }
+
+    public List<Product> getProducts() {
+        return products;
+    }
+
+    public void setProducts(List<Product> products) {
+        this.products = products;
+    }
+
+    public int getCapacity() {
+        return capacity;
+    }
+
+    public void setCapacity(int capacity) {
+        this.capacity = capacity;
+    }
 
     @Override
     public boolean addProduct(Product product) {
-        return false;
+        if (isFull()) {
+            return false;
+        }
+        products.add(product);
+        return true;
     }
 
     @Override
     public boolean removeProduct(Product product) {
-        return false;
+        if (!products.contains(product)) {
+            return false;
+        }
+        products.remove(product);
+        return true;
     }
 
     @Override
@@ -26,12 +58,14 @@ public class Basket implements BasketOperations {
 
     @Override
     public boolean isProductInBasket(Product product) {
-        return false;
+        return products.contains(product);
+
     }
 
     @Override
     public double summarizeBasket() {
-        return 0;
+        return products.stream().mapToDouble(Product::getPrice).sum();
+
     }
 
     @Override
@@ -41,6 +75,7 @@ public class Basket implements BasketOperations {
 
     @Override
     public int getProductsAmount() {
-        return 0;
+        return this.products.size();
+
     }
 }

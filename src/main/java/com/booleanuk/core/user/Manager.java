@@ -7,7 +7,7 @@ public class Manager extends User {
         super(fullName);
     }
 
-    private boolean changeBasketSize(Basket basket, int newSize) {
+    public boolean changeBasketSize(Basket basket, int newSize) {
         return false;
     }
 }

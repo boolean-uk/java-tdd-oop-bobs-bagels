@@ -33,9 +33,9 @@ public class UserTest {
         Basket basket = new Basket();
         String fullName = "Fullname";
         Manager manager1 = new Manager(fullName);
-        Assertions.assertNotEquals(12, basket.getCapacity);
+        Assertions.assertNotEquals(12, basket.getCapacity());
         manager1.changeBasketSize(basket, 12);
-        Assertions.assertEquals(12, basket.getCapacity);
+        Assertions.assertEquals(12, basket.getCapacity());
         //add getter to Basket
     }
 
