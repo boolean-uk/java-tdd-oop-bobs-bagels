@@ -2,6 +2,7 @@ package com.booleanuk.core;
 
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class BasketTest {
@@ -9,15 +10,26 @@ public class BasketTest {
     public void testAddingBagelToBasket() {
         Basket basket = new Basket();
 
-        assertTrue(basket.add(new Bagel(Bagel.BagelType.PLAIN)));
+        assertTrue(basket.addItem(new Bagel(Bagel.BagelType.PLAIN)));
     }
 
     @Test
     public void testRemovingBagelFromBasket() {
         Basket basket = new Basket();
         Bagel bagel = new Bagel(Bagel.BagelType.PLAIN);
-        basket.add(bagel);
+        basket.addItem(bagel);
 
-        assertTrue(basket.remove(bagel.getId()));
+        assertTrue(basket.removeItem(bagel.getId()));
+    }
+
+    @Test
+    public void testCheckingIfBasketIsFull() {
+        Basket basket = new Basket(2);
+
+        basket.addItem(new Bagel(Bagel.BagelType.PLAIN));
+        assertFalse(basket.isFull());
+
+        basket.addItem(new Bagel(Bagel.BagelType.PLAIN));
+        assertTrue(basket.isFull());
     }
 }
