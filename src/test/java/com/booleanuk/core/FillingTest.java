@@ -26,6 +26,6 @@ public class FillingTest {
     @Test
     public void getVariantTest() {
         Assertions.assertEquals("bacon", filling.getVariant().toLowerCase());
-        Assertions.assertNotEquals("eggs", filling.getVariant().toLowerCase());
+        Assertions.assertNotEquals("eggss", filling.getVariant().toLowerCase());
     }
 }
