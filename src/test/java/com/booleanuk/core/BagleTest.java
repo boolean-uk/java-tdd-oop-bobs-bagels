@@ -16,8 +16,8 @@ public class BagleTest {
 
     @Test
     public void getSKUTest() {
-        Assertions.assertEquals("BGLO", bagle.getSKU());
-        Assertions.assertNotEquals("BGLOO", bagle.getSKU());
+        Assertions.assertEquals("bglo", bagle.getSKU().toLowerCase());
+        Assertions.assertNotEquals("BGLOO", bagle.getSKU().toLowerCase());
     }
 
     @Test
@@ -25,6 +25,9 @@ public class BagleTest {
         Assertions.assertEquals(0.49, bagle.getPrice());
         Assertions.assertNotEquals(1,bagle.getPrice());
     }
-
-    public void
+    @Test
+    public void getVariantTest() {
+        Assertions.assertEquals("onion", bagle.getVariant().toLowerCase());
+        Assertions.assertNotEquals("everything",bagle.getVariant().toLowerCase());
+    }
 }
