@@ -7,14 +7,15 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 
 public class TestBasket {
+    public Basket basket;
     @BeforeEach
     public void setUp() {
-        Basket basket = new Basket();
+        basket = new Basket();
     }
 
     @Test
     public void whenAddToBasketExistingBagelType_bagelIsAddedToBasket(){
-        BagelType typeOfBagel = BagelType.ONION;
+        Basket.BagelType typeOfBagel = Basket.BagelType.ONION;
         Bagel bagel = new Bagel(typeOfBagel);
 
         basket.addToBasket(bagel);
