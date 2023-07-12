@@ -1,6 +1,6 @@
 package com.booleanuk.core;
 
-public class Bagel {
+public class Bagel extends Item {
     private final BagelType type;
 
     public Bagel(BagelType type) {
@@ -15,5 +15,9 @@ public class Bagel {
 
         BagelType(String type) {
         }
+    }
+
+    public BagelType getType() {
+        return type;
     }
 }
