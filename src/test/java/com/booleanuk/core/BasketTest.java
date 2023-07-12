@@ -76,4 +76,54 @@ public class BasketTest {
         basket.remove("Coffee","Black");
         Assertions.assertEquals(1, basket.getShoppingList().get(coffee));
     }
+
+    @Test
+    public void shouldChangeBasketCapacity() {
+        int newCapacity = 4;
+        basket.changeCapacity(newCapacity);
+        Assertions.assertEquals(newCapacity, basket.getCapacity());
+    }
+
+    @Test
+    public void shouldNotChangeBasketCapacityToNegativeValue() {
+        //Setup
+        int oldCapacity = basket.getCapacity();
+        int newCapacity = -1;
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outputStream));
+
+        //Execute
+        basket.changeCapacity(newCapacity);
+        String output = outputStream.toString().trim();
+
+        //Verify
+        //should not change capacity
+        Assertions.assertEquals(oldCapacity, basket.getCapacity());
+        //should print message
+        Assertions.assertTrue(output.contains("Capacity cannot be less than 1."));
+
+    }
+    @Test
+    public void shouldNotChangeBasketCapacityForLowerValueThanBasketSize() {
+        //Setup
+        int oldCapacity = basket.getCapacity();
+        int newCapacity = 2;
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outputStream));
+
+        basket.add("Bagel","Onion");
+        basket.add("Coffee","Black");
+        basket.add("Filling", "Bacon");
+        basket.add("Filling", "Egg");
+
+        //Execute
+        basket.changeCapacity(newCapacity);
+        String output = outputStream.toString().trim();
+
+        //Verify
+        //should not change capacity
+        Assertions.assertEquals(oldCapacity, basket.getCapacity());
+        //should print message
+        Assertions.assertTrue(output.contains("Capacity cannot be smaller than no. of items in basket."));
+    }
 }
