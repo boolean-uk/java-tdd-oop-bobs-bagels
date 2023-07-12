@@ -2,35 +2,34 @@ package com.booleanuk.core;
 
 import org.junit.jupiter.api.Test;
 
-import java.util.UUID;
-
+import static com.booleanuk.core.SKU.BGLO;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class BasketTest {
     @Test
-    public void testAddingBagelToBasket() {
+    public void testAddingItemToBasket() {
         Basket basket = new Basket();
 
-        assertTrue(basket.addItem(new Bagel(Bagel.BagelVariant.PLAIN)));
+        assertTrue(basket.addItem(new Item(BGLO)));
     }
 
     @Test
     public void testRemovingBagelFromBasket() {
         Basket basket = new Basket();
-        Bagel bagel = new Bagel(Bagel.BagelVariant.PLAIN);
+        Item bagel = new Item(BGLO);
         basket.addItem(bagel);
 
-        assertTrue(basket.removeItem(bagel.getId()));
+        assertTrue(basket.removeItem(bagel));
     }
 
     @Test
     public void testCheckingIfBasketIsFull() {
         Basket basket = new Basket(2);
 
-        basket.addItem(new Bagel(Bagel.BagelVariant.PLAIN));
+        basket.addItem(new Item(BGLO));
         assertFalse(basket.isFull());
 
-        basket.addItem(new Bagel(Bagel.BagelVariant.PLAIN));
+        basket.addItem(new Item(BGLO));
         assertTrue(basket.isFull());
     }
 
@@ -38,9 +37,9 @@ public class BasketTest {
     public void testDenyingAddingBagelIfBasketIsFull() {
         Basket basket = new Basket(2);
 
-        basket.addItem(new Bagel(Bagel.BagelVariant.PLAIN));
-        basket.addItem(new Bagel(Bagel.BagelVariant.PLAIN));
-        assertFalse(basket.addItem(new Bagel(Bagel.BagelVariant.PLAIN)));
+        basket.addItem(new Item(BGLO));
+        basket.addItem(new Item(BGLO));
+        assertFalse(basket.addItem(new Item(BGLO)));
     }
 
     @Test
@@ -52,33 +51,33 @@ public class BasketTest {
 
         assertThrows(IllegalArgumentException.class , () -> basket.setCapacity(-1));
 
-        basket.addItem(new Bagel(Bagel.BagelVariant.PLAIN));
-        basket.addItem(new Bagel(Bagel.BagelVariant.PLAIN));
+        basket.addItem(new Item(BGLO));
+        basket.addItem(new Item(BGLO));
         assertThrows(IllegalArgumentException.class , () -> basket.setCapacity(1));
     }
 
     @Test
     public void testCheckingIfBagelIsInBasket() {
         Basket basket = new Basket();
-        Bagel bagel = new Bagel(Bagel.BagelVariant.PLAIN);
+        Item item = new Item(BGLO);
 
-        assertFalse(basket.isInBasket(bagel));
+        assertFalse(basket.isInBasket(item));
 
-        basket.addItem(bagel);
-        assertTrue(basket.isInBasket(bagel));
+        basket.addItem(item);
+        assertTrue(basket.isInBasket(item));
     }
 
     @Test
     public void testRemovingNonexistentBagelFromBasket() {
         Basket basket = new Basket();
-        assertFalse(basket.removeItem(UUID.randomUUID()));
+        assertFalse(basket.removeItem(new Item(BGLO)));
     }
 
     @Test
     public void testGettingTotalPriceOfItemsInBasket() {
         Basket basket = new Basket();
-        basket.addItem(new Bagel(Bagel.BagelVariant.PLAIN));
-        basket.addItem(new Bagel(Bagel.BagelVariant.PLAIN));
+        basket.addItem(new Item(BGLO));
+        basket.addItem(new Item(BGLO));
 
         assertEquals(0.78, basket.getTotalPrice());
     }

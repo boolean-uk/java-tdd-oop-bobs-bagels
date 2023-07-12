@@ -1,50 +1,53 @@
 package com.booleanuk.core;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 public class Basket {
     private final static int DEFAULT_CAPACITY = 10;
 
-    private final List<Bagel> bagels;
+    private final Map<Item, Integer> items;
     private int capacity;
 
     public Basket() {
-        bagels = new ArrayList<>();
+        items = new HashMap<>();
         capacity = DEFAULT_CAPACITY;
     }
 
     public Basket(int capacity) {
-        this.bagels = new ArrayList<>();
+        this();
         this.capacity = capacity;
     }
 
-    public boolean addItem(Bagel bagel) {
+    public boolean addItem(Item item) {
         if (isFull()) {
             return false;
         }
-        return bagels.add(bagel);
+
+        if (items.containsKey(item)) {
+            items.put(item, items.get(item) + 1);
+        } else {
+            items.put(item, 1);
+        }
+        return true;
     }
 
-    public boolean removeItem(UUID id) {
-        Bagel bagel = bagels.stream()
-                .filter(b -> b.getId()
-                .equals(id))
-                .findFirst()
-                .orElse(null);
-        if (!isInBasket(bagel)) {
-            return false;
+    public boolean removeItem(Item item) {
+        if (isInBasket(item)) {
+            items.put(item, items.get(item) - 1);
+            if (items.get(item) <= 0) {
+                items.remove(item);
+            }
+            return true;
         }
-        return bagels.remove(bagel);
+        return false;
     }
 
     public boolean isFull() {
-        return bagels.size() >= capacity;
+        return items.size() >= capacity;
     }
 
     public void setCapacity(int newCapacity) {
-        if (newCapacity <= 0 || newCapacity < bagels.size()) {
+        if (newCapacity <= 0 || newCapacity < items.size()) {
             throw new IllegalArgumentException("Incorrect capacity");
         }
         capacity = newCapacity;
@@ -54,7 +57,7 @@ public class Basket {
         return capacity;
     }
 
-    public boolean isInBasket(Bagel bagel) {
-        return bagels.stream().anyMatch(b -> b.getVariant().equals(bagel.getVariant()));
+    public boolean isInBasket(Item item) {
+        return items.containsKey(item);
     }
 }
