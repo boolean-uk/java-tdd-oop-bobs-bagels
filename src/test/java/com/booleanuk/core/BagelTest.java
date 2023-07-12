@@ -40,6 +40,13 @@ public class BagelTest {
     }
     @Test
     public void priceSetterAndGetterTest() {
-
+        Bagel bagel = new Bagel("BGLP");
+        Assertions.assertTrue(bagel.addFilling("FILB"));
+        Assertions.assertTrue(bagel.addFilling("FILB"));
+        Assertions.assertTrue(bagel.addFilling("FILB"));
+        Assertions.assertTrue(bagel.addFilling("FILC"));
+        Assertions.assertEquals(0.87, bagel.getPrice());
+        Assertions.assertTrue(bagel.removeFilling("FILC"));
+        Assertions.assertEquals(0.75, bagel.getPrice());
     }
 }

@@ -33,6 +33,7 @@ public class Bagel extends Item {
                 fillings.put(fillingSku, fillings.get(fillingSku) - 1);
                 if(fillings.get(fillingSku) == 0)
                     fillings.remove(fillingSku);
+                setPrice(getPrice() - itemPriceVariants.get(fillingSku).getPrice());
                 return true;
             }
         return false;
