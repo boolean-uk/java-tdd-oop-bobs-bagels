@@ -26,8 +26,32 @@ public class Basket {
         if(basketCapacity - basketQuantity < quantity)
             return false;
 
+        if(products.containsKey(newProduct)) {
+            products.replace(newProduct, quantity + products.get(newProduct));
+            return true;
+        }
         products.put(newProduct, quantity);
         basketQuantity += quantity;
+        return true;
+    }
+
+    public boolean removeProduct(String sku, int quantity) {
+        if(quantity <= 0)
+            return false;
+
+        Product newProduct = inventory.getProduct(sku);
+        if(!products.containsKey(newProduct))
+            return false;
+        if(products.get(newProduct) < quantity)
+            return false;
+        if(products.get(newProduct) == quantity) {
+            products.remove(newProduct);
+            basketQuantity -= quantity;
+            return true;
+        }
+
+        products.replace(newProduct, products.get(newProduct) - quantity);
+        basketQuantity -= quantity;
         return true;
     }
 }
