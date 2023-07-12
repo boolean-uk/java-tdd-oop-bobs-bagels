@@ -1,38 +1,46 @@
-package com.booleanuk.core;
+package com.booleanuk.extension;
 
-import com.booleanuk.core.types.BagelType;
-import com.booleanuk.core.types.CoffeeType;
-import com.booleanuk.core.types.FillingType;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import static com.booleanuk.extension.types.BagelType.*;
+import static com.booleanuk.extension.types.CoffeeType.*;
+import static com.booleanuk.extension.types.FillingType.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 class BasketTest {
 
     private Basket basket;
-    private Item bagel;
-    private Item coffee;
-    private List<Item> expectedItems;
+    private Bagel bagel;
+    private Coffee coffee;
+    private Map<Item,Integer> expectedItems;
 
     @BeforeEach
     public void setup() {
         basket = new Basket(5);
-        bagel = new Bagel(BagelType.PLAIN, FillingType.BACON);
-        coffee = new Coffee(CoffeeType.BLACK);
-        expectedItems = List.of(bagel, coffee);
+        bagel = new Bagel(PLAIN,BACON);
+        coffee = new Coffee(BLACK);
+        expectedItems = new HashMap<>();
+        expectedItems.put(bagel,1);
+        expectedItems.put(coffee,2);
+
     }
 
     @Test
     public void addAddsItemIfBasketIsNotFull() {
-        List<Item> expectedItems = List.of(bagel, coffee);
+
+
         basket.add(bagel);
         basket.add(coffee);
+        basket.add(coffee);
 
-        assertEquals(2 ,basket.getItems().size());
+        assertEquals(3 ,basket.getItems().size());
         assertEquals(basket.getItems(), expectedItems);
     }
 
@@ -108,7 +116,7 @@ class BasketTest {
         basket.add(bagel);
         basket.add(coffee);
         assertEquals(2 ,basket.getItemCount());
-        assertTrue(basket.getItems().contains(bagel));
+        assertTrue(basket.getItems().keySet().contains(bagel));
 
         basket.remove(coffee);
 
@@ -131,7 +139,7 @@ class BasketTest {
         basket.add(coffee);
 
         assertEquals(2 ,basket.getItemCount());
-        assertTrue(basket.getItems().contains(bagel));
+        assertTrue(basket.getItems().keySet().contains(bagel));
 
         basket.remove(bagel);
 
@@ -173,8 +181,8 @@ class BasketTest {
 
         assertEquals(2, basket.getItems().size());
         assertEquals(expectedItems, basket.getItems());
-        assertTrue(basket.getItems().contains(bagel));
-        assertTrue(basket.getItems().contains(coffee));
+        assertTrue(basket.getItems().keySet().contains(bagel));
+        assertTrue(basket.getItems().keySet().contains(coffee));
     }
 
     @Test

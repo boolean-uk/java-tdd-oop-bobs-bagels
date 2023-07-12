@@ -2,7 +2,7 @@
 
 | Classes          | Methods                         | Fields                                  | Scenario                                    | Output    |
 |------------------|---------------------------------|-----------------------------------------|---------------------------------------------|-----------|
-| Basket           |                                 | int capacity, List<Item> items          |                                             |           |
+| Basket           |                                 | int capacity, Map<Item,Integer> items   |                                             |           |
 |                  | add(Item item)                  |                                         | adding item to basket if basket is not full | void      |
 |                  |                                 |                                         | if basket is full                           | Exception |
 |                  | remove(Item item)               |                                         | remove provided item if is in the basket    | void      |
