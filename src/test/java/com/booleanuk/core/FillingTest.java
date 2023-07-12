@@ -22,4 +22,10 @@ public class FillingTest {
         Assertions.assertEquals(0.12, filling.getPrice());
         Assertions.assertNotEquals(1.20, filling.getPrice());
     }
+
+    @Test
+    public void getFillingTest() {
+        Assertions.assertEquals("bacon", filling.getFilling());
+        Assertions.assertEquals("eggs", filling.getFilling());
+    }
 }
