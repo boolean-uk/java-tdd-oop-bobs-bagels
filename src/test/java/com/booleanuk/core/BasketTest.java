@@ -99,4 +99,10 @@ public class BasketTest {
         assertTrue(bagel.addFilling(new Filling(FILB)));
         assertFalse(bagel.addFilling(new Filling(FILB)));
     }
+
+    @Test
+    public void testGettingAvailableFilling() {
+        Basket basket = new Basket();
+        assertEquals(6, basket.getAvailableFillings().size());
+    }
 }
