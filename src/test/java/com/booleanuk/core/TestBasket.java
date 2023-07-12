@@ -33,4 +33,19 @@ public class TestBasket {
         Assertions.assertFalse(basket.getBagelList().contains(bagel));
     }
 
+    @Test
+    public void whenIsBasketFullCalled_basketCapacityIsChecked(){
+        //Setup
+        basket.addToBasket(new Bagel(Basket.BagelType.ONION));
+        basket.addToBasket(new Bagel(Basket.BagelType.PLAIN));
+        String message = "";
+        try{
+            basket.addToBasket(new Bagel(Basket.BagelType.SESAME));
+        } catch (Exception e) {
+            message = e.getMessage();
+        }
+
+        Assertions.assertEquals("Basket is full", message);
+    }
+
 }
