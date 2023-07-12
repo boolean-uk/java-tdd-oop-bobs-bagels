@@ -32,4 +32,13 @@ public class BasketTest {
         basket.addItem(new Bagel(Bagel.BagelType.PLAIN));
         assertTrue(basket.isFull());
     }
+
+    @Test
+    public void testDenyingAddingBagelIfBasketIsFull() {
+        Basket basket = new Basket(2);
+
+        basket.addItem(new Bagel(Bagel.BagelType.PLAIN));
+        basket.addItem(new Bagel(Bagel.BagelType.PLAIN));
+        assertFalse(basket.addItem(new Bagel(Bagel.BagelType.PLAIN)));
+    }
 }
