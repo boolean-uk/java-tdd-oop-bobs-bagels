@@ -18,7 +18,7 @@ public class Item {
         itemPriceVariants.put("BGLS", new ItemPriceVariant("Sesame", 0.49));
         itemPriceVariants.put("COFB", new ItemPriceVariant("Black", 0.99));
         itemPriceVariants.put("COFW", new ItemPriceVariant("White", 1.19));
-        itemPriceVariants.put("COFC", new ItemPriceVariant("Capuccino", 1.29));
+        itemPriceVariants.put("COFC", new ItemPriceVariant("Cappuccino", 1.29));
         itemPriceVariants.put("COFL", new ItemPriceVariant("Latte", 1.29));
         itemPriceVariants.put("FILB", new ItemPriceVariant("Bacon", 0.12));
         itemPriceVariants.put("FILE", new ItemPriceVariant("Egg", 0.12));
@@ -48,11 +48,10 @@ public class Item {
         fillCoffeeSkus();
         fillFillingsSkus();
     }
-    public Item(String sku) {
-        ItemPriceVariant ipv = com.booleanuk.core.Item.itemPriceVariants.get(sku);
-        this.setSku(sku);
-        this.setVariant(ipv.getVariant());
-        this.setPrice(ipv.getPrice());
+    public Item(String sku, double price, String variant) {
+        this.sku = sku;
+        this.price = price;
+        this.variant = variant;
     }
     public String getSku() {
         return sku;
