@@ -16,4 +16,10 @@ public class FillingTest {
         Assertions.assertEquals("filb", filling.getSKU().toLowerCase());
         Assertions.assertNotEquals("filbb", filling.getSKU().toLowerCase());
     }
+
+    @Test
+    public void getPriceTest() {
+        Assertions.assertEquals(0.12, filling.getPrice());
+        Assertions.assertNotEquals(1.20, filling.getPrice());
+    }
 }
