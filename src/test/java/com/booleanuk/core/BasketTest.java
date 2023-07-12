@@ -132,4 +132,16 @@ public class BasketTest {
         //Then
         Assertions.assertFalse(result);
     }
+
+    @Test
+    public void testChangeBasketCapacity_WhenQuantityIsValid_ShouldReturnTrue() {
+        //Given
+        Basket basket = new Basket(inventory, 10);
+
+        //When
+        boolean result = basket.changeBasketCapacity(5);
+
+        //Then
+        Assertions.assertTrue(result);
+    }
 }
