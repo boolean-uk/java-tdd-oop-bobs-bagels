@@ -65,10 +65,11 @@ public class Bagel {
 ```
 
 ```java
+
+@Getter
 public class Basket {
     private final Map<Bagel, Integer> bagels = new HashMap<>();
     private final Map<Coffee, Integer> coffees = new HashMap<>();
-    @Setter
     private int capacity;
 
     public Basket(int capacity) {
@@ -94,6 +95,10 @@ public class Basket {
     public BigDecimal totalPrice() {
         // TODO
         return null;
+    }
+
+    public void resize(int capacity) {
+        // TODO
     }
 
     private int itemAmount() {
