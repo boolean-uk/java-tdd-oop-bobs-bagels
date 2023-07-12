@@ -52,4 +52,32 @@ public class BasketTest {
         //Then
         Assertions.assertFalse(result);
     }
+
+    @Test
+    public void testAddProduct_WhenQuantityIsNotValid_ShouldReturnFalse() {
+        //Given
+        Basket basket = new Basket(inventory, 10);
+
+        //When
+        boolean result = basket.addProduct("BGLO", -2);
+
+        //Then
+        Assertions.assertFalse(result);
+    }
+
+    @Test
+    public void testAddProduct_WhenBasketIsFull_ShouldReturnFalse() {
+        //Given
+        Basket basket = new Basket(inventory, 10);
+
+        //When
+        boolean result1 = basket.addProduct("BGLO", 2);
+        boolean result2 = basket.addProduct("BGLO", 4);
+        boolean result3 = basket.addProduct("BGLO", 5);
+
+        //Then
+        Assertions.assertTrue(result1);
+        Assertions.assertTrue(result2);
+        Assertions.assertFalse(result3);
+    }
 }
