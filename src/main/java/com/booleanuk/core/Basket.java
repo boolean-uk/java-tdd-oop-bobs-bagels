@@ -10,14 +10,14 @@ public class Basket {
     public int getCapacity() {
         return capacity;
     }
-    public void setCapacity(int capacity) {
+    public boolean setCapacity(int capacity) {
+        if(capacity < currentAmount)
+            return false;
         this.capacity = capacity;
+        return true;
     }
     public int getCurrentAmount() {
         return currentAmount;
-    }
-    public void setCurrentAmount(int currentAmount) {
-        this.currentAmount = currentAmount;
     }
     public ArrayList<Item> getItems() {
         return items;
@@ -37,14 +37,14 @@ public class Basket {
     }
 
     public boolean addBagel(Bagel bagel) {
-        if(currentAmount == capacity)
+        if(isFull())
             return false;
         items.add(bagel);
         ++currentAmount;
         return true;
     }
     public boolean addBagel(BagelType bagelType) {
-        if(currentAmount == capacity)
+        if(isFull())
             return false;
         items.add(new Bagel(bagelType));
         ++currentAmount;
@@ -69,4 +69,8 @@ public class Basket {
         }
         return false;
     }
+    public boolean isFull() {
+        return currentAmount == capacity;
+    }
+
 }
