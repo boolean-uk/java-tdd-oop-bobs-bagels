@@ -6,6 +6,7 @@
 - Design a domain from user stories
 - Use test driven development to build an application
 - Use object-oriented concepts to manage the complexity of the project
+- CHANGED SOMETHING?
 
 ## Set up instructions
 - Fork this repository and clone the forked version to your machine
@@ -129,6 +130,7 @@ You should only work on these after completing the core criteria above.
 When you run a test, it's either going to pass or fail. When it fails, you'll be presented with a big red stream of text. This is called a stack trace and, though intimidating, does contain some useful information.
 
 One of the core skills of a developer is debugging stack traces like this. The stack trace details in which classes & files the failure happened, and gives you a line number at the end. Most of the lines in the stack trace are irrelevant most of the time, you want to try and identify the files that you're actually working with.
+
 
 In the sample screenshot below, we've tried to complete the first step of the exercise but provided an invalid value. Then we run the test associated with it and we see a big red stack trace, a test failure.
 
