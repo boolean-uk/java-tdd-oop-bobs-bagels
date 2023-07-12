@@ -17,12 +17,14 @@ public class BobBagelTest {
         //when
         Basket basket = new Basket();
         Bagel bagel = new Bagel();
-        int quantity =1;
+        int quantity = 1;
         //given
         basket.add(bagel,quantity);
         //then
         assertTrue(basket.getBasket().containsKey(bagel));
     }
+
+
 
 
 
