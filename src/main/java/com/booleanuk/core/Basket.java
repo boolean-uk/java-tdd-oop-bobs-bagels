@@ -75,9 +75,10 @@ public class Basket {
         return item.getPrice();
     }
 
-    public List<SKU> getAvailableFillings() {
+    public List<Filling> getAvailableFillings() {
         return Arrays.stream(SKU.values())
                 .filter(val -> val.getName().equals("Filling"))
+                .map(Filling::new)
                 .toList();
 
     }

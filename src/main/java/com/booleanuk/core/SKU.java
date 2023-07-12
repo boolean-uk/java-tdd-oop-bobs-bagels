@@ -39,4 +39,13 @@ public enum SKU {
     public String getVariant() {
         return variant;
     }
+
+    @Override
+    public String toString() {
+        return  name() + "{" +
+                "price=" + price +
+                ", name='" + name + '\'' +
+                ", variant='" + variant + '\'' +
+                '}';
+    }
 }
