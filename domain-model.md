@@ -16,16 +16,16 @@
 |         | String variant |                                |                                                   |         |
 |         |                |                                |                                                   |         |
 
-| Classes   | Members                     | Methods                                                 | Scenario                             | Outputs |
-|-----------|-----------------------------|---------------------------------------------------------|--------------------------------------|---------|
-| Inventory | List<Product> inventoryList | getProductBySKU(String sku)                             | if sku exists                        | Product |
-|           |                             |                                                         | if sku does not exist                | null    |
-|           |                             | getProductByNameAndVariant(String name, String variant) | if name and variant exists           | Product |
-|           |                             |                                                         | if name and variant does not exist   | null    |
-|           |                             | getPriceBySKU(String sku)                               | if sku exists                        | double  |
-|           |                             |                                                         | if sku does not exist                | null    |
-|           |                             | getPriceByNameAndVariant(String name, String variant)   | if name and variant exists           | double  |
-|           |                             |                                                         | if name and variant does not exist   | null    |
+| Classes   | Members                     | Methods                                                 | Scenario                         | Outputs |
+|-----------|-----------------------------|---------------------------------------------------------|----------------------------------|---------|
+| Inventory | List<Product> inventoryList | getProductBySKU(String sku)                             | if sku exists                    | Product |
+|           |                             |                                                         | if sku does not exist            | null    |
+|           |                             | getProductByNameAndVariant(String name, String variant) | if name and variant exists       | Product |
+|           |                             |                                                         | if name and variant do not exist | null    |
+|           |                             | getPriceBySKU(String sku)                               | if sku exists                    | double  |
+|           |                             |                                                         | if sku does not exist            | 0.00    |
+|           |                             | getPriceByNameAndVariant(String name, String variant)   | if name and variant exists       | double  |
+|           |                             |                                                         | if name and variant do not exist | 0.00    |
 
 
 
