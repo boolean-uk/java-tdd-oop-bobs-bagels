@@ -5,11 +5,11 @@ import java.util.List;
 
 public class Basket {
     private int capacity;
-    private List<String> bagels;
+    private List<Item> items;
 
     public Basket(int capacity) {
         this.capacity = capacity;
-        this.bagels = new ArrayList<>();
+        this.items = new ArrayList<>();
     }
 
     public int getCapacity() {
@@ -20,42 +20,41 @@ public class Basket {
         this.capacity = capacity;
     }
 
-    public List<String> getBagels() {
-        return bagels;
-    }
-
-    public void setBagels(List<String> bagels) {
-        this.bagels = bagels;
-    }
-
-    public void add(String bagel) {
-        if (isFull() && !checkIfExists(bagel)) System.out.println("Basket is full!");
-        else bagels.add(bagel);
-    }
-
-    public void remove(String bagel) {
-        if (checkIfExists(bagel)) bagels.remove(bagel);
-        else System.out.println("No such bagel in a basket");
-    }
-
     public boolean isFull() {
-        return bagels.size() >= capacity;
+        return items.size() >= capacity;
     }
 
-    public boolean checkIfExists(String bagel) {
-        return bagels.contains(bagel);
+    public boolean checkIfExists(Item item) {
+        return items.contains(item);
     }
 
-
-    public int getBagelCount() {
-        return bagels.size();
+    public int getItemCount() {
+        return items.size();
     }
 
     public int freeSpace() {
-        return capacity - getBagelCount();
+        return capacity - getItemCount();
     }
 
     public void clearBasket() {
-        bagels.clear();
+        items.clear();
+    }
+
+    public List<Item> getItems() {
+        return items;
+    }
+
+    public void add(Item item) {
+        if (isFull()) throw new IllegalStateException("You can't add this item");
+        else items.add(item);
+    }
+
+    public void remove(Item item) {
+        if (checkIfExists(item)) items.remove(item);
+        else throw new IllegalArgumentException("You can't remove this item");
+    }
+
+    public double getTotalCost() {
+          return items.stream().map(Item::getPrice).reduce(0L, Long::sum) / 100.0;
     }
 }
