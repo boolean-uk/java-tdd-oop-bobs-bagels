@@ -31,9 +31,8 @@ public class Basket {
     }
 
     public int getItemCount() {
-        System.out.println(items);
-        return items.size();
-        //return items.values().stream().mapToInt(Integer::intValue).sum();
+        System.out.println(items.values());
+        return items.values().stream().mapToInt(Integer::intValue).sum();
     }
 
     public int freeSpace() {
@@ -51,8 +50,8 @@ public class Basket {
     public void add(Item item) {
         if (isFull()) throw new IllegalStateException("You can't add this item");
         else{
-            int quantity = items.getOrDefault(item,1);
-            items.put(item,quantity);
+            int quantity = items.getOrDefault(item,0);
+            items.put(item,quantity + 1);
         }
     }
 

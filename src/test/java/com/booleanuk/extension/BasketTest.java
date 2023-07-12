@@ -40,7 +40,7 @@ class BasketTest {
         basket.add(coffee);
         basket.add(coffee);
 
-        assertEquals(3 ,basket.getItems().size());
+        assertEquals(3 ,basket.getItemCount());
         assertEquals(basket.getItems(), expectedItems);
     }
 
@@ -137,7 +137,6 @@ class BasketTest {
     public void getItemCountReturnsProperValue() {
         basket.add(bagel);
         basket.add(coffee);
-
         assertEquals(2 ,basket.getItemCount());
         assertTrue(basket.getItems().keySet().contains(bagel));
 
