@@ -18,5 +18,24 @@ public class Bagel extends Product{
         return filling;
     }
 
+    public String chooseFilling(Product filling) {
+        if(filling.getName().equals("Filling")){
+            this.setPrice(this.getPrice() + filling.getPrice());
+            this.filling = filling;
+            return "Filling added to bagel";
+        }
+        else{ return "Category of product is not \"Filling\""; }
+    }
+
+    public String chooseFilling(String variant) {
+        Inventory inventory = new Inventory();
+        Product filling = inventory.getProductByNameAndVariant("Filling", variant);
+        if(filling != null){
+            this.setPrice(this.getPrice() + filling.getPrice());
+            this.filling = filling;
+            return "Filling added to bagel";
+        }
+        else{ return "Variant does not exist"; }
+    }
 
 }
