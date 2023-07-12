@@ -5,6 +5,7 @@ import java.util.List;
 
 public class Basket {
     public static int capacity;
+    private Inventory inventory = Inventory.getInstance();
 
     public Basket(){
         capacity = 2; //starting size of the basket
@@ -12,6 +13,7 @@ public class Basket {
     }
 
     private List<Bagel> bagelList = new ArrayList<Bagel>();
+
     public List<Bagel> getBagelList()
     {
         return bagelList;
@@ -38,12 +40,16 @@ public class Basket {
     }
 
     public double getTotalCost() {
-        double price =0;
+        double cost =0;
         for(Bagel bagel:bagelList)
         {
-            inventory
+            for(InventoryItem i : inventory.getList()){
+                if (bagel.getSku().equals(i.sku)){
+                    cost += i.price;
+                }
+            }
         }
-        return price;
+        return cost;
     }
 
 }
