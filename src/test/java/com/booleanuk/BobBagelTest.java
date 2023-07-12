@@ -31,10 +31,13 @@ public class BobBagelTest {
         int quantity = 1;
         basket.add(bagel,quantity);
         //given
-        basket.removeProduct(1);
+        basket.removeProduct(bagel,1);
         //then
         assertFalse(basket.getBasket().containsKey(bagel));
     }
+
+    @Test
+    public void shouldCheckBasketCapacity(){}
 
 
 
