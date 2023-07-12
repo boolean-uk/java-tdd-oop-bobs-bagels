@@ -29,8 +29,8 @@ public class TestBasket {
         Basket.BagelType typeOfBagel = Basket.BagelType.ONION;
         Bagel bagel = new Bagel(typeOfBagel);
         basket.addToBasket(bagel);
-        basket.removeFromBasket(0);
-        Assertions.assertEquals(List.of(null),basket.getBagelList());
+        basket.removeFromBasket(bagel);
+        Assertions.assertFalse(basket.getBagelList().contains(bagel));
     }
 
 }

@@ -15,5 +15,8 @@ public class Basket {
     {
         bagelList.add(bagel);
     }
+    public void removeFromBasket(Bagel bagel){
+        bagelList.remove(bagel);
+    }
 
 }
