@@ -11,6 +11,10 @@ public class BobBagelTest {
 
 
 
+
+
+
+
     @Test
     public void shouldAddBagelToBasket(){
         //when
@@ -49,10 +53,19 @@ public class BobBagelTest {
 
     @Test
     public void shouldReturnTotalBasketCost(){
+        //when
         Basket basket = new Basket();
-        Bagel bagel = new Bagel();
-        int quantity = 1;
+        Bagel bagel = new Bagel("Onion Bagel", 1,"BGLO");
+        Bagel bagel1 = new Bagel("Plain Bagel", 2,"BGLO");
+        int quantity = 3;
+
         basket.add(bagel,quantity);
+        basket.add(bagel1, quantity*2);
+        //given
+        double totalCost = basket.getTotalPrice();
+
+        //then
+        assertEquals(15,totalCost);
     }
 
 
