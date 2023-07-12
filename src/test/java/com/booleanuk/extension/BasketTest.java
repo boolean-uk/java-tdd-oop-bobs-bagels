@@ -176,11 +176,12 @@ class BasketTest {
     public void getItemsReturnProperMap() {
         basket.add(bagel);
 
-        assertEquals(1, basket.getItems().size());
+        assertEquals(1, basket.getItems().keySet().size());
 
         basket.add(coffee);
+        basket.add(coffee);
 
-        assertEquals(2, basket.getItems().size());
+        assertEquals(2, basket.getItems().keySet().size());
         assertEquals(expectedItems, basket.getItems());
         assertTrue(basket.getItems().keySet().contains(bagel));
         assertTrue(basket.getItems().keySet().contains(coffee));
