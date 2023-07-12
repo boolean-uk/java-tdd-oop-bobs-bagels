@@ -51,6 +51,24 @@ public class BasketTest {
 
     }
 
+    @Test
+    public void shouldNotAddBagelToBasketWhenBasketIsFull() {
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outputStream));
+        basket.changeCapacity(2);
+        basket.add("Bagel","Onion");
+        basket.add("Coffee","Black");
+        basket.add("Filling", "Bacon");
+
+        String output = outputStream.toString().trim();
+
+        //should not add last item
+        Assertions.assertFalse(basket.getShoppingList().containsKey(filling));
+
+        //should print message
+        Assertions.assertTrue(output.contains("Basket is full."));
+
+    }
 
     @Test
     public void removeTest(){
