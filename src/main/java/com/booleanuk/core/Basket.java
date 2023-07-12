@@ -45,7 +45,7 @@ public class Basket {
             return false;
         switch (itemType.getSku().substring(0, 3)) {
             case "BGL" -> items.add(new Bagel((BagelType) itemType));
-            case "COF" -> items.add(new Item(itemType.getSku(), itemType.getPrice(), itemType.getVariant()));
+            case "COF" -> items.add(new Item(itemType));
         }
         ++currentAmount;
         return true;
@@ -59,10 +59,9 @@ public class Basket {
     }
     public boolean removeItem(IItemType itemType) {
         Item toRemove = null;
-        for(Item item : items) {
+        for(Item item : items)
             if(item.getSku().equals(itemType.getSku()))
                 toRemove = item;
-        }
         if(toRemove != null) {
             items.remove(toRemove);
             return true;
@@ -76,7 +75,6 @@ public class Basket {
         double totalPrice = 0;
         for (Item item : items)
             totalPrice += item.getPrice();
-        return totalPrice;
-
+        return Math.round(totalPrice * 100) / (double)100;
     }
 }

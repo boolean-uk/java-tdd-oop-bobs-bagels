@@ -12,6 +12,11 @@ public class Item {
         this.price = price;
         this.variant = variant;
     }
+    public Item(IItemType itemType) {
+        this.sku = itemType.getSku();
+        this.price = itemType.getPrice();
+        this.variant = itemType.getVariant();
+    }
     public String getSku() {
         return sku;
     }
