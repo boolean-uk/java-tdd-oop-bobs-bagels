@@ -5,9 +5,9 @@ import java.util.HashMap;
 import java.util.HashSet;
 
 public class Bagel extends Item {
-    public HashSet<String> bagelsSkus;
+    public static HashSet<String> bagelsSkus;
     public HashMap<String, Integer> fillings;
-    public void fillBagelsSkus() {
+    public static void fillBagelsSkus() {
         bagelsSkus = new HashSet<String>();
         bagelsSkus.add("BGLO");
         bagelsSkus.add("BGLP");

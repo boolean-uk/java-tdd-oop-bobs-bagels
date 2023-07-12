@@ -5,7 +5,7 @@ import java.util.HashSet;
 public class Filling extends Item {
 
     public static HashSet<String> fillingsSkus;
-    public void fillFillingsSkus() {
+    public static void fillFillingsSkus() {
         fillingsSkus = new HashSet<String>();
         fillingsSkus.add("FILB");
         fillingsSkus.add("FILE");
