@@ -1,4 +1,4 @@
 package com.booleanuk.core;
 
-public class Filling {
+public class Filling extends Product {
 }
