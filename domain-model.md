@@ -115,7 +115,8 @@ I want customers to only be able to order things that we stock in our inventory.
 |---------|------------|------------------------------------|----------|---------|
 | Manager |            | checkProductPrice(Product product) |          |         |
 
-| Class | Attributes                       | Methods                                     | Scenario                    | Outputs |
-|-------|----------------------------------|---------------------------------------------|-----------------------------|---------|
-| Store | availableProducts:List<Products> | isProductAvailable(Product product):boolean | if product is available     | true    |
-|       |                                  | isProductAvailable(Product product):boolean | if product is not available | false   |
+| Class | Attributes                       | Methods                                     | Scenario                    | Outputs        |
+|-------|----------------------------------|---------------------------------------------|-----------------------------|----------------|
+| Store | availableProducts:List<Products> | isProductAvailable(Product product):boolean | if product is available     | true           |
+|       |                                  | isProductAvailable(Product product):boolean | if product is not available | false          |
+|       |                                  | loadAvailableProducts(String file)          | loads the products list     | List<Products> |
