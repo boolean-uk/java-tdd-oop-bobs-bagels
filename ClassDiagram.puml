@@ -1,0 +1,56 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+'abstract class AbstractList
+'abstract AbstractItem
+'interface List
+'interface Collection
+
+'List <|-- AbstractList
+'Collection <|-- AbstractCollection
+'
+'Collection <|- List
+'AbstractCollection <|- AbstractList
+'AbstractList <|-- ArrayList
+
+'class ArrayList {
+'Object[] elementData
+'size()
+'}
+abstract class AbstractItem
+Bagel <|-- AbstractItem
+Coffee <|-- AbstractItem
+Filling <|-- AbstractItem
+Basket *-- Inventory
+Basket o-- AbstractItem
+
+class Inventory{
+}
+class Basket{
+}
+class Bagel{
+}
+class Coffee{
+}
+class Filling{
+}
+
+enum Sku {
+BGLO
+BGLP
+BGLE
+BGLS
+COFB
+COFW
+COFC
+COFL
+FILB
+FILE
+FILC
+FILX
+FILS
+FILH
+
+}
+
+@enduml
