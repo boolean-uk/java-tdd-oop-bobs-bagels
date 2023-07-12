@@ -33,15 +33,11 @@ public class Inventory {
     }
 
     public Product getProductBySKU(String sku) {
-        if(inventoryList.stream().anyMatch(e -> e.getSku().equals(sku))){
-            return inventoryList.stream().filter(e -> e.getSku().equals(sku)).findFirst().get();
-        }else return null;
+            return inventoryList.stream().filter(e -> e.getSku().equals(sku)).findFirst().orElse(null);
     }
 
     public Product getProductByNameAndVariant(String name, String variant) {
-        if(inventoryList.stream().anyMatch(e -> (e.getName().equals(name)&&e.getVariant().equals(variant)))){
-            return inventoryList.stream().filter(e -> (e.getName().equals(name)&&e.getVariant().equals(variant))).findFirst().get();
-        }else return null;
+        return inventoryList.stream().filter(e -> (e.getName().equals(name)&&e.getVariant().equals(variant))).findFirst().orElse(null);
     }
 
     public double getPriceBySKU(String sku) {
