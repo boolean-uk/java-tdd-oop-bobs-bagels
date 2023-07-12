@@ -5,28 +5,28 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class ProductTest {
-    private Product bagel;
+    private Product coffee;
     private static final String SKU = "BGLO";
     private static final double PRICE = 0.49;
     private static final String VARIANT = "Onion";
 
     @BeforeEach
     public void setUp() {
-        bagel = new Bagel(SKU, PRICE, VARIANT);
+        coffee = new Coffee(SKU, PRICE, VARIANT);
     }
 
     @Test
     public void testGetSKU(){
-        Assertions.assertEquals(SKU, bagel.getSKU());
+        Assertions.assertEquals(SKU, coffee.getSKU());
     }
 
     @Test
     public void testGetPrice(){
-        Assertions.assertEquals(PRICE, bagel.getPrice());
+        Assertions.assertEquals(PRICE, coffee.getPrice());
     }
 
     @Test
     public void testGetVariant(){
-        Assertions.assertEquals(VARIANT, bagel.getVariant());
+        Assertions.assertEquals(VARIANT, coffee.getVariant());
     }
 }

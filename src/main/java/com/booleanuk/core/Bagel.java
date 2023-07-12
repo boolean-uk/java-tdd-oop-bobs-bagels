@@ -8,8 +8,9 @@ import java.util.ListIterator;
 public class Bagel extends Product{
     private List<Filling> fillings;
 
-    public Bagel(String SKU, Double price, String variant) {
+    public Bagel(String SKU, Double price, String variant, List<Filling> fillings) {
         super(SKU, price, variant);
+        this.fillings = fillings;
     }
 
     public List<Filling> getFillings(){
