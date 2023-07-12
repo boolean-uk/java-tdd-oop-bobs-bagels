@@ -1,9 +1,9 @@
 package com.booleanuk.core;
 
 public abstract class Product {
-    private String SKU;
-    private Double price;
-    private String variant;
+    protected String SKU;
+    protected Double price;
+    protected String variant;
 
     public Product(String SKU, Double price, String variant){
         this.SKU = SKU;
