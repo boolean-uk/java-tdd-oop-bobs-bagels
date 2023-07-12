@@ -61,7 +61,6 @@ class BasketTest {
         basket.add(bagel);
         basket.add(bagel);
         basket.add(coffee);
-
         basket.remove(bagel);
 
         assertEquals(2 ,basket.getItems().size());
