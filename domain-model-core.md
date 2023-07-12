@@ -67,12 +67,12 @@ I want customers to only be able to order things that we stock in our inventory.
 | Basket | Hashmap<String, Integer> productsCount | boolean add(String productVariant, int amount)    | if there are less products in total than capacity                                             | true                             |
 |        |                                        |                                                   | if there are more products in total than capacity or the productVariant is N/A or amount <= 0 | false                            |
 |        | int capacity                           |                                                   |                                                                                               |                                  |
-|        | int currentAmount                      | boolean remove(String productVariant, int amount) | if the amount of products of sku in basket is >= amount                                       | true                             |
+|        | int currentAmountOfProducts            | boolean remove(String productVariant, int amount) | if the amount of products of sku in basket is >= amount                                       | true                             |
 |        |                                        |                                                   | if the amount of products of sku in basket is < amount or amount <= 0                         | false                            |
 |        |                                        | boolean changeCapacity(int newCapacity)           | if newCapacity >= currentAmount                                                               | true                             |
 |        |                                        |                                                   | if newCapacity < currentAmount                                                                | false                            |
 |        |                                        | double totalCost()                                | always                                                                                        | total cost of products in basket |
-|        |                                        | double checkCost(String productVariant)           | always                                                                                        | cost of product by sku           |
+|        |                                        | double checkCostOfProduct(String productVariant)  | always                                                                                        | cost of product by sku           |
 
 | Class   | Field          | Method | Condition | Output |
 |---------|----------------|--------|-----------|--------|
@@ -82,9 +82,9 @@ I want customers to only be able to order things that we stock in our inventory.
 |         | String variant |        |           |        |
 
 
-| Class     | Field                    | Method                         | Condition                         | Output          |
-|-----------|--------------------------|--------------------------------|-----------------------------------|-----------------|
-| Inventory | Hashmap<String, Product> | Product getProduct(String sku) | if product exist in the inventory | Product product |
-|           |                          |                                | if product doesn't exists         | null            |
+| Class     | Field                             | Method                                    | Condition                         | Output          |
+|-----------|-----------------------------------|-------------------------------------------|-----------------------------------|-----------------|
+| Inventory | Hashmap<String, Product> products | Product getProduct(String productVariant) | if product exist in the inventory | Product product |
+|           |                                   |                                           | if product doesn't exists         | null            |
 
 
