@@ -24,14 +24,29 @@ public class Inventory {
         bagels.add(bagle2);
         bagels.add(bagle3);
         bagels.add(bagle4);
+        Coffee coffee1 = new Coffee("COFB",  	0.99,"Black");
+        Coffee coffee2 = new Coffee("COFW",  	1.19,"White");
+        Coffee coffee3 = new Coffee("COFC",  	1.29,"Capuccino");
+        Coffee coffee4 = new Coffee("COFL",  	1.29,"Latte");
+
+        coffees.add(coffee1);
+        coffees.add(coffee2);
+        coffees.add(coffee3);
+        coffees.add(coffee4);
+
         Filling filling1 = new Filling("FILB", 0.12, "Bacon");
-        Filling filling2 = new Filling("FILB", 0.12, "Bacon");
-        Filling filling3 = new Filling("FILB", 0.12, "Bacon");
-        Filling filling4 = new Filling("FILB", 0.12, "Bacon");
+        Filling filling2 = new Filling("FILE", 0.12, "Egg");
+        Filling filling3 = new Filling("FILC", 0.12, "Cheese");
+        Filling filling4 = new Filling("FILX", 0.12, "Cream Cheese");
+        Filling filling5 = new Filling("FILS", 0.12, "Smoked Salmon");
+        Filling filling6 = new Filling("FILH", 0.12, "Ham");
         fillings.add(filling1);
         fillings.add(filling2);
         fillings.add(filling3);
         fillings.add(filling4);
+        fillings.add(filling5);
+        fillings.add(filling6);
+
 
     }
     public void addBagel(Bagle bagel) {
