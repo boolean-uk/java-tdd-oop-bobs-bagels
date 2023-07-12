@@ -2,7 +2,6 @@ package com.booleanuk;
 
 import com.booleanuk.core.Bagel;
 import com.booleanuk.core.Basket;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -62,10 +61,44 @@ public class BobBagelTest {
         basket.add(bagel,quantity);
         basket.add(bagel1, quantity*2);
         //given
-        double totalCost = basket.getTotalPrice();
+        double totalCost = basket.getTotalCost();
 
         //then
         assertEquals(15,totalCost);
+    }
+
+
+    @Test
+    public  void shouldReturnTrueIfSanityIsOk(){
+        //when
+        Basket basket = new Basket();
+        Bagel bagel = new Bagel("Onion Bagel", 1,"BGLO");
+        Bagel bagel1 = new Bagel("Plain Bagel", 2,"BGLO");
+        int quantity = 3;
+
+        basket.add(bagel,quantity);
+        //given
+       boolean sanity = basket.removeProduct(bagel,1);
+        //then
+        assertTrue(sanity);
+
+    }
+
+
+    @Test
+    public  void shouldReturnFalseIfSanityIsNotOK(){
+        //when
+        Basket basket = new Basket();
+        Bagel bagel = new Bagel("Onion Bagel", 1,"BGLO");
+        Bagel bagel1 = new Bagel("Plain Bagel", 2,"BGLO");
+        int quantity = 3;
+
+        basket.add(bagel,quantity);
+        //given
+        boolean sanity = basket.removeProduct(bagel1,1);
+        //then
+        assertFalse(sanity);
+
     }
 
 

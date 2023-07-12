@@ -17,14 +17,18 @@ public class Basket {
         basket.put(bagel,quantity);
     }
 
-    public void removeProduct(Bagel bagel, int quantity) {
-        if(basket.containsKey(bagel)){
-            if(basket.get(bagel) > quantity){
-                basket.replace(bagel,basket.get(bagel)-1 );
+    public boolean removeProduct(Product product, int quantity) {
+        if(checkSanity(product)){
+            if(basket.get(product) > quantity){
+                basket.replace(product,basket.get(product)-1 );
+                return  true;
             }else{
-                basket.remove(bagel);
+                basket.remove(product);
+                return true;
             }
         }
+        System.out.println("Are you ok?");
+        return false;
     }
 
     public void changeCapacity(int capacity) {
@@ -37,5 +41,22 @@ public class Basket {
 
     public int getCapacity() {
         return capacity;
+    }
+
+    public double getTotalCost() {
+        double totalCost = 0;
+        for (Product product :
+               basket.keySet()) {
+            if(basket.containsKey(product)) {
+                totalCost = totalCost + product.getPrice() * basket.get(product);
+            }
+        }
+
+        return totalCost;
+    }
+
+
+   private boolean checkSanity(Product product){
+        return  basket.containsKey(product);
     }
 }
