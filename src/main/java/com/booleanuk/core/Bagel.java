@@ -4,6 +4,7 @@ package com.booleanuk.core;
 import lombok.Builder;
 
 import java.math.BigDecimal;
+import java.util.Arrays;
 
 @Builder
 public class Bagel {
@@ -16,7 +17,9 @@ public class Bagel {
     }
 
     public BigDecimal price() {
-        // TODO
-        return null;
+        var price = type.getPrice();
+        return Arrays.stream(fillings)
+                .map(Filling::getPrice)
+                .reduce(price, BigDecimal::add);
     }
 }
