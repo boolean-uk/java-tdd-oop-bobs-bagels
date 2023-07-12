@@ -11,4 +11,16 @@ public class Bagle {
         this.price = price;
         this.variant = variant;
     }
+
+    public String getSKU() {
+        return SKU;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public String getVariant() {
+        return variant;
+    }
 }
