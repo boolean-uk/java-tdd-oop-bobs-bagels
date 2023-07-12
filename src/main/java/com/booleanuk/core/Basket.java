@@ -11,15 +11,23 @@ public class Basket {
     }
 
     public boolean add(Product product) {
-        if (list.size() >= capacity) {
+        if (list.size() <= capacity) {
             return list.add(product);
         } else {
             return false;
         }
+
+    }
+
+    public ArrayList<Product> getList() {
+        return list;
     }
 
     public boolean remove(Product product){
-        return list.remove(product);
+        if (list.contains(product)) {
+            return list.remove(product);
+        }
+        return false;
     }
 
     public int getCapacity() {

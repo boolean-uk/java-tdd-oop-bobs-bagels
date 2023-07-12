@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 public class ProductManager {
@@ -15,12 +16,25 @@ public class ProductManager {
         basket = new Basket(10);
     }
 
-    public void orderBagel(String type) {
-
+    public boolean orderBagel(String variant) {
+        for (Map.Entry<String, Product> entry : inventory.entrySet()) {
+            if (entry.getValue().getVariant().equals(variant)) {
+                basket.add(entry.getValue());
+                return true;
+            }
+        }
+        System.out.println("Failed to find the product");
+        return false;
     }
 
-    public void removeBagel(String type) {
-
+    public boolean removeBagel(String variant) {
+        for (Map.Entry<String, Product> entry : inventory.entrySet()) {
+            if (entry.getValue().getVariant().equals(variant)) {
+                return basket.remove(entry.getValue());
+            }
+        }
+        System.out.println("Failed to remove the product");
+        return false;
     }
 
     public HashMap<String, Product> getInventory() {
@@ -75,5 +89,9 @@ public class ProductManager {
             System.out.println();
         }
         scanner.close();
+    }
+
+    public Basket getBasket() {
+        return basket;
     }
 }
