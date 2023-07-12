@@ -179,7 +179,7 @@ public class BasketTest {
         Optional<Double> price = Inventory.getItemPrice("Coffee", "Black");
         Assertions.assertTrue(price.isPresent());
         double DELTA = 1e-9;
-//        Assertions.assertEquals(0.99, price, DELTA);
+        Assertions.assertEquals(0.99, price.get(), DELTA);
     }
 
 }
