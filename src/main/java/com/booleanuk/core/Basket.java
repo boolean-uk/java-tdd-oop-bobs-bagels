@@ -35,7 +35,18 @@ public class Basket {
         }, () -> System.out.println("Item not found in inventory"));
     }
 
+    public void changeCapacity(int capacity){
+        if (capacity<= 0) System.out.println("Capacity cannot be less than 1.");
+        else if (capacity < shoppingList.size()) {
+            System.out.println("Capacity cannot be smaller than no. of items in basket.");
+        } else {
+            this.capacity = capacity;
+        }
+    }
 
+    public int getCapacity() {
+        return capacity;
+    }
 
     public Map<Item, Integer> getShoppingList() {
         return this.shoppingList;
