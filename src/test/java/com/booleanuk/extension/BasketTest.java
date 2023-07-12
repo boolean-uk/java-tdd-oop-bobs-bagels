@@ -41,6 +41,7 @@ class BasketTest {
         basket.add(coffee);
 
         assertEquals(3 ,basket.getItemCount());
+
         assertEquals(basket.getItems(), expectedItems);
     }
 
@@ -150,7 +151,7 @@ class BasketTest {
 
         basket.remove(coffee);
 
-        assertEquals(1 ,basket.getItemCount());
+        assertEquals(0 ,basket.getItemCount());
     }
 
     @Test

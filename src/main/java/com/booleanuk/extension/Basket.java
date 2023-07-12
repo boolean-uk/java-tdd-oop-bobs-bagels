@@ -31,7 +31,7 @@ public class Basket {
     }
 
     public int getItemCount() {
-        System.out.println(items.values());
+
         return items.values().stream().mapToInt(Integer::intValue).sum();
     }
 
