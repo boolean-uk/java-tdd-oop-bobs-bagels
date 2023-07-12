@@ -37,7 +37,15 @@ public class BobBagelTest {
     }
 
     @Test
-    public void shouldCheckBasketCapacity(){}
+    public void shouldCheckBasketCapacity(){
+        //when
+        Basket basket = new Basket();
+        int capacity = 10;
+        //given
+        basket.changeCapacity(10);
+        //then
+        assertEquals(10,basket.getCapacity());
+    }
 
 
 

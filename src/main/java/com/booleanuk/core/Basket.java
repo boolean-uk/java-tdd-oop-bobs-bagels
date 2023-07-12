@@ -6,6 +6,8 @@ public class Basket {
 
     private HashMap<Product, Integer> basket = new HashMap<>();
 
+    private int capacity = 5;
+
 
     public HashMap<Product, Integer> getBasket() {
         return basket;
