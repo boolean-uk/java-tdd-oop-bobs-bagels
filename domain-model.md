@@ -12,6 +12,7 @@
 |        |                                                   |                                         | capacity less than zero                                        | print message                |
 |        |                                                   |                                         | capacity less than number of items in a basket                 | print message                |
 |        |                                                   | totalCost()                             | user wants no know the total cost of basket                    | double                       |
+|        |                                                   | isInBasket()                            | user wants to check if item is in  basket                      | boolean                      |
 
 ## Item
 | Class | Attributes     | Methods    | Scenarios                             | Output |

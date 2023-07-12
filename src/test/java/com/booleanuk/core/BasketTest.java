@@ -96,6 +96,12 @@ public class BasketTest {
     }
 
     @Test
+    public void isInBasketCheck(){
+        basket.add("Bagel","Onion");
+        Assertions.assertTrue(basket.isInBasket("Bagel", "Onion"));
+        Assertions.assertFalse(basket.isInBasket("Bagel", "Bacon"));
+    }
+    @Test
     public void shouldChangeBasketCapacity() {
         int newCapacity = 4;
         basket.changeCapacity(newCapacity);

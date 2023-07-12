@@ -26,18 +26,26 @@ public class Basket {
     public void remove(String name, String variant) {
         Optional<Item> optional = Inventory.searchInventory(name,variant);
         optional.ifPresentOrElse(item -> {
-            int quantity = this.shoppingList.getOrDefault(item, 0);
+            if(isInBasket(name, variant)) {
+                int quantity = this.shoppingList.get(item);
 
-            if (quantity > 1) {
-                this.shoppingList.put(item, quantity - 1);
-            } else if (quantity == 1) {
-                this.shoppingList.remove(item);
-            } else {
+                if (quantity > 1) this.shoppingList.put(item, quantity - 1);
+                else this.shoppingList.remove(item);
+
+            }else{
                 System.out.println("Item not found in basket");
             }
-        }, () -> System.out.println("Item not found in inventory"));
+        },() -> System.out.println("Item not found in inventory"));
     }
 
+    public boolean isInBasket(String name, String variant){
+        return this.shoppingList.
+                entrySet().
+                stream().
+                filter(entry -> entry.getKey().getName().equals(name) && entry.getKey().getVariant().equals(variant)).
+                anyMatch(item ->true);
+
+    }
     public void changeCapacity(int capacity){
         if (capacity<= 0) System.out.println("Capacity cannot be less than 1.");
         else if (capacity < shoppingList.size()) {
