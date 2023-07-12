@@ -53,4 +53,12 @@ public class TestBasket {
         Assertions.assertEquals(4,basket.getCapacity());
     }
 
+    @Test
+    public void whenGetTotalCostCalled_totalCostIsReturned() throws Exception {
+        basket.addToBasket(new Bagel(Basket.BagelType.ONION));
+        basket.addToBasket(new Bagel(Basket.BagelType.PLAIN));
+
+        Assertions.assertEquals(0.88,basket.getTotalCost());
+    }
+
 }
