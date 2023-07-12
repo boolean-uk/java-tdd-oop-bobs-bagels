@@ -10,4 +10,8 @@ public class Basket {
     public HashMap<Product, Integer> getBasket() {
         return basket;
     }
+
+    public void add(Bagel bagel, int quantity) {
+        basket.put(bagel,quantity);
+    }
 }
