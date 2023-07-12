@@ -11,13 +11,13 @@ public class BasketTest {
     public void testAddingBagelToBasket() {
         Basket basket = new Basket();
 
-        assertTrue(basket.addItem(new Bagel(Bagel.BagelType.PLAIN)));
+        assertTrue(basket.addItem(new Bagel(Bagel.BagelVariant.PLAIN)));
     }
 
     @Test
     public void testRemovingBagelFromBasket() {
         Basket basket = new Basket();
-        Bagel bagel = new Bagel(Bagel.BagelType.PLAIN);
+        Bagel bagel = new Bagel(Bagel.BagelVariant.PLAIN);
         basket.addItem(bagel);
 
         assertTrue(basket.removeItem(bagel.getId()));
@@ -27,10 +27,10 @@ public class BasketTest {
     public void testCheckingIfBasketIsFull() {
         Basket basket = new Basket(2);
 
-        basket.addItem(new Bagel(Bagel.BagelType.PLAIN));
+        basket.addItem(new Bagel(Bagel.BagelVariant.PLAIN));
         assertFalse(basket.isFull());
 
-        basket.addItem(new Bagel(Bagel.BagelType.PLAIN));
+        basket.addItem(new Bagel(Bagel.BagelVariant.PLAIN));
         assertTrue(basket.isFull());
     }
 
@@ -38,9 +38,9 @@ public class BasketTest {
     public void testDenyingAddingBagelIfBasketIsFull() {
         Basket basket = new Basket(2);
 
-        basket.addItem(new Bagel(Bagel.BagelType.PLAIN));
-        basket.addItem(new Bagel(Bagel.BagelType.PLAIN));
-        assertFalse(basket.addItem(new Bagel(Bagel.BagelType.PLAIN)));
+        basket.addItem(new Bagel(Bagel.BagelVariant.PLAIN));
+        basket.addItem(new Bagel(Bagel.BagelVariant.PLAIN));
+        assertFalse(basket.addItem(new Bagel(Bagel.BagelVariant.PLAIN)));
     }
 
     @Test
@@ -52,15 +52,15 @@ public class BasketTest {
 
         assertThrows(IllegalArgumentException.class , () -> basket.setCapacity(-1));
 
-        basket.addItem(new Bagel(Bagel.BagelType.PLAIN));
-        basket.addItem(new Bagel(Bagel.BagelType.PLAIN));
+        basket.addItem(new Bagel(Bagel.BagelVariant.PLAIN));
+        basket.addItem(new Bagel(Bagel.BagelVariant.PLAIN));
         assertThrows(IllegalArgumentException.class , () -> basket.setCapacity(1));
     }
 
     @Test
     public void testCheckingIfBagelIsInBasket() {
         Basket basket = new Basket();
-        Bagel bagel = new Bagel(Bagel.BagelType.PLAIN);
+        Bagel bagel = new Bagel(Bagel.BagelVariant.PLAIN);
 
         assertFalse(basket.isInBasket(bagel));
 
@@ -72,5 +72,14 @@ public class BasketTest {
     public void testRemovingNonexistentBagelFromBasket() {
         Basket basket = new Basket();
         assertFalse(basket.removeItem(UUID.randomUUID()));
+    }
+
+    @Test
+    public void testGettingTotalPriceOfItemsInBasket() {
+        Basket basket = new Basket();
+        basket.addItem(new Bagel(Bagel.BagelVariant.PLAIN));
+        basket.addItem(new Bagel(Bagel.BagelVariant.PLAIN));
+
+        assertEquals(0.78, basket.getTotalPrice());
     }
 }
