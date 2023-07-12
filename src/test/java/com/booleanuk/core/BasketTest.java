@@ -164,5 +164,15 @@ public class BasketTest {
         Assertions.assertFalse(isBasketFull);
     }
 
+    @Test
+    public void shouldReturnCorrectTotalCost() {
+        basket.add("Bagel","Onion");
+        basket.add("Coffee","Black");
+        basket.add("Coffee","Black");
+        double DELTA = 1e-9;
+
+        Assertions.assertEquals(2.47, basket.totalCost(), DELTA);
+    }
+
 
 }
