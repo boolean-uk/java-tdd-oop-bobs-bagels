@@ -70,4 +70,8 @@ public class Basket {
         }
         return totalPrice;
     }
+
+    public static BigDecimal checkPrice(Item item) {
+        return item.getPrice();
+    }
 }

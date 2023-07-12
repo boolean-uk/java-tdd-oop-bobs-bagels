@@ -14,7 +14,7 @@ public class BasketTest {
         Basket basket = new Basket();
 
         assertTrue(basket.addItem(new Bagel(BGLO)));
-        assertTrue(basket.addItem(new Bagel(BGLO, new Item(FILB))));
+        assertTrue(basket.addItem(new Bagel(BGLO, new Filling(FILB))));
     }
 
     @Test
@@ -88,6 +88,7 @@ public class BasketTest {
 
     @Test
     public void testCheckingBagelPrice() {
-        assertEquals(0.49, Basket.checkPrice(new Bagel(BGLO)));
+        assertEquals(BigDecimal.valueOf(0.49), Basket.checkPrice(new Bagel(BGLO)));
+        assertEquals(BigDecimal.valueOf(0.61), Basket.checkPrice(new Bagel(BGLO, new Filling(FILB))));
     }
 }

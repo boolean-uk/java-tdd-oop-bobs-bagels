@@ -9,8 +9,11 @@ public class Bagel extends Item {
         super(sku);
     }
 
-    public Bagel(SKU sku, Item filling) {
+    public Bagel(SKU sku, Filling filling) {
         super(sku);
+        if (!sku.getName().equals("Bagel")) {
+            throw new IllegalArgumentException("Wrong bagel SKU");
+        }
         this.filling = filling;
     }
 
