@@ -13,7 +13,7 @@ public class Inventory {
         products.put(sku, new Product(sku, price, name, variant));
     }
 
-    public boolean verifyProduct(String sku) {
-        return products.containsKey(sku);
+    public Product getProduct(String sku) {
+        return products.get(sku);
     }
 }
