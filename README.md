@@ -1,4 +1,4 @@
-# Bob's Bagels - Object-oriented Programming
+# Bob's Bagels - Object-oriented Programming Changes
 
 ![](./assets/bagels.jpg)
 
