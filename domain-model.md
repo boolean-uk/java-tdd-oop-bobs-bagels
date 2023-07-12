@@ -8,13 +8,13 @@
 |         | String variant |         |          |         |
 |         |                |         |          |         |
 
-| Classes | Members        | Methods                        | Scenario                                          | Outputs |
-|---------|----------------|--------------------------------|---------------------------------------------------|---------|
-| Bagel   | String sku     | chooseFilling(Product product) | if name of product equals "Filling" add to basket | String  |
-|         | double price   | chooseFilling(String variant)  | if name of variant does not exist print message   | String  |
-|         | String name    |                                |                                                   |         |
-|         | String variant |                                |                                                   |         |
-|         |                |                                |                                                   |         |
+| Classes | Members         | Methods                        | Scenario                                          | Outputs |
+|---------|-----------------|--------------------------------|---------------------------------------------------|---------|
+| Bagel   | String sku      | chooseFilling(Product product) | if name of product equals "Filling" add to basket | String  |
+|         | double price    | chooseFilling(String variant)  | if name of variant does not exist print message   | String  |
+|         | String name     |                                |                                                   |         |
+|         | String variant  |                                |                                                   |         |
+|         | Product filling |                                |                                                   |         |
 
 | Classes   | Members                     | Methods                                                 | Scenario                         | Outputs |
 |-----------|-----------------------------|---------------------------------------------------------|----------------------------------|---------|
