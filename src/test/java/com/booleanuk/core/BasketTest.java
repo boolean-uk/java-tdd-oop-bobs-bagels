@@ -2,6 +2,8 @@ package com.booleanuk.core;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.UUID;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class BasketTest {
@@ -53,5 +55,22 @@ public class BasketTest {
         basket.addItem(new Bagel(Bagel.BagelType.PLAIN));
         basket.addItem(new Bagel(Bagel.BagelType.PLAIN));
         assertThrows(IllegalArgumentException.class , () -> basket.setCapacity(1));
+    }
+
+    @Test
+    public void testCheckingIfBagelIsInBasket() {
+        Basket basket = new Basket();
+        Bagel bagel = new Bagel(Bagel.BagelType.PLAIN);
+
+        assertFalse(basket.isInBasket(bagel));
+
+        basket.addItem(bagel);
+        assertTrue(basket.isInBasket(bagel));
+    }
+
+    @Test
+    public void testRemovingNonexistentBagelFromBasket() {
+        Basket basket = new Basket();
+        assertFalse(basket.removeItem(UUID.randomUUID()));
     }
 }
