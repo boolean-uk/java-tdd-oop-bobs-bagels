@@ -7,7 +7,7 @@ import java.math.BigDecimal;
 import java.util.Arrays;
 
 @Builder
-public class Bagel {
+public class Bagel implements Product {
     private final BagelType type;
     private final Filling[] fillings;
 

@@ -4,6 +4,7 @@ import lombok.Getter;
 
 import java.math.BigDecimal;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
 
@@ -91,5 +92,10 @@ public class Basket {
 
     private boolean isFull() {
         return itemAmount() == capacity;
+    }
+
+    private List<Discount> getDiscounts() {
+        // TODO
+        return null;
     }
 }

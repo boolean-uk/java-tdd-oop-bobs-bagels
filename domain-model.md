@@ -48,7 +48,7 @@ public enum Coffee {
 ```
 
 ```java
-public class Bagel {
+public class Bagel implements Product {
     private final BagelType type;
     private final Filling[] fillings;
 
@@ -65,6 +65,30 @@ public class Bagel {
 ```
 
 ```java
+public record BreakfastSet(
+        Bagel bagel,
+        Coffee coffee
+) implements Product {
+}
+```
+
+```java
+public record Discount(
+        Type type,
+        BigDecimal price
+) {
+    public enum Type {
+        SixOnion,
+        TwelvePlain,
+        SixEverything,
+        BreakfastSet,
+    }
+}
+```
+
+```java
+
+import java.util.List;
 
 @Getter
 public class Basket {
@@ -110,6 +134,11 @@ public class Basket {
 
     private boolean isFull() {
         return itemAmount() == capacity;
+    }
+
+    private List<Discount> getDiscounts() {
+        // TODO
+        return null;
     }
 }
 ```
