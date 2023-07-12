@@ -4,9 +4,6 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 public class ItemTest {
-    public ItemTest() {
-        Item.fillSkus();
-    }
     @Test
     public void skuSetterAndGetterTest() {
         Item item1 = new Item("BGLO", 0.49, "Onion");

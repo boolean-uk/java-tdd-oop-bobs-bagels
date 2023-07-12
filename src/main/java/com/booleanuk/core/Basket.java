@@ -43,4 +43,7 @@ public class Basket {
         ++currentAmount;
         return true;
     }
+    public boolean removeBagel(Bagel bagel) {
+        return true;
+    }
 }
