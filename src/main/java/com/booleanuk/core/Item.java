@@ -1,13 +1,16 @@
 package com.booleanuk.core;
 
 import java.util.HashMap;
+import java.util.HashSet;
 
 public class Item {
     private String sku;
     private double price;
     private String variant;
     public static HashMap<String, ItemPriceVariant> itemPriceVariants;
-    public static void fillItemPriceVariants() {
+    public static HashSet<String> fillingsSkus;
+    public static HashSet<String> coffeeSkus;
+    private static void fillItemPriceVariants() {
         itemPriceVariants = new HashMap<String, ItemPriceVariant>();
         itemPriceVariants.put("BGLO", new ItemPriceVariant("Onion", 0.49));
         itemPriceVariants.put("BGLP", new ItemPriceVariant("Plain", 0.39));
@@ -23,6 +26,27 @@ public class Item {
         itemPriceVariants.put("FILX", new ItemPriceVariant("Cream Cheese", 0.12));
         itemPriceVariants.put("FILS", new ItemPriceVariant("Smoked Salmon", 0.12));
         itemPriceVariants.put("FILH", new ItemPriceVariant("Ham", 0.12));
+    }
+    private static void fillFillingsSkus() {
+        fillingsSkus = new HashSet<String>();
+        fillingsSkus.add("FILB");
+        fillingsSkus.add("FILE");
+        fillingsSkus.add("FILC");
+        fillingsSkus.add("FILX");
+        fillingsSkus.add("FILS");
+        fillingsSkus.add("FILH");
+    }
+    private static void fillCoffeeSkus() {
+        coffeeSkus = new HashSet<String>();
+        coffeeSkus.add("COFB");
+        coffeeSkus.add("COFW");
+        coffeeSkus.add("COFC");
+        coffeeSkus.add("COFL");
+    }
+    public static void fillSkus() {
+        fillItemPriceVariants();
+        fillCoffeeSkus();
+        fillFillingsSkus();
     }
     public Item(String sku) {
         ItemPriceVariant ipv = com.booleanuk.core.Item.itemPriceVariants.get(sku);

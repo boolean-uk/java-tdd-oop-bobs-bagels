@@ -19,7 +19,7 @@ public class Bagel extends Item {
         fillings = new HashMap<String, Integer>();
     }
     public boolean addFilling(String fillingSku) {
-        if (Filling.fillingsSkus.contains(fillingSku)) {
+        if (Item.fillingsSkus.contains(fillingSku)) {
             Integer amount = fillings.get(fillingSku);
             fillings.put(fillingSku, amount == null ? 1 : amount + 1);
             setPrice(getPrice() + itemPriceVariants.get(fillingSku).getPrice());
@@ -28,7 +28,7 @@ public class Bagel extends Item {
         return false;
     }
     public boolean removeFilling(String fillingSku) {
-        if (Filling.fillingsSkus.contains(fillingSku))
+        if (Item.fillingsSkus.contains(fillingSku))
             if (fillings.containsKey(fillingSku)) {
                 fillings.put(fillingSku, fillings.get(fillingSku) - 1);
                 if(fillings.get(fillingSku) == 0)

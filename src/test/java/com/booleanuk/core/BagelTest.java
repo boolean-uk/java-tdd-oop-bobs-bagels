@@ -5,11 +5,9 @@ import org.junit.jupiter.api.Test;
 
 public class BagelTest {
     public BagelTest() {
-        Item.fillItemPriceVariants();
-        Filling.fillFillingsSkus();
         Bagel.fillBagelsSkus();
+        Item.fillSkus();
     }
-
     @Test
     public void constructorTest() {
         Bagel bagel = new Bagel("BGLP");
@@ -17,7 +15,6 @@ public class BagelTest {
         Assertions.assertEquals(0.39, bagel.getPrice());
         Assertions.assertEquals("Plain", bagel.getVariant());
     }
-
     @Test
     public void addFillingTest() {
         Bagel bagel = new Bagel("BGLP");

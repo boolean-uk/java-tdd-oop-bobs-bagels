@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 
 public class ItemTest {
     public ItemTest() {
-        Item.fillItemPriceVariants();
+        Item.fillSkus();
     }
     @Test
     public void skuSetterAndGetterTest() {
