@@ -3,8 +3,8 @@ package com.booleanuk.core;
 import lombok.Getter;
 
 import java.math.BigDecimal;
+import java.util.Arrays;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
 
@@ -57,21 +57,23 @@ public class Basket {
     }
 
     public BigDecimal totalPrice() {
-        var totalPrice = bagels.entrySet().stream()
-                .map(e -> {
-                    var price = e.getKey().price();
-                    var amount = e.getValue();
-
-                    return price.multiply(BigDecimal.valueOf(amount));
-                })
-                .reduce(BigDecimal.ZERO, BigDecimal::add);
-        return coffees.entrySet().stream()
+        var discounts = getDiscounts();
+        var totalPrice = discounts.entrySet().stream()
                 .map(e -> {
                     var price = e.getKey().getPrice();
                     var amount = e.getValue();
 
                     return price.multiply(BigDecimal.valueOf(amount));
                 })
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
+
+        // TODO add prices of non-discount bagels and coffees to the total
+
+        return bagels.keySet().stream()
+                .map(b -> Arrays.stream(b.getFillings())
+                        .map(Filling::getPrice)
+                        .reduce(BigDecimal.ZERO, BigDecimal::add)
+                )
                 .reduce(totalPrice, BigDecimal::add);
     }
 
@@ -94,8 +96,37 @@ public class Basket {
         return itemAmount() == capacity;
     }
 
-    private List<Discount> getDiscounts() {
-        // TODO
-        return null;
+    private Map<Discount, Integer> getDiscounts() {
+        var onionBagelAmount = countBagelType(BagelType.BGLO);
+        var plainBagelAmount = countBagelType(BagelType.BGLP);
+        var everythingBagelAmount = countBagelType(BagelType.BGLE);
+        var sesameBagelAmount = countBagelType(BagelType.BGLS);
+        var leftoverBagelAmount = onionBagelAmount % 6 + plainBagelAmount % 12 + everythingBagelAmount % 6 + sesameBagelAmount;
+        var coffeeAmount = countCoffees();
+        var breakfastSetAmount = Math.min(leftoverBagelAmount, coffeeAmount);
+
+        var discounts = new HashMap<Discount, Integer>();
+
+        discounts.put(Discount.SixOnion, onionBagelAmount / 6);
+        discounts.put(Discount.TwelvePlain, plainBagelAmount / 12);
+        discounts.put(Discount.SixEverything, everythingBagelAmount / 6);
+        discounts.put(Discount.BreakfastSet, breakfastSetAmount);
+
+        return discounts;
+    }
+
+    private int countBagelType(BagelType type) {
+        return bagels.entrySet().stream()
+                .filter(e -> {
+                    var bagelType = e.getKey().getType();
+                    return bagelType.equals(type);
+                })
+                .map(Map.Entry::getValue)
+                .reduce(0, Integer::sum);
+    }
+
+    private int countCoffees() {
+        return coffees.values().stream()
+                .reduce(0, Integer::sum);
     }
 }
