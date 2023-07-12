@@ -58,13 +58,16 @@ class BasketTest {
 
     @Test
     public void removeRemovesItems() {
+        Map<Item,Integer> expected = new HashMap<>();
+        expected.put(coffee,1);
+
         basket.add(bagel);
         basket.add(bagel);
         basket.add(coffee);
         basket.remove(bagel);
 
-        assertEquals(2 ,basket.getItems().size());
-        assertEquals(basket.getItems(), expectedItems);
+        assertEquals(1 ,basket.getItems().size());
+        assertEquals(basket.getItems(), expected);
     }
 
     @Test
