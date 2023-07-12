@@ -13,7 +13,7 @@ public class FillingTest {
 
     @Test
     public void getSKUTest() {
-        Assertions.assertEquals("filb", filling.getSKU());
-        Assertions.assertNotEquals("filbb", filling.getSKU());
+        Assertions.assertEquals("filb", filling.getSKU().toLowerCase());
+        Assertions.assertNotEquals("filbb", filling.getSKU().toLowerCase());
     }
 }

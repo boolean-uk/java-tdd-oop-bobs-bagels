@@ -12,5 +12,7 @@ public class Filling {
         this.variant = variant;
     }
 
-
+    public String getSKU() {
+        return SKU;
+    }
 }
