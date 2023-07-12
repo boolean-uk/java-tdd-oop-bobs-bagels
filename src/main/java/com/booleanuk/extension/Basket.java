@@ -7,6 +7,8 @@ import java.util.Map;
 
 public class Basket {
     private int capacity;
+    private final static int SIX_BAGELS_PRICE = 249;
+    private final static int TWELVE_BAGELS_PRICE = 399;
     private Map<Item,Integer> items;
 
     public Basket(int capacity) {
@@ -61,7 +63,11 @@ public class Basket {
     }
 
     public double getTotalCost() {
-
-        return items.entrySet().stream().map(entry -> entry.getKey().getPrice() * entry.getValue()).reduce(0L, Long::sum) / 100.0;
+        List<Long> listOfPrices = items.entrySet().stream().map(entry -> {
+            if(entry.getValue() >= 6 && entry.getValue() < 12) return SIX_BAGELS_PRICE + (entry.getValue()%6)*entry.getKey().getPrice();
+            else if(entry.getValue() >= 12) return TWELVE_BAGELS_PRICE + (entry.getValue()%12)*entry.getKey().getPrice();
+            else return entry.getKey().getPrice() * entry.getValue();
+        }).toList();
+        return listOfPrices.stream().reduce(0L, Long::sum) / 100.0;
     }
 }
