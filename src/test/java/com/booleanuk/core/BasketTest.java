@@ -107,7 +107,18 @@ public class BasketTest {
     }
 
     @Test
-    public void checkPriceOfFilling() {
+    public void testCheckingPriceOfFilling() {
         assertEquals(BigDecimal.valueOf(0.12), Basket.checkPrice(new Filling(FILB)));
+    }
+
+    @Test
+    public void testCreatingItemUsingStrings() {
+        Bagel bagel = new Bagel("Onion", new Filling("Bacon"));
+        assertNotNull(bagel);
+    }
+
+    @Test
+    public void testOrderingItemOutOfInventory() {
+        assertThrows(IllegalArgumentException.class, () -> new Bagel("Incorrect"));
     }
 }
