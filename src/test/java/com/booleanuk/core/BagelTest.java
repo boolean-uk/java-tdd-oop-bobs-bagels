@@ -26,4 +26,20 @@ public class BagelTest {
         Assertions.assertTrue(bagel.addFilling("FILB"));
         Assertions.assertTrue(bagel.addFilling("FILC"));
     }
+    @Test
+    public void removeFillingTest() {
+        Bagel bagel = new Bagel("BGLP");
+        Assertions.assertTrue(bagel.addFilling("FILB"));
+        Assertions.assertTrue(bagel.addFilling("FILB"));
+        Assertions.assertTrue(bagel.addFilling("FILB"));
+        Assertions.assertTrue(bagel.addFilling("FILC"));
+        Assertions.assertTrue(bagel.removeFilling("FILB"));
+        Assertions.assertTrue(bagel.removeFilling("FILB"));
+        Assertions.assertTrue(bagel.removeFilling("FILC"));
+        Assertions.assertFalse(bagel.removeFilling("FILC"));
+    }
+    @Test
+    public void priceSetterAndGetterTest() {
+
+    }
 }
