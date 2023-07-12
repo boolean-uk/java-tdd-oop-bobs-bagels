@@ -35,33 +35,33 @@ public class BasketTest {
     }
 
     @Test
-    public void testAddToBasketShouldThrowException() {
-        Bagel bagel = new Bagel("NO BAGEL :(", 0.49, "Onion", Collections.emptyList());
+    public void testAddToBasketShouldThrowException() throws Exception {
+        Bagel bagel = new Bagel("NO BAGEL", 0.49, "Onion", Collections.emptyList());
 
         Exception exception = Assertions.assertThrows(Exception.class, () -> basket.addToBasket(bagel));
+        System.out.println(basket.getContents());
         Assertions.assertEquals("Bagel " + bagel + " is not in the manager's inventory!", exception.getMessage());
     }
 
     @Test
-    public void testRemoveFromBasketShouldSucceed(){
+    public void testRemoveFromBasketShouldSucceed() throws Exception {
         Bagel bagel = new Bagel("BGLO", 0.49, "Onion", Collections.emptyList());
         basket.addToBasket(bagel);
         basket.removeFromBasket(bagel);
 
-        Assertions.assertFalse(basket.getBagels(), contains(bagel));
+        Assertions.assertFalse(basket.getContents().contains(bagel));
     }
 
     @Test
-    public void testRemoveFromBasketShouldThrowException(){
+    public void testRemoveFromBasketShouldThrowException() {
         Bagel bagel = new Bagel("BGLO", 0.49, "Onion", Collections.emptyList());
-        basket.removeFromBasket(bagel);
 
-        Exception exception = Assertions.assertThrows(Exception.class, () -> basket.removeFromBasket(bagel1));
-        Assertions.assertEquals("Bagel " + bagel1 + " is not in the basket!", exception.getMessage());
+        Exception exception = Assertions.assertThrows(Exception.class, () -> basket.removeFromBasket(bagel));
+        Assertions.assertEquals("Bagel " + bagel + " is not in the basket!", exception.getMessage());
     }
 
     @Test
-    public void testIsBasketFullShouldSucceed(){
+    public void testIsBasketFullShouldSucceed() throws Exception {
         for(Bagel bagel: BAGELS){
             basket.addToBasket(bagel);
         }
@@ -70,7 +70,7 @@ public class BasketTest {
     }
 
     @Test
-    public void testGetTotalCost(){
+    public void testGetTotalCost() throws Exception {
         for(Bagel bagel: BAGELS){
             basket.addToBasket(bagel);
         }
@@ -78,7 +78,7 @@ public class BasketTest {
         Double expectedSum = BAGELS.stream()
                 .mapToDouble(Product::getPrice)
                 .sum();
-        Double actualSum = basket.contents.stream()
+        Double actualSum = basket.getContents().stream()
                 .mapToDouble(Product::getPrice)
                 .sum();
         Assertions.assertEquals(expectedSum, actualSum);
