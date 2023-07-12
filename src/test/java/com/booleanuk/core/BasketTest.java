@@ -170,4 +170,18 @@ public class BasketTest {
         //Then
         Assertions.assertFalse(result);
     }
+
+    @Test
+    public void testGetTotalCost_ShouldTotalCostOfProductsInTheBasket() {
+        //Given
+        Basket basket = new Basket(inventory, 10);
+        basket.addProduct("BGLO", 3);
+        basket.addProduct("COFB", 1);
+
+        //When
+        float result = basket.getTotalCost();
+
+        //Then
+        Assertions.assertEquals(result, 2.46F);
+    }
 }
