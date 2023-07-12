@@ -8,7 +8,7 @@ import java.text.DecimalFormat;
 public class BagleTest {
 
     private Bagle bagle;
-    private static final DecimalFormat decfor = new DecimalFormat("0.00");
+
 
     public BagleTest() {
         this.bagle = new Bagle("BGLO", 0.49, "Onion");
