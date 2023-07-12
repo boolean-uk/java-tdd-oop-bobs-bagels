@@ -49,9 +49,8 @@ public class BasketTest {
         basket.add("Coffee","Black");
         Assertions.assertEquals(2, basket.getShoppingList().get(coffee));
 
-
-
     }
+
 
     @Test
     public void removeTest(){
@@ -126,4 +125,26 @@ public class BasketTest {
         //should print message
         Assertions.assertTrue(output.contains("Capacity cannot be smaller than no. of items in basket."));
     }
+
+    @Test
+    public void shouldReturnTrueIfBasketIsFull() {
+        basket.changeCapacity(2);
+        basket.add("Bagel","Onion");
+        basket.add("Coffee","Black");
+        basket.add("Filling", "Bacon");
+
+        boolean isBasketFull = basket.isBasketFull();
+        Assertions.assertTrue(isBasketFull);
+    }
+
+    @Test
+    public void shouldReturnFalseIfBasketIsNotFull() {
+        basket.add("Bagel","Onion");
+        basket.add("Coffee","Black");
+
+        boolean isBasketFull = basket.isBasketFull();
+        Assertions.assertFalse(isBasketFull);
+    }
+
+
 }
