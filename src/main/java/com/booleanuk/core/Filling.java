@@ -15,4 +15,8 @@ public class Filling {
     public String getSKU() {
         return SKU;
     }
+
+    public double getPrice() {
+        return price;
+    }
 }
