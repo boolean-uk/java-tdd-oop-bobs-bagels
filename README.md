@@ -137,3 +137,4 @@ At the top, we see `expected: <32> but was: <33>`. This means the test expected 
 In the stack trace itself, we see this line: `at app//com.booleanuk.core.BasketTest.shouldBeAged32(ExerciseTest.java:20)`. This is helpful! This tells us the exact line in the ExerciseTest.java file (line 20) where the failure happened, as well as the method name (shouldBeAged32), helping us to identify where the issue began. This is the kind of thing you need to look for; a relevant file name, method name, class name and line number to give you a good starting point for debugging.
 
 ![](./assets/test-failure.PNG)
+Now let's run some tests!
