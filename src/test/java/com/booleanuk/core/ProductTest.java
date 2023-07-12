@@ -21,7 +21,7 @@ public class ProductTest {
     public void testGetPrice(){
         Assertions.assertEquals(PRICE, bagel.getPrice());
     }
-    
+
     public void testGetVariant(){
         Assertions.assertEquals(VARIANT, bagel.getVariant());
     }
