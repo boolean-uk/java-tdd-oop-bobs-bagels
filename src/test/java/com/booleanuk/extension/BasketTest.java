@@ -150,7 +150,6 @@ class BasketTest {
         assertEquals(2 ,basket.getItemCount());
 
         basket.remove(coffee);
-
         assertEquals(0 ,basket.getItemCount());
     }
 
