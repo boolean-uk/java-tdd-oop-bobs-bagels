@@ -1,13 +1,12 @@
 package com.booleanuk.core;
 
-import java.sql.Array;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Inventory {
 
     private static Inventory singleton = null;
-    private static List<InventoryItem> inventoryItemList = new ArrayList<InventoryItem>();
+    private static List<InventoryItem> inventoryItemList = new ArrayList<>();
 
     private Inventory(){
         inventoryItemList.add(new InventoryItem("BGLO",0.49,"Bagel","Onion"));
