@@ -1,0 +1,26 @@
+[
+  {
+    "SKU": "BGLO",
+    "price": 0.49,
+    "name": "Bagel",
+    "variant": "Onion"
+  },
+  {
+    "SKU": "BGLP",
+    "price": 0.39,
+    "name": "Bagel",
+    "variant": "Plain"
+  },
+  {
+    "SKU": "BGLE",
+    "price": 0.49,
+    "name": "Bagel",
+    "variant": "Everything"
+  },
+  {
+    "SKU": "BGLS",
+    "price": 0.49,
+    "name": "Bagel",
+    "variant": "Sesame"
+  }
+]

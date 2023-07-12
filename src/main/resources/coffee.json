@@ -1,0 +1,26 @@
+[
+  {
+    "SKU": "COFB",
+    "price": 0.99,
+    "name": "Coffee",
+    "variant": "Black"
+  },
+  {
+    "SKU": "COFW",
+    "price": 1.19,
+    "name": "Coffee",
+    "variant": "White"
+  },
+  {
+    "SKU": "COFC",
+    "price": 1.29,
+    "name": "Coffee",
+    "variant": "Cappucino"
+  },
+  {
+    "SKU": "COFL",
+    "price": 1.29,
+    "name": "Coffee",
+    "variant": "Latte"
+  }
+]
