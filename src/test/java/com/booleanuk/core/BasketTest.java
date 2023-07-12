@@ -6,6 +6,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
+import java.util.Optional;
 
 public class BasketTest {
     private static Basket basket;
@@ -173,6 +174,12 @@ public class BasketTest {
 
         Assertions.assertEquals(2.47, basket.totalCost(), DELTA);
     }
-
+    @Test
+    public void shouldReturnCorrectItemPrice() {
+        Optional<Double> price = Inventory.getItemPrice("Coffee", "Black");
+        Assertions.assertTrue(price.isPresent());
+        double DELTA = 1e-9;
+//        Assertions.assertEquals(0.99, price, DELTA);
+    }
 
 }

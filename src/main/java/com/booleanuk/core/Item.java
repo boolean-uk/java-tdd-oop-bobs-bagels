@@ -14,7 +14,7 @@ public abstract class Item {
         this.price = price;
         this.variant = variant;
     }
-    public Double checkPrice() {
+    public Double getPrice() {
         return this.price;
     }
 

@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Optional;
 
 public class Inventory {
-    private static List<Item> inventory =new ArrayList<Item>();;
+    private static List<Item> inventory = new ArrayList<>();;
 
     public static void createInventory(){
 
@@ -37,4 +37,8 @@ public class Inventory {
         return Optional.empty();
     }
 
+    public static Optional<Double> getItemPrice(String name, String variant) {
+        Optional<Item> optionalItem = searchInventory(name, variant);
+        return optionalItem.map(Item::getPrice);
+    }
 }

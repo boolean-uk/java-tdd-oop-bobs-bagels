@@ -58,7 +58,7 @@ public class Basket {
     public double totalCost(){
         return shoppingList.entrySet()
                 .stream()
-                .mapToDouble(entry -> entry.getValue() * entry.getKey().checkPrice())
+                .mapToDouble(entry -> entry.getValue() * entry.getKey().getPrice())
                 .sum();
     }
 
