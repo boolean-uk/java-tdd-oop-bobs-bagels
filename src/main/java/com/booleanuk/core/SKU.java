@@ -1,6 +1,7 @@
 package com.booleanuk.core;
 
 import java.math.BigDecimal;
+import java.util.Arrays;
 
 public enum SKU {
     BGLO(BigDecimal.valueOf(0.49), "Bagel", "Onion"),
@@ -28,6 +29,18 @@ public enum SKU {
         this.variant = variant;
     }
 
+    public static SKU getConstant(Item item) {
+        return Arrays.stream(values())
+                .filter(val -> val.getName().equals(item.getName()) && val.getVariant().equals(item.getVariant()))
+                .findFirst().orElseThrow(IllegalArgumentException::new);
+    }
+
+    public static SKU getConstant(String name, String variant) {
+        return Arrays.stream(values())
+                .filter(val -> val.getName().equals(name) && val.getVariant().equals(variant))
+                .findFirst().orElseThrow(IllegalArgumentException::new);
+    }
+
     public BigDecimal getPrice() {
         return price;
     }
@@ -38,14 +51,5 @@ public enum SKU {
 
     public String getVariant() {
         return variant;
-    }
-
-    @Override
-    public String toString() {
-        return  name() + "{" +
-                "price=" + price +
-                ", name='" + name + '\'' +
-                ", variant='" + variant + '\'' +
-                '}';
     }
 }

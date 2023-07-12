@@ -7,4 +7,8 @@ public class Filling extends Item {
             throw new IllegalArgumentException("Wrong filling SKU");
         }
     }
+
+    public Filling(String variant) {
+        super(SKU.getConstant("Filling", variant));
+    }
 }

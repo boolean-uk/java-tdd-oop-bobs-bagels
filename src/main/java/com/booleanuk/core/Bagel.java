@@ -9,6 +9,10 @@ public class Bagel extends Item {
         super(sku);
     }
 
+    public Bagel(String variant) {
+        super(SKU.getConstant("Bagel", variant));
+    }
+
     public Bagel(SKU sku, Filling filling) {
         super(sku);
         if (!sku.getName().equals("Bagel")) {
@@ -16,6 +20,12 @@ public class Bagel extends Item {
         }
         this.filling = filling;
     }
+
+    public Bagel(String variant, Filling filling) {
+        super(SKU.getConstant("Bagel", variant));
+        this.filling = filling;
+    }
+
 
     @Override
     public BigDecimal getPrice() {
