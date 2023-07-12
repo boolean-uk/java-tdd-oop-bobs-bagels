@@ -47,6 +47,15 @@ public class BobBagelTest {
         assertEquals(10,basket.getCapacity());
     }
 
+    @Test
+    public void shouldReturnTotalBasketCost(){
+        Basket basket = new Basket();
+        Bagel bagel = new Bagel();
+        int quantity = 1;
+        basket.add(bagel,quantity);
+    }
+
+
 
 
 

@@ -26,4 +26,16 @@ public class Basket {
             }
         }
     }
+
+    public void changeCapacity(int capacity) {
+        setCapacity(capacity);
+    }
+
+    public void setCapacity(int capacity) {
+        this.capacity = capacity;
+    }
+
+    public int getCapacity() {
+        return capacity;
+    }
 }
