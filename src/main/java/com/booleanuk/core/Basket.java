@@ -8,8 +8,8 @@ public class Basket {
 
     public Basket(){
         capacity = 2; //starting size of the basket
+
     }
-    enum BagelType { ONION, PLAIN, EVERYTHING, SESAME}
 
     private List<Bagel> bagelList = new ArrayList<Bagel>();
     public List<Bagel> getBagelList()
@@ -35,6 +35,15 @@ public class Basket {
 
     public static int getCapacity() {
         return capacity;
+    }
+
+    public double getTotalCost() {
+        double price =0;
+        for(Bagel bagel:bagelList)
+        {
+            inventory
+        }
+        return price;
     }
 
 }

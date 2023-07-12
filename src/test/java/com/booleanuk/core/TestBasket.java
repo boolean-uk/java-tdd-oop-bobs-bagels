@@ -16,7 +16,7 @@ public class TestBasket {
     @Test
     public void whenAddToBasketExistingBagelType_bagelIsAddedToBasket() throws Exception {
         //Setup
-        Basket.BagelType typeOfBagel = Basket.BagelType.ONION;
+        String typeOfBagel = "BGLO";
         Bagel bagel = new Bagel(typeOfBagel);
         //Execute
         basket.addToBasket(bagel);
@@ -26,7 +26,7 @@ public class TestBasket {
     @Test
     public void whenRemoveFromBasketBagelDoesExistInBasket_bagelIsRemovedFromBasket() throws Exception {
         //Setup
-        Basket.BagelType typeOfBagel = Basket.BagelType.ONION;
+        String typeOfBagel = "BGLO";
         Bagel bagel = new Bagel(typeOfBagel);
         basket.addToBasket(bagel);
         basket.removeFromBasket(bagel);
@@ -36,11 +36,11 @@ public class TestBasket {
     @Test
     public void whenIsBasketFullCalled_basketCapacityIsChecked() throws Exception {
         //Setup
-        basket.addToBasket(new Bagel(Basket.BagelType.ONION));
-        basket.addToBasket(new Bagel(Basket.BagelType.PLAIN));
+        basket.addToBasket(new Bagel("BGLO"));
+        basket.addToBasket(new Bagel("BGLP"));
         String message = "";
         try{
-            basket.addToBasket(new Bagel(Basket.BagelType.SESAME));
+            basket.addToBasket(new Bagel("BGLS"));
         } catch (Exception e) {
             message = e.getMessage();
         }
@@ -55,8 +55,8 @@ public class TestBasket {
 
     @Test
     public void whenGetTotalCostCalled_totalCostIsReturned() throws Exception {
-        basket.addToBasket(new Bagel(Basket.BagelType.ONION));
-        basket.addToBasket(new Bagel(Basket.BagelType.PLAIN));
+        basket.addToBasket(new Bagel("BGLO"));
+        basket.addToBasket(new Bagel("BGLP"));
 
         Assertions.assertEquals(0.88,basket.getTotalCost());
     }
