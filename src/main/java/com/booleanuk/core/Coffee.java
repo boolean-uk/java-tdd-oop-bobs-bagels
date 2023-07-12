@@ -15,8 +15,5 @@ public class Coffee extends Item {
     public CoffeeType getCoffeeType() {
         return coffeeType;
     }
-    @Override
-    public String toString() {
-        return coffeeType + "";
-    }
+
 }

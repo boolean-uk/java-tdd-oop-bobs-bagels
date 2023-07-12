@@ -23,7 +23,7 @@ public class Basket {
     }
 
     public boolean isFull() {
-        return items.size() >= capacity;
+        return this.getItemCount() >= capacity;
     }
 
     public boolean checkIfExists(Item item) {
