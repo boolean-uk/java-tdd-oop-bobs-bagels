@@ -49,6 +49,9 @@ public class BasketTest {
 
         basket.removeItem("BGLO");
         Assertions.assertEquals(0,basket.getItems().size());
+
+        basket.removeItem("BGLO");
+        Assertions.assertEquals(0,basket.getItems().size());
     }
 
     @Test
@@ -72,6 +75,18 @@ public class BasketTest {
         basket.addItem("BGLO");
         basket.addItem("FILB");
         Assertions.assertEquals(4,basket.getItems().size());
+    }
+
+    @Test
+    public void doesItemExistInBasketSoItCanBeRemoveFromItTest() {
+        basket.addItem("BGLO");
+        basket.addItem("FILB");
+
+        Assertions.assertTrue(basket.removeItem("BGLO"));
+        Assertions.assertFalse(basket.removeItem("BGLO"));
+        Assertions.assertTrue(basket.removeItem("FILB"));
+        Assertions.assertFalse(basket.removeItem("FILB"));
+        Assertions.assertFalse(basket.removeItem("strange item"));
 
 
     }
