@@ -36,4 +36,15 @@ public class FillingExt {
     public void setPrice(double price) {
         this.price = price;
     }
+
+
+    @Override
+    public String toString() {
+        return "FillingExt{" +
+                "sku=" + sku +
+                ", name='" + name + '\'' +
+                ", price=" + price +
+                '}';
+    }
 }
+

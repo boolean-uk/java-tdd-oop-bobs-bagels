@@ -1,7 +1,5 @@
 package com.booleanuk.extension;
 
-import com.booleanuk.core.Inventory;
-
 public class BasketManager {
 
 
@@ -22,7 +20,7 @@ public class BasketManager {
 
 
     public boolean add(BagelExt bagelExt) {
-        if (isProductInInventory(bagelExt)) {
+        if (isNotProductInInventory(bagelExt)) {
             if (checkIsBasketFull()) {
                 basketExt.add(bagelExt);
                 return true;
@@ -31,11 +29,23 @@ public class BasketManager {
                 return false;
             }
         }
+        System.out.println("Product does not exist in the inventory!");
+        return false;
 
 
     }
+
+    private boolean isNotProductInInventory(BagelExt bagelExt) {
+        for (BagelExt bagelExt1 :
+                inventoryExt.getAllBagelsInInventory()) {
+            if (bagelExt1.getSku() == bagelExt.getSku())
+                return true;
+        }
+        return false;
+    }
+
     public boolean add(CoffeeExt coffeeExt) {
-        if (isProductInInventory(coffeeExt)) {
+        if (isNotProductInInventory(coffeeExt)) {
             if (checkIsBasketFull()) {
                 basketExt.add(coffeeExt);
                 return true;
@@ -44,9 +54,30 @@ public class BasketManager {
                 return false;
             }
         }
+        System.out.println("Product does not exist in the inventory!");
+        return false;
     }
+
+    private boolean isNotProductInInventory(CoffeeExt coffeeExt) {
+        for (CoffeeExt coffeeExt1 :
+                inventoryExt.getAllCoffeesInInventory()) {
+            if (coffeeExt1.getSku() == coffeeExt.getSku())
+                return true;
+        }
+        return false;
+
+    }
+    private boolean isNotProductInInventory(FillingExt fillingExt) {
+        for (FillingExt fillingExt1 :
+                inventoryExt.getAllFilingsInInventory()) {
+            if (fillingExt1.getSku() == fillingExt.getSku())
+                return true;
+        }
+        return false;
+    }
+
     public boolean add(FillingExt fillingExt) {
-        if (isProductInInventory(fillingExt)) {
+        if (isNotProductInInventory(fillingExt)) {
             if (checkIsBasketFull()) {
                 basketExt.add(fillingExt);
                 return true;
@@ -56,6 +87,9 @@ public class BasketManager {
                 return false;
             }
         }
+        System.out.println("Product does not exist in the inventory!");
+        return false;
+
     }
 
     public boolean remove(BagelExt bagelExt) {

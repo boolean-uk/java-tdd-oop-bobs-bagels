@@ -107,14 +107,14 @@ public class BobBagelsExtensionTest {
     public void shouldNotAdd6ProductToBasket(){
         //given
         basketManager.add(fillingB);
-        basketManager.add(fillingB);
+        basketManager.add(fillingC);
         basketManager.add(fillingS);
         basketManager.add(bagelE);
         basketManager.add(coffeeB);
         basketManager.add(coffeeC);
         //when
         basketManager.add(fillingE);
-
+        System.out.println(basketExt.getFillingInBasket());
         //then
         assertFalse(basketExt.getFillingInBasket().contains(fillingE));
 
@@ -201,6 +201,9 @@ public class BobBagelsExtensionTest {
         //then
         assertFalse(canAddBagelTheBasketThatIsNotInTheInventory);
     }
+
+
+
 
 }
 

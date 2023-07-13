@@ -37,4 +37,7 @@ public class CoffeeExt {
     public void setPrice(double price) {
         this.price = price;
     }
+
+
 }
+

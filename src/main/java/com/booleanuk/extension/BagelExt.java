@@ -40,4 +40,5 @@ public class BagelExt {
     public void setFillingExt(FillingExt fillingExt) {
         this.fillingExt = fillingExt;
     }
+
 }
