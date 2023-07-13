@@ -131,7 +131,7 @@ public class BobBagelsExtensionTest {
     @Test
     public void shouldReturnFalseIfSanityIsNotOk() {
         //given
-        int isOk;
+        boolean isOk;
         //when
         isOk = basketManager.remove(bagelE);
         //then
