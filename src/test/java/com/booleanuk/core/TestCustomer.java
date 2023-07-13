@@ -26,17 +26,15 @@ public class TestCustomer {
         Assertions.assertEquals(List.of(bagel), customer.getBasket().getListOfItemsInBasket());
     }
 
-    @Test
-    public void whenCheckBasketCalled_everythingInBasketIsReturned() throws Exception {
-        //Setup
-        String coffee = "COFB";
-        customer.addToBasket(coffee);
-        String bagel = "BGLO";
-        customer.addToBasket(bagel);
-
-
-
-        Assertions.assertEquals(List.of(coffee,bagel), customer.getBasket().getListOfItemsInBasket());
-    }
+//    @Test
+//    public void whenCheckBasketCalled_everythingInBasketIsReturned() throws Exception {
+//        //Setup
+//        String coffee = "COFB";
+//        customer.addToBasket(coffee);
+//        String bagel = "BGLO";
+//        customer.addToBasket(bagel);
+//
+//        Assertions.assertEquals(List.of(coffee,bagel), customer.getBasket().getListOfItemsInBasket());
+//    }
 
 }

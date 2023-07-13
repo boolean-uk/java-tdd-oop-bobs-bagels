@@ -36,8 +36,20 @@ public class Inventory {
         return inventoryItemList;
     }
 
-//    public double getPriceBySku(String sku){
-//        return inventoryItemList.
-//    }
+    public double getPriceBySku(String sku){
+        for (InventoryItem i : inventoryItemList){
+            if(sku.equals(i.sku)){
+                return i.price;
+            }
+        } return 0.0;
+    }
+
+    public String getItemBySku(String sku){
+        for (InventoryItem i : inventoryItemList) {
+            if (sku.equals(i.sku)) {
+                return i.toString();
+            }
+        } return "";
+    }
 
 }

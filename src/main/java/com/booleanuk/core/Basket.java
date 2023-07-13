@@ -8,7 +8,7 @@ public class Basket {
     private Inventory inventory = Inventory.getInstance();
 
     public Basket(){
-        capacity = 2; //starting size of the basket
+        capacity = 2; //default size of the basket
     }
 
     private List<String> listOfItemsInBasket = new ArrayList<String>();
@@ -17,17 +17,17 @@ public class Basket {
     {
         return listOfItemsInBasket;
     }
-    public void  addToBasket(String bagel) throws Exception
+    public void  addToBasket(String item) throws Exception
     {
         if (listOfItemsInBasket.size()<capacity)
         {
-            listOfItemsInBasket.add(bagel);
+            listOfItemsInBasket.add(item);
         }
         else throw new Exception("Basket is full");
 
     }
-    public void removeFromBasket(String bagel){
-        listOfItemsInBasket.remove(bagel);
+    public void removeFromBasket(String item){
+        listOfItemsInBasket.remove(item);
     }
 
     public static void setBasketCapacity(int capacity) {
@@ -42,11 +42,7 @@ public class Basket {
         double cost =0;
         for(String item: listOfItemsInBasket)
         {
-            for(InventoryItem i : inventory.getList()){
-                if (item.equals(i.sku)){
-                    cost += i.price;
-                }
-            }
+            cost += inventory.getPriceBySku(item);
         }
         return cost;
     }

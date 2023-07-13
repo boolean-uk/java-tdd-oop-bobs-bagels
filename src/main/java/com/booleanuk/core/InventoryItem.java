@@ -12,4 +12,9 @@ public class InventoryItem {
         this.name = name;
         this.variant = variant;
     }
+
+    @Override
+    public String toString(){
+        return this.variant + " " + this.name + " £" + this.price;
+    }
 }
