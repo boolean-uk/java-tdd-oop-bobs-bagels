@@ -64,8 +64,12 @@ public class Basket {
 
     public double getTotalCost() {
         List<Long> listOfPrices = items.entrySet().stream().map(entry -> {
-            if(entry.getValue() >= 6 && entry.getValue() < 12) return SIX_BAGELS_PRICE + (entry.getValue()%6)*entry.getKey().getPrice();
-            else if(entry.getValue() >= 12) return TWELVE_BAGELS_PRICE + (entry.getValue()%12)*entry.getKey().getPrice();
+            if(entry.getKey() instanceof Bagel && entry.getValue() >= 6 && entry.getValue() < 12){
+                return SIX_BAGELS_PRICE + (entry.getValue()%6)*entry.getKey().getPrice();
+            }
+            else if(entry.getKey() instanceof Bagel && entry.getValue() >= 12){
+                return TWELVE_BAGELS_PRICE + (entry.getValue()%12)*entry.getKey().getPrice();
+            }
             else return entry.getKey().getPrice() * entry.getValue();
         }).toList();
         return listOfPrices.stream().reduce(0L, Long::sum) / 100.0;
