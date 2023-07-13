@@ -1,3 +1,7 @@
+User story for EXTENSION1
+' As a customer,
+So that I can see the total cost of my order,
+I want to be able o add multiple items to my basket and receive the discounted price when applicable.'
 | Class        | Attributes                                  | Methods                                 | Scenario                              | Output                                           |  
 |--------------|---------------------------------------------|-----------------------------------------|---------------------------------------|--------------------------------------------------|
 | `Basket`     | `HashMap<String, Integer> items`            | `addItem(String item, int quantity)`    | If basket is not full                 | `Added item to basket, you can add 2 items more` |
@@ -7,7 +11,7 @@
 |              |                                             | `isFull()`                              | If basket is full                     | true                                             |
 |              |                                             |                                         | If basket is not full                 | false                                            |
 |              |                                             | `changeCapacity(int newCapacity)`       | Bob's manager want to change capacity |                                                  |
-|              |                                             | calculateTotalPrice(): double           |                                       |                                                  |
+|              |                                             | calculateTotalPrice(): double<br/>           |                                       |                                                  |
 | Bagel        | SKU: String, Price: double, Variant: String |                                         |                                       |                                                  |
 | Coffee       | SKU: String, Price: double, Variant: String |                                         |                                       |                                                  |
 | Filling      | SKU: String, Price: double, Variant: String |                                         |                                       |                                                  |
