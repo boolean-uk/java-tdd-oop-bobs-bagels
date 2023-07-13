@@ -5,7 +5,7 @@ import java.util.*;
 import java.util.Map.Entry;
 
 public class Basket {
-    private final static int DEFAULT_CAPACITY = 10;
+    private final static int DEFAULT_CAPACITY = 100;
 
     private final Map<Item, Integer> items;
     private int capacity;
@@ -45,11 +45,11 @@ public class Basket {
     }
 
     public boolean isFull() {
-        return items.size() >= capacity;
+        return items.values().stream().mapToInt(Integer::intValue).sum() >= capacity;
     }
 
     public void setCapacity(int newCapacity) {
-        if (newCapacity <= 0 || newCapacity < items.size()) {
+        if (newCapacity <= 0 || newCapacity < items.values().stream().mapToInt(Integer::intValue).sum()) {
             throw new IllegalArgumentException("Incorrect capacity");
         }
         capacity = newCapacity;

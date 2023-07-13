@@ -39,4 +39,12 @@ public class Bagel extends Item {
         }
         return false;
     }
+
+    @Override
+    public String toString() {
+        return "Bagel{" +
+                "sku=" + super.getSku() +
+                "filling=" + filling +
+                '}';
+    }
 }
