@@ -3,6 +3,7 @@ package com.booleanuk.core;
 import com.booleanuk.extension.SpecialOffer;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -16,6 +17,7 @@ public class Inventory {
         this.bagels = new ArrayList<>();
         this.coffees = new ArrayList<>();
         this.fillings = new ArrayList<>();
+        specialOffers = new HashMap<>();
         initializeInventory();
     }
 
