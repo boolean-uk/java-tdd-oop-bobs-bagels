@@ -96,7 +96,7 @@ public class BobBagelsExtensionTest {
     }
 
     @Test
-    public void shouldRemoveCoffeeFromBasket(){
+    public void shouldRemoveFillingFromBasket(){
         //given
         basketManager.add(fillingB);
         //when
