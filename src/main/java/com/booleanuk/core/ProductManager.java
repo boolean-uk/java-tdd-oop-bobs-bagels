@@ -18,9 +18,9 @@ public class ProductManager {
 
     public boolean orderBagel(String variant) {
         if (basket.getList().size() < basket.getCapacity()) {
-            for (Map.Entry<String, Product> entry : inventory.entrySet()) {
-                if (entry.getValue().getVariant().equals(variant)) {
-                    return basket.add(entry.getValue());
+            for (Product product : inventory.values()) {
+                if (product.getVariant().equals(variant)) {
+                    return basket.add(product);
                 }
             }
             System.out.println("Failed to find the product");
@@ -42,6 +42,14 @@ public class ProductManager {
 
     public HashMap<String, Product> getInventory() {
         return inventory;
+    }
+
+    public Basket getBasket() {
+        return basket;
+    }
+
+    public boolean changeBasketCapacity(int capacity) {
+        return basket.setCapacity(capacity);
     }
 
     private HashMap<String, Product> fillHashMapFromFile(String file) {
@@ -92,13 +100,5 @@ public class ProductManager {
             System.out.println();
         }
         scanner.close();
-    }
-
-    public Basket getBasket() {
-        return basket;
-    }
-
-    public void changeBasketSize(int size) {
-        basket.setCapacity(size);
     }
 }

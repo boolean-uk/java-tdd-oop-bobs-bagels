@@ -16,11 +16,6 @@ public class Basket {
         } else {
             return false;
         }
-
-    }
-
-    public ArrayList<Product> getList() {
-        return list;
     }
 
     public boolean remove(Product product) {
@@ -28,6 +23,10 @@ public class Basket {
             return list.remove(product);
         }
         return false;
+    }
+
+    public ArrayList<Product> getList() {
+        return list;
     }
 
     public int getCapacity() {
