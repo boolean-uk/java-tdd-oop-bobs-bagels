@@ -7,14 +7,14 @@ import java.util.HashMap;
 import java.util.Scanner;
 
 public class ProductManager {
-    private static final HashMap<String, Product> INVENTORY = fillHashMapFromFile("src/main/java/com/booleanuk/core/inventory.txt");
+    private static final HashMap<String, Product> INVENTORY = fillHashMapFromFile("src/main/java/com/booleanuk/core/data/inventory.txt");
     private final Basket basket;
 
     public ProductManager() {
         basket = new Basket();
     }
 
-    public boolean orderBagel(String variant) {
+    public boolean orderProduct(String variant) {
         if (basket.getList().size() < basket.getCapacity()) {
             for (Product product : INVENTORY.values()) {
                 if (product.getVariant().equals(variant)) {
@@ -28,7 +28,7 @@ public class ProductManager {
         return false;
     }
 
-    public boolean removeBagel(String variant) {
+    public boolean removeProduct(String variant) {
         for (Product product : INVENTORY.values()) {
             if (product.getVariant().equals(variant)) {
                 return basket.remove(product);
@@ -69,34 +69,5 @@ public class ProductManager {
             e.printStackTrace();
         }
         return hashMap;
-    }
-
-    private void displayMenu() {
-        Scanner scanner = new Scanner(System.in);
-        boolean running = true;
-
-        while (running) {
-            System.out.println("===== MENU =====");
-            System.out.println("A - Order a bagel");
-            System.out.println("B - Remove bagel from the basket");
-            System.out.println("C - Change basket capacity");
-            System.out.println("Q - Quit");
-            System.out.print("Enter your choice: ");
-
-            String choice = scanner.nextLine().trim().toUpperCase();
-
-            switch (choice) {
-                case "A" -> System.out.println("Order a bagel");
-                case "B" -> System.out.println("Remove bagel from the basket");
-                case "C" -> System.out.println("Change basket capacity");
-                case "Q" -> {
-                    running = false;
-                    System.out.println("Goodbye!");
-                }
-                default -> System.out.println("Invalid choice. Please try again.");
-            }
-            System.out.println();
-        }
-        scanner.close();
     }
 }

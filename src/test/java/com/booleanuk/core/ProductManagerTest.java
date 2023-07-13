@@ -15,7 +15,7 @@ public class ProductManagerTest {
     @Test
     public void shouldAddBagelToBasket() {
         //Execute
-        boolean result = productManager.orderBagel("Plain");
+        boolean result = productManager.orderProduct("Sesame");
 
         //Verify
         Assertions.assertTrue(result);
@@ -24,7 +24,7 @@ public class ProductManagerTest {
     @Test
     public void shouldNotAddBagelToBasket() {
         //Execute
-        boolean result = productManager.orderBagel("Fake");
+        boolean result = productManager.orderProduct("Fake");
 
         //Verify
         Assertions.assertFalse(result);
@@ -33,11 +33,11 @@ public class ProductManagerTest {
     @Test
     public void shouldRemoveBagelFromBasket() {
         //Setup
-        productManager.orderBagel("Plain");
+        productManager.orderProduct("Plain");
 
 
         //Execute
-        boolean result = productManager.removeBagel("Plain");
+        boolean result = productManager.removeProduct("Plain");
 
         //Verify
 
@@ -47,7 +47,7 @@ public class ProductManagerTest {
     @Test
     public void shouldNotRemoveFromBasket() {
         //Execute
-        boolean result = productManager.removeBagel("Plain");
+        boolean result = productManager.removeProduct("Plain");
 
         //Verify
         Assertions.assertFalse(result);
@@ -77,9 +77,9 @@ public class ProductManagerTest {
     @Test
     public void shouldNotChangeBasketCapacity() {
         //Setup
-        productManager.orderBagel("Plain");
-        productManager.orderBagel("Plain");
-        productManager.orderBagel("Plain");
+        productManager.orderProduct("Plain");
+        productManager.orderProduct("Plain");
+        productManager.orderProduct("Plain");
         int expectedCapacity = productManager.getBasket().getCapacity();
         int newCapacity = 2;
 
@@ -93,9 +93,9 @@ public class ProductManagerTest {
     @Test
     public void shouldReturnTotalBasketCost() {
         //Setup
-        productManager.orderBagel("Plain");
-        productManager.orderBagel("Plain");
-        productManager.orderBagel("Plain");
+        productManager.orderProduct("Plain");
+        productManager.orderProduct("Plain");
+        productManager.orderProduct("Plain");
         double expected = 0.39 * 3;
 
         //Execute
