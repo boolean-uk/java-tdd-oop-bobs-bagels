@@ -1,6 +1,7 @@
 package com.booleanuk.core;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Basket {
     private ArrayList<Product> list = new ArrayList<>();
@@ -22,13 +23,28 @@ public class Basket {
     }
 
     public double total(){
+        // TODO: Podwaliny pod EXTENSION1 (mapa duplikatow)
         double total = 0;
-        for (Product product : list) {
-            total += product.getPrice();
-        }
-        total = Math.round(total * 100);
-        total = total/100;
-        return total;
+        HashMap<Product, Integer> duplicatesHashMap = new HashMap<>();
+        list.forEach(product -> {
+            if (!duplicatesHashMap.containsKey(product)) {
+                duplicatesHashMap.put(product, 1);
+            } else {
+                duplicatesHashMap.computeIfPresent(product, (k, v) -> v + 1);
+            }
+        });
+        duplicatesHashMap.forEach((product, integer) -> {
+            if (integer >= 12) {
+
+            }
+        });
+//        double total = 0;
+//        for (Product product : list) {
+//            total += product.getPrice();
+//        }
+//        total = Math.round(total * 100);
+//        total = total/100;
+//        return total;
     }
 
     public int getCapacity() {

@@ -2,6 +2,7 @@ package com.booleanuk.core;
 
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.Set;
 
 public class Main {
     private static final ProductManager PRODUCT_MANAGER = new ProductManager();
@@ -48,9 +49,10 @@ public class Main {
 
     private static void displayBagle() {
         System.out.println("===== BAGLES =====");
-        for (String sku : PRODUCT_MANAGER.getInventory().keySet()) {
+        Set<String> skuList = PRODUCT_MANAGER.getInventory().keySet();
+        for (String sku : skuList) {
             if (sku.startsWith("B"))
-                System.out.println(PRODUCT_MANAGER.getInventory().get(sku));
+                System.out.println(PRODUCT_MANAGER.getInventory().get(sku).toStringExtended());
         }
         System.out.print("\nType a filling variant or click ENTER to exit: ");
         String choice = SCANNER.nextLine().trim();
@@ -64,9 +66,9 @@ public class Main {
         }
 
         System.out.println("\n===== FILLINGS =====");
-        for (String sku : PRODUCT_MANAGER.getInventory().keySet()) {
+        for (String sku : skuList) {
             if (sku.startsWith("F")) {
-                System.out.println(PRODUCT_MANAGER.getInventory().get(sku));
+                System.out.println(PRODUCT_MANAGER.getInventory().get(sku).toStringExtended());
             }
         }
         System.out.println("\nDo you fancy yourself a filling?");
@@ -93,9 +95,9 @@ public class Main {
 
     private static void displayCoffee() {
         System.out.println("===== COFFEES =====");
-        for (String string : PRODUCT_MANAGER.getInventory().keySet()) {
-            if (string.startsWith("C")) {
-                System.out.println(PRODUCT_MANAGER.getInventory().get(string));
+        for (String sku : PRODUCT_MANAGER.getInventory().keySet()) {
+            if (sku.startsWith("C")) {
+                System.out.println(PRODUCT_MANAGER.getInventory().get(sku).toStringExtended());
             }
         }
         System.out.print("Type a coffee variant or click ENTER to exit: ");
@@ -151,7 +153,7 @@ public class Main {
         } else {
             for (Product product : basket) {
                 System.out.print(basket.indexOf(product) + " = ");
-                System.out.println(product);
+                System.out.println(product.toStringExtended());
             }
             return true;
         }
