@@ -14,7 +14,7 @@
 |          |                                            | `getReceipt()`                                       | returns receipt                                            | String  |
 |          |                                            | `getProductDiscount(Product product, int quantity)`  | returns product discount amount including quantity         | float   |
 |          |                                            | `leftpad(String text, int length)`                   | returns String with given width(filled with left padding)  | String  |
-|          |                                            | `rightpad(String text, int length)`                  | returns String with given width(filled with left padding)  | String  |
+|          |                                            | `rightpad(String text, int length)`                  | returns String with given width(filled with right padding) | String  |
 
 | Class     | Members                | Methods       | Scenario                | Outputs |
 |-----------|------------------------|---------------|-------------------------|---------|
