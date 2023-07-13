@@ -1,9 +1,10 @@
 package com.booleanuk.extension;
 
-import com.booleanuk.extension.bagel.Bagel;
-import com.booleanuk.extension.bagel.BagelType;
-import com.booleanuk.extension.specialoffer.BagelOffer;
-import com.booleanuk.extension.specialoffer.BreakfastOffer;
+import com.booleanuk.extension.product.BagelSandwich;
+import com.booleanuk.extension.product.Coffee;
+import com.booleanuk.extension.product.Product;
+import com.booleanuk.extension.product.specialoffer.BagelOffer;
+import com.booleanuk.extension.product.specialoffer.BreakfastOffer;
 import lombok.Getter;
 
 import java.math.BigDecimal;
@@ -17,30 +18,30 @@ import java.util.NoSuchElementException;
 public class Basket {
     private final List<Product> products = new ArrayList<>();
     private int capacity;
-    private final Map<BagelType, Integer> bagelTypeCounter = new HashMap<>();
+    private final Map<BagelSandwich.Bagel, Integer> bagelTypeCounter = new HashMap<>();
 
     public Basket(int capacity) {
         this.capacity = capacity;
     }
 
-    public void addBagel(Bagel bagel) {
+    public void addBagel(BagelSandwich bagel) {
         if (isFull()) {
             throw new IllegalStateException("Cannot add new bagel - basket is full");
         }
 
         products.add(bagel);
 
-        bagelTypeCounter.merge(bagel.type(), 1, Integer::sum);
+        bagelTypeCounter.merge(bagel.getBagel(), 1, Integer::sum);
     }
 
-    public void removeBagel(Bagel bagel) {
+    public void removeBagel(BagelSandwich bagel) {
         if (!products.contains(bagel)) {
             throw new NoSuchElementException("Cannot remove bagel because it's not in the basket");
         }
 
         products.remove(bagel);
 
-        bagelTypeCounter.merge(bagel.type(), -1, Integer::sum);
+        bagelTypeCounter.merge(bagel.getBagel(), -1, Integer::sum);
     }
 
     public void addCoffee(Coffee coffee) {
@@ -109,7 +110,7 @@ public class Basket {
         var productsGrouped = new ArrayList<>(products);
         for (var e : bagelTypeCounter.entrySet()) {
             var type = e.getKey();
-            if (type.equals(BagelType.BGLS)) {
+            if (type.equals(BagelSandwich.Bagel.BGLS)) {
                 continue;
             }
             var amount = e.getValue();
@@ -121,20 +122,20 @@ public class Basket {
             var offerAmount = amount / offerQuantity;
 
             var bagelsForAllOffers = new ArrayList<>(productsGrouped.stream()
-                    .filter(p -> p instanceof Bagel)
-                    .map(p -> (Bagel) p)
-                    .filter(b -> b.type().equals(type))
+                    .filter(p -> p instanceof BagelSandwich)
+                    .map(p -> (BagelSandwich) p)
+                    .filter(b -> b.getBagel().equals(type))
                     .limit((long) offerAmount * offerQuantity)
                     .toList());
 
             productsGrouped.removeAll(bagelsForAllOffers);
 
             while (!bagelsForAllOffers.isEmpty()) {
-                var bagelsForSingleOffer = new ArrayList<Bagel>();
+                var bagelsForSingleOffer = new ArrayList<BagelSandwich>();
                 for (int i = 0; i < offerQuantity; i++) {
                     bagelsForSingleOffer.add(bagelsForAllOffers.remove(0));
                 }
-                var bagelOffer = BagelOffer.of(bagelsForSingleOffer.toArray(Bagel[]::new));
+                var bagelOffer = BagelOffer.of(bagelsForSingleOffer.toArray(BagelSandwich[]::new));
                 productsGrouped.add(bagelOffer);
             }
         }
@@ -170,10 +171,10 @@ public class Basket {
                 .toList());
     }
 
-    private List<Bagel> extractBagels(List<Product> products) {
+    private List<BagelSandwich> extractBagels(List<Product> products) {
         return new ArrayList<>(products.stream()
-                .filter(p -> p instanceof Bagel)
-                .map(p -> (Bagel) p)
+                .filter(p -> p instanceof BagelSandwich)
+                .map(p -> (BagelSandwich) p)
                 .toList());
     }
 }

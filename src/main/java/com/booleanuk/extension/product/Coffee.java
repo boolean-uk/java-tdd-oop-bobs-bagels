@@ -1,4 +1,4 @@
-package com.booleanuk.extension;
+package com.booleanuk.extension.product;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -13,6 +13,7 @@ public enum Coffee implements Product {
     COFC("Cappuccino", BigDecimal.valueOf(1.29)),
     COFL("Latte", BigDecimal.valueOf(1.29));
 
+    private final Product.Type productType = Product.Type.Coffee;
     private final String variant;
     private final BigDecimal price;
 }

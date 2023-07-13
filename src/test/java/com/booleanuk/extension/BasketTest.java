@@ -1,9 +1,8 @@
 package com.booleanuk.extension;
 
-import com.booleanuk.extension.bagel.Bagel;
-import com.booleanuk.extension.bagel.BagelType;
-import com.booleanuk.extension.bagel.Filling;
-import com.booleanuk.extension.specialoffer.BagelOffer;
+import com.booleanuk.extension.product.BagelSandwich;
+import com.booleanuk.extension.product.Coffee;
+import com.booleanuk.extension.product.specialoffer.BagelOffer;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -18,25 +17,16 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class BasketTest {
-    private static Bagel BAGEL_ONION;
-    private static Bagel BAGEL_PLAIN;
-    private static Bagel BAGEL_EVERYTHING;
+    private static BagelSandwich BAGEL_ONION;
+    private static BagelSandwich BAGEL_PLAIN;
+    private static BagelSandwich BAGEL_EVERYTHING;
     private static Coffee COFFEE;
 
     @BeforeAll
     static void testSetup() {
-        BAGEL_ONION = Bagel.builder()
-                .type(BagelType.BGLO)
-                .fillings(Filling.values())
-                .build();
-        BAGEL_PLAIN = Bagel.builder()
-                .type(BagelType.BGLP)
-                .fillings(Filling.values())
-                .build();
-        BAGEL_EVERYTHING = Bagel.builder()
-                .type(BagelType.BGLE)
-                .fillings(Filling.values())
-                .build();
+        BAGEL_ONION = new BagelSandwich(BagelSandwich.Bagel.BGLO, BagelSandwich.Filling.values());
+        BAGEL_PLAIN = new BagelSandwich(BagelSandwich.Bagel.BGLP, BagelSandwich.Filling.values());
+        BAGEL_EVERYTHING = new BagelSandwich(BagelSandwich.Bagel.BGLE, BagelSandwich.Filling.values());
         COFFEE = Coffee.COFB;
     }
 
@@ -132,8 +122,8 @@ class BasketTest {
             basket.addBagel(BAGEL_ONION);
         }
 
-        var fillingPrice = Arrays.stream(BAGEL_ONION.fillings())
-                .map(Filling::getPrice)
+        var fillingPrice = Arrays.stream(BAGEL_ONION.getFillings())
+                .map(BagelSandwich.Filling::getPrice)
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
         var expectedPrice = BagelOffer.Type.SixOnion.getPrice()
                 .add(BigDecimal.valueOf(cap).multiply(fillingPrice));
@@ -149,8 +139,8 @@ class BasketTest {
             basket.addBagel(BAGEL_PLAIN);
         }
 
-        var fillingPrice = Arrays.stream(BAGEL_PLAIN.fillings())
-                .map(Filling::getPrice)
+        var fillingPrice = Arrays.stream(BAGEL_PLAIN.getFillings())
+                .map(BagelSandwich.Filling::getPrice)
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
         var expectedPrice = BagelOffer.Type.TwelvePlain.getPrice()
                 .add(BigDecimal.valueOf(cap).multiply(fillingPrice));
@@ -166,8 +156,8 @@ class BasketTest {
             basket.addBagel(BAGEL_EVERYTHING);
         }
 
-        var fillingPrice = Arrays.stream(BAGEL_EVERYTHING.fillings())
-                .map(Filling::getPrice)
+        var fillingPrice = Arrays.stream(BAGEL_EVERYTHING.getFillings())
+                .map(BagelSandwich.Filling::getPrice)
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
         var expectedPrice = BagelOffer.Type.SixEverything.getPrice()
                 .add(BigDecimal.valueOf(cap).multiply(fillingPrice));
@@ -181,8 +171,8 @@ class BasketTest {
         basket.addBagel(BAGEL_EVERYTHING);
         basket.addCoffee(COFFEE);
 
-        var fillingPrice = Arrays.stream(BAGEL_EVERYTHING.fillings())
-                .map(Filling::getPrice)
+        var fillingPrice = Arrays.stream(BAGEL_EVERYTHING.getFillings())
+                .map(BagelSandwich.Filling::getPrice)
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
         var expectedPrice = BigDecimal.valueOf(1.25)
                 .add(fillingPrice);

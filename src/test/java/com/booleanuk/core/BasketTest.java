@@ -16,23 +16,13 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class BasketTest {
-    private static Bagel BAGEL_ONION;
-    private static Bagel BAGEL_PLAIN;
-    private static Bagel BAGEL_EVERYTHING;
+    private static Bagel BAGEL;
     private static Coffee COFFEE;
 
     @BeforeAll
     static void testSetup() {
-        BAGEL_ONION = Bagel.builder()
-                .type(BagelType.BGLO)
-                .fillings(Filling.values())
-                .build();
-        BAGEL_PLAIN = Bagel.builder()
+        BAGEL = Bagel.builder()
                 .type(BagelType.BGLP)
-                .fillings(Filling.values())
-                .build();
-        BAGEL_EVERYTHING = Bagel.builder()
-                .type(BagelType.BGLE)
                 .fillings(Filling.values())
                 .build();
         COFFEE = Coffee.COFB;
@@ -42,33 +32,33 @@ class BasketTest {
     void addBagel_shouldAddBagelIfBasketNotFull() {
         var basket = new Basket(1);
 
-        basket.addBagel(BAGEL_PLAIN);
+        basket.addBagel(BAGEL);
 
-        assertTrue(basket.getProducts().contains(BAGEL_PLAIN));
+        assertTrue(basket.getProducts().contains(BAGEL));
     }
 
     @Test
     void addBagel_shouldThrowIfBasketFull() {
         var basket = new Basket(0);
 
-        assertThrows(IllegalStateException.class, () -> basket.addBagel(BAGEL_PLAIN));
+        assertThrows(IllegalStateException.class, () -> basket.addBagel(BAGEL));
     }
 
     @Test
     void removeBagel_shouldRemoveBagelIfPresent() {
         var basket = new Basket(1);
-        basket.addBagel(BAGEL_PLAIN);
+        basket.addBagel(BAGEL);
 
-        basket.removeBagel(BAGEL_PLAIN);
+        basket.removeBagel(BAGEL);
 
-        assertFalse(basket.getProducts().contains(BAGEL_PLAIN));
+        assertFalse(basket.getProducts().contains(BAGEL));
     }
 
     @Test
     void removeBagel_shouldThrowIfAbsent() {
         var basket = new Basket(1);
 
-        assertThrows(NoSuchElementException.class, () -> basket.removeBagel(BAGEL_PLAIN));
+        assertThrows(NoSuchElementException.class, () -> basket.removeBagel(BAGEL));
     }
 
     @Test
@@ -114,10 +104,10 @@ class BasketTest {
     @Test
     void totalPrice_shouldCorrectlyCalculatePriceForNonEmptyBasket() {
         var basket = new Basket(2);
-        basket.addBagel(BAGEL_PLAIN);
-        basket.addBagel(BAGEL_PLAIN);
+        basket.addBagel(BAGEL);
+        basket.addBagel(BAGEL);
 
-        var expectedPrice = BAGEL_PLAIN.getPrice().multiply(BigDecimal.valueOf(2));
+        var expectedPrice = BAGEL.getPrice().multiply(BigDecimal.valueOf(2));
 
         assertEquals(expectedPrice, basket.totalPrice());
     }
@@ -125,7 +115,7 @@ class BasketTest {
     @Test
     void resize_shouldResizeBasketIfNewCapacityGreaterThanOrEqualsToAmountOfItems() {
         var basket = new Basket(2);
-        basket.addBagel(BAGEL_PLAIN);
+        basket.addBagel(BAGEL);
         basket.addCoffee(COFFEE);
 
         var newCapacity = 5;
@@ -136,7 +126,7 @@ class BasketTest {
     @Test
     void resize_shouldThrowIfNewCapacitySmallerThanAmountOfItems() {
         var basket = new Basket(2);
-        basket.addBagel(BAGEL_PLAIN);
+        basket.addBagel(BAGEL);
         basket.addCoffee(COFFEE);
 
         assertThrows(IllegalArgumentException.class, () -> basket.resize(1));
