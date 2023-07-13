@@ -1,4 +1,4 @@
-package com.booleanuk;
+package com.booleanuk.core;
 
 import com.booleanuk.core.*;
 import org.junit.jupiter.api.Test;
