@@ -189,5 +189,18 @@ public class BobBagelsExtensionTest {
         assertEquals(pricelist, bagelsPriceList);
     }
 
+
+    @Test
+    public void shouldReturnFalseIfProductIsNotInTheInventory(){
+        //given
+        BagelExt bagelExt = new BagelExt();
+
+        //when
+        boolean canAddBagelTheBasketThatIsNotInTheInventory = basketManager.add(bagelExt);
+
+        //then
+        assertFalse(canAddBagelTheBasketThatIsNotInTheInventory);
+    }
+
 }
 

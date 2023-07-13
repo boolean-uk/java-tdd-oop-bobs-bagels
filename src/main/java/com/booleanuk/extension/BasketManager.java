@@ -22,34 +22,39 @@ public class BasketManager {
 
 
     public boolean add(BagelExt bagelExt) {
-
-        if (checkIsBasketFull()) {
-            basketExt.add(bagelExt);
-            return true;
-        } else {
-            System.out.println("Basket is full!");
-            return false;
+        if (isProductInInventory(bagelExt)) {
+            if (checkIsBasketFull()) {
+                basketExt.add(bagelExt);
+                return true;
+            } else {
+                System.out.println("Basket is full!");
+                return false;
+            }
         }
 
 
     }
     public boolean add(CoffeeExt coffeeExt) {
-        if (checkIsBasketFull()) {
-            basketExt.add(coffeeExt);
-            return true;
-        } else {
-            System.out.println("Basket is full!");
-            return false;
+        if (isProductInInventory(coffeeExt)) {
+            if (checkIsBasketFull()) {
+                basketExt.add(coffeeExt);
+                return true;
+            } else {
+                System.out.println("Basket is full!");
+                return false;
+            }
         }
     }
     public boolean add(FillingExt fillingExt) {
-        if (checkIsBasketFull()) {
-            basketExt.add(fillingExt);
-            return true;
+        if (isProductInInventory(fillingExt)) {
+            if (checkIsBasketFull()) {
+                basketExt.add(fillingExt);
+                return true;
 
-        } else {
-            System.out.println("Basket is full!");
-            return false;
+            } else {
+                System.out.println("Basket is full!");
+                return false;
+            }
         }
     }
 
@@ -123,6 +128,8 @@ public class BasketManager {
 
         return sb.toString();
     }
+
+
 
 
 }

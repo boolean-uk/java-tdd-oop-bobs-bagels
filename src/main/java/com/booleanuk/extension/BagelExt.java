@@ -11,6 +11,9 @@ public class BagelExt {
     private FillingExt fillingExt;
 
 
+    public BagelExt() {
+    }
+
     public BagelExt(SKU sku, String name, double price) {
         this.sku = sku;
         this.name = name;
