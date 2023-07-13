@@ -121,3 +121,17 @@ I'd like to get some discount for buying multiple products.
 | Coffee extends *Product*  | BigDecimal price        | BigDecimal getPrice()                         |                                                                        | price of the coffee                 |
 | Inventory                 | List\<String> itemSkus  | boolean containsItem(String sku)              | If item exists in inventory                                            | true                                |
 |                           |                         |                                               | If item does not exist in inventory                                    | false                               |
+
+### Extension 2.
+
+```
+1.
+As a customer,
+So I can have order confirmation,
+I'd like to get a detailed receipt.
+```
+
+| Class   | Fields             | Methods               | Scenario | Output                  |
+|---------|--------------------|-----------------------|----------|-------------------------|
+| Receipt | LocalDateTime time | String printReceipt() |          | prints detailed receipt |       
+|         | Basket basket      |                       |          |                         |                  
