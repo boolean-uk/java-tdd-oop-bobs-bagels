@@ -8,7 +8,7 @@ public class Basket {
 
     private static ArrayList<Filling> allFillings = new ArrayList<>();
     private static ArrayList<Bagel> allBagels = new ArrayList<>();
-    private static ArrayList<Coffee> allCoffees;
+    private static ArrayList<Coffee> allCoffees = new ArrayList<>();
 
     private HashMap<Product, Integer> basket = new HashMap<>();
 
@@ -86,6 +86,11 @@ public class Basket {
         }
 
         return productsInBasket;
+    }
+
+
+    private boolean isInTheInvetory(){
+        return false;
     }
 
 

@@ -134,7 +134,15 @@ public class BobBagelTest {
         Bagel bagel = new Bagel("Onion Bagel", 1,"BGLO",BagelVariant.ONION);
         Bagel bagel1 = new Bagel("Plain Bagel", 2,"BGLP",BagelVariant.PLAIN);
         int quantity = 3;
+        //given
+       boolean isAdded = basket.add(bagel1,10);
+
+       //then
+        assertFalse(isAdded);
     }
+
+
+
 
 
 
