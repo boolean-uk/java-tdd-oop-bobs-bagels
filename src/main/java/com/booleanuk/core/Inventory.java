@@ -1,10 +1,6 @@
 package com.booleanuk.core;
 
-import org.w3c.dom.ls.LSOutput;
-
 import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Set;
 
 public class Inventory {
 
@@ -35,22 +31,22 @@ public class Inventory {
 
 
 
-    public  boolean isInTheIventory(Product product1){
+    public  boolean isInTheInventory(Product product1){
         for (Product product :
                 allBagels) {
-            if(product.equals(product1)){
+            if(product1.equals(product)){
                 return  true;
             }
         }
         for (Product product :
                 allFillings) {
-            if(product.equals(product1)){
+            if(product1.equals(product)){
                 return  true;
             }
         }
         for (Product product :
                 allCoffees) {
-            if(product.equals(product1)){
+            if(product1.equals(product)){
                 return  true;
             }
         }

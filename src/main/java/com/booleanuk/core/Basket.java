@@ -21,7 +21,7 @@ public class Basket {
 
     public boolean add(Product product, int quantity) {
         int freeSpace = capacity - productsInBasket();
-        if (inventory.isInTheIventory(product)) {
+        if (inventory.isInTheInventory(product)) {
             if (freeSpace < quantity) {
                 System.out.println("Your basket does not have capacity!");
                 return false;
@@ -93,9 +93,6 @@ public class Basket {
     }
 
 
-    private boolean isInTheInvetory() {
-        return false;
-    }
 
 
 
