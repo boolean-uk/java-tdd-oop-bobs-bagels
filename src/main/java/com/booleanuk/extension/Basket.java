@@ -7,8 +7,8 @@ import java.util.Map;
 
 public class Basket {
     private int capacity;
-    private final static int SIX_BAGELS_PRICE = 249;
-    private final static int TWELVE_BAGELS_PRICE = 399;
+    private final static int SIX_BAGELS_PRICE = 249 + 72;
+    private final static int TWELVE_BAGELS_PRICE = 399 + 144;
     private Map<Item,Integer> items;
 
     public Basket(int capacity) {
