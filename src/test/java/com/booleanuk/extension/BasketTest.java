@@ -77,7 +77,7 @@ public class BasketTest {
 
         for(int i = 0; i < 5; i++)
             basket.add(BGLO);
-        Assertions.assertEquals(Map.of(BGLO, BigDecimal.valueOf(0)), basket.calculateDiscounts());
+        Assertions.assertEquals(Map.of(BGLO, BigDecimal.valueOf(0.0)), basket.calculateDiscounts());
 
         basket.add(BGLO);
         Assertions.assertEquals(Map.of(BGLO, BigDecimal.valueOf(0.45)), basket.calculateDiscounts());
