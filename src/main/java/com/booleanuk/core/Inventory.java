@@ -21,4 +21,8 @@ public class Inventory {
         put("Smoked Salmon", new Product("FILS", 0.12d, "Filling", "Smoked Salmon"));
         put("Ham", new Product("FILH", 0.12d, "Filling", "Ham"));
     }};
+
+    public static HashMap<String, Product> getProducts() {
+        return products;
+    }
 }
