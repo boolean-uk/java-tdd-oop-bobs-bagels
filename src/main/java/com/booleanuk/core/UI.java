@@ -1,6 +1,7 @@
 package com.booleanuk.core;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 public class UI {
@@ -8,9 +9,11 @@ public class UI {
     Customer customer = new Customer();
     Manager manager = new Manager();
     public void displayRecipe() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        String formattedDateTimeNow = LocalDateTime.now().format(formatter);
         System.out.println("    ~~~ Bob's Bagels ~~~ \n");
-        System.out.println(LocalDateTime.now() + "\n");
-        System.out.println("------------------------------");
+        System.out.println("    " + formattedDateTimeNow + "\n");
+        System.out.println("------------------------------ \n");
         System.out.println(customer.checkBasketWithQuantity());
         System.out.println("------------------------------");
         System.out.println("Total:                   £" + (double) customer.getTotalCost() / 100);
