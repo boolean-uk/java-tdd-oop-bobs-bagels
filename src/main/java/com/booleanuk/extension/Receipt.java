@@ -1,6 +1,8 @@
 package com.booleanuk.extension;
 
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 public class Receipt {
@@ -14,7 +16,7 @@ public class Receipt {
 
     public String printReceipt() {
         List<Product> products = basket.getProducts();
-        Map<Product, Integer> quantities = new HashMap<>();
+        Map<Product, Integer> quantities = new LinkedHashMap<>();
 
         for(Product p : products) {
             quantities.putIfAbsent(p, 0);
@@ -23,7 +25,9 @@ public class Receipt {
 
         StringBuilder sb = new StringBuilder();
         sb.append("   ~~~ Bob's Bagels ~~~   \n");
-        sb.append(time+"\n");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+        String formattedTime = time.format(formatter);
+        sb.append(formattedTime+"\n");
         sb.append("-------------------------------\n");
         quantities.forEach((product, quantity) -> {
             sb.append(product.getVariant()+" "+product.getName()+"        "+quantity+" "+product.getPrice()+"\n");

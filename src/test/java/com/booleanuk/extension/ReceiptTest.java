@@ -4,6 +4,8 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 public class ReceiptTest {
@@ -21,7 +23,19 @@ public class ReceiptTest {
         basket.add(COFB);
         Receipt receipt = new Receipt(basket);
         String actual = receipt.printReceipt();
-        String expected = "";
+        LocalDateTime time = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+        String formattedTime = time.format(formatter);
+        String expected = "   ~~~ Bob's Bagels ~~~   \n" +
+                formattedTime+"\n" +
+                "-------------------------------\n" +
+                "Onion Bagel        1 3.49\n" +
+                "Egg Filling        1 (3.0)\n" +
+                "Plain Bagel        2 0.39\n" +
+                "Black Coffee        1 0.99\n" +
+                "-------------------------------\n" +
+                "Total                     5.26\n" +
+                "Thank you for your order!";
 
         Assertions.assertEquals(expected, actual);
     }
