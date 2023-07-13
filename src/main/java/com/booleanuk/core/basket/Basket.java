@@ -21,6 +21,11 @@ public class Basket implements BasketOperations {
         setCapacity(capacity);
     }
 
+    private static void saveReceivedDiscount(HashMap<Product, BigDecimal> discounts, Discount discount) {
+        BigDecimal productDiscount = discount.getProduct().getPrice().multiply(BigDecimal.valueOf(discount.getRequiredAmount())).subtract(discount.getDiscountedPrice());
+        discounts.put(discount.getProduct(), productDiscount);
+    }
+
     public List<Product> getProducts() {
         return products;
     }
@@ -48,7 +53,6 @@ public class Basket implements BasketOperations {
         products.add(product);
         return true;
     }
-
 
     public boolean addProduct(Product product, int quantity) {
         for (int i = 0; i < quantity; i++) {
@@ -81,44 +85,44 @@ public class Basket implements BasketOperations {
     }
 
     @Override
-    public BigDecimal summarizeBasket() {
+    public SummarizedBasket summarizeBasket() {
         Store store = Store.getInstance();
 
         HashMap<Product, BigDecimal> discounts = new HashMap<>();
 
-
-        BigDecimal sum = products.stream().map(Product::getPrice).reduce(BigDecimal.ZERO, BigDecimal::add);
-
-//        BigDecimal sum = BigDecimal.valueOf(products.stream().mapToDouble(Product::getPrice).sum());
+        BigDecimal total = products.stream().map(Product::getPrice).reduce(BigDecimal.ZERO, BigDecimal::add);
 
         for (Discount discount : store.getAvailableDiscounts()) {
-            if (products.contains(discount.getProduct()) && Collections.frequency(products, discount.getProduct()) == discount.getRequiredAmount()) {
-                if (discount.getOptionalRequiredProduct() != null && products.contains(discount.getOptionalRequiredProduct())) {
-
-//                    Calculate received discount on this item
-                    var productDiscount = discount.getProduct().getPrice().multiply(BigDecimal.valueOf(discount.getRequiredAmount())).subtract(discount.getDiscountedPrice());
-                    discounts.put(discount.getProduct(), productDiscount);
-
-                    sum = sum
+            if (isDiscountRequirementMet(discount)) {
+                if (isItDifferentProductsDiscount(discount)) {
+                    saveReceivedDiscount(discounts, discount);
+                    total = total
                             .subtract(discount.getProduct().getPrice()
                                     .multiply(BigDecimal.valueOf(discount.getRequiredAmount())))
                             .subtract(discount.getOptionalRequiredProduct().getPrice());
                 } else {
-
-//                    Calculate received discount on this item
-                    var productDiscount = discount.getProduct().getPrice().multiply(BigDecimal.valueOf(discount.getRequiredAmount())).subtract(discount.getDiscountedPrice());
-                    discounts.put(discount.getProduct(), productDiscount);
-
-                    sum = sum
+                    saveReceivedDiscount(discounts, discount);
+                    total = total
                             .subtract(discount.getProduct().getPrice()
                                     .multiply(BigDecimal.valueOf(discount.getRequiredAmount())));
                 }
 
-                if (BigDecimal.ZERO.equals(sum)) sum = BigDecimal.ZERO;
-                sum = sum.add(discount.getDiscountedPrice());
+                if (total.compareTo((BigDecimal.ZERO)) < 0) {
+                    total = BigDecimal.ZERO;
+                }
+                total = total.add(discount.getDiscountedPrice());
             }
         }
-        return sum;
+
+        return new SummarizedBasket(total, discounts);
+    }
+
+    private boolean isItDifferentProductsDiscount(Discount discount) {
+        return discount.getOptionalRequiredProduct() != null && products.contains(discount.getOptionalRequiredProduct());
+    }
+
+    private boolean isDiscountRequirementMet(Discount discount) {
+        return products.contains(discount.getProduct()) && Collections.frequency(products, discount.getProduct()) == discount.getRequiredAmount();
     }
 
     @Override

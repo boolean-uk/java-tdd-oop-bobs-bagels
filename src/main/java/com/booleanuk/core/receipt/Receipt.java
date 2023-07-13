@@ -52,7 +52,7 @@ public class Receipt {
             }
 
         }
-        receipt.append(separator).append("\n").append(String.format("Total                  $%.2f\n\n", basket.summarizeBasket())).append("\t").append(thankYouMessage);
+        receipt.append(separator).append("\n").append(String.format("Total                  $%.2f\n\n", basket.summarizeBasket().total())).append("\t").append(thankYouMessage);
 
 
         return receipt;

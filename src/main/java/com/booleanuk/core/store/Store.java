@@ -21,9 +21,8 @@ public class Store {
     private final static String fillings = "/filling.json";
     private final static String coffees = "/coffee.json";
     private static Store INSTANCE;
-    private final List<Discount> availableDiscounts = new ArrayList<>(0);
+    private List<Discount> availableDiscounts = new ArrayList<>(0);
     private List<Product> availableProducts = new ArrayList<>(0);
-
     private Store() {
         loadAvailableBagels();
         loadAvailableCoffees();
@@ -51,6 +50,10 @@ public class Store {
 
     public List<Discount> getAvailableDiscounts() {
         return availableDiscounts;
+    }
+
+    public void setAvailableDiscounts(List<Discount> availableDiscounts) {
+        this.availableDiscounts = availableDiscounts;
     }
 
     public void addDiscount(Discount discount) {
