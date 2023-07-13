@@ -60,5 +60,12 @@ public class TestBasket {
 
         Assertions.assertEquals(0.88,basket.getTotalCost());
     }
+    @Test
+    public void whenGetTotalCostCalledWithFillings_totalCostIsReturned() throws Exception {
+        basket.addToBasket(new Bagel("BGLO"));
+        basket.addFilling("FILE");
+        
+        Assertions.assertEquals(0.61,basket.getTotalCost());
+    }
 
 }
