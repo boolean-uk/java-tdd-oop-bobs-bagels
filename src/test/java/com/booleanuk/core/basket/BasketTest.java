@@ -1,6 +1,8 @@
 package com.booleanuk.core.basket;
 
 import com.booleanuk.core.products.Bagel;
+import com.booleanuk.core.products.BagelVariant;
+import com.booleanuk.core.store.Store;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -24,8 +26,9 @@ public class BasketTest {
     public void shouldAddNewProductToBasket() {
         Basket basket = new Basket(2);
         Bagel bagel = new Bagel("SKU1", 0.55);
-        basket.addProduct(bagel);
+        boolean result = basket.addProduct(bagel);
 
+        Assertions.assertTrue(result);
         Assertions.assertEquals(bagel, basket.getProducts().get(0));
     }
 
@@ -47,8 +50,9 @@ public class BasketTest {
         Bagel bagel = new Bagel("SKU1", 0.55);
 
         basket.addProduct(bagel);
-        basket.removeProduct(bagel);
+        boolean result = basket.removeProduct(bagel);
 
+        Assertions.assertTrue(result);
         Assertions.assertEquals(0, basket.getProductsAmount());
     }
 
@@ -95,5 +99,21 @@ public class BasketTest {
         basket.addProduct(bagel);
 
         Assertions.assertEquals(0.55, basket.summarizeBasket());
+    }
+
+    @Test
+    public void shouldReturnTrueWhenProductIsInStore() {
+        Store store = new Store();
+        Bagel bagel = new Bagel("BGLO", 0.49, BagelVariant.Onion);
+
+        Assertions.assertTrue(store.isProductAvailable(bagel));
+    }
+
+    @Test
+    public void shouldReturnFalseWhenProductIsNotInStore() {
+        Store store = new Store();
+        Bagel bagel = new Bagel("BGLO", 0.99, BagelVariant.Plain);
+
+        Assertions.assertFalse(store.isProductAvailable(bagel));
     }
 }
