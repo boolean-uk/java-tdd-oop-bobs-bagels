@@ -180,7 +180,7 @@ public class BobBagelsExtensionTest {
         //given
         String pricelist ="aaaa";
         //when
-        String bagelsPriceList = basketManager.getPriceListOfFillings();
+        String bagelsPriceList = basketManager.getPriceListOfBagels();
         //then
         assertEquals(pricelist, bagelsPriceList);
     }
