@@ -17,11 +17,11 @@ public class BagelOffer implements SpecialOffer {
     private BagelOffer(Bagel... bagels) {
         // TODO validation of amount and type of bagels (check if they conform to existing promotions)
         this.bagels = List.of(bagels);
-        this.offerType = switch (bagels[0].getType()) {
+        this.offerType = switch (bagels[0].type()) {
             case BGLO -> Type.SixOnion;
             case BGLP -> Type.TwelvePlain;
             case BGLE -> Type.SixEverything;
-            default -> throw new IllegalStateException("Unexpected value: " + bagels[0].getType());
+            default -> throw new IllegalStateException("Unexpected value: " + bagels[0].type());
         };
     }
 
@@ -34,7 +34,7 @@ public class BagelOffer implements SpecialOffer {
         var price = offerType.getPrice();
 
         return bagels.stream()
-                .map(Bagel::getFillings)
+                .map(Bagel::fillings)
                 .flatMap(Arrays::stream)
                 .map(Filling::getPrice)
                 .reduce(price, BigDecimal::add);
