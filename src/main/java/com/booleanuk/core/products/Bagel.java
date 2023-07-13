@@ -13,7 +13,17 @@ public class Bagel extends Product {
     }
 
     public double getPriceWithFilling() {
-        return 0;
+        double fillingsprice = 0;
+        for (Filling filling : fillings
+        ) {
+            fillingsprice += filling.getPrice();
+        }
+        return super.getPrice() + fillingsprice;
+    }
+
+    public double getPriceWithOutFilling() {
+
+        return super.getPrice();
     }
 
     @Override
