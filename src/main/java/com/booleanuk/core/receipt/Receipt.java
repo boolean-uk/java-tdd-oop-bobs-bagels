@@ -27,7 +27,6 @@ public class Receipt {
 
     public StringBuilder printReceipt(Basket basket) {
 
-
         createReceipt(basket);
         String header = "Bob's Bagels";
 
@@ -42,13 +41,17 @@ public class Receipt {
         receipt.append("\t ~~~ ").append(header).append(" ~~~\n").append("\t   ").append(formattedTimeStamp).append("\n").append(separator).append("\n");
 
 
-        String result = "132";
         for (Map.Entry<Product, Integer> entry : listOfProducts.entrySet()) {
             if (!(entry.getKey() instanceof Bagel)) {
                 BigDecimal totalPrice = entry.getKey().getPrice().multiply(BigDecimal.valueOf(entry.getValue()));
                 receipt.append(String.format("%-18s %2d  $%.2f", entry.getKey().toString(), entry.getValue(), totalPrice));
             } else {
                 receipt.append(showBagelOnReceipt((Bagel) entry.getKey(), entry.getValue()));
+            }
+
+            if (basket.summarizeBasket().discounts().containsKey(entry.getKey())) {
+                receipt.append(String.format("                     (-$%s)\n",
+                        basket.summarizeBasket().discounts().get(entry.getKey()).toString()));
             }
 
         }
@@ -69,7 +72,7 @@ public class Receipt {
 
 
     public StringBuilder showBagelOnReceipt(Bagel bagel, int amount) {
-        BigDecimal totalPrice = bagel.getPriceWithOutFilling().multiply(BigDecimal.valueOf(amount));
+        BigDecimal totalPrice = bagel.getPrice().multiply(BigDecimal.valueOf(amount));
         StringBuilder bagelOnReceipt = new StringBuilder();
         bagelOnReceipt.append(String.format("%-18s %2d  $%.2f\n", bagel, amount, totalPrice));
 

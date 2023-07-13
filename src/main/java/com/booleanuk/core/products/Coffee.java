@@ -14,4 +14,9 @@ public class Coffee extends Product {
         super(SKU, price);
         this.variant = variant;
     }
+
+    @Override
+    public String toString() {
+        return "Coffee";
+    }
 }

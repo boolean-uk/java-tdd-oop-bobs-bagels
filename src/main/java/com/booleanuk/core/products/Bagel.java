@@ -21,22 +21,11 @@ public class Bagel extends Product {
         this.variant = variant;
     }
 
-    public BigDecimal getPriceWithFilling() {
-        BigDecimal fillingsPrice = BigDecimal.ZERO;
-        for (Filling filling : fillings
-        ) {
-            fillingsPrice = fillingsPrice.add(filling.getPrice());
-        }
-        return super.getPrice().add(fillingsPrice);
-    }
-
-    public BigDecimal getPriceWithOutFilling() {
-
+    public BigDecimal getPrice() {
         return super.getPrice();
     }
 
-    @Override
-    public BigDecimal getPrice() {
+    public BigDecimal getPriceWithFilling() {
         BigDecimal fillingsPrice = BigDecimal.ZERO;
         for (Filling filling : fillings) {
             fillingsPrice = fillingsPrice.add(filling.getPrice());
@@ -80,6 +69,6 @@ public class Bagel extends Product {
 
     @Override
     public String toString() {
-        return super.toString() + "Bagel" + ", variant=" + variant + '}';
+        return variant + " Bagel";
     }
 }

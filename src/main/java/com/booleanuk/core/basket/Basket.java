@@ -1,5 +1,6 @@
 package com.booleanuk.core.basket;
 
+import com.booleanuk.core.products.Bagel;
 import com.booleanuk.core.products.Product;
 import com.booleanuk.core.store.Discount;
 import com.booleanuk.core.store.Store;
@@ -85,7 +86,16 @@ public class Basket implements BasketOperations {
 
         HashMap<Product, BigDecimal> savings = new HashMap<>();
 
-        BigDecimal total = products.stream().map(Product::getPrice).reduce(BigDecimal.ZERO, BigDecimal::add);
+        BigDecimal total = BigDecimal.ZERO;
+
+        for (Product product : products) {
+            if (product instanceof Bagel) {
+                total = total.add(((Bagel) product).getPriceWithFilling());
+            } else {
+                total = total.add(product.getPrice());
+            }
+        }
+//        products.stream().map(Product::getPrice).reduce(BigDecimal.ZERO, BigDecimal::add);
 
         for (Discount discount : store.getAvailableDiscounts()) {
             if (isDiscountRequirementsMet(discount)) {
