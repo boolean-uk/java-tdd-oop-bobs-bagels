@@ -1,48 +1,38 @@
 # Domain Model
 
-| Classes | Members        | Methods           | Scenario | Outputs                     |
-|---------|----------------|-------------------|----------|-----------------------------|
-| Product | String type    | getType(): String |          | return the type of product  |
-|         | double cost    | getCost(): double |          | return the cost of products |
-|         | String name    |                   |          |                             |
+| Classes | Members     | Methods           | Scenario | Outputs                     |
+|---------|-------------|-------------------|----------|-----------------------------|
+| Filling | String type | getType(): String |          | return the type of product  |
+|         | double cost | getCost(): double |          | return the cost of products |
+|         |             |                   |          |                             |
 
-| Classes | Members             | Methods                       | Scenario                                          | Outputs |
-|---------|---------------------|-------------------------------|---------------------------------------------------|---------|
-| Bagel   | String type         | addFilling(String variant)    | if name of product equals "Filling" add to basket | String  |
-|         | double cost         | removeFilling(String variant) | if name of variant does not exist print message   | String  |
-|         | String name         |                               |                                                   |         |
-|         | products: Product<> |                               |                                                   |         |
+| Classes | Members              | Methods                               | Scenario                                          | Outputs |
+|---------|----------------------|---------------------------------------|---------------------------------------------------|---------|
+| Bagel   | String type          | addFilling(filling: Filling): void    | if name of product equals "Filling" add to basket | String  |
+|         | double cost          | removeFilling(filling: Filling): void | if name of variant does not exist print message   | String  |
+|         | fillings: Filling[]  | getType(): String                     |                                                   |         |
+|         |                      | getCost(): double                     |                                                   |         |
+|         |                      | getFillings(): Filling[]              |                                                   |         |
+|         |                      |                                       |                                                   |         |
+|         |                      |                                       |                                                   |         |
 
-| Classes   | Members                     | Methods                                                 | Scenario                             | Outputs |
-|-----------|-----------------------------|---------------------------------------------------------|--------------------------------------|---------|
-| Inventory | List<Product> inventoryList | getProductBySKU(String sku)                             | if sku exists                        | Product |
-|           |                             |                                                         | if sku does not exist                | null    |
-|           |                             | getProductByNameAndVariant(String name, String variant) | if name and variant exists           | Product |
-|           |                             |                                                         | if name and variant does not exist   | null    |
-|           |                             | getPriceBySKU(String sku)                               | if sku exists                        | double  |
-|           |                             |                                                         | if sku does not exist                | null    |
-|           |                             | getPriceByNameAndVariant(String name, String variant)   | if name and variant exists           | double  |
-|           |                             |                                                         | if name and variant does not exist   | null    |
+| Classes   | Members                | Methods                                   | Scenario | Outputs                             |
+|-----------|------------------------|-------------------------------------------|----------|-------------------------------------|
+| Inventory | inventoryList: Bagel[] | addBagel(bagel: Bagel): void              |          | add the Bagel in the Inventory      |
+|           |                        |                                           |          |                                     |
+|           |                        | removeBagel(bagel: Bagel): void           |          | remove the Bagel from the Inventory |
+|           |                        |                                           |          |                                     |
+|           |                        | checkInventoryList(bagel: Bagel): boolean |          | True/ False                         |
 
 
 
-| Classes | Members                              | Methods                                    | Scenario                                                                                                    | Outputs |
-|---------|--------------------------------------|--------------------------------------------|-------------------------------------------------------------------------------------------------------------|---------|
-| Basket  | int capacity                         | addProduct(Product product)                | if capacity is not full add product                                                                         | String  |
-|         |                                      |                                            | if capacity is full                                                                                         | String  |
-|         |                                      | addProduct(String sku)                     |                                                                                                             |         |
-|         |                                      | addBagelByVariant(String variant)          | if variant exists and name equals "Bagel" add bagel                                                         | String  |
-|         |                                      |                                            | if variant doesn't exist or name is not equal to "Bagel"                                                    | String  |
-|         | HashMap<Product, Integer> basketList | removeProduct(Product product)             | if product is in basket remove product from basket                                                          | String  |
-|         |                                      |                                            | if product is not in basket                                                                                 | String  |
-|         |                                      | removeProduct(String sku)                  |                                                                                                             |         |
-|         | int productsQuantity                 | isOverfilled()                             | if basket is full                                                                                           | true    |
-|         |                                      |                                            | if basket is not full                                                                                       | false   |
-|         |                                      | changeCapacity(int newSize)                | change size if new capacity is bigger than previous one                                                     | String  |
-|         |                                      |                                            | if new capacity is smaller than previous check if quantity of products <= new capacity                      | String  |
-|         |                                      |                                            | if new capacity is smaller than previous check if quantity of products > new capacity and don't change      | String  |
-|         |                                      | totalCost()                                | count cost of whole basket                                                                                  | double  |
-|         |                                      | checkPrice(Product product)                | check price of given product                                                                                | double  |
-|         |                                      | checkPrice(String sku)                     |                                                                                                             |         |
-|         |                                      | checkIfProductInInventory(Product product) | if product in inventory                                                                                     | true    |
-|         |                                      | checkIfProductInInventory(String sku)      | if product not in inventory                                                                                 | false   |
+
+| Classes | Members              | Methods                           | Scenario                                                  | Outputs                                                                                          |
+|---------|----------------------|-----------------------------------|-----------------------------------------------------------|--------------------------------------------------------------------------------------------------|
+| Basket  | int capacity         | getCapacity(): int                | get the capacity                                          | Returns the maximum number of items that the basket can hold                                     |
+|         | int productsQuantity | getProductsQuantity(): int        | get the products quantity                                 | Returns the number of products currently in the basket                                           |
+|         | products: Bagel[]    | addProduct(bagel: Bagel): void    | add the bagel in the basket                               | Adds a bagel item to the basket. Raises an exception if the basket is already full               |
+|         |                      | getTotalCost(): double            | Get the total cost of the basket                          | Returns the total cost of the basket                                                             |
+|         |                      | removeProduct(bagel: Bagel): void | if product is in basket remove product from basket        | Removes a bagel item from the basket. Raises an exception if the item is not found in the basket |
+|         |                      | isFull(): boolean                 | Returns True if the basket is full, False otherwise       | Returns True if the basket is full, False otherwise                                              |
+|         |                      | changeCapacity(int newCapacity)   | Changes the capacity of the basket to the specified value | Changed capacity of the basket                                                                   |
