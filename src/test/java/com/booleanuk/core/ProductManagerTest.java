@@ -41,7 +41,7 @@ public class ProductManagerTest {
 
         //Verify
 
-        Assertions.assertEquals(0,productManager.getBasket().getList().size());
+        Assertions.assertEquals(0, productManager.getBasket().getList().size());
     }
 
     @Test
@@ -88,5 +88,20 @@ public class ProductManagerTest {
 
         //Verify
         Assertions.assertEquals(expectedCapacity, productManager.getBasket().getCapacity());
+    }
+
+    @Test
+    public void shouldReturnTotalBasketCost() {
+        //Setup
+        productManager.orderBagel("Plain");
+        productManager.orderBagel("Plain");
+        productManager.orderBagel("Plain");
+        double expected = 0.39 * 3;
+
+        //Execute
+        double total = productManager.getBasket().total();
+
+        //Verify
+        Assertions.assertEquals(expected, total);
     }
 }
