@@ -1,4 +1,4 @@
-package com.booleanuk.core.product.bagel;
+package com.booleanuk.core.bagel;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

@@ -1,12 +1,14 @@
-package com.booleanuk.core;
+package com.booleanuk.extension;
 
-import com.booleanuk.core.bagel.Bagel;
-import com.booleanuk.core.bagel.BagelType;
-import com.booleanuk.core.bagel.Filling;
+import com.booleanuk.extension.bagel.Bagel;
+import com.booleanuk.extension.bagel.BagelType;
+import com.booleanuk.extension.bagel.Filling;
+import com.booleanuk.extension.specialoffer.BagelOffer;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
+import java.util.Arrays;
 import java.util.NoSuchElementException;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
@@ -112,12 +114,78 @@ class BasketTest {
     }
 
     @Test
-    void totalPrice_shouldCorrectlyCalculatePriceForNonEmptyBasket() {
+    void totalPrice_shouldCorrectlyCalculatePriceForNoDiscounts() {
         var basket = new Basket(2);
         basket.addBagel(BAGEL_PLAIN);
         basket.addBagel(BAGEL_PLAIN);
 
         var expectedPrice = BAGEL_PLAIN.getPrice().multiply(BigDecimal.valueOf(2));
+
+        assertEquals(expectedPrice, basket.totalPrice());
+    }
+
+    @Test
+    void totalPrice_shouldCorrectlyCalculatePriceForOnionBagelOffer() {
+        var cap = 6;
+        var basket = new Basket(cap);
+        for (int i = 0; i < cap; i++) {
+            basket.addBagel(BAGEL_ONION);
+        }
+
+        var fillingPrice = Arrays.stream(BAGEL_ONION.fillings())
+                .map(Filling::getPrice)
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
+        var expectedPrice = BagelOffer.Type.SixOnion.getPrice()
+                .add(BigDecimal.valueOf(cap).multiply(fillingPrice));
+
+        assertEquals(expectedPrice, basket.totalPrice());
+    }
+
+    @Test
+    void totalPrice_shouldCorrectlyCalculatePriceForPlainBagelOffer() {
+        var cap = 12;
+        var basket = new Basket(cap);
+        for (int i = 0; i < cap; i++) {
+            basket.addBagel(BAGEL_PLAIN);
+        }
+
+        var fillingPrice = Arrays.stream(BAGEL_PLAIN.fillings())
+                .map(Filling::getPrice)
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
+        var expectedPrice = BagelOffer.Type.TwelvePlain.getPrice()
+                .add(BigDecimal.valueOf(cap).multiply(fillingPrice));
+
+        assertEquals(expectedPrice, basket.totalPrice());
+    }
+
+    @Test
+    void totalPrice_shouldCorrectlyCalculatePriceForEverythingBagelOffer() {
+        var cap = 6;
+        var basket = new Basket(cap);
+        for (int i = 0; i < cap; i++) {
+            basket.addBagel(BAGEL_EVERYTHING);
+        }
+
+        var fillingPrice = Arrays.stream(BAGEL_EVERYTHING.fillings())
+                .map(Filling::getPrice)
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
+        var expectedPrice = BagelOffer.Type.SixEverything.getPrice()
+                .add(BigDecimal.valueOf(cap).multiply(fillingPrice));
+
+        assertEquals(expectedPrice, basket.totalPrice());
+    }
+
+    @Test
+    void totalPrice_shouldCorrectlyCalculatePriceForBreakfastOffer() {
+        var basket = new Basket(2);
+        basket.addBagel(BAGEL_EVERYTHING);
+        basket.addCoffee(COFFEE);
+
+        var fillingPrice = Arrays.stream(BAGEL_EVERYTHING.fillings())
+                .map(Filling::getPrice)
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
+        var expectedPrice = BigDecimal.valueOf(1.25)
+                .add(fillingPrice);
 
         assertEquals(expectedPrice, basket.totalPrice());
     }

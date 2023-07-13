@@ -1,8 +1,8 @@
-package com.booleanuk.core.product.specialoffer;
+package com.booleanuk.extension.specialoffer;
 
-import com.booleanuk.core.product.Coffee;
-import com.booleanuk.core.product.bagel.Bagel;
-import com.booleanuk.core.product.bagel.Filling;
+import com.booleanuk.extension.Coffee;
+import com.booleanuk.extension.bagel.Bagel;
+import com.booleanuk.extension.bagel.Filling;
 import lombok.Getter;
 
 import java.math.BigDecimal;

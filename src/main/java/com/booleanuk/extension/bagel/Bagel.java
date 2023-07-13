@@ -1,7 +1,7 @@
-package com.booleanuk.core.product.bagel;
+package com.booleanuk.extension.bagel;
 
 
-import com.booleanuk.core.product.Product;
+import com.booleanuk.extension.Product;
 import lombok.Builder;
 
 import java.math.BigDecimal;
