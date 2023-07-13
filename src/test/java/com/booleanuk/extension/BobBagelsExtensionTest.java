@@ -4,6 +4,8 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 public class BobBagelsExtensionTest {
 
 
@@ -52,8 +54,23 @@ public class BobBagelsExtensionTest {
         //when
         basketManager.add(bagelO);
         //then
-        Assertions.assertTrue(basketExt.getBagelsInBasket().contains(bagelO));
+        assertTrue(basketExt.getBagelsInBasket().contains(bagelO));
 
+    }
+
+    @Test
+    public void shouldAddCoffeeToBasket(){
+        //when
+        basketManager.add(coffeeB);
+        //then
+        assertTrue(basketExt.getCoffeesInBasket().contains(coffeeB));
+    }
+
+    public void shouldAddFillingToBasket(){
+        //when
+        basketManager.add(fillingB);
+        //then
+        assertTrue(basketExt.getFillingInBasket().contains(fillingB));
     }
 
 
