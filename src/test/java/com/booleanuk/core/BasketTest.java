@@ -4,18 +4,22 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class BasketTest {
     private Basket basket;
+
+    private static final List<Filling> FILLINGS = List.of(
+            new Filling("FILB", 0.12, "Bacon"),
+            new Filling("FILC", 0.12, "Cheese")
+    );
+
     private static final List<Bagel> BAGELS = List.of(
-            new Bagel("BGLO", 0.49, "Onion", Collections.emptyList()),
-            new Bagel("BGLP", 0.39, "Plain", Collections.emptyList()),
-            new Bagel("BGLE", 0.49, "Everything", Collections.emptyList()),
-            new Bagel("BGLS", 0.49, "Sesame", Collections.emptyList())
+            new Bagel("BGLO", 0.49, "Onion", FILLINGS),
+            new Bagel("BGLP", 0.39, "Plain", FILLINGS),
+            new Bagel("BGLE", 0.49, "Everything", FILLINGS),
+            new Bagel("BGLS", 0.49, "Sesame", FILLINGS)
     );
     private static final int INITIAL_CAPACITY = 4;
 
@@ -41,6 +45,19 @@ public class BasketTest {
         Exception exception = Assertions.assertThrows(Exception.class, () -> basket.addToBasket(bagel));
         System.out.println(basket.getContents());
         Assertions.assertEquals("Bagel " + bagel + " is not in the manager's inventory!", exception.getMessage());
+    }
+
+    @Test
+    public void testAddToBasketShouldThrowException2() throws Exception {
+        List<Filling> fillings = List.of(
+                new Filling("NO FILLING", 0.12, "Bacon")
+        );
+        Bagel bagel = new Bagel("BGLO", 0.49, "Onion", fillings);
+
+        Exception exception = Assertions.assertThrows(Exception.class, () -> basket.addToBasket(bagel));
+
+        Assertions.assertEquals("Bagel does not have the correct filling!", exception.getMessage());
+
     }
 
     @Test

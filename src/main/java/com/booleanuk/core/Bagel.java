@@ -10,8 +10,12 @@ public class Bagel extends Product{
         this.fillings = fillings;
     }
 
-    public List<Filling> getFillings(){
+    public List<Filling> getFillings() {
         return fillings;
+    }
+
+    public void setFillings(List<Filling> fillings) {
+        this.fillings = fillings;
     }
 
     @Override
