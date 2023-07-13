@@ -9,6 +9,9 @@ import java.util.List;
 public class TestCustomer {
 
     public Customer customer;
+    public String ONION_BAGEL = "BGLO";
+    public String BLACK_COFFEE = "COFB";
+
     @BeforeEach
     public void setUp() {
         customer = new Customer();
@@ -16,24 +19,19 @@ public class TestCustomer {
 
     @Test
     public void whenAddToBasketExistingBagelType_bagelIsAddedToBasket()  {
-        //Setup
-        String bagel = "BGLO";
-
         //Execute
-        customer.addToBasket(bagel);
+        customer.addToBasket(ONION_BAGEL);
 
-        Assertions.assertEquals(List.of(bagel), customer.getBasket().getListOfItemsInBasket());
+        Assertions.assertEquals(List.of(ONION_BAGEL), customer.getBasket().getListOfItemsInBasket());
     }
 
     @Test
     public void whenCheckBasketCalled_everythingInBasketIsReturned()  {
         //Setup
-        String coffee = "COFB";
-        customer.addToBasket(coffee);
-        String bagel = "BGLO";
-        customer.addToBasket(bagel);
+        customer.addToBasket(BLACK_COFFEE);
+        customer.addToBasket(ONION_BAGEL);
 
-        String expected = "0 " + Inventory.getItemBySku(coffee) + "1 " + Inventory.getItemBySku(bagel);
+        String expected = "0 " + Inventory.getItemBySku(BLACK_COFFEE) + "1 " + Inventory.getItemBySku(ONION_BAGEL);
 
         Assertions.assertEquals(expected, customer.checkBasket());
     }

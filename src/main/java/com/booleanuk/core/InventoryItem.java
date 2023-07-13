@@ -17,4 +17,8 @@ public class InventoryItem {
     public String toString(){
         return this.variant + " " + this.name + " £" + this.price + "\n";
     }
+
+    public String getFullName(){
+        return this.variant + " " + this.name;
+    }
 }

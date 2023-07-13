@@ -9,18 +9,19 @@ import java.util.List;
 public class TestManager {
     public Manager manager;
     public Customer customer;
+    public int CAPACITY = 5;
+
     @BeforeEach
     public void setUp() {
         manager = new Manager();
     }
 
-
     @Test
     public void whenChangeBasketCapacity_basketCapacityIsChanged() {
-        manager.changeBasketCapacity(5);
+        manager.changeBasketCapacity(CAPACITY);
         customer = new Customer();
 
-        Assertions.assertEquals(5,customer.basket.getCapacity());
+        Assertions.assertEquals(CAPACITY,customer.basket.getCapacity());
     }
 
 }

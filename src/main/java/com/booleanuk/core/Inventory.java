@@ -44,6 +44,14 @@ public class Inventory {
         } return 0;
     }
 
+    public String getFullNameBySku(String sku){
+        for (InventoryItem i : inventoryItemList){
+            if(sku.equals(i.sku)){
+                return i.getFullName();
+            }
+        } return "";
+    }
+
     public static String getItemBySku(String sku){
         for (InventoryItem i : inventoryItemList) {
             if (sku.equals(i.sku)) {

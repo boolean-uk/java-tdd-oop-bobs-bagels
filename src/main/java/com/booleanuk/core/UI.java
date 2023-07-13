@@ -1,7 +1,6 @@
 package com.booleanuk.core;
 
 import java.time.LocalDateTime;
-import java.util.Locale;
 import java.util.Scanner;
 
 public class UI {
@@ -9,14 +8,14 @@ public class UI {
     Customer customer = new Customer();
     Manager manager = new Manager();
     public void displayRecipe() {
-        System.out.println("~~~ Bob's Bagels ~~~ \n");
+        System.out.println("    ~~~ Bob's Bagels ~~~ \n");
         System.out.println(LocalDateTime.now() + "\n");
-        System.out.println("----------------------------");
-        System.out.println(customer.checkBasket());
-        System.out.println("----------------------------");
-        System.out.println("Total: £" + (double) customer.getTotalCost() / 100);
-        System.out.println(" Thank you");
-        System.out.println("for your order!");
+        System.out.println("------------------------------");
+        System.out.println(customer.checkBasketWithQuantity());
+        System.out.println("------------------------------");
+        System.out.println("Total:                   £" + (double) customer.getTotalCost() / 100);
+        System.out.println("          Thank you");
+        System.out.println("       for your order!");
     }
     public void displayLoginMenu()
     {
