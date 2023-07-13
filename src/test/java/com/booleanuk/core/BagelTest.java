@@ -1,5 +1,8 @@
 package com.booleanuk.core;
 
+import com.booleanuk.core.product.bagel.Bagel;
+import com.booleanuk.core.product.bagel.BagelType;
+import com.booleanuk.core.product.bagel.Filling;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

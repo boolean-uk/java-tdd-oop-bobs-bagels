@@ -33,10 +33,16 @@ public enum Filling {
 ```
 
 ```java
+public interface Product {
+    BigDecimal getPrice();
+}
+```
+
+```java
 
 @RequiredArgsConstructor
 @Getter
-public enum Coffee {
+public enum Coffee implements Product {
     COFB("Black", BigDecimal.valueOf(.99)),
     COFW("White", BigDecimal.valueOf(1.19)),
     COFC("Cappuccino", BigDecimal.valueOf(1.29)),
@@ -48,16 +54,12 @@ public enum Coffee {
 ```
 
 ```java
-public class Bagel implements Product {
-    private final BagelType type;
-    private final Filling[] fillings;
 
-    public Bagel(BagelType type, Filling... fillings) {
-        this.type = type;
-        this.fillings = fillings;
-    }
-
-    public BigDecimal price() {
+@Builder
+@Getter
+public record Bagel(BagelType type, Filling... fillings) implements Product {
+    @Override
+    public BigDecimal getPrice() {
         // TODO
         return null;
     }
@@ -65,35 +67,61 @@ public class Bagel implements Product {
 ```
 
 ```java
-public record BreakfastSet(
-        Bagel bagel,
-        Coffee coffee
-) implements Product {
+public interface SpecialOffer extends Product {
 }
 ```
 
 ```java
-public record Discount(
-        Type type,
-        BigDecimal price
-) {
-    public enum Type {
-        SixOnion,
-        TwelvePlain,
-        SixEverything,
-        BreakfastSet,
+
+@Getter
+public class BagelOffer implements SpecialOffer {
+    private final List<Bagel> bagels;
+
+    private BagelOffer(Bagel... bagels) {
+        this.bagels = List.of(bagels);
+    }
+
+    public static BagelOffer of(Bagel... bagels) {
+        return new BagelOffer(bagels);
+    }
+
+    @Override
+    public BigDecimal getPrice() {
+        // TODO
+        return null;
     }
 }
 ```
 
 ```java
 
-import java.util.List;
+@Getter
+public class BreakfastOffer implements SpecialOffer {
+    private final Bagel bagel;
+    private final Coffee coffee;
+
+    private BreakfastOffer(Bagel bagel, Coffee coffee) {
+        this.bagel = bagel;
+        this.coffee = coffee;
+    }
+
+    public static BreakfastOffer of(Bagel bagel, Coffee coffee) {
+        return new BreakfastOffer(bagel, coffee);
+    }
+
+    @Override
+    public BigDecimal getPrice() {
+        // TODO
+        return null;
+    }
+}
+```
+
+```java
 
 @Getter
 public class Basket {
-    private final Map<Bagel, Integer> bagels = new HashMap<>();
-    private final Map<Coffee, Integer> coffees = new HashMap<>();
+    private final List<Product> products = new ArrayList<>();
     private int capacity;
 
     public Basket(int capacity) {
@@ -101,6 +129,9 @@ public class Basket {
     }
 
     public void addBagel(Bagel bagel) {
+        if (isFull()) {
+            throw new IllegalStateException("Cannot add new bagel - basket is full");
+        }
         // TODO
     }
 
@@ -109,6 +140,9 @@ public class Basket {
     }
 
     public void addCoffee(Coffee coffee) {
+        if (isFull()) {
+            throw new IllegalStateException();
+        }
         // TODO
     }
 
@@ -126,19 +160,13 @@ public class Basket {
     }
 
     private int itemAmount() {
-        var amount = bagels.values().stream()
-                .reduce(0, Integer::sum);
-        return coffees.values().stream()
-                .reduce(amount, Integer::sum);
+        // TODO
+        return -1;
     }
 
     private boolean isFull() {
-        return itemAmount() == capacity;
-    }
-
-    private List<Discount> getDiscounts() {
         // TODO
-        return null;
+        return false;
     }
 }
 ```
