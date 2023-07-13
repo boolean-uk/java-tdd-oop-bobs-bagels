@@ -181,4 +181,19 @@ public class BasketTest {
         //Then
         Assertions.assertEquals(result, 2.49F + 3.99F);
     }
+
+    @Test
+    public void testGetTotal_WhenMixingDiscountWithNoDiscount_ShouldTotalCostOfProductsInTheBasket() {
+        //Given
+        Basket basket = new Basket(inventory, 22);
+        basket.addProduct("BGLO", 8);
+        basket.addProduct("BGLP", 12);
+        basket.addProduct("COFW", 2);
+
+        //When
+        float result = basket.getTotalCost();
+
+        //Then
+        Assertions.assertEquals(result, 2.49F + 3.99F + 0.98F + 1.19F*2);
+    }
 }
