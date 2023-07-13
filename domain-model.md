@@ -72,22 +72,22 @@ I want customers to only be able to order things that we stock in our inventory.
 
 | Class          | Methods                                            | Fields                                | Outcome                                                         |
 |----------------|----------------------------------------------------|---------------------------------------|-----------------------------------------------------------------|
-| Basket         | addProduct(Product product, int quantity)          | HashMap<Bagel,Integer> basket         | Product is added to the basket                                  |
-|                | removeProduct(Product product, Quantity)           | HashMap<Bagel,Integer> basket         | Product is removed from the basket                              |
+| Basket         | addProduct(Product product, int quantity)          | `HashMap<Bagel,Integer> basket `        | Product is added to the basket                                  |
+|                | removeProduct(Product product, Quantity)           | `HashMap<Bagel,Integer> basket  `       | Product is removed from the basket                              |
 |                | public void changeCapacity(int capacity)           | int capacity                          | It will change capacity of the Basket                           |
-|                | public double getTotalCost()                       | HashMap<Bagel,Integer> basket         | Method will provide total cost of the basket                    |
+|                | public double getTotalCost()                       |` HashMap<Bagel,Integer> basket    `     | Method will provide total cost of the basket                    |
 |                | private boolean checkSanity(Product product)       |                                       | True if basket contains product                                 |
 |                |                                                    |                                       | False if basket does not contains product                       |
-|                | private int productsInBasket()                     | HashMap<Bagel,Integer> basket         | It will return number of products in the basket                 |
+|                | private int productsInBasket()                     | `HashMap<Bagel,Integer> basket  `       | It will return number of products in the basket                 |
 |                |                                                    |                                       |                                                                 |
-| Bagel          | public double getTotalCostOfProduct()              | ArrayList<Filling> fillings           | It will return bagel with filling total cost                    |
-|                | public void addFilling(Filling filling)            | ArrayList<Filling> fillings           | it will add filling to the bagel                                |
+| Bagel          | public double getTotalCostOfProduct()              | `ArrayList<Filling> fillings     `      | It will return bagel with filling total cost                    |
+|                | public void addFilling(Filling filling)            |` ArrayList<Filling> fillings   `        | it will add filling to the bagel                                |
 |                |                                                    |                                       |                                                                 |
 | Inventory      | public  boolean isInTheInventory(Product product1) |                                       | return true if inventory contains product.                      |
 |                |                                                    |                                       | return false if inventory does not contains product.            |
-|                | public String returnAllFilling()                   | static ArrayList<Filling> allFillings | It will return String with all fillings with price in inventory |
-|                | public String returnAllBagels()                    | static ArrayList<Bagle> allBagels     | It will return String with all bagels with price in inventory   |
-|                | public String returnAllCoffees()                   | static ArrayList<Coffee> allCoffees   | It will return String with all coffees with price in inventory  |
+|                | public String returnAllFilling()                   | static `ArrayList<Filling>` allFillings | It will return String with all fillings with price in inventory |
+|                | public String returnAllBagels()                    | static `ArrayList<Bagle>` allBagels     | It will return String with all bagels with price in inventory   |
+|                | public String returnAllCoffees()                   | `static ArrayList<Coffee> allCoffees`   | It will return String with all coffees with price in inventory  |
 | Product        |                                                    |                                       |                                                                 |
 | Coffees        |                                                    |                                       |                                                                 |
 | Filling        |                                                    |                                       |                                                                 |
