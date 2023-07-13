@@ -1,12 +1,15 @@
 package com.booleanuk.core;
 
+import com.booleanuk.extension.Receipt;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
+import java.math.BigDecimal;
 import java.util.Optional;
+import java.util.stream.IntStream;
 
 public class BasketTest {
     private static Basket basket;
@@ -20,9 +23,9 @@ public class BasketTest {
     @BeforeEach
     public void cleanUp(){
         basket = new Basket(5);
-        bagel = new Bagel("BGLO", "Bagel", 0.49, "Onion");
-        filling = new Filling("FILB", "Filling", 0.12, "Bacon");
-        coffee = new Coffee("COFB", "Coffee", 0.99, "Black");
+        bagel = new Bagel("BGLO", "Bagel", BigDecimal.valueOf(0.49), "Onion");
+        filling = new Filling("FILB", "Filling", BigDecimal.valueOf(0.12), "Bacon");
+        coffee = new Coffee("COFB", "Coffee", BigDecimal.valueOf(0.99), "Black");
     }
 
     @Test
@@ -172,29 +175,79 @@ public class BasketTest {
     }
 
     @Test
-    public void shouldReturnCorrectTotalCost() {
+    public void shouldNotReturnPriceForNonExistingItem(){
+
+        Optional<BigDecimal> price2 = Inventory.getItemPrice("Covfefe", "Yellow");
+        Assertions.assertFalse(price2.isPresent());
+        Assertions.assertEquals(Optional.empty(), price2);
+    }
+
+    @Test
+    public void totalPriceShouldCalculateCorrectly1(){
         basket.add("Bagel","Onion");
         basket.add("Coffee","Black");
         basket.add("Coffee","Black");
-        double DELTA = 1e-9;
-
-        Assertions.assertEquals(2.47, basket.totalCost(), DELTA);
+        Assertions.assertEquals(BigDecimal.valueOf(2.47), basket.totalPrice());
     }
     @Test
-    public void shouldReturnCorrectItemPrice() {
-        Optional<Double> price = Inventory.getItemPrice("Coffee", "Black");
-        Assertions.assertTrue(price.isPresent());
-        double DELTA = 1e-9;
-        Assertions.assertEquals(0.99, price.get(), DELTA);
-
+    public void totalPriceShouldCalculateCorrectly2(){
+        basket.add("Bagel","Plain");
+        basket.add("Coffee","Black");
+        basket.add("Coffee","Black");
+        Assertions.assertEquals(BigDecimal.valueOf(2.24), basket.totalPrice());
     }
 
     @Test
-    public void shouldNotReturnPriceForNonExistingItem(){
+    public void totalPriceShouldCalculateCorrectly3(){
+        basket.changeCapacity(16);
+        for (int i = 0; i < 16; i++) {
+            basket.add("Bagel", "Plain");
+        }
+        Assertions.assertEquals(BigDecimal.valueOf(5.55), basket.totalPrice());
+    }
+    @Test
+    public void totalPriceShouldCalculateCorrectly4(){
+        basket.changeCapacity(23);
+        for (int i = 0; i < 12; i++) {
+            basket.add("Bagel", "Plain");
+        }
+        for (int i = 0; i < 6; i++) {
+            basket.add("Bagel", "Everything");
+        }
+        basket.add("Bagel", "Onion");
+        basket.add("Bagel", "Onion");
 
-        Optional<Double> price2 = Inventory.getItemPrice("Covfefe", "Yellow");
-        Assertions.assertFalse(price2.isPresent());
-        Assertions.assertEquals(Optional.empty(), price2);
+        Assertions.assertEquals(BigDecimal.valueOf(7.46), basket.totalPrice());
+    }
+    @Test
+    public void totalPriceShouldCalculateCorrectly5(){
+        basket.changeCapacity(23);
+        for (int i = 0; i < 12; i++) {
+            basket.add("Bagel", "Plain");
+        }
+        basket.add("Coffee", "Black");
+        basket.add("Coffee", "Black");
+        basket.add("Coffee", "Black");
+
+        Assertions.assertEquals(BigDecimal.valueOf(7.26), basket.totalPrice());
+    }
+
+    @Test
+    public void totalPriceShouldCalculateCorrectly6(){
+        basket.changeCapacity(23);
+        for (int i = 0; i < 12; i++) {
+            basket.add("Bagel", "Plain");
+        }
+        for (int i = 0; i < 6; i++) {
+            basket.add("Bagel", "Everything");
+        }
+        basket.add("Bagel", "Onion");
+        basket.add("Bagel", "Onion");
+        basket.add("Coffee", "Black");
+        basket.add("Coffee", "Black");
+        basket.add("Coffee", "Black");
+
+        Assertions.assertEquals(BigDecimal.valueOf(10.73), basket.totalPrice());
     }
 
 }
