@@ -10,9 +10,9 @@ public class BobBagelTest {
 
     @Test
     public void shouldAddBagelToBasket(){
-        //when
+        //given
         Basket basket = new Basket();
-        Bagel bagel = new Bagel();
+        Bagel bagel = new Bagel("Onion", 0.49, "BGLO", BagelVariant.ONION);
         int quantity = 1;
         //given
         basket.add(bagel,quantity);
@@ -22,9 +22,9 @@ public class BobBagelTest {
 
     @Test
     public void shouldRemoveBagelFromBasket(){
-        //when
+        //given
         Basket basket = new Basket();
-        Bagel bagel = new Bagel();
+        Bagel bagel = new Bagel("Onion", 0.49, "BGLO", BagelVariant.ONION);
         int quantity = 1;
         basket.add(bagel,quantity);
         //given
@@ -35,10 +35,10 @@ public class BobBagelTest {
 
     @Test
     public void shouldCheckBasketCapacity(){
-        //when
+        //given
         Basket basket = new Basket();
         int capacity = 10;
-        //given
+        //when
         basket.changeCapacity(10);
         //then
         assertEquals(10,basket.getCapacity());
@@ -46,12 +46,12 @@ public class BobBagelTest {
 
     @Test
     public void ShouldReturnTrueAfterAddFillingsToTheBagel(){
-        //when
-        Basket basket = new Basket();
-        Bagel bagel = new Bagel("Onion Bagel", 1,"BGLO", BagelVariant.ONION);
-        int quantity = 3;
-        Filling filling = new Filling("Bacon",0.5,"FILB", FillingVariant.BACON);
         //given
+        Basket basket = new Basket();
+        Bagel bagel = new Bagel("Onion", 0.49, "BGLO", BagelVariant.ONION);
+        int quantity = 3;
+        Filling filling = new Filling("Bacon",0.12,"FILB", FillingVariant.BACON);
+        //when
         bagel.addFilling(filling);
 
         //then
@@ -62,47 +62,48 @@ public class BobBagelTest {
 
     @Test
     public void shouldReturnTotalBasketCost(){
-        //when
-        Basket basket = new Basket();
-        basket.setCapacity(20);
-        Bagel bagel = new Bagel("Onion Bagel", 1,"BGLO", BagelVariant.ONION);
-        Bagel bagel1 = new Bagel("Plain Bagel", 2,"BGLO",BagelVariant.ONION);
-        int quantity = 3;
-
-        basket.add(bagel,quantity);
-        basket.add(bagel1, quantity*2);
         //given
+        Basket basket = new Basket();
+        basket.setCapacity(10);
+        Bagel bagel = new Bagel("Onion", 0.49, "BGLO", BagelVariant.ONION);
+        Bagel bagel1 = new Bagel("Plain", 0.39, "BGLP", BagelVariant.PLAIN);
+        int quantity = 5;
+
+        basket.add(bagel,2);
+        basket.add(bagel1, 8);
+        //when
         double totalCost = basket.getTotalCost();
 
         //then
-        assertEquals(15,totalCost);
+        assertEquals(4.1,totalCost);
     }
 
     @Test
     public void  shouldReturn5afterAddingTooManyBagels(){
-        Basket basket = new Basket();
-        Bagel bagel = new Bagel("Onion Bagel", 1,"BGLO", BagelVariant.ONION);
-        Bagel bagel1 = new Bagel("Plain Bagel", 2,"BGLO",BagelVariant.ONION);
-        int quantity = 5;
         //given
+        Basket basket = new Basket();
+        Bagel bagel =new Bagel("Onion", 0.49, "BGLO", BagelVariant.ONION);
+        Bagel bagel1 = new Bagel("Plain", 0.39, "BGLP", BagelVariant.PLAIN);
+        int quantity = 5;
+        //when
         basket.add(bagel,quantity);
         basket.add(bagel1, quantity*2);
         double totalCost = basket.getTotalCost();
         //then
-        assertEquals(5,totalCost);
+        assertEquals(2.45,totalCost);
     }
 
 
     @Test
     public  void shouldReturnTrueIfSanityIsOk(){
-        //when
+        //given
         Basket basket = new Basket();
-        Bagel bagel = new Bagel("Onion Bagel", 1,"BGLO",BagelVariant.ONION);
-        Bagel bagel1 = new Bagel("Plain Bagel", 2,"BGLP",BagelVariant.PLAIN);
+        Bagel bagel = new Bagel("Onion", 0.49, "BGLO", BagelVariant.ONION);
+        Bagel bagel1 = new Bagel("Plain", 0.39, "BGLP", BagelVariant.PLAIN);
         int quantity = 3;
 
         basket.add(bagel,quantity);
-        //given
+        //when
        boolean sanity = basket.removeProduct(bagel,1);
         //then
         assertTrue(sanity);
@@ -112,14 +113,14 @@ public class BobBagelTest {
 
     @Test
     public  void shouldReturnFalseIfSanityIsNotOK(){
-        //when
+        //given
         Basket basket = new Basket();
-        Bagel bagel = new Bagel("Onion Bagel", 1,"BGLO",BagelVariant.ONION);
-        Bagel bagel1 = new Bagel("Plain Bagel", 2,"BGLP",BagelVariant.PLAIN);
+        Bagel bagel = new Bagel("Onion", 0.49, "BGLO", BagelVariant.ONION);
+        Bagel bagel1 = new Bagel("Plain", 0.39, "BGLP", BagelVariant.PLAIN);
         int quantity = 3;
 
         basket.add(bagel,quantity);
-        //given
+        //when
         boolean sanity = basket.removeProduct(bagel1,1);
         //then
         assertFalse(sanity);
@@ -128,30 +129,47 @@ public class BobBagelTest {
 
 
     @Test
-    public void shouldNotAddProductsIfCapacityIsLessThanQuantity(){
-        //when
-        Basket basket = new Basket();
-        Bagel bagel = new Bagel("Onion Bagel", 1,"BGLO",BagelVariant.ONION);
-        Bagel bagel1 = new Bagel("Plain Bagel", 2,"BGLP",BagelVariant.PLAIN);
-        int quantity = 3;
+    public void shouldNotAddProductsIfCapacityIsLessThanQuantity() {
         //given
-       boolean isAdded = basket.add(bagel1,10);
+        Basket basket = new Basket();
+        Bagel bagel = new Bagel("Onion", 0.49, "BGLO", BagelVariant.ONION);
+        Bagel bagel1 = new Bagel("Plain", 0.39, "BGLP", BagelVariant.PLAIN);
+        int quantity = 3;
+        //when
+        boolean isAdded = basket.add(bagel1, 10);
 
-       //then
+        //then
         assertFalse(isAdded);
     }
 
+
+
     @Test
-    public void shouldAddBagelIfIsInTheInventory(){
-        //when
+    public void shouldReturnFalseAfterAddingProductThatDoesNotExist() {
+        //given
         Basket basket = new Basket();
+        Bagel bagel = new Bagel();
+        int quantity = 1;
+        //when
+        basket.add(bagel, quantity);
+        //then
+        assertFalse(basket.getBasket().containsKey(bagel));
 
     }
 
     @Test
-    public  void shouldReturnFalseAfterAddingProductThatDoesNotExist(){
+    public void shouldReturnBagelPriceList(){
+        //given
+        Inventory inventory = new Inventory();
+        //when
+        String bagelPriceList= inventory.returnAllBagels();
+        //then
 
-
+        assertEquals("All Bagel Cost:\n" +
+                "Bagel: Onion Price: 0.49\n" +
+                "Bagel: Plain Price: 0.39\n" +
+                "Bagel: Everything Price: 0.49\n" +
+                "Bagel: Sesame Price: 0.49\n", bagelPriceList);
     }
 
 

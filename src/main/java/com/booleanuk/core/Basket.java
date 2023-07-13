@@ -1,9 +1,6 @@
 package com.booleanuk.core;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Set;
 
 public class Basket {
 
@@ -24,14 +21,18 @@ public class Basket {
 
     public boolean add(Product product, int quantity) {
         int freeSpace = capacity - productsInBasket();
-        if (freeSpace < quantity) {
-            System.out.println("Your basket does not have capacity!");
-            return false;
+        if (inventory.isInTheIventory(product)) {
+            if (freeSpace < quantity) {
+                System.out.println("Your basket does not have capacity!");
+                return false;
+            }
+
+
+            basket.put(product, quantity);
+            return true;
         }
-
-
-        basket.put(product, quantity);
-        return true;
+        System.out.println("not added to basket");
+        return false;
     }
 
     public boolean removeProduct(Product product, int quantity) {

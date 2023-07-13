@@ -1,14 +1,16 @@
 package com.booleanuk.core;
 
+import org.w3c.dom.ls.LSOutput;
+
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
 public class Inventory {
 
-    private static Set<Filling> allFillings = new HashSet<>();
-    private static Set<Bagel> allBagels =new HashSet<>();
-    private static Set<Coffee> allCoffees = new HashSet<>();
-
+    private static ArrayList<Filling> allFillings = new ArrayList<>();
+    private static ArrayList<Bagel> allBagels =new ArrayList<>();
+    private static ArrayList<Coffee> allCoffees = new ArrayList<>();
 
     public Inventory() {
         addToInventory();
@@ -29,5 +31,59 @@ public class Inventory {
         allFillings.add(new Filling("Cream Cheese",0.12,"FILB",FillingVariant.CREAM_CHEESE));
         allFillings.add(new Filling("Smoked Salmon",0.12,"FILB",FillingVariant.SMOKED_SALMON));
         allFillings.add(new Filling("Ham",0.12,"FILB",FillingVariant.HAM));
+    }
+
+
+
+    public  boolean isInTheIventory(Product product1){
+        for (Product product :
+                allBagels) {
+            if(product.equals(product1)){
+                return  true;
+            }
+        }
+        for (Product product :
+                allFillings) {
+            if(product.equals(product1)){
+                return  true;
+            }
+        }
+        for (Product product :
+                allCoffees) {
+            if(product.equals(product1)){
+                return  true;
+            }
+        }
+        return false;
+    }
+
+
+    public String returnAllFilling(){
+        StringBuilder sb = new StringBuilder("All Filling Cost:\n");
+        for (Filling filling :
+                allFillings) {
+            sb.append("Filling: ").append(filling.getName()).append(" Price: ").append(filling.getPrice()).append("\n");
+        }
+
+        return sb.toString();
+    }
+
+    public String returnAllBagels(){
+        StringBuilder sb = new StringBuilder("All Bagel Cost:\n");
+        for (Bagel bagel :
+                allBagels) {
+            sb.append("Bagel: ").append(bagel.getName()).append(" Price: ").append(bagel.getPrice()).append("\n");
+        }
+        return sb.toString();
+    }
+
+
+    public String returnAllCoffees(){
+        StringBuilder sb = new StringBuilder("All Coffees Cost:\n");
+        for (Coffee coffee :
+                allCoffees) {
+            sb.append("Coffee: ").append(coffee.getName()).append(" Price: ").append(coffee.getPrice()).append("\n");
+        }
+        return sb.toString();
     }
 }

@@ -4,13 +4,15 @@ import java.util.ArrayList;
 
 public abstract class Product {
 
-    private String name;
+    private String name ="";
     private double price;
-	private String skw;
+    private String skw;
 
     private ArrayList<Product> fillings = new ArrayList<>();
 
-    public  Product(){}
+    public Product() {
+    }
+
     public Product(String name, double price, String skw) {
         this.name = name;
         this.price = price;
@@ -51,5 +53,19 @@ public abstract class Product {
     }
 
     public abstract double getTotalCostOfProduct();
+
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Product other = (Product) obj;
+
+        return other.getName().equals(name);
+    }
 
 }
