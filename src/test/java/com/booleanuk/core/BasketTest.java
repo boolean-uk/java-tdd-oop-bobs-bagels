@@ -58,4 +58,22 @@ public class BasketTest {
         Assertions.assertFalse(basket.addItem("FILB"));
     }
 
+    @Test
+    public void changingCapacityTest() {
+        basket.addItem("BGLO");
+        basket.addItem("FILB");
+        Assertions.assertEquals(2,basket.getItems().size());
+
+        basket.changeCapacity(4);
+        basket.addItem("BGLO");
+        basket.addItem("FILB");
+        Assertions.assertEquals(4,basket.getItems().size());
+
+        basket.addItem("BGLO");
+        basket.addItem("FILB");
+        Assertions.assertEquals(4,basket.getItems().size());
+
+
+    }
+
 }
