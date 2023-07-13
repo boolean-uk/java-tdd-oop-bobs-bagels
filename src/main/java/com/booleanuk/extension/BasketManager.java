@@ -1,13 +1,17 @@
 package com.booleanuk.extension;
 
+import com.booleanuk.core.Inventory;
+
 public class BasketManager {
 
 
     private BasketExt basketExt;
+    private InventoryExt inventoryExt;
 
 
     public BasketManager(BasketExt basketExt) {
         this.basketExt = basketExt;
+
     }
 
 
@@ -93,5 +97,10 @@ public class BasketManager {
         System.out.println(basketExt.getTotalCostFillings());
         System.out.println(basketExt.getTotalCostCoffee());
         return  basketExt.getTotalCostBagel() + basketExt.getTotalCostFillings() + basketExt.getTotalCostCoffee();
+    }
+
+    public void addFillingToBagel(BagelExt bagelExt, FillingExt fillingExt){
+
+
     }
 }

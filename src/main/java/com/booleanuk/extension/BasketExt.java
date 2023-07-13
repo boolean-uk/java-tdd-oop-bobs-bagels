@@ -12,22 +12,22 @@ public class BasketExt {
 
 
     public BasketExt() {
-        this.coffeesInBasket =new ArrayList<>();
+        this.coffeesInBasket = new ArrayList<>();
         this.bagelsInBasket = new ArrayList<>();
         this.fillingInBasket = new ArrayList<>();
         capacity = 5;
     }
 
 
-
-    public void add(BagelExt bagelExt){
+    public void add(BagelExt bagelExt) {
         bagelsInBasket.add(bagelExt);
     }
 
-    public void add(CoffeeExt coffeeExt){
+    public void add(CoffeeExt coffeeExt) {
         coffeesInBasket.add(coffeeExt);
     }
-    public void add(FillingExt fillingExt){
+
+    public void add(FillingExt fillingExt) {
         fillingInBasket.add(fillingExt);
     }
 
@@ -47,9 +47,11 @@ public class BasketExt {
     public void remove(BagelExt bagelExt) {
         bagelsInBasket.remove(bagelExt);
     }
+
     public void remove(FillingExt fillingExt) {
         fillingInBasket.remove(fillingExt);
     }
+
     public void remove(CoffeeExt coffeeExt) {
         coffeesInBasket.remove(coffeeExt);
     }
@@ -67,7 +69,7 @@ public class BasketExt {
 
         for (BagelExt bagel :
                 bagelsInBasket) {
-            totalCost+=bagel.getPrice();
+            totalCost += bagel.getPrice();
 
         }
         return totalCost;
@@ -76,9 +78,9 @@ public class BasketExt {
     public double getTotalCostFillings() {
         double totalCost = 0;
 
-        for (FillingExt  fillingExt:
+        for (FillingExt fillingExt :
                 fillingInBasket) {
-            totalCost+=fillingExt.getPrice();
+            totalCost += fillingExt.getPrice();
         }
         return totalCost;
 
@@ -87,10 +89,11 @@ public class BasketExt {
     public double getTotalCostCoffee() {
         double totalCost = 0;
 
-        for (CoffeeExt  coffeeExt:
+        for (CoffeeExt coffeeExt :
                 coffeesInBasket) {
-            totalCost+=coffeeExt.getPrice();
+            totalCost += coffeeExt.getPrice();
         }
         return totalCost;
     }
+
 }

@@ -152,6 +152,14 @@ public class BobBagelsExtensionTest {
 
     }
 
+    @Test
+    public void ShouldAddFillingToTheBagel(){
+        //when
+        basketManager.addFillingToBagel(bagelE,fillingB);
+        //then
+        assertEquals(bagelE.getFillingExt(), fillingB);
+    }
+
 
 }
 
