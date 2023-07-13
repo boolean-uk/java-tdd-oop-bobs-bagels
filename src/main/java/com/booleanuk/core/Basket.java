@@ -15,15 +15,17 @@ public class Basket {
     }
 
     public void addProduct(Product product){
-        // TODO
+        if (products.size() < basketCapacity)
+            products.add(product);
+        else
+            throw new IllegalStateException("Capacity full you can not add more products");
     }
 
     public void removeProduct(Product product){
-        // TODO
-    }
-
-    public void changeBasketSize(int newSize){
-        // TODO
+        if (products.contains(product))
+            products.remove(product);
+        else
+            throw new IllegalStateException("You do not have that product on your basket");
     }
 
     public ArrayList<Product> getBagelsInBasket() {
@@ -31,19 +33,33 @@ public class Basket {
     }
 
     public BigDecimal getBasketPrice(){
-        // TODO
-        return null;
+       return products.stream()
+                .map(Product::getPrice)
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
     }
 
     public void changeBasketCapacity(int newCapacity){
-        // TODO
+        capacity = newCapacity;
     }
 
     public int getCapacity(){
         return capacity;
     }
 
-    public int getUserCapacity(){
+    public int getBasketCapacity(){
         return basketCapacity;
+    }
+
+    public void getFillingTypes(){
+        for (FillingType fType : FillingType.values()){
+            System.out.println(
+                    fType + " " + fType.getVariant()+ " " + fType.getPrice()
+            );
+        }
+    }
+
+    public static void main(String[] args) {
+        Basket basket = new Basket();
+        basket.getFillingTypes();
     }
 }

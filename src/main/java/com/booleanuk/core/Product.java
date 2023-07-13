@@ -7,7 +7,7 @@ public class Product {
 
     public void setPrice(BigDecimal price){
         this.price = price;
-    };
+    }
 
     public BigDecimal getPrice() {
         return price;
@@ -15,6 +15,6 @@ public class Product {
 
 
     public void addToPrice(BigDecimal addToPrice) {
-        // TODO
+        price = price.add(addToPrice);
     }
 }

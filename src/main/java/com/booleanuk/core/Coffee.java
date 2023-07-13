@@ -5,9 +5,10 @@ public class Coffee extends Product{
 
     public Coffee(CoffeeType coffeeType) {
         this.coffeeType = coffeeType;
+        updatePrice();
     }
 
     private void updatePrice(){
-        // TODO
+        setPrice(coffeeType.getPrice());
     }
 }

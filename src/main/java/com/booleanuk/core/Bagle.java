@@ -8,11 +8,13 @@ public class Bagle extends Product{
 
     public Bagle(BagleType bagleType) {
         this.bagleType = bagleType;
+        updatePrice();
     }
     public void addFilling(FillingType fillingType){
-
+        bagleFillingList.add(fillingType);
+        addToPrice(fillingType.getPrice());
     }
     private void updatePrice(){
-
+        setPrice(bagleType.getPrice());
     }
 }
