@@ -1,4 +1,4 @@
-package com.booleanuk.core;
+package com.booleanuk.extension;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -19,6 +19,12 @@ public class Client {
 
         bagel.setFillings(fillings);
         basket.addToBasket(bagel);
+    }
+
+    public void orderCoffee(String coffeeVariant){
+        Coffee coffee = Manager.getCoffeeByVariant(coffeeVariant);
+
+        basket.addToBasket(coffee);
     }
 
     public List<Product> getBasketContents() {
@@ -65,4 +71,9 @@ public class Client {
     public boolean isBasketFull() {
         return basket.isBasketFull();
     }
+
+    public Basket getBasket() {
+        return basket;
+    }
+
 }

@@ -95,4 +95,15 @@ public class Manager {
                 filling.getVariant() + " - " + filling.getPrice()));
     }
 
+    public static void prettyPrintAllCoffee() {
+        List<Coffee> coffees = getInventory().stream()
+                .filter(product -> product instanceof Coffee)
+                .map(product -> (Coffee) product)
+                .sorted(Comparator.comparing(Coffee::getPrice))
+                .toList();
+
+        coffees.forEach(coffee -> System.out.println(
+                coffee.getVariant() + " - " + coffee.getPrice()));
+    }
+
 }
