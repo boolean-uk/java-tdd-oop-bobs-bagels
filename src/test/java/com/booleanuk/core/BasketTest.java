@@ -30,7 +30,7 @@ public class BasketTest {
         Basket basket = new Basket(10);
         basket.add("Plain", 6);
         basket.add("Everything", 2);
-        basket.add("Cinnamon", 2);
+        basket.add("Sesame", 2);
         Assertions.assertTrue(basket.changeCapacity(15));
         Assertions.assertFalse(basket.changeCapacity(8));
     }
@@ -40,8 +40,8 @@ public class BasketTest {
         Basket basket = new Basket(10);
         basket.add("Plain", 6);
         basket.add("Everything", 2);
-        basket.add("Cinnamon", 2);
-        Assertions.assertEquals(40, basket.totalCost());
+        basket.add("Sesame", 2);
+        Assertions.assertEquals(4.3, basket.totalCost());
     }
 
     @Test
