@@ -17,7 +17,7 @@ public class Inventory {
         this.bagels = new ArrayList<>();
         this.coffees = new ArrayList<>();
         this.fillings = new ArrayList<>();
-        specialOffers = new HashMap<>();
+
         initializeInventory();
     }
 
