@@ -145,7 +145,9 @@ public class Basket {
 
     private List<Product> groupBreakfastOffers(List<Product> products) {
         var productsGrouped = new ArrayList<>(products);
-        var coffees = extractCoffees(productsGrouped);
+        var coffees = new ArrayList<>(extractCoffees(productsGrouped).stream()
+                .filter(c -> c.equals(Coffee.COFB))
+                .toList());
         var bagels = extractBagels(productsGrouped);
 
         productsGrouped.removeAll(coffees);

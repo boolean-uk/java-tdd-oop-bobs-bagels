@@ -105,11 +105,12 @@ class BasketTest {
 
     @Test
     void totalPrice_shouldCorrectlyCalculatePriceForNoDiscounts() {
-        var basket = new Basket(2);
+        var basket = new Basket(3);
         basket.addBagel(BAGEL_PLAIN);
         basket.addBagel(BAGEL_PLAIN);
+        basket.addCoffee(Coffee.COFL);
 
-        var expectedPrice = BAGEL_PLAIN.getPrice().multiply(BigDecimal.valueOf(2));
+        var expectedPrice = BAGEL_PLAIN.getPrice().multiply(BigDecimal.valueOf(2)).add(Coffee.COFL.getPrice());
 
         assertEquals(expectedPrice, basket.totalPrice());
     }

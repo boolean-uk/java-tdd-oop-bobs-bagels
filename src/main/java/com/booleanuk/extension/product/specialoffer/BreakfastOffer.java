@@ -16,6 +16,7 @@ public class BreakfastOffer implements SpecialOffer {
     private final Coffee coffee;
 
     private BreakfastOffer(BagelSandwich bagel, Coffee coffee) {
+        validateCoffee(coffee);
         this.productType = Product.Type.SpecialOffer;
         this.offerType = SpecialOffer.Type.BreakfastOffer;
         this.bagel = bagel;
@@ -31,5 +32,11 @@ public class BreakfastOffer implements SpecialOffer {
         return Arrays.stream(bagel.getFillings())
                 .map(BagelSandwich.Filling::getPrice)
                 .reduce(BigDecimal.valueOf(1.25), BigDecimal::add);
+    }
+
+    private void validateCoffee(Coffee coffee) {
+        if (!coffee.equals(Coffee.COFB)) {
+            throw new IllegalArgumentException("Breakfast offer only applies to Black Coffee");
+        }
     }
 }
