@@ -17,13 +17,29 @@ public class BasketManager {
 
 
     public void add(BagelExt bagelExt) {
-        basketExt.add(bagelExt);
+
+        if (!isBasketFull()) {
+            basketExt.add(bagelExt);
+        } else {
+            System.out.println("Basket is full!");
+        }
+
+
     }
     public void add(CoffeeExt coffeeExt) {
+        if (!isBasketFull()) {
             basketExt.add(coffeeExt);
+        } else {
+            System.out.println("Basket is full!");
+        }
     }
     public void add(FillingExt fillingExt) {
-        basketExt.add(fillingExt);
+        if (!isBasketFull()) {
+            basketExt.add(fillingExt);
+
+        } else {
+            System.out.println("Basket is full!");
+        }
     }
 
     public void remove(BagelExt bagelExt) {
@@ -38,7 +54,7 @@ public class BasketManager {
 
     private boolean isBasketFull(){
         int occupiedCapacity = basketExt.getBagelsInBasket().size() + basketExt.getCoffeesInBasket().size() + basketExt.getFillingInBasket().size();
-        if(occupiedCapacity == basketExt.getCapacity()){
+        if (occupiedCapacity >= basketExt.getCapacity()) {
             return true;
         }
         return false;
