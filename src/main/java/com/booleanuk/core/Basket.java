@@ -35,11 +35,20 @@ public class Basket {
     }
 
     public boolean changeCapacity(int newCapacity){
+        if (newCapacity < currentAmountOfProducts || newCapacity == 0)
+            return false;
+        capacity = newCapacity;
         return true;
     }
 
     public double totalCost(){
-        return 0;
+        double cost = 0;
+        for (String bagelType : productsCount.keySet()) {
+            cost += productsCount.get(bagelType) * Inventory.getProducts()
+                                                            .get(bagelType)
+                                                            .getPrice();
+        }
+        return cost;
     }
 
     public double checkCostOfProduct(String productVariant){
