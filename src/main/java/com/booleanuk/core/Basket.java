@@ -1,12 +1,7 @@
 package com.booleanuk.core;
 
-import java.math.BigDecimal;
-import java.math.RoundingMode;
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
-
-import static java.lang.Math.round;
 
 public class Basket {
     public static int capacity = 2; //default size of the basket
