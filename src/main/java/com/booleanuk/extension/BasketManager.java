@@ -25,4 +25,14 @@ public class BasketManager {
     public void add(FillingExt fillingExt) {
         basketExt.add(fillingExt);
     }
+
+    public void remove(BagelExt bagelExt) {
+        basketExt.remove(bagelExt);
+    }
+    public void remove(FillingExt fillingExt) {
+        basketExt.remove(fillingExt);
+    }
+    public void remove(CoffeeExt coffeeExt) {
+        basketExt.remove(coffeeExt);
+    }
 }

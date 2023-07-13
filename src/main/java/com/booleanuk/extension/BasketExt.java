@@ -41,4 +41,14 @@ public class BasketExt {
     public ArrayList<FillingExt> getFillingInBasket() {
         return fillingInBasket;
     }
+
+    public void remove(BagelExt bagelExt) {
+        bagelsInBasket.remove(bagelExt);
+    }
+    public void remove(FillingExt fillingExt) {
+        fillingInBasket.remove(fillingExt);
+    }
+    public void remove(CoffeeExt coffeeExt) {
+        coffeesInBasket.remove(coffeeExt);
+    }
 }
