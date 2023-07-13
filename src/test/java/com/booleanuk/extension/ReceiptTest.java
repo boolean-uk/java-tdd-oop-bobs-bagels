@@ -14,7 +14,8 @@ public class ReceiptTest {
     void shouldReturnReceiptString() {
         Basket basket = new Basket(100);
         Bagel BGLO = new Bagel("BGLO", BigDecimal.valueOf(0.49), "Onion");
-        BGLO.setFillings(List.of(new Filling("FILE", BigDecimal.valueOf(3.00), "Egg")));
+        Filling FILE = new Filling("FILE", BigDecimal.valueOf(3.00), "Egg");
+        BGLO.setFillings(List.of(FILE, FILE));
         Bagel BGLP = new Bagel("BGLP", BigDecimal.valueOf(0.39), "Plain");
         Coffee COFB = new Coffee("COFB", BigDecimal.valueOf(0.99), "Black");
         basket.add(BGLO);
@@ -29,12 +30,12 @@ public class ReceiptTest {
         String expected = "   ~~~ Bob's Bagels ~~~   \n" +
                 formattedTime+"\n" +
                 "-------------------------------\n" +
-                "Onion Bagel        1 3.49\n" +
-                "Egg Filling        1 (3.0)\n" +
-                "Plain Bagel        2 0.39\n" +
+                "Onion Bagel        1 6.49\n" +
+                "Egg Filling        2 (6.0)\n" +
+                "Plain Bagel        2 0.78\n" +
                 "Black Coffee        1 0.99\n" +
                 "-------------------------------\n" +
-                "Total                     5.26\n" +
+                "Total                     8.26\n" +
                 "Thank you for your order!";
 
         Assertions.assertEquals(expected, actual);
