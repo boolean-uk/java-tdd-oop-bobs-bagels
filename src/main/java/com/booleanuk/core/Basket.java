@@ -1,5 +1,6 @@
 package com.booleanuk.core;
-import com.booleanuk.core.Bagle;
+
+
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -10,16 +11,18 @@ import java.util.Map;
 
 public class Basket {
     private List<String> items;
+    private List<Bagle> bagles;
     private Inventory inventory;
     private int capacity;
     private static final DecimalFormat roundUp = new DecimalFormat("0.00");
 
-    Bagle bagle;
+
 
     public Basket(int capacity) {
         this.capacity = capacity;
         items = new ArrayList<>();
         inventory = new Inventory();
+        bagles = new ArrayList<>();
     }
 
     public List<String> getItems() {
@@ -29,19 +32,19 @@ public class Basket {
     public boolean addItem(String item, List<String> fillings) {
         double priceOfProduct = 0;
         if(inventory.checkAvailability(item) == true && items.size() + fillings.size() < capacity) {
-            //System.out.println("The product added to basket costs :" + inventory.getItemPrice(item));
-            //items.add(item);
 
             if (item.startsWith("BGL")){
-                Bagle bagle = inventory.getBagelBySKU(item);
+                Bagle bagle = new Bagle(item, inventory.getItemPrice(item), inventory.getBagelVariant(item));
                 priceOfProduct += inventory.getItemPrice(item);
                 items.add(bagle.getSKU());
+
+                bagles.add(bagle);
                 if(fillings != null && !fillings.isEmpty()){
                     for(String fillingSKU : fillings){
-                       if(inventory.checkAvailability(fillingSKU) == true) {
+                        if(inventory.checkAvailability(fillingSKU) == true) {
                             items.add(fillingSKU);
                             priceOfProduct += inventory.getItemPrice(fillingSKU);
-
+                            bagle.addFilling(fillingSKU);
                         }
                     }
                     System.out.println("Price of product is: " + priceOfProduct);
@@ -72,14 +75,38 @@ List<Bagle> bagles;
         //bagle.addFilling(SKUofFilling);
     }
 */
-    public boolean removeItem(String item) {
-        if(items.contains(item)) {
+    public boolean removeFilling(String nameOfBagle, String nameOfFilling) {
+        if(items.contains(nameOfBagle) && inventory.checkAvailability(nameOfFilling) == true) {
+            items.remove(nameOfFilling);
+            return true;
+        }
+        return false;
+    }
+
+    public boolean removeCoffee(String item) {
+        if(items.contains(item) && item.startsWith("COF")) {
             items.remove(item);
             return true;
         }else {
             return false;
         }
     }
+
+    public boolean removeBagle(String item) {
+        if(items.contains(item)){
+            for(Bagle bagle : bagles) {
+                if(bagle.getSKU().equals(item)){
+                    items.remove(item);
+                    for(int i =0; i < bagle.getFillings().size(); i++) {
+                        items.remove(bagle.getFillings().get(i));
+                    }
+                }
+            }
+            return true;
+        }
+        return false;
+    }
+
 
     public void changeCapacity(int newCapacity) {
         if(newCapacity > 0 && newCapacity >= items.size()) {
