@@ -123,7 +123,7 @@ Filling class extends Item and it represents a filling item.
 
 SKU is a data type (enum), that represents various items (their price, name and variant) based on SKU constant.
 
-| Class | Fields (??)       | Role | Methods                                      | Scenario                                               | Output                                       |
+| Class | Fields            | Role | Methods                                      | Scenario                                               | Output                                       |
 |-------|-------------------|------|----------------------------------------------|--------------------------------------------------------|----------------------------------------------|
 | SKU   | BigDecimal price; |      | BigDecimal getPrice()                        | Returns the price of the specific SKU.                 | The price of the specific SKU.               |
 |       | String name;      |      | String getName()                             | Returns the name connected with the specific SKU.      | The name connected with the specific SKU.    |
@@ -131,13 +131,37 @@ SKU is a data type (enum), that represents various items (their price, name and 
 |       |                   |      | SKU getConstant(Item item)                   | If I want to get SKU based on Item object.             | The constant SKU.                            |
 |       |                   |      | SKU getConstant(String name, String variant) | If I want to get SKU based on Item's name and variant. | The constant SKU.                            |
 
-2. User stories?
-   do pierwszego:
-   As a customer, I want to be able to order items from Bob's Bagels using SKUs.
-   As a customer, I want to be able to view the total price of my order.
-   As a manager, I want to offer special offers, such as "Onion or everything 6 for 2.49" and "Plain 12 for 3.99" offers for bagels, for my customers.
-   As a customer, I want to be able to add a coffee and a bagel together for a discounted price of 1.25.
-   As a customer, I want to be able to view the breakdown of prices for each item in my order.
+### EXTENSION1
+User stories:
+```
+1. As a customer, 
+I want to be able to order items from Bob's Bagels using SKUs.
+
+2. As a customer, 
+I want to be able to view the total price of my order.
+
+3. As a manager, 
+I want to announce special offers for my customers, such as:
+- for Onion/Everything variant: "6 for 2.49" 
+- for Plain variant: "12 for 3.99"
+
+4. As a manager, 
+I want to announce a special offer for my customers: "Coffee & Bagel for 1.25".
+
+5. As a customer, 
+I want to see on my receipt which special offers were included and how they were calculated.
+```
+
+| Class | Fields | Role | Methods | Scenario | Output |
+|-------|--------|------|---------|----------|--------|
+|       |        |      |         |          |        |
+|       |        |      |         |          |        |
+|       |        |      |         |          |        |
+|       |        |      |         |          |        |
+|       |        |      |         |          |        |
+|       |        |      |         |          |        |
+
+
 
 As a customer, I want to be able to generate a receipt for my order.
 As a customer, I want the receipt to display the date and time of the order.
