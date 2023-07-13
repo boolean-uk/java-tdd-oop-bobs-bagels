@@ -2,9 +2,11 @@ package com.booleanuk.core.product.specialoffer;
 
 import com.booleanuk.core.product.Coffee;
 import com.booleanuk.core.product.bagel.Bagel;
+import com.booleanuk.core.product.bagel.Filling;
 import lombok.Getter;
 
 import java.math.BigDecimal;
+import java.util.Arrays;
 
 @Getter
 public class BreakfastOffer implements SpecialOffer {
@@ -22,7 +24,8 @@ public class BreakfastOffer implements SpecialOffer {
 
     @Override
     public BigDecimal getPrice() {
-        // TODO
-        return null;
+        return Arrays.stream(bagel.fillings())
+                .map(Filling::getPrice)
+                .reduce(BigDecimal.valueOf(1.25), BigDecimal::add);
     }
 }
