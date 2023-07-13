@@ -19,7 +19,6 @@ public class Bagel extends Item {
         return bagelType;
     }
 
-
     public FillingType getFillingType() {
         return fillingType;
     }

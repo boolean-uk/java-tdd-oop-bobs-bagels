@@ -138,7 +138,7 @@ class BasketTest {
         basket.add(bagel);
         basket.add(bagel);
 
-        assertEquals(basket.getTotalCost(), (249 + 72 + coffee.getPrice()) / 100.0);
+        assertEquals((249 + 72 + coffee.getPrice()) / 100.0, basket.getTotalCost());
         basket.add(bagel);
         basket.add(bagel);
         basket.add(bagel);

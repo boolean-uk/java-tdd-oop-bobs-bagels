@@ -1,6 +1,7 @@
 package com.booleanuk.extension.types;
 
 public enum FillingType {
+    WITHOUT_FILLING(0, "FILW"),
     BACON(12, "FILB"),
     EGG(12, "FILE"),
     CHEESE(12, "FILC"),

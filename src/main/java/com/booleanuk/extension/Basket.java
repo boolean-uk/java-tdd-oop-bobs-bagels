@@ -1,5 +1,7 @@
 package com.booleanuk.extension;
 
+import com.booleanuk.extension.types.FillingType;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -7,8 +9,10 @@ import java.util.Map;
 
 public class Basket {
     private int capacity;
-    private final static int SIX_BAGELS_PRICE = 249 + 72;
-    private final static int TWELVE_BAGELS_PRICE = 399 + 144;
+    private final static int SIX_BAGELS_PRICE = 249;
+    private final static int TWELVE_BAGELS_PRICE = 399;
+    private final static int SINGLE_FILLING_PRICE = 12;
+
     private Map<Item,Integer> items;
 
     public Basket(int capacity) {
@@ -63,6 +67,10 @@ public class Basket {
     }
 
     public double getTotalCost() {
+        long priceOfFillings = items.entrySet().stream().filter(entry -> entry.getKey() instanceof Bagel)
+                .map(entry -> entry.getValue() * ((Bagel) entry.getKey()).getFillingType().getPrice())
+                .reduce(0L, Long::sum);
+
         List<Long> listOfPrices = items.entrySet().stream().map(entry -> {
             if(entry.getKey() instanceof Bagel && entry.getValue() >= 6 && entry.getValue() < 12){
                 return SIX_BAGELS_PRICE + (entry.getValue()%6)*entry.getKey().getPrice();
@@ -72,6 +80,6 @@ public class Basket {
             }
             else return entry.getKey().getPrice() * entry.getValue();
         }).toList();
-        return listOfPrices.stream().reduce(0L, Long::sum) / 100.0;
+        return (priceOfFillings + listOfPrices.stream().reduce(0L, Long::sum)) / 100.0;
     }
 }
