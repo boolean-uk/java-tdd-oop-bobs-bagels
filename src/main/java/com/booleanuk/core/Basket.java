@@ -62,9 +62,7 @@ public class Basket {
     }
 
     public BigDecimal totalPrice() {
-        var products = new ArrayList<>(this.products);
-
-        groupProductsIntoOffers(products);
+        var products = groupProductsIntoOffers(this.products);
 
         return products.stream()
                 .map(Product::getPrice)
@@ -87,12 +85,15 @@ public class Basket {
         return itemAmount() == capacity;
     }
 
-    private void groupProductsIntoOffers(List<Product> products) {
-        groupBagelOffers(products);
-        groupBreakfastOffers(products);
+    private List<Product> groupProductsIntoOffers(List<Product> products) {
+        List<Product> productsGrouped = new ArrayList<>(products);
+        productsGrouped = groupBagelOffers(productsGrouped);
+        productsGrouped = groupBreakfastOffers(productsGrouped);
+
+        return productsGrouped;
     }
 
-    private void groupBagelOffers(List<Product> products) {
+    private List<Product> groupBagelOffers(List<Product> products) {
         var productsGrouped = new ArrayList<>(products);
         for (var e : bagelTypeCounter.entrySet()) {
             var type = e.getKey();
@@ -114,6 +115,8 @@ public class Basket {
                     .limit((long) offerAmount * offerQuantity)
                     .toList());
 
+            productsGrouped.removeAll(bagelsForAllOffers);
+
             while (!bagelsForAllOffers.isEmpty()) {
                 var bagelsForSingleOffer = new ArrayList<Bagel>();
                 for (int i = 0; i < offerQuantity; i++) {
@@ -123,42 +126,42 @@ public class Basket {
                 productsGrouped.add(bagelOffer);
             }
         }
+
+        return productsGrouped;
     }
 
-    private void groupBreakfastOffers(List<Product> products) {
-        var coffees = extractCoffees(products);
-        var bagels = extractBagels(products);
+    private List<Product> groupBreakfastOffers(List<Product> products) {
+        var productsGrouped = new ArrayList<>(products);
+        var coffees = extractCoffees(productsGrouped);
+        var bagels = extractBagels(productsGrouped);
+
+        productsGrouped.removeAll(coffees);
+        productsGrouped.removeAll(bagels);
 
         var breakfastOfferAmount = Math.min(coffees.size(), bagels.size());
 
         for (int i = 0; i < breakfastOfferAmount; i++) {
             var breakfastOffer = BreakfastOffer.of(bagels.remove(0), coffees.remove(0));
-            products.add(breakfastOffer);
+            productsGrouped.add(breakfastOffer);
         }
 
-        products.addAll(coffees);
-        products.addAll(bagels);
+        productsGrouped.addAll(coffees);
+        productsGrouped.addAll(bagels);
+
+        return productsGrouped;
     }
 
     private List<Coffee> extractCoffees(List<Product> products) {
-        var coffees = new ArrayList<>(products.stream()
+        return new ArrayList<>(products.stream()
                 .filter(p -> p instanceof Coffee)
                 .map(p -> (Coffee) p)
                 .toList());
-
-        products.removeAll(coffees);
-
-        return coffees;
     }
 
     private List<Bagel> extractBagels(List<Product> products) {
-        var bagels = new ArrayList<>(products.stream()
+        return new ArrayList<>(products.stream()
                 .filter(p -> p instanceof Bagel)
                 .map(p -> (Bagel) p)
                 .toList());
-
-        products.removeAll(bagels);
-
-        return bagels;
     }
 }
