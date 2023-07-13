@@ -16,6 +16,7 @@ public class BasketTest {
 
     Store store = Store.getInstance();
 
+
     @Test
     public void shouldCreateBasketWithEmptyList() {
         Basket basket = new Basket();
@@ -149,7 +150,6 @@ public class BasketTest {
         Discount discountBagelOnion = new Discount(bagelOnion, 6, BigDecimal.valueOf(2.49));
 
 
-        store.setAvailableProducts(new ArrayList<>());
         store.addDiscount(discountBagelPlain);
         store.addDiscount(discountBagelOnion);
 
@@ -179,6 +179,40 @@ public class BasketTest {
     }
 
     @Test
+    public void shouldCalculateTripleDiscountsBagelsWithEighteenBagels() {
+        Bagel bagelOnion = new Bagel("BGLO", BigDecimal.valueOf(0.49), BagelVariant.Onion);
+
+        Discount discountBagelOnion = new Discount(bagelOnion, 6, BigDecimal.valueOf(2.49));
+
+
+        store.setAvailableDiscounts(new ArrayList<>());
+        store.addDiscount(discountBagelOnion);
+
+        Basket basket = new Basket(18);
+        basket.addProduct(bagelOnion, 18);
+
+        Assertions.assertEquals(BigDecimal.valueOf(2.49).multiply(BigDecimal.valueOf(3)), basket.summarizeBasket().total());
+    }
+
+    @Test
+    public void shouldCalculateDoubleDiscountsBagelsWithSeventeenBagels() {
+        Bagel bagelOnion = new Bagel("BGLO", BigDecimal.valueOf(0.49), BagelVariant.Onion);
+
+        Discount discountBagelOnion = new Discount(bagelOnion, 6, BigDecimal.valueOf(2.49));
+
+
+        store.setAvailableDiscounts(new ArrayList<>());
+        store.addDiscount(discountBagelOnion);
+
+        Basket basket = new Basket(17);
+        basket.addProduct(bagelOnion, 17);
+
+        Assertions.assertEquals(BigDecimal.valueOf(2.49).multiply(BigDecimal.valueOf(2)).add(BigDecimal.valueOf(5).multiply(BigDecimal.valueOf(0.49))), basket.summarizeBasket().total());
+
+    }
+
+
+    @Test
     public void shouldDiscountOnMultipleBagelsWithCoffee() {
         Bagel bagelOnion = new Bagel("BGLO", BigDecimal.valueOf(0.49), BagelVariant.Onion);
         Bagel bagelPlain = new Bagel("BGLP", BigDecimal.valueOf(0.39), BagelVariant.Plain);
@@ -191,7 +225,6 @@ public class BasketTest {
         Discount discountBagelOnion = new Discount(bagelOnion, 6, BigDecimal.valueOf(2.49));
 
 
-        store.setAvailableProducts(new ArrayList<>());
         store.setAvailableDiscounts(new ArrayList<>());
         store.addDiscount(discountBagelPlain);
         store.addDiscount(discountBagelOnion);
