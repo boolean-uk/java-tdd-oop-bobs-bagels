@@ -94,6 +94,21 @@ public class Basket {
         return partialCost;
     }
 
+    private float getProductDiscount(Product product, int quantity) {
+        float discountAmount = 0;
+
+        int specialOfferQuantity = product.getSpecialOfferQuantity();
+        float specialOfferPrice = product.getSpecialOfferPrice();
+
+        if(specialOfferQuantity <= 0 || specialOfferQuantity > quantity)
+            return 0;
+
+        discountAmount += (float) Math.round((quantity / specialOfferQuantity)
+                * ((product.getPrice() * specialOfferQuantity) - specialOfferPrice) * 100) / 100;
+
+        return discountAmount;
+    }
+
     public String getReceipt() {
         LocalDateTime ldt = LocalDateTime.now();
         StringBuilder stringBuilder = new StringBuilder();
@@ -106,8 +121,13 @@ public class Basket {
             String bagelVariant = product.getKey().getVariant();
             int bagelQuantity = product.getValue();
             float bagelPrice = getPartialCost(product.getKey(), bagelQuantity);
+            float discountAmount = getProductDiscount(product.getKey(), bagelQuantity);
 
-            stringBuilder.append(rightpad(bagelVariant + " " + bagelName, 18) + rightpad(String.valueOf(bagelQuantity), 4)  + "£" + bagelPrice + "\n");
+            stringBuilder.append(rightpad(bagelVariant + " " + bagelName, 18)
+                    + rightpad(String.valueOf(bagelQuantity), 4)
+                    + "£" + bagelPrice + "\n");
+            if(discountAmount > 0)
+                stringBuilder.append(leftpad("(-£" + discountAmount + ")", 29) + "\n");
         }
 
         stringBuilder.append("\n" + "-".repeat(28) + "\n\n")
@@ -118,5 +138,6 @@ public class Basket {
         return stringBuilder.toString();
     }
 
+    private String leftpad(String text, int length) { return String.format("%" + length + "." + length + "s", text); }
     private String rightpad(String text, int length) { return String.format("%-" + length + "." + length + "s", text); }
 }
