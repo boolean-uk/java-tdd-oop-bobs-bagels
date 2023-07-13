@@ -1,12 +1,12 @@
 package com.booleanuk.extension;
 
-public class ExtensionProduct {
+public class Product {
     private String sku;
     private double price;
     private String name;
     private String variant;
 
-    public ExtensionProduct(String sku, double price, String name, String variant) {
+    public Product(String sku, double price, String name, String variant) {
         this.sku = sku;
         this.price = price;
         this.name = name;

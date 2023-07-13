@@ -4,13 +4,13 @@ import com.booleanuk.core.Inventory;
 
 import java.util.HashMap;
 
-public class ExtensionBasket {
+public class Basket {
     private final HashMap<String, Integer> productsCount;
     private int capacity;
     private int currentAmountOfProducts;
 
-    public ExtensionBasket(int capacity) {
-        productsCount = new HashMap<String, Integer>();
+    public Basket(int capacity) {
+        productsCount = new HashMap<>();
         this.capacity = capacity;
         currentAmountOfProducts = 0;
     }

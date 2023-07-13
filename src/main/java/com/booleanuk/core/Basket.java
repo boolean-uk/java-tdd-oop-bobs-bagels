@@ -13,27 +13,27 @@ public class Basket {
         currentAmountOfProducts = 0;
     }
 
-    public boolean add(String productVariant, int amount){
-        if (amount <= 0 || amount + currentAmountOfProducts > capacity || !Inventory.getProducts().containsKey(productVariant))
+    public boolean add(String productSKu, int amount){
+        if (amount <= 0 || amount + currentAmountOfProducts > capacity || !Inventory.getProducts().containsKey(productSKu))
             return false;
 
-        if (productsCount.containsKey(productVariant))
-            productsCount.put(productVariant, productsCount.get(productVariant) + amount);
+        if (productsCount.containsKey(productSKu))
+            productsCount.put(productSKu, productsCount.get(productSKu) + amount);
         else
-            productsCount.put(productVariant, amount);
+            productsCount.put(productSKu, amount);
 
         currentAmountOfProducts += amount;
         return true;
     }
 
-    public boolean remove(String productVariant, int amount){
-        if (amount <= 0 || !productsCount.containsKey(productVariant) || productsCount.get(productVariant) < amount)
+    public boolean remove(String productSKu, int amount){
+        if (amount <= 0 || !productsCount.containsKey(productSKu) || productsCount.get(productSKu) < amount)
             return false;
 
-        productsCount.put(productVariant, productsCount.get(productVariant) - amount);
+        productsCount.put(productSKu, productsCount.get(productSKu) - amount);
 
-        if (productsCount.get(productVariant) == 0)
-            productsCount.remove(productVariant);
+        if (productsCount.get(productSKu) == 0)
+            productsCount.remove(productSKu);
 
         currentAmountOfProducts -= amount;
         return true;
@@ -57,13 +57,13 @@ public class Basket {
         return cost;
     }
 
-    public double checkCostOfProduct(String productVariant){
+    public double checkCostOfProduct(String productSKu){
         var products = Inventory.getProducts();
 
-        if (!products.containsKey(productVariant))
+        if (!products.containsKey(productSKu))
             return 0.0d;
 
-        return products.get(productVariant)
+        return products.get(productSKu)
                 .getPrice();
     }
 }
