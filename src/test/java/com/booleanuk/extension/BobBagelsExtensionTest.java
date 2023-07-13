@@ -29,8 +29,8 @@ public class BobBagelsExtensionTest {
     @BeforeEach
     public void prepareToTests() {
         basketExt = new BasketExt();
-        basketManager = new BasketManager(basketExt);
         inventoryExt = new InventoryExt();
+        basketManager = new BasketManager(basketExt,inventoryExt);
         bagelO = new BagelExt(SKU.BGLO, "Bagel", 0.49);
         bagelP = new BagelExt(SKU.BGLP, "Bagel", 0.39);
         bagelE = new BagelExt(SKU.BGLE, "Bagel", 0.49);
@@ -162,9 +162,18 @@ public class BobBagelsExtensionTest {
 
     @Test
     public void shouldReturnsFillingPriceList() {
+        //given
+        String pricelist = "Fillings Pricelist:\n" +
+                "Name:FILB Bacon Price: 0.12\n" +
+                "Name:FILE EGG Price: 0.12\n" +
+                "Name:FILC Cheese Price: 0.12\n" +
+                "Name:FILX Cream_Cheese Price: 0.12\n" +
+                "Name:FILS Smoked_Salmon Price: 0.12\n" +
+                "Name:FILX Cream_Cheese Price: 0.12\n";
         //when
         String fillingPriceList = basketManager.getPriceListOfFillings();
-        assertEquals("aaa", fillingPriceList);
+        //then
+        assertEquals(pricelist, fillingPriceList);
     }
 
 }

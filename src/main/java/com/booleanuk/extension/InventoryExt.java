@@ -32,4 +32,16 @@ public class InventoryExt {
         allFilingsInInventory.add(new FillingExt(SKU.FILS, "Filling", 0.12));
         allFilingsInInventory.add(new FillingExt(SKU.FILX, "Filling", 0.12));
     }
+
+    public ArrayList<BagelExt> getAllBagelsInInventory() {
+        return allBagelsInInventory;
+    }
+
+    public ArrayList<CoffeeExt> getAllCoffeesInInventory() {
+        return allCoffeesInInventory;
+    }
+
+    public ArrayList<FillingExt> getAllFilingsInInventory() {
+        return allFilingsInInventory;
+    }
 }

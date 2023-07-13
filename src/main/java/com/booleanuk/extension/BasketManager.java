@@ -9,8 +9,9 @@ public class BasketManager {
     private InventoryExt inventoryExt;
 
 
-    public BasketManager(BasketExt basketExt) {
+    public BasketManager(BasketExt basketExt,InventoryExt inventoryExt) {
         this.basketExt = basketExt;
+        this.inventoryExt = inventoryExt;
 
     }
 
@@ -104,6 +105,12 @@ public class BasketManager {
     }
 
     public String getPriceListOfFillings(){
-        return "";
+        StringBuilder sb = new StringBuilder("Fillings Pricelist:\n");
+        for (FillingExt fillingExt :
+                inventoryExt.getAllFilingsInInventory()) {
+            sb.append("Name:").append(fillingExt.getSku().name()).append(" ").append(fillingExt.getSku().getVariant()).append(" Price: ").append(fillingExt.getPrice()).append("\n");
+        }
+
+        return sb.toString();
     }
 }
