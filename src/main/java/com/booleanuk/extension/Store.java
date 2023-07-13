@@ -15,7 +15,7 @@ public class Store {
 
     public boolean placeOrder(Basket basket) {
         if (basket.getItems().size() > 0) {
-            orders.add(new Order(basket.getItems()));
+            orders.add(new Order(basket));
             baskets.remove(basket);
             return true;
         }
