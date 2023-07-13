@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class BasketTest {
@@ -38,6 +39,24 @@ public class BasketTest {
         basket.addItem("BGLS",fillings2);
         Assertions.assertEquals(8,basket.getItems().size());
     }
+    @Test
+    public void calculateTotalFillingsCostTest() {
+        Basket basket = new Basket(10);
+        Inventory inventory = new Inventory();
+
+        basket.addItem("BGLO", Arrays.asList("FILB", "FILC"));
+        basket.addItem("BGLP", Arrays.asList("FILC", "FILX"));
+        basket.addItem("COFB", null);
+
+        double totalCost = basket.calculateTotalFillingsCost();
+
+        Assertions.assertEquals(0.48, totalCost, 0.01);
+    }
+
+
+
+
+
 
     @Test
     public void checkIfWeCanAddToBasketOverTheSizeOfCapacityTest() {

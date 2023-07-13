@@ -28,36 +28,32 @@ public class Basket {
 
     public boolean addItem(String item, List<String> fillings) {
         double priceOfProduct = 0;
-        if(inventory.checkAvailability(item) == true && items.size() + fillings.size() < capacity) {
-            //System.out.println("The product added to basket costs :" + inventory.getItemPrice(item));
-            //items.add(item);
-
-            if (item.startsWith("BGL")){
+        if (inventory.checkAvailability(item) && items.size() + (fillings != null ? fillings.size() : 0) < capacity) {
+            if (item.startsWith("BGL")) {
                 Bagle bagle = inventory.getBagelBySKU(item);
                 priceOfProduct += inventory.getItemPrice(item);
                 items.add(bagle.getSKU());
-                if(fillings != null && !fillings.isEmpty()){
-                    for(String fillingSKU : fillings){
-                       if(inventory.checkAvailability(fillingSKU) == true) {
+                if (fillings != null && !fillings.isEmpty()) {
+                    for (String fillingSKU : fillings) {
+                        if (inventory.checkAvailability(fillingSKU)) {
                             items.add(fillingSKU);
                             priceOfProduct += inventory.getItemPrice(fillingSKU);
-
                         }
                     }
                     System.out.println("Price of product is: " + priceOfProduct);
                 }
-            }else if(item.startsWith("COF")) {
+            } else if (item.startsWith("COF")) {
                 System.out.println("Price of product is: " + inventory.getItemPrice(item));
                 items.add(item);
-            }else {
+            } else {
                 return false;
             }
             return true;
-        }else {
+        } else {
             return false;
         }
-
     }
+
 
 
     /*
@@ -72,14 +68,43 @@ List<Bagle> bagles;
         //bagle.addFilling(SKUofFilling);
     }
 */
-    public boolean removeItem(String item) {
-        if(items.contains(item)) {
+    public boolean removeItem(String item, List<String> fillings) {
+        if (items.contains(item)) {
+            if (item.startsWith("BGL")) {
+                Bagle bagel = inventory.getBagelBySKU(item);
+                for (String filling : fillings) {
+                    if (items.contains(filling)) {
+                        items.remove(filling);
+                        System.out.println("Filling removed: " + filling);
+                    }
+                }
+            }
             items.remove(item);
+            System.out.println("Item removed: " + item);
             return true;
-        }else {
+        } else {
             return false;
         }
     }
+    public double calculateTotalFillingsCost() {
+        double totalCost = 0;
+
+        for (String item : items) {
+            if (item.startsWith("FIL")) {
+                totalCost += inventory.getItemPrice(item);
+            }
+        }
+
+        return totalCost;
+    }
+
+
+
+
+
+
+
+
 
     public void changeCapacity(int newCapacity) {
         if(newCapacity > 0 && newCapacity >= items.size()) {
