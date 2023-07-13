@@ -69,6 +69,7 @@ public class UI {
         } else {
             System.out.println("You can't make the basket capacity smaller, customers would loose their orders!");
             System.out.println("Try again if you want to change it differently");
+            displayLoginMenu();
         }
     }
     public void displayBagelMenu()

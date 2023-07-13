@@ -102,5 +102,14 @@ public class Basket {
         }
         return products;
     }
+    public int getCostWithoutDiscount()
+    {
+        int cost=0;
+        for(String item: listOfItemsInBasket)
+        {
+                cost += inventory.getPriceBySku(item);
+        }
+        return cost;
+    }
 
 }
