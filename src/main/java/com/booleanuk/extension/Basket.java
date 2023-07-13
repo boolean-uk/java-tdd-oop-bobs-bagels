@@ -96,13 +96,13 @@ public class Basket {
 
             stringBuilder.append(rightpad(bagelVariant + " " + bagelName, 18)
                     + rightpad(String.valueOf(bagelQuantity), 4)
-                    + "£" + bagelPrice + "\n");
+                    + "$" + bagelPrice + "\n");
             if(discountAmount > 0)
-                stringBuilder.append(leftpad("(-£" + discountAmount + ")", 29) + "\n");
+                stringBuilder.append(leftpad("(-$" + discountAmount + ")", 28) + "\n");
         }
 
         stringBuilder.append("\n" + "-".repeat(28) + "\n\n")
-                .append("Total                £" + getTotalCost() + "\n\n")
+                .append("Total                $" + getTotalCost() + "\n\n")
                 .append("        Thank you\n")
                 .append("      for your order! \n");
 
