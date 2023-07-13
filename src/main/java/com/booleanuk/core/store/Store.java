@@ -21,7 +21,6 @@ public class Store {
     private final static String fillings = "/filling.json";
     private final static String coffees = "/coffee.json";
     private static Store INSTANCE;
-
     private static String json;
     private List<Product> availableProducts = new ArrayList<>(0);
 
