@@ -1,35 +1,47 @@
 package com.booleanuk.core;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.NoSuchElementException;
 
 public class Basket {
 
     private int capacity;
-    private int productsQuantity;
     private ArrayList<Bagel> products;
 
     public Basket(int capacity) {
         this.capacity = capacity;
     }
 
-    public void addProduct(Bagel bagel) {
-
+    public void addProduct(Bagel bagel) throws IllegalAccessException {
+        if (isFull()) {
+            throw new IllegalAccessException("Basket is already full");
+        }
+        products.add(bagel);
     }
 
     public void removeProduct(Bagel bagel) {
-
+        if (!products.contains(bagel)) {
+            throw new NoSuchElementException("You dont have this product in your basket")
+        }
+        products.remove(bagel);
     }
 
     public boolean isFull() {
-        return true;
+        return getProductsQuantity() == capacity;
     }
 
     public void changeCapacity(int newCapacity) {
-
+        if (newCapacity < getProductsQuantity()) {
+            throw new IllegalArgumentException("You cannot do it");
+        }
+        this.capacity = newCapacity;
     }
 
-    public int getTotalCost(ArrayList<Bagel> products) {
-        return 0;
+    public Double getTotalCost(ArrayList<Bagel> products) {
+        return products.stream()
+                .mapToDouble(Bagel::getPrice)
+                .sum();
     }
 
     public int getCapacity() {
@@ -41,11 +53,7 @@ public class Basket {
     }
 
     public int getProductsQuantity() {
-        return productsQuantity;
-    }
-
-    public void setProductsQuantity(int productsQuantity) {
-        this.productsQuantity = productsQuantity;
+        return products.size();
     }
 
     public ArrayList<Bagel> getProducts() {
