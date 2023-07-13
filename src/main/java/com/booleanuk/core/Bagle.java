@@ -8,14 +8,13 @@ public class Bagle {
     String SKU;
     double price;
     String variant;
-    Filling filling;
-    //List<String> fillings;
+    public List<Filling> fillings;
 
     public Bagle(String SKU, double price, String variant) {
         this.SKU = SKU;
         this.price = price;
         this.variant = variant;
-        //fillings = new ArrayList<>();
+        this.fillings = new ArrayList<>();
     }
 
     public String getSKU() {
@@ -29,10 +28,9 @@ public class Bagle {
     public String getVariant() {
         return variant;
     }
-/*
-    public void addFilling(String filling) {
+
+    public void addFilling(Filling filling) {
         fillings.add(filling);
     }
 
- */
 }

@@ -1,9 +1,10 @@
 package com.booleanuk.core;
-
+import com.booleanuk.core.Bagle;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 
 public class Basket {
     private List<String> items;
@@ -22,16 +23,28 @@ public class Basket {
         return items;
     }
 
-    public boolean addItem(String item) {
-        if(inventory.checkAvailability(item) == true && items.size()<capacity) {
+    public boolean addItem(String item, List<String> fillings) {
+        if(inventory.checkAvailability(item) == true && items.size()<capacity ) {
             System.out.println("The product added to basket costs :" + inventory.getItemPrice(item));
             items.add(item);
+            if (item.startsWith("BGL")){
+                Bagle bagle = inventory.getBagelBySKU(item);
+
+                if(fillings != null && !fillings.isEmpty()){
+                    for(String fillingSKU : fillings){
+                        Filling filling = inventory.getFillingBySKU(fillingSKU);
+                        bagle.addFilling(filling);
+                    }
+                }
+            }
             return true;
         }else {
             return false;
         }
 
     }
+
+
     /*
 List<Bagle> bagles;
     public void addFilling(String SKUofBagle,String SKUofFilling) {
