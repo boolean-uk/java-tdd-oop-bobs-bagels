@@ -4,14 +4,15 @@ So that I can see the total cost of my order,
 I want to be able o add multiple items to my basket and receive the discounted price when applicable.'
 | Class        | Attributes                                  | Methods                                 | Scenario                              | Output                                           |  
 |--------------|---------------------------------------------|-----------------------------------------|---------------------------------------|--------------------------------------------------|
-| `Basket`     | `HashMap<String, Integer> items`            | `addItem(String item, int quantity)`    | If basket is not full                 | `Added item to basket, you can add 2 items more` |
-|              | `int capacity`                              |                                         | If basket is full                     | `Basket is full`                                 |
-|              |                                             | `removeItem(String item, int quantity)` | If item is in basket                  | true                                             |
+| `Basket`     | `List<String, Integer> items`               | `addItem(String item)`                  | If basket is not full && item exist   | true                                             |
+|              | `int capacity`                              |                                         | If basket is full                     | false                                            |
+|              |                                             | `removeItem(String item)`               | If item is in basket                  | true                                             |
 |              |                                             |                                         | If item is not in basket              | false                                            |
 |              |                                             | `isFull()`                              | If basket is full                     | true                                             |
 |              |                                             |                                         | If basket is not full                 | false                                            |
-|              |                                             | `changeCapacity(int newCapacity)`       | Bob's manager want to change capacity |                                                  |
-|              |                                             | calculateTotalPrice(): double<br/>           |                                       |                                                  |
+|              |                                             | `changeCapacity(int newCapacity)`       | If newCapacity > 0                    |                                                  |
+|              |                                             |                                         | If newCapacity < numberOfItemsInBasket|newCapacity = numberOfItemsInBasket               |
+|              |                                             | calculateTotalPrice()                   |                                       | double                                           |
 | Bagel        | SKU: String, Price: double, Variant: String |                                         |                                       |                                                  |
 | Coffee       | SKU: String, Price: double, Variant: String |                                         |                                       |                                                  |
 | Filling      | SKU: String, Price: double, Variant: String |                                         |                                       |                                                  |
