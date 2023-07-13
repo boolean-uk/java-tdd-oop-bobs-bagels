@@ -87,8 +87,6 @@ public class BasketTest {
         Assertions.assertTrue(basket.removeItem("FILB"));
         Assertions.assertFalse(basket.removeItem("FILB"));
         Assertions.assertFalse(basket.removeItem("strange item"));
-
-
     }
 
 }
