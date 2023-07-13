@@ -1,12 +1,16 @@
 package com.booleanuk.core;
 
+import com.booleanuk.extension.SpecialOffer;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class Inventory {
     private List<Bagle> bagels;
     private List<Coffee> coffees;
     private List<Filling> fillings;
+    private Map<String, SpecialOffer> specialOffers;
 
     public Inventory(){
         this.bagels = new ArrayList<>();
@@ -46,6 +50,13 @@ public class Inventory {
         fillings.add(filling4);
         fillings.add(filling5);
         fillings.add(filling6);
+
+        specialOffers.put("BGLO", new SpecialOffer(6,2.49));
+        specialOffers.put("BGLP", new SpecialOffer(12,3.99));
+        specialOffers.put("BGLE", new SpecialOffer(6,2.49));
+        specialOffers.put("COFB", new SpecialOffer(1,1.25));
+
+
 
 
     }
@@ -119,7 +130,18 @@ public class Inventory {
                 return filling.getPrice();
             }
         }
+        if (item.equals("COFB")) {
+            Bagle bagle = getBagelBySKU("BGLP");
+            if (bagle!=null){
+                double baglePrice = bagle.getPrice();
+                double coffeeBagelPrice = 1.25;
+                return Math.min(baglePrice,coffeeBagelPrice);
+            }
+        }
         return 0.0;
+    }
+    public SpecialOffer getSpecialOffer(String SKU){
+        return specialOffers.get(SKU);
     }
 
 
