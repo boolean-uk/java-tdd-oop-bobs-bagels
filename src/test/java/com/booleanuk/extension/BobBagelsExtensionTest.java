@@ -153,13 +153,19 @@ public class BobBagelsExtensionTest {
     }
 
     @Test
-    public void ShouldAddFillingToTheBagel(){
+    public void ShouldAddFillingToTheBagel() {
         //when
-        basketManager.addFillingToBagel(bagelE,fillingB);
+        basketManager.addFillingToBagel(bagelE, fillingB);
         //then
         assertEquals(bagelE.getFillingExt(), fillingB);
     }
 
+    @Test
+    public void shouldReturnsFillingPriceList() {
+        //when
+        String fillingPriceList = basketManager.getPriceListOfFillings();
+        assertEquals("aaa", fillingPriceList);
+    }
 
 }
 
