@@ -30,11 +30,11 @@ public class Basket {
         listOfItemsInBasket.remove(item);
     }
 
-    public static void setBasketCapacity(int capacity) {
+    public void setBasketCapacity(int capacity) {
         Basket.capacity = capacity;
     }
 
-    public static int getCapacity() {
+    public int getCapacity() {
         return capacity;
     }
 
