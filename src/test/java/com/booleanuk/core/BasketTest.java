@@ -32,4 +32,23 @@ public class BasketTest {
         Assertions.assertEquals(2,basket.getItems().size());
     }
 
+    @Test
+    public void removeFromBasketTest() {
+        basket.addItem("BGLO");
+        basket.addItem("FILB");
+        Assertions.assertEquals(2,basket.getItems().size());
+
+        basket.removeItem("BGLOOOO");
+        Assertions.assertEquals(2,basket.getItems().size());
+
+        basket.removeItem("FILB");
+        Assertions.assertEquals(1,basket.getItems().size());
+
+        basket.removeItem("FILB");
+        Assertions.assertEquals(1,basket.getItems().size());
+
+        basket.removeItem("BGLO");
+        Assertions.assertEquals(0,basket.getItems().size());
+    }
+
 }
