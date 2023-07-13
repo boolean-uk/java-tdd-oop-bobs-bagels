@@ -36,7 +36,8 @@ public class Basket {
         }
     }
 
-    public boolean isFull() {
-        return false;
+    public void changeCapacity(int newCapacity) {
+        this.capacity = newCapacity;
     }
+
 }
