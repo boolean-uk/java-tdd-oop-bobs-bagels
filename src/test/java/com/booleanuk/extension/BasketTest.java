@@ -145,4 +145,15 @@ public class BasketTest {
 
         assertEquals(0, store.getBaskets().size());
     }
+
+    @Test
+    public void testGettingTotalPriceOfOrder() {
+        Store store = new Store();
+        Basket basket = new Basket();
+        store.addBasket(basket);
+        basket.addItem(new Bagel(BGLO));
+        basket.addItem(new Bagel(BGLO));
+
+        assertEquals(BigDecimal.valueOf(0.98), basket.getTotalPrice());
+    }
 }
