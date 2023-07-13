@@ -22,7 +22,24 @@ public class Inventory {
         put("FILH", new Product("FILH", 0.12d, "Filling", "Ham"));
     }};
 
+    private static final HashMap<String, Discount> discounts = new HashMap<>()
+    {{
+        put("BGLO", new Discount(6,2.49));
+        put("BGLP", new Discount(12,3.99));
+        put("BGLE", new Discount(6,2.49));
+    }};
     public static HashMap<String, Product> getProducts() {
         return products;
+    }
+
+    public static double getDiscount(String productSku, HashMap<String, Integer> basketProducts){
+        if(!discounts.containsKey(productSku))
+            return 0;
+
+        Discount discount = discounts.get(productSku);
+        int size = discount.getDiscountPackSize();
+        int discountPacks = basketProducts.get(productSku) / size;
+        basketProducts.put(productSku, basketProducts.get(productSku) - discountPacks * size);
+        return discountPacks * size * products.get(productSku).getPrice() - discountPacks * discount.getPackPriceAfterDiscount();
     }
 }

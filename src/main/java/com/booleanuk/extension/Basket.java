@@ -1,7 +1,5 @@
 package com.booleanuk.extension;
 
-import com.booleanuk.core.Inventory;
-
 import java.util.HashMap;
 
 public class Basket {
@@ -45,9 +43,13 @@ public class Basket {
 
     public double totalCost(){
         double cost = 0;
-        for (String bagelType : productsCount.keySet()) {
-            cost += productsCount.get(bagelType) * Inventory.getProducts()
-                    .get(bagelType)
+        HashMap<String, Integer> productsInBasket = new HashMap<>(productsCount);
+        for(String productType : productsInBasket.keySet()){
+            cost -= Inventory.getDiscount(productType,productsInBasket);
+        }
+        for (String productType : productsInBasket.keySet()) {
+            cost += productsCount.get(productType) * Inventory.getProducts()
+                    .get(productType)
                     .getPrice();
         }
         return cost;
