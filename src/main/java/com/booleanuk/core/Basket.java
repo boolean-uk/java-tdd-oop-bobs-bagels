@@ -31,10 +31,6 @@ public class Basket {
         return total;
     }
 
-    public ArrayList<Product> getList() {
-        return list;
-    }
-
     public int getCapacity() {
         return capacity;
     }
@@ -45,5 +41,9 @@ public class Basket {
         }
         this.capacity = capacity;
         return true;
+    }
+
+    public ArrayList<Product> getList() {
+        return list;
     }
 }

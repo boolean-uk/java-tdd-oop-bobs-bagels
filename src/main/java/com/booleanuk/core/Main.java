@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
-    private static ProductManager productManager = new ProductManager();
-    private static Scanner scanner = new Scanner(System.in);
+    private static final ProductManager PRODUCT_MANAGER = new ProductManager();
+    private static final Scanner SCANNER = new Scanner(System.in);
 
     public static void main(String[] args) {
         boolean running = true;
@@ -20,111 +20,106 @@ public class Main {
             System.out.println("F - Total cost");
             System.out.println("Q - Quit");
             System.out.print("Enter your choice: ");
-
-            String choice = scanner.nextLine().trim().toUpperCase();
+            String choice = SCANNER.nextLine().trim().toUpperCase();
+            System.out.println();
 
             switch (choice) {
-                case "A":
-                    displayBagle();
-                    break;
-                case "B":
-                    displayCoffee();
-                    break;
-                case "C":
-                    displayRemove();
-                    break;
-                case "D":
-                    displayCapacity();
-                    break;
-                case "E":
-                    displayBasket();
-                    break;
-                case "F":
-                    displayCost();
-                    break;
-                case "Q":
+                case "A" -> displayBagle();
+                case "B" -> displayCoffee();
+                case "C" -> displayRemove();
+                case "D" -> displayCapacity();
+                case "E" -> displayBasket();
+                case "F" -> displayCost();
+                case "Q" -> {
                     running = false;
                     System.out.println("Goodbye!");
-                    break;
-                default:
-                    System.out.println("Invalid choice. Please try again.");
-                    break;
+                }
+                default -> System.out.println("Invalid choice. Please try again.");
             }
             System.out.println();
         }
-        scanner.close();
+        SCANNER.close();
     }
 
     private static void displayCost() {
-        System.out.println("Total cost: " + productManager.getBasket().total() + " GBP");
+        System.out.println("===== TOTAL =====");
+        System.out.println("Total cost: " + PRODUCT_MANAGER.getTotal() + " GBP");
     }
 
     private static void displayBagle() {
-        for (String string : productManager.getInventory().keySet()) {
-            if (string.startsWith("B")) {
-                System.out.println(productManager.getInventory().get(string));
-            }
+        System.out.println("===== BAGLES =====");
+        for (String sku : PRODUCT_MANAGER.getInventory().keySet()) {
+            if (sku.startsWith("B"))
+                System.out.println(PRODUCT_MANAGER.getInventory().get(sku));
         }
-        System.out.println("\nType a bagle variant or Q for exit.");
-        String choice = scanner.nextLine().trim().toUpperCase();
-        switch (choice) {
-            case "A" -> {
-                boolean isAdd;
-                do {
+        System.out.print("\nType a filling variant or click ENTER to exit: ");
+        String choice = SCANNER.nextLine().trim();
+        if (choice.isEmpty()) {
+            System.out.println("Returning");
+            return;
+        }
+        String choiceFormatted = choice.substring(0, 1).toUpperCase() + choice.substring(1).toLowerCase();
+        if (!(PRODUCT_MANAGER.orderProduct(choiceFormatted))) {
+            return;
+        }
 
-                    System.out.println("Type the variant:");
-                    choice = scanner.nextLine().trim();
-                    // Dodac obsluge bledow
-                    isAdd = productManager.orderProduct(choice);
-                } while (!isAdd);
-                System.out.println("Do you want to add filling?");
-                System.out.println("Y/N");
-                choice = scanner.nextLine().trim().toUpperCase();
-                if ("Y".equals(choice)) {
-                    for (String sku : productManager.getInventory().keySet()) {
-                        if (sku.startsWith("F")) {
-                            System.out.println(productManager.getInventory().get(sku));
-                        }
-                    }
-                    do {
-                        System.out.println("Choose filling variant:");
-                        choice = scanner.nextLine().trim();
-                        productManager.orderProduct(choice);
-                        System.out.println("Want to add next filling?");
-                        System.out.println("Y/N");
-                        choice = scanner.nextLine().trim().toUpperCase();
-                    } while ("Y".equals(choice));
-                }
+        System.out.println("\n===== FILLINGS =====");
+        for (String sku : PRODUCT_MANAGER.getInventory().keySet()) {
+            if (sku.startsWith("F")) {
+                System.out.println(PRODUCT_MANAGER.getInventory().get(sku));
             }
-            case "Q" -> System.out.println("Returning to menu...");
         }
+        System.out.println("\nDo you fancy yourself a filling?");
+        System.out.print("Type a filling variant or click ENTER to exit: ");
+        choice = SCANNER.nextLine().trim();
+        if (choice.isEmpty()) {
+            System.out.println("Returning");
+            return;
+        }
+        choiceFormatted = choice.substring(0, 1).toUpperCase() + choice.substring(1).toLowerCase();
+        do {
+            PRODUCT_MANAGER.orderProduct(choiceFormatted);
+            System.out.println("\nWant to add another filling?");
+            System.out.print("Type a filling variant or click ENTER to exit: ");
+            choice = SCANNER.nextLine().trim();
+            if (choice.isEmpty()) {
+                System.out.println("Returning");
+                return;
+            }
+            choiceFormatted = choice.substring(0, 1).toUpperCase() + choice.substring(1).toLowerCase();
+            System.out.println(choiceFormatted);
+        } while (true);
     }
 
     private static void displayCoffee() {
-        for (String string : productManager.getInventory().keySet()) {
+        System.out.println("===== COFFEES =====");
+        for (String string : PRODUCT_MANAGER.getInventory().keySet()) {
             if (string.startsWith("C")) {
-                System.out.println(productManager.getInventory().get(string));
+                System.out.println(PRODUCT_MANAGER.getInventory().get(string));
             }
         }
-        System.out.println("Type the variant or Q for exit:");
-        String choice = scanner.nextLine().trim();
-        //todo Bug z wyjsciem
-        if (!(choice.equals("Q")) || !(choice.equals("q"))){
-            productManager.orderProduct(choice);
+        System.out.print("Type a coffee variant or click ENTER to exit: ");
+        String choice = SCANNER.nextLine().trim();
+        if (choice.isEmpty()) {
+            System.out.println("Returning");
+            return;
         }
+        String choiceFormatted = choice.substring(0, 1).toUpperCase() + choice.substring(1).toLowerCase();
+        PRODUCT_MANAGER.orderProduct(choiceFormatted);
     }
 
     private static void displayRemove() {
+        System.out.println("===== REMOVE =====");
         if (displayBasket()) {
             System.out.println("Which item index to remove?");
             int choice = -1;
             try {
-                choice = Integer.parseInt(scanner.nextLine().trim().toUpperCase());
+                choice = Integer.parseInt(SCANNER.nextLine().trim().toUpperCase());
             } catch (NumberFormatException ex) {
                 System.out.println("Index has not been passed");
             }
-            if (choice != -1 && choice < productManager.getBasket().getList().size() && choice >= 0) {
-                productManager.getBasket().getList().remove(choice);
+            if (choice != -1 && choice < PRODUCT_MANAGER.getItems().size() && choice >= 0) {
+                PRODUCT_MANAGER.getItems().remove(choice);
             } else {
                 System.out.println("Failed to remove the item.");
             }
@@ -132,22 +127,24 @@ public class Main {
     }
 
     private static void displayCapacity() {
+        System.out.println("===== CAPACITY =====");
         System.out.println("Type new basket capacity:");
         int choice = -1;
         try {
-            choice = Integer.parseInt(scanner.nextLine().trim().toUpperCase());
+            choice = Integer.parseInt(SCANNER.nextLine().trim().toUpperCase());
         } catch (NumberFormatException ex) {
             System.out.println("Capacity can not be changed");
         }
         if (choice != -1) {
-            productManager.changeBasketCapacity(choice);
+            PRODUCT_MANAGER.changeBasketCapacity(choice);
         } else {
             System.out.println("Failed to change the capacity");
         }
     }
 
     private static boolean displayBasket() {
-        ArrayList<Product> basket = productManager.getBasket().getList();
+        System.out.println("===== BASKET =====");
+        ArrayList<Product> basket = PRODUCT_MANAGER.getItems();
         if (basket.isEmpty()) {
             System.out.println("The basket is empty...");
             return false;

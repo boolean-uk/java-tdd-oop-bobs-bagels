@@ -3,8 +3,8 @@ package com.booleanuk.core;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Scanner;
 
 public class ProductManager {
     private static final HashMap<String, Product> INVENTORY = fillHashMapFromFile("src/main/java/com/booleanuk/core/data/inventory.txt");
@@ -12,6 +12,10 @@ public class ProductManager {
 
     public ProductManager() {
         basket = new Basket();
+    }
+
+    public HashMap<String, Product> getInventory() {
+        return INVENTORY;
     }
 
     public boolean orderProduct(String variant) {
@@ -38,20 +42,20 @@ public class ProductManager {
         return false;
     }
 
-    public HashMap<String, Product> getInventory() {
-        return INVENTORY;
-    }
-
-    public Basket getBasket() {
-        return basket;
-    }
-
     public void changeBasketCapacity(int capacity) {
         if (basket.setCapacity(capacity)) {
             System.out.println("Basket new capacity: " + basket.getCapacity());
         } else {
             System.out.println("Failed to change capacity");
         }
+    }
+
+    public ArrayList<Product> getItems() {
+        return basket.getList();
+    }
+
+    public double getTotal() {
+        return basket.total();
     }
 
     private static HashMap<String, Product> fillHashMapFromFile(String file) {
