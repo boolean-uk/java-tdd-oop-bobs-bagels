@@ -153,37 +153,6 @@ class BasketTest {
         assertEquals((COFFEE_PLUS_BAGEL + bagel.getPrice()) / 100.0, basket.getTotalCost());
     }
 
-//    @Test
-//    public void getTotalCostReturnsTotalCos() {
-//        basket.add(bagelWithoutFilling);
-//        basket.add(bagelWithoutFilling);
-//        basket.add(bagelWithoutFilling);
-//        basket.add(bagelWithoutFilling);
-//        basket.add(bagelWithoutFilling);
-//        basket.add(bagelWithoutFilling);
-//        assertEquals((SIX_BAGELS_PRICE) / 100.0, basket.getTotalCost());
-//
-//        basket.add(coffee);
-//        assertEquals((SIX_BAGELS_PRICE + coffee.getPrice()) / 100.0, basket.getTotalCost());
-//
-//        basket.add(bagel);
-//        basket.add(bagel);
-//        basket.add(bagel);
-//        basket.add(bagel);
-//        basket.add(bagel);
-//        basket.add(bagel);
-//        assertEquals((2 * SIX_BAGELS_PRICE + 6 * SINGLE_FILLING_PRICE + coffee.getPrice()) / 100.0, basket.getTotalCost());
-//
-//        basket.add(bagel);
-//        assertEquals((2 * SIX_BAGELS_PRICE + 7 * SINGLE_FILLING_PRICE + COFFEE_PLUS_BAGEL) / 100.0, basket.getTotalCost());
-//
-//        basket.add(coffee);
-//        basket.add(bagel);
-//        basket.add(bagel);
-//        assertEquals((2 * SIX_BAGELS_PRICE + 9 * SINGLE_FILLING_PRICE + 2 * COFFEE_PLUS_BAGEL + bagel.getPrice()) / 100.0, basket.getTotalCost());
-//
-//    }
-
     @Test
     public void getTotalCostReturnsTotalCostFor6BagelsSpecialOffer() {
         basket.add(bagelWithoutFilling);
@@ -319,6 +288,21 @@ class BasketTest {
         basket.clearBasket();
 
         assertEquals(0, basket.getTotalCost());
+    }
+
+    @Test
+    public void toStringPrintsReceipt() {
+        basket.add(bagel);
+        basket.add(bagel);
+        basket.add(bagel);
+        basket.add(bagel);
+        basket.add(bagel);
+        basket.add(bagel);
+        basket.add(bagel);
+        basket.add(bagelWithoutFilling);
+        basket.add(coffee);
+
+        assertEquals(basket.toString(), "");
     }
 }
 

@@ -37,6 +37,6 @@ public class Bagel extends Item {
 
     @Override
     public String toString() {
-        return bagelType + "with" + fillingType;
+        return bagelType + " with " + fillingType;
     }
 }
