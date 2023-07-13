@@ -122,13 +122,20 @@ I'd like to get some discount for buying multiple products.
 | Inventory                 | List\<String> itemSkus  | boolean containsItem(String sku)              | If item exists in inventory                                            | true                                |
 |                           |                         |                                               | If item does not exist in inventory                                    | false                               |
 
-### Extension 2.
+### Extensions 2. and 3.
 
 ```
 1.
 As a customer,
 So I can have order confirmation,
 I'd like to get a detailed receipt.
+```
+
+```
+2.
+As a customer,
+So I can know how much I saved,
+I'd like to see all discounts on my receipt.
 ```
 
 | Class   | Fields             | Methods               | Scenario | Output                  |
