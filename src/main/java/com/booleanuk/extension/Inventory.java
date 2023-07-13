@@ -23,29 +23,26 @@ public class Inventory {
         put("FILH", new Product("FILH", 12, "Filling", "Ham"));
     }};
 
-    private static final HashMap<String, Discount> discounts = new HashMap<>()
+    private static final HashMap<Integer, Integer> discounts = new HashMap<>()
     {{
-        put("BGLO", new Discount(6,249));
-        put("BGLP", new Discount(12,399));
-        put("BGLE", new Discount(6,249));
+        put(6,249);
+        put(12,399);
     }};
     public static HashMap<String, Product> getProducts() {
         return products;
     }
 
     public static int getDiscount(String productSku, HashMap<String, Integer> basketProducts){
-        if(!discounts.containsKey(productSku))
+        if(!productSku.startsWith("BGL"))
             return 0;
 
-        Discount discount = discounts.get(productSku);
-        int packSize = discount.getDiscountPackSize();
-        int discountPacks = basketProducts.get(productSku) / packSize;
-        int quantity = discountPacks * packSize;
+        int twelvePacks = basketProducts.get(productSku) / 12;
+        int discount = discountCounter(12, twelvePacks, productSku, basketProducts);
 
-        basketProducts.put(productSku, basketProducts.get(productSku) - quantity);
+        int sixPacks = basketProducts.get(productSku) / 6;
+        discount += discountCounter(6, sixPacks, productSku, basketProducts);
 
-        return quantity * products.get(productSku).getPrice()
-                - discountPacks * discount.getPackPriceAfterDiscount();
+        return discount;
     }
 
     public static int getCoffeeDiscount(String coffeeSKU, HashMap<String, Integer> basketProducts){
@@ -71,4 +68,12 @@ public class Inventory {
 
         return discount;
     }
+
+    private static int discountCounter(int packSize, int packCounter,String productSku, HashMap<String, Integer> basketProducts){
+        int quantity = packCounter * packSize;
+        basketProducts.put(productSku, basketProducts.get(productSku) - quantity);
+        return quantity * products.get(productSku).getPrice()
+                - packCounter * discounts.get(packSize);
+    }
+
 }

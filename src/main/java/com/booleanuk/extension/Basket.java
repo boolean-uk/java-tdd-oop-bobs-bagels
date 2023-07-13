@@ -3,6 +3,7 @@ package com.booleanuk.extension;
 import java.util.HashMap;
 
 public class Basket {
+
     private final HashMap<String, Integer> productsCount;
     private int capacity;
     private int currentAmountOfProducts;
@@ -69,6 +70,10 @@ public class Basket {
 
         return products.get(productVariant)
                 .getPrice();
+    }
+
+    public HashMap<String, Integer> getProductsCount() {
+        return productsCount;
     }
 }
 
