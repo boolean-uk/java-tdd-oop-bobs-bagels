@@ -263,181 +263,211 @@ public class BasketTest {
         Assertions.assertEquals("Basket is full", message);
     }
 
-//    @Test
-//    public void removeProductTest_ByProduct1_IfProductIsInBasket(){
-//        Basket basket = new Basket();
-//        Inventory inventory = new Inventory();
-//        Product product1 = inventory.getInventoryList().get(0);
-//        basket.addProduct(product1);
-//        String message = basket.removeProduct(product1);
-//
-//        Assertions.assertEquals("Product removed", message);
-//    }
-//
-//    @Test
-//    public void removeProductTest_ByProduct1_IfProductIsNotInBasket(){
-//        Basket basket = new Basket();
-//        Inventory inventory = new Inventory();
-//        Product product1 = inventory.getInventoryList().get(0);
-//        String message = basket.removeProduct(product1);
-//
-//        Assertions.assertEquals("Product is not in basket", message);
-//    }
-//
-//    @Test
-//    public void removeProductTest_ByProductQuantity_IfProductIsInBasketAndWeWantToRemoveMore(){
-//        Basket basket = new Basket();
-//        Inventory inventory = new Inventory();
-//        Product product1 = inventory.getInventoryList().get(0);
-//        basket.addProduct(product1);
-//        String message = basket.removeProduct(product1, 2);
-//
-//        Assertions.assertEquals("Quantity of this product is less than given", message);
-//    }
-//
-//
-//    @Test
-//    public void removeProductTest_ByProductQuantity_IfProductIsInBasket(){
-//        Basket basket = new Basket();
-//        Inventory inventory = new Inventory();
-//        Product product1 = inventory.getInventoryList().get(0);
-//        basket.addProduct(product1, 2);
-//        String message = basket.removeProduct(product1, 2);
-//
-//        Assertions.assertEquals("Product removed", message);
-//    }
-//
-//    @Test
-//    public void removeProductTest_ByProductQuantity_IfProductIsNotInBasket(){
-//        Basket basket = new Basket();
-//        Inventory inventory = new Inventory();
-//        Product product1 = inventory.getInventoryList().get(0);
-//        Product product2 = inventory.getInventoryList().get(1);
-//        basket.addProduct(product1);
-//        String message = basket.removeProduct(product2, 2);
-//
-//        Assertions.assertEquals("Product is not in the basket", message);
-//    }
-//
-//    @Test
-//    public void removeProductTest_BySku1_IfProductIsInBasket(){
-//        Basket basket = new Basket();
-//        Inventory inventory = new Inventory();
-//        Product product1 = inventory.getInventoryList().get(0);
-//        basket.addProduct(product1);
-//        String message = basket.removeProduct(product1.getSku());
-//
-//        Assertions.assertEquals("Product removed", message);
-//    }
-//
-//    @Test
-//    public void removeProductTest_ByProduct1_IfProductIsNotInBasket(){
-//        Basket basket = new Basket();
-//        Inventory inventory = new Inventory();
-//        Product product1 = inventory.getInventoryList().get(0);
-//        String message = basket.removeProduct(product1.getSku());
-//
-//        Assertions.assertEquals("Product is not in basket", message);
-//    }
-//
-//
-//    @Test
-//    public void removeProductTest_ByProductQuantity_IfProductIsInBasketAndWeWantToRemoveMore(){
-//        Basket basket = new Basket();
-//        Inventory inventory = new Inventory();
-//        Product product1 = inventory.getInventoryList().get(0);
-//        basket.addProduct(product1);
-//        String message = basket.removeProduct(product1.getSku(), 2);
-//
-//        Assertions.assertEquals("Quantity of this product is less than given", message);
-//    }
-//
-//
-//    @Test
-//    public void removeProductTest_ByProductQuantity_IfProductIsInBasket(){
-//        Basket basket = new Basket();
-//        Inventory inventory = new Inventory();
-//        Product product1 = inventory.getInventoryList().get(0);
-//        basket.addProduct(product1, 2);
-//        String message = basket.removeProduct(product1.getSku(), 2);
-//
-//        Assertions.assertEquals("Product removed", message);
-//    }
-//
-//    @Test
-//    public void removeProductTest_ByProductQuantity_IfProductIsNotInBasket(){
-//        Basket basket = new Basket();
-//        Inventory inventory = new Inventory();
-//        Product product1 = inventory.getInventoryList().get(0);
-//        Product product2 = inventory.getInventoryList().get(1);
-//        basket.addProduct(product1);
-//        String message = basket.removeProduct(product2.getSku(), 2);
-//
-//        Assertions.assertEquals("Product is not in the basket", message);
-//    }
-//
-//    @Test
-//    public void isOverfilledTest_IfBasketIsFull(){
-//        Basket basket = new Basket(1);
-//        Inventory inventory = new Inventory();
-//        Product product1 = inventory.getInventoryList().get(0);
-//        basket.addProduct(product1);
-//
-//        Assertions.assertTrue(basket.isOverfilled());
-//    }
-//
-//    @Test
-//    public void isOverfilledTest_IfBasketIsNotFull(){
-//        Basket basket = new Basket(2);
-//        Inventory inventory = new Inventory();
-//        Product product1 = inventory.getInventoryList().get(0);
-//        basket.addProduct(product1);
-//
-//        Assertions.assertFalse(basket.isOverfilled());
-//    }
-//
-//
-//    @Test
-//    public void changeCapacityTest_IfNewCapacityIsBiggerThanActual(){
-//        Basket basket = new Basket(2);
-//        String message = basket.changeCapacity(5);
-//
-//        Assertions.assertEquals("Capacity changed", message);
-//    }
-//
-//    @Test
-//    public void changeCapacityTest_IfNewCapacityIsSmallerThanActualAndProductsQuantityIsLess(){
-//        Basket basket = new Basket(10);
-//        Inventory inventory = new Inventory();
-//        Product product1 = inventory.getInventoryList().get(0);
-//        basket.addProduct(product1, 5);
-//        String message = basket.changeCapacity(7);
-//
-//        Assertions.assertEquals("Capacity changed", message);
-//    }
-//
-//    @Test
-//    public void changeCapacityTest_IfNewCapacityIsSmallerThanActualAndProductsQuantityIsMore(){
-//        Basket basket = new Basket(10);
-//        Inventory inventory = new Inventory();
-//        Product product1 = inventory.getInventoryList().get(0);
-//        basket.addProduct(product1, 5);
-//        String message = basket.changeCapacity(4);
-//
-//        Assertions.assertEquals("Capacity can not be changed", message);
-//    }
-//
-//
-//    @Test
-//    public void totalCostTest(){
-//        Basket basket = new Basket(10);
-//        Inventory inventory = new Inventory();
-//        Product product1 = inventory.getInventoryList().get(0);
-//        basket.addProduct(product1, 5);
-//        double result = basket.totalCost();
-//
-//        Assertions.assertEquals(product1.getPrice()*5, result);
-//    }
-//
-//
+    //-------------------------------------------
+    @Test
+    public void removeProductTest_ByProduct1_IfProductIsInBasket(){
+        Basket basket = new Basket();
+        Inventory inventory = new Inventory();
+        Product product1 = inventory.getInventoryList().get(0);
+        basket.addProduct(product1);
+        String message = basket.removeProduct(product1);
+
+        Assertions.assertEquals("Product removed", message);
+    }
+
+    @Test
+    public void removeProductTest_ByProduct1_IfProductIsNotInBasket(){
+        Basket basket = new Basket();
+        Inventory inventory = new Inventory();
+        Product product1 = inventory.getInventoryList().get(0);
+        basket.addProduct(product1);
+        Product product2 = inventory.getInventoryList().get(1);
+        String message = basket.removeProduct(product2);
+
+        Assertions.assertEquals("Product is not in the basket", message);
+    }
+
+    @Test
+    public void removeProductTest_ByProduct1_IfProductIsNotInInventory(){
+        Basket basket = new Basket();
+        Product product = new Bagel("BO", 0.49, "Bagel", "Cheeseee");
+        String message = basket.removeProduct(product);
+
+        Assertions.assertEquals("Product is not in inventory", message);
+    }
+
+    @Test
+    public void removeProductTest_ByProductQuantity_IfProductIsInBasketAndWeWantToRemoveMore(){
+        Basket basket = new Basket();
+        Inventory inventory = new Inventory();
+        Product product1 = inventory.getInventoryList().get(0);
+        basket.addProduct(product1);
+        String message = basket.removeProduct(product1, 2);
+
+        Assertions.assertEquals("Quantity of this product is less than given", message);
+    }
+
+
+    @Test
+    public void removeProductTest_ByProductQuantity_IfProductIsInBasketAndProductIsNotCompletelyRemoved(){
+        Basket basket = new Basket();
+        Inventory inventory = new Inventory();
+        Product product1 = inventory.getInventoryList().get(0);
+        basket.addProduct(product1, 2);
+        String message = basket.removeProduct(product1, 1);
+
+        Assertions.assertEquals("Products removed", message);
+    }
+
+    @Test
+    public void removeProductTest_ByProductQuantity_IfProductIsInBasket(){
+        Basket basket = new Basket();
+        Inventory inventory = new Inventory();
+        Product product1 = inventory.getInventoryList().get(0);
+        basket.addProduct(product1, 2);
+        String message = basket.removeProduct(product1, 2);
+
+        Assertions.assertEquals("Products removed", message);
+    }
+
+    @Test
+    public void removeProductTest_ByProductQuantity_IfProductIsNotInBasket(){
+        Basket basket = new Basket();
+        Inventory inventory = new Inventory();
+        Product product1 = inventory.getInventoryList().get(0);
+        Product product2 = inventory.getInventoryList().get(1);
+        basket.addProduct(product1);
+        String message = basket.removeProduct(product2, 2);
+
+        Assertions.assertEquals("Product is not in the basket", message);
+    }
+
+    @Test
+    public void removeProductTest_BySku1_IfProductIsInBasket(){
+        Basket basket = new Basket();
+        Inventory inventory = new Inventory();
+        Product product1 = inventory.getInventoryList().get(0);
+        basket.addProduct(product1);
+        String message = basket.removeProduct(product1.getSku());
+
+        Assertions.assertEquals("Product removed", message);
+    }
+
+    @Test
+    public void removeProductTest_BySku1_IfProductIsNotInBasket(){
+        Basket basket = new Basket();
+        Inventory inventory = new Inventory();
+        Product product1 = inventory.getInventoryList().get(0);
+        String message = basket.removeProduct(product1.getSku());
+
+        Assertions.assertEquals("Product is not in the basket", message);
+    }
+
+
+    @Test
+    public void removeProductTest_BySkuQuantity_IfProductIsInBasketAndWeWantToRemoveMore(){
+        Basket basket = new Basket();
+        Inventory inventory = new Inventory();
+        Product product1 = inventory.getInventoryList().get(0);
+        basket.addProduct(product1);
+        String message = basket.removeProduct(product1.getSku(), 2);
+
+        Assertions.assertEquals("Quantity of this product is less than given", message);
+    }
+
+
+    @Test
+    public void removeProductTest_BySkuQuantity_IfProductIsInBasket(){
+        Basket basket = new Basket();
+        Inventory inventory = new Inventory();
+        Product product1 = inventory.getInventoryList().get(0);
+        basket.addProduct(product1, 2);
+        String message = basket.removeProduct(product1.getSku(), 2);
+
+        Assertions.assertEquals("Products removed", message);
+    }
+
+    @Test
+    public void removeProductTest_BySkuQuantity_IfProductIsNotInBasket(){
+        Basket basket = new Basket();
+        Inventory inventory = new Inventory();
+        Product product1 = inventory.getInventoryList().get(0);
+        Product product2 = inventory.getInventoryList().get(1);
+        basket.addProduct(product1);
+        String message = basket.removeProduct(product2.getSku(), 2);
+
+        Assertions.assertEquals("Product is not in the basket", message);
+    }
+
+    @Test
+    public void isOverfilledTest_IfBasketIsFull(){
+        Basket basket = new Basket(1);
+        Inventory inventory = new Inventory();
+        Product product1 = inventory.getInventoryList().get(0);
+        String message = basket.addProduct(product1, 3);
+
+        Assertions.assertEquals("Basket is full", message);
+    }
+
+    @Test
+    public void isOverfilledTest_IfBasketIsNotFull(){
+        Basket basket = new Basket(2);
+        Inventory inventory = new Inventory();
+        Product product1 = inventory.getInventoryList().get(0);
+        basket.addProduct(product1);
+
+        Assertions.assertFalse(basket.isOverfilled());
+    }
+
+
+    @Test
+    public void changeCapacityTest_IfNewCapacityIsBiggerThanActual(){
+        Basket basket = new Basket(2);
+        String message = basket.changeCapacity(5);
+
+        Assertions.assertEquals("Capacity changed", message);
+    }
+
+    @Test
+    public void changeCapacityTest_IfNewCapacityIsSmallerThanActualAndProductsQuantityIsLess(){
+        Basket basket = new Basket(10);
+        Inventory inventory = new Inventory();
+        Product product1 = inventory.getInventoryList().get(0);
+        basket.addProduct(product1, 5);
+        String message = basket.changeCapacity(7);
+
+        Assertions.assertEquals("Capacity changed", message);
+    }
+
+    @Test
+    public void changeCapacityTest_IfNewCapacityIsSmallerThanActualAndProductsQuantityIsMore(){
+        Basket basket = new Basket(10);
+        Inventory inventory = new Inventory();
+        Product product1 = inventory.getInventoryList().get(0);
+        basket.addProduct(product1, 5);
+        String message = basket.changeCapacity(4);
+
+        Assertions.assertEquals("Capacity can not be changed", message);
+    }
+
+    @Test
+    public void changeCapacityTest_IfNewCapacityIsEqualToActual(){
+        Basket basket = new Basket(4);
+        String message = basket.changeCapacity(4);
+
+        Assertions.assertEquals("Nothing to change", message);
+    }
+
+    @Test
+    public void totalCostTest(){
+        Basket basket = new Basket(10);
+        Inventory inventory = new Inventory();
+        Product product1 = inventory.getInventoryList().get(0);
+        basket.addProduct(product1, 5);
+        double result = basket.totalCost();
+
+        Assertions.assertEquals(product1.getPrice()*5, result);
+    }
+
+
 }

@@ -1,9 +1,6 @@
 package com.booleanuk.core;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class Basket {
@@ -43,7 +40,6 @@ public class Basket {
                         .toList();
                 if (products.isEmpty()) return "There is no empty bagel to add filling";
                 else {
-                    System.out.println(products);
                     for (Product p : products) {
                         Bagel bagel;
                         if (p.getClass().equals(Bagel.class)) bagel = (Bagel) p;
@@ -136,8 +132,83 @@ public class Basket {
     }
 
     public boolean isOverfilled() {
-        return productsQuantity > capacity;
+        return productsQuantity >= capacity;
     }
 
 
+    public String removeProduct(Product product) {
+        if (inventory.checkIfProductInInventory(product)) {
+            Optional<Product> productToRemove = basketList.keySet().stream().
+                    filter(integer -> (integer.getSku().equals(product.getSku())
+                            && integer.getName().equals(product.getName())
+                            && integer.getVariant().equals(product.getVariant())
+                            && integer.getPrice() == product.getPrice())).findAny();
+            if(productToRemove.isPresent()){
+                productsQuantity-=basketList.get(productToRemove.get());
+                basketList.remove(productToRemove.get());
+                return "Product removed";
+            }
+            else { return "Product is not in the basket"; }
+        }
+        else return "Product is not in inventory";
+    }
+
+    public String removeProduct(Product product, int quantity) {
+        if (inventory.checkIfProductInInventory(product)) {
+            Optional<Product> productToRemove = basketList.keySet().stream().
+                    filter(integer -> (integer.getSku().equals(product.getSku())
+                            && integer.getName().equals(product.getName())
+                            && integer.getVariant().equals(product.getVariant())
+                            && integer.getPrice() == product.getPrice())).findAny();
+            if(productToRemove.isPresent()){
+                if(basketList.get(productToRemove.get()) < quantity){
+                    return "Quantity of this product is less than given";
+                }else if(basketList.get(productToRemove.get()) == quantity){
+                    productsQuantity-=quantity;
+                    basketList.remove(productToRemove.get());
+                    return "Products removed";
+                }else {
+                    productsQuantity-=quantity;
+                    basketList.replace(productToRemove.get(), quantity);
+                    return "Products removed";
+                }
+            }
+            else { return "Product is not in the basket"; }
+        }
+        else return "Product is not in inventory";
+    }
+
+    public String removeProduct(String sku) {
+        Product product = inventory.getProductBySKU(sku);
+        if (product != null) {
+            return this.removeProduct(product);
+        } else return "Product is not in inventory";
+    }
+
+    public String removeProduct(String sku, int quantity) {
+        Product product = inventory.getProductBySKU(sku);
+        if (product != null) {
+            return this.removeProduct(product, quantity);
+        } else return "Product is not in inventory";
+    }
+
+    public String changeCapacity(int newCapacity) {
+        if(this.capacity < newCapacity){
+            this.capacity = newCapacity;
+            return "Capacity changed";
+        } else if (this.capacity > newCapacity) {
+            if(this.productsQuantity <= newCapacity){
+                this.capacity = newCapacity;
+                return "Capacity changed";
+            }else { return "Capacity can not be changed"; }
+        } else return "Nothing to change";
+    }
+
+    public double totalCost() {
+        double totalCost = 0.00;
+        for(Map.Entry<Product,Integer> entry : basketList.entrySet()){
+            totalCost += entry.getValue()*entry.getKey().getPrice();
+        }
+        return totalCost;
+    }
 }
