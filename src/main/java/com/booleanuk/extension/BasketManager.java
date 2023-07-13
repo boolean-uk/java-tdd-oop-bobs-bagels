@@ -48,14 +48,27 @@ public class BasketManager {
         }
     }
 
-    public void remove(BagelExt bagelExt) {
-        basketExt.remove(bagelExt);
+    public boolean remove(BagelExt bagelExt) {
+        if(checkSanity(bagelExt)) {
+            basketExt.remove(bagelExt);
+            return true;
+            }
+        return false;
     }
-    public void remove(FillingExt fillingExt) {
-        basketExt.remove(fillingExt);
+    public boolean remove(FillingExt fillingExt) {
+        if(checkSanity(fillingExt)) {
+
+            basketExt.remove(fillingExt);
+            return true;
+            }
+        return false;
     }
-    public void remove(CoffeeExt coffeeExt) {
-        basketExt.remove(coffeeExt);
+    public boolean remove(CoffeeExt coffeeExt) {
+        if(checkSanity(coffeeExt)) {
+            basketExt.remove(coffeeExt);
+            return true;
+        }
+        return false;
     }
 
     private boolean checkIsBasketFull(){
