@@ -19,9 +19,6 @@ public class Bagel extends Product {
         return sum;
     }
 
-    public BigDecimal getBagelPrice() {
-        return this.getPrice().subtract(getFillingsPrice());
-    }
 
     private BigDecimal getFillingsPrice() {
         BigDecimal sum = BigDecimal.ZERO;
