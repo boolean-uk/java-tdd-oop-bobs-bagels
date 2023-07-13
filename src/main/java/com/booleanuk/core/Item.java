@@ -1,20 +1,21 @@
 package com.booleanuk.core;
 
+import java.math.BigDecimal;
 import java.util.Objects;
 
 public abstract class Item {
     protected String SKU;
     protected String name;
-    protected Double price;
+    protected BigDecimal price;
     protected String variant;
 
-    public Item(String SKU, String name, Double price, String variant) {
+    public Item(String SKU, String name, BigDecimal price, String variant) {
         this.SKU = SKU;
         this.name = name;
         this.price = price;
         this.variant = variant;
     }
-    public Double getPrice() {
+    public BigDecimal getPrice() {
         return this.price;
     }
 
@@ -24,6 +25,9 @@ public abstract class Item {
 
     public String getVariant() {
         return variant;
+    }
+    public String getSKU() {
+        return this.SKU;
     }
 
     @Override

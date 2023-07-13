@@ -1,6 +1,5 @@
 package com.booleanuk.core;
 
-import com.booleanuk.extension.Receipt;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -9,7 +8,6 @@ import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.math.BigDecimal;
 import java.util.Optional;
-import java.util.stream.IntStream;
 
 public class BasketTest {
     private static Basket basket;
