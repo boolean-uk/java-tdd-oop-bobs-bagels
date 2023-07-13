@@ -9,14 +9,15 @@ public class BasketTest {
     @Test
     public void shouldCreateBasketWithEmptyList() {
         Basket basket = new Basket();
+
         Assertions.assertEquals(0, basket.getProductsAmount());
     }
 
     @Test
     public void shouldCreateBasketWithGivenCapacity() {
         Basket basket = new Basket(5);
+
         Assertions.assertEquals(5, basket.getCapacity());
-        //add getter to basket
     }
 
     @Test
@@ -24,8 +25,8 @@ public class BasketTest {
         Basket basket = new Basket(2);
         Bagel bagel = new Bagel("SKU1", 0.55);
         basket.addProduct(bagel);
+
         Assertions.assertEquals(bagel, basket.getProducts().get(0));
-        //add getProducts to basket
     }
 
     @Test
@@ -33,8 +34,10 @@ public class BasketTest {
         Bagel bagel = new Bagel("SKU1", 0.55);
         Bagel bagel1 = new Bagel("SKU1", 0.55);
         Basket basket = new Basket(3);
+
         basket.addProduct(bagel);
         basket.addProduct(bagel1);
+
         Assertions.assertEquals(2, basket.getProductsAmount());
     }
 
@@ -42,45 +45,55 @@ public class BasketTest {
     public void shouldRemoveProductFromBasket() {
         Basket basket = new Basket(2);
         Bagel bagel = new Bagel("SKU1", 0.55);
+
         basket.addProduct(bagel);
         basket.removeProduct(bagel);
+
         Assertions.assertEquals(0, basket.getProductsAmount());
     }
 
     @Test
-    public void productInBasketReturnsTrue() {
+    public void shouldReturnTrueWhenSuccessfulAddedProduct() {
         Basket basket = new Basket(1);
         Bagel bagel = new Bagel("SKU1", 0.55);
+
         basket.addProduct(bagel);
+
         Assertions.assertTrue(basket.isProductInBasket(bagel));
     }
 
     @Test
-    public void productNotInBasketReturnsFalse() {
+    public void shouldReturnFalseWhenProductIsNotInBasket() {
         Basket basket = new Basket(1);
         Bagel bagel = new Bagel("SKU1", 0.55);
+
         Assertions.assertFalse(basket.isProductInBasket(bagel));
     }
 
     @Test
-    public void returnsTrueBasketIsFull() {
+    public void shouldReturnTrueWhenBasketIsFull() {
         Basket basket = new Basket(1);
         Bagel bagel = new Bagel("SKU1", 0.55);
+
         basket.addProduct(bagel);
+
         Assertions.assertFalse(basket.isFull());
     }
 
     @Test
-    public void returnsFalseBasketIsNotFull() {
+    public void shouldReturnFalseWhenBasketIsNotFull() {
         Basket basket = new Basket(1);
+
         Assertions.assertFalse(basket.isFull());
     }
 
     @Test
-    public void shouldSummarizeBasketProperlySumIs055() {
+    public void shouldCalculateTotalPriceOfAllProductsInBasket() {
         Basket basket = new Basket(1);
         Bagel bagel = new Bagel("SKU1", 0.55);
+
         basket.addProduct(bagel);
+
         Assertions.assertEquals(0.55, basket.summarizeBasket());
     }
 }

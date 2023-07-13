@@ -10,41 +10,44 @@ public class UserTest {
     @Test
     public void shouldCreateCustomerProperly() {
         String fullName = "fullname";
-        Customer customer1 = new Customer(fullName);
-        Assertions.assertEquals(fullName, customer1.getFullName());
+        Customer customer = new Customer(fullName);
+
+        Assertions.assertEquals(fullName, customer.getFullName());
     }
 
     @Test
     public void shouldNewCustomerBasketBeEmpty() {
         String fullName = "fullname";
-        Customer customer1 = new Customer(fullName);
-        Assertions.assertEquals(0, customer1.getBasket().getProductsAmount());
+        Customer customer = new Customer(fullName);
+
+        Assertions.assertEquals(0, customer.getBasket().getProductsAmount());
     }
 
     @Test
     public void shouldCreateManagerProperly() {
         String fullName = "fullname";
-        Manager manager1 = new Manager(fullName);
-        Assertions.assertEquals(fullName, manager1.getFullName());
+        Manager manager = new Manager(fullName);
+
+        Assertions.assertEquals(fullName, manager.getFullName());
     }
 
     @Test
     public void shouldManagerChangeTheBasketCapacity() {
         Basket basket = new Basket();
         String fullName = "Fullname";
-        Manager manager1 = new Manager(fullName);
+        Manager manager = new Manager(fullName);
+
         Assertions.assertNotEquals(12, basket.getCapacity());
-        manager1.changeBasketSize(basket, 12);
+
+        manager.changeBasketSize(basket, 12);
         Assertions.assertEquals(12, basket.getCapacity());
-        //add getter to Basket
     }
 
     @Test
     public void shouldCustomerCheckThePrice() {
         Bagel bagel = new Bagel("BGLO", 0.25);
-        Customer customer1 = new Customer("fullname");
-        Assertions.assertEquals(bagel.getPrice(), customer1.checkProductPrice(bagel));
+        Customer customer = new Customer("fullname");
+
+        Assertions.assertEquals(bagel.getPrice(), customer.checkProductPrice(bagel));
     }
-
-
 }
