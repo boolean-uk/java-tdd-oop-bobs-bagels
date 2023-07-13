@@ -78,4 +78,44 @@ public class InventoryTest {
 
         Assertions.assertEquals(price, 0.0);
     }
+
+    @Test
+    public void getPriceByProductTest_IfProductExists() {
+        Product product1 = new Product("BGLO", 0.49, "Bagel", "Onion");
+        double price = inventory.getPriceByProduct(product1);
+
+        Assertions.assertEquals(price, 0.49);
+    }
+
+    @Test
+    public void getPriceByProductTest_IfProductDoesNotExist() {
+        Product product1 = new Product("B", 0.49, "B", "Onion");
+        double price = inventory.getPriceByProduct(product1);
+
+        Assertions.assertEquals(price, 0.0);
+    }
+
+    @Test
+    public void checkIfProductInInventoryTest_IfProductInInventory() {
+        Product product1 = new Product("BGLO", 0.49, "Bagel", "Onion");
+
+        Assertions.assertTrue(inventory.checkIfProductInInventory(product1));
+    }
+
+    @Test
+    public void checkIfProductInInventoryTest_IfProductNotInInventory() {
+        Product product1 = new Product("B", 0.49, "B", "Onion");
+
+        Assertions.assertFalse(inventory.checkIfProductInInventory(product1));
+    }
+
+    @Test
+    public void checkIfProductInInventoryTest_BySku_IfProductInInventory() {
+        Assertions.assertTrue(inventory.checkIfProductInInventory("BGLO"));
+    }
+
+    @Test
+    public void checkIfProductInInventoryTest_BySku_IfProductNotInInventory() {
+        Assertions.assertFalse(inventory.checkIfProductInInventory("B"));
+    }
 }

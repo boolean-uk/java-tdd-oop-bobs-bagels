@@ -26,6 +26,10 @@
 |           |                             |                                                         | if sku does not exist            | 0.00    |
 |           |                             | getPriceByNameAndVariant(String name, String variant)   | if name and variant exists       | double  |
 |           |                             |                                                         | if name and variant do not exist | 0.00    |
+|           |                             | getPrice(Product product)                               | if product exists                | double  |
+|           |                             |                                                         | if product does not exist        | 0.00    |
+|           |                             | checkIfProductInInventory(Product product)              | if product in inventory          | true    |
+|           |                             | checkIfProductInInventory(String sku)                   | if product not in inventory      | false   |
 
 | Classes | Members                              | Methods                                         | Scenario                                                                                               | Outputs |
 |---------|--------------------------------------|-------------------------------------------------|--------------------------------------------------------------------------------------------------------|---------|
@@ -48,7 +52,3 @@
 |         |                                      |                                                 | if new capacity is smaller than previous check if quantity of products <= new capacity                 | String  |
 |         |                                      |                                                 | if new capacity is smaller than previous check if quantity of products > new capacity and don't change | String  |
 |         |                                      | totalCost()                                     | count cost of whole basket                                                                             | double  |
-|         |                                      | checkPrice(Product product)                     | check price of given product                                                                           | double  |
-|         |                                      | checkPrice(String sku)                          |                                                                                                        |         |
-|         |                                      | checkIfProductInInventory(Product product)      | if product in inventory                                                                                | true    |
-|         |                                      | checkIfProductInInventory(String sku)           | if product not in inventory                                                                            | false   |
