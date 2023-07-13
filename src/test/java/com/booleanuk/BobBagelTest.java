@@ -49,7 +49,6 @@ public class BobBagelTest {
         //when
         Basket basket = new Basket();
         Bagel bagel = new Bagel("Onion Bagel", 1,"BGLO", BagelVariant.ONION);
-        Bagel bagel1 = new Bagel("Plain Bagel", 2,"BGLO",BagelVariant.ONION);
         int quantity = 3;
         Filling filling = new Filling("Bacon",0.5,"FILB", FillingVariant.BACON);
         //given
@@ -65,6 +64,7 @@ public class BobBagelTest {
     public void shouldReturnTotalBasketCost(){
         //when
         Basket basket = new Basket();
+        basket.setCapacity(20);
         Bagel bagel = new Bagel("Onion Bagel", 1,"BGLO", BagelVariant.ONION);
         Bagel bagel1 = new Bagel("Plain Bagel", 2,"BGLO",BagelVariant.ONION);
         int quantity = 3;
@@ -76,6 +76,20 @@ public class BobBagelTest {
 
         //then
         assertEquals(15,totalCost);
+    }
+
+    @Test
+    public void  shouldReturn5afterAddingTooManyBagels(){
+        Basket basket = new Basket();
+        Bagel bagel = new Bagel("Onion Bagel", 1,"BGLO", BagelVariant.ONION);
+        Bagel bagel1 = new Bagel("Plain Bagel", 2,"BGLO",BagelVariant.ONION);
+        int quantity = 5;
+        //given
+        basket.add(bagel,quantity);
+        basket.add(bagel1, quantity*2);
+        double totalCost = basket.getTotalCost();
+        //then
+        assertEquals(5,totalCost);
     }
 
 

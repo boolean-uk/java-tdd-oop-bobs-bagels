@@ -15,10 +15,16 @@ public class Basket {
         return basket;
     }
 
-    public void add(Product product, int quantity) {
-        int productsInBasket = 0;
+    public boolean add(Product product, int quantity) {
+        int freeSpace = capacity - productsInBasket();
+        if (freeSpace < quantity) {
+            System.out.println("Your basket does not have capacity!");
+            return false;
+        }
 
-        basket.put(product,quantity);
+
+        basket.put(product, quantity);
+        return true;
     }
 
     public boolean removeProduct(Product product, int quantity) {
@@ -52,7 +58,7 @@ public class Basket {
         for (Product product :
                basket.keySet()) {
             if(basket.containsKey(product)) {
-                totalCost = totalCost + product.getPrice() * basket.get(product);
+                totalCost = totalCost + (product.getPrice() * basket.get(product));
             }
         }
 
