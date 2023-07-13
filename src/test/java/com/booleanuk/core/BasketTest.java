@@ -230,6 +230,6 @@ public class BasketTest {
         String result = basket.getReceipt();
 
         //Then
-        Assertions.assertEquals(result, expected);
+        Assertions.assertEquals(expected.toString(), result);
     }
 }
