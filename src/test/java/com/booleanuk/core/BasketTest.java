@@ -11,6 +11,7 @@ public class BasketTest {
         Assertions.assertFalse(basket.add("Everything", 8));
         Assertions.assertFalse(basket.add("Plastic", 3));
         Assertions.assertFalse(basket.add("Plain", 0));
+        Assertions.assertTrue(basket.add("Egg", 1));
     }
 
     @Test
@@ -48,6 +49,7 @@ public class BasketTest {
     public void checkCostOfProducts(){
         Basket basket = new Basket(10);
         Assertions.assertEquals(0.39, basket.checkCostOfProduct("Plain"));
+        Assertions.assertEquals(0.12, basket.checkCostOfProduct("Egg"));
         Assertions.assertEquals(0.0, basket.checkCostOfProduct("Pizza"));
     }
 
