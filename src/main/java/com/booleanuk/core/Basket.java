@@ -14,10 +14,23 @@ public class Basket {
     }
 
     public boolean add(String productVariant, int amount){
+        if (amount <= 0 || amount + currentAmountOfProducts > capacity || !Inventory.getProducts().containsKey(productVariant))
+            return false;
+        if (productsCount.containsKey(productVariant))
+            productsCount.put(productVariant, productsCount.get(productVariant) + amount);
+        else
+            productsCount.put(productVariant, amount);
+        currentAmountOfProducts += amount;
         return true;
     }
 
     public boolean remove(String productVariant, int amount){
+        if (amount <= 0 || !productsCount.containsKey(productVariant) || productsCount.get(productVariant) < amount)
+            return false;
+        productsCount.put(productVariant, productsCount.get(productVariant) - amount);
+        if (productsCount.get(productVariant) == 0)
+            productsCount.remove(productVariant);
+        currentAmountOfProducts -= amount;
         return true;
     }
 

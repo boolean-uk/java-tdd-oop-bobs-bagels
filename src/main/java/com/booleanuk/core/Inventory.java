@@ -3,14 +3,10 @@ package com.booleanuk.core;
 import java.util.HashMap;
 
 public class Inventory {
-    private HashMap<String, Product> products;
+    private static HashMap<String, Product> products;
 
-    public Inventory(){
-        products = new HashMap<String, Product>();
-        populateInventory();
+    public static HashMap<String, Product> getProducts() {
+        return products;
     }
 
-    private void populateInventory() {
-
-    }
 }
