@@ -44,7 +44,7 @@ public class Inventory {
         } return 0.0;
     }
 
-    public String getItemBySku(String sku){
+    public static String getItemBySku(String sku){
         for (InventoryItem i : inventoryItemList) {
             if (sku.equals(i.sku)) {
                 return i.toString();
