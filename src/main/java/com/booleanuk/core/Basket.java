@@ -1,16 +1,19 @@
 package com.booleanuk.core;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class Basket {
-    private final HashMap<Product, Integer> products;
+    private final LinkedHashMap<Product, Integer> products;
     private final Inventory inventory;
     private int basketCapacity;
     private int basketQuantity;
 
     public Basket(Inventory inventory, int quantity) {
-        this.products = new HashMap<>();
+        this.products = new LinkedHashMap<>();
         this.inventory = inventory;
         this.basketCapacity = quantity;
     }
@@ -69,17 +72,51 @@ public class Basket {
         float totalCost = 0;
 
         for(Map.Entry<Product, Integer> product : products.entrySet()){
-            int specialOfferQuantity = product.getKey().getSpecialOfferQuantity();
-            float specialOfferPrice = product.getKey().getSpecialOfferPrice();
-
-            int productQuantity = product.getValue();
-            if(specialOfferQuantity > 0 && specialOfferQuantity <= productQuantity) {
-                totalCost += (productQuantity / specialOfferQuantity) * specialOfferPrice;
-                productQuantity -= (productQuantity / specialOfferQuantity) * specialOfferQuantity;
-            }
-            totalCost += product.getKey().getPrice() * productQuantity;
+            totalCost += getPartialCost(product.getKey(), product.getValue());
         }
 
         return totalCost;
     }
+
+    private float getPartialCost(Product product, int quantity) {
+        float partialCost = 0;
+
+        int specialOfferQuantity = product.getSpecialOfferQuantity();
+        float specialOfferPrice = product.getSpecialOfferPrice();
+
+        if(specialOfferQuantity > 0 && specialOfferQuantity <= quantity) {
+            partialCost += (quantity / specialOfferQuantity) * specialOfferPrice;
+            quantity -= (quantity / specialOfferQuantity) * specialOfferQuantity;
+        }
+
+        partialCost += product.getPrice() * quantity;
+
+        return partialCost;
+    }
+
+    public String getReceipt() {
+        LocalDateTime ldt = LocalDateTime.now();
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("    ~~~ Bob's Bagels ~~~    \n\n")
+                .append("    " + ldt.format(DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss")) + "   \n\n")
+                .append("-".repeat(28) + "\n\n");
+
+        for(Map.Entry<Product, Integer> product : products.entrySet()){
+            String bagelName = product.getKey().getName();
+            String bagelVariant = product.getKey().getVariant();
+            int bagelQuantity = product.getValue();
+            float bagelPrice = getPartialCost(product.getKey(), bagelQuantity);
+
+            stringBuilder.append(rightpad(bagelVariant + " " + bagelName, 18) + rightpad(String.valueOf(bagelQuantity), 4)  + "£" + bagelPrice + "\n");
+        }
+
+        stringBuilder.append("\n" + "-".repeat(28) + "\n\n")
+                .append("Total                £" + getTotalCost() + "\n\n")
+                .append("        Thank you\n")
+                .append("      for your order! \n\n");
+
+        return stringBuilder.toString();
+    }
+
+    private String rightpad(String text, int length) { return String.format("%-" + length + "." + length + "s", text); }
 }

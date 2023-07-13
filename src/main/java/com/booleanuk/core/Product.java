@@ -37,4 +37,12 @@ public class Product {
     public float getSpecialOfferPrice() {
         return specialOfferPrice;
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getVariant() {
+        return variant;
+    }
 }
