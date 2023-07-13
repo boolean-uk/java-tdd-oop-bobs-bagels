@@ -1,7 +1,5 @@
 package com.booleanuk.extension;
 
-import com.booleanuk.core.Bagel;
-import com.booleanuk.core.Filling;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -16,8 +14,8 @@ public class BagelTest {
 
     @BeforeEach
     void beforeEach() {
-        bagel = new Bagel(BigDecimal.valueOf(12),"variantBagel");
-        filling = new Filling(BigDecimal.valueOf(3), "variantFilling");
+        bagel = new Bagel("BV", BigDecimal.valueOf(12),"variantBagel");
+        filling = new Filling("FV", BigDecimal.valueOf(3), "variantFilling");
     }
 
     @Test
