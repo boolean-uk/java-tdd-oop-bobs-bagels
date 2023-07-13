@@ -1,10 +1,9 @@
 package com.booleanuk.extension;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class BobBagelsExtensionTest {
 
@@ -66,6 +65,7 @@ public class BobBagelsExtensionTest {
         assertTrue(basketExt.getCoffeesInBasket().contains(coffeeB));
     }
 
+    @Test
     public void shouldAddFillingToBasket(){
         //when
         basketManager.add(fillingB);
