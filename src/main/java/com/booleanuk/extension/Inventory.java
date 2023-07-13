@@ -1,4 +1,4 @@
 package com.booleanuk.extension;
 
-public class Recipt {
+public class Inventory {
 }
