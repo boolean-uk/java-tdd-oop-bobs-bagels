@@ -1,6 +1,7 @@
 | Class Name | `Basket`                                                                                               | `Product`                                                                  | `Bagle`                                                                     | `Coffee`                |
 |------------|:-------------------------------------------------------------------------------------------------------|:---------------------------------------------------------------------------|:----------------------------------------------------------------------------|:------------------------|
 | Variables  | int `DEFAULT_CAPACITY`<br/>int `basketCapacity`<br/>                                                   | BigDecimal `price`<br/>                                                    | BagleType `bagleType`<br/> ArrayList<FillingType> bagleFillingList          | CoffeeType `coffeeType` |
+<<<<<<< HEAD
 | Methods    | `addProduct(Product product)`<br/>`removeProduct(Product product)`<br/>`changeBasketSize(int newSize)` | `addToPrice(BigDecimal addToPrice)`<br/>`addToPrice(BigDecimal addToPrice` | addFilling(FillingType fillingType)<br/>countTotalPrice()<br/>updatePrice() | updatePrice()           |
 
 
@@ -46,3 +47,6 @@
     }
 }
 ```
+=======
+| Methods    | `addProduct(Product product)`<br/>`removeProduct(Product product)`<br/>`changeBasketSize(int newSize)` | `addToPrice(BigDecimal addToPrice)`<br/>`addToPrice(BigDecimal addToPrice` | addFilling(FillingType fillingType)<br/>countTotalPrice()<br/>updatePrice() | updatePrice()           |
+>>>>>>> origin/main
