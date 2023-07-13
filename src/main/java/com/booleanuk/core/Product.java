@@ -33,4 +33,18 @@ public class Product {
     public String getVariant() {
         return variant;
     }
+
+    public Bagel toBagel(){
+       return new Bagel(this.getSku(), this.getPrice(), this.getName(), this.getVariant(), null);
+    }
+
+    @Override
+    public String toString() {
+        return "Product{" +
+                "sku='" + sku + '\'' +
+                ", price=" + price +
+                ", name='" + name + '\'' +
+                ", variant='" + variant + '\'' +
+                '}';
+    }
 }

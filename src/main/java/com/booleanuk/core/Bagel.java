@@ -14,6 +14,10 @@ public class Bagel extends Product{
         this.filling = filling;
     }
 
+    public Bagel(Product product){
+        super(product.getSku(), product.getPrice(), product.getName(), product.getVariant());
+    }
+
     public Product getFilling() {
         return filling;
     }
@@ -38,4 +42,10 @@ public class Bagel extends Product{
         else{ return "Variant does not exist"; }
     }
 
+    @Override
+    public String toString() {
+        return "Bagel{" +
+                "filling=" + filling +
+                '}';
+    }
 }
