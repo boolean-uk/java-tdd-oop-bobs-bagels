@@ -101,5 +101,14 @@ public class BasketTest {
         Assertions.assertEquals(expectedSum, actualSum);
     }
 
+    @Test
+    public void testChangeBasketCapacityShouldSucceed() throws Exception {
+        Basket.setCapacity(2);
+        for(Bagel bagel: BAGELS){
+            basket.addToBasket(bagel);
+        }
+
+        Assertions.assertTrue(basket.isBasketFull());
+    }
 
 }

@@ -47,6 +47,48 @@ public class ManagerTest {
 
         // Verify
         Assertions.assertEquals(inventory, managerInventory);
-
     }
+
+    @Test
+    void testGetBagelByVariant(){
+        List<Filling> fillings = List.of(
+                new Filling("BGLO", 0.49, "Onion")
+        );
+        Bagel bagel = new Bagel("BGLO", 0.49, "Onion", fillings);
+
+        Assertions.assertEquals(bagel, bob.getBagelByVariant("BGLO"));
+    }
+
+    @Test
+    void testGetBagelByVariantShouldThrowException(){
+        Assertions.assertThrows(IllegalArgumentException.class, () -> bob.getBagelByVariant("Nonexistent"));
+    }
+
+    @Test
+    void testGetFillingByVariant(){
+        List<Filling> fillings = List.of(
+                new Filling("NO FILLING", 0.12, "Bacon")
+        );
+        Filling filling = new Filling("BGLO", 0.49, "Onion");
+
+       Assertions.assertEquals(filling, bob.getFillingByVariant("Bacon"));
+    }
+
+    @Test
+    void testGetFillingByVariantShouldThrowException(){
+        Assertions.assertThrows(IllegalArgumentException.class, () -> bob.getFillingByVariant("Nonexistent"));
+    }
+
+    @Test
+    void testGetFillingsByVariants() {
+        List<Filling> expected = List.of(
+                new Filling("FILB", 0.12, "Bacon"),
+                new Filling("FILE", 0.12, "Egg")
+        );
+
+        List<Filling> actual = bob.getFillingsByVariants(List.of("Bacon", "Egg"));
+
+        Assertions.assertEquals(expected, actual);
+    }
+
 }
