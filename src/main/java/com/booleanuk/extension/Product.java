@@ -3,10 +3,12 @@ package com.booleanuk.extension;
 import java.math.BigDecimal;
 
 public abstract class Product {
-    protected BigDecimal price;
+    private String sku;
+    private BigDecimal price;
     protected String variant;
 
-    public Product(BigDecimal price, String variant) {
+    public Product(String sku, BigDecimal price, String variant) {
+        this.sku = sku;
         this.price = price;
         this.variant = variant;
     }
@@ -21,5 +23,9 @@ public abstract class Product {
 
     public int getSize() {
         return 1;
+    }
+
+    public String getSku() {
+        return sku;
     }
 }
