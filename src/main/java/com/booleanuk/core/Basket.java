@@ -43,6 +43,12 @@ public class Basket {
     }
 
     public double checkCostOfProduct(String productVariant){
-        return 0;
+        var products = Inventory.getProducts();
+
+        if (!products.containsKey(productVariant))
+            return 0.0d;
+
+        return products.get(productVariant)
+                .getPrice();
     }
 }
