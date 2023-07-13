@@ -44,7 +44,7 @@ public class ManagerTest {
         }
         String receipt = bob.applyDiscountsAndGenerateReceipt(client);
         Assertions.assertTrue(receipt.contains("Onion Bagel"));
-        Assertions.assertTrue(receipt.contains("0,45"));
+        Assertions.assertTrue(receipt.contains("0.45"));
     }
 
     @Test
@@ -54,7 +54,7 @@ public class ManagerTest {
         }
         String receipt = bob.applyDiscountsAndGenerateReceipt(client);
         Assertions.assertTrue(receipt.contains("Plain Bagel"));
-        Assertions.assertTrue(receipt.contains("0,69"));
+        Assertions.assertTrue(receipt.contains("0.69"));
     }
 
     @Test
@@ -65,7 +65,7 @@ public class ManagerTest {
         String receipt = bob.applyDiscountsAndGenerateReceipt(client);
 
         Assertions.assertTrue(receipt.contains("Everything Bagel"));
-        Assertions.assertTrue(receipt.contains("0,90"));
+        Assertions.assertTrue(receipt.contains("0.90"));
     }
 
     @Test
@@ -77,7 +77,7 @@ public class ManagerTest {
         }
 
         String receipt = bob.applyDiscountsAndGenerateReceipt(client);
-        Assertions.assertTrue(receipt.contains("0,00"));
+        Assertions.assertTrue(receipt.contains("0.00"));
     }
 
     @Test
@@ -90,7 +90,7 @@ public class ManagerTest {
         }
         String receipt = bob.applyDiscountsAndGenerateReceipt(client);
         Assertions.assertTrue(receipt.contains("Coffee Bagel Set"));
-        Assertions.assertTrue(receipt.contains("1,00"));
+        Assertions.assertTrue(receipt.contains("1.00"));
     }
 
     @Test
