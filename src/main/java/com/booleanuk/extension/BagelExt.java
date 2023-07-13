@@ -13,4 +13,17 @@ public class BagelExt {
         this.name = name;
         this.price = price;
     }
+
+
+    public SKU getSku() {
+        return sku;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public double getPrice() {
+        return price;
+    }
 }

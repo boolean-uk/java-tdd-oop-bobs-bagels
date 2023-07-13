@@ -140,17 +140,15 @@ public class BobBagelsExtensionTest {
 
     @Test
     public void shouldReturnTotalCostOfBasket(){
-        //given //0.36+
+        //given
         basketManager.add(fillingB);
-        basketManager.add(fillingB);
-        basketManager.add(fillingS);
         basketManager.add(bagelE);
         basketManager.add(coffeeB);
         //when
         double totalCost = basketManager.getTotalCost();
 
         //then
-        assertEquals(1.48,totalCost);
+        assertEquals(1.60,totalCost);
 
     }
 

@@ -13,5 +13,27 @@ public class FillingExt {
         this.price = price;
     }
 
+    public SKU getSku() {
+        return sku;
+    }
 
+    public void setSku(SKU sku) {
+        this.sku = sku;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
 }

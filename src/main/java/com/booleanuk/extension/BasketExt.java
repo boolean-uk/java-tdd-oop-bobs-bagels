@@ -61,4 +61,36 @@ public class BasketExt {
     public void setCapacity(int capacity) {
         this.capacity = capacity;
     }
+
+    public double getTotalCostBagel() {
+        double totalCost = 0;
+
+        for (BagelExt bagel :
+                bagelsInBasket) {
+            totalCost+=bagel.getPrice();
+
+        }
+        return totalCost;
+    }
+
+    public double getTotalCostFillings() {
+        double totalCost = 0;
+
+        for (FillingExt  fillingExt:
+                fillingInBasket) {
+            totalCost+=fillingExt.getPrice();
+        }
+        return totalCost;
+
+    }
+
+    public double getTotalCostCoffee() {
+        double totalCost = 0;
+
+        for (CoffeeExt  coffeeExt:
+                coffeesInBasket) {
+            totalCost+=coffeeExt.getPrice();
+        }
+        return totalCost;
+    }
 }
