@@ -24,4 +24,10 @@ public class Basket {
         if(inventory.checkAvailability(item) == true && items.size()<capacity)
             items.add(item);
     }
+
+    public void removeItem(String item) {
+        if(items.contains(item)) {
+            items.remove(item);
+        }
+    }
 }
