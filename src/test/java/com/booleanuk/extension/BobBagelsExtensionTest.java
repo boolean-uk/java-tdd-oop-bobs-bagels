@@ -4,8 +4,7 @@ import com.booleanuk.core.Filling;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class BobBagelsExtensionTest {
 
@@ -120,6 +119,14 @@ public class BobBagelsExtensionTest {
         //then
         assertFalse(basketExt.getFillingInBasket().contains(fillingE));
 
+    }
+
+    @Test
+    public void shouldChangeCapacityTo10(){
+        //when
+        basketExt.setCapacity(10);
+        //then
+        assertEquals(10,basketExt.getCapacity());
     }
 
 
