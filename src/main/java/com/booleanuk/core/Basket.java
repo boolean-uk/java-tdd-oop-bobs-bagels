@@ -1,5 +1,6 @@
 package com.booleanuk.core;
 
+import java.text.DecimalFormat;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -78,8 +79,8 @@ public class Basket {
     public String addProduct(Product product, int quantity) {
         if (inventory.checkIfProductInInventory(product)) {
             if (product.getName().equals("Filling") && quantity > 1) return "You can add only 1 filling";
-            else if(product.getName().equals("Filling") && quantity == 1){
-               return addProduct(product);
+            else if (product.getName().equals("Filling") && quantity == 1) {
+                return addProduct(product);
             }
             productsQuantity += quantity;
             if (isOverfilled()) {
@@ -106,7 +107,7 @@ public class Basket {
         Product product = inventory.getProductBySKU(sku);
         if (product != null) {
             if (product.getName().equals("Filling") && quantity > 1) return "You can add only 1 filling";
-            else if(product.getName().equals("Filling") && quantity == 1){
+            else if (product.getName().equals("Filling") && quantity == 1) {
                 return addProduct(product);
             }
             return addProduct(product, quantity);
@@ -124,7 +125,7 @@ public class Basket {
         Product product = inventory.getProductByNameAndVariant("Bagel", variant);
         if (product != null) {
             if (product.getName().equals("Filling") && quantity > 1) return "You can add only 1 filling";
-            else if(product.getName().equals("Filling") && quantity == 1){
+            else if (product.getName().equals("Filling") && quantity == 1) {
                 return addProduct(product);
             }
             return addProduct(product, quantity);
@@ -143,14 +144,14 @@ public class Basket {
                             && integer.getName().equals(product.getName())
                             && integer.getVariant().equals(product.getVariant())
                             && integer.getPrice() == product.getPrice())).findAny();
-            if(productToRemove.isPresent()){
-                productsQuantity-=basketList.get(productToRemove.get());
+            if (productToRemove.isPresent()) {
+                productsQuantity -= basketList.get(productToRemove.get());
                 basketList.remove(productToRemove.get());
                 return "Product removed";
+            } else {
+                return "Product is not in the basket";
             }
-            else { return "Product is not in the basket"; }
-        }
-        else return "Product is not in inventory";
+        } else return "Product is not in inventory";
     }
 
     public String removeProduct(Product product, int quantity) {
@@ -160,22 +161,22 @@ public class Basket {
                             && integer.getName().equals(product.getName())
                             && integer.getVariant().equals(product.getVariant())
                             && integer.getPrice() == product.getPrice())).findAny();
-            if(productToRemove.isPresent()){
-                if(basketList.get(productToRemove.get()) < quantity){
+            if (productToRemove.isPresent()) {
+                if (basketList.get(productToRemove.get()) < quantity) {
                     return "Quantity of this product is less than given";
-                }else if(basketList.get(productToRemove.get()) == quantity){
-                    productsQuantity-=quantity;
+                } else if (basketList.get(productToRemove.get()) == quantity) {
+                    productsQuantity -= quantity;
                     basketList.remove(productToRemove.get());
                     return "Products removed";
-                }else {
-                    productsQuantity-=quantity;
+                } else {
+                    productsQuantity -= quantity;
                     basketList.replace(productToRemove.get(), quantity);
                     return "Products removed";
                 }
+            } else {
+                return "Product is not in the basket";
             }
-            else { return "Product is not in the basket"; }
-        }
-        else return "Product is not in inventory";
+        } else return "Product is not in inventory";
     }
 
     public String removeProduct(String sku) {
@@ -193,22 +194,39 @@ public class Basket {
     }
 
     public String changeCapacity(int newCapacity) {
-        if(this.capacity < newCapacity){
+        if (this.capacity < newCapacity) {
             this.capacity = newCapacity;
             return "Capacity changed";
         } else if (this.capacity > newCapacity) {
-            if(this.productsQuantity <= newCapacity){
+            if (this.productsQuantity <= newCapacity) {
                 this.capacity = newCapacity;
                 return "Capacity changed";
-            }else { return "Capacity can not be changed"; }
+            } else {
+                return "Capacity can not be changed";
+            }
         } else return "Nothing to change";
     }
 
     public double totalCost() {
         double totalCost = 0.00;
-        for(Map.Entry<Product,Integer> entry : basketList.entrySet()){
-            totalCost += entry.getValue()*entry.getKey().getPrice();
+        for (Map.Entry<Product, Integer> entry : basketList.entrySet()) {
+            System.out.println("K: " + entry.getKey());
+            System.out.println("V: " + entry.getValue());
+            if ((entry.getKey().getSku().equals("BGLO")|| entry.getKey().getSku().equals("BGLE"))
+                    && entry.getValue() >= 6) {
+                int quantityOfSpecialPrice = entry.getValue() / 6;
+                int rest = entry.getValue() % 6;
+                totalCost += quantityOfSpecialPrice * 2.49;
+                totalCost += rest * entry.getKey().getPrice();
+            } else if (entry.getKey().getSku().equals("BGLP")
+                    && entry.getValue() >= 12) {
+                int quantityOfSpecialPrice = entry.getValue() / 12;
+                int rest = entry.getValue() % 12;
+                totalCost += quantityOfSpecialPrice * 3.99;
+                totalCost += rest * entry.getKey().getPrice();
+            } else totalCost += entry.getValue() * entry.getKey().getPrice();
         }
-        return totalCost;
+        DecimalFormat twoDForm = new DecimalFormat("#.##");
+        return Double.parseDouble(twoDForm.format(totalCost));
     }
 }

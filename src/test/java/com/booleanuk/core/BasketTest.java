@@ -480,6 +480,16 @@ public class BasketTest {
     }
 
     @Test
+    public void totalCostTest_SpecialOfferBagelOnionWithRest(){
+        Basket basket = new Basket(10);
+        Product product1 = new Product("BGLO", 0.49, "Bagel", "Onion");
+        basket.addProduct(product1, 8);
+        double result = basket.totalCost();
+
+        Assertions.assertEquals(3.47, result);
+    }
+
+    @Test
     public void totalCostTest_SpecialOfferBagelEverything(){
 
         Basket basket = new Basket(10);
@@ -494,11 +504,38 @@ public class BasketTest {
     public void totalCostTest_SpecialOfferBagelPlain(){
 
         Basket basket = new Basket(20);
+        Product product1 = new Product("BGLO", 0.49, "Bagel", "Onion");
+        Product product2 = new Product("BGLP", 0.39, "Bagel", "Plain");
+        Product product3 = new Product("BGLE", 0.49, "Bagel", "Everything");
+        Product product4 = new Product("COFB", 0.99, "Coffee", "Black");
+        basket.addProduct(product1, 2);
+        basket.addProduct(product2, 12);
+        basket.addProduct(product3, 6);
+        basket.addProduct(product4, 3);
+        double result = basket.totalCost();
+
+        Assertions.assertEquals(10.43, result);
+    }
+
+    @Test
+    public void totalCostTest_SpecialOfferExample1(){
+
+        Basket basket = new Basket(20);
         Product product1 = new Product("BGLP", 0.39, "Bagel", "Plain");
         basket.addProduct(product1, 12);
         double result = basket.totalCost();
 
         Assertions.assertEquals(3.99, result);
+    }
+    @Test
+    public void totalCostTest_SpecialOfferExample2(){
+
+        Basket basket = new Basket(20);
+        Product product1 = new Product("BGLP", 0.39, "Bagel", "Plain");
+        basket.addProduct(product1, 16);
+        double result = basket.totalCost();
+
+        Assertions.assertEquals(5.55, result);
     }
 
 
