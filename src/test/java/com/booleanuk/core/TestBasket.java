@@ -16,31 +16,30 @@ public class TestBasket {
     @Test
     public void whenAddToBasketExistingBagelType_bagelIsAddedToBasket() throws Exception {
         //Setup
-        String typeOfBagel = "BGLO";
-        Bagel bagel = new Bagel(typeOfBagel);
+        String bagel = "BGLO";
+
         //Execute
         basket.addToBasket(bagel);
 
-        Assertions.assertEquals(List.of(bagel), basket.getBagelList());
+        Assertions.assertEquals(List.of(bagel), basket.getListOfItemsInBasket());
     }
     @Test
     public void whenRemoveFromBasketBagelDoesExistInBasket_bagelIsRemovedFromBasket() throws Exception {
         //Setup
-        String typeOfBagel = "BGLO";
-        Bagel bagel = new Bagel(typeOfBagel);
+        String bagel = "BGLO";
         basket.addToBasket(bagel);
         basket.removeFromBasket(bagel);
-        Assertions.assertFalse(basket.getBagelList().contains(bagel));
+        Assertions.assertFalse(basket.getListOfItemsInBasket().contains(bagel));
     }
 
     @Test
     public void whenIsBasketFullCalled_basketCapacityIsChecked() throws Exception {
         //Setup
-        basket.addToBasket(new Bagel("BGLO"));
-        basket.addToBasket(new Bagel("BGLP"));
+        basket.addToBasket("BGLO");
+        basket.addToBasket("BGLP");
         String message = "";
         try{
-            basket.addToBasket(new Bagel("BGLS"));
+            basket.addToBasket("BGLS");
         } catch (Exception e) {
             message = e.getMessage();
         }
@@ -55,15 +54,15 @@ public class TestBasket {
 
     @Test
     public void whenGetTotalCostCalled_totalCostIsReturned() throws Exception {
-        basket.addToBasket(new Bagel("BGLO"));
-        basket.addToBasket(new Bagel("BGLP"));
+        basket.addToBasket("BGLO");
+        basket.addToBasket("BGLP");
 
         Assertions.assertEquals(0.88,basket.getTotalCost());
     }
     @Test
     public void whenGetTotalCostCalledWithFillings_totalCostIsReturned() throws Exception {
-        basket.addToBasket(new Bagel("BGLO"));
-        basket.addFilling("FILE");
+        basket.addToBasket("BGLO");
+        basket.addToBasket("FILE");
 
         Assertions.assertEquals(0.61,basket.getTotalCost());
     }

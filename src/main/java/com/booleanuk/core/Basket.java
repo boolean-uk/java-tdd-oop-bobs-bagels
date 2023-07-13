@@ -9,31 +9,25 @@ public class Basket {
 
     public Basket(){
         capacity = 2; //starting size of the basket
-
     }
 
-    private List<Bagel> bagelList = new ArrayList<Bagel>();
-    private List<String> fillingList = new ArrayList<>();
+    private List<String> listOfItemsInBasket = new ArrayList<String>();
 
-    public List<Bagel> getBagelList()
+    public List<String> getListOfItemsInBasket()
     {
-        return bagelList;
+        return listOfItemsInBasket;
     }
-    public void  addToBasket(Bagel bagel) throws Exception
+    public void  addToBasket(String bagel) throws Exception
     {
-        if (bagelList.size()<capacity)
+        if (listOfItemsInBasket.size()<capacity)
         {
-            bagelList.add(bagel);
+            listOfItemsInBasket.add(bagel);
         }
         else throw new Exception("Basket is full");
 
     }
-    public void addFilling(String filling)
-    {
-        fillingList.add(filling);
-    }
-    public void removeFromBasket(Bagel bagel){
-        bagelList.remove(bagel);
+    public void removeFromBasket(String bagel){
+        listOfItemsInBasket.remove(bagel);
     }
 
     public static void setBasketCapacity(int capacity) {
@@ -46,18 +40,10 @@ public class Basket {
 
     public double getTotalCost() {
         double cost =0;
-        for(Bagel bagel:bagelList)
+        for(String item: listOfItemsInBasket)
         {
             for(InventoryItem i : inventory.getList()){
-                if (bagel.getSku().equals(i.sku)){
-                    cost += i.price;
-                }
-            }
-        }
-        for(String filling:fillingList)
-        {
-            for(InventoryItem i : inventory.getList()){
-                if (filling.equals(i.sku)){
+                if (item.equals(i.sku)){
                     cost += i.price;
                 }
             }
