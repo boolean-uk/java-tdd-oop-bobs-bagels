@@ -1,10 +1,14 @@
 package com.booleanuk.core;
 
+import java.awt.image.AreaAveragingScaleFilter;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Basket {
 
-
+    private static ArrayList<Filling> allFillings = new ArrayList<>();
+    private static ArrayList<Bagel> allBagels = new ArrayList<>();
+    private static ArrayList<Coffee> allCoffees;
 
     private HashMap<Product, Integer> basket = new HashMap<>();
 
@@ -83,4 +87,6 @@ public class Basket {
 
         return productsInBasket;
     }
+
+
 }
