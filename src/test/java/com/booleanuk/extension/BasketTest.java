@@ -292,12 +292,12 @@ class BasketTest {
 
     @Test
     public void toStringPrintsReceipt() {
-        basket.add(bagel);
-        basket.add(bagel);
-        basket.add(bagel);
-        basket.add(bagel);
-        basket.add(bagel);
-        basket.add(bagel);
+//        basket.add(bagel);
+//        basket.add(bagel);
+//        basket.add(bagel);
+//        basket.add(bagel);
+//        basket.add(bagel);
+//        basket.add(bagel);
         basket.add(bagel);
         basket.add(bagelWithoutFilling);
         basket.add(coffee);

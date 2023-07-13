@@ -115,8 +115,11 @@ public class Basket {
 
     @Override
     public String toString() {
+        long priceWithoutDiscount = items.entrySet().stream().mapToLong(entry -> entry.getKey().getPrice() * entry.getValue()).sum();
         StringBuilder receipt = new StringBuilder();
         receipt.append("Bob's Bagels - Receipt\n");
+
+        int remainingBagels = 0;
 
         for (Map.Entry<Item, Integer> entry : items.entrySet()) {
             Item item = entry.getKey();
@@ -131,28 +134,33 @@ public class Basket {
                     int specialOfferCount = quantity / 6;
                     int remainingCount = quantity % 6;
                     long discountedPrice = ((specialOfferCount / 2) * TWELVE_BAGELS_PRICE + (specialOfferCount % 2) * SIX_BAGELS_PRICE);
-                    discount = itemPrice - discountedPrice;
+                    discount = (quantity - remainingCount) * ((Bagel) item).getBagelType().getPrice() - discountedPrice;
                     receipt.append(" (Special Offer: ").append(specialOfferCount * 6).append(" for $").append(discountedPrice / 100.0).append(")");
                     if (remainingCount > 0) {
                         receipt.append(" + ").append(remainingCount).append(" at $").append(bagel.getPrice() / 100.0);
-                        discount -= bagel.getPrice();
+                        remainingBagels += remainingCount;
                     }
                 } else {
                     receipt.append(" at $").append(bagel.getPrice() / 100.0);
-                    discount -= bagel.getPrice();
+                    remainingBagels += quantity;
                 }
             } else if (item instanceof Coffee) {
                 receipt.append("Coffee x").append(quantity).append(" at $").append(item.getPrice() / 100.0);
-            } else {
-                receipt.append("Item x").append(quantity).append(" at $").append(item.getPrice() / 100.0);
             }
 
             receipt.append(" = $").append(itemPrice / 100.0).append("\n");
+            if (item instanceof Coffee) {
+                long coffeeDiscount = Math.min(remainingBagels, quantity);
+                if (coffeeDiscount > 0)
+                    receipt.append(" (Special Offer: Coffee+Bagel: ").append(coffeeDiscount).append(" for $").append(coffeeDiscount * COFFEE_PLUS_BAGEL / 100.0).append(")\n");
+            }
+
             if (discount > 0) receipt.append("discount is equal to: $").append(discount / 100.0).append("\n");
         }
 
         double totalCost = getTotalCost();
         receipt.append("Total Cost: $").append(totalCost).append("\n");
+        receipt.append("Total Discount: $").append((priceWithoutDiscount - (long) totalCost * 100) / 100.0).append("\n");
         return receipt.toString();
     }
 
