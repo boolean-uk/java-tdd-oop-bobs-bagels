@@ -19,6 +19,7 @@ public class Receipt {
     public String printReceipt() {
         List<Product> products = basket.getProducts();
         Map<Product, Integer> quantities = new LinkedHashMap<>();
+        Map<Product, BigDecimal> discounts = basket.calculateDiscounts();
 
         for(Product p : products) {
             quantities.putIfAbsent(p, 0);
@@ -37,6 +38,10 @@ public class Receipt {
             if(product.getName().equals("Bagel")) {
                 Bagel bagel = (Bagel) product;
 
+                BigDecimal discount = discounts.get(product);
+                if(discount != null && !discount.equals(BigDecimal.valueOf(0.0)))
+                    sb.append("                    (-" + discount + ")\n");
+
                 Map<Filling, Long> fillingsQuantities = bagel.getFillings().stream()
                         .collect(Collectors.groupingBy(filling -> filling, Collectors.counting()));
 
@@ -44,6 +49,10 @@ public class Receipt {
                     BigDecimal fillingsPrice = f.getPrice().multiply(BigDecimal.valueOf(fillingQuantity));
                     sb.append(f.getVariant()+" "+f.getName()+"        "+fillingQuantity+" ("+fillingsPrice+")\n");
                 });
+            } else {
+                BigDecimal discount = discounts.get(product);
+                if(discount != null && !discount.equals(BigDecimal.valueOf(0.0)))
+                    sb.append("                    (-" + discount + ")\n");
             }
         });
         sb.append("-------------------------------\n");

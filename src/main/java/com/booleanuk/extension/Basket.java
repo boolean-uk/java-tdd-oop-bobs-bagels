@@ -49,7 +49,10 @@ public class Basket {
         for(Product p : products){
             sum=sum.add(p.getPrice());
         }
-        return sum;
+
+        BigDecimal discount = calculateDiscounts().values().stream().reduce(BigDecimal.ZERO, BigDecimal::add);
+
+        return sum.subtract(discount);
     }
 
     public Map<Product, BigDecimal> calculateDiscounts() {
