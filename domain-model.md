@@ -122,8 +122,8 @@ I want customers to only be able to order things that we stock in our inventory.
 |       |                                  | loadAvailableProducts(String file)          | loads the products list     | List<Products> |
 
 
-| Class   | Attributes                        | Methods                      | Scenario                        | Outputs |
-|---------|-----------------------------------|------------------------------|---------------------------------|---------|
-| Receipt | products:HashMap<Product,Integer> | createReceipt(Basket basket) | Creates receipt of given basket | void    |
-|         |                                   | printReceipt(Basket basket)  | prints receipt                  | void    |
-|         |                                   |                              |                                 |         |
+| Class   | Attributes                        | Methods                      | Scenario                                       | Outputs                      |
+|---------|-----------------------------------|------------------------------|------------------------------------------------|------------------------------|
+| Receipt | products:HashMap<Product,Integer> | createReceipt(Basket basket) | Creates receipt of given basket                | void                         |
+|         |                                   | printReceipt(Basket basket)  | prints receipt                                 | StringBuilder recepit        |
+|         |                                   | showBagelOnReceipt           | prints bagel on the receipt  with his fillings | StringBuilder bagelOnReceipt |
