@@ -1,9 +1,11 @@
 package com.booleanuk.extension;
 
+import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class Receipt {
     private LocalDateTime time;
@@ -30,12 +32,18 @@ public class Receipt {
         sb.append(formattedTime+"\n");
         sb.append("-------------------------------\n");
         quantities.forEach((product, quantity) -> {
-            sb.append(product.getVariant()+" "+product.getName()+"        "+quantity+" "+product.getPrice()+"\n");
+            BigDecimal productsPrice = product.getPrice().multiply(BigDecimal.valueOf(quantity));
+            sb.append(product.getVariant()+" "+product.getName()+"        "+quantity+" "+productsPrice+"\n");
             if(product.getName().equals("Bagel")) {
                 Bagel bagel = (Bagel) product;
-                for(Filling f: bagel.getFillings()){
-                    sb.append(f.getVariant()+" "+f.getName()+"        "+quantity+" ("+f.getPrice()+")\n");
-                }
+
+                Map<Filling, Long> fillingsQuantities = bagel.getFillings().stream()
+                        .collect(Collectors.groupingBy(filling -> filling, Collectors.counting()));
+
+                fillingsQuantities.forEach((f, fillingQuantity) -> {
+                    BigDecimal fillingsPrice = f.getPrice().multiply(BigDecimal.valueOf(fillingQuantity));
+                    sb.append(f.getVariant()+" "+f.getName()+"        "+fillingQuantity+" ("+fillingsPrice+")\n");
+                });
             }
         });
         sb.append("-------------------------------\n");
