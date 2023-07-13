@@ -47,7 +47,11 @@ public class ProductManager {
     }
 
     public void changeBasketCapacity(int capacity) {
-        basket.setCapacity(capacity);
+        if (basket.setCapacity(capacity)) {
+            System.out.println("Basket new capacity: " + basket.getCapacity());
+        } else {
+            System.out.println("Failed to change capacity");
+        }
     }
 
     private static HashMap<String, Product> fillHashMapFromFile(String file) {

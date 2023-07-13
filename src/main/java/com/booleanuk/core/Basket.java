@@ -26,6 +26,8 @@ public class Basket {
         for (Product product : list) {
             total += product.getPrice();
         }
+        total = Math.round(total * 100);
+        total = total/100;
         return total;
     }
 
