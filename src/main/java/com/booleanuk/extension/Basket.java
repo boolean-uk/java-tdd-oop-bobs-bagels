@@ -42,17 +42,20 @@ public class Basket {
     }
 
     public double totalCost(){
-        double cost = 0;
+        int cost = 0;
         HashMap<String, Integer> productsInBasket = new HashMap<>(productsCount);
-        for(String productType : productsInBasket.keySet()){
-            cost -= Inventory.getDiscount(productType,productsInBasket);
-        }
+
         for (String productType : productsInBasket.keySet()) {
-            cost += productsCount.get(productType) * Inventory.getProducts()
+            cost += productsInBasket.get(productType) * Inventory.getProducts()
                     .get(productType)
                     .getPrice();
         }
-        return cost;
+
+        for(String productType : productsInBasket.keySet()){
+            cost -= Inventory.getDiscount(productType,productsInBasket);
+        }
+
+        return (double) cost / 100;
     }
 
     public double checkCostOfProduct(String productVariant){

@@ -2,11 +2,11 @@ package com.booleanuk.extension;
 
 public class Product {
     private String sku;
-    private double price;
+    private int price;
     private String name;
     private String variant;
 
-    public Product(String sku, double price, String name, String variant) {
+    public Product(String sku, int price, String name, String variant) {
         this.sku = sku;
         this.price = price;
         this.name = name;
@@ -17,7 +17,7 @@ public class Product {
         return sku;
     }
 
-    public double getPrice() {
+    public int getPrice() {
         return price;
     }
 
