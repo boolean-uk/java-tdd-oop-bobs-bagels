@@ -113,7 +113,7 @@ public class ReceiptFormatter {
                                         .toList();
                                 bagelOffers.forEach(o -> amounts.merge(o.getBagelOfferType(), 1, Integer::sum));
                                 fillingAmount += bagelOffers.stream()
-                                        .map(BagelOffer::getBagels)
+                                        .map(BagelOffer::getSandwiches)
                                         .flatMap(List::stream)
                                         .map(BagelSandwich::getFillings)
                                         .flatMap(Arrays::stream)
