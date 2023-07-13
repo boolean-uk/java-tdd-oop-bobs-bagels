@@ -111,5 +111,16 @@ public class BasketTest {
         basket.addItem("FILB");
         Assertions.assertEquals(4,basket.getItems().size());
     }
+    @Test
+    public void changingCapacityOfBasketWithItemsAlreadyInBasketExceedingNewCapacityGivenByUser() {
+        basket.addItem("BGLO");
+        basket.addItem("FILB");
+        basket.addItem("FILB");
+        Assertions.assertEquals(3,basket.getItems().size());
+        basket.changeCapacity(2);
+        basket.addItem("FILB");
+        basket.addItem("FILB");
+        Assertions.assertEquals(3,basket.getItems().size());
+    }
 
 }
