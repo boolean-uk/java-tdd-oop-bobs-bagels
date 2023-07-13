@@ -21,7 +21,7 @@ public class Basket {
     }
 
     public void addItem(String item) {
-        if(inventory.checkAvailability(item) == true)
+        if(inventory.checkAvailability(item) == true && items.size()<capacity)
             items.add(item);
     }
 }
