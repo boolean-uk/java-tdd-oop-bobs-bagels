@@ -191,7 +191,7 @@ public class BasketTest {
         basket.addProduct(product0.getSku());
         String message = basket.addProduct(product1.getSku(), 3);
 
-        Product productFromBasket = basket.getBasketList().keySet().stream().toList().get(0);
+        Product productFromBasket = basket.getBasketList().keySet().stream().toList().get(1);
 
         Assertions.assertEquals("Product added", message);
         Assertions.assertTrue(basket.getBasketList().containsKey(productFromBasket));
@@ -467,6 +467,38 @@ public class BasketTest {
         double result = basket.totalCost();
 
         Assertions.assertEquals(product1.getPrice()*5, result);
+    }
+
+    @Test
+    public void totalCostTest_SpecialOfferBagelOnion(){
+        Basket basket = new Basket(10);
+        Product product1 = new Product("BGLO", 0.49, "Bagel", "Onion");
+        basket.addProduct(product1, 6);
+        double result = basket.totalCost();
+
+        Assertions.assertEquals(2.49, result);
+    }
+
+    @Test
+    public void totalCostTest_SpecialOfferBagelEverything(){
+
+        Basket basket = new Basket(10);
+        Product product1 = new Product("BGLE", 0.49, "Bagel", "Everything");
+        basket.addProduct(product1, 6);
+        double result = basket.totalCost();
+
+        Assertions.assertEquals(2.49, result);
+    }
+
+    @Test
+    public void totalCostTest_SpecialOfferBagelPlain(){
+
+        Basket basket = new Basket(20);
+        Product product1 = new Product("BGLP", 0.39, "Bagel", "Plain");
+        basket.addProduct(product1, 12);
+        double result = basket.totalCost();
+
+        Assertions.assertEquals(3.99, result);
     }
 
 

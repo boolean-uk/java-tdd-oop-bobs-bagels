@@ -52,3 +52,6 @@
 |         |                                      |                                                 | if new capacity is smaller than previous check if quantity of products <= new capacity                 | String  |
 |         |                                      |                                                 | if new capacity is smaller than previous check if quantity of products > new capacity and don't change | String  |
 |         |                                      | totalCost()                                     | count cost of whole basket                                                                             | double  |
+|         |                                      |                                                 | if in basket are 6 Bagel Onion use special offer (6 for 2.49)                                          | double  |
+|         |                                      |                                                 | if in basket are 12 Bagel Plain use special offer (12 for 3.99)                                        | double  |
+|         |                                      |                                                 | if in basket are 6 Bagel Everything use special offer (6 for 2.49)                                     | double  |
