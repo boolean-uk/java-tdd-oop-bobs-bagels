@@ -7,7 +7,6 @@ public class Basket {
     private int capacity;
     private int currentAmount = 0;
     private final ArrayList<Item> items;
-    public ArrayList<String> availableDiscounts;
     public int getCapacity() {
         return capacity;
     }
@@ -29,15 +28,7 @@ public class Basket {
     public static void setDefaultCapacity(int defaultCapacity) {
         Basket.defaultCapacity = defaultCapacity;
     }
-    public void fillAvailableDiscounts() {
-        availableDiscounts = new ArrayList<String>();
-        availableDiscounts.add("6*BGLO,newPrice=2.49");
-        availableDiscounts.add("12*BGLP,newPrice=3.99");
-        availableDiscounts.add("6*BGLE,newPrice=2.49");
-//        availableDiscounts.add("1*COFB,1*BGL,newPrice=1.25");
-    }
     public Basket() {
-        fillAvailableDiscounts();
         items = new ArrayList<Item>();
         capacity = defaultCapacity;
     }
@@ -85,37 +76,5 @@ public class Basket {
         for (Item item : items)
             totalPrice += item.getPrice();
         return Math.round(totalPrice * 100) / (double)100;
-    }
-    public HashMap<String, Integer> calculateDiscounts() {
-        HashMap<String, Integer> itemsCount = new HashMap<String, Integer>();
-        for (BagelType bagelType : BagelType.values())
-            itemsCount.put(bagelType.getSku(), 0);
-        for (CoffeeType coffeeType : CoffeeType.values())
-            itemsCount.put(coffeeType.getSku(), 0);
-        for (Item item : items)
-            itemsCount.put(item.getItemType().getSku(), itemsCount.get(item.getItemType().getSku()) + 1);
-
-        HashMap<String, Integer> activeDiscounts = new HashMap<String, Integer>();
-        for (String discountString : availableDiscounts) {
-            List<String> discountedItems = new LinkedList<String>(Arrays.asList(discountString.split(",")));
-            String priceString = discountedItems.remove(discountedItems.size() - 1);
-            double newPrice = Double.parseDouble(priceString.substring(priceString.indexOf("=") + 1));
-            int numberOfApplies = -1;
-            for (String itemString : discountedItems) {
-                String itemSku = itemString.substring(itemString.indexOf("*") + 1);
-                int itemCount = Integer.parseInt(itemString.substring(0, itemString.indexOf("*")));
-                numberOfApplies = numberOfApplies == - 1 ? itemsCount.get(itemSku) / itemCount :
-                        Math.min(numberOfApplies, itemsCount.get(itemSku) / itemCount);
-            }
-            if (numberOfApplies > 0) {
-                for (String itemString : discountedItems) {
-                    String itemSku = itemString.substring(itemString.indexOf("*") + 1);
-                    int itemCount = Integer.parseInt(itemString.substring(0, itemString.indexOf("*")));
-                    itemsCount.put(itemSku, itemsCount.get(itemSku) - itemCount * numberOfApplies);
-                }
-            }
-            activeDiscounts.put(discountString, numberOfApplies);
-        }
-        return activeDiscounts;
     }
 }

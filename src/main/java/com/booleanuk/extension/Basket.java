@@ -8,7 +8,7 @@ public class Basket {
     private int currentAmount = 0;
     private final ArrayList<Item> items;
     public ArrayList<String> availableDiscounts;
-    private HashMap<String, IItemType> itemTypeBySku;
+    public static HashMap<String, IItemType> itemTypeBySku;
     public int getCapacity() {
         return capacity;
     }
@@ -46,6 +46,8 @@ public class Basket {
             itemTypeBySku.put(bagelType.getSku(), bagelType);
         for (CoffeeType coffeeType : CoffeeType.values())
             itemTypeBySku.put(coffeeType.getSku(), coffeeType);
+        for (FillingType fillingType : FillingType.values())
+            itemTypeBySku.put(fillingType.getSku(), fillingType);
     }
     public Basket() {
         fillAvailableDiscounts();
@@ -57,7 +59,6 @@ public class Basket {
         currentAmount = 0;
         items.clear();
     }
-
     public boolean addItem(Item item) {
         if(isFull())
             return false;
@@ -109,7 +110,6 @@ public class Basket {
             for (String itemString : discountedItems) {
                 String itemSku = itemString.substring(itemString.indexOf("*") + 1);
                 int itemCount = Integer.parseInt(itemString.substring(0, itemString.indexOf("*")));
-                double a = itemTypeBySku.get(itemSku).getPrice();
                 initialPrice += itemTypeBySku.get(itemSku).getPrice() * (double)itemCount;
             }
             totalPrice -= (initialPrice - newPrice) * activeDiscounts.get(discountString);
@@ -148,3 +148,4 @@ public class Basket {
         return activeDiscounts;
     }
 }
+

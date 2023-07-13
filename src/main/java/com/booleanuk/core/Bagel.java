@@ -1,12 +1,9 @@
 package com.booleanuk.core;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 
 public class Bagel extends Item {
     private double price;
-    public static HashSet<String> bagelsSkus;
     public HashMap<FillingType, Integer> fillings;
     public Bagel(BagelType bagelType) {
         super(bagelType);

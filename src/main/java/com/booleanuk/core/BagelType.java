@@ -8,21 +8,18 @@ public enum BagelType implements IItemType {
     public double getPrice() {
         return price;
     }
-    public void setPrice(double price) {
-        this.price = price;
-    }
     public String getVariant() {
         return variant;
-    }
-    public void setVariant(String variant) {
-        this.variant = variant;
     }
     public String getSku() {
         return sku;
     }
-    public String sku;
+    public void setPrice(double price) {
+        this.price = price;
+    }
+    public final String sku;
     private double price;
-    private String variant;
+    private final String variant;
     BagelType(String sku, double price, String variant) {
         this.sku = sku;
         this.price = price;

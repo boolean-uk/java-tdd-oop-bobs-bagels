@@ -10,7 +10,7 @@ public class BasketTest {
         Assertions.assertTrue(basket.addItem(new Bagel(BagelType.BGLE)));
         Assertions.assertTrue(basket.addItem(new Item(CoffeeType.COFL)));
         Assertions.assertTrue(basket.addItem(new Bagel(BagelType.BGLO)));
-        Assertions.assertTrue(basket.addItem(new Bagel(BagelType.BGLS)));
+        Assertions.assertTrue(basket.addItem(BagelType.BGLS));
         Assertions.assertFalse(basket.addItem(new Bagel(BagelType.BGLE)));
     }
     @Test
@@ -66,23 +66,5 @@ public class BasketTest {
         Assertions.assertEquals(2.35, basket.getTotalPrice());
         basket.removeItem(BagelType.BGLE);
         Assertions.assertEquals(1.86, basket.getTotalPrice());
-    }
-    @Test
-    public void discountTest() {
-        Basket basket = new Basket();
-        basket.setCapacity(24);
-        basket.addItem(BagelType.BGLO);
-        basket.addItem(BagelType.BGLO);
-        basket.addItem(BagelType.BGLO);
-        basket.addItem(BagelType.BGLO);
-        basket.addItem(BagelType.BGLO);
-        basket.addItem(BagelType.BGLO);
-        basket.addItem(BagelType.BGLO);
-        basket.addItem(BagelType.BGLO);
-        basket.addItem(BagelType.BGLO);
-        basket.addItem(BagelType.BGLO);
-        basket.addItem(BagelType.BGLO);
-        basket.addItem(BagelType.BGLO);
-        basket.calculateDiscounts();
     }
 }

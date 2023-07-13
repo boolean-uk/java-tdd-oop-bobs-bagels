@@ -14,15 +14,12 @@ public enum BagelType implements IItemType {
     public String getVariant() {
         return variant;
     }
-    public void setVariant(String variant) {
-        this.variant = variant;
-    }
     public String getSku() {
         return sku;
     }
-    public String sku;
+    public final String sku;
     private double price;
-    private String variant;
+    private final String variant;
     BagelType(String sku, double price, String variant) {
         this.sku = sku;
         this.price = price;
