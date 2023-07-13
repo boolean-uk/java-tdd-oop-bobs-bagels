@@ -79,6 +79,15 @@ public class Inventory {
         }
         return null;
     }
+
+    public String getBagelVariant(String SKU){
+        for (Bagle bagel : bagels){
+            if (bagel.getVariant().equals(SKU)){
+                return bagel.getVariant();
+            }
+        }
+        return null;
+    }
     public Coffee getCoffeeBySKU(String SKU) {
         for (Coffee coffee : coffees) {
             if (coffee.getSKU().equals(SKU)) {

@@ -19,6 +19,7 @@ public class BasketTest {
         List<String> fillings = new ArrayList<>();
         fillings.add("FILB");
         fillings.add("FILE");
+        fillings.add("FILXXXXXX");
 
         List<String> fillings2 = new ArrayList<>();
         fillings2.add("FILE");
@@ -62,9 +63,35 @@ public class BasketTest {
         basket.addItem("BGLP",fillings2);
         Assertions.assertEquals(10,basket.getItems().size());
     }
-/*
+
     @Test
-    public void removeFromBasketTest() {
+    public void removeCoffeeFromBasketTest() {
+
+        List<String> filling = new ArrayList<>();
+        List<String> fillings2 = new ArrayList<>();
+        fillings2.add("FILE");
+        fillings2.add("FILC");
+        fillings2.add("FILX");
+        fillings2.add("FILS");
+        fillings2.add("FILH");
+        fillings2.add("FILB");
+        fillings2.add("FILE");
+
+
+        basket.addItem("BGLO",filling);
+        basket.addItem("BGLO",filling);
+        basket.addItem("FILB",filling);
+        basket.addItem("FILB",filling);
+        Assertions.assertEquals(2,basket.getItems().size());
+        basket.removeCoffee("COFL");
+        Assertions.assertEquals(2,basket.getItems().size());
+
+        basket.addItem("COFL",fillings2);
+        Assertions.assertEquals(3,basket.getItems().size());
+
+        basket.removeCoffee("COFL");
+        Assertions.assertEquals(2,basket.getItems().size());
+        /*
         basket.addItem("BGLO");
         basket.addItem("FILB");
         Assertions.assertEquals(2,basket.getItems().size());
@@ -83,8 +110,53 @@ public class BasketTest {
 
         basket.removeItem("BGLO");
         Assertions.assertEquals(0,basket.getItems().size());
+        */
+
     }
-*/
+
+    @Test
+    public void removeFillingTest() {
+        List<String> filling = new ArrayList<>();
+        List<String> fillings2 = new ArrayList<>();
+        fillings2.add("FILE");
+        fillings2.add("FILC");
+        fillings2.add("FILX");
+        fillings2.add("FILS");
+        fillings2.add("FILH");
+        fillings2.add("FILB");
+        fillings2.add("FILE");
+
+        basket.addItem("BGLO",fillings2);
+        basket.addItem("BGLP",fillings2);
+
+        Assertions.assertEquals(16,basket.getItems().size());
+        basket.removeFilling("BGLO","wrong name");
+        Assertions.assertEquals(16,basket.getItems().size());
+        basket.removeFilling("BGLO","FILH");
+        Assertions.assertEquals(15,basket.getItems().size());
+        basket.removeFilling("BGLS","FILH");
+        Assertions.assertEquals(15,basket.getItems().size());
+    }
+
+    @Test
+    public void removeWholeBagleTest() {
+        List<String> filling = new ArrayList<>();
+        List<String> fillings2 = new ArrayList<>();
+        fillings2.add("FILE");
+        fillings2.add("FILC");
+        fillings2.add("FILX");
+        fillings2.add("FILS");
+        fillings2.add("FILH");
+        fillings2.add("FILB");
+        fillings2.add("FILE");
+
+        basket.addItem("BGLO",fillings2);
+        basket.addItem("BGLP",fillings2);
+        Assertions.assertEquals(16,basket.getItems().size());
+        basket.removeBagle("BGLO");
+        Assertions.assertEquals(8,basket.getItems().size());
+    }
+
     @Test
     public void isBasketFullTest() {
         List<String> filling = new ArrayList<>();
