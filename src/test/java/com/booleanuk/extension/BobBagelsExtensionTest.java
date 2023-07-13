@@ -3,6 +3,7 @@ package com.booleanuk.extension;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class BobBagelsExtensionTest {
@@ -71,6 +72,16 @@ public class BobBagelsExtensionTest {
         basketManager.add(fillingB);
         //then
         assertTrue(basketExt.getFillingInBasket().contains(fillingB));
+    }
+
+    @Test
+    public void shouldRemoveBagelFromBasket(){
+        //given
+        basketManager.add(bagelO);
+        //when
+        basketManager.remove(bagelO);
+        //then
+        assertFalse(basketExt.getBagelsInBasket().contains(bagelO));
     }
 
 
