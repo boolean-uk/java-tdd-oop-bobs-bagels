@@ -113,7 +113,7 @@ public class Basket {
         stringBuilder.append("\n" + "-".repeat(28) + "\n\n")
                 .append("Total                £" + getTotalCost() + "\n\n")
                 .append("        Thank you\n")
-                .append("      for your order! \n\n");
+                .append("      for your order! \n");
 
         return stringBuilder.toString();
     }
