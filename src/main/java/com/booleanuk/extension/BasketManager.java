@@ -100,7 +100,6 @@ public class BasketManager {
     }
 
     public void addFillingToBagel(BagelExt bagelExt, FillingExt fillingExt){
-
-
+        bagelExt.setFillingExt(fillingExt);
     }
 }
