@@ -1,2 +1,4 @@
-package com.booleanuk.core;public class Inventory {
+package com.booleanuk.core;
+
+public class Inventory {
 }

@@ -1,2 +1,4 @@
-package com.booleanuk.core;public class Filling {
+package com.booleanuk.core;
+
+public class Filling {
 }

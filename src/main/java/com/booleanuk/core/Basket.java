@@ -1,2 +1,4 @@
-package com.booleanuk.core;public class Basket {
+package com.booleanuk.core;
+
+public class Basket {
 }
