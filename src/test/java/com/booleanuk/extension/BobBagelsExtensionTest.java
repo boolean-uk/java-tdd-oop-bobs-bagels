@@ -178,7 +178,11 @@ public class BobBagelsExtensionTest {
     @Test
     public void shouldReturnsBagelsPriceList(){
         //given
-        String pricelist ="aaaa";
+        String pricelist ="Bagels Pricelist:\n" +
+                "Name:BGLO Onion Price: 0.49\n" +
+                "Name:BGLP Plain Price: 0.39\n" +
+                "Name:BGLE Everything Price: 0.49\n" +
+                "Name:BGLS Sesame Price: 0.49\n";
         //when
         String bagelsPriceList = basketManager.getPriceListOfBagels();
         //then
