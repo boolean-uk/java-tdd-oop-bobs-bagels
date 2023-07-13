@@ -10,6 +10,7 @@
 |        |                                        | double totalCost()                            | always                                                                                    | total cost of products in basket |
 |        |                                        | double checkCostOfProduct(String productSku)  | always                                                                                    | cost of product by sku           |
 
+
 | Class   | Field          | Method | Condition | Output |
 |---------|----------------|--------|-----------|--------|
 | Product | String sku     |        |           |        |
@@ -18,9 +19,13 @@
 |         | String variant |        |           |        |
 
 
-| Class     | Field                             | Method                                                                         | Condition                         | Output          |
-|-----------|-----------------------------------|--------------------------------------------------------------------------------|-----------------------------------|-----------------|
-| Inventory | Hashmap<String, Product> products | Product getProduct(String productSku)                                          | if product exist in the inventory | Product product |
-|           |                                   |                                                                                | if product doesn't exists         | null            |
-|           |                                   | double getDiscount(String productSku, HashMap<String, Integer> basketProducts) |                                   | double          |
+| Class     | Field                                | Method                                                                        | Condition | Output |
+|-----------|--------------------------------------|-------------------------------------------------------------------------------|-----------|--------|
+| Inventory | Hashmap<String, Product> products    | getDiscount(String productSku, HashMap<String, Integer> basketProducts)       |           | int    |
+|           | Hashmap<String, Discount> discounts  | getCoffeeDiscount(String coffeeSKU,  HashMap<String, Integer> basketProducts) |           | int    |
 
+
+| Class    | Field                      | Method | Condition | Output |
+|----------|----------------------------|--------|-----------|--------|
+| Discount | int discountPackSize       |        |           |        |
+|          | int packPriceAfterDiscount |        |           |        |
