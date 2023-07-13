@@ -7,7 +7,7 @@ public class BasketTest {
     private Basket basket;
 
     public BasketTest() {
-        basket = new Basket(5);
+        basket = new Basket(2);
     }
 
     @Test
@@ -20,9 +20,16 @@ public class BasketTest {
 
         basket.addItem("FILB");
         Assertions.assertEquals(2,basket.getItems().size());
+    }
 
-
-
+    @Test
+    public void checkIfWeCanAddToBasketOverTheSizeOfCapacityTest() {
+        basket.addItem("BGLO");
+        basket.addItem("BGLO");
+        basket.addItem("FILB");
+        Assertions.assertEquals(2,basket.getItems().size());
+        basket.addItem("BGLO");
+        Assertions.assertEquals(2,basket.getItems().size());
     }
 
 }
