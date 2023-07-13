@@ -20,14 +20,23 @@ public class Basket {
         return items;
     }
 
-    public void addItem(String item) {
-        if(inventory.checkAvailability(item) == true && items.size()<capacity)
+    public boolean addItem(String item) {
+        if(inventory.checkAvailability(item) == true && items.size()<capacity) {
             items.add(item);
+            return true;
+        }else {
+            return false;
+        }
+
     }
 
     public void removeItem(String item) {
         if(items.contains(item)) {
             items.remove(item);
         }
+    }
+
+    public boolean isFull() {
+        return false;
     }
 }

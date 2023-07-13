@@ -51,4 +51,11 @@ public class BasketTest {
         Assertions.assertEquals(0,basket.getItems().size());
     }
 
+    @Test
+    public void isBasketFullTest() {
+        Assertions.assertTrue(basket.addItem("BGLO"));
+        Assertions.assertTrue(basket.addItem("FILB"));
+        Assertions.assertFalse(basket.addItem("FILB"));
+    }
+
 }
