@@ -1,28 +1,25 @@
 # Domain Model
 
-| Classes | Members     | Methods           | Scenario | Outputs                     |
-|---------|-------------|-------------------|----------|-----------------------------|
-| Filling | String type | getType(): String |          | return the type of product  |
-|         | double cost | getCost(): double |          | return the cost of products |
-|         |             |                   |          |                             |
+| Classes | Members       | Methods            | Scenario | Outputs                     |
+|---------|---------------|--------------------|----------|-----------------------------|
+| Filling | name: String  | getName(): String  | -        | return the name of filling  |
+|         | price: double | getPrice(): double | -        | return the price of filling |
+|         | sku: String   | getSKU(): String   | -        |                             |
 
-| Classes | Members              | Methods                               | Scenario                                          | Outputs |
-|---------|----------------------|---------------------------------------|---------------------------------------------------|---------|
-| Bagel   | String type          | addFilling(filling: Filling): void    | if name of product equals "Filling" add to basket | String  |
-|         | double cost          | removeFilling(filling: Filling): void | if name of variant does not exist print message   | String  |
-|         | fillings: Filling[]  | getType(): String                     |                                                   |         |
-|         |                      | getCost(): double                     |                                                   |         |
-|         |                      | getFillings(): Filling[]              |                                                   |         |
-|         |                      |                                       |                                                   |         |
-|         |                      |                                       |                                                   |         |
+| Classes | Members         | Methods                  | Scenario                          | Outputs |
+|---------|-----------------|--------------------------|-----------------------------------|---------|
+| Bagel   | sku: String     | getName(): String        | Get the name of the bagel         | String  |
+|         | price: double   | getVariant(): String     | Get the variant of the bagel      | String  |
+|         | variant: String | getSku(): String         | Get the SKU of the bagel          | String  |
+|         | name: String    | getPrice(): double       | Get the price of the bagel        | Price   |
+|         |                 | getFillings(): Filling[] | Get all the fillings of the bagel | String  |
 
-| Classes   | Members                | Methods                                   | Scenario | Outputs                             |
-|-----------|------------------------|-------------------------------------------|----------|-------------------------------------|
-| Inventory | inventoryList: Bagel[] | addBagel(bagel: Bagel): void              |          | add the Bagel in the Inventory      |
-|           |                        |                                           |          |                                     |
-|           |                        | removeBagel(bagel: Bagel): void           |          | remove the Bagel from the Inventory |
-|           |                        |                                           |          |                                     |
-|           |                        | checkInventoryList(bagel: Bagel): boolean |          | True/ False                         |
+| Classes   | Members                        | Methods                                   | Scenario | Outputs                             |
+|-----------|--------------------------------|-------------------------------------------|----------|-------------------------------------|
+| Inventory | products: Map<String, Product> | addProduct(product: Product): void        | -        | add the Bagel in the Inventory      |
+|           |                                | removeProduct(sku: String): void          | -        | remove the Bagel from the Inventory |
+|           |                                | checkProductExists(sku: String): boolean  | -        | True/ False                         |
+|           |                                | checkInventoryList(bagel: Bagel): boolean | -        | True/ False                         |
 
 
 
