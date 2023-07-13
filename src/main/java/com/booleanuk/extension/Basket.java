@@ -1,9 +1,7 @@
 package com.booleanuk.extension;
 
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.time.LocalDateTime;
+import java.util.*;
 
 public class Basket {
     private int capacity;
@@ -161,6 +159,8 @@ public class Basket {
         double totalCost = getTotalCost();
         receipt.append("Total Cost: $").append(totalCost).append("\n");
         receipt.append("Total Discount: $").append((priceWithoutDiscount - (long) totalCost * 100) / 100.0).append("\n");
+        receipt.append("Thank you for your order!");
+
         return receipt.toString();
     }
 

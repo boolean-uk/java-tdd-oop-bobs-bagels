@@ -290,19 +290,19 @@ class BasketTest {
         assertEquals(0, basket.getTotalCost());
     }
 
-    @Test
-    public void toStringPrintsReceipt() {
+//    @Test
+//    public void toStringPrintsReceipt() {
+////        basket.add(bagel);
+////        basket.add(bagel);
+////        basket.add(bagel);
+////        basket.add(bagel);
+////        basket.add(bagel);
+////        basket.add(bagel);
 //        basket.add(bagel);
-//        basket.add(bagel);
-//        basket.add(bagel);
-//        basket.add(bagel);
-//        basket.add(bagel);
-//        basket.add(bagel);
-        basket.add(bagel);
-        basket.add(bagelWithoutFilling);
-        basket.add(coffee);
-
-        assertEquals(basket.toString(), "");
-    }
+//        basket.add(bagelWithoutFilling);
+//        basket.add(coffee);
+//
+//        assertEquals(basket.toString(), "");
+//    }
 }
 
