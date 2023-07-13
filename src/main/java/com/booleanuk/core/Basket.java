@@ -13,6 +13,7 @@ public class Basket {
     }
 
     private List<Bagel> bagelList = new ArrayList<Bagel>();
+    private List<String> fillingList = new ArrayList<>();
 
     public List<Bagel> getBagelList()
     {
@@ -26,6 +27,10 @@ public class Basket {
         }
         else throw new Exception("Basket is full");
 
+    }
+    public void addFilling(String filling)
+    {
+        fillingList.add(filling);
     }
     public void removeFromBasket(Bagel bagel){
         bagelList.remove(bagel);
@@ -45,6 +50,14 @@ public class Basket {
         {
             for(InventoryItem i : inventory.getList()){
                 if (bagel.getSku().equals(i.sku)){
+                    cost += i.price;
+                }
+            }
+        }
+        for(String filling:fillingList)
+        {
+            for(InventoryItem i : inventory.getList()){
+                if (filling.equals(i.sku)){
                     cost += i.price;
                 }
             }
