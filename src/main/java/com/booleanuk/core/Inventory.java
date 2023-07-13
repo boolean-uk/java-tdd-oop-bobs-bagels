@@ -7,9 +7,9 @@ public class Inventory {
 
     public Inventory() {
         this.products = new HashMap<>();
-        products.put("BGLO", new Product("BGLO", 0.49F, "Bagel", "Onion"));
-        products.put("BGLP", new Product("BGLP", 0.39F, "Bagel", "Plain"));
-        products.put("BGLE", new Product("BGLE",0.49F, "Bagel", "Everything"));
+        products.put("BGLO", new Product("BGLO", 0.49F, "Bagel", "Onion", 6, 2.49F));
+        products.put("BGLP", new Product("BGLP", 0.39F, "Bagel", "Plain", 12, 3.99F));
+        products.put("BGLE", new Product("BGLE",0.49F, "Bagel", "Everything", 6, 2.49F));
         products.put("BGLS", new Product("BGLS",0.49F, "Bagel", "Sesame"));
 
         products.put("COFB", new Product("COFB",0.99F, "Coffee", "Black"));

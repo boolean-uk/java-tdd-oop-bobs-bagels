@@ -69,7 +69,15 @@ public class Basket {
         float totalCost = 0;
 
         for(Map.Entry<Product, Integer> product : products.entrySet()){
-            totalCost += product.getKey().getPrice() * product.getValue();
+            int specialOfferQuantity = product.getKey().getSpecialOfferQuantity();
+            float specialOfferPrice = product.getKey().getSpecialOfferPrice();
+
+            int productQuantity = product.getValue();
+            if(specialOfferQuantity > 0 && specialOfferQuantity <= productQuantity) {
+                totalCost += (productQuantity / specialOfferQuantity) * specialOfferPrice;
+                productQuantity -= (productQuantity / specialOfferQuantity) * specialOfferQuantity;
+            }
+            totalCost += product.getKey().getPrice() * productQuantity;
         }
 
         return totalCost;
