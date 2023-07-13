@@ -61,8 +61,8 @@ public class ReceiptFormatter {
         var leftPadding = Math.round(RECEIPT_WIDTH * 0.7);
         var rightPadding = RECEIPT_WIDTH - leftPadding;
         var rightPaddingLeft = rightPadding / 2 + rightPadding % 2;
-        var righPaddingRight = rightPadding / 2;
-        var format = "|%-" + leftPadding + "s%-" + rightPaddingLeft + "s%" + righPaddingRight + "s|\n";
+        var rightPaddingRight = rightPadding / 2;
+        var format = "|%-" + leftPadding + "s%-" + rightPaddingLeft + "s%" + rightPaddingRight + "s|\n";
         var sb = new StringBuilder();
         var fillingAmount = 0;
         for (var productType : Product.Type.values()) {
