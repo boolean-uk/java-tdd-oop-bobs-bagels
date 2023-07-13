@@ -1,5 +1,6 @@
 package com.booleanuk.extension;
 
+import com.booleanuk.core.Filling;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -83,6 +84,28 @@ public class BobBagelsExtensionTest {
         //then
         assertFalse(basketExt.getBagelsInBasket().contains(bagelO));
     }
+
+    @Test
+    public void shouldRemoveCoffeeFromBasket(){
+        //given
+        basketManager.add(coffeeB);
+        //when
+        basketManager.remove(coffeeB);
+        //then
+        assertFalse(basketExt.getCoffeesInBasket().contains(coffeeB));
+    }
+
+    @Test
+    public void shouldRemoveCoffeeFromBasket(){
+        //given
+        basketManager.add(fillingB);
+        //when
+        basketManager.remove(fillingB);
+        //then
+        assertFalse(basketExt.getFillingInBasket().contains(fillingB));
+    }
+
+
 
 
 }
