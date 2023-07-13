@@ -1,7 +1,4 @@
-package com.booleanuk.core;
-
-import java.util.HashMap;
-import java.util.HashSet;
+package com.booleanuk.extension;
 
 public class Item {
     private final IItemType itemType;

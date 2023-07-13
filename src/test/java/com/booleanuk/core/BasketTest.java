@@ -67,4 +67,22 @@ public class BasketTest {
         basket.removeItem(BagelType.BGLE);
         Assertions.assertEquals(1.86, basket.getTotalPrice());
     }
+    @Test
+    public void discountTest() {
+        Basket basket = new Basket();
+        basket.setCapacity(24);
+        basket.addItem(BagelType.BGLO);
+        basket.addItem(BagelType.BGLO);
+        basket.addItem(BagelType.BGLO);
+        basket.addItem(BagelType.BGLO);
+        basket.addItem(BagelType.BGLO);
+        basket.addItem(BagelType.BGLO);
+        basket.addItem(BagelType.BGLO);
+        basket.addItem(BagelType.BGLO);
+        basket.addItem(BagelType.BGLO);
+        basket.addItem(BagelType.BGLO);
+        basket.addItem(BagelType.BGLO);
+        basket.addItem(BagelType.BGLO);
+        basket.calculateDiscounts();
+    }
 }

@@ -1,4 +1,4 @@
-package com.booleanuk.core;
+package com.booleanuk.extension;
 
 import java.util.*;
 
@@ -8,6 +8,7 @@ public class Basket {
     private int currentAmount = 0;
     private final ArrayList<Item> items;
     public ArrayList<String> availableDiscounts;
+    private HashMap<String, IItemType> itemTypeBySku;
     public int getCapacity() {
         return capacity;
     }
@@ -34,12 +35,27 @@ public class Basket {
         availableDiscounts.add("6*BGLO,newPrice=2.49");
         availableDiscounts.add("12*BGLP,newPrice=3.99");
         availableDiscounts.add("6*BGLE,newPrice=2.49");
-//        availableDiscounts.add("1*COFB,1*BGL,newPrice=1.25");
+        availableDiscounts.add("1*COFB,1*BGLP,newPrice=1.25");
+        availableDiscounts.add("1*COFB,1*BGLO,newPrice=1.25");
+        availableDiscounts.add("1*COFB,1*BGLE,newPrice=1.25");
+        availableDiscounts.add("1*COFB,1*BGLS,newPrice=1.25");
+    }
+    public void fillItemsBySku() {
+        itemTypeBySku = new HashMap<String, IItemType>();
+        for (BagelType bagelType : BagelType.values())
+            itemTypeBySku.put(bagelType.getSku(), bagelType);
+        for (CoffeeType coffeeType : CoffeeType.values())
+            itemTypeBySku.put(coffeeType.getSku(), coffeeType);
     }
     public Basket() {
         fillAvailableDiscounts();
+        fillItemsBySku();
         items = new ArrayList<Item>();
         capacity = defaultCapacity;
+    }
+    public void clear() {
+        currentAmount = 0;
+        items.clear();
     }
 
     public boolean addItem(Item item) {
@@ -84,6 +100,20 @@ public class Basket {
         double totalPrice = 0;
         for (Item item : items)
             totalPrice += item.getPrice();
+        HashMap<String, Integer> activeDiscounts = calculateDiscounts();
+        for (String discountString : activeDiscounts.keySet()) {
+            double initialPrice = 0;
+            List<String> discountedItems = new LinkedList<String>(Arrays.asList(discountString.split(",")));
+            String priceString = discountedItems.remove(discountedItems.size() - 1);
+            double newPrice = Double.parseDouble(priceString.substring(priceString.indexOf("=") + 1));
+            for (String itemString : discountedItems) {
+                String itemSku = itemString.substring(itemString.indexOf("*") + 1);
+                int itemCount = Integer.parseInt(itemString.substring(0, itemString.indexOf("*")));
+                double a = itemTypeBySku.get(itemSku).getPrice();
+                initialPrice += itemTypeBySku.get(itemSku).getPrice() * (double)itemCount;
+            }
+            totalPrice -= (initialPrice - newPrice) * activeDiscounts.get(discountString);
+        }
         return Math.round(totalPrice * 100) / (double)100;
     }
     public HashMap<String, Integer> calculateDiscounts() {
@@ -98,8 +128,7 @@ public class Basket {
         HashMap<String, Integer> activeDiscounts = new HashMap<String, Integer>();
         for (String discountString : availableDiscounts) {
             List<String> discountedItems = new LinkedList<String>(Arrays.asList(discountString.split(",")));
-            String priceString = discountedItems.remove(discountedItems.size() - 1);
-            double newPrice = Double.parseDouble(priceString.substring(priceString.indexOf("=") + 1));
+            discountedItems.remove(discountedItems.size() - 1);
             int numberOfApplies = -1;
             for (String itemString : discountedItems) {
                 String itemSku = itemString.substring(itemString.indexOf("*") + 1);
