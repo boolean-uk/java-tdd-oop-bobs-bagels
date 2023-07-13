@@ -10,6 +10,8 @@ public class Basket {
     private Inventory inventory;
     private int capacity;
 
+    Bagle bagle;
+
     public Basket(int capacity) {
         this.capacity = capacity;
         items = new ArrayList<>();
@@ -22,6 +24,7 @@ public class Basket {
 
     public boolean addItem(String item) {
         if(inventory.checkAvailability(item) == true && items.size()<capacity) {
+            System.out.println("The product added to basket costs :" + inventory.getItemPrice(item));
             items.add(item);
             return true;
         }else {
@@ -29,7 +32,18 @@ public class Basket {
         }
 
     }
-
+    /*
+List<Bagle> bagles;
+    public void addFilling(String SKUofBagle,String SKUofFilling) {
+        double price = inventory.getItemPrice(SKUofBagle);
+        //String variant = inventory.getVariantBySKU(SKUofBagle);
+        //if(bagles.contains(bagle)){
+        //    bagle.addFilling(SKUofFilling);
+        //}
+       // bagle = new Bagle(SKUofBagle, price, variant);
+        //bagle.addFilling(SKUofFilling);
+    }
+*/
     public boolean removeItem(String item) {
         if(items.contains(item)) {
             items.remove(item);
