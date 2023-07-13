@@ -12,9 +12,9 @@ public class Basket {
         this.capacity = capacity;
     }
 
-    public void addProduct(Bagel bagel) throws IllegalAccessException {
+    public void addProduct(Bagel bagel)  {
         if (isFull()) {
-            throw new IllegalAccessException("Basket is already full");
+            throw new NoSuchElementException("Basket is already full");
         }
         products.add(bagel);
     }
