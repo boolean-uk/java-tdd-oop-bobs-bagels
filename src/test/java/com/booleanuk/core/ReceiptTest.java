@@ -9,29 +9,29 @@ import com.booleanuk.core.receipt.Receipt;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.math.BigDecimal;
+
 public class ReceiptTest {
 
 
     @Test
-    public void shouldCreateReceiptWithOneEntry()
-    {
+    public void shouldCreateReceiptWithOneEntry() {
         Basket basket = new Basket();
-        Bagel bagel = new Bagel("SKU1",0.51);
+        Bagel bagel = new Bagel("SKU1", BigDecimal.valueOf(0.51));
         basket.addProduct(bagel);
         Receipt receipt = new Receipt();
         receipt.createReceipt(basket);
-        Assertions.assertEquals(1,receipt.getListOfProducts().size());
+        Assertions.assertEquals(1, receipt.getListOfProducts().size());
     }
 
     @Test
-    public void shouldPrintReceiptWithOneEntry()
-    {
+    public void shouldPrintReceiptWithOneEntry() {
 
         Basket basket = new Basket();
-        Bagel onionBagel = new Bagel("BGLO",0.49);
-        Bagel plainBagel = new Bagel("BGLP",0.39);
-        Bagel everythingBagel = new Bagel("BGLE",0.49);
-        Bagel sesameBagel = new Bagel("BGLS",0.49);
+        Bagel onionBagel = new Bagel("BGLO",BigDecimal.valueOf(0.49));
+        Bagel plainBagel = new Bagel("BGLP",BigDecimal.valueOf(0.39));
+        Bagel everythingBagel = new Bagel("BGLE",BigDecimal.valueOf(0.49));
+        Bagel sesameBagel = new Bagel("BGLS",BigDecimal.valueOf(0.49));
         onionBagel.setVariant(BagelVariant.Onion);
         plainBagel.setVariant(BagelVariant.Plain);
         everythingBagel.setVariant(BagelVariant.Everything);
@@ -52,9 +52,9 @@ public class ReceiptTest {
    @Test
    public void shouldPrintBagelOnReceiptProperly()
    {
-       Bagel onionBagel = new Bagel("BGLO",0.49);
+       Bagel onionBagel = new Bagel("BGLO",BigDecimal.valueOf(0.49));
        onionBagel.setVariant(BagelVariant.Onion);
-       Filling filling = new Filling("FILB",0.12);
+       Filling filling = new Filling("FILB",BigDecimal.valueOf(0.12));
        filling.setVariant(FillingVariant.Bacon);
        onionBagel.addFilling(filling);
        Receipt receipt = new Receipt();
@@ -67,15 +67,15 @@ public class ReceiptTest {
     public  void shouldPrintReceiptWithFillings()
    {
        Basket basket = new Basket();
-       Bagel onionBagel = new Bagel("BGLO",0.49);
-       Bagel plainBagel = new Bagel("BGLP",0.39);
-       Bagel everythingBagel = new Bagel("BGLE",0.49);
-       Bagel sesameBagel = new Bagel("BGLS",0.49);
+       Bagel onionBagel = new Bagel("BGLO",BigDecimal.valueOf(0.49));
+       Bagel plainBagel = new Bagel("BGLP",BigDecimal.valueOf(0.39));
+       Bagel everythingBagel = new Bagel("BGLE",BigDecimal.valueOf(0.49));
+       Bagel sesameBagel = new Bagel("BGLS",BigDecimal.valueOf(0.49));
        onionBagel.setVariant(BagelVariant.Onion);
        plainBagel.setVariant(BagelVariant.Plain);
        everythingBagel.setVariant(BagelVariant.Everything);
        sesameBagel.setVariant(BagelVariant.Sesame);
-       Filling filling = new Filling("FILB",0.12);
+       Filling filling = new Filling("FILB",BigDecimal.valueOf(0.12));
        filling.setVariant(FillingVariant.Bacon);
        onionBagel.addFilling(filling);
        basket.addProduct(onionBagel);

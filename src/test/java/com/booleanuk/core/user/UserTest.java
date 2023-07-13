@@ -5,6 +5,8 @@ import com.booleanuk.core.products.Bagel;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.math.BigDecimal;
+
 public class UserTest {
 
     @Test
@@ -46,7 +48,7 @@ public class UserTest {
 
     @Test
     public void shouldCustomerCheckThePrice() {
-        Bagel bagel = new Bagel("BGLO", 0.25);
+        Bagel bagel = new Bagel("BGLO", BigDecimal.valueOf(0.25));
         Customer customer = new Customer("fullname");
 
         Assertions.assertEquals(bagel.getPrice(), customer.checkProductPrice(bagel));

@@ -2,6 +2,8 @@ package com.booleanuk.core.user;
 
 import com.booleanuk.core.products.Product;
 
+import java.math.BigDecimal;
+
 public abstract class User {
     private String fullName;
 
@@ -9,7 +11,7 @@ public abstract class User {
         this.fullName = fullName;
     }
 
-    public double checkProductPrice(Product product) {
+    public BigDecimal checkProductPrice(Product product) {
         return product.getPrice();
     }
 

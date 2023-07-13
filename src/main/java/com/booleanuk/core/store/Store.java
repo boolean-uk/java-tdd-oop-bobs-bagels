@@ -21,10 +21,10 @@ public class Store {
     private final static String fillings = "/filling.json";
     private final static String coffees = "/coffee.json";
     private static Store INSTANCE;
+    private final List<Discount> availableDiscounts = new ArrayList<>(0);
     private List<Product> availableProducts = new ArrayList<>(0);
 
-
-    public Store() {
+    private Store() {
         loadAvailableBagels();
         loadAvailableCoffees();
         loadAvailableFillings();
@@ -49,6 +49,16 @@ public class Store {
         return jsonContentBuilder.toString();
     }
 
+    public List<Discount> getAvailableDiscounts() {
+        return availableDiscounts;
+    }
+
+    public void addDiscount(Discount discount) {
+        if (!availableDiscounts.contains(discount)) {
+            this.availableDiscounts.add(discount);
+        }
+    }
+
     private void loadAvailableBagels() {
         try {
             InputStream inputStream = Store.class.getResourceAsStream(bagels);
@@ -58,7 +68,7 @@ public class Store {
             JsonArray jsonArray = gson.fromJson(json, JsonArray.class);
 
             for (JsonElement jsonElement : jsonArray) {
-                var product = gson.fromJson(jsonElement, Bagel.class);
+                Bagel product = gson.fromJson(jsonElement, Bagel.class);
                 addAvailableProducts(product);
             }
         } catch (Exception e) {

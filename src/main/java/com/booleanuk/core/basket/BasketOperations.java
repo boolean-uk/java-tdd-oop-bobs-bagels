@@ -2,6 +2,8 @@ package com.booleanuk.core.basket;
 
 import com.booleanuk.core.products.Product;
 
+import java.math.BigDecimal;
+
 public interface BasketOperations {
     boolean addProduct(Product product);
 
@@ -11,7 +13,7 @@ public interface BasketOperations {
 
     boolean isProductInBasket(Product product);
 
-    double summarizeBasket();
+    BigDecimal summarizeBasket();
 
     int getProductsAmount();
 }

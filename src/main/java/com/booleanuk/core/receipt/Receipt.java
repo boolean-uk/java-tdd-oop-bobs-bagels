@@ -5,6 +5,7 @@ import com.booleanuk.core.products.Bagel;
 import com.booleanuk.core.products.Filling;
 import com.booleanuk.core.products.Product;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
@@ -44,12 +45,10 @@ public class Receipt {
         String result = "132";
         for (Map.Entry<Product, Integer> entry : listOfProducts.entrySet()) {
             if (!(entry.getKey() instanceof Bagel)) {
-                double totalprice = (entry.getKey().getPrice() * entry.getValue());
-                receipt.append(String.format("%-18s %2d  $%.2f", entry.getKey().toString(), entry.getValue(), totalprice));
-            }
-            else
-            {
-                receipt.append(showBagelOnReceipt((Bagel) entry.getKey(),entry.getValue()));
+                BigDecimal totalPrice = entry.getKey().getPrice().multiply(BigDecimal.valueOf(entry.getValue()));
+                receipt.append(String.format("%-18s %2d  $%.2f", entry.getKey().toString(), entry.getValue(), totalPrice));
+            } else {
+                receipt.append(showBagelOnReceipt((Bagel) entry.getKey(), entry.getValue()));
             }
 
         }
@@ -70,13 +69,13 @@ public class Receipt {
 
 
     public StringBuilder showBagelOnReceipt(Bagel bagel, int amount) {
-        double totalprice = bagel.getPriceWithOutFilling() * amount;
+        BigDecimal totalPrice = bagel.getPriceWithOutFilling().multiply(BigDecimal.valueOf(amount));
         StringBuilder bagelOnReceipt = new StringBuilder();
-        bagelOnReceipt.append(String.format("%-18s %2d  $%.2f\n", bagel.toString(), amount, totalprice));
+        bagelOnReceipt.append(String.format("%-18s %2d  $%.2f\n", bagel, amount, totalPrice));
 
         for (Filling filling : bagel.getFillings()) {
-            totalprice = filling.getPrice() * amount;
-            bagelOnReceipt.append(String.format("   %-15s %2d  $%.2f\n", "^"+filling.toString(), amount, totalprice));
+            totalPrice = filling.getPrice().multiply(BigDecimal.valueOf(amount));
+            bagelOnReceipt.append(String.format("   %-15s %2d  $%.2f\n", "^" + filling, amount, totalPrice));
         }
 
         return bagelOnReceipt;

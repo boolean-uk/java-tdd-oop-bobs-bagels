@@ -1,8 +1,13 @@
 package com.booleanuk.core.basket;
 
 import com.booleanuk.core.products.Product;
+import com.booleanuk.core.store.Discount;
+import com.booleanuk.core.store.Store;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 
 public class Basket implements BasketOperations {
@@ -29,7 +34,7 @@ public class Basket implements BasketOperations {
     }
 
     public void setCapacity(int capacity) {
-        if (capacity <= 1) {
+        if (capacity < 1) {
             throw new IllegalArgumentException("Capacity cant be smaller than 1");
         }
         this.capacity = capacity;
@@ -41,6 +46,17 @@ public class Basket implements BasketOperations {
             return false;
         }
         products.add(product);
+        return true;
+    }
+
+
+    public boolean addProduct(Product product, int quantity) {
+        for (int i = 0; i < quantity; i++) {
+            if (isFull()) {
+                return false;
+            }
+            products.add(product);
+        }
         return true;
     }
 
@@ -65,9 +81,44 @@ public class Basket implements BasketOperations {
     }
 
     @Override
-    public double summarizeBasket() {
-        return products.stream().mapToDouble(Product::getPrice).sum();
+    public BigDecimal summarizeBasket() {
+        Store store = Store.getInstance();
 
+        HashMap<Product, BigDecimal> discounts = new HashMap<>();
+
+
+        BigDecimal sum = products.stream().map(Product::getPrice).reduce(BigDecimal.ZERO, BigDecimal::add);
+
+//        BigDecimal sum = BigDecimal.valueOf(products.stream().mapToDouble(Product::getPrice).sum());
+
+        for (Discount discount : store.getAvailableDiscounts()) {
+            if (products.contains(discount.getProduct()) && Collections.frequency(products, discount.getProduct()) == discount.getRequiredAmount()) {
+                if (discount.getOptionalRequiredProduct() != null && products.contains(discount.getOptionalRequiredProduct())) {
+
+//                    Calculate received discount on this item
+                    var productDiscount = discount.getProduct().getPrice().multiply(BigDecimal.valueOf(discount.getRequiredAmount())).subtract(discount.getDiscountedPrice());
+                    discounts.put(discount.getProduct(), productDiscount);
+
+                    sum = sum
+                            .subtract(discount.getProduct().getPrice()
+                                    .multiply(BigDecimal.valueOf(discount.getRequiredAmount())))
+                            .subtract(discount.getOptionalRequiredProduct().getPrice());
+                } else {
+
+//                    Calculate received discount on this item
+                    var productDiscount = discount.getProduct().getPrice().multiply(BigDecimal.valueOf(discount.getRequiredAmount())).subtract(discount.getDiscountedPrice());
+                    discounts.put(discount.getProduct(), productDiscount);
+
+                    sum = sum
+                            .subtract(discount.getProduct().getPrice()
+                                    .multiply(BigDecimal.valueOf(discount.getRequiredAmount())));
+                }
+
+                if (BigDecimal.ZERO.equals(sum)) sum = BigDecimal.ZERO;
+                sum = sum.add(discount.getDiscountedPrice());
+            }
+        }
+        return sum;
     }
 
     @Override
