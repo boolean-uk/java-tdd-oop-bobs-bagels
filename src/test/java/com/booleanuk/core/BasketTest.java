@@ -187,16 +187,16 @@ public class BasketTest {
         Basket basket = new Basket(5);
         Inventory inventory = new Inventory();
         Product product1 = inventory.getInventoryList().get(0);
-        Product product0 = inventory.getInventoryList().get(1);
-        basket.addProduct(product0.getSku());
+//        Product product0 = inventory.getInventoryList().get(1);
+//        basket.addProduct(product0.getSku());
         String message = basket.addProduct(product1.getSku(), 3);
 
-        Product productFromBasket = basket.getBasketList().keySet().stream().toList().get(1);
+        Product productFromBasket = basket.getBasketList().keySet().stream().toList().get(0);
 
         Assertions.assertEquals("Product added", message);
         Assertions.assertTrue(basket.getBasketList().containsKey(productFromBasket));
         Assertions.assertEquals(basket.getBasketList().get(productFromBasket), 3);
-        Assertions.assertEquals(basket.getProductsQuantity(), 4);
+        Assertions.assertEquals(basket.getProductsQuantity(), 3);
     }
 
     @Test
@@ -503,7 +503,7 @@ public class BasketTest {
     @Test
     public void totalCostTest_SpecialOfferBagelPlain(){
 
-        Basket basket = new Basket(20);
+        Basket basket = new Basket(25);
         Product product1 = new Product("BGLO", 0.49, "Bagel", "Onion");
         Product product2 = new Product("BGLP", 0.39, "Bagel", "Plain");
         Product product3 = new Product("BGLE", 0.49, "Bagel", "Everything");

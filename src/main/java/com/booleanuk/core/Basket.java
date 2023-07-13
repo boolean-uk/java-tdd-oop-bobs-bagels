@@ -210,9 +210,9 @@ public class Basket {
     public double totalCost() {
         double totalCost = 0.00;
         for (Map.Entry<Product, Integer> entry : basketList.entrySet()) {
-            System.out.println("K: " + entry.getKey());
-            System.out.println("V: " + entry.getValue());
-            if ((entry.getKey().getSku().equals("BGLO")|| entry.getKey().getSku().equals("BGLE"))
+//            System.out.println("K: " + entry.getKey());
+//            System.out.println("V: " + entry.getValue());
+            if ((entry.getKey().getSku().equals("BGLO") || entry.getKey().getSku().equals("BGLE"))
                     && entry.getValue() >= 6) {
                 int quantityOfSpecialPrice = entry.getValue() / 6;
                 int rest = entry.getValue() % 6;
