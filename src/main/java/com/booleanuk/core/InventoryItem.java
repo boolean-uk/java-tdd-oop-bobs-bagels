@@ -15,6 +15,6 @@ public class InventoryItem {
 
     @Override
     public String toString(){
-        return this.variant + " " + this.name + " £" + this.price + "/n";
+        return this.variant + " " + this.name + " £" + this.price + "\n";
     }
 }

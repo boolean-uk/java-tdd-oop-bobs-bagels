@@ -2,8 +2,12 @@ package com.booleanuk.core;
 
 public class Manager {
 
-    public void changeBasketCapacity(int newCapacity)
+    public boolean changeBasketCapacity(int newCapacity)
     {
-        Basket.setBasketCapacity(newCapacity);
+        if (newCapacity>Basket.getCapacity()){
+            Basket.setBasketCapacity(newCapacity);
+            return true;
+        }
+        return false;
     }
 }

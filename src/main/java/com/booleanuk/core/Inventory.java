@@ -52,4 +52,12 @@ public class Inventory {
         } return "";
     }
 
+    public String getAllItems(){
+        String allItems = "";
+        for (int i = 0; i < inventoryItemList.size(); i++) {
+            allItems += "" + i + ". " + inventoryItemList.get(i).toString();
+        }
+        return allItems;
+    }
+
 }
