@@ -1,6 +1,7 @@
 package com.booleanuk.extension;
 
 import java.util.HashMap;
+import java.util.List;
 
 public class Inventory {
     private static final HashMap<String, Product> products = new HashMap<>() {{
@@ -37,9 +38,37 @@ public class Inventory {
             return 0;
 
         Discount discount = discounts.get(productSku);
-        int size = discount.getDiscountPackSize();
-        int discountPacks = basketProducts.get(productSku) / size;
-        basketProducts.put(productSku, basketProducts.get(productSku) - discountPacks * size);
-        return discountPacks * size * products.get(productSku).getPrice() - discountPacks * discount.getPackPriceAfterDiscount();
+        int packSize = discount.getDiscountPackSize();
+        int discountPacks = basketProducts.get(productSku) / packSize;
+        int quantity = discountPacks * packSize;
+
+        basketProducts.put(productSku, basketProducts.get(productSku) - quantity);
+
+        return quantity * products.get(productSku).getPrice()
+                - discountPacks * discount.getPackPriceAfterDiscount();
+    }
+
+    public static int getCoffeeDiscount(String coffeeSKU, HashMap<String, Integer> basketProducts){
+        int discount = 0;
+
+        List<String> bagels = basketProducts.keySet()
+                .stream()
+                .filter(s -> s.startsWith("BGL"))
+                .toList();
+
+        for (String productSKU: bagels) {
+            while (basketProducts.get(coffeeSKU) > 0 && basketProducts.get(productSKU) > 0) {
+                basketProducts.put(productSKU, basketProducts.get(productSKU) - 1);
+                basketProducts.put(coffeeSKU, basketProducts.get(coffeeSKU) - 1);
+
+                discount += products.get(productSKU).getPrice() + products.get(coffeeSKU).getPrice()
+                        - 125;
+            }
+
+            if (basketProducts.get(coffeeSKU) == 0)
+                return discount;
+        }
+
+        return discount;
     }
 }

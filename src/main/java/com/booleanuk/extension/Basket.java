@@ -45,16 +45,19 @@ public class Basket {
         int cost = 0;
         HashMap<String, Integer> productsInBasket = new HashMap<>(productsCount);
 
-        for (String productType : productsInBasket.keySet()) {
-            cost += productsInBasket.get(productType) * Inventory.getProducts()
-                    .get(productType)
+        for (String productSKU : productsInBasket.keySet()) {
+            cost += productsInBasket.get(productSKU) * Inventory.getProducts()
+                    .get(productSKU)
                     .getPrice();
         }
 
-        for(String productType : productsInBasket.keySet()){
-            cost -= Inventory.getDiscount(productType,productsInBasket);
+        for(String productSKU : productsInBasket.keySet()){
+            cost -= Inventory.getDiscount(productSKU, productsInBasket);
+            if (productSKU.equals("COFB")) {
+                cost -= Inventory.getCoffeeDiscount(productSKU, productsInBasket);
+            }
         }
-
+        
         return (double) cost / 100;
     }
 

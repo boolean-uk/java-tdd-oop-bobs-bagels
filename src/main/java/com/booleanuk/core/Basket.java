@@ -49,9 +49,9 @@ public class Basket {
 
     public double totalCost(){
         double cost = 0;
-        for (String bagelType : productsCount.keySet()) {
-            cost += productsCount.get(bagelType) * Inventory.getProducts()
-                                                            .get(bagelType)
+        for (String productSKu : productsCount.keySet()) {
+            cost += productsCount.get(productSKu) * Inventory.getProducts()
+                                                            .get(productSKu)
                                                             .getPrice();
         }
         return cost;
