@@ -6,9 +6,6 @@ public class Bagel extends Product{
 
     BagelVariant bagelVariant;
 
-
-
-
     public Bagel(){
         super();
     }

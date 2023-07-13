@@ -1,8 +1,4 @@
 package com.booleanuk.extension;
 
-public class ReciptCreator {
-
-
-
-
+public class Recipt {
 }
