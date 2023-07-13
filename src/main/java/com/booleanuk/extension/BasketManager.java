@@ -16,29 +16,35 @@ public class BasketManager {
     }
 
 
-    public void add(BagelExt bagelExt) {
+    public boolean add(BagelExt bagelExt) {
 
-        if (!isBasketFull()) {
+        if (checkIsBasketFull()) {
             basketExt.add(bagelExt);
+            return true;
         } else {
             System.out.println("Basket is full!");
+            return false;
         }
 
 
     }
-    public void add(CoffeeExt coffeeExt) {
-        if (!isBasketFull()) {
+    public boolean add(CoffeeExt coffeeExt) {
+        if (checkIsBasketFull()) {
             basketExt.add(coffeeExt);
+            return true;
         } else {
             System.out.println("Basket is full!");
+            return false;
         }
     }
-    public void add(FillingExt fillingExt) {
-        if (!isBasketFull()) {
+    public boolean add(FillingExt fillingExt) {
+        if (checkIsBasketFull()) {
             basketExt.add(fillingExt);
+            return true;
 
         } else {
             System.out.println("Basket is full!");
+            return false;
         }
     }
 
@@ -52,13 +58,21 @@ public class BasketManager {
         basketExt.remove(coffeeExt);
     }
 
-    private boolean isBasketFull(){
+    private boolean checkIsBasketFull(){
         int occupiedCapacity = basketExt.getBagelsInBasket().size() + basketExt.getCoffeesInBasket().size() + basketExt.getFillingInBasket().size();
-        if (occupiedCapacity >= basketExt.getCapacity()) {
-            return true;
-        }
-        return false;
-
+        return occupiedCapacity < basketExt.getCapacity();
 
     }
+
+    private boolean checkSanity(CoffeeExt coffeeExt){
+        return basketExt.getCoffeesInBasket().contains(coffeeExt);
+    }
+    private boolean checkSanity(FillingExt fillingExt){
+        return basketExt.getFillingInBasket().contains(fillingExt);
+    }
+    private boolean checkSanity(BagelExt bagelExt){
+        return basketExt.getBagelsInBasket().contains(bagelExt);
+    }
+
+
 }
