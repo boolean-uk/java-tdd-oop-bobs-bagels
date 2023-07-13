@@ -1,6 +1,5 @@
 package com.booleanuk.extension;
 
-import com.booleanuk.core.Filling;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -122,16 +121,22 @@ public class BobBagelsExtensionTest {
     }
 
     @Test
-    public void shouldChangeCapacityTo10(){
+    public void shouldChangeCapacityTo10() {
         //when
         basketExt.setCapacity(10);
         //then
-        assertEquals(10,basketExt.getCapacity());
+        assertEquals(10, basketExt.getCapacity());
     }
 
-
-
-
+    @Test
+    public void shouldReturnFalseIfSanityIsNotOk() {
+        //given
+        int isOk;
+        //when
+        isOk = basketManager.remove(bagelE);
+        //then
+        assertFalse(isOk);
+    }
 
 
 }
