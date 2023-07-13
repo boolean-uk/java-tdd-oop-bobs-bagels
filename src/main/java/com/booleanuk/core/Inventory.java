@@ -11,16 +11,6 @@ public class Inventory {
         fillings = new ArrayList<>();
     }
 
-    public void addBagel(Bagel bagel) {
-        bagels.add(bagel);
-        System.out.println("Added bagel to the inventory.");
-    }
-
-    public void removeBagel(Bagel bagel) {
-        bagels.remove(bagel);
-        System.out.println("Removed bagel from the inventory.");
-    }
-
     public void addFilling(Filling filling) {
         fillings.add(filling);
         System.out.println("Added filling to the inventory.");
@@ -31,7 +21,7 @@ public class Inventory {
         System.out.println("Removed filling from the inventory.");
     }
 
-    public Bagel getBagelBySKU(String sku) {
+    public Bagel getBagelBySku(String sku) {
         for (Bagel bagel : bagels) {
             if (bagel.getSku().equals(sku)) {
                 return bagel;
@@ -40,7 +30,7 @@ public class Inventory {
         return null;
     }
 
-    public Filling getFillingBySKU(String sku) {
+    public Filling getFillingBySku(String sku) {
         for (Filling filling : fillings) {
             if (filling.getSku().equals(sku)) {
                 return filling;
