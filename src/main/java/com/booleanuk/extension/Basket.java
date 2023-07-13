@@ -9,7 +9,8 @@ import static java.lang.Math.round;
 public class Basket {
 
     private List<Item> items;
-    private List<Item> copyItem;
+    private List<Item> coffeeList;
+    private List<Item> bagelList;
     private int capacity;
     private Inventory inventory;
 
@@ -22,15 +23,22 @@ public class Basket {
         items = new ArrayList<>();
         this.capacity = capacity;
         inventory = new Inventory();
+        coffeeList = new ArrayList<>();
+        bagelList = new ArrayList<>();
     }
 
     public boolean add(Item item) {
-        copyItem = new ArrayList<>(items);
         if (items.size() < capacity) {
             items.add(item);
+            if (item.getVariant().equals("Black")) {
+                coffeeList.add(item);
+            }
+            if (item.getName().equals("Bagel")) {
+                bagelList.add(item);
+            }
+
             if (item.getVariant().equals("Onion")) {
                 countBagelOnion++;
-
             } else if (item.getVariant().equals("Everything")) {
                 ++countBagelEverything;
             } else if (item.getVariant().equals("Plain")) {
@@ -76,7 +84,6 @@ public class Basket {
         return false;
     }
 
-
     public void changeCapacity(int newCapacity) {
         if (capacity > newCapacity)
             throw new RuntimeException("New capacity cannot be smaller than the old one");
@@ -85,6 +92,28 @@ public class Basket {
     }
 
     public double totalCost() {
+        int pairs = 0;
+        if (coffeeList.size() > bagelList.size()) {
+            pairs = bagelList.size();
+            for (int i = 0; i < bagelList.size(); i++) {
+                coffeeList.get(i).setPrice(0);
+            }
+            for (Item i: bagelList) {
+                i.setPrice(0);
+            }
+            sum += 1.25*pairs;
+        } else {
+            pairs = coffeeList.size();
+            for (int i = 0; i < coffeeList.size(); i++) {
+                bagelList.get(i).setPrice(0);
+            }
+            for (Item i: coffeeList) {
+                i.setPrice(0);
+            }
+
+            sum += 1.25*pairs;
+        }
+
         sum += items.stream()
                 .map(Item::getPrice)
                 .reduce(Double::sum)
