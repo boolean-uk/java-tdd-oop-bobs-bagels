@@ -1,21 +1,41 @@
 package com.booleanuk.core;
 
+import com.booleanuk.core.product.Coffee;
+import com.booleanuk.core.product.bagel.Bagel;
+import com.booleanuk.core.product.bagel.BagelType;
+import com.booleanuk.core.product.bagel.Filling;
+import com.booleanuk.core.product.specialoffer.BagelOffer;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
+import java.util.Arrays;
 import java.util.NoSuchElementException;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class BasketTest {
-    private static Bagel BAGEL;
+    private static Bagel BAGEL_ONION;
+    private static Bagel BAGEL_PLAIN;
+    private static Bagel BAGEL_EVERYTHING;
     private static Coffee COFFEE;
 
     @BeforeAll
     static void testSetup() {
-        BAGEL = Bagel.builder()
+        BAGEL_ONION = Bagel.builder()
+                .type(BagelType.BGLO)
+                .fillings(Filling.values())
+                .build();
+        BAGEL_PLAIN = Bagel.builder()
                 .type(BagelType.BGLP)
+                .fillings(Filling.values())
+                .build();
+        BAGEL_EVERYTHING = Bagel.builder()
+                .type(BagelType.BGLE)
                 .fillings(Filling.values())
                 .build();
         COFFEE = Coffee.COFB;
@@ -25,33 +45,33 @@ class BasketTest {
     void addBagel_shouldAddBagelIfBasketNotFull() {
         var basket = new Basket(1);
 
-        basket.addBagel(BAGEL);
+        basket.addBagel(BAGEL_PLAIN);
 
-        assertTrue(basket.getBagels().containsKey(BAGEL));
+        assertTrue(basket.getProducts().contains(BAGEL_PLAIN));
     }
 
     @Test
     void addBagel_shouldThrowIfBasketFull() {
         var basket = new Basket(0);
 
-        assertThrows(IllegalStateException.class, () -> basket.addBagel(BAGEL));
+        assertThrows(IllegalStateException.class, () -> basket.addBagel(BAGEL_PLAIN));
     }
 
     @Test
     void removeBagel_shouldRemoveBagelIfPresent() {
         var basket = new Basket(1);
-        basket.addBagel(BAGEL);
+        basket.addBagel(BAGEL_PLAIN);
 
-        basket.removeBagel(BAGEL);
+        basket.removeBagel(BAGEL_PLAIN);
 
-        assertFalse(basket.getBagels().containsKey(BAGEL));
+        assertFalse(basket.getProducts().contains(BAGEL_PLAIN));
     }
 
     @Test
     void removeBagel_shouldThrowIfAbsent() {
         var basket = new Basket(1);
 
-        assertThrows(NoSuchElementException.class, () -> basket.removeBagel(BAGEL));
+        assertThrows(NoSuchElementException.class, () -> basket.removeBagel(BAGEL_PLAIN));
     }
 
     @Test
@@ -60,7 +80,7 @@ class BasketTest {
 
         basket.addCoffee(COFFEE);
 
-        assertTrue(basket.getCoffees().containsKey(COFFEE));
+        assertTrue(basket.getProducts().contains(COFFEE));
     }
 
     @Test
@@ -77,7 +97,7 @@ class BasketTest {
 
         basket.removeCoffee(COFFEE);
 
-        assertFalse(basket.getCoffees().containsKey(COFFEE));
+        assertFalse(basket.getProducts().contains(COFFEE));
     }
 
     @Test
@@ -95,12 +115,78 @@ class BasketTest {
     }
 
     @Test
-    void totalPrice_shouldCorrectlyCalculatePriceForNonEmptyBasket() {
+    void totalPrice_shouldCorrectlyCalculatePriceForNoDiscounts() {
         var basket = new Basket(2);
-        basket.addBagel(BAGEL);
+        basket.addBagel(BAGEL_PLAIN);
+        basket.addBagel(BAGEL_PLAIN);
+
+        var expectedPrice = BAGEL_PLAIN.getPrice().multiply(BigDecimal.valueOf(2));
+
+        assertEquals(expectedPrice, basket.totalPrice());
+    }
+
+    @Test
+    void totalPrice_shouldCorrectlyCalculatePriceForOnionBagelOffer() {
+        var cap = 6;
+        var basket = new Basket(cap);
+        for (int i = 0; i < cap; i++) {
+            basket.addBagel(BAGEL_ONION);
+        }
+
+        var fillingPrice = Arrays.stream(BAGEL_ONION.fillings())
+                .map(Filling::getPrice)
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
+        var expectedPrice = BagelOffer.Type.SixOnion.getPrice()
+                .add(BigDecimal.valueOf(cap).multiply(fillingPrice));
+
+        assertEquals(expectedPrice, basket.totalPrice());
+    }
+
+    @Test
+    void totalPrice_shouldCorrectlyCalculatePriceForPlainBagelOffer() {
+        var cap = 12;
+        var basket = new Basket(cap);
+        for (int i = 0; i < cap; i++) {
+            basket.addBagel(BAGEL_PLAIN);
+        }
+
+        var fillingPrice = Arrays.stream(BAGEL_PLAIN.fillings())
+                .map(Filling::getPrice)
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
+        var expectedPrice = BagelOffer.Type.TwelvePlain.getPrice()
+                .add(BigDecimal.valueOf(cap).multiply(fillingPrice));
+
+        assertEquals(expectedPrice, basket.totalPrice());
+    }
+
+    @Test
+    void totalPrice_shouldCorrectlyCalculatePriceForEverythingBagelOffer() {
+        var cap = 6;
+        var basket = new Basket(cap);
+        for (int i = 0; i < cap; i++) {
+            basket.addBagel(BAGEL_EVERYTHING);
+        }
+
+        var fillingPrice = Arrays.stream(BAGEL_EVERYTHING.fillings())
+                .map(Filling::getPrice)
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
+        var expectedPrice = BagelOffer.Type.SixEverything.getPrice()
+                .add(BigDecimal.valueOf(cap).multiply(fillingPrice));
+
+        assertEquals(expectedPrice, basket.totalPrice());
+    }
+
+    @Test
+    void totalPrice_shouldCorrectlyCalculatePriceForBreakfastOffer() {
+        var basket = new Basket(2);
+        basket.addBagel(BAGEL_EVERYTHING);
         basket.addCoffee(COFFEE);
 
-        var expectedPrice = BAGEL.price().add(COFFEE.getPrice());
+        var fillingPrice = Arrays.stream(BAGEL_EVERYTHING.fillings())
+                .map(Filling::getPrice)
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
+        var expectedPrice = BigDecimal.valueOf(1.25)
+                .add(fillingPrice);
 
         assertEquals(expectedPrice, basket.totalPrice());
     }
@@ -108,7 +194,7 @@ class BasketTest {
     @Test
     void resize_shouldResizeBasketIfNewCapacityGreaterThanOrEqualsToAmountOfItems() {
         var basket = new Basket(2);
-        basket.addBagel(BAGEL);
+        basket.addBagel(BAGEL_PLAIN);
         basket.addCoffee(COFFEE);
 
         var newCapacity = 5;
@@ -119,7 +205,7 @@ class BasketTest {
     @Test
     void resize_shouldThrowIfNewCapacitySmallerThanAmountOfItems() {
         var basket = new Basket(2);
-        basket.addBagel(BAGEL);
+        basket.addBagel(BAGEL_PLAIN);
         basket.addCoffee(COFFEE);
 
         assertThrows(IllegalArgumentException.class, () -> basket.resize(1));

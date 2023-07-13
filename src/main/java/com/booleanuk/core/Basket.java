@@ -1,18 +1,25 @@
 package com.booleanuk.core;
 
+import com.booleanuk.core.product.Coffee;
+import com.booleanuk.core.product.Product;
+import com.booleanuk.core.product.bagel.Bagel;
+import com.booleanuk.core.product.bagel.BagelType;
+import com.booleanuk.core.product.specialoffer.BagelOffer;
+import com.booleanuk.core.product.specialoffer.BreakfastOffer;
 import lombok.Getter;
 
 import java.math.BigDecimal;
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
 
 @Getter
 public class Basket {
-    private final Map<Bagel, Integer> bagels = new HashMap<>();
-    private final Map<Coffee, Integer> coffees = new HashMap<>();
+    private final List<Product> products = new ArrayList<>();
     private int capacity;
+    private final Map<BagelType, Integer> bagelTypeCounter = new HashMap<>();
 
     public Basket(int capacity) {
         this.capacity = capacity;
@@ -22,59 +29,44 @@ public class Basket {
         if (isFull()) {
             throw new IllegalStateException("Cannot add new bagel - basket is full");
         }
-        bagels.merge(bagel, 1, Integer::sum);
+
+        products.add(bagel);
+
+        bagelTypeCounter.merge(bagel.type(), 1, Integer::sum);
     }
 
     public void removeBagel(Bagel bagel) {
-        if (!bagels.containsKey(bagel)) {
-            throw new NoSuchElementException(String.format("Cannot remove %s - it's not in the basket", bagel));
+        if (!products.contains(bagel)) {
+            throw new NoSuchElementException("Cannot remove bagel because it's not in the basket");
         }
 
-        if (bagels.get(bagel) > 1) {
-            bagels.put(bagel, bagels.get(bagel) - 1);
-        } else {
-            bagels.remove(bagel);
-        }
+        products.remove(bagel);
+
+        bagelTypeCounter.merge(bagel.type(), -1, Integer::sum);
     }
 
     public void addCoffee(Coffee coffee) {
         if (isFull()) {
-            throw new IllegalStateException();
+            throw new IllegalStateException("Cannot add new coffee - basket is full");
         }
-        coffees.merge(coffee, 1, Integer::sum);
+
+        products.add(coffee);
     }
 
     public void removeCoffee(Coffee coffee) {
-        if (!coffees.containsKey(coffee)) {
-            throw new NoSuchElementException(String.format("Cannot remove %s - it's not in the basket", coffee));
+        if (!products.contains(coffee)) {
+            throw new NoSuchElementException("Cannot remove coffee because it's not in the basket");
         }
 
-        if (coffees.get(coffee) > 1) {
-            coffees.put(coffee, bagels.get(coffee) - 1);
-        } else {
-            coffees.remove(coffee);
-        }
+        products.remove(coffee);
     }
 
     public BigDecimal totalPrice() {
-        var discounts = getDiscounts();
-        var totalPrice = discounts.entrySet().stream()
-                .map(e -> {
-                    var price = e.getKey().getPrice();
-                    var amount = e.getValue();
+        var products = groupProductsIntoOffers(this.products);
 
-                    return price.multiply(BigDecimal.valueOf(amount));
-                })
+        return products.stream()
+                .map(Product::getPrice)
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
-
-        // TODO add prices of non-discount bagels and coffees to the total
-
-        return bagels.keySet().stream()
-                .map(b -> Arrays.stream(b.getFillings())
-                        .map(Filling::getPrice)
-                        .reduce(BigDecimal.ZERO, BigDecimal::add)
-                )
-                .reduce(totalPrice, BigDecimal::add);
     }
 
     public void resize(int capacity) {
@@ -86,47 +78,90 @@ public class Basket {
     }
 
     private int itemAmount() {
-        var amount = bagels.values().stream()
-                .reduce(0, Integer::sum);
-        return coffees.values().stream()
-                .reduce(amount, Integer::sum);
+        return products.size();
     }
 
     private boolean isFull() {
         return itemAmount() == capacity;
     }
 
-    private Map<Discount, Integer> getDiscounts() {
-        var onionBagelAmount = countBagelType(BagelType.BGLO);
-        var plainBagelAmount = countBagelType(BagelType.BGLP);
-        var everythingBagelAmount = countBagelType(BagelType.BGLE);
-        var sesameBagelAmount = countBagelType(BagelType.BGLS);
-        var leftoverBagelAmount = onionBagelAmount % 6 + plainBagelAmount % 12 + everythingBagelAmount % 6 + sesameBagelAmount;
-        var coffeeAmount = countCoffees();
-        var breakfastSetAmount = Math.min(leftoverBagelAmount, coffeeAmount);
+    private List<Product> groupProductsIntoOffers(List<Product> products) {
+        List<Product> productsGrouped = new ArrayList<>(products);
+        productsGrouped = groupBagelOffers(productsGrouped);
+        productsGrouped = groupBreakfastOffers(productsGrouped);
 
-        var discounts = new HashMap<Discount, Integer>();
-
-        discounts.put(Discount.SixOnion, onionBagelAmount / 6);
-        discounts.put(Discount.TwelvePlain, plainBagelAmount / 12);
-        discounts.put(Discount.SixEverything, everythingBagelAmount / 6);
-        discounts.put(Discount.BreakfastSet, breakfastSetAmount);
-
-        return discounts;
+        return productsGrouped;
     }
 
-    private int countBagelType(BagelType type) {
-        return bagels.entrySet().stream()
-                .filter(e -> {
-                    var bagelType = e.getKey().getType();
-                    return bagelType.equals(type);
-                })
-                .map(Map.Entry::getValue)
-                .reduce(0, Integer::sum);
+    private List<Product> groupBagelOffers(List<Product> products) {
+        var productsGrouped = new ArrayList<>(products);
+        for (var e : bagelTypeCounter.entrySet()) {
+            var type = e.getKey();
+            if (type.equals(BagelType.BGLS)) {
+                continue;
+            }
+            var amount = e.getValue();
+            var offerQuantity = switch (type) {
+                case BGLO, BGLE -> 6;
+                case BGLP -> 12;
+                default -> throw new IllegalStateException("Unexpected value: " + type);
+            };
+            var offerAmount = amount / offerQuantity;
+
+            var bagelsForAllOffers = new ArrayList<>(productsGrouped.stream()
+                    .filter(p -> p instanceof Bagel)
+                    .map(p -> (Bagel) p)
+                    .filter(b -> b.type().equals(type))
+                    .limit((long) offerAmount * offerQuantity)
+                    .toList());
+
+            productsGrouped.removeAll(bagelsForAllOffers);
+
+            while (!bagelsForAllOffers.isEmpty()) {
+                var bagelsForSingleOffer = new ArrayList<Bagel>();
+                for (int i = 0; i < offerQuantity; i++) {
+                    bagelsForSingleOffer.add(bagelsForAllOffers.remove(0));
+                }
+                var bagelOffer = BagelOffer.of(bagelsForSingleOffer.toArray(Bagel[]::new));
+                productsGrouped.add(bagelOffer);
+            }
+        }
+
+        return productsGrouped;
     }
 
-    private int countCoffees() {
-        return coffees.values().stream()
-                .reduce(0, Integer::sum);
+    private List<Product> groupBreakfastOffers(List<Product> products) {
+        var productsGrouped = new ArrayList<>(products);
+        var coffees = extractCoffees(productsGrouped);
+        var bagels = extractBagels(productsGrouped);
+
+        productsGrouped.removeAll(coffees);
+        productsGrouped.removeAll(bagels);
+
+        var breakfastOfferAmount = Math.min(coffees.size(), bagels.size());
+
+        for (int i = 0; i < breakfastOfferAmount; i++) {
+            var breakfastOffer = BreakfastOffer.of(bagels.remove(0), coffees.remove(0));
+            productsGrouped.add(breakfastOffer);
+        }
+
+        productsGrouped.addAll(coffees);
+        productsGrouped.addAll(bagels);
+
+        return productsGrouped;
+    }
+
+    private List<Coffee> extractCoffees(List<Product> products) {
+        return new ArrayList<>(products.stream()
+                .filter(p -> p instanceof Coffee)
+                .map(p -> (Coffee) p)
+                .toList());
+    }
+
+    private List<Bagel> extractBagels(List<Product> products) {
+        return new ArrayList<>(products.stream()
+                .filter(p -> p instanceof Bagel)
+                .map(p -> (Bagel) p)
+                .toList());
     }
 }

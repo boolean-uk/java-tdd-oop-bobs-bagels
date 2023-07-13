@@ -33,10 +33,16 @@ public enum Filling {
 ```
 
 ```java
+public interface Product {
+    BigDecimal getPrice();
+}
+```
+
+```java
 
 @RequiredArgsConstructor
 @Getter
-public enum Coffee {
+public enum Coffee implements Product {
     COFB("Black", BigDecimal.valueOf(.99)),
     COFW("White", BigDecimal.valueOf(1.19)),
     COFC("Cappuccino", BigDecimal.valueOf(1.29)),
@@ -48,16 +54,12 @@ public enum Coffee {
 ```
 
 ```java
-public class Bagel implements Product {
-    private final BagelType type;
-    private final Filling[] fillings;
 
-    public Bagel(BagelType type, Filling... fillings) {
-        this.type = type;
-        this.fillings = fillings;
-    }
-
-    public BigDecimal price() {
+@Builder
+@Getter
+public record Bagel(BagelType type, Filling... fillings) implements Product {
+    @Override
+    public BigDecimal getPrice() {
         // TODO
         return null;
     }
@@ -65,36 +67,81 @@ public class Bagel implements Product {
 ```
 
 ```java
-public record BreakfastSet(
-        Bagel bagel,
-        Coffee coffee
-) implements Product {
+public interface SpecialOffer extends Product {
 }
 ```
 
 ```java
-public record Discount(
-        Type type,
-        BigDecimal price
-) {
+
+@Getter
+public class BagelOffer implements SpecialOffer {
+    private final Type offerType;
+    private final List<Bagel> bagels;
+
+    private BagelOffer(Bagel... bagels) {
+        // TODO validation of amount and type of bagels (check if they conform to existing promotions)
+        this.bagels = List.of(bagels);
+        this.offerType = switch (bagels[0].type()) {
+            case BGLO -> Type.SixOnion;
+            case BGLP -> Type.TwelvePlain;
+            case BGLE -> Type.SixEverything;
+            default -> throw new IllegalStateException("Unexpected value: " + bagels[0].type());
+        };
+    }
+
+    public static BagelOffer of(Bagel... bagels) {
+        return new BagelOffer(bagels);
+    }
+
+    @Override
+    public BigDecimal getPrice() {
+        // TODO
+        return null;
+    }
+
+    @RequiredArgsConstructor
+    @Getter
     public enum Type {
-        SixOnion,
-        TwelvePlain,
-        SixEverything,
-        BreakfastSet,
+        SixOnion(BigDecimal.valueOf(2.49)),
+        TwelvePlain(BigDecimal.valueOf(3.99)),
+        SixEverything(BigDecimal.valueOf(2.49));
+
+        private final BigDecimal price;
     }
 }
 ```
 
 ```java
 
-import java.util.List;
+@Getter
+public class BreakfastOffer implements SpecialOffer {
+    private final Bagel bagel;
+    private final Coffee coffee;
+
+    private BreakfastOffer(Bagel bagel, Coffee coffee) {
+        this.bagel = bagel;
+        this.coffee = coffee;
+    }
+
+    public static BreakfastOffer of(Bagel bagel, Coffee coffee) {
+        return new BreakfastOffer(bagel, coffee);
+    }
+
+    @Override
+    public BigDecimal getPrice() {
+        // TODO
+        return null;
+    }
+}
+```
+
+```java
 
 @Getter
 public class Basket {
-    private final Map<Bagel, Integer> bagels = new HashMap<>();
-    private final Map<Coffee, Integer> coffees = new HashMap<>();
+    private final List<Product> products = new ArrayList<>();
     private int capacity;
+    private final Map<BagelType, Integer> bagelTypeCounter = new HashMap<>();
 
     public Basket(int capacity) {
         this.capacity = capacity;
@@ -126,17 +173,36 @@ public class Basket {
     }
 
     private int itemAmount() {
-        var amount = bagels.values().stream()
-                .reduce(0, Integer::sum);
-        return coffees.values().stream()
-                .reduce(amount, Integer::sum);
+        // TODO
+        return -1;
     }
 
     private boolean isFull() {
-        return itemAmount() == capacity;
+        // TODO
+        return false;
     }
 
-    private List<Discount> getDiscounts() {
+    private List<Product> groupProductsIntoOffers(List<Product> products) {
+        // TODO
+        return null;
+    }
+
+    private List<Product> groupBagelOffers(List<Product> products) {
+        // TODO
+        return null;
+    }
+
+    private List<Product> groupBreakfastOffers(List<Product> products) {
+        // TODO
+        return null;
+    }
+
+    private List<Coffee> extractCoffees(List<Product> products) {
+        // TODO
+        return null;
+    }
+
+    private List<Bagel> extractBagels(List<Product> products) {
         // TODO
         return null;
     }
