@@ -3,9 +3,10 @@ package com.booleanuk.extension;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
+import java.util.UUID;
+import java.util.stream.IntStream;
 
-import static com.booleanuk.extension.SKU.BGLO;
-import static com.booleanuk.extension.SKU.FILB;
+import static com.booleanuk.extension.SKU.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class BasketTest {
@@ -137,11 +138,11 @@ public class BasketTest {
         Basket basket = new Basket();
         store.addBasket(basket);
 
-        assertFalse(store.placeOrder(basket));
+        assertNull(store.placeOrder(basket));
 
         basket.addItem(new Bagel(SKU.BGLO));
         basket.addItem(new Bagel(SKU.BGLO));
-        assertTrue(store.placeOrder(basket));
+        assertNotNull(store.placeOrder(basket));
 
         assertEquals(0, store.getBaskets().size());
     }
@@ -155,5 +156,43 @@ public class BasketTest {
         basket.addItem(new Bagel(BGLO));
 
         assertEquals(BigDecimal.valueOf(0.98), basket.getTotalPrice());
+    }
+
+    @Test
+    public void testCountingItemQuantityForDiscount() {
+        Store store = new Store();
+        Basket basket = new Basket();
+        store.addBasket(basket);
+        basket.addItem(new Bagel(BGLO));
+        basket.addItem(new Bagel(BGLO));
+        UUID id = store.placeOrder(basket);
+        assertNotNull(store.getOrder(id));
+
+        assertEquals(BigDecimal.valueOf(2), store.getOrder(id).getTotalPriceAfterDiscount());
+    }
+
+    @Test
+    public void testSpecialOffers() {
+        Store store = new Store();
+        Basket basket = new Basket();
+        store.addBasket(basket);
+        basket.addItem(new Bagel(BGLO));
+        basket.addItem(new Bagel(BGLO));
+        for (int i = 0; i < 6; i++) {
+            basket.addItem(new Bagel(BGLP));
+            basket.addItem(new Bagel(BGLP));
+            basket.addItem(new Bagel(BGLE));
+        }
+        for (int i = 0; i < 3; i++) {
+            basket.addItem(new Bagel(COFB));
+        }
+        UUID id = store.placeOrder(basket);
+        Order order = store.getOrder(id);
+
+
+
+        assertEquals(23, order.getItems().values().stream().mapToInt(Integer::intValue).sum());
+//        assertEquals(BigDecimal.valueOf(11.57), basket.getTotalPrice());
+//        assertEquals(BigDecimal.valueOf(9.27), order.getTotalPriceAfterDiscount());
     }
 }

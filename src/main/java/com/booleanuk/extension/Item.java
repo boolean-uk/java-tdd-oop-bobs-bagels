@@ -17,6 +17,9 @@ public class Item {
         this.sku = ckeckedSKU;
     }
 
+    public SKU getSku() {
+        return sku;
+    }
     public BigDecimal getPrice() {
         return sku.getPrice();
     }

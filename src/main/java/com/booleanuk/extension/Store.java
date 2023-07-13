@@ -3,6 +3,7 @@ package com.booleanuk.extension;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 public class Store {
     private List<Basket> baskets;
@@ -13,13 +14,14 @@ public class Store {
         this.orders = new ArrayList<>();
     }
 
-    public boolean placeOrder(Basket basket) {
+    public UUID placeOrder(Basket basket) {
         if (basket.getItems().size() > 0) {
-            orders.add(new Order(basket));
+            Order order = new Order(basket);
+            orders.add(order);
             baskets.remove(basket);
-            return true;
+            return order.getId();
         }
-        return false;
+        return null;
     }
 
     public BigDecimal applySpecialOffers() {
@@ -32,5 +34,11 @@ public class Store {
 
     public List<Basket> getBaskets() {
         return baskets;
+    }
+
+    public Order getOrder(UUID id) {
+        return orders.stream().
+                filter(order -> order.getId().equals(id))
+                .findFirst().orElse(null);
     }
 }
