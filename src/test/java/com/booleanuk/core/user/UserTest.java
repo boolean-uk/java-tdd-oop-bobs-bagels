@@ -34,13 +34,14 @@ public class UserTest {
     @Test
     public void shouldManagerChangeTheBasketCapacity() {
         Basket basket = new Basket();
-        String fullName = "Fullname";
+        String fullName = "fullname";
         Manager manager = new Manager(fullName);
 
         Assertions.assertNotEquals(12, basket.getCapacity());
 
-        manager.changeBasketSize(basket, 12);
+        boolean changeResult = manager.changeBasketSize(basket, 12);
         Assertions.assertEquals(12, basket.getCapacity());
+        Assertions.assertTrue(changeResult);
     }
 
     @Test
