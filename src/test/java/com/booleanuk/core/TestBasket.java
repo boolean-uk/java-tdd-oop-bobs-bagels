@@ -8,12 +8,13 @@ import java.util.List;
 
 public class TestBasket {
     public Basket basket;
+    public Manager manager;
 
     @BeforeEach
     public void setUp() {
 
         basket = new Basket();
-        Manager manager = new Manager();
+        manager = new Manager();
         manager.changeBasketCapacity(2);
     }
 
@@ -58,14 +59,26 @@ public class TestBasket {
         basket.addToBasket("BGLO");
         basket.addToBasket("BGLP");
 
-        Assertions.assertEquals(0.88,basket.getTotalCost());
+        Assertions.assertEquals(88,basket.getTotalCost());
     }
     @Test
     public void whenGetTotalCostCalledWithFillings_totalCostIsReturned()  {
         basket.addToBasket("BGLO");
         basket.addToBasket("FILE");
 
-        Assertions.assertEquals(0.61,basket.getTotalCost());
+        Assertions.assertEquals(61,basket.getTotalCost());
+    }
+    @Test
+    public void when6BagelsAnd6CofffesAreInTheBasket_totalDiscoutPriceIsReturned()
+    {
+        manager.changeBasketCapacity(12);
+        for (int i=0;i<6;i++)
+        {
+            basket.addToBasket("BGLP");
+            basket.addToBasket("COFB");
+        }
+
+        Assertions.assertEquals(750,basket.getTotalCost());
     }
 
 }

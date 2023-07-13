@@ -1,5 +1,6 @@
 package com.booleanuk.core;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 public class Customer {
