@@ -8,9 +8,13 @@ import java.util.List;
 
 public class TestBasket {
     public Basket basket;
+
     @BeforeEach
     public void setUp() {
+
         basket = new Basket();
+        Manager manager = new Manager();
+        manager.changeBasketCapacity(2);
     }
 
     @Test
@@ -37,14 +41,11 @@ public class TestBasket {
         //Setup
         basket.addToBasket("BGLO");
         basket.addToBasket("BGLP");
-        String message = "";
-        try{
-            basket.addToBasket("BGLS");
-        } catch (Exception e) {
-            message = e.getMessage();
-        }
 
-        Assertions.assertEquals("Basket is full", message);
+         boolean result = basket.addToBasket("BGLS");
+
+
+        Assertions.assertEquals(false, result);
     }
     @Test
     public void whenSetBasketCapacityCorrectCapacity_capacityIsChanged(){

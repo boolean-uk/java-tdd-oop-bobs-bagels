@@ -59,5 +59,9 @@ public class Inventory {
         }
         return allItems;
     }
+    public String getSkuById(int i)
+    {
+      return inventoryItemList.get(i).sku;
+    }
 
 }

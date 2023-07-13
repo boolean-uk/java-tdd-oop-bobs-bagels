@@ -13,17 +13,25 @@ public class Basket {
     {
         return listOfItemsInBasket;
     }
-    public void  addToBasket(String item) throws Exception
+    public boolean  addToBasket(String item)
     {
         if (listOfItemsInBasket.size()<capacity)
         {
             listOfItemsInBasket.add(item);
+            return true;
         }
-        else throw new Exception("Basket is full");
+        else
+            return false;
+
 
     }
-    public void removeFromBasket(String item){
-        listOfItemsInBasket.remove(item);
+    public boolean removeFromBasket(String item){
+        if (listOfItemsInBasket.contains(item))
+        {
+            listOfItemsInBasket.remove(item);
+            return true;
+        }
+    return false;
     }
 
     public static void setBasketCapacity(int capacity) {
