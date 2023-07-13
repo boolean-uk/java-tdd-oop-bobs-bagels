@@ -4,30 +4,18 @@ import java.util.HashMap;
 import java.util.HashSet;
 
 public class Item {
-    private final String sku;
-    private double price;
-    private final String variant;
-    public Item(String sku, double price, String variant) {
-        this.sku = sku;
-        this.price = price;
-        this.variant = variant;
-    }
+    private final IItemType itemType;
     public Item(IItemType itemType) {
-        this.sku = itemType.getSku();
-        this.price = itemType.getPrice();
-        this.variant = itemType.getVariant();
+        this.itemType = itemType;
     }
     public String getSku() {
-        return sku;
+        return itemType.getSku();
     }
     public double getPrice() {
-        return price;
-    }
-    public void setPrice(double price) {
-        this.price = price;
+        return itemType.getPrice();
     }
     public String getVariant() {
-        return variant;
+        return itemType.getVariant();
     }
 }
 

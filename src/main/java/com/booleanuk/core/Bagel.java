@@ -5,11 +5,19 @@ import java.util.HashMap;
 import java.util.HashSet;
 
 public class Bagel extends Item {
+    private double price;
     public static HashSet<String> bagelsSkus;
     public HashMap<FillingType, Integer> fillings;
     public Bagel(BagelType bagelType) {
-        super(bagelType.name(), bagelType.getPrice(), bagelType.getVariant());
+        super(bagelType);
+        price = bagelType.getPrice();
         fillings = new HashMap<FillingType, Integer>();
+    }
+    private void setPrice(double price) {
+        this.price = price;
+    }
+    public double getPrice() {
+        return price;
     }
     public void addFilling(FillingType fillingType) {
         Integer amount = fillings.get(fillingType);

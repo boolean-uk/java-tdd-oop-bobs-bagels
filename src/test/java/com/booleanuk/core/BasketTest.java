@@ -67,5 +67,4 @@ public class BasketTest {
         basket.removeItem(BagelType.BGLE);
         Assertions.assertEquals(1.86, basket.getTotalPrice());
     }
-
 }
