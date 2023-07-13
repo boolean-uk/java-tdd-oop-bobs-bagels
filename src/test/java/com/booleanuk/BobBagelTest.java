@@ -1,7 +1,6 @@
 package com.booleanuk;
 
-import com.booleanuk.core.Bagel;
-import com.booleanuk.core.Basket;
+import com.booleanuk.core.*;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -46,11 +45,28 @@ public class BobBagelTest {
     }
 
     @Test
+    public void ShouldReturnTrueAfterAddFillingsToTheBagel(){
+        //when
+        Basket basket = new Basket();
+        Bagel bagel = new Bagel("Onion Bagel", 1,"BGLO", BagelVariant.ONION);
+        Bagel bagel1 = new Bagel("Plain Bagel", 2,"BGLO",BagelVariant.ONION);
+        int quantity = 3;
+        Filling filling = new Filling("Bacon",0.5,"FILB", FillingVariant.BACON);
+        //given
+        bagel.addFilling(filling);
+
+        //then
+        assertTrue(bagel.getFillings().contains(filling));
+
+    }
+
+
+    @Test
     public void shouldReturnTotalBasketCost(){
         //when
         Basket basket = new Basket();
-        Bagel bagel = new Bagel("Onion Bagel", 1,"BGLO");
-        Bagel bagel1 = new Bagel("Plain Bagel", 2,"BGLO");
+        Bagel bagel = new Bagel("Onion Bagel", 1,"BGLO", BagelVariant.ONION);
+        Bagel bagel1 = new Bagel("Plain Bagel", 2,"BGLO",BagelVariant.ONION);
         int quantity = 3;
 
         basket.add(bagel,quantity);
@@ -67,8 +83,8 @@ public class BobBagelTest {
     public  void shouldReturnTrueIfSanityIsOk(){
         //when
         Basket basket = new Basket();
-        Bagel bagel = new Bagel("Onion Bagel", 1,"BGLO");
-        Bagel bagel1 = new Bagel("Plain Bagel", 2,"BGLO");
+        Bagel bagel = new Bagel("Onion Bagel", 1,"BGLO",BagelVariant.ONION);
+        Bagel bagel1 = new Bagel("Plain Bagel", 2,"BGLP",BagelVariant.PLAIN);
         int quantity = 3;
 
         basket.add(bagel,quantity);
@@ -84,8 +100,8 @@ public class BobBagelTest {
     public  void shouldReturnFalseIfSanityIsNotOK(){
         //when
         Basket basket = new Basket();
-        Bagel bagel = new Bagel("Onion Bagel", 1,"BGLO");
-        Bagel bagel1 = new Bagel("Plain Bagel", 2,"BGLO");
+        Bagel bagel = new Bagel("Onion Bagel", 1,"BGLO",BagelVariant.ONION);
+        Bagel bagel1 = new Bagel("Plain Bagel", 2,"BGLP",BagelVariant.PLAIN);
         int quantity = 3;
 
         basket.add(bagel,quantity);
@@ -96,6 +112,15 @@ public class BobBagelTest {
 
     }
 
+
+    @Test
+    public void shouldNotAddProductsIfCapacityIsLessThanQuantity(){
+        //when
+        Basket basket = new Basket();
+        Bagel bagel = new Bagel("Onion Bagel", 1,"BGLO",BagelVariant.ONION);
+        Bagel bagel1 = new Bagel("Plain Bagel", 2,"BGLP",BagelVariant.PLAIN);
+        int quantity = 3;
+    }
 
 
 

@@ -18,7 +18,6 @@ public class Basket {
     public void add(Product product, int quantity) {
         int productsInBasket = 0;
 
-
         basket.put(product,quantity);
     }
 
@@ -66,7 +65,7 @@ public class Basket {
     }
 
 
-    public int productsInBasket(){
+    private int productsInBasket(){
         int productsInBasket = 0;
         for (Product product :
                 basket.keySet()) {

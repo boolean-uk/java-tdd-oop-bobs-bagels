@@ -1,11 +1,14 @@
 package com.booleanuk.core;
 
-public class Product {
+import java.util.ArrayList;
+
+public abstract class Product {
 
     private String name;
     private double price;
 	private String skw;
 
+    private ArrayList<Product> fillings = new ArrayList<>();
 
     public  Product(){}
     public Product(String name, double price, String skw) {
@@ -38,4 +41,15 @@ public class Product {
     public void setSkw(String skw) {
         this.skw = skw;
     }
+
+    public ArrayList<Product> getFillings() {
+        return fillings;
+    }
+
+    public void setFillings(ArrayList<Product> fillings) {
+        this.fillings = fillings;
+    }
+
+    public abstract double getTotalCostOfProduct();
+
 }
