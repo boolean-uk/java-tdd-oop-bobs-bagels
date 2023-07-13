@@ -9,9 +9,10 @@ import java.util.Map;
 
 public class Basket {
     private int capacity;
-    private final static int SIX_BAGELS_PRICE = 249;
-    private final static int TWELVE_BAGELS_PRICE = 399;
-    private final static int SINGLE_FILLING_PRICE = 12;
+    public final static int SIX_BAGELS_PRICE = 249;
+    public final static int TWELVE_BAGELS_PRICE = 399;
+    public final static int SINGLE_FILLING_PRICE = 12;
+    public final static int COFFEE_PLUS_BAGEL = 125;
 
     private Map<Item,Integer> items;
 
@@ -71,7 +72,7 @@ public class Basket {
                 .map(entry -> entry.getValue() * ((Bagel) entry.getKey()).getFillingType().getPrice())
                 .reduce(0L, Long::sum);
 
-        List<Long> listOfPrices = items.entrySet().stream().map(entry -> {
+        long priceOfItems = items.entrySet().stream().map(entry -> {
             if(entry.getKey() instanceof Bagel && entry.getValue() >= 6 && entry.getValue() < 12){
                 return SIX_BAGELS_PRICE + (entry.getValue()%6)*entry.getKey().getPrice();
             }
@@ -79,7 +80,8 @@ public class Basket {
                 return TWELVE_BAGELS_PRICE + (entry.getValue()%12)*entry.getKey().getPrice();
             }
             else return entry.getKey().getPrice() * entry.getValue();
-        }).toList();
-        return (priceOfFillings + listOfPrices.stream().reduce(0L, Long::sum)) / 100.0;
+        }).reduce(0L, Long::sum);
+
+        return (priceOfFillings + priceOfItems) / 100.0;
     }
 }

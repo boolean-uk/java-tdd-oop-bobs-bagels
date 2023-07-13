@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static com.booleanuk.extension.Basket.*;
 import static com.booleanuk.extension.types.BagelType.*;
 import static com.booleanuk.extension.types.CoffeeType.*;
 import static com.booleanuk.extension.types.FillingType.*;
@@ -138,14 +139,16 @@ class BasketTest {
         basket.add(bagel);
         basket.add(bagel);
 
-        assertEquals((249 + 72 + coffee.getPrice()) / 100.0, basket.getTotalCost());
+        assertEquals((SIX_BAGELS_PRICE + 6* SINGLE_FILLING_PRICE + coffee.getPrice()) / 100.0, basket.getTotalCost());
         basket.add(bagel);
         basket.add(bagel);
         basket.add(bagel);
         basket.add(bagel);
         basket.add(bagel);
         basket.add(bagel);
-        assertEquals(basket.getTotalCost(), (399 + 144 + coffee.getPrice()) / 100.0);
+        assertEquals((TWELVE_BAGELS_PRICE + 12 * SINGLE_FILLING_PRICE + coffee.getPrice()) / 100.0,basket.getTotalCost());
+        basket.add(bagel);
+        assertEquals((TWELVE_BAGELS_PRICE + 12 * SINGLE_FILLING_PRICE + COFFEE_PLUS_BAGEL) / 100.0,basket.getTotalCost());
 
     }
 
