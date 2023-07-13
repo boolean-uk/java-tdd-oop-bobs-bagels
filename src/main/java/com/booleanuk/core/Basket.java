@@ -6,7 +6,7 @@ import java.util.NoSuchElementException;
 public class Basket {
 
     private int capacity;
-    private ArrayList<Bagel> products;
+    private ArrayList<Bagel> products = new ArrayList<>();
 
     public Basket(int capacity) {
         this.capacity = capacity;
@@ -21,7 +21,7 @@ public class Basket {
 
     public void removeProduct(Bagel bagel) {
         if (!products.contains(bagel)) {
-            throw new NoSuchElementException("You dont have this product in your basket")
+            throw new NoSuchElementException("You dont have this product in your basket");
         }
         products.remove(bagel);
     }

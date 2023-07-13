@@ -10,7 +10,7 @@ public class BasketTest {
         Basket basket = new Basket(3);
         Bagel bagel = new Bagel("BGLO", 0.49, "Bagel", "Onion");
         basket.addProduct(bagel);
-        assertTrue(basket.isFull());
+        assertTrue(basket.getProducts().contains(bagel));
     }
 
     @Test
