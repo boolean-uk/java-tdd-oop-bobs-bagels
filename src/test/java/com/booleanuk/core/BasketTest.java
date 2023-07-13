@@ -93,9 +93,19 @@ public class BasketTest {
         Assertions.assertFalse(basket.removeItem("FILB"));
         Assertions.assertFalse(basket.removeItem("strange item"));
     }
-
+    @Test
     public void getTotalPriceOfItemsInBasketTest() {
-
+        basket.addItem("BGLO");
+        basket.addItem("FILB");
+        Assertions.assertEquals(0.61, basket.calculateTotalPrice());
+        basket.addItem("FILX");
+        Assertions.assertEquals(0.73, basket.calculateTotalPrice());
+        basket.addItem("COFL");
+        Assertions.assertEquals(2.02, basket.calculateTotalPrice());
+        basket.addItem("COFW");
+        Assertions.assertEquals(2.02, basket.calculateTotalPrice());
+        basket.removeItem("BGLO");
+        Assertions.assertEquals(1.53, basket.calculateTotalPrice());
     }
 
     @Test
