@@ -15,7 +15,7 @@ public class TestCustomer {
     }
 
     @Test
-    public void whenAddToBasketExistingBagelType_bagelIsAddedToBasket() throws Exception {
+    public void whenAddToBasketExistingBagelType_bagelIsAddedToBasket()  {
         //Setup
         String bagel = "BGLO";
 
@@ -26,14 +26,14 @@ public class TestCustomer {
     }
 
     @Test
-    public void whenCheckBasketCalled_everythingInBasketIsReturned() throws Exception {
+    public void whenCheckBasketCalled_everythingInBasketIsReturned()  {
         //Setup
         String coffee = "COFB";
         customer.addToBasket(coffee);
         String bagel = "BGLO";
         customer.addToBasket(bagel);
 
-        String expected = Inventory.getItemBySku(coffee) + Inventory.getItemBySku(bagel);
+        String expected = "0 " + Inventory.getItemBySku(coffee) + "1 " + Inventory.getItemBySku(bagel);
 
         Assertions.assertEquals(expected, customer.checkBasket());
     }

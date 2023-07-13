@@ -18,7 +18,7 @@ public class TestBasket {
     }
 
     @Test
-    public void whenAddToBasketExistingBagelType_bagelIsAddedToBasket() throws Exception {
+    public void whenAddToBasketExistingBagelType_bagelIsAddedToBasket()  {
         //Setup
         String bagel = "BGLO";
 
@@ -28,7 +28,7 @@ public class TestBasket {
         Assertions.assertEquals(List.of(bagel), basket.getListOfItemsInBasket());
     }
     @Test
-    public void whenRemoveFromBasketBagelDoesExistInBasket_bagelIsRemovedFromBasket() throws Exception {
+    public void whenRemoveFromBasketBagelDoesExistInBasket_bagelIsRemovedFromBasket()  {
         //Setup
         String bagel = "BGLO";
         basket.addToBasket(bagel);
@@ -37,7 +37,7 @@ public class TestBasket {
     }
 
     @Test
-    public void whenIsBasketFullCalled_basketCapacityIsChecked() throws Exception {
+    public void whenIsBasketFullCalled_basketCapacityIsChecked() {
         //Setup
         basket.addToBasket("BGLO");
         basket.addToBasket("BGLP");
@@ -54,14 +54,14 @@ public class TestBasket {
     }
 
     @Test
-    public void whenGetTotalCostCalled_totalCostIsReturned() throws Exception {
+    public void whenGetTotalCostCalled_totalCostIsReturned() {
         basket.addToBasket("BGLO");
         basket.addToBasket("BGLP");
 
         Assertions.assertEquals(0.88,basket.getTotalCost());
     }
     @Test
-    public void whenGetTotalCostCalledWithFillings_totalCostIsReturned() throws Exception {
+    public void whenGetTotalCostCalledWithFillings_totalCostIsReturned()  {
         basket.addToBasket("BGLO");
         basket.addToBasket("FILE");
 

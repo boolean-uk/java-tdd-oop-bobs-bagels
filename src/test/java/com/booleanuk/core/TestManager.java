@@ -16,11 +16,11 @@ public class TestManager {
 
 
     @Test
-    public void whenChangeBasketCapacity_basketCapacityIsChanged() throws Exception {
-        manager.changeBasketCapacity(3);
+    public void whenChangeBasketCapacity_basketCapacityIsChanged() {
+        manager.changeBasketCapacity(5);
         customer = new Customer();
 
-        Assertions.assertEquals(3,customer.basket.getCapacity());
+        Assertions.assertEquals(5,customer.basket.getCapacity());
     }
 
 }

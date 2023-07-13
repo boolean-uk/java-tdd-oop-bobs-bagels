@@ -22,6 +22,7 @@ public class UI {
             System.out.println("Press 1 or 2");
             int intInput = sc.nextInt();
             if(intInput == 1){
+                System.out.println("Current capacity is: " + Basket.getCapacity());
                 System.out.println("Enter new basket capacity:");
                 intInput = sc.nextInt();
                 if (manager.changeBasketCapacity(intInput)){
@@ -53,7 +54,10 @@ public class UI {
                         System.out.println("Item added to your basket\n\n");
                     }
                     else
-                        System.out.println("Check if you have enough space in your basket\n\n");
+                        System.out.println("You don't have enough space in your basket");
+                        System.out.println("Current basket capacity is: " + Basket.getCapacity());
+                        System.out.println();
+                        System.out.println();
 
                 }
                 else if(intInput == 2)
