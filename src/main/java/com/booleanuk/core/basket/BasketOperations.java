@@ -13,8 +13,5 @@ public interface BasketOperations {
 
     double summarizeBasket();
 
-    boolean isProductAvailable(Product product);
-
-    //added new functionality AC
     int getProductsAmount();
 }

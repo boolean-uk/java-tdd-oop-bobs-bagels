@@ -71,11 +71,6 @@ public class Basket implements BasketOperations {
     }
 
     @Override
-    public boolean isProductAvailable(Product product) {
-        return false;
-    }
-
-    @Override
     public int getProductsAmount() {
         return this.products.size();
 

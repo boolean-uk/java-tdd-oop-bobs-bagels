@@ -21,7 +21,6 @@ public class Store {
     private final static String fillings = "/filling.json";
     private final static String coffees = "/coffee.json";
     private static Store INSTANCE;
-    private static String json;
     private List<Product> availableProducts = new ArrayList<>(0);
 
 
@@ -35,7 +34,6 @@ public class Store {
         if (INSTANCE == null) {
             INSTANCE = new Store();
         }
-
         return INSTANCE;
     }
 
@@ -59,7 +57,6 @@ public class Store {
             Gson gson = new Gson();
             JsonArray jsonArray = gson.fromJson(json, JsonArray.class);
 
-
             for (JsonElement jsonElement : jsonArray) {
                 var product = gson.fromJson(jsonElement, Bagel.class);
                 addAvailableProducts(product);
@@ -69,6 +66,14 @@ public class Store {
         }
     }
 
+    public void addAvailableProducts(Product product) {
+        availableProducts.add(product);
+    }
+
+    public boolean isProductAvailable(Product product) {
+        return getAvailableProducts().contains(product);
+    }
+
     private void loadAvailableCoffees() {
         try {
             InputStream inputStream = Store.class.getResourceAsStream(coffees);
@@ -76,7 +81,6 @@ public class Store {
 
             Gson gson = new Gson();
             JsonArray jsonArray = gson.fromJson(json, JsonArray.class);
-
 
             for (JsonElement jsonElement : jsonArray) {
                 var product = gson.fromJson(jsonElement, Coffee.class);
@@ -95,7 +99,6 @@ public class Store {
             Gson gson = new Gson();
             JsonArray jsonArray = gson.fromJson(json, JsonArray.class);
 
-
             for (JsonElement jsonElement : jsonArray) {
                 var product = gson.fromJson(jsonElement, Filling.class);
                 addAvailableProducts(product);
@@ -109,19 +112,7 @@ public class Store {
         return availableProducts;
     }
 
-    public void setAvailableProducts(List<Product> availableProducts) {
-        this.availableProducts = availableProducts;
-    }
-
-    public void addAvailableProducts(Product product) {
-        this.availableProducts.add(product);
-    }
-
-    public String getJson() {
-        return json;
-    }
-
-    public static void setJson(String json) {
-        Store.json = json;
+    public void setAvailableProducts(List<Product> newAvailableProducts) {
+        availableProducts = newAvailableProducts;
     }
 }
