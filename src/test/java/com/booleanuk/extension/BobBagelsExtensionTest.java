@@ -175,6 +175,15 @@ public class BobBagelsExtensionTest {
         //then
         assertEquals(pricelist, fillingPriceList);
     }
+    @Test
+    public void shouldReturnsBagelsPriceList(){
+        //given
+        String pricelist ="aaaa";
+        //when
+        String bagelsPriceList = basketManager.getPriceListOfFillings();
+        //then
+        assertEquals(pricelist, bagelsPriceList);
+    }
 
 }
 

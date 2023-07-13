@@ -113,4 +113,16 @@ public class BasketManager {
 
         return sb.toString();
     }
+
+    public String getPriceListOfBagels(){
+        StringBuilder sb = new StringBuilder("Bagels Pricelist:\n");
+        for (BagelExt bagelExt :
+                inventoryExt.getAllBagelsInInventory()) {
+            sb.append("Name:").append(bagelExt.getSku().name()).append(" ").append(bagelExt.getSku().getVariant()).append(" Price: ").append(bagelExt.getPrice()).append("\n");
+        }
+
+        return sb.toString();
+    }
+
+
 }
