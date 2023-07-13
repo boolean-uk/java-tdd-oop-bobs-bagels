@@ -8,13 +8,15 @@ public class BasketExt {
     private ArrayList<BagelExt> bagelsInBasket;
     private ArrayList<FillingExt> fillingInBasket;
 
+    private int capacity;
+
 
     public BasketExt() {
         this.coffeesInBasket =new ArrayList<>();
         this.bagelsInBasket = new ArrayList<>();
         this.fillingInBasket = new ArrayList<>();
+        capacity = 5;
     }
-
 
 
 
@@ -50,5 +52,13 @@ public class BasketExt {
     }
     public void remove(CoffeeExt coffeeExt) {
         coffeesInBasket.remove(coffeeExt);
+    }
+
+    public int getCapacity() {
+        return capacity;
+    }
+
+    public void setCapacity(int capacity) {
+        this.capacity = capacity;
     }
 }

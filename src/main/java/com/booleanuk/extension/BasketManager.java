@@ -35,4 +35,14 @@ public class BasketManager {
     public void remove(CoffeeExt coffeeExt) {
         basketExt.remove(coffeeExt);
     }
+
+    private boolean isBasketFull(){
+        int occupiedCapacity = basketExt.getBagelsInBasket().size() + basketExt.getCoffeesInBasket().size() + basketExt.getFillingInBasket().size();
+        if(occupiedCapacity == basketExt.getCapacity()){
+            return true;
+        }
+        return false;
+
+
+    }
 }

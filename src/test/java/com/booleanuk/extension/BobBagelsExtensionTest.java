@@ -105,6 +105,25 @@ public class BobBagelsExtensionTest {
         assertFalse(basketExt.getFillingInBasket().contains(fillingB));
     }
 
+    @Test
+    public void shouldNotAdd6ProductToBasket(){
+        //given
+        basketManager.add(fillingB);
+        basketManager.add(fillingB);
+        basketManager.add(fillingS);
+        basketManager.add(bagelE);
+        basketManager.add(coffeeB);
+        basketManager.add(coffeeC);
+        //when
+        basketManager.add(fillingE);
+
+        //then
+        assertFalse(basketExt.getFillingInBasket().contains(fillingE));
+
+    }
+
+
+
 
 
 
