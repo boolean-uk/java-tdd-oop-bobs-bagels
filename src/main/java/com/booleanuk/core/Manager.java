@@ -1,9 +1,6 @@
 package com.booleanuk.core;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 public class Manager {
     private int basketCapacity = 0;
@@ -51,7 +48,7 @@ public class Manager {
     public static Bagel getBagelByVariant(String variant) {
         for (Product product : inventory) {
             if(product instanceof Bagel && product.getVariant().equals(variant)){
-                return (Bagel) product;
+                return ((Bagel) product).clone();
             }
         }
         throw new IllegalArgumentException("Bagel with variant " + variant + " is not in the inventory!");
@@ -60,7 +57,7 @@ public class Manager {
     public static Filling getFillingByVariant(String variant) {
         for (Product product : inventory) {
             if(product instanceof Filling && product.getVariant().equals(variant)){
-                return (Filling) product;
+                return ((Filling) product).clone();
             }
         }
         throw new IllegalArgumentException("Filling with variant " + variant + " is not in the inventory!");
@@ -73,4 +70,29 @@ public class Manager {
         }
         return fillings;
     }
+
+    public static void prettyPrintAllBagels() {
+        System.out.println("All bagels in my inventory: ");
+
+        List<Bagel> bagels = getInventory().stream()
+                .filter(product -> product instanceof Bagel)
+                .map(product -> (Bagel) product)
+                .sorted(Comparator.comparing(Bagel::getPrice))
+                .toList();
+
+        bagels.forEach(bagel -> System.out.println(
+                bagel.getVariant() + " - " + bagel.getPrice()));
+    }
+
+    public static void prettyPrintAllFillings() {
+        List<Filling> fillings = getInventory().stream()
+                .filter(product -> product instanceof Filling)
+                .map(product -> (Filling) product)
+                .sorted(Comparator.comparing(Filling::getPrice))
+                .toList();
+
+        fillings.forEach(filling -> System.out.println(
+                filling.getVariant() + " - " + filling.getPrice()));
+    }
+
 }

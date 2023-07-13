@@ -1,8 +1,6 @@
 package com.booleanuk.core;
 
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 
 import java.util.Collections;
 import java.util.List;
@@ -39,16 +37,15 @@ public class BasketTest {
     }
 
     @Test
-    public void testAddToBasketShouldThrowException() throws Exception {
+    public void testAddToBasketShouldThrowException() {
         Bagel bagel = new Bagel("NO BAGEL", 0.49, "Onion", Collections.emptyList());
 
         Exception exception = Assertions.assertThrows(Exception.class, () -> basket.addToBasket(bagel));
-        System.out.println(basket.getContents());
         Assertions.assertEquals("Bagel " + bagel + " is not in the manager's inventory!", exception.getMessage());
     }
 
     @Test
-    public void testAddToBasketShouldThrowException2() throws Exception {
+    public void testAddToBasketShouldThrowException2() {
         List<Filling> fillings = List.of(
                 new Filling("NO FILLING", 0.12, "Bacon")
         );
@@ -57,11 +54,10 @@ public class BasketTest {
         Exception exception = Assertions.assertThrows(Exception.class, () -> basket.addToBasket(bagel));
 
         Assertions.assertEquals("Bagel does not have the correct filling!", exception.getMessage());
-
     }
 
     @Test
-    public void testRemoveFromBasketShouldSucceed() throws Exception {
+    public void testRemoveFromBasketShouldSucceed() {
         Bagel bagel = new Bagel("BGLO", 0.49, "Onion", Collections.emptyList());
         basket.addToBasket(bagel);
         basket.removeFromBasket(bagel);
@@ -74,11 +70,11 @@ public class BasketTest {
         Bagel bagel = new Bagel("BGLO", 0.49, "Onion", Collections.emptyList());
 
         Exception exception = Assertions.assertThrows(Exception.class, () -> basket.removeFromBasket(bagel));
-        Assertions.assertEquals("Bagel " + bagel + " is not in the basket!", exception.getMessage());
+        Assertions.assertEquals("Bagel is not in the basket!", exception.getMessage());
     }
 
     @Test
-    public void testIsBasketFullShouldSucceed() throws Exception {
+    public void testIsBasketFullShouldSucceed() {
         for(Bagel bagel: BAGELS){
             basket.addToBasket(bagel);
         }
@@ -87,7 +83,7 @@ public class BasketTest {
     }
 
     @Test
-    public void testGetTotalCost() throws Exception {
+    public void testGetTotalCost() {
         for(Bagel bagel: BAGELS){
             basket.addToBasket(bagel);
         }
@@ -102,11 +98,10 @@ public class BasketTest {
     }
 
     @Test
-    public void testChangeBasketCapacityShouldSucceed() throws Exception {
+    public void testChangeBasketCapacityShouldSucceed() {
         Basket.setCapacity(2);
-        for(Bagel bagel: BAGELS){
-            basket.addToBasket(bagel);
-        }
+        basket.addToBasket(BAGELS.get(0));
+        basket.addToBasket(BAGELS.get(1));
 
         Assertions.assertTrue(basket.isBasketFull());
     }

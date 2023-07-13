@@ -5,7 +5,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class ManagerTest {
     private Manager bob;
@@ -50,37 +52,38 @@ public class ManagerTest {
     }
 
     @Test
-    void testGetBagelByVariant(){
-        List<Filling> fillings = List.of(
-                new Filling("BGLO", 0.49, "Onion")
-        );
-        Bagel bagel = new Bagel("BGLO", 0.49, "Onion", fillings);
+    public void testGetBagelByVariant() {
+        Bagel bagel = new Bagel("BGLO", 0.49, "Onion", Collections.emptyList());
 
-        Assertions.assertEquals(bagel, bob.getBagelByVariant("BGLO"));
+        Assertions.assertEquals(bagel, Manager.getBagelByVariant("Onion"));
     }
 
     @Test
-    void testGetBagelByVariantShouldThrowException(){
-        Assertions.assertThrows(IllegalArgumentException.class, () -> bob.getBagelByVariant("Nonexistent"));
+    public void testGetBagelByVariantShouldThrowException(){
+        Exception exception = Assertions.assertThrows(
+                IllegalArgumentException.class,
+                () -> bob.getBagelByVariant("Nonexistent"));
+
+        Assertions.assertEquals("Bagel with variant Nonexistent " +
+                "is not in the inventory!", exception.getMessage());
     }
 
     @Test
-    void testGetFillingByVariant(){
-        List<Filling> fillings = List.of(
-                new Filling("NO FILLING", 0.12, "Bacon")
-        );
-        Filling filling = new Filling("BGLO", 0.49, "Onion");
+    public void testGetFillingByVariant(){
+        Filling filling = new Filling("FILB", 0.12, "Bacon");
 
        Assertions.assertEquals(filling, bob.getFillingByVariant("Bacon"));
     }
 
     @Test
-    void testGetFillingByVariantShouldThrowException(){
-        Assertions.assertThrows(IllegalArgumentException.class, () -> bob.getFillingByVariant("Nonexistent"));
+    public void testGetFillingByVariantShouldThrowException(){
+        Assertions.assertThrows(
+                IllegalArgumentException.class,
+                () -> bob.getFillingByVariant("Nonexistent"));
     }
 
     @Test
-    void testGetFillingsByVariants() {
+    public void testGetFillingsByVariants() {
         List<Filling> expected = List.of(
                 new Filling("FILB", 0.12, "Bacon"),
                 new Filling("FILE", 0.12, "Egg")

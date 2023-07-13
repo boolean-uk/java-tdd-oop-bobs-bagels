@@ -16,26 +16,28 @@ public class Basket {
         capacity = basketCapacity;
     }
 
-    public void addToBasket(Bagel bagel) throws Exception {
+    public void addToBasket(Bagel bagel) {
         if(contents.size() >= capacity){
-            throw new Exception("Basket is full!");
+            throw new IllegalStateException("Basket is full!");
         }
         List<Filling> fillings = bagel.getFillings();
         bagel.setFillings(Collections.emptyList());
+
         if(!Manager.getInventory().contains(bagel)){
-            throw new Exception("Bagel " + bagel + " is not in the manager's inventory!");
+            throw new IllegalArgumentException("Bagel " + bagel + " is not in the manager's inventory!");
         }
-        System.out.println(fillings);
+
         if(!Manager.getInventory().containsAll(fillings)){
-            throw new Exception("Bagel does not have the correct filling!");
+            throw new IllegalArgumentException("Bagel does not have the correct filling!");
         }
+
         bagel.setFillings(fillings);
         contents.add(bagel);
     }
 
-    public void removeFromBasket(Bagel bagel) throws Exception{
+    public void removeFromBasket(Bagel bagel) {
         if(!contents.contains(bagel)){
-            throw new Exception("Bagel " + bagel +  " is not in the basket!");
+            throw new IllegalArgumentException("Bagel is not in the basket!");
         }
         contents.remove(bagel);
     }
@@ -46,6 +48,17 @@ public class Basket {
         return contents;
     }
 
-    public Double getTotalCost(){ return contents.stream().mapToDouble(Product::getPrice).sum(); }
+    public Double getTotalCost(){
+        Double totalCost = 0.0;
+        for (Product product: contents) {
+            if (product instanceof Bagel bagel) {
+                for (Filling filling : bagel.getFillings()) {
+                    totalCost += filling.getPrice();
+                }
+            }
+            totalCost += product.getPrice();
+        }
+        return Math.round(totalCost * 100.0) / 100.0;
+    }
 
 }

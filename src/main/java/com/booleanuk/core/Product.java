@@ -35,8 +35,5 @@ public abstract class Product {
                 Objects.equals(variant, product.variant);
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(SKU, price, variant);
-    }
+    public abstract Product clone();
 }

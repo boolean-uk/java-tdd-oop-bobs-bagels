@@ -30,17 +30,12 @@ public class Bagel extends Product{
     }
 
     @Override
-    public int hashCode() {
-        return Objects.hash(fillings);
+    public String toString() {
+        return variant + " bagel with " + fillings + " - " + price + "£";
     }
 
     @Override
-    public String toString() {
-        return "Bagel{" +
-                "fillings=" + fillings +
-                ", SKU='" + SKU + '\'' +
-                ", price=" + price +
-                ", variant='" + variant + '\'' +
-                '}';
+    public Bagel clone() {
+        return new Bagel(SKU, price, variant, fillings);
     }
 }
