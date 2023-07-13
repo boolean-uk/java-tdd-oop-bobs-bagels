@@ -19,6 +19,6 @@ public class BagelTest {
             expectedPrice = expectedPrice.add(f.getPrice());
         }
 
-        assertEquals(expectedPrice, bagel.price());
+        assertEquals(expectedPrice, bagel.getPrice());
     }
 }

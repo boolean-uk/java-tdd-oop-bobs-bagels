@@ -1,8 +1,8 @@
 package com.booleanuk.core;
 
+import com.booleanuk.core.product.Coffee;
 import com.booleanuk.core.product.bagel.Bagel;
 import com.booleanuk.core.product.bagel.BagelType;
-import com.booleanuk.core.product.Coffee;
 import com.booleanuk.core.product.bagel.Filling;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -10,7 +10,11 @@ import org.junit.jupiter.api.Test;
 import java.math.BigDecimal;
 import java.util.NoSuchElementException;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class BasketTest {
     private static Bagel BAGEL;
@@ -31,7 +35,7 @@ class BasketTest {
 
         basket.addBagel(BAGEL);
 
-        assertTrue(basket.getBagels().containsKey(BAGEL));
+        assertTrue(basket.getProducts().contains(BAGEL));
     }
 
     @Test
@@ -48,7 +52,7 @@ class BasketTest {
 
         basket.removeBagel(BAGEL);
 
-        assertFalse(basket.getBagels().containsKey(BAGEL));
+        assertFalse(basket.getProducts().contains(BAGEL));
     }
 
     @Test
@@ -64,7 +68,7 @@ class BasketTest {
 
         basket.addCoffee(COFFEE);
 
-        assertTrue(basket.getCoffees().containsKey(COFFEE));
+        assertTrue(basket.getProducts().contains(COFFEE));
     }
 
     @Test
@@ -81,7 +85,7 @@ class BasketTest {
 
         basket.removeCoffee(COFFEE);
 
-        assertFalse(basket.getCoffees().containsKey(COFFEE));
+        assertFalse(basket.getProducts().contains(COFFEE));
     }
 
     @Test
@@ -102,9 +106,9 @@ class BasketTest {
     void totalPrice_shouldCorrectlyCalculatePriceForNonEmptyBasket() {
         var basket = new Basket(2);
         basket.addBagel(BAGEL);
-        basket.addCoffee(COFFEE);
+        basket.addBagel(BAGEL);
 
-        var expectedPrice = BAGEL.price().add(COFFEE.getPrice());
+        var expectedPrice = BAGEL.getPrice().multiply(BigDecimal.valueOf(2));
 
         assertEquals(expectedPrice, basket.totalPrice());
     }
