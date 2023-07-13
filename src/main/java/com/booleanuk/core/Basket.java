@@ -50,8 +50,12 @@ public class Basket {
 
     }
 
-    public double getTotalPrice() {
-        return 0.0;
+    public double calculateTotalPrice() {
+        double totalPrice = 0;
+        for(String item : items) {
+            totalPrice +=inventory.getItemPrice(item);
+        }
+        return totalPrice;
     }
 
 }
