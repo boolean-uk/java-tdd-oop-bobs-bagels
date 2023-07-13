@@ -51,4 +51,25 @@ public class Inventory {
             return inventoryList.stream().filter(e -> (e.getName().equals(name)&&e.getVariant().equals(variant))).findFirst().get().getPrice();
         }else return 0;
     }
+
+    public double getPriceByProduct(Product product1) {
+        if(inventoryList.stream().anyMatch(e -> (e.getSku().equals(product1.getSku())
+                && e.getName().equals(product1.getName())
+                && e.getVariant().equals(product1.getVariant())
+                && e.getPrice()==product1.getPrice()))){
+            return product1.getPrice();
+        }
+        else return 0;
+    }
+
+    public boolean checkIfProductInInventory(Product product1) {
+        return inventoryList.stream().anyMatch(e -> (e.getSku().equals(product1.getSku())
+                && e.getName().equals(product1.getName())
+                && e.getVariant().equals(product1.getVariant())
+                && e.getPrice()==product1.getPrice()));
+    }
+
+    public boolean checkIfProductInInventory(String sku) {
+        return inventoryList.stream().anyMatch(e -> e.getSku().equals(sku));
+    }
 }
