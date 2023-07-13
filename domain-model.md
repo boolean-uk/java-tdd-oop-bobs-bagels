@@ -87,3 +87,37 @@ I want customers to only be able to order things that we stock in our inventory.
 | Filling   | BigDecimal price       | BigDecimal getPrice()                    |                                                                        | price of the filling   |
 | Inventory | List<String> itemSkus  | boolean containsItem(String sku)         | If item exists in inventory                                            | true                   |
 |           |                        |                                          | If item does not exist in inventory                                    | false                  |
+
+## Extensions
+
+### Extension 1.
+
+```
+1.
+As a customer,
+So I can have more for less
+I'd like to get some discount for buying multiple products.
+```
+
+| Class                     | Fields                  | Methods                                       | Scenario                                                               | Output                              |
+|---------------------------|-------------------------|-----------------------------------------------|------------------------------------------------------------------------|-------------------------------------|
+| Basket                    | List\<Product> products | void add(Product product)                     | If customer wants to add a specific type of product to his basket      |                                     |
+|                           | List\<Product> products | void remove(Product product)                  | If customer wants to remove a product from his basket.                 |                                     |
+|                           | int capacity            | boolean isFull()                              | Called when customer adds a product to his basket.                     |                                     |
+|                           |                         |                                               | If number of products equals basket capacity                           | true                                |
+|                           |                         |                                               | If number of products is less than basket capacity                     | false                               |
+|                           | int capacity            | void setCapacity(int newCapacity)             | If manager would like to change the capacity of baskets.               |                                     |
+|                           |                         |                                               | If new capacity is less than number of bagels in basket                | Output error message                |
+|                           |                         |                                               | If new capacity is greater than or equal to number of bagels in basket | Output nothing                      |
+|                           | List\<String> products  | boolean doesProductExist(Product product)     | Called when customer tries to remove a product from his basket         |                                     |
+|                           |                         |                                               | If product exists in the basket                                        | true                                |
+|                           |                         |                                               | If product does not exist in the basket                                | false                               |
+|                           |                         | Map<Product, BigDecimal> calculateDiscounts() |                                                                        | map of products and their discounts |
+|                           |                         | BigDecimal totalCost()                        |                                                                        | total cost of products              |
+| *Product*                 | BigDecimal price        | BigDecimal getPrice()                         |                                                                        | price of the product                |
+| Bagel extends *Product*   | BigDecimal price        | BigDecimal getPrice()                         |                                                                        | price of the bagel                  |
+|                           | List\<Filling> fillings | void setFillings(List\<Filling> fillings)     |                                                                        |                                     |
+| Filling extends *Product* | BigDecimal price        | BigDecimal getPrice()                         |                                                                        | price of the filling                |
+| Coffee extends *Product*  | BigDecimal price        | BigDecimal getPrice()                         |                                                                        | price of the coffee                 |
+| Inventory                 | List\<String> itemSkus  | boolean containsItem(String sku)              | If item exists in inventory                                            | true                                |
+|                           |                         |                                               | If item does not exist in inventory                                    | false                               |
