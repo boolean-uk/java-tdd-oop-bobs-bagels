@@ -9,11 +9,6 @@ import static org.junit.jupiter.api.Assertions.*;
 public class BobBagelTest {
 
 
-
-
-
-
-
     @Test
     public void shouldAddBagelToBasket(){
         //when
@@ -100,6 +95,8 @@ public class BobBagelTest {
         assertFalse(sanity);
 
     }
+
+
 
 
 

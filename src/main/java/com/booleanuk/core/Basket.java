@@ -4,6 +4,8 @@ import java.util.HashMap;
 
 public class Basket {
 
+
+
     private HashMap<Product, Integer> basket = new HashMap<>();
 
     private int capacity = 5;
@@ -13,8 +15,11 @@ public class Basket {
         return basket;
     }
 
-    public void add(Bagel bagel, int quantity) {
-        basket.put(bagel,quantity);
+    public void add(Product product, int quantity) {
+        int productsInBasket = 0;
+
+
+        basket.put(product,quantity);
     }
 
     public boolean removeProduct(Product product, int quantity) {
@@ -58,5 +63,19 @@ public class Basket {
 
    private boolean checkSanity(Product product){
         return  basket.containsKey(product);
+    }
+
+
+    public int productsInBasket(){
+        int productsInBasket = 0;
+        for (Product product :
+                basket.keySet()) {
+            if(basket.containsKey(product)) {
+               productsInBasket+=basket.get(product);
+            }
+
+        }
+
+        return productsInBasket;
     }
 }
