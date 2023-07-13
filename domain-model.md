@@ -11,15 +11,16 @@
 |          |                                      |                                                | new capacity is not valid                          | false   |
 |          |                                      | `getTotalCost()`                               | returns total cost                                 | float   |
 
-| Class     | Members   | Methods       | Scenario                | Outputs |
-|-----------|-----------|---------------|-------------------------|---------|
-| `Product` | `sku`     | `getPrice()`  | returns product's price | float   |
-|           | `price`   |               |                         |         |
-|           | `name`    |               |                         |         |
-|           | `variant` |               |                         |         |
+| Class     | Members                | Methods       | Scenario                | Outputs |
+|-----------|------------------------|---------------|-------------------------|---------|
+| `Product` | `sku`                  | `getPrice()`  | returns product's price | float   |
+|           | `price`                |               |                         |         |
+|           | `name`                 |               |                         |         |
+|           | `variant`              |               |                         |         |
+|           | `specialOfferQuantity` |               |                         |         |
+|           | `specialOfferPrice`    |               |                         |         |
 
-| Class       | Members                             | Methods                                                                        | Scenario                                 | Outputs |
-|-------------|-------------------------------------|--------------------------------------------------------------------------------|------------------------------------------|---------|
-| `Inventory` | `HashMap<String, Product> products` | `public void addProduct(String sku, float price, String name, String variant)` | adds product to inventory                | void    |
-|             |                                     | `getProduct(String sku)`                                                       | returns specific product from inventory  | Product |
+| Class       | Members                             | Methods                   | Scenario                                   | Outputs  |
+|-------------|-------------------------------------|---------------------------|--------------------------------------------|----------|
+| `Inventory` | `HashMap<String, Product> products` | `getProduct(String sku)`  | returns specific product from inventory    | Product  |
 
