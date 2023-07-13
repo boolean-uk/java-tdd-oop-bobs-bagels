@@ -120,3 +120,10 @@ I want customers to only be able to order things that we stock in our inventory.
 | Store | availableProducts:List<Products> | isProductAvailable(Product product):boolean | if product is available     | true           |
 |       |                                  | isProductAvailable(Product product):boolean | if product is not available | false          |
 |       |                                  | loadAvailableProducts(String file)          | loads the products list     | List<Products> |
+
+
+| Class   | Attributes                        | Methods                      | Scenario                        | Outputs |
+|---------|-----------------------------------|------------------------------|---------------------------------|---------|
+| Receipt | products:HashMap<Product,Integer> | createReceipt(Basket basket) | Creates receipt of given basket | void    |
+|         |                                   | printReceipt(Basket basket)  | prints receipt                  | void    |
+|         |                                   |                              |                                 |         |
