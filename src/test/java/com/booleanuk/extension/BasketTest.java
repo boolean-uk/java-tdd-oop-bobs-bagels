@@ -159,40 +159,18 @@ public class BasketTest {
     }
 
     @Test
-    public void testCountingItemQuantityForDiscount() {
-        Store store = new Store();
-        Basket basket = new Basket();
-        store.addBasket(basket);
-        basket.addItem(new Bagel(BGLO));
-        basket.addItem(new Bagel(BGLO));
-        UUID id = store.placeOrder(basket);
-        assertNotNull(store.getOrder(id));
-
-        assertEquals(BigDecimal.valueOf(2), store.getOrder(id).getTotalPriceAfterDiscount());
-    }
-
-    @Test
     public void testSpecialOffers() {
         Store store = new Store();
         Basket basket = new Basket();
         store.addBasket(basket);
-        basket.addItem(new Bagel(BGLO));
-        basket.addItem(new Bagel(BGLO));
-        for (int i = 0; i < 6; i++) {
-            basket.addItem(new Bagel(BGLP));
-            basket.addItem(new Bagel(BGLP));
-            basket.addItem(new Bagel(BGLE));
-        }
-        for (int i = 0; i < 3; i++) {
-            basket.addItem(new Bagel(COFB));
-        }
+        IntStream.range(0, 2).mapToObj(i -> new Bagel(BGLO)).forEach(basket::addItem);
+        IntStream.range(0, 12).mapToObj(i -> new Bagel(BGLP)).forEach(basket::addItem);
+        IntStream.range(0, 6).mapToObj(i -> new Bagel(BGLE)).forEach(basket::addItem);
+        IntStream.range(0, 3).mapToObj(i -> new Coffee(COFB)).forEach(basket::addItem);
+
         UUID id = store.placeOrder(basket);
         Order order = store.getOrder(id);
 
-
-
-        assertEquals(23, order.getItems().values().stream().mapToInt(Integer::intValue).sum());
-//        assertEquals(BigDecimal.valueOf(11.57), basket.getTotalPrice());
-//        assertEquals(BigDecimal.valueOf(9.27), order.getTotalPriceAfterDiscount());
+        assertEquals(BigDecimal.valueOf(10.43), order.getTotalPriceAfterDiscount());
     }
 }
