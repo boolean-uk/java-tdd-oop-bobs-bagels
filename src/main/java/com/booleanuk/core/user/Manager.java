@@ -8,6 +8,11 @@ public class Manager extends User {
     }
 
     public boolean changeBasketSize(Basket basket, int newSize) {
-        return false;
+        if (newSize < basket.getProductsAmount() || newSize <= 1) {
+            throw new IllegalArgumentException("Can't change capacity below actual amount of items");
+        }
+
+        basket.setCapacity(newSize);
+        return true;
     }
 }

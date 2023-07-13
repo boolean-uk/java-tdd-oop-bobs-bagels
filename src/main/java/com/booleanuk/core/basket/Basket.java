@@ -7,14 +7,13 @@ import java.util.List;
 
 public class Basket implements BasketOperations {
     private List<Product> products = new ArrayList<>(0);
-    private int capacity;
+    private int capacity = 5;
 
     public Basket() {
-
     }
 
     public Basket(int capacity) {
-        this.capacity = capacity;
+        setCapacity(capacity);
     }
 
     public List<Product> getProducts() {
@@ -30,6 +29,9 @@ public class Basket implements BasketOperations {
     }
 
     public void setCapacity(int capacity) {
+        if (capacity <= 1) {
+            throw new IllegalArgumentException("Capacity cant be smaller than 1");
+        }
         this.capacity = capacity;
     }
 
