@@ -102,19 +102,22 @@ public class Basket implements BasketOperations {
                             .subtract(discount.getOptionalRequiredProduct().getPrice());
                 } else {
                     saveReceivedDiscount(discounts, discount);
-                    total = total
-                            .subtract(discount.getProduct().getPrice()
-                                    .multiply(BigDecimal.valueOf(discount.getRequiredAmount())));
+                    total = total.subtract(discount.getProduct().getPrice().multiply(BigDecimal.valueOf(discount.getRequiredAmount()).multiply(getAmountOfDiscountOccurrences(discount))));
+
                 }
 
                 if (total.compareTo((BigDecimal.ZERO)) < 0) {
                     total = BigDecimal.ZERO;
                 }
-                total = total.add(discount.getDiscountedPrice());
+                total = total.add(discount.getDiscountedPrice().multiply(getAmountOfDiscountOccurrences(discount)));
             }
         }
 
         return new SummarizedBasket(total, discounts);
+    }
+
+    private BigDecimal getAmountOfDiscountOccurrences(Discount discount) {
+        return BigDecimal.valueOf(Collections.frequency(products, discount.getProduct())).divideToIntegralValue(BigDecimal.valueOf(discount.getRequiredAmount()));
     }
 
     private boolean isItDifferentProductsDiscount(Discount discount) {
@@ -122,7 +125,11 @@ public class Basket implements BasketOperations {
     }
 
     private boolean isDiscountRequirementMet(Discount discount) {
-        return products.contains(discount.getProduct()) && Collections.frequency(products, discount.getProduct()) == discount.getRequiredAmount();
+        return products.contains(discount.getProduct()) && hasRequiredAmountOfThisProduct(discount);
+    }
+
+    private boolean hasRequiredAmountOfThisProduct(Discount discount) {
+        return Math.floor((double) Collections.frequency(products, discount.getProduct()) / discount.getRequiredAmount()) >= 1;
     }
 
     @Override
