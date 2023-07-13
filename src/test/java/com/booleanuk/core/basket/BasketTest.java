@@ -16,7 +16,6 @@ public class BasketTest {
 
     Store store = Store.getInstance();
 
-
     @Test
     public void shouldCreateBasketWithEmptyList() {
         Basket basket = new Basket();
@@ -135,8 +134,9 @@ public class BasketTest {
         store.addDiscount(discountBagelOnion);
 
         Basket basket = new Basket(6);
-        basket.addProduct(bagelOnion, 6);
+        boolean addingResult = basket.addProduct(bagelOnion, 6);
 
+        Assertions.assertTrue(addingResult);
         Assertions.assertEquals(BigDecimal.valueOf(2.49), basket.summarizeBasket().total());
 
     }
@@ -211,7 +211,6 @@ public class BasketTest {
 
     }
 
-
     @Test
     public void shouldDiscountOnMultipleBagelsWithCoffee() {
         Bagel bagelOnion = new Bagel("BGLO", BigDecimal.valueOf(0.49), BagelVariant.Onion);
@@ -235,8 +234,36 @@ public class BasketTest {
         basket.addProduct(bagelOnion, 6);
         basket.addProduct(bagelPlain, 12);
         basket.addProduct(coffeeBlack);
-        SummarizedBasket total = basket.summarizeBasket();
+        BasketSummary total = basket.summarizeBasket();
         Assertions.assertEquals(BigDecimal.valueOf(2.49).add(BigDecimal.valueOf(3.99).add(BigDecimal.valueOf(1.25))), total.total());
+    }
 
+    @Test
+    public void shouldReturnHowMuchMoneySavedOnDiscount() {
+        Bagel bagelOnion = new Bagel("BGLO", BigDecimal.valueOf(0.49), BagelVariant.Onion);
+        Bagel bagelPlain = new Bagel("BGLP", BigDecimal.valueOf(0.39), BagelVariant.Plain);
+        Bagel bagelEverything = new Bagel("BGLE", BigDecimal.valueOf(0.49), BagelVariant.Everything);
+        Coffee coffeeBlack = new Coffee("COFB", BigDecimal.valueOf(0.99), CoffeeVariant.Black);
+
+
+        Discount discountCoffeeBlack = new Discount(coffeeBlack, 1, BigDecimal.valueOf(1.25), bagelEverything);
+        Discount discountBagelPlain = new Discount(bagelPlain, 12, BigDecimal.valueOf(3.99));
+        Discount discountBagelOnion = new Discount(bagelOnion, 6, BigDecimal.valueOf(2.49));
+
+
+        store.setAvailableDiscounts(new ArrayList<>());
+        store.addDiscount(discountBagelPlain);
+        store.addDiscount(discountBagelOnion);
+        store.addDiscount(discountCoffeeBlack);
+
+
+        Basket basket = new Basket(19);
+        basket.addProduct(bagelOnion, 6);
+        basket.addProduct(bagelPlain, 12);
+        basket.addProduct(coffeeBlack);
+        BasketSummary total = basket.summarizeBasket();
+
+        Assertions.assertEquals(BigDecimal.valueOf(0.45), total.discounts().get(bagelOnion));
+        Assertions.assertEquals(BigDecimal.valueOf(0.69), total.discounts().get(bagelPlain));
     }
 }

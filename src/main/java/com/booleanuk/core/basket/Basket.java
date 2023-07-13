@@ -11,6 +11,7 @@ import java.util.HashMap;
 import java.util.List;
 
 public class Basket implements BasketOperations {
+    private final Store store = Store.getInstance();
     private List<Product> products = new ArrayList<>(0);
     private int capacity = 5;
 
@@ -19,11 +20,6 @@ public class Basket implements BasketOperations {
 
     public Basket(int capacity) {
         setCapacity(capacity);
-    }
-
-    private static void saveReceivedDiscount(HashMap<Product, BigDecimal> discounts, Discount discount) {
-        BigDecimal productDiscount = discount.getProduct().getPrice().multiply(BigDecimal.valueOf(discount.getRequiredAmount())).subtract(discount.getDiscountedPrice());
-        discounts.put(discount.getProduct(), productDiscount);
     }
 
     public List<Product> getProducts() {
@@ -85,47 +81,62 @@ public class Basket implements BasketOperations {
     }
 
     @Override
-    public SummarizedBasket summarizeBasket() {
-        Store store = Store.getInstance();
+    public BasketSummary summarizeBasket() {
 
-        HashMap<Product, BigDecimal> discounts = new HashMap<>();
+        HashMap<Product, BigDecimal> savings = new HashMap<>();
 
         BigDecimal total = products.stream().map(Product::getPrice).reduce(BigDecimal.ZERO, BigDecimal::add);
 
         for (Discount discount : store.getAvailableDiscounts()) {
-            if (isDiscountRequirementMet(discount)) {
-                if (isItDifferentProductsDiscount(discount)) {
-                    saveReceivedDiscount(discounts, discount);
+            if (isDiscountRequirementsMet(discount)) {
+                if (isSingleProductDiscount(discount)) {
+
+                    total = total.subtract(discount.getProduct().getPrice()
+                            .multiply(BigDecimal.valueOf(discount.getRequiredAmount())
+                                    .multiply(getAmountOfDiscountOccurrences(discount))));
+
+                    addSavedMoney(savings, discount);
+
+                } else {
                     total = total
                             .subtract(discount.getProduct().getPrice()
                                     .multiply(BigDecimal.valueOf(discount.getRequiredAmount())))
                             .subtract(discount.getOptionalRequiredProduct().getPrice());
-                } else {
-                    saveReceivedDiscount(discounts, discount);
-                    total = total.subtract(discount.getProduct().getPrice().multiply(BigDecimal.valueOf(discount.getRequiredAmount()).multiply(getAmountOfDiscountOccurrences(discount))));
-
+                    addSavedMoney(savings, discount);
                 }
 
                 if (total.compareTo((BigDecimal.ZERO)) < 0) {
                     total = BigDecimal.ZERO;
                 }
-                total = total.add(discount.getDiscountedPrice().multiply(getAmountOfDiscountOccurrences(discount)));
+                total = total.add(discount.getDiscountedPrice()
+                        .multiply(getAmountOfDiscountOccurrences(discount)));
             }
         }
-
-        return new SummarizedBasket(total, discounts);
+        return new BasketSummary(total, savings);
     }
 
     private BigDecimal getAmountOfDiscountOccurrences(Discount discount) {
         return BigDecimal.valueOf(Collections.frequency(products, discount.getProduct())).divideToIntegralValue(BigDecimal.valueOf(discount.getRequiredAmount()));
     }
 
-    private boolean isItDifferentProductsDiscount(Discount discount) {
-        return discount.getOptionalRequiredProduct() != null && products.contains(discount.getOptionalRequiredProduct());
+    private boolean isSingleProductDiscount(Discount discount) {
+        return !(discount.getOptionalRequiredProduct() != null && products.contains(discount.getOptionalRequiredProduct()));
     }
 
-    private boolean isDiscountRequirementMet(Discount discount) {
+    private boolean isDiscountRequirementsMet(Discount discount) {
         return products.contains(discount.getProduct()) && hasRequiredAmountOfThisProduct(discount);
+    }
+
+    private void addSavedMoney(HashMap<Product, BigDecimal> discounts, Discount discount) {
+        BigDecimal productPrice = discount.getProduct().getPrice();
+        BigDecimal requiredAmountOfProductToActivateDiscount = BigDecimal.valueOf(discount.getRequiredAmount());
+        BigDecimal discountedPrice = discount.getDiscountedPrice();
+
+        BigDecimal savedMoney = productPrice
+                .multiply(requiredAmountOfProductToActivateDiscount)
+                .subtract(discountedPrice);
+
+        discounts.put(discount.getProduct(), savedMoney);
     }
 
     private boolean hasRequiredAmountOfThisProduct(Discount discount) {

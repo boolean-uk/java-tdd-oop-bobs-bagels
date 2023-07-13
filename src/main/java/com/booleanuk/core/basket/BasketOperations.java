@@ -11,7 +11,7 @@ public interface BasketOperations {
 
     boolean isProductInBasket(Product product);
 
-    SummarizedBasket summarizeBasket();
+    BasketSummary summarizeBasket();
 
     int getProductsAmount();
 }
