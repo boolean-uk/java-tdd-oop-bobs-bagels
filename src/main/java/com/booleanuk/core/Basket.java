@@ -30,9 +30,12 @@ public class Basket {
 
     }
 
-    public void removeItem(String item) {
+    public boolean removeItem(String item) {
         if(items.contains(item)) {
             items.remove(item);
+            return true;
+        }else {
+            return false;
         }
     }
 
