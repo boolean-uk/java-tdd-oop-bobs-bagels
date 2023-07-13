@@ -48,6 +48,7 @@ public class BasketTest {
     public void checkCostOfProducts(){
         Basket basket = new Basket(10);
         Assertions.assertEquals(0.39, basket.checkCostOfProduct("Plain"));
+        Assertions.assertEquals(0.0, basket.checkCostOfProduct("Pizza"));
     }
 
 }
