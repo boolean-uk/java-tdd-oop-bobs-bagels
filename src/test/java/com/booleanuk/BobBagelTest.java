@@ -141,6 +141,19 @@ public class BobBagelTest {
         assertFalse(isAdded);
     }
 
+    @Test
+    public void shouldAddBagelIfIsInTheInventory(){
+        //when
+        Basket basket = new Basket();
+
+    }
+
+    @Test
+    public  void shouldReturnFalseAfterAddingProductThatDoesNotExist(){
+
+
+    }
+
 
 
 

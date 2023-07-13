@@ -1,19 +1,22 @@
 package com.booleanuk.core;
 
-import java.awt.image.AreaAveragingScaleFilter;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Set;
 
 public class Basket {
 
-    private static ArrayList<Filling> allFillings = new ArrayList<>();
-    private static ArrayList<Bagel> allBagels = new ArrayList<>();
-    private static ArrayList<Coffee> allCoffees = new ArrayList<>();
 
     private HashMap<Product, Integer> basket = new HashMap<>();
 
+    private static final Inventory inventory  = new Inventory();
     private int capacity = 5;
 
+
+    public Basket() {
+
+    }
 
     public HashMap<Product, Integer> getBasket() {
         return basket;
@@ -89,9 +92,11 @@ public class Basket {
     }
 
 
-    private boolean isInTheInvetory(){
+    private boolean isInTheInvetory() {
         return false;
     }
+
+
 
 
 }
