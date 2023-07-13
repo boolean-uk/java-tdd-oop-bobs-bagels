@@ -31,7 +31,7 @@ public class Bagel extends Product{
     }
 
 
-
-
-
+    public void addFilling(Filling filling) {
+        getFillings().add(filling);
+    }
 }
