@@ -7,11 +7,10 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 
 public class TestManager {
-    public Basket basket;
     public Manager manager;
+    public Customer customer;
     @BeforeEach
     public void setUp() {
-        basket = new Basket();
         manager = new Manager();
     }
 
@@ -19,8 +18,9 @@ public class TestManager {
     @Test
     public void whenChangeBasketCapacity_basketCapacityIsChanged() throws Exception {
         manager.changeBasketCapacity(3);
+        customer = new Customer();
 
-        Assertions.assertEquals(3,basket.getCapacity());
+        Assertions.assertEquals(3,customer.basket.getCapacity());
     }
 
 }

@@ -4,12 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Basket {
-    public static int capacity;
+    public static int capacity = 2; //default size of the basket
     private Inventory inventory = Inventory.getInstance();
-
-    public Basket(){
-        capacity = 2; //default size of the basket
-    }
 
     private List<String> listOfItemsInBasket = new ArrayList<String>();
 
@@ -30,11 +26,11 @@ public class Basket {
         listOfItemsInBasket.remove(item);
     }
 
-    public void setBasketCapacity(int capacity) {
+    public static void setBasketCapacity(int capacity) {
         Basket.capacity = capacity;
     }
 
-    public int getCapacity() {
+    public static int getCapacity() {
         return capacity;
     }
 
