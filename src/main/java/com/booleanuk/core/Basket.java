@@ -40,9 +40,18 @@ public class Basket {
     }
 
     public void changeCapacity(int newCapacity) {
-        this.capacity = newCapacity;
+        if(newCapacity > 0 && newCapacity >= items.size()) {
+            this.capacity = newCapacity;
+        }else if(newCapacity < items.size()) {
+            System.out.println("You already got " + items.size() + " bagles in basket so you can't downsize basket to " + newCapacity + " spaces.");
+            System.out.println("New basket size is " + items.size());
+            this.capacity = items.size();
+        }
+
     }
 
-
+    public double getTotalPrice() {
+        return 0.0;
+    }
 
 }
