@@ -1,4 +1,6 @@
-package com.booleanuk.core;
+package com.booleanuk.extension;
+
+import com.booleanuk.core.*;
 
 import java.text.DecimalFormat;
 import java.time.LocalDateTime;
