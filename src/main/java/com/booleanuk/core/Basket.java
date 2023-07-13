@@ -4,11 +4,7 @@ import java.util.ArrayList;
 
 public class Basket {
     private ArrayList<Product> list = new ArrayList<>();
-    private int capacity;
-
-    public Basket(int capacity) {
-        this.capacity = capacity;
-    }
+    private int capacity = 10;
 
     public boolean add(Product product) {
         if (list.size() <= capacity) {
@@ -23,6 +19,14 @@ public class Basket {
             return list.remove(product);
         }
         return false;
+    }
+
+    public double total(){
+        double total = 0;
+        for (Product product : list) {
+            total += product.getPrice();
+        }
+        return total;
     }
 
     public ArrayList<Product> getList() {

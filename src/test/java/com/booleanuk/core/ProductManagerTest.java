@@ -55,10 +55,10 @@ public class ProductManagerTest {
 
     @Test
     public void fillHashMapFromFileTest() {
-        // Assert that getInventory() method works and fills HashMap
-        Assertions.assertFalse(productManager.getInventory().isEmpty());
+        // Executed
 
-        // Assert hard-coded for the inventory.txt file, remove for custom use
+        // Verify
+        Assertions.assertFalse(productManager.getInventory().isEmpty());
         Assertions.assertEquals("Onion", productManager.getInventory().get("BGLO").getVariant());
     }
 
@@ -68,7 +68,7 @@ public class ProductManagerTest {
         int expectedCapacity = 11;
 
         //Execute
-        productManager.changeBasketSize(expectedCapacity);
+        productManager.changeBasketCapacity(expectedCapacity);
 
         //Verify
         Assertions.assertEquals(expectedCapacity, productManager.getBasket().getCapacity());
@@ -84,7 +84,7 @@ public class ProductManagerTest {
         int newCapacity = 2;
 
         //Execute
-        productManager.changeBasketSize(newCapacity);
+        productManager.changeBasketCapacity(newCapacity);
 
         //Verify
         Assertions.assertEquals(expectedCapacity, productManager.getBasket().getCapacity());

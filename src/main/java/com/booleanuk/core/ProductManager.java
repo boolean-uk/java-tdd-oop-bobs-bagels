@@ -4,21 +4,19 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.Map;
 import java.util.Scanner;
 
 public class ProductManager {
-    private HashMap<String, Product> inventory;
-    private Basket basket;
+    private static final HashMap<String, Product> INVENTORY = fillHashMapFromFile("src/main/java/com/booleanuk/core/inventory.txt");
+    private final Basket basket;
 
     public ProductManager() {
-        inventory = fillHashMapFromFile("src/main/java/com/booleanuk/core/inventory.txt");
-        basket = new Basket(10);
+        basket = new Basket();
     }
 
     public boolean orderBagel(String variant) {
         if (basket.getList().size() < basket.getCapacity()) {
-            for (Product product : inventory.values()) {
+            for (Product product : INVENTORY.values()) {
                 if (product.getVariant().equals(variant)) {
                     return basket.add(product);
                 }
@@ -31,9 +29,9 @@ public class ProductManager {
     }
 
     public boolean removeBagel(String variant) {
-        for (Map.Entry<String, Product> entry : inventory.entrySet()) {
-            if (entry.getValue().getVariant().equals(variant)) {
-                return basket.remove(entry.getValue());
+        for (Product product : INVENTORY.values()) {
+            if (product.getVariant().equals(variant)) {
+                return basket.remove(product);
             }
         }
         System.out.println("Failed to remove the product");
@@ -41,18 +39,18 @@ public class ProductManager {
     }
 
     public HashMap<String, Product> getInventory() {
-        return inventory;
+        return INVENTORY;
     }
 
     public Basket getBasket() {
         return basket;
     }
 
-    public boolean changeBasketCapacity(int capacity) {
-        return basket.setCapacity(capacity);
+    public void changeBasketCapacity(int capacity) {
+        basket.setCapacity(capacity);
     }
 
-    private HashMap<String, Product> fillHashMapFromFile(String file) {
+    private static HashMap<String, Product> fillHashMapFromFile(String file) {
         HashMap<String, Product> hashMap = new HashMap<>();
 
         try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
