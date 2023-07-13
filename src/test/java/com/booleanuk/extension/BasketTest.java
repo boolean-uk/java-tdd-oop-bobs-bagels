@@ -49,6 +49,11 @@ public class BasketTest {
     Item everythingBagel;
     Item sesameBagel;
     Item blackCoffee;
+    Item blackCoffee1;
+    Item blackCoffee2;
+    Item blackCoffee3;
+    Item blackCoffee4;
+    Item blackCoffee5;
     Item whiteCoffee;
     Item cappuccinoCoffee;
     Item latteCoffee;
@@ -107,6 +112,12 @@ public class BasketTest {
         sesameBagel = new Item("Bagel", "Sesame", 0.49);
 
         blackCoffee = new Item("Coffee", "Black", 0.99);
+        blackCoffee1 = new Item("Coffee", "Black", 0.99);
+        blackCoffee2 = new Item("Coffee", "Black", 0.99);
+        blackCoffee3 = new Item("Coffee", "Black", 0.99);
+        blackCoffee4 = new Item("Coffee", "Black", 0.99);
+        blackCoffee5 = new Item("Coffee", "Black", 0.99);
+
         whiteCoffee = new Item("Coffee", "White", 1.19);
         cappuccinoCoffee = new Item("Coffee", "Cappuccino", 1.29);
         latteCoffee = new Item("Coffee", "Latte", 1.29);
@@ -121,7 +132,7 @@ public class BasketTest {
     }
 
     @Test
-    public void totalCostSpecialOfferShouldReturnEqual(){
+    public void totalCostSpecialOfferShouldReturnEqual() {
         basket.add(onionBagel);
         basket.add(onionBagel2);
         basket.add(onionBagel3);
@@ -134,7 +145,7 @@ public class BasketTest {
     }
 
     @Test
-    public void totalCostSpecialOfferReturnEqualFor13OnionBagels(){
+    public void totalCostSpecialOfferReturnEqualFor13OnionBagels() {
         basket.changeCapacity(14);
         basket.add(onionBagel);
         basket.add(onionBagel2);
@@ -154,7 +165,7 @@ public class BasketTest {
     }
 
     @Test
-    public void totalCostSpecialOfferReturnEqualFor8EverythingBagels(){
+    public void totalCostSpecialOfferReturnEqualFor8EverythingBagels() {
         basket.changeCapacity(10);
         basket.add(everythingBagel);
         basket.add(everythingBagel2);
@@ -169,7 +180,7 @@ public class BasketTest {
     }
 
     @Test
-      public void totalCostSpecialOfferReturnEqualFor13PlainBagels(){
+    public void totalCostSpecialOfferReturnEqualFor13PlainBagels() {
         basket.changeCapacity(14);
         basket.add(plainBagel1);
         basket.add(plainBagel2);
@@ -186,5 +197,24 @@ public class BasketTest {
         basket.add(plainBagel13);
         basket.add(hamFilling);
         Assertions.assertEquals(4.5, basket.totalCost());
+    }
+
+    @Test
+    public void totalCostSpecialOfferReturnEqualFor4CoffeeBagels() {
+        basket.changeCapacity(14);
+        basket.add(plainBagel1);
+        basket.add(plainBagel2);
+        basket.add(plainBagel3);
+        basket.add(plainBagel4);
+        basket.add(plainBagel5);
+        basket.add(plainBagel6);
+        basket.add(plainBagel7);
+        basket.add(blackCoffee1);
+        basket.add(blackCoffee2);
+        basket.add(blackCoffee3);
+        basket.add(blackCoffee4);
+        basket.add(blackCoffee5);
+        basket.add(hamFilling);
+        Assertions.assertEquals(7.15, basket.totalCost());
     }
 }
