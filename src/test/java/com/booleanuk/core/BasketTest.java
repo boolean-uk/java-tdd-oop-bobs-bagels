@@ -7,7 +7,7 @@ public class BasketTest {
     private Basket basket;
 
     public BasketTest() {
-        basket = new Basket(2);
+        basket = new Basket(4);
     }
 
     @Test
@@ -27,9 +27,10 @@ public class BasketTest {
         basket.addItem("BGLO");
         basket.addItem("BGLO");
         basket.addItem("FILB");
-        Assertions.assertEquals(2,basket.getItems().size());
+        basket.addItem("FILB");
+        Assertions.assertEquals(4,basket.getItems().size());
         basket.addItem("BGLO");
-        Assertions.assertEquals(2,basket.getItems().size());
+        Assertions.assertEquals(4,basket.getItems().size());
     }
 
     @Test
@@ -58,6 +59,8 @@ public class BasketTest {
     public void isBasketFullTest() {
         Assertions.assertTrue(basket.addItem("BGLO"));
         Assertions.assertTrue(basket.addItem("FILB"));
+        Assertions.assertTrue(basket.addItem("BGLO"));
+        Assertions.assertTrue(basket.addItem("BGLO"));
         Assertions.assertFalse(basket.addItem("FILB"));
     }
 
@@ -65,16 +68,18 @@ public class BasketTest {
     public void changingCapacityTest() {
         basket.addItem("BGLO");
         basket.addItem("FILB");
-        Assertions.assertEquals(2,basket.getItems().size());
-
-        basket.changeCapacity(4);
         basket.addItem("BGLO");
         basket.addItem("FILB");
         Assertions.assertEquals(4,basket.getItems().size());
 
+        basket.changeCapacity(6);
         basket.addItem("BGLO");
         basket.addItem("FILB");
-        Assertions.assertEquals(4,basket.getItems().size());
+        Assertions.assertEquals(6,basket.getItems().size());
+
+        basket.addItem("BGLO");
+        basket.addItem("FILB");
+        Assertions.assertEquals(6,basket.getItems().size());
     }
 
     @Test
@@ -87,6 +92,24 @@ public class BasketTest {
         Assertions.assertTrue(basket.removeItem("FILB"));
         Assertions.assertFalse(basket.removeItem("FILB"));
         Assertions.assertFalse(basket.removeItem("strange item"));
+    }
+
+    public void getTotalPriceOfItemsInBasketTest() {
+
+    }
+
+    @Test
+    public void changingCapacityOfBasketWithNegativeNumber() {
+        basket.addItem("BGLO");
+        basket.addItem("FILB");
+        basket.addItem("BGLO");
+        basket.addItem("FILB");
+        Assertions.assertEquals(4,basket.getItems().size());
+
+        basket.changeCapacity(-10);
+        basket.addItem("BGLO");
+        basket.addItem("FILB");
+        Assertions.assertEquals(4,basket.getItems().size());
     }
 
 }
