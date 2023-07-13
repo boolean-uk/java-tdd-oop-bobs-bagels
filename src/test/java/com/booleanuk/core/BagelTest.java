@@ -5,6 +5,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 public class BagelTest {
@@ -14,8 +15,8 @@ public class BagelTest {
 
     @BeforeEach
     void beforeEach() {
-        bagel = new Bagel(12);
-        filling = new Filling(3);
+        bagel = new Bagel(BigDecimal.valueOf(12),"variantBagel");
+        filling = new Filling(BigDecimal.valueOf(3), "variantFilling");
     }
 
     @Test
@@ -27,8 +28,8 @@ public class BagelTest {
 
     @Test
     void shouldReturnPriceOfBagelAndFillings() {
-        Assertions.assertEquals(12, bagel.getPrice());
+        Assertions.assertEquals(BigDecimal.valueOf(12), bagel.getPrice());
         bagel.setFillings(List.of(filling));
-        Assertions.assertEquals(15, bagel.getPrice());
+        Assertions.assertEquals(BigDecimal.valueOf(15), bagel.getPrice());
     }
 }

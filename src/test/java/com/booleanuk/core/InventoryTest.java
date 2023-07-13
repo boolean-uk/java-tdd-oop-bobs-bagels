@@ -18,7 +18,7 @@ public class InventoryTest {
 
     @Test
     void shouldCheckIfInvetoryContainsItem() {
-        Assertions.assertFalse(invetory.containsItem("BLLLLL"));
-        Assertions.assertTrue(invetory.containsItem("BGLO"));
+        Assertions.assertFalse(inventory.containsItem("BLLLLL"));
+        Assertions.assertTrue(inventory.containsItem("BGLO"));
     }
 }
