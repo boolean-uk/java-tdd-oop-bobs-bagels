@@ -292,6 +292,84 @@ public class BasketTest {
 
     }
 
+        @Test
+        public void testCalculateTotalPriceForSingleItems() {
+            Basket basket = new Basket(20);
+
+            basket.addItem("BGLO",null);
+            basket.addItem("BGLP", null);
+            double totalPrice = basket.calculateTotalPrice();
+            double expectedPrice = 0.88;
+            Assertions.assertEquals(expectedPrice, totalPrice);
+        }
+
+        @Test
+        public void testCalculateTotalPriceWithSpecialOffer() {
+            Basket basket = new Basket(20);
+
+            for(int i=0;i<12;i++){
+                basket.addItem("BGLP", null);
+            }
+
+            double totalPrice = basket.calculateTotalPrice();
+            double expectedPrice = 3.99;
+            Assertions.assertEquals(expectedPrice, totalPrice);
+        }
+
+        @Test
+        public void testCalculateTotalPriceWithSpecialOfferAndRegularItems() {
+            Basket basket = new Basket(24);
 
 
-}
+            basket.addItem("BGLO", null);
+            basket.addItem("BGLO", null);
+            for(int i=0;i<12;i++){
+                basket.addItem("BGLP", null);
+            }
+            for(int i=0;i<6;i++){
+                basket.addItem("BGLE", null);
+            }
+            basket.addItem("COFB",null);
+            basket.addItem("COFB",null);
+            basket.addItem("COFB",null);
+
+            double totalPrice = basket.calculateTotalPrice();
+            double expectedPrice = 10.43;
+            Assertions.assertEquals(expectedPrice, totalPrice);
+        }
+        @Test
+        public void testCalculateTotalPriceWithOfferItems() {
+            Basket basket = new Basket(20);
+
+            for(int i =0;i<16;i++){
+                basket.addItem("BGLP", null);
+            }
+            double totalPrice = basket.calculateTotalPrice();
+            double expectedPrice = 5.55;
+            Assertions.assertEquals(expectedPrice, totalPrice);
+        }
+
+
+    @Test
+    public void testCalculateTotalPriceWithOfferItemsCoffeandbagel() {
+        Basket basket = new Basket(20);
+
+        basket.addItem("COFB", null);
+        basket.addItem("BGLP", null);
+
+
+        double totalPrice = basket.calculateTotalPrice();
+        double expectedPrice = 1.25;
+        Assertions.assertEquals(expectedPrice, totalPrice);
+    }
+
+        private void initializeInventory(Inventory inventory) {
+            // Inicjalizacja inventarza
+        }
+    }
+
+
+
+
+
+
