@@ -197,7 +197,6 @@ public class BobBagelsExtensionTest {
 
         //when
         boolean canAddBagelTheBasketThatIsNotInTheInventory = basketManager.add(bagelExt);
-
         //then
         assertFalse(canAddBagelTheBasketThatIsNotInTheInventory);
     }

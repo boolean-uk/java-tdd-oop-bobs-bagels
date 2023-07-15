@@ -133,9 +133,6 @@ public class BasketManager {
 
 
     public double getTotalCost() {
-        System.out.println(basketExt.getTotalCostBagel() );
-        System.out.println(basketExt.getTotalCostFillings());
-        System.out.println(basketExt.getTotalCostCoffee());
         return  basketExt.getTotalCostBagel() + basketExt.getTotalCostFillings() + basketExt.getTotalCostCoffee();
     }
 
