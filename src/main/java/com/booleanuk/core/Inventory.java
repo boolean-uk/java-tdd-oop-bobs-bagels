@@ -5,11 +5,12 @@ import java.util.ArrayList;
 public class Inventory {
 
     private static ArrayList<Filling> allFillings = new ArrayList<>();
-    private static ArrayList<Bagel> allBagels =new ArrayList<>();
+    private static ArrayList<Bagel> allBagels = new ArrayList<>();
     private static ArrayList<Coffee> allCoffees = new ArrayList<>();
 
     public Inventory() {
-        addToInventory();
+        if(allFillings.isEmpty() || allCoffees.isEmpty() || allBagels.isEmpty())
+            addToInventory();
     }
 
     private static void addToInventory() {

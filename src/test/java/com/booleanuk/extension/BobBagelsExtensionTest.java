@@ -3,6 +3,8 @@ package com.booleanuk.extension;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.time.LocalDateTime;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class BobBagelsExtensionTest {
@@ -11,6 +13,8 @@ public class BobBagelsExtensionTest {
     BasketExt basketExt;
     InventoryExt inventoryExt;
     BasketManager basketManager;
+
+    ReceiptCreator receiptCreator;
 
     DiscountCreator discountCreator;
     BagelExt bagelO;
@@ -30,10 +34,11 @@ public class BobBagelsExtensionTest {
 
     @BeforeEach
     public void prepareToTests() {
+        receiptCreator = new ReceiptCreator();
         basketExt = new BasketExt();
         inventoryExt = new InventoryExt();
         discountCreator = new DiscountCreator();
-        basketManager = new BasketManager(basketExt,inventoryExt,discountCreator);
+        basketManager = new BasketManager(basketExt,inventoryExt,discountCreator,receiptCreator);
         bagelO = new BagelExt(SKU.BGLO, "Bagel", 0.49);
         bagelP = new BagelExt(SKU.BGLP, "Bagel", 0.39);
         bagelE = new BagelExt(SKU.BGLE, "Bagel", 0.49);
@@ -221,10 +226,21 @@ public class BobBagelsExtensionTest {
 
 
     @Test
-    public void shouldReturnReciptForOrder(){
+    public void shouldReturnFirstPartOfReceiptForOrder(){
+        //given
+        LocalDateTime date = LocalDateTime.of(2023,7,15,21,36,31);
+        receiptCreator.setReceiptCreatedAt(date);
+        String howShouldLook = "\n" +
+                "    ~~~ Bob's Bagels ~~~    \n" +
+                "   2023-JULY-15 21:36:31    \n" +
+                "---------------------------";
+        //when
+        String receipt = receiptCreator.CreateFirstPartOfReceipt(basketExt);
 
-
-
+        assertEquals(howShouldLook,receipt);
+    }
+    @Test
+    public void shouldReturnLastPartOfTheReceipt(){
 
     }
 

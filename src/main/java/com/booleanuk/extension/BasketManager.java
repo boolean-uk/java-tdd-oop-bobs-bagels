@@ -6,12 +6,14 @@ public class BasketManager {
     private BasketExt basketExt;
     private InventoryExt inventoryExt;
     private  DiscountCreator discountCreator;
+    private ReceiptCreator receiptCreator;
 
 
-    public BasketManager(BasketExt basketExt, InventoryExt inventoryExt, DiscountCreator discountCreator) {
+    public BasketManager(BasketExt basketExt, InventoryExt inventoryExt, DiscountCreator discountCreator, ReceiptCreator receiptCreator) {
         this.basketExt = basketExt;
         this.inventoryExt = inventoryExt;
         this.discountCreator = discountCreator;
+        this.receiptCreator = receiptCreator;
 
     }
 
