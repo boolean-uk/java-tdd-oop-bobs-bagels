@@ -296,6 +296,7 @@ public class BasketTest {
                 basket.addItem("BGLE", null);
             }
             basket.addItem("COFB",null);
+
             basket.addItem("COFB",null);
             basket.addItem("COFB",null);
 
@@ -319,9 +320,8 @@ public class BasketTest {
     @Test
     public void testCalculateTotalPriceWithOfferItemsCoffeandbagel() {
         Basket basket = new Basket(20);
-
-        basket.addItem("COFB", null);
         basket.addItem("BGLP", null);
+        basket.addItem("COFB", null);
 
 
         double totalPrice = basket.calculateTotalPrice();

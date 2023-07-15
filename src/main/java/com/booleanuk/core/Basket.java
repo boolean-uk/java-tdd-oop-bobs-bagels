@@ -113,7 +113,6 @@ public class Basket {
         double totalPrice = 0;
         Map<String, Integer> itemQuantities = new HashMap<>();
 
-
         for (String item : items) {
             itemQuantities.put(item, itemQuantities.getOrDefault(item, 0) + 1);
         }
@@ -126,6 +125,8 @@ public class Basket {
             SpecialOffer specialOffer = inventory.getSpecialOffer(item);
 
             int remainingCount = 0;
+            double savings = 0;
+
             if (specialOffer != null && quantity >= specialOffer.getQuantity()) {
                 int offerCount = quantity / specialOffer.getQuantity();
                 remainingCount = quantity % specialOffer.getQuantity();
@@ -135,36 +136,40 @@ public class Basket {
 
                 if (item.equals("COFB") && itemQuantities.containsKey("BGLP")) {
                     if (quantity > specialOffer.getQuantity()) {
-                        System.out.println("Test if");
                         offerPrice = quantity * 0.99;
-
-                    } else if(itemQuantities.get("BGLP") % 12 != 0) {
+                    } else if (itemQuantities.get("BGLP") % 12 != 0) {
                         offerPrice = 1.25;
                         remainingPrice = 0;
-                        itemQuantities.put("BGLP", itemQuantities.get("BGLP") -1);
-                    }else {
+                        itemQuantities.put("BGLP", itemQuantities.get("BGLP") - 1);
+
+                    } else {
                         offerPrice = 0.99;
                     }
                 }
 
                 totalPrice += offerPrice + remainingPrice;
-                receipt.addItem(getItemName(item), quantity, offerPrice + remainingPrice);
+
+                double regularPrice = itemPrice * quantity;
+                savings = regularPrice - (offerPrice + remainingPrice);
+
+                receipt.addItem(getItemName(item), quantity, offerPrice + remainingPrice, savings);
             } else {
                 if (item.equals("BGLP") && itemQuantities.containsKey("COFB")) {
                     continue;
-                }else {
+                } else {
                     totalPrice += itemPrice * quantity;
                 }
 
-                receipt.addItem(getItemName(item), quantity, itemPrice * quantity);
+                receipt.addItem(getItemName(item), quantity, itemPrice * quantity, savings);
             }
         }
 
         receipt.printReceipt();
 
         return Math.round(totalPrice * 100.0) / 100.0;
-
     }
+
+
 
     private String getItemName(String item) {
         switch (item) {
