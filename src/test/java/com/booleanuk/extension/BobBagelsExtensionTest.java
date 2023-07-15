@@ -11,6 +11,8 @@ public class BobBagelsExtensionTest {
     BasketExt basketExt;
     InventoryExt inventoryExt;
     BasketManager basketManager;
+
+    DiscountCreator discountCreator;
     BagelExt bagelO;
     BagelExt bagelP;
     BagelExt bagelE;
@@ -30,7 +32,8 @@ public class BobBagelsExtensionTest {
     public void prepareToTests() {
         basketExt = new BasketExt();
         inventoryExt = new InventoryExt();
-        basketManager = new BasketManager(basketExt,inventoryExt);
+        discountCreator = new DiscountCreator();
+        basketManager = new BasketManager(basketExt,inventoryExt,discountCreator);
         bagelO = new BagelExt(SKU.BGLO, "Bagel", 0.49);
         bagelP = new BagelExt(SKU.BGLP, "Bagel", 0.39);
         bagelE = new BagelExt(SKU.BGLE, "Bagel", 0.49);
@@ -199,6 +202,20 @@ public class BobBagelsExtensionTest {
         boolean canAddBagelTheBasketThatIsNotInTheInventory = basketManager.add(bagelExt);
         //then
         assertFalse(canAddBagelTheBasketThatIsNotInTheInventory);
+    }
+
+
+
+    @Test
+    public void shouldReturnTrueForTwelveSameBagels(){
+        //given
+        for(int i = 0; i < 12; i++){
+            basketManager.add(bagelE);
+        }
+        //when
+        boolean isDiscount = discountCreator.isSpecialTwelveOffer(basketExt);
+        //then
+        assertTrue(isDiscount);
     }
 
 
