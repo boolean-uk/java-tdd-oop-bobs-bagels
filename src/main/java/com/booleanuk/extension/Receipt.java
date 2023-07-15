@@ -31,7 +31,7 @@ public class Receipt {
         System.out.println();
 
         for (ReceiptItem item : items) {
-            System.out.printf("%-18s %2d   £%s%n", item.getName(), item.getQuantity(), DECIMAL_FORMAT.format(item.getPrice()));
+            System.out.printf("%-18s %2d   $%s%n", item.getName(), item.getQuantity(), DECIMAL_FORMAT.format(item.getPrice()));
         }
 
         System.out.println();

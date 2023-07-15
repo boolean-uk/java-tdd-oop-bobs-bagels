@@ -155,13 +155,11 @@ List<Bagle> bagles;
                         remainingPrice = 0;
                         itemQuantities.put("BGLP", itemQuantities.get("BGLP") -1);
                     }else {
-                        System.out.println("Test else");
                         offerPrice = 0.99;
                     }
                 }
 
                 totalPrice += offerPrice + remainingPrice;
-                System.out.println("Test total price " + totalPrice);
                 receipt.addItem(getItemName(item), quantity, offerPrice + remainingPrice);
             } else {
                 if (item.equals("BGLP") && itemQuantities.containsKey("COFB")) {
