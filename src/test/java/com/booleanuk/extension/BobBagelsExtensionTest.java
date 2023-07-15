@@ -209,6 +209,7 @@ public class BobBagelsExtensionTest {
     @Test
     public void shouldReturnTrueForTwelveSameBagels(){
         //given
+        basketExt.setCapacity(20);
         for(int i = 0; i < 12; i++){
             basketManager.add(bagelE);
         }
