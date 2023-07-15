@@ -173,4 +173,41 @@ public class BasketTest {
 
         assertEquals(BigDecimal.valueOf(10.43), order.getTotalPriceAfterDiscount());
     }
+    @Test
+    public void testPrintingReceipt() {
+        Store store = new Store();
+        Basket basket = new Basket();
+        store.addBasket(basket);
+        IntStream.range(0, 2).mapToObj(i -> new Bagel(SKU.BGLO)).forEach(basket::addItem);
+        IntStream.range(0, 12).mapToObj(i -> new Bagel(SKU.BGLP)).forEach(basket::addItem);
+        IntStream.range(0, 6).mapToObj(i -> new Bagel(SKU.BGLE)).forEach(basket::addItem);
+        IntStream.range(0, 3).mapToObj(i -> new Coffee(SKU.COFB)).forEach(basket::addItem);
+
+        UUID id = store.placeOrder(basket);
+        Order order = store.getOrder(id);
+
+        BigDecimal expectedTotalPrice = BigDecimal.valueOf(10.43);
+        assertEquals(expectedTotalPrice, order.getTotalPriceAfterDiscount());
+
+        Receipt receipt = new Receipt(order);
+        receipt.printReceipt();
+    }
+
+    @Test
+    public void testPrintingReceiptTwo() {
+        Store store = new Store();
+        Basket basket = new Basket();
+        store.addBasket(basket);
+        IntStream.range(0, 16).mapToObj(i -> new Bagel(SKU.BGLO)).forEach(basket::addItem);
+
+        UUID id = store.placeOrder(basket);
+        Order order = store.getOrder(id);
+        //it should be 5.55
+        BigDecimal expectedTotalPrice = BigDecimal.valueOf(5.95);
+        assertEquals(expectedTotalPrice, order.getTotalPriceAfterDiscount());
+
+        Receipt receipt = new Receipt(order);
+        receipt.printReceipt();
+    }
+
 }
