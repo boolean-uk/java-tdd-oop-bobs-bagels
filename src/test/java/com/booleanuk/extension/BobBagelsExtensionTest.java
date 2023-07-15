@@ -214,7 +214,7 @@ public class BobBagelsExtensionTest {
             basketManager.add(bagelE);
         }
         //when
-        boolean isDiscount = discountCreator.isSpecialTwelveOffer(basketExt);
+        boolean isDiscount = discountCreator.isSpecialBGLETwelveOffer(basketExt);
         //then
         assertTrue(isDiscount);
     }
