@@ -1,6 +1,7 @@
 package com.booleanuk.core.basket;
 
 import com.booleanuk.core.products.Bagel;
+import com.booleanuk.core.products.Filling;
 import com.booleanuk.core.products.Product;
 import com.booleanuk.core.store.Discount;
 import com.booleanuk.core.store.Store;
@@ -72,7 +73,7 @@ public class Basket implements BasketOperations {
 
     @Override
     public boolean isFull() {
-        return false;
+        return  (products.size()==capacity);
     }
 
     @Override
@@ -157,5 +158,27 @@ public class Basket implements BasketOperations {
     public int getProductsAmount() {
         return this.products.size();
 
+    }
+
+
+    public StringBuilder listBasket()
+    {
+        StringBuilder basketlist = new StringBuilder();
+        int  number=0;
+        for (Product product : products)
+        {
+            if(product instanceof Bagel)
+            {
+                basketlist.append(String.format("%-25s %10s",number + product.toString(), "$" + product.getPrice())).append("\n");
+                for (Filling filling : ((Bagel) product).getFillings())
+                {
+                    basketlist.append(String.format("%-25s %10s", "  ^"+filling, "$" + filling.getPrice())).append("\n");
+                }
+            }
+            else basketlist.append(String.format("%-25s %10s", number + product.toString(), "$" + product.getPrice())).append("\n");
+
+            number++;
+        }
+        return basketlist;
     }
 }
