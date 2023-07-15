@@ -3,7 +3,7 @@ package com.booleanuk.core;
 import java.math.BigDecimal;
 
 public class Bagel extends Item {
-    private Item filling;
+    private Filling filling;
 
     public Bagel(SKU sku) {
         super(sku);
@@ -38,5 +38,9 @@ public class Bagel extends Item {
             return true;
         }
         return false;
+    }
+
+    public Filling getFilling() {
+        return filling;
     }
 }

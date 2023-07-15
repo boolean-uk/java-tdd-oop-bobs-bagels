@@ -3,7 +3,7 @@ package com.booleanuk.extension;
 import java.math.BigDecimal;
 
 public class Bagel extends Item {
-    private Item filling;
+    private Filling filling;
 
     public Bagel(SKU sku) {
         super(sku);
@@ -26,25 +26,15 @@ public class Bagel extends Item {
         this.filling = filling;
     }
 
-
     @Override
     public BigDecimal getPrice() {
-        return filling == null ? super.getPrice() : super.getPrice().add(filling.getPrice());
-    }
-
-    public boolean addFilling(Filling filling) {
-        if (this.filling == null) {
-            this.filling = filling;
-            return true;
+        if (filling != null) {
+            return super.getPrice().add(filling.getPrice());
         }
-        return false;
+        return super.getPrice();
     }
 
-    @Override
-    public String toString() {
-        return "Bagel{" +
-                "sku=" + super.getSku() +
-                "filling=" + filling +
-                '}';
+    public Filling getFilling() {
+        return filling;
     }
 }

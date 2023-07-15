@@ -33,6 +33,11 @@ public class Basket {
         } else {
             items.put(item, 1);
         }
+
+        if (item instanceof Bagel bagel && bagel.getFilling() != null) {
+            addItem(((Bagel) item).getFilling());
+        }
+
         return true;
     }
 
@@ -88,13 +93,5 @@ public class Basket {
                 .map(Filling::new)
                 .toList();
 
-    }
-
-    @Override
-    public String toString() {
-        return "Basket{" +
-                "items=" + items +
-                ", capacity=" + capacity +
-                '}';
     }
 }

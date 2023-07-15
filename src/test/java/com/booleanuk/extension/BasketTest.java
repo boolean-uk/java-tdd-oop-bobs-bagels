@@ -95,10 +95,9 @@ public class BasketTest {
 
     @Test
     public void testAddingFillingToBagel() {
-        Bagel bagel = new Bagel(BGLO);
-
-        assertTrue(bagel.addFilling(new Filling(FILB)));
-        assertFalse(bagel.addFilling(new Filling(FILB)));
+        Basket basket = new Basket();
+        basket.addItem(new Bagel(BGLO, new Filling(FILC)));
+        assertEquals(2, basket.getItems().size());
     }
 
     @Test
@@ -171,6 +170,14 @@ public class BasketTest {
         UUID id = store.placeOrder(basket);
         Order order = store.getOrder(id);
 
-        assertEquals(BigDecimal.valueOf(10.43), order.getTotalPriceAfterDiscount());
+        assertEquals(BigDecimal.valueOf(9.97), order.getTotalPriceAfterDiscount());
+    }
+
+    @Test
+    public void testCoffeeAndBagelSpecialOffer() {
+        Store store = new Store();
+        Basket basket = new Basket();
+        store.addBasket(basket);
+
     }
 }
