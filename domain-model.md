@@ -76,27 +76,27 @@ I want customers to only be able to order things that we stock in our inventory.
 Basket class represents a basket for holding items, including functionality for adding, removing and calculating the total price of items.
 
 
-| Class  | Fields                   | Role                                    | Methods                               | Scenario                                                                | Output                                      |
-|--------|--------------------------|-----------------------------------------|---------------------------------------|-------------------------------------------------------------------------|---------------------------------------------|
-| Basket | Map<Item, Integer> items | A map that stores items and theirs id's | boolean addItem(Item item)            | If customer wants to add a specific type of bagel to his basket.        |                                             |
-|        | int capacity             | The maximum capacity of the basket      |                                       | If it is possible to add an item to the basket.                         | true                                        |
-|        | int DEFAULT_CAPACITY     | The default capacity of the basket      |                                       | If it is not possible to add an item to the basket.                     | false                                       |
-|        |                          |                                         | boolean removeItem(Item item)         | If customer wants to remove a bagel from his basket.                    |                                             |
-|        |                          |                                         |                                       | If it is possible to remove an item from the basket.                    | true                                        |
-|        |                          |                                         |                                       | If it is not possible to remove an item from the basket.                | false                                       |
-|        |                          |                                         | boolean isFull()                      | Called when customer adds a bagel to his basket.                        |                                             |
-|        |                          |                                         |                                       | If number of bagels equals basket capacity                              | true                                        |
-|        |                          |                                         |                                       | If number of bagels is less than basket capacity                        | false                                       |
-|        |                          |                                         | void setCapacity(int newCapacity)     | If manager would like to change the capacity of baskets.                |                                             |
-|        |                          |                                         |                                       | If new capacity is less than number of bagels in basket.                | Output error message                        |
-|        |                          |                                         |                                       | If new capacity is greater than or equal to number of bagels in basket. | Output nothing                              |
-|        |                          |                                         | int getCapacity()                     | Returns the current capacity of the basket.                             |                                             |
-|        |                          |                                         | boolean IsInBasket(Item item)         | Called when customer tries to remove a bagel from his basket.           |                                             |
-|        |                          |                                         |                                       | If item is in the basket.                                               | true                                        |
-|        |                          |                                         |                                       | If item is not in the basket.                                           | false                                       |
-|        |                          |                                         | BigDecimal getTotalPrice()            | If customer wants to know how much he'll pay.                           | The price of items in the basket            |
-|        |                          |                                         | BigDecimal checkPrice(Item item)      | If customer wants to know the cost of a specific item.                  | The price of a bagel of the given type.     |
-|        |                          |                                         | List\<Filling> getAvailableFillings() | Called when customer wants to know the list of available fillings.      | The list of available fillings for a bagel. |
+| Class  | Fields                   | Role                                       | Methods                               | Scenario                                                                | Output                                      |
+|--------|--------------------------|--------------------------------------------|---------------------------------------|-------------------------------------------------------------------------|---------------------------------------------|
+| Basket | Map<Item, Integer> items | A map that stores items and their quantity | boolean addItem(Item item)            | If customer wants to add a specific type of bagel to his basket.        |                                             |
+|        | int capacity             | The maximum capacity of the basket         |                                       | If it is possible to add an item to the basket.                         | true                                        |
+|        | int DEFAULT_CAPACITY     | The default capacity of the basket         |                                       | If it is not possible to add an item to the basket.                     | false                                       |
+|        |                          |                                            | boolean removeItem(Item item)         | If customer wants to remove a bagel from his basket.                    |                                             |
+|        |                          |                                            |                                       | If it is possible to remove an item from the basket.                    | true                                        |
+|        |                          |                                            |                                       | If it is not possible to remove an item from the basket.                | false                                       |
+|        |                          |                                            | boolean isFull()                      | Called when customer adds a bagel to his basket.                        |                                             |
+|        |                          |                                            |                                       | If number of bagels equals basket capacity                              | true                                        |
+|        |                          |                                            |                                       | If number of bagels is less than basket capacity                        | false                                       |
+|        |                          |                                            | void setCapacity(int newCapacity)     | If manager would like to change the capacity of baskets.                |                                             |
+|        |                          |                                            |                                       | If new capacity is less than number of bagels in basket.                | Output error message                        |
+|        |                          |                                            |                                       | If new capacity is greater than or equal to number of bagels in basket. | Output nothing                              |
+|        |                          |                                            | int getCapacity()                     | Returns the current capacity of the basket.                             |                                             |
+|        |                          |                                            | boolean IsInBasket(Item item)         | Called when customer tries to remove a bagel from his basket.           |                                             |
+|        |                          |                                            |                                       | If item is in the basket.                                               | true                                        |
+|        |                          |                                            |                                       | If item is not in the basket.                                           | false                                       |
+|        |                          |                                            | BigDecimal getTotalPrice()            | If customer wants to know how much he'll pay.                           | The price of items in the basket            |
+|        |                          |                                            | BigDecimal checkPrice(Item item)      | If customer wants to know the cost of a specific item.                  | The price of a bagel of the given type.     |
+|        |                          |                                            | List\<Filling> getAvailableFillings() | Called when customer wants to know the list of available fillings.      | The list of available fillings for a bagel. |
 
 Item represents a general item based on SKU (Stock keeping unit).
 
@@ -141,33 +141,48 @@ I want to be able to order items from Bob's Bagels using SKUs.
 I want to be able to view the total price of my order.
 
 3. As a manager, 
-I want to announce special offers for my customers, such as:
+I want to announce special offers for my customers, as follows:
 - for Onion/Everything variant: "6 for 2.49" 
 - for Plain variant: "12 for 3.99"
+- "Coffee & Bagel for 1.25".
 
-4. As a manager, 
-I want to announce a special offer for my customers: "Coffee & Bagel for 1.25".
-
-5. As a customer, 
+4. As a customer, 
 I want to see on my receipt which special offers were included and how they were calculated.
 ```
+Order is a class that stores items customer bought. 
 
-| Class | Fields | Role | Methods | Scenario | Output |
-|-------|--------|------|---------|----------|--------|
-|       |        |      |         |          |        |
-|       |        |      |         |          |        |
-|       |        |      |         |          |        |
-|       |        |      |         |          |        |
-|       |        |      |         |          |        |
-|       |        |      |         |          |        |
+Method getItems() to class Basket. 
+Method getSKU() in class Item.
 
+| Class | Fields                         | Role                         | Methods                          | Scenario                                                         | Output                    |
+|-------|--------------------------------|------------------------------|----------------------------------|------------------------------------------------------------------|---------------------------|
+| Store | List\<Basket> baskets          | To store customer's baskets. | UUID placeOrder(Basket basket)   | If customer wants to order items using SKUs.                     | ID of the placed order.   |
+|       |                                |                              | Order getOrder(UUID id)          |                                                                  | The placed order.         |
+|       |                                |                              |                                  |                                                                  |                           |
+|       | List\<Order> orders            | To store actual orders.      | void applySpecialOffers()        |                                                                  |                           |
+|       |                                |                              | List\<Basket> getBaskets()       |                                                                  |                           |
+|       |                                |                              | void addBasket(Basket Baskets)   | If customer wants to place order and and his items to the Store. |                           |
+|       |                                |                              | Basket getBaskets()              |                                                                  |                           |
+|       |                                |                              |                                  |                                                                  |                           |
+| Order | Map<Item,Integer> orderedItems |                              | BigDecimal getTotalPrice()       | If customer wants to know final price of his items.              | The total price of order. |
+|       | UUID id                        |                              | Integer getItemQuantity(SKU sku) | If customer wants to know the quantity of the item.              | The quantity of the item. |
+|       |                                |                              |                                  |                                                                  |                           |
 
+### EXTENSION2
+User stories:
 
-As a customer, I want to be able to generate a receipt for my order.
-As a customer, I want the receipt to display the date and time of the order.
-As a customer, I want the receipt to list the ordered items, including their names, quantities, and prices.
-As a customer, I want the receipt to display the total price of the order.
-As a customer, I want the receipt to include a thank you message.
+```
+1. As a customer,
+I want to be able to generate a receipt for my order with store's nome.
+2. As a customer, 
+I want the receipt to display the date and time of the order.
+3. As a customer, 
+I want the receipt to list the ordered items, including their names, quantities, and prices.
+4. As a customer, 
+I want the receipt to display the total price of the order.
+5. As a manager, 
+I want the receipt to include a "thank you for your order" message.
+```
 
 As a customer, I want to see the savings on my receipt, indicating the amount saved for each item and the total savings.
 As a customer, I want the savings to be displayed in parentheses() next to the item price.
