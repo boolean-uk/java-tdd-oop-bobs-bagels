@@ -8,13 +8,13 @@ public class ReceiptLine {
     private final Item item;
     private final BigDecimal quantity;
     private final BigDecimal price;
-//    private double discount;
+    private final boolean bagelCoffeeSpecial;
 
-    public ReceiptLine(Item item, BigDecimal quantity, BigDecimal price) {
+    public ReceiptLine(Item item, BigDecimal quantity, BigDecimal price, boolean bagelCoffeeSpecial) {
         this.item = item;
         this.quantity = quantity;
         this.price = price;
-//        this.discount = discount;
+        this.bagelCoffeeSpecial = bagelCoffeeSpecial;
     }
 
     public Item getItem() {
@@ -27,5 +27,9 @@ public class ReceiptLine {
 
     public BigDecimal getPrice() {
         return price;
+    }
+
+    public boolean isBagelCoffeeSpecial() {
+        return bagelCoffeeSpecial;
     }
 }

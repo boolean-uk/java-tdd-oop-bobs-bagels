@@ -1,5 +1,6 @@
 package com.booleanuk.core;
 
+import com.booleanuk.extension.Receipt;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -7,6 +8,8 @@ import org.junit.jupiter.api.Test;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Optional;
 
 public class BasketTest {
@@ -248,4 +251,23 @@ public class BasketTest {
         Assertions.assertEquals(BigDecimal.valueOf(10.73), basket.totalPrice());
     }
 
+
+    @Test
+    public void receiptTest(){
+        basket.changeCapacity(50);
+        for (int i = 0; i < 15; i++) {
+            basket.add("Bagel", "Plain");
+        }
+        for (int i = 0; i < 6; i++) {
+            basket.add("Bagel", "Everything");
+        }
+        basket.add("Coffee", "Black");
+        basket.add("Coffee", "Black");
+        basket.add("Coffee", "Black");
+        basket.add("Bagel", "Onion");
+        basket.add("Filling", "Bacon");
+        Receipt receipt = basket.mapShoppingListToReceipt();
+        System.out.println(receipt);
+        Assertions.assertEquals(new BigDecimal("1.53"), receipt.getSavedMoney());
+    }
 }
