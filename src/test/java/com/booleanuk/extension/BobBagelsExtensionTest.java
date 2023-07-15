@@ -219,6 +219,7 @@ public class BobBagelsExtensionTest {
             basketManager.add(bagelE);
         }
         //when
+        basketManager.countBagelsInBasket();
         boolean isDiscount = discountCreator.isSpecialBGLETwelveOffer(basketExt);
         //then
         assertTrue(isDiscount);
@@ -239,6 +240,8 @@ public class BobBagelsExtensionTest {
 
         assertEquals(howShouldLook,receipt);
     }
+    
+
     @Test
     public void shouldReturnLastPartOfTheReceipt(){
 

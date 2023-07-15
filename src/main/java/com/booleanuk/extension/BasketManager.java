@@ -166,5 +166,11 @@ public class BasketManager {
 
 
 
+    public void countBagelsInBasket(){
+        discountCreator.bagelsCounter(basketExt);
+    }
+
+
+
 
 }

@@ -18,23 +18,28 @@ public class DiscountCreator {
     }
 
     public boolean isSpecialBGLOTwelveOffer(BasketExt basketExt) {
-        bagelsCounter(basketExt);
         return bglo >=12;
     }
     public boolean isSpecialBGLPTwelveOffer(BasketExt basketExt) {
-        bagelsCounter(basketExt);
         return bglp >=12;
     }
     public boolean isSpecialBGLETwelveOffer(BasketExt basketExt) {
-        bagelsCounter(basketExt);
+
         return bgle >=12;
     }
     public boolean isSpecialBGLSTwelveOffer(BasketExt basketExt) {
-        bagelsCounter(basketExt);
+
         return bgls >=12;
     }
 
-    private void bagelsCounter(BasketExt basketExt) {
+
+    public boolean isSpecialBGLSSixOffer(BasketExt basketExt) {
+        return bgls >= 6 && bgls < 12;
+    }
+
+
+
+    public void bagelsCounter(BasketExt basketExt) {
         for (BagelExt bagel :
                 basketExt.getBagelsInBasket()) {
             if (bagel.getSku() == SKU.BGLP) {
