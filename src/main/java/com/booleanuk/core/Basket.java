@@ -62,18 +62,7 @@ public class Basket {
     }
 
 
-    /*
-List<Bagle> bagles;
-    public void addFilling(String SKUofBagle,String SKUofFilling) {
-        double price = inventory.getItemPrice(SKUofBagle);
-        //String variant = inventory.getVariantBySKU(SKUofBagle);
-        //if(bagles.contains(bagle)){
-        //    bagle.addFilling(SKUofFilling);
-        //}
-       // bagle = new Bagle(SKUofBagle, price, variant);
-        //bagle.addFilling(SKUofFilling);
-    }
-*/
+
     public boolean removeFilling(String nameOfBagle, String nameOfFilling) {
         if (items.contains(nameOfBagle) && inventory.checkAvailability(nameOfFilling) == true) {
             items.remove(nameOfFilling);
@@ -150,7 +139,6 @@ List<Bagle> bagles;
                         offerPrice = quantity * 0.99;
 
                     } else if(itemQuantities.get("BGLP") % 12 != 0) {
-                        System.out.println("Are we here?");
                         offerPrice = 1.25;
                         remainingPrice = 0;
                         itemQuantities.put("BGLP", itemQuantities.get("BGLP") -1);
