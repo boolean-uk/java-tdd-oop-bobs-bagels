@@ -124,6 +124,7 @@ List<Bagle> bagles;
         double totalPrice = 0;
         Map<String, Integer> itemQuantities = new HashMap<>();
 
+
         for (String item : items) {
             itemQuantities.put(item, itemQuantities.getOrDefault(item, 0) + 1);
         }
@@ -145,22 +146,29 @@ List<Bagle> bagles;
 
                 if (item.equals("COFB") && itemQuantities.containsKey("BGLP")) {
                     if (quantity > specialOffer.getQuantity()) {
+                        System.out.println("Test if");
                         offerPrice = quantity * 0.99;
-                    } else {
+
+                    } else if(itemQuantities.get("BGLP") % 12 != 0) {
+                        System.out.println("Are we here?");
                         offerPrice = 1.25;
                         remainingPrice = 0;
+                        itemQuantities.put("BGLP", itemQuantities.get("BGLP") -1);
+                    }else {
+                        System.out.println("Test else");
+                        offerPrice = 0.99;
                     }
                 }
 
                 totalPrice += offerPrice + remainingPrice;
-
+                System.out.println("Test total price " + totalPrice);
                 receipt.addItem(getItemName(item), quantity, offerPrice + remainingPrice);
             } else {
                 if (item.equals("BGLP") && itemQuantities.containsKey("COFB")) {
                     continue;
+                }else {
+                    totalPrice += itemPrice * quantity;
                 }
-
-                totalPrice += itemPrice * quantity;
 
                 receipt.addItem(getItemName(item), quantity, itemPrice * quantity);
             }

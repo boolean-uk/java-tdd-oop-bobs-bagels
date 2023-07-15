@@ -19,7 +19,7 @@ public class Receipt {
     public void addItem(String name, int quantity, double price) {
         ReceiptItem item = new ReceiptItem(name, quantity, price);
         items.add(item);
-        total += price * quantity;
+        total += price;
     }
 
     public void printReceipt() {

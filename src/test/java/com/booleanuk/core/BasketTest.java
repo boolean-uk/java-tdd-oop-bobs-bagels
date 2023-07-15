@@ -93,27 +93,6 @@ public class BasketTest {
 
         basket.removeCoffee("COFL");
         Assertions.assertEquals(2,basket.getItems().size());
-        /*
-        basket.addItem("BGLO");
-        basket.addItem("FILB");
-        Assertions.assertEquals(2,basket.getItems().size());
-
-        basket.removeItem("BGLOOOO");
-        Assertions.assertEquals(2,basket.getItems().size());
-
-        basket.removeItem("FILB");
-        Assertions.assertEquals(1,basket.getItems().size());
-
-        basket.removeItem("FILB");
-        Assertions.assertEquals(1,basket.getItems().size());
-
-        basket.removeItem("BGLO");
-        Assertions.assertEquals(0,basket.getItems().size());
-
-        basket.removeItem("BGLO");
-        Assertions.assertEquals(0,basket.getItems().size());
-        */
-
     }
 
     @Test
@@ -207,20 +186,7 @@ public class BasketTest {
 
         Assertions.assertEquals(10,basket.getItems().size());
     }
-    /*
-        @Test
-        public void doesItemExistInBasketSoItCanBeRemoveFromItTest() {
-            basket.addItem("BGLO");
-            basket.addItem("FILB");
 
-            Assertions.assertTrue(basket.removeItem("BGLO"));
-            Assertions.assertFalse(basket.removeItem("BGLO"));
-            Assertions.assertTrue(basket.removeItem("FILB"));
-            Assertions.assertFalse(basket.removeItem("FILB"));
-            Assertions.assertFalse(basket.removeItem("strange item"));
-        }
-
-    */
     @Test
     public void getTotalPriceOfItemsInBasketTest() {
         Assertions.assertEquals(0.00, basket.calculateTotalPrice());
@@ -361,6 +327,40 @@ public class BasketTest {
         double totalPrice = basket.calculateTotalPrice();
         double expectedPrice = 1.25;
         Assertions.assertEquals(expectedPrice, totalPrice);
+    }
+
+    @Test
+    public void testCalculateTotalPriceWithSpecialMultipleOffersAndRegularItems() {
+        Basket basket = new Basket(24);
+
+        for(int i=0;i<12;i++){
+            basket.addItem("BGLP", null);
+        }
+        //Koszt kosztyka 3.99 bo tylko 12 bajgli
+        Assertions.assertEquals(3.99, basket.calculateTotalPrice());
+
+        //3.99 + 0.99 = 4.98
+        basket.addItem("COFB",null);
+        Assertions.assertEquals(4.98, basket.calculateTotalPrice());
+
+        for(int i=0;i<12;i++){
+            basket.addItem("BGLP", null);
+        }
+        //4.98 + 1.25 + 11*0.39 = 9 .53
+        Assertions.assertEquals(9.53, basket.calculateTotalPrice());
+
+    }
+
+    @Test
+    public void calculateTotalCostOfOfferWithFillingsTest() {
+        Basket basket = new Basket(24);
+        List<String> filling = new ArrayList<>();
+        filling.add("FILB");
+        for(int i=0;i<12;i++){
+            basket.addItem("BGLS", filling);
+        }
+        basket.calculateTotalPrice();
+        Assertions.assertEquals(7.32, basket.calculateTotalPrice());
     }
 
         private void initializeInventory(Inventory inventory) {
