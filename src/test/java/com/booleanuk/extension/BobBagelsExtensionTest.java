@@ -220,6 +220,15 @@ public class BobBagelsExtensionTest {
     }
 
 
+    @Test
+    public void shouldReturnReciptForOrder(){
+
+
+
+
+    }
+
+
 
 
 }
