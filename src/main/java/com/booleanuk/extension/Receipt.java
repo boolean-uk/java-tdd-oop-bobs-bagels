@@ -1,39 +1,64 @@
 package com.booleanuk.extension;
 
 import java.time.LocalDateTime;
-import java.util.Set;
+import java.util.HashMap;
 
 public class Receipt {
-    private LocalDateTime creationDate;
+    private final HashMap<String, Integer> costs;
+    private final HashMap<String, Integer> amounts;
+    private final HashMap<String, Integer> discounts;
+    private final double totalCost;
+    private final double totalDiscount;
+    private final LocalDateTime creationDate;
 
-    public Receipt(){
+    public Receipt(
+            HashMap<String, Integer> costs,
+            HashMap<String, Integer> amounts,
+            HashMap<String, Integer> discounts,
+            double totalCost,
+            double totalDiscount
+    ) {
+        this.costs = costs;
+        this.amounts = amounts;
+        this.discounts = discounts;
+        this.totalCost = totalCost;
+        this.totalDiscount = totalDiscount;
         this.creationDate = LocalDateTime.now();
     }
+
+    public HashMap<String, Integer> getCosts() {
+        return costs;
+    }
+
+    public HashMap<String, Integer> getAmounts() {
+        return amounts;
+    }
+
+    public HashMap<String, Integer> getDiscounts() {
+        return discounts;
+    }
+
+    public double getTotalCost() {
+        return totalCost;
+    }
+
+    public double getTotalDiscount() {
+        return totalDiscount;
+    }
+
     public LocalDateTime getCreationDate() {
         return creationDate;
     }
 
-    public String[] generateReceipt(Basket basket){
-        Set<String> keys = basket.getProductsCount().keySet();
-        String[] receipt = new String[keys.size() + 12];
+    public double getDiscount(String productSKU) {
+        return (double) discounts.get(productSKU) / 100;
+    }
 
-        String line = "----------------------------";
-        String bob = "~~~ Bob's Bagels ~~~";
-        String date = creationDate.toString();
-        int lineLength = line.length();
+    public double getCost(String productSKU) {
+        return (double) costs.get(productSKU) / 100;
+    }
 
-        receipt[0] = " ".repeat((lineLength - bob.length())/2) + bob;
-        receipt[1] = "";
-        receipt[2] = " ".repeat((lineLength - date.length())/2) + date;
-        receipt[3] = "";
-        receipt[4] = line;
-        receipt[5] = "";
-
-        int keyCounter = 6;
-        for(String key : keys){
-
-        }
-
-        return receipt;
+    public int getQuantity(String productSKU) {
+        return amounts.get(productSKU);
     }
 }
