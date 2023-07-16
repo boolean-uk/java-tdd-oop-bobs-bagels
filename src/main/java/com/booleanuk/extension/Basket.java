@@ -14,23 +14,23 @@ public class Basket {
         currentAmountOfProducts = 0;
     }
 
-    public boolean add(String productVariant, int amount){
-        if (amount <= 0 || amount + currentAmountOfProducts > capacity || !Inventory.getProducts().containsKey(productVariant))
+    public boolean add(String productSKU, int amount){
+        if (amount <= 0 || amount + currentAmountOfProducts > capacity || Inventory.productNotInInventory(productSKU))
             return false;
-        if (productsCount.containsKey(productVariant))
-            productsCount.put(productVariant, productsCount.get(productVariant) + amount);
+        if (productsCount.containsKey(productSKU))
+            productsCount.put(productSKU, productsCount.get(productSKU) + amount);
         else
-            productsCount.put(productVariant, amount);
+            productsCount.put(productSKU, amount);
         currentAmountOfProducts += amount;
         return true;
     }
 
-    public boolean remove(String productVariant, int amount){
-        if (amount <= 0 || !productsCount.containsKey(productVariant) || productsCount.get(productVariant) < amount)
+    public boolean remove(String productSKU, int amount){
+        if (amount <= 0 || !productsCount.containsKey(productSKU) || productsCount.get(productSKU) < amount)
             return false;
-        productsCount.put(productVariant, productsCount.get(productVariant) - amount);
-        if (productsCount.get(productVariant) == 0)
-            productsCount.remove(productVariant);
+        productsCount.put(productSKU, productsCount.get(productSKU) - amount);
+        if (productsCount.get(productSKU) == 0)
+            productsCount.remove(productSKU);
         currentAmountOfProducts -= amount;
         return true;
     }
@@ -42,38 +42,21 @@ public class Basket {
         return true;
     }
 
-    public double totalCost(){
-        int cost = 0;
-        HashMap<String, Integer> productsInBasket = new HashMap<>(productsCount);
-
-        for (String productSKU : productsInBasket.keySet()) {
-            cost += productsInBasket.get(productSKU) * Inventory.getProducts()
-                    .get(productSKU)
-                    .getPrice();
-        }
-
-        for(String productSKU : productsInBasket.keySet()){
-            cost -= Inventory.getDiscount(productSKU, productsInBasket);
-            if (productSKU.equals("COFB")) {
-                cost -= Inventory.getCoffeeDiscount(productSKU, productsInBasket);
-            }
-        }
-        
-        return (double) cost / 100;
-    }
-
-    public double checkCostOfProduct(String productVariant){
-        var products = Inventory.getProducts();
-
-        if (!products.containsKey(productVariant))
-            return 0.0d;
-
-        return products.get(productVariant)
-                .getPrice();
-    }
-
     public HashMap<String, Integer> getProductsCount() {
         return productsCount;
+    }
+
+    public int getCapacity() {
+        return capacity;
+    }
+
+    public int getCurrentAmountOfProducts() {
+        return currentAmountOfProducts;
+    }
+
+    public void clearBasket() {
+        productsCount.clear();
+        currentAmountOfProducts = 0;
     }
 }
 
