@@ -2,6 +2,7 @@ package com.booleanuk.extension;
 
 import java.math.BigDecimal;
 import java.util.Arrays;
+import java.util.List;
 
 public enum SKU {
     BGLO(BigDecimal.valueOf(0.49), "Bagel", "Onion"),
@@ -51,5 +52,12 @@ public enum SKU {
 
     public String getVariant() {
         return variant;
+    }
+
+    public static List<Filling> getAvailableFillings() {
+        return Arrays.stream(values())
+                .filter(val -> val.getName().equals("Filling"))
+                .map(Filling::new)
+                .toList();
     }
 }

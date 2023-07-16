@@ -8,21 +8,52 @@ import java.util.stream.IntStream;
 import static com.booleanuk.extension.Discount.DiscountType.*;
 
 public class Discount {
+    public static final BigDecimal SIX = BigDecimal.valueOf(6);
+    public static final BigDecimal TWELVE = BigDecimal.valueOf(12);
+
     private final DiscountType type;
     private final Item discountedItem;
-    private Item relatedItem;
+    private final Item relatedItem;
     private final BigDecimal discountedPrice;
+    private BigDecimal discountedItemSavings;
+    private BigDecimal relatedItemSavings;
 
     public Discount(DiscountType type, Item discountedItem) {
         this.type = type;
         this.discountedItem = discountedItem;
         relatedItem = null;
         discountedPrice = type.getPrice();
+        calculateSavings();
     }
 
     public Discount(DiscountType type, Item discountedItem, Item relatedItem) {
-        this(type, discountedItem);
+        this.type = type;
+        this.discountedItem = discountedItem;
         this.relatedItem = relatedItem;
+        discountedPrice = type.getPrice();
+        calculateSavings();
+    }
+
+    private void calculateSavings() {
+        switch (this.type) {
+            case TWELVE_BAGELS -> {
+                discountedItemSavings = discountedItem.getPrice().multiply(TWELVE).subtract(discountedPrice);
+            }
+            case SIX_BAGELS -> {
+                discountedItemSavings = discountedItem.getPrice().multiply(SIX).subtract(discountedPrice);
+            }
+            case COFFEE_AND_BAGEL -> {
+                if (discountedItem.getPrice().compareTo(SKU.COFB.getPrice()) > 0) {
+                    discountedItemSavings = discountedItem.getPrice().subtract(SKU.COFB.getPrice());
+                } else {
+                    discountedItemSavings = BigDecimal.ZERO;
+                }
+                relatedItemSavings = discountedItem.getPrice()
+                        .add(relatedItem.getPrice())
+                        .subtract(discountedPrice)
+                        .subtract(discountedItemSavings);
+            }
+        }
     }
 
     public static List<Discount> calculateDiscounts(Order order) {
@@ -75,12 +106,20 @@ public class Discount {
         return discountedPrice;
     }
 
+    public BigDecimal getDiscountedItemSavings() {
+        return discountedItemSavings;
+    }
+
+    public BigDecimal getRelatedItemSavings() {
+        return relatedItemSavings;
+    }
+
     @Override
     public String toString() {
         return "Discount{" +
                 "type=" + type +
                 ", discountedItem=" + discountedItem.getSku() +
-                ", relatedItem=" + relatedItem.getSku() +
+                (relatedItem == null ? "" : ", relatedItem=" + relatedItem.getSku()) +
                 ", price=" + discountedPrice +
                 '}';
     }

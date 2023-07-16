@@ -1,7 +1,6 @@
 package com.booleanuk.extension;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -41,5 +40,9 @@ public class Store {
         return orders.stream().
                 filter(order -> order.getId().equals(id))
                 .findFirst().orElse(null);
+    }
+
+    public List<Filling> getAvailableFillings() {
+        return SKU.getAvailableFillings();
     }
 }

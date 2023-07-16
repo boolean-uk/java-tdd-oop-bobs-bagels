@@ -1,24 +1,22 @@
 package com.booleanuk.extension;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
-import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
-public class Order {
-    private static final BigDecimal SIX = BigDecimal.valueOf(6);
-    private static final BigDecimal TWELVE = BigDecimal.valueOf(12);
+import static com.booleanuk.extension.Discount.SIX;
+import static com.booleanuk.extension.Discount.TWELVE;
 
+public class Order {
     private final UUID id;
-    private final LocalDateTime orderDate;
     private final Basket basket;
+    private final List<Discount> discounts;
 
     public Order(Basket basket) {
         id = UUID.randomUUID();
-        orderDate = LocalDateTime.now();
         this.basket = basket;
+        discounts = Discount.calculateDiscounts(this);
     }
 
     public UUID getId() {
@@ -35,7 +33,6 @@ public class Order {
 
     public BigDecimal getTotalPriceAfterDiscount() {
         BigDecimal totalPriceAfterDiscount = getTotalPrice();
-        List<Discount> discounts = Discount.calculateDiscounts(this);
 
         for (Discount discount : discounts) {
             switch (discount.getType()) {
@@ -64,34 +61,11 @@ public class Order {
         return totalPriceAfterDiscount;
     }
 
-//    public BigDecimal getTotalPriceAfterDiscount() {
-//        BigDecimal priceAfterDiscount = getTotalPrice();
-//        for (SKU bagelSKU : getSKUInBasketFromCheapest("Bagel")) {
-//            int tempBagelCount = getItemQuantity(bagelSKU);
-//            BigDecimal per12BagelCount = BigDecimal.valueOf(tempBagelCount / 12);
-//            BigDecimal per6BagelCount = BigDecimal.valueOf((tempBagelCount % 12) / 6);
-//            BigDecimal per1BagelPrice = bagelSKU.getPrice();
-//            priceAfterDiscount = priceAfterDiscount
-//                    .subtract(per1BagelPrice.multiply(per12BagelCount.multiply(TWELVE)))
-//                    .subtract(per1BagelPrice.multiply(per6BagelCount.multiply(SIX)))
-//                    .add(per12BagelCount.multiply(PRICE_FOR_12_BAGELS))
-//                    .add(per6BagelCount.multiply(PRICE_FOR_6_BAGELS));
-//        }
-//        return priceAfterDiscount;
-//    }
-
-    private List<SKU> getSKUInBasketFromCheapest(String itemName) {
-        return basket.getItems().keySet().stream()
-                .filter(el -> el.getName().equals(itemName))
-                .map(Item::getSku)
-                .sorted(Comparator.comparing(SKU::getPrice))
-                .toList();
+    public BigDecimal getTotalSavings() {
+        return getTotalPrice().subtract(getTotalPriceAfterDiscount());
     }
 
-    public int getItemQuantity(SKU sku) {
-        Item item = getItems().keySet().stream()
-                .filter(key -> key.getSku().equals(sku))
-                .findFirst().orElse(null);
-        return item == null ? 0 : getItems().get(item);
+    public List<Discount> getDiscounts() {
+        return discounts;
     }
 }

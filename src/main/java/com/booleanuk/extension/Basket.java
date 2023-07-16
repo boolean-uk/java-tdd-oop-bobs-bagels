@@ -1,9 +1,8 @@
 package com.booleanuk.extension;
 
 import java.math.BigDecimal;
-import java.util.Arrays;
 import java.util.HashMap;
-import java.util.List;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 
@@ -14,7 +13,7 @@ public class Basket {
     private int capacity;
 
     public Basket() {
-        items = new HashMap<>();
+        items = new LinkedHashMap<>();
         capacity = DEFAULT_CAPACITY;
     }
 
@@ -85,13 +84,5 @@ public class Basket {
 
     public static BigDecimal checkPrice(Item item) {
         return item.getPrice();
-    }
-
-    public List<Filling> getAvailableFillings() {
-        return Arrays.stream(SKU.values())
-                .filter(val -> val.getName().equals("Filling"))
-                .map(Filling::new)
-                .toList();
-
     }
 }
