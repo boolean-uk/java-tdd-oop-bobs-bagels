@@ -51,14 +51,14 @@ public class Receipt {
     }
 
     public double getDiscount(String productSKU) {
-        return (double) discounts.get(productSKU) / 100;
+        return (double) discounts.getOrDefault(productSKU, 0) / 100;
     }
 
     public double getCost(String productSKU) {
-        return (double) costs.get(productSKU) / 100;
+        return (double) costs.getOrDefault(productSKU, 0) / 100;
     }
 
     public int getQuantity(String productSKU) {
-        return amounts.get(productSKU);
+        return amounts.getOrDefault(productSKU, 0);
     }
 }

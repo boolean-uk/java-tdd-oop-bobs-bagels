@@ -44,7 +44,7 @@ public class Checkout {
         return cost;
     }
 
-    public static double countBasketCostWithoutDiscounts(Basket basket){
+    public static double countBasketCostWithoutDiscounts(Basket basket) {
         return (double) basket.getProductsCount()
                 .entrySet()
                 .stream()
