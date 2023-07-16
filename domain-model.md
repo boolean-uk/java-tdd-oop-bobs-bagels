@@ -122,6 +122,11 @@ I'd like to get some discount for buying multiple products.
 | Inventory                 | List\<String> itemSkus  | boolean containsItem(String sku)              | If item exists in inventory                                            | true                                |
 |                           |                         |                                               | If item does not exist in inventory                                    | false                               |
 
+#### Assumptions
+
+When calculating discounts we prioritise bagels sold in bulk. Then for each black coffee (COFB) we take one additional
+bagel starting from the cheapest one and calculate discount for coffee.
+
 ### Extensions 2. and 3.
 
 ```
