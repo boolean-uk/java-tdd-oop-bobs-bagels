@@ -237,13 +237,20 @@ public class BobBagelsExtensionTest {
                 "---------------------------";
         //when
         String receipt = receiptCreator.CreateFirstPartOfReceipt(basketExt);
-
+        //then
         assertEquals(howShouldLook,receipt);
     }
-    
 
     @Test
-    public void shouldReturnLastPartOfTheReceipt(){
+    public void shouldReturnTrueForCoffeeAndBagelPromo(){
+            //given
+        basketManager.add(bagelE);
+        basketManager.add(coffeeW);
+        //when
+        boolean isCoffeePromo = discountCreator.isSpecialCoffeeAndBagelPromo(basketExt);
+
+        //then
+        assertTrue(isCoffeePromo);
 
     }
 

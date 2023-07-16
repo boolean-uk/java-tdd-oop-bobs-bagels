@@ -8,6 +8,13 @@ public class DiscountCreator {
     private int bglp;
     private int bgle;
     private int bgls;
+    private boolean bglo6Discount;
+    private boolean bglo12Discount;
+    private  boolean isBglp12Discount;
+    private boolean  isBglp6Discount;
+
+    private boolean  isCoffeeAndBagelPromo;
+
 
 
     public DiscountCreator() {
@@ -35,6 +42,14 @@ public class DiscountCreator {
 
     public boolean isSpecialBGLSSixOffer(BasketExt basketExt) {
         return bgls >= 6 && bgls < 12;
+    }
+
+    public boolean isSpecialCoffeeAndBagelPromo(BasketExt basketExt){
+        bagelsCounter(basketExt);
+        if((bgls < 6 && bgls >= 1) || (bglp < 6 && bglp >= 1)  || (bgle < 6 && bgle >= 1) || (bglo < 6 && bglo >= 1)  ){
+            return true;
+        }
+        return false;
     }
 
 
