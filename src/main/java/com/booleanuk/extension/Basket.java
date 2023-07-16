@@ -4,6 +4,8 @@ import java.math.BigDecimal;
 import java.util.*;
 import java.util.stream.Collectors;
 
+import static java.util.stream.Collectors.groupingBy;
+
 public class Basket {
 
     private List<Product> products;
@@ -56,32 +58,55 @@ public class Basket {
     }
 
     public Map<Product, BigDecimal> calculateDiscounts() {
-        Map<Product, Integer> quantities = new HashMap<>();
+        Map<Product, Long> quantities = getProductQuantities();
         Map<Product, BigDecimal> discounts = new HashMap<>();
 
-        for(Product p : products) {
-            quantities.putIfAbsent(p, 0);
-            quantities.put(p, quantities.get(p) + 1);
-        }
+        Map<String, List<Bagel>> discountedBagels = getBagels().stream().collect(groupingBy(Bagel::getSku));
 
         quantities.forEach((product, quantity) -> {
             switch (product.getSku()) {
                 case "BGLO", "BGLE" -> {
-                    int discounted = quantity / 6;
+                    long discounted = quantity / 6;
                     discounts.put(product, BigDecimal.valueOf(discounted * 0.45));
+                    discountedBagels.get(product.getSku()).subList(0, (int) (discounted * 6)).clear();
                 }
                 case "BGLP" -> {
-                    int discounted = quantity / 12;
+                    long discounted = quantity / 12;
                     discounts.put(product, BigDecimal.valueOf(discounted * 0.69));
+                    discountedBagels.get(product.getSku()).subList(0, (int) (discounted * 12)).clear();
                 }
                 case "COFB" -> {
-                    long bagelCount = products.stream()
-                            .filter(p -> p.getName().equals("Bagel")).count();
+                    List<Bagel> bagels = discountedBagels.values().stream()
+                            .flatMap(List::stream)
+                            .sorted(Comparator.comparing(Bagel::getPrice))
+                            .toList();
 
-                    discounts.put(product, BigDecimal.valueOf(Math.min(quantity, bagelCount) * 0.25));
+                    BigDecimal discount = BigDecimal.ZERO;
+
+                    BigDecimal coffeePrice = product.getPrice();
+                    long coffeeQuantity = quantity;
+
+                    for(Bagel bagel : bagels) {
+                        if (coffeeQuantity == 0)
+                            break;
+
+                        BigDecimal bagelPrice = bagel.getPrice();
+                        discount = discount.add(coffeePrice.add(bagelPrice).subtract(BigDecimal.valueOf(1.25)));
+                        coffeeQuantity--;
+                    }
+
+                    discounts.put(product, discount);
                 }
             }
         });
         return discounts;
+    }
+
+    private Map<Product, Long> getProductQuantities() {
+        return products.stream().collect(groupingBy(product -> product, Collectors.counting()));
+    }
+
+    private List<Bagel> getBagels() {
+        return products.stream().filter(p -> p.getName().equals("Bagel")).map(p -> (Bagel) p).toList();
     }
 }
