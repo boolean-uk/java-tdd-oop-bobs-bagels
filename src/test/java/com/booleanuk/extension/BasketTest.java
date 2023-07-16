@@ -100,7 +100,28 @@ public class BasketTest {
         Assertions.assertEquals(Map.of(
                 BGLO, BigDecimal.valueOf(0.45),
                 BGLP, BigDecimal.valueOf(1.38),
-                COFB, BigDecimal.valueOf(0.25)
+                COFB, BigDecimal.valueOf(0)
+        ), basket.calculateDiscounts());
+
+        basket.add(BGLP);
+        Assertions.assertEquals(Map.of(
+                BGLO, BigDecimal.valueOf(0.45),
+                BGLP, BigDecimal.valueOf(1.38),
+                COFB, BigDecimal.valueOf(0.13)
+        ), basket.calculateDiscounts());
+
+        basket.add(COFB);
+        Assertions.assertEquals(Map.of(
+                BGLO, BigDecimal.valueOf(0.45),
+                BGLP, BigDecimal.valueOf(1.38),
+                COFB, BigDecimal.valueOf(0.13)
+        ), basket.calculateDiscounts());
+
+        basket.add(BGLO);
+        Assertions.assertEquals(Map.of(
+                BGLO, BigDecimal.valueOf(0.45),
+                BGLP, BigDecimal.valueOf(1.38),
+                COFB, BigDecimal.valueOf(0.36)
         ), basket.calculateDiscounts());
     }
 }

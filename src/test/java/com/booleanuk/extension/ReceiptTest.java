@@ -49,6 +49,7 @@ public class ReceiptTest {
             basket.add(BGLO);
 
         basket.add(COFB);
+        basket.add(BGLP);
 
         Receipt receipt = new Receipt(basket);
         String actual = receipt.printReceipt();
@@ -61,9 +62,10 @@ public class ReceiptTest {
                 "Onion Bagel        6 2.94\n" +
                 "                    (-0.45)\n" +
                 "Black Coffee        1 0.99\n" +
-                "                    (-0.25)\n" +
+                "                    (-0.13)\n" +
+                "Plain Bagel        1 0.39\n" +
                 "-------------------------------\n" +
-                "Total                     3.23\n" +
+                "Total                     3.74\n" +
                 "Thank you for your order!";
 
         Assertions.assertEquals(expected, actual);
