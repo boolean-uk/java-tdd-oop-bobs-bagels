@@ -55,8 +55,7 @@ public class DiscountCreator {
 
 
     public void bagelsCounter(BasketExt basketExt) {
-        for (BagelExt bagel :
-                basketExt.getBagelsInBasket()) {
+        basketExt.getBagelsInBasket().forEach(bagel -> {
             if (bagel.getSku() == SKU.BGLP) {
                 bglp++;
             } else if (bagel.getSku() == SKU.BGLO) {
@@ -66,7 +65,7 @@ public class DiscountCreator {
             } else if (bagel.getSku() == SKU.BGLS) {
                 bgls++;
             }
-        }
+        });
     }
 
 }
