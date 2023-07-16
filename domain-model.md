@@ -191,6 +191,15 @@ I want the receipt to display the total price of the order.
 5. As a manager, 
 I want the receipt to include a "thank you for your order" message.
 ```
+| Class   | Fields       | Role                                | Methods                              | Scenario                                                                  | Output                 |
+|---------|--------------|-------------------------------------|--------------------------------------|---------------------------------------------------------------------------|------------------------|
+| Receipt | Order order  | Order for which receipt is printed. | void printReceipt()                  | If order has been placed a receipt should be printed.                     | void (receipt printout) |
+|         |              |                                     | void printStoreName()                | Prints store name on the receipt.                                         | void                   |
+|         |              |                                     | void printOrderDateTime()            | Prints date and time of order on the receipt.                             | void                   |
+|         |              |                                     | void printItems()                    | Prints list of purchased items with names, quantities, prices on receipt. | void                   |
+|         |              |                                     | void printTotalPrice()               | Prints total price of the purchase of the receipt.                        | void                   |
+|         |              |                                     | oid printThankYouMessage()           | Prints a thank you message on the receipt.                                | void                   |
+|         |              |                                     | String formatPrice(BigDecimal price) | Returns formatted price.                                                  | String with price      |
 
 ### EXTENSION3
 User stories:

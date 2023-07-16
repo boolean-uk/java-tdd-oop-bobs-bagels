@@ -1,6 +1,7 @@
 package com.booleanuk.extension;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -10,17 +11,23 @@ import static com.booleanuk.extension.Discount.TWELVE;
 
 public class Order {
     private final UUID id;
+    private final LocalDateTime dateTime;
     private final Basket basket;
     private final List<Discount> discounts;
 
     public Order(Basket basket) {
         id = UUID.randomUUID();
+        dateTime = LocalDateTime.now();
         this.basket = basket;
         discounts = Discount.calculateDiscounts(this);
     }
 
     public UUID getId() {
         return id;
+    }
+
+    public LocalDateTime getDateTime() {
+        return dateTime;
     }
 
     public Map<Item, Integer> getItems() {

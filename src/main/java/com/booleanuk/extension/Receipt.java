@@ -19,7 +19,7 @@ public class Receipt {
 
     public void printReceipt() {
         printStoreName();
-        printCurrentDateTime();
+        printOrderDateTime();
         System.out.println(LINE_SEPARATOR);
         printItems();
         System.out.println(LINE_SEPARATOR);
@@ -32,9 +32,9 @@ public class Receipt {
         System.out.println("     ~~~ Bob's Bagels ~~~");
     }
 
-    private void printCurrentDateTime() {
-        LocalDateTime now = LocalDateTime.now();
-        String formattedDateTime = now.format(DateTimeFormatter.ofPattern("     yyyy-MM-dd HH:mm:ss"));
+    private void printOrderDateTime() {
+        LocalDateTime orderDateTime = order.getDateTime();
+        String formattedDateTime = orderDateTime.format(DateTimeFormatter.ofPattern("     yyyy-MM-dd HH:mm:ss"));
         System.out.println(formattedDateTime);
     }
 
