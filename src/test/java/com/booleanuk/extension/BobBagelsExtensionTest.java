@@ -243,16 +243,30 @@ public class BobBagelsExtensionTest {
 
     @Test
     public void shouldReturnTrueForCoffeeAndBagelPromo(){
-            //given
+        //given
         basketManager.add(bagelE);
         basketManager.add(coffeeW);
+        basketManager.countBagelsInBasket();
         //when
         boolean isCoffeePromo = discountCreator.isSpecialCoffeeAndBagelPromo(basketExt);
 
         //then
         assertTrue(isCoffeePromo);
-
     }
+    @Test
+    public  void shouldPrintCorrectReceipt(){
+        //given
+        basketExt.setCapacity(20);
+        for(int i = 0; i < 12; i++){
+            basketManager.add(bagelE);
+
+        }
+        //when
+        //then
+    }
+
+
+
 
 
 
