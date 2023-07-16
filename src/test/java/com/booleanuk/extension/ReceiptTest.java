@@ -25,15 +25,26 @@ public class ReceiptTest {
         LocalDateTime time = LocalDateTime.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
         String formattedTime = time.format(formatter);
-        String expected = "   ~~~ Bob's Bagels ~~~   \n" +
-                formattedTime+"\n" +
-                "-------------------------------\n" +
-                "Onion Bagel        1 6.49\n" +
-                "Egg Filling        2 (6.0)\n" +
-                "Plain Bagel        2 0.78\n" +
-                "-------------------------------\n" +
-                "Total                     7.27\n" +
-                "Thank you for your order!";
+        String expected = String.format("""
+                    ~~~ Bob's Bagels ~~~
+                                
+                    %s
+                                
+                ----------------------------
+                                
+                Onion Bagel         1  £0.49
+                Egg Filling          2  £6.0
+                Plain Bagel         2  £0.78
+                
+                ----------------------------
+                                
+                Total                  £7.27
+                                
+                 You saved a total of £0.0
+                        on this shop
+                                
+                         Thank you
+                      for your order!""", formattedTime);
 
         Assertions.assertEquals(expected, actual);
     }
@@ -56,17 +67,28 @@ public class ReceiptTest {
         LocalDateTime time = LocalDateTime.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
         String formattedTime = time.format(formatter);
-        String expected = "   ~~~ Bob's Bagels ~~~   \n" +
-                formattedTime+"\n" +
-                "-------------------------------\n" +
-                "Onion Bagel        6 2.94\n" +
-                "                    (-0.45)\n" +
-                "Black Coffee        1 0.99\n" +
-                "                    (-0.13)\n" +
-                "Plain Bagel        1 0.39\n" +
-                "-------------------------------\n" +
-                "Total                     3.74\n" +
-                "Thank you for your order!";
+        String expected = String.format("""
+                    ~~~ Bob's Bagels ~~~
+                                
+                    %s
+                                
+                ----------------------------
+                                
+                Onion Bagel         6  £2.94
+                                     (-£0.45)
+                Black Coffee        1  £0.99
+                                     (-£0.13)
+                Plain Bagel         1  £0.39
+                                
+                ----------------------------
+                                
+                Total                  £3.74
+                                
+                 You saved a total of £0.58
+                        on this shop
+                                
+                         Thank you
+                      for your order!""", formattedTime);
 
         Assertions.assertEquals(expected, actual);
     }
