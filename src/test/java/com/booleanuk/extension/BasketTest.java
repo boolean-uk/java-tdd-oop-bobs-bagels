@@ -2,7 +2,11 @@ package com.booleanuk.extension;
 
 import org.junit.jupiter.api.Test;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.UUID;
 import java.util.stream.IntStream;
 
@@ -102,8 +106,8 @@ public class BasketTest {
 
     @Test
     public void testGettingAvailableFillings() {
-        Basket basket = new Basket();
-        assertEquals(6, basket.getAvailableFillings().size());
+        Store store = new Store();
+        assertEquals(6, store.getAvailableFillings().size());
     }
 
     @Test
@@ -209,7 +213,6 @@ public class BasketTest {
 
         UUID id = store.placeOrder(basket);
         Order order = store.getOrder(id);
-        //it should be 5.55
         BigDecimal expectedTotalPrice = BigDecimal.valueOf(5.95);
         assertEquals(expectedTotalPrice, order.getTotalPriceAfterDiscount());
 
@@ -217,4 +220,31 @@ public class BasketTest {
         receipt.printReceipt();
     }
 
+    @Test
+    public void testPrintingReceiptWithSavings() {
+        ByteArrayOutputStream output = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(output));
+
+        Store store = new Store();
+        Basket basket = new Basket();
+        store.addBasket(basket);
+        IntStream.range(0, 16).mapToObj(i -> new Bagel(SKU.BGLP)).forEach(basket::addItem);
+
+        UUID id = store.placeOrder(basket);
+        Order order = store.getOrder(id);
+
+        Receipt receipt = new Receipt(order);
+        receipt.printReceipt();
+        String result = output.toString();
+        assertTrue(result.contains("~~~ Bob's Bagels ~~~"));
+        assertTrue(result.contains("------------------------------"));
+        assertTrue(result.contains(LocalDate.now().toString()));
+        assertTrue(result.contains("Bagel   Plain      16   €6.24"));
+        assertTrue(result.contains("(-€0.69)"));
+        assertTrue(result.contains("Total                   €5.55"));
+        assertTrue(result.contains("You saved a total of €0.69"));
+        assertTrue(result.contains("on this shop"));
+        assertTrue(result.contains("Thank you"));
+        assertTrue(result.contains("for your order!"));
+    }
 }
