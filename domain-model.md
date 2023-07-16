@@ -157,26 +157,24 @@ I want to see on my receipt which special offers were included and how they were
 ```
 Order is a class that stores items customer bought.
 
-| Class    | Fields                           | Role                         | Methods                                        | Scenario                                                                   | Output                        |
-|----------|----------------------------------|------------------------------|------------------------------------------------|----------------------------------------------------------------------------|-------------------------------|
-| Store    | List\<Basket> baskets            | To store customer's baskets. | UUID placeOrder(Basket basket)                 | If customer wants to order items using SKUs.                               | ID of the placed order.       |
-|          |                                  |                              | Order getOrder(UUID id)                        |                                                                            | The placed order.             |
-|          |                                  |                              |                                                |                                                                            |                               |
-|          | List\<Order> orders              | To store actual orders.      | void applySpecialOffers()                      |                                                                            |                               |
-|          |                                  |                              | List\<Basket> getBaskets()                     |                                                                            |                               |
-|          |                                  |                              | void addBasket(Basket Baskets)                 | If customer wants to place order and and his items to the Store.           |                               |
-|          |                                  |                              | Basket getBaskets()                            |                                                                            |                               |
-|          |                                  |                              |                                                |                                                                            |                               |
-| Order    | Map<Item,Integer> orderedItems   |                              | BigDecimal getTotalPrice()                     | If customer wants to know final price of his items.                        | The total price of order.     |
-|          | UUID id                          |                              | BigDecimal getTotalPriceAfterDiscount()        | If customer wants to know / is to be presented with total discount amount. | Total discounted price.       |
-|          |                                  |                              |                                                |                                                                            |                               |
-| Discount | DiscountType type                |                              | List<Discount> calculateDiscounts(Order order) | If discounts are to be applied for a given order                           | List with applied discounts.  |
-|          | Item discountedItem              |                              | DiscountType getType()                         | Returns type of applied discounts.                                         | Type of applied discount.     |
-|          | Item relatedItem                 |                              | Item getDiscountedItem()                       | Returns item subject to discount.                                          | Discounted item.              |
-|          | BigDecimal discountedPrice       |                              | Item getRelatedItem()                          | Returns second item in package discount (like "Coffee and Bagel")          | Second discounted item.       |
-|          | BigDecimal discountedItemSavings |                              | BigDecimal getDiscountedPrice()                | Returns discounted price.                                                  | Discounted price.             |
-|          | BigDecimal relatedItemSavings    |                              | BigDecimal getDiscountedItemSavings()          | Returns savings as a difference between original and discounted price.     | Savings on discounted item/s. |
-|          |                                  |                              | BigDecimal getRelatedItemSavings()             | Returns savings regarding second discounted item.                          | Savings on discounted item/s. |
+| Class    | Fields                         | Role                         | Methods                                        | Scenario                                                                   | Output                        |
+|----------|--------------------------------|------------------------------|------------------------------------------------|----------------------------------------------------------------------------|-------------------------------|
+| Store    | List\<Basket> baskets          | To store customer's baskets. | UUID placeOrder(Basket basket)                 | If customer wants to order items using SKUs.                               | ID of the placed order.       |
+|          |                                |                              | Order getOrder(UUID id)                        |                                                                            | The placed order.             |
+|          |                                |                              |                                                |                                                                            |                               |
+|          | List\<Order> orders            | To store actual orders.      | void applySpecialOffers()                      |                                                                            |                               |
+|          |                                |                              | List\<Basket> getBaskets()                     |                                                                            |                               |
+|          |                                |                              | void addBasket(Basket Baskets)                 | If customer wants to place order and and his items to the Store.           |                               |
+|          |                                |                              | Basket getBaskets()                            |                                                                            |                               |
+|          |                                |                              |                                                |                                                                            |                               |
+| Order    | Map<Item,Integer> orderedItems |                              | BigDecimal getTotalPrice()                     | If customer wants to know final price of his items.                        | The total price of order.     |
+|          | UUID id                        |                              | BigDecimal getTotalPriceAfterDiscount()        | If customer wants to know / is to be presented with total discount amount. | Total discounted price.       |
+|          |                                |                              |                                                |                                                                            |                               |
+| Discount | DiscountType type              |                              | List<Discount> calculateDiscounts(Order order) | If discounts are to be applied for a given order                           | List with applied discounts.  |
+|          | Item discountedItem            |                              | DiscountType getType()                         | Returns type of applied discounts.                                         | Type of applied discount.     |
+|          | Item relatedItem               |                              | Item getDiscountedItem()                       | Returns item subject to discount.                                          | Discounted item.              |
+|          | BigDecimal discountedPrice     |                              | Item getRelatedItem()                          | Returns second item in package discount (like "Coffee and Bagel")          | Second discounted item.       |
+|          |                                |                              | BigDecimal getDiscountedPrice()                | Returns discounted price.                                                  | Discounted price.             |
 
 ### EXTENSION2
 User stories:
@@ -205,3 +203,14 @@ I want the savings to be displayed in parentheses() under the item's original pr
 3. As a customer, 
 I want to see the total savings for the entire order.
 ```
+
+
+| Class    | Fields                           | Role                           | Methods                               | Scenario                                                                          | Output                                           |
+|----------|----------------------------------|--------------------------------|---------------------------------------|-----------------------------------------------------------------------------------|--------------------------------------------------|
+| Order    | List<Discount> discounts         | To store calculated discounts. | List<Discount> getDiscounts()         | If discounts are to be used for price calculation.                                | List of discounts.                               |
+|          |                                  |                                | BigDecimal getTotalSavings()          | If total savings are to be used to print receipt.                                 | Amount of savings.                               |
+| Discount | BigDecimal discountedItemSavings |                                | BigDecimal getDiscountedItemSavings() | Returns savings as a difference between original and discounted price.            | Savings on discounted item/s.                    |
+|          | BigDecimal relatedItemSavings    |                                | BigDecimal getRelatedItemSavings()    | Returns savings regarding second discounted item.                                 | Savings on discounted item/s.                    |
+|          |                                  |                                | void calculateSavings()               | Calculates savings for each discounted item on the Discount object creation.      | void                                             |
+| Receipt  |                                  |                                | void printSavings(Item item)          | If discounts were applied and savings on item are to be shown on the receipt.     | void (printed amount of savings on item)         |
+|          |                                  |                                | void printSavingsMessage()            | If there are savings on discounts in the order - info will be printed on receipt. | void (printed message with total savings amount. |
