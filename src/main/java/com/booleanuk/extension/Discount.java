@@ -7,6 +7,17 @@ import java.util.stream.IntStream;
 
 import static com.booleanuk.extension.Discount.DiscountType.*;
 
+/*
+    Implemented discount policy is as follows:
+    1. only bagels of the same SKU are counted for "6 for..." and "12 for..." discount;
+    2. "12 for..." discount is calculated first, then for the remainder may be applied "6 for..." (if < 12),
+        and then "Coffee and Bagel" discount respectively (only one discount applies for a given item).
+    3. "Coffee and bagel" discount is calculated starting from the cheapest coffee and bagel.
+    4. Savings on "coffee and bagel" are calculated as follows:
+        4.1. if coffee costs more than black coffee, savings = original price - cost of black coffee
+        4.2. the remaining savings are assigned to the bagel discount.
+*/
+
 public class Discount {
     public static final BigDecimal SIX = BigDecimal.valueOf(6);
     public static final BigDecimal TWELVE = BigDecimal.valueOf(12);

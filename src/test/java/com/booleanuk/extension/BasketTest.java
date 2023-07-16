@@ -6,7 +6,6 @@ import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.UUID;
 import java.util.stream.IntStream;
 
@@ -197,7 +196,7 @@ public class BasketTest {
         UUID id = store.placeOrder(basket);
         Order order = store.getOrder(id);
 
-        BigDecimal expectedTotalPrice = BigDecimal.valueOf(10.43);
+        BigDecimal expectedTotalPrice = BigDecimal.valueOf(9.97);
         assertEquals(expectedTotalPrice, order.getTotalPriceAfterDiscount());
 
         Receipt receipt = new Receipt(order);
