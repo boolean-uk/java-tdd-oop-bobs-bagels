@@ -1,15 +1,16 @@
 package com.booleanuk.extension;
 
 import java.math.BigDecimal;
-import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Receipt {
     private LocalDateTime time;
     private Basket basket;
+    private int maxLength;
 
     public Receipt(Basket basket) {
         this.basket = basket;
@@ -17,48 +18,123 @@ public class Receipt {
     }
 
     public String printReceipt() {
-        List<Product> products = basket.getProducts();
-        Map<Product, Integer> quantities = new LinkedHashMap<>();
-        Map<Product, BigDecimal> discounts = basket.calculateDiscounts();
-
-        for(Product p : products) {
-            quantities.putIfAbsent(p, 0);
-            quantities.put(p, quantities.get(p) + 1);
-        }
-
-        StringBuilder sb = new StringBuilder();
-        sb.append("   ~~~ Bob's Bagels ~~~   \n");
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
-        String formattedTime = time.format(formatter);
-        sb.append(formattedTime+"\n");
-        sb.append("-------------------------------\n");
-        quantities.forEach((product, quantity) -> {
-            BigDecimal productsPrice = product.getPrice().multiply(BigDecimal.valueOf(quantity));
-            sb.append(product.getVariant()+" "+product.getName()+"        "+quantity+" "+productsPrice+"\n");
-            if(product.getName().equals("Bagel")) {
-                Bagel bagel = (Bagel) product;
-
-                BigDecimal discount = discounts.get(product);
-                if(discount != null && !discount.equals(BigDecimal.valueOf(0.0)))
-                    sb.append("                    (-" + discount + ")\n");
-
-                Map<Filling, Long> fillingsQuantities = bagel.getFillings().stream()
-                        .collect(Collectors.groupingBy(filling -> filling, Collectors.counting()));
-
-                fillingsQuantities.forEach((f, fillingQuantity) -> {
-                    BigDecimal fillingsPrice = f.getPrice().multiply(BigDecimal.valueOf(fillingQuantity));
-                    sb.append(f.getVariant()+" "+f.getName()+"        "+fillingQuantity+" ("+fillingsPrice+")\n");
-                });
-            } else {
-                BigDecimal discount = discounts.get(product);
-                if(discount != null && !discount.equals(BigDecimal.valueOf(0.0)))
-                    sb.append("                    (-" + discount + ")\n");
-            }
-        });
-        sb.append("-------------------------------\n");
-        sb.append("Total                     " + basket.totalCost()+"\n");
-        sb.append("Thank you for your order!");
-        return sb.toString();
+        maxLength = calculateMaxRowLength();
+        return printHeader() + printProducts() + printFooter();
     }
 
+    private int calculateMaxRowLength() {
+        String totalCost = basket.totalCost().toString();
+        String totalDiscount = basket.calculateDiscounts().values().stream().reduce(BigDecimal.ZERO, BigDecimal::add).toString();
+
+        int maxProductLength = getProductRows().stream().mapToInt(ProductRow::length).max().orElse(0);
+        int maxFooterLength = Math.max(6 + totalCost.length(), 22 + totalDiscount.length());
+
+        return Math.max(Math.max(maxProductLength, maxFooterLength), 28);
+    }
+
+    private String printHeader() {
+        String title = " ".repeat((maxLength - 20) / 2) + "~~~ Bob's Bagels ~~~";
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+        String formattedTime = " ".repeat((maxLength - 19) / 2) + time.format(formatter);
+
+        String separator = "-".repeat(maxLength);
+
+        return title + "\n\n" +
+                formattedTime +
+                "\n\n" +
+                separator +
+                "\n\n";
+    }
+
+    private String printFooter() {
+        BigDecimal totalCost = basket.totalCost();
+        BigDecimal totalDiscount = basket.calculateDiscounts().values().stream().reduce(BigDecimal.ZERO, BigDecimal::add);
+
+        String separator = "-".repeat(maxLength);
+        String total = "Total" + " ".repeat(maxLength - 6 - totalCost.toString().length()) + "£" + totalCost;
+        String youSaved = " ".repeat((maxLength - 22 - totalDiscount.toString().length()) / 2) +
+                "You saved a total of £" + totalDiscount;
+        String onThisShop = " ".repeat((maxLength - 12) / 2) + "on this shop";
+        String thankYou = " ".repeat((maxLength - 9) / 2) + "Thank you";
+        String forYourOrder = " ".repeat((maxLength - 15) / 2) + "for your order!";
+
+        return "\n" + separator + "\n\n" + total
+                + "\n\n" + youSaved
+                + "\n" + onThisShop
+                + "\n\n" + thankYou
+                + "\n" + forYourOrder;
+    }
+
+    private String printProducts() {
+        List<ProductRow> products = getProductRows();
+        Map<Product, BigDecimal> discounts = basket.calculateDiscounts();
+
+        return products.stream()
+                .map(row -> {
+                    int rowLength = row.length();
+
+                    BigDecimal discount = discounts.get(row.product);
+                    String withDiscount = "";
+
+                    if(discount != null && discount.compareTo(BigDecimal.ZERO) > 0) {
+                        int discountLength = discount.toString().length();
+                        withDiscount = String.format("\n%s(-£%s)", " ".repeat(maxLength - discountLength - 3), discount);
+                    }
+
+                    row.setSpacing(maxLength - rowLength + 2);
+                    return row + withDiscount + "\n";
+                })
+                .reduce("", String::concat);
+    }
+
+    private Map<String, List<Product>> getProducts() {
+        return basket.getProducts().stream()
+                .flatMap(p -> {
+                    if (p.getName().equals("Bagel"))
+                        return Stream.concat(Stream.of(p), ((Bagel) p).getFillings().stream());
+                    return Stream.of(p);
+                })
+                .collect(Collectors.groupingBy(Product::getSku, LinkedHashMap::new, Collectors.toList()));
+    }
+
+    private List<ProductRow> getProductRows() {
+        Map<String, List<Product>> products = getProducts();
+
+        List<ProductRow> rows = new ArrayList<>();
+        products.forEach((sku, productList) -> {
+            Product product = productList.get(0);
+
+            BigDecimal productPrice = product.getPrice();
+            if(product.getName().equals("Bagel")) {
+                BigDecimal fillingsPrice = ((Bagel) product).getFillings().stream().map(Filling::getPrice).reduce(BigDecimal.ZERO, BigDecimal::add);
+                productPrice = productPrice.subtract(fillingsPrice);
+            }
+
+            rows.add(new ProductRow(
+                    product,
+                    product.getVariant() + " " + product.getName(),
+                    productList.size(),
+                    productPrice.multiply(BigDecimal.valueOf(productList.size()))
+            ));
+        });
+
+        return rows;
+    }
+
+    private record ProductRow(Product product, String name, int quantity, BigDecimal totalPrice) {
+        private static int spacing;
+
+        public int length() {
+            return name.length() + String.valueOf(quantity).length() + totalPrice.toString().length() + 5;
+        }
+
+        public String toString() {
+            return name + " ".repeat(spacing) + quantity + " ".repeat(quantity > 10 ? 1 : 2) + "£" + totalPrice;
+        }
+
+        public void setSpacing(int spacing) {
+            ProductRow.spacing = spacing;
+        }
+    }
 }
