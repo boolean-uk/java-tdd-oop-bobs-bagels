@@ -85,7 +85,16 @@ public class BasketTest {
 
         basket.addProduct(bagel);
 
-        Assertions.assertFalse(basket.isFull());
+        Assertions.assertTrue(basket.isFull());
+    }
+
+    @Test
+    public void shouldThrowBasketOverfillExceptionWhenBasketIsGettingOverfilled() {
+        Basket basket = new Basket(1);
+        Bagel bagel = new Bagel("SKU1", BigDecimal.valueOf(0.55));
+        basket.addProduct(bagel);
+        BasketOverfillException basketOverfillException = Assertions.assertThrows(BasketOverfillException.class, () -> basket.addProduct(bagel));
+        Assertions.assertEquals("Basket overfill", basketOverfillException.getMessage());
     }
 
     @Test

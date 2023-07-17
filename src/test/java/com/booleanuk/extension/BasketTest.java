@@ -124,12 +124,15 @@ public class BasketTest {
         store.addDiscount(discountBagelOnion);
         store.addDiscount(discountCoffeeBlack);
 
-        Basket basket = new Basket(19);
+        Basket basket = new Basket(20);
         basket.addProduct(bagelOnion, 6);
         basket.addProduct(bagelPlain, 12);
+        basket.addProduct(bagelEverything);
         basket.addProduct(coffeeBlack);
         BasketSummary total = basket.summarizeBasket();
-        Assertions.assertEquals(BigDecimal.valueOf(2.49).add(BigDecimal.valueOf(3.99).add(BigDecimal.valueOf(1.25))), total.total());
+
+        BigDecimal expectedTotalCost = BigDecimal.valueOf(2.49).add(BigDecimal.valueOf(3.99).add(BigDecimal.valueOf(1.25)));
+        Assertions.assertEquals(expectedTotalCost, total.total());
     }
 
     @Test

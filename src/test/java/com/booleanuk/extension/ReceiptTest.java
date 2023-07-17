@@ -30,7 +30,7 @@ public class ReceiptTest {
     @Test
     public void shouldPrintReceiptWithOneEntry() {
 
-        Basket basket = new Basket();
+        Basket basket = new Basket(20);
         Bagel onionBagel = new Bagel("BGLO", BigDecimal.valueOf(0.49));
         Bagel plainBagel = new Bagel("BGLP", BigDecimal.valueOf(0.39));
         Bagel everythingBagel = new Bagel("BGLE", BigDecimal.valueOf(0.49));
