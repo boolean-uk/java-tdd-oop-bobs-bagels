@@ -290,7 +290,7 @@ class BasketTest {
 
     @Test
     public void getReceiptPrintsReceipt() {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
         String date = LocalDateTime.now().format(formatter);
 
         basket.add(bagel);
@@ -305,7 +305,7 @@ class BasketTest {
                                  (Special Offer: Coffee+Bagel: 1 for $1.25)
                                 Total Cost: $1.86
                                 Total Discount: $0.99
-                                """,
+                                Thank you for your order!""",
                 basket.getReceipt());
     }
 

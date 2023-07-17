@@ -102,7 +102,7 @@ public class Basket {
         StringBuilder receipt = new StringBuilder();
         receipt.append("Bob's Bagels - Receipt\n");
 
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
         receipt.append(LocalDateTime.now().format(formatter));
         receipt.append("\n");
 
