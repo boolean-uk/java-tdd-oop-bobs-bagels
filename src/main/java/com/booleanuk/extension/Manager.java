@@ -1,7 +1,6 @@
 package com.booleanuk.extension;
 
 import java.util.*;
-import java.util.stream.Collectors;
 import java.time.format.DateTimeFormatter;
 import java.time.LocalDateTime;
 
@@ -9,7 +8,6 @@ public class Manager {
     private int basketCapacity = 0;
     private final int lineLength = 28;
     private final int countIndex = 19;
-    private final int priceIndex = 23;
 
     private final double ONION_BAGEL_PRICE = 0.49;
     private final double PLAIN_BAGEL_PRICE = 0.39;
