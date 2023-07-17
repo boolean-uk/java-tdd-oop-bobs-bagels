@@ -13,6 +13,7 @@ public class BobBagelsExtensionTest {
     BasketExt basketExt;
     InventoryExt inventoryExt;
     BasketManager basketManager;
+    PaymentFinalizer paymentFinalizer;
 
     ReceiptCreator receiptCreator;
 
@@ -38,7 +39,8 @@ public class BobBagelsExtensionTest {
         basketExt = new BasketExt();
         inventoryExt = new InventoryExt();
         discountCreator = new DiscountCreator();
-        basketManager = new BasketManager(basketExt,inventoryExt,discountCreator,receiptCreator);
+        paymentFinalizer = new PaymentFinalizer(discountCreator);
+        basketManager = new BasketManager(basketExt,inventoryExt,discountCreator,receiptCreator,paymentFinalizer);
         bagelO = new BagelExt(SkuExt.BGLO, "Bagel", 0.49);
         bagelP = new BagelExt(SkuExt.BGLP, "Bagel", 0.39);
         bagelE = new BagelExt(SkuExt.BGLE, "Bagel", 0.49);

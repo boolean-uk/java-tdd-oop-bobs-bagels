@@ -7,13 +7,15 @@ public class BasketManager {
     private InventoryExt inventoryExt;
     private  DiscountCreator discountCreator;
     private ReceiptCreator receiptCreator;
+    private PaymentFinalizer paymentFinalizer;
 
 
-    public BasketManager(BasketExt basketExt, InventoryExt inventoryExt, DiscountCreator discountCreator, ReceiptCreator receiptCreator) {
+    public BasketManager(BasketExt basketExt, InventoryExt inventoryExt, DiscountCreator discountCreator, ReceiptCreator receiptCreator, PaymentFinalizer paymentFinalizer) {
         this.basketExt = basketExt;
         this.inventoryExt = inventoryExt;
         this.discountCreator = discountCreator;
         this.receiptCreator = receiptCreator;
+        this.paymentFinalizer = paymentFinalizer;
 
     }
 
