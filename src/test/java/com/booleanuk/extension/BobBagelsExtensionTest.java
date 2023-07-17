@@ -292,18 +292,7 @@ public class BobBagelsExtensionTest {
     }
 
 
-    @Test
-    public  void shouldPrintCorrectReceipt(){
-        //given
-        basketExt.setCapacity(24);
-        for(int i = 0; i < 12; i++){
-            basketManager.add(bagelO);
 
-
-        }
-        //when
-        //then
-    }
 
 
 
