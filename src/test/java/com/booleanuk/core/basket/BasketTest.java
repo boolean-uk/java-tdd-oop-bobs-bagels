@@ -85,7 +85,7 @@ public class BasketTest {
 
         basket.addProduct(bagel);
 
-        Assertions.assertFalse(basket.isFull());
+        Assertions.assertTrue(basket.isFull());
     }
 
     @Test

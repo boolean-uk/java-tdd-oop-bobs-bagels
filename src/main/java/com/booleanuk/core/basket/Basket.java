@@ -73,7 +73,7 @@ public class Basket implements BasketOperations {
 
     @Override
     public boolean isFull() {
-        return  (products.size()==capacity);
+        return (products.size() == capacity);
     }
 
     @Override
@@ -161,21 +161,17 @@ public class Basket implements BasketOperations {
     }
 
 
-    public StringBuilder listBasket()
-    {
+    public StringBuilder listBasket() {
         StringBuilder basketlist = new StringBuilder();
-        int  number=0;
-        for (Product product : products)
-        {
-            if(product instanceof Bagel)
-            {
-                basketlist.append(String.format("%-25s %10s",number +"." + product.toString(), "$" + product.getPrice())).append("\n");
-                for (Filling filling : ((Bagel) product).getFillings())
-                {
-                    basketlist.append(String.format("%-25s %10s", "  ^"+filling, "$" + filling.getPrice())).append("\n");
+        int number = 0;
+        for (Product product : products) {
+            if (product instanceof Bagel) {
+                basketlist.append(String.format("%-25s %10s", number + "." + product, "$" + product.getPrice())).append("\n");
+                for (Filling filling : ((Bagel) product).getFillings()) {
+                    basketlist.append(String.format("%-25s %10s", "  ^" + filling, "$" + filling.getPrice())).append("\n");
                 }
-            }
-            else basketlist.append(String.format("%-25s %10s", number+"." + product.toString(), "$" + product.getPrice())).append("\n");
+            } else
+                basketlist.append(String.format("%-25s %10s", number + "." + product.toString(), "$" + product.getPrice())).append("\n");
 
             number++;
         }
