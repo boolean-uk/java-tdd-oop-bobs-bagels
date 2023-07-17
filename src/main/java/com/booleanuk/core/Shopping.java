@@ -1,12 +1,11 @@
 package com.booleanuk.core;
 
-import com.booleanuk.core.basket.Basket;
+import com.booleanuk.core.Inventory.Inventory;
 import com.booleanuk.core.products.Bagel;
 import com.booleanuk.core.products.Coffee;
 import com.booleanuk.core.products.Filling;
 import com.booleanuk.core.products.Product;
 import com.booleanuk.core.receipt.Receipt;
-import com.booleanuk.core.Inventory.Inventory;
 import com.booleanuk.core.user.Customer;
 
 import java.util.List;
@@ -14,7 +13,7 @@ import java.util.Scanner;
 
 public class Shopping {
     static StringBuilder combinedMenuText = new StringBuilder();
-    Basket basket = new Basket();
+
     Customer customer;
     Inventory inventory = Inventory.getInstance();
     String customerName = "";
@@ -82,7 +81,7 @@ public class Shopping {
                     System.out.println("X-to end your shopping");
                 }
                 case "r" -> {
-                    if (!shopping.customerName.equals("") || shopping.basket.getProductsAmount() == 0) {
+                    if (!shopping.customerName.equals("") || shopping.customer.getBasket().getProductsAmount() == 0) {
                         shopping.removeFromBasket();
                         System.out.println(shopping.showBasket);
                         System.out.println(shopping.addToBasket);
@@ -96,13 +95,13 @@ public class Shopping {
                     }
                 }
                 case "s" -> {
-                    if (!shopping.customerName.equals("") || shopping.basket.getProductsAmount() != 0) {
-                        System.out.println("Your basket capacity:" + shopping.basket.getCapacity());
+                    if (!shopping.customerName.equals("") || shopping.customer.getBasket().getProductsAmount() != 0) {
+                        System.out.println("Your basket capacity:" + shopping.customer.getBasket().getCapacity());
                         System.out.println("Your products:");
-                        if (shopping.basket.getProducts().size() == 0) {
+                        if (shopping.customer.getBasket().getProducts().size() == 0) {
                             System.out.println("Your basket is empty!");
                         }
-                        System.out.println(shopping.basket.listBasket());
+                        System.out.println(shopping.customer.getBasket().listBasket());
                         System.out.println(combinedMenuText);
                         System.out.println(shopping.showBasket);
                         System.out.println(shopping.addToBasket);
@@ -125,7 +124,7 @@ public class Shopping {
         System.out.println(shopping.separator);
         System.out.println();
         Receipt receipt = new Receipt();
-        System.out.println(receipt.printReceipt(shopping.basket));
+        System.out.println(receipt.printReceipt(shopping.customer.getBasket()));
     }
 
     public void addItemToBasket() {
@@ -166,10 +165,10 @@ public class Shopping {
                             int userFillingInput = scanner.nextInt();
                             System.out.println("Adding " + usersChoice + " with " + products.get(userFillingInput) + "!");
                             usersChoice.addFilling((Filling) products.get(userFillingInput));
-                            basket.addProduct(usersChoice);
+                            customer.getBasket().addProduct(usersChoice);
                         }
                         case "n" -> {
-                            basket.addProduct(usersChoice);
+                            customer.getBasket().addProduct(usersChoice);
                             System.out.println("You don't want filling - maybe next time");
                         }
                     }
@@ -189,7 +188,16 @@ public class Shopping {
                     int userCoffeeInput = scanner.nextInt();
                     System.out.println("You've chosen " + products.get(userCoffeeInput) + "!");
                     Coffee usersChoice = (Coffee) products.get(userCoffeeInput);
-                    this.basket.addProduct(usersChoice);
+                    this.customer.getBasket().addProduct(usersChoice);
+                    System.out.println("Added Coffee to your basket!");
+                } catch (Exception wrongDataProvided) {
+                    System.out.println("Enter proper data next time!");
+                }
+                try {
+                    int userCoffeeInput = scanner.nextInt();
+                    System.out.println("You've chosen " + products.get(userCoffeeInput) + "!");
+                    Coffee usersChoice = (Coffee) products.get(userCoffeeInput);
+                    this.customer.getBasket().addProduct(usersChoice);
                     System.out.println("Added Coffee to your basket!");
                 } catch (Exception wrongDataProvided) {
                     System.out.println("Enter proper data next time!");
@@ -202,7 +210,7 @@ public class Shopping {
         System.out.println("Type what u want to remove");
         System.out.println(separator);
         int number = 0;
-        List<Product> products = basket.getProducts();
+        List<Product> products = customer.getBasket().getProducts();
         for (Product product : products) {
             System.out.println("Type \"" + number + "\" for " + String.format("%-25s %10s", product, "$" + product.getPrice()));
             number++;
@@ -212,7 +220,7 @@ public class Shopping {
 
         try {
             int userInput = scanner.nextInt();
-            basket.removeProduct(products.get(userInput));
+            customer.getBasket().removeProduct(products.get(userInput));
             System.out.println("Product removed!");
         } catch (Exception wrongDataProvided) {
             System.out.println("Enter proper data next time!");

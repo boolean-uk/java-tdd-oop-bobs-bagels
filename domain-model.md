@@ -72,16 +72,17 @@ I want customers to only be able to order things that we stock in our inventory.
 
 ## DOMAIN MODEL
 
-| Class            | Attributes    | Methods | Scenario | Outputs |
-|------------------|---------------|---------|----------|---------|
-| Abstract Product | SKU: String   |         |          |         |
-|                  | price: double |         |          |         |
+| Class            | Attributes        | Methods | Scenario | Outputs |
+|------------------|-------------------|---------|----------|---------|
+| Abstract Product | SKU: String       |         |          |         |
+|                  | price: BigDecimal |         |          |         |
 
 | Class                 | Attributes              | Methods                             | Scenario                                             | Outputs |
 |-----------------------|-------------------------|-------------------------------------|------------------------------------------------------|---------|
-| Bagel extends Product | variant: BagelVariant   | getPriceWithFillings(): double      | calculates totals price including all added fillings | double  |
+| Bagel extends Product | variant: BagelVariant   | getPriceWithFillings(): BigDecimal  | calculates totals price including all added fillings | double  |
 |                       | fillings: List<Filling> | addFilling(Filling filling):boolean | If filling added correctly                           | true    |
 |                       |                         |                                     | If filling added incorrectly                         | false   |
+
 
 | Class                   | Attributes              | Methods | Scenario | Outputs |
 |-------------------------|-------------------------|---------|----------|---------|
@@ -91,17 +92,31 @@ I want customers to only be able to order things that we stock in our inventory.
 |------------------------|------------------------|---------|----------|---------|
 | Coffee extends Product | variant: CoffeeVariant |         |          |         |
 
-| Class  | Attributes              | Methods                                      | Scenario                                                | Outputs |
-|--------|-------------------------|----------------------------------------------|---------------------------------------------------------|---------|
-| Basket | products: List<Product> | addProduct(Product product): boolean         | product added successfully                              | true    |
-|        | capacity: int           |                                              | adding product failed                                   | false   |
-|        |                         | isFull(): boolean                            | if products.size == capacity                            | true    |
-|        |                         |                                              | if products.size < capacity                             | false   |
-|        |                         | isProductInBasket(Product product): boolean  | if basket contains product                              | true    |
-|        |                         |                                              | if basket doesn't contains product                      | false   |
-|        |                         | summarizeBasket(): double                    | summarize all products with optional fillings in basket | double  |
-|        |                         | isProductAvailable(Product product): boolean | if product is in Bob's inventory                        | true    |
-|        |                         |                                              | if product isn't in Bob's inventory                     | false   |
+| Class  | Attributes              | Methods                                                                                                                  | Scenario                                                                  | Outputs    |
+|--------|-------------------------|--------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------|------------|
+| Basket | products: List<Product> | addProduct(Product product): boolean                                                                                     | product added successfully                                                | true       |
+|        | capacity: int           |                                                                                                                          | adding product failed                                                     | false      |
+|        |                         | isFull(): boolean                                                                                                        | if products.size == capacity                                              | true       |
+|        |                         |                                                                                                                          | if products.size < capacity                                               | false      |
+|        |                         | isProductInBasket(Product product): boolean                                                                              | if basket contains product                                                | true       |
+|        |                         |                                                                                                                          | if basket doesn't contains product                                        | false      |
+|        |                         | summarizeBasket(): BigDecimal                                                                                            | summarize all products with optional fillings in basket                   | BigDecimal |
+|        |                         | summarizeBasketWithoutDiscounts(): BigDecimal                                                                            | summarize all products with optional fillings in basket without discounts | BigDecimal |
+|        |                         | isProductAvailable(Product product): boolean                                                                             | if product is in Bob's inventory                                          | true       |
+|        |                         |                                                                                                                          | if product isn't in Bob's inventory                                       | false      |
+|        |                         | getAmountOfDiscountOccurrences(Discount discount):BigDecimal                                                             | gets amount of discounts occurrences                                      | BigDecimal |
+|        |                         | isSingleProductDiscount(Discount discount):boolean                                                                       | if single product discounts                                               | true       |
+|        |                         |                                                                                                                          | if single product doesn't discount                                        | false      |
+|        |                         | isDiscountRequirementMet(Discount discount) :boolean                                                                     | if discount requirement are met                                           | true       |
+|        |                         |                                                                                                                          | if discount requirement are not met                                       | false      |
+|        |                         | addSavedMoney(HashMap<Product,BigDecimal> discounts,Discount discount):void                                              | adds saved money                                                          | void       |
+|        |                         | applyDiscounts(HashMap<Product, BigDecimal> savings, BigDecimal total):BidDecimal                                        | applies  discounts                                                        | BigDecimal |
+|        |                         | applySingleDiscount(HashMap<Product, BigDecimal> savings, BigDecimal total, SingleProductDiscount discount)              | applies single discount                                                   | BigDecimal |
+|        |                         | applyMultipleProductsDiscount(HashMap<Product, BigDecimal> savings, BigDecimal total, MultipleProductsDiscount discount) | applies multiple products discount                                        | BigDecimal |
+|        |                         | hasRequiredAmountOfThisProduct(Discount discount):boolean                                                                | has required amount of discounted product                                 | true       |
+|        |                         |                                                                                                                          | has not required amount of discounted product                             | false      |
+|        |                         | isProductAlreadyDiscounted(HashMap<Product, BigDecimal> savings, Discount discount)                                      | product already discounted                                                | true       |
+|        |                         |                                                                                                                          | product not already discounted                                            | false      |
 
 | Class         | Attributes       | Methods | Scenario | Outputs |
 |---------------|------------------|---------|----------|---------|
@@ -115,15 +130,44 @@ I want customers to only be able to order things that we stock in our inventory.
 |---------|------------|------------------------------------|----------|---------|
 | Manager |            | checkProductPrice(Product product) |          |         |
 
-| Class | Attributes                       | Methods                                     | Scenario                    | Outputs        |
-|-------|----------------------------------|---------------------------------------------|-----------------------------|----------------|
-| Store | availableProducts:List<Products> | isProductAvailable(Product product):boolean | if product is available     | true           |
-|       |                                  | isProductAvailable(Product product):boolean | if product is not available | false          |
-|       |                                  | loadAvailableProducts(String file)          | loads the products list     | List<Products> |
+| Class     | Attributes                        | Methods                                     | Scenario                            | Outputs |
+|-----------|-----------------------------------|---------------------------------------------|-------------------------------------|---------|
+| Inventory | availableProducts:List<Products>  | isProductAvailable(Product product):boolean | if product is available             | true    |
+|           | availableDiscounts:List<Discount> | isProductAvailable(Product product):boolean | if product is not available         | false   |
+|           |                                   | loadAvailableBagels():void                  | loads  Bagels to availableProducts  | void    |
+|           |                                   | loadAvailableCoffees():void                 | loads  Coffees to availableProducts | void    |
+|           |                                   | loadAvailableFillings():void                | loads Fillings to availableProducts | void    |
 
+| Class   | Attributes                        | Methods                                                   | Scenario                                       | Outputs                      |
+|---------|-----------------------------------|-----------------------------------------------------------|------------------------------------------------|------------------------------|
+| Receipt | products:HashMap<Product,Integer> | createReceipt(Basket basket):void                         | Creates receipt of given basket                | void                         |
+|         |                                   | printReceipt(Basket basket):StringBuilder                 | prints receipt                                 | StringBuilder recepit        |
+|         |                                   | showBagelOnReceipt(Bagel bagel, int amount):StringBuilder | prints bagel on the receipt  with his fillings | StringBuilder bagelOnReceipt |
 
-| Class   | Attributes                        | Methods                      | Scenario                                       | Outputs                      |
-|---------|-----------------------------------|------------------------------|------------------------------------------------|------------------------------|
-| Receipt | products:HashMap<Product,Integer> | createReceipt(Basket basket) | Creates receipt of given basket                | void                         |
-|         |                                   | printReceipt(Basket basket)  | prints receipt                                 | StringBuilder recepit        |
-|         |                                   | showBagelOnReceipt           | prints bagel on the receipt  with his fillings | StringBuilder bagelOnReceipt |
+| Class    | Attributes                     | Methods                     | Scenario                                     | Outputs |
+|----------|--------------------------------|-----------------------------|----------------------------------------------|---------|
+| Shopping |                                | addItemToBasket():void      | Adds item to basket with user interface      | void    |
+|          | customer:Customer              | removeItemFromBasket():void | Removes item from basket with user interface | void    |
+|          | inventory:Inventory            |                             |                                              |         |
+|          | customer:Customer              |                             |                                              |         |
+|          | customerName:String            |                             |                                              |         |
+|          | showInventory:String           |                             |                                              |         |
+|          | addToBasket:String             |                             |                                              |         |
+|          | removeFromBasket:String        |                             |                                              |         |
+|          | showBasket:String              |                             |                                              |         |
+|          | combinedMenuText:StringBuilder |                             |                                              |         |
+
+| Class    | Attributes                      | Methods | Scenario | Outputs |
+|----------|---------------------------------|---------|----------|---------|
+| Discount | product:Product                 |         |          |         |
+|          | requiredAmount:int              |         |          |         |
+|          | discountedPrice:BigDecimal      |         |          |         |
+|          | optionalRequiredProduct:Product |         |          |         |
+
+| Class                                     | Attributes                       | Methods | Scenario | Outputs |
+|-------------------------------------------|----------------------------------|---------|----------|---------|
+| MultipleProductsDiscount extends Discount | optionalRequiredProduct: Product |         |          |         |
+
+| Class                                  | Attributes | Methods | Scenario | Outputs |
+|----------------------------------------|------------|---------|----------|---------|
+| SingleProductDiscount extends Discount |            |         |          |         |
