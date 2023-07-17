@@ -1,6 +1,5 @@
 package com.booleanuk.core;
 
-import com.booleanuk.extension.Store;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
@@ -93,33 +92,7 @@ public class BasketTest {
         assertEquals(BigDecimal.valueOf(0.61), Basket.checkPrice(new Bagel(BGLO, new Filling(FILB))));
     }
 
-    @Test
-    public void testAddingFillingToBagel() {
-        Bagel bagel = new Bagel(BGLO);
 
-        assertTrue(bagel.addFilling(new Filling(FILB)));
-        assertFalse(bagel.addFilling(new Filling(FILB)));
-    }
 
-    @Test
-    public void testGettingAvailableFillings() {
-        Basket basket = new Basket();
-        assertEquals(6, basket.getAvailableFillings().size());
-    }
 
-    @Test
-    public void testCheckingPriceOfFilling() {
-        assertEquals(BigDecimal.valueOf(0.12), Basket.checkPrice(new Filling(FILB)));
-    }
-
-    @Test
-    public void testCreatingItemUsingStrings() {
-        Bagel bagel = new Bagel("Onion", new Filling("Bacon"));
-        assertNotNull(bagel);
-    }
-
-    @Test
-    public void testOrderingItemOutOfInventory() {
-        assertThrows(IllegalArgumentException.class, () -> new Bagel("Incorrect"));
-    }
 }

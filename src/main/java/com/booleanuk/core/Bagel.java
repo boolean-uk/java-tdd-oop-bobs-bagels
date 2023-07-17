@@ -7,6 +7,9 @@ public class Bagel extends Item {
 
     public Bagel(SKU sku) {
         super(sku);
+        if (!sku.getName().equals("Bagel")) {
+            throw new IllegalArgumentException("Wrong bagel SKU");
+        }
     }
 
     public Bagel(String variant) {
