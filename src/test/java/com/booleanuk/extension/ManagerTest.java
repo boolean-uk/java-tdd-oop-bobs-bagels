@@ -89,7 +89,7 @@ public class ManagerTest {
             client.orderCoffee("Black");
         }
         String receipt = bob.applyDiscountsAndGenerateReceipt(client);
-        Assertions.assertTrue(receipt.contains("Coffee Bagel Set"));
+        Assertions.assertTrue(receipt.contains("Coffee & Bagel Set"));
         Assertions.assertTrue(receipt.contains("1.00"));
     }
 

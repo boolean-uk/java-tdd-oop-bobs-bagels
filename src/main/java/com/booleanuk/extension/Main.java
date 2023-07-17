@@ -54,6 +54,9 @@ public class Main {
                 continue;
             }
                 try {
+                    // uncomment this for loop if you want to order
+                    // more bagles fast to test the solution
+                    // for (int i = 0; i < 6; i++) client.orderBagel(bagelChoice, fillingChoices);
                     client.orderBagel(bagelChoice, fillingChoices);
                     System.out.println("Do you want to order anything else? (y/n)");
                     String lastChanceToOrder = input.nextLine();

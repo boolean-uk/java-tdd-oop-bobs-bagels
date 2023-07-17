@@ -7,6 +7,23 @@ import java.time.LocalDateTime;
 
 public class Manager {
     private int basketCapacity = 0;
+    private final int lineLength = 28;
+    private final int countIndex = 19;
+    private final int priceIndex = 23;
+
+    private final double ONION_BAGEL_PRICE = 0.49;
+    private final double PLAIN_BAGEL_PRICE = 0.39;
+    private final double EVERYTHING_BAGEL_PRICE = 0.49;
+    private final double FILLING_PRICE = 0.12;
+    private final int ONION_BAGEL_DISCOUNT = 6;
+    private final int PLAIN_BAGEL_DISCOUNT = 12;
+    private final int EVERYTHING_BAGEL_DISCOUNT = 6;
+    private final double ONION_BAGEL_DISCOUNT_PRICE = 2.49;
+    private final double PLAIN_BAGEL_DISCOUNT_PRICE = 3.99;
+    private final double EVERYTHING_BAGEL_DISCOUNT_PRICE = 2.49;
+
+    private final double COFFEE_BAGEL_PRICE_WITHOUT_BAGEL = 0.8;
+
 
     private static final List<Product> inventory = List.of(
             new Bagel("BGLO", 0.49, "Onion", Collections.emptyList()),
@@ -25,31 +42,7 @@ public class Manager {
             new Filling("FILH", 0.12, "Ham")
     );
 
-    public String applyDiscountsAndGenerateReceipt(Client client) {
-        Basket basket = client.getBasket();
-        int onionBagelsCount = basket.getBagelSKUCount("BGLO");
-        int plainBagelsCount = basket.getBagelSKUCount("BGLP");
-        int everythingBagelsCount = basket.getBagelSKUCount("BGLE");
-        int blackCoffeeCount = basket.getCoffeesSKUCount("COFB");
-        int fillingsCount = basket.getFillingCount();
-        double onionBagelsPrice = (onionBagelsCount / 6) * 2.49 + (onionBagelsCount % 6) * 0.49;
-        double plainBagelsPrice = (plainBagelsCount / 12) * 3.99 + (plainBagelsCount % 12) * 0.39;
-        double everythingBagelsPrice = (everythingBagelsCount / 6) * 2.49 + (everythingBagelsCount % 6) * 0.49;
-        double onionBagelsDiscount = onionBagelsCount * 0.49 - onionBagelsPrice;
-        double plainBagelsDiscount = plainBagelsCount * 0.39 - plainBagelsPrice;
-        double everythingBagelsDiscount = everythingBagelsCount * 0.49 - everythingBagelsPrice;
-        int BagelsCount = onionBagelsCount + plainBagelsCount + everythingBagelsCount;
-        int notDiscountedBagelsCount = BagelsCount - (onionBagelsCount / 6) * 6 -
-                (plainBagelsCount / 12) * 12 - (everythingBagelsCount / 6) * 6;
-        int coffeeBagelSets = Math.min(blackCoffeeCount, notDiscountedBagelsCount);
-        double coffeeBagelSetsPrice = coffeeBagelSets * 0.8;
-        double coffeeBagelSetsDiscount = coffeeBagelSets - coffeeBagelSetsPrice;
-        double totalCost = onionBagelsPrice + plainBagelsPrice + everythingBagelsPrice +
-                coffeeBagelSetsPrice + fillingsCount * 0.12;
-        double sumDiscounts = onionBagelsDiscount + plainBagelsDiscount + everythingBagelsDiscount +
-                coffeeBagelSetsDiscount;
-
-        StringBuilder receipt = new StringBuilder();
+    private void beginTheReceipt(StringBuilder receipt){
         receipt.append("    ~~~ Bob's Bagels ~~~")
                 .append(System.lineSeparator().repeat(2));
 
@@ -58,93 +51,181 @@ public class Manager {
         receipt.append("    ")
                 .append(dtf.format(now))
                 .append(System.lineSeparator().repeat(2))
-                .append("-".repeat(28))
-                .append(System.lineSeparator());
+                .append("-".repeat(lineLength))
+                .append(System.lineSeparator().repeat(2));
+    }
 
-        if (plainBagelsCount > 0) {
-            receipt.append("Plain Bagel")
-                    .append(" ".repeat(8))
-                    .append(plainBagelsCount)
-                    .append("\t£")
-                    .append(String.format("%.2f", plainBagelsPrice))
-                    .append(System.lineSeparator());
-            if (plainBagelsDiscount > 0) {
-                receipt.append("\t".repeat(5))
-                        .append(" (-£")
-                        .append(String.format("%.2f", plainBagelsDiscount))
-                        .append(")").append(System.lineSeparator());
-            }
-        }
-
-        if (onionBagelsCount > 0) {
-            receipt.append("Onion Bagel")
-                    .append(" ".repeat(8))
-                    .append(onionBagelsCount)
-                    .append("\t£")
-                    .append(String.format("%.2f", onionBagelsPrice))
-                    .append(System.lineSeparator());
-            if (onionBagelsDiscount > 0) {
-                receipt.append("\t".repeat(5)).append(" (-£")
-                        .append(String.format("%.2f", onionBagelsDiscount))
-                        .append(")")
-                        .append(System.lineSeparator());
-            }
-        }
-
-        if (everythingBagelsCount > 0) {
-            receipt.append("Everything Bagel")
-                    .append(" ".repeat(8))
-                    .append(everythingBagelsCount)
-                    .append("\t£")
-                    .append(String.format("%.2f", everythingBagelsPrice))
-                    .append(System.lineSeparator());
-            if (everythingBagelsDiscount > 0) {
-                receipt.append("\t".repeat(5)).append(" (-£")
-                        .append(String.format("%.2f", everythingBagelsDiscount))
-                        .append(")")
-                        .append(System.lineSeparator());
-            }
-        }
-
-        if (coffeeBagelSets > 0) {
-            receipt.append("Coffee Bagel Set")
-                    .append(" ".repeat(8))
-                    .append(coffeeBagelSets)
-                    .append("\t£")
-                    .append(String.format("%.2f", coffeeBagelSetsPrice))
-                    .append(System.lineSeparator());
-            if (coffeeBagelSetsDiscount > 0) {
-                receipt.append("\t".repeat(5))
-                        .append(" (-£")
-                        .append(String.format("%.2f", coffeeBagelSetsDiscount))
-                        .append(")")
-                        .append(System.lineSeparator());
-            }
-        }
-
-        if (fillingsCount > 0) {
-            receipt.append("Filling")
-                    .append(" ".repeat(12))
-                    .append(fillingsCount)
-                    .append("\t£")
-                    .append(String.format("%.2f", 0.12 * fillingsCount))
-                    .append(System.lineSeparator());
-        }
-
+    private void endTheReceipt(StringBuilder receipt, double totalCost, double sumDiscounts){
         receipt.append(System.lineSeparator())
-                .append("-".repeat(28))
+                .append("-".repeat(lineLength))
                 .append(System.lineSeparator().repeat(2))
-                .append("Total: ")
-                .append("\t\t\t\t\t£")
+                .append("Total:")
+                .append("\t\t\t\t   £")
                 .append(String.format("%.2f", totalCost))
                 .append(System.lineSeparator().repeat(2))
-                .append("You saved a total of ")
+                .append(" You saved a total of ")
                 .append("£").append(String.format("%.2f", sumDiscounts))
                 .append("\n")
-                .append("    on this shop")
+                .append("      on this shop")
                 .append(System.lineSeparator().repeat(2))
                 .append("        Thank you\n")
                 .append("      for your order!");
+    }
+
+    private void appendProductToReceipt(StringBuilder receipt, String name,
+                                        int count, double price, double discount){
+        receipt.append(name)
+                .append(" ".repeat(countIndex - name.length()))
+                .append(count)
+                .append(" ".repeat(4 - String.valueOf(count).length()))
+                .append("£")
+                .append(String.format("%.2f", price))
+                .append(System.lineSeparator());
+        if (discount > 0) {
+            receipt.append(" ".repeat(21)).append("(-£")
+                    .append(String.format("%.2f", discount))
+                    .append(")")
+                    .append(System.lineSeparator());
+        }
+    }
+
+    private void appendFillingsToReceipt(StringBuilder receipt, int fillingsCount){
+        receipt.append("Filling")
+                .append(" ".repeat(countIndex - "Filling".length()))
+                .append(fillingsCount)
+                .append(" ".repeat(4 - String.valueOf(fillingsCount).length()))
+                .append("£")
+                .append(String.format("%.2f", fillingsCount * FILLING_PRICE))
+                .append(System.lineSeparator());
+    }
+
+    private double calculateOnionBagelsPrice(int onionBagelsCount) {
+        return (onionBagelsCount / ONION_BAGEL_DISCOUNT) * ONION_BAGEL_DISCOUNT_PRICE +
+                (onionBagelsCount % ONION_BAGEL_DISCOUNT) * ONION_BAGEL_PRICE;
+    }
+
+    private double calculateOnionBagelsDiscount(int onionBagelsCount,
+                                                double onionBagelsPrice) {
+        return onionBagelsCount * ONION_BAGEL_PRICE - onionBagelsPrice;
+    }
+
+
+    private double calculatePlainBagelsPrice(int plainBagelsCount) {
+        return (plainBagelsCount / PLAIN_BAGEL_DISCOUNT) * PLAIN_BAGEL_DISCOUNT_PRICE +
+                (plainBagelsCount % PLAIN_BAGEL_DISCOUNT) * PLAIN_BAGEL_PRICE;
+    }
+
+    private double calculatePlainBagelsDiscount(int plainBagelsCount,
+                                                double plainBagelsPrice) {
+        return plainBagelsCount * PLAIN_BAGEL_PRICE - plainBagelsPrice;
+    }
+
+    private double calculateEverythingBagelsPrice(int everythingBagelsCount) {
+        return (everythingBagelsCount / EVERYTHING_BAGEL_DISCOUNT) * EVERYTHING_BAGEL_DISCOUNT_PRICE +
+                (everythingBagelsCount % EVERYTHING_BAGEL_DISCOUNT) * EVERYTHING_BAGEL_PRICE;
+    }
+
+    private double calculateEverythingBagelsDiscount(int everythingBagelsCount,
+                                                     double everythingBagelsPrice) {
+        return everythingBagelsCount * EVERYTHING_BAGEL_PRICE - everythingBagelsPrice;
+    }
+
+    private int calculateCoffeeBagelSets(int blackCoffeeCount,
+                                         int notDiscountedBagelsCount) {
+        return Math.min(blackCoffeeCount, notDiscountedBagelsCount);
+    }
+
+    private double calculateCoffeeBagelSetsPrice(double coffeeBagelSets) {
+        return coffeeBagelSets * COFFEE_BAGEL_PRICE_WITHOUT_BAGEL;
+    }
+
+    private double calculateCoffeeBagelSetsDiscount(double coffeeBagelSets,
+                                                    double coffeeBagelSetsPrice){
+        return coffeeBagelSets - coffeeBagelSetsPrice;
+    }
+
+    private double calculateTotalCost(double onionBagelsPrice,
+                                      double plainBagelsPrice,
+                                      double everythingBagelsPrice,
+                                      double coffeeBagelSetsPrice,
+                                      double fillingsCount) {
+        return onionBagelsPrice + plainBagelsPrice + everythingBagelsPrice +
+                coffeeBagelSetsPrice + fillingsCount * FILLING_PRICE;
+    }
+
+    private double sumDiscounts(double onionBagelsDiscount,
+                                double plainBagelsDiscount,
+                                double everythingBagelsDiscount,
+                                double coffeeBagelSetsDiscount) {
+        return onionBagelsDiscount +  plainBagelsDiscount +
+                everythingBagelsDiscount + coffeeBagelSetsDiscount;
+    }
+
+    private int calculateNotDiscountedBagels(int BagelsCount,
+                                             int onionBagelsCount,
+                                             int plainBagelsCount,
+                                             int everythingBagelsCount) {
+        return BagelsCount - (onionBagelsCount / 6) * 6 -
+                (plainBagelsCount / 12) * 12 - (everythingBagelsCount / 6) * 6;
+    }
+
+    public String applyDiscountsAndGenerateReceipt(Client client) {
+        Basket basket = client.getBasket();
+        int onionBagelsCount = basket.getBagelSKUCount("BGLO");
+        int plainBagelsCount = basket.getBagelSKUCount("BGLP");
+        int everythingBagelsCount = basket.getBagelSKUCount("BGLE");
+        int blackCoffeeCount = basket.getCoffeesSKUCount("COFB");
+        int fillingsCount = basket.getFillingCount();
+        double onionBagelsPrice = calculateOnionBagelsPrice(onionBagelsCount);
+        double plainBagelsPrice = calculatePlainBagelsPrice(plainBagelsCount);
+        double everythingBagelsPrice = calculateEverythingBagelsPrice(everythingBagelsCount);
+        double onionBagelsDiscount = calculateOnionBagelsDiscount(onionBagelsCount, onionBagelsPrice);
+        double plainBagelsDiscount = calculatePlainBagelsDiscount(plainBagelsCount, plainBagelsPrice);
+        double everythingBagelsDiscount = calculateEverythingBagelsDiscount
+                (everythingBagelsCount, everythingBagelsPrice);
+        int BagelsCount = onionBagelsCount + plainBagelsCount + everythingBagelsCount;
+        int notDiscountedBagelsCount = calculateNotDiscountedBagels
+                (BagelsCount, onionBagelsCount, plainBagelsCount, everythingBagelsCount);
+        int coffeeBagelSets = calculateCoffeeBagelSets(blackCoffeeCount, notDiscountedBagelsCount);
+        double coffeeBagelSetsPrice = calculateCoffeeBagelSetsPrice(coffeeBagelSets);
+        double coffeeBagelSetsDiscount = calculateCoffeeBagelSetsDiscount(coffeeBagelSets, coffeeBagelSetsPrice);
+        double totalCost = calculateTotalCost(onionBagelsPrice, plainBagelsPrice, everythingBagelsPrice,
+                coffeeBagelSetsPrice, fillingsCount);
+        double discountsSummed = sumDiscounts
+                (onionBagelsDiscount, plainBagelsDiscount,
+                        everythingBagelsDiscount, coffeeBagelSetsDiscount);
+
+
+        StringBuilder receipt = new StringBuilder();
+
+        beginTheReceipt(receipt);
+
+        if (onionBagelsCount > 0) {
+            appendProductToReceipt(receipt, "Onion Bagel", onionBagelsCount,
+                    onionBagelsPrice, onionBagelsDiscount);
+        }
+
+        if (plainBagelsCount > 0) {
+            appendProductToReceipt(receipt, "Plain Bagel", plainBagelsCount,
+                    plainBagelsPrice, plainBagelsDiscount);
+        }
+
+
+        if (everythingBagelsCount > 0) {
+            appendProductToReceipt(receipt, "Everything Bagel", everythingBagelsCount,
+                    everythingBagelsPrice, everythingBagelsDiscount);
+        }
+
+        if (coffeeBagelSets > 0) {
+            appendProductToReceipt(receipt, "Coffee & Bagel Set", coffeeBagelSets,
+                    coffeeBagelSetsPrice, coffeeBagelSetsDiscount);
+        }
+
+        if (fillingsCount > 0) {
+            appendFillingsToReceipt(receipt, fillingsCount);
+        }
+
+        endTheReceipt(receipt, totalCost, discountsSummed);
 
         return receipt.toString();
     }
