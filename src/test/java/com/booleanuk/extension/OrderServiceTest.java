@@ -1,5 +1,6 @@
 package com.booleanuk.extension;
 
+import io.github.cdimascio.dotenv.Dotenv;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -13,11 +14,16 @@ import java.util.stream.IntStream;
 
 public class OrderServiceTest {
 
+    private static String TWILIO_RECIPIENT_PHONE_NUMBER;
     static Order order;
     OrderService orderService;
 
     @BeforeAll
     static void beforeAll() {
+        Dotenv dotenv = Dotenv.configure().load();
+
+        TWILIO_RECIPIENT_PHONE_NUMBER = dotenv.get("TWILIO_RECIPIENT_PHONE_NUMBER");
+
         Bagel BGLO = new Bagel("BGLO", BigDecimal.valueOf(0.49), "Onion");
         Bagel BGLP = new Bagel("BGLP", BigDecimal.valueOf(0.39), "Plain");
         Bagel BGLE = new Bagel("BGLE", BigDecimal.valueOf(0.49), "Everything");
@@ -51,10 +57,11 @@ public class OrderServiceTest {
 
     @Test
     public void getMessagesShouldReturnMessages() {
-        orderService.placeOrder(order, "");
+        List<String> expected = List.of(getExpectedFormattedSummaryMessage());
+
+        orderService.placeOrder(order, TWILIO_RECIPIENT_PHONE_NUMBER);
 
         List<String> actual = orderService.getMessages();
-        List<String> expected = List.of(getExpectedFormattedSummaryMessage());
 
         Assertions.assertEquals(expected, actual);
     }

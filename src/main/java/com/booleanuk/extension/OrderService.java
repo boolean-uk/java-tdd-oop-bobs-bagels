@@ -1,5 +1,10 @@
 package com.booleanuk.extension;
 
+import com.twilio.Twilio;
+import com.twilio.rest.api.v2010.account.Message;
+import com.twilio.type.PhoneNumber;
+import io.github.cdimascio.dotenv.Dotenv;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -9,10 +14,21 @@ public class OrderService {
 
     private static volatile OrderService instance;
 
+    private final String TWILIO_ACCOUNT_SID;
+    private final String TWILIO_AUTH_TOKEN;
+    private final String TWILIO_FROM_NUMBER;
+
     private final List<Order> orders = new ArrayList<>();
     private final List<String> messages = new ArrayList<>();
 
     private OrderService() {
+        Dotenv dotenv = Dotenv.configure().load();
+
+        TWILIO_ACCOUNT_SID = dotenv.get("TWILIO_ACCOUNT_SID");
+        TWILIO_AUTH_TOKEN = dotenv.get("TWILIO_AUTH_TOKEN");
+        TWILIO_FROM_NUMBER = dotenv.get("TWILIO_FROM_NUMBER");
+
+        Twilio.init(TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN);
     }
 
     public static OrderService getInstance() {
@@ -36,6 +52,11 @@ public class OrderService {
 
     private void notifyCustomer(Order order, String phoneNumber) {
         String body = getNotificationBody(getReceipt(order));
+        Message.creator(
+                new PhoneNumber(phoneNumber),
+                new PhoneNumber(TWILIO_FROM_NUMBER),
+                body
+        ).create();
         messages.add(body);
     }
 
@@ -52,6 +73,10 @@ public class OrderService {
         sb.append(receipt.printReceipt());
 
         return sb.toString();
+    }
+
+    public List<Order> getOrders() {
+        return orders;
     }
 
     public List<String> getMessages() {
