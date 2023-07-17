@@ -232,4 +232,58 @@ public class BasketTest {
         //Then
         Assertions.assertFalse(result);
     }
+
+    @Test
+    public void testRemoveFillingFromBagel_WhenBagelIsInBasket_ShouldReturnTrue() {
+        //Given
+        Basket basket = new Basket(inventory, 20);
+        basket.addProduct("BGLO", 2);
+        basket.addFillingToBagel("BGLO", "FILE");
+
+        //When
+        boolean result = basket.removeFillingFromBagel("BGLO");
+
+        //Then
+        Assertions.assertTrue(result);
+    }
+
+    @Test
+    public void testRemoveFillingFromBagel_WhenBagelIsNotInBasket_ShouldReturnFalse() {
+        //Given
+        Basket basket = new Basket(inventory, 20);
+        basket.addProduct("BGLO", 2);
+        basket.addFillingToBagel("BGLO", "FILE");
+
+        //When
+        boolean result = basket.removeFillingFromBagel("BGLS");
+
+        //Then
+        Assertions.assertFalse(result);
+    }
+
+    @Test
+    public void testRemoveFillingFromBagel_WhenBagelHasNoFilling_ShouldReturnFalse() {
+        //Given
+        Basket basket = new Basket(inventory, 20);
+        basket.addProduct("BGLO", 2);
+
+        //When
+        boolean result = basket.removeFillingFromBagel("BGLO");
+
+        //Then
+        Assertions.assertFalse(result);
+    }
+
+    @Test
+    public void testRemoveFillingFromBagel_WhenParameterIsNotBagel_ShouldReturnFalse() {
+        //Given
+        Basket basket = new Basket(inventory, 20);
+        basket.addProduct("BGLO", 2);
+
+        //When
+        boolean result = basket.removeFillingFromBagel("FILE");
+
+        //Then
+        Assertions.assertFalse(result);
+    }
 }
