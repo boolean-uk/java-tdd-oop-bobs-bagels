@@ -1,6 +1,7 @@
 package com.booleanuk.extension;
 
 import com.twilio.Twilio;
+import com.twilio.exception.AuthenticationException;
 import com.twilio.rest.api.v2010.account.Message;
 import com.twilio.type.PhoneNumber;
 import io.github.cdimascio.dotenv.Dotenv;
@@ -8,8 +9,9 @@ import io.github.cdimascio.dotenv.Dotenv;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
+
+import static spark.Spark.post;
 
 public class OrderService {
 
@@ -29,7 +31,20 @@ public class OrderService {
         TWILIO_AUTH_TOKEN = dotenv.get("TWILIO_AUTH_TOKEN");
         TWILIO_FROM_NUMBER = dotenv.get("TWILIO_FROM_NUMBER");
 
-        Twilio.init(TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN);
+        try {
+            Twilio.init(TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN);
+        } catch (AuthenticationException ignored) {
+           System.err.println("Can not authenticate to Twilio");
+        }
+
+        post("/sms", (req, res) -> {
+            String fromNumber = req.queryParams("From");
+            String message = req.queryParams("Body");
+            messages.add(message);
+            Order order = createOrderFromSMS(message);
+            placeOrder(order, fromNumber);
+            return "";
+        });
     }
 
     public static OrderService getInstance() {
@@ -54,11 +69,15 @@ public class OrderService {
     }
 
     public void notifyCustomer(String messageBody, String phoneNumber) {
-        Message.creator(
-                new PhoneNumber(phoneNumber),
-                new PhoneNumber(TWILIO_FROM_NUMBER),
-                messageBody
-        ).create();
+        try {
+            Message.creator(
+                    new PhoneNumber(phoneNumber),
+                    new PhoneNumber(TWILIO_FROM_NUMBER),
+                    messageBody
+            ).create();
+        } catch (AuthenticationException ignored) {
+            System.err.println("Can not authenticate to Twilio");
+        }
     }
 
     public String getNotificationBody(Receipt receipt) {
