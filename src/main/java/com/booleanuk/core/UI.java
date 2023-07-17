@@ -11,12 +11,19 @@ public class UI {
     public void displayRecipe() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         String formattedDateTimeNow = LocalDateTime.now().format(formatter);
+
+        System.out.println();
+        System.out.println("Thank you for your order!");
+        System.out.println("Your receipt:");
         System.out.println("    ~~~ Bob's Bagels ~~~ \n");
         System.out.println("    " + formattedDateTimeNow + "\n");
         System.out.println("------------------------------ \n");
         System.out.println(customer.checkBasketWithQuantity());
         System.out.println("------------------------------");
-        System.out.println("Total:                   £" + (double) customer.getTotalCost() / 100);
+        System.out.println("Total:                   £" + customer.getTotalCost());
+        System.out.println();
+        System.out.println("You saved " + customer.getTotalDiscount() + " on this order!");
+        System.out.println();
         System.out.println("          Thank you");
         System.out.println("       for your order!");
     }
@@ -57,8 +64,6 @@ public class UI {
         {
             displayRecipe();
         }
-        else if(customerInput==4)
-            displayLoginMenu();
     }
     public void displayManagerMenu()
     {

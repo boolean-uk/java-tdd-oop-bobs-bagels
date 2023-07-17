@@ -66,6 +66,7 @@ public class Customer {
     {
         return (double) basket.getTotalCost()/100;
     }
+    public double getTotalDiscount() {return (double) (basket.getCostWithoutDiscount()-basket.getTotalCost())/100;}
     public boolean removeFromBasket(int i)
     {
         return (basket.removeFromBasket(i));
