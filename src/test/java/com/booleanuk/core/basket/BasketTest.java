@@ -2,7 +2,7 @@ package com.booleanuk.core.basket;
 
 import com.booleanuk.core.products.Bagel;
 import com.booleanuk.core.products.BagelVariant;
-import com.booleanuk.core.store.Store;
+import com.booleanuk.core.Inventory.Inventory;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -10,7 +10,7 @@ import java.math.BigDecimal;
 
 public class BasketTest {
 
-    Store store = Store.getInstance();
+    Inventory inventory = Inventory.getInstance();
 
     @Test
     public void shouldCreateBasketWithEmptyList() {
@@ -115,18 +115,18 @@ public class BasketTest {
     }
 
     @Test
-    public void shouldReturnTrueWhenProductIsInStore() {
+    public void shouldReturnTrueWhenProductIsInInventory() {
 
         Bagel bagel = new Bagel("BGLO", BigDecimal.valueOf(0.49), BagelVariant.Onion);
 
-        Assertions.assertTrue(store.isProductAvailable(bagel));
+        Assertions.assertTrue(inventory.isProductAvailable(bagel));
     }
 
     @Test
-    public void shouldReturnFalseWhenProductIsNotInStore() {
+    public void shouldReturnFalseWhenProductIsNotInInventory() {
 
         Bagel bagel = new Bagel("BGLO", BigDecimal.valueOf(0.99), BagelVariant.Plain);
 
-        Assertions.assertFalse(store.isProductAvailable(bagel));
+        Assertions.assertFalse(inventory.isProductAvailable(bagel));
     }
 }

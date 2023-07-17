@@ -6,7 +6,7 @@ import com.booleanuk.core.products.Coffee;
 import com.booleanuk.core.products.Filling;
 import com.booleanuk.core.products.Product;
 import com.booleanuk.core.receipt.Receipt;
-import com.booleanuk.core.store.Store;
+import com.booleanuk.core.Inventory.Inventory;
 import com.booleanuk.core.user.Customer;
 
 import java.util.List;
@@ -16,7 +16,7 @@ public class Shopping {
     static StringBuilder combinedMenuText = new StringBuilder();
     Basket basket = new Basket();
     Customer customer;
-    Store store = Store.getInstance();
+    Inventory inventory = Inventory.getInstance();
     String customerName = "";
     String separator = "=".repeat(50);
     String showInventory = "Type I to see Bob's inventory";
@@ -61,7 +61,7 @@ public class Shopping {
                     System.out.println("X-to end your shopping");
                 }
                 case "i" -> {
-                    List<Product> products = shopping.store.getAvailableProducts();
+                    List<Product> products = shopping.inventory.getAvailableProducts();
                     for (Product product : products) {
                         System.out.printf("%-25s %10s%n", product, "$" + product.getPrice());
                     }
@@ -138,7 +138,7 @@ public class Shopping {
         userInput = userInput.toLowerCase();
         switch (userInput) {
             case "b" -> {
-                List<Product> products = this.store.getAvailableProducts();
+                List<Product> products = this.inventory.getAvailableProducts();
                 int number = 0;
                 for (Product product : products) {
                     if (product instanceof Bagel)
@@ -178,7 +178,7 @@ public class Shopping {
                 }
             }
             case "c" -> {
-                List<Product> products = this.store.getAvailableProducts();
+                List<Product> products = this.inventory.getAvailableProducts();
                 int number = 0;
                 for (Product product : products) {
                     if (product instanceof Coffee)

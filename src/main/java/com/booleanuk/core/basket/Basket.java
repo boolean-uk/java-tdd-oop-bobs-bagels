@@ -3,10 +3,10 @@ package com.booleanuk.core.basket;
 import com.booleanuk.core.products.Bagel;
 import com.booleanuk.core.products.Filling;
 import com.booleanuk.core.products.Product;
-import com.booleanuk.core.store.Discount;
-import com.booleanuk.core.store.MultipleProductsDiscount;
-import com.booleanuk.core.store.SingleProductDiscount;
-import com.booleanuk.core.store.Store;
+import com.booleanuk.core.Inventory.Discount;
+import com.booleanuk.core.Inventory.MultipleProductsDiscount;
+import com.booleanuk.core.Inventory.SingleProductDiscount;
+import com.booleanuk.core.Inventory.Inventory;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -15,7 +15,7 @@ import java.util.HashMap;
 import java.util.List;
 
 public class Basket implements BasketOperations {
-    private final Store store = Store.getInstance();
+    private final Inventory inventory = Inventory.getInstance();
     private List<Product> products = new ArrayList<>(0);
     private int capacity = 5;
 
@@ -106,7 +106,7 @@ public class Basket implements BasketOperations {
 
     private BigDecimal applyDiscounts(HashMap<Product, BigDecimal> savings, BigDecimal total) {
 
-        for (Discount discount : store.getAvailableDiscounts()) {
+        for (Discount discount : inventory.getAvailableDiscounts()) {
             if (isDiscountRequirementsMet(discount)) {
 
                 if (isSingleProductDiscount(discount)) {

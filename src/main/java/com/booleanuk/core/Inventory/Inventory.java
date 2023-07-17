@@ -1,4 +1,4 @@
-package com.booleanuk.core.store;
+package com.booleanuk.core.Inventory;
 
 import com.booleanuk.core.products.Bagel;
 import com.booleanuk.core.products.Coffee;
@@ -15,23 +15,24 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Store {
+public class Inventory {
 
     private final static String bagels = "/bagel.json";
     private final static String fillings = "/filling.json";
     private final static String coffees = "/coffee.json";
-    private static Store INSTANCE;
+    private static Inventory INSTANCE;
     private List<Discount> availableDiscounts = new ArrayList<>(0);
     private List<Product> availableProducts = new ArrayList<>(0);
-    private Store() {
+
+    private Inventory() {
         loadAvailableBagels();
         loadAvailableCoffees();
         loadAvailableFillings();
     }
 
-    public static Store getInstance() {
+    public static Inventory getInstance() {
         if (INSTANCE == null) {
-            INSTANCE = new Store();
+            INSTANCE = new Inventory();
         }
         return INSTANCE;
     }
@@ -64,7 +65,7 @@ public class Store {
 
     private void loadAvailableBagels() {
         try {
-            InputStream inputStream = Store.class.getResourceAsStream(bagels);
+            InputStream inputStream = Inventory.class.getResourceAsStream(bagels);
             String json = getJsonAsString(inputStream);
 
             Gson gson = new Gson();
@@ -89,7 +90,7 @@ public class Store {
 
     private void loadAvailableCoffees() {
         try {
-            InputStream inputStream = Store.class.getResourceAsStream(coffees);
+            InputStream inputStream = Inventory.class.getResourceAsStream(coffees);
             String json = getJsonAsString(inputStream);
 
             Gson gson = new Gson();
@@ -106,7 +107,7 @@ public class Store {
 
     private void loadAvailableFillings() {
         try {
-            InputStream inputStream = Store.class.getResourceAsStream(fillings);
+            InputStream inputStream = Inventory.class.getResourceAsStream(fillings);
             String json = getJsonAsString(inputStream);
 
             Gson gson = new Gson();

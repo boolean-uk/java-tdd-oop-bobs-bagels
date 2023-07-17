@@ -1,4 +1,4 @@
-package com.booleanuk.core.store;
+package com.booleanuk.core.Inventory;
 
 import com.booleanuk.core.products.Product;
 

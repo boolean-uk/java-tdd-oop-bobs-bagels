@@ -1,5 +1,8 @@
 package com.booleanuk.extension;
 
+import com.booleanuk.core.Inventory.Inventory;
+import com.booleanuk.core.Inventory.MultipleProductsDiscount;
+import com.booleanuk.core.Inventory.SingleProductDiscount;
 import com.booleanuk.core.basket.Basket;
 import com.booleanuk.core.basket.BasketSummary;
 import com.booleanuk.core.products.Bagel;
@@ -8,9 +11,6 @@ import com.booleanuk.core.products.Coffee;
 import com.booleanuk.core.products.CoffeeVariant;
 import com.booleanuk.core.products.Filling;
 import com.booleanuk.core.products.FillingVariant;
-import com.booleanuk.core.store.MultipleProductsDiscount;
-import com.booleanuk.core.store.SingleProductDiscount;
-import com.booleanuk.core.store.Store;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -19,14 +19,14 @@ import java.util.ArrayList;
 
 public class BasketTest {
 
-    Store store = Store.getInstance();
+    Inventory inventory = Inventory.getInstance();
 
     @Test
-    public void shouldReturnFalseWhenProductIsNotInStore() {
+    public void shouldReturnFalseWhenProductIsNotInInventory() {
 
         Bagel bagel = new Bagel("BGLO", BigDecimal.valueOf(0.99), BagelVariant.Plain);
 
-        Assertions.assertFalse(store.isProductAvailable(bagel));
+        Assertions.assertFalse(inventory.isProductAvailable(bagel));
     }
 
     @Test
@@ -35,7 +35,7 @@ public class BasketTest {
 
         SingleProductDiscount discountBagelOnion = new SingleProductDiscount(bagelOnion, 6, BigDecimal.valueOf(2.49));
 
-        store.addDiscount(discountBagelOnion);
+        inventory.addDiscount(discountBagelOnion);
 
         Basket basket = new Basket(6);
         boolean addingResult = basket.addProduct(bagelOnion, 6);
@@ -52,9 +52,9 @@ public class BasketTest {
         SingleProductDiscount discountBagelPlain = new SingleProductDiscount(bagelPlain, 12, BigDecimal.valueOf(3.99));
         SingleProductDiscount discountBagelOnion = new SingleProductDiscount(bagelOnion, 6, BigDecimal.valueOf(2.49));
 
-        store.setAvailableDiscounts(new ArrayList<>());
-        store.addDiscount(discountBagelPlain);
-        store.addDiscount(discountBagelOnion);
+        inventory.setAvailableDiscounts(new ArrayList<>());
+        inventory.addDiscount(discountBagelPlain);
+        inventory.addDiscount(discountBagelOnion);
 
         Basket basket = new Basket(18);
         basket.addProduct(bagelOnion, 6);
@@ -71,7 +71,7 @@ public class BasketTest {
 
         MultipleProductsDiscount discount = new MultipleProductsDiscount(coffeeBlack, 1, BigDecimal.valueOf(1.25), bagelOnion);
 
-        store.addDiscount(discount);
+        inventory.addDiscount(discount);
 
         Basket basket = new Basket(2);
         basket.addProduct(bagelOnion);
@@ -88,9 +88,9 @@ public class BasketTest {
         MultipleProductsDiscount discountCoffeeBagel = new MultipleProductsDiscount(coffeeBlack, 1, BigDecimal.valueOf(1.25), bagelOnion);
         SingleProductDiscount discountBagelOnion = new SingleProductDiscount(bagelOnion, 6, BigDecimal.valueOf(2.49));
 
-        store.setAvailableDiscounts(new ArrayList<>());
-        store.addDiscount(discountBagelOnion);
-        store.addDiscount(discountCoffeeBagel);
+        inventory.setAvailableDiscounts(new ArrayList<>());
+        inventory.addDiscount(discountBagelOnion);
+        inventory.addDiscount(discountCoffeeBagel);
 
         Basket basket = new Basket(10);
         basket.addProduct(bagelOnion, 6);
@@ -126,8 +126,8 @@ public class BasketTest {
 
         SingleProductDiscount discountBagelOnion = new SingleProductDiscount(bagelOnion, 6, BigDecimal.valueOf(2.49));
 
-        store.setAvailableDiscounts(new ArrayList<>());
-        store.addDiscount(discountBagelOnion);
+        inventory.setAvailableDiscounts(new ArrayList<>());
+        inventory.addDiscount(discountBagelOnion);
 
         Basket basket = new Basket(18);
         basket.addProduct(bagelOnion, 18);
@@ -141,8 +141,8 @@ public class BasketTest {
 
         SingleProductDiscount discountBagelOnion = new SingleProductDiscount(bagelOnion, 6, BigDecimal.valueOf(2.49));
 
-        store.setAvailableDiscounts(new ArrayList<>());
-        store.addDiscount(discountBagelOnion);
+        inventory.setAvailableDiscounts(new ArrayList<>());
+        inventory.addDiscount(discountBagelOnion);
 
         Basket basket = new Basket(17);
         basket.addProduct(bagelOnion, 17);
@@ -161,10 +161,10 @@ public class BasketTest {
         SingleProductDiscount discountBagelPlain = new SingleProductDiscount(bagelPlain, 12, BigDecimal.valueOf(3.99));
         SingleProductDiscount discountBagelOnion = new SingleProductDiscount(bagelOnion, 6, BigDecimal.valueOf(2.49));
 
-        store.setAvailableDiscounts(new ArrayList<>());
-        store.addDiscount(discountBagelPlain);
-        store.addDiscount(discountBagelOnion);
-        store.addDiscount(discountCoffeeBlack);
+        inventory.setAvailableDiscounts(new ArrayList<>());
+        inventory.addDiscount(discountBagelPlain);
+        inventory.addDiscount(discountBagelOnion);
+        inventory.addDiscount(discountCoffeeBlack);
 
         Basket basket = new Basket(20);
         basket.addProduct(bagelOnion, 6);
@@ -188,10 +188,10 @@ public class BasketTest {
         SingleProductDiscount discountBagelPlain = new SingleProductDiscount(bagelPlain, 12, BigDecimal.valueOf(3.99));
         SingleProductDiscount discountBagelOnion = new SingleProductDiscount(bagelOnion, 6, BigDecimal.valueOf(2.49));
 
-        store.setAvailableDiscounts(new ArrayList<>());
-        store.addDiscount(discountBagelPlain);
-        store.addDiscount(discountBagelOnion);
-        store.addDiscount(discountCoffeeBlack);
+        inventory.setAvailableDiscounts(new ArrayList<>());
+        inventory.addDiscount(discountBagelPlain);
+        inventory.addDiscount(discountBagelOnion);
+        inventory.addDiscount(discountCoffeeBlack);
 
         Basket basket = new Basket(19);
         basket.addProduct(bagelOnion, 6);
@@ -212,9 +212,9 @@ public class BasketTest {
         SingleProductDiscount discountBagelPlain = new SingleProductDiscount(bagelPlain, 12, BigDecimal.valueOf(3.99));
         SingleProductDiscount discountBagelOnion = new SingleProductDiscount(bagelOnion, 6, BigDecimal.valueOf(2.49));
 
-        store.setAvailableDiscounts(new ArrayList<>());
-        store.addDiscount(discountBagelPlain);
-        store.addDiscount(discountBagelOnion);
+        inventory.setAvailableDiscounts(new ArrayList<>());
+        inventory.addDiscount(discountBagelPlain);
+        inventory.addDiscount(discountBagelOnion);
 
         bagelPlain.addFilling(new Filling("FILL", BigDecimal.valueOf(0.12), FillingVariant.Egg));
 

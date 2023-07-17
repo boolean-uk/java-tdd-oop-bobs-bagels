@@ -6,8 +6,8 @@ import com.booleanuk.core.products.BagelVariant;
 import com.booleanuk.core.products.Filling;
 import com.booleanuk.core.products.FillingVariant;
 import com.booleanuk.core.receipt.Receipt;
-import com.booleanuk.core.store.Discount;
-import com.booleanuk.core.store.Store;
+import com.booleanuk.core.Inventory.Discount;
+import com.booleanuk.core.Inventory.Inventory;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -91,7 +91,7 @@ public class ReceiptTest {
 
     @Test
     public void shouldReturnHowMuchMoneySavedOnDiscount() {
-        Store store = Store.getInstance();
+        Inventory inventory = Inventory.getInstance();
         Bagel bagelOnion = new Bagel("BGLO", BigDecimal.valueOf(0.49), BagelVariant.Onion);
         Bagel bagelPlain = new Bagel("BGLP", BigDecimal.valueOf(0.39), BagelVariant.Plain);
         Bagel bagelEverything = new Bagel("BGLE", BigDecimal.valueOf(0.49), BagelVariant.Everything);
@@ -101,9 +101,9 @@ public class ReceiptTest {
         Discount discountBagelOnion = new Discount(bagelOnion, 6, BigDecimal.valueOf(2.49));
 
 
-        store.setAvailableDiscounts(new ArrayList<>());
-        store.addDiscount(discountBagelPlain);
-        store.addDiscount(discountBagelOnion);
+        inventory.setAvailableDiscounts(new ArrayList<>());
+        inventory.addDiscount(discountBagelPlain);
+        inventory.addDiscount(discountBagelOnion);
 
         bagelPlain.addFilling(new Filling("FILL", BigDecimal.valueOf(0.12), FillingVariant.Ham));
 
