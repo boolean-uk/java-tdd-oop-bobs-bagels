@@ -52,7 +52,7 @@ public class Receipt {
 
 
         for(ReceiptLine rl: this.getProducts()){
-            System.out.println(rl.getPrice() + " " + rl.getItem().getName() + " " + rl.getItem().getVariant());
+            //System.out.println(rl.getPrice() + " " + rl.getItem().getName() + " " + rl.getItem().getVariant());
 
                 if(rl.isBagelCoffeeSpecial()){
                     discountedAmount = rl.getPrice().
