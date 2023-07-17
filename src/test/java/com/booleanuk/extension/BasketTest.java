@@ -299,8 +299,8 @@ class BasketTest {
 
         assertEquals("Bob's Bagels - Receipt\n" + date + "\n" +
                         """
-                                SESAME Bagel x1 at $0.61 = $0.61
                                 PLAIN Bagel x1 at $0.39 = $0.39
+                                SESAME Bagel x1 at $0.61 = $0.61
                                 Coffee x1 at $0.99 = $0.99
                                  (Special Offer: Coffee+Bagel: 1 for $1.25)
                                 Total Cost: $1.86
