@@ -50,6 +50,10 @@ public class ProductManager {
         }
     }
 
+    public int getBasketCapacity() {
+        return basket.getCapacity();
+    }
+
     public ArrayList<Product> getItems() {
         return basket.getList();
     }

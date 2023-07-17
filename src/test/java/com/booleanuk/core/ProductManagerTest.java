@@ -41,7 +41,7 @@ public class ProductManagerTest {
 
         //Verify
 
-        Assertions.assertEquals(0, productManager.getBasket().getList().size());
+        Assertions.assertEquals(0, productManager.getItems().size());
     }
 
     @Test
@@ -54,15 +54,6 @@ public class ProductManagerTest {
     }
 
     @Test
-    public void fillHashMapFromFileTest() {
-        // Executed
-
-        // Verify
-        Assertions.assertFalse(productManager.getInventory().isEmpty());
-        Assertions.assertEquals("Onion", productManager.getInventory().get("BGLO").getVariant());
-    }
-
-    @Test
     public void shouldChangeBasketCapacity() {
         //Setup
         int expectedCapacity = 11;
@@ -71,7 +62,7 @@ public class ProductManagerTest {
         productManager.changeBasketCapacity(expectedCapacity);
 
         //Verify
-        Assertions.assertEquals(expectedCapacity, productManager.getBasket().getCapacity());
+        Assertions.assertEquals(expectedCapacity, productManager.getBasketCapacity());
     }
 
     @Test
@@ -80,14 +71,14 @@ public class ProductManagerTest {
         productManager.orderProduct("Plain");
         productManager.orderProduct("Plain");
         productManager.orderProduct("Plain");
-        int expectedCapacity = productManager.getBasket().getCapacity();
+        int expectedCapacity = productManager.getBasketCapacity();
         int newCapacity = 2;
 
         //Execute
         productManager.changeBasketCapacity(newCapacity);
 
         //Verify
-        Assertions.assertEquals(expectedCapacity, productManager.getBasket().getCapacity());
+        Assertions.assertEquals(expectedCapacity, productManager.getBasketCapacity());
     }
 
     @Test
@@ -99,9 +90,18 @@ public class ProductManagerTest {
         double expected = 0.39 * 3;
 
         //Execute
-        double total = productManager.getBasket().total();
+        double total = productManager.getTotal();
 
         //Verify
         Assertions.assertEquals(expected, total);
+    }
+
+    @Test
+    public void shouldfillHashMapFromFileTest() {
+        // Executed
+
+        // Verify
+        Assertions.assertFalse(productManager.getInventory().isEmpty());
+        Assertions.assertEquals("Onion", productManager.getInventory().get("BGLO").getVariant());
     }
 }
