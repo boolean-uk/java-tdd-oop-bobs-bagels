@@ -6,22 +6,22 @@ import java.util.List;
 
 public class Inventory {
     private static final HashMap<String, Product> products = new HashMap<>() {{
-        put("BGLO", new Product("BGLO", 49, "Bagel", "Onion"));
-        put("BGLP", new Product("BGLP", 39, "Bagel", "Plain"));
-        put("BGLE", new Product("BGLE", 49, "Bagel", "Everything"));
-        put("BGLS", new Product("BGLS", 49, "Bagel", "Sesame"));
+        put("BGLO", new Bagel("BGLO", 49,  "Onion"));
+        put("BGLP", new Bagel("BGLP", 39,  "Plain"));
+        put("BGLE", new Bagel("BGLE", 49,  "Everything"));
+        put("BGLS", new Bagel("BGLS", 49,  "Sesame"));
 
-        put("COFB", new Product("COFB", 99, "Coffee", "Black"));
-        put("COFW", new Product("COFW", 119, "Coffee", "White"));
-        put("COFC", new Product("COFC", 129, "Coffee", "Capuccino"));
-        put("COFL", new Product("COFL", 129, "Coffee", "Latte"));
+        put("COFB", new Coffee("COFB", 99,  "Black"));
+        put("COFW", new Coffee("COFW", 119,  "White"));
+        put("COFC", new Coffee("COFC", 129,  "Capuccino"));
+        put("COFL", new Coffee("COFL", 129,  "Latte"));
 
-        put("FILB", new Product("FILB", 12, "Filling", "Bacon"));
-        put("FILE", new Product("FILE", 12, "Filling", "Egg"));
-        put("FILC", new Product("FILC", 12, "Filling", "Cheese"));
-        put("FILX", new Product("FILX", 12, "Filling", "Cream Cheese"));
-        put("FILS", new Product("FILS", 12, "Filling", "Smoked Salmon"));
-        put("FILH", new Product("FILH", 12, "Filling", "Ham"));
+        put("FILB", new Filling("FILB", 12,  "Bacon"));
+        put("FILE", new Filling("FILE", 12,  "Egg"));
+        put("FILC", new Filling("FILC", 12,  "Cheese"));
+        put("FILX", new Filling("FILX", 12,  "Cream Cheese"));
+        put("FILS", new Filling("FILS", 12, "Smoked Salmon"));
+        put("FILH", new Filling("FILH", 12,  "Ham"));
     }};
 
     private static final List<CombinationBargain> combinationBargains = CombinationBargain.coffeePlusBagel();
