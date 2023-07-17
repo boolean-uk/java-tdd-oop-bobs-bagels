@@ -88,23 +88,19 @@ public class OrderServiceTest {
         orderService.placeOrder(order, TWILIO_RECIPIENT_PHONE_NUMBER);
         List<String> actual = orderService.getMessages();
 
-        List<String> expected = new ArrayList<>();
-        expected.add(getExpectedFormattedSummaryMessage());
-        Assertions.assertEquals(expected, actual);
-
-        expected.add("6 x BGLO, 1 x BGLP, 1 x BGLE + 1 x FILE, 1 x COFB");
-        expected.add(getExpectedFormattedSummaryMessage());
-
         String summaryMessageWithProductsOnly = getExpectedFormattedSummaryMessage().lines()
                 .skip(9)
                 .limit(7)
                 .map(s -> s + "\n")
                 .reduce("", String::concat);
 
+        Assertions.assertTrue(actual.get(0).contains("Your order is being processed. ETA:"));
+        Assertions.assertTrue(actual.get(0).contains(summaryMessageWithProductsOnly));
+
         try {
             mockSmsOrder();
-            Assertions.assertTrue(expected.contains("6 x BGLO, 1 x BGLP, 1 x BGLE + 1 x FILE, 1 x COFB"));
-            Assertions.assertTrue(expected.get(2).contains(summaryMessageWithProductsOnly));
+            Assertions.assertTrue(actual.contains("6 x BGLO, 1 x BGLP, 1 x BGLE + 1 x FILE, 1 x COFB"));
+            Assertions.assertTrue(actual.get(2).contains(summaryMessageWithProductsOnly));
         } catch (URISyntaxException | IOException | InterruptedException e) {
             throw new RuntimeException(e);
         }

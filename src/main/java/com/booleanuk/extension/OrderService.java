@@ -1,10 +1,12 @@
 package com.booleanuk.extension;
 
 import com.twilio.Twilio;
+import com.twilio.exception.ApiException;
 import com.twilio.exception.AuthenticationException;
 import com.twilio.rest.api.v2010.account.Message;
 import com.twilio.type.PhoneNumber;
 import io.github.cdimascio.dotenv.Dotenv;
+import io.github.cdimascio.dotenv.DotenvException;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -17,24 +19,30 @@ public class OrderService {
 
     private static volatile OrderService instance;
 
-    private final String TWILIO_ACCOUNT_SID;
-    private final String TWILIO_AUTH_TOKEN;
-    private final String TWILIO_FROM_NUMBER;
+    private String TWILIO_ACCOUNT_SID;
+    private String TWILIO_AUTH_TOKEN;
+    private String TWILIO_FROM_NUMBER;
 
     private final List<Order> orders = new ArrayList<>();
     private final List<String> messages = new ArrayList<>();
 
     private OrderService() {
-        Dotenv dotenv = Dotenv.configure().load();
+        try {
+            Dotenv dotenv = Dotenv.configure().load();
 
-        TWILIO_ACCOUNT_SID = dotenv.get("TWILIO_ACCOUNT_SID");
-        TWILIO_AUTH_TOKEN = dotenv.get("TWILIO_AUTH_TOKEN");
-        TWILIO_FROM_NUMBER = dotenv.get("TWILIO_FROM_NUMBER");
+            TWILIO_ACCOUNT_SID = dotenv.get("TWILIO_ACCOUNT_SID", "");
+            TWILIO_AUTH_TOKEN = dotenv.get("TWILIO_AUTH_TOKEN", "");
+            TWILIO_FROM_NUMBER = dotenv.get("TWILIO_FROM_NUMBER", "");
+        } catch (DotenvException ignore) {
+            TWILIO_ACCOUNT_SID = "";
+            TWILIO_AUTH_TOKEN = "";
+            TWILIO_FROM_NUMBER = "";
+        }
 
         try {
             Twilio.init(TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN);
         } catch (AuthenticationException ignored) {
-           System.err.println("Can not authenticate to Twilio");
+            System.err.println("Can not authenticate to Twilio");
         }
 
         post("/sms", (req, res) -> {
@@ -75,7 +83,7 @@ public class OrderService {
                     new PhoneNumber(TWILIO_FROM_NUMBER),
                     messageBody
             ).create();
-        } catch (AuthenticationException ignored) {
+        } catch (ApiException | AuthenticationException ignored) {
             System.err.println("Can not authenticate to Twilio");
         }
     }
