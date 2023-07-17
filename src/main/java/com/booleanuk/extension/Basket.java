@@ -8,11 +8,7 @@ import com.booleanuk.extension.product.specialoffer.BreakfastOffer;
 import lombok.Getter;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.NoSuchElementException;
+import java.util.*;
 
 @Getter
 public class Basket {
@@ -82,12 +78,12 @@ public class Basket {
         this.capacity = capacity;
     }
 
-    public void printReceipt() {
+    public String getReceipt() {
         var receiptData = groupProductsIntoOffers(this.products);
         var total = totalPrice();
         var saved = totalPriceNoDiscounts().subtract(total);
-        var receipt = ReceiptFormatter.formatReceipt(receiptData, total, saved);
-        System.out.println(receipt);
+
+        return ReceiptFormatter.formatReceipt(receiptData, total, saved);
     }
 
     private int itemAmount() {
