@@ -34,6 +34,14 @@ public class Bagel extends Item {
         return super.getPrice();
     }
 
+    public boolean addFilling(Filling filling) {
+        if (this.filling == null) {
+            this.filling = filling;
+            return true;
+        }
+        return false;
+    }
+
     public Filling getFilling() {
         return filling;
     }

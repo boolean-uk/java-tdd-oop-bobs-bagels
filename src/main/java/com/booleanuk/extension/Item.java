@@ -10,14 +10,6 @@ public abstract class Item {
         this.sku = sku;
     }
 
-    public Item(String name, String variant) {
-        SKU ckeckedSKU = SKU.getConstant(name, variant);
-        if (ckeckedSKU == null) {
-            throw new IllegalArgumentException("No such item in inventory");
-        }
-        this.sku = ckeckedSKU;
-    }
-
     public SKU getSku() {
         return sku;
     }
