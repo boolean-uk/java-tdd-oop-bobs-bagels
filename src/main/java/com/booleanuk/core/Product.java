@@ -38,6 +38,10 @@ public class Product {
        return new Bagel(this.sku, this.price, this.name, this.variant, null);
     }
 
+    public Filling toFilling(){
+        return new Filling(this.sku, this.price, this.name, this.variant);
+    }
+
     @Override
     public String toString() {
         return "Product{" +

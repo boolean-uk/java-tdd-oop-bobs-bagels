@@ -28,7 +28,7 @@ public class BagelTest {
 
     @Test
     void chooseFillingTest_ByVariantExist() {
-        Product filling = new Product("FILB", 0.12, "Filling", "Bacon");
+        Filling filling = new Filling("FILB", 0.12, "Filling", "Bacon");
         Bagel bagel = new Bagel("BGLO", 0.49, "Bagel", "Onion");
         String message = bagel.chooseFilling("Bacon");
         Assertions.assertEquals("Filling added to bagel", message);

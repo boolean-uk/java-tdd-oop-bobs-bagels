@@ -33,8 +33,9 @@ public class Bagel extends Product{
 
     public String chooseFilling(String variant) {
         Inventory inventory = new Inventory();
-        Filling filling = (Filling) inventory.getProductByNameAndVariant("Filling", variant);
-        if(filling != null){
+        Product product = inventory.getProductByNameAndVariant("Filling", variant);
+        if(product != null){
+            Filling filling = product.toFilling();
             this.price = this.price + filling.price;
             this.filling = filling;
             return "Filling added to bagel";

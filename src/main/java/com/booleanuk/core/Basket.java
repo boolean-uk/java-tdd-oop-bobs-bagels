@@ -227,11 +227,19 @@ public class Basket {
                 int rest = entry.getValue() % 12;
                 totalCost += quantityOfSpecialPrice * 3.99;
                 tmp.replace(entry.getKey(), rest);
+            } else if (entry.getKey().getName().equals("Coffee") && !entry.getKey().getVariant().equals("Black")){
+                totalCost += entry.getValue() * entry.getKey().getPrice();
             }
         }
 
-        int plainBagelsCount = tmp.entrySet().stream().filter(e -> e.getKey().getSku().equals("BGLP")).findAny().get().getValue();
-        int coffeeCount = tmp.entrySet().stream().filter(e -> e.getKey().getSku().equals("COFB")).findAny().get().getValue();
+        int plainBagelsCount = 0;
+        int coffeeCount = 0;
+        if(tmp.entrySet().stream().anyMatch(e -> e.getKey().getSku().equals("BGLP"))){
+            plainBagelsCount = tmp.entrySet().stream().filter(e -> e.getKey().getSku().equals("BGLP")).findAny().get().getValue();
+        }
+        if(tmp.entrySet().stream().anyMatch(e -> e.getKey().getSku().equals("COFB"))){
+            coffeeCount = tmp.entrySet().stream().filter(e -> e.getKey().getSku().equals("COFB")).findAny().get().getValue();
+        }
 
         boolean coffeeIsMin = coffeeCount <= plainBagelsCount;
 
