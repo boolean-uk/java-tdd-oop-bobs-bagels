@@ -52,3 +52,10 @@ You saved a total of £0.69
         Thank you
       for your order!
 ```
+## User Stories
+
+```
+As a customer,
+So I can track my savings,
+I'd like to be able to see on the receipt how much I saved on my order.
+```
