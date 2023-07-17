@@ -3,7 +3,7 @@ package com.booleanuk.extension;
 import java.math.BigDecimal;
 import java.util.Objects;
 
-public class Item {
+public abstract class Item {
     private final SKU sku;
 
     public Item(SKU sku) {
@@ -11,7 +11,7 @@ public class Item {
     }
 
     public Item(String name, String variant) {
-        SKU ckeckedSKU = SKU.getConstant(new Item(name, variant));
+        SKU ckeckedSKU = SKU.getConstant(name, variant);
         if (ckeckedSKU == null) {
             throw new IllegalArgumentException("No such item in inventory");
         }
