@@ -147,3 +147,33 @@ I'd like to see all discounts on my receipt.
 |---------|--------------------|-----------------------|----------|-------------------------|
 | Receipt | LocalDateTime time | String printReceipt() |          | prints detailed receipt |       
 |         | Basket basket      |                       |          |                         |                  
+
+### Extension 4.
+
+```
+1.
+As a customer,
+So I know when my order is ready
+I want to get my order's summary and delivery time via SMS.
+```
+
+```
+2.
+As a customer,
+So I don't need to visit the place
+I want to order my bagels via SMS.
+```
+
+```
+3.
+As a customer,
+So I can keep track of my orders
+I want to see all sent and received messages.
+```
+
+| Class        | Fields                 | Methods                      | Scenario                                     | Output                                   |
+|--------------|------------------------|------------------------------|----------------------------------------------|------------------------------------------|
+| Order        | Basket basket          | Basket getBasket()           |                                              | returns basket associated with the order |
+| OrderService | List\<Order> orders    | void placeOrder(Order order) | User places order either manually or via SMS | user receives an SMS notification        |
+|              |                        | Order createOrderFromSMS()   | User sends SMS with order details            | returns new order                        |
+|              | List\<String> messages | List<String> getMessages()   | User requests his message history            | returns sent and received messages       |
