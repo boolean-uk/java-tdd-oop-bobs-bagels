@@ -9,8 +9,8 @@ import java.util.List;
 public class TestCustomer {
 
     public Customer customer;
-    public String ONION_BAGEL = "BGLO";
-    public String BLACK_COFFEE = "COFB";
+    public Bagel ONION_BAGEL = (new Bagel("BGLO",49,"Bagel","Onion"));
+    public Coffee BLACK_COFFEE = (new Coffee("COFB",99,"Coffee","Black"));
 
     @BeforeEach
     public void setUp() {
@@ -31,7 +31,7 @@ public class TestCustomer {
         customer.addToBasket(BLACK_COFFEE);
         customer.addToBasket(ONION_BAGEL);
 
-        String expected = "0 " + Inventory.getItemBySku(BLACK_COFFEE) + "1 " + Inventory.getItemBySku(ONION_BAGEL);
+        String expected = "0 " + BLACK_COFFEE.toString() + "1 " + ONION_BAGEL.toString();
 
         Assertions.assertEquals(expected, customer.checkBasket());
     }

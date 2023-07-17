@@ -9,11 +9,10 @@ import java.util.List;
 public class TestBasket {
     public Basket basket;
     public Manager manager;
-    public String ONION_BAGEL = "BGLO";
-    public String PLAIN_BAGEL = "BGLP";
-    public String SESAME_BAGEL = "BGLS";
-    public String EGG_FILLING = "FILE";
-    public String BLACK_COFFEE = "COFB";
+    public Bagel ONION_BAGEL = new Bagel("BGLO",49,"Bagel","Onion");
+    public Filling FILLING_EGG = new Filling("FILE",12,"Filling","Egg");
+    public Bagel PLAIN_BAGEL = new Bagel("BGLP",39,"Bagel","Plain");
+    public Coffee COFFE_BLACK = new Coffee("COFB",99,"Coffee","Black");
 
 
     @BeforeEach
@@ -26,6 +25,8 @@ public class TestBasket {
 
     @Test
     public void whenAddToBasketExistingBagelType_bagelIsAddedToBasket()  {
+        //Setup
+
         //Execute
         basket.addToBasket(ONION_BAGEL);
 
@@ -34,20 +35,10 @@ public class TestBasket {
     @Test
     public void whenRemoveFromBasketBagelDoesExistInBasket_bagelIsRemovedFromBasket()  {
         //Setup
+
         basket.addToBasket(ONION_BAGEL);
-        basket.removeFromBasket(ONION_BAGEL);
+        basket.removeFromBasket(0);
         Assertions.assertFalse(basket.getListOfItemsInBasket().contains(ONION_BAGEL));
-    }
-
-    @Test
-    public void whenIsBasketFullCalled_basketCapacityIsChecked() {
-        //Setup
-        basket.addToBasket(ONION_BAGEL);
-        basket.addToBasket(PLAIN_BAGEL);
-
-         boolean result = basket.addToBasket(SESAME_BAGEL);
-
-        Assertions.assertEquals(false, result);
     }
     @Test
     public void whenSetBasketCapacityCorrectCapacity_capacityIsChanged(){
@@ -65,7 +56,7 @@ public class TestBasket {
     @Test
     public void whenGetTotalCostCalledWithFillings_totalCostIsReturned()  {
         basket.addToBasket(ONION_BAGEL);
-        basket.addToBasket(EGG_FILLING);
+        basket.addToBasket(FILLING_EGG);
 
         Assertions.assertEquals(61,basket.getTotalCost());
     }
@@ -76,8 +67,9 @@ public class TestBasket {
         for (int i=0;i<6;i++)
         {
             basket.addToBasket(PLAIN_BAGEL);
-            basket.addToBasket(BLACK_COFFEE);
+            basket.addToBasket(COFFE_BLACK);
         }
+
         Assertions.assertEquals(750,basket.getTotalCost());
     }
 

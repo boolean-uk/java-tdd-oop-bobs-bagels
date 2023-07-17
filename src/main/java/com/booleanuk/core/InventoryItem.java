@@ -1,6 +1,6 @@
 package com.booleanuk.core;
 
-public class InventoryItem {
+public abstract class InventoryItem {
     public String sku;
     public int price;
     public String name;

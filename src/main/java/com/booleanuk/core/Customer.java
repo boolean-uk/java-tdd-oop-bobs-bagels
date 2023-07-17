@@ -11,7 +11,7 @@ public class Customer {
         basket = new Basket();
     }
 
-    public boolean addToBasket(String item)  {
+    public boolean addToBasket(InventoryItem item)  {
         return basket.addToBasket(item);
     }
     public Basket getBasket()
@@ -23,35 +23,35 @@ public class Customer {
         String itemsInBasket = new String();
         for (int i=0; i < basket.getListOfItemsInBasket().size();i++)
         {
-            itemsInBasket+=""+i+" " +inventory.getItemBySku(basket.getListOfItemsInBasket().get(i));
+            itemsInBasket+=""+i+" " +basket.getListOfItemsInBasket().get(i).toString();
         }
         return itemsInBasket;
     }
     public String checkBasketWithQuantity()
     {
         String itemsInBasket = new String();
-        Map<String,Integer> quantities = calculateQuantity();
-        for (String i : quantities.keySet())
+        Map<InventoryItem,Integer> quantities = calculateQuantity();
+        for (InventoryItem i : quantities.keySet())
         {
-            String fullName = inventory.getFullNameBySku(i);
+            String fullName = i.getFullName();
             int howManySpaces = 23-fullName.length();
-            itemsInBasket+= fullName; //inventory.getItemBySku(basket.getListOfItemsInBasket().get(i));
+            itemsInBasket+= fullName;
             for(int j = 0; j < howManySpaces; j++){
                 itemsInBasket += " ";
             }
             int quantity = quantities.get(i);
             itemsInBasket+="" + quantity;
             itemsInBasket += quantity<10 ? "   " : "  ";
-            itemsInBasket += "£" + inventory.getPriceBySku(i);
+            itemsInBasket += "£" + i.price;
             itemsInBasket += "\n";
         }
         return itemsInBasket;
     }
 
-    public Map<String, Integer> calculateQuantity()
+    public Map<InventoryItem, Integer> calculateQuantity()
     {
-        Map<String,Integer> quantities = new HashMap<>();
-        for (String i : basket.getListOfItemsInBasket())
+        Map<InventoryItem,Integer> quantities = new HashMap<>();
+        for (InventoryItem i : basket.getListOfItemsInBasket())
         {
             if(quantities.containsKey(i)){
                 int value = quantities.get(i) + 1;
@@ -66,13 +66,9 @@ public class Customer {
     {
         return basket.getTotalCost();
     }
-    public boolean removeFromBasket(String sku)
+    public boolean removeFromBasket(int i)
     {
-        return (basket.removeFromBasket(sku));
-    }
-    public String getSkuByIndex(int i)
-    {
-        return basket.getListOfItemsInBasket().get(i);
+        return (basket.removeFromBasket(i));
     }
 
 }

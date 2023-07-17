@@ -7,13 +7,13 @@ public class Basket {
     public static int capacity = 2; //default size of the basket
     private Inventory inventory = Inventory.getInstance();
 
-    private List<String> listOfItemsInBasket = new ArrayList<String>();
+    private List<InventoryItem> listOfItemsInBasket = new ArrayList<InventoryItem>();
 
-    public List<String> getListOfItemsInBasket()
+    public List<InventoryItem> getListOfItemsInBasket()
     {
         return listOfItemsInBasket;
     }
-    public boolean  addToBasket(String item)
+    public boolean  addToBasket(InventoryItem item)
     {
         if (listOfItemsInBasket.size()<capacity)
         {
@@ -25,10 +25,10 @@ public class Basket {
 
 
     }
-    public boolean removeFromBasket(String item){
-        if (listOfItemsInBasket.contains(item))
+    public boolean removeFromBasket(int i){
+        if (listOfItemsInBasket.get(i)!=null)
         {
-            listOfItemsInBasket.remove(item);
+            listOfItemsInBasket.remove(i);
             return true;
         }
     return false;
@@ -51,11 +51,11 @@ public class Basket {
         int numberOfBgls = countProduct("BGLS");
 
 
-        for(String item: listOfItemsInBasket)
+        for(InventoryItem item: listOfItemsInBasket)
         {
-            if(!item.startsWith("BGL"))
+            if(!item.sku.startsWith("BGL"))
             {
-                cost += inventory.getPriceBySku(item);
+                cost += item.price;
             }
         }
         cost+=countCoffeeDiscount(numberOfBglp,numberOfCoffees);
@@ -88,9 +88,9 @@ public class Basket {
     public int countProduct(String sku)
     {
         int products = 0;
-        for(String item: listOfItemsInBasket)
+        for(InventoryItem item: listOfItemsInBasket)
         {
-            if (item.startsWith(sku))
+            if (item.sku.startsWith(sku))
             {
                 products++;
             }
@@ -100,9 +100,9 @@ public class Basket {
     public int getCostWithoutDiscount()
     {
         int cost=0;
-        for(String item: listOfItemsInBasket)
+        for(InventoryItem item: listOfItemsInBasket)
         {
-                cost += inventory.getPriceBySku(item);
+                cost += item.price;
         }
         return cost;
     }

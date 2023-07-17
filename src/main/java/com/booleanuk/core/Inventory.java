@@ -9,20 +9,20 @@ public class Inventory {
     private static List<InventoryItem> inventoryItemList = new ArrayList<>();
 
     private Inventory(){
-        inventoryItemList.add(new InventoryItem("BGLO",49,"Bagel","Onion"));
-        inventoryItemList.add(new InventoryItem("BGLP",39,"Bagel","Plain"));
-        inventoryItemList.add(new InventoryItem("BGLE",49,"Bagel","Everything"));
-        inventoryItemList.add(new InventoryItem("BGLS",49,"Bagel","Sesame"));
-        inventoryItemList.add(new InventoryItem("COFB",99,"Coffee","Black"));
-        inventoryItemList.add(new InventoryItem("COFW",19,"Coffee","White"));
-        inventoryItemList.add(new InventoryItem("COFC",29,"Coffee","Capuccino"));
-        inventoryItemList.add(new InventoryItem("COFL",29,"Coffee","Latte"));
-        inventoryItemList.add(new InventoryItem("FILB",12,"Filling","Bacon"));
-        inventoryItemList.add(new InventoryItem("FILE",12,"Filling","Egg"));
-        inventoryItemList.add(new InventoryItem("FILC",12,"Filling","Cheese"));
-        inventoryItemList.add(new InventoryItem("FILX",12,"Filling","Cream Cheese"));
-        inventoryItemList.add(new InventoryItem("FILS",12,"Filling","Smoked Salmon"));
-        inventoryItemList.add(new InventoryItem("FILH",12,"Filling","Ham"));
+        inventoryItemList.add(new Bagel("BGLO",49,"Bagel","Onion"));
+        inventoryItemList.add(new Bagel("BGLP",39,"Bagel","Plain"));
+        inventoryItemList.add(new Bagel("BGLE",49,"Bagel","Everything"));
+        inventoryItemList.add(new Bagel("BGLS",49,"Bagel","Sesame"));
+        inventoryItemList.add(new Coffee("COFB",99,"Coffee","Black"));
+        inventoryItemList.add(new Coffee("COFW",19,"Coffee","White"));
+        inventoryItemList.add(new Coffee("COFC",29,"Coffee","Capuccino"));
+        inventoryItemList.add(new Coffee("COFL",29,"Coffee","Latte"));
+        inventoryItemList.add(new Filling("FILB",12,"Filling","Bacon"));
+        inventoryItemList.add(new Filling("FILE",12,"Filling","Egg"));
+        inventoryItemList.add(new Filling("FILC",12,"Filling","Cheese"));
+        inventoryItemList.add(new Filling("FILX",12,"Filling","Cream Cheese"));
+        inventoryItemList.add(new Filling("FILS",12,"Filling","Smoked Salmon"));
+        inventoryItemList.add(new Filling("FILH",12,"Filling","Ham"));
     }
 
     public static Inventory getInstance(){
@@ -36,28 +36,8 @@ public class Inventory {
         return inventoryItemList;
     }
 
-    public int getPriceBySku(String sku){
-        for (InventoryItem i : inventoryItemList){
-            if(sku.equals(i.sku)){
-                return i.price;
-            }
-        } return 0;
-    }
-
-    public String getFullNameBySku(String sku){
-        for (InventoryItem i : inventoryItemList){
-            if(sku.equals(i.sku)){
-                return i.getFullName();
-            }
-        } return "";
-    }
-
-    public static String getItemBySku(String sku){
-        for (InventoryItem i : inventoryItemList) {
-            if (sku.equals(i.sku)) {
-                return i.toString();
-            }
-        } return "";
+    public static InventoryItem getItemByIndex(int i){
+        return inventoryItemList.get(i);
     }
 
     public String getAllItems(){
@@ -67,9 +47,4 @@ public class Inventory {
         }
         return allItems;
     }
-    public String getSkuById(int i)
-    {
-      return inventoryItemList.get(i).sku;
-    }
-
 }

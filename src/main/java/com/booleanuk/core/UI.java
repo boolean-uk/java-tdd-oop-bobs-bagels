@@ -84,7 +84,7 @@ public class UI {
             System.out.println("This item is not in our menu! Choose something else");
             addItem = sc.nextInt();
         }
-        if(customer.addToBasket(inventory.getSkuById(addItem)))
+        if(customer.addToBasket(inventory.getItemByIndex(addItem)))
         {
             System.out.println("Item added to your basket\n");
         }
@@ -105,7 +105,7 @@ public class UI {
             System.out.println(customer.checkBasket());
             System.out.println("Type the number of an item you want to remove");
             int removeItem = sc.nextInt();
-            if (customer.removeFromBasket(customer.getSkuByIndex(removeItem)))
+            if (customer.removeFromBasket(removeItem))
             {
                 System.out.println("You removed item from the basket");
             }
