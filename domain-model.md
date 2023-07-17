@@ -6,6 +6,7 @@
 |               | countProduct(String)           |                         | returns amount of given product                    |
 |               | countCoffeeDiscount            |                         | returns discounted price for cofee+bagel           |
 |               | removeFromBasket(int)          |                         | item is removed from the basket                    |
+|               | getTotalCost()                 |                         | returns price of all items with discounts applied  |
 |               |                                |                         |                                                    |
 | Customer      | checkBasketWithQuantity        |                         | returns String of all items and quantity           |
 |               | addToBasket(InventoryItem)     |                         | item is added to basket                            |
@@ -23,7 +24,7 @@
 | UI            | displayBasketMenu()            |                         | displays basket menu                               |
 |               | displayLoginMenu()             |                         | displays login menu                                |
 |               | displayBagelMenu()             |                         | displays bagel menu                                |
-|               | displayRecipe()                |                         | displays receipt                                   |
+|               | displayReceipt()               |                         | displays receipt                                   |
 |               | displayManagerMenu()           |                         | displays manager menu                              |
 |               | displayCustomerMenu()          |                         | displays customer menu                             |
 
