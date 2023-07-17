@@ -262,7 +262,7 @@ public class BobBagelsExtensionTest {
        //given
         LocalDateTime date = LocalDateTime.of(2023,7,15,21,36,31);
         receiptCreator.setReceiptCreatedAt(date);
-        String correctREceipt = "\n" +
+        String correctREceipt ="\n" +
                 "    ~~~ Bob's Bagels ~~~    \n" +
                 "   2023-JULY-15 21:36:31    \n" +
                 "---------------------------\n" +
@@ -271,10 +271,10 @@ public class BobBagelsExtensionTest {
                 "               $-0.69\n" +
                 "Onion Bagel  12  3.99       \n" +
                 "               $-1.89\n" +
-                "Bacon Filling  2 0.24\n" +
+                "Bacon Filling  1 0.12\n" +
                 "Cheese Filling  1 0.12\n" +
                 "---------------------------\n" +
-                "      TOTAL: 8.339999999999998\n" +
+                "      TOTAL: 8.219999999999997\n" +
                 "You saved a total of: $2.58\n" +
                 "Thank you for your order!\n";
         basketExt.setCapacity(30);
@@ -282,7 +282,6 @@ public class BobBagelsExtensionTest {
             basketManager.add(bagelO);
             basketManager.add(bagelP);
         }
-        basketExt.add(fillingB);
         basketExt.add(fillingB);
         basketManager.add(fillingC);
         //when
