@@ -9,7 +9,7 @@ public class BasketTest {
 
     @BeforeAll
     static void setup() {
-        inventory = new Inventory();
+        inventory = new Ixnventory();
     }
 
     @Test
