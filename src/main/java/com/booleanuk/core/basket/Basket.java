@@ -169,13 +169,13 @@ public class Basket implements BasketOperations {
         {
             if(product instanceof Bagel)
             {
-                basketlist.append(String.format("%-25s %10s",number + product.toString(), "$" + product.getPrice())).append("\n");
+                basketlist.append(String.format("%-25s %10s",number +"." + product.toString(), "$" + product.getPrice())).append("\n");
                 for (Filling filling : ((Bagel) product).getFillings())
                 {
                     basketlist.append(String.format("%-25s %10s", "  ^"+filling, "$" + filling.getPrice())).append("\n");
                 }
             }
-            else basketlist.append(String.format("%-25s %10s", number + product.toString(), "$" + product.getPrice())).append("\n");
+            else basketlist.append(String.format("%-25s %10s", number+"." + product.toString(), "$" + product.getPrice())).append("\n");
 
             number++;
         }

@@ -1,4 +1,5 @@
 package com.booleanuk.core;
+
 import com.booleanuk.core.basket.Basket;
 import com.booleanuk.core.products.Bagel;
 import com.booleanuk.core.products.Coffee;
@@ -10,6 +11,7 @@ import com.booleanuk.core.user.Customer;
 
 import java.util.List;
 import java.util.Scanner;
+
 public class Shopping {
     static StringBuilder combinedMenuText = new StringBuilder();
     Basket basket = new Basket();
@@ -36,7 +38,7 @@ public class Shopping {
         System.out.println(shopping.separator);
         while (!userInput.equals("x")) {
             switch (userInput) {
-                case "b":
+                case "b" -> {
                     if (shopping.customerName.equals("")) {
                         System.out.println("Please insert your name :)");
                         shopping.customerName = scanner.next();
@@ -50,15 +52,15 @@ public class Shopping {
                     } else {
                         System.out.println("You already have your basket!");
                     }
-                    break;
-                case "m":
+                }
+                case "m" -> {
                     System.out.println(combinedMenuText);
                     System.out.println(shopping.showBasket);
                     System.out.println(shopping.addToBasket);
                     System.out.println(shopping.removeFromBasket);
                     System.out.println("X-to end your shopping");
-                    break;
-                case "i":
+                }
+                case "i" -> {
                     List<Product> products = shopping.store.getAvailableProducts();
                     for (Product product : products) {
                         System.out.printf("%-25s %10s%n", product, "$" + product.getPrice());
@@ -66,27 +68,20 @@ public class Shopping {
                     System.out.println(shopping.separator);
                     System.out.println(combinedMenuText);
                     System.out.println("X-to end your shopping");
-                    break;
-
-                case "a":
+                }
+                case "a" -> {
                     if (!shopping.customerName.equals("")) {
                         shopping.addItemToBasket();
-                        System.out.println(shopping.showBasket);
-                        System.out.println(shopping.addToBasket);
-                        System.out.println(shopping.removeFromBasket);
-                        System.out.println("X-to end your shopping");
                     } else {
                         System.out.println("You need to start shopping first!");
                         System.out.println(combinedMenuText);
-                        System.out.println(shopping.showBasket);
-                        System.out.println(shopping.addToBasket);
-                        System.out.println(shopping.removeFromBasket);
-                        System.out.println("X-to end your shopping");
                     }
-                    break;
-
-
-                case "r":
+                    System.out.println(shopping.showBasket);
+                    System.out.println(shopping.addToBasket);
+                    System.out.println(shopping.removeFromBasket);
+                    System.out.println("X-to end your shopping");
+                }
+                case "r" -> {
                     if (!shopping.customerName.equals("") || shopping.basket.getProductsAmount() == 0) {
                         shopping.removeFromBasket();
                         System.out.println(shopping.showBasket);
@@ -99,9 +94,8 @@ public class Shopping {
                         System.out.println(combinedMenuText);
                         System.out.println("X-to end your shopping");
                     }
-                    break;
-
-                case "s":
+                }
+                case "s" -> {
                     if (!shopping.customerName.equals("") || shopping.basket.getProductsAmount() != 0) {
                         System.out.println("Your basket capacity:" + shopping.basket.getCapacity());
                         System.out.println("Your products:");
@@ -115,7 +109,7 @@ public class Shopping {
                         System.out.println(combinedMenuText);
                         System.out.println(shopping.addToBasket);
                     }
-                    break;
+                }
             }
             userInput = scanner.next();
             userInput = userInput.toLowerCase();
@@ -134,13 +128,13 @@ public class Shopping {
     public void addItemToBasket() {
         System.out.println("Type what u want to add");
         System.out.println("B - For Bagels");
-        System.out.println("C - For Coffe");
+        System.out.println("C - For Coffee");
         System.out.println("Anything else will exit");
         Scanner scanner = new Scanner(System.in);
         String userInput = scanner.next();
         userInput = userInput.toLowerCase();
         switch (userInput) {
-            case "b": {
+            case "b" -> {
                 List<Product> products = this.store.getAvailableProducts();
                 int number = 0;
                 for (Product product : products) {
@@ -158,27 +152,25 @@ public class Shopping {
                 userWantFillingInput = userWantFillingInput.toLowerCase();
 
                 switch (userWantFillingInput) {
-                    case "y":
-
+                    case "y" -> {
                         number = 0;
                         for (Product product : products) {
                             if (product instanceof Filling)
-                                System.out.println("Type \"" + number + "\" for " + String.format("%-25s %10s", product, "$" + product.getPrice()));
+                                System.out.println("Type \"" + number + "\" for " + String.format("%-27s %9s", product, "$" + product.getPrice()));
                             number++;
                         }
                         int userFillingInput = scanner.nextInt();
                         System.out.println("Adding " + usersChoice + " with " + products.get(userFillingInput) + "!");
                         usersChoice.addFilling((Filling) products.get(userFillingInput));
                         basket.addProduct(usersChoice);
-                        break;
-                    case "n":
+                    }
+                    case "n" -> {
                         basket.addProduct(usersChoice);
                         System.out.println("You don't want filling - maybe next time");
-                        break;
+                    }
                 }
-                break;
             }
-            case "c":
+            case "c" -> {
                 List<Product> products = this.store.getAvailableProducts();
                 int number = 0;
                 for (Product product : products) {
@@ -191,6 +183,7 @@ public class Shopping {
                 Coffee usersChoice = (Coffee) products.get(userCoffeeInput);
                 this.basket.addProduct(usersChoice);
                 System.out.println("Added Coffee to your basket!");
+            }
         }
     }
 
