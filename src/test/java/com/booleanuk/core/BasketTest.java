@@ -1,14 +1,12 @@
 package com.booleanuk.core;
 
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 
 public class BasketTest {
     private static Inventory inventory;
 
-    @BeforeAll
-    static void setup() {
+    @BeforeEach
+    void setup() {
         inventory = new Inventory();
     }
 
@@ -166,5 +164,72 @@ public class BasketTest {
 
         //Then
         Assertions.assertEquals(result, 2.46F);
+    }
+
+    @Test
+    public void testAddFillingToBagel_WhenThereIsNoFillingInBagel_ShouldReturnTrue() {
+        //Given
+        Basket basket = new Basket(inventory, 20);
+        basket.addProduct("BGLO", 2);
+
+        //When
+        boolean result = basket.addFillingToBagel("BGLO", "FILB");
+
+        //Then
+        Assertions.assertTrue(result);
+    }
+
+    @Test
+    public void testAddFillingToBagel_WhenThereIsAlreadyFillingInBagelAndItIsDifferent_ShouldReturnTrue() {
+        //Given
+        Basket basket = new Basket(inventory, 20);
+        basket.addProduct("BGLO", 2);
+
+        //When
+        basket.addFillingToBagel("BGLO", "FILB");
+        boolean result = basket.addFillingToBagel("BGLO", "FILE");
+
+        //Then
+        Assertions.assertTrue(result);
+    }
+
+    @Test
+    public void testAddFillingToBagel_WhenThereIsAlreadyFillingInBagelAndItIsTheSame_ShouldReturnFalse() {
+        //Given
+        Basket basket = new Basket(inventory, 20);
+        basket.addProduct("BGLO", 2);
+
+        //When
+        basket.addFillingToBagel("BGLO", "FILB");
+        boolean result = basket.addFillingToBagel("BGLO", "FILB");
+
+        //Then
+        Assertions.assertFalse(result);
+    }
+
+    @Test
+    public void testAddFillingToBagel_WhenInvalidInput_ShouldReturnFalse() {
+        //Given
+        Basket basket = new Basket(inventory, 20);
+        basket.addProduct("BGLO", 2);
+
+        //When
+        boolean result = basket.addFillingToBagel("FILB", "BGLO");
+
+        //Then
+        Assertions.assertFalse(result);
+    }
+
+    @Test
+    public void testAddFillingToBagel_WhenThereIsNoSpecificBagelInBasket_ShouldReturnFalse() {
+        //Given
+        Basket basket = new Basket(inventory, 20);
+        basket.addProduct("BGLO", 2);
+
+        //When
+        boolean result = basket.addFillingToBagel("BGLS", "FILE");
+
+        //Then
+        Assertions.assertFalse(result);
     }
 }
