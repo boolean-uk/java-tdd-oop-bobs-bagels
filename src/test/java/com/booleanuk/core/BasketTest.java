@@ -48,7 +48,7 @@ public class BasketTest {
     public void addProductTest_ByProduct1_IfProductIsAFillingAndEmptyBagelExists() {
         Basket basket = new Basket();
         Product bagel = new Product("BGLO", 0.49, "Bagel", "Onion");
-        Product filling = new Product("FILB", 0.12, "Filling", "Bacon");
+        Filling filling = new Filling("FILB", 0.12, "Filling", "Bacon");
         basket.addProduct(bagel);
         String message = basket.addProduct(filling);
         List<Product> productsFromBasket = basket.getBasketList().keySet().stream().toList();
@@ -66,7 +66,7 @@ public class BasketTest {
     @Test
     public void addProductTest_ByProduct1_IfProductIsAFillingAndEmptyBagelDoesNotExist() {
         Basket basket = new Basket();
-        Product filling = new Product("FILB", 0.12, "Filling", "Bacon");
+        Filling filling = new Filling("FILB", 0.12, "Filling", "Bacon");
         String message = basket.addProduct(filling);
 
         Assertions.assertEquals("There is no empty bagel to add filling", message);
@@ -77,8 +77,8 @@ public class BasketTest {
     public void addProductTest_ByProduct1_IfProductIsAFillingAndNotEmptyBagelExists() {
         Basket basket = new Basket();
         Product bagel = new Product("BGLO", 0.49, "Bagel", "Onion");
-        Product filling = new Product("FILB", 0.12, "Filling", "Bacon");
-        Product filling2 = new Product("FILE", 0.12, "Filling", "Egg");
+        Filling filling = new Filling("FILB", 0.12, "Filling", "Bacon");
+        Filling filling2 = new Filling("FILE", 0.12, "Filling", "Egg");
         basket.addProduct(bagel);
         basket.addProduct(filling);
         String message = basket.addProduct(filling2);
@@ -130,7 +130,7 @@ public class BasketTest {
     @Test
     public void addProductTest_ByProductQuantity_IfProductIsAFillingAndQuantityIsMoreThan1() {
         Basket basket = new Basket();
-        Product filling = new Product("FILB", 0.12, "Filling", "Bacon");
+        Filling filling = new Filling("FILB", 0.12, "Filling", "Bacon");
         String message = basket.addProduct(filling, 3);
 
         Assertions.assertEquals("You can add only 1 filling", message);
@@ -139,7 +139,7 @@ public class BasketTest {
     public void addProductTest_ByProductQuantity_IfProductIsAFillingAndQuantityIs1() {
         Basket basket = new Basket();
         Product bagel = new Product("BGLO", 0.49, "Bagel", "Onion");
-        Product filling = new Product("FILB", 0.12, "Filling", "Bacon");
+        Filling filling = new Filling("FILB", 0.12, "Filling", "Bacon");
         basket.addProduct(bagel);
         String message = basket.addProduct(filling, 1);
         List<Product> productsFromBasket = basket.getBasketList().keySet().stream().toList();
@@ -536,6 +536,33 @@ public class BasketTest {
         double result = basket.totalCost();
 
         Assertions.assertEquals(5.55, result);
+    }
+
+    /**
+     *
+     * 2x BGLO  = 0.98
+     * 14x BGLP (promo-12, promo with coffee-2) = 3.99
+     * 6x BGLE  = 2.49
+     * 3x COF (promo with coffee-2, coffee in normal price-1) = 2.50 + 0.99 = 3.49
+     *            ----
+     *           10.95
+     */
+
+    @Test
+    public void totalCostTest_SpecialOfferExampleCoffeeAndBagelPlain(){
+
+        Basket basket = new Basket(30);
+        Product product1 = new Product("BGLO", 0.49, "Bagel", "Onion");
+        Product product2 = new Product("BGLP", 0.39, "Bagel", "Plain");
+        Product product3 = new Product("BGLE", 0.49, "Bagel", "Everything");
+        Product product4 = new Product("COFB", 0.99, "Coffee", "Black");
+        basket.addProduct(product1, 2);
+        basket.addProduct(product2, 14);
+        basket.addProduct(product3, 6);
+        basket.addProduct(product4, 3);
+        double result = basket.totalCost();
+
+        Assertions.assertEquals(10.95, result);
     }
 
 

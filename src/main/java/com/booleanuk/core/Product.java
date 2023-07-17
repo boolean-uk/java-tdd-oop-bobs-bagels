@@ -2,10 +2,10 @@ package com.booleanuk.core;
 
 public class Product {
 
-    private String sku;
-    private double price;
-    private String name;
-    private String variant;
+    String sku;
+    double price;
+    String name;
+    String variant;
 
     public Product(String sku, double price, String name, String variant) {
         this.sku = sku;
@@ -35,7 +35,7 @@ public class Product {
     }
 
     public Bagel toBagel(){
-       return new Bagel(this.getSku(), this.getPrice(), this.getName(), this.getVariant(), null);
+       return new Bagel(this.sku, this.price, this.name, this.variant, null);
     }
 
     @Override

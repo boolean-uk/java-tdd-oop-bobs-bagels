@@ -10,11 +10,19 @@
 
 | Classes | Members         | Methods                        | Scenario                                          | Outputs |
 |---------|-----------------|--------------------------------|---------------------------------------------------|---------|
-| Bagel   | String sku      | chooseFilling(Product product) | if name of product equals "Filling" add to basket | String  |
-|         | double price    | chooseFilling(String variant)  | if name of variant does not exist print message   | String  |
-|         | String name     |                                |                                                   |         |
-|         | String variant  |                                |                                                   |         |
-|         | Product filling |                                |                                                   |         |
+| Bagel   | Filling filling | chooseFilling(Product product) | if name of product equals "Filling" add to basket | String  |
+|         |                 | chooseFilling(String variant)  | if name of variant does not exist print message   | String  |
+|         |                 |                                |                                                   |         |
+|         |                 |                                |                                                   |         |
+|         |                 |                                |                                                   |         |
+
+| Classes | Members | Methods | Scenario | Outputs |
+|---------|---------|---------|----------|---------|
+| Coffee  |         |         |          |         |
+
+| Classes | Members | Methods | Scenario | Outputs |
+|---------|---------|---------|----------|---------|
+| Filling |         |         |          |         |
 
 | Classes   | Members                     | Methods                                                 | Scenario                         | Outputs |
 |-----------|-----------------------------|---------------------------------------------------------|----------------------------------|---------|
@@ -55,8 +63,11 @@
 |         |                                      |                                                 | if in basket are 6 Bagel Onion use special offer (6 for 2.49)                                          | double  |
 |         |                                      |                                                 | if in basket are 12 Bagel Plain use special offer (12 for 3.99)                                        | double  |
 |         |                                      |                                                 | if in basket are 6 Bagel Everything use special offer (6 for 2.49)                                     | double  |
+
 # Extension 1 included in totalCost() method in Basket class
+
 # Extension 2,3
+
 | Classes | Members            | Methods                        | Scenario               | Outputs |
 |---------|--------------------|--------------------------------|------------------------|---------|
 | Receipt | LocalDateTime date | generateReceipt(Basket basket) | if basket is empty     | String  |

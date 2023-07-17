@@ -34,10 +34,10 @@ public class Basket {
 
     public String addProduct(Product product) {
         if (inventory.checkIfProductInInventory(product)) {
-            if (product.getName().equals("Filling")) {
+            if (product.name.equals("Filling")) {
                 List<Product> products = basketList.keySet()
                         .stream()
-                        .filter(integer -> integer.getName().equals("Bagel"))
+                        .filter(integer -> integer.name.equals("Bagel"))
                         .toList();
                 if (products.isEmpty()) return "There is no empty bagel to add filling";
                 else {
@@ -49,11 +49,11 @@ public class Basket {
                         }
                         if (bagel.getFilling() == null) {
                             Product bagelOld = basketList.keySet().stream().
-                                    filter(integer -> (integer.getSku().equals(bagel.getSku())
-                                            && integer.getName().equals(bagel.getName())
-                                            && integer.getVariant().equals(bagel.getVariant())
-                                            && integer.getPrice() == bagel.getPrice())).findAny().get();
-                            bagel.chooseFilling(product);
+                                    filter(item -> (item.sku.equals(bagel.sku)
+                                            && item.name.equals(bagel.name)
+                                            && item.variant.equals(bagel.variant)
+                                            && item.price == bagel.price)).findAny().get();
+                            bagel.chooseFilling((Filling)product);
                             basketList.put(bagel, basketList.remove(bagelOld));
                             return "Product added";
                         }
@@ -78,8 +78,8 @@ public class Basket {
 
     public String addProduct(Product product, int quantity) {
         if (inventory.checkIfProductInInventory(product)) {
-            if (product.getName().equals("Filling") && quantity > 1) return "You can add only 1 filling";
-            else if (product.getName().equals("Filling") && quantity == 1) {
+            if (product.name.equals("Filling") && quantity > 1) return "You can add only 1 filling";
+            else if (product.name.equals("Filling") && quantity == 1) {
                 return addProduct(product);
             }
             productsQuantity += quantity;
@@ -106,8 +106,8 @@ public class Basket {
     public String addProduct(String sku, int quantity) {
         Product product = inventory.getProductBySKU(sku);
         if (product != null) {
-            if (product.getName().equals("Filling") && quantity > 1) return "You can add only 1 filling";
-            else if (product.getName().equals("Filling") && quantity == 1) {
+            if (product.name.equals("Filling") && quantity > 1) return "You can add only 1 filling";
+            else if (product.name.equals("Filling") && quantity == 1) {
                 return addProduct(product);
             }
             return addProduct(product, quantity);
@@ -124,8 +124,8 @@ public class Basket {
     public String addBagelByVariant(String variant, int quantity) {
         Product product = inventory.getProductByNameAndVariant("Bagel", variant);
         if (product != null) {
-            if (product.getName().equals("Filling") && quantity > 1) return "You can add only 1 filling";
-            else if (product.getName().equals("Filling") && quantity == 1) {
+            if (product.name.equals("Filling") && quantity > 1) return "You can add only 1 filling";
+            else if (product.name.equals("Filling") && quantity == 1) {
                 return addProduct(product);
             }
             return addProduct(product, quantity);
@@ -140,10 +140,10 @@ public class Basket {
     public String removeProduct(Product product) {
         if (inventory.checkIfProductInInventory(product)) {
             Optional<Product> productToRemove = basketList.keySet().stream().
-                    filter(integer -> (integer.getSku().equals(product.getSku())
-                            && integer.getName().equals(product.getName())
-                            && integer.getVariant().equals(product.getVariant())
-                            && integer.getPrice() == product.getPrice())).findAny();
+                    filter(item -> (item.sku.equals(product.sku)
+                            && item.name.equals(product.name)
+                            && item.variant.equals(product.variant)
+                            && item.price == product.price)).findAny();
             if (productToRemove.isPresent()) {
                 productsQuantity -= basketList.get(productToRemove.get());
                 basketList.remove(productToRemove.get());
@@ -157,10 +157,10 @@ public class Basket {
     public String removeProduct(Product product, int quantity) {
         if (inventory.checkIfProductInInventory(product)) {
             Optional<Product> productToRemove = basketList.keySet().stream().
-                    filter(integer -> (integer.getSku().equals(product.getSku())
-                            && integer.getName().equals(product.getName())
-                            && integer.getVariant().equals(product.getVariant())
-                            && integer.getPrice() == product.getPrice())).findAny();
+                    filter(item -> (item.sku.equals(product.sku)
+                            && item.name.equals(product.name)
+                            && item.variant.equals(product.variant)
+                            && item.price == product.price)).findAny();
             if (productToRemove.isPresent()) {
                 if (basketList.get(productToRemove.get()) < quantity) {
                     return "Quantity of this product is less than given";
@@ -209,23 +209,43 @@ public class Basket {
 
     public double totalCost() {
         double totalCost = 0.00;
+        Map<Product, Integer> tmp = new HashMap<>(basketList);
         for (Map.Entry<Product, Integer> entry : basketList.entrySet()) {
-//            System.out.println("K: " + entry.getKey());
-//            System.out.println("V: " + entry.getValue());
-            if ((entry.getKey().getSku().equals("BGLO") || entry.getKey().getSku().equals("BGLE"))
-                    && entry.getValue() >= 6) {
-                int quantityOfSpecialPrice = entry.getValue() / 6;
-                int rest = entry.getValue() % 6;
-                totalCost += quantityOfSpecialPrice * 2.49;
-                totalCost += rest * entry.getKey().getPrice();
-            } else if (entry.getKey().getSku().equals("BGLP")
+            if ((entry.getKey().sku.equals("BGLO") || entry.getKey().sku.equals("BGLE"))
+                    ) {
+                if(entry.getValue() >= 6){
+                    int quantityOfSpecialPrice = entry.getValue() / 6;
+                    int rest = entry.getValue() % 6;
+                    totalCost += quantityOfSpecialPrice * 2.49;
+                    tmp.replace(entry.getKey(), rest);
+                    totalCost += rest * entry.getKey().price;
+                }else totalCost += entry.getValue() * entry.getKey().price;
+
+            } else if (entry.getKey().sku.equals("BGLP")
                     && entry.getValue() >= 12) {
                 int quantityOfSpecialPrice = entry.getValue() / 12;
                 int rest = entry.getValue() % 12;
                 totalCost += quantityOfSpecialPrice * 3.99;
-                totalCost += rest * entry.getKey().getPrice();
-            } else totalCost += entry.getValue() * entry.getKey().getPrice();
+                tmp.replace(entry.getKey(), rest);
+            }
         }
+
+        int plainBagelsCount = tmp.entrySet().stream().filter(e -> e.getKey().getSku().equals("BGLP")).findAny().get().getValue();
+        int coffeeCount = tmp.entrySet().stream().filter(e -> e.getKey().getSku().equals("COFB")).findAny().get().getValue();
+
+        boolean coffeeIsMin = coffeeCount <= plainBagelsCount;
+
+        int minElements = Math.min(plainBagelsCount, coffeeCount);
+        int maxElements = Math.max(plainBagelsCount, coffeeCount);
+
+
+        totalCost += minElements * 1.25;
+        maxElements -= minElements;
+        for(int i = 0; i < maxElements; i++){
+            if(coffeeIsMin) totalCost += 0.39;
+            else totalCost += 0.99;
+        }
+
         DecimalFormat twoDForm = new DecimalFormat("#.##");
         return Double.parseDouble(twoDForm.format(totalCost));
     }

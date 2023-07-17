@@ -4,17 +4,11 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 public class BagelTest {
-    @Test
-    void chooseFillingTest_ByProductIsNotFilling() {
-        Product coffee = new Product("COFW", 1.19, "Coffee", "White");
-        Bagel bagel = new Bagel("BGLO", 0.49, "Bagel", "Onion");
-        String message = bagel.chooseFilling(coffee);
-        Assertions.assertEquals("Category of product is not \"Filling\"", message);
-    }
+
 
     @Test
     void chooseFillingTest_ByProductIsFilling() {
-        Product filling = new Product("FILB", 0.12, "Filling", "Bacon");
+        Filling filling = new Filling("FILB", 0.12, "Filling", "Bacon");
         Bagel bagel = new Bagel("BGLO", 0.49, "Bagel", "Onion");
         String message = bagel.chooseFilling(filling);
         Assertions.assertEquals("Filling added to bagel", message);

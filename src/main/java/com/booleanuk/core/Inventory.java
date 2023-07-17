@@ -33,43 +33,43 @@ public class Inventory {
     }
 
     public Product getProductBySKU(String sku) {
-            return inventoryList.stream().filter(e -> e.getSku().equals(sku)).findFirst().orElse(null);
+            return inventoryList.stream().filter(e -> e.sku.equals(sku)).findFirst().orElse(null);
     }
 
     public Product getProductByNameAndVariant(String name, String variant) {
-        return inventoryList.stream().filter(e -> (e.getName().equals(name)&&e.getVariant().equals(variant))).findFirst().orElse(null);
+        return inventoryList.stream().filter(e -> (e.name.equals(name)&&e.variant.equals(variant))).findFirst().orElse(null);
     }
 
     public double getPriceBySKU(String sku) {
-        if(inventoryList.stream().anyMatch(e -> e.getSku().equals(sku))){
-            return inventoryList.stream().filter(e -> e.getSku().equals(sku)).findFirst().get().getPrice();
+        if(inventoryList.stream().anyMatch(e -> e.sku.equals(sku))){
+            return inventoryList.stream().filter(e -> e.sku.equals(sku)).findFirst().get().price;
         }else return 0;
     }
 
     public double getPriceByNameAndVariant(String name, String variant) {
-        if(inventoryList.stream().anyMatch(e -> (e.getName().equals(name)&&e.getVariant().equals(variant)))){
-            return inventoryList.stream().filter(e -> (e.getName().equals(name)&&e.getVariant().equals(variant))).findFirst().get().getPrice();
+        if(inventoryList.stream().anyMatch(e -> (e.name.equals(name)&&e.variant.equals(variant)))){
+            return inventoryList.stream().filter(e -> (e.name.equals(name)&&e.variant.equals(variant))).findFirst().get().price;
         }else return 0;
     }
 
     public double getPriceByProduct(Product product1) {
-        if(inventoryList.stream().anyMatch(e -> (e.getSku().equals(product1.getSku())
-                && e.getName().equals(product1.getName())
-                && e.getVariant().equals(product1.getVariant())
-                && e.getPrice()==product1.getPrice()))){
-            return product1.getPrice();
+        if(inventoryList.stream().anyMatch(e -> (e.sku.equals(product1.sku)
+                && e.name.equals(product1.name)
+                && e.variant.equals(product1.variant)
+                && e.price==product1.price))){
+            return product1.price;
         }
         else return 0;
     }
 
     public boolean checkIfProductInInventory(Product product1) {
-        return inventoryList.stream().anyMatch(e -> (e.getSku().equals(product1.getSku())
-                && e.getName().equals(product1.getName())
-                && e.getVariant().equals(product1.getVariant())
-                && e.getPrice()==product1.getPrice()));
+        return inventoryList.stream().anyMatch(e -> (e.sku.equals(product1.sku)
+                && e.name.equals(product1.name)
+                && e.variant.equals(product1.variant)
+                && e.price==product1.price));
     }
 
     public boolean checkIfProductInInventory(String sku) {
-        return inventoryList.stream().anyMatch(e -> e.getSku().equals(sku));
+        return inventoryList.stream().anyMatch(e -> e.sku.equals(sku));
     }
 }
