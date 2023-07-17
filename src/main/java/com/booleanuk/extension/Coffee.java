@@ -9,6 +9,6 @@ public class Coffee extends Item {
     }
 
     public Coffee(String variant) {
-        super(SKU.getConstant("Coffee", variant));
+        this(SKU.getConstant("Coffee", variant));
     }
 }

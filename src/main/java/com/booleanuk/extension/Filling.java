@@ -9,6 +9,6 @@ public class Filling extends Item {
     }
 
     public Filling(String variant) {
-        super(SKU.getConstant("Filling", variant));
+        this(SKU.getConstant("Filling", variant));
     }
 }
