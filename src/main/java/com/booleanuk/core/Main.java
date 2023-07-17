@@ -11,6 +11,7 @@ public class Main {
     public static void main(String[] args) {
         boolean running = true;
 
+        // Menu
         while (running) {
             System.out.println("===== MENU =====");
             System.out.println("A - Order a bagel");
@@ -42,11 +43,13 @@ public class Main {
         SCANNER.close();
     }
 
+    // Outputs total price of all items in the basket
     private static void displayCost() {
         System.out.println("===== TOTAL =====");
         System.out.println("Total cost: " + PRODUCT_MANAGER.getTotal() + " GBP");
     }
 
+    // Displays window that allows user to add new bagels to the basket
     private static void displayBagle() {
         System.out.println("===== BAGLES =====");
         List<Product> products = PRODUCT_MANAGER.getInventory();
@@ -55,7 +58,7 @@ public class Main {
                 System.out.println(product.toStringExtended());
             }
         }
-        System.out.print("\nType a filling variant or click ENTER to exit: ");
+        System.out.print("\nType a bagle variant or click ENTER to exit: ");
         String choice = SCANNER.nextLine().trim();
         if (choice.isEmpty()) {
             System.out.println("Returning");
@@ -67,6 +70,7 @@ public class Main {
             return;
         }
 
+        // Dispalys window that allows user to add fillings to his bagel
         System.out.println("\n===== FILLINGS =====");
         for (Product product : products) {
             if (product instanceof Filling) {
@@ -81,13 +85,14 @@ public class Main {
             return;
         }
         choiceFormatted = choice.substring(0, 1).toUpperCase() + choice.substring(1).toLowerCase();
+
+        // Repeats the same filling window as long as the user wants more fillings
         do {
             for (Product product : PRODUCT_MANAGER.getInventory()) {
                 if (product.getVariant().equals(choiceFormatted)) {
                     bagel.addFilling((Filling) product);
                 }
             }
-            System.out.println(bagel.getFillingsPrice());
             System.out.println("\nWant to add another filling?");
             System.out.print("Type a filling variant or click ENTER to exit: ");
             choice = SCANNER.nextLine().trim();
@@ -99,6 +104,7 @@ public class Main {
         } while (true);
     }
 
+    // Similar window to displayBagle() but simpler
     private static void displayCoffee() {
         System.out.println("===== COFFEES =====");
         List<Product> products = PRODUCT_MANAGER.getInventory();
@@ -117,24 +123,22 @@ public class Main {
         PRODUCT_MANAGER.orderProduct(choiceFormatted);
     }
 
+    // Displays window allowing user to remove items from the basket using
+    // index that is displayed in the terminal
     private static void displayRemove() {
         System.out.println("===== REMOVE =====");
         if (displayBasket()) {
-            System.out.println("Which item index to remove?");
             int choice = -1;
             try {
                 choice = Integer.parseInt(SCANNER.nextLine().trim().toUpperCase());
             } catch (NumberFormatException ex) {
                 System.out.println("Index has not been passed");
             }
-            if (choice != -1 && choice < PRODUCT_MANAGER.getItems().size() && choice >= 0) {
-                PRODUCT_MANAGER.getItems().remove(choice);
-            } else {
-                System.out.println("Failed to remove the item.");
-            }
+            PRODUCT_MANAGER.removeProduct(choice);
         }
     }
 
+    // Displays window allowing the user to configure basket capacity
     private static void displayCapacity() {
         System.out.println("===== CAPACITY =====");
         System.out.println("Type new basket capacity:");
@@ -151,6 +155,7 @@ public class Main {
         }
     }
 
+    // Displays window showing all of user's products in the basket
     private static boolean displayBasket() {
         System.out.println("===== BASKET =====");
         ArrayList<Product> basket = PRODUCT_MANAGER.getItems();

@@ -4,7 +4,6 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 public class ProductManager {
@@ -15,59 +14,7 @@ public class ProductManager {
         basket = new Basket();
     }
 
-    public List<Product> getInventory() {
-        return INVENTORY;
-    }
-
-    public Product orderProduct(String variant) {
-        if (basket.getList().size() < basket.getCapacity()) {
-            for (Product product : INVENTORY) {
-                if (product.getVariant().equals(variant)) {
-                    if (product instanceof Bagel){
-                        basket.add(new Bagel(product.name, product.price, product.variant));
-                    } else {
-                        basket.add(new Product(product.name, product.price, product.variant));
-                    }
-                    return product;
-                }
-            }
-            System.out.println("Failed to find the product");
-            return null;
-        }
-        System.out.println("Can't add product. Basket is full!");
-        return null;
-    }
-
-    public boolean removeProduct(String variant) {
-        for (Product product : INVENTORY) {
-            if (product.getVariant().equals(variant)) {
-                return basket.remove(product);
-            }
-        }
-        System.out.println("Failed to remove the product");
-        return false;
-    }
-
-    public void changeBasketCapacity(int capacity) {
-        if (basket.setCapacity(capacity)) {
-            System.out.println("Basket new capacity: " + basket.getCapacity());
-        } else {
-            System.out.println("Failed to change capacity");
-        }
-    }
-
-    public int getBasketCapacity() {
-        return basket.getCapacity();
-    }
-
-    public ArrayList<Product> getItems() {
-        return basket.getList();
-    }
-
-    public double getTotal() {
-        return basket.total();
-    }
-
+    // Fills INVENTORY from data/inventory.txt which allows full scalability
     private static List<Product> fillList(String file) {
         List<Product> list = new ArrayList<>();
 
@@ -93,5 +40,65 @@ public class ProductManager {
             e.printStackTrace();
         }
         return list;
+    }
+
+    // Returns items configured in the data/inventory.txt
+    public List<Product> getInventory() {
+        return INVENTORY;
+    }
+
+    // Communicates with basket to create a new product
+    public Product orderProduct(String variant) {
+        if (basket.getList().size() < basket.getCapacity()) {
+            for (Product product : INVENTORY) {
+                if (product.getVariant().equals(variant)) {
+                    Product newProduct;
+                    if (product instanceof Bagel) {
+                        newProduct = new Bagel(product.name, product.price, product.variant);
+                        basket.add(newProduct);
+                    } else {
+                        newProduct = new Product(product.name, product.price, product.variant);
+                        basket.add(newProduct);
+                    }
+                    return newProduct;
+                }
+            }
+            System.out.println("Failed to find the product");
+            return null;
+        }
+        System.out.println("Can't add product. Basket is full!");
+        return null;
+    }
+
+    // Communicates with basket to remove product from the basket
+    public void removeProduct(int choice) {
+        if (choice != -1 && choice < basket.getList().size() && choice >= 0) {
+            basket.getList().remove(choice);
+        } else {
+            System.out.println("Failed to remove the item.");
+        }
+        System.out.println("Failed to remove the product");
+    }
+
+    // Communicates with basket to change basket capacity
+    public void changeBasketCapacity(int capacity) {
+        if (basket.setCapacity(capacity)) {
+            System.out.println("Basket new capacity: " + basket.getCapacity());
+        } else {
+            System.out.println("Failed to change capacity");
+        }
+    }
+
+    public int getBasketCapacity() {
+        return basket.getCapacity();
+    }
+
+    // Returns items in the basket
+    public ArrayList<Product> getItems() {
+        return basket.getList();
+    }
+
+    public double getTotal() {
+        return basket.total();
     }
 }

@@ -15,19 +15,19 @@ public class ProductManagerTest {
     @Test
     public void shouldAddBagelToBasket() {
         //Execute
-        boolean result = productManager.orderProduct("Sesame");
+        Product result = productManager.orderProduct("Sesame");
 
         //Verify
-        Assertions.assertTrue(result);
+        Assertions.assertNotNull(result);
     }
 
     @Test
     public void shouldNotAddBagelToBasket() {
         //Execute
-        boolean result = productManager.orderProduct("Fake");
+        Product result = productManager.orderProduct("Fake");
 
         //Verify
-        Assertions.assertFalse(result);
+        Assertions.assertNull(result);
     }
 
     @Test
@@ -37,20 +37,22 @@ public class ProductManagerTest {
 
 
         //Execute
-        boolean result = productManager.removeProduct("Plain");
+        productManager.removeProduct(0);
 
         //Verify
-
         Assertions.assertEquals(0, productManager.getItems().size());
     }
 
     @Test
     public void shouldNotRemoveFromBasket() {
+        //Setup
+        productManager.orderProduct("Plain");
+
         //Execute
-        boolean result = productManager.removeProduct("Plain");
+        productManager.removeProduct(1);
 
         //Verify
-        Assertions.assertFalse(result);
+        Assertions.assertEquals(1, productManager.getItems().size());
     }
 
     @Test
@@ -97,11 +99,9 @@ public class ProductManagerTest {
     }
 
     @Test
-    public void shouldfillHashMapFromFileTest() {
-        // Executed
-
+    public void shouldfillListTest() {
         // Verify
         Assertions.assertFalse(productManager.getInventory().isEmpty());
-        Assertions.assertEquals("Onion", productManager.getInventory().get("BGLO").getVariant());
+        Assertions.assertEquals("Onion", productManager.getInventory().get(0).getVariant());
     }
 }
