@@ -21,3 +21,6 @@ gradle-app.setting
 .classpath
 
 .idea
+
+# Do not push your secrets kids
+.env
