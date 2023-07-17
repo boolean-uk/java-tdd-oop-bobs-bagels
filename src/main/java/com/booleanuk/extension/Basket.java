@@ -97,6 +97,10 @@ public class Basket {
     public boolean isFull() {
         return currentAmount == capacity;
     }
+    public Receipt getReceipt() {
+        return new Receipt(items, calculateDiscounts());
+    }
+
     public double getTotalPrice() {
         double totalPrice = 0;
         for (Item item : items)

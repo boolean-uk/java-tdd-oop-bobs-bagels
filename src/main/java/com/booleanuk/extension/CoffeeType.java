@@ -1,5 +1,9 @@
 package com.booleanuk.extension;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Scanner;
+
 public enum CoffeeType implements IItemType {
     COFB("COFB", 0.99, "Black"),
     COFW("COFW", 1.19, "White"),
@@ -23,4 +27,23 @@ public enum CoffeeType implements IItemType {
     public final String sku;
     private final double price;
     private final String variant;
+    public static CoffeeType order() {
+        Scanner input = new Scanner(System.in);
+        for (;;) {
+            System.out.println("""
+                    Available bagels:
+                    COFB - black(£0.99),
+                    COFW - white(£1.19),
+                    COFL - latte(£1.29),
+                    COFC - cappuccino(£1.29).
+                    Type cancel to exit""");
+            String choice = input.next();
+            if(choice.equalsIgnoreCase("cancel"))
+                return null;
+            for(CoffeeType coffeeType : CoffeeType.values()) {
+                if(coffeeType.getSku().equals(choice))
+                    return coffeeType;
+            }
+        }
+    }
 }
