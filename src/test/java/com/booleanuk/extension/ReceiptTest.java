@@ -1,4 +1,4 @@
-package com.booleanuk.core;
+package com.booleanuk.extension;
 
 import com.booleanuk.core.basket.Basket;
 import com.booleanuk.core.products.Bagel;
