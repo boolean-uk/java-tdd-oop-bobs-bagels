@@ -15,7 +15,7 @@ public class Basket {
         this.capacity = capacity;
     }
 
-    public void addProduct(Bagel bagel)  {
+    public void addProduct(Bagel bagel) {
         if (isFull()) {
             throw new NoSuchElementException("Basket is already full");
         }
@@ -58,6 +58,20 @@ public class Basket {
         }
 
         return totalCost;
+    }
+
+    public double getTotalCostWithoutDiscount() {
+        double totalCost = 0.0;
+        for (Bagel bagel : products) {
+            double bagelPrice = bagel.getPrice();
+            totalCost += bagelPrice;
+        }
+
+        return totalCost;
+    }
+
+    public double getDiscountValue() {
+        return getTotalCostWithoutDiscount() - getTotalCost();
     }
 
     private Map<String, Integer> countBagels() {

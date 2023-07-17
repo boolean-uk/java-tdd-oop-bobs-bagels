@@ -48,7 +48,8 @@ public class ReceiptTest {
                 "for your order!\n" +
                 "~~~ Bob's Bagels ~~~\n\n" +
                 currentDate + "\n\n" +
-                "----------------------------\n";
+                "----------------------------\n" +
+                "You saved a total of: £11 \n";
 
         String[] expectedLines = expectedReceipt.split("\\r?\\n");
         String[] actualLines = printedReceipt.split("\\r?\\n");
