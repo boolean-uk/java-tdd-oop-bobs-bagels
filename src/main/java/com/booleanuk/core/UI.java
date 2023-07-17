@@ -15,6 +15,7 @@ public class UI {
         System.out.println();
         System.out.println("Thank you for your order!");
         System.out.println("Your receipt:");
+        System.out.println();
         System.out.println("    ~~~ Bob's Bagels ~~~ \n");
         System.out.println("    " + formattedDateTimeNow + "\n");
         System.out.println("------------------------------ \n");
@@ -22,7 +23,7 @@ public class UI {
         System.out.println("------------------------------");
         System.out.println("Total:                   £" + customer.getTotalCost());
         System.out.println();
-        System.out.println("You saved " + customer.getTotalDiscount() + " on this order!");
+        System.out.println("You saved £" + customer.getTotalDiscount() + " on this order!");
         System.out.println();
         System.out.println("          Thank you");
         System.out.println("       for your order!");
@@ -104,16 +105,21 @@ public class UI {
     public void displayBasketMenu()
     {
         Scanner sc = new Scanner(System.in);
+        System.out.println();
         System.out.println(customer.checkBasket());
-        System.out.println("\nTotal Cost: £"+customer.getTotalCost());
+        System.out.println("Total Cost: £"+customer.getTotalCost());
+        System.out.println();
         System.out.println("1. Remove item");
         System.out.println("2. Go back");
         int basketMenu = sc.nextInt();
         if(basketMenu ==1)
         {
+            System.out.println();
             System.out.println(customer.checkBasket());
             System.out.println("Type the number of an item you want to remove");
+            System.out.println();
             int removeItem = sc.nextInt();
+            System.out.println();
             if (customer.removeFromBasket(removeItem))
             {
                 System.out.println("You removed item from the basket");
