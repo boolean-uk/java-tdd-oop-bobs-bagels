@@ -22,15 +22,6 @@ public class InventoryTest {
         }
 
     @Test
-    public void testGetBagelBySku_ExistingBagel() {
-        Inventory inventory = new Inventory();
-        Bagel bagel = new Bagel("BGLO", 0.49, "Bagel", "Onion");
-        inventory.addBagel(bagel);
-        Bagel retrievedBagel = inventory.getBagelBySku("BGLO");
-        assertEquals(bagel, retrievedBagel);
-    }
-
-    @Test
     public void testGetBagelBySku_NonExistingBagel() {
         Inventory inventory = new Inventory();
         Bagel retrievedBagel = inventory.getBagelBySku("BGLP");

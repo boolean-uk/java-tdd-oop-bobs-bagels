@@ -30,16 +30,16 @@ public class Bagel {
         this.price = price;
     }
 
+    public String getName() {
+        return name;
+    }
+
     public String getVariant() {
         return variant;
     }
 
     public void setVariant(String variant) {
         this.variant = variant;
-    }
-
-    public String getName() {
-        return name;
     }
 
     public void setName(String name) {

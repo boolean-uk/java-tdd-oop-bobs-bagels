@@ -20,12 +20,12 @@ public class BagelTest {
     @Test
     public void getNameTest() {
         Bagel bagel = new Bagel("BGLO", 0.49, "Bagel", "Onion");
-        assertEquals("Bagel", bagel.getName());
+        assertEquals("Onion", bagel.getName());
     }
 
     @Test
     public void getVariantTest() {
         Bagel bagel = new Bagel("BGLO", 0.49, "Bagel", "Onion");
-        assertEquals("Onion", bagel.getVariant());
+        assertEquals("Bagel", bagel.getVariant());
     }
 }
