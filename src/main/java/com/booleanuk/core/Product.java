@@ -1,9 +1,9 @@
 package com.booleanuk.core;
 
 public class Product {
-    private String name;
-    private double price;
-    private String variant;
+    protected String name;
+    protected double price;
+    protected String variant;
 
     public Product(String name, double price, String variant) {
         this.name = name;
@@ -29,6 +29,6 @@ public class Product {
     }
 
     public String toStringExtended() {
-        return "Name: " + name + " | Price: " + price + " | Variant: "+ variant;
+        return "Name: " + name + " | Price: " + price + " | Variant: " + variant;
     }
 }
