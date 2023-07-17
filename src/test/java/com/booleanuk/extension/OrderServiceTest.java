@@ -51,7 +51,7 @@ public class OrderServiceTest {
 
     @Test
     public void getMessagesShouldReturnMessages() {
-        orderService.placeOrder(order);
+        orderService.placeOrder(order, "");
 
         List<String> actual = orderService.getMessages();
         List<String> expected = List.of(getExpectedFormattedSummaryMessage());

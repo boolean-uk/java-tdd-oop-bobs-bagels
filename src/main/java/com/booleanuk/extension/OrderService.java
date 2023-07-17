@@ -10,6 +10,7 @@ public class OrderService {
     private static volatile OrderService instance;
 
     private final List<Order> orders = new ArrayList<>();
+    private final List<String> messages = new ArrayList<>();
 
     private OrderService() {
     }
@@ -22,6 +23,20 @@ public class OrderService {
                 instance = new OrderService();
             return instance;
         }
+    }
+
+    public void placeOrder(Order order, String phoneNumber) {
+        orders.add(order);
+        notifyCustomer(order, phoneNumber);
+    }
+
+    public Receipt getReceipt(Order order) {
+        return new Receipt(order.getBasket());
+    }
+
+    private void notifyCustomer(Order order, String phoneNumber) {
+        String body = getNotificationBody(getReceipt(order));
+        messages.add(body);
     }
 
     public String getNotificationBody(Receipt receipt) {
@@ -39,4 +54,7 @@ public class OrderService {
         return sb.toString();
     }
 
+    public List<String> getMessages() {
+        return messages;
+    }
 }
