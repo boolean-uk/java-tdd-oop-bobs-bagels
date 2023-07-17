@@ -23,14 +23,14 @@ public class ProductsTest {
 
     @Test
     public void shouldCreateFillingProperly() {
-        Filling filling = new Filling("SKU3", BigDecimal.valueOf(0.46));
+        Filling filling = new Filling("SKU3", BigDecimal.valueOf(0.46), FillingVariant.Bacon);
         Assertions.assertEquals("SKU3", filling.getSKU());
         Assertions.assertEquals(BigDecimal.valueOf(0.46), filling.getPrice());
     }
 
     @Test
     public void ShouldEvaluateThePriceWithFillingProperly() {
-        Filling filling = new Filling("SKU3", BigDecimal.valueOf(0.46));
+        Filling filling = new Filling("SKU3", BigDecimal.valueOf(0.46), FillingVariant.Egg);
         Bagel bagel = new Bagel("SKU1", BigDecimal.valueOf(0.44));
         bagel.getFillings().add(filling);
         Assertions.assertEquals(BigDecimal.valueOf(0.90).doubleValue(), bagel.getPriceWithFilling().doubleValue());

@@ -7,6 +7,7 @@ import com.booleanuk.core.products.BagelVariant;
 import com.booleanuk.core.products.Coffee;
 import com.booleanuk.core.products.CoffeeVariant;
 import com.booleanuk.core.products.Filling;
+import com.booleanuk.core.products.FillingVariant;
 import com.booleanuk.core.store.Discount;
 import com.booleanuk.core.store.Store;
 import org.junit.jupiter.api.Assertions;
@@ -170,7 +171,7 @@ public class BasketTest {
         store.addDiscount(discountBagelPlain);
         store.addDiscount(discountBagelOnion);
 
-        bagelPlain.addFilling(new Filling("FILL", BigDecimal.valueOf(0.12)));
+        bagelPlain.addFilling(new Filling("FILL", BigDecimal.valueOf(0.12), FillingVariant.Egg));
 
         Basket basket = new Basket(19);
         basket.addProduct(bagelOnion, 6);

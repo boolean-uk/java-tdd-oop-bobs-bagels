@@ -5,13 +5,14 @@ import java.math.BigDecimal;
 public class Filling extends Product {
     private FillingVariant variant;
 
-    public Filling(String SKU, BigDecimal price) {
+    public Filling(String SKU, BigDecimal price, FillingVariant variant) {
         super(SKU, price);
+        this.variant = variant;
     }
 
     @Override
     public String toString() {
-        return variant + " filling";
+        return variant.toString() + " filling";
     }
 
     public FillingVariant getVariant() {

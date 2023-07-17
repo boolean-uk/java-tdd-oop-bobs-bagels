@@ -56,7 +56,7 @@ public class ReceiptTest {
     public void shouldPrintBagelOnReceiptProperly() {
         Bagel onionBagel = new Bagel("BGLO", BigDecimal.valueOf(0.49));
         onionBagel.setVariant(BagelVariant.Onion);
-        Filling filling = new Filling("FILB", BigDecimal.valueOf(0.12));
+        Filling filling = new Filling("FILB", BigDecimal.valueOf(0.12), FillingVariant.Ham);
         filling.setVariant(FillingVariant.Bacon);
         onionBagel.addFilling(filling);
         Receipt receipt = new Receipt();
@@ -76,7 +76,7 @@ public class ReceiptTest {
         plainBagel.setVariant(BagelVariant.Plain);
         everythingBagel.setVariant(BagelVariant.Everything);
         sesameBagel.setVariant(BagelVariant.Sesame);
-        Filling filling = new Filling("FILB", BigDecimal.valueOf(0.12));
+        Filling filling = new Filling("FILB", BigDecimal.valueOf(0.12), FillingVariant.Ham);
         filling.setVariant(FillingVariant.Bacon);
         onionBagel.addFilling(filling);
         basket.addProduct(onionBagel);
@@ -105,7 +105,7 @@ public class ReceiptTest {
         store.addDiscount(discountBagelPlain);
         store.addDiscount(discountBagelOnion);
 
-        bagelPlain.addFilling(new Filling("FILL", BigDecimal.valueOf(0.12)));
+        bagelPlain.addFilling(new Filling("FILL", BigDecimal.valueOf(0.12), FillingVariant.Ham));
 
         Basket basket = new Basket(19);
         basket.addProduct(bagelOnion, 6);
