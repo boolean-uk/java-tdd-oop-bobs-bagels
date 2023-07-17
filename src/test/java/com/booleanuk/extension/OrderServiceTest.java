@@ -6,7 +6,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -45,12 +44,27 @@ public class OrderServiceTest {
 
     @Test
     public void shouldReturnNotificationMessage() {
+        String actual = orderService.getNotificationBody(new Receipt(order.getBasket()));
+        String expected = getExpectedFormattedSummaryMessage();
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void getMessagesShouldReturnMessages() {
+        orderService.placeOrder(order);
+
+        List<String> actual = orderService.getMessages();
+        List<String> expected = List.of(getExpectedFormattedSummaryMessage());
+
+        Assertions.assertEquals(expected, actual);
+    }
+
+    private String getExpectedFormattedSummaryMessage() {
         LocalDateTime receiptTime = LocalDateTime.now();
         LocalDateTime deliveryTime = receiptTime.plusDays(1);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
 
-        String actual = orderService.getNotificationBody(new Receipt(order.getBasket()));
-        String expected = String.format("""
+        return String.format("""
                 Your order is being processed. ETA: %s
                                 
                 Here's your receipt:
@@ -77,8 +91,5 @@ public class OrderServiceTest {
                                 
                          Thank you
                       for your order!""", deliveryTime.format(formatter), receiptTime.format(formatter));
-        Assertions.assertEquals(expected, actual);
     }
-
-
 }
