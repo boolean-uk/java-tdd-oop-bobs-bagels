@@ -57,9 +57,4 @@ public class Basket {
             );
         }
     }
-
-    public static void main(String[] args) {
-        Basket basket = new Basket();
-        basket.getFillingTypes();
-    }
 }
