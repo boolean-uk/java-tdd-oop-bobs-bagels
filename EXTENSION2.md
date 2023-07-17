@@ -45,3 +45,10 @@ Total                  £5.55
         Thank you
       for your order!
 ```
+## User Stories
+
+```
+As a customer,
+So I can manage my budget,
+I'd like to get a receipt when I buy my bagels.
+```
