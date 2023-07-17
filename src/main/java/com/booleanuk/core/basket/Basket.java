@@ -46,7 +46,7 @@ public class Basket implements BasketOperations {
     @Override
     public boolean addProduct(Product product) {
         if (isFull()) {
-            return false;
+            throw new BasketOverfillException("Basket overfill");
         }
         products.add(product);
         return true;
