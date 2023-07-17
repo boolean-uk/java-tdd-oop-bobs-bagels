@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class Basket {
     private static final int DEFAULT_CAPACITY = 40;
@@ -14,14 +15,13 @@ public class Basket {
     private int basketCapacity;
     private BigDecimal basketPrice = BigDecimal.ZERO;
     private ArrayList<Product> listOfProducts = new ArrayList<>();
-
     private ArrayList<ReceiptProduct> receiptList = new ArrayList<>();
     public void addProduct(Product product){
         listOfProducts.add(product);
     }
 
-    public Map<Product, Integer> createProductMap(){
-        Map<Product, Integer> productCountMap = new HashMap<>();
+    public LinkedHashMap<Product, Integer> createProductMap(){
+        LinkedHashMap<Product, Integer> productCountMap = new LinkedHashMap<>();
         for (Product product : listOfProducts) {
             if (productCountMap.containsKey(product)) {
                 int count = productCountMap.get(product);
@@ -61,6 +61,9 @@ public class Basket {
             name = productType.getVariant() + " Bagel";
             receiptList.add(new ReceiptProduct(name, quantity, value));
         }
+        else if (productType.equals(ProductType.CBD)){
+            receiptList.add(new ReceiptProduct(productType.getVariant(), quantity, value));
+        }
         else {
             name = productType.getVariant() + " Coffee";
             receiptList.add(new ReceiptProduct(name, quantity, value));
@@ -78,7 +81,7 @@ public class Basket {
     }
 
     public BigDecimal getPrice(){
-        Map<Product, Integer> productCountMap = createProductMap();
+        LinkedHashMap<Product, Integer> productCountMap = createProductMap();
         productCountMap.forEach((product, quantity) -> {
             if (isBagelProduct(product.getTypeOfProduct()))
                 setBagelDiscount(product,quantity);
@@ -90,8 +93,17 @@ public class Basket {
                 .map(Product::getFillingPrice)
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
 
+        addFillingsToReceipt(fillingPrice);
+
         addToBasketPrice(fillingPrice);
         return basketPrice;
+    }
+
+    public void addFillingsToReceipt(BigDecimal fillingPrice){
+        if (fillingPrice.compareTo(BigDecimal.ZERO) > 0) {
+            BigDecimal numberOfFillings = fillingPrice.divide(BigDecimal.valueOf(0.12));
+            receiptList.add(new ReceiptProduct("filling", numberOfFillings.intValue(), fillingPrice));
+        }
     }
 
     public void addToBasketPrice(BigDecimal value){
@@ -130,7 +142,6 @@ public class Basket {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         String orderDate = LocalDateTime.now().format(formatter);
 
-        // Wyśrodkowanie tytułu Bob's Bagels
         int totalWidth = 29;
         String centeredTitle = String.format("%" + (totalWidth - 5) + "s%n%n", "~~~ Bob's Bagels ~~~");
         String centeredDate = String.format("%" + (totalWidth + orderDate.length()) / 2 + "s%n%n", orderDate);
@@ -154,7 +165,13 @@ public class Basket {
 
     public static void main(String[] args) {
         Basket basket = new Basket();
-        basket.addProduct(new Bagel(ProductType.BGLO));
+        Bagel bagel = new Bagel(ProductType.BGLO);
+        bagel.addFilling(FillingType.FILB);
+        bagel.addFilling(FillingType.FILB);
+        bagel.addFilling(FillingType.FILB);
+        bagel.addFilling(FillingType.FILB);
+        bagel.addFilling(FillingType.FILB);
+        basket.addProduct(bagel);
         basket.addProduct(new Bagel(ProductType.BGLO));
         basket.addProduct(new Bagel(ProductType.BGLO));
         basket.addProduct(new Bagel(ProductType.BGLO));
@@ -167,6 +184,7 @@ public class Basket {
         basket.addProduct(new Bagel(ProductType.BGLO));
         basket.addProduct(new Bagel(ProductType.BGLO));
         basket.addProduct(new Coffee(ProductType.COFW));
+        basket.addProduct(new CoffeeBagel(ProductType.BGLE));
 
         basket.getReceipt();
     }

@@ -25,6 +25,8 @@ public class ReceiptProduct {
         return price;
     }
 
+
+
     @Override
     public String toString() {
         return String.format("%-18s %2d   £%.2f", name, quantity, price);
