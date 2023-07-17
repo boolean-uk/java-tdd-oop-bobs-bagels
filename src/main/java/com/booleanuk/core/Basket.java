@@ -86,11 +86,9 @@ public class Basket {
         Product bagel = inventory.getProduct(bagelSku);
         Product filling = inventory.getProduct(fillingSku);
 
-        if(!(bagel instanceof Bagel) || !(filling instanceof Filling))
+        if(!(bagel instanceof Bagel bagel1) || !(filling instanceof Filling filling1))
             return false;
 
-        Bagel bagel1 = (Bagel) bagel;
-        Filling filling1 = (Filling) filling;
         Filling actualBagelFilling = bagel1.getFilling();
 
         if(!this.products.containsKey(bagel1))
@@ -108,6 +106,19 @@ public class Basket {
         addProduct(fillingSku, this.products.get(bagel1));
         bagel1.addFilling(filling1);
 
+        return true;
+    }
+
+    public boolean removeFillingFromBagel(String bagelSku){
+        Product bagel = inventory.getProduct(bagelSku);
+
+        if(!(bagel instanceof Bagel bagel1))
+            return false;
+
+        if(!this.products.containsKey(bagel1) || bagel1.filling == null)
+            return false;
+
+        bagel1.filling = null;
         return true;
     }
 }
