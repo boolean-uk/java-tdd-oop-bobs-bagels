@@ -12,6 +12,8 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.stream.IntStream;
 
+import static org.mockito.Mockito.*;
+
 public class OrderServiceTest {
 
     private static String TWILIO_RECIPIENT_PHONE_NUMBER;
@@ -57,11 +59,12 @@ public class OrderServiceTest {
 
     @Test
     public void getMessagesShouldReturnMessages() {
+        OrderService spyOrderService = spy(orderService);
+        doNothing().when(spyOrderService).notifyCustomer(any(String.class), any(String.class));
+        spyOrderService.placeOrder(order, TWILIO_RECIPIENT_PHONE_NUMBER);
+
         List<String> expected = List.of(getExpectedFormattedSummaryMessage());
-
-        orderService.placeOrder(order, TWILIO_RECIPIENT_PHONE_NUMBER);
-
-        List<String> actual = orderService.getMessages();
+        List<String> actual = spyOrderService.getMessages();
 
         Assertions.assertEquals(expected, actual);
     }
