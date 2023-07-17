@@ -1,12 +1,12 @@
 package com.booleanuk.core.basket;
 
+import com.booleanuk.core.Inventory.Discount;
+import com.booleanuk.core.Inventory.Inventory;
+import com.booleanuk.core.Inventory.MultipleProductsDiscount;
+import com.booleanuk.core.Inventory.SingleProductDiscount;
 import com.booleanuk.core.products.Bagel;
 import com.booleanuk.core.products.Filling;
 import com.booleanuk.core.products.Product;
-import com.booleanuk.core.Inventory.Discount;
-import com.booleanuk.core.Inventory.MultipleProductsDiscount;
-import com.booleanuk.core.Inventory.SingleProductDiscount;
-import com.booleanuk.core.Inventory.Inventory;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -26,12 +26,6 @@ public class Basket implements BasketOperations {
         setCapacity(capacity);
     }
 
-    private static boolean isProductAlreadyDiscounted(HashMap<Product, BigDecimal> savings, Discount discount) {
-        if (discount instanceof MultipleProductsDiscount multipleProductsDiscount) {
-            return !savings.containsKey(multipleProductsDiscount.getProduct()) && !savings.containsKey(multipleProductsDiscount.getOptionalRequiredProduct());
-        }
-        return !savings.containsKey(discount.getProduct());
-    }
 
     public List<Product> getProducts() {
         return products;
@@ -215,6 +209,12 @@ public class Basket implements BasketOperations {
 
     }
 
+    private boolean isProductAlreadyDiscounted(HashMap<Product, BigDecimal> savings, Discount discount) {
+        if (discount instanceof MultipleProductsDiscount multipleProductsDiscount) {
+            return !savings.containsKey(multipleProductsDiscount.getProduct()) && !savings.containsKey(multipleProductsDiscount.getOptionalRequiredProduct());
+        }
+        return !savings.containsKey(discount.getProduct());
+    }
 
     public String listBasket() {
         StringBuilder basket = new StringBuilder();
