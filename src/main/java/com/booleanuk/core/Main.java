@@ -1,8 +1,8 @@
 package com.booleanuk.core;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
-import java.util.Set;
 
 public class Main {
     private static final ProductManager PRODUCT_MANAGER = new ProductManager();
@@ -49,10 +49,11 @@ public class Main {
 
     private static void displayBagle() {
         System.out.println("===== BAGLES =====");
-        Set<String> skuList = PRODUCT_MANAGER.getInventory().keySet();
-        for (String sku : skuList) {
-            if (sku.startsWith("B"))
-                System.out.println(PRODUCT_MANAGER.getInventory().get(sku).toStringExtended());
+        List<Product> products = PRODUCT_MANAGER.getInventory();
+        for (Product product : products) {
+            if (product instanceof Bagel) {
+                System.out.println(product.toStringExtended());
+            }
         }
         System.out.print("\nType a filling variant or click ENTER to exit: ");
         String choice = SCANNER.nextLine().trim();
@@ -61,14 +62,15 @@ public class Main {
             return;
         }
         String choiceFormatted = choice.substring(0, 1).toUpperCase() + choice.substring(1).toLowerCase();
-        if (!(PRODUCT_MANAGER.orderProduct(choiceFormatted))) {
+        Bagel bagel = (Bagel) PRODUCT_MANAGER.orderProduct(choiceFormatted);
+        if (bagel == null) {
             return;
         }
 
         System.out.println("\n===== FILLINGS =====");
-        for (String sku : skuList) {
-            if (sku.startsWith("F")) {
-                System.out.println(PRODUCT_MANAGER.getInventory().get(sku).toStringExtended());
+        for (Product product : products) {
+            if (product instanceof Filling) {
+                System.out.println(product.toStringExtended());
             }
         }
         System.out.println("\nDo you fancy yourself a filling?");
@@ -80,7 +82,12 @@ public class Main {
         }
         choiceFormatted = choice.substring(0, 1).toUpperCase() + choice.substring(1).toLowerCase();
         do {
-            PRODUCT_MANAGER.orderProduct(choiceFormatted);
+            System.out.println(bagel.fillings);
+            for (Product product : PRODUCT_MANAGER.getInventory()) {
+                if (product.getVariant().equals(choiceFormatted)) {
+                    bagel.addFilling((Filling) product);
+                }
+            }
             System.out.println("\nWant to add another filling?");
             System.out.print("Type a filling variant or click ENTER to exit: ");
             choice = SCANNER.nextLine().trim();
@@ -89,15 +96,15 @@ public class Main {
                 return;
             }
             choiceFormatted = choice.substring(0, 1).toUpperCase() + choice.substring(1).toLowerCase();
-            System.out.println(choiceFormatted);
         } while (true);
     }
 
     private static void displayCoffee() {
         System.out.println("===== COFFEES =====");
-        for (String sku : PRODUCT_MANAGER.getInventory().keySet()) {
-            if (sku.startsWith("C")) {
-                System.out.println(PRODUCT_MANAGER.getInventory().get(sku).toStringExtended());
+        List<Product> products = PRODUCT_MANAGER.getInventory();
+        for (Product product : products) {
+            if (product instanceof Coffee) {
+                System.out.println(product.toStringExtended());
             }
         }
         System.out.print("Type a coffee variant or click ENTER to exit: ");

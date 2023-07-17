@@ -5,35 +5,37 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class ProductManager {
-    private static final HashMap<String, Product> INVENTORY = fillHashMapFromFile("src/main/java/com/booleanuk/core/data/inventory.txt");
+    private static final List<Product> INVENTORY = fillList("src/main/java/com/booleanuk/core/data/inventory.txt");
     private final Basket basket;
 
     public ProductManager() {
         basket = new Basket();
     }
 
-    public HashMap<String, Product> getInventory() {
+    public List<Product> getInventory() {
         return INVENTORY;
     }
 
-    public boolean orderProduct(String variant) {
+    public Product orderProduct(String variant) {
         if (basket.getList().size() < basket.getCapacity()) {
-            for (Product product : INVENTORY.values()) {
+            for (Product product : INVENTORY) {
                 if (product.getVariant().equals(variant)) {
-                    return basket.add(product);
+                    basket.add(product);
+                    return product;
                 }
             }
             System.out.println("Failed to find the product");
-            return false;
+            return null;
         }
         System.out.println("Can't add product. Basket is full!");
-        return false;
+        return null;
     }
 
     public boolean removeProduct(String variant) {
-        for (Product product : INVENTORY.values()) {
+        for (Product product : INVENTORY) {
             if (product.getVariant().equals(variant)) {
                 return basket.remove(product);
             }
@@ -62,8 +64,8 @@ public class ProductManager {
         return basket.total();
     }
 
-    private static HashMap<String, Product> fillHashMapFromFile(String file) {
-        HashMap<String, Product> hashMap = new HashMap<>();
+    private static List<Product> fillList(String file) {
+        List<Product> list = new ArrayList<>();
 
         try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
             String line;
@@ -74,12 +76,18 @@ public class ProductManager {
                     String name = parts[1].trim();
                     double price = Double.parseDouble(parts[2].trim());
                     String variant = parts[3].trim();
-                    hashMap.put(productCode, new Product(name, price, variant));
+                    if (productCode.startsWith("B")) {
+                        list.add(new Bagel(name, price, variant));
+                    } else if (productCode.startsWith("F")) {
+                        list.add(new Filling(name, price, variant));
+                    } else if (productCode.startsWith("C")) {
+                        list.add(new Coffee(name, price, variant));
+                    }
                 }
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return hashMap;
+        return list;
     }
 }

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Bagel extends Product {
-    private final List<Filling> fillings = new ArrayList<>();
+    public final List<Filling> fillings = new ArrayList<>();
 
     public Bagel(String name, double price, String variant) {
         super(name, price, variant);
@@ -16,10 +16,13 @@ public class Bagel extends Product {
 
     @Override
     public double getPrice() {
-        int sum = 0;
+        double sum = 0;
         for (Filling filling : fillings) {
             sum += filling.getPrice();
         }
-        return price + sum;
+        sum += price;
+        price = sum;
+        return sum;
     }
+
 }
