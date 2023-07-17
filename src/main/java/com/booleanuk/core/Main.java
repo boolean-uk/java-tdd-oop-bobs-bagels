@@ -82,12 +82,12 @@ public class Main {
         }
         choiceFormatted = choice.substring(0, 1).toUpperCase() + choice.substring(1).toLowerCase();
         do {
-            System.out.println(bagel.fillings);
             for (Product product : PRODUCT_MANAGER.getInventory()) {
                 if (product.getVariant().equals(choiceFormatted)) {
                     bagel.addFilling((Filling) product);
                 }
             }
+            System.out.println(bagel.getFillingsPrice());
             System.out.println("\nWant to add another filling?");
             System.out.print("Type a filling variant or click ENTER to exit: ");
             choice = SCANNER.nextLine().trim();

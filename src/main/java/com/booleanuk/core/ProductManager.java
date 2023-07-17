@@ -23,7 +23,11 @@ public class ProductManager {
         if (basket.getList().size() < basket.getCapacity()) {
             for (Product product : INVENTORY) {
                 if (product.getVariant().equals(variant)) {
-                    basket.add(product);
+                    if (product instanceof Bagel){
+                        basket.add(new Bagel(product.name, product.price, product.variant));
+                    } else {
+                        basket.add(new Product(product.name, product.price, product.variant));
+                    }
                     return product;
                 }
             }
