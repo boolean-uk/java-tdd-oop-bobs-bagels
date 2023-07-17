@@ -16,17 +16,17 @@ public class UI {
         System.out.println("Thank you for your order!");
         System.out.println("Your receipt:");
         System.out.println();
-        System.out.println("    ~~~ Bob's Bagels ~~~ \n");
-        System.out.println("    " + formattedDateTimeNow + "\n");
-        System.out.println("------------------------------ \n");
+        System.out.println("      ~~~ Bob's Bagels ~~~ \n");
+        System.out.println("      " + formattedDateTimeNow + "\n");
+        System.out.println("-------------------------------- \n");
         System.out.println(customer.checkBasketWithQuantity());
-        System.out.println("------------------------------");
-        System.out.println("Total:                   £" + customer.getTotalCost());
+        System.out.println("--------------------------------");
+        System.out.println("Total:                     £" + customer.getTotalCost());
         System.out.println();
-        System.out.println("You saved £" + customer.getTotalDiscount() + " on this order!");
+        System.out.println("  You saved £" + customer.getTotalDiscount() + " on this order!");
         System.out.println();
-        System.out.println("          Thank you");
-        System.out.println("       for your order!");
+        System.out.println("           Thank you");
+        System.out.println("        for your order!");
     }
     public void displayLoginMenu()
     {
