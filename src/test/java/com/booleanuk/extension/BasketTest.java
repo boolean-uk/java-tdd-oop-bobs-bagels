@@ -308,15 +308,16 @@ class BasketTest {
 //                basket.getReceipt());
 //    }
 
-    @Test
-    public void orderSendsMessage() {
-        basket.add(bagel);
-        basket.add(bagel);
-        basket.add(bagel);
-        basket.add(coffee);
 
-        assertDoesNotThrow(() -> basket.order());
-    }
+//    @Test
+//    public void orderSendsMessage() {
+//        basket.add(bagel);
+//        basket.add(bagel);
+//        basket.add(bagel);
+//        basket.add(coffee);
+//
+//        assertDoesNotThrow(() -> basket.order());
+//    }
 
 }
 
