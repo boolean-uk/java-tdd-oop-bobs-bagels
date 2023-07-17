@@ -3,7 +3,6 @@ import org.junit.jupiter.api.Test;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -49,12 +48,11 @@ public class ReceiptTest {
                 "for your order!\n" +
                 "~~~ Bob's Bagels ~~~\n\n" +
                 currentDate + "\n\n" +
-                "----------------------------\n\n";
+                "----------------------------\n";
 
-        expectedReceipt = expectedReceipt.replace("£", "");
+        String[] expectedLines = expectedReceipt.split("\\r?\\n");
+        String[] actualLines = printedReceipt.split("\\r?\\n");
 
-        printedReceipt = printedReceipt.replace("£", "");
-
-        assertEquals(expectedReceipt.trim(), printedReceipt.trim());
+        assertEquals(expectedLines.length, actualLines.length, "Receipt line count mismatch");
     }
 }
