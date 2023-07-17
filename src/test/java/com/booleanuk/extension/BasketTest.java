@@ -8,7 +8,8 @@ import com.booleanuk.core.products.Coffee;
 import com.booleanuk.core.products.CoffeeVariant;
 import com.booleanuk.core.products.Filling;
 import com.booleanuk.core.products.FillingVariant;
-import com.booleanuk.core.store.Discount;
+import com.booleanuk.core.store.MultipleProductsDiscount;
+import com.booleanuk.core.store.SingleProductDiscount;
 import com.booleanuk.core.store.Store;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -32,7 +33,7 @@ public class BasketTest {
     public void shouldDiscountOnSingleBagels() {
         Bagel bagelOnion = new Bagel("BGLO", BigDecimal.valueOf(0.49), BagelVariant.Onion);
 
-        Discount discountBagelOnion = new Discount(bagelOnion, 6, BigDecimal.valueOf(2.49));
+        SingleProductDiscount discountBagelOnion = new SingleProductDiscount(bagelOnion, 6, BigDecimal.valueOf(2.49));
 
         store.addDiscount(discountBagelOnion);
 
@@ -48,9 +49,10 @@ public class BasketTest {
         Bagel bagelOnion = new Bagel("BGLO", BigDecimal.valueOf(0.49), BagelVariant.Onion);
         Bagel bagelPlain = new Bagel("BGLP", BigDecimal.valueOf(0.39), BagelVariant.Plain);
 
-        Discount discountBagelPlain = new Discount(bagelPlain, 12, BigDecimal.valueOf(3.99));
-        Discount discountBagelOnion = new Discount(bagelOnion, 6, BigDecimal.valueOf(2.49));
+        SingleProductDiscount discountBagelPlain = new SingleProductDiscount(bagelPlain, 12, BigDecimal.valueOf(3.99));
+        SingleProductDiscount discountBagelOnion = new SingleProductDiscount(bagelOnion, 6, BigDecimal.valueOf(2.49));
 
+        store.setAvailableDiscounts(new ArrayList<>());
         store.addDiscount(discountBagelPlain);
         store.addDiscount(discountBagelOnion);
 
@@ -67,7 +69,7 @@ public class BasketTest {
         Bagel bagelOnion = new Bagel("BGLO", BigDecimal.valueOf(0.49), BagelVariant.Onion);
         Coffee coffeeBlack = new Coffee("COFB", BigDecimal.valueOf(0.99), CoffeeVariant.Black);
 
-        Discount discount = new Discount(coffeeBlack, 1, BigDecimal.valueOf(1.25), bagelOnion);
+        MultipleProductsDiscount discount = new MultipleProductsDiscount(coffeeBlack, 1, BigDecimal.valueOf(1.25), bagelOnion);
 
         store.addDiscount(discount);
 
@@ -79,10 +81,50 @@ public class BasketTest {
     }
 
     @Test
+    public void shouldNotDiscountBagelWithCoffeeIfAlreadyDiscountedBagels() {
+        Bagel bagelOnion = new Bagel("BGLO", BigDecimal.valueOf(0.49), BagelVariant.Onion);
+        Coffee coffeeBlack = new Coffee("COFB", BigDecimal.valueOf(0.99), CoffeeVariant.Black);
+
+        MultipleProductsDiscount discountCoffeeBagel = new MultipleProductsDiscount(coffeeBlack, 1, BigDecimal.valueOf(1.25), bagelOnion);
+        SingleProductDiscount discountBagelOnion = new SingleProductDiscount(bagelOnion, 6, BigDecimal.valueOf(2.49));
+
+        store.setAvailableDiscounts(new ArrayList<>());
+        store.addDiscount(discountBagelOnion);
+        store.addDiscount(discountCoffeeBagel);
+
+        Basket basket = new Basket(10);
+        basket.addProduct(bagelOnion, 6);
+        basket.addProduct(coffeeBlack);
+        BasketSummary basketSummary = basket.summarizeBasket();
+
+        Assertions.assertEquals(BigDecimal.valueOf(3.48), basketSummary.total());
+    }
+
+//    @Test
+//    public void shouldDiscountSixBagelAndDiscountCoffeeBagelBundle() {
+//        Bagel bagelOnion = new Bagel("BGLO", BigDecimal.valueOf(0.49), BagelVariant.Onion);
+//        Coffee coffeeBlack = new Coffee("COFB", BigDecimal.valueOf(0.99), CoffeeVariant.Black);
+//
+//        MultipleProductsDiscount discountCoffeeBagel = new MultipleProductsDiscount(coffeeBlack, 1, BigDecimal.valueOf(1.25), bagelOnion);
+//        SingleProductDiscount discountBagelOnion = new SingleProductDiscount(bagelOnion, 6, BigDecimal.valueOf(2.49));
+//
+//        store.setAvailableDiscounts(new ArrayList<>());
+//        store.addDiscount(discountBagelOnion);
+//        store.addDiscount(discountCoffeeBagel);
+//
+//        Basket basket = new Basket(10);
+//        basket.addProduct(bagelOnion, 7);
+//        basket.addProduct(coffeeBlack);
+//        BasketSummary basketSummary = basket.summarizeBasket();
+//
+//        Assertions.assertEquals(BigDecimal.valueOf(3.64), basketSummary.total());
+//    }
+
+    @Test
     public void shouldCalculateTripleDiscountsBagelsWithEighteenBagels() {
         Bagel bagelOnion = new Bagel("BGLO", BigDecimal.valueOf(0.49), BagelVariant.Onion);
 
-        Discount discountBagelOnion = new Discount(bagelOnion, 6, BigDecimal.valueOf(2.49));
+        SingleProductDiscount discountBagelOnion = new SingleProductDiscount(bagelOnion, 6, BigDecimal.valueOf(2.49));
 
         store.setAvailableDiscounts(new ArrayList<>());
         store.addDiscount(discountBagelOnion);
@@ -97,7 +139,7 @@ public class BasketTest {
     public void shouldCalculateDoubleDiscountsBagelsWithSeventeenBagels() {
         Bagel bagelOnion = new Bagel("BGLO", BigDecimal.valueOf(0.49), BagelVariant.Onion);
 
-        Discount discountBagelOnion = new Discount(bagelOnion, 6, BigDecimal.valueOf(2.49));
+        SingleProductDiscount discountBagelOnion = new SingleProductDiscount(bagelOnion, 6, BigDecimal.valueOf(2.49));
 
         store.setAvailableDiscounts(new ArrayList<>());
         store.addDiscount(discountBagelOnion);
@@ -115,9 +157,9 @@ public class BasketTest {
         Bagel bagelEverything = new Bagel("BGLE", BigDecimal.valueOf(0.49), BagelVariant.Everything);
         Coffee coffeeBlack = new Coffee("COFB", BigDecimal.valueOf(0.99), CoffeeVariant.Black);
 
-        Discount discountCoffeeBlack = new Discount(coffeeBlack, 1, BigDecimal.valueOf(1.25), bagelEverything);
-        Discount discountBagelPlain = new Discount(bagelPlain, 12, BigDecimal.valueOf(3.99));
-        Discount discountBagelOnion = new Discount(bagelOnion, 6, BigDecimal.valueOf(2.49));
+        MultipleProductsDiscount discountCoffeeBlack = new MultipleProductsDiscount(coffeeBlack, 1, BigDecimal.valueOf(1.25), bagelEverything);
+        SingleProductDiscount discountBagelPlain = new SingleProductDiscount(bagelPlain, 12, BigDecimal.valueOf(3.99));
+        SingleProductDiscount discountBagelOnion = new SingleProductDiscount(bagelOnion, 6, BigDecimal.valueOf(2.49));
 
         store.setAvailableDiscounts(new ArrayList<>());
         store.addDiscount(discountBagelPlain);
@@ -142,9 +184,9 @@ public class BasketTest {
         Bagel bagelEverything = new Bagel("BGLE", BigDecimal.valueOf(0.49), BagelVariant.Everything);
         Coffee coffeeBlack = new Coffee("COFB", BigDecimal.valueOf(0.99), CoffeeVariant.Black);
 
-        Discount discountCoffeeBlack = new Discount(coffeeBlack, 1, BigDecimal.valueOf(1.25), bagelEverything);
-        Discount discountBagelPlain = new Discount(bagelPlain, 12, BigDecimal.valueOf(3.99));
-        Discount discountBagelOnion = new Discount(bagelOnion, 6, BigDecimal.valueOf(2.49));
+        MultipleProductsDiscount discountCoffeeBlack = new MultipleProductsDiscount(coffeeBlack, 1, BigDecimal.valueOf(1.25), bagelEverything);
+        SingleProductDiscount discountBagelPlain = new SingleProductDiscount(bagelPlain, 12, BigDecimal.valueOf(3.99));
+        SingleProductDiscount discountBagelOnion = new SingleProductDiscount(bagelOnion, 6, BigDecimal.valueOf(2.49));
 
         store.setAvailableDiscounts(new ArrayList<>());
         store.addDiscount(discountBagelPlain);
@@ -167,8 +209,8 @@ public class BasketTest {
         Bagel bagelPlain = new Bagel("BGLP", BigDecimal.valueOf(0.39), BagelVariant.Plain);
         Bagel bagelEverything = new Bagel("BGLE", BigDecimal.valueOf(0.49), BagelVariant.Everything);
 
-        Discount discountBagelPlain = new Discount(bagelPlain, 12, BigDecimal.valueOf(3.99));
-        Discount discountBagelOnion = new Discount(bagelOnion, 6, BigDecimal.valueOf(2.49));
+        SingleProductDiscount discountBagelPlain = new SingleProductDiscount(bagelPlain, 12, BigDecimal.valueOf(3.99));
+        SingleProductDiscount discountBagelOnion = new SingleProductDiscount(bagelOnion, 6, BigDecimal.valueOf(2.49));
 
         store.setAvailableDiscounts(new ArrayList<>());
         store.addDiscount(discountBagelPlain);

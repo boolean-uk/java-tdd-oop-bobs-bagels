@@ -4,6 +4,8 @@ import com.booleanuk.core.products.Bagel;
 import com.booleanuk.core.products.Filling;
 import com.booleanuk.core.products.Product;
 import com.booleanuk.core.store.Discount;
+import com.booleanuk.core.store.MultipleProductsDiscount;
+import com.booleanuk.core.store.SingleProductDiscount;
 import com.booleanuk.core.store.Store;
 
 import java.math.BigDecimal;
@@ -22,6 +24,13 @@ public class Basket implements BasketOperations {
 
     public Basket(int capacity) {
         setCapacity(capacity);
+    }
+
+    private static boolean isProductAlreadyDiscounted(HashMap<Product, BigDecimal> savings, Discount discount) {
+        if (discount instanceof MultipleProductsDiscount multipleProductsDiscount) {
+            return !savings.containsKey(multipleProductsDiscount.getProduct()) && !savings.containsKey(multipleProductsDiscount.getOptionalRequiredProduct());
+        }
+        return !savings.containsKey(discount.getProduct());
     }
 
     public List<Product> getProducts() {
@@ -86,9 +95,82 @@ public class Basket implements BasketOperations {
     public BasketSummary summarizeBasket() {
 
         HashMap<Product, BigDecimal> savings = new HashMap<>();
-
         BigDecimal total = BigDecimal.ZERO;
 
+        total = summarizeBasketWithoutDiscounts(total);
+
+        total = applyDiscounts(savings, total);
+
+        return new BasketSummary(total, savings);
+    }
+
+    private BigDecimal applyDiscounts(HashMap<Product, BigDecimal> savings, BigDecimal total) {
+
+        for (Discount discount : store.getAvailableDiscounts()) {
+            if (isDiscountRequirementsMet(discount)) {
+
+                if (isSingleProductDiscount(discount)) {
+                    SingleProductDiscount singleProductDiscount = (SingleProductDiscount) discount;
+                    if (isProductAlreadyDiscounted(savings, singleProductDiscount)) {
+                        total = applySingleDiscount(savings, total, singleProductDiscount);
+                    }
+                }
+                if (isMultipleProductsDiscount(discount)) {
+                    MultipleProductsDiscount multipleProductsDiscount = (MultipleProductsDiscount) discount;
+                    if (isProductAlreadyDiscounted(savings, multipleProductsDiscount)) {
+                        total = applyMultipleProductsDiscount(savings, total, multipleProductsDiscount);
+                    }
+                }
+            }
+        }
+        return total;
+    }
+
+    private BigDecimal applySingleDiscount(HashMap<Product, BigDecimal> savings, BigDecimal total, SingleProductDiscount discount) {
+
+
+        BigDecimal discountedValue = discount.getDiscountedPrice().multiply(getAmountOfDiscountOccurrences(discount));
+        BigDecimal productsValue = discount.getProduct().getPrice()
+                .multiply(BigDecimal.valueOf(discount.getRequiredAmount())
+                        .multiply(getAmountOfDiscountOccurrences(discount)));
+
+        total = total.subtract(productsValue);
+
+        addSavedMoney(savings, discount);
+
+        if (total.compareTo((BigDecimal.ZERO)) < 0) {
+            total = BigDecimal.ZERO;
+        }
+
+        return total.add(discountedValue);
+    }
+
+    private BigDecimal applyMultipleProductsDiscount(HashMap<Product, BigDecimal> savings, BigDecimal total, MultipleProductsDiscount discount) {
+
+
+        BigDecimal discountedValue = discount.getDiscountedPrice().multiply(getAmountOfDiscountOccurrences(discount));
+
+        BigDecimal productsValue = discount.getProduct().getPrice()
+                .multiply(BigDecimal.valueOf(discount.getRequiredAmount()))
+                .add(discount.getOptionalRequiredProduct().getPrice());
+
+        total = total
+                .subtract(productsValue);
+
+        addSavedMoney(savings, discount);
+
+        if (total.compareTo((BigDecimal.ZERO)) < 0) {
+            total = BigDecimal.ZERO;
+        }
+
+        return total.add(discountedValue);
+    }
+
+    private boolean isMultipleProductsDiscount(Discount discount) {
+        return discount instanceof MultipleProductsDiscount;
+    }
+
+    private BigDecimal summarizeBasketWithoutDiscounts(BigDecimal total) {
         for (Product product : products) {
             if (product instanceof Bagel) {
                 total = total.add(((Bagel) product).getPriceWithFilling());
@@ -96,34 +178,7 @@ public class Basket implements BasketOperations {
                 total = total.add(product.getPrice());
             }
         }
-//        products.stream().map(Product::getPrice).reduce(BigDecimal.ZERO, BigDecimal::add);
-
-        for (Discount discount : store.getAvailableDiscounts()) {
-            if (isDiscountRequirementsMet(discount)) {
-                if (isSingleProductDiscount(discount)) {
-
-                    total = total.subtract(discount.getProduct().getPrice()
-                            .multiply(BigDecimal.valueOf(discount.getRequiredAmount())
-                                    .multiply(getAmountOfDiscountOccurrences(discount))));
-
-                    addSavedMoney(savings, discount);
-
-                } else {
-                    total = total
-                            .subtract(discount.getProduct().getPrice()
-                                    .multiply(BigDecimal.valueOf(discount.getRequiredAmount())))
-                            .subtract(discount.getOptionalRequiredProduct().getPrice());
-                    addSavedMoney(savings, discount);
-                }
-
-                if (total.compareTo((BigDecimal.ZERO)) < 0) {
-                    total = BigDecimal.ZERO;
-                }
-                total = total.add(discount.getDiscountedPrice()
-                        .multiply(getAmountOfDiscountOccurrences(discount)));
-            }
-        }
-        return new BasketSummary(total, savings);
+        return total;
     }
 
     private BigDecimal getAmountOfDiscountOccurrences(Discount discount) {
@@ -131,7 +186,7 @@ public class Basket implements BasketOperations {
     }
 
     private boolean isSingleProductDiscount(Discount discount) {
-        return !(discount.getOptionalRequiredProduct() != null && products.contains(discount.getOptionalRequiredProduct()));
+        return discount instanceof SingleProductDiscount;
     }
 
     private boolean isDiscountRequirementsMet(Discount discount) {
@@ -161,20 +216,20 @@ public class Basket implements BasketOperations {
     }
 
 
-    public StringBuilder listBasket() {
-        StringBuilder basketlist = new StringBuilder();
+    public String listBasket() {
+        StringBuilder basket = new StringBuilder();
         int number = 0;
         for (Product product : products) {
             if (product instanceof Bagel) {
-                basketlist.append(String.format("%-25s %10s", number + "." + product, "$" + product.getPrice())).append("\n");
+                basket.append(String.format("%-25s %10s", number + "." + product, "$" + product.getPrice())).append("\n");
                 for (Filling filling : ((Bagel) product).getFillings()) {
-                    basketlist.append(String.format("%-25s %10s", "  ^" + filling, "$" + filling.getPrice())).append("\n");
+                    basket.append(String.format("%-25s %10s", "  ^" + filling, "$" + filling.getPrice())).append("\n");
                 }
             } else
-                basketlist.append(String.format("%-25s %10s", number + "." + product.toString(), "$" + product.getPrice())).append("\n");
+                basket.append(String.format("%-25s %10s", number + "." + product.toString(), "$" + product.getPrice())).append("\n");
 
             number++;
         }
-        return basketlist;
+        return basket.toString();
     }
 }
