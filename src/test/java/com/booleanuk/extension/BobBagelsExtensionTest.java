@@ -179,7 +179,8 @@ public class BobBagelsExtensionTest {
                 "Name:FILC Cheese Price: 0.12\n" +
                 "Name:FILX Cream_Cheese Price: 0.12\n" +
                 "Name:FILS Smoked_Salmon Price: 0.12\n" +
-                "Name:FILX Cream_Cheese Price: 0.12\n";
+                "Name:FILH Ham Price: 0.12\n";
+
         //when
         String fillingPriceList = basketManager.getPriceListOfFillings();
         //then
@@ -258,16 +259,46 @@ public class BobBagelsExtensionTest {
 
     @Test
     public void shouldReturnMainPartOfReceipt(){
+       //given
+        LocalDateTime date = LocalDateTime.of(2023,7,15,21,36,31);
+        receiptCreator.setReceiptCreatedAt(date);
+        String correctREceipt = "\n    ~~~ Bob's Bagels ~~~    \n" +
+                "   2023-JULY-15 21:36:31    \n" +
+                "---------------------------\n" +
+                "\n" +
+                "Plain Bagel  12  3.99       \n" +
+                "               $-0.69\n" +
+                "Onion Bagel  12  3.99       \n" +
+                "               $-1.89\n" +
+                "Cheese Filling  1 0.12\n" +
+                "Bacon Filling  2 0.24\n" +
+                "---------------------------\n" +
+                "      TOTAL: 8.339999999999998\n" +
+                "You saved a total of: $2.58\n" +
+                "Thank you for your order!\n";
+        basketExt.setCapacity(30);
+        for(int i = 0; i < 12; i++){
+            basketManager.add(bagelO);
+            basketManager.add(bagelP);
+        }
+        basketExt.add(fillingB);
+        basketExt.add(fillingB);
+        basketManager.add(fillingC);
+        //when
+       String receipt = basketManager.createReceipt();
 
+        //then
+        assertEquals(correctREceipt,receipt);
     }
 
 
     @Test
     public  void shouldPrintCorrectReceipt(){
         //given
-        basketExt.setCapacity(20);
+        basketExt.setCapacity(24);
         for(int i = 0; i < 12; i++){
-            basketManager.add(bagelE);
+            basketManager.add(bagelO);
+
 
         }
         //when

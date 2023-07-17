@@ -11,10 +11,12 @@ public class InventoryExt {
 
 
     public InventoryExt() {
+
         addToInventory();
     }
 
     private  void addToInventory() {
+        if(allFilingsInInventory.isEmpty()){
         allBagelsInInventory.add( new BagelExt(SkuExt.BGLO, "Bagel", 0.49));
         allBagelsInInventory.add(new BagelExt(SkuExt.BGLP, "Bagel", 0.39));
         allBagelsInInventory.add(new BagelExt(SkuExt.BGLE, "Bagel", 0.49));
@@ -29,6 +31,7 @@ public class InventoryExt {
         allFilingsInInventory.add( new FillingExt(SkuExt.FILX, "Filling", 0.12));
         allFilingsInInventory.add(new FillingExt(SkuExt.FILS, "Filling", 0.12));
         allFilingsInInventory.add(new FillingExt(SkuExt.FILH, "Filling", 0.12));
+        }
     }
 
     public ArrayList<BagelExt> getAllBagelsInInventory() {

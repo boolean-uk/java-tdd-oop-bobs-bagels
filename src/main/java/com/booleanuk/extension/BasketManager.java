@@ -167,6 +167,15 @@ public class BasketManager {
     }
 
 
+    public String createReceipt(){
+        StringBuilder receipt = new StringBuilder();
+        receipt.append(receiptCreator.CreateFirstPartOfReceipt(basketExt)).append("\n");
+        receipt.append(paymentFinalizer.printPriceForReceipt(basketExt));
+        return receipt.toString();
+
+    }
+
+
 
     public void countBagelsInBasket(){
         discountCreator.bagelsCounter(basketExt);

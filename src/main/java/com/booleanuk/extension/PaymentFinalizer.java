@@ -1,5 +1,6 @@
 package com.booleanuk.extension;
 
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -26,6 +27,7 @@ public class PaymentFinalizer {
     PaymentFinalizer(DiscountCreator discountCreator) {
         receiptForBagels = new HashMap<>();
         receiptForCoffee = new HashMap<>();
+        receiptForFillings = new HashMap<>();
         paymentBeforeDiscount = 0;
         totalDiscount = 0;
         this.discountCreator = discountCreator;
@@ -76,26 +78,249 @@ public class PaymentFinalizer {
 
     public String printPriceForReceipt(BasketExt basketExt) {
         dateForReceipt(basketExt);
-        StringBuilder sb = new StringBuilder();
+        StringBuilder sb = new StringBuilder("\n");
         for (BagelExt bagelExt :
                 receiptForBagels.keySet()) {
             if (bagelExt.getSku() == SkuExt.BGLP) {
-                if (discountCreator.isBgle12Discount()) {
-                    sb.append(bagelExt.getSku().getVariant())
-                            .append(" ")
-                            .append(bagelExt.getName())
-                            .append("  ")
-                            .append(receiptForBagels.get(bagelExt))
-                            .append(" ")
-                            .append(getOnePositionCost(bagelExt.getPrice(),receiptForBagels.get(bagelExt)))
-                            .append("       \n");
-                } else if (discountCreator.isBgle6Discount()) {
+                sb.append(bagelExt.getSku().getVariant())
+                        .append(" ")
+                        .append(bagelExt.getName())
+                        .append("  ")
+                        .append(receiptForBagels.get(bagelExt))
+                        .append("  ");
 
+                if (discountCreator.isBglp12Discount()) {
+                    BigDecimal totalCost = BigDecimal.valueOf(getOnePositionCost(bagelExt.getPrice(), receiptForBagels.get(bagelExt)));
+                    BigDecimal promo  = BigDecimal.valueOf(twelveInPromo);
+                    BigDecimal diff = promo.subtract(totalCost);
+                    paymentBeforeDiscount+=totalCost.doubleValue();
+
+                    sb.append(promo)
+                            .append("       \n");
+                    sb.append("               ")
+                            .append("$")
+                            .append(diff).append("\n");
+                    totalDiscount = totalDiscount + (diff.doubleValue() * (-1) );
+
+                } else if (discountCreator.isBglp6Discount()) {
+                    BigDecimal totalCost = BigDecimal.valueOf(getOnePositionCost(bagelExt.getPrice(), receiptForBagels.get(bagelExt)));
+                    BigDecimal promo  = BigDecimal.valueOf(sixInPromo);
+                    BigDecimal diff = promo.subtract(totalCost);
+                    paymentBeforeDiscount+=totalCost.doubleValue();
+
+
+                    sb.append(promo)
+                            .append("       \n");
+                    sb.append("               ")
+                            .append("$")
+                            .append(diff).append("\n");
+                    totalDiscount = totalDiscount + (diff.doubleValue() * (-1) );
+
+
+                }else{
+                    BigDecimal bagelCost = BigDecimal.valueOf(bagelExt.getPrice());
+                    BigDecimal totalCost = bagelCost.multiply(BigDecimal.valueOf(receiptForBagels.get(bagelExt)));
+                    paymentBeforeDiscount+=totalCost.doubleValue();
+                    sb.append("$")
+                            .append( totalCost).append("\n");
+                }
+
+
+            }if(bagelExt.getSku() == SkuExt.BGLO){
+
+                sb.append(bagelExt.getSku().getVariant())
+                        .append(" ")
+                        .append(bagelExt.getName())
+                        .append("  ")
+                        .append(receiptForBagels.get(bagelExt))
+                        .append("  ");
+
+                if (discountCreator.isBglo12Discount()) {
+                    BigDecimal totalCost = BigDecimal.valueOf(getOnePositionCost(bagelExt.getPrice(), receiptForBagels.get(bagelExt)));
+                    BigDecimal promo  = BigDecimal.valueOf(twelveInPromo);
+                    BigDecimal diff = promo.subtract(totalCost);
+                    paymentBeforeDiscount+=totalCost.doubleValue();
+
+                    sb.append(promo)
+                            .append("       \n");
+                    sb.append("               ")
+                            .append("$")
+                            .append(diff).append("\n");
+                    totalDiscount = totalDiscount + (diff.doubleValue() * (-1) );
+
+                } else if (discountCreator.isBglo6Discount()) {
+                    BigDecimal totalCost = BigDecimal.valueOf(getOnePositionCost(bagelExt.getPrice(), receiptForBagels.get(bagelExt)));
+                    BigDecimal promo  = BigDecimal.valueOf(sixInPromo);
+                    BigDecimal diff = promo.subtract(totalCost);
+                    paymentBeforeDiscount+=totalCost.doubleValue();
+
+
+                    sb.append(promo)
+                            .append("       \n");
+                    sb.append("               ")
+                            .append("$")
+                            .append(diff)
+                            .append("\n");
+                    totalDiscount = totalDiscount + (diff.doubleValue() * (-1) );
+
+
+                }else{
+                    BigDecimal bagelCost = BigDecimal.valueOf(bagelExt.getPrice());
+                    BigDecimal totalCost = bagelCost.multiply(BigDecimal.valueOf(receiptForBagels.get(bagelExt)));
+                    paymentBeforeDiscount+=totalCost.doubleValue();
+                    sb.append("$")
+                            .append( totalCost)
+                            .append("\n");
                 }
             }
+            if(bagelExt.getSku() == SkuExt.BGLE){
+
+                sb.append(bagelExt.getSku().getVariant())
+                        .append(" ")
+                        .append(bagelExt.getName())
+                        .append("  ")
+                        .append(receiptForBagels.get(bagelExt))
+                        .append("  ");
+
+                if (discountCreator.isBgle12Discount()) {
+                    BigDecimal totalCost = BigDecimal.valueOf(getOnePositionCost(bagelExt.getPrice(), receiptForBagels.get(bagelExt)));
+                    BigDecimal promo  = BigDecimal.valueOf(twelveInPromo);
+                    BigDecimal diff = promo.subtract(totalCost);
+                    paymentBeforeDiscount+=totalCost.doubleValue();
+
+                    sb.append(promo)
+                            .append("       \n");
+                    sb.append("               ")
+                            .append("$")
+                            .append(diff)
+                            .append("\n");
+                    totalDiscount = totalDiscount + (diff.doubleValue() * (-1) );
+
+                } else if (discountCreator.isBgle6Discount()) {
+                    BigDecimal totalCost = BigDecimal.valueOf(getOnePositionCost(bagelExt.getPrice(), receiptForBagels.get(bagelExt)));
+                    BigDecimal promo  = BigDecimal.valueOf(sixInPromo);
+                    BigDecimal diff = promo.subtract(totalCost);
+                    paymentBeforeDiscount+=totalCost.doubleValue();
+
+
+                    sb.append(promo)
+                            .append("       \n");
+                    sb.append("               ")
+                            .append("$")
+                            .append(diff)
+                            .append("\n");
+                    totalDiscount = totalDiscount + (diff.doubleValue() * (-1) );
+
+
+                }else{
+                    BigDecimal bagelCost = BigDecimal.valueOf(bagelExt.getPrice());
+                    BigDecimal totalCost = bagelCost.multiply(BigDecimal.valueOf(receiptForBagels.get(bagelExt)));
+                    paymentBeforeDiscount+=totalCost.doubleValue();
+                    sb.append("$")
+                            .append( totalCost);
+                }
+
+            }
+
+            if(bagelExt.getSku() == SkuExt.BGLS){
+
+                sb.append(bagelExt.getSku().getVariant())
+                        .append(" ")
+                        .append(bagelExt.getName())
+                        .append("  ")
+                        .append(receiptForBagels.get(bagelExt))
+                        .append("  ");
+
+                if (discountCreator.isBgls12Discount()) {
+                    BigDecimal totalCost = BigDecimal.valueOf(getOnePositionCost(bagelExt.getPrice(), receiptForBagels.get(bagelExt)));
+                    BigDecimal promo  = BigDecimal.valueOf(twelveInPromo);
+                    BigDecimal diff = promo.subtract(totalCost);
+                    paymentBeforeDiscount+=totalCost.doubleValue();
+
+                    sb.append(promo)
+                            .append("       \n");
+                    sb.append("               ")
+                            .append("$")
+                            .append(diff)
+                            .append("\n");
+                    totalDiscount = totalDiscount + (diff.doubleValue() * (-1) );
+
+                } else if (discountCreator.isBgls6Discount()) {
+                    BigDecimal totalCost = BigDecimal.valueOf(getOnePositionCost(bagelExt.getPrice(), receiptForBagels.get(bagelExt)));
+                    BigDecimal promo  = BigDecimal.valueOf(sixInPromo);
+                    BigDecimal diff = promo.subtract(totalCost);
+                    paymentBeforeDiscount+=totalCost.doubleValue();
+
+
+                    sb.append(promo)
+                            .append("       \n");
+                    sb.append("               ")
+                            .append("$")
+                            .append(diff)
+                            .append("\n");
+                    totalDiscount = totalDiscount + (diff.doubleValue() * (-1) );
+
+
+                }else{
+                    BigDecimal bagelCost = BigDecimal.valueOf(bagelExt.getPrice());
+                    BigDecimal totalCost = bagelCost.multiply(BigDecimal.valueOf(receiptForBagels.get(bagelExt)));
+                    paymentBeforeDiscount+=totalCost.doubleValue();
+                    sb.append("$")
+                            .append( totalCost)
+                            .append("\n");
+                }
+
+            }
+
+
+
+        }
+        for (FillingExt filling :
+                receiptForFillings.keySet()) {
+            BigDecimal fillingPrice = BigDecimal.valueOf(filling.getPrice());
+            BigDecimal quantity = BigDecimal.valueOf(receiptForFillings.get(filling));
+            BigDecimal total = fillingPrice.multiply(quantity);
+            paymentBeforeDiscount+= total.doubleValue();
+                sb.append(filling.getSku().getVariant())
+                        .append(" ")
+                        .append(filling.getName())
+                        .append("  ")
+                        .append(receiptForFillings.get(filling))
+                        .append(" ")
+                        .append(getOnePositionCost(filling.getPrice(),receiptForFillings.get(filling)))
+                        .append("\n");
+
         }
 
-        return "";
+        for (CoffeeExt coffeeExt :
+                receiptForCoffee.keySet()) {
+
+            BigDecimal fillingPrice = BigDecimal.valueOf(coffeeExt.getPrice());
+            BigDecimal quantity = BigDecimal.valueOf(receiptForCoffee.get(coffeeExt));
+            BigDecimal total = fillingPrice.multiply(quantity);
+            paymentBeforeDiscount+= total.doubleValue();
+
+
+                sb.append(coffeeExt.getSku().getVariant())
+                        .append(" ")
+                        .append(coffeeExt.getName())
+                        .append("  ")
+                        .append(receiptForCoffee.get(coffeeExt))
+                        .append(" ")
+                        .append(getOnePositionCost(coffeeExt.getPrice(), receiptForCoffee.get(coffeeExt)))
+                        .append("\n");
+
+        }
+
+
+        sb.append("---------------------------\n")
+                .append("      TOTAL: ")
+                .append(paymentBeforeDiscount - totalDiscount).append("\n");
+        sb.append("You saved a total of: $")
+                .append(totalDiscount)
+                .append("\n")
+                .append("Thank you for your order!\n");
+        return sb.toString();
 
 
     }
