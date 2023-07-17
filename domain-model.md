@@ -70,25 +70,25 @@ So we don't get any weird requests,
 I want customers to only be able to order things that we stock in our inventory.
 ```
 
-| Classes   | Fields           | Methods                                     | Scenario                                                                                         | Outputs                                     |
-|-----------|------------------|---------------------------------------------|--------------------------------------------------------------------------------------------------|---------------------------------------------|
-| Basket    | List<Item> items |                                             |                                                                                                  |                                             |
-|           | int capacity     |                                             |                                                                                                  |                                             |
-|           |                  | addItem(Item item)                          | Adds a bagel item to the basket. Raises an exception if the basket is already full               | Adds a bagel item                           |
-|           |                  | removeItem(Item item)                       | Removes a bagel item from the basket. Raises an exception if the item is not found in the basket | Removes a bagel item                        |
-|           |                  | getItemsCount()                             | Returns the number of items currently in the basket                                              | The number of items currently in the basket |
-|           |                  | isFull()                                    | Returns True if the basket is full, False otherwise                                              | True / False                                |
-|           |                  | changeCapacity(int newCapacity)             | Changes the capacity of the basket to the specified value                                        |                                             |
-|           |                  | totalCost()                                 | Gets total cost of  items in the basket                                                          |                                             |
-|           |                  |                                             |                                                                                                  |                                             |
-| Item      | String name      | getPrice()                                  | Gets price of a particular item                                                                  | Price of an item                            |
-|           | String variant   | getVariant()                                | Gets variant of a particular item                                                                | Variant of an item                          |
-|           | double price     |                                             |                                                                                                  |                                             |
-|           |                  |                                             |                                                                                                  |                                             |
-| Inventory | List<Item> items | getAllItemsInInventory()                    | Gets all item which are in Bob's inventory                                                       |                                             |
-|           |                  | checkIfItemIsInInventory(Item item)         | Checks if item is in Bob's inventory                                                             | True or throws exception                    |
-|           |                  | getPriceOfParticularBagel(String variant)   | Gets price of a particular bagel before adding it to the basket                                  | Price of a bagel                            |
-|           |                  | getPriceOfParticularFilling(String variant) | Gets price of a particular filling before adding it to the basket                                | Price of a filling                          |
+| Classes   | Fields           | Methods                                     | Scenario                                                                                    | Outputs                                     |
+|-----------|------------------|---------------------------------------------|---------------------------------------------------------------------------------------------|---------------------------------------------|
+| Basket    | List<Item> items |                                             |                                                                                             |                                             |
+|           | int capacity     |                                             |                                                                                             |                                             |
+|           |                  | addItem(Item item)                          | Adds an item to the basket. Raises an exception if the basket is already full               | Adds a bagel item                           |
+|           |                  | removeItem(Item item)                       | Removes an item from the basket. Raises an exception if the item is not found in the basket | Removes a bagel item                        |
+|           |                  | getItemsCount()                             | Returns the number of items currently in the basket                                         | The number of items currently in the basket |
+|           |                  | isFull()                                    | Returns True if the basket is full, False otherwise                                         | True / False                                |
+|           |                  | changeCapacity(int newCapacity)             | Changes the capacity of the basket to the specified value                                   |                                             |
+|           |                  | totalCost()                                 | Gets total cost of  items in the basket                                                     |                                             |
+|           |                  |                                             |                                                                                             |                                             |
+| Item      | String name      | getPrice()                                  | Returns price of a particular item                                                          | Price of an item                            |
+|           | String variant   | getVariant()                                | Returns variant of a particular item                                                        | Variant of an item                          |
+|           | double price     |                                             |                                                                                             |                                             |
+|           | String SKU       |                                             |                                                                                             |                                             |
+|           |                  |                                             |                                                                                             |                                             |
+| Inventory | List<Item> items | getAllItemsInInventory()                    | Returns all item which are in Bob's inventory                                               |                                             |
+|           |                  | checkIfItemIsInInventory(Item item)         | Checks if item is in Bob's inventory                                                        | True or throws exception                    |
+|           |                  | getPriceOfParticularItem(String variant)    | Returns price of a particular item before adding it to the basket                           | Price of an item                            |
 
 ```
 

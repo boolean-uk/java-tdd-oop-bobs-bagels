@@ -14,10 +14,6 @@ public class Item {
         this.price = price;
     }
 
-    public String getName() {
-        return name;
-    }
-
     public String getVariant() {
         return variant;
     }
