@@ -99,6 +99,10 @@ public class Shopping {
                     if (!shopping.customerName.equals("") || shopping.basket.getProductsAmount() != 0) {
                         System.out.println("Your basket capacity:" + shopping.basket.getCapacity());
                         System.out.println("Your products:");
+                        if(shopping.basket.getProducts().size()==0)
+                        {
+                           System.out.println("Your basket is empty!");
+                        }
                         System.out.println(shopping.basket.listBasket());
                         System.out.println(combinedMenuText);
                         System.out.println(shopping.showBasket);
@@ -143,31 +147,37 @@ public class Shopping {
                     number++;
                 }
                 int userBagelInput = scanner.nextInt();
-                System.out.println("You've chosen " + products.get(userBagelInput) + "!");
-                Bagel usersChoice = (Bagel) products.get(userBagelInput);
-                System.out.println("Do you want some fillings?");
-                System.out.println("Y - if yes");
-                System.out.println("N - if no");
-                String userWantFillingInput = scanner.next();
-                userWantFillingInput = userWantFillingInput.toLowerCase();
+                try {
+                    System.out.println("You've chosen " + products.get(userBagelInput) + "!");
+                    Bagel usersChoice = (Bagel) products.get(userBagelInput);
+                    System.out.println("Do you want some fillings?");
+                    System.out.println("Y - if yes");
+                    System.out.println("N - if no");
+                    String userWantFillingInput = scanner.next();
+                    userWantFillingInput = userWantFillingInput.toLowerCase();
 
-                switch (userWantFillingInput) {
-                    case "y" -> {
-                        number = 0;
-                        for (Product product : products) {
-                            if (product instanceof Filling)
-                                System.out.println("Type \"" + number + "\" for " + String.format("%-27s %9s", product, "$" + product.getPrice()));
-                            number++;
+                    switch (userWantFillingInput) {
+                        case "y" -> {
+                            number = 0;
+                            for (Product product : products) {
+                                if (product instanceof Filling)
+                                    System.out.println("Type \"" + number + "\" for " + String.format("%-27s %9s", product, "$" + product.getPrice()));
+                                number++;
+                            }
+                            int userFillingInput = scanner.nextInt();
+                            System.out.println("Adding " + usersChoice + " with " + products.get(userFillingInput) + "!");
+                            usersChoice.addFilling((Filling) products.get(userFillingInput));
+                            basket.addProduct(usersChoice);
                         }
-                        int userFillingInput = scanner.nextInt();
-                        System.out.println("Adding " + usersChoice + " with " + products.get(userFillingInput) + "!");
-                        usersChoice.addFilling((Filling) products.get(userFillingInput));
-                        basket.addProduct(usersChoice);
+                        case "n" -> {
+                            basket.addProduct(usersChoice);
+                            System.out.println("You don't want filling - maybe next time");
+                        }
                     }
-                    case "n" -> {
-                        basket.addProduct(usersChoice);
-                        System.out.println("You don't want filling - maybe next time");
-                    }
+                }
+                catch(Exception wrongDataProvided)
+                {
+                    System.out.println("Enter proper data next time!");
                 }
             }
             case "c" -> {
@@ -178,11 +188,17 @@ public class Shopping {
                         System.out.println("Type \"" + number + "\" for " + String.format("%-25s %10s", product, "$" + product.getPrice()));
                     number++;
                 }
+                try{
                 int userCoffeeInput = scanner.nextInt();
                 System.out.println("You've chosen " + products.get(userCoffeeInput) + "!");
                 Coffee usersChoice = (Coffee) products.get(userCoffeeInput);
                 this.basket.addProduct(usersChoice);
                 System.out.println("Added Coffee to your basket!");
+            }
+            catch (Exception wrongDataProvided)
+            {
+                System.out.println("Enter proper data next time!");
+            }
             }
         }
     }
@@ -198,8 +214,16 @@ public class Shopping {
         }
         System.out.println(separator);
         Scanner scanner = new Scanner(System.in);
-        int userInput = scanner.nextInt();
-        basket.removeProduct(products.get(userInput));
-        System.out.println("Product removed!");
+
+        try {
+            int userInput = scanner.nextInt();
+            basket.removeProduct(products.get(userInput));
+            System.out.println("Product removed!");
+        }
+        catch (Exception wrongDataProvided)
+        {
+            System.out.println("Enter proper data next time!");
+        }
+
     }
 }
