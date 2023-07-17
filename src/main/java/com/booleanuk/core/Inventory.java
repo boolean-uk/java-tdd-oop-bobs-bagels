@@ -9,20 +9,20 @@ public class Inventory {
     private static List<InventoryItem> inventoryItemList = new ArrayList<>();
 
     private Inventory(){
-        inventoryItemList.add(new Bagel("BGLO",49,"Bagel","Onion"));
-        inventoryItemList.add(new Bagel("BGLP",39,"Bagel","Plain"));
-        inventoryItemList.add(new Bagel("BGLE",49,"Bagel","Everything"));
-        inventoryItemList.add(new Bagel("BGLS",49,"Bagel","Sesame"));
-        inventoryItemList.add(new Coffee("COFB",99,"Coffee","Black"));
-        inventoryItemList.add(new Coffee("COFW",19,"Coffee","White"));
-        inventoryItemList.add(new Coffee("COFC",29,"Coffee","Capuccino"));
-        inventoryItemList.add(new Coffee("COFL",29,"Coffee","Latte"));
-        inventoryItemList.add(new Filling("FILB",12,"Filling","Bacon"));
-        inventoryItemList.add(new Filling("FILE",12,"Filling","Egg"));
-        inventoryItemList.add(new Filling("FILC",12,"Filling","Cheese"));
-        inventoryItemList.add(new Filling("FILX",12,"Filling","Cream Cheese"));
-        inventoryItemList.add(new Filling("FILS",12,"Filling","Smoked Salmon"));
-        inventoryItemList.add(new Filling("FILH",12,"Filling","Ham"));
+        inventoryItemList.add(new Bagel("BGLO",49,"Onion"));
+        inventoryItemList.add(new Bagel("BGLP",39,"Plain"));
+        inventoryItemList.add(new Bagel("BGLE",49,"Everything"));
+        inventoryItemList.add(new Bagel("BGLS",49,"Sesame"));
+        inventoryItemList.add(new Coffee("COFB",99,"Black"));
+        inventoryItemList.add(new Coffee("COFW",19,"White"));
+        inventoryItemList.add(new Coffee("COFC",29,"Capuccino"));
+        inventoryItemList.add(new Coffee("COFL",29,"Latte"));
+        inventoryItemList.add(new Filling("FILB","Bacon"));
+        inventoryItemList.add(new Filling("FILE","Egg"));
+        inventoryItemList.add(new Filling("FILC","Cheese"));
+        inventoryItemList.add(new Filling("FILX","Cream Cheese"));
+        inventoryItemList.add(new Filling("FILS","Smoked Salmon"));
+        inventoryItemList.add(new Filling("FILH","Ham"));
     }
 
     public static Inventory getInstance(){

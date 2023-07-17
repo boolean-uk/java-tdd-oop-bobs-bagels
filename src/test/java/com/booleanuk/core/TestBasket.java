@@ -9,10 +9,10 @@ import java.util.List;
 public class TestBasket {
     public Basket basket;
     public Manager manager;
-    public Bagel ONION_BAGEL = new Bagel("BGLO",49,"Bagel","Onion");
-    public Filling FILLING_EGG = new Filling("FILE",12,"Filling","Egg");
-    public Bagel PLAIN_BAGEL = new Bagel("BGLP",39,"Bagel","Plain");
-    public Coffee COFFE_BLACK = new Coffee("COFB",99,"Coffee","Black");
+    public Bagel ONION_BAGEL = new Bagel("BGLO",49,"Onion");
+    public Filling FILLING_EGG = new Filling("FILE","Egg");
+    public Bagel PLAIN_BAGEL = new Bagel("BGLP",39,"Plain");
+    public Coffee COFFE_BLACK = new Coffee("COFB",99,"Black");
 
 
     @BeforeEach

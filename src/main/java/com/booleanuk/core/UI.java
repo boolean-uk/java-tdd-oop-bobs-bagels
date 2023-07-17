@@ -66,7 +66,7 @@ public class UI {
         System.out.println("Enter new basket capacity:");
         int newCapacity = sc.nextInt();
         if (manager.changeBasketCapacity(newCapacity)){
-            System.out.println("New basket capacity is: " + newCapacity);
+            System.out.println("New basket capacity is: " + newCapacity + "\n");
             displayLoginMenu();
         } else {
             System.out.println("You can't make the basket capacity smaller, customers would loose their orders!");
