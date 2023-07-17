@@ -101,21 +101,4 @@ public class Basket {
             );
         }
     }
-
-    public static void main(String[] args) {
-        Basket basket = new Basket();
-        basket.addProduct(new Bagel(ProductType.BGLO));
-        basket.addProduct(new Bagel(ProductType.BGLO));
-        basket.addProduct(new Bagel(ProductType.BGLO));
-        basket.addProduct(new Bagel(ProductType.BGLO));
-        basket.addProduct(new Bagel(ProductType.BGLO));
-        basket.addProduct(new Bagel(ProductType.BGLO));
-        basket.addProduct(new Bagel(ProductType.BGLO));
-        basket.addProduct(new Bagel(ProductType.BGLO));
-        basket.addProduct(new Bagel(ProductType.BGLO));
-        basket.addProduct(new Bagel(ProductType.BGLO));
-        basket.addProduct(new Bagel(ProductType.BGLO));
-        basket.addProduct(new Bagel(ProductType.BGLO));
-        System.out.println(basket.getPrice());
-    }
 }

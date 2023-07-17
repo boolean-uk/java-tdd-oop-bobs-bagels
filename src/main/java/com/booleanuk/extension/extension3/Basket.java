@@ -199,42 +199,4 @@ public class Basket {
     public BigDecimal getDiscount() {
         return discount;
     }
-
-    public static void main(String[] args) {
-        Basket basket = new Basket();
-//        Bagel bagel = new Bagel(ProductType.BGLO);
-//        bagel.addFilling(FillingType.FILB);
-//        bagel.addFilling(FillingType.FILB);
-//        bagel.addFilling(FillingType.FILB);
-//        bagel.addFilling(FillingType.FILB);
-//        bagel.addFilling(FillingType.FILB);
-//        basket.addProduct(bagel);
-        basket.addProduct(new Bagel(ProductType.BGLP));
-        basket.addProduct(new Bagel(ProductType.BGLP));
-        basket.addProduct(new Bagel(ProductType.BGLP));
-        basket.addProduct(new Bagel(ProductType.BGLP));
-        basket.addProduct(new Bagel(ProductType.BGLP));
-        basket.addProduct(new Bagel(ProductType.BGLP));
-        basket.addProduct(new Bagel(ProductType.BGLP));
-
-//        basket.addProduct(new Bagel(ProductType.BGLO));
-//        basket.addProduct(new Bagel(ProductType.BGLO));
-//        basket.addProduct(new Bagel(ProductType.BGLO));
-//        basket.addProduct(new Bagel(ProductType.BGLO));
-//        basket.addProduct(new Bagel(ProductType.BGLO));
-//        basket.addProduct(new Bagel(ProductType.BGLO));
-//        basket.addProduct(new Bagel(ProductType.BGLO));
-//        basket.addProduct(new Bagel(ProductType.BGLO));
-//        basket.addProduct(new Bagel(ProductType.BGLO));
-//        basket.addProduct(new Bagel(ProductType.BGLO));
-//        basket.addProduct(new Coffee(ProductType.COFW));
-//        basket.addProduct(new CoffeeBagel(ProductType.BGLE));
-//        basket.addProduct(new CoffeeBagel(ProductType.BGLP));
-//        basket.addProduct(new CoffeeBagel(ProductType.BGLP));
-//        basket.addProduct(new CoffeeBagel(ProductType.BGLP));
-
-
-
-        basket.getReceipt();
-    }
 }
