@@ -10,6 +10,8 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 import static org.mockito.Mockito.*;
@@ -55,6 +57,23 @@ public class OrderServiceTest {
         String actual = orderService.getNotificationBody(new Receipt(order.getBasket()));
         String expected = getExpectedFormattedSummaryMessage();
         Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldCreateOrderFromSMSText() {
+        Order order = orderService.createOrderFromSMS("6 x BGLO, 1 x BGLP, 1 x BGLE + 1 x FILE, 1 x COFB");
+
+        Map<String, List<Product>> products = order.getBasket().getProducts().stream().collect(Collectors.groupingBy(Product::getSku));
+
+        Assertions.assertEquals(6, products.get("BGLO").size());
+        Assertions.assertEquals(1, products.get("BGLP").size());
+        Assertions.assertEquals(1, products.get("BGLE").size());
+
+        List<Filling> BGLEFillings = ((Bagel) products.get("BGLE").get(0)).getFillings();
+        Assertions.assertEquals(1, BGLEFillings.size());
+        Assertions.assertEquals("FILE", BGLEFillings.get(0).getSku());
+
+        Assertions.assertEquals(1, products.get("COFB").size());
     }
 
     @Test
