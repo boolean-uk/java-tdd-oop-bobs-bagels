@@ -173,6 +173,9 @@ I want to see all sent and received messages.
 
 | Class        | Fields                 | Methods                                                     | Scenario                                     | Output                                   |
 |--------------|------------------------|-------------------------------------------------------------|----------------------------------------------|------------------------------------------|
+| Inventory    |                        | Product getProduct(String sku)                              | Creates new product                          |                                          |
+|              |                        |                                                             | If product exists in the inventory           | returns new product                      |
+|              |                        |                                                             | If product does not exist in the inventory   | throws an exception                      |
 | Order        | Basket basket          | Basket getBasket()                                          |                                              | returns basket associated with the order |
 | OrderService | List\<Order> orders    | void placeOrder(Order order)                                | User places order either manually or via SMS | user receives an SMS notification        |
 |              |                        | void notifyCustomer(String messageBody, String phoneNumber) | Sends an SMS to user                         | user receives an SMS notification        |
