@@ -1,0 +1,78 @@
+package com.booleanuk.core;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
+
+import java.util.ArrayList;
+
+import static org.junit.jupiter.api.Assertions.*;
+public class BasketTest {
+    @Test
+    public void addItemTest() {
+        Basket basket = new Basket(3);
+        Bagel bagel = new Bagel("BGLO", 0.49, "Bagel", "Onion");
+        basket.addProduct(bagel);
+        assertTrue(basket.getProducts().contains(bagel));
+    }
+
+    @Test
+    public void removeItemTest() {
+        Basket basket = new Basket(3);
+        Bagel bagel = new Bagel("BGLO", 0.49, "Bagel", "Onion");
+        basket.addProduct(bagel);
+        basket.removeProduct(bagel);
+        assertFalse(basket.isFull());
+    }
+
+    @Test
+    public void checkIsBasketFullTest() {
+        Basket basket = new Basket(2);
+        Bagel bagel1 = new Bagel("BGLO", 0.49, "Bagel", "Onion");
+        Bagel bagel2 = new Bagel("BGLP", 0.39, "Bagel", "Plain");
+        basket.addProduct(bagel1);
+        basket.addProduct(bagel2);
+        assertTrue(basket.isFull());
+    }
+
+    @Test
+    public void getTotalCostTest() {
+        Basket basket = new Basket(5);
+        Bagel bagel1 = new Bagel("BGLO", 0.49, "Bagel", "Onion");
+        Bagel bagel2 = new Bagel("BGLP", 0.39, "Bagel", "Plain");
+        basket.addProduct(bagel1);
+        basket.addProduct(bagel2);
+
+        double expectedCost = bagel1.getPrice() + bagel2.getPrice();
+        assertEquals(expectedCost, basket.getTotalCost(), 0.001);
+    }
+
+    @Test
+    //extension 1
+    public void getTotalCostWithSpecialOfferTest() {
+        Basket basket = new Basket(6);
+        Bagel bagel1 = new Bagel("BGLO", 0.49, "Bagel", "Onion");
+        Bagel bagel2 = new Bagel("BGLP", 0.39, "Bagel", "Plain");
+        basket.addProduct(bagel1);
+        basket.addProduct(bagel1);
+        basket.addProduct(bagel1);
+        basket.addProduct(bagel2);
+        basket.addProduct(bagel2);
+        basket.addProduct(bagel2);
+
+        assertEquals(3.66, basket.getTotalCost(), 0.001);
+    }
+
+    @Test
+    public void changeBasketCapacity() {
+        Basket basket = new Basket(3);
+        Bagel bagel1 = new Bagel("BGLO", 0.49, "Bagel", "Onion");
+        Bagel bagel2 = new Bagel("BGLP", 0.39, "Bagel", "Plain");
+        basket.addProduct(bagel1);
+        basket.addProduct(bagel2);
+        ArrayList<Bagel> products = new ArrayList<>();
+        products.add(bagel1);
+        products.add(bagel2);
+        basket.changeCapacity(5);
+        Assertions.assertFalse(basket.isFull());
+    }
+}
+
