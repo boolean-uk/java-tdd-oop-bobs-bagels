@@ -39,20 +39,20 @@ public class BobBagelsExtensionTest {
         inventoryExt = new InventoryExt();
         discountCreator = new DiscountCreator();
         basketManager = new BasketManager(basketExt,inventoryExt,discountCreator,receiptCreator);
-        bagelO = new BagelExt(SKU.BGLO, "Bagel", 0.49);
-        bagelP = new BagelExt(SKU.BGLP, "Bagel", 0.39);
-        bagelE = new BagelExt(SKU.BGLE, "Bagel", 0.49);
-        bagelS = new BagelExt(SKU.BGLS, "Bagel", 0.49);
-        coffeeB = new CoffeeExt(SKU.COFB, "Coffee", 0.99);
-        coffeeW = new CoffeeExt(SKU.COFW, "Coffee", 1.19);
-        coffeeC = new CoffeeExt(SKU.COFC, "Coffee", 1.29);
-        coffeeL = new CoffeeExt(SKU.COFL, "Coffee", 1.29);
-        fillingB = new FillingExt(SKU.FILB, "Filling", 0.12);
-        fillingE = new FillingExt(SKU.FILE, "Filling", 0.12);
-        fillingC = new FillingExt(SKU.FILC, "Filling", 0.12);
-        fillingX = new FillingExt(SKU.FILX, "Filling", 0.12);
-        fillingS = new FillingExt(SKU.FILS, "Filling", 0.12);
-        fillingH = new FillingExt(SKU.FILX, "Filling", 0.12);
+        bagelO = new BagelExt(SkuExt.BGLO, "Bagel", 0.49);
+        bagelP = new BagelExt(SkuExt.BGLP, "Bagel", 0.39);
+        bagelE = new BagelExt(SkuExt.BGLE, "Bagel", 0.49);
+        bagelS = new BagelExt(SkuExt.BGLS, "Bagel", 0.49);
+        coffeeB = new CoffeeExt(SkuExt.COFB, "Coffee", 0.99);
+        coffeeW = new CoffeeExt(SkuExt.COFW, "Coffee", 1.19);
+        coffeeC = new CoffeeExt(SkuExt.COFC, "Coffee", 1.29);
+        coffeeL = new CoffeeExt(SkuExt.COFL, "Coffee", 1.29);
+        fillingB = new FillingExt(SkuExt.FILB, "Filling", 0.12);
+        fillingE = new FillingExt(SkuExt.FILE, "Filling", 0.12);
+        fillingC = new FillingExt(SkuExt.FILC, "Filling", 0.12);
+        fillingX = new FillingExt(SkuExt.FILX, "Filling", 0.12);
+        fillingS = new FillingExt(SkuExt.FILS, "Filling", 0.12);
+        fillingH = new FillingExt(SkuExt.FILX, "Filling", 0.12);
     }
 
 
@@ -220,7 +220,7 @@ public class BobBagelsExtensionTest {
         }
         //when
         basketManager.countBagelsInBasket();
-        boolean isDiscount = discountCreator.isSpecialBGLETwelveOffer(basketExt);
+        boolean isDiscount = discountCreator.isSpecialBGLETwelveOffer();
         //then
         assertTrue(isDiscount);
     }
@@ -253,6 +253,13 @@ public class BobBagelsExtensionTest {
         //then
         assertTrue(isCoffeePromo);
     }
+
+    @Test
+    public void shouldReturnMainPartOfReceipt(){
+
+    }
+
+
     @Test
     public  void shouldPrintCorrectReceipt(){
         //given

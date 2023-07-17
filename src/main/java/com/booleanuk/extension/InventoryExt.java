@@ -1,7 +1,5 @@
 package com.booleanuk.extension;
 
-import com.booleanuk.core.*;
-
 import java.util.ArrayList;
 
 public class InventoryExt {
@@ -9,7 +7,7 @@ public class InventoryExt {
 
     private ArrayList<BagelExt> allBagelsInInventory = new ArrayList<>();
     private ArrayList<CoffeeExt> allCoffeesInInventory = new ArrayList<>();
-    ArrayList<FillingExt> allFilingsInInventory = new ArrayList<>();
+    private ArrayList<FillingExt> allFilingsInInventory = new ArrayList<>();
 
 
     public InventoryExt() {
@@ -17,20 +15,20 @@ public class InventoryExt {
     }
 
     private  void addToInventory() {
-        allBagelsInInventory.add( new BagelExt(SKU.BGLO, "Bagel", 0.49));
-        allBagelsInInventory.add(new BagelExt(SKU.BGLP, "Bagel", 0.39));
-        allBagelsInInventory.add(new BagelExt(SKU.BGLE, "Bagel", 0.49));
-        allBagelsInInventory.add( new BagelExt(SKU.BGLS, "Bagel", 0.49));
-        allCoffeesInInventory.add(new CoffeeExt(SKU.COFB, "Coffee", 0.99));
-        allCoffeesInInventory.add(new CoffeeExt(SKU.COFW, "Coffee", 1.19));
-        allCoffeesInInventory.add(new CoffeeExt(SKU.COFC, "Coffee", 1.29));
-        allCoffeesInInventory.add(new CoffeeExt(SKU.COFL, "Coffee", 1.29));
-        allFilingsInInventory.add(new FillingExt(SKU.FILB, "Filling", 0.12));
-        allFilingsInInventory.add(new FillingExt(SKU.FILE, "Filling", 0.12));
-        allFilingsInInventory.add(new FillingExt(SKU.FILC, "Filling", 0.12));
-        allFilingsInInventory.add( new FillingExt(SKU.FILX, "Filling", 0.12));
-        allFilingsInInventory.add(new FillingExt(SKU.FILS, "Filling", 0.12));
-        allFilingsInInventory.add(new FillingExt(SKU.FILX, "Filling", 0.12));
+        allBagelsInInventory.add( new BagelExt(SkuExt.BGLO, "Bagel", 0.49));
+        allBagelsInInventory.add(new BagelExt(SkuExt.BGLP, "Bagel", 0.39));
+        allBagelsInInventory.add(new BagelExt(SkuExt.BGLE, "Bagel", 0.49));
+        allBagelsInInventory.add( new BagelExt(SkuExt.BGLS, "Bagel", 0.49));
+        allCoffeesInInventory.add(new CoffeeExt(SkuExt.COFB, "Coffee", 0.99));
+        allCoffeesInInventory.add(new CoffeeExt(SkuExt.COFW, "Coffee", 1.19));
+        allCoffeesInInventory.add(new CoffeeExt(SkuExt.COFC, "Coffee", 1.29));
+        allCoffeesInInventory.add(new CoffeeExt(SkuExt.COFL, "Coffee", 1.29));
+        allFilingsInInventory.add(new FillingExt(SkuExt.FILB, "Filling", 0.12));
+        allFilingsInInventory.add(new FillingExt(SkuExt.FILE, "Filling", 0.12));
+        allFilingsInInventory.add(new FillingExt(SkuExt.FILC, "Filling", 0.12));
+        allFilingsInInventory.add( new FillingExt(SkuExt.FILX, "Filling", 0.12));
+        allFilingsInInventory.add(new FillingExt(SkuExt.FILS, "Filling", 0.12));
+        allFilingsInInventory.add(new FillingExt(SkuExt.FILH, "Filling", 0.12));
     }
 
     public ArrayList<BagelExt> getAllBagelsInInventory() {

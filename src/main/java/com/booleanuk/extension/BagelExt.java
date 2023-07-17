@@ -1,11 +1,9 @@
 package com.booleanuk.extension;
 
-import java.util.ArrayList;
-
 public class BagelExt {
 
 
-    private SKU sku;
+    private SkuExt skuExt;
     private String name;
     private double price;
     private FillingExt fillingExt;
@@ -14,15 +12,15 @@ public class BagelExt {
     public BagelExt() {
     }
 
-    public BagelExt(SKU sku, String name, double price) {
-        this.sku = sku;
+    public BagelExt(SkuExt skuExt, String name, double price) {
+        this.skuExt = skuExt;
         this.name = name;
         this.price = price;
     }
 
 
-    public SKU getSku() {
-        return sku;
+    public SkuExt getSku() {
+        return skuExt;
     }
 
     public String getName() {

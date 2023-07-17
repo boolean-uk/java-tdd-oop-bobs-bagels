@@ -1,6 +1,6 @@
 package com.booleanuk.extension;
 
-public enum SKU {
+public enum SkuExt {
 
 
     BGLO("Onion"), BGLP("Plain"), BGLE("Everything"), BGLS("Sesame"),
@@ -10,7 +10,7 @@ public enum SKU {
 
     private final String variant;
 
-    SKU(String variant) {
+    SkuExt(String variant) {
         this.variant = variant;
     }
 

@@ -2,24 +2,24 @@ package com.booleanuk.extension;
 
 public class CoffeeExt {
 
-    private SKU sku;
+    private SkuExt skuExt;
     private String name;
     private double price;
 
 
-    public CoffeeExt(SKU sku, String name, double price) {
-        this.sku = sku;
+    public CoffeeExt(SkuExt skuExt, String name, double price) {
+        this.skuExt = skuExt;
         this.name = name;
         this.price = price;
     }
 
 
-    public SKU getSku() {
-        return sku;
+    public SkuExt getSku() {
+        return skuExt;
     }
 
-    public void setSku(SKU sku) {
-        this.sku = sku;
+    public void setSku(SkuExt skuExt) {
+        this.skuExt = skuExt;
     }
 
     public String getName() {

@@ -2,23 +2,23 @@ package com.booleanuk.extension;
 
 public class FillingExt {
 
-    private SKU sku;
+    private SkuExt skuExt;
     private String name;
     private double price;
 
 
-    public FillingExt(SKU sku, String name, double price) {
-        this.sku = sku;
+    public FillingExt(SkuExt skuExt, String name, double price) {
+        this.skuExt = skuExt;
         this.name = name;
         this.price = price;
     }
 
-    public SKU getSku() {
-        return sku;
+    public SkuExt getSku() {
+        return skuExt;
     }
 
-    public void setSku(SKU sku) {
-        this.sku = sku;
+    public void setSku(SkuExt skuExt) {
+        this.skuExt = skuExt;
     }
 
     public String getName() {
@@ -40,7 +40,7 @@ public class FillingExt {
     @Override
     public String toString() {
         return "FillingExt{" +
-                "sku=" + sku +
+                "sku=" + skuExt +
                 ", name='" + name + '\'' +
                 ", price=" + price +
                 '}';
