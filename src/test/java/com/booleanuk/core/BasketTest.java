@@ -14,9 +14,9 @@ import java.util.Optional;
 
 public class BasketTest {
     private static Basket basket;
-    private static Bagel bagel;
-    private static Filling filling;
-    private static Coffee coffee;
+    private static Item bagel;
+    private static Item filling;
+    private static Item coffee;
     @BeforeAll
     public static void SetUp(){
         Inventory.createInventory();

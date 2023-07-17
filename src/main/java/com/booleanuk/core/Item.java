@@ -3,7 +3,7 @@ package com.booleanuk.core;
 import java.math.BigDecimal;
 import java.util.Objects;
 
-public abstract class Item {
+public class Item {
     protected String SKU;
     protected String name;
     protected BigDecimal price;
