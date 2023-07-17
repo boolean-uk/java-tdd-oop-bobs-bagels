@@ -9,8 +9,8 @@ import java.util.List;
 public class TestCustomer {
 
     public Customer customer;
-    public Bagel ONION_BAGEL = (new Bagel("BGLO",49,"Bagel","Onion"));
-    public Coffee BLACK_COFFEE = (new Coffee("COFB",99,"Coffee","Black"));
+    public Bagel ONION_BAGEL = (new Bagel("BGLO",49,"Onion"));
+    public Coffee BLACK_COFFEE = (new Coffee("COFB",99,"Black"));
 
     @BeforeEach
     public void setUp() {

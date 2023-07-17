@@ -15,7 +15,7 @@ public abstract class InventoryItem {
 
     @Override
     public String toString(){
-        return this.variant + " " + this.name + " £" + this.price + "\n";
+        return this.variant + " " + this.name + " £" + (double)this.price/100 + "\n";
     }
 
     public String getFullName(){

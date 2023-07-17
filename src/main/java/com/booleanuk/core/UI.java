@@ -96,7 +96,7 @@ public class UI {
     {
         Scanner sc = new Scanner(System.in);
         System.out.println(customer.checkBasket());
-        System.out.println("\nTotal Cost: "+customer.getTotalCost());
+        System.out.println("\nTotal Cost: £"+customer.getTotalCost());
         System.out.println("1. Remove item");
         System.out.println("2. Go back");
         int basketMenu = sc.nextInt();
