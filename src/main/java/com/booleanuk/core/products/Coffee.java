@@ -15,8 +15,10 @@ public class Coffee extends Product {
         this.variant = variant;
     }
 
+
+
     @Override
     public String toString() {
-        return "Coffee";
+        return variant + " Coffee";
     }
 }
