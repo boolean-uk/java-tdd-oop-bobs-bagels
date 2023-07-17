@@ -27,15 +27,15 @@ class BasketTest {
 
     @BeforeEach
     public void setup() {
-        TwilioService twilioService = new TwilioService();
-        basket = new Basket(20, twilioService);
+//        TwilioService twilioService = new TwilioService();
+//        basket = new Basket(20, twilioService);
+        basket = new Basket(20);
         bagel = new Bagel(SESAME, BACON);
         bagelWithoutFilling = new Bagel(PLAIN, WITHOUT_FILLING);
         coffee = new Coffee(BLACK);
         expectedItems = new HashMap<>();
         expectedItems.put(bagel, 1);
         expectedItems.put(coffee, 2);
-
     }
 
     @Test

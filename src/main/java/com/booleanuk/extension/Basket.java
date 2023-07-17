@@ -15,12 +15,17 @@ public class Basket {
     public final static int COFFEE_PLUS_BAGEL = 125;
 
     private final Map<Item, Integer> items;
-    private final TwilioService twilioService;
+//    private final TwilioService twilioService;
 
-    public Basket(int capacity, TwilioService twilioService) {
+//    public Basket(int capacity, TwilioService twilioService) {
+//        this.capacity = capacity;
+//        this.items = new HashMap<>();
+//        this.twilioService = twilioService;
+//    }
+
+    public Basket(int capacity) {
         this.capacity = capacity;
         this.items = new HashMap<>();
-        this.twilioService = twilioService;
     }
 
     public int getCapacity() {
@@ -153,9 +158,9 @@ public class Basket {
         return receipt.toString();
     }
 
-    public void order() {
-        twilioService.send(getReceipt());
-    }
+//    public void order() {
+//        twilioService.send(getReceipt());
+//    }
 
     private List<Long> getCoffeePrices() {
         return items.entrySet()
