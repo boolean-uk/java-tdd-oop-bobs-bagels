@@ -8,15 +8,11 @@ import java.util.List;
 import java.util.Map;
 
 public class Inventory {
-    private List<Bagle> bagels;
-    private List<Coffee> coffees;
-    private List<Filling> fillings;
+    private List<Product> products;
     private Map<String, SpecialOffer> specialOffers;
 
     public Inventory(){
-        this.bagels = new ArrayList<>();
-        this.coffees = new ArrayList<>();
-        this.fillings = new ArrayList<>();
+        this.products = new ArrayList<>();
         specialOffers = new HashMap<>();
 
         initializeInventory();
@@ -27,19 +23,19 @@ public class Inventory {
         Bagle bagle2 = new Bagle("BGLP",  	0.39,"Plain");
         Bagle bagle3 = new Bagle("BGLE",  	0.49,"Everything");
         Bagle bagle4 = new Bagle("BGLS",  	0.49,"Sesame");
-        bagels.add(bagle1);
-        bagels.add(bagle2);
-        bagels.add(bagle3);
-        bagels.add(bagle4);
+        products.add(bagle1);
+        products.add(bagle2);
+        products.add(bagle3);
+        products.add(bagle4);
         Coffee coffee1 = new Coffee("COFB",  	0.99,"Black");
         Coffee coffee2 = new Coffee("COFW",  	1.19,"White");
         Coffee coffee3 = new Coffee("COFC",  	1.29,"Capuccino");
         Coffee coffee4 = new Coffee("COFL",  	1.29,"Latte");
 
-        coffees.add(coffee1);
-        coffees.add(coffee2);
-        coffees.add(coffee3);
-        coffees.add(coffee4);
+        products.add(coffee1);
+        products.add(coffee2);
+        products.add(coffee3);
+        products.add(coffee4);
 
         Filling filling1 = new Filling("FILB", 0.12, "Bacon");
         Filling filling2 = new Filling("FILE", 0.12, "Egg");
@@ -47,12 +43,12 @@ public class Inventory {
         Filling filling4 = new Filling("FILX", 0.12, "Cream Cheese");
         Filling filling5 = new Filling("FILS", 0.12, "Smoked Salmon");
         Filling filling6 = new Filling("FILH", 0.12, "Ham");
-        fillings.add(filling1);
-        fillings.add(filling2);
-        fillings.add(filling3);
-        fillings.add(filling4);
-        fillings.add(filling5);
-        fillings.add(filling6);
+        products.add(filling1);
+        products.add(filling2);
+        products.add(filling3);
+        products.add(filling4);
+        products.add(filling5);
+        products.add(filling6);
 
         specialOffers.put("BGLO", new SpecialOffer(6,2.49));
         specialOffers.put("BGLP", new SpecialOffer(12,3.99));
@@ -63,63 +59,34 @@ public class Inventory {
 
 
     }
-    public void addBagel(Bagle bagel) {
-        bagels.add(bagel);
+
+    public void addProduct(Product product) {
+        products.add(product);
     }
-    public void addCoffee(Coffee coffee) {
-        coffees.add(coffee);
-    }
-    public void addFilling(Filling filling) {
-        fillings.add(filling);
-    }
-    public Bagle getBagelBySKU(String SKU){
-        for (Bagle bagel : bagels){
-            if (bagel.getSKU().equals(SKU)){
-                return bagel;
+
+    public Product getProductBySKU(String SKU){
+        for (Product product : products){
+            if (product.getSKU().equals(SKU)){
+                return product;
             }
         }
         return null;
     }
 
-    public String getBagelVariant(String SKU){
-        for (Bagle bagel : bagels){
-            if (bagel.getVariant().equals(SKU)){
-                return bagel.getVariant();
-            }
-        }
-        return null;
-    }
-    public Coffee getCoffeeBySKU(String SKU) {
-        for (Coffee coffee : coffees) {
-            if (coffee.getSKU().equals(SKU)) {
-                return coffee;
+    public String getProductVariant(String SKU){
+        for (Product product : products){
+            if (product.getVariant().equals(SKU)){
+                return product.getVariant();
             }
         }
         return null;
     }
 
-    public Filling getFillingBySKU(String SKU) {
-        for (Filling filling : fillings) {
-            if (filling.getSKU().equals(SKU)) {
-                return filling;
-            }
-        }
-        return null;
-    }
+
 
     public boolean checkAvailability(String item) {
-        for (Bagle bagel : bagels) {
-            if (bagel.getSKU().equals(item)) {
-                return true;
-            }
-        }
-        for (Coffee coffee : coffees) {
-            if (coffee.getSKU().equals(item)) {
-                return true;
-            }
-        }
-        for (Filling filling : fillings) {
-            if (filling.getSKU().equals(item)) {
+        for (Product product : products) {
+            if (product.getSKU().equals(item)) {
                 return true;
             }
         }
@@ -127,23 +94,14 @@ public class Inventory {
     }
 
     public double getItemPrice(String item) {
-        for (Bagle bagel : bagels) {
-            if (bagel.getSKU().equals(item)) {
-                return bagel.getPrice();
+        for (Product product : products) {
+            if (product.getSKU().equals(item)) {
+                return product.getPrice();
             }
         }
-        for (Coffee coffee : coffees) {
-            if (coffee.getSKU().equals(item)) {
-                return coffee.getPrice();
-            }
-        }
-        for (Filling filling : fillings) {
-            if (filling.getSKU().equals(item)) {
-                return filling.getPrice();
-            }
-        }
+
         if (item.equals("COFB")) {
-            Bagle bagle = getBagelBySKU("BGLP");
+            Product bagle = getProductBySKU("BGLP");
             if (bagle!=null){
                 double baglePrice = bagle.getPrice();
                 double coffeeBagelPrice = 1.25;

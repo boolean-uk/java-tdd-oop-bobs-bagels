@@ -1,26 +1,9 @@
 package com.booleanuk.core;
 
-public class Filling {
-
-    String SKU;
-    double price;
-    String variant;
+public class Filling extends Product{
 
     public Filling(String SKU, double price, String variant) {
-        this.SKU = SKU;
-        this.price = price;
-        this.variant = variant;
+        super(SKU, price, variant);
     }
 
-    public String getSKU() {
-        return SKU;
-    }
-
-    public double getPrice() {
-        return price;
-    }
-
-    public String getVariant() {
-        return variant;
-    }
 }

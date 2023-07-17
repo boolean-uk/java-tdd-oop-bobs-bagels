@@ -33,7 +33,7 @@ public class Basket {
         int itemsCapacity = fillings == null ? items.size() : items.size() + fillings.size();
         if (inventory.checkAvailability(item) && itemsCapacity < capacity) {
             if (item.startsWith("BGL")) {
-                Bagle bagle = new Bagle(item, inventory.getItemPrice(item), inventory.getBagelVariant(item));
+                Bagle bagle = new Bagle(item, inventory.getItemPrice(item), inventory.getProductVariant(item));
                 priceOfProduct += inventory.getItemPrice(item);
                 items.add(bagle.getSKU());
                 bagles.add(bagle);

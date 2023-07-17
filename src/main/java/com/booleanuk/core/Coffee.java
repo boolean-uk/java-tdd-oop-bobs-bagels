@@ -1,24 +1,10 @@
 package com.booleanuk.core;
 
-public class Coffee {
-    private String SKU;
-    private double price;
-    private String variant;
+public class Coffee extends Product{
+
 
     public Coffee(String SKU, double price, String variant){
-        this.SKU= SKU;
-        this.price=price;
-        this.variant=variant;
+        super(SKU, price, variant);
+    }
 
-
-    }
-    public String getSKU(){
-        return SKU;
-    }
-    public double getPrice(){
-        return price;
-    }
-    public String getVariant(){
-        return variant;
-    }
 }

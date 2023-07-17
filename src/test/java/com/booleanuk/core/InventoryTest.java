@@ -7,7 +7,7 @@ public class InventoryTest {
     @Test
     public void testGetBagelBySKU(){
         Inventory inventory= new Inventory();
-        Bagle bagel= inventory.getBagelBySKU("BGLO");
+        Product bagel= inventory.getProductBySKU("BGLO");
         Assertions.assertEquals("BGLO", bagel.getSKU());
     }
     @Test
@@ -15,14 +15,14 @@ public class InventoryTest {
         Inventory inventory = new Inventory();
 
 
-        Coffee coffee = inventory.getCoffeeBySKU("COFB");
+        Product coffee = inventory.getProductBySKU("COFB");
         Assertions.assertEquals("COFB", coffee.getSKU());
     }
     @Test
     public void testGetFillingBySKU() {
         Inventory inventory = new Inventory();
 
-        Filling filling = inventory.getFillingBySKU("FILB");
+        Product filling = inventory.getProductBySKU("FILB");
         Assertions.assertEquals("FILB", filling.getSKU());
     }
     @Test
