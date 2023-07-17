@@ -66,14 +66,14 @@ public class Basket {
         cost+=countBagelDiscount(numberOfBgls,49);
         return cost;
     }
-    double countCoffeeDiscount(int numberOfBagels, int numberOfCoffees)
+    public double countCoffeeDiscount(int numberOfBagels, int numberOfCoffees)
     {
         double cost=0;
         numberOfCoffees= numberOfBagels<numberOfCoffees ? numberOfBagels: numberOfCoffees;
         cost+=(125*numberOfCoffees)-(99*numberOfCoffees);
         return cost;
     }
-    double countBagelDiscount(int numberOfBagels, double price)
+    public double countBagelDiscount(int numberOfBagels, double price)
     {
         int cost=0;
         cost+= 399*(numberOfBagels/12);

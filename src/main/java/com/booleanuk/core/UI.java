@@ -8,7 +8,7 @@ public class UI {
     Inventory inventory = Inventory.getInstance();
     Customer customer = new Customer();
     Manager manager = new Manager();
-    public void displayRecipe() {
+    public void displayReceipt() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         String formattedDateTimeNow = LocalDateTime.now().format(formatter);
 
@@ -63,7 +63,7 @@ public class UI {
         }
         else if(customerInput == 3)
         {
-            displayRecipe();
+            displayReceipt();
         }
     }
     public void displayManagerMenu()

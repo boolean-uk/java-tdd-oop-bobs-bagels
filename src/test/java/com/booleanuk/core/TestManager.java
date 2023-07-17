@@ -19,7 +19,7 @@ public class TestManager {
         manager.changeBasketCapacity(CAPACITY);
         customer = new Customer();
 
-        Assertions.assertEquals(CAPACITY,customer.basket.getCapacity());
+        Assertions.assertEquals(CAPACITY,customer.getBasket().getCapacity());
     }
 
 }

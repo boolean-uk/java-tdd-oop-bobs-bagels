@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Customer {
-    Basket basket;
+    private Basket basket;
     private Inventory inventory = Inventory.getInstance();
 
     public Customer() {
