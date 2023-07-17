@@ -1,11 +1,9 @@
 package com.booleanuk.extension;
 
-public class BagelExt {
+public class BagelExt extends  ProductExt{
 
 
-    private SkuExt skuExt;
-    private String name;
-    private double price;
+
     private FillingExt fillingExt;
 
 
@@ -13,23 +11,11 @@ public class BagelExt {
     }
 
     public BagelExt(SkuExt skuExt, String name, double price) {
-        this.skuExt = skuExt;
-        this.name = name;
-        this.price = price;
+        super(skuExt,name,price);
     }
 
 
-    public SkuExt getSku() {
-        return skuExt;
-    }
 
-    public String getName() {
-        return name;
-    }
-
-    public double getPrice() {
-        return price;
-    }
 
     public FillingExt getFillingExt() {
         return fillingExt;
