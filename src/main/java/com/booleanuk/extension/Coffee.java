@@ -27,6 +27,7 @@ public class Coffee extends Item {
     public int hashCode() {
         return Objects.hash(coffeeType);
     }
+    
     @Override
     public String toString() {
         return coffeeType + "";

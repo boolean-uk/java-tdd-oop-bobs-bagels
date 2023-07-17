@@ -5,6 +5,8 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -12,7 +14,6 @@ import static com.booleanuk.extension.Basket.*;
 import static com.booleanuk.extension.types.BagelType.PLAIN;
 import static com.booleanuk.extension.types.BagelType.SESAME;
 import static com.booleanuk.extension.types.CoffeeType.BLACK;
-import static com.booleanuk.extension.types.CoffeeType.WHITE;
 import static com.booleanuk.extension.types.FillingType.BACON;
 import static com.booleanuk.extension.types.FillingType.WITHOUT_FILLING;
 import static org.junit.jupiter.api.Assertions.*;
@@ -23,7 +24,7 @@ class BasketTest {
     private Bagel bagel;
     private Bagel bagelWithoutFilling;
     private Coffee coffee;
-    private Coffee whiteCoffee;
+
     private Map<Item, Integer> expectedItems;
 
     @BeforeEach
@@ -32,7 +33,6 @@ class BasketTest {
         bagel = new Bagel(SESAME, BACON);
         bagelWithoutFilling = new Bagel(PLAIN, WITHOUT_FILLING);
         coffee = new Coffee(BLACK);
-        whiteCoffee = new Coffee(WHITE);
         expectedItems = new HashMap<>();
         expectedItems.put(bagel, 1);
         expectedItems.put(coffee, 2);
@@ -41,8 +41,6 @@ class BasketTest {
 
     @Test
     public void addAddsItemIfBasketIsNotFull() {
-
-
         basket.add(bagel);
         basket.add(coffee);
         basket.add(coffee);
@@ -54,7 +52,7 @@ class BasketTest {
 
     @Test
     public void addThrowsExceptionIfBasketIsFull() {
-        basket.changeCapacity(5);
+        basket.setCapacity(5);
         basket.add(bagel);
         basket.add(bagel);
         basket.add(bagel);
@@ -89,7 +87,7 @@ class BasketTest {
     @Test
     public void isFullReturnsTrueIfBasketIsFull() {
         assertFalse(basket.isFull());
-        basket.changeCapacity(5);
+        basket.setCapacity(5);
         basket.add(bagel);
         basket.add(bagel);
         basket.add(coffee);
@@ -114,11 +112,11 @@ class BasketTest {
     public void changeCapacityChangesCapacity() {
         assertEquals(20, basket.getCapacity());
 
-        basket.changeCapacity(7);
+        basket.setCapacity(7);
 
         assertEquals(7, basket.getCapacity());
 
-        basket.changeCapacity(3);
+        basket.setCapacity(3);
 
         assertEquals(3, basket.getCapacity());
     }
@@ -128,7 +126,7 @@ class BasketTest {
         basket.add(bagel);
         basket.add(coffee);
         assertEquals(2, basket.getItemCount());
-        assertTrue(basket.getItems().keySet().contains(bagel));
+        assertTrue(basket.getItems().containsKey(bagel));
 
         basket.remove(coffee);
 
@@ -231,7 +229,7 @@ class BasketTest {
         basket.add(bagel);
         basket.add(coffee);
         assertEquals(2, basket.getItemCount());
-        assertTrue(basket.getItems().keySet().contains(bagel));
+        assertTrue(basket.getItems().containsKey(bagel));
 
         basket.remove(bagel);
 
@@ -255,11 +253,11 @@ class BasketTest {
     @Test
     public void freeSpaceReturnsProperValue() {
         basket.add(bagel);
-        assertEquals(19, basket.freeSpace());
+        assertEquals(19, basket.getRemainingSpace());
 
         basket.remove(bagel);
 
-        assertEquals(20, basket.freeSpace());
+        assertEquals(20, basket.getRemainingSpace());
     }
 
     @Test
@@ -273,8 +271,8 @@ class BasketTest {
 
         assertEquals(2, basket.getItems().keySet().size());
         assertEquals(expectedItems, basket.getItems());
-        assertTrue(basket.getItems().keySet().contains(bagel));
-        assertTrue(basket.getItems().keySet().contains(coffee));
+        assertTrue(basket.getItems().containsKey(bagel));
+        assertTrue(basket.getItems().containsKey(coffee));
     }
 
     @Test
@@ -291,18 +289,24 @@ class BasketTest {
     }
 
     @Test
-    public void toStringPrintsReceipt() {
-//        basket.add(bagel);
-//        basket.add(bagel);
-//        basket.add(bagel);
-//        basket.add(bagel);
-//        basket.add(bagel);
-//        basket.add(bagel);
+    public void getReceiptPrintsReceipt() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        String date = LocalDateTime.now().format(formatter);
+
         basket.add(bagel);
         basket.add(bagelWithoutFilling);
         basket.add(coffee);
 
-        assertEquals(basket.toString(), "");
+        assertEquals("Bob's Bagels - Receipt\n" + date + "\n" +
+                        """
+                                SESAME Bagel x1 at $0.61 = $0.61
+                                PLAIN Bagel x1 at $0.39 = $0.39
+                                Coffee x1 at $0.99 = $0.99
+                                 (Special Offer: Coffee+Bagel: 1 for $1.25)
+                                Total Cost: $1.86
+                                Total Discount: $0.99
+                                """,
+                basket.getReceipt());
     }
 }
 

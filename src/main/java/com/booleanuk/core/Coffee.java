@@ -10,10 +10,7 @@ public class Coffee extends Item {
         this.price = coffeeType.getPrice();
     }
 
-
-
     public CoffeeType getCoffeeType() {
         return coffeeType;
     }
-
 }
