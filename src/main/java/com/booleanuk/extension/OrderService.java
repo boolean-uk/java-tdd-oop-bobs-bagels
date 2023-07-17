@@ -43,21 +43,21 @@ public class OrderService {
 
     public void placeOrder(Order order, String phoneNumber) {
         orders.add(order);
-        notifyCustomer(order, phoneNumber);
+        String body = getNotificationBody(getReceipt(order));
+        notifyCustomer(body, phoneNumber);
+        messages.add(body);
     }
 
     public Receipt getReceipt(Order order) {
         return new Receipt(order.getBasket());
     }
 
-    private void notifyCustomer(Order order, String phoneNumber) {
-        String body = getNotificationBody(getReceipt(order));
+    public void notifyCustomer(String messageBody, String phoneNumber) {
         Message.creator(
                 new PhoneNumber(phoneNumber),
                 new PhoneNumber(TWILIO_FROM_NUMBER),
-                body
+                messageBody
         ).create();
-        messages.add(body);
     }
 
     public String getNotificationBody(Receipt receipt) {

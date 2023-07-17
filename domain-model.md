@@ -171,9 +171,10 @@ So I can keep track of my orders
 I want to see all sent and received messages.
 ```
 
-| Class        | Fields                 | Methods                      | Scenario                                     | Output                                   |
-|--------------|------------------------|------------------------------|----------------------------------------------|------------------------------------------|
-| Order        | Basket basket          | Basket getBasket()           |                                              | returns basket associated with the order |
-| OrderService | List\<Order> orders    | void placeOrder(Order order) | User places order either manually or via SMS | user receives an SMS notification        |
-|              |                        | Order createOrderFromSMS()   | User sends SMS with order details            | returns new order                        |
-|              | List\<String> messages | List<String> getMessages()   | User requests his message history            | returns sent and received messages       |
+| Class        | Fields                 | Methods                                                     | Scenario                                     | Output                                   |
+|--------------|------------------------|-------------------------------------------------------------|----------------------------------------------|------------------------------------------|
+| Order        | Basket basket          | Basket getBasket()                                          |                                              | returns basket associated with the order |
+| OrderService | List\<Order> orders    | void placeOrder(Order order)                                | User places order either manually or via SMS | user receives an SMS notification        |
+|              |                        | void notifyCustomer(String messageBody, String phoneNumber) | Sends an SMS to user                         | user receives an SMS notification        |
+|              |                        | Order createOrderFromSMS()                                  | User sends SMS with order details            | returns new order                        |
+|              | List\<String> messages | List<String> getMessages()                                  | User requests his message history            | returns sent and received messages       |
