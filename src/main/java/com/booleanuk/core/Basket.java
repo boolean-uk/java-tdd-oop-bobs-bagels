@@ -68,6 +68,7 @@ public class Basket {
             items.remove(nameOfFilling);
             return true;
         }
+        System.out.println("Item not in basket");
         return false;
     }
 
@@ -76,6 +77,7 @@ public class Basket {
             items.remove(item);
             return true;
         } else {
+            System.out.println("Item not in basket");
             return false;
         }
     }
@@ -92,6 +94,7 @@ public class Basket {
             }
             return true;
         }
+        System.out.println("Item not in basket");
         return false;
     }
 
