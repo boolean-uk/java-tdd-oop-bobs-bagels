@@ -75,28 +75,31 @@ public class Basket {
                     discounts.put(product, BigDecimal.valueOf(discounted * 0.69));
                     discountedBagels.get(product.getSku()).subList(0, (int) (discounted * 12)).clear();
                 }
-                case "COFB" -> {
-                    List<Bagel> bagels = discountedBagels.values().stream()
-                            .flatMap(List::stream)
-                            .sorted(Comparator.comparing(Bagel::getPrice))
-                            .toList();
+            }
+        });
 
-                    BigDecimal discount = BigDecimal.ZERO;
+        quantities.forEach((product, quantity) -> {
+            if (product.getSku().equals("COFB")) {
+                List<Bagel> bagels = discountedBagels.values().stream()
+                        .flatMap(List::stream)
+                        .sorted(Comparator.comparing(Bagel::getPrice))
+                        .toList();
 
-                    BigDecimal coffeePrice = product.getPrice();
-                    long coffeeQuantity = quantity;
+                BigDecimal discount = BigDecimal.ZERO;
 
-                    for(Bagel bagel : bagels) {
-                        if (coffeeQuantity == 0)
-                            break;
+                BigDecimal coffeePrice = product.getPrice();
+                long coffeeQuantity = quantity;
 
-                        BigDecimal bagelPrice = bagel.getPrice();
-                        discount = discount.add(coffeePrice.add(bagelPrice).subtract(BigDecimal.valueOf(1.25)));
-                        coffeeQuantity--;
-                    }
+                for (Bagel bagel : bagels) {
+                    if (coffeeQuantity == 0)
+                        break;
 
-                    discounts.put(product, discount);
+                    BigDecimal bagelPrice = bagel.getPrice();
+                    discount = discount.add(coffeePrice.add(bagelPrice).subtract(BigDecimal.valueOf(1.25)));
+                    coffeeQuantity--;
                 }
+
+                discounts.put(product, discount);
             }
         });
         return discounts;
