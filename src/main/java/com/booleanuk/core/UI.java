@@ -26,7 +26,7 @@ public class UI {
         System.out.println("Hello! Who are you?");
         System.out.println("1. Manager");
         System.out.println("2. Customer");
-        System.out.println("Press 1 or 2");
+        System.out.println("Press 1 or 2 and press Enter");
         int intInput = sc.nextInt();
         if (intInput==1)
         {
@@ -38,11 +38,12 @@ public class UI {
     public void displayCustomerMenu()
     {
         Scanner sc = new Scanner(System.in);
+        System.out.println();
         System.out.println("1. Show menu");
         System.out.println("2. Show my basket");
         System.out.println("3. Buy items");
         System.out.println("4. Quit");
-        System.out.println("Press 1,2,3,4");
+        System.out.println("Press 1, 2, 3 or 4 and press Enter");
         int customerInput = sc.nextInt();
         if(customerInput == 1)
         {
@@ -62,6 +63,7 @@ public class UI {
     public void displayManagerMenu()
     {
         Scanner sc = new Scanner(System.in);
+        System.out.println();
         System.out.println("Current capacity is: " + Basket.getCapacity());
         System.out.println("Enter new basket capacity:");
         int newCapacity = sc.nextInt();
@@ -69,8 +71,10 @@ public class UI {
             System.out.println("New basket capacity is: " + newCapacity + "\n");
             displayLoginMenu();
         } else {
+            System.out.println();
             System.out.println("You can't make the basket capacity smaller, customers would loose their orders!");
             System.out.println("Try again if you want to change it differently");
+            System.out.println();
             displayLoginMenu();
         }
     }
