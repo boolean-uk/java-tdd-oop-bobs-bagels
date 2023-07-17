@@ -7,7 +7,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-
 public class Basket {
     private int capacity;
     public final static int SIX_BAGELS_PRICE = 249;
@@ -16,10 +15,12 @@ public class Basket {
     public final static int COFFEE_PLUS_BAGEL = 125;
 
     private final Map<Item, Integer> items;
+    private final TwilioService twilioService;
 
-    public Basket(int capacity) {
+    public Basket(int capacity, TwilioService twilioService) {
         this.capacity = capacity;
         this.items = new HashMap<>();
+        this.twilioService = twilioService;
     }
 
     public int getCapacity() {
@@ -152,6 +153,10 @@ public class Basket {
         return receipt.toString();
     }
 
+    public void order() {
+        twilioService.send(getReceipt());
+    }
+
     private List<Long> getCoffeePrices() {
         return items.entrySet()
                 .stream()
@@ -177,4 +182,5 @@ public class Basket {
                     } else return 0L;
                 }).reduce(0L, Long::sum);
     }
+
 }

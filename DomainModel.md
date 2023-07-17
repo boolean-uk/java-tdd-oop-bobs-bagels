@@ -14,7 +14,7 @@
 |                  |                           |                                         | if provided bagel is not in a basket        | false     |
 |                  | getTotalCost()            |                                         | return total cost of items in the basket    | double    |
 |                  | getReceipt()              |                                         | return nicely formatted receipt             | String    |
-|                  |                           |                                         |                                             |           |
+|                  | order()                   |                                         | sends confirmation sms                      | void      |
 |                  |                           |                                         |                                             |           |
 |                  |                           |                                         |                                             |           |
 | Item             |                           | long price                              |                                             |           |
@@ -30,4 +30,5 @@
 |                  |                           |                                         |                                             |           |
 | Enum FillingType |                           | long price, String code                 |                                             |           |
 |                  |                           |                                         |                                             |           |
+| TwilioService    | send(String messageBody)  |                                         | handles Twilio sending SMS API              | void      |
 

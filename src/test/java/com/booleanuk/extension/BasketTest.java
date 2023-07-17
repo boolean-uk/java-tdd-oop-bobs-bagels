@@ -27,7 +27,8 @@ class BasketTest {
 
     @BeforeEach
     public void setup() {
-        basket = new Basket(20);
+        TwilioService twilioService = new TwilioService();
+        basket = new Basket(20, twilioService);
         bagel = new Bagel(SESAME, BACON);
         bagelWithoutFilling = new Bagel(PLAIN, WITHOUT_FILLING);
         coffee = new Coffee(BLACK);
@@ -306,6 +307,16 @@ class BasketTest {
 //                                Thank you for your order!""",
 //                basket.getReceipt());
 //    }
+
+    @Test
+    public void orderSendsMessage() {
+        basket.add(bagel);
+        basket.add(bagel);
+        basket.add(bagel);
+        basket.add(coffee);
+
+        assertDoesNotThrow(() -> basket.order());
+    }
 
 }
 
