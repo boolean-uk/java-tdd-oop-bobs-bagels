@@ -8,6 +8,7 @@ import io.github.cdimascio.dotenv.Dotenv;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class OrderService {
@@ -81,5 +82,44 @@ public class OrderService {
 
     public List<String> getMessages() {
         return messages;
+    }
+
+    public Order createOrderFromSMS(String orderMessage) {
+        Basket basket = new Basket(100);
+        Order order = new Order(basket);
+
+        String[] orderItems = orderMessage.split(", ");
+
+        for(String orderItem : orderItems) {
+            String[] s = orderItem.split(" \\+ ");
+            String[] productItems = s[0].split(" x ");
+            int productQuantity = Integer.parseInt(productItems[0]);
+            String productSku = productItems[1];
+
+            Product product = Inventory.getProduct(productSku);
+            for(int i = 0; i < productQuantity; i++)
+                basket.add(product);
+
+            if(s.length > 1) {
+                if(!productSku.startsWith("BGL"))
+                    throw new IllegalArgumentException("Only bagels may have fillings");
+                String[] fillingItems = s[1].split(" x ");
+                int fillingQuantity = Integer.parseInt(fillingItems[0]);
+                String fillingSku = fillingItems[1];
+
+                if(!fillingSku.startsWith("FIL"))
+                    throw new IllegalArgumentException(String.format("Product %s is not a filling", fillingSku));
+
+                Filling filling = (Filling) Inventory.getProduct(fillingSku);
+                Bagel bagel = (Bagel) product;
+
+                List<Filling> fillings = new ArrayList<>(fillingQuantity);
+                for(int i = 0; i < fillingQuantity; i++)
+                    fillings.add(filling);
+
+                bagel.setFillings(fillings);
+            }
+        }
+        return order;
     }
 }
