@@ -1,38 +1,50 @@
 package com.booleanuk.extension;
 
 import io.github.cdimascio.dotenv.Dotenv;
+import io.github.cdimascio.dotenv.DotenvException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.io.IOException;
 import java.math.BigDecimal;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.URLEncoder;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
+import java.nio.charset.StandardCharsets;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-import static org.mockito.Mockito.*;
-
 public class OrderServiceTest {
 
     private static String TWILIO_RECIPIENT_PHONE_NUMBER;
     static Order order;
-    OrderService orderService;
+    static OrderService orderService;
 
     @BeforeAll
     static void beforeAll() {
-        Dotenv dotenv = Dotenv.configure().load();
+        orderService = OrderService.getInstance();
 
-        TWILIO_RECIPIENT_PHONE_NUMBER = dotenv.get("TWILIO_RECIPIENT_PHONE_NUMBER");
+        try {
+            Dotenv dotenv = Dotenv.configure().load();
+            TWILIO_RECIPIENT_PHONE_NUMBER = dotenv.get("TWILIO_RECIPIENT_PHONE_NUMBER", "");
+        } catch (DotenvException ignore) {
+            TWILIO_RECIPIENT_PHONE_NUMBER = "";
+        }
 
         Bagel BGLO = new Bagel("BGLO", BigDecimal.valueOf(0.49), "Onion");
         Bagel BGLP = new Bagel("BGLP", BigDecimal.valueOf(0.39), "Plain");
         Bagel BGLE = new Bagel("BGLE", BigDecimal.valueOf(0.49), "Everything");
         Coffee COFB = new Coffee("COFB", BigDecimal.valueOf(0.99), "Black");
-        Filling FILE = new Filling("FILE", BigDecimal.valueOf(3.00), "Egg");
+        Filling FILE = new Filling("FILE", BigDecimal.valueOf(0.12), "Egg");
 
         Basket basket = new Basket(1000);
 
@@ -45,11 +57,6 @@ public class OrderServiceTest {
         basket.add(COFB);
 
         order = new Order(basket);
-    }
-
-    @BeforeEach
-    void setUp() {
-        orderService = OrderService.getInstance();
     }
 
     @Test
@@ -78,14 +85,29 @@ public class OrderServiceTest {
 
     @Test
     public void getMessagesShouldReturnMessages() {
-        OrderService spyOrderService = spy(orderService);
-        doNothing().when(spyOrderService).notifyCustomer(any(String.class), any(String.class));
-        spyOrderService.placeOrder(order, TWILIO_RECIPIENT_PHONE_NUMBER);
+        orderService.placeOrder(order, TWILIO_RECIPIENT_PHONE_NUMBER);
+        List<String> actual = orderService.getMessages();
 
-        List<String> expected = List.of(getExpectedFormattedSummaryMessage());
-        List<String> actual = spyOrderService.getMessages();
-
+        List<String> expected = new ArrayList<>();
+        expected.add(getExpectedFormattedSummaryMessage());
         Assertions.assertEquals(expected, actual);
+
+        expected.add("6 x BGLO, 1 x BGLP, 1 x BGLE + 1 x FILE, 1 x COFB");
+        expected.add(getExpectedFormattedSummaryMessage());
+
+        String summaryMessageWithProductsOnly = getExpectedFormattedSummaryMessage().lines()
+                .skip(9)
+                .limit(7)
+                .map(s -> s + "\n")
+                .reduce("", String::concat);
+
+        try {
+            mockSmsOrder();
+            Assertions.assertTrue(expected.contains("6 x BGLO, 1 x BGLP, 1 x BGLE + 1 x FILE, 1 x COFB"));
+            Assertions.assertTrue(expected.get(2).contains(summaryMessageWithProductsOnly));
+        } catch (URISyntaxException | IOException | InterruptedException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     private String getExpectedFormattedSummaryMessage() {
@@ -107,18 +129,31 @@ public class OrderServiceTest {
                                      (-£0.45)
                 Plain Bagel         1  £0.39
                 Everything Bagel    1  £0.49
-                Egg Filling          1  £3.0
+                Egg Filling         1  £0.12
                 Black Coffee        1  £0.99
                                      (-£0.13)
                                 
                 ----------------------------
                                 
-                Total                  £7.23
+                Total                  £4.35
                                 
                  You saved a total of £0.58
                         on this shop
                                 
                          Thank you
                       for your order!""", deliveryTime.format(formatter), receiptTime.format(formatter));
+    }
+
+    private void mockSmsOrder() throws URISyntaxException, IOException, InterruptedException {
+        String formData = String.format(
+                "From=%s&Body=%s",
+                URLEncoder.encode(TWILIO_RECIPIENT_PHONE_NUMBER, StandardCharsets.UTF_8),
+                URLEncoder.encode("6 x BGLO, 1 x BGLP, 1 x BGLE + 1 x FILE, 1 x COFB", StandardCharsets.UTF_8));
+        HttpRequest smsRequest = HttpRequest.newBuilder(new URI("http://localhost:4567/sms"))
+                .POST(HttpRequest.BodyPublishers.ofString(formData))
+                .setHeader("Content-Type", "application/x-www-form-urlencoded")
+                .build();
+        HttpClient httpClient = HttpClient.newHttpClient();
+        httpClient.send(smsRequest, HttpResponse.BodyHandlers.ofString());
     }
 }
