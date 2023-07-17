@@ -6,42 +6,42 @@ import org.junit.jupiter.api.Test;
 
 public class BasketTest {
     Basket basket;
-    Item onionBagel;
-    Item plainBagel;
-    Item everythingBagel;
-    Item sesameBagel;
-    Item blackCoffee;
-    Item whiteCoffee;
-    Item cappuccinoCoffee;
-    Item latteCoffee;
-    Item baconFilling;
-    Item eggFilling;
-    Item cheeseFilling;
-    Item creamCheeseFilling;
-    Item smokeSalmonFilling;
-    Item hamFilling;
+    Bagel onionBagel;
+    Bagel plainBagel;
+    Bagel everythingBagel;
+    Bagel sesameBagel;
+    Coffee blackCoffee;
+    Coffee whiteCoffee;
+    Coffee cappuccinoCoffee;
+    Coffee latteCoffee;
+    Filling baconFilling;
+    Filling eggFilling;
+    Filling cheeseFilling;
+    Filling creamCheeseFilling;
+    Filling smokeSalmonFilling;
+    Filling hamFilling;
     Inventory inventory;
 
     @BeforeEach
     public void setUp(){
         basket = new Basket(2);
 
-        onionBagel = new Item("Bagel","Onion", 0.49);
-        plainBagel = new Item("Bagel", "Plain", 0.39);
-        everythingBagel = new Item("Bagel", "Everything", 0.49);
-        sesameBagel = new Item("Bagel", "Sesame", 0.49);
+        onionBagel = new Bagel("BGLO", "Bagel","Onion", 0.49);
+        plainBagel = new Bagel("BGLP", "Bagel", "Plain", 0.39);
+        everythingBagel = new Bagel("BGLE", "Bagel", "Everything", 0.49);
+        sesameBagel = new Bagel("BGLS", "Bagel", "Sesame", 0.49);
 
-        blackCoffee = new Item("Coffee","Black", 0.99);
-        whiteCoffee = new Item("Coffee","White", 1.19);
-        cappuccinoCoffee = new Item("Coffee","Cappuccino", 1.29);
-        latteCoffee = new Item("Coffee","Latte", 1.29);
+        blackCoffee = new Coffee("COFB", "Coffee","Black", 0.99);
+        whiteCoffee = new Coffee("COFW","Coffee","White", 1.19);
+        cappuccinoCoffee = new Coffee("COFC","Coffee","Cappuccino", 1.29);
+        latteCoffee = new Coffee("COFL","Coffee","Latte", 1.29);
 
-        baconFilling = new Item("Filling", "Bacon", 0.12);
-        eggFilling = new Item("Filling","Egg", 0.12);
-        cheeseFilling = new Item("Filling","Cheese", 0.12);
-        creamCheeseFilling = new Item("Filling","Cream Cheese", 0.12);
-        smokeSalmonFilling = new Item("Filling","Smoked Salmon", 0.12);
-        hamFilling = new Item("Filling","Ham", 0.12);
+        baconFilling = new Filling("FILB","Filling", "Bacon", 0.12);
+        eggFilling = new Filling("FILE", "Filling","Egg", 0.12);
+        cheeseFilling = new Filling("FILC", "Filling","Cheese", 0.12);
+        creamCheeseFilling = new Filling("FILX", "Filling","Cream Cheese", 0.12);
+        smokeSalmonFilling = new Filling("FILS", "Filling","Smoked Salmon", 0.12);
+        hamFilling = new Filling("FILH","Filling","Ham", 0.12);
 
         inventory = new Inventory();
         inventory.getItems().add(onionBagel);
@@ -58,7 +58,6 @@ public class BasketTest {
         inventory.getItems().add(creamCheeseFilling);
         inventory.getItems().add(smokeSalmonFilling);
         inventory.getItems().add(hamFilling);
-
     }
 
     @Test
@@ -152,27 +151,27 @@ public class BasketTest {
 
     @Test
     public void getPriceOfABagelShouldReturnEqual(){
-        Assertions.assertEquals(0.49, inventory.getPriceOfParticularBagel(onionBagel.getVariant()));
+        Assertions.assertEquals(0.49, inventory.getPriceOfParticularItem(onionBagel.getVariant()));
     }
 
     @Test
     public void getPriceOfABagelShouldReturnNotEqual(){
-        Assertions.assertNotEquals(0.49, inventory.getPriceOfParticularBagel(smokeSalmonFilling.getVariant()));
+        Assertions.assertNotEquals(0.49, inventory.getPriceOfParticularItem(smokeSalmonFilling.getVariant()));
     }
 
     @Test
     public void getPriceOfAFillingShouldReturnEqual(){
-        Assertions.assertEquals(0.12, inventory.getPriceOfParticularFilling(baconFilling.getVariant()));
+        Assertions.assertEquals(0.12, inventory.getPriceOfParticularItem(baconFilling.getVariant()));
     }
 
     @Test
     public void getPriceOfParticularFillingShouldReturnNotEqual(){
-        Assertions.assertNotEquals(0.21, inventory.getPriceOfParticularFilling(hamFilling.getVariant()));
+        Assertions.assertNotEquals(0.21, inventory.getPriceOfParticularItem(hamFilling.getVariant()));
     }
 
     @Test
     public void checkIfItemIsInInventoryShouldThrowException(){
-        Item itemNotInInventory = new Item("Coffee", "Mocha", 1.20);
+        Item itemNotInInventory = new Item("COFM", "Coffee", "Mocha", 1.20);
         Assertions.assertThrows(RuntimeException.class, () -> inventory.checkIfItemIsInInventory(itemNotInInventory));
     }
 

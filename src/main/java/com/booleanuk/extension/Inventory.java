@@ -15,7 +15,7 @@ public class Inventory {
         return items;
     }
 
-    public double getPriceOfParticularBagel(String variant) {
+    public double getPriceOfParticularItem(String variant) {
         Item bagel = items.stream()
                 .filter(item -> item.getVariant().equals(variant))
                 .findFirst()

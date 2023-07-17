@@ -15,24 +15,19 @@ public class Inventory {
         return items;
     }
 
-    public double getPriceOfParticularBagel(String variant) {
-        Item bagel = items.stream()
-                .filter(item -> item.getVariant().equals(variant))
+    //I'd like to know the cost of a bagel before I add it to my basket.
+    //I'd like to know the cost of each filling before I add it to my bagel order.
+    public double getPriceOfParticularItem(String variant) {
+        Item item = items.stream()
+                .filter(i -> i.getVariant().equals(variant))
                 .findFirst()
                 .get();
 
-        return bagel.getPrice();
+        return item.getPrice();
     }
 
-    public double getPriceOfParticularFilling(String variant) {
-        Item filling = items.stream()
-                .filter(item -> item.getVariant().equals(variant))
-                .findFirst()
-                .get();
 
-        return filling.getPrice();
-    }
-
+    //I want customers to only be able to order things that we stock in our inventory.
     public boolean checkIfItemIsInInventory(Item item){
         if(!items.contains(item))
             throw new RuntimeException("This item is not in Bob's inventory");

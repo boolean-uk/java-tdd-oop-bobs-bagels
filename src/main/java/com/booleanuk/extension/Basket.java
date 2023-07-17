@@ -4,8 +4,6 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-import static java.lang.Math.round;
-
 public class Basket {
 
     private List<Item> items;
@@ -88,7 +86,6 @@ public class Basket {
         if (capacity > newCapacity)
             throw new RuntimeException("New capacity cannot be smaller than the old one");
         capacity = newCapacity;
-
     }
 
     public double totalCost() {
