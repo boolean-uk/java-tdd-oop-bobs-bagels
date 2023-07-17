@@ -29,12 +29,4 @@ public abstract class InventoryItem {
     public int getPrice() {
         return price;
     }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getVariant() {
-        return variant;
-    }
 }
