@@ -81,4 +81,33 @@ public class Basket {
 
         return partialCost;
     }
+
+    public boolean addFillingToBagel(String bagelSku, String fillingSku){
+        Product bagel = inventory.getProduct(bagelSku);
+        Product filling = inventory.getProduct(fillingSku);
+
+        if(!(bagel instanceof Bagel) || !(filling instanceof Filling))
+            return false;
+
+        Bagel bagel1 = (Bagel) bagel;
+        Filling filling1 = (Filling) filling;
+        Filling actualBagelFilling = bagel1.getFilling();
+
+        if(!this.products.containsKey(bagel1))
+            return false;
+
+        if(actualBagelFilling == null){
+            addProduct(fillingSku, this.products.get(bagel1));
+            bagel1.addFilling(filling1);
+            return true;
+        }
+
+        if(actualBagelFilling.equals(filling1)) return false;
+
+        removeProduct(actualBagelFilling.getSku(), this.products.get(actualBagelFilling));
+        addProduct(fillingSku, this.products.get(bagel1));
+        bagel1.addFilling(filling1);
+
+        return true;
+    }
 }
