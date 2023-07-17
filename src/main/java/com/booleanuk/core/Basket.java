@@ -53,9 +53,9 @@ public class Basket {
 
         for(InventoryItem item: listOfItemsInBasket)
         {
-            if(!item.sku.startsWith("BGL"))
+            if(!item.getSku().startsWith("BGL"))
             {
-                cost += item.price;
+                cost += item.getPrice();
             }
         }
         cost+=countCoffeeDiscount(numberOfBglp,numberOfCoffees);
@@ -90,7 +90,7 @@ public class Basket {
         int products = 0;
         for(InventoryItem item: listOfItemsInBasket)
         {
-            if (item.sku.startsWith(sku))
+            if (item.getSku().startsWith(sku))
             {
                 products++;
             }
@@ -102,7 +102,7 @@ public class Basket {
         int cost=0;
         for(InventoryItem item: listOfItemsInBasket)
         {
-                cost += item.price;
+                cost += item.getPrice();
         }
         return cost;
     }

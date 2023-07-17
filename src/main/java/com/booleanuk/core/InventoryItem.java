@@ -1,10 +1,10 @@
 package com.booleanuk.core;
 
 public abstract class InventoryItem {
-    public String sku;
-    public int price;
-    public String name;
-    public String variant;
+    private String sku;
+    private int price;
+    private String name;
+    private String variant;
 
     public InventoryItem(String sku,int price,String name, String variant) {
         this.sku = sku;
@@ -20,5 +20,21 @@ public abstract class InventoryItem {
 
     public String getFullName(){
         return this.variant + " " + this.name;
+    }
+
+    public String getSku() {
+        return sku;
+    }
+
+    public int getPrice() {
+        return price;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getVariant() {
+        return variant;
     }
 }

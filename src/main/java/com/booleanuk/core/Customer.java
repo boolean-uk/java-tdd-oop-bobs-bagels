@@ -42,7 +42,7 @@ public class Customer {
             int quantity = quantities.get(i);
             itemsInBasket+="" + quantity;
             itemsInBasket += quantity<10 ? "   " : "  ";
-            itemsInBasket += "£" + (double)i.price/100;
+            itemsInBasket += "£" + (double)i.getPrice()/100;
             itemsInBasket += "\n";
         }
         return itemsInBasket;
