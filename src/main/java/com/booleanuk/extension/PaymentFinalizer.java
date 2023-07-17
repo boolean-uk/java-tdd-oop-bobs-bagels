@@ -277,6 +277,9 @@ public class PaymentFinalizer {
         }
         for (FillingExt filling :
                 receiptForFillings.keySet()) {
+            if (filling.getSku() == SkuExt.FILB) {
+
+
             BigDecimal fillingPrice = BigDecimal.valueOf(filling.getPrice());
             BigDecimal quantity = BigDecimal.valueOf(receiptForFillings.get(filling));
             BigDecimal total = fillingPrice.multiply(quantity);
@@ -290,8 +293,101 @@ public class PaymentFinalizer {
                         .append(getOnePositionCost(filling.getPrice(),receiptForFillings.get(filling)))
                         .append("\n");
 
-        }
 
+            }
+            if (filling.getSku() == SkuExt.FILX) {
+
+
+                BigDecimal fillingPrice = BigDecimal.valueOf(filling.getPrice());
+                BigDecimal quantity = BigDecimal.valueOf(receiptForFillings.get(filling));
+                BigDecimal total = fillingPrice.multiply(quantity);
+                paymentBeforeDiscount+= total.doubleValue();
+                sb.append(filling.getSku().getVariant())
+                        .append(" ")
+                        .append(filling.getName())
+                        .append("  ")
+                        .append(receiptForFillings.get(filling))
+                        .append(" ")
+                        .append(getOnePositionCost(filling.getPrice(),receiptForFillings.get(filling)))
+                        .append("\n");
+
+
+            }
+            if (filling.getSku() == SkuExt.FILH){
+
+
+                BigDecimal fillingPrice = BigDecimal.valueOf(filling.getPrice());
+                BigDecimal quantity = BigDecimal.valueOf(receiptForFillings.get(filling));
+                BigDecimal total = fillingPrice.multiply(quantity);
+                paymentBeforeDiscount+= total.doubleValue();
+                sb.append(filling.getSku().getVariant())
+                        .append(" ")
+                        .append(filling.getName())
+                        .append("  ")
+                        .append(receiptForFillings.get(filling))
+                        .append(" ")
+                        .append(getOnePositionCost(filling.getPrice(),receiptForFillings.get(filling)))
+                        .append("\n");
+
+
+            }
+            if (filling.getSku() == SkuExt.FILS) {
+
+
+                BigDecimal fillingPrice = BigDecimal.valueOf(filling.getPrice());
+                BigDecimal quantity = BigDecimal.valueOf(receiptForFillings.get(filling));
+                BigDecimal total = fillingPrice.multiply(quantity);
+                paymentBeforeDiscount+= total.doubleValue();
+                sb.append(filling.getSku().getVariant())
+                        .append(" ")
+                        .append(filling.getName())
+                        .append("  ")
+                        .append(receiptForFillings.get(filling))
+                        .append(" ")
+                        .append(getOnePositionCost(filling.getPrice(),receiptForFillings.get(filling)))
+                        .append("\n");
+
+
+            }
+            if (filling.getSku() == SkuExt.FILE) {
+
+
+                BigDecimal fillingPrice = BigDecimal.valueOf(filling.getPrice());
+                BigDecimal quantity = BigDecimal.valueOf(receiptForFillings.get(filling));
+                BigDecimal total = fillingPrice.multiply(quantity);
+                paymentBeforeDiscount+= total.doubleValue();
+                sb.append(filling.getSku().getVariant())
+                        .append(" ")
+                        .append(filling.getName())
+                        .append("  ")
+                        .append(receiptForFillings.get(filling))
+                        .append(" ")
+                        .append(getOnePositionCost(filling.getPrice(),receiptForFillings.get(filling)))
+                        .append("\n");
+
+
+            }
+            if (filling.getSku() == SkuExt.FILC) {
+
+
+                BigDecimal fillingPrice = BigDecimal.valueOf(filling.getPrice());
+                BigDecimal quantity = BigDecimal.valueOf(receiptForFillings.get(filling));
+                BigDecimal total = fillingPrice.multiply(quantity);
+                paymentBeforeDiscount+= total.doubleValue();
+                sb.append(filling.getSku().getVariant())
+                        .append(" ")
+                        .append(filling.getName())
+                        .append("  ")
+                        .append(receiptForFillings.get(filling))
+                        .append(" ")
+                        .append(getOnePositionCost(filling.getPrice(),receiptForFillings.get(filling)))
+                        .append("\n");
+
+
+            }
+
+
+}
         for (CoffeeExt coffeeExt :
                 receiptForCoffee.keySet()) {
 

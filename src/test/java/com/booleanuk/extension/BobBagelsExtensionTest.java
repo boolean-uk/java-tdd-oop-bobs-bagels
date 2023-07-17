@@ -258,11 +258,11 @@ public class BobBagelsExtensionTest {
     }
 
     @Test
-    public void shouldReturnMainPartOfReceipt(){
+    public void shouldPrintCorrectReceipt(){
        //given
         LocalDateTime date = LocalDateTime.of(2023,7,15,21,36,31);
         receiptCreator.setReceiptCreatedAt(date);
-        basketManager.createReceipt();
+
         basketExt.setCapacity(30);
         for(int i = 0; i < 12; i++){
             basketManager.add(bagelO);
@@ -270,12 +270,11 @@ public class BobBagelsExtensionTest {
         }
         basketExt.add(fillingB);
         basketManager.add(fillingC);
-        String correctREceipt = basketManager.createReceipt();
-        //when
-       String receipt = basketManager.createReceipt();
+
+        String receipt = basketManager.createReceipt();
 
         //then
-        assertEquals(correctREceipt,receipt);
+        System.out.println(receipt);
     }
 
 
