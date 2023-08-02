@@ -1,9 +1,9 @@
-package com.booleanuk.core;
+package com.booleanuk.extension;
 
 import java.util.List;
 import java.util.Objects;
 
-public class Bagel extends Product{
+public class Bagel extends Product {
     private List<Filling> fillings;
 
     public Bagel(String SKU, Double price, String variant, List<Filling> fillings) {

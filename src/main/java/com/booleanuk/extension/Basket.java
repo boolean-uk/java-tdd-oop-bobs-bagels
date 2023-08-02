@@ -1,4 +1,4 @@
-package com.booleanuk.core;
+package com.booleanuk.extension;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -35,6 +35,18 @@ public class Basket {
         contents.add(bagel);
     }
 
+    public void addToBasket(Product product) {
+        if(contents.size() >= capacity){
+            throw new IllegalStateException("Basket is full!");
+        }
+
+        if(!Manager.getInventory().contains(product)){
+            throw new IllegalArgumentException("Product " + product + " is not in the manager's inventory!");
+        }
+
+        contents.add(product);
+    }
+
     public void removeFromBasket(Bagel bagel) {
         if(!contents.contains(bagel)){
             throw new IllegalArgumentException("Bagel is not in the basket!");
@@ -59,6 +71,30 @@ public class Basket {
             totalCost += product.getPrice();
         }
         return Math.round(totalCost * 100.0) / 100.0;
+    }
+
+    public int getBagelSKUCount(String SKU) {
+        return contents.stream()
+                .filter(product -> product instanceof Bagel bagel && bagel.getSKU().equals(SKU))
+                .map(product -> (Bagel) product)
+                .toList().size();
+    }
+
+
+    public int getCoffeesSKUCount(String SKU){
+        return contents.stream()
+                .filter(product -> product instanceof Coffee coffee && coffee.getSKU().equals(SKU))
+                .map(product -> (Coffee) product)
+                .toList().size();
+    }
+
+    public int getFillingCount(){
+        return contents.stream()
+                .filter(product -> product instanceof Bagel)
+                .map(product -> (Bagel) product)
+                .map(Bagel::getFillings)
+                .mapToInt(List::size)
+                .sum();
     }
 
 }

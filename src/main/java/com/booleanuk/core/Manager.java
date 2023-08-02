@@ -108,4 +108,5 @@ public class Manager {
         coffees.forEach(coffee -> System.out.println(
                 coffee.getVariant() + " - " + coffee.getPrice()));
     }
+
 }

@@ -1,4 +1,4 @@
-package com.booleanuk.core;
+package com.booleanuk.extension;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -9,7 +9,8 @@ import java.util.List;
 
 public class ManagerTest {
     private Manager bob;
-    private static final int INITIAL_BASKET_CAPACITY = 15;
+    private Client client;
+    private static final int INITIAL_BASKET_CAPACITY = 25;
 
     private static final List<Product> inventory = List.of(
             new Bagel("BGLO", 0.49, "Onion", Collections.emptyList()),
@@ -31,6 +32,63 @@ public class ManagerTest {
     @BeforeEach
     public void setUp(){
         bob = new Manager(INITIAL_BASKET_CAPACITY);
+        client = new Client();
+    }
+
+    @Test
+    public void testApplyDiscountsAndGenerateReceipt_OnionBagelsDiscount(){
+        for(int i = 0; i < 6; i++){
+            client.orderBagel("Onion", List.of("Bacon"));
+        }
+        String receipt = bob.applyDiscountsAndGenerateReceipt(client);
+        Assertions.assertTrue(receipt.contains("Onion Bagel"));
+        Assertions.assertTrue(receipt.contains("0.45"));
+    }
+
+    @Test
+    public void testApplyDiscountsAndGenerateReceipt_PlainBagelsDiscount(){
+        for(int i = 0; i < 12; i++){
+            client.orderBagel("Plain",List.of("Bacon"));
+        }
+        String receipt = bob.applyDiscountsAndGenerateReceipt(client);
+        Assertions.assertTrue(receipt.contains("Plain Bagel"));
+        Assertions.assertTrue(receipt.contains("0.69"));
+    }
+
+    @Test
+    public void testApplyDiscountsAndGenerateReceipt_EverythingBagelsDiscount(){
+        for(int i = 0; i < 12; i++){
+            client.orderBagel("Everything",List.of("Bacon"));
+        }
+        String receipt = bob.applyDiscountsAndGenerateReceipt(client);
+
+        Assertions.assertTrue(receipt.contains("Everything Bagel"));
+        Assertions.assertTrue(receipt.contains("0.90"));
+    }
+
+    @Test
+    public void testApplyDiscountsAndGenerateReceipt_NoDiscount() {
+        for(int i = 0; i < 5; i++){
+            client.orderBagel("Onion", List.of("Bacon"));
+            client.orderBagel("Plain", List.of("Bacon"));
+            client.orderBagel("Everything", List.of("Bacon"));
+        }
+
+        String receipt = bob.applyDiscountsAndGenerateReceipt(client);
+        Assertions.assertTrue(receipt.contains("0.00"));
+    }
+
+    @Test
+    public void testApplyDiscountsAndGenerateReceipt_CoffeeBagelSet() {
+        for (int i = 0; i < 5; i++) {
+            client.orderBagel("Onion", List.of("Bacon"));
+            client.orderBagel("Plain", List.of("Bacon"));
+            client.orderBagel("Everything", List.of("Bacon"));
+            client.orderCoffee("Black");
+        }
+        String receipt = bob.applyDiscountsAndGenerateReceipt(client);
+        Assertions.assertTrue(receipt.contains("Coffee & Bagel Set"));
+        Assertions.assertTrue(receipt.contains("1.00"));
     }
 
     @Test
@@ -62,7 +120,7 @@ public class ManagerTest {
                 IllegalArgumentException.class,
                 () -> bob.getBagelByVariant("Nonexistent"));
 
-        Assertions.assertEquals("Bagel with variant Nonexistent " +
+        Assertions.assertEquals("Bagel with variant nonexistent " +
                 "is not in the inventory!", exception.getMessage());
     }
 
@@ -70,7 +128,7 @@ public class ManagerTest {
     public void testGetFillingByVariant(){
         Filling filling = new Filling("FILB", 0.12, "Bacon");
 
-       Assertions.assertEquals(filling, bob.getFillingByVariant("Bacon"));
+        Assertions.assertEquals(filling, bob.getFillingByVariant("Bacon"));
     }
 
     @Test
