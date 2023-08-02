@@ -6,7 +6,12 @@ public class Filling extends Product {
     }
 
     @Override
-    public Product clone() {
-        return null;
+    public String toString() {
+        return variant + " (" + price + "£)";
+    }
+
+    @Override
+    public Filling clone() {
+        return new Filling(SKU, price, variant);
     }
 }
