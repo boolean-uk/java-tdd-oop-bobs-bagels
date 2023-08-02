@@ -91,5 +91,4 @@ public class ManagerTest {
 
         Assertions.assertEquals(expected, actual);
     }
-
 }
