@@ -9,5 +9,7 @@ public class coreTest {
         Basket basket = new Basket(2);
         Bagel bagel = new Bagel("BGLO",0.49d,"Onion");
         Assertions.assertTrue(basket.add(bagel));
+        Assertions.assertTrue(basket.remove("BGLO"));
+        Assertions.assertFalse(basket.remove("panagiotis"));
     }
 }

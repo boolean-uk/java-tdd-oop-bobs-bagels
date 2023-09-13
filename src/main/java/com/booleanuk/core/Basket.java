@@ -14,4 +14,14 @@ public class Basket {
         this.basketList.add(item);
         return true;
     }
+
+    public Boolean remove(String sku) {
+        for (Foods food:basketList) {
+            if (food.getSku().equals(sku)){
+                basketList.remove(food);
+                return true;
+            }
+        }
+        return false;
+    }
 }
