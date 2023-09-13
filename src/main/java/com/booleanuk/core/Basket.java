@@ -11,6 +11,9 @@ public class Basket {
     }
 
     public boolean add(Foods item) {
+        if (basketList.size() <= this.size) {
+            return false;
+        }
         this.basketList.add(item);
         return true;
     }
