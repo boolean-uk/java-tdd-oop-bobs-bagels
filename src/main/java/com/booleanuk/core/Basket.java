@@ -3,15 +3,15 @@ package com.booleanuk.core;
 import java.util.ArrayList;
 
 public class Basket {
-    int size;
+    int capacity;
     ArrayList<Foods> basketList;
     public Basket(int size) {
-        this.size=size;
+        this.capacity =size;
         basketList = new ArrayList<>();
     }
 
     public boolean add(Foods item) {
-        if (basketList.size() <= this.size) {
+        if (basketList.size() >= this.capacity) {
             return false;
         }
         this.basketList.add(item);
@@ -27,4 +27,6 @@ public class Basket {
         }
         return false;
     }
+
+
 }
