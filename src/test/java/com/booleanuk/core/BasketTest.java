@@ -26,8 +26,8 @@ public class BasketTest {
 
         assertTrue(basket.addToBasket(itemBGLO));
         assertEquals(1, basket.getItemBasket().size());
-        assertFalse(basket.getItemBasket().contains(itemBGLO));
-        assertTrue(basket.addToBasket(itemBGLP));
+        assertTrue(basket.getItemBasket().contains(itemBGLO));
+        assertFalse(basket.addToBasket(itemBGLP));
         assertEquals(1, basket.getItemBasket().size());
 
     }

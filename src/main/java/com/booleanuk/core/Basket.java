@@ -19,11 +19,13 @@ public class Basket {
 
     public boolean addToBasket(InventoryItem item) {
         if (itemBasket.size() < this.basketSize) {
-            itemBasket.add(new InventoryItem("BGLO", 0.49, "Bagel", "Onion"));
+            itemBasket.add(item);
             System.out.println("Item added successfully" + " " + getItemBasket());
+            System.out.println(itemBasket.toString());
             return true;
         } else {
-            System.out.println("it didn't work");
+            System.out.println("Basket is full" + " " + itemBasket.size());
+            System.out.println(itemBasket.toString());
             return false;
         }
     }

@@ -32,6 +32,12 @@ public class InventoryItem {
         return Objects.hash(SKU, price, name, variant);
     }
 
+    // used this override to make visual what the hashcode represents
+    @Override
+    public String toString() {
+        return "SKU: " + SKU + ", Price: " + price + ", Name: " + name + ", Variant: " + variant;
+    }
+
     public String getSKU() {
         return SKU;
     }
