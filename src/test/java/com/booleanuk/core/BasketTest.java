@@ -22,4 +22,22 @@ public class BasketTest {
         assertFalse(basket.addToBasket(bagelItem,1));
         assertEquals(0, basket.getItemsMap().size());
     }
+
+    // test add to basket -> product already exists -> increase quantity
+
+
+    @Test
+    public void testRemoveFromBasket() {
+        Inventory inventory = new Inventory();
+        Basket basket = new Basket(inventory, 5);
+        Item bagelItem = new Bagel("BGLO", 0.49, "Bagel", "Onion");
+        Item bagelItem2 = new Bagel("BGLP",	0.39,	"Bagel",	"Plain");
+
+        assertTrue(basket.addToBasket(bagelItem,1));
+        assertEquals(1, basket.getItemsMap().size());
+        assertFalse(basket.removeFromBasket(bagelItem2));
+        assertEquals(1, basket.getItemsMap().size());
+        assertTrue(basket.removeFromBasket(bagelItem));
+        assertEquals(0, basket.getItemsMap().size());
+    }
 }
