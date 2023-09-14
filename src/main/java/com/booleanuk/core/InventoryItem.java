@@ -1,5 +1,7 @@
 package com.booleanuk.core;
 
+import java.util.Objects;
+
 public class InventoryItem {
     private String SKU;
 
@@ -14,6 +16,20 @@ public class InventoryItem {
         this.price = price;
         this.name = name;
         this.variant = variant;
+    }
+
+    // needed this because the test wasn't passing due too hashcode not matching
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        InventoryItem that = (InventoryItem) o;
+        return Double.compare(price, that.price) == 0 && Objects.equals(SKU, that.SKU) && Objects.equals(name, that.name) && Objects.equals(variant, that.variant);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(SKU, price, name, variant);
     }
 
     public String getSKU() {

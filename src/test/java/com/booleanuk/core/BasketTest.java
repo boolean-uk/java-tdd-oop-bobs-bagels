@@ -9,10 +9,12 @@ public class BasketTest {
 
     @Test
     public void testAddToBasketWorks() {
-        Basket basket = new Basket("BGLO", 2);
+        Inventory inventory = new Inventory();
+        Basket basket = new Basket(inventory, 2);
+        InventoryItem itemBGLO = new InventoryItem("BGLO", 0.49, "Bagel", "Onion");
 
-        assertTrue(basket.addToBasket("BGLO"));
-        assertEquals(1, basket.itemBasket.size()); // check if it's added successfully
-        assertTrue(basket.itemBasket.contains("BGLO")); // check if the correct bagel is in the basket
+        assertTrue(basket.addToBasket());
+        assertEquals(1, basket.getItemBasket().size());
+        assertTrue(basket.getItemBasket().contains(itemBGLO));
     }
 }
