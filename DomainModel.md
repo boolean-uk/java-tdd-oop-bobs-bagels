@@ -65,30 +65,44 @@ I want customers to only be able to order things that we stock in our inventory.
 
 ### Domain Model
 
-(Currently Under Development)
-
-| Class     | Method                       | Attributes                            | Scenario                               | Outcome                   |
-|-----------|------------------------------|---------------------------------------|----------------------------------------|---------------------------|
-| Bagel     | getType()                    | String type                           | 7. Get the bagel type                  | String                    |
-|           | getCost()                    | int cost                              | Get the bagel cost                     | int                       |
-|           | addFilling(Filling filling)  | ArrayList<Filling> fillings           | 8. Choose fillings for my bagel:       |                           |
-|           |                              |                                       | - If space exists for filling          | True                      |
-|           |                              |                                       | - If space doesn't exist for filling   | False                     |
-| Filling   | getType()                    | String type                           | Get the filling type                   | String                    |
-|           | getCost()                    | int cost                              | 9. Get the filling cost                | int                       |
-| Coffee    | getType()                    | String type                           | Get the coffee type                    | String                    |
-|           | getCost()                    | int cost                              | Get the coffee cost                    | int                       |
-| Basket    | addBagel(String type)        | ArrayList<Bagel> bagels, int capacity | 1,3. Add bagel to basket:              |                           |
-|           |                              |                                       | - If capacity not max                  | True, Add bagel to basket |
-|           |                              |                                       | - If capacity is max                   | False, Print Message      |
-|           | removeBagel(String type)     |                                       | 2,5. Remove bagel from basket:         |                           |
-|           |                              |                                       | - If item exists                       | True, Bagel removed       |
-|           |                              |                                       | - If item doesn't exist                | False, Print Message      |
-|           | setCapacity(int newCapacity) |                                       | 4. Expand business -> bigger capacity: |                           |
-|           |                              |                                       | - If newCapacity > oldCapacity         | True, Capacity changes    |
-|           |                              |                                       | - Otherwise                            | False, Print Message      |
-|           | getTotalCost()               |                                       | 6. Find the cost of items in basket:   |                           |
-|           |                              |                                       | - If basket is empty:                  | 0, Print Message          |
-|           |                              |                                       | - If basket is not empty               | int                       |
-| Inventory | -                            | -                                     | -                                      | -                         |
-|           | -                            | -                                     | -                                      | -                         |
+| Class     | Method                                        | Attributes                                | Scenario                                | Outcome                          |
+|-----------|-----------------------------------------------|-------------------------------------------|-----------------------------------------|----------------------------------|
+| Product   | getType()                                     | String type                               | Get the product type                    | String                           |
+|           | getCost()                                     | int cost                                  | Get the product cost                    | int                              |   
+|           | getSku()                                      | String sku                                | Get the product sku                     | String                           |
+|           | toString()                                    |                                           | Get string representation of product    | String                           |
+| Bagel     | getType()                                     | String type                               | 7. Get the bagel type                   | String                           |
+|           | getCost()                                     | int cost                                  | Get the bagel cost                      | int                              |
+|           | getSku()                                      | String sku                                | Get the bagel sku                       | String                           |
+|           | addFilling(Filling filling)                   | Filling filling                           | 8. Choose filling for my bagel:         |                                  |
+|           |                                               |                                           | - If filling does not exist             | True                             |
+|           |                                               |                                           | - If filling exists                     | False                            |
+| Filling   | getType()                                     | String type                               | Get the filling type                    | String                           |
+|           | getCost()                                     | int cost                                  | 9. Get the filling cost                 | int                              |
+|           | getSku()                                      | String sku                                | Get the filling sku                     | String                           |
+| Coffee    | getType()                                     | String type                               | Get the coffee type                     | String                           |
+|           | getCost()                                     | int cost                                  | Get the coffee cost                     | int                              |
+|           | getSku()                                      | String sku                                | Get the coffee sku                      | String                           |
+| Basket    | addProduct(String type)                       | ArrayList<Product> products, int capacity | 1,3. Add product to basket:             |                                  |
+|           |                                               |                                           | - If capacity not max                   | True, Add product to basket      |
+|           |                                               |                                           | - If capacity is max                    | False, Print Message             |
+|           | removeProduct(String type)                    |                                           | 2,5. Remove product from basket:        |                                  |
+|           |                                               |                                           | - If product exists                     | True, Product removed            |
+|           |                                               |                                           | - If product doesn't exist              | False, Print Message             |
+|           | setCapacity(int newCapacity)                  |                                           | 4. Expand business -> bigger capacity:  |                                  |
+|           |                                               |                                           | - If newCapacity > oldCapacity          | True, Capacity changes           |
+|           |                                               |                                           | - Otherwise                             | False, Print Message             |
+|           | getTotalCost()                                |                                           | 6. Find the cost of products in basket: |                                  |
+|           |                                               |                                           | - If basket is empty:                   | 0, Print Message                 |
+|           |                                               |                                           | - If basket is not empty                | int                              |
+| Inventory | searchProduct(String productName)             | HashMap<String, String> namesToSkus       | Look for product in the shop inventory: |                                  |
+|           |                                               |                                           | - If product in inventory               | String (which is the SKU)        |
+|           |                                               |                                           | - If product not in inventory           | null                             |
+|           | getProductByName(String productName)          | HashMap<String, Product> SkusToProducts   | Get product from the shop inventory:    |                                  |
+|           |                                               |                                           | - If SKU exists                         | Product                          |
+|           |                                               |                                           | - If SKU does not exist                 | null                             |
+|           | addNewProduct(Product product)                |                                           | Add product to inventory:               |                                  |
+|           |                                               |                                           | - If product already exists             | False,                           |
+|           |                                               |                                           | - Otherwise                             | True, Product added to inventory |
+|           | getProductList()                              |                                           | Get a list of all the products          | String                           |
+|           | constructProductName(String sku, String type) |                                           | Create a product name for the product   | String                           |
