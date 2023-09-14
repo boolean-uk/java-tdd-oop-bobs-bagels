@@ -17,7 +17,7 @@ public class Basket {
         return itemBasket;
     }
 
-    public boolean addToBasket() {
+    public boolean addToBasket(InventoryItem item) {
         if (itemBasket.size() < this.basketSize) {
             itemBasket.add(new InventoryItem("BGLO", 0.49, "Bagel", "Onion"));
             System.out.println("Item added successfully" + " " + getItemBasket());
