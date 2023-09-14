@@ -10,16 +10,16 @@ public class BasketTest {
         Inventory inventory = new Inventory();
         Basket basket = new Basket(inventory, 5);
         Item bagelItem = new Bagel("BGLO", 0.49, "Bagel", "Onion");
-        assertTrue(basket.addToBasket(bagelItem);
+        assertTrue(basket.addToBasket(bagelItem,1));
         assertEquals(1, basket.getItemsMap().size());
-        assertTrue(basket.getItemsMap().contains(bagelItem));
+        assertTrue(basket.getItemsMap().containsKey(bagelItem));
     }
     @Test
     public void testAddToBasketFailed() {
         Inventory inventory = new Inventory();
         Basket basket = new Basket(inventory, 5);
         Item bagelItem = new Bagel("BGLG", 0.49, "Bagel", "Garlic");
-        assertFalse(basket.addToBasket(bagelItem));
+        assertFalse(basket.addToBasket(bagelItem,1));
         assertEquals(0, basket.getItemsMap().size());
     }
 }

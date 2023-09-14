@@ -1,5 +1,7 @@
 package com.booleanuk.core;
 
+import java.util.Objects;
+
 public abstract class Item {
     protected String sku;
     protected Double price;
@@ -56,4 +58,18 @@ public abstract class Item {
 
     public abstract double calculateTotalPrice(int quantity);
     // Either abstract method here or in Sellable interface
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Item item = (Item) o;
+        return Objects.equals(sku, item.sku) && Objects.equals(price, item.price) && Objects.equals(name, item.name) && Objects.equals(variant, item.variant);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(sku, price, name, variant);
+    }
 }
