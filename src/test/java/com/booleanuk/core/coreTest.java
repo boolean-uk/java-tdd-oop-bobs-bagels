@@ -20,5 +20,7 @@ public class coreTest {
         Bagel bagel2 = new Bagel("BGLP",0.39d,"Plain");
         basket.add(bagel1);
         Assertions.assertFalse(basket.add(bagel2));
+        basket.setCapacity(12);
+        Assertions.assertEquals(basket.getCapacity(),12);
     }
 }
