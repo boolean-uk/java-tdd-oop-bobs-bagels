@@ -33,11 +33,15 @@ public class BasketTest {
         Item bagelItem = new Bagel("BGLO", 0.49, "Bagel", "Onion");
         Item bagelItem2 = new Bagel("BGLP",	0.39,	"Bagel",	"Plain");
 
-        assertTrue(basket.addToBasket(bagelItem,1));
+        assertTrue(basket.addToBasket(bagelItem,2));
         assertEquals(1, basket.getItemsMap().size());
-        assertFalse(basket.removeFromBasket(bagelItem2));
+        assertFalse(basket.removeFromBasket(bagelItem2,1));
         assertEquals(1, basket.getItemsMap().size());
-        assertTrue(basket.removeFromBasket(bagelItem));
+        assertTrue(basket.removeFromBasket(bagelItem,1));
+        assertEquals(1, basket.getItemsMap().size());
+        assertEquals(1, basket.getItemsMap().get(bagelItem));
+        assertTrue(basket.removeFromBasket(bagelItem,1));
         assertEquals(0, basket.getItemsMap().size());
+
     }
 }

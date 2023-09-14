@@ -37,4 +37,17 @@ public class Basket {
         }
         return false;
     }
+    public boolean removeFromBasket(Item item, int amount) {
+        if (this.itemsMap.containsKey(item)
+//                && this.itemsMap.get(item)<=amount
+                && amount>0) {
+            if (amount>=this.itemsMap.get(item)) {
+                this.itemsMap.remove(item);
+            } else {
+                this.itemsMap.put(item,this.itemsMap.get(item)-amount);
+            }
+            return true;
+        }
+        return false;
+    }
 }
