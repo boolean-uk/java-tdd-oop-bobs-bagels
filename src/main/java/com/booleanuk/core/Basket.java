@@ -7,11 +7,14 @@ public class Basket {
 
     private ArrayList<InventoryItem> list;
     private ArrayList<InventoryItem> basket = new ArrayList<>();
+
+    private InventoryItem item;
     private int capacity;
 
-    public Basket() {
+    public Basket(InventoryItem inventoryItem) {
         this.list = new ArrayList<>();
         this.capacity = 4;
+        this.item = inventoryItem;
     }
 
     public boolean addBagel(String variant, double price) {
@@ -22,7 +25,7 @@ public class Basket {
             boolean added = true;
 
             while (iterator.hasNext()) {
-                InventoryItem item = iterator.next();
+                item = iterator.next();
                 if (item.getVariant().equals(variant) && item.getName().equals("Bagel")) {
                     added = false;
                 }
@@ -45,7 +48,7 @@ public class Basket {
 
         if (!variant.equals("")) {
             while (iterator.hasNext()) {
-                InventoryItem item = iterator.next();
+                item = iterator.next();
                 if (item.getVariant().equals(variant) && item.getName().equals("Bagel")) {
                     iterator.remove();
                     removed = true;
@@ -83,7 +86,7 @@ public class Basket {
         double sum = 0;
 
         while (iterator.hasNext()) {
-            InventoryItem item = iterator.next();
+            item = iterator.next();
             sum += item.getPrice();
         }
         return sum;
@@ -108,7 +111,7 @@ public class Basket {
             boolean added = true;
 
             while (iterator.hasNext()) {
-                InventoryItem item = iterator.next();
+                item = iterator.next();
                 if (item.getVariant().equals(variant) && item.getName().equals("Filling")) {
                     added = false;
                 }

@@ -14,6 +14,9 @@ public class InventoryItem {
         this.variant = variant;
     }
 
+    public InventoryItem() {
+    }
+
     public String getSku() {
         return sku;
     }

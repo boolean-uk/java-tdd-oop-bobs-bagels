@@ -7,7 +7,8 @@ public class BasketTest {
 
     @Test
     public void addBagel() {
-        Basket theBasket = new Basket();
+        InventoryItem item = new InventoryItem();
+        Basket theBasket = new Basket(item);
 
         Assertions.assertFalse(theBasket.addBagel("Onion", 1.6));
         Assertions.assertFalse(theBasket.addBagel("Sesame", 0));
@@ -16,7 +17,8 @@ public class BasketTest {
 
     @Test
     public void removeBagel() {
-        Basket theBasket = new Basket();
+        InventoryItem item = new InventoryItem();
+        Basket theBasket = new Basket(item);
 
         theBasket.addBagel("Oat", 1.6);
         theBasket.addBagel("Multigrain", 1.2);
@@ -29,7 +31,8 @@ public class BasketTest {
 
     @Test
     public void setCapacity() {
-        Basket theBasket = new Basket();
+        InventoryItem item = new InventoryItem();
+        Basket theBasket = new Basket(item);
 
         Assertions.assertTrue(theBasket.setCapacity(3));
 
@@ -42,7 +45,8 @@ public class BasketTest {
 
     @Test
     public void totalCost() {
-        Basket theBasket = new Basket();
+        InventoryItem item = new InventoryItem();
+        Basket theBasket = new Basket(item);
 
         Assertions.assertEquals(0, theBasket.totalCost(), 0.001);
 
@@ -58,7 +62,8 @@ public class BasketTest {
 
     @Test
     public void showBagelCost() {
-        Basket theBasket = new Basket();
+        InventoryItem item = new InventoryItem();
+        Basket theBasket = new Basket(item);
 
         Assertions.assertEquals(0.39, theBasket.showBagelCost("Plain"));
         Assertions.assertEquals(0, theBasket.showBagelCost("Blueberry"));
@@ -66,7 +71,8 @@ public class BasketTest {
 
     @Test
     public void addFilling() {
-        Basket theBasket = new Basket();
+        InventoryItem item = new InventoryItem();
+        Basket theBasket = new Basket(item);
 
         Assertions.assertFalse(theBasket.addFilling("Bacon", 1.4));
         Assertions.assertFalse(theBasket.addFilling("Egg", 0));
@@ -75,7 +81,8 @@ public class BasketTest {
 
     @Test
     public void showFillingCost() {
-        Basket theBasket = new Basket();
+        InventoryItem item = new InventoryItem();
+        Basket theBasket = new Basket(item);
 
         Assertions.assertEquals(0.12, theBasket.showFillingCost("Bacon"));
         Assertions.assertEquals(0, theBasket.showFillingCost("Sauce"));
