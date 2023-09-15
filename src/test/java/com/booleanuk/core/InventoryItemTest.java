@@ -3,6 +3,8 @@ package com.booleanuk.core;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 public class InventoryItemTest {
 
     @Test
@@ -39,5 +41,28 @@ public void testSKU() {
         Assertions.assertEquals("Onion", inventoryItem.getVariant());
         inventoryItem.setVariant("Plain");
         Assertions.assertEquals("Plain", inventoryItem.getVariant());
+    }
+
+    @Test
+    public void testGetBagelPrice() {
+        InventoryItem bagelItem = new InventoryItem("BGLO", 0.49, "Bagel", "Onion");
+
+        Assertions.assertEquals(0.49, bagelItem.getPrice());
+    }
+    @Test
+    public void testGetFillingPrice() {
+        InventoryItem fillingItem = new InventoryItem("FILH", 0.12, "Filling", "Ham");
+
+        Assertions.assertEquals(0.12, fillingItem.getPrice());
+    }
+
+    @Test
+    public void testItemInStock() {
+        Inventory inventory = new Inventory();
+        InventoryItem bagelItem = new InventoryItem("BGLO", 0.49, "Bagel", "Onion");
+        InventoryItem otherBagelItem = new InventoryItem("BGLC", 0.52, "Bagel", "Chocolate");
+
+        assertTrue(inventory.getInventoryItem().contains(bagelItem));
+        assertFalse(inventory.getInventoryItem().contains(otherBagelItem));
     }
 }
