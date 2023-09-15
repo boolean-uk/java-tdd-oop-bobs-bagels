@@ -10,6 +10,7 @@ public class BasketTest {
         Inventory inventory = new Inventory();
         Basket basket = new Basket(inventory, 5);
         Item bagelItem = new Bagel("BGLO", 0.49, "Bagel", "Onion");
+
         assertTrue(basket.addToBasket(bagelItem,1));
         assertEquals(1, basket.getItemsMap().size());
         assertTrue(basket.getItemsMap().containsKey(bagelItem));
@@ -19,6 +20,7 @@ public class BasketTest {
         Inventory inventory = new Inventory();
         Basket basket = new Basket(inventory, 5);
         Item bagelItem = new Bagel("BGLG", 0.49, "Bagel", "Garlic");
+
         assertFalse(basket.addToBasket(bagelItem,1));
         assertEquals(0, basket.getItemsMap().size());
     }
@@ -43,5 +45,16 @@ public class BasketTest {
         assertTrue(basket.removeFromBasket(bagelItem,1));
         assertEquals(0, basket.getItemsMap().size());
 
+    }
+
+
+    @Test
+    public void testCheckingWhetherBasketIsFull() {
+        Inventory inventory = new Inventory();
+        Basket basket = new Basket(inventory, 2);
+        Item bagelItem = new Bagel("BGLO", 0.49, "Bagel", "Onion");
+        assertFalse(basket.isFull());
+        Item bagelItem2 = new Bagel("BGLP",	0.39,	"Bagel",	"Plain");
+        assertTrue(basket.isFull());
     }
 }
