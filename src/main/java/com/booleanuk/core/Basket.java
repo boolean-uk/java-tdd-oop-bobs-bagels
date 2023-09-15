@@ -52,6 +52,15 @@ public class Basket {
             return true;
         }
     }
+
+    public double getTotalCost() {
+       double totalCosts = 0.00;
+       for (InventoryItem item : itemBasket) {
+         totalCosts += item.getPrice();
+       }
+        System.out.println("The total costs of your items is: " + totalCosts);
+    return totalCosts;
+    }
 }
 
 
