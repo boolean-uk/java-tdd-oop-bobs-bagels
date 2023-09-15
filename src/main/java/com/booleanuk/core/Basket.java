@@ -37,5 +37,18 @@ public class Basket {
         System.out.println("Item removed from basket" + " " + getItemBasket());
         return true;
     }
+
+    public boolean addToBasketSize(int changeBasketSize) {
+        int newBasketSize = this.basketSize + changeBasketSize;
+        if (newBasketSize < 1) {
+            System.out.println("Changing the basket size didn't work" + " " + basketSize);
+            return false;
+        } else {
+            this.basketSize = newBasketSize;
+            System.out.println("Changing basket size is successful" + " " + basketSize);
+            return true;
+        }
+    }
 }
+
 
