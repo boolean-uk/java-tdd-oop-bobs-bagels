@@ -48,5 +48,12 @@ public class CoreTest {
         Assertions.assertEquals(1.37d,basket.getTotalCost()); //user story 6
     }
 
+    @Test
+    void checkFillingConstructorWithSkuOnly() {
+        Filling filling = new Filling("FILE");
+        Assertions.assertEquals(0.12d,filling.getCost());
+        Assertions.assertEquals("Egg",filling.getVariant());
+    }
+
 
 }
