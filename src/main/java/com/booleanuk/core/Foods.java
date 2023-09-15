@@ -19,8 +19,5 @@ public class Foods {
         return sku;
     }
 
-    public int getPrice() {
-        return this.price;
-    }
 
 }

@@ -26,19 +26,8 @@ public class coreTest {
 
     @Test
     void checkInventoryInitialization(){
-        Basket basket = new Basket(1);
-        Assertions.assertFalse(basket.inventory.isEmpty());
+        Inventory inventory = new Inventory();
+        Assertions.assertFalse(inventory.inventoryList.isEmpty());
     }
 
-    @Test
-    void basketCostTest() {
-        Basket basket = new Basket(2);
-        Bagel bagel1 = new Bagel("BGLO");
-        Bagel bagel2 = new Bagel("BGLP");
-        basket.add(bagel1);
-        basket.add(bagel2);
-        Assertions.assertEquals(0.88d,basket.getTotalCost());
-        basket.remove(bagel1.getSku());
-        Assertions.assertEquals(0.39d,basket.getTotalCost());
-    }
 }
