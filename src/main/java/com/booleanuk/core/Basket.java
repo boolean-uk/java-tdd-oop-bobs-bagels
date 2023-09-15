@@ -10,6 +10,11 @@ public class Basket {
     public Basket(int maxCapacity) {
         this.items = new HashMap<>();
         this.capacity = maxCapacity;
+        System.out.println("#Shop Basket initiating...");
+    }
+
+    public int getCapacity() {
+        return capacity;
     }
 
     private int getSize() {
@@ -45,6 +50,7 @@ public class Basket {
             this.capacity = newCapacity;
             return true;
         }
+        System.out.println("New capacity cannot be smaller than the current one.");
         return false;
     }
 
