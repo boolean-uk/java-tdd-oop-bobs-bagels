@@ -2,7 +2,8 @@ package com.booleanuk.core;
 
 public class Foods {
     private String sku;
-    private int price;
+    private int price = -1;
+    private double cost;
     private String variant;
 
     public Foods(String sku, double price, String variant) {
@@ -19,5 +20,19 @@ public class Foods {
         return sku;
     }
 
+    public double getCost(){
+        return (double) (this.price / 100.0);
+    }
+
+    public int getPrice() {
+        return this.price;
+    }
+
+    protected void setPrice() {
+        if (price < 0) {
+            Inventory inv = new Inventory();
+            this.price = inv.get(this.sku).getPrice();
+        }
+    }
 
 }

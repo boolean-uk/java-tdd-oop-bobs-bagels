@@ -19,4 +19,13 @@ public class Inventory {
         inventoryList.put(bagel3.getSku(),bagel3);
         inventoryList.put(bagel4.getSku(),bagel4);
     }
+
+    public Foods get(String sku) {
+        for (Foods food: inventoryList.values()) {
+            if (food.getSku().equals(sku)) {
+                return food;
+            }
+        }
+        return null;
+    }
 }

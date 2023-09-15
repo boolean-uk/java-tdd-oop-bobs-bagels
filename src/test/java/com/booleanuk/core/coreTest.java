@@ -30,4 +30,10 @@ public class coreTest {
         Assertions.assertFalse(inventory.inventoryList.isEmpty());
     }
 
+    @Test
+    void checkBagelsConstructorWithSkuOnly() {
+        Bagel bagel = new Bagel("BGLO");
+        Assertions.assertEquals(0.49d,bagel.getCost());
+    }
+
 }
