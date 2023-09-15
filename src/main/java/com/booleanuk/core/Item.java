@@ -16,6 +16,16 @@ public abstract class Item {
         this.variant = variant;
     }
 
+    protected Item(String sku) {
+        this(sku, null, null, null);
+    }
+
+
+//    public Item(String name, String variant) {
+//        this.name = name;
+//        this.variant = variant;
+//    }
+
     public String getSku() {
         return this.sku;
     }

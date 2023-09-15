@@ -1,8 +1,13 @@
 package com.booleanuk.core;
 
+import java.math.BigDecimal;
+
 public class Bagel extends Product implements Sellable, Fillable{
-    public Bagel(String sku, Double price, String name, String variant) {
+    public Bagel(String sku, BigDecimal price, String name, String variant) {
         super(sku, price, name, variant);
+    }
+    public Bagel(String sku) {
+        super(sku);
     }
 
     @Override
