@@ -34,6 +34,7 @@ public class coreTest {
     void checkBagelsConstructorWithSkuOnly() {
         Bagel bagel = new Bagel("BGLO");
         Assertions.assertEquals(0.49d,bagel.getCost());
+        Assertions.assertEquals("Onion",bagel.getVariant());
     }
 
 }

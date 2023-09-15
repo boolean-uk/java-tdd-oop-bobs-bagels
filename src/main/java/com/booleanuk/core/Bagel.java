@@ -9,6 +9,7 @@ public class Bagel extends Foods{
     public Bagel(String sku) {
         super(sku);
         setPrice();
+        setVariant();
     }
 
 }
