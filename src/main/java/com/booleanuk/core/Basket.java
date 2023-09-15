@@ -13,6 +13,10 @@ public class Basket {
         this.inventory = inventory;
     }
 
+    public int getBasketSize() {
+        return basketSize;
+    }
+
     public ArrayList<InventoryItem> getItemBasket() {
         return itemBasket;
     }

@@ -56,4 +56,17 @@ public class BasketTest {
         assertFalse(basket.removeFromBasket(itemBGLP));
         assertEquals(1, basket.getItemBasket().size());
     }
+    
+    @Test
+    public void testChangeBasketSize() {
+        Inventory inventory = new Inventory();
+        Basket basket = new Basket(inventory,1);
+        
+        assertTrue(basket.addToBasketSize(1));
+        assertEquals(2, basket.getBasketSize());
+
+        assertFalse(basket.addToBasketSize(-2));
+        assertEquals(2, basket.getBasketSize());
+
+    }
 }
