@@ -1,5 +1,7 @@
 package com.booleanuk.core;
 
+import java.util.Objects;
+
 public class Product {
     private final String type;
     private final double cost;
@@ -21,6 +23,24 @@ public class Product {
 
     public String getSku() {
         return sku;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+        Product product = (Product) obj;
+        return Objects.equals(this.sku, product.getSku());
+    }
+
+    @Override
+    public int hashCode() {
+        int result = this.sku.hashCode();
+        return result * 31 + (int)(this.cost * 100);
     }
 
     @Override
