@@ -50,4 +50,7 @@ public class Basket {
         }
         return false;
     }
+    public boolean isFull() {
+      return this.capacity<=this.itemsMap.size();
+    }
 }

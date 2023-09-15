@@ -53,8 +53,10 @@ public class BasketTest {
         Inventory inventory = new Inventory();
         Basket basket = new Basket(inventory, 2);
         Item bagelItem = new Bagel("BGLO", 0.49, "Bagel", "Onion");
+        assertTrue(basket.addToBasket(bagelItem,2));
         assertFalse(basket.isFull());
         Item bagelItem2 = new Bagel("BGLP",	0.39,	"Bagel",	"Plain");
+        assertTrue(basket.addToBasket(bagelItem2,2));
         assertTrue(basket.isFull());
     }
 }
