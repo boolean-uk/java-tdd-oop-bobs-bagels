@@ -53,10 +53,39 @@ public class BasketTest {
         Inventory inventory = new Inventory();
         Basket basket = new Basket(inventory, 2);
         Item bagelItem = new Bagel("BGLO", 0.49, "Bagel", "Onion");
-        assertTrue(basket.addToBasket(bagelItem,2));
+        assertTrue(basket.addToBasket(bagelItem,1));
         assertFalse(basket.isFull());
         Item bagelItem2 = new Bagel("BGLP",	0.39,	"Bagel",	"Plain");
-        assertTrue(basket.addToBasket(bagelItem2,2));
+        assertTrue(basket.addToBasket(bagelItem2,1));
         assertTrue(basket.isFull());
+    }
+
+    @Test
+    public void testSettingCapacity() {
+        Inventory inventory = new Inventory();
+        Basket basket = new Basket(inventory, 2);
+        assertEquals(2, basket.getCapacity());
+        Item bagelItem = new Bagel("BGLO", 0.49, "Bagel", "Onion");
+
+        assertTrue(basket.addToBasket(bagelItem,2));
+        assertTrue(basket.setCapacity(5));
+        assertEquals(5, basket.getCapacity());
+        Item bagelItem2 = new Bagel("BGLP",	0.39,	"Bagel",	"Plain");
+        assertTrue(basket.addToBasket(bagelItem2,2));
+        assertFalse(basket.setCapacity(3));
+        assertEquals(5, basket.getCapacity());
+
+    }
+
+    @Test
+    public void testGetTotalCost() {
+        Inventory inventory = new Inventory();
+        Basket basket = new Basket(inventory, 5);
+        Item bagelItem = new Bagel("BGLO", 0.49, "Bagel", "Onion");
+        Item bagelItem2 = new Bagel("BGLP",	0.39,	"Bagel",	"Plain");
+        assertEquals(0, basket.getTotalCost());
+        assertTrue(basket.addToBasket(bagelItem,2));
+        assertTrue(basket.addToBasket(bagelItem2,2));
+        assertEquals(1.76, basket.getTotalCost());
     }
 }

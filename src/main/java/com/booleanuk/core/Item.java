@@ -1,14 +1,15 @@
 package com.booleanuk.core;
 
+import java.math.BigDecimal;
 import java.util.Objects;
 
 public abstract class Item {
     protected String sku;
-    protected Double price;
+    protected BigDecimal price;
     protected String name;
     protected String variant;
 
-    public Item(String sku, Double price, String name, String variant) {
+    public Item(String sku, BigDecimal  price, String name, String variant) {
         this.sku = sku;
         this.price = price;
         this.name = name;
@@ -23,11 +24,11 @@ public abstract class Item {
         this.sku = sku;
     }
 
-    public Double getPrice() {
+    public BigDecimal getPrice() {
         return this.price;
     }
 
-    public void setPrice(Double price) {
+    public void setPrice(BigDecimal price) {
         this.price = price;
     }
 
