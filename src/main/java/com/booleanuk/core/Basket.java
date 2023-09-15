@@ -21,13 +21,17 @@ public class Basket {
         if (itemBasket.size() < this.basketSize) {
             itemBasket.add(item);
             System.out.println("Item added successfully" + " " + getItemBasket());
-            System.out.println(itemBasket.toString());
             return true;
         } else {
             System.out.println("Basket is full" + " " + itemBasket.size());
-            System.out.println(itemBasket.toString());
             return false;
         }
+    }
+    public boolean removeFromBasket(InventoryItem item) {
+        if (itemBasket.contains(item));
+        itemBasket.remove(item);
+        System.out.println("Item removed from basket" + " " + getItemBasket());
+        return true;
     }
 }
 
