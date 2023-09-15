@@ -37,4 +37,16 @@ public class coreTest {
         Assertions.assertEquals("Onion",bagel.getVariant());
     }
 
+    @Test
+    void checkBaketTotalCost(){
+        Basket basket = new Basket(3);
+        basket.add(new Bagel("BGLO"));
+        basket.add(new Bagel("BGLP"));
+        basket.add(new Bagel("BGLE"));
+
+        Assertions.assertEquals(3,basket.basketList.size());
+        Assertions.assertEquals(1.37d,basket.getTotalCost());
+
+    }
+
 }

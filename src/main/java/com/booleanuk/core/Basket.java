@@ -5,7 +5,6 @@ import java.util.HashMap;
 
 public class Basket {
     int capacity;
-    double cost = 0;
     ArrayList<Foods> basketList;
 
     public Basket(int size) {
@@ -39,4 +38,11 @@ public class Basket {
         return this.capacity;
     }
 
+    public double getTotalCost() {
+        int cost = 0;
+        for (Foods food: basketList) {
+            cost += food.getPrice();
+        }
+        return (double) (cost / 100.0);
+    }
 }
