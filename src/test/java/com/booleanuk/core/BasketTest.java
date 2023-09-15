@@ -87,6 +87,7 @@ public class BasketTest {
     }
 
     @Test
+    //this works because of the addToBasket method, it may need to change when the items are separate?
     public void testAddBagelFillingWorks() {
         Inventory inventory = new Inventory();
         Basket basket = new Basket(inventory, 2);
