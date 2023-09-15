@@ -31,4 +31,16 @@ public class BasketTest {
         assertEquals(1, basket.getItemBasket().size());
 
     }
+
+    @Test
+    public void testRemoveFromBasketWorks() {
+        Inventory inventory = new Inventory();
+        Basket basket = new Basket(inventory, 1);
+        InventoryItem itemBGLO = new InventoryItem("BGLO", 0.49, "Bagel", "Onion");
+
+        assertTrue(basket.addToBasket(itemBGLO));
+        assertEquals(1, basket.getItemBasket().size());
+        assertTrue(basket.removeFromBasket(itemBGLO));
+        assertEquals(0, basket.getItemBasket().size());
+    }
 }
