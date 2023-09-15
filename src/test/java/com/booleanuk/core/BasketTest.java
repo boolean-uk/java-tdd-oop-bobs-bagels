@@ -69,4 +69,20 @@ public class BasketTest {
         assertEquals(2, basket.getBasketSize());
 
     }
+
+    @Test
+    public void testGetTotalCost() {
+        Inventory inventory = new Inventory();
+        Basket basket = new Basket(inventory, 2);
+        InventoryItem itemBGLO = new InventoryItem("BGLO", 0.49, "Bagel", "Onion");
+        InventoryItem itemBGLP = new InventoryItem("BGLP", 0.39, "Bagel", "Plain");
+
+        assertTrue(basket.addToBasket(itemBGLO));
+        assertTrue(basket.addToBasket(itemBGLP));
+        assertEquals(2, basket.getItemBasket().size());
+
+        double expectedCost = itemBGLO.getPrice() +itemBGLP.getPrice();
+        assertEquals(expectedCost, basket.getTotalCost());
+
+    }
 }

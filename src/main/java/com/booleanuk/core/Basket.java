@@ -32,10 +32,13 @@ public class Basket {
         }
     }
     public boolean removeFromBasket(InventoryItem item) {
-        if (itemBasket.contains(item));
-        itemBasket.remove(item);
-        System.out.println("Item removed from basket" + " " + getItemBasket());
-        return true;
+        if (itemBasket.contains(item)) {
+            itemBasket.remove(item);
+            System.out.println("Item removed from basket" + " " + getItemBasket());
+            return true;
+        }
+        System.out.println("Item is not in basket and can't be removed" + " " + getItemBasket());
+        return false;
     }
 
     public boolean addToBasketSize(int changeBasketSize) {
