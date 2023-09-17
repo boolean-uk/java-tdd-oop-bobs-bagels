@@ -1,5 +1,8 @@
 package com.booleanuk.core;
 
+import com.booleanuk.core.Products.Item;
+import com.booleanuk.core.Products.Product;
+
 import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
@@ -40,7 +43,7 @@ public class Basket {
     }
 
     public Map<Item, Integer> getItemsMap() {
-        return itemsMap;
+        return this.itemsMap;
     }
 
     public void setItemsMap(Map<Item, Integer> itemsMap) {

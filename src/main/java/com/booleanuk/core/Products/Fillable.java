@@ -1,4 +1,6 @@
-package com.booleanuk.core;
+package com.booleanuk.core.Products;
+
+import com.booleanuk.core.Products.Filling;
 
 import java.util.ArrayList;
 

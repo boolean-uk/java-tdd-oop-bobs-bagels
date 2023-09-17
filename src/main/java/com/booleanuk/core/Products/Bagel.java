@@ -1,4 +1,4 @@
-package com.booleanuk.core;
+package com.booleanuk.core.Products;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;

@@ -1,8 +1,13 @@
 package com.booleanuk.core;
 
+import com.booleanuk.core.Products.Bagel;
+import com.booleanuk.core.Products.Filling;
+import com.booleanuk.core.Products.Item;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
+import java.util.List;
+import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -109,11 +114,28 @@ public class BasketTest {
         Inventory inventory = new Inventory();
         Basket basket = new Basket(inventory, 5);
         Bagel bagelItem = new Bagel("BGLO", new BigDecimal("0.49"), "Bagel", "Onion");
-//        Item filling1 = new Filling("FILB",	 new BigDecimal("0.12"),	"Filling",	"Bacon");
-//        Item filling2 = new Filling("FILC",	 new BigDecimal("0.12"),	"Filling",	"Cheese");
-        bagelItem.addFillingBySku("FILB", inventory);
-        bagelItem.addFillingBySku("FILC", inventory);
+        Filling filling1 = new Filling("FILB",	 new BigDecimal("0.12"),	"Filling",	"Bacon");
+        Filling filling2 = new Filling("FILC",	 new BigDecimal("0.12"),	"Filling",	"Cheese");
+        bagelItem.addFilling(filling1);
+        bagelItem.addFilling(filling2);
         assertTrue(basket.addToBasket(bagelItem,1));
-       assertEquals(0.49,basket.getItemsMap().keySet().);
+        Map<Item, Integer> itemsMap = basket.getItemsMap();
+
+        boolean bagelItemWithFillingsFound = false;
+        for (Map.Entry<Item, Integer> entry : itemsMap.entrySet()) {
+            Item item = entry.getKey();
+            Integer quantity = entry.getValue();
+
+            if (item.equals(bagelItem) && quantity == 1) {
+                Bagel bagelInMap = (Bagel) item;
+                if (bagelInMap.getFillings().contains(filling1) &&
+                        bagelInMap.getFillings().contains(filling2)) {
+                    bagelItemWithFillingsFound = true;
+                    break;
+                }
+            }
+        }
+
+        assertTrue(bagelItemWithFillingsFound);
     }
 }

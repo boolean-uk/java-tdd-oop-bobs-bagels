@@ -1,9 +1,8 @@
-package com.booleanuk.core;
+package com.booleanuk.core.Products;
 
 import java.math.BigDecimal;
-import java.util.Objects;
 
-public class Coffee extends Product implements Sellable{
+public class Coffee extends Product implements Sellable {
     public Coffee(String sku, BigDecimal price, String name, String variant) {
         super(sku, price, name, variant);
     }
