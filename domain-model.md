@@ -5,7 +5,7 @@
 |             | `int capacity`                              | `removeBagel(Bagel bagel)`                                               |
 |             |                                             | `isBasketFull()`                                                         |
 |             |                                             | `setCapacity(int newCapacity)`                                           |
-|             |                                             | `getTotalCost(HashMap<String, Filling> fillingInventory)`                |
+|             |                                             | `getTotalCost(HashMap<String, Filling> fillingInventory)<br/>`           |
 |             |                                             |                                                                          |
 | `Bagel`     | `String type`                               | `getPrice()`                                                             |
 |             | `double price`                              | `getFillings`                                                            |
