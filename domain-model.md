@@ -1,27 +1,26 @@
 
-| Classes           | Members                                  | Methods                                         |
-|-------------------|------------------------------------------|-------------------------------------------------|
-| `Basket`          | `List<Bagel> list`                       | `addBagel(String type)`                         |
-|                   | `capacity int`                           | `removeBagel(String type)`                      |
-|                   |                                          | `isBasketFull()`                                |
-|                   |                                          | `increaseCapacity(int newCapacity)`             |
-|                   |                                          |                                                 |
-| `Bagel`           | `String type`                            | `getType()`                                     |
-|                   | `double cost`                            | `getTotalCost()`                                |
-|                   | `List<String> selectedFillings`          | `addFilling(String filling)`                    |
-|                   |                                          | `getSelectedFillings()`                         |
-|                   |                                          |                                                 |
-| `fillingsTable`   | `HashMap<String, Double> fillingsPrices` | `addFillingPrice(String filling, double price)` |
-|                   |                                          | `getFillingCost(String filling)`                |
-|                   |                                          |                                                 |
-| `BagelsInventory` | `HashMap<String, Double> bagelsPrices`   | `addBagelType(String type, double cost)`        |
-|                   |                                          | `removeBagelType(String type)`                  |
-|                   |                                          | `isBagelTypeAvailable(String type)`             |
-|                   |                                          |                                                 |
-| `Manager`         |                                          | `changeBasketCapacity(int capacity)`            |
-|                   |                                          | `getBagelsInventory()`                          |
-|                   |                                          | `getFillingsInventory`                          |
-|                   |                                          |                                                 |
-
-
+| Classes     | Members                                     | Methods                                                                  |
+|-------------|---------------------------------------------|--------------------------------------------------------------------------|
+| `Basket`    | `ArrayList<Bagel> basket`                   | `addBagel(Bagel bagel)`                                                  |
+|             | `int capacity`                              | `removeBagel(Bagel bagel)`                                               |
+|             |                                             | `isBasketFull()`                                                         |
+|             |                                             | `setCapacity(int newCapacity)`                                           |
+|             |                                             | `getTotalCost(HashMap<String, Filling> fillingInventory)`                |
+|             |                                             |                                                                          |
+| `Bagel`     | `String type`                               | `getPrice()`                                                             |
+|             | `double price`                              | `getFillings`                                                            |
+|             | `List<String> selectedFillings`             | `getType()`                                                              |
+|             |                                             | `addFillings(String filling, HashMap<String, Filling> fillingsInventory` |
+|             |                                             | `calculateBagelsCost<HashMap<String, FIlling> fillingInventory`          |
+|             |                                             |                                                                          |
+| `Filling`   | `String name`                               | `getName()`                                                              |
+|             | `double cost`                               | `getCost()`                                                              |
+|             |                                             |                                                                          |
+| `Inventory` | `HashMap<String, Bagel> bagelInventory`     | `getBagelInventory()`                                                    |
+|             | `HashMap<String, Filling> fillingInventory` | `getFillingInventory()`                                                  |
+|             |                                             | `addBagelType(String bagelType, double cost)`                            |
+|             |                                             | `addFilling(String filling, double price)`                               |
+|             |                                             | `isBagelAvailable(String type)`                                          |
+|             |                                             | `getBagelsPrice(String type)`                                            |
+|             |                                             | `getFillingPrice(String name)`                                           |
 
