@@ -95,4 +95,28 @@ public class Basket {
 
         return totalPrice;
     }
+
+    public BigDecimal getItemCost(String sku) {
+//        BigDecimal totalPrice = BigDecimal.ZERO;
+//
+//        for (Map.Entry<Item, Integer> entry : itemsMap.entrySet()) {
+//            Item item = entry.getKey();
+//            int quantity = entry.getValue();
+//
+//            totalPrice = totalPrice.add(item.getPrice().multiply(new BigDecimal(quantity)));
+//        }
+//
+//        return totalPrice;
+//        if(this.inventory.getInventoryList().contains(item))
+        return this.inventory.getItemBySku(sku)!=null ? this.inventory.getItemBySku(sku).getPrice() : BigDecimal.valueOf(0.00);
+    }
+
+    public boolean isProductInBasket(Product product) {
+        return this.itemsMap.containsKey(product);
+
+    }
+    public boolean itemIsAvailable(Item item) {
+        return this.inventory.getInventoryList().contains(item);
+
+    }
 }

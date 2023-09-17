@@ -1,7 +1,9 @@
 package com.booleanuk.core;
 
+import java.math.BigDecimal;
+
 public class Filling extends Item {
-    public Filling(String sku, Double price, String name, String variant) {
+    public Filling(String sku, BigDecimal price, String name, String variant) {
         super(sku, price, name, variant);
     }
 // double filling etc.
