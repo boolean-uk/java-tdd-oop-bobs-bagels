@@ -3,8 +3,20 @@ package com.booleanuk.core.Products;
 import java.math.BigDecimal;
 
 public class Coffee extends Product implements Sellable {
-    public Coffee(String sku, BigDecimal price, String name, String variant) {
-        super(sku, price, name, variant);
+    private CoffeeType variant;
+
+
+    public Coffee(String SKU, BigDecimal price, String name, CoffeeType variant) {
+        super(SKU, price, name);
+        this.variant = variant;
+    }
+
+    public CoffeeType getVariant() {
+        return variant;
+    }
+
+    public void setVariant(CoffeeType variant) {
+        this.variant = variant;
     }
 
     @Override
@@ -27,4 +39,9 @@ public class Coffee extends Product implements Sellable {
 //        // Customize the hash code generation for Coffee
 //        return Objects.hash(super.hashCode(), /* Add additional attributes for Coffee */);
 //    }
+
+    @Override
+    public String toString() {
+        return String.format("%s %s", this.variant, this.name);
+    }
 }

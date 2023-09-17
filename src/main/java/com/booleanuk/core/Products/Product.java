@@ -3,11 +3,11 @@ package com.booleanuk.core.Products;
 import java.math.BigDecimal;
 
 public abstract class Product extends Item implements Sellable{
-    public Product(String sku, BigDecimal price, String name, String variant) {
-        super(sku, price, name, variant);
+    public Product(String SKU, BigDecimal price, String name) {
+        super(SKU, price, name);
     }
-    public Product(String sku) {
-        super(sku);
+    public Product(String SKU) {
+        super(SKU);
     }
 
 }

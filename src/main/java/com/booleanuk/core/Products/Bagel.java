@@ -6,14 +6,15 @@ import java.util.Objects;
 
 public class Bagel extends Product implements Sellable, Fillable {
     private ArrayList<Filling> fillings;
-
-    public Bagel(String sku, BigDecimal price, String name, String variant) {
-        super(sku, price, name, variant);
+    private BagelType variant;
+    public Bagel(String SKU, BigDecimal price, String name,BagelType variant ) {
+        super(SKU, price, name);
         this.fillings = new ArrayList<>();
+        this.variant = variant;
     }
 
-    public Bagel(String sku) {
-        super(sku);
+    public Bagel(String SKU) {
+        super(SKU);
     }
 
     @Override
@@ -27,6 +28,18 @@ public class Bagel extends Product implements Sellable, Fillable {
     @Override
     public BigDecimal getPrice() {
         return super.getPrice();
+    }
+
+    public void setFillings(ArrayList<Filling> fillings) {
+        this.fillings = fillings;
+    }
+
+    public void setVariant(BagelType variant) {
+        this.variant = variant;
+    }
+
+    public BagelType getVariant() {
+        return variant;
     }
 
     public BigDecimal getTotalPrice() {
@@ -65,6 +78,6 @@ public class Bagel extends Product implements Sellable, Fillable {
 
     @Override
     public String toString() {
-        return String.format("%s Bagel", this.variant);
+        return String.format("%s %s", this.variant, this.name);
     }
 }

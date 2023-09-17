@@ -4,20 +4,20 @@ import java.math.BigDecimal;
 import java.util.Objects;
 
 public abstract class Item {
-    protected String sku;
+    protected String SKU;
     protected BigDecimal price;
     protected String name;
-    protected String variant;
 
-    public Item(String sku, BigDecimal  price, String name, String variant) {
-        this.sku = sku;
+
+    public Item(String SKU, BigDecimal  price, String name) {
+        this.SKU = SKU;
         this.price = price;
         this.name = name;
-        this.variant = variant;
+
     }
 
     protected Item(String sku) {
-        this(sku, null, null, null);
+        this(sku, null, null);
     }
 
 
@@ -27,11 +27,11 @@ public abstract class Item {
 //    }
 
     public String getSku() {
-        return this.sku;
+        return this.SKU;
     }
 
     public void setSku(String sku) {
-        this.sku = sku;
+        this.SKU = sku;
     }
 
     public BigDecimal getPrice() {
@@ -55,20 +55,19 @@ public abstract class Item {
     }
 // protected setters??
     // abstract methods - do we need different implementation?
-    public String getVariant() {
-        return this.variant;
-    }
+//    public String getVariant() {
+//        return this.variant;
+//    }
+//
+//    public boolean setVariant(String variant) {
+//        if (variant.isBlank()) {
+//            return false;
+//        }
+//        this.variant = variant;
+//        return true;
+//    }
 
-    public boolean setVariant(String variant) {
-        if (variant.isBlank()) {
-            return false;
-        }
-        this.variant = variant;
-        return true;
-    }
 
-    public abstract double calculateTotalPrice(int quantity);
-    // Either abstract method here or in Sellable interface
 
 
     @Override
@@ -76,11 +75,13 @@ public abstract class Item {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Item item = (Item) o;
-        return Objects.equals(sku, item.sku);
+        return Objects.equals(SKU, item.SKU);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(sku);
+        return Objects.hash(SKU);
     }
+
+
 }

@@ -1,5 +1,7 @@
 package com.booleanuk.core;
 
+import com.booleanuk.core.Products.Bagel;
+import com.booleanuk.core.Products.Filling;
 import com.booleanuk.core.Products.Item;
 import com.booleanuk.core.Products.Product;
 
@@ -12,13 +14,12 @@ public class Basket {
     private Map<Item, Integer> itemsMap;
 
 
-
     private Inventory inventory;
-    // make static and final and exclude from constructor?
 
-    public Basket( Inventory inventory,int capacity ) {
+    public Basket(Inventory inventory, int capacity) {
+        this.itemsMap = new HashMap<Item, Integer>();
+
         this.setCapacity(capacity);
-        this.itemsMap = new HashMap<Item,Integer>();
         this.setInventory(inventory);
     }
 
@@ -34,7 +35,7 @@ public class Basket {
     }
 
     public boolean setCapacity(int capacity) {
-        if (capacity<this.getBasketSize()) {
+        if (capacity < this.getBasketSize()) {
             //add a print message for the mistake
             return false;
         }
@@ -49,6 +50,7 @@ public class Basket {
     public void setItemsMap(Map<Item, Integer> itemsMap) {
         this.itemsMap = itemsMap;
     }
+
     public Inventory getInventory() {
         return inventory;
     }
@@ -56,9 +58,10 @@ public class Basket {
     public void setInventory(Inventory inventory) {
         this.inventory = inventory;
     }
+
     public boolean addToBasket(Item item, int amount) {
         if (this.inventory.getInventoryList().contains(item)) {
-            this.itemsMap.put(item,amount);
+            this.itemsMap.put(item, amount);
             return true;
         }
         return false;
@@ -67,23 +70,30 @@ public class Basket {
     }
 
 
-
-
     public boolean removeFromBasket(Item item, int amount) {
         if (this.itemsMap.containsKey(item)
 //                && this.itemsMap.get(item)<=amount
-                && amount>0) {
-            if (amount>=this.itemsMap.get(item)) {
+                && amount > 0) {
+            if (amount >= this.itemsMap.get(item)) {
                 this.itemsMap.remove(item);
             } else {
-                this.itemsMap.put(item,this.itemsMap.get(item)-amount);
+                this.itemsMap.put(item, this.itemsMap.get(item) - amount);
             }
             return true;
         }
         return false;
     }
+
+    public boolean removeFromBasket(Item item) {
+        if (this.itemsMap.containsKey(item)) {
+            this.itemsMap.remove(item);
+            return true;
+        }
+        return false;
+    }
+
     public boolean isFull() {
-      return this.capacity<=this.getBasketSize();
+        return this.capacity <= this.getBasketSize();
     }
 
     public BigDecimal getTotalCost() {
@@ -111,15 +121,51 @@ public class Basket {
 //
 //        return totalPrice;
 //        if(this.inventory.getInventoryList().contains(item))
-        return this.inventory.getItemBySku(sku)!=null ? this.inventory.getItemBySku(sku).getPrice() : BigDecimal.valueOf(0.00);
+        return this.inventory.getItemBySku(sku) != null ? this.inventory.getItemBySku(sku).getPrice() : BigDecimal.valueOf(0.00);
     }
 
     public boolean isProductInBasket(Product product) {
         return this.itemsMap.containsKey(product);
 
     }
+
     public boolean itemIsAvailable(Item item) {
         return this.inventory.getInventoryList().contains(item);
+
+    }
+
+
+    @Override
+    public String toString() {
+
+        StringBuilder basket = new StringBuilder();
+        int number = 0;
+        for (Map.Entry<Item, Integer> entry : itemsMap.entrySet()) {
+            Item item = entry.getKey();
+            int quantity = entry.getValue();
+
+            // Append item name, quantity, and total cost for the item
+            basket.append(String.format("%-30s x %5s pcs x %10s = %10s",
+                            number + "." + item.getName(),
+                            quantity,
+                            "EUR" + item.getPrice(),
+                            "EUR" + item.getPrice().multiply(BigDecimal.valueOf(quantity))))
+                    .append("\n");
+
+            if (item instanceof Bagel) {
+                for (Filling filling : ((Bagel) item).getFillings()) {
+                    basket.append(String.format("%-30s %5s %10s",
+                                    "  >>" + filling.getName(),
+                                    "",
+                                    "EUR" + filling.getPrice()))
+                            .append("\n");
+                }
+            }
+
+            number++;
+        }
+
+        return basket.toString();
 
     }
 }

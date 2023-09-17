@@ -39,9 +39,18 @@ public class Inventory {
 //    }
 
     public Inventory() {
+        this.inventoryList = new ArrayList<>();
+
         loadBagels();
         loadCoffees();
         loadFillings();
+    }
+
+    public static Inventory getInstance() {
+        if (INSTANCE == null) {
+            INSTANCE = new Inventory();
+        }
+        return INSTANCE;
     }
 
     public ArrayList<Item> getInventoryList() {
@@ -96,4 +105,8 @@ public class Inventory {
     private void loadFillings() {
         loadProducts(fillings, Filling.class);
     }
+    public boolean isItemAvailable(Item item) {
+        return this.getInventoryList().contains(item);
+    }
+
 }

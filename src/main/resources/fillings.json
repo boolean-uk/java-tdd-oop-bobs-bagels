@@ -21,13 +21,13 @@
     "SKU": "FILX",
     "price": 0.12,
     "name": "Filling",
-    "variant": "Cream_Cheese"
+    "variant": "CreamCheese"
   },
   {
     "SKU": "FILS",
     "price": 0.12,
     "name": "Filling",
-    "variant": "Smoked_Salmon"
+    "variant": "SmokedSalmon"
   },
   {
     "SKU": "FILH",
