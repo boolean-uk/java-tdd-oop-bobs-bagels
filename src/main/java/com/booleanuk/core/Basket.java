@@ -10,7 +10,6 @@ public class Basket {
     public Basket(int maxCapacity) {
         this.items = new HashMap<>();
         this.capacity = maxCapacity;
-        System.out.println("#Shop Basket initiating...");
     }
 
     public int getCapacity() {
@@ -50,7 +49,7 @@ public class Basket {
             this.capacity = newCapacity;
             return true;
         }
-        System.out.println("New capacity cannot be smaller than the current one.");
+        System.out.println("New capacity must be bigger than the current one.");
         return false;
     }
 
@@ -61,5 +60,16 @@ public class Basket {
             cost += item.getKey().getCost() * item.getValue();
         }
         return cost;
+    }
+
+    public String showProducts() {
+        if (getSize() == 0){
+            return "Basket is empty.\n";
+        }
+        StringBuilder result = new StringBuilder();
+        for (Map.Entry<Product,Integer> entry : this.items.entrySet()) {
+            result.append(entry.getValue()).append("x ").append(entry.getKey().getSku()).append(" = ").append(entry.getValue()*entry.getKey().getCost()).append("\n");
+        }
+        return String.valueOf(result);
     }
 }

@@ -75,4 +75,18 @@ public class BasketTest {
         Assertions.assertFalse(basket.removeProduct(coffee));
         Assertions.assertEquals(0.49,basket.getTotalCost());
     }
+
+    @Test
+    public void shouldShowProductsCorrectly() {
+        Basket basket = new Basket(10);
+        Product bagel = new Product("Onion",0.49, "BGLO");
+        Product coffee = new Product("Black", 0.99, "COFB");
+        basket.addProduct(bagel);
+        basket.addProduct(bagel);
+        basket.addProduct(bagel);
+        basket.addProduct(coffee);
+        basket.addProduct(coffee);
+        String expected = "3x BGLO = 1.47\n2x COFB = 1.98\n";
+        Assertions.assertEquals(expected, basket.showProducts());
+    }
 }
