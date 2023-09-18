@@ -10,7 +10,7 @@ public class BasketTest {
     public void testAddToBasketWorks() {
         Inventory inventory = new Inventory();
         Basket basket = new Basket(inventory, 2);
-        InventoryItem itemBGLO = new InventoryItem("BGLO", 0.49, "Bagel", "Onion");
+        InventoryItem itemBGLO = new Bagel("BGLO", 0.49, "Bagel", "Onion");
 
         assertTrue(basket.addToBasket(itemBGLO));
         assertEquals(1, basket.getItemBasket().size());
@@ -21,8 +21,8 @@ public class BasketTest {
     public void testAddToBasketFails() {
         Inventory inventory = new Inventory();
         Basket basket = new Basket(inventory, 1);
-        InventoryItem itemBGLO = new InventoryItem("BGLO", 0.49, "Bagel", "Onion");
-        InventoryItem itemBGLP = new InventoryItem("BGLP", 0.39, "Bagel", "Plain");
+        InventoryItem itemBGLO = new Bagel("BGLO", 0.49, "Bagel", "Onion");
+        InventoryItem itemBGLP = new Bagel("BGLP", 0.39, "Bagel", "Plain");
 
         assertTrue(basket.addToBasket(itemBGLO));
         assertEquals(1, basket.getItemBasket().size());
@@ -36,7 +36,7 @@ public class BasketTest {
     public void testRemoveFromBasketWorks() {
         Inventory inventory = new Inventory();
         Basket basket = new Basket(inventory, 1);
-        InventoryItem itemBGLO = new InventoryItem("BGLO", 0.49, "Bagel", "Onion");
+        InventoryItem itemBGLO = new Bagel("BGLO", 0.49, "Bagel", "Onion");
 
         assertTrue(basket.addToBasket(itemBGLO));
         assertEquals(1, basket.getItemBasket().size());
@@ -48,8 +48,8 @@ public class BasketTest {
     public void testRemoveFromBasketFailed() {
         Inventory inventory = new Inventory();
         Basket basket = new Basket(inventory, 2);
-        InventoryItem itemBGLO = new InventoryItem("BGLO", 0.49, "Bagel", "Onion");
-        InventoryItem itemBGLP = new InventoryItem("BGLP", 0.39, "Bagel", "Plain");
+        InventoryItem itemBGLO = new Bagel("BGLO", 0.49, "Bagel", "Onion");
+        InventoryItem itemBGLP = new Bagel("BGLP", 0.39, "Bagel", "Plain");
 
         assertTrue(basket.addToBasket(itemBGLO));
         assertEquals(1, basket.getItemBasket().size());
@@ -74,8 +74,8 @@ public class BasketTest {
     public void testGetTotalCost() {
         Inventory inventory = new Inventory();
         Basket basket = new Basket(inventory, 2);
-        InventoryItem itemBGLO = new InventoryItem("BGLO", 0.49, "Bagel", "Onion");
-        InventoryItem itemBGLP = new InventoryItem("BGLP", 0.39, "Bagel", "Plain");
+        InventoryItem itemBGLO = new Bagel("BGLO", 0.49, "Bagel", "Onion");
+        InventoryItem itemBGLP = new Bagel("BGLP", 0.39, "Bagel", "Plain");
 
         assertTrue(basket.addToBasket(itemBGLO));
         assertTrue(basket.addToBasket(itemBGLP));
@@ -91,8 +91,8 @@ public class BasketTest {
     public void testAddBagelFillingWorks() {
         Inventory inventory = new Inventory();
         Basket basket = new Basket(inventory, 2);
-        InventoryItem itemBGLO = new InventoryItem("BGLO", 0.49, "Bagel", "Onion");
-        InventoryItem itemFILH = new InventoryItem("FILH", 0.12, "Filling", "Ham");
+        InventoryItem itemBGLO = new Bagel("BGLO", 0.49, "Bagel", "Onion");
+        InventoryItem itemFILH = new BagelFilling("FILH", 0.12, "Filling", "Ham");
 
         assertTrue(basket.addToBasket(itemBGLO));
         assertEquals(1, basket.getItemBasket().size());

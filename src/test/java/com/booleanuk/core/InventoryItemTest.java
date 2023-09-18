@@ -9,7 +9,8 @@ public class InventoryItemTest {
 
     @Test
 public void testSKU() {
-        InventoryItem inventoryItem = new InventoryItem("BGLO", 0.49, "Bagel", "Onion");
+        InventoryItem inventoryItem = new Bagel("BGLO", 0.49, "Bagel", "Onion") {
+        };
 
         Assertions.assertEquals("BGLO",inventoryItem.getSKU());
         inventoryItem.setSKU("BGLP");
@@ -18,7 +19,7 @@ public void testSKU() {
 
     @Test
     public void testPrice() {
-        InventoryItem inventoryItem = new InventoryItem("BGLO", 0.49, "Bagel", "Onion");
+        InventoryItem inventoryItem = new Bagel("BGLO", 0.49, "Bagel", "Onion");
 
         Assertions.assertEquals(0.49, inventoryItem.getPrice());
         inventoryItem.setPrice(1.19);
@@ -27,7 +28,7 @@ public void testSKU() {
 
     @Test
     public void testName() {
-        InventoryItem inventoryItem = new InventoryItem("BGLO", 0.49, "Bagel", "Onion");
+        InventoryItem inventoryItem = new Bagel("BGLO", 0.49, "Bagel", "Onion");
 
         Assertions.assertEquals("Bagel", inventoryItem.getName());
         inventoryItem.setName("Coffee");
@@ -36,7 +37,7 @@ public void testSKU() {
 
     @Test
     public void testVariant() {
-        InventoryItem inventoryItem = new InventoryItem("BGLO", 0.49, "Bagel", "Onion");
+        InventoryItem inventoryItem = new Bagel("BGLO", 0.49, "Bagel", "Onion");
 
         Assertions.assertEquals("Onion", inventoryItem.getVariant());
         inventoryItem.setVariant("Plain");
@@ -45,13 +46,13 @@ public void testSKU() {
 
     @Test
     public void testGetBagelPrice() {
-        InventoryItem bagelItem = new InventoryItem("BGLO", 0.49, "Bagel", "Onion");
+        InventoryItem bagelItem = new Bagel("BGLO", 0.49, "Bagel", "Onion");
 
         Assertions.assertEquals(0.49, bagelItem.getPrice());
     }
     @Test
     public void testGetFillingPrice() {
-        InventoryItem fillingItem = new InventoryItem("FILH", 0.12, "Filling", "Ham");
+        InventoryItem fillingItem = new BagelFilling("FILH", 0.12, "Filling", "Ham");
 
         Assertions.assertEquals(0.12, fillingItem.getPrice());
     }
@@ -59,8 +60,8 @@ public void testSKU() {
     @Test
     public void testItemInStock() {
         Inventory inventory = new Inventory();
-        InventoryItem bagelItem = new InventoryItem("BGLO", 0.49, "Bagel", "Onion");
-        InventoryItem otherBagelItem = new InventoryItem("BGLC", 0.52, "Bagel", "Chocolate");
+        InventoryItem bagelItem = new Bagel("BGLO", 0.49, "Bagel", "Onion");
+        InventoryItem otherBagelItem = new Bagel("BGLC", 0.52, "Bagel", "Chocolate");
 
         assertTrue(inventory.getInventoryItem().contains(bagelItem));
         assertFalse(inventory.getInventoryItem().contains(otherBagelItem));

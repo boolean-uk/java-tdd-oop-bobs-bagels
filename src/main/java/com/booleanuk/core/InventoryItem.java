@@ -2,7 +2,7 @@ package com.booleanuk.core;
 
 import java.util.Objects;
 
-public class InventoryItem {
+public abstract class InventoryItem {
     private String SKU;
 
     private double price;
