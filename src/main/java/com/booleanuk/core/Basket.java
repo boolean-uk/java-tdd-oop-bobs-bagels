@@ -1,6 +1,7 @@
 package com.booleanuk.core;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Iterator;
 
 public class Basket {
@@ -137,6 +138,51 @@ public class Basket {
             }
         }
         return 0;
+    }
+
+    public double discounts(String item, int times) {
+        fillList();
+        String[] thisItem = item.split(",");
+        double totalDiscount = 0;
+        double cb = 1.25;
+        boolean isCoffee = false;
+
+        while (times > 0) {
+            if (times >= 12) {
+                times -= 12;
+                totalDiscount += 3.99;
+            } else if (times >= 6) {
+                times -= 6;
+                totalDiscount += 2.49;
+            } else {
+                break;
+            }
+        }
+
+        if (thisItem.length == 1) {
+            for (InventoryItem it : list) {
+                if (it.getVariant().equals(item)) {
+                    totalDiscount += it.getPrice() * times;
+                    break;
+                }
+            }
+        } else {
+            for (String str : thisItem) {
+                for (InventoryItem it : list) {
+                    if (it.getVariant().equals(str)) {
+                        if (it.getName().equals("Coffee")) {
+                            isCoffee = true;
+                        }
+                    }
+                }
+            }
+        }
+
+        if (isCoffee) {
+            totalDiscount = cb * times;
+        }
+
+        return totalDiscount;
     }
 
 

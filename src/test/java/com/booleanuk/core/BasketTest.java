@@ -87,4 +87,18 @@ public class BasketTest {
         Assertions.assertEquals(0.12, theBasket.showFillingCost("Bacon"));
         Assertions.assertEquals(0, theBasket.showFillingCost("Sauce"));
     }
+
+    @Test
+    public void discounts() {
+        InventoryItem item = new InventoryItem();
+        Basket theBasket = new Basket(item);
+
+        Assertions.assertEquals(2.49, theBasket.discounts("Onion", 6));
+        Assertions.assertEquals(3.99, theBasket.discounts("Plain", 12));
+        Assertions.assertEquals(0.98, theBasket.discounts("Onion", 2));
+        Assertions.assertEquals(2.49, theBasket.discounts("Everything", 6));
+        Assertions.assertEquals(2.97, theBasket.discounts("Black", 3), 0.001);
+        Assertions.assertEquals(5.55, theBasket.discounts("Plain", 16), 0.001);
+        Assertions.assertEquals(1.25, theBasket.discounts("Plain,Black", 1), 0.001);
+    }
 }
