@@ -6,6 +6,7 @@ import java.util.Scanner;
 public class Shop {
     private final Inventory inventory;
     private final Basket basket;
+    private Receipt receipt;
     Scanner userInput;
 
     public Shop(File inventorySkus, int basketCapacity) {
@@ -102,6 +103,7 @@ public class Shop {
         Shop bobBagels = new Shop(inventorySkus, basketCapacity);
         File productList = new File("./FullProductList.txt");
         bobBagels.inventory.loadProducts(productList);
+        bobBagels.receipt = new Receipt("Bob's Bagels","Thanks for your order!");
         boolean exit = false;
         System.out.println("\n=-=-=-=-=-=-=-=-=-=-=-=-=\nWelcome to Bob's Bagels!\n=-=-=-=-=-=-=-=-=-=-=-=-=\n");
         bobBagels.showMenu();
@@ -113,6 +115,6 @@ public class Shop {
             System.out.println("=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
             exit = bobBagels.handleChoice(choice);
         }
-        System.out.println("\n=-=-=-=-=-=-=-=-=-=-=-=-=\nBob waves at you. Thanks!\n=-=-=-=-=-=-=-=-=-=-=-=-=");
+        bobBagels.receipt.printSelf(bobBagels.basket.showProducts(), bobBagels.basket.getTotalCost());
     }
 }
