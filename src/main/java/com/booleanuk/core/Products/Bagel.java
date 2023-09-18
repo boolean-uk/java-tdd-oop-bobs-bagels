@@ -2,6 +2,7 @@ package com.booleanuk.core.Products;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Objects;
 
 public class Bagel extends Product implements Sellable, Fillable {
@@ -17,10 +18,7 @@ public class Bagel extends Product implements Sellable, Fillable {
         super(SKU);
     }
 
-    @Override
-    public double calculateTotalPrice(int quantity) {
-        return 0;
-    }
+
 
     // implement filling functionality
 
@@ -34,9 +32,16 @@ public class Bagel extends Product implements Sellable, Fillable {
         this.fillings = fillings;
     }
 
-    public void setVariant(BagelType variant) {
-        this.variant = variant;
+    public boolean setVariant(BagelType newVariant) {
+
+        if (Arrays.asList(BagelType.values()).contains(newVariant)) {
+            this.variant = newVariant;
+            return true;
+        } else {
+            return false;
+        }
     }
+
 
     public BagelType getVariant() {
         return variant;
@@ -79,5 +84,13 @@ public class Bagel extends Product implements Sellable, Fillable {
     @Override
     public String toString() {
         return String.format("%s %s", this.variant, this.name);
+    }
+
+    @Override
+    public BigDecimal calculateTotalPriceItem() {
+        BigDecimal fillingsPriceSum = fillings.stream()
+                .map(Filling::getPrice)
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
+        return this.getPrice().add(fillingsPriceSum);
     }
 }

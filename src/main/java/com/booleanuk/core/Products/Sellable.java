@@ -1,6 +1,8 @@
 package com.booleanuk.core.Products;
 
+import java.math.BigDecimal;
+
 public interface Sellable {
-    public abstract double calculateTotalPrice(int quantity);
+    public abstract BigDecimal calculateTotalPriceItem();
     // Either abstract method in Item or in Sellable interface
 }

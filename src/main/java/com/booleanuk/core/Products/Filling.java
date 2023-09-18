@@ -18,10 +18,7 @@ public class Filling extends Item {
     }
 
     // double filling etc.
-    @Override
-    public double calculateTotalPrice(int quantity) {
-        return 0;
-    }
+
     @Override
     public String toString() {
         return String.format("%s %s", this.variant, this.name);

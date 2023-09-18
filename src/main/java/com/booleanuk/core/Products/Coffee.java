@@ -19,10 +19,7 @@ public class Coffee extends Product implements Sellable {
         this.variant = variant;
     }
 
-    @Override
-    public double calculateTotalPrice(int quantity) {
-        return 0;
-    }
+
 
 //    @Override
 //    public boolean equals(Object o) {
@@ -43,5 +40,10 @@ public class Coffee extends Product implements Sellable {
     @Override
     public String toString() {
         return String.format("%s %s", this.variant, this.name);
+    }
+
+    @Override
+    public BigDecimal calculateTotalPriceItem() {
+        return this.getPrice();
     }
 }

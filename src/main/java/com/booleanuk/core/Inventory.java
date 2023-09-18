@@ -13,7 +13,6 @@ import com.google.gson.JsonElement;
 
 
 public class Inventory {
-//    private final static String bagels = "/bagels.json";
     private final static String bagels = "/bagels.json";
     private final static String fillings = "/fillings.json";
     private final static String coffees = "/coffees.json";
@@ -57,21 +56,18 @@ public class Inventory {
         return inventoryList;
     }
 
-    public void setInventoryList(ArrayList<Item> inventoryList) {
-        this.inventoryList = inventoryList;
-    }
-    // initialize with {static ...}?? here or in Basket?
 
-    public Item getItemBySku(String sku) {
-//        for (Item item : this.inventoryList) {
-//            if (item.getSku().equals(sku)) {
-//                return item;
-//            }
-//        }
-        return getInventoryList().stream()
-                .filter(f -> f.getSku().equals(sku))
-                .findFirst()
-                .orElse(null);
+    public boolean itemIsAvailable(Item currentItem) {
+        for (Item item : this.inventoryList) {
+            if (item.getSku().equals(currentItem.getSku())) {
+                return true;
+            }
+        }
+        return false;
+//        return getInventoryList().stream()
+//                .filter(f -> f.getSku().equals(item.getSku()))
+//                .findFirst()
+//                .orElse(null);
     }
     public void addProductToInventory(Item item) {
         this.inventoryList.add(item);
@@ -104,9 +100,6 @@ public class Inventory {
 
     private void loadFillings() {
         loadProducts(fillings, Filling.class);
-    }
-    public boolean isItemAvailable(Item item) {
-        return this.getInventoryList().contains(item);
     }
 
 }

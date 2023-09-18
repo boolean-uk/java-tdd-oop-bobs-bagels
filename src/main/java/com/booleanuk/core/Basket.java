@@ -1,9 +1,6 @@
 package com.booleanuk.core;
 
-import com.booleanuk.core.Products.Bagel;
-import com.booleanuk.core.Products.Filling;
-import com.booleanuk.core.Products.Item;
-import com.booleanuk.core.Products.Product;
+import com.booleanuk.core.Products.*;
 
 import java.math.BigDecimal;
 import java.util.HashMap;
@@ -60,15 +57,26 @@ public class Basket {
     }
 
     public boolean addToBasket(Item item, int amount) {
-        if (this.inventory.getInventoryList().contains(item)) {
-            this.itemsMap.put(item, amount);
-            return true;
+        if (this.inventory.itemIsAvailable(item) ) {
+            if (this.getRemainingCapacity()>=amount) {
+                if (this.itemsMap.containsKey(item)) {
+                    this.itemsMap.put(item, amount + this.itemsMap.get(item));
+                    System.out.println("Product was already in the basket. Quantity increased.");
+                } else {
+                    this.itemsMap.put(item, amount);
+                    System.out.println("Product was added to the basket");
+                }
+                return true;
+            }
+            System.out.println("Not enough space in the basket!");
+            return false;
         }
+        System.out.println("Item not found.");
         return false;
-        //handle item already exists
-        //handle capacity is (almost) full
     }
-
+    public int getRemainingCapacity() {
+        return this.capacity - this.getBasketSize();
+    }
 
     public boolean removeFromBasket(Item item, int amount) {
         if (this.itemsMap.containsKey(item)
@@ -109,19 +117,13 @@ public class Basket {
         return totalPrice;
     }
 
-    public BigDecimal getItemCost(String sku) {
-//        BigDecimal totalPrice = BigDecimal.ZERO;
-//
-//        for (Map.Entry<Item, Integer> entry : itemsMap.entrySet()) {
-//            Item item = entry.getKey();
-//            int quantity = entry.getValue();
-//
-//            totalPrice = totalPrice.add(item.getPrice().multiply(new BigDecimal(quantity)));
-//        }
-//
-//        return totalPrice;
-//        if(this.inventory.getInventoryList().contains(item))
-        return this.inventory.getItemBySku(sku) != null ? this.inventory.getItemBySku(sku).getPrice() : BigDecimal.valueOf(0.00);
+    public BigDecimal getItemCost(Item currentItem) {
+
+        if (currentItem instanceof Sellable) {
+            return ((Sellable) currentItem).calculateTotalPriceItem();
+        } else {
+            return currentItem.getPrice();
+        }
     }
 
     public boolean isProductInBasket(Product product) {
