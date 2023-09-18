@@ -17,7 +17,6 @@ public class Inventory {
         this.skusToProducts = new LinkedHashMap<>();
         this.baseProducts = new HashMap<>();
         this.populateBaseData(file);
-        System.out.println("#Shop Inventory initiating...");
     }
 
     private void populateBaseData(File file) {
@@ -45,7 +44,6 @@ public class Inventory {
                 Product product = new Product(dataArr[2].replace('_', ' '), Double.parseDouble(dataArr[1]), dataArr[0]);
                 this.addNewProduct(product);
             }
-            System.out.println("#Shop Inventory loading...");
             myReader.close();
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
