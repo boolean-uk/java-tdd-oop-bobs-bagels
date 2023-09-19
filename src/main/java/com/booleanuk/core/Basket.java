@@ -24,16 +24,17 @@ class Basket {
             items.add(item);
             System.out.println("item has been added");
             return true;
+        } else {
+            System.out.println("item has not been added(not enough space)");
+            return false;
         }
-        return false;
-    }
 
+    }
 
 
     public boolean contains(String item) {
         return items.contains(item);
     }
-
 
 
     public void remove(String item) {
@@ -45,7 +46,10 @@ class Basket {
         }
     }
 
-
+    public void avSpaceSetter(int newVal) {
+        avSpace = newVal;
+        System.out.println("The new space value is: " + newVal);
+    }
 
 
 }
