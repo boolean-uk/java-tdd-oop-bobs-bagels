@@ -76,10 +76,27 @@ public class Basket {
             //    costAfterDiscount = oldCost - discount =>
             // => discount = oldCost - costAfterDiscount
             if (instances >= 6 && instances % 6 == 0){
-                discount = oldCost - 249;
+                discount += oldCost - 249;
+                oldCost = 0;
             }
         }
         return discount ;
+    }
+
+    public int plainBagelDiscount() {
+        int oldCost = 0;
+        int discount = 0;
+        int instances = 0;
+        for (Foods food: basketList) {
+            if (food.getSku().equals("BGLP")) {
+                oldCost += food.getPrice();
+                instances++;
+            }
+            if (instances >= 6 && instances % 6 == 0){
+
+            }
+        }
+        return discount;
     }
 
 }

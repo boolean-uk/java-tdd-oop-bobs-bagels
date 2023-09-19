@@ -29,6 +29,9 @@ public class ExtensionTest {
         Basket basket1 = new Basket(10);
         basket1.addMultiple(bagel,8);
         Assertions.assertEquals(3.47d,basket1.getTotalCost());
-        //
+        //Check if 12 bagels are added
+        Basket basket2 = new Basket(12);
+        basket2.addMultiple(bagel,12);
+        Assertions.assertEquals(4.98,basket2.getTotalCost());
     }
 }
