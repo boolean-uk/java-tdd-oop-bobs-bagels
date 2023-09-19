@@ -59,7 +59,7 @@ public class Basket {
         for (Foods food: basketList) {
             cost += food.getPrice();
         }
-        cost = cost - onionBagelDiscount();
+        cost = cost - onionBagelDiscount() - plainBagelDiscount();
         return (double) (cost / 100.0);
     }
 
@@ -92,8 +92,9 @@ public class Basket {
                 oldCost += food.getPrice();
                 instances++;
             }
-            if (instances >= 6 && instances % 6 == 0){
-
+            if (instances >= 12 && instances % 12 == 0){
+                discount += oldCost - 399;
+                oldCost = 0;
             }
         }
         return discount;
