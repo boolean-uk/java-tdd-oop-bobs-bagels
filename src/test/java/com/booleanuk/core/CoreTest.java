@@ -71,5 +71,16 @@ public class CoreTest {
         Assertions.assertEquals(73,bagel.getPrice());
     }
 
+    @Test
+    void checkFillingToString() {
+        Filling filling = new Filling("FILB");
+        Assertions.assertEquals("Bacon 0.12$", filling.toString()); //user story 9
+    }
+
+    @Test
+    void checkIfFoodExistsInInventory() {
+        Basket basket = new Basket(2);
+        Assertions.assertFalse(basket.add(new Bagel("KLMNOP",0.12d,"banana"))); //user story 10
+    }
 
 }

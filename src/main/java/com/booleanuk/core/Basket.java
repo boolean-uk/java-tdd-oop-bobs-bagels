@@ -16,6 +16,9 @@ public class Basket {
         if (basketList.size() >= this.capacity) {
             return false;
         }
+        if (!new Inventory().inventoryList.containsKey(item.getSku())) {
+            return false;
+        }
         this.basketList.add(item);
         return true;
     }

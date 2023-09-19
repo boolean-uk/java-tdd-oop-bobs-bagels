@@ -10,4 +10,9 @@ public class Filling extends Foods{
         setPrice();
         setVariant();
     }
+
+    @Override
+    public String toString(){
+        return getVariant() + " " + getCost() + "$";
+    }
 }

@@ -1,7 +1,6 @@
 package com.booleanuk.core;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class Bagel extends Foods{
     ArrayList<Filling> fillingsList = new ArrayList<>();
@@ -26,7 +25,7 @@ public class Bagel extends Foods{
     public String toString(){
         String fillingsString = "";
         for (Filling filling: fillingsList) {
-            fillingsString += "  " + filling.getVariant() + " " + filling.getCost() + "$\n";
+            fillingsString += "  " + filling.toString() + "\n";
         }
         return "bagel: \n  " + getVariant() + " " + getCost() + "$" + "\nFillings:\n" + fillingsString;
     }
