@@ -9,7 +9,7 @@ public class BasketTest {
 
     @Test
     public void theTestToAdd() {
-        Basket basket = new Basket();
+        Basket basket = new Basket(3);
         String name = "le onion";
         basket.add(name);
         Assertions.assertTrue(basket.contains(name));
@@ -17,7 +17,7 @@ public class BasketTest {
 
     @Test
     public void testRemoveBagelFromBasket() {
-        Basket basket = new Basket();
+        Basket basket = new Basket(3);
         String name = "Le onion";
         basket.add(name);
 
