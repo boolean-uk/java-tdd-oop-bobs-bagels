@@ -38,7 +38,7 @@ public class CoreTest {
     }
 
     @Test
-    void checkBaketTotalCost(){
+    void checkBasketTotalCost(){
         Basket basket = new Basket(3);
         basket.add(new Bagel("BGLO"));
         basket.add(new Bagel("BGLP"));
@@ -53,6 +53,18 @@ public class CoreTest {
         Filling filling = new Filling("FILE");
         Assertions.assertEquals(0.12d,filling.getCost());
         Assertions.assertEquals("Egg",filling.getVariant());
+    }
+
+    @Test
+    void checkFillingAdditionToBagel() {
+        Bagel bagel = new Bagel("BGLO");
+        bagel.addFilling(new Filling("FILB"));
+        Assertions.assertFalse(bagel.fillingsList.isEmpty());
+        Assertions.assertEquals(1,bagel.fillingsList.size());
+        bagel.addFilling(new Filling("FILE"));
+        Assertions.assertEquals(2,bagel.fillingsList.size());
+
+        System.out.println(bagel.toString());
     }
 
 
