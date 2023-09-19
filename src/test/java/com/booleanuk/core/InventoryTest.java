@@ -10,8 +10,8 @@ public class InventoryTest {
     public void shouldAddNewProductsToInventory() {
         File skuFile = new File("./SkusOfBaseProducts.txt");
         Inventory inventory = new Inventory(skuFile);
-        Product bagel = new Product("bagel",0.49, "BGL");
-        Product coffee = new Product("coffee",1.49, "COF");
+        Product bagel = new Bagel("bagel",0.49, "BGL");
+        Product coffee = new Coffee("coffee",1.49, "COF");
         Assertions.assertTrue(inventory.addNewProduct(bagel));
         Assertions.assertTrue(inventory.addNewProduct(coffee));
     }
@@ -20,8 +20,8 @@ public class InventoryTest {
     public void shouldNotAddExistingProductsAgain() {
         File skuFile = new File("./SkusOfBaseProducts.txt");
         Inventory inventory = new Inventory(skuFile);
-        Product bagel1 = new Product("bagel",0.49, "BGL");
-        Product bagel2 = new Product("bagel",0.49, "BGL");
+        Product bagel1 = new Bagel("bagel",0.49, "BGL");
+        Product bagel2 = new Bagel("bagel",0.49, "BGL");
         Assertions.assertTrue(inventory.addNewProduct(bagel1));
         Assertions.assertFalse(inventory.addNewProduct(bagel2));
     }
@@ -30,9 +30,9 @@ public class InventoryTest {
     public void shouldReturnListOfProducts() {
         File skuFile = new File("./SkusOfBaseProducts.txt");
         Inventory inventory = new Inventory(skuFile);
-        Product bagel = new Product("Onion",0.49, "BGLO");
+        Product bagel = new Bagel("Onion",0.49, "BGLO");
         inventory.addNewProduct(bagel);
-        Product coffee = new Product("Black", 0.99, "COFB");
+        Product coffee = new Coffee("Black", 0.99, "COFB");
         inventory.addNewProduct(coffee);
         String expected = "BGLO | 0.49$ | Onion Bagel\nCOFB | 0.99$ | Black Coffee";
         Assertions.assertEquals(expected, inventory.getProductList());
@@ -42,7 +42,7 @@ public class InventoryTest {
     public void shouldGetExistingProductWithCorrectName() {
         File skuFile = new File("./SkusOfBaseProducts.txt");
         Inventory inventory = new Inventory(skuFile);
-        Product bagel = new Product("Onion",0.49, "BGLO");
+        Product bagel = new Bagel("Onion",0.49, "BGLO");
         inventory.addNewProduct(bagel);
         Assertions.assertEquals(bagel.toString(), inventory.getProductByName("Onion Bagel").toString());
     }
@@ -60,7 +60,7 @@ public class InventoryTest {
         Inventory inventory = new Inventory(skuFile);
         File productsFile = new File("./FullProductList.txt");
         inventory.loadProducts(productsFile);
-        Product bagel = new Product("Onion",0.49, "BGLO");
+        Product bagel = new Bagel("Onion",0.49, "BGLO");
         Assertions.assertEquals(bagel.toString(), inventory.getProductByName("Onion Bagel").toString());
     }
 }

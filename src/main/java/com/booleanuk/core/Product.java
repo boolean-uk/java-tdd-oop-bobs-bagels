@@ -2,7 +2,7 @@ package com.booleanuk.core;
 
 import java.util.Objects;
 
-public class Product {
+public abstract class Product {
     private final String type;
     private final double cost;
     private final String sku;

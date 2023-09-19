@@ -7,18 +7,18 @@ public class BasketTest {
     @Test
     public void shouldAddProductsIfSpaceExists() {
         Basket basket = new Basket(3);
-        Product bagel = new Product("Onion",0.49, "BGLO");
+        Product bagel = new Bagel("Onion",0.49, "BGLO");
         Assertions.assertTrue(basket.addProduct(bagel));
-        Product coffee = new Product("Black", 0.99, "COFB");
+        Product coffee = new Coffee("Black", 0.99, "COFB");
         Assertions.assertTrue(basket.addProduct(coffee));
     }
 
     @Test
     public void shouldNotAddProductsIfFull() {
         Basket basket = new Basket(1);
-        Product bagel = new Product("Onion",0.49, "BGLO");
+        Product bagel = new Bagel("Onion",0.49, "BGLO");
         Assertions.assertTrue(basket.addProduct(bagel));
-        Product coffee = new Product("Black", 0.99, "COFB");
+        Product coffee = new Coffee("Black", 0.99, "COFB");
         Assertions.assertFalse(basket.addProduct(coffee));
     }
 
@@ -31,9 +31,9 @@ public class BasketTest {
     @Test
     public void shouldGetTotalCost() {
         Basket basket = new Basket(3);
-        Product bagel = new Product("Onion",0.49, "BGLO");
+        Product bagel = new Bagel("Onion",0.49, "BGLO");
         basket.addProduct(bagel);
-        Product coffee = new Product("Black", 0.99, "COFB");
+        Product coffee = new Coffee("Black", 0.99, "COFB");
         basket.addProduct(coffee);
         Assertions.assertEquals(1.48, basket.getTotalCost());
     }
@@ -47,9 +47,9 @@ public class BasketTest {
     @Test
     public void capacityShouldIncrease() {
         Basket basket = new Basket(1);
-        Product bagel = new Product("Onion",0.49, "BGLO");
+        Product bagel = new Bagel("Onion",0.49, "BGLO");
         Assertions.assertTrue(basket.addProduct(bagel));
-        Product coffee = new Product("Black", 0.99, "COFB");
+        Product coffee = new Coffee("Black", 0.99, "COFB");
         Assertions.assertFalse(basket.addProduct(coffee));
         basket.setCapacity(2);
         Assertions.assertTrue(basket.addProduct(coffee));
@@ -58,7 +58,7 @@ public class BasketTest {
     @Test
     public void shouldRemoveExistingProduct() {
         Basket basket = new Basket(3);
-        Product bagel = new Product("Onion",0.49, "BGLO");
+        Product bagel = new Bagel("Onion",0.49, "BGLO");
         basket.addProduct(bagel);
         Assertions.assertEquals(0.49,basket.getTotalCost());
         Assertions.assertTrue(basket.removeProduct(bagel));
@@ -68,8 +68,8 @@ public class BasketTest {
     @Test
     public void shouldReturnFalseOnFalseRemove() {
         Basket basket = new Basket(3);
-        Product bagel = new Product("Onion",0.49, "BGLO");
-        Product coffee = new Product("Black", 0.99, "COFB");
+        Product bagel = new Bagel("Onion",0.49, "BGLO");
+        Product coffee = new Coffee("Black", 0.99, "COFB");
         basket.addProduct(bagel);
         Assertions.assertEquals(0.49,basket.getTotalCost());
         Assertions.assertFalse(basket.removeProduct(coffee));
@@ -79,8 +79,8 @@ public class BasketTest {
     @Test
     public void shouldShowProductsCorrectly() {
         Basket basket = new Basket(10);
-        Product bagel = new Product("Onion",0.49, "BGLO");
-        Product coffee = new Product("Black", 0.99, "COFB");
+        Product bagel = new Bagel("Onion",0.49, "BGLO");
+        Product coffee = new Coffee("Black", 0.99, "COFB");
         basket.addProduct(bagel);
         basket.addProduct(bagel);
         basket.addProduct(bagel);
