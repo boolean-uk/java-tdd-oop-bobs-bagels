@@ -7,8 +7,8 @@ public class Basket {
     ArrayList<Foods> basketList;
     Inventory inventory = new Inventory();
 
-    public Basket(int size) {
-        this.capacity =size;
+    public Basket(int capacity) {
+        this.capacity = capacity;
         basketList = new ArrayList<>();
     }
 
