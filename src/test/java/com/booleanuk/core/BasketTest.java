@@ -73,5 +73,40 @@ public class BasketTest {
 
     }
 
+    @Test
+    public void testCalculateTotalCost() {
+        Basket basket = new Basket();
+
+        basket.addPrice("Onion", 0.49d);
+        basket.addPrice("Plain", 0.39d);
+        basket.addPrice("Everything", 0.49d);
+
+
+        double totalCost = basket.calculatePrice();
+
+
+        assertEquals(8.25, totalCost);
+    }
+
+
+
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
