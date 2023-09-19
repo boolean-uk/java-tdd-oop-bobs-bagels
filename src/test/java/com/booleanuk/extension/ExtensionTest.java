@@ -18,4 +18,16 @@ public class ExtensionTest {
         Assertions.assertTrue(basket.addMultiple(bagel,6));
         Assertions.assertEquals(4.38d,basket.getTotalCost());
     }
+
+    @Test
+    void checkOnionBagelOffer() {
+        Basket basket = new Basket(6);
+        Bagel bagel = new Bagel("BGLO");
+        basket.addMultiple(bagel,6);
+        Assertions.assertEquals(2.49d,basket.getTotalCost());
+        //Check if 8 bagels are added (One of them must be priced separately)
+        Basket basket1 = new Basket(10);
+        basket1.addMultiple(bagel,8);
+        Assertions.assertEquals(3.47d,basket1.getTotalCost());
+    }
 }
