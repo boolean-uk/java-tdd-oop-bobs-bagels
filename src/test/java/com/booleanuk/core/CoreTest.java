@@ -83,4 +83,14 @@ public class CoreTest {
         Assertions.assertFalse(basket.add(new Bagel("KLMNOP",0.12d,"banana"))); //user story 10
     }
 
+    @Test
+    void checkBasketCostWithBagelsAndFillings(){
+        Basket basket = new Basket(2);
+        Bagel bagel = new Bagel("BGLO");
+        bagel.addFilling(new Filling("FILB"));
+        bagel.addFilling(new Filling("FILE"));
+        basket.add(bagel);
+        Assertions.assertEquals(0.73d,basket.getTotalCost());
+    }
+
 }
