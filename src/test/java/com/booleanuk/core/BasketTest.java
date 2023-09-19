@@ -27,5 +27,18 @@ public class BasketTest {
         Assertions.assertFalse(basket.contains(name));
     }
 
+    @Test
+    public void testSpaceAvailable() {
+
+        Basket basket = new Basket(3);
+
+
+        basket.add("Le onion");
+        basket.add("Cream");
+        Assertions.assertTrue(basket.add("Egg"));
+        Assertions.assertFalse(basket.add("Vanilla"));
+
+    }
+
 
 }
