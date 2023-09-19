@@ -15,7 +15,17 @@ public class BasketTest {
         Assertions.assertTrue(basket.contains(name));
     }
 
+    @Test
+    public void testRemoveBagelFromBasket() {
+        Basket basket = new Basket();
+        String name = "Le onion";
+        basket.add(name);
 
+        Assertions.assertTrue(basket.contains(name));
+
+        basket.remove(name);
+        Assertions.assertFalse(basket.contains(name));
+    }
 
 
 }
