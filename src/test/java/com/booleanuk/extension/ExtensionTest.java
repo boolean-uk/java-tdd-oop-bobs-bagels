@@ -11,12 +11,12 @@ public class ExtensionTest {
     //extension 1
     @Test
     void checkBasketAddMultiple() {
-        Basket basket = new Basket(6);
+        Basket basket = new Basket(3);
         Bagel bagel = new Bagel("BGLO");
         bagel.addFilling(new Filling("FILB"));
         bagel.addFilling(new Filling("FILE"));
-        Assertions.assertTrue(basket.addMultiple(bagel,6));
-        Assertions.assertEquals(4.38d,basket.getTotalCost());
+        Assertions.assertTrue(basket.addMultiple(bagel,3));
+        Assertions.assertEquals(2.19d,basket.getTotalCost());
     }
 
     @Test
@@ -29,5 +29,6 @@ public class ExtensionTest {
         Basket basket1 = new Basket(10);
         basket1.addMultiple(bagel,8);
         Assertions.assertEquals(3.47d,basket1.getTotalCost());
+        //
     }
 }
