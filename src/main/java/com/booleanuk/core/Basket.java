@@ -1,11 +1,11 @@
 package com.booleanuk.core;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class Basket {
     int capacity;
     ArrayList<Foods> basketList;
+    Inventory inventory = new Inventory();
 
     public Basket(int size) {
         this.capacity =size;
@@ -16,7 +16,7 @@ public class Basket {
         if (basketList.size() >= this.capacity) {
             return false;
         }
-        if (!new Inventory().inventoryList.containsKey(item.getSku())) {
+        if (!this.inventory.inventoryList.containsKey(item.getSku())) {
             return false;
         }
         this.basketList.add(item);
