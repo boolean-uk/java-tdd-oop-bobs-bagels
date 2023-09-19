@@ -38,11 +38,25 @@ public class Inventory {
         try {
             Scanner myReader = new Scanner(file);
             String[] dataArr;
+            int errorCounter = 0;
             while (myReader.hasNextLine()) {
                 String data = myReader.nextLine();
                 dataArr = data.split(" ");
-                Product product = new Product(dataArr[2].replace('_', ' '), Double.parseDouble(dataArr[1]), dataArr[0]);
-                this.addNewProduct(product);
+                Product product;
+                switch (dataArr[0].substring(0,3)){
+                    case "BGL" -> product = new Bagel(dataArr[2].replace('_', ' '), Double.parseDouble(dataArr[1]), dataArr[0]);
+                    case "FIL" -> product = new Filling(dataArr[2].replace('_', ' '), Double.parseDouble(dataArr[1]), dataArr[0]);
+                    case "COF" -> product = new Coffee(dataArr[2].replace('_', ' '), Double.parseDouble(dataArr[1]), dataArr[0]);
+                    default -> product = null;
+                }
+                if (product != null){
+                    this.addNewProduct(product);
+                } else {
+                    errorCounter++;
+                }
+            }
+            if (errorCounter != 0){
+                System.out.println(errorCounter + " products failed to load. Please check skus.");
             }
             myReader.close();
         } catch (FileNotFoundException e) {
@@ -90,7 +104,15 @@ public class Inventory {
             return null;
         } else {
             Product tmp = skusToProducts.get(sku);
-            return new Product(tmp.getType(), tmp.getCost(), tmp.getSku());
+            if (tmp instanceof Bagel) {
+                return new Bagel(tmp.getType(), tmp.getCost(), tmp.getSku());
+            } else if (tmp instanceof Filling) {
+                return new Filling(tmp.getType(), tmp.getCost(), tmp.getSku());
+            } else if (tmp instanceof Coffee) {
+                return new Coffee(tmp.getType(), tmp.getCost(), tmp.getSku());
+            } else {
+                return null;
+            }
         }
     }
 }
