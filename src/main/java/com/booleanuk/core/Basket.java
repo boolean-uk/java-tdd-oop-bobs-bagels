@@ -37,12 +37,14 @@ class Basket {
     }
 
 
-    public void remove(String item) {
+    public boolean remove(String item) {
         if (items.contains(item)) {
             items.remove(item);
             System.out.println(item + "has been deleted from the list");
+            return true;
         } else {
             System.out.println("This item has not been found");
+            return false;
         }
     }
 

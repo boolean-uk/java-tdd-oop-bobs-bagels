@@ -56,10 +56,22 @@ public class BasketTest {
         Assertions.assertTrue(basket.add("Vanilla"));
 
 
-
-
     }
 
+    @Test
+    public void checkIfRemoveExists() {
+
+        Basket basket = new Basket(3);
+        String name = "Le onion";
+        basket.add(name);
+
+        Assertions.assertTrue(basket.contains(name));
+        basket.remove(name);
+
+        Assertions.assertFalse(basket.contains(name));
+        basket.remove(name);
+
+    }
 
 
 }
