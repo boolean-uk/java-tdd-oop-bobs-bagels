@@ -1,9 +1,12 @@
 package com.booleanuk.core;
 
 import java.util.ArrayList;
+import java.util.List;
+
 public class Inventory {
 
-    private ArrayList<InventoryItem> inventoryItem;
+    private List<InventoryItem> inventoryItem;
+
 
     protected Inventory() {
         this.inventoryItem = new ArrayList<>();
@@ -29,7 +32,7 @@ public class Inventory {
         this.inventoryItem.add(new BagelFilling("FILH", 0.12, "Filling", "Ham"));
     }
 
-    public ArrayList<InventoryItem> getInventoryItem() {
+    public List<InventoryItem> getInventoryItem() {
         return inventoryItem;
     }
 
