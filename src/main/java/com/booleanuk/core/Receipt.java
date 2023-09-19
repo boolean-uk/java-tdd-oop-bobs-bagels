@@ -25,7 +25,7 @@ public class Receipt {
             System.out.println("----------------------\n");
             System.out.println(productsCost);
             System.out.println("----------------------");
-            System.out.println("Total     "+totalCost+"\n");
+            System.out.println("Total     "+totalCost+"$\n");
             System.out.println(this.endMessage);
         }
     }

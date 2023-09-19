@@ -68,7 +68,7 @@ public class Basket {
         }
         StringBuilder result = new StringBuilder();
         for (Map.Entry<Product,Integer> entry : this.items.entrySet()) {
-            result.append(entry.getValue()).append("x ").append(entry.getKey().getSku()).append(" = ").append(entry.getValue()*entry.getKey().getCost()).append("\n");
+            result.append(entry.getValue()).append("x ").append(entry.getKey().getSku()).append(" = ").append(entry.getValue()*entry.getKey().getCost()).append("$\n");
         }
         return String.valueOf(result);
     }
