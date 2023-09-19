@@ -22,6 +22,18 @@ public class Basket {
         this.basketList.add(item);
         return true;
     }
+    public boolean addMultiple(Foods item, int quantity) {
+        if (basketList.size() + quantity > this.capacity) {
+            return false;
+        }
+        if (!this.inventory.inventoryList.containsKey(item.getSku())) {
+            return false;
+        }
+        for (int i=1; i <= quantity;i++) {
+            this.basketList.add(item);
+        }
+        return true;
+    }
 
     public Boolean remove(String sku) {
         for (Foods food:basketList) {
