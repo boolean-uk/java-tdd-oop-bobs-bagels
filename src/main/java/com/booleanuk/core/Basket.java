@@ -1,4 +1,5 @@
 package com.booleanuk.core;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,6 +18,15 @@ class Basket {
 
     public boolean contains(String item) {
         return items.contains(item);
+    }
+
+    public void remove(String item) {
+        if (items.contains(item)) {
+            items.remove(item);
+            System.out.println(item + "has been deleted from the list");
+        } else {
+            System.out.println("This item has not been found");
+        }
     }
 
 }
