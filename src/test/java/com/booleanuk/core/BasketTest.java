@@ -77,15 +77,15 @@ public class BasketTest {
     public void testCalculateTotalCost() {
         Basket basket = new Basket();
 
-        basket.addPrice("Onion", 0.49d);
-        basket.addPrice("Plain", 0.39d);
-        basket.addPrice("Everything", 0.49d);
+        basket.addPrice("Onion", 0.49);
+        basket.addPrice("Plain", 0.39);
+        basket.addPrice("Everything", 0.49);
 
 
         double totalCost = basket.calculatePrice();
 
 
-        assertEquals(8.25, totalCost);
+        assertEquals(1.37, totalCost);
     }
 
 

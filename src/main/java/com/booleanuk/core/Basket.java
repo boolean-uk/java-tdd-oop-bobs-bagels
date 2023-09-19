@@ -1,22 +1,27 @@
 package com.booleanuk.core;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 class Basket {
 
     private List<String> items;
+    private Map<String, Double> pricedItems;
     private int avSpace = 0;
 
     public Basket() {
         this.items = new ArrayList<>();
+        this.pricedItems = new HashMap<>();
 
     }
 
     public Basket(int space) {
         this.items = new ArrayList<>();
         this.avSpace = space;
+        this.pricedItems = new HashMap<>();
     }
 
     public boolean add(String item) {
@@ -31,9 +36,21 @@ class Basket {
 
     }
 
+    public void addPrice(String name, double price) {
+        pricedItems.put(name, price);
+        add(name);
 
+    }
 
-
+    public double calculatePrice() {
+        double total = 0.00d;
+        for (Map.Entry<String, Double> entry : pricedItems.entrySet()) {
+            Double value = entry.getValue();
+            total += value;
+        }
+        System.out.println(total);
+        return total;
+    }
 
 
     public boolean contains(String item) {
