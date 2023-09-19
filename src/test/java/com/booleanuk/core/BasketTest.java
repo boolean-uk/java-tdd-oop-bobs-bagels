@@ -40,5 +40,26 @@ public class BasketTest {
 
     }
 
+    @Test
+    public void changeSpaceCapacity() {
+
+        Basket basket = new Basket(3);
+
+
+        basket.add("Le onion");
+        basket.add("Cream");
+        Assertions.assertTrue(basket.add("Egg"));
+        Assertions.assertFalse(basket.add("Vanilla"));
+
+        basket.avSpaceSetter(5);
+
+        Assertions.assertTrue(basket.add("Vanilla"));
+
+
+
+
+    }
+
+
 
 }
