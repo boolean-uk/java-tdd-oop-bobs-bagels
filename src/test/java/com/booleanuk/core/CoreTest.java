@@ -56,15 +56,19 @@ public class CoreTest {
     }
 
     @Test
-    void checkFillingAdditionToBagel() {
+    void checkFillingAdditionToBagel() {                              //user story 8
         Bagel bagel = new Bagel("BGLO");
         bagel.addFilling(new Filling("FILB"));
         Assertions.assertFalse(bagel.fillingsList.isEmpty());
         Assertions.assertEquals(1,bagel.fillingsList.size());
         bagel.addFilling(new Filling("FILE"));
         Assertions.assertEquals(2,bagel.fillingsList.size());
-
-        System.out.println(bagel.toString());
+        Assertions.assertEquals("bagel: \n" +
+                "  Onion 0.49$\n" +
+                "Fillings:\n" +
+                "  Bacon 0.12$\n" +
+                "  Egg 0.12$\n",bagel.toString());
+        Assertions.assertEquals(73,bagel.getPrice());
     }
 
 

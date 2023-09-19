@@ -2,7 +2,7 @@ package com.booleanuk.core;
 
 public class Foods {
     private String sku;
-    private int price = -1;
+    protected int price = -1;
     private String variant = "";
 
     public Foods(String sku, double price, String variant) {

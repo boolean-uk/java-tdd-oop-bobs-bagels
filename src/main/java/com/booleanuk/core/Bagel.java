@@ -31,5 +31,14 @@ public class Bagel extends Foods{
         return "bagel: \n  " + getVariant() + " " + getCost() + "$" + "\nFillings:\n" + fillingsString;
     }
 
+    @Override
+    public int getPrice() {
+        int price = this.price;
+        for (Filling filling : fillingsList) {
+            price += filling.getPrice();
+        }
+        return price;
+    }
+
 
 }
