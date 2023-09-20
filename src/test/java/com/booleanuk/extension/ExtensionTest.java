@@ -51,4 +51,14 @@ public class ExtensionTest {
         Assertions.assertEquals(7.98d,basket3.getTotalCost());
     }
 
+    @Test
+    void checkEverythingBagelDiscount() {
+        Basket basket1 = new Basket(6);
+        Bagel bagel = new Bagel("BGLE");
+        basket1.addMultiple(bagel,6);
+        Assertions.assertEquals(2.49d,basket1.getTotalCost());
+        Basket basket2 = new Basket(12);
+        basket2.addMultiple(bagel,12);
+        Assertions.assertEquals(4.98d,basket2.getTotalCost());
+    }
 }

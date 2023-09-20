@@ -59,7 +59,7 @@ public class Basket {
         for (Foods food: basketList) {
             cost += food.getPrice();
         }
-        cost = cost - onionBagelDiscount() - plainBagelDiscount();
+        cost = cost - onionBagelDiscount() - plainBagelDiscount() - EverythingBagelDiscount();
         return (double) (cost / 100.0);
     }
 
@@ -99,5 +99,25 @@ public class Basket {
         }
         return discount;
     }
+
+    public int EverythingBagelDiscount(){
+        int oldCost = 0;
+        int discount = 0;
+        int instances = 0;
+        for (Foods food: basketList) {
+            if (food.getSku().equals("BGLE")) {
+                oldCost += food.getPrice();
+                instances ++;
+            }
+            //    costAfterDiscount = oldCost - discount =>
+            // => discount = oldCost - costAfterDiscount
+            if (instances >= 6 && instances % 6 == 0){
+                discount += oldCost - 249;
+                oldCost = 0;
+            }
+        }
+        return discount ;
+    }
+
 
 }
