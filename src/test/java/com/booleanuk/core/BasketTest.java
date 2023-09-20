@@ -109,7 +109,13 @@ public class BasketTest {
         Fillings fillings = new Fillings();
         Basket basket = new Basket();
 
-        basket.testMethod();
+//        basket.testMethod();
+        basket.addPrice("BGLO", 0.49);
+        Assertions.assertEquals(1, basket.pricedItems.size());
+
+        basket.addPrice("SDFDF", 0.49);
+        Assertions.assertEquals(1, basket.pricedItems.size());
+
 
     }
 

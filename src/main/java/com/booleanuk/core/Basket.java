@@ -9,12 +9,12 @@ import java.util.Map;
 class Basket {
     Fillings fillings = new Fillings();
     private List<String> items;
-    private Map<String, Double> pricedItems;
+    public Map<String, Double> pricedItems;
     private int avSpace = 5;
 
-    public void testMethod(){
-        System.out.println(fillings.inventoryList);
-    }
+//    public void testMethod(){
+//        System.out.println(fillings.inventoryList.containsKey("SDASDSAD"));
+//    }
 
     public Basket() {
         this.items = new ArrayList<>();
@@ -36,12 +36,12 @@ class Basket {
 
     public boolean add(String item) {
 
-        if (items.size() < avSpace) {
+        if (items.size() < avSpace  ) {
             items.add(item);
             System.out.println("item has been added");
             return true;
         } else {
-            System.out.println("item has not been added(not enough space)");
+            System.out.println("The cart is full");
             return false;
         }
 
