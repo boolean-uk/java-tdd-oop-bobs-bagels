@@ -143,5 +143,17 @@ public class Basket {
         return discount;
     }
 
+    public String printReceipt() {
+        String bagelString = "";
+        String coffeeString = "";
+        for (Foods food: basketList){
+            if (food instanceof Bagel){
+                bagelString += food.getVariant() + " Bagel    " + food.getCost() + "$\n";
+            }else if (food instanceof Coffee) {
+                coffeeString += food.getVariant() + " Coffee   " + food.getCost() + "$\n";
+            }
+        }
+        return "~~~ Bob's Bagels ~~~\n--------------------\n" + bagelString + coffeeString + "Total: " + getTotalCost();
+    }
 
 }

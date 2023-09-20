@@ -84,4 +84,21 @@ public class ExtensionTest {
         basket1.addMultiple(bagel,3);
         Assertions.assertEquals(2.23d,basket1.getTotalCost());
     }
+
+    @Test
+    void checkPrintReceipt(){
+        Basket basket = new Basket(5);
+        Bagel bagel1 = new Bagel("BGLO");
+        Bagel bagel2 = new Bagel("BGLP");
+        Coffee coffee = new Coffee("COFB");
+        basket.add(bagel1);
+        basket.add(bagel2);
+        basket.add(coffee);
+        Assertions.assertEquals("~~~ Bob's Bagels ~~~\n" +
+                "--------------------\n" +
+                "Onion Bagel    0.49$\n" +
+                "Plain Bagel    0.39$\n" +
+                "Black Coffee   0.99$\n" +
+                "Total: 1.25",basket.printReceipt());
+    }
 }
