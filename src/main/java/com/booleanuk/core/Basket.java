@@ -6,10 +6,12 @@ import java.util.Map;
 public class Basket {
     private final HashMap<Product,Integer> items;
     private int capacity;
+    private final int[] discounts;
 
     public Basket(int maxCapacity) {
         this.items = new HashMap<>();
         this.capacity = maxCapacity;
+        this.discounts = new int[Discounts.values().length];
     }
 
     public int getCapacity() {
@@ -57,9 +59,9 @@ public class Basket {
         double cost = 0.00d;
         if (this.items.isEmpty()) return cost;
         for (Map.Entry<Product,Integer> item: this.items.entrySet()) {
-            cost += item.getKey().getCost() * item.getValue();
+            cost += (double) ((int) (item.getKey().getCost() * 100) * item.getValue()) / 100;
         }
-        return cost;
+        return cost - this.getDiscount();
     }
 
     public String showProducts() {
@@ -67,9 +69,67 @@ public class Basket {
             return "Basket is empty.\n";
         }
         StringBuilder result = new StringBuilder();
+        double cost;
         for (Map.Entry<Product,Integer> entry : this.items.entrySet()) {
-            result.append(entry.getValue()).append("x ").append(entry.getKey().getSku()).append(" = ").append(entry.getValue()*entry.getKey().getCost()).append("$\n");
+            cost = (double) (int) (entry.getValue() * entry.getKey().getCost() * 100) / 100;
+            result.append(entry.getValue()).append("x ").append(entry.getKey().getSku()).append(" = ").append(cost).append("$\n");
         }
         return String.valueOf(result);
+    }
+
+    public String calculateDiscount() {
+        if (getSize() == 0){
+            return "";
+        }
+        StringBuilder discountText = new StringBuilder();
+        int times, quantity;
+        double discountPrice;
+        int bagelRemainder = 0;
+        int coffeeRemainder = 0;
+        for (Map.Entry<Product, Integer> entry : this.items.entrySet()){
+            if (entry.getKey() instanceof Bagel){
+                quantity = entry.getValue();
+                times = quantity / 6;
+                if (times > 0) {
+                    this.discounts[0] = times;
+                    discountPrice = times * Discounts.SixBagels.getAmount();
+                    discountText.append(times).append("x SixBGLDiscount  (-").append(discountPrice).append("$)\n");
+                    quantity -= times * 6;
+                }
+                times = quantity / 3;
+                if (times > 0) {
+                    this.discounts[1] = times;
+                    discountPrice = times * Discounts.ThreeBagels.getAmount();
+                    discountText.append(times).append("x ThreeBGLDiscount (-").append(discountPrice).append("$)\n");
+                    quantity -= times * 3;
+                }
+                bagelRemainder += quantity;
+            }
+            if (entry.getKey() instanceof Coffee){
+                coffeeRemainder += entry.getValue();
+            }
+        }
+        if (bagelRemainder != 0 && coffeeRemainder != 0){
+            if (bagelRemainder > coffeeRemainder) {
+                bagelRemainder = coffeeRemainder;
+            }
+            this.discounts[2] = bagelRemainder;
+            discountPrice = bagelRemainder * Discounts.CoffeeAndBagel.getAmount();
+            discountText.append(bagelRemainder).append("x COFBGLDiscount (-").append(discountPrice).append("$)\n");
+        }
+        return String.valueOf(discountText);
+    }
+
+    public double getDiscount() {
+        int multiplier;
+        Discounts[] discounts = Discounts.values();
+        double savedAmount = 0;
+        for (int i=0; i<Discounts.values().length; i++) {
+            multiplier = this.discounts[i];
+            if (multiplier != 0) {
+                savedAmount += multiplier * discounts[i].getAmount();
+            }
+        }
+        return savedAmount;
     }
 }

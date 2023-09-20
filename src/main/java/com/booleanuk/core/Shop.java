@@ -26,9 +26,14 @@ public class Shop {
             case "SHOW" -> this.showProductsWithPrice();
             case "GET" -> this.getCost();
             case "PAY" -> exit = true;
+            case "TEST" -> this.doTest();
             default -> System.out.println("Wrong choice... Please try again.");
         }
         return exit;
+    }
+
+    private void doTest() {
+        System.out.println(this.basket.calculateDiscount());
     }
 
     private void showMenu() {
@@ -37,7 +42,7 @@ public class Shop {
         System.out.println("CHANGE capacity of basket.");
         System.out.println("ADD product to basket.");
         System.out.println("REMOVE product from basket.");
-        System.out.println("SHOW basket's products and cost per each");
+        System.out.println("SHOW basket's products and cost of each.");
         System.out.println("GET total cost of products in basket.");
         System.out.println("PAY in the cashier and leave shop.");
         System.out.println("Capital letters indicate your available choices.");
@@ -99,7 +104,7 @@ public class Shop {
 
     public static void main(String[] args) {
         File inventorySkus = new File("./SkusOfBaseProducts.txt");
-        int basketCapacity = 6;
+        int basketCapacity = 10;
         Shop bobBagels = new Shop(inventorySkus, basketCapacity);
         File productList = new File("./FullProductList.txt");
         bobBagels.inventory.loadProducts(productList);
@@ -115,6 +120,6 @@ public class Shop {
             System.out.println("=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
             exit = bobBagels.handleChoice(choice);
         }
-        bobBagels.receipt.printSelf(bobBagels.basket.showProducts(), bobBagels.basket.getTotalCost());
+        bobBagels.receipt.printSelf(bobBagels.basket.showProducts(), bobBagels.basket.calculateDiscount(), bobBagels.basket.getTotalCost(), bobBagels.basket.getDiscount());
     }
 }
