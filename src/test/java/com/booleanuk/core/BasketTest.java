@@ -34,12 +34,12 @@ public class BasketTest {
         Basket basket = new Basket(5);
         Bagel bagelItem = new Bagel("BGLO", new BigDecimal("0.49"), "Bagel", BagelType.Onion);
 
-        assertTrue(basket.addToBasket(bagelItem, 2)); // Add 2 items
+        assertTrue(basket.addToBasket(bagelItem, 2));
         assertEquals(2, basket.getBasketSize());
         assertEquals(2, basket.getItemsMap().get(bagelItem));
 
-        assertTrue(basket.addToBasket(bagelItem, 3)); // Add 3 more items of the same type
-        assertEquals(5, basket.getBasketSize()); // Quantity increased to 5
+        assertTrue(basket.addToBasket(bagelItem, 3));
+        assertEquals(5, basket.getBasketSize());
         assertEquals(5, basket.getItemsMap().get(bagelItem));
     }
     @Test
@@ -102,7 +102,7 @@ public class BasketTest {
 
         assertTrue(basket.addToBasket(bagelItem, 1));
 
-        assertTrue(basket.removeFromBasket(bagelItem, 1)); // Removing the only item in the basket
+        assertTrue(basket.removeFromBasket(bagelItem, 1));
 
         assertEquals(0, basket.getBasketSize());
         assertFalse(basket.getItemsMap().containsKey(bagelItem));
@@ -255,10 +255,10 @@ public class BasketTest {
         Basket basket = new Basket(10);
         Bagel bagelItem = new Bagel("BGLO", new BigDecimal("0.49"), "Bagel", BagelType.Onion);
 
-        assertFalse(basket.addToBasket(bagelItem, 0)); // Try to add with zero quantity
+        assertFalse(basket.addToBasket(bagelItem, 0));
         assertEquals(0, basket.getBasketSize());
 
-        assertFalse(basket.addToBasket(bagelItem, -1)); // Try to add with negative quantity
+        assertFalse(basket.addToBasket(bagelItem, -1));
         assertEquals(0, basket.getBasketSize());
     }
     @Test

@@ -1,6 +1,7 @@
 package com.booleanuk.core.Products;
 
 import java.math.BigDecimal;
+import java.util.Objects;
 
 public class Coffee extends Item implements Sellable {
     public static final BigDecimal COFFEE_AND_BAGEL_DISCOUNT_PRICE = BigDecimal.valueOf(1.25);
@@ -50,4 +51,18 @@ public class Coffee extends Item implements Sellable {
         }
         return this.getPrice();
     }
+
+//    @Override
+//    public boolean equals(Object o) {
+//        if (this == o) return true;
+//        if (o == null || getClass() != o.getClass()) return false;
+//        if (!super.equals(o)) return false;
+//        Coffee coffee = (Coffee) o;
+//        return bagelAdded == coffee.bagelAdded && variant == coffee.variant;
+//    }
+//
+//    @Override
+//    public int hashCode() {
+//        return Objects.hash(super.hashCode(), variant, bagelAdded);
+//    }
 }

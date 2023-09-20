@@ -95,7 +95,11 @@ public class Basket {
         } else {
             System.out.println(PRODUCT_AMOUNT_INCREASED_MESSAGE);
         }
-
+//        if (item instanceof Coffee coffee) {
+//            if (coffee.isBagelAdded()) {
+//                coffee.setBagelAdded(false); // Reset bagelAdded flag for the new coffee
+//            }
+//        }
         return true;
     }
 
@@ -118,7 +122,6 @@ public class Basket {
 
         return true;
     }
-// DO I NEED THIS METHOD >>
     public boolean removeFromBasket(Item item) {
         return itemsMap.remove(item) != null;
     }

@@ -29,11 +29,12 @@ public class FillingTest {
         Filling cheese = new Filling("FILC", new BigDecimal("0.12"), "Filling", FillingType.Cheese);
         Filling creamCheese = new Filling("FILX", new BigDecimal("0.12"), "Filling", FillingType.CreamCheese);
 
-        // Test setting and getting the variant
-        cheese.setVariant(FillingType.Cheese); // Cheese variant remains the same
-        assertEquals(FillingType.Cheese, cheese.getVariant());
 
-        creamCheese.setVariant(FillingType.CreamCheese); // CreamCheese variant remains the same
+        cheese.setVariant(FillingType.Cheese);
+        assertEquals(FillingType.Cheese, cheese.getVariant());
+        cheese.setVariant(FillingType.Ham);
+        assertEquals(FillingType.Ham, cheese.getVariant());
+        creamCheese.setVariant(FillingType.CreamCheese);
         assertEquals(FillingType.CreamCheese, creamCheese.getVariant());
     }
 
