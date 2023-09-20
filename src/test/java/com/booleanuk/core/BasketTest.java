@@ -10,7 +10,7 @@ public class BasketTest {
     @Test
     public void theTestToAdd() {
         Basket basket = new Basket(3);
-        String name = "le onion";
+        String name = "BGLO";
         basket.add(name);
         Assertions.assertTrue(basket.contains(name));
     }
@@ -18,7 +18,7 @@ public class BasketTest {
     @Test
     public void testRemoveBagelFromBasket() {
         Basket basket = new Basket(3);
-        String name = "Le onion";
+        String name = "BGLO";
         basket.add(name);
 
         Assertions.assertTrue(basket.contains(name));
@@ -33,10 +33,10 @@ public class BasketTest {
         Basket basket = new Basket(3);
 
 
-        basket.add("Le onion");
-        basket.add("Cream");
-        Assertions.assertTrue(basket.add("Egg"));
-        Assertions.assertFalse(basket.add("Vanilla"));
+        basket.add("BGLO");
+        basket.add("BGLP");
+        Assertions.assertTrue(basket.add("BGLE"));
+        Assertions.assertFalse(basket.add("BGLS"));
 
     }
 
@@ -46,14 +46,14 @@ public class BasketTest {
         Basket basket = new Basket(3);
 
 
-        basket.add("Le onion");
-        basket.add("Cream");
-        Assertions.assertTrue(basket.add("Egg"));
-        Assertions.assertFalse(basket.add("Vanilla"));
+        basket.add("BGLO");
+        basket.add("BGLP");
+        Assertions.assertTrue(basket.add("BGLE"));
+        Assertions.assertFalse(basket.add("BGLS"));
 
         basket.avSpaceSetter(5);
 
-        Assertions.assertTrue(basket.add("Vanilla"));
+        Assertions.assertTrue(basket.add("BGLS"));
 
 
     }
@@ -62,7 +62,7 @@ public class BasketTest {
     public void checkIfRemoveExists() {
 
         Basket basket = new Basket(3);
-        String name = "Le onion";
+        String name = "BGLO";
         basket.add(name);
 
         Assertions.assertTrue(basket.contains(name));
@@ -77,9 +77,9 @@ public class BasketTest {
     public void testCalculateTotalCost() {
         Basket basket = new Basket();
 
-        basket.addPrice("Onion", 0.49);
-        basket.addPrice("Plain", 0.39);
-        basket.addPrice("Everything", 0.49);
+        basket.addPrice("BGLO", 0.49);
+        basket.addPrice("BGLP", 0.39);
+        basket.addPrice("BGLE", 0.49);
 
 
         double totalCost = basket.calculatePrice();
@@ -97,8 +97,8 @@ public class BasketTest {
         fillings.addFillings("FILB", 0.12);
         fillings.addFillings("FILE", 0.12);
 
-        basket.addPrice("Plain", 0.39);
-        basket.addPrice("Onion", 0.49);
+        basket.addPrice("BGLO", 0.39);
+        basket.addPrice("BGLP", 0.49);
 
         Assertions.assertEquals(1.12, basket.calculatePrice());
     }

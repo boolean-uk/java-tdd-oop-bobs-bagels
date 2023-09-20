@@ -19,7 +19,6 @@ class Basket {
     public Basket() {
         this.items = new ArrayList<>();
         this.pricedItems = new HashMap<>();
-        this.fillings = fillings;
     }
     public Basket(Fillings fillings) {
         this.items = new ArrayList<>();

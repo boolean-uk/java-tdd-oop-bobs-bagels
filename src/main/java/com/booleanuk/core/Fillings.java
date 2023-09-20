@@ -7,6 +7,8 @@ public class Fillings {
     private HashMap<String, Double> customerList;
     public HashMap<String, Double> inventoryList;
 
+
+
     public double fillingPrice;
 
     public Fillings() {
