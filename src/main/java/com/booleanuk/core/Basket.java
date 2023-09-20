@@ -8,8 +8,6 @@ public class Basket {
     private int capacity;
     private ArrayList<Bagel> basket;
 
-    public Basket() {}
-
     public Basket(int capacity) {
         this.capacity = capacity;
         this.basket = new ArrayList<>(capacity);

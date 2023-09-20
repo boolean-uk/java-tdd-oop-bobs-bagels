@@ -1,26 +1,32 @@
 
-| Classes     | Members                                     | Methods                                                                  |
-|-------------|---------------------------------------------|--------------------------------------------------------------------------|
-| `Basket`    | `ArrayList<Bagel> basket`                   | `addBagel(Bagel bagel)`                                                  |
-|             | `int capacity`                              | `removeBagel(Bagel bagel)`                                               |
-|             |                                             | `isBasketFull()`                                                         |
-|             |                                             | `setCapacity(int newCapacity)`                                           |
-|             |                                             | `getTotalCost(HashMap<String, Filling> fillingInventory)<br/>`           |
-|             |                                             |                                                                          |
-| `Bagel`     | `String type`                               | `getPrice()`                                                             |
-|             | `double price`                              | `getFillings`                                                            |
-|             | `List<String> selectedFillings`             | `getType()`                                                              |
-|             |                                             | `addFillings(String filling, HashMap<String, Filling> fillingsInventory` |
-|             |                                             | `calculateBagelsCost<HashMap<String, FIlling> fillingInventory`          |
-|             |                                             |                                                                          |
-| `Filling`   | `String name`                               | `getName()`                                                              |
-|             | `double cost`                               | `getCost()`                                                              |
-|             |                                             |                                                                          |
-| `Inventory` | `HashMap<String, Bagel> bagelInventory`     | `getBagelInventory()`                                                    |
-|             | `HashMap<String, Filling> fillingInventory` | `getFillingInventory()`                                                  |
-|             |                                             | `addBagelType(String bagelType, double cost)`                            |
-|             |                                             | `addFilling(String filling, double price)`                               |
-|             |                                             | `isBagelAvailable(String type)`                                          |
-|             |                                             | `getBagelsPrice(String type)`                                            |
-|             |                                             | `getFillingPrice(String name)`                                           |
+| Classes        | Members                                       | Methods                                                                  |
+|----------------|-----------------------------------------------|--------------------------------------------------------------------------|
+| `Basket`       | `ArrayList<Product> basket`                   | `addBagel(Product product)`                                              |
+|                | `int capacity`                                | `removeBagel(Product product)`                                           |
+|                |                                               | `isBasketFull()`                                                         |
+|                |                                               | `setCapacity(int newCapacity)`                                           |
+|                |                                               | `getTotalCost(Inventory inventory)`                                      |
+|                |                                               |                                                                          |
+| `Product`      | `String name`                                 | `getName()`                                                              |
+|                | `double price`                                | `getPrice()`                                                             |
+|                | `String SKU`                                  | `getSKU()`                                                               |
+|                |                                               |                                                                          |
+| `Bagel`        | `Inherits from Product`                       | `getType()`                                                              |
+|                | `List<String> selectedFillings`               | `addFillings(String filling, HashMap<String, Filling> fillingsInventory` |
+|                |                                               | `calculateBagelsCost<HashMap<String, FIlling> fillingInventory`          |
+|                |                                               |                                                                          |
+| `Coffee`       | `inherits from Product`                       |                                                                          |
+|                |                                               |                                                                          |
+| `Filling`      | `inherits from Product`                       |                                                                          |
+|                |                                               |                                                                          |
+| `SpecialOffer` | `String SKU`                                  | `getSKU()`                                                               |
+|                | `int quantity`                                | `getQuantity`                                                            |
+|                | `double offerPrice`                           | `getOfferPrice()`                                                        |
+|                |                                               |                                                                          |
+| `Inventory`    | `HashMap<String, Product> productInventory`   | `getProductInventory()`                                                  |
+|                | `HashMap<String, SpecialOffer> specialOffers` | `getSpecialOffer()`                                                      |
+|                |                                               | `addProduct(Product product)`                                            |
+|                |                                               | `addSpecialOffer(SpecialOffer specialOffer)`                             |
+|                |                                               | `isProductAvailable(String SKU)`                                         |
+|                |                                               | `getProductPrice(String SKU)`                                            |
 

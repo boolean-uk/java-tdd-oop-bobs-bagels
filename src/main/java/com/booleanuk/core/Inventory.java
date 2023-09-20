@@ -7,19 +7,21 @@ public class Inventory {
     private HashMap<String, Bagel> bagelInventory = new HashMap<>();
     private HashMap<String, Filling> fillingInventory = new HashMap<>();
 
-    public Inventory() {}
-
     public Inventory(HashMap<String, Bagel> bagelInventory, HashMap<String, Filling> fillingInventory) {
         this.bagelInventory = bagelInventory;
         this.fillingInventory = fillingInventory;
     }
 
+    public Inventory() {
+
+    }
+
     public HashMap<String, Bagel> getBagelInventory() {
-        return bagelInventory;
+        return new HashMap<>(bagelInventory);
     }
 
     public HashMap<String, Filling> getFillingInventory() {
-        return fillingInventory;
+        return new HashMap<>(fillingInventory);
     }
 
     public void addBagelType(String bagelType, double cost) {

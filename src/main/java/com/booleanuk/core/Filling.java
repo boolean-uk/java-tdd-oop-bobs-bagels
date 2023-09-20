@@ -5,8 +5,6 @@ public class Filling {
     private String name;
     private double cost;
 
-    public Filling() {}
-
     public Filling(String name, double cost) {
         this.name = name;
         this.cost = cost;
