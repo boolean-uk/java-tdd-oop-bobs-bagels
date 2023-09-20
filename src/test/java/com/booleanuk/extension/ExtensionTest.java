@@ -69,4 +69,19 @@ public class ExtensionTest {
         Assertions.assertEquals(0.99d,coffee.getCost());
         Assertions.assertEquals("Black",coffee.getVariant());
     }
+
+    @Test
+    void checkCoffeeAndBagelDiscount() {
+        Basket basket = new Basket(3);
+        Coffee coffee = new Coffee("COFB");
+        Bagel bagel = new Bagel("BGLO");
+        basket.add(coffee);
+        basket.add(bagel);
+        Assertions.assertEquals(1.25d,basket.getTotalCost());
+        //Check for 3 bagels and 1 coffee
+        Basket basket1 = new Basket(4);
+        basket1.add(coffee);
+        basket1.addMultiple(bagel,3);
+        Assertions.assertEquals(2.23d,basket1.getTotalCost());
+    }
 }

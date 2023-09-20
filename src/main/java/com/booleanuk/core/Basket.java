@@ -59,7 +59,7 @@ public class Basket {
         for (Foods food: basketList) {
             cost += food.getPrice();
         }
-        cost = cost - onionBagelDiscount() - plainBagelDiscount() - EverythingBagelDiscount();
+        cost = cost - onionBagelDiscount() - plainBagelDiscount() - EverythingBagelDiscount() - coffeeAndBagelDiscount();
         return (double) (cost / 100.0);
     }
 
@@ -117,6 +117,30 @@ public class Basket {
             }
         }
         return discount ;
+    }
+
+    public int coffeeAndBagelDiscount() {
+        int oldCost = 0;
+        int discount = 0;
+        boolean foundBagel = false;
+        boolean foundCoffee = false;
+        for (Foods food: basketList){
+            if (food instanceof Bagel ){
+                foundBagel = true;
+                oldCost += food.getPrice();
+            }
+            if (food.getSku().equals("COFB")) {
+                foundCoffee = true;
+                oldCost += food.getPrice();
+            }
+            if (foundBagel && foundCoffee) {
+                discount += oldCost - 125;
+                oldCost = 0;
+                foundBagel = false;
+                foundCoffee = false;
+            }
+        }
+        return discount;
     }
 
 

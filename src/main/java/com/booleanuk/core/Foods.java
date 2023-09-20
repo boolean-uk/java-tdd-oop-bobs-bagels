@@ -1,6 +1,6 @@
 package com.booleanuk.core;
 
-public class Foods {
+public abstract class Foods {
     private String sku;
     protected int price = -1;
     private String variant = "";
