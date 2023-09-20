@@ -25,7 +25,7 @@ public class Basket {
 //    "%s x%s %10s" <ALTERNATIVE FILLING FORMAT?
     private static final String TOTAL_COST_MESSAGE = "Total                  € %.2f\n";
     private static final String TOTAL_SAVINGS_MESSAGE = "You saved a total of € %.2f\n       on this shop\n";
-    private static final String ITEM_ON_BASKET_OVERVIEW_FORMAT = "%s x %s pcs x %s = %10s";
+    private static final String ITEM_ON_BASKET_OVERVIEW_FORMAT = "%s x %s pcs x %s = %s";
 
 
 
@@ -267,7 +267,7 @@ public class Basket {
         return inventory.itemIsAvailable(item);
     }
 
-    private BigDecimal calculateItemTotalCost(Item item, int quantity) {
+    BigDecimal calculateItemTotalCost(Item item, int quantity) {
         if (item instanceof Sellable) {
             return ((Sellable) item).calculateTotalPriceItem().multiply(BigDecimal.valueOf(quantity));
         } else {

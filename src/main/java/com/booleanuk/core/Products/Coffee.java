@@ -40,7 +40,7 @@ public class Coffee extends Item implements Sellable {
 
     @Override
     public String toString() {
-        return String.format("%s %s %s", this.variant, this.name, this.isBagelAdded()? "with Bagel" : "");
+        return String.format("%s %s%s", this.variant, this.name, this.isBagelAdded()? " with Bagel" : "");
     }
 
     @Override

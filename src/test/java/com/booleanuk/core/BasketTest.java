@@ -11,7 +11,6 @@ import static org.junit.jupiter.api.Assertions.*;
 public class BasketTest {
     @Test
     public void testAddToBasketSuccessful() {
-        Inventory inventory = new Inventory();
         Basket basket = new Basket( 5);
         Bagel bagelItem = new Bagel("BGLO", new BigDecimal("0.49"), "Bagel", BagelType.Onion);
 
@@ -127,6 +126,17 @@ public class BasketTest {
         assertEquals(0, basket.getItemsMap().size());
 
     }
+    @Test
+    public void testRemoveFromBasketOverloadedMethod() {
+        Basket basket = new Basket(5);
+        Item item = new Bagel("BGLO", BigDecimal.valueOf(0.49), "Bagel", BagelType.Onion);
+        int initialQuantity = 2;
+
+        assertTrue(basket.addToBasket(item, initialQuantity));
+        assertEquals(initialQuantity, basket.getItemsMap().get(item));
+        assertTrue(basket.removeFromBasket(item));
+        assertFalse(basket.getItemsMap().containsKey(item));
+    }
 
 
     @Test
@@ -140,6 +150,18 @@ public class BasketTest {
         assertTrue(basket.addToBasket(bagelItem2, 1));
         assertTrue(basket.isFull());
     }
+
+    @Test
+    public void testCalculateItemTotalCost() {
+        Item item = new Bagel("BGLO", BigDecimal.valueOf(0.49), "Bagel", BagelType.Onion);
+        int quantity = 3;
+
+        BigDecimal expectedTotalCost = BigDecimal.valueOf(0.49).multiply(BigDecimal.valueOf(3));
+        Basket basket = new Basket(5);
+        BigDecimal actualTotalCost = basket.calculateItemTotalCost(item, quantity);
+        assertEquals(expectedTotalCost, actualTotalCost);
+    }
+
 
     @Test
     public void testSettingCapacity() {
@@ -250,53 +272,41 @@ public class BasketTest {
         bagelWithFillings.addFilling(filling1);
         bagelWithFillings.addFilling(filling2);
 
-        assertTrue(basket.addToBasket(bagelWithFillings, 2)); // Add 2 Bagels with fillings
-        assertTrue(basket.addToBasket(bagelWithoutFillings, 2)); // Add 2 Bagels without fillings
+        assertTrue(basket.addToBasket(bagelWithFillings, 2));
+        assertTrue(basket.addToBasket(bagelWithoutFillings, 2));
 
-        // Bagels with fillings cost (0.49 + 0.12 + 0.15) * 2 = 1.52 * 2 = 3.04
+        // Bagels with fillings cost (0.49 + 0.12 + 0.15) * 2 = 1.52
         // Bagels without fillings cost 0.39 * 2 = 0.78
-        // Total cost should be 3.04 + 0.78 = 3.82
-        assertEquals(new BigDecimal("3.82"), basket.calculateTotalCost());
+        // Total cost should be 1.52 + 0.78 = 2.30
+        assertEquals(new BigDecimal("2.30"), basket.calculateTotalCost());
     }
     @Test
     public void testTotalCostWithDifferentItems() {
         Basket basket = new Basket(10);
         Bagel bagelItem = new Bagel("BGLO", new BigDecimal("0.49"), "Bagel", BagelType.Onion);
-        Coffee coffeeItem = new Coffee("CFOB", new BigDecimal("1.99"), "Coffee", CoffeeType.Black);
+        Coffee coffeeItem = new Coffee("COFB", new BigDecimal("0.99"), "Coffee", CoffeeType.Black);
 
-        assertTrue(basket.addToBasket(bagelItem, 2)); // Add 2 Bagels
-        assertTrue(basket.addToBasket(coffeeItem, 3)); // Add 3 Coffees
+        assertTrue(basket.addToBasket(bagelItem, 2));
+        assertTrue(basket.addToBasket(coffeeItem, 3));
 
-        // Bagels cost 0.49 * 2 = 0.98, Coffees cost 1.99 * 3 = 5.97
-        // Total cost should be 0.98 + 5.97 = 6.95
-        assertEquals(new BigDecimal("6.95"), basket.calculateTotalCost());
+        // Bagels cost 0.49 * 2 = 0.98, Coffees cost 0.99 * 3 = 2.97
+        // Total cost should be 0.98 + 2.97 = 3.95
+        assertEquals(new BigDecimal("3.95"), basket.calculateTotalCost());
     }
     @Test
     public void testTotalCostWithDiscounts() {
-        Basket basket = new Basket(10);
+        Basket basket = new Basket(30);
         Bagel discountBagel = new Bagel("BGLP", new BigDecimal("0.39"), "Bagel", BagelType.Plain);
-        Bagel nonDiscountBagel = new Bagel("BGLO", new BigDecimal("0.49"), "Bagel", BagelType.Onion);
+        Bagel otherDiscountBagel = new Bagel("BGLO", new BigDecimal("0.49"), "Bagel", BagelType.Onion);
 
         assertTrue(basket.addToBasket(discountBagel, 12)); // 12 Plain Bagels with discount
-        assertTrue(basket.addToBasket(nonDiscountBagel, 6)); // 6 Onion Bagels without discount
+        assertTrue(basket.addToBasket(otherDiscountBagel, 6)); // 6 Onion Bagels with discount
 
-        // Discounted Bagels cost 3.99, Non-discounted Bagels cost 0.49 * 6 = 2.94
-        // Total cost should be 3.99 + 2.94 = 6.93
-        assertEquals(new BigDecimal("6.93"), basket.calculateTotalCost());
+        // 12 Discounted Bagels cost 3.99, 6 Discounted Bagels cost 2.49
+        // Total cost should be 3.99 + 2.49 = 6.48
+        assertEquals(new BigDecimal("6.48"), basket.calculateTotalCost());
     }
-    @Test
-    public void testTotalCostWithDifferentTypes() {
-        Basket basket = new Basket(10);
-        Bagel bagelItem = new Bagel("BGLO", new BigDecimal("0.49"), "Bagel", BagelType.Onion);
-        Coffee coffeeItem = new Coffee("CFOB", new BigDecimal("1.99"), "Coffee", CoffeeType.Black);
 
-        assertTrue(basket.addToBasket(bagelItem, 2)); // Add 2 Bagels
-        assertTrue(basket.addToBasket(coffeeItem, 3)); // Add 3 Coffees
-
-        // Bagels cost 0.49 * 2 = 0.98, Coffees cost 1.99 * 3 = 5.97
-        // Total cost should be 0.98 + 5.97 = 6.95
-        assertEquals(new BigDecimal("6.95"), basket.calculateTotalCost());
-    }
     @Test
     public void testChangingCapacityAfterAddingItems() {
         Basket basket = new Basket(5);
@@ -320,13 +330,13 @@ public class BasketTest {
         assertEquals(8, basket.getBasketSize());
 
         assertFalse(basket.setCapacity(5)); // Try to set capacity to less than current items
-        assertEquals(8, basket.getCapacity()); // Capacity should remain unchanged
+        assertEquals(10, basket.getCapacity()); // Capacity should remain unchanged
     }
     @Test
     public void testToStringForEmptyBasket() {
         Basket basket = new Basket(10);
 
-        String expected = "Your basket's capacity is 0/10.\nYou have no items in your basket yet.";
+        String expected = "Your basket's capacity is 0/10.\nYour products:\nYou have no items in your basket yet.";
         assertEquals(expected, basket.toString());
     }
     @Test
@@ -340,7 +350,7 @@ public class BasketTest {
 
         String expected = "Your basket's capacity is 3/10.\nYour products:\n" +
                 "0. Onion Bagel x 2 pcs x € 0.49 = € 0.98\n" +
-                "1. Coffee Cappuccino x 1 pcs x € 1.29 = € 1.29\n";
+                "1. Cappuccino Coffee x 1 pcs x € 1.29 = € 1.29\n";
 
         assertEquals(expected, basket.toString());
     }
