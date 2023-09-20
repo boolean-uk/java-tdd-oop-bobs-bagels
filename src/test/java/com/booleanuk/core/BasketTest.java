@@ -88,9 +88,21 @@ public class BasketTest {
         assertEquals(1.37, totalCost);
     }
 
+    @Test
+    public void checkFillingsPrice() {
+        Fillings fillings = new Fillings();
+        Basket basket = new Basket(fillings);
+
+        fillings.addFillings("FILB", 0.12);
+        fillings.addFillings("FILE", 0.12);
+        fillings.addFillings("FILC", 0.12);
+
+        Assertions.assertTrue(fillings.fillingChecker());
+
+        Assertions.assertEquals(0.36, fillings.getFillingCost());
 
 
-
+    }
 }
 
 
