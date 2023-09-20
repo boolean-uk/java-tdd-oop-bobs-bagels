@@ -1,9 +1,6 @@
 package com.booleanuk.core;
 
-import com.booleanuk.core.Products.Bagel;
-import com.booleanuk.core.Products.Coffee;
-import com.booleanuk.core.Products.Filling;
-import com.booleanuk.core.Products.Item;
+import com.booleanuk.core.Products.*;
 
 import java.util.*;
 
@@ -11,9 +8,10 @@ public class Shop {
     private static final int BASKET_CAPACITY = 30;
     private final Scanner scanner;
     private Basket basket;
+
     public Shop() {
         this.scanner = new Scanner(System.in);
-        this.basket = new Basket( BASKET_CAPACITY);
+        this.basket = new Basket(BASKET_CAPACITY);
     }
 
     public static void main(String[] args) {
@@ -122,7 +120,7 @@ public class Shop {
     }
 
     private void addFillingsToBagel(Bagel bagel, List<Item> products) {
-        System.out.println("Do you want to add some (more) fillings?");
+        System.out.println("Do you want to add some fillings?");
         System.out.println("Type Y for Yes");
         System.out.println("Type N for No");
 
@@ -230,7 +228,9 @@ public class Shop {
         int number = 0;
         for (Item item : items) {
             if (itemType.isInstance(item)) {
-                System.out.println("Type \"" + number + "\" for " + String.format("%-30s €%10s", item, item.getPrice()));
+                System.out.println("Type \"" + number + "\" for " + String.format("%-30s €%10s",
+                        item,
+                        item instanceof Coffee ? ((Sellable) item).calculateTotalPriceItem() : item.getPrice()));
             }
             number++;
 

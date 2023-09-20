@@ -87,9 +87,7 @@ public class Basket {
 
         itemsMap.put(item, itemsMap.getOrDefault(item, 0) + amount);
 
-        if (itemsMap.get(item) == amount) {
-            System.out.println(PRODUCT_ADDED_MESSAGE);
-        } else {
+        if (itemsMap.get(item) != amount) {
             System.out.println(PRODUCT_AMOUNT_INCREASED_MESSAGE);
         }
         return true;

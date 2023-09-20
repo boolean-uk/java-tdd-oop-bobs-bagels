@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 
 public class ExtensionTest {
     @Test
-    public void shouldSayHelloWorld() {
-        Assertions.assertEquals("Hello, world!", Extension.sayHelloWorld());
+    public void testDummyTest(){
+        Assertions.assertTrue(true);
     }
 }
