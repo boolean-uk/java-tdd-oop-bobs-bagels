@@ -53,10 +53,7 @@ public class Fillings {
 
     }
 
-    public void sendFillingCost(Basket basket) {
-        double fillingCost = getFillingCost();
-        basket.addPrice("Fillings", fillingCost);
-    }
+
 
 
 

@@ -12,7 +12,7 @@ public class BasketTest {
         Basket basket = new Basket(3);
         String name = "BGLO";
         basket.add(name);
-        Assertions.assertTrue(basket.contains(name));
+        Assertions.assertTrue(basket.items.contains(name));
     }
 
     @Test
@@ -21,10 +21,10 @@ public class BasketTest {
         String name = "BGLO";
         basket.add(name);
 
-        Assertions.assertTrue(basket.contains(name));
+        Assertions.assertTrue(basket.items.contains(name));
 
         basket.remove(name);
-        Assertions.assertFalse(basket.contains(name));
+        Assertions.assertFalse(basket.items.contains(name));
     }
 
     @Test
@@ -65,10 +65,10 @@ public class BasketTest {
         String name = "BGLO";
         basket.add(name);
 
-        Assertions.assertTrue(basket.contains(name));
+        Assertions.assertTrue(basket.items.contains(name));
         basket.remove(name);
 
-        Assertions.assertFalse(basket.contains(name));
+        Assertions.assertFalse(basket.items.contains(name));
         basket.remove(name);
 
     }
@@ -109,7 +109,6 @@ public class BasketTest {
         Fillings fillings = new Fillings();
         Basket basket = new Basket();
 
-//        basket.testMethod();
         basket.addPrice("BGLO", 0.49);
         Assertions.assertEquals(1, basket.pricedItems.size());
 

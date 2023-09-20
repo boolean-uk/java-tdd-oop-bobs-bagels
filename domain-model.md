@@ -52,36 +52,33 @@ So we don't get any weird requests,
 I want customers to only be able to order things that we stock in our inventory.
 -->
 
-| Classes | Methods                               | Scenario                              | Outputs   |
-|---------|---------------------------------------|---------------------------------------|-----------|
-| Basket  | add(String bagelname, int price)      | if the bagel has been added           | true      |
-|         |                                       |                                       |           |
-|         |                                       | if the bagel has not been found       | false     |
-|         |                                       |                                       |           |
-|         | reove(String name)                    | if the bagel is still in the list     | false     |
-|         |                                       | if the bagel has been removed         | true      |
-|         |                                       |                                       |           |
-|         | spaceAvailable()                      | if max capacity has been exceeded     | false     |
-|         |                                       | if max capacity hasn't been exceeded  | true      |
-|         |                                       |                                       |           |
-|         | changeMaxCapacity(int newMaxCapValue) | if max capacity has been changed      | true      |
-|         |                                       | if max capacity hasn't been changed   | false     |
-|         |                                       |                                       |           |
-|         | remove(String name)                   | If the item exists in the item list   | true      |
-|         |                                       | If the item doesn't exist in the list | false     |
-|         |                                       |                                       |           |
-|         | priceChecker(String name)             | If product has been found             | true      |
-|         |                                       |                                       | int price |       
-|         |                                       | If product has not been found         | false     |
-|         |                                       |                                       |           |
-|         | changeFilling(String name)            | If product has been found             | true      | 
-|         |                                       | If product has not been found         | false     |
-|         |                                       |                                       |           |
-|         | priceCheck(String name)               | If product has been found             | int price | 
-|         |                                       | If product has not been found         | false     |
-|         |                                       |                                       |           |
-|         | stockChecker(String name)             | If there is stock                     | true      |
-|         |                                       | If there is no stock                  | false     |
-|         |                                       |                                       |           |
+| Classes | Methods                               | Scenario                                 | Outputs   |
+|---------|---------------------------------------|------------------------------------------|-----------|
+| Basket  | add(String item)                      | If the bagel has been added              | true      |
+|         |                                       |                                          |           |         
+|         |                                       | If the bagel has not been found          | false     |
+|         | addPrice(String bagelname, int price) | If the bagel has been added              | true      |
+|         |                                       |                                          |           |
+|         |                                       | If the bagel has not been found          | false     |
+|         |                                       |                                          |           |
+|         | remove(String name)                   | If the bagel is still in the list        | false     |
+|         |                                       | If the bagel has been removed            | true      |
+|         |                                       |                                          |           |
+|         | avSpaceSetter()                       | Change the cart size                     | void      |
+|         |                                       |                                          |           |
+|         |                                       |                                          |           |
+|         | calculatePrice(String name)           | User gets to know what the total cost is | double    |
+|         |                                       |                                          | int price |       
+|         |                                       |                                          |           |
+|         |                                       |                                          |           |
+|         | changeFilling(String name)            | If product has been found                | true      | 
+|         |                                       | If product has not been found            | false     |
+|         |                                       |                                          |           |
+|         | priceCheck(String name)               | If product has been found                | int price | 
+|         |                                       | If product has not been found            | false     |
+|         |                                       |                                          |           |
+|         | stockChecker(String name)             | If there is stock                        | true      |
+|         |                                       | If there is no stock                     | false     |
+|         |                                       |                                          |           |
 
 

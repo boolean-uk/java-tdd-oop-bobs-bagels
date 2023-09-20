@@ -7,19 +7,17 @@ import java.util.Map;
 
 
 class Basket {
-    Fillings fillings = new Fillings();
-    private List<String> items;
-    public Map<String, Double> pricedItems;
     private int avSpace = 5;
+    Fillings fillings = new Fillings();
+    public List<String> items;
+    public Map<String, Double> pricedItems;
 
-//    public void testMethod(){
-//        System.out.println(fillings.inventoryList.containsKey("SDASDSAD"));
-//    }
 
     public Basket() {
         this.items = new ArrayList<>();
         this.pricedItems = new HashMap<>();
     }
+
     public Basket(Fillings fillings) {
         this.items = new ArrayList<>();
         this.fillings = fillings;
@@ -36,9 +34,9 @@ class Basket {
 
     public boolean add(String item) {
 
-        if (items.size() < avSpace  ) {
+        if (items.size() < avSpace && fillings.inventoryList.containsKey(item)) {
             items.add(item);
-            System.out.println("item has been added");
+            System.out.println("Item has been added");
             return true;
         } else {
             System.out.println("The cart is full");
@@ -48,10 +46,11 @@ class Basket {
     }
 
     public void addPrice(String name, double price) {
-        if(fillings.inventoryList.containsKey(name)){
+        if (fillings.inventoryList.containsKey(name)) {
+            System.out.println("The bagel you've chosen costs: " + price);
             pricedItems.put(name, price);
             add(name);
-        }else{
+        } else {
             System.out.println("Bagel has not been found in our stock");
         }
 
@@ -70,12 +69,6 @@ class Basket {
         total += fillingprices;
         return total;
     }
-
-
-    public boolean contains(String item) {
-        return items.contains(item);
-    }
-
 
     public boolean remove(String item) {
         if (items.contains(item)) {
