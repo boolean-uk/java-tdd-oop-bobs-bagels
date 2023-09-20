@@ -36,11 +36,8 @@ public class BagelTest {
             fail("Expected an exception for invalid numeric value");
         } catch (ArrayIndexOutOfBoundsException e) {
             // This exception should be thrown because the index is out of bounds
-            // maybe handle such exceptions in the bagel class
             assertTrue(true);
         }
-
-
     }
 
     @Test
@@ -102,7 +99,6 @@ public class BagelTest {
         bagel.addFilling(baconFilling);
         bagel.addFilling(eggFilling);
 
-        // Calculate the expected price: Bagel price + Bacon price + Egg price
         BigDecimal expectedPrice = new BigDecimal("0.49").add(new BigDecimal("0.12")).add(new BigDecimal("0.12"));
 
         assertEquals(expectedPrice, bagel.calculateTotalPriceItem());

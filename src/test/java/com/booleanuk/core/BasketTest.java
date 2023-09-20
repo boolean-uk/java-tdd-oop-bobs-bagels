@@ -94,7 +94,6 @@ public class BasketTest {
         assertFalse(basket.addToBasket(bagelItem2,1));
     }
 
-    // test add to basket -> product already exists -> increase quantity
     @Test
     public void testRemoveFromBasketWithSingleItem() {
         Basket basket = new Basket(5);
@@ -234,21 +233,6 @@ public class BasketTest {
         // Bagels with multiple fillings cost (0.49 + 0.12 + 0.12) * 2 = 1.46
         assertEquals(new BigDecimal("1.46"), basket.calculateTotalCost());
     }
-//    @Test
-//    public void testTotalCostWithBagelsAndFillings() {
-//        Basket basket = new Basket(10);
-//        Bagel bagelItem = new Bagel("BGLO", new BigDecimal("0.49"), "Bagel", BagelType.Onion);
-//        Filling filling1 = new Filling("FILC", new BigDecimal("0.12"), "Filling", FillingType.Cheese);
-//        Filling filling2 = new Filling("FILB", new BigDecimal("0.12"), "Filling", FillingType.Bacon);
-//
-//        bagelItem.addFilling(filling1);
-//        bagelItem.addFilling(filling2);
-//
-//        assertTrue(basket.addToBasket(bagelItem, 3)); // Add 3 Bagels with fillings
-//
-//        // Bagels with fillings cost (0.49 + 0.12 + 0.15) * 3 = 1.52 * 3 = 4.56
-//        assertEquals(new BigDecimal("4.56"), basket.calculateTotalCost());
-//    }
 
     @Test
     public void testAddingItemsWithInvalidQuantities() {
@@ -312,25 +296,25 @@ public class BasketTest {
         Basket basket = new Basket(5);
         Bagel bagelItem = new Bagel("BGLO", new BigDecimal("0.49"), "Bagel", BagelType.Onion);
 
-        assertTrue(basket.addToBasket(bagelItem, 2)); // Add 2 items
+        assertTrue(basket.addToBasket(bagelItem, 2));
         assertEquals(2, basket.getBasketSize());
 
-        assertTrue(basket.setCapacity(10)); // Increase capacity to 10
+        assertTrue(basket.setCapacity(10));
         assertEquals(10, basket.getCapacity());
 
-        assertTrue(basket.addToBasket(bagelItem, 6)); // Add 6 more items
-        assertEquals(8, basket.getBasketSize()); // Total items should be 8
+        assertTrue(basket.addToBasket(bagelItem, 6));
+        assertEquals(8, basket.getBasketSize());
     }
     @Test
     public void testSettingCapacityToLessThanCurrentItems() {
         Basket basket = new Basket(10);
         Bagel bagelItem = new Bagel("BGLO", new BigDecimal("0.49"), "Bagel", BagelType.Onion);
 
-        assertTrue(basket.addToBasket(bagelItem, 8)); // Add 8 items
+        assertTrue(basket.addToBasket(bagelItem, 8));
         assertEquals(8, basket.getBasketSize());
 
-        assertFalse(basket.setCapacity(5)); // Try to set capacity to less than current items
-        assertEquals(10, basket.getCapacity()); // Capacity should remain unchanged
+        assertFalse(basket.setCapacity(5));
+        assertEquals(10, basket.getCapacity());
     }
     @Test
     public void testToStringForEmptyBasket() {

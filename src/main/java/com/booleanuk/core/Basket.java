@@ -18,11 +18,9 @@ public class Basket {
     private static final String PRODUCT_ADDED_MESSAGE = "Product was added to the basket";
     private static final String PRODUCT_AMOUNT_INCREASED_MESSAGE = "Product was already in the basket. Quantity increased.";
     private static final String DATE_TIME_FORMAT = "yyyy-MM-dd HH:mm:ss";
-    private static final String ITEM_ON_RECEIPT_FORMAT = "%-18s %2d  € %.2f\n";
-    // "%s x %s pcs x %s = %10s" < ALTERNATIVE FORMAT
+    private static final String ITEM_ON_RECEIPT_FORMAT = "%-18s x%2d  € %.2f\n";
     private static final String DISCOUNT_FORMAT = "  >> Discount:  € -%s\n";
     private static final String FILLING_FORMAT = " >> %-15s x%2d  € %.2f\n";
-//    "%s x%s %10s" <ALTERNATIVE FILLING FORMAT?
     private static final String TOTAL_COST_MESSAGE = "Total                  € %.2f\n";
     private static final String TOTAL_SAVINGS_MESSAGE = "You saved a total of € %.2f\n       on this shop\n";
     private static final String ITEM_ON_BASKET_OVERVIEW_FORMAT = "%s x %s pcs x %s = %s";
@@ -49,7 +47,6 @@ public class Basket {
 
     public boolean setCapacity(int capacity) {
         if (capacity < getBasketSize()) {
-//            printErrorMessage(NOT_ENOUGH_SPACE_MESSAGE);
             return false;
         }
         this.capacity = capacity;
@@ -95,11 +92,6 @@ public class Basket {
         } else {
             System.out.println(PRODUCT_AMOUNT_INCREASED_MESSAGE);
         }
-//        if (item instanceof Coffee coffee) {
-//            if (coffee.isBagelAdded()) {
-//                coffee.setBagelAdded(false); // Reset bagelAdded flag for the new coffee
-//            }
-//        }
         return true;
     }
 

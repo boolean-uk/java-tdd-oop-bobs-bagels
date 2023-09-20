@@ -9,11 +9,9 @@ import java.util.*;
 
 public class Shop {
     private static final int BASKET_CAPACITY = 30;
-//    private final Inventory inventory;
     private final Scanner scanner;
     private Basket basket;
     public Shop() {
-//        this.inventory = Inventory.getInstance();
         this.scanner = new Scanner(System.in);
         this.basket = new Basket( BASKET_CAPACITY);
     }

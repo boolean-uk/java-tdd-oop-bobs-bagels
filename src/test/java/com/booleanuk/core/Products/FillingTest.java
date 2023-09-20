@@ -8,11 +8,9 @@ import static org.junit.jupiter.api.Assertions.*;
 public class FillingTest {
     @Test
     public void testFilling() {
-        // Test different fillings
         Filling bacon = new Filling("FILB", new BigDecimal("0.12"), "Filling", FillingType.Bacon);
         Filling egg = new Filling("FILE", new BigDecimal("0.12"), "Filling", FillingType.Egg);
 
-        // Verify SKU, price, name, and variant
         assertEquals("FILB", bacon.getSku());
         assertEquals(BigDecimal.valueOf(0.12), bacon.getPrice());
         assertEquals("Filling", bacon.getName());
@@ -29,7 +27,6 @@ public class FillingTest {
         Filling cheese = new Filling("FILC", new BigDecimal("0.12"), "Filling", FillingType.Cheese);
         Filling creamCheese = new Filling("FILX", new BigDecimal("0.12"), "Filling", FillingType.CreamCheese);
 
-
         cheese.setVariant(FillingType.Cheese);
         assertEquals(FillingType.Cheese, cheese.getVariant());
         cheese.setVariant(FillingType.Ham);
@@ -43,7 +40,6 @@ public class FillingTest {
         Filling smokedSalmon = new Filling("FILS", new BigDecimal("0.12"), "Filling", FillingType.SmokedSalmon);
         Filling ham = new Filling("FILH", new BigDecimal("0.12"), "Filling", FillingType.Ham);
 
-        // Test the toString() method
         assertEquals("SmokedSalmon Filling", smokedSalmon.toString());
         assertEquals("Ham Filling", ham.toString());
     }

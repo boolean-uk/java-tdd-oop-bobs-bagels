@@ -35,7 +35,6 @@ public class CoffeeTest {
         coffee.setBagelAdded(true);
         assertTrue(coffee.isBagelAdded());
 
-        // Check that bagel can only be added when coffee has a discount
         Coffee coffeeWithDiscount = new Coffee("COFB", new BigDecimal("0.99"), "Coffee", CoffeeType.Black);
         coffeeWithDiscount.setBagelAdded(true);
         assertTrue(coffeeWithDiscount.isBagelAdded());
@@ -50,13 +49,10 @@ public class CoffeeTest {
         Coffee coffeeWithDiscount = new Coffee("COFB", new BigDecimal("0.99"), "Coffee", CoffeeType.Black);
         Coffee coffeeWithoutDiscount = new Coffee("COFC", new BigDecimal("1.29"), "Coffee", CoffeeType.Cappuccino);
 
-        // With discount, the price should be the discount price
         assertEquals(BigDecimal.valueOf(0.99), coffeeWithDiscount.calculateTotalPriceItem());
 
-        // Without discount, the price should be the regular price
         assertEquals(BigDecimal.valueOf(1.29), coffeeWithoutDiscount.calculateTotalPriceItem());
 
-        // With discount and bagel added, the price should still be the discount price
         coffeeWithDiscount.setBagelAdded(true);
         assertEquals(Coffee.COFFEE_AND_BAGEL_DISCOUNT_PRICE, coffeeWithDiscount.calculateTotalPriceItem());
     }

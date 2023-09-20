@@ -42,16 +42,10 @@ public class Inventory {
 
 
     public boolean itemIsAvailable(Item currentItem) {
-        for (Item item : this.inventoryList) {
-            if (item.getSku().equals(currentItem.getSku())) {
-                return true;
-            }
-        }
-        return false;
-//        return getInventoryList().stream()
-//                .filter(f -> f.getSku().equals(item.getSku()))
-//                .findFirst()
-//                .orElse(null);
+        return getInventoryList().stream()
+                .filter(f -> f.getSku().equals(currentItem.getSku()))
+                .findFirst()
+                .orElse(null) != null;
     }
     public void addProductToInventory(Item item) {
         this.inventoryList.add(item);
