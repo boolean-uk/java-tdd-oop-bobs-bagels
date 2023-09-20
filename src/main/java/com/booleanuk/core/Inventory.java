@@ -20,6 +20,10 @@ public class Inventory {
         Filling filling4 = new Filling("FILX",0.12d,"Cream Cheese");
         Filling filling5 = new Filling("FILS",0.12d,"Smoked Salmon");
         Filling filling6 = new Filling("FILH",0.12d,"Ham");
+        Coffee coffee1 = new Coffee("COFB",0.99d,"Black");
+        Coffee coffee2 = new Coffee("COFW",1.19d,"Black");
+        Coffee coffee3 = new Coffee("COFC",1.29d,"Black");
+        Coffee coffee4 = new Coffee("COFL",1.29d,"Black");
         inventoryList.put(bagel1.getSku(),bagel1);
         inventoryList.put(bagel2.getSku(),bagel2);
         inventoryList.put(bagel3.getSku(),bagel3);
@@ -30,6 +34,10 @@ public class Inventory {
         inventoryList.put(filling4.getSku(),filling4);
         inventoryList.put(filling5.getSku(),filling5);
         inventoryList.put(filling6.getSku(),filling6);
+        inventoryList.put(coffee1.getSku(),coffee1);
+        inventoryList.put(coffee2.getSku(),coffee2);
+        inventoryList.put(coffee3.getSku(),coffee3);
+        inventoryList.put(coffee4.getSku(),coffee4);
     }
 
     public Foods get(String sku) {

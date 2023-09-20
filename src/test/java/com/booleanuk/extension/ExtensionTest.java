@@ -2,6 +2,7 @@ package com.booleanuk.extension;
 
 import com.booleanuk.core.Bagel;
 import com.booleanuk.core.Basket;
+import com.booleanuk.core.Coffee;
 import com.booleanuk.core.Filling;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -60,5 +61,12 @@ public class ExtensionTest {
         Basket basket2 = new Basket(12);
         basket2.addMultiple(bagel,12);
         Assertions.assertEquals(4.98d,basket2.getTotalCost());
+    }
+
+    @Test
+    void checkCoffeeConstructor(){
+        Coffee coffee = new Coffee("COFB");
+        Assertions.assertEquals(0.99d,coffee.getCost());
+        Assertions.assertEquals("Black",coffee.getVariant());
     }
 }
