@@ -52,17 +52,4 @@ public class Coffee extends Item implements Sellable {
         return this.getPrice();
     }
 
-//    @Override
-//    public boolean equals(Object o) {
-//        if (this == o) return true;
-//        if (o == null || getClass() != o.getClass()) return false;
-//        if (!super.equals(o)) return false;
-//        Coffee coffee = (Coffee) o;
-//        return bagelAdded == coffee.bagelAdded && variant == coffee.variant;
-//    }
-//
-//    @Override
-//    public int hashCode() {
-//        return Objects.hash(super.hashCode(), variant, bagelAdded);
-//    }
 }

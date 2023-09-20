@@ -16,10 +16,6 @@ public abstract class Item {
 
     }
 
-    protected Item(String sku) {
-        this(sku, null, null);
-    }
-
 
     public String getSku() {
         return this.SKU;
@@ -51,19 +47,6 @@ public abstract class Item {
 
     public abstract Enum<?> getVariant();
 
-// protected setters??
-    // abstract methods - do we need different implementation?
-//    public String getVariant() {
-//        return this.variant;
-//    }
-//
-//    public boolean setVariant(String variant) {
-//        if (variant.isBlank()) {
-//            return false;
-//        }
-//        this.variant = variant;
-//        return true;
-//    }
 
 
     @Override
