@@ -5,23 +5,15 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Objects;
 
-public class Bagel extends Product implements Sellable, Fillable {
+public class Bagel extends Item implements Sellable, Fillable {
     private ArrayList<Filling> fillings;
     private BagelType variant;
-    public Bagel(String SKU, BigDecimal price, String name,BagelType variant ) {
+
+    public Bagel(String SKU, BigDecimal price, String name, BagelType variant) {
         super(SKU, price, name);
         this.fillings = new ArrayList<>();
         this.variant = variant;
     }
-
-    public Bagel(String SKU) {
-        super(SKU);
-    }
-
-
-
-    // implement filling functionality
-
 
     @Override
     public BigDecimal getPrice() {
@@ -42,17 +34,9 @@ public class Bagel extends Product implements Sellable, Fillable {
         }
     }
 
-
+    @Override
     public BagelType getVariant() {
         return variant;
-    }
-
-    public BigDecimal getTotalPrice() {
-        BigDecimal fillingsPrice = BigDecimal.ZERO;
-        for (Filling filling : this.fillings) {
-            fillingsPrice = fillingsPrice.add(filling.getPrice());
-        }
-        return this.getPrice().add(fillingsPrice);
     }
 
     @Override
@@ -60,25 +44,29 @@ public class Bagel extends Product implements Sellable, Fillable {
         return this.fillings;
     }
 
-//    public boolean addFillingBySku(String sku, Inventory inventory) {
-//        Item filling = inventory.getItemBySku(sku);
-//        return filling != null && this.fillings.add((Filling) filling);
-//    }
-    public void addFilling(Filling filling) {
-        fillings.add(filling);
+
+    public boolean addFilling(Filling filling) {
+        if (this.getFillings().size()<this.MAX_FILLINGS) {
+            this.fillings.add(filling);
+            return true;
+        } else {
+            System.out.printf("Cannot add more than %s fillings!\n",this.MAX_FILLINGS);
+            return false;
+        }
     }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
         Bagel bagel = (Bagel) o;
-        return Objects.equals(fillings, bagel.fillings);
+        return Objects.equals(fillings, bagel.fillings) && Objects.equals(getSku(), bagel.getSku());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), fillings);
+        return Objects.hash(super.hashCode(), fillings, getSku());
     }
 
     @Override
@@ -93,4 +81,5 @@ public class Bagel extends Product implements Sellable, Fillable {
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
         return this.getPrice().add(fillingsPriceSum);
     }
+
 }

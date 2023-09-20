@@ -9,10 +9,10 @@ public abstract class Item {
     protected String name;
 
 
-    public Item(String SKU, BigDecimal  price, String name) {
-        this.SKU = SKU;
-        this.price = price;
-        this.name = name;
+    public Item(String SKU, BigDecimal price, String name) {
+        this.setSku(SKU);
+        this.setPrice(price);
+        this.setName(name);
 
     }
 
@@ -20,11 +20,6 @@ public abstract class Item {
         this(sku, null, null);
     }
 
-
-//    public Item(String name, String variant) {
-//        this.name = name;
-//        this.variant = variant;
-//    }
 
     public String getSku() {
         return this.SKU;
@@ -53,6 +48,9 @@ public abstract class Item {
         this.name = name;
         return true;
     }
+
+    public abstract Enum<?> getVariant();
+
 // protected setters??
     // abstract methods - do we need different implementation?
 //    public String getVariant() {
@@ -66,8 +64,6 @@ public abstract class Item {
 //        this.variant = variant;
 //        return true;
 //    }
-
-
 
 
     @Override

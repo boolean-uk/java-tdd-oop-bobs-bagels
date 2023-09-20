@@ -9,6 +9,7 @@ public class Filling extends Item {
         this.variant = variant;
     }
 
+    @Override
     public FillingType getVariant() {
         return variant;
     }
@@ -17,7 +18,6 @@ public class Filling extends Item {
         this.variant = variant;
     }
 
-    // double filling etc.
 
     @Override
     public String toString() {
