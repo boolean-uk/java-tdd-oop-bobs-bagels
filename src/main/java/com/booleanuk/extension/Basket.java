@@ -64,4 +64,33 @@ public class Basket {
 
         return totalCost;
     }
+
+    public Receipt generateReceipt(String storeName, Inventory inventory) {
+        Receipt receipt = new Receipt(storeName);
+        HashMap<String, Integer> productCount = new HashMap<>();
+
+        for (Product product : basket) {
+            String SKU = product.getSKU();
+            productCount.put(SKU, productCount.getOrDefault(SKU, 0) + 1);
+        }
+
+        for (String SKU : productCount.keySet()) {
+            int count = productCount.get(SKU);
+            Product product = inventory.getProductInventory().get(SKU);
+            SpecialOffer offer = inventory.getSpecialOffer(SKU);
+
+            if (offer != null && count >= offer.getQuantity()) {
+                int fullOffers = count / offer.getQuantity();
+                int remaining = count % offer.getQuantity();
+                double cost = (fullOffers * offer.getOfferPrice()) + (remaining * product.getPrice());
+                receipt.addItem(product, count, cost, offer.getOfferPrice());
+            } else {
+                double cost = count * product.getPrice();
+                receipt.addItem(product, count, cost, 0.0);
+            }
+        }
+
+        return receipt;
+    }
+
 }
