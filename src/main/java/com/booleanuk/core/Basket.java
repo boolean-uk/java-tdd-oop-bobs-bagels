@@ -7,16 +7,26 @@ import java.util.Map;
 
 
 class Basket {
-
+    Fillings fillings = new Fillings();
     private List<String> items;
     private Map<String, Double> pricedItems;
-    private int avSpace = 0;
+    private int avSpace = 5;
+
+    public void testMethod(){
+        System.out.println(fillings.inventoryList);
+    }
 
     public Basket() {
         this.items = new ArrayList<>();
         this.pricedItems = new HashMap<>();
-
+        this.fillings = fillings;
     }
+    public Basket(Fillings fillings) {
+        this.items = new ArrayList<>();
+        this.fillings = fillings;
+        this.pricedItems = new HashMap<>();
+    }
+
 
     public Basket(int space) {
         this.items = new ArrayList<>();
@@ -25,8 +35,8 @@ class Basket {
     }
 
 
-
     public boolean add(String item) {
+
         if (items.size() < avSpace) {
             items.add(item);
             System.out.println("item has been added");
@@ -51,6 +61,9 @@ class Basket {
             total += value;
         }
         System.out.println(total);
+        System.out.println(fillings.fillingPrice);
+        double fillingprices = fillings.getFillingCost();
+        total += fillingprices;
         return total;
     }
 

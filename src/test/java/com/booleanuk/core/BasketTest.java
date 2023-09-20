@@ -85,24 +85,35 @@ public class BasketTest {
         double totalCost = basket.calculatePrice();
 
 
-        assertEquals(1.37, totalCost);
+        Assertions.assertEquals(1.37, totalCost);
     }
 
     @Test
-    public void checkFillingsPrice() {
+    public void testBasketFillingsTotal() {
         Fillings fillings = new Fillings();
         Basket basket = new Basket(fillings);
 
+
         fillings.addFillings("FILB", 0.12);
         fillings.addFillings("FILE", 0.12);
-        fillings.addFillings("FILC", 0.12);
 
-        Assertions.assertTrue(fillings.fillingChecker());
+        basket.addPrice("Plain", 0.39);
+        basket.addPrice("Onion", 0.49);
 
-        Assertions.assertEquals(0.36, fillings.getFillingCost());
+        Assertions.assertEquals(1.12, basket.calculatePrice());
+    }
 
+
+    @Test
+    public void testAdditemsThatExist() {
+        Fillings fillings = new Fillings();
+        Basket basket = new Basket();
+
+        basket.testMethod();
 
     }
+
+
 }
 
 
