@@ -48,8 +48,13 @@ class Basket {
     }
 
     public void addPrice(String name, double price) {
-        pricedItems.put(name, price);
-        add(name);
+        if(fillings.inventoryList.containsKey(name)){
+            pricedItems.put(name, price);
+            add(name);
+        }else{
+            System.out.println("Bagel has not been found in our stock");
+        }
+
 
     }
 
