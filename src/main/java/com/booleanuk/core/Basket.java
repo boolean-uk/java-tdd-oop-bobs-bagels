@@ -7,8 +7,8 @@ import java.util.Map;
 
 
 class Basket {
-    private int avSpace = 5;
     Fillings fillings = new Fillings();
+    private int avSpace = 5;
     public List<String> items;
     public Map<String, Double> pricedItems;
 
