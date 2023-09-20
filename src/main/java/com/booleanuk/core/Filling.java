@@ -1,6 +1,6 @@
 package com.booleanuk.core;
 
-public class Filling extends Foods{
+public class Filling extends Bagel{
     public Filling(String sku, double price, String variant) {
         super(sku, price, variant);
     }

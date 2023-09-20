@@ -49,14 +49,5 @@ public class Inventory {
         return null;
     }
 
-    @Override
-    public String toString() {
-        String bagelList = "Bagels: \n";
-        for (Foods food : inventoryList.values()){
-            if (food instanceof Bagel){
-                bagelList += "\n  " + food.getVariant() + " " + food.getCost();
-            }
-        }
-        return bagelList;
-    }
+
 }
