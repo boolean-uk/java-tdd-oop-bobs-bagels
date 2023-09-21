@@ -27,7 +27,7 @@ public class Basket {
 
             while (iterator.hasNext()) {
                 item = iterator.next();
-                if (item.getVariant().equals(variant) && item.getName().equals("Bagel")) {
+                if (item.getVariant().equals(variant) && item instanceof Bagel) {
                     added = false;
                 }
             }
@@ -35,7 +35,7 @@ public class Basket {
                 System.out.println("this " + variant + "item already exist");
             } else {
                 String sku = "BGL" + variant.substring(0, 1).toUpperCase();
-                basket.add(new InventoryItem(sku, price, "Bagel", variant));
+                basket.add(new Bagel(sku, price, variant));
                 System.out.println("this " + variant + "item added successfully");
             }
             return added;
@@ -50,7 +50,7 @@ public class Basket {
         if (!variant.equals("")) {
             while (iterator.hasNext()) {
                 item = iterator.next();
-                if (item.getVariant().equals(variant) && item.getName().equals("Bagel")) {
+                if (item.getVariant().equals(variant) && item instanceof Bagel) {
                     iterator.remove();
                     removed = true;
                 }
@@ -97,7 +97,7 @@ public class Basket {
         fillList();
 
         for (InventoryItem item : list) {
-            if (item.getVariant().equals(variant) && item.getName().equals("Bagel")) {
+            if (item.getVariant().equals(variant) && item instanceof Bagel) {
                 return item.getPrice();
             }
         }
@@ -113,7 +113,7 @@ public class Basket {
 
             while (iterator.hasNext()) {
                 item = iterator.next();
-                if (item.getVariant().equals(variant) && item.getName().equals("Filling")) {
+                if (item.getVariant().equals(variant) && item instanceof Filling) {
                     added = false;
                 }
             }
@@ -121,7 +121,7 @@ public class Basket {
                 System.out.println("this " + variant + "item already exist");
             } else {
                 String sku = "FIL" + variant.substring(0, 1).toUpperCase();
-                basket.add(new InventoryItem(sku, price, "Filling", variant));
+                basket.add(new Filling(sku, price, variant));
                 System.out.println("this " + variant + "item added successfully");
             }
             return added;
@@ -133,7 +133,7 @@ public class Basket {
         fillList();
 
         for (InventoryItem item : list) {
-            if (item.getVariant().equals(variant) && item.getName().equals("Filling")) {
+            if (item.getVariant().equals(variant) && item instanceof Filling) {
                 return item.getPrice();
             }
         }
@@ -170,7 +170,7 @@ public class Basket {
             for (String str : thisItem) {
                 for (InventoryItem it : list) {
                     if (it.getVariant().equals(str)) {
-                        if (it.getName().equals("Coffee")) {
+                        if (it instanceof Coffee) {
                             isCoffee = true;
                         }
                     }
@@ -187,19 +187,19 @@ public class Basket {
 
 
     public void fillList() {
-        list.add(new InventoryItem("BGLO", 0.49, "Bagel", "Onion"));
-        list.add(new InventoryItem("BGLP", 0.39, "Bagel", "Plain"));
-        list.add(new InventoryItem("BGLE", 0.49, "Bagel", "Everything"));
-        list.add(new InventoryItem("BGLS", 0.49, "Bagel", "Sesame"));
-        list.add(new InventoryItem("COFB", 0.99, "Coffee", "Black"));
-        list.add(new InventoryItem("COFW", 1.19, "Coffee", "White"));
-        list.add(new InventoryItem("COFC", 1.29, "Coffee", "Capuccino"));
-        list.add(new InventoryItem("COFL", 1.29, "Coffee", "Latte"));
-        list.add(new InventoryItem("FILB", 0.12, "Filling", "Bacon"));
-        list.add(new InventoryItem("FILE", 0.12, "Filling", "Egg"));
-        list.add(new InventoryItem("FILC", 0.12, "Filling", "Cheese"));
-        list.add(new InventoryItem("FILX", 0.12, "Filling", "Cream Cheese"));
-        list.add(new InventoryItem("FILS", 0.12, "Filling", "Smoked Salmon"));
-        list.add(new InventoryItem("FILH", 0.12, "Filling", "Ham"));
+        list.add(new Bagel("BGLO", 0.49, "Onion"));
+        list.add(new Bagel("BGLP", 0.39, "Plain"));
+        list.add(new Bagel("BGLE", 0.49, "Everything"));
+        list.add(new Bagel("BGLS", 0.49, "Sesame"));
+        list.add(new Coffee("COFB", 0.99, "Black"));
+        list.add(new Coffee("COFW", 1.19, "White"));
+        list.add(new Coffee("COFC", 1.29, "Cappuccino"));
+        list.add(new Coffee("COFL", 1.29, "Latte"));
+        list.add(new Filling("FILB", 0.12, "Bacon"));
+        list.add(new Filling("FILE", 0.12, "Egg"));
+        list.add(new Filling("FILC", 0.12, "Cheese"));
+        list.add(new Filling("FILX", 0.12, "Cream Cheese"));
+        list.add(new Filling("FILS", 0.12, "Smoked Salmon"));
+        list.add(new Filling("FILH", 0.12, "Ham"));
     }
 }

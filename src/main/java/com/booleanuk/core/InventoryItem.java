@@ -4,13 +4,11 @@ public class InventoryItem {
 
     private String sku;
     private double price;
-    private String name;
     private String variant;
 
-    public InventoryItem(String sku, double price, String name, String variant) {
+    public InventoryItem(String sku, double price, String variant) {
         this.sku = sku;
         this.price = price;
-        this.name = name;
         this.variant = variant;
     }
 
@@ -31,14 +29,6 @@ public class InventoryItem {
 
     public void setPrice(double price) {
         this.price = price;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public String getVariant() {

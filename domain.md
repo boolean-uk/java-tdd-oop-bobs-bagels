@@ -53,11 +53,16 @@
 |                 |                                   |                                            |                                  |                               |
 | `InventoryItem` | `String sku`                      | `setSku()`                                 | Return sku                       | void                          |
 |                 | `double price`                    | `getSku(String sku)`                       | Get the sku                      | Return String                 |
-|                 | `String name`                     | `setPrice()`                               | Return price                     | void                          |
-|                 | `String variant`                  | `getPrice(double price)`                   | Get the price                    | Return double                 |
-|                 |                                   | `setName()`                                | Return name                      | void                          |
-|                 |                                   | `getName(String name)`                     | Get the name                     | Return String                 |
+|                 | `String variant`                  | `setPrice()`                               | Return price                     | void                          |
+|                 |                                   | `getPrice(double price)`                   | Get the price                    | Return double                 |
 |                 |                                   | `setVariant()`                             | Return variant                   | void                          |
 |                 |                                   | `getVariant(String variant)`               | Get the variant                  | Return String                 |
 |                 |                                   |                                            |                                  |                               |
+| `Bagel`         | `String name`                     | `setName()`                                | Return name                      | void                          |
+|                 |                                   | `getName(String name)`                     | Get the name                     | Return String                 |
 |                 |                                   |                                            |                                  |                               |
+| `Coffee`        | `String name`                     | `setName()`                                | Return name                      | void                          |
+|                 |                                   | `getName(String name)`                     | Get the name                     | Return String                 |
+|                 |                                   |                                            |                                  |                               |
+| `Filling`       | `String name`                     | `setName()`                                | Return name                      | void                          |
+|                 |                                   | `getName(String name)`                     | Get the name                     | Return String                 |
