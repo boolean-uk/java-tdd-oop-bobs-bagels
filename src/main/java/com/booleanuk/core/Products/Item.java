@@ -13,9 +13,7 @@ public abstract class Item {
         this.setSku(SKU);
         this.setPrice(price);
         this.setName(name);
-
     }
-
 
     public String getSku() {
         return this.SKU;
@@ -47,8 +45,6 @@ public abstract class Item {
 
     public abstract Enum<?> getVariant();
 
-
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -61,6 +57,4 @@ public abstract class Item {
     public int hashCode() {
         return Objects.hash(SKU);
     }
-
-
 }

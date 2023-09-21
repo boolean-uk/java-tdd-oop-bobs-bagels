@@ -1,8 +1,4 @@
 package com.booleanuk.core.Products;
-
-import com.booleanuk.core.Products.Bagel;
-import com.booleanuk.core.Products.BagelType;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
@@ -26,7 +22,6 @@ public class BagelTest {
         assertThrows(IllegalArgumentException.class, () -> bagel.setVariant(BagelType.valueOf("OnionGarlic")));
         assertEquals(BagelType.valueOf("Everything"), bagel.getVariant());
     }
-
     @Test
     public void testInvalidBagelVariantInput() {
         int invalidNumericValue = 200;

@@ -7,7 +7,7 @@ import java.util.*;
 public class Shop {
     private static final int BASKET_CAPACITY = 30;
     private final Scanner scanner;
-    private Basket basket;
+    private final Basket basket;
 
     public Shop() {
         this.scanner = new Scanner(System.in);
@@ -41,11 +41,9 @@ public class Shop {
                     System.out.println("Invalid input!");
                     break;
             }
-
             printActions();
             userInput = shop.scanner.next().toUpperCase();
         }
-
         System.out.println(shop.basket.printReceipt());
     }
 
@@ -82,7 +80,6 @@ public class Shop {
             listMenuOptions(products, Bagel.class);
             Bagel currentBagel = null;
             int userBagelInput = getIntInput();
-
 
             try {
                 currentBagel = (Bagel) products.get(userBagelInput);
@@ -145,7 +142,6 @@ public class Shop {
                     continue;
                 }
             }
-
             System.out.println("Do you want to add more fillings?");
             System.out.println("Type Y for Yes");
             System.out.println("Type N for No");
@@ -236,7 +232,6 @@ public class Shop {
 
         }
     }
-
     private void listMenuOptions(List<Item> items) {
         listMenuOptions(items, Item.class);
     }

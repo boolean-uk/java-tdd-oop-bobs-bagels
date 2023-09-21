@@ -18,7 +18,7 @@ public class Inventory {
     private final static String coffees = "/coffees.json";
     private static Inventory INSTANCE;
 
-    private ArrayList<Item> inventoryList;
+    private final ArrayList<Item> inventoryList;
 
 
     public Inventory() {
@@ -39,7 +39,6 @@ public class Inventory {
     public ArrayList<Item> getInventoryList() {
         return inventoryList;
     }
-
 
     public boolean itemIsAvailable(Item currentItem) {
         return getInventoryList().stream()

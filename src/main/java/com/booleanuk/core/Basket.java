@@ -15,7 +15,6 @@ public class Basket {
     private static final String NO_ITEMS_MESSAGE = "You have no items in your basket yet.";
     private static final String NOT_ENOUGH_SPACE_MESSAGE = "Not enough space in the basket!";
     private static final String ITEM_NOT_FOUND_MESSAGE = "Item not found.";
-    private static final String PRODUCT_ADDED_MESSAGE = "Product was added to the basket";
     private static final String PRODUCT_AMOUNT_INCREASED_MESSAGE = "Product was already in the basket. Quantity increased.";
     private static final String DATE_TIME_FORMAT = "yyyy-MM-dd HH:mm:ss";
     private static final String ITEM_ON_RECEIPT_FORMAT = "%-18s x%2d  € %.2f\n";
@@ -24,7 +23,6 @@ public class Basket {
     private static final String TOTAL_COST_MESSAGE = "Total                  € %.2f\n";
     private static final String TOTAL_SAVINGS_MESSAGE = "You saved a total of € %.2f\n       on this shop\n";
     private static final String ITEM_ON_BASKET_OVERVIEW_FORMAT = "%s x %s pcs x %s = %s";
-
 
 
     private int capacity;
@@ -78,15 +76,11 @@ public class Basket {
             System.out.println("Invalid input! Please enter a valid quantity.");
             return false;
         }
-
-
         if (getRemainingCapacity() < amount) {
             printErrorMessage(NOT_ENOUGH_SPACE_MESSAGE);
             return false;
         }
-
         itemsMap.put(item, itemsMap.getOrDefault(item, 0) + amount);
-
         if (itemsMap.get(item) != amount) {
             System.out.println(PRODUCT_AMOUNT_INCREASED_MESSAGE);
         }
@@ -109,7 +103,6 @@ public class Basket {
         } else {
             itemsMap.put(item, currentAmount - amount);
         }
-
         return true;
     }
     public boolean removeFromBasket(Item item) {
@@ -244,11 +237,9 @@ public class Basket {
                         basketContent.append(String.format("  >> You save:  € %s\n", currentSavings.multiply(BigDecimal.valueOf(quantity))));
                     }
                 }
-
                 number++;
             }
         }
-
         return basketContent.toString();
     }
 
@@ -289,7 +280,6 @@ public class Basket {
                 discountedPrice = setsPrice.add(remainingSetsPrice).add(individualPrice);
             }
         }
-
         BigDecimal amountSaved = originalPrice.subtract(discountedPrice);
 
         return new BigDecimal[]{discountedPrice, amountSaved};

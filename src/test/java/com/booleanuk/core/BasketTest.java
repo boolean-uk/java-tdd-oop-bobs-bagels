@@ -136,17 +136,18 @@ public class BasketTest {
         assertTrue(basket.removeFromBasket(item));
         assertFalse(basket.getItemsMap().containsKey(item));
     }
-
-
     @Test
     public void testCheckingWhetherBasketIsFull() {
         Basket basket = new Basket( 2);
         Bagel bagelItem = new Bagel("BGLO", new BigDecimal("0.49"), "Bagel", BagelType.Onion);
         assertTrue(basket.addToBasket(bagelItem, 1));
+
         assertFalse(basket.isFull());
+
         assertEquals(1,basket.getRemainingCapacity());
         Bagel bagelItem2 = new Bagel("BGLP", new BigDecimal("0.39"), "Bagel", BagelType.Plain);
         assertTrue(basket.addToBasket(bagelItem2, 1));
+
         assertTrue(basket.isFull());
     }
 
@@ -188,8 +189,6 @@ public class BasketTest {
         assertTrue(basket.addToBasket(bagelItem2, 2));
         assertEquals(new BigDecimal("1.76"), basket.calculateTotalCost());
     }
-
-
     @Test
     public void testAddFilling() {
         Basket basket = new Basket( 5);
@@ -215,7 +214,7 @@ public class BasketTest {
                 }
             }
         }
-
+        
         assertTrue(bagelItemWithFillingsFound);
     }
     @Test
