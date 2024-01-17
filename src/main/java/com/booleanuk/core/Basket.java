@@ -12,4 +12,8 @@ public class Basket {
     public ArrayList<Bagel> getBagels() {
         return bagels;
     }
+
+    public void addBagel(Bagel bagel) {
+        bagels.add(bagel);
+    }
 }

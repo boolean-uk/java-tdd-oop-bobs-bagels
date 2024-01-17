@@ -20,7 +20,8 @@ public class Store {
         return baskets;
     }
 
-    public boolean addBagelToBasket(String onion, int basketId) {
-        return false;
+    public boolean addBagelToBasket(String bagel, int basketId) {
+        baskets.get(basketId).addBagel(new Bagel(bagel));
+        return true;
     }
 }
