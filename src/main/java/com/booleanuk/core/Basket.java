@@ -72,7 +72,11 @@ public class Basket {
     }
 
     public double totalCost(){
-        return 0.0;
+        double totalCost = 0;
+        for (Product product : products.keySet()){
+            totalCost += product.price*products.get(product);
+        }
+        return totalCost;
     }
 
     public Product getProduct(String SKU){

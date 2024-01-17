@@ -75,7 +75,7 @@ public class TestBasket {
         Assertions.assertTrue(basket.add("COFB"));
         Assertions.assertEquals(2, basket.items);
         Assertions.assertFalse(basket.add("COFB"));
-        Assertions.assertTrue(basket.add("COFB"));
+        Assertions.assertFalse(basket.add("COFB"));
         Assertions.assertEquals(2, basket.items);
     }
 
