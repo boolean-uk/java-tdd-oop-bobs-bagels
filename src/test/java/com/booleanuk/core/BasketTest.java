@@ -31,12 +31,13 @@ public class BasketTest {
         Basket basket = new Basket(5);
 
         Bagel bagel = new Bagel("Plain");
+        Bagel bagel2 = new Bagel("Plain");
 
         Assertions.assertTrue(basket.addItemToBasket(bagel));
 
         Assertions.assertFalse(basket.getItemList().isEmpty());
 
-        Assertions.assertTrue(basket.removeItemFromBasket(bagel));
+        Assertions.assertTrue(basket.removeItemFromBasket(bagel2));
 
         Assertions.assertTrue(basket.getItemList().isEmpty());
 
