@@ -9,7 +9,7 @@ I'd like to add a specific type of bagel to my basket.
 
 | Classes | Methods                 | Scenario                    | Returns |
 |---------|-------------------------|-----------------------------|---------|
-| Shop    | boolean addItem(T item) | if item is in inventory     | true    |
+| Basket  | boolean addItem(T item) | if item is in inventory     | true    |
 |         |                         | if item is not in inventory | false   |
 
 ```
@@ -115,7 +115,6 @@ As the manager,
 So we don't get any weird requests,
 I want customers to only be able to order things that we stock in our inventory.
 ```
-# *Note* Use singleton
 | Classes   | Methods                                                | Scenario                            | Returns            |
 |-----------|--------------------------------------------------------|-------------------------------------|--------------------|
 | Inventory | ArrayList<Bagel> getBagel(String name, int amount)     | If bagel is in inventory            | ArrayList<Bagel>   |
