@@ -16,4 +16,8 @@ public class Basket {
     public void addBagel(Bagel bagel) {
         bagels.add(bagel);
     }
+
+    public int getNoOfBagels() {
+        return bagels.size();
+    }
 }
