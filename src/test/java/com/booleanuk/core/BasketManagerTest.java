@@ -21,6 +21,8 @@ public class BasketManagerTest {
     @Test
     public void testRemove(){
         BasketManager b = new BasketManager();
+        b.add(item_a);
+        Assertions.assertNotNull(b.remove(item_a));
     }
 
     @Test
