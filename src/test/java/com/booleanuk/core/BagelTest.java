@@ -13,6 +13,7 @@ public class BagelTest {
     @Test
     public void testRemoveBagel(){
         Bagel abagel = new Bagel();
+        abagel.addBagel("bagel1");
         Assertions.assertTrue(abagel.removeBagel("bagel1"));
         Assertions.assertFalse(abagel.removeBagel("bagel2"));
     }
