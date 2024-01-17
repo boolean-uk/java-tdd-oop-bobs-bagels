@@ -37,7 +37,8 @@ public class BasketTest {
 
         Assertions.assertFalse(basket.getItemList().isEmpty());
 
-        Assertions.assertTrue(basket.removeItemFromBasket(bagel2));
+        Assertions.assertTrue(basket.removeItemFromBasket(bagel));
+        Assertions.assertFalse(basket.removeItemFromBasket(bagel2));
 
         Assertions.assertTrue(basket.getItemList().isEmpty());
 

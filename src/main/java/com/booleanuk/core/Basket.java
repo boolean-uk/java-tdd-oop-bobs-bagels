@@ -23,8 +23,11 @@ public class Basket {
     }
 
     public boolean removeItemFromBasket(Item item) {
-        this.itemList.remove(item);
-        return true;
+        if(this.itemList.contains(item)) {
+            this.itemList.remove(item);
+            return true;
+        }
+        return false;
     }
 
 
