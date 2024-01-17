@@ -16,6 +16,7 @@ public class Basket {
              }
 
         public void removeItem(Product product) {
+            bagelBasket.remove(product);
 
         }
 
