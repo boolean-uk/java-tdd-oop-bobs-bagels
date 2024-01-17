@@ -52,16 +52,16 @@ class BasketTest {
         Bagel bagel4 = new Bagel("Sesame");
         //bagel4.setBagel("Blueberry Bagels");
 
-        //Bagel bagel5 = new Bagel();
+        Bagel bagel5 = new Bagel("Onion");
         //bagel5.setBagel("Raspberry Bagels");
 
         basket.addBagelTypeToBasket(bagel1);
         basket.addBagelTypeToBasket(bagel2);
         basket.addBagelTypeToBasket(bagel3);
         basket.addBagelTypeToBasket(bagel4);
-        //basket.addBagelTypeToBasket(bagel5);
+        basket.addBagelTypeToBasket(bagel5);
 
-        String result = basket.basketIsFull();
+        String result = basket.bagelBasketIsFull();
 
         Assertions.assertEquals("Basket is full!", result);
     }
@@ -78,11 +78,18 @@ class BasketTest {
         Bagel bagel2 = new Bagel("Plain");
         //bagel2.setBagel("Vanilla Bagels");
 
+        Bagel bagel3 = new Bagel("Everything");
+        //bagel3.setBagel("Strawberry Bagels");
+
+        Bagel bagel4 = new Bagel("Sesame");
+        //bagel4.setBagel("Blueberry Bagels");
 
         basket.addBagelTypeToBasket(bagel1);
         basket.addBagelTypeToBasket(bagel2);
+        basket.addBagelTypeToBasket(bagel3);
+        basket.addBagelTypeToBasket(bagel4);
 
-        String result = basket.basketIsFull();
+        String result = basket.bagelBasketIsFull();
 
         Assertions.assertEquals("Basket is not full!", result);
     }
@@ -104,19 +111,23 @@ class BasketTest {
         Bagel bagel4 = new Bagel("Sesame");
         //bagel4.setBagel("Blueberry Bagels");
 
-        //Bagel bagel5 = new Bagel();
+        Bagel bagel5 = new Bagel("Onion");
         //bagel5.setBagel("Raspberry Bagels");
+        Filling filling1 = new Filling("Egg");
+        Filling filling2 = new Filling("Cheese");
 
-        basket.addBagelTypeToBasket(bagel1);
-        basket.addBagelTypeToBasket(bagel2);
-        basket.addBagelTypeToBasket(bagel3);
-        basket.addBagelTypeToBasket(bagel4);
+        basket.itemsMap.put(bagel1.getBagel(), 0.49);
+        basket.itemsMap.put(bagel2.getBagel(), 0.39);
+        basket.itemsMap.put(bagel3.getBagel(), 0.49);
+        basket.itemsMap.put(bagel4.getBagel(), 0.49);
+        basket.itemsMap.put(filling1.getFillingType(), 0.12);
+        basket.itemsMap.put(filling2.getFillingType(), 0.12);
         //basket.addBagelTypeToBasket(bagel5);
 
-        //If newCapacity > this.bagels.size() then the following should pass the test
-        String result = basket.changeBasketCapacity(6);
+        //If newCapacity > this.items.size() then the following should pass the test
+        String result = basket.changeBasketCapacity(8);
 
-        Assertions.assertEquals("Basket capacity changed!", result);
+        Assertions.assertEquals("Basket capacity is changed.", result);
 
     }
 
@@ -125,7 +136,6 @@ class BasketTest {
     public void basketCapacityIsNotChanged() {
         Basket basket = new Basket();
 
-        //4 entries
         Bagel bagel1 = new Bagel("Onion");
         //bagel1.setBagel("Chocolate Bagels");
 
@@ -138,21 +148,21 @@ class BasketTest {
         Bagel bagel4 = new Bagel("Sesame");
         //bagel4.setBagel("Blueberry Bagels");
 
-        //Bagel bagel5 = new Bagel();
+        Bagel bagel5 = new Bagel("Onion");
         //bagel5.setBagel("Raspberry Bagels");
+        Filling filling1 = new Filling("Egg");
+        Filling filling2 = new Filling("Cheese");
 
-        basket.addBagelTypeToBasket(bagel1);
-        basket.addBagelTypeToBasket(bagel2);
-        basket.addBagelTypeToBasket(bagel3);
-        basket.addBagelTypeToBasket(bagel4);
+        basket.itemsMap.put(bagel1.getBagel(), 0.49);
+        basket.itemsMap.put(bagel2.getBagel(), 0.39);
+        basket.itemsMap.put(bagel3.getBagel(), 0.49);
+        basket.itemsMap.put(bagel4.getBagel(), 0.49);
+        basket.itemsMap.put(filling1.getFillingType(), 0.12);
+        basket.itemsMap.put(filling2.getFillingType(), 0.12);
         //basket.addBagelTypeToBasket(bagel5);
 
-        //This should pass, as theres already 5 bagels in the list and the new capacity is 5
-        //Thus the capacity hasnt changed, if new capacity is lower than 5, it should also pass
-        //as the capacity can't be lowered than the items already in the list
-        String result = basket.changeBasketCapacity(3);
-
-        //It should fail if the new capacity is bigger than 5 as the capacity has then been changed
+        //If newCapacity > this.items.size() then the following should pass the test
+        String result = basket.changeBasketCapacity(4);
 
         Assertions.assertEquals("Basket capacity is not changed.", result);
     }
@@ -177,13 +187,13 @@ class BasketTest {
         //Bagel bagel5 = new Bagel();
         //bagel5.setBagel("Raspberry Bagels");
 
-        basket.addBagelTypeToBasket(bagel1);
-        basket.addBagelTypeToBasket(bagel2);
-        basket.addBagelTypeToBasket(bagel3);
-        basket.addBagelTypeToBasket(bagel4);
+        basket.itemsList.add(bagel1.getVariant());
+        basket.itemsList.add(bagel2.getVariant());
+        basket.itemsList.add(bagel3.getVariant());
+        basket.itemsList.add(bagel4.getVariant());
         //basket.addBagelTypeToBasket(bagel5);
 
-        String result = basket.canRemoveItemInBasket(bagel1);
+        String result = basket.canRemoveItemInBasket(bagel2.getVariant());
 
         Assertions.assertEquals("Item is in basket and can be removed.", result);
     }
@@ -209,13 +219,14 @@ class BasketTest {
         //Bagel bagel5 = new Bagel();
         //bagel5.setBagel("Raspberry Bagels");
 
-        basket.addBagelTypeToBasket(bagel1);
-        basket.addBagelTypeToBasket(bagel2);
-        basket.addBagelTypeToBasket(bagel3);
+        basket.itemsList.add(bagel1.getVariant());
+        basket.itemsList.add(bagel2.getVariant());
+        basket.itemsList.add(bagel3.getVariant());
+        //basket.items.put(bagel4.getBagel(), 0.49);
         //basket.addBagelTypeToBasket(bagel4);
         //basket.addBagelTypeToBasket(bagel5);
 
-        String result = basket.canRemoveItemInBasket(bagel4);
+       String result = basket.canRemoveItemInBasket(bagel4.getVariant());
 
         Assertions.assertEquals("Item is not in basket and can't be removed.", result);
     }
@@ -226,14 +237,22 @@ class BasketTest {
 
         Basket basket = new Basket();
 
-        basket.addItem("Butter", 10, 2);
-        basket.addItem("Milk", 5, 1);
-        basket.addItem("Bread", 10, 1);
-        basket.addItem("Biscuits", 5, 2);
+        Bagel bagel1 = new Bagel("Onion");
+
+        Bagel bagel2 = new Bagel("Sesame");
+
+        Filling filling1 = new Filling("Cheese");
+
+        Filling filling2 = new Filling("Egg");
+
+        basket.addItem(bagel1.getVariant(), 1, bagel1.getPrice());
+        basket.addItem(bagel2.getVariant(), 2, bagel2.getPrice());
+        basket.addItem(filling1.getVariant(), 1, filling1.getPrice());
+        basket.addItem(filling2.getVariant(), 2, filling2.getPrice());
 
         double totalScore = basket.totalCostOfItems();
 
-        Assertions.assertEquals(45, totalScore);
+        Assertions.assertEquals(1.83, totalScore);
     }
 
     //User Story 7

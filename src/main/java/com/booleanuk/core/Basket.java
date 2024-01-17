@@ -7,21 +7,23 @@ public class Basket {
 
     //String type;
     ArrayList<Bagel> bagels;
+    ArrayList<String> itemsList;
 
-    HashMap<String, Integer> items;
+    HashMap<String, Double> itemsMap;
 
     HashMap<String, Inventory> itemsFullyDetailed;
 
     HashMap<Bagel, Integer> bagelsWithCost;
 
-    HashMap<String, Integer[]> itemsWithQuantity;
+    HashMap<String, Double[]> itemsWithQuantity;
 
 
-    int basketSize = 4;
+    int basketSize = 5;
 
     public Basket() {
         bagels = new ArrayList<>(5);
-        items = new HashMap<>();
+        itemsList = new ArrayList<>();
+        itemsMap = new HashMap<>();
         itemsWithQuantity = new HashMap<>();
         itemsFullyDetailed = new HashMap<>();
         itemsFullyDetailed.put("BGLO", new Inventory("BGLO", 0.49, "Bagel", "Onion"));
@@ -65,7 +67,7 @@ public class Basket {
     }
 
     //User Story 3
-    public String basketIsFull() {
+    public String bagelBasketIsFull() {
         if (this.bagels.size() >= this.basketSize) {
             return "Basket is full!";
         }
@@ -74,32 +76,29 @@ public class Basket {
 
     //User story 4
     public String changeBasketCapacity(int newCapacity) {
-        if(this.bagels.size() < newCapacity) {
-            this.bagels = new ArrayList<>(newCapacity);
-            return "Basket capacity changed!";
-        } else if (this.bagels.size() <= newCapacity) {
-            return "Basket capacity is not changed.";
+        if(newCapacity > this.basketSize) {
+            this.basketSize = newCapacity;
+            return "Basket capacity is changed.";
         }
         return "Basket capacity is not changed.";
-
     }
 
     //User Story 5
-    public String canRemoveItemInBasket(Bagel item) {
-        if(this.bagels.contains(item)) {
+    public String canRemoveItemInBasket(String item) {
+        if(this.itemsList.contains(item)) {
             return "Item is in basket and can be removed.";
         }
         return "Item is not in basket and can't be removed.";
     }
 
     //User Story 6
-    public void addItem(String item, int quantity, int costPerUnit) {
-        itemsWithQuantity.put(item, new Integer[] { quantity, costPerUnit });
+    public void addItem(String item, double quantity, double costPerUnit) {
+        itemsWithQuantity.put(item, new Double[] { quantity, costPerUnit });
     }
 
     public double totalCostOfItems() {
         double totalCost = 0.00;
-        for (Integer[] value : this.itemsWithQuantity.values()) {
+        for (Double[] value : this.itemsWithQuantity.values()) {
             totalCost += value[0] * value[1]; // quantity * cost per unit
         }
         return totalCost;
