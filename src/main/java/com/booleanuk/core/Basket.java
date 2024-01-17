@@ -48,6 +48,10 @@ public class Basket {
         return false;
     }
 
+    public void changeCapacity(int capacity){
+        this.capacity = capacity;
+    }
+
     public void clearList(){
         this.basket.clear();
     }
