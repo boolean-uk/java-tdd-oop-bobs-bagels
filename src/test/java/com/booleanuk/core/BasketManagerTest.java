@@ -25,6 +25,7 @@ public class BasketManagerTest {
     @Test
     public void testCheckCapacity(){
         BasketManager b = new BasketManager();
+        Assertions.assertEquals(b.getCapacity(), b.checkCapacity());
     }
 
     @Test
