@@ -88,4 +88,9 @@ public class Store {
         fillingCodes.put("HAM","FILH");
 
     }
+
+    public boolean updateBasketCapacity(int newCapacity) {
+        basketCapacity = newCapacity;
+        return true;
+    }
 }

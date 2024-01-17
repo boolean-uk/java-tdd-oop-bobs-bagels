@@ -73,5 +73,20 @@ public class StoreTest {
         Assertions.assertEquals("All bagels of that kind in your basket already has that filling.", actual);
     }
 
+    @Test
+    public void updateBasketCapacityToValid() {
+        Store store = new Store();
+        int basketId = store.createBasket();
+
+        store.addBagelToBasket("Onion", basketId);
+        store.addBagelToBasket("Onion", basketId);
+
+        basketId = store.createBasket();
+
+        store.addBagelToBasket("Onion", basketId);
+
+        Assertions.assertTrue(store.updateBasketCapacity(2));
+    }
+
 
 }
