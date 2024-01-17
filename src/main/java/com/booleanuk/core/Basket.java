@@ -35,6 +35,7 @@ public class Basket {
                 return true;
             }
         }
+
         System.out.println("Bagel not found");
         return false;
     }
@@ -51,6 +52,7 @@ public class Basket {
     public void changeCapacity(int capacity){
         this.capacity = capacity;
     }
+
 
     public void clearList(){
         this.basket.clear();
