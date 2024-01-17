@@ -41,7 +41,7 @@
 |----------------------------------|-----------------------|-------------------------------|-----------------------|---------|
 | inventory: HashMap<String, Item> |                       |                               |                       |         |
 |                                  | initializeInventory() | When I want to open the shop  | HashMap<String, Item> | void    |
-|                                  | costEachFilling()     | When I want to know the cost  | String                | Sys.out |
+|                                  | costEachFilling()     | When I want to know the cost  | StringBuilder         | Sys.out |
 |                                  |                       | of each filling before adding |                       |         |
 
 

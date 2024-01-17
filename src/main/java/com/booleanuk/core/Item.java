@@ -19,11 +19,11 @@ public class Item {
     @Override
     public String toString() {
         return "Item: {" +
-                "SKU = '" + SKU + '\'' +
-                ", price = " + price +
-                ", name = " + name +
-                ", variant = " + variant +
-                ", filling = " + (filling != null ? filling.toString() : "None") +
+                "SKU: '" + SKU + '\'' +
+                ", price: " + price +
+                ", name: " + name +
+                ", variant: " + variant +
+                ", filling: " + (filling != null ? filling.toString() : "None") +
                 '}';
     }
 
