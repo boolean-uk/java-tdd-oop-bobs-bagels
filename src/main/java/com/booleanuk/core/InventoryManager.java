@@ -27,6 +27,10 @@ public class InventoryManager {
         }
     }
 
+    /**
+     * Logic: Iterate through the stock and retrieve all the prices for items which are categorised as filling
+     * @return Sys.out and a StringBuilder (Don't know if I need to return this or can remove yet)
+     */
     public StringBuilder costEachFilling() {
         StringBuilder sb = new StringBuilder();
         int counter = 0;
