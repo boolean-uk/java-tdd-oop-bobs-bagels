@@ -221,4 +221,20 @@ class BasketTest {
         Assertions.assertEquals(45, totalScore);
     }
 
+    //User Story 7
+    @Test
+    public void testReturnCostOfBagel() {
+        Basket basket = new Basket();
+
+        Bagel bagel = new Bagel();
+
+        Inventory inventory = new Inventory("BGLE", 0.49, "Bagel", "Everything");
+
+        bagel.setBagel(inventory.getVariant());
+
+        String result = basket.returnCostOfBagel(bagel);
+
+        Assertions.assertEquals(0.49 + "£", result);
+    }
+
 }

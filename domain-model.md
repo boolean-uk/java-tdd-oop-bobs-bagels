@@ -15,10 +15,10 @@ Basket  String type        addBagelType()   Add a specific type of bagel to bask
 
 Version 1
 
-| Class  | Member variables         | Methods                                | Scenario                          | Output/Result |
-|--------|--------------------------|----------------------------------------|-----------------------------------|---------------|
-| Basket | ArrayList<String> bagels | addBagelTypeToBasket(String bagelType) | If bagel type added to basket     | Return true   |
-|        |                          |                                        | If bagel type not added to basket | Return false  |
+| Class  | Member variables        | Methods                                | Scenario                          | Output/Result |
+|--------|-------------------------|----------------------------------------|-----------------------------------|---------------|
+| Basket | ArrayList<Bagel> bagels | addBagelTypeToBasket(String bagelType) | If bagel type added to basket     | Return true   |
+| Bagel  |                         |                                        | If bagel type not added to basket | Return false  |
 
 
 ## User Story 2
@@ -36,10 +36,10 @@ Basket  String type        removeBagelType()   Remove a specific type of bagel t
 
 Version 1
 
-| Class  | Member variables         | Methods                                     | Scenario                          | Output/Result |
-|--------|--------------------------|---------------------------------------------|-----------------------------------|---------------|
-| Basket | ArrayList<String> bagels | removeBagelTypeFromBasket(String bagelType) | If bagel type removed from basket | Return true   |
-|        |                          |                                             | If bagel type not removed basket  | Return false  |
+| Class  | Member variables        | Methods                                     | Scenario                          | Output/Result |
+|--------|-------------------------|---------------------------------------------|-----------------------------------|---------------|
+| Basket | ArrayList<Bagel> bagels | removeBagelTypeFromBasket(String bagelType) | If bagel type removed from basket | Return true   |
+| Bagel  |                         |                                             | If bagel type not removed basket  | Return false  |
 
 
 
@@ -58,17 +58,17 @@ Basket  ArrayList<String> bagels, int basketSize        basketIsFull()   If bask
 
 Version 1
 
-| Class  | Member variables         | Methods                    | Scenario              | Output/Result                |
-|--------|--------------------------|----------------------------|-----------------------|------------------------------|
-| Basket | ArrayList<String> bagels | basketIsFull(int quantity) | If basket is full     | Return "Basket is full!"     |
-|        |                          |                            | If basket is not full | Return "Basket is not full." |
+| Class  | Member variables        | Methods                    | Scenario              | Output/Result                |
+|--------|-------------------------|----------------------------|-----------------------|------------------------------|
+| Basket | ArrayList<Bagel> bagels | basketIsFull(int quantity) | If basket is full     | Return "Basket is full!"     |
+|        |                         |                            | If basket is not full | Return "Basket is not full." |
 
 Version 2
 
-| Class  | Member variables         | Methods        | Scenario              | Output/Result                |
-|--------|--------------------------|----------------|-----------------------|------------------------------|
-| Basket | ArrayList<String> bagels | basketIsFull() | If basket is full     | Return "Basket is full!"     |
-|        | int basketSize           |                | If basket is not full | Return "Basket is not full." |
+| Class  | Member variables        | Methods        | Scenario              | Output/Result                |
+|--------|-------------------------|----------------|-----------------------|------------------------------|
+| Basket | ArrayList<Bagel> bagels | basketIsFull() | If basket is full     | Return "Basket is full!"     |
+| Bagel  | int basketSize          |                | If basket is not full | Return "Basket is not full." |
 
 
 ## User Story 4
@@ -81,10 +81,10 @@ I’d like to change the capacity of baskets.
 
 Version 1
 
-| Class  | Member variables         | Methods                                                | Scenario                          | Output/Result                            |
-|--------|--------------------------|--------------------------------------------------------|-----------------------------------|------------------------------------------|
-| Basket | ArrayList<String> bagels | changeBasketCapacity(int oldDapacity, int newCapacity) | If basket capacity is changed     | Return "Basket capacity change!"         |
-|        |                          |                                                        | if basket capacity is not changed | Return "Basket is capacity is the same." |
+| Class  | Member variables        | Methods                                                | Scenario                          | Output/Result                            |
+|--------|-------------------------|--------------------------------------------------------|-----------------------------------|------------------------------------------|
+| Basket | ArrayList<Bagel> bagels | changeBasketCapacity(int oldDapacity, int newCapacity) | If basket capacity is changed     | Return "Basket capacity change!"         |
+|        |                         |                                                        | if basket capacity is not changed | Return "Basket is capacity is the same." |
 
 
 ## User Story 5
@@ -100,10 +100,10 @@ Basket  ArrayList<String> bagels        canRemoveItemInBasket()   Remove a speci
 # Domain Model For User Story 5
 Version 1
 
-| Class  | Member variables         | Methods                            | Scenario                      | Output/Result                                       |
-|--------|--------------------------|------------------------------------|-------------------------------|-----------------------------------------------------|
-| Basket | ArrayList<String> bagels | canRemoveItemInBasket(String item) | Item exist in basket          | Return "Item is in basket and can be removed"       |
-|        |                          |                                    | Item does not exist in basket | Return "Item is not in basket and can't be removed" |
+| Class  | Member variables        | Methods                            | Scenario                      | Output/Result                                       |
+|--------|-------------------------|------------------------------------|-------------------------------|-----------------------------------------------------|
+| Basket | ArrayList<Bagel> bagels | canRemoveItemInBasket(String item) | Item exist in basket          | Return "Item is in basket and can be removed"       |
+|        |                         |                                    | Item does not exist in basket | Return "Item is not in basket and can't be removed" |
 
 ## User Story 6.
 As a customer,
@@ -113,10 +113,10 @@ I'd like to know the total cost of items in my basket.
 # Domain Model For User Story 6
 
 
-| Class   | Member variables | Methods                                                     | Scenario           | Output/Result    |
-|---------|------------------|-------------------------------------------------------------|--------------------|------------------|
-| Product | int cost         | int totalCost(HashMap<String, Integer> item, int totalCost) | if all items added | Return totalCost |
-|         | String[] items   |                                                             | if no items added  | Return 0         |
+| Class  | Member variables                              | Methods                                                     | Scenario           | Output/Result    |
+|--------|-----------------------------------------------|-------------------------------------------------------------|--------------------|------------------|
+| Basket | HashMap<String, Integer[]> itemsWithQuantity; | int totalCost(HashMap<String, Integer> item, int totalCost) | if all items added | Return totalCost |
+|        |                                               |                                                             | if no items added  | Return 0         |
 
 
 
@@ -126,6 +126,13 @@ So I know what the damage will be,
 I'd like to know the cost of a bagel before I add it to my basket.
 
 # Domain Model For User Story 7
+
+| Class     | Member Variables                        | Methods                               | Scenario             | Output/Result        |
+|-----------|-----------------------------------------|---------------------------------------|----------------------|----------------------|
+| Basket    | HashMap<Bagel, Integer> bagelsWithCost; | double returnCostOfBagel(Bagel bagel) | I want cost of bagel | Return cost of bagel |
+| Inventory |                                         |                                       |                      |                      |
+| Bagel     |                                         |                                       |                      |                      |
+
 
 ## User Story 8.
 As a customer,

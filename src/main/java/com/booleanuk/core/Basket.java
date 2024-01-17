@@ -10,6 +10,10 @@ public class Basket {
 
     HashMap<String, Integer> items;
 
+    HashMap<String, Inventory> itemsFullyDetailed;
+
+    HashMap<Bagel, Integer> bagelsWithCost;
+
     HashMap<String, Integer[]> itemsWithQuantity;
     int basketSize = 5;
 
@@ -17,6 +21,22 @@ public class Basket {
         bagels = new ArrayList<>(5);
         items = new HashMap<>();
         itemsWithQuantity = new HashMap<>();
+        itemsFullyDetailed = new HashMap<>();
+        itemsFullyDetailed.put("BGLO", new Inventory("BGLO", 0.49, "Bagel", "Onion"));
+        itemsFullyDetailed.put("BGLP", new Inventory("BGLP", 0.39, "Bagel", "Plain"));
+        itemsFullyDetailed.put("BGLE", new Inventory("BGLE", 0.49, "Bagel", "Everything"));
+        itemsFullyDetailed.put("BGLS", new Inventory("BGLS", 0.49, "Bagel", "Sesame"));
+        itemsFullyDetailed.put("COFB", new Inventory("COFB", 0.99, "Coffee", "Black"));
+        itemsFullyDetailed.put("COFW", new Inventory("COFW", 1.19, "Coffee", "White"));
+        itemsFullyDetailed.put("COFC", new Inventory("COFC", 1.29, "Coffee", "Cappuccino"));
+        itemsFullyDetailed.put("COFL", new Inventory("COFL", 1.29, "Coffee", "Latte"));
+        itemsFullyDetailed.put("FILB", new Inventory("FILB", 0.12, "Filling", "Bacon"));
+        itemsFullyDetailed.put("FILE", new Inventory("FILE", 0.12, "Filling", "Egg"));
+        itemsFullyDetailed.put("FILC", new Inventory("FILC", 0.12, "Filling", "Cheese"));
+        itemsFullyDetailed.put("FILX", new Inventory("FILX", 0.12, "Filling", "Cream Cheese"));
+        itemsFullyDetailed.put("FILS", new Inventory("FILS", 0.12, "Filling", "Smoked Salmon"));
+        itemsFullyDetailed.put("FILH", new Inventory("FILH", 0.12, "Filling", "Ham"));
+
         //User Story 3
         /*
         bagels.add("Chocolate");
