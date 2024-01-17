@@ -27,13 +27,13 @@ public class TestBasket {
         boolean thrown = false;
         Basket basket = new Basket(new User());
 
-        try {
-            basket.add("BOOGIE");
-        } catch (IllegalStateException e) {
-            thrown = true;
-        }
-
-        Assertions.assertTrue(thrown);
+        Assertions.assertEquals(0, basket.items);
+        Assertions.assertFalse(basket.add("BLABLA"));
+        Assertions.assertFalse(basket.add("BGLU"));
+        Assertions.assertFalse(basket.add("HOOGA"));
+        Assertions.assertEquals(0, basket.items);
+        Assertions.assertTrue(basket.add("FILE"));
+        Assertions.assertEquals(1, basket.items);
     }
 
     @Test
