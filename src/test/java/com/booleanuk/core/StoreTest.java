@@ -22,6 +22,6 @@ public class StoreTest {
         Assertions.assertFalse(store.getBaskets().get(basketId).getBagels().contains(bagel));
         boolean expected = store.addBagelToBasket("Onion", basketId);
         Assertions.assertTrue(expected);
-        Assertions.assertFalse(store.getBaskets().get(basketId).getBagels().contains(bagel));
+        Assertions.assertTrue(store.getBaskets().get(basketId).getBagels().contains(bagel));
     }
 }
