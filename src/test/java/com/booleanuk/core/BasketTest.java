@@ -106,44 +106,43 @@ class BasketTest {
         Assertions.assertEquals(10, result);
     }
 
-    /*
-    // 5.
-
     @Test
-    public void removeBananaFromBasketOnlyContainingChocolate() {
-        Basket basket = new Basket(3);
-        boolean addResult = basket.addBagel("choclate");
-        boolean removeResult = basket.removeBagel("banana");
-        Assertions.assertFalse(removeResult);
+    public void addBeyondCapacity() {
+        Basket basket = new Basket();
+        int newCapacity = 2;
+        int intResult = basket.changeCapacity(newCapacity);
+        boolean result = basket.addItem("Bagel Onion");
+        result = basket.addItem("Filling Bacon");
+        Assertions.assertTrue(result);
+        result = basket.addItem("Bagel Onion");
+        Assertions.assertFalse(result);
+
+        Assertions.assertEquals(2, basket.basket.size());
     }
 
 
-
-    // Overall Test
-
+    // Overall Test after first five user stories
     @Test
     public void overallTest() {
-        Basket basket = new Basket(3);
-
-        // Add 4 bagels to a max 3 bagel basket. Fours add should return false, the rest true
-        Assertions.assertTrue(basket.addBagel("choclate"));
-        Assertions.assertTrue(basket.addBagel("banana"));
-        Assertions.assertTrue(basket.addBagel("creme"));
-        Assertions.assertFalse(basket.addBagel("cheese"));
+        Basket basket = new Basket();
+        int intResult = basket.changeCapacity(3);
+        // Add 4 items to a max 3 items basket. Fours add should return false, the rest true
+        Assertions.assertTrue(basket.addItem("Bagel Plain"));
+        Assertions.assertTrue(basket.addItem("Bagel Sesame"));
+        Assertions.assertTrue(basket.addItem("Coffee Capuccino"));
+        Assertions.assertFalse(basket.addItem("Filling Cheese"));
 
         // Remove banana to add cheese and salami. Salami should return fail, the rest true
-        Assertions.assertTrue(basket.removeBagel("banana"));
-        Assertions.assertTrue(basket.addBagel("cheese"));
-        Assertions.assertFalse(basket.addBagel("salami"));
+        Assertions.assertTrue(basket.removeItem("Bagel Sesame"));
+        Assertions.assertTrue(basket.addItem("Bagel Everything"));
+        Assertions.assertFalse(basket.addItem("Bagel Onion"));
 
         // Change capacity to 5 and add the extra bagels
-        Assertions.assertEquals(5, basket.changeBasketCapacity(5));
-        Assertions.assertTrue(basket.addBagel("banana"));
-        Assertions.assertTrue(basket.addBagel("salami"));
+        Assertions.assertEquals(5, basket.changeCapacity(5));
+        Assertions.assertTrue(basket.addItem("Bagel Everything"));
+        Assertions.assertTrue(basket.addItem("Bagel Everything"));
 
         // Remove ham bagel, that has now been added
-        Assertions.assertFalse(basket.removeBagel("ham"));
+        Assertions.assertTrue(basket.removeItem("Bagel Everything"));
     }
-
-     */
 }
