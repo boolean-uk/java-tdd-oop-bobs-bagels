@@ -27,6 +27,7 @@ I'd like to remove a bagel from my basket.
 | remove(String item) | ArrayList<String> items | If item *does* exists in basket   | true           |
 |                     |                         | If item *doesn't* exist in basket | false          |
 
+
 ```
 3.
 As a member of the public,
@@ -38,6 +39,7 @@ I'd like to know when my basket is full when I try adding an item beyond my bask
 |----------|-------------------------|-------------------------|----------------|
 | isFull() | ArrayList<String> items | If basket *is* full     | true           |
 |          |                         | If basket *isn't* full  | false          |
+
 
 ```
 4.
@@ -51,6 +53,7 @@ I’d like to change the capacity of baskets.
 | ArrayList<String> enhancedBasket | Customers can now choose which baskets they want to use | ...            |
 |                                  |                                                         |                |
 
+
 ```
 5.
 As a member of the public
@@ -60,7 +63,7 @@ I'd like to know if I try to remove an item that doesn't exist in my basket.
 
 | Method              | Member variables        | Scenario                          | Output/Results |
 |---------------------|-------------------------|-----------------------------------|----------------|
-| remove(String item) | ArrayList<String> items | If item *does* exists in basket   | true           |
+| remove(String item) | ArrayList<String> items | If item *does* exist in basket    | true           |
 |                     |                         | If item *doesn't* exist in basket | false          |
 
 
@@ -71,6 +74,10 @@ So I know how much money I need,
 I'd like to know the total cost of items in my basket.
 ```
 
+| Method      | Member variables | Scenario                         | Output/Results |
+|-------------|------------------|----------------------------------|----------------|
+| totalCost() | int totalCost    | If items *do* exist in basket    | sum            |
+|             |                  | If items *don't* exist in basket | 0              |
 
 
 ```
@@ -80,6 +87,10 @@ So I know what the damage will be,
 I'd like to know the cost of a bagel before I add it to my basket.
 ```
 
+| Method                    | Member variables                | Scenario                          | Output/Results              |
+|---------------------------|---------------------------------|-----------------------------------|-----------------------------|
+| costOfBagel(String bagel) | HashMap<String, Integer> bagels | If bagel *does* exists in list    | "This bagel costs: " + cost |
+|                           |                                 | If item *doesn't* exist in basket | "We do not sell this bagel" |
 
 
 ```
@@ -89,6 +100,10 @@ So I can shake things up a bit,
 I'd like to be able to choose fillings for my bagel.
 ```
 
+| Method                    | Member variables                  | Scenario                           | Output/Results |
+|---------------------------|-----------------------------------|------------------------------------|----------------|
+| fillBagel(String filling) | HashMap<String, Integer> fillings | If filling *does* exist in list    | true           |
+|                           |                                   | If filling *doesn't* exist in list | false          |
 
 
 ```
@@ -98,6 +113,10 @@ So I don't over-spend,
 I'd like to know the cost of each filling before I add it to my bagel order.
 ```
 
+| Method        | Member variables                  | Scenario                         | Output/Results |
+|---------------|-----------------------------------|----------------------------------|----------------|
+| fillingCost() | HashMap<String, Integer> fillings | If fillings *do* exist in map    | true           |
+|               |                                   | If fillings *don't* exist in map | false          |
 
 
 ```
@@ -107,3 +126,7 @@ So we don't get any weird requests,
 I want customers to only be able to order things that we stock in our inventory.
 ```
 
+| Method          | Member variables           | Scenario                                       | Output/Results |
+|-----------------|----------------------------|------------------------------------------------|----------------|
+| controlOrders() | ArrayList<String> products | If item requested *does* exist in inventory    | true           |
+|                 |                            | If item requested *doesn't* exist in inventory | false          |
