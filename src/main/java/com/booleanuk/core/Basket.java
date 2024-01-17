@@ -2,10 +2,12 @@ package com.booleanuk.core;
 
 import java.util.ArrayList;
 
+import static java.lang.Math.round;
+
 public class Basket {
     ArrayList<String> basket;
     int capacity;
-    Double total;
+    double total;
 
     Inventory inventory;
 
@@ -28,8 +30,11 @@ public class Basket {
 
         // Add item by SKU code to
         String sku = inventory.mapTypeVariantToSKU.get(item);
-        basket.add(sku);
-        total += Double.parseDouble(inventory.inventory.get(sku)[1]);
+        this.basket.add(sku);
+        String strPrice = this.inventory.inventory.get(sku)[1];
+        double price = Double.parseDouble(strPrice);
+        this.total += price;
+        this.total = Math.round(this.total*100.0) / 100.0;
         return true;
     }
 
@@ -50,6 +55,10 @@ public class Basket {
     public int changeCapacity(int newCapacity) {
         this.capacity = newCapacity;
         return this.capacity;
+    }
+
+    public double getTotal() {
+        return this.total;
     }
 
 }
