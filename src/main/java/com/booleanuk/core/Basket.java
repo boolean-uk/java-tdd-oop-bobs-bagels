@@ -31,7 +31,19 @@ public class Basket {
     }
 
     public boolean remove(String SKU){
-        return true;
+        if (getProduct(SKU) != null){
+            Product product = getProduct(SKU);
+
+            if (products.get(product) > 1){
+                products.put(product, products.get(product) - 1);
+            } else {
+                products.remove(product);
+            }
+            return true;
+        } else {
+            System.out.println("This product is not in your cart.");
+            return false;
+        }
     }
 
     public Product getProduct(String SKU){
