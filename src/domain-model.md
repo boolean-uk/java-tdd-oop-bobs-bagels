@@ -5,11 +5,11 @@ I'd like to add a specific type of bagel to my basket.
 
 
 
-| Classes   | Methods                     | Members              | Scenario                  | Output |
-|-----------|-----------------------------|----------------------|---------------------------|--------|
-| Order     | add(String name, int price) | HashMap<Name, Price> | Item is not already added | true   |
-| Inventory |                             |                      | Item is already added     | false  |
-|           |                             |                      |                           |        |
+| Classes | Methods                                                               | Members              | Scenario                  | Output |
+|---------|-----------------------------------------------------------------------|----------------------|---------------------------|--------|
+| Order   | add(String SKU, String itemType, String bagelName, double bagelPrice) | HashMap<Name, Price> | Item is not already added | true   |
+|         |                                                                       |                      | Item is already added     | false  |
+|         |                                                                       |                      |                           |        |
 
 
 2.
@@ -19,11 +19,11 @@ I'd like to remove a bagel from my basket.
 
 
 
-| Classes   | Methods             | Members               | Scenario                             | Output |
-|-----------|---------------------|-----------------------|--------------------------------------|--------|
-| Order     | remove(String name) | HashMap<Name, Price>  | Item is in list, and can get removed | true   |
-| Inventory |                     |                       | Item is not existing in list         | false  |
-|           |                     |                       |                                      |        |
+| Classes | Methods                                                                   | Members               | Scenario                             | Output |
+|---------|---------------------------------------------------------------------------|-----------------------|--------------------------------------|--------|
+| Order   | remove(String SKU, String itemType, String bagelName, double bagelPrice ) | HashMap<Name, Price>  | Item is in list, and can get removed | true   |
+|         |                                                                           |                       | Item is not existing in list         | false  |
+|         |                                                                           |                       |                                      |        |
 
 
 3.
@@ -32,11 +32,11 @@ So that I can not overfill my small bagel basket
 I'd like to know when my basket is full when I try adding an item beyond my basket capacity.
 
 
-| Classes   | Methods        | Members               | Scenario         | Output |
-|-----------|----------------|-----------------------|------------------|--------|
-| Order     | isBasketFull() | HashMap<Name, Price>  | List is not full | true   |
-| Inventory |                |                       | List is full     | false  |
-|           |                |                       |                  |        |
+| Classes | Methods        | Members      | Scenario         | Output |
+|---------|----------------|--------------|------------------|--------|
+| Order   | isBasketFull() | int capacity | List is not full | true   |
+|         |                |              | List is full     | false  |
+|         |                |              |                  |        |
 
 
 4.
@@ -46,11 +46,11 @@ I’d like to change the capacity of baskets.
 
 
 
-| Classes   | Methods                  | Members               | Scenario                                   | Output          |
-|-----------|--------------------------|-----------------------|--------------------------------------------|-----------------|
-| Order     | updateBasket(int amount) | HashMap<Name, Price>  | If correct value is given (above previous) | New Amount      |
-| Inventory |                          |                       | If wrong value is given                    | Previous Amount |
-|           |                          |                       |                                            |                 |
+| Classes | Methods                  | Members      | Scenario                                   | Output          |
+|---------|--------------------------|--------------|--------------------------------------------|-----------------|
+| Order   | updateBasket(int amount) | int capacity | If correct value is given (above previous) | New Amount      |
+|         |                          |              | If wrong value is given                    | Previous Amount |
+|         |                          |              |                                            |                 |
 
 
 5.
@@ -59,11 +59,11 @@ So that I can maintain my sanity
 I'd like to know if I try to remove an item that doesn't exist in my basket.
 
 
-| Classes   | Methods                       | Members               | Scenario                                   | Output                         |
-|-----------|-------------------------------|-----------------------|--------------------------------------------|--------------------------------|
-| Order     | canItemBeRemoved(String name) | HashMap<Name, Price>  | If item is in list, it can be removed      | "The item can be removed."     |
-| Inventory |                               |                       | If item is not in list, it cant be removed | "The item is not in the list!" |
-|           |                               |                       |                                            |                                |
+| Classes | Methods                       | Members           | Scenario                                   | Output                         |
+|---------|-------------------------------|-------------------|--------------------------------------------|--------------------------------|
+| Order   | canItemBeRemoved(String name) | String bagelSku   | If item is in list, it can be removed      | "The item can be removed."     |
+|         |                               | String fillingSku | If item is not in list, it cant be removed | "The item is not in the list!" |
+|         |                               | String coffeeName |                                            |                                |
 
 
 6.
@@ -72,11 +72,11 @@ So I know how much money I need,
 I'd like to know the total cost of items in my basket.
 
 
-| Classes   | Methods      | Members               | Scenario                               | Output    |
-|-----------|--------------|-----------------------|----------------------------------------|-----------|
-| Order     | totalCost()  | HashMap<Name, Price>  | If item is in list, it adds to the sum | sum       |
-| Inventory |              | HashMap<Name, Price>  | If item is not in list                 | return 0; |
-|           |              |                       |                                        |           |
+| Classes | Methods      | Members             | Scenario                               | Output    |
+|---------|--------------|---------------------|----------------------------------------|-----------|
+| Order   | totalCost()  | double bagelPrice   | If item is in list, it adds to the sum | sum       |
+|         |              | double coffeePrice  | If item is not in list                 | return 0; |
+|         |              | double fillingPrice |                                        |           |
 
 
 
@@ -86,11 +86,11 @@ So I know what the damage will be,
 I'd like to know the cost of a bagel before I add it to my basket.
 
 
-| Classes   | Methods                   | Members        | Scenario               | Output     |
-|-----------|---------------------------|----------------|------------------------|------------|
-| Order     | getCost(String bagelName) | int bagelPrice | If item is in list     | bagelPrice |
-| Inventory |                           |                | If item is not in list | 0          |
-|           |                           |                |                        |            |
+| Classes | Methods                   | Members           | Scenario               | Output     |
+|---------|---------------------------|-------------------|------------------------|------------|
+| Order   | getCost(String bagelName) | double bagelPrice | If item is in list     | bagelPrice |
+|         |                           |                   | If item is not in list | 0          |
+|         |                           |                   |                        |            |
 
 
 8.
@@ -99,11 +99,11 @@ So I can shake things up a bit,
 I'd like to be able to choose fillings for my bagel.
 
 
-| Classes   | Methods                           | Members               | Scenario                | Output        |
-|-----------|-----------------------------------|-----------------------|-------------------------|---------------|
-| Order     | chooseFilling(String fillingName) | HashMap<Name, Price>  | If item is in list      | return true;  |
-| Inventory |                                   |                       | If item is not in list  | return false; |
-|           |                                   |                       |                         |               |
+| Classes | Methods                        | Members            | Scenario                | Output        |
+|---------|--------------------------------|--------------------|-------------------------|---------------|
+| Order   | chooseFilling(String fillName) | String fillingName | If item is in list      | return true;  |
+|         |                                |                    | If item is not in list  | return false; |
+|         |                                |                    |                         |               |
 
 
 9.
@@ -112,11 +112,11 @@ So I don't over-spend,
 I'd like to know the cost of each filling before I add it to my bagel order.
 
 
-| Classes   | Methods                            | Members               | Scenario                | Output              |
-|-----------|------------------------------------|-----------------------|-------------------------|---------------------|
-| Order     | getFillingCost(String fillingName) | HashMap<Name, Price>  | If item is in list      | return fillingPrice |
-| Inventory |                                    |                       | If item is not in list  | return 0            |
-|           |                                    |                       |                         |                     |
+| Classes | Methods                         | Members             | Scenario                | Output              |
+|---------|---------------------------------|---------------------|-------------------------|---------------------|
+| Order   | getFillingCost(String fillName) | double fillingPrice | If item is in list      | return fillingPrice |
+|         |                                 |                     | If item is not in list  | return 0            |
+|         |                                 |                     |                         |                     |
 
 
 10.
