@@ -8,9 +8,9 @@ public class BagelTest {
     @Test
     public void testCreateBagel(){
         Bagel bagel = new Bagel("plain");
-        Assertions.assertTrue("plain", bagel.getName());
-        Assertions.assertTrue(2.00, bagel.getPrice());
-        Assertions.assertFalse("chocolate", bagel.getName());
-        Assertions.assertFalse(4.20, bagel.getPrice());
+        Assertions.assertEquals("plain", bagel.getName());
+        Assertions.assertEquals(2.00, bagel.getPrice());
+        Assertions.assertEquals("chocolate", bagel.getName());
+        Assertions.assertEquals(4.20, bagel.getPrice());
     }
 }
