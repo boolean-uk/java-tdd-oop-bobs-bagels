@@ -48,4 +48,9 @@ public class BasketTest {
         basket.add(bagel4);
         Assertions.assertTrue(basket.isFull());
     }
+    @Test
+    public void shouldChangeBasketCapacity(){
+        Basket basket = new Basket(4);
+        Assertions.assertEquals("Basket size is updated to 8", basket.changeCapacity(8));
+    }
 }
