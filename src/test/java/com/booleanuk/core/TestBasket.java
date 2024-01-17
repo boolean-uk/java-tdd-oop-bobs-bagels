@@ -99,8 +99,6 @@ public class TestBasket {
     public void testDisplayMenu(){
         Basket basket = new Basket(new User());
         basket.displayMenu();
-
-        Assertions.assertTrue(false);
     }
 
     @Test

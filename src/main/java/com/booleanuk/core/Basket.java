@@ -67,10 +67,6 @@ public class Basket {
         }
     }
 
-    public void displayMenu(){
-
-    }
-
     public double totalCost(){
         double totalCost = 0;
         for (Product product : products.keySet()){
@@ -86,5 +82,29 @@ public class Basket {
             }
         }
         return null;
+    }
+
+    public void displayMenu(){
+        System.out.printf("=============================================%n");
+        System.out.printf("                  Bob's Bagels               %n");
+
+        System.out.printf("=============================================%n");
+        System.out.printf("| %-5s | %-8s | %-15s | %-5s|%n", "SKU", "Type", "Name", "Price");
+        System.out.printf("---------------------------------------------%n");
+
+        System.out.printf("| %-5s | %-8s | %-15s | %5.2f|%n", "BGLO", "Bagel", "Onion", 0.49);
+        System.out.printf("| %-5s | %-8s | %-15s | %5.2f|%n", "BGLP", "Bagel", "Plain", 0.39);
+        System.out.printf("| %-5s | %-8s | %-15s | %5.2f|%n", "BGLE", "Bagel", "Everything", 0.49);
+        System.out.printf("| %-5s | %-8s | %-15s | %5.2f|%n", "BGLS", "Bagel", "Sesame", 0.49);
+        System.out.printf("| %-5s | %-8s | %-15s | %5.2f|%n", "COFB", "Coffee", "Black", 0.99);
+        System.out.printf("| %-5s | %-8s | %-15s | %5.2f|%n", "COFW", "Coffee", "White", 1.19);
+        System.out.printf("| %-5s | %-8s | %-15s | %5.2f|%n", "COFC", "Coffee", "Cappuccino", 1.29);
+        System.out.printf("| %-5s | %-8s | %-15s | %5.2f|%n", "COFL", "Coffee", "Latte", 1.29);
+        System.out.printf("| %-5s | %-8s | %-15s | %5.2f|%n", "FILB", "Filling", "Bacon", 0.12);
+        System.out.printf("| %-5s | %-8s | %-15s | %5.2f|%n", "FILE", "Filling", "Egg", 0.12);
+        System.out.printf("| %-5s | %-8s | %-15s | %5.2f|%n", "FILC", "Filling", "Cheese", 0.12);
+        System.out.printf("| %-5s | %-8s | %-15s | %5.2f|%n", "FILX", "Filling", "Cream Cheese", 0.12);
+        System.out.printf("| %-5s | %-8s | %-15s | %5.2f|%n", "FILS", "Filling", "Smoked Salmon", 0.12);
+        System.out.printf("| %-5s | %-8s | %-15s | %5.2f|%n", "FILH", "Filling", "Ham", 0.12);
     }
 }
