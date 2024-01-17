@@ -55,7 +55,15 @@ public class TestBasket {
 
     @Test
     public void testRemoveProductNotInBasket(){
+        Basket basket = new Basket(new User());
 
+        Assertions.assertFalse(basket.remove("COFC"));
+        Assertions.assertFalse(basket.remove("COFW"));
+        Assertions.assertFalse(basket.remove("BGLO"));
+
+        basket.add("COFC");
+
+        Assertions.assertFalse(basket.remove("BGLE"));
     }
 
     @Test

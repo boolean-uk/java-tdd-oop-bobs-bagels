@@ -11,83 +11,89 @@ public class Product {
     public Product(String SKU) throws IllegalStateException{
 
         switch (SKU) {
-
-            case "BGLO":
+            case "BGLO" -> {
                 type = "Bagel";
                 price = 0.49;
                 name = "Onion";
-                break;
-            case "BGLP":
+            }
+            case "BGLP" -> {
                 type = "Bagel";
                 price = 0.39;
                 name = "Plain";
-                break;
-            case "BGLE":
+            }
+            case "BGLE" -> {
                 type = "Bagel";
                 price = 0.49;
                 name = "Everything";
-                break;
-            case "BGLS":
+            }
+            case "BGLS" -> {
                 type = "Bagel";
                 price = 0.49;
                 name = "Sesame";
-                break;
-
-            case "COFB":
+            }
+            case "COFB" -> {
                 type = "Coffee";
                 price = 0.99;
                 name = "Black";
-                break;
-            case "COFW":
+            }
+            case "COFW" -> {
                 type = "Coffee";
                 price = 1.19;
                 name = "White";
-                break;
-            case "COFC":
+            }
+            case "COFC" -> {
                 type = "Coffee";
                 price = 1.29;
                 name = "Cappuccino";
-                break;
-            case "COFL":
+            }
+            case "COFL" -> {
                 type = "Coffee";
                 price = 1.29;
                 name = "Latte";
-                break;
-
-            case "FILB":
+            }
+            case "FILB" -> {
                 type = "Filling";
                 price = 0.12;
                 name = "Bacon";
-                break;
-            case "FILE":
+            }
+            case "FILE" -> {
                 type = "Filling";
                 price = 0.12;
                 name = "Egg";
-                break;
-            case "FILC":
+            }
+            case "FILC" -> {
                 type = "Filling";
                 price = 0.12;
                 name = "Cheese";
-                break;
-            case "FILX":
+            }
+            case "FILX" -> {
                 type = "Filling";
                 price = 0.12;
                 name = "Cream Cheese";
-                break;
-            case "FILS":
+            }
+            case "FILS" -> {
                 type = "Filling";
                 price = 0.12;
                 name = "Smoked Salmon";
-                break;
-            case "FILH":
+            }
+            case "FILH" -> {
                 type = "Filling";
                 price = 0.12;
                 name = "Ham";
-                break;
-
-            default:
-                throw new IllegalStateException("Unexpected value: " + SKU);
+            }
+            default -> throw new IllegalStateException("Unexpected value: " + SKU);
         }
         this.SKU = SKU;
+    }
+
+    @Override
+    public boolean equals(Object otherObj){
+        if (getClass() == otherObj.getClass()){
+            return this.SKU.equals(((Product) otherObj).SKU);
+        } else if (otherObj instanceof String){
+            return this.SKU.equals(otherObj);
+        } else {
+            return false;
+        }
     }
 }
