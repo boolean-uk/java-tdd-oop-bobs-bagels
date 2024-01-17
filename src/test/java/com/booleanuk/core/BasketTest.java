@@ -47,7 +47,7 @@ class BasketTest {
     public void testChangeCapacityOfBasket(){
         Basket basket = new Basket();
         basket.add("bagel 0");
-        Assertions.assertTrue(basket.changeCapacity(15));
+        basket.changeCapacity(17);
         Assertions.assertFalse(basket.checkIfBasketIsFull());
         for (int i = 1; i < 5; i++) {
             basket.add("bagel " + i);
@@ -60,6 +60,6 @@ class BasketTest {
         for (int i = 10; i < 18; i++) {
             basket.add("bagel " + i);
         }
-        Assertions.assertFalse(basket.checkIfBasketIsFull());
+        Assertions.assertTrue(basket.checkIfBasketIsFull());
     }
 }
