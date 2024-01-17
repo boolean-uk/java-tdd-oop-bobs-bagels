@@ -36,5 +36,16 @@ public class StoreTest {
         Assertions.assertFalse(store.getBaskets().get(basketId).getBagels().contains(bagel));
     }
 
+    @Test
+    public void addBagelToFullBasketTest() {
+        Store store = new Store();
+        int basketId = store.createBasket();
+        store.addBagelToBasket("Onion", basketId);
+        store.addBagelToBasket("Onion", basketId);
+        store.addBagelToBasket("Onion", basketId);
+        String actual = store.addBagelToBasket("Onion", basketId);
+        Assertions.assertEquals("You're basket is full!", actual);
+    }
+
 
 }
