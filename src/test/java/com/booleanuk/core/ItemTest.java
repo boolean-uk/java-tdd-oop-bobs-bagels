@@ -11,5 +11,5 @@ public class ItemTest {
     }
 
     @Test
-    public void
+    public void setPrice
 }
