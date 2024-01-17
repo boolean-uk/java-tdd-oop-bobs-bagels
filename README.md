@@ -36,12 +36,12 @@ I'd like to add a specific type of bagel to my basket.
 
 Class Basket
 
-| Class Variables | Methods                       | Scenario             | Output/Return |
-|-----------------|-------------------------------|----------------------|---------------|
-| ArrayList<Item> | boolean addBagel(Bagel bagel) | Adds bagel to basket | True/False    |
-|                 |                               |                      |               |
-|                 |                               |                      |               |
-|                 |                               |                      |               |
+| Class Variables | Methods                              | Scenario             | Output/Return                 |
+|-----------------|--------------------------------------|----------------------|-------------------------------|
+| ArrayList<Item> | boolean addItemToBasket(Bagel bagel) | Adds item to basket  | True/False                    |
+|                 | ArrayList<Item> getItemList()        | Gets a list of Items | ArrayList<Item> basketOfItems |
+|                 |                                      |                      |                               |
+|                 |                                      |                      |                               |
 
 
 
