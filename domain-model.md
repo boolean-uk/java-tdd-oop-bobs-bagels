@@ -94,13 +94,25 @@ As a customer,
 So I can shake things up a bit,
 I'd like to be able to choose fillings for my bagel.
 ```
-| Classes | member variables                               | Methods                    | Scenario                   | Output       |
-|---------|------------------------------------------------|----------------------------|----------------------------|--------------|
-| Bagel   | String filling, ArrayList<Filling> fillingList | addFilling(String filling) | if filling in fillingList  | return true  |
-|         |                                                |                            | else                       | return false |
-|         |                                                |                            |                            |              |
+| Classes | member variables                           | Methods                    | Scenario                   | Output       |
+|---------|--------------------------------------------|----------------------------|----------------------------|--------------|
+| Bagel   | String filling, ArrayList<String> fillings | addFilling(String filling) | if filling in fillingList  | return true  |
+|         |                                            |                            | else                       | return false |
+|         |                                            |                            |                            |              |
 
 ```
+9.
+As a customer,
+So I don't over-spend,
+I'd like to know the cost of each filling before I add it to my bagel order.
+```
+| Classes | member variables                                                  | Methods           | Scenario                   | Output       |
+|---------|-------------------------------------------------------------------|-------------------|----------------------------|--------------|
+| Bagel   | String filling, ArrayList<String> fillings, double priceOfFilling | getFillingPrice() | if filling in fillingList  | return true  |
+|         |                                                                   |                   | else                       | return false |
+|         |                                                                   |                   |                            |              |
+
+
 10.
 As the manager,
 So we don't get any weird requests,
