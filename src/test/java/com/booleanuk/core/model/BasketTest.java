@@ -9,6 +9,7 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
 public class BasketTest {
+    private static final int DEFAULT_CAPACITY = 12;
     private static final String coffeeBlackSKU = "COFB";
     private static final String bagelPlainSKU = "BGLP";
 
@@ -19,14 +20,14 @@ public class BasketTest {
     @BeforeAll
     public static void setup() throws FileNotFoundException {
         Store bobsTest = new Store("TesT Store");
-        basket = new Basket(2);
+        basket = new Basket();
         item1 = bobsTest.getItemBySKU(bagelPlainSKU);
         item2 = bobsTest.getItemBySKU(coffeeBlackSKU);
     }
     @BeforeEach
     public void resetBasket() {
         basket.setBasket(new ArrayList<>());
-        basket.setCapacity(2);
+        basket.setCapacity(DEFAULT_CAPACITY);
     }
 
     @Test
@@ -43,7 +44,15 @@ public class BasketTest {
     }
 
     @Test
+    public void canChangeBasketCapacity() {
+        Assertions.assertEquals(12, basket.getCapacity());
+        basket.setCapacity(5);
+        Assertions.assertEquals(5, basket.getCapacity());
+    }
+
+    @Test
     public void canNotAddItemsWhenBasketIsFull() {
+        basket.setCapacity(2);
         Assertions.assertTrue(basket.addItem(item1));
         Assertions.assertTrue(basket.addItem(item1));
         Assertions.assertFalse(basket.addItem(item1));
@@ -64,18 +73,13 @@ public class BasketTest {
     }
 
     @Test
-    public void canChangeBasketCapacity() {
-        Assertions.assertEquals(2, basket.getCapacity());
-        basket.setCapacity(5);
-        Assertions.assertEquals(5, basket.getCapacity());
-    }
-
-    @Test
     public void getTotalCost() {
         Assertions.assertEquals(0, basket.getTotalCost());
-        basket.addItem(item1);
-        basket.addItem(item1);
-        basket.addItem(item2);
-        Assertions.assertEquals((0.39 + 0.39 + 0.99), basket.getTotalCost());
+        Assertions.assertTrue(basket.addItem(item1));
+        Assertions.assertEquals(0.39, basket.getTotalCost());
+        Assertions.assertTrue(basket.addItem(item1));
+        Assertions.assertEquals(0.78, basket.getTotalCost());
+        Assertions.assertTrue(basket.addItem(item2));
+        Assertions.assertEquals(1.77, basket.getTotalCost());
     }
 }

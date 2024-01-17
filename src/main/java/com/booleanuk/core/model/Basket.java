@@ -31,4 +31,12 @@ public class Basket {
         // TODO Increase stock
         return basket.remove(item);
     }
+
+    public double getTotalCost() {
+        double cost = 0;
+        for (Item item : basket) {
+            cost += item.getPrice();
+        }
+        return cost;
+    }
 }
