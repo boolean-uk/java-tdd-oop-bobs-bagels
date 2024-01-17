@@ -7,7 +7,7 @@ public class ItemTest {
 
     Item item_unfilled = new Item("XXX", 10.0, Item.Name.BAGEL, Item.Variant.CHEESE, null);
     Item item_filling = new Item("FFF", 10.0, Item.Name.FILLING, Item.Variant.CHEESE, null);
-    Item item_not_a_filling = new Item("FFF", 10.0, Item.Name.FILLING, Item.Variant.CHEESE, null);
+    Item item_not_a_filling = new Item("FFF", 10.0, Item.Name.COFFEE, Item.Variant.CHEESE, null);
 
     @Test
     public void testAddFilling() {

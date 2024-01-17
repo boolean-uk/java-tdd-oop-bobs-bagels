@@ -17,7 +17,10 @@ public class Item {
     }
 
     public boolean addFilling(Item filling) {
-      setFilling(filling);
+        if ((this.getName() != Name.FILLING) && (filling.getName() == Name.FILLING)) {
+        setFilling(filling);
+        return true;
+        }
       return false;
     }
 
