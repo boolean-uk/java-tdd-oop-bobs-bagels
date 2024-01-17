@@ -20,11 +20,19 @@ public class Bagel {
     }
 
     public boolean addFilling(String filling) {
-        filling = filling.toLowerCase();
+        filling = filling.toUpperCase();
         if(fillings.contains(filling)) {
             return false;
         }
         fillings.add(filling);
         return true;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public boolean hasFilling(String filling) {
+        return fillings.contains(filling.toUpperCase());
     }
 }

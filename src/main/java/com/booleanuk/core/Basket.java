@@ -22,6 +22,17 @@ public class Basket {
     }
 
     public String addFilling(String filling, String bagel) {
-        return "Filling added.";
+        boolean bagelExists = false;
+        for(Bagel b: bagels) {
+            if(b.getName().equals(bagel)) {
+                bagelExists = true;
+                if(!b.hasFilling(filling)) {
+                    b.addFilling(filling);
+                    return "Filling added.";
+                }
+            }
+        }
+        return bagelExists? "All bagels of that kind in your basket already has that filling."
+                : "Your basket doesn't contain that bagel.";
     }
 }
