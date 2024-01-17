@@ -14,7 +14,6 @@ public class Inventory {
         this.variant = variant;
     }
 
-    // Getters and Setters
     public String getSku() {
         return sku;
     }

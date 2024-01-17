@@ -4,13 +4,11 @@ public class Bagel {
 
     String bagel;
 
-    private String variant; // Variant of the bagel
-    private String sku; // SKU associated with the variant
+    private String variant;
+    private String sku;
 
     public Bagel(String variant) {
         this.variant = variant;
-        // You would need to determine the SKU based on the variant here
-        // For example:
         if (variant.equals("Onion")) {
             this.sku = "BGLO";
         }
