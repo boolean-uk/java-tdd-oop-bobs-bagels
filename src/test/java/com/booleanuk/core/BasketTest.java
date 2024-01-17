@@ -18,7 +18,6 @@ class BasketTest {
         Assertions.assertTrue(basket.add("plain"));
         Assertions.assertFalse(basket.add(""));
     }
-
     @Test
     public void testTryRemoveBagelFromList(){
         Basket basket = new Basket();
@@ -42,7 +41,6 @@ class BasketTest {
         }
         Assertions.assertTrue(basket.checkIfBasketIsFull());
     }
-
     @Test
     public void testChangeCapacityOfBasket(){
         Basket basket = new Basket();
@@ -62,4 +60,16 @@ class BasketTest {
         }
         Assertions.assertTrue(basket.checkIfBasketIsFull());
     }
+    @Test
+    public void testTryRemoveBagel(){
+        Basket basket = new Basket();
+        basket.add("Plain");
+        basket.add("Chocolate");
+        basket.add("Onion");
+        Assertions.assertFalse(basket.remove("Redberry"));
+        Assertions.assertTrue(basket.remove("Onion"));
+        Assertions.assertFalse(basket.remove("Onion"));
+    }
+
+
 }
