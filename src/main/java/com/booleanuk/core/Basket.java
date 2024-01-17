@@ -127,7 +127,10 @@ public class Basket {
     }
 
     //User Story 10
-    public boolean mustBeInInventory(String item) {
-        return true;
+    public boolean mustBeInInventory(String sku) {
+        if(itemsFullyDetailed.containsKey(sku)) {
+            return true;
+        }
+        return false;
     }
 }

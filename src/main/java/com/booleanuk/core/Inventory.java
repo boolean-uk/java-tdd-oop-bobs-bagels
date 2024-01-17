@@ -7,6 +7,9 @@ public class Inventory {
     private String name;
     private String variant;
 
+    public Inventory(String name) {
+        this.name = name;
+    }
     public Inventory(String sku, double price, String name, String variant) {
         this.sku = sku;
         this.price = price;
