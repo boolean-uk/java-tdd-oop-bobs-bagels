@@ -19,6 +19,7 @@ class BasketTest {
         Basket basket =new Basket();
         Product product = new Product( "",5,"Bagel","");
         basket.addItem(product);
+        basket.removeItem(product);
         Assertions.assertFalse(basket.bagelBasket.contains(product));
     }
 
