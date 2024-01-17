@@ -91,12 +91,12 @@ I want customers to only be able to order things that we stock in our inventory.
 ### Inventory Class
 (everything that can be ordered)
 
-| Methods                    | Member Variables                 |
-|----------------------------|----------------------------------|
-| isInInventory(String name) | HashMap<String, double> bagels   |
-|                            | HashMap<String, double> coffees  |
-|                            | HashMap<String, double> fillings |
-|                            | int inventory;                   |                                  |
+| Methods                         | Member Variables                 |
+|---------------------------------|----------------------------------|
+| isInInventory(String name)      | HashMap<String, double> bagels   |
+| changeCapacity(int newCapacity) | HashMap<String, double> coffees  |
+|                                 | HashMap<String, double> fillings |
+|                                 | int capacity;                    |                                  |
 
 ### Basket Class
 
@@ -104,9 +104,8 @@ I want customers to only be able to order things that we stock in our inventory.
 |-----------------------------------------------|-------------------------|
 | addItem(Item item)                            | ArrayList\<Item> basket |
 | removeItem(Item item)                         | int bagelsInBasket      |
-| changeBasketCapacity(int newCapacity)         | int coffeesInBasket     |
-| showTotalCostInBasket()                       | int fillingsInBasket    |
-| addBagelFilling(Bagel bagel, Filling filling) |                         |
+| showTotalCostInBasket()                       | int coffeesInBasket     |
+| addBagelFilling(Bagel bagel, Filling filling) | int fillingsInBasket    |
 | showCostOfBagel(String name)                  |                         |
 | showCostOfFillings()                          |                         |
 
