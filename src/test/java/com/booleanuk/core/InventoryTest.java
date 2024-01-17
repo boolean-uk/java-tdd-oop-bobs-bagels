@@ -25,4 +25,11 @@ public class InventoryTest {
         Assertions.assertEquals(false, inventory.isInStock("BGLO"));
     }
 
+    @Test
+    public void testUpdateStock(){
+        Inventory inventory = new Inventory();
+        Assertions.assertEquals(50, inventory.fillingInventory.get("FILC"));
+        Assertions.assertEquals("FILC stock has been updated", inventory.updateStock("FILC",30));
+    }
+
 }

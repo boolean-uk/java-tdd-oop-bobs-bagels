@@ -34,4 +34,17 @@ public class Inventory {
         return false;
     }
 
+    public String updateStock(String sku, int amount){
+        if (bagelInventory.containsKey(sku)){
+            bagelInventory.put(sku,amount);
+        }
+        else if (coffeeInventory.containsKey(sku)){
+            coffeeInventory.put(sku,amount);
+        }
+        else if (fillingInventory.containsKey(sku)){
+            fillingInventory.put(sku, amount);
+        }
+        return sku + " stock has been updated";
+    }
+
 }
