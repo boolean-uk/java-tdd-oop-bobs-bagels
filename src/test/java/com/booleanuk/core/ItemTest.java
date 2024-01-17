@@ -10,7 +10,7 @@ public class ItemTest {
         Item bglo = new Item("Bagel", "Onion", 0.49);
         Assertions.assertEquals("Bagel", bglo.name);
         Assertions.assertEquals("Onion", bglo.variant);
-        Assertions.assertEquals(0.49, bglo.price);
+        Assertions.assertEquals(0.49, bglo.checkPrice());
     }
 
     @Test
