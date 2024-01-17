@@ -31,24 +31,19 @@
 |                    | changeCapacity()     | If I want to limit the baskets sizes     | void                   | void    |
 |                    | checkItemInBasket()  | If I want to check if item is in basket, | boolean                | Sys.out |
 |                    |                      | before I try to remove it                |                        |         |
-|                    | totalCost()          | If I want to know the value of Items,    | int                    | Sys.out |
+|                    | totalCost()          | If I want to know the value of Items,    | double                 | Sys.out |
 |                    |                      | currently in the basket                  |                        |         |
 |                    | checkItemInventory() | If I want to make sure we stock          | boolean                | void    |
-|                    |                      | the requested item                       |                        |         |
 
 # Class InventoryManager
 
-| Member Variables                 | Methods               | Scenario                      | Return                | Output |
-|----------------------------------|-----------------------|-------------------------------|-----------------------|--------|
-| inventory: HashMap<String, Item> |                       |                               |                       |        |
-|                                  | initializeInventory() | When I want to open the shop  | HashMap<String, Item> | void   |
-|                                  | costEachFilling()     | When I want to know the cost  |                       |        |
-|                                  |                       | of each filling before adding |                       |        |
-|                                  |                       |                               |                       |        |
-|                                  |                       |                               |                       |        |
-|                                  |                       |                               |                       |        |
-|                                  |                       |                               |                       |        |
-|                                  |                       |                               |                       |        |
+| Member Variables                 | Methods               | Scenario                      | Return                | Output  |
+|----------------------------------|-----------------------|-------------------------------|-----------------------|---------|
+| inventory: HashMap<String, Item> |                       |                               |                       |         |
+|                                  | initializeInventory() | When I want to open the shop  | HashMap<String, Item> | void    |
+|                                  | costEachFilling()     | When I want to know the cost  | String                | Sys.out |
+|                                  |                       | of each filling before adding |                       |         |
+
 
 # Class Item
 
@@ -61,9 +56,15 @@
 | filling: Item    |              |                                                     |        |         |
 |                  | addFilling() | If I want to associate a filling with an Item       | void   | void    |
 |                  | getPrice()   | If I want to know the price before adding to basket | int    | Sys.out |
-|                  |              |                                                     |        |         |
-|                  |              |                                                     |        |         |
-|                  |              |                                                     |        |         |
+
+
+
+## Class Diagram
+
+![](./src/main/java/com/booleanuk/core/class-diagram.jpg)
+
+
+
 
 ## User Stories
 
