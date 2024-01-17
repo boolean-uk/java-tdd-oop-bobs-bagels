@@ -17,4 +17,13 @@ public class BagelTest {
         Assertions.assertEquals(5.00, bagel2.getPrice());
 
     }
+    @Test
+    public void testGetPrice(){
+        Bagel bagel = new Bagel("Onion");
+        Assertions.assertEquals(2, bagel.getPrice());
+        Bagel bagel2 = new Bagel("Red berry", 5);
+        Assertions.assertEquals(5, bagel2.getPrice());
+
+
+    }
 }
