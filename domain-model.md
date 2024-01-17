@@ -157,11 +157,11 @@ I'd like to know the cost of each filling before I add it to my bagel order.
 # Domain Model For User Story 9
 
 
-| Class     | Member Variables                               | Methods                                        | Scenario                               | Output/Result                           |
-|-----------|------------------------------------------------|------------------------------------------------|----------------------------------------|-----------------------------------------|
-| Basket    | HashMap<String, Inventory> itemsFullyDetailed; | double costOfEachFilling(Filling bagelFilling) | I want to see the cost of each filling | Return cost of each filling as a double |
-| Inventory |                                                |                                                |                                        |                                         |
-| Filling   |                                                |                                                |                                        |                                         |
+| Class     | Member Variables                               | Methods                                        | Scenario                               | Output/Result                      |
+|-----------|------------------------------------------------|------------------------------------------------|----------------------------------------|------------------------------------|
+| Basket    | HashMap<String, Inventory> itemsFullyDetailed; | double costOfEachFilling(Filling bagelFilling) | I want to see the cost of each filling | Return cost of filling as a double |
+| Inventory |                                                |                                                |                                        |                                    |
+| Filling   |                                                |                                                |                                        |                                    |
 
 
 ## User Story 10.

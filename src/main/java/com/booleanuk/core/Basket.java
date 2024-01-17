@@ -121,6 +121,8 @@ public class Basket {
 
     //User Story 9
     public double costOfEachFilling(Filling bagelFilling) {
-        return 0.12;
+        String sku = bagelFilling.getSku();
+        Inventory fillingType = itemsFullyDetailed.get(sku);
+        return fillingType.getPrice();
     }
 }
