@@ -5,15 +5,13 @@ import java.util.HashMap;
 
 public class Inventory {
 
-    HashMap<String, String[]> bagelInventory;
-    HashMap<String, String[]> coffeeInventory;
-    HashMap<String, String[]> fillingInventory;
+    HashMap<String, String[]> inventory;
 
     HashMap<String, String> mapSKUtoTypeVariant;
     HashMap<String, String> mapTypeVariantToSKU;
 
 
-    String[][] inventory =     {
+    String[][] inventoryArray =     {
             {"BGLO", "0.49", "Bagel", "Onion"},
             {"BGLP", "0.39", "Bagel", "Plain"},
             {"BGLE", "0.49", "Bagel", "Everything"},
@@ -33,25 +31,13 @@ public class Inventory {
 
     public Inventory() {
         // Initiate hash maps
-        bagelInventory = new HashMap<>();
-        coffeeInventory = new HashMap<>();
-        fillingInventory = new HashMap<>();
-        mapSKUtoTypeVariant =  new HashMap<>();
-        mapTypeVariantToSKU = new HashMap<>();
+        inventory = new HashMap<>();
 
-        // Fill hasp maps
-        for (int i = 0; i < inventory.length; i++) {
-            mapSKUtoTypeVariant.put(inventory[i][0], inventory[i][2] + " " + inventory[i][3]);
-            mapTypeVariantToSKU.put(inventory[i][2] + " " + inventory[i][3], inventory[i][0]);
-
-            if (inventory[i][3].equals("Bagel"))
-                bagelInventory.put(inventory[i][0], inventory[i]);
-
-            else if (inventory[i][3].equals("Coffee"))
-                coffeeInventory.put(inventory[i][0], inventory[i]);
-
-            else if (inventory[i][3].equals("Fillings"))
-                fillingInventory.put(inventory[i][0], inventory[i]);
+        // Fill hash map
+        for (int i = 0; i < inventoryArray.length; i++) {
+            mapSKUtoTypeVariant.put(inventoryArray[i][0], inventoryArray[i][2] + " " + inventoryArray[i][3]);
+            mapTypeVariantToSKU.put(inventoryArray[i][2] + " " + inventoryArray[i][3], inventoryArray[i][0]);
+            inventory.put(inventoryArray[i][0], inventoryArray[i]);
         }
 
 

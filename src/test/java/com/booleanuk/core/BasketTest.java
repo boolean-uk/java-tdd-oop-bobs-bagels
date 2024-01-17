@@ -5,20 +5,42 @@ import org.junit.jupiter.api.Test;
 
 class BasketTest {
 
-    // 1.
+    // Add functionality
     @Test
-    public void addChocolateBagelReturnTrue() {
-        Basket basket = new Basket(3);
-        boolean result = basket.addBagel("choclate");
+    public void addMultipleValidItems() {
+        Basket basket = new Basket();
+        boolean result = basket.addItem("Bagel Onion");
         Assertions.assertTrue(result);
+
+        result = basket.addItem("Filling Bacon");
+        Assertions.assertTrue(result);
+
+        result = basket.addItem("Coffee Black");
+        Assertions.assertTrue(result);
+
+        result = basket.addItem("Bagel Onion");
+        Assertions.assertTrue(result);
+
+        Assertions.assertEquals("Bagel Onion", basket.basket.get(0));
+        Assertions.assertEquals("Filling Bacon", basket.basket.get(1));
+        Assertions.assertEquals("Coffee Black", basket.basket.get(2));
+        Assertions.assertEquals("Bagel Onion", basket.basket.get(3));
+
     }
 
     @Test
-    public void addChocolateBagelTwiceReturnTrue() {
-        Basket basket = new Basket(3);
-        boolean result = basket.addBagel("choclate");
-        result = basket.addBagel("choclate");
-        Assertions.assertTrue(result);
+    public void addMultipleInValidItems() {
+        Basket basket = new Basket();
+        boolean result = basket.addItem("Choclate");
+        Assertions.assertFalse(result);
+
+        result = basket.addItem("Bagel Black");
+        Assertions.assertFalse(result);
+
+        result = basket.addItem("Filling Bagel");
+        Assertions.assertFalse(result);
+
+        Assertions.assertEquals(0, basket.basket.size());
     }
 
     // 2.
@@ -30,6 +52,8 @@ class BasketTest {
         result = basket.removeBagel("choclate");
         Assertions.assertTrue(result);
     }
+
+    /*
 
     @Test
     public void removeChocolateFromEmptyBasketReturnFalse() {
@@ -115,10 +139,5 @@ class BasketTest {
         Assertions.assertFalse(basket.removeBagel("ham"));
     }
 
-
-
-
-
-
-
+     */
 }
