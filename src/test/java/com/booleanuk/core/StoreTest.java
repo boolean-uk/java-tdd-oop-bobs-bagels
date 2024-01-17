@@ -29,9 +29,9 @@ public class StoreTest {
     public void addNonExistingBagelToBasketTest() {
         Store store = new Store();
         int basketId = store.createBasket();
-        Bagel bagel = new Bagel("Chocolate");
+        Bagel bagel = new Bagel("Orange");
         Assertions.assertFalse(store.getBaskets().get(basketId).getBagels().contains(bagel));
-        String actual = store.addBagelToBasket("Chocolate", basketId);
+        String actual = store.addBagelToBasket("Orange", basketId);
         Assertions.assertEquals("Bob's bagels doesn't have that bagel.", actual);
         Assertions.assertFalse(store.getBaskets().get(basketId).getBagels().contains(bagel));
     }

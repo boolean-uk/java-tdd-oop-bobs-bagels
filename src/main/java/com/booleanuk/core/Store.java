@@ -4,12 +4,17 @@ import java.util.HashMap;
 
 public class Store {
     private HashMap<Integer, Basket> baskets;
-    private HashMap<String, Double> inventory;
+    private HashMap<String, Double> prices;
+    HashMap<String, String> bagelCodes;
+    HashMap<String, String> coffeeCodes;
+    HashMap<String, String> fillingCodes;
+
     private int basketCapacity;
 
     public Store() {
         baskets = new HashMap<>();
-        initilizeInventory();
+        initilizePrices();
+        initilizeCodes();
         basketCapacity = 3;
     }
     public int createBasket() {
@@ -23,8 +28,7 @@ public class Store {
     }
 
     public String addBagelToBasket(String bagel, int basketId) {
-        String sku = "BGL" + bagel.toUpperCase().charAt(0);
-        if(!inventory.containsKey(sku)) {
+        if(!bagelCodes.containsKey(bagel.toUpperCase())) {
             return "Bob's bagels doesn't have that bagel.";
         }
         Basket basket = baskets.get(basketId);
@@ -36,22 +40,45 @@ public class Store {
         return "Bagel added.";
     }
 
-    private void initilizeInventory() {
-        inventory = new HashMap<>();
-        inventory.put("BGLO", 0.49);
-        inventory.put("BGLP", 0.39);
-        inventory.put("BGLE", 0.49);
-        inventory.put("BGLS", 0.49);
-        inventory.put("COFB", 0.99);
-        inventory.put("COFW", 1.19);
-        inventory.put("COFC", 1.29);
-        inventory.put("COFL", 1.29);
-        inventory.put("FILB", 0.12);
-        inventory.put("FILE", 0.12);
-        inventory.put("FILC", 0.12);
-        inventory.put("FILX", 0.12);
-        inventory.put("FILS", 0.12);
-        inventory.put("FILH", 0.12);
+    private void initilizePrices() {
+        prices = new HashMap<>();
+        prices.put("BGLO", 0.49);
+        prices.put("BGLP", 0.39);
+        prices.put("BGLE", 0.49);
+        prices.put("BGLS", 0.49);
+        prices.put("COFB", 0.99);
+        prices.put("COFW", 1.19);
+        prices.put("COFC", 1.29);
+        prices.put("COFL", 1.29);
+        prices.put("FILB", 0.12);
+        prices.put("FILE", 0.12);
+        prices.put("FILC", 0.12);
+        prices.put("FILX", 0.12);
+        prices.put("FILS", 0.12);
+        prices.put("FILH", 0.12);
+
+    }
+
+    private void initilizeCodes() {
+        bagelCodes = new HashMap<>();
+        bagelCodes.put("ONION", "BGLO");
+        bagelCodes.put("PLAIN", "BGLP");
+        bagelCodes.put("EVERYTHING", "BGLE");
+        bagelCodes.put("SESAME", "BGLS");
+
+        coffeeCodes = new HashMap<>();
+        coffeeCodes.put("BLACK","COFB");
+        coffeeCodes.put("WHITE","COFW");
+        coffeeCodes.put("CAPUCCINO","COFC");
+        coffeeCodes.put("LATTE","COFL");
+
+        fillingCodes = new HashMap<>();
+        fillingCodes.put("BACON","FILB");
+        fillingCodes.put("EGG","FILE");
+        fillingCodes.put("CHEESE","FILC");
+        fillingCodes.put("CREAM CHEESE","FILX");
+        fillingCodes.put("SMOKED SALMON","FILS");
+        fillingCodes.put("HAM","FILH");
 
     }
 }
