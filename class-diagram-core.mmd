@@ -1,0 +1,42 @@
+---
+title: Bob's Bagels
+---
+classDiagram
+    Product <|-- Bagel
+    Product <|-- Coffee
+    Product <|-- Filling
+
+    class Product {
+        -String sku
+        -String name
+        -String variant
+        -double price
+
+        +getPrice() double
+    }
+    class Bagel {
+        -ArrayList~Filling~ fillings
+        +addFilling() boolean
+        +getPrice() double
+
+    }
+    class Coffee {
+
+    }
+    class Filling {
+
+    }
+    class Inventory {
+        -HashMap~Product, Integer~ stock
+        +inStock() boolean
+    }
+    class Basket {
+        -HashMap~Product, Integer~ basketItems
+        -int basketLimit
+        +addProduct(Product product) boolean
+        +removeProduct(Product product) boolean
+        +isFull() boolean
+        +setCapacity(int basketLimit) void
+        +inBasket() boolean
+        +sumPrice double
+    }

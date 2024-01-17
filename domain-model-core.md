@@ -10,7 +10,7 @@ Note: the domain model is subject to change before the assignment is complete
 |         |           | double price                         |                                        |           |                   |
 |         |           |                                      | double getPrice()                      |           |                   |
 |         | Bagel     | ArrayList<Filling> fillings          |                                        |           |                   |
-|         |           |                                      | addFilling(Filling filling)            |           |                   |
+|         |           |                                      | boolean addFilling(Filling filling)    |           |                   |
 |         |           |                                      | double getPrice()                      |           |                   |
 |         | Coffee    |                                      |                                        |           |                   |
 |         |           |                                      |                                        |           |                   |
