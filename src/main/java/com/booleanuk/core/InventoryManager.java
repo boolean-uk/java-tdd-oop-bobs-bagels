@@ -8,7 +8,7 @@ public class InventoryManager {
     private Map<String, Item> inventory;
 
     public InventoryManager() {
-
+        this.inventory = initializeInventory();
     }
 
     public HashMap<String, Item> initializeInventory() {
@@ -24,7 +24,7 @@ public class InventoryManager {
      */
 
     public Map<String, Item> getInventory() {
-        return inventory;
+        return this.inventory;
     }
 
     /**

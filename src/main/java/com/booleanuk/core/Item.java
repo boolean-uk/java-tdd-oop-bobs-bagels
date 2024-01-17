@@ -8,8 +8,12 @@ public class Item {
     private Variant variant;
     private Item filling;
 
-    public Item() {
-
+    public Item(String SKU, double price, Name name, Variant variant, Item filling) {
+        this.SKU = SKU;
+        this.price = price;
+        this.name = name;
+        this.variant = variant;
+        this.filling = filling;
     }
 
     /**
@@ -59,14 +63,15 @@ public class Item {
     public void setFilling(Item filling) {
         this.filling = filling;
     }
+
+    enum Name {
+        BAGEL, COFFEE, FILLING
+    }
+    enum Variant {
+        ONION, PLAIN, EVERYTHING, SESAME, BLACK, WHITE, CAPUCCINO, LATTE, BACON, EGG, CHEESE, CREAM_CHEESE, SMOKED_SALMON, HAM
+    }
 }
 
 
-enum Name {
-    HEARTS, DIAMONDS, CLUBS, SPADES
-}
-enum Variant {
-    HEARTS, DIAMONDS, CLUBS, SPADES
-}
 
 
