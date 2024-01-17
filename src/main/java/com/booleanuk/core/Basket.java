@@ -20,4 +20,8 @@ public class Basket {
     public int getNoOfBagels() {
         return bagels.size();
     }
+
+    public String addFilling(String filling, String bagel) {
+        return "Filling added.";
+    }
 }
