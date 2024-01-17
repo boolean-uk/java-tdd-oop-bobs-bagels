@@ -5,14 +5,21 @@ import java.util.Map;
 
 public class InventoryManager {
 
-    private Map<String, Item> inventory;
+    private Map<String, Item> inventory = new HashMap<>();
 
     public InventoryManager() {
-        this.inventory = initializeInventory();
+        initializeInventory();
     }
 
-    public HashMap<String, Item> initializeInventory() {
-        return null;
+    public void initializeInventory() {
+        String[] SKU = new String[]{"BGLO", "BGLP", "BGLE", "BGLS", "COFB", "COFW", "COFC", "COFL", "FILB", "FILE", "FILC", "FILX", "FILS", "FILH"};
+        double[] price = new double[]{.49, .39, .49, .49, .99, 1.19, 1.29, 1.29, .12, 12, 12, 12, 12, 12};
+        Item.Name[] name = new Item.Name[]{Item.Name.BAGEL, Item.Name.BAGEL, Item.Name.BAGEL, Item.Name.BAGEL, Item.Name.COFFEE, Item.Name.COFFEE, Item.Name.COFFEE, Item.Name.COFFEE, Item.Name.FILLING, Item.Name.FILLING, Item.Name.FILLING, Item.Name.FILLING, Item.Name.FILLING, Item.Name.FILLING};
+        Item.Variant[] variant = new Item.Variant[]{Item.Variant.ONION, Item.Variant.PLAIN, Item.Variant.EVERYTHING, Item.Variant.SESAME, Item.Variant.BLACK, Item.Variant.WHITE, Item.Variant.CAPUCCINO, Item.Variant.LATTE, Item.Variant.BACON, Item.Variant.EGG, Item.Variant.CHEESE, Item.Variant.CREAM_CHEESE, Item.Variant.SMOKED_SALMON, Item.Variant.HAM};
+
+        for (int i = 0; i < SKU.length; i++) {
+            this.inventory.put(SKU[i], new Item(SKU[i], price[i], name[i], variant[i], null));
+        }
     }
 
     public String costEachFilling() {

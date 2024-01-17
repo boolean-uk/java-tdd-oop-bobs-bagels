@@ -16,6 +16,17 @@ public class Item {
         this.filling = filling;
     }
 
+    @Override
+    public String toString() {
+        return "Item: {" +
+                "SKU = '" + SKU + '\'' +
+                ", price = " + price +
+                ", name = " + name +
+                ", variant = " + variant +
+                ", filling = " + (filling != null ? filling.toString() : "None") +
+                '}';
+    }
+
     /**
      * Getters for member variables
      */
