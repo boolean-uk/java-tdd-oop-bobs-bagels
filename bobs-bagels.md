@@ -96,7 +96,13 @@ I want customers to only be able to order things that we stock in our inventory.
 | isInInventory(String name)      | HashMap<String, double> bagels   |
 | changeCapacity(int newCapacity) | HashMap<String, double> coffees  |
 |                                 | HashMap<String, double> fillings |
-|                                 | int capacity;                    |                                  |
+|                                 | int capacity;                    |   
+
+### SKUConverter Class
+
+| Methods             | Member Variables                  |
+|---------------------|-----------------------------------|
+| getSKU(String name) | HashMap<String, String> nameToSKU |
 
 ### Basket Class
 

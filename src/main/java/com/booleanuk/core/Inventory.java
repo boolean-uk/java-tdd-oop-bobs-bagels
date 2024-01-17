@@ -7,6 +7,7 @@ public class Inventory {
     public HashMap<String, Double> bagels;
     public HashMap<String, Double> fillings;
     public HashMap<String, Double> coffees;
+    public int capacity;
 
     public Inventory() {
         this.bagels = new HashMap<>();
@@ -15,6 +16,7 @@ public class Inventory {
         createFillingInventory();
         this.coffees = new HashMap<>();
         createCoffeeInventory();
+        this.capacity = 5;
     }
 
     public boolean isInInventory(String sKU) {
@@ -25,6 +27,10 @@ public class Inventory {
             return true;
         }
         return coffees.containsKey(sKU);
+    }
+
+    public void changeCapacity(int newCapacity) {
+        this.capacity = newCapacity;
     }
 
     private void createBagelInventory() {

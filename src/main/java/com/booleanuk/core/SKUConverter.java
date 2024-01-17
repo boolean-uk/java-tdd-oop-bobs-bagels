@@ -4,7 +4,7 @@ import java.util.HashMap;
 
 public class SKUConverter {
 
-    private HashMap<String, String> nameToSKU;
+    private final HashMap<String, String> nameToSKU;
 
     public SKUConverter() {
         this.nameToSKU = new HashMap<>();

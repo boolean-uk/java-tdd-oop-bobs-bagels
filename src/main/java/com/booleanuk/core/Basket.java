@@ -25,6 +25,10 @@ public class Basket {
             System.out.print("This item does not exist at our store!");
             return false;
         }
+        if (basket.size() == this.inventory.capacity) {
+            System.out.print("Your basket is at its capacity, can't add item!");
+            return false;
+        }
         this.basket.add(item);
         return true;
     }
