@@ -8,7 +8,6 @@ import lombok.Data;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Scanner;
 
 @Data
@@ -16,18 +15,16 @@ public class Store {
     private static final String FILE_NAME = "inventory";
     private static final String EXT = ".csv";
     private final String name;
-    private ArrayList<Item> items;
-    private HashMap<Item, Integer> inventory;
+    private ArrayList<Item> inventory;
 
     public Store(String name) throws FileNotFoundException {
         this.name = name;
-        this.items = new ArrayList<>();
-        this.inventory = new HashMap<>();
+        this.inventory = new ArrayList<>();
         fetchItems();
     }
 
     public Item getItemBySKU(String sku) {
-        for (Item item : items) {
+        for (Item item : inventory) {
             if (item.getSKU().equalsIgnoreCase(sku)) {
                 return item;
             }
@@ -43,17 +40,20 @@ public class Store {
         scanner.nextLine(); // Skip .csv header
         while (scanner.hasNext()) {
             String[] values = scanner.nextLine().split(",");
-            Item item = null;
 
             switch (values[2]) {
-                case "Bagel" -> {item = new Bagel(values[0], Double.parseDouble(values[1]), values[2], values[3]);}
-                case "Coffee" -> {item = new Coffee(values[0], Double.parseDouble(values[1]), values[2], values[3]);}
-                case "Filling" -> {item = new Filling(values[0], Double.parseDouble(values[1]), values[2], values[3]);}
-            }
-
-            if (item != null) {
-                items.add(item);
-                inventory.put(item, Integer.valueOf(values[4]));
+                case "Bagel" -> {
+                    Bagel item = new Bagel(values[0], Double.parseDouble(values[1]), values[2], values[3]);
+                    inventory.add(item);
+                }
+                case "Coffee" -> {
+                    Coffee item = new Coffee(values[0], Double.parseDouble(values[1]), values[2], values[3]);
+                    inventory.add(item);
+                }
+                case "Filling" -> {
+                    Filling item = new Filling(values[0], Double.parseDouble(values[1]), values[2], values[3]);
+                    inventory.add(item);
+                }
             }
         }
     }
