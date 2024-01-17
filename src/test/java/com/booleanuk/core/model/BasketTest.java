@@ -57,6 +57,15 @@ public class BasketTest {
     }
 
     @Test
+    public void canNotRemoveItemFromBasketIfItDoesNotExist() {
+        Item itemToAdd = bobsTest.getItemBySKU(coffeeBlackSKU);
+        Item itemNotToAdd = bobsTest.getItemBySKU(bagelPlainSKU);
+
+        Assertions.assertTrue(basket.addItem(itemToAdd));
+        Assertions.assertFalse(basket.removeItem(itemNotToAdd));
+    }
+
+    @Test
     public void canChangeBasketCapacity() {
         Assertions.assertEquals(2, basket.getCapacity());
         basket.setCapacity(5);
