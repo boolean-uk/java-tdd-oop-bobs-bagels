@@ -5,11 +5,18 @@ import java.util.Collection;
 import java.util.HashMap;
 
 public class Store {
+    private HashMap<Integer, Basket> baskets;
+
+    public Store() {
+        baskets = new HashMap<>();
+    }
     public int createBasket() {
-        return -1;
+        Basket basket = new Basket();
+        baskets.put(basket.hashCode(), basket);
+        return basket.hashCode();
     }
 
     public HashMap<Integer,Basket> getBaskets() {
-        return new HashMap<>();
+        return baskets;
     }
 }
