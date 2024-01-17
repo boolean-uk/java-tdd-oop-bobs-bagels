@@ -113,10 +113,10 @@ I'd like to know the total cost of items in my basket.
 # Domain Model For User Story 6
 
 
-| Class  | Member variables                              | Methods                                                     | Scenario           | Output/Result    |
-|--------|-----------------------------------------------|-------------------------------------------------------------|--------------------|------------------|
-| Basket | HashMap<String, Integer[]> itemsWithQuantity; | int totalCost(HashMap<String, Integer> item, int totalCost) | if all items added | Return totalCost |
-|        |                                               |                                                             | if no items added  | Return 0         |
+| Class  | Member variables                              | Methods                                                     | Scenario           | Output/Result                |
+|--------|-----------------------------------------------|-------------------------------------------------------------|--------------------|------------------------------|
+| Basket | HashMap<String, Integer[]> itemsWithQuantity; | int totalCost(HashMap<String, Integer> item, int totalCost) | if all items added | Return totalCost as a double |
+|        |                                               |                                                             | if no items added  | Return 0                     |
 
 
 
@@ -127,11 +127,11 @@ I'd like to know the cost of a bagel before I add it to my basket.
 
 # Domain Model For User Story 7
 
-| Class     | Member Variables                        | Methods                                      | Scenario             | Output/Result        |
-|-----------|-----------------------------------------|----------------------------------------------|----------------------|----------------------|
-| Basket    | HashMap<Bagel, Integer> bagelsWithCost; | double returnCostOfBagel(Bagel bagelVariant) | I want cost of bagel | Return cost of bagel |
-| Inventory |                                         |                                              |                      |                      |
-| Bagel     |                                         |                                              |                      |                      |
+| Class     | Member Variables                        | Methods                                      | Scenario             | Output/Result                    |
+|-----------|-----------------------------------------|----------------------------------------------|----------------------|----------------------------------|
+| Basket    | HashMap<Bagel, Integer> bagelsWithCost; | double returnCostOfBagel(Bagel bagelVariant) | I want cost of bagel | Return cost of bagel as a double |
+| Inventory |                                         |                                              |                      |                                  |
+| Bagel     |                                         |                                              |                      |                                  |
 
 
 ## User Story 8.
@@ -142,11 +142,11 @@ I'd like to be able to choose fillings for my bagel.
 # Domain Model For User Story 8
 
 
-| Class     | Member Variables                               | Methods                                         | Scenario                                 | Output/Result              |
-|-----------|------------------------------------------------|-------------------------------------------------|------------------------------------------|----------------------------|
-| Basket    | HashMap<String, Inventory> itemsFullyDetailed; | String chooseBagelFilling(Filling bagelFilling) | I want to choose the filling of my bagel | Return affirming statement |
-| Inventory |                                                |                                                 |                                          |                            |
-| Filling   |                                                |                                                 |                                          |                            |
+| Class     | Member Variables                               | Methods                                         | Scenario                                 | Output/Result                          |
+|-----------|------------------------------------------------|-------------------------------------------------|------------------------------------------|----------------------------------------|
+| Basket    | HashMap<String, Inventory> itemsFullyDetailed; | String chooseBagelFilling(Filling bagelFilling) | I want to choose the filling of my bagel | Return affirming statement as a String |
+| Inventory |                                                |                                                 |                                          |                                        |
+| Filling   |                                                |                                                 |                                          |                                        |
 
 
 ## User Story 9.
@@ -157,11 +157,11 @@ I'd like to know the cost of each filling before I add it to my bagel order.
 # Domain Model For User Story 9
 
 
-| Class     | Member Variables                               | Methods                                        | Scenario                               | Output/Result               |
-|-----------|------------------------------------------------|------------------------------------------------|----------------------------------------|-----------------------------|
-| Basket    | HashMap<String, Inventory> itemsFullyDetailed; | String costOfEachFilling(Filling bagelFilling) | I want to see the cost of each filling | Return cost of each filling |
-| Inventory |                                                |                                                |                                        |                             |
-| Filling   |                                                |                                                |                                        |                             |
+| Class     | Member Variables                               | Methods                                        | Scenario                               | Output/Result                           |
+|-----------|------------------------------------------------|------------------------------------------------|----------------------------------------|-----------------------------------------|
+| Basket    | HashMap<String, Inventory> itemsFullyDetailed; | double costOfEachFilling(Filling bagelFilling) | I want to see the cost of each filling | Return cost of each filling as a double |
+| Inventory |                                                |                                                |                                        |                                         |
+| Filling   |                                                |                                                |                                        |                                         |
 
 
 ## User Story 10.

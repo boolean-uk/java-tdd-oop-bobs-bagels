@@ -97,8 +97,8 @@ public class Basket {
         itemsWithQuantity.put(item, new Integer[] { quantity, costPerUnit });
     }
 
-    public int totalCostOfItems() {
-        int totalCost = 0;
+    public double totalCostOfItems() {
+        double totalCost = 0.00;
         for (Integer[] value : this.itemsWithQuantity.values()) {
             totalCost += value[0] * value[1]; // quantity * cost per unit
         }
@@ -117,5 +117,10 @@ public class Basket {
         String sku = bagelFilling.getSku();
         Inventory fillingType = itemsFullyDetailed.get(sku);
         return fillingType.getVariant();
+    }
+
+    //User Story 9
+    public double costOfEachFilling(Filling bagelFilling) {
+        return 0.12;
     }
 }

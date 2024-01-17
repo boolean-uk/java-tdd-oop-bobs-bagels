@@ -231,7 +231,7 @@ class BasketTest {
         basket.addItem("Bread", 10, 1);
         basket.addItem("Biscuits", 5, 2);
 
-        int totalScore = basket.totalCostOfItems();
+        double totalScore = basket.totalCostOfItems();
 
         Assertions.assertEquals(45, totalScore);
     }
@@ -268,7 +268,7 @@ class BasketTest {
 
         Filling filling = new Filling("Egg");
 
-        String result = basket.costOfEachFilling(filling);
+        double result = basket.costOfEachFilling(filling);
 
         Assertions.assertEquals(0.12, result);
     }
