@@ -20,8 +20,10 @@ public class StoreTest {
         int basketId = store.createBasket();
         Bagel bagel = new Bagel("Onion");
         Assertions.assertFalse(store.getBaskets().get(basketId).getBagels().contains(bagel));
-        boolean expected = store.addBagelToBasket("Onion", basketId);
-        Assertions.assertTrue(expected);
+        String actual = store.addBagelToBasket("Onion", basketId);
+        Assertions.assertEquals("Bagel added.", actual);
         Assertions.assertTrue(store.getBaskets().get(basketId).getBagels().contains(bagel));
     }
+
+
 }
