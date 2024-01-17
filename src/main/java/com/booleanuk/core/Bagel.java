@@ -7,8 +7,10 @@ public class Bagel {
     String bagel;
     ArrayList<String> bagelList;
     int key=0;
+
+    int capacity=4;
     public Bagel(){
-        this.bagelList=new ArrayList<>();
+        this.bagelList=new ArrayList<>(capacity);
     }
 
     public String addBagel(String bagel){
@@ -24,6 +26,15 @@ public class Bagel {
             bagelList.remove(bagel);
             return true;
         }
+        return false;
+    }
+
+    public boolean basketFull(){
+        if (bagelList.size()>capacity){
+            System.out.println("Basket Full");
+            return true;
+        }
+        System.out.println("Basket has space");
         return false;
     }
 

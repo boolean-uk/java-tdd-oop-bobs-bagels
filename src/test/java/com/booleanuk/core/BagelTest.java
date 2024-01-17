@@ -31,11 +31,17 @@ public class BagelTest {
         abagel.addBagel("bagel2");
         abagel.addBagel("bagel4");
         abagel.addBagel("bagel5");
+        abagel.addBagel("bagel6");
         System.setOut(new PrintStream(outContent));
         Assertions.assertTrue(abagel.basketFull());
         assertEquals("Basket Full", outContent.toString().trim());
+    }
 
-
+    @Test
+    public void testChangeCap(){
+        Bagel abagel = new Bagel();
+        int outcome = abagel.changeCap(3);
+        Assertions.assertEquals(3,outcome);
     }
 
 
