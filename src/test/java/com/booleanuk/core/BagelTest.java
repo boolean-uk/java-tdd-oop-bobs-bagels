@@ -7,7 +7,7 @@ public class BagelTest {
     /* Test use case 1 */
     @Test
     public void testAddingItemToBasket(){
-        Basket basket = new Basket();
+        Basket basket = new Basket(15);
         Assertions.assertTrue(basket.addItem("Coffee", "Black", 10));
 
 
@@ -16,8 +16,17 @@ public class BagelTest {
     /*  Test use case 2*/
     @Test
     public void testRemovingItemFromBasket(){
-        Basket basket = new Basket();
+        Basket basket = new Basket(15);
         basket.addItem("Coffee", "Black", 1);
         Assertions.assertTrue(basket.removeItem("Coffee", "Black"));
+    }
+
+    /* Test use case 3 */
+    @Test
+    public void testAddingOverMaxCapacity(){
+        Basket basket = new Basket(2);
+        basket.addItem("Coffee", "Black", 1);
+        basket.addItem("Filling", "Bacon", 1);
+        Assertions.assertFalse(basket.addItem("Bagel", "Onion", 1));
     }
 }

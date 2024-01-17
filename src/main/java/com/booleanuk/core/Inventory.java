@@ -46,12 +46,17 @@ public class Inventory {
         int count = 0;
         Iterator<Item> iterator;
         switch (name) {
-            case "Bagel" -> iterator = bagels.iterator();
-            case "Coffee" -> iterator = coffee.iterator();
-            case "Filling" -> iterator = fillings.iterator();
-            default -> {
+            case "Bagel":
+                iterator = bagels.iterator();
+                break;
+            case "Coffee":
+                iterator = coffee.iterator();
+                break;
+            case "Filling":
+                iterator = fillings.iterator();
+                break;
+            default:
                 return false;
-            }
         }
         while(iterator.hasNext()){
             Item currentItem = iterator.next();
@@ -70,12 +75,17 @@ public class Inventory {
         int count = 0;
         Iterator<Item> iterator;
         switch (name) {
-            case "Bagel" -> iterator = bagels.iterator();
-            case "Coffee" -> iterator = coffee.iterator();
-            case "Filling" -> iterator = fillings.iterator();
-            default -> {
+            case "Bagel":
+                iterator = bagels.iterator();
+                break;
+            case "Coffee":
+                iterator = coffee.iterator();
+                break;
+            case "Filling":
+                iterator = fillings.iterator();
+                break;
+            default:
                 return null;
-            }
         }
         while(iterator.hasNext()){
             Item currentItem = iterator.next();

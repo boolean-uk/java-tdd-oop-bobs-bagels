@@ -1,6 +1,6 @@
 package com.booleanuk.core;
 
-class Item {
+public abstract class Item {
     protected String type;
     protected double price;
     protected  String name;
