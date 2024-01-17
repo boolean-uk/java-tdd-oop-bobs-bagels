@@ -35,10 +35,15 @@ public class BasketManager {
         return getCapacity() - getBasket().size();
     }
 
-    public void changeCapacity(int newCapacity) {
+    public boolean changeCapacity(int newCapacity) {
         if (newCapacity > 0) {
+            while(getBasket().size() > newCapacity){
+                getBasket().remove(getBasket().size()-1);
+            }
             setCapacity(newCapacity);
+            return true;
         }
+        return false;
     }
 
     public boolean checkItemInBasket() {

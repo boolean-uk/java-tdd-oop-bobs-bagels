@@ -50,6 +50,15 @@ public class BasketManagerTest {
         b.changeCapacity(5);
         Assertions.assertEquals(5, b.getCapacity());
         Assertions.assertNotEquals(10, b.getCapacity());
+        b.changeCapacity(1);
+        b.add(item_a);
+        Assertions.assertNull(b.add(item_b));
+
+        b.changeCapacity(2);
+        b.add(item_b);
+        b.add(item_c);
+        Assertions.assertTrue(b.changeCapacity(1));
+        Assertions.assertFalse(b.changeCapacity(-1));
     }
 
     @Test
