@@ -68,12 +68,12 @@ As a customer,
 So I know how much money I need,
 I'd like to know the total cost of items in my basket.
 ```
-| Class     | Methods                  | Member variables           | Scenario               | Outputs/Results    |
-|-----------|--------------------------|----------------------------|------------------------|--------------------|
-| Basket    | double totalCostBasket() | ArrayList<String> itemList | totalCostBasket() with | return item1+item2 |
-| Inventory | boolean addItem()        |                            | two items in itemList  |                    |
-|           |                          |                            | totalCostBasket() with | return item1+item2 |
-|           |                          |                            | five of the same item  | return item*5      |
+| Class     | Methods            | Member variables           | Scenario              | Outputs/Results    |
+|-----------|--------------------|----------------------------|-----------------------|--------------------|
+| Basket    | double totalCost() | ArrayList<String> itemList | totalCost() with      | return item1+item2 |
+| Inventory | boolean addItem()  |                            | two items in itemList |                    |
+|           |                    |                            | totalCost() with      | return item1+item2 |
+|           |                    |                            | five of the same item | return item*5      |
 
 
 ```
@@ -82,11 +82,11 @@ As a customer,
 So I know what the damage will be,
 I'd like to know the cost of a bagel before I add it to my basket.
 ```
-| Class     | Methods          | Member variables | Scenario         | Outputs/Results |
-|-----------|------------------|------------------|------------------|-----------------|
-| Inventory | void printMenu() |                  | Start of program | Print the menu  |
-|           |                  |                  | or a new order   | for the user    |
-|           |                  |                  |                  |                 |
+| Class     | Methods          | Member variables                             | Scenario         | Outputs/Results |
+|-----------|------------------|----------------------------------------------|------------------|-----------------|
+| Inventory | void printMenu() | inventoryPriceList: HashMap<String, Integer> | Start of program | Print the menu  |
+|           |                  |                                              | or a new order   | for the user    |
+|           |                  |                                              |                  |                 |
 
 
 ```
