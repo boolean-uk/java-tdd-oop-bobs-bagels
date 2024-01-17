@@ -12,7 +12,8 @@ public class BasketManagerTest {
         BasketManager b = new BasketManager();
         Assertions.assertNotNull(b.getBasket());
         b.add(item_a);
-        Assertions.assertNotNull(b.getBasket());
+        Assertions.assertEquals(0, b.getBasket().size());
+        Assertions.assertSame(item_a, b.getBasket().get(0));
     }
 
     @Test

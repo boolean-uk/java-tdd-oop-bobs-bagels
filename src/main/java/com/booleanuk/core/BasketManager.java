@@ -1,5 +1,6 @@
 package com.booleanuk.core;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class BasketManager {
@@ -8,7 +9,8 @@ public class BasketManager {
     private int capacity;
 
     public BasketManager() {
-
+        this.basket = new ArrayList<>();
+        this.capacity = 10;
     }
 
     public Item add(Item item) {
