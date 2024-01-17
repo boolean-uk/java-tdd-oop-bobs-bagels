@@ -33,8 +33,16 @@ public class BasketTest {
     @Test
     public void canAddItemToBasket() {
         Item itemToAdd = bobsTest.getItemBySKU(bagelPlainSKU);
-        basket.addItem(itemToAdd);
+        Assertions.assertTrue(basket.addItem(itemToAdd));
         Assertions.assertEquals(1, basket.getBasket().size());
         Assertions.assertEquals(itemToAdd, basket.getBasket().get(0));
+    }
+
+    @Test
+    public void canRemoveItemFromBasket() {
+        Item itemToAdd = bobsTest.getItemBySKU(coffeeBlackSKU);
+        Assertions.assertTrue(basket.addItem(itemToAdd));
+        Assertions.assertTrue(basket.removeItem(itemToAdd));
+        Assertions.assertEquals(0, basket.getBasket().size());
     }
 }
