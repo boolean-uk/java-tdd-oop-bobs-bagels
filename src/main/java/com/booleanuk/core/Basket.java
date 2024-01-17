@@ -12,11 +12,11 @@ public class Basket {
     }
     public boolean add(Product item){
        if(this.basket.contains(item)){
-           System.out.println("Bagel already added!");
+           System.out.println(item +"already added!");
            return false;
        }
        this.basket.add(item);
-       System.out.println("Bagel added successfully!");
+       System.out.println(item + " added successfully!");
        return true;
 
     }
@@ -26,6 +26,9 @@ public class Basket {
         }
         this.basket.remove(item);
         return item +" removed from basket";
+    }
+    public boolean isFull(){
+
     }
 
 }

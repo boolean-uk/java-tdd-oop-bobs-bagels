@@ -22,7 +22,7 @@ public class BasketTest {
     public void removingItemWhenItemIsInBasket(){
         Basket basket = new Basket(4);
         Bagel bagel1 = new Bagel("BGLO",0.49, "Bagel", "Onion" );
-        Bagel bagel2 = new Bagel("BGLO",0.49, "Bagel", "Onion" );
+        Bagel bagel2 = new Bagel("BGLP", 0.39, "Bagel", "Plain");
         basket.add(bagel1);
         basket.add(bagel2);
         Assertions.assertEquals("Onion Bagel removed from basket", basket.remove(bagel1));
@@ -34,5 +34,18 @@ public class BasketTest {
         basket.add(bagel1);
         basket.remove(bagel1);
         Assertions.assertEquals("Basket is empty", basket.remove(bagel1));
+    }
+    @Test
+    public void isFullShouldReturnTrue(){
+        Basket basket = new Basket(4);
+        Bagel bagel1 = new Bagel("BGLO",0.49, "Bagel", "Onion" );
+        Bagel bagel2 = new Bagel("BGLP", 0.39, "Bagel", "Plain");
+        Bagel bagel3 = new Bagel("BGLE", 0.49, "Bagel", "Everything" );
+        Bagel bagel4 = new Bagel("BGLS", 0.49, "Bagel", "Sesame" );
+        basket.add(bagel1);
+        basket.add(bagel2);
+        basket.add(bagel3);
+        basket.add(bagel4);
+        Assertions.assertTrue(basket.isFull());
     }
 }
