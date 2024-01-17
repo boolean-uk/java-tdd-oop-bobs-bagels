@@ -40,6 +40,10 @@ public class Store {
         return "Bagel added.";
     }
 
+    public String addFilling(String filling, String bagel, int basketId) {
+        return "Bob's bagels doesn't have that filling.";
+    }
+
     private void initilizePrices() {
         prices = new HashMap<>();
         prices.put("BGLO", 0.49);

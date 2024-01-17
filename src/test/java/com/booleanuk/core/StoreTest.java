@@ -47,5 +47,14 @@ public class StoreTest {
         Assertions.assertEquals("You're basket is full!", actual);
     }
 
+    @Test
+    public void addNonExistentFillingToBagelInBasket() {
+        Store store = new Store();
+        int basketId = store.createBasket();
+        store.addBagelToBasket("Onion", basketId);
+        String actual = store.addFilling("Lettuce", "Onion", basketId);
+        Assertions.assertEquals("Bob's bagels doesn't have that filling.", actual);
+    }
+
 
 }
