@@ -36,7 +36,7 @@ public class BagelTest {
         Shop shop = new Shop();
         shop.createBasket();
         shop.getAllBaskets().get(0).addItem("Coffee", "Black", 5);
-        Assertions.assertTrue(shop.changeMaxCapacity(2));
+        Assertions.assertFalse(shop.changeMaxCapacity(2));
 
 
     }

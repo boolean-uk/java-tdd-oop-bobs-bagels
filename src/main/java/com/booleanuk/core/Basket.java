@@ -7,19 +7,17 @@ public class Basket {
     private ArrayList<Item> items;
 
     private int maxCapacity;
-    private int currentCapacity;
+
     public Basket(int maxCapacity){
         this.maxCapacity = maxCapacity;
-        this.currentCapacity = 0;
         items = new ArrayList<>();
     }
     public boolean addItem(String type, String name, int amount){
-        if(amount + currentCapacity > maxCapacity){
+        if(amount + this.items.size() > maxCapacity){
             return false;
         }
         Inventory i = Inventory.getInstance();
         if(i.checkInventory(type, name, amount)){
-            currentCapacity += amount;
             items.addAll(i.getItems(type, name, amount));
             return true;
         }
@@ -43,7 +41,10 @@ public class Basket {
         return this.items;
     }
     public int getCurrentBasketSize(){
-        return this.currentCapacity;
+        return this.items.size();
+    }
+    public boolean changeBasketCapacity(int capacity){
+        return capacity >= this.items.size();
     }
 
 

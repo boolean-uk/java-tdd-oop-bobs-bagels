@@ -6,6 +6,7 @@ public class Shop {
     private ArrayList<Basket> baskets;
     private int maxCapacity;
     public Shop(){
+        baskets = new ArrayList<>();
         this.maxCapacity = 5;
     }
 
@@ -14,7 +15,10 @@ public class Shop {
     }
     public boolean changeMaxCapacity(int maxCapacity){
         for(Basket b : baskets){
-            if (b.getCurrentBasketSize() > maxCapacity){
+            if (b.changeBasketCapacity(maxCapacity)){
+                b.changeBasketCapacity(maxCapacity);
+            }
+            else {
                 return false;
             }
         }
