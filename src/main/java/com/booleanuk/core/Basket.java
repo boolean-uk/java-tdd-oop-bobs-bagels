@@ -3,6 +3,10 @@ package com.booleanuk.core;
 import java.util.ArrayList;
 
 public class Basket {
+    Inventory inventory = new Inventory();
+    Bagel bagels = new Bagel();
+    Coffee coffee = new Coffee();
+    Filling filling = new Filling();
     ArrayList<String> bagelBasket;
     int capacity;
 

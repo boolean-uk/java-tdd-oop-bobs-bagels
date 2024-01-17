@@ -1,14 +1,18 @@
 package com.booleanuk.core;
 
+import java.util.Objects;
+
 public class Product {
-    public String type;
-    public String [] variant;
-    public String [] sku;
-    public double [] price;
+    protected String type;
+    protected String [] variant;
+    protected String [] sku;
+    protected double [] price;
+
 }
 
 class Bagel extends Product{
     public String [][] bagels = new String[4][4];
+
     public Bagel() {
         super();
         this.type = "Bagel";
