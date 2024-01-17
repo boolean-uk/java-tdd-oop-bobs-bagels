@@ -88,5 +88,20 @@ public class StoreTest {
         Assertions.assertTrue(store.updateBasketCapacity(2));
     }
 
+    @Test
+    public void updateBasketCapacityToInvalid() {
+        Store store = new Store();
+        int basketId = store.createBasket();
+
+        store.addBagelToBasket("Onion", basketId);
+        store.addBagelToBasket("Onion", basketId);
+        store.addBagelToBasket("Onion", basketId);
+
+        basketId = store.createBasket();
+
+        store.addBagelToBasket("Onion", basketId);
+
+        Assertions.assertFalse(store.updateBasketCapacity(2));
+    }
 
 }
