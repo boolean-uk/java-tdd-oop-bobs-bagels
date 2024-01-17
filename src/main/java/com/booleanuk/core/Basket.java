@@ -28,7 +28,11 @@ public class Basket {
         return item +" removed from basket";
     }
     public boolean isFull(){
-
+        if( this.basket.size() >= size){
+            System.out.println("Basket is full");
+            return true;
+        }
+        return false;
     }
 
 }
