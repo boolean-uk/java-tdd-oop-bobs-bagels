@@ -54,23 +54,32 @@ So we don't get any weird requests,
 I want customers to only be able to order things that we stock in our inventory.
 ```
 
-| Classes          | Members        | Methods          | Scenario                | Result/output          |
-|------------------|----------------|------------------|-------------------------|------------------------|
-| Inventory        | String sku     | isInStock()      | Checks if the           | returns boolean        |
-| Bagel extends    | String type    |                  | specific item is        |                        |
-| Coffee extends   | String variant |                  | in stock                |                        |
-| Filling extends  | double price   | updateStock()    | Updates the current     | returns String         |
-|                  | int stock      |                  | stock of specific       | telling if the stock   |
-|                  |                |                  | items                   | has been updated       |
-|                  |                |                  |                         |                        |
-| Basket           | ArrayList<>    | addItem()        | User want to add item   | returns String telling |
-|                  | basket         |                  | into basket             | what has been added    |
-|                  |                | removeItem()     | User wants to remove    | returns String telling |
-|                  |                |                  | item from basket        | what has been removed  |
-|                  |                | totalCost()      | After change in basket  | returns total basket   |
-|                  |                |                  |                         | value after change     |
-|                  |                |                  |                         |                        |
-| User             | String role;   |                  |                         |                        |
-| Manager extends  |                | changeCapacity() | Manager wants to update | returns String telling |
-| Customer extends |                |                  | basket capacity         | what has been changed  |
-|                  |                |                  |                         |                        |
+| Classes          | Members                   | Methods          | Scenario                | Result/output          |
+|------------------|---------------------------|------------------|-------------------------|------------------------|
+| Product          | String sku                |                  |                         |                        |
+| Bagel extends    | String type               |                  |                         |                        |
+| Coffee extends   | String variant            |                  |                         |                        |
+| Filling extends  | double price              |                  |                         |                        |
+|                  |                           |                  |                         |                        |
+|                  |                           |                  |                         |                        |
+|                  |                           |                  |                         |                        |
+| Inventory        | HashMap<String,           | isInStock()      | Checks if the wanted    | returns boolean        |
+|                  | Integer> bagelInventory   |                  | item is in stock        |                        |
+|                  | HashMap<String,           |                  |                         |                        |
+|                  | Integer> coffeeInventory  | updateStock()    | Updates the current     | returns String         |
+|                  | HashMap<String,           |                  | stock of specific       | telling if the stock   |
+|                  | Integer> fillingInventory |                  | items                   | has been updated       |
+|                  |                           |                  |                         |                        |
+|                  |                           |                  |                         |                        |
+|                  |                           |                  |                         |                        |
+| Basket           | ArrayList<>               | addItem()        | User want to add item   | returns String telling |
+|                  | basket                    |                  | into basket             | what has been added    |
+|                  |                           | removeItem()     | User wants to remove    | returns String telling |
+|                  |                           |                  | item from basket        | what has been removed  |
+|                  |                           | totalCost()      | After change in basket  | returns total basket   |
+|                  |                           |                  |                         | value after change     |
+|                  |                           |                  |                         |                        |
+| User             | String role;              |                  |                         |                        |
+| Manager extends  |                           | changeCapacity() | Manager wants to update | returns String telling |
+| Customer extends |                           |                  | basket capacity         | what has been changed  |
+|                  |                           |                  |                         |                        |
