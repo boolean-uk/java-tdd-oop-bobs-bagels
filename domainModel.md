@@ -81,10 +81,6 @@ I want customers to only be able to order things that we stock in our inventory.
 |         |                 | setVariant(): void   |
 
 
-| Class     | Variables                         | Method             |
-|-----------|-----------------------------------|--------------------|
-| Inventory | ArrayList <Product> inventoryItem | getInventoryItem() |
-
 
 | Class  | Variables                             | Methods                        | Scenarios                                  | Outputs            |
 |--------|---------------------------------------|--------------------------------|--------------------------------------------|--------------------|
