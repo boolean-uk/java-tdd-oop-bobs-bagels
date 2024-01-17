@@ -4,6 +4,36 @@ public class Bagel {
 
     String bagel;
 
+    private String variant; // Variant of the bagel
+    private String sku; // SKU associated with the variant
+
+    public Bagel(String variant) {
+        this.variant = variant;
+        // You would need to determine the SKU based on the variant here
+        // For example:
+        if (variant.equals("Onion")) {
+            this.sku = "BGLO";
+        }
+        else if (variant.equals("Plain")) {
+            this.sku = "BGLP";
+        }
+        else if (variant.equals("Everything")) {
+            this.sku = "BGLE";
+        }
+        else if (variant.equals("Sesame")) {
+            this.sku = "BGLS";
+        }
+    }
+
+    // Getters
+    public String getVariant() {
+        return variant;
+    }
+
+    public String getSku() {
+        return sku;
+    }
+
     public String getBagel() {
         return bagel;
     }

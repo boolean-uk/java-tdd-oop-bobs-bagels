@@ -15,7 +15,9 @@ public class Basket {
     HashMap<Bagel, Integer> bagelsWithCost;
 
     HashMap<String, Integer[]> itemsWithQuantity;
-    int basketSize = 5;
+
+
+    int basketSize = 4;
 
     public Basket() {
         bagels = new ArrayList<>(5);
@@ -104,8 +106,9 @@ public class Basket {
     }
 
     //User Story 7
-    public double returnCostOfBagel(Bagel bagel) {
-        return 0.49;
-
+    public double returnCostOfBagel(Bagel bagelVariant) {
+        String sku = bagelVariant.getSku();
+        Inventory bagelType = itemsFullyDetailed.get(sku);
+        return bagelType.getPrice();
     }
 }

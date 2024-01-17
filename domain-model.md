@@ -127,11 +127,11 @@ I'd like to know the cost of a bagel before I add it to my basket.
 
 # Domain Model For User Story 7
 
-| Class     | Member Variables                        | Methods                               | Scenario             | Output/Result        |
-|-----------|-----------------------------------------|---------------------------------------|----------------------|----------------------|
-| Basket    | HashMap<Bagel, Integer> bagelsWithCost; | double returnCostOfBagel(Bagel bagel) | I want cost of bagel | Return cost of bagel |
-| Inventory |                                         |                                       |                      |                      |
-| Bagel     |                                         |                                       |                      |                      |
+| Class     | Member Variables                        | Methods                                      | Scenario             | Output/Result        |
+|-----------|-----------------------------------------|----------------------------------------------|----------------------|----------------------|
+| Basket    | HashMap<Bagel, Integer> bagelsWithCost; | double returnCostOfBagel(Bagel bagelVariant) | I want cost of bagel | Return cost of bagel |
+| Inventory |                                         |                                              |                      |                      |
+| Bagel     |                                         |                                              |                      |                      |
 
 
 ## User Story 8.
