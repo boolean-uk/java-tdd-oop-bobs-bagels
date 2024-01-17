@@ -38,7 +38,14 @@ public class BasketTest {
 
         Assertions.assertTrue(basket.getItemList().isEmpty());
 
+    }
 
+    @Test
+    public void testCapacity() {
+        Basket basket = new Basket(5);
+
+        basket.getCapacity();
+        Assertions.assertEquals(basket.getBasketCapacity);
 
     }
 

@@ -14,12 +14,12 @@ I'd like to add a specific type of bagel to my basket.
 
 Class Basket
 
-| Class Variables | Methods                              | Scenario             | Output/Return                 |
-|-----------------|--------------------------------------|----------------------|-------------------------------|
-| ArrayList<Item> | boolean addItemToBasket(Bagel bagel) | Adds item to basket  | True/False                    |
-|                 | ArrayList<Item> getItemList()        | Gets a list of Items | ArrayList<Item> basketOfItems |
-|                 |                                      |                      |                               |
-|                 |                                      |                      |                               |
+| Class Variables           | Methods                           | Scenario             | Output/Return                              |
+|---------------------------|-----------------------------------|----------------------|--------------------------------------------|
+| ArrayList<Item> itemList  | String addItemToBasket(Item item) | Adds item to basket  | Comment on what went wrong or if it worked |
+|                           | ArrayList<Item> getItemList()     | Gets a list of Items | ArrayList<Item> basketOfItems              |
+|                           |                                   |                      |                                            |
+|                           |                                   |                      |                                            |
 
 
 
@@ -30,12 +30,12 @@ So I can change my order,
 I'd like to remove a bagel from my basket.
 ```
 
-| Class Variables | Methods                                 | Scenario                 | Output/Return |
-|-----------------|-----------------------------------------|--------------------------|---------------|
-| ArrayList<Item> | boolean removeItemFromBasket(Item item) | Removes item from basket | True/False    |
-|                 |                                         |                          |               |
-|                 |                                         |                          |               |
-|                 |                                         |                          |               |
+| Class Variables          | Methods                                | Scenario                 | Output/Return                               |
+|--------------------------|----------------------------------------|--------------------------|---------------------------------------------|
+| ArrayList<Item> itemList | String removeItemFromBasket(Item item) | Removes item from basket | Comment on what went wrong or if it worked  |
+|                          |                                        |                          |                                             |
+|                          |                                        |                          |                                             |
+|                          |                                        |                          |                                             |
 
 
 
@@ -46,15 +46,17 @@ As a member of the public,
 So that I can not overfill my small bagel basket
 I'd like to know when my basket is full when I try adding an item beyond my basket capacity.
 
-
-
 ```
-| Class Variables | Methods | Scenario | Output/Return |
-|-----------------|---------|----------|---------------|
-|                 |         |          |               |
-|                 |         |          |               |
-|                 |         |          |               |
-|                 |         |          |               |
+
+
+Class Basket
+
+| Class Variables          | Methods                           | Scenario                                              | Output/Return                                 |
+|--------------------------|-----------------------------------|-------------------------------------------------------|-----------------------------------------------|
+| ArrayList<Item> itemList | String addItemToBasket(Item item) | Comments on what went wrong whn adding above capacity | Comment on what went wrong or if it worked    |
+| int capacity             |                                   |                                                       |                                               |
+|                          |                                   |                                                       |                                               |
+|                          |                                   |                                                       |                                               |
 
 
 
@@ -65,14 +67,14 @@ So that I can expand my business,
 I’d like to change the capacity of baskets.
 ```
 
+Class Basket
 
-| Class Variables | Methods | Scenario | Output/Return |
-|-----------------|---------|----------|---------------|
-|                 |         |          |               |
-|                 |         |          |               |
-|                 |         |          |               |
-|                 |         |          |               |
-
+| Class Variables          | Methods                           | Scenario                                              | Output/Return                              |
+|--------------------------|-----------------------------------|-------------------------------------------------------|--------------------------------------------|
+| ArrayList<Item> itemList | String addItemToBasket(Item item) | Comments on what went wrong whn adding above capacity | Comment on what went wrong or if it worked |
+| int capacity             | int getBasketCapacity()           | Gets basket capacity                                  | int                                        |
+|                          | setBasketCapacity(int capacity)   | Sets basket capacity                                  | boolean                                    |
+|                          |                                   |                                                       |                                            |
 
 
 
@@ -83,14 +85,14 @@ So that I can maintain my sanity
 I'd like to know if I try to remove an item that doesn't exist in my basket.
 ```
 
+Class basket
 
-
-| Class Variables | Methods | Scenario | Output/Return |
-|-----------------|---------|----------|---------------|
-|                 |         |          |               |
-|                 |         |          |               |
-|                 |         |          |               |
-|                 |         |          |               |
+| Class Variables          | Methods                                | Scenario                 | Output/Return                               |
+|--------------------------|----------------------------------------|--------------------------|---------------------------------------------|
+| ArrayList<Item> itemList | String removeItemFromBasket(Item item) | Removes item from basket | Comment on what went wrong or if it worked  |
+|                          |                                        |                          |                                             |
+|                          |                                        |                          |                                             |
+|                          |                                        |                          |                                             |
 
 
 
