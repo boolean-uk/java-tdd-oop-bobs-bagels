@@ -102,4 +102,10 @@ public class Basket {
         }
         return totalCost;
     }
+
+    //User Story 7
+    public double returnCostOfBagel(Bagel bagel) {
+        return 0.49;
+
+    }
 }

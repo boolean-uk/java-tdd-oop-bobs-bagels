@@ -232,9 +232,9 @@ class BasketTest {
 
         bagel.setBagel(inventory.getVariant());
 
-        String result = basket.returnCostOfBagel(bagel);
+        double result = basket.returnCostOfBagel(bagel);
 
-        Assertions.assertEquals(0.49 + "£", result);
+        Assertions.assertEquals(0.49, result);
     }
 
 }
