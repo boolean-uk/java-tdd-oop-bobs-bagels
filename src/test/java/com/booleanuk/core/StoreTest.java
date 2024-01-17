@@ -25,5 +25,16 @@ public class StoreTest {
         Assertions.assertTrue(store.getBaskets().get(basketId).getBagels().contains(bagel));
     }
 
+    @Test
+    public void addNonExistingBagelToBasketTest() {
+        Store store = new Store();
+        int basketId = store.createBasket();
+        Bagel bagel = new Bagel("Chocolate");
+        Assertions.assertFalse(store.getBaskets().get(basketId).getBagels().contains(bagel));
+        String actual = store.addBagelToBasket("Chocolate", basketId);
+        Assertions.assertEquals("Bob's bagels doesn't have that bagel.", actual);
+        Assertions.assertFalse(store.getBaskets().get(basketId).getBagels().contains(bagel));
+    }
+
 
 }
