@@ -22,4 +22,11 @@ public class Basket {
     public void clear() {
         basket.clear();
     }
+
+    public boolean addItem(Item item) {
+        if (basket.size() >= capacity) {
+            return false;
+        }
+        return basket.add(item);
+    }
 }

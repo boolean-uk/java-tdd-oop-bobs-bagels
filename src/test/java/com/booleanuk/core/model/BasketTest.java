@@ -19,7 +19,6 @@ public class BasketTest {
         bobsTest = new Store("TesT Store");
         basket = new Basket(5);
     }
-
     @BeforeEach
     public void resetBasket() {
         basket.clear();
@@ -34,7 +33,7 @@ public class BasketTest {
     @Test
     public void canAddItemToBasket() {
         Item itemToAdd = bobsTest.getItemBySKU(bagelPlainSKU);
-        basket.add(itemToAdd);
+        basket.addItem(itemToAdd);
         Assertions.assertEquals(1, basket.getBasket().size());
         Assertions.assertEquals(itemToAdd, basket.getBasket().get(0));
     }
