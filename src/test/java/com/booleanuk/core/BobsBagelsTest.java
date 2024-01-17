@@ -67,4 +67,28 @@ class BobsBagelsTest {
         basket.changeBasketCapacity(-10);
         Assertions.assertEquals(basket.basketCapacity, 4);
     }
+
+    @Test
+    public void testTotalCostTwoItems(){
+        Basket basket = new Basket();
+        basket.addBagel("BGLP");
+        basket.addBagel("BGLP");
+
+
+        double total = basket.getTotatlCost();
+        Assertions.assertEquals(total, 0.78);
+    }
+    @Test
+    public void testTotalCostFiveItems(){
+        Basket basket = new Basket();
+
+        basket.addBagel("BGLP");
+        basket.addBagel("BGLS");
+        basket.addBagel("COFB");
+        basket.addBagel("FILB");
+        basket.addBagel("FILC");
+
+        double total = basket.getTotatlCost();
+        Assertions.assertEquals(total, 2.11);
+    }
 }
