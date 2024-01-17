@@ -12,4 +12,18 @@ public class BobsBagelsShopTest {
         Assertions.assertEquals(new HashMap<>(), shop.inventory);
         Assertions.assertEquals(3, shop.basketCapacity);
     }
+
+    @Test
+    public void testShowInventory() {
+        BobsBagelsShop shop = new BobsBagelsShop(new HashMap<>(), 3);
+        Assertions.assertEquals("No items in stock.", shop.showInventory());
+
+        Item bglo = new Item("Bagel", "Onion", 0.49);
+        //Item bglp = new Item("Bagel", "Plain", 0.39);
+        HashMap<Item, Integer> testInventory = new HashMap<>();
+        testInventory.put(bglo, 100);
+        //testInventory.put(bglp, 100);
+        BobsBagelsShop shop2 = new BobsBagelsShop(testInventory, 3);
+        Assertions.assertEquals("Bob's Bagels\nSKU\tPrice\tName\tVariant\nbglo\t0.49\tBagel\tOnion\n", shop2.showInventory());
+    }
 }
