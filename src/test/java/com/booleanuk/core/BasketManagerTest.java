@@ -61,6 +61,9 @@ public class BasketManagerTest {
         Assertions.assertFalse(b.changeCapacity(-1));
     }
 
+    /**
+     * might be redundant
+     */
     @Test
     public void testCheckItemInBasket(){
         BasketManager b = new BasketManager();
