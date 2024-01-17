@@ -32,14 +32,14 @@ class BasketTest {
     public void checkIfBasketIsFull(){
         Basket basket = new Basket();
         basket.add("bagel 0");
-        Assertions.assertEquals(1, basket.checkIfBasketIsFull());
+        Assertions.assertFalse(basket.checkIfBasketIsFull());
         for (int i = 1; i < 5; i++) {
             basket.add("bagel " + i);
         }
-        Assertions.assertEquals(5, basket.checkIfBasketIsFull());
+        Assertions.assertTrue(basket.checkIfBasketIsFull());
         for (int i = 5; i < 9; i++) {
             basket.add("bagel " + i);
         }
-        Assertions.assertEquals(5, basket.checkIfBasketIsFull());
+        Assertions.assertTrue(basket.checkIfBasketIsFull());
     }
 }

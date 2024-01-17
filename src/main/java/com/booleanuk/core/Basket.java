@@ -7,19 +7,23 @@ public class Basket {
 
     ArrayList<Bagel> basket;
     double total;
+    int capacity;
     public Basket(){
         this.basket = new ArrayList<>();
         this.total = 0;
+        this.capacity = 5;
     }
 
     public boolean add(String bagelType){
         Bagel bagel = new Bagel(bagelType);
         if(!bagel.getName().isEmpty()){
-            basket.add(bagel);
-            System.out.println("Added " + bagel.getName());
-            return true;
+            if(!checkIfBasketIsFull()){
+                basket.add(bagel);
+                System.out.println("Added " + bagel.getName());
+                return true;
+            }
         }
-        System.out.println("Invalid bagel");
+        System.out.println("Could not add bagel");
         return false;
     }
 
@@ -35,4 +39,16 @@ public class Basket {
         return false;
     }
 
+    public boolean checkIfBasketIsFull(){
+        if(basket.size() >= capacity){
+            System.out.println("Basket is full");
+            return true;
+        }
+        System.out.println("Basket is not full");
+        return false;
+    }
+
+    public void clearList(){
+        this.basket.clear();
+    }
 }
