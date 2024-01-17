@@ -9,10 +9,8 @@ class BasketTest {
     public void addBagelToBasket(){
         Basket basket = new Basket();
 
-        basket.add("plain");
         Assertions.assertTrue(basket.add("plain"));
         Assertions.assertFalse(basket.add(""));
-        Assertions.assertFalse(basket.add());
     }
 
 }
