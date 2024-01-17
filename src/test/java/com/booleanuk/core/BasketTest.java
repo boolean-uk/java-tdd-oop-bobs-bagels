@@ -22,6 +22,18 @@ class BasketTest {
         basket.removeItem(product);
         Assertions.assertFalse(basket.bagelBasket.contains(product));
     }
+    @Test
+    public void testBasketIsFull(){
+        Basket basket =new Basket();
+        Product product = new Product( "",5,"Bagel","");
+        Product product2 = new Product( "",5,"Bagel2","");
+        Product product3 = new Product( "",5,"Bagel3","");
+        basket.addItem(product);
+        basket.addItem(product2);
+        basket.addItem(product3);
+        basket.removeItem(product);
+        Assertions.assertFalse(basket.bagelBasket.contains(product3));
+    }
 
 
 }
