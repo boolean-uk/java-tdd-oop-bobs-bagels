@@ -31,4 +31,10 @@ public class BagelTest {
         Assertions.assertFalse(bagel.addFilling("brick"));
         Assertions.assertEquals("Bacon", bagel.getFilling());
     }
+    @Test
+    public void testGetPriceOfFilling(){
+        Bagel bagel = new Bagel("plain");
+        Assertions.assertEquals(2.00, bagel.checkPriceOfFilling("Cheese"));
+        Assertions.assertEquals(3.00, bagel.checkPriceOfFilling("Ham"));
+    }
 }
