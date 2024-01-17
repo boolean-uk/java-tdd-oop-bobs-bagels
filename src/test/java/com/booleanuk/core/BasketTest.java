@@ -14,6 +14,13 @@ class BasketTest {
         Assertions.assertEquals("Bagel",basket.bagelBasket.get(0).getName());
 
     }
+    @Test
+    public void RemovingBagel(){
+        Basket basket =new Basket();
+        Product product = new Product( "",5,"Bagel","");
+        basket.addItem(product);
+        Assertions.assertFalse(basket.bagelBasket.contains(product));
+    }
 
 
 }
