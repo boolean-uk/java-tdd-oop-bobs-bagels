@@ -70,7 +70,9 @@ class BasketTest {
     public void returnsTrueIfCostOfBasketIsSameAsExpected() {
         Basket basket = new Basket();
 
-        Bagel plainBagel = new Bagel("Plain bagel", 2.49);;
+        Bagel plainBagel = new Bagel("Plain bagel", 2.49);
+
+        basket.add(plainBagel);
 
         Assertions.assertEquals(2.49, basket.totalCost());
     }

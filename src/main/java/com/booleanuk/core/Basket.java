@@ -4,28 +4,35 @@ import java.util.ArrayList;
 
 public class Basket {
 
-    public ArrayList<String> bagels;
-    int capacity;
+    private ArrayList<Item> items;
+    private int capacity;
+    private double totalCost;
 
     public Basket() {
-        this.bagels = new ArrayList<>();
+        this.items = new ArrayList<>();
         this.capacity = 2;
     }
 
-    public boolean add(String bagel) {
+    public boolean add(Item item) {
         if (isFull()) {
             return false;
         } else {
-            return bagels.add(bagel);
+            items.add(item);
+            totalCost += item.getPrice();
+            return true;
         }
     }
 
-    public boolean remove(String bagel) {
-        return bagels.remove(bagel);
+    public boolean remove(Item item) {
+        if (items.remove(item)) {
+            totalCost -= item.getPrice();
+            return true;
+        }
+        return false;
     }
 
     public boolean isFull() {
-        return (bagels.size() >= capacity);
+        return (items.size() >= capacity);
     }
 
     public void modifyCapacity(int newCapacity) {
@@ -34,5 +41,9 @@ public class Basket {
 
     public int getCapacity() {
         return capacity;
+    }
+
+    public double totalCost() {
+        return totalCost;
     }
 }
