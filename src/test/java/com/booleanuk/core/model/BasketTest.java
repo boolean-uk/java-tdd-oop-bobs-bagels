@@ -17,11 +17,11 @@ public class BasketTest {
     @BeforeAll
     public static void setup() throws FileNotFoundException {
         bobsTest = new Store("TesT Store");
-        basket = new Basket(5);
+        basket = new Basket(2);
     }
     @BeforeEach
     public void resetBasket() {
-        basket.clear();
+        basket.setBasket(new ArrayList<>());
     }
 
     @Test
@@ -36,6 +36,15 @@ public class BasketTest {
         Assertions.assertTrue(basket.addItem(itemToAdd));
         Assertions.assertEquals(1, basket.getBasket().size());
         Assertions.assertEquals(itemToAdd, basket.getBasket().get(0));
+    }
+
+    @Test
+    public void canNotAddItemsWhenBasketIsFull() {
+        Item itemToAdd = bobsTest.getItemBySKU(bagelPlainSKU);
+        Assertions.assertTrue(basket.addItem(itemToAdd));
+        Assertions.assertTrue(basket.addItem(itemToAdd));
+        Assertions.assertFalse(basket.addItem(itemToAdd));
+        Assertions.assertEquals(2, basket.getBasket().size());
     }
 
     @Test

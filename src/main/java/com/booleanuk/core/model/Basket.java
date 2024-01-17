@@ -19,11 +19,8 @@ public class Basket {
         this.capacity = capacity;
     }
 
-    public void clear() {
-        basket.clear();
-    }
-
     public boolean addItem(Item item) {
+        // TODO Decrease stock
         if (basket.size() >= capacity) {
             return false;
         }
@@ -31,6 +28,7 @@ public class Basket {
     }
 
     public boolean removeItem(Item item) {
+        // TODO Increase stock
         return basket.remove(item);
     }
 }
