@@ -15,14 +15,14 @@ public class BasketManager {
 
     public Item add(Item item) {
         if (checkCapacity() > 0) {
-            basket.add(item);
+            getBasket().add(item);
             return item;
         }
         return null;
     }
 
     public Item remove(Item item) {
-        for(Item i : getBasket()) {
+        for(Item i : this.getBasket()) {
             if (i == item) {
                 getBasket().remove(i);
                 return i;
@@ -32,10 +32,10 @@ public class BasketManager {
     }
 
     public int checkCapacity() {
-        return capacity - getBasket().size();
+        return getCapacity() - getBasket().size();
     }
 
-    public void changeCapacity() {
+    public void changeCapacity(int newCapacity) {
 
     }
 

@@ -47,6 +47,9 @@ public class BasketManagerTest {
     @Test
     public void testChangeCapacity(){
         BasketManager b = new BasketManager();
+        b.changeCapacity(5);
+        Assertions.assertEquals(5, b.getCapacity());
+        Assertions.assertNotEquals(10, b.getCapacity());
     }
 
     @Test
