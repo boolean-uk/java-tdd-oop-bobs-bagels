@@ -125,4 +125,9 @@ public class Basket {
         Inventory fillingType = itemsFullyDetailed.get(sku);
         return fillingType.getPrice();
     }
+
+    //User Story 10
+    public boolean mustBeInInventory(String item) {
+        return true;
+    }
 }

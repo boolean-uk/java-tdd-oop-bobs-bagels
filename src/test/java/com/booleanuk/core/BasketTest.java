@@ -278,7 +278,7 @@ class BasketTest {
     public void testIsInInventory() {
         Basket basket = new Basket();
 
-        boolean result = mustBeInInventory("Bagel");
+        boolean result = basket.mustBeInInventory("Bagel");
 
         Assertions.assertTrue(result);
     }
@@ -287,7 +287,7 @@ class BasketTest {
     public void testNotInInventory() {
         Basket basket = new Basket();
 
-        boolean result = mustBeInInventory("Banana");
+        boolean result = basket.mustBeInInventory("Banana");
 
         Assertions.assertFalse(result);
     }
