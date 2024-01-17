@@ -10,4 +10,9 @@ public class InventoryManagerTest {
         InventoryManager inv = new InventoryManager();
         Assertions.assertNotNull(inv.getInventory());
     }
+    @Test
+    public void testCostEachFilling() {
+        InventoryManager inv = new InventoryManager();
+        Assertions.assertNotEquals("", inv.costEachFilling());
+    }
 }
