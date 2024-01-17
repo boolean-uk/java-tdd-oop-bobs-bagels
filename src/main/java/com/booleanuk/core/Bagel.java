@@ -14,4 +14,8 @@ public class Bagel {
         Bagel other = (Bagel) obj;
         return this.name.equals(other.name);
     }
+
+    public boolean addFilling(String filling) {
+        return true;
+    }
 }
