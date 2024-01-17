@@ -41,7 +41,10 @@ public class Store {
     }
 
     public String addFilling(String filling, String bagel, int basketId) {
-        return "Bob's bagels doesn't have that filling.";
+        if(!fillingCodes.containsKey(filling.toUpperCase())) {
+            return "Bob's bagels doesn't have that filling.";
+        }
+        return baskets.get(basketId).addFilling(filling, bagel);
     }
 
     private void initilizePrices() {

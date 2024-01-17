@@ -56,5 +56,22 @@ public class StoreTest {
         Assertions.assertEquals("Bob's bagels doesn't have that filling.", actual);
     }
 
+    @Test
+    public void addFillingThatAllGivenBagelsAlreadyHaveTest() {
+        Store store = new Store();
+        int basketId = store.createBasket();
+
+        store.addBagelToBasket("Onion", basketId);
+        store.addBagelToBasket("Onion", basketId);
+
+        store.addFilling("Cheese", "Onion", basketId);
+        store.addFilling("Cheese", "Onion", basketId);
+        store.addFilling("Egg", "Onion", basketId);
+
+        String actual = store.addFilling("Cheese", "Onion", basketId);
+
+        Assertions.assertEquals("All bagels of that kind in your basket already has that filling.", actual);
+    }
+
 
 }
