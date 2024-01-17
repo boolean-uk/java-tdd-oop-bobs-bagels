@@ -53,4 +53,13 @@ public class BasketTest {
         Basket basket = new Basket(4);
         Assertions.assertEquals("Basket size is updated to 8", basket.changeCapacity(8));
     }
+    @Test
+    public void shouldReTurnTotalCost(){
+        Basket basket = new Basket(4);
+        Bagel bagel1 = new Bagel("BGLO",0.49, "Bagel", "Onion" );
+        Bagel bagel2 = new Bagel("BGLP", 0.39, "Bagel", "Plain");
+        basket.add(bagel1);
+        basket.add(bagel2);
+        Assertions.assertEquals(0.88, basket.getTotalCost());
+    }
 }

@@ -39,4 +39,6 @@ public class Basket {
         return "Basket size is updated to " + newCapacity;
     }
 
+    public double getTotalCost(){
+
 }
