@@ -105,11 +105,11 @@ I'd like to know the cost of a bagel before I add it to my basket.
 ```
 Basket class
 
-| Methods       | Member variables    | Scenario                                        | Output/result      |
-|---------------|---------------------|-------------------------------------------------|--------------------|
-| bagelPrices() | String[] basketArr  | The user gets information about prices          | return bagelPrices |
-|               |                     | before they choose the product. Using a menu-   |                    |
-|               |                     | string that shows every product and their price |                    |
+| Methods      | Member variables    | Scenario                                        | Output/result |
+|--------------|---------------------|-------------------------------------------------|---------------|
+| createMenu() | String[] basketArr  | The user gets information about prices          | return menu   |
+|              |                     | before they choose the product. Using a menu-   |               |
+|              |                     | string that shows every product and their price |               |
 
 ```
 8.
@@ -133,11 +133,11 @@ I'd like to know the cost of each filling before I add it to my bagel order.
 ```
 Basket class
 
-| Methods          | Member variables    | Scenario                                        | Output/result        |
-|------------------|---------------------|-------------------------------------------------|----------------------|
-| fillingPrices()  | String[] basketArr  | The user gets information about prices          | return fillingPrices |
-|                  |                     | before they choose the product. Using a menu-   |                      |
-|                  |                     | string that shows every product and their price |                      |
+| Methods      | Member variables    | Scenario                                        | Output/result |
+|--------------|---------------------|-------------------------------------------------|---------------|
+| createMenu() | String[] basketArr  | The user gets information about prices          | return menu   |
+|              |                     | before they choose the product. Using a menu-   |               |
+|              |                     | string that shows every product and their price |               |
 
 ```
 10.

@@ -48,10 +48,10 @@ public class Inventory {
 
     @Override
     public String toString() {
-        return "Inventory: " +
-                "SKU='" + SKU + '\'' +
-                ", price=" + price +
-                ", name='" + name + '\'' +
-                ", variant='" + variant;
+        return "Item: " +
+                "SKU= " + SKU +
+                ", price="  + price +
+                ", name= " + name +
+                ", variant= " + variant;
     }
 }

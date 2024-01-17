@@ -8,16 +8,16 @@ public class TestBasket {
     public void testAddBagelToBasket(){
         Basket basket = new Basket();
 
-        basket.addToBasket("BGLO");
-        Assertions.assertEquals("BGLO",basket.basketArr[0]);
+        basket.addBagelToBasket("Bagel");
+        Assertions.assertEquals("Bagel added to basket",basket.basketArr[0]);
     }
 
     @Test
     public void testRemoveBagelFromBasket(){
         Basket basket = new Basket();
-        basket.addToBasket("BGLO");
-        basket.addToBasket("COFB");
-        boolean result = basket.removeFromBasket("BGLO");
+        basket.addBagelToBasket("Bagel");
+        basket.addBagelToBasket("Bagel");
+        boolean result = basket.removeFromBasket("Bagel");
         Assertions.assertTrue(result);
     }
 
@@ -25,13 +25,13 @@ public class TestBasket {
     public void testAddToBasketDontExtendCapacity(){
         Basket basket = new Basket();
 
-        basket.addToBasket("BGLO");
-        basket.addToBasket("BGLP");
-        basket.addToBasket("COFB");
-        basket.addToBasket("COFB");
-        basket.addToBasket("FILB");
-        boolean result = basket.addToBasket("FILC");
-        Assertions.assertFalse(result);
+        basket.addBagelToBasket("Bagel");
+        basket.addBagelToBasket("Bagel");
+        basket.addBagelToBasket("Bagel");
+        basket.addBagelToBasket("Bagel");
+        basket.addBagelToBasket("Bagel");
+
+        Assertions.assertEquals("Basket is full",basket.addBagelToBasket("Bagel"));
     }
 
     @Test
@@ -46,11 +46,11 @@ public class TestBasket {
     public void testIfBagelExists(){
         Basket basket = new Basket();
 
-        basket.addToBasket("BGLO");
-        basket.addToBasket("BGLP");
-        basket.addToBasket("COFB");
-        basket.addToBasket("COFB");
-        basket.addToBasket("FILB");
+        basket.addBagelToBasket("Bagel");
+        basket.addBagelToBasket("Bagel");
+        basket.addBagelToBasket("Bagel");
+        basket.addBagelToBasket("Bagel");
+        basket.addBagelToBasket("Bogle");
         boolean result = basket.removeFromBasket("FILE");
         Assertions.assertFalse(result);
     }
@@ -59,9 +59,9 @@ public class TestBasket {
     public void testTotalCostIsRight(){
         Basket basket = new Basket();
 
-        basket.addToBasket("BGLO");
-        basket.addToBasket("BGLP");
-        basket.addToBasket("COFB");
+        basket.addBagelToBasket("Bagel");
+        basket.addBagelToBasket("Bagel");
+        basket.addBagelToBasket("Bagel");
         Assertions.assertEquals(1.87d,basket.totalCost());
     }
 
@@ -69,7 +69,7 @@ public class TestBasket {
     public void testShouldSeeBagelPrices(){
         Basket basket = new Basket();
 
-        Assertions.assertEquals("String",basket.bagelPrices());
+        Assertions.assertEquals("String",basket.addBagelToBasket("Wrong"));
     }
 
     @Test
@@ -77,20 +77,21 @@ public class TestBasket {
         Basket basket = new Basket();
 
         //Not ready at all
-        Assertions.assertFalse(basket.addToBasket("Fill"));
+        Assertions.assertEquals("HMM",basket.addBagelToBasket("Fill"));
     }
 
     @Test
     public void testShouldSeeFillingPrices(){
         Basket basket = new Basket();
 
-        Assertions.assertEquals("String",basket.fillingPrices());
+        Assertions.assertEquals("String",basket.addBagelToBasket("HMM"));
     }
 
     @Test
     public void testCanOnlyAddExistingValues(){
         Basket basket = new Basket();
-
-        Assertions.assertFalse(basket.addToBasket("BGLQ"));
+        basket.addBagelToBasket("Bagel");
+        basket.addBagelToBasket("Bagel");
+        Assertions.assertEquals("That product doesnt exist",basket.addBagelToBasket("Bogle"));
     }
 }
