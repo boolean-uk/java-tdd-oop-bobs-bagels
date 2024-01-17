@@ -20,5 +20,6 @@ public class Basket {
        return true;
 
     }
+    public String remove(Product item){
 
 }
