@@ -273,4 +273,24 @@ class BasketTest {
         Assertions.assertEquals(0.12, result);
     }
 
+    //User Story 10 Case 1 - Is in inventory
+    @Test
+    public void testIsInInventory() {
+        Basket basket = new Basket();
+
+        boolean result = mustBeInInventory("Bagel");
+
+        Assertions.assertTrue(result);
+    }
+    //User Story 10 Case 1 - Is in inventory
+    @Test
+    public void testNotInInventory() {
+        Basket basket = new Basket();
+
+        boolean result = mustBeInInventory("Banana");
+
+        Assertions.assertFalse(result);
+    }
+
+
 }

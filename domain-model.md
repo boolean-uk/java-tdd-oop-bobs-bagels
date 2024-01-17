@@ -170,3 +170,9 @@ So we don't get any weird requests,
 I want customers to only be able to order things that we stock in our inventory.
 
 # Domain Model For User Story 10
+
+
+| Class     | Member Variables                               | Methods                                | Scenario            | Output/Result |
+|-----------|------------------------------------------------|----------------------------------------|---------------------|---------------|
+| Basket    | HashMap<String, Inventory> itemsFullyDetailed; | boolean mustBeInInventory(String item) | If in inventory     | Return true   |
+| Inventory |                                                |                                        | If not in inventory | Return false  |
