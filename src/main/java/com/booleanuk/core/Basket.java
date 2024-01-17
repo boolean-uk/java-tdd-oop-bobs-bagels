@@ -16,18 +16,23 @@ public class Basket {
     }
 
     public boolean add(String SKU){
-        if (getProduct(SKU) != null) {
-            Product product = getProduct(SKU);
-            products.put(product, products.get(product) + 1);
-        } else {
-            try {
-                products.put(new Product(SKU), 1);
-            } catch (IllegalStateException e){
-                return false;
+        if (items < capacity){
+            if (getProduct(SKU) != null) {
+                Product product = getProduct(SKU);
+                products.put(product, products.get(product) + 1);
+            } else {
+                try {
+                    products.put(new Product(SKU), 1);
+                } catch (IllegalStateException e){
+                    System.out.println("This item is not on the menu.");
+                    return false;
+                }
             }
+            items++;
+            return true;
         }
-        items++;
-        return true;
+        System.out.println("Your basket is full.");
+        return false;
     }
 
     public boolean remove(String SKU){
@@ -48,7 +53,18 @@ public class Basket {
     }
 
     public void updateCapacity(int newCapacity){
+        if (user instanceof Manager){
+            capacity = newCapacity;
 
+            if (newCapacity < items){
+                products = new HashMap<>();
+                items = 0;
+
+                System.out.println("The capacity has been updated. " +
+                        "Cart can only hold " + newCapacity + " items. " +
+                        "Your basket has been reset.");
+            }
+        }
     }
 
     public void displayMenu(){
