@@ -22,8 +22,9 @@ public class InventoryManager {
         }
     }
 
-    public String costEachFilling() {
-        return "";
+    public StringBuilder costEachFilling() {
+        StringBuilder sb = new StringBuilder();
+        return sb;
     }
 
     /**
