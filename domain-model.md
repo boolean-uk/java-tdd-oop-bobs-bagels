@@ -70,7 +70,7 @@ I'd like to know the total cost of items in my basket.
 
 | Classes | Methods               | Scenario                 | Returns                              |
 |---------|-----------------------|--------------------------|--------------------------------------|
-| Shop    | double getTotalCost() | If a basket has items    | double with value of items in basket |
+| Basket  | double getTotalCost() | If a basket has items    | double with value of items in basket |
 |         |                       | If a basket has no items | 0                                    |
 ```
 7.
@@ -79,10 +79,10 @@ So I know what the damage will be,
 I'd like to know the cost of a bagel before I add it to my basket.
 ```
 
-| Classes | Methods          | Scenario      | Returns |
-|---------|------------------|---------------|---------|
-| Bagel   | double getCost() | Method called | double  |
-|         |                  |               |         |
+| Classes   | Methods                          | Scenario      | Returns |
+|-----------|----------------------------------|---------------|---------|
+| Inventory | String getPriceInfo(String name) | Method called | String  |
+|           |                                  |               |         |
 
 ```
 8.
@@ -104,10 +104,10 @@ So I don't over-spend,
 I'd like to know the cost of each filling before I add it to my bagel order.
 ```
 
-| Classes | Methods               | Scenario      | Returns                                      |
-|---------|-----------------------|---------------|----------------------------------------------|
-| Shop    | String listFillings() | Method called | String containing information about fillings |
-|         |                       |               |                                              |
+| Classes   | Methods               | Scenario      | Returns                                      |
+|-----------|-----------------------|---------------|----------------------------------------------|
+| Inventory | String listFillings() | Method called | String containing information about fillings |
+|           |                       |               |                                              |
 
 ```
 10.
