@@ -76,7 +76,7 @@ I'd like to know the total cost of items in my basket.
 
 | Method      | Member variables | Scenario                         | Output/Results |
 |-------------|------------------|----------------------------------|----------------|
-| totalCost() | int totalCost    | If items *do* exist in basket    | sum            |
+| totalCost() | double totalCost | If items *do* exist in basket    | sum            |
 |             |                  | If items *don't* exist in basket | 0              |
 
 
@@ -113,10 +113,10 @@ So I don't over-spend,
 I'd like to know the cost of each filling before I add it to my bagel order.
 ```
 
-| Method        | Member variables                  | Scenario                         | Output/Results |
-|---------------|-----------------------------------|----------------------------------|----------------|
-| fillingCost() | HashMap<String, Integer> fillings | If fillings *do* exist in map    | true           |
-|               |                                   | If fillings *don't* exist in map | false          |
+| Method        | Member variables                  | Scenario                           | Output/Results |
+|---------------|-----------------------------------|------------------------------------|----------------|
+| fillingCost() | HashMap<String, Integer> fillings | If fillings *does* exist in map    | true           |
+|               |                                   | If fillings *doesn't* exist in map | false          |
 
 
 ```
@@ -130,3 +130,8 @@ I want customers to only be able to order things that we stock in our inventory.
 |-----------------|----------------------------|------------------------------------------------|----------------|
 | controlOrders() | ArrayList<String> products | If item requested *does* exist in inventory    | true           |
 |                 |                            | If item requested *doesn't* exist in inventory | false          |
+
+
+### Class diagram
+
+![img.png](img.png)

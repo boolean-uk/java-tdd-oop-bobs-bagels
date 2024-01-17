@@ -8,29 +8,37 @@ class BasketTest {
     public void addingBagelToBasketReturnsTrue() {
         Basket basket = new Basket();
 
-        Assertions.assertTrue(basket.add("Plain bagel"));
+        Bagel newBagel = new Bagel("Plain bagel", 2.49);
+
+        Assertions.assertTrue(basket.add(newBagel));
     }
 
     @Test
     public void removingBagelToBasketReturnsTrue() {
         Basket basket = new Basket();
 
-        basket.add("Plain bagel");
+        Bagel newBagel = new Bagel("Plain bagel", 2.49);
 
-        Assertions.assertTrue(basket.remove("Plain bagel"));
+        basket.add(newBagel);
+
+        Assertions.assertTrue(basket.remove(newBagel));
     }
 
     @Test
     public void returnsTrueIfBasketIsFull() {
         Basket basket = new Basket();
 
-        basket.add("Plain bagel");
+        Bagel plainBagel = new Bagel("Plain bagel", 2.49);
+        Bagel eggBagel = new Bagel("Egg bagel", 2.69);
+        Bagel sourdoughBagel = new Bagel("Sourdough bagel", 2.69);
+
+        basket.add(plainBagel);
         Assertions.assertFalse(basket.isFull());
 
-        basket.add("Egg bagel");
+        basket.add(eggBagel);
         Assertions.assertTrue(basket.isFull());
 
-        basket.add("Sourdough bagel");
+        basket.add(sourdoughBagel);
         Assertions.assertTrue(basket.isFull());
     }
 
@@ -49,8 +57,21 @@ class BasketTest {
     public void testRemovingNonExistentItem() {
         Basket basket = new Basket();
 
-        basket.add("Egg bagel");
+        Bagel newBagel = new Bagel("Plain bagel", 2.49);
 
-        Assertions.assertFalse(basket.remove("Plain bagel"));
+        basket.add(newBagel);
+
+        Bagel oldBagel = new Bagel("Egg bagel", 2.69);
+
+        Assertions.assertFalse(basket.remove(oldBagel));
+    }
+
+    @Test
+    public void returnsTrueIfCostOfBasketIsSameAsExpected() {
+        Basket basket = new Basket();
+
+        Bagel plainBagel = new Bagel("Plain bagel", 2.49);;
+
+        Assertions.assertEquals(2.49, basket.totalCost());
     }
 }
