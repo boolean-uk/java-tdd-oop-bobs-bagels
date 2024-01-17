@@ -10,4 +10,11 @@ public class BagelTest {
         Bagel bagel = new Bagel("Onion");
         Assertions.assertTrue(bagel.addFilling("Egg"));
     }
+
+    @Test
+    public void addFillingThatAlreadyExistsTest() {
+        Bagel bagel = new Bagel("Onion");
+        bagel.addFilling("Egg");
+        Assertions.assertFalse(bagel.addFilling("Egg"));
+    }
 }
