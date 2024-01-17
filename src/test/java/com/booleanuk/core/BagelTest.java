@@ -18,7 +18,8 @@ public class BagelTest {
     public void addFilling() {
         Bagel bagel = new Bagel("Plain");
 
-        Assertions.assertTrue(bagel.addFilling());
+
+        Assertions.assertTrue(bagel.addFilling(new Filling("Bacon")));
 
     }
 

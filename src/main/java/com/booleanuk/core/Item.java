@@ -7,6 +7,12 @@ public class Item {
     private ArrayList<String> skuCodes;
     private String name;
     private double price;
+    private String variant;
+    public Item(String variant) {
+        this.variant = variant;
+
+    }
+
     public Item() {
 
     }
