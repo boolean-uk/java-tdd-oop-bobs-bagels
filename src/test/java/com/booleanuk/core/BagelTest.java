@@ -43,6 +43,16 @@ public class BagelTest {
         int outcome = abagel.changeCap(3);
         Assertions.assertEquals(3,outcome);
     }
+    @Test
+    public void testRemoveBagel(){
+        Bagel abagel = new Bagel();
+        abagel.addBagel("bagel1");
+        Assertions.assertTrue(abagel.removeBagel("bagel1"));
+        Assertions.assertFalse(abagel.removeBagel("bagel2"));
+        assertEquals("Basket does not contain this bagel2", outContent.toString().trim());
+    }
+    }
+
 
 
 }

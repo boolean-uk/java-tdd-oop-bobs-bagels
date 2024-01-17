@@ -37,6 +37,11 @@ public class Bagel {
         System.out.println("Basket has space");
         return false;
     }
+    public int changeCap(int cap){
+        this.capacity=cap;
+        return this.capacity;
+    }
+
 
 
 }
