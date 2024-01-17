@@ -6,7 +6,7 @@ public class BagelTest {
 
     @Test
     public void testInit() {
-        Bagel bagel = new Bagel();
+        Bagel bagel = new Bagel("Plain");
     }
 
 }

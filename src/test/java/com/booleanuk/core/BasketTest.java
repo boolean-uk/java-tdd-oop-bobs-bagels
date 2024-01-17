@@ -17,7 +17,7 @@ public class BasketTest {
     public void testAddItemToBasket() {
         Basket basket = new Basket();
 
-        Bagel bagel = new Bagel();
+        Bagel bagel = new Bagel("Plain");
 
         Assertions.assertTrue(basket.addItemToBasket(bagel));
         ArrayList<Item> itemList = basket.getItemList();

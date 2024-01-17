@@ -11,12 +11,16 @@ public class Basket {
 
     }
 
-    public boolean addItemToBasket(Bagel bagel) {
-        itemList.add(bagel);
+    public boolean addItemToBasket(Item item) {
+        itemList.add(item);
         return true;
     }
 
     public ArrayList<Item> getItemList() {
         return new ArrayList<>(itemList);
+    }
+
+    public boolean removeItemFromBasket(String plain) {
+        return true;
     }
 }
