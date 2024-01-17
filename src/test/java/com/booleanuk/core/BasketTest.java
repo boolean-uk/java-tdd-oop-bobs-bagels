@@ -10,7 +10,7 @@ class BasketTest {
     @Test
     public void testAddBagelToBasket() {
         Basket basket = new Basket();
-        basket.add("BGLO");
+        Assertions.assertTrue(basket.add("BGLO"));
         Assertions.assertTrue(basket.basketMap.containsKey("BGLO"));
     }
 
@@ -23,6 +23,16 @@ class BasketTest {
         Assertions.assertTrue(basket.basketMap.containsKey("BGLO"));
         Assertions.assertTrue(basket.basketMap.containsKey("BGLP"));
         Assertions.assertTrue(basket.basketMap.containsKey("BGLE"));
+    }
+
+    @Test
+    public void testAddMultipleOffSameBagelToBasket() {
+        Basket basket = new Basket();
+        basket.add("BGLO");
+        basket.add("BGLO");
+        basket.add("BGLO");
+        Assertions.assertTrue(basket.basketMap.containsKey("BGLO"));
+        Assertions.assertEquals(3, (int) basket.basketMap.get("BGLO"));
     }
 
     @Test
