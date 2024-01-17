@@ -103,13 +103,15 @@ So I know how much money I need,
 I'd like to know the total cost of items in my basket.
 ```
 
+Class Customer
 
-| Class Variables | Methods | Scenario | Output/Return |
-|-----------------|---------|----------|---------------|
-|                 |         |          |               |
-|                 |         |          |               |
-|                 |         |          |               |
-|                 |         |          |               |
+
+| Class Variables | Methods                                | Scenario                            | Output/Return |
+|-----------------|----------------------------------------|-------------------------------------|---------------|
+|                 | getTotalCost(ArrayList<Item> itemList) | Calculates total price of item list | double        |
+|                 | getCostOfItem(Item item)               | Gets price of single item           | double        |
+|                 |                                        |                                     |               |
+|                 |                                        |                                     |               |
 
 
 

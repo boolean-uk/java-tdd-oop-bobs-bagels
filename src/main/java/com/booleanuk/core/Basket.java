@@ -34,4 +34,12 @@ public class Basket {
     public int getBasketCapacity() {
         return this.basketCapacity;
     }
+
+    public boolean setBasketCapacity(int basketCapacity) {
+        if(basketCapacity > 0) {
+            this.basketCapacity = basketCapacity;
+            return true;
+        }
+        return false;
+    }
 }
