@@ -76,40 +76,39 @@ I want customers to only be able to order things that we stock in our inventory.
 
 ### Class Basket
 
-| Methods                      | Member variables                                          | Scenario                | Output/return                            |
-|------------------------------|-----------------------------------------------------------|-------------------------|------------------------------------------|
-| {1,3,8, 10}`add(String sku)` | HashMap<item: Item, amount: int> basketContent            | sku *in* inventory and  | String "Item *sku* added to basket."     |
-|                              | HashMap<item: Item, amount: int> BobsBagelShop.inventory  | basket *is not* full.   |                                          |
-|                              | int BobsBagelShop.basketCapacity                          | sku *not in* inventory. | String "Chosen item not in stock."       |
-|                              |                                                           | basket *is* full.       | String "Basket is full."                 |
-| {2,5}`remove(String sku)`    | HashMap<item: Item, amount: int> basketContent            | sku *not in* basket.    | String "Item *sku* not in basket."       |
-|                              |                                                           | sku *in* basket.        | String "Item *sku* removed from basket." |
-| {6}`totalCost()`             | HashMap<item: Item, amount: int> basketContent            | Not empty basket.       | double price                             |
-|                              | double item.price                                         | Empty basket.           | double price = 0.0.                      |
-|                              |                                                           |                         |                                          |
+| Methods                    | Member variables                                       | Scenario                | Output/return                            |
+|----------------------------|--------------------------------------------------------|-------------------------|------------------------------------------|
+| {1,3,8, 10}`add(Item sku)` | HashMap<Item item, int amount> basketContent           | sku *in* inventory and  | String "Item *sku* added to basket."     |
+|                            | HashMap<Item item, int amount> BobsBagelShop.inventory | basket *is not* full.   |                                          |
+|                            | int BobsBagelShop.basketCapacity                       | sku *not in* inventory. | String "Chosen item not in stock."       |
+|                            |                                                        | basket *is* full.       | String "Basket is full."                 |
+| {2,5}`remove(Item sku)`    | HashMap<Item item, int amount> basketContent           | sku *not in* basket.    | String "Item *sku* not in basket."       |
+|                            |                                                        | sku *in* basket.        | String "Item *sku* removed from basket." |
+| {6}`totalCost()`           | HashMap<Item item, int amount> basketContent           | Not empty basket.       | double price                             |
+|                            | double item.price                                      | Empty basket.           | double price = 0.0.                      |
+|                            |                                                        |                         |                                          |
 
 ### Class BobsBagelsShop
 
-| Methods                              | Member variables                 | Scenario                     | Output/Return                                         |
-|--------------------------------------|----------------------------------|------------------------------|-------------------------------------------------------|
-| {4}`changeCapacity(int newCapacity)` | int basketCapacity               | newCapacity < 0              | String "New capacity must be non negative."           |
-|                                      |                                  | newCapacity >= 0             |                                                       |
-|                                      |                                  | && no baskets have more      | String "New basket capacity is *newCapacity*."        |
-|                                      |                                  | items than newCapacity.      |                                                       |
-|                                      |                                  | Baskets have more items than | String "New capacity must be larger than              |
-|                                      |                                  | newCapacity.                 | number of items currently in basket."                 |
-| {7,9}`showInventory()`               | HashMap<item: Item, amount: int> | Inventory not empty.         | String "Bob's Bagels\nSKU\tPrice\tName\tVariant\n..." |
-|                                      | inventory                        | Inventory empty.             | String "No items in stock."                           |
+| Methods                              | Member variables               | Scenario                     | Output/Return                                         |
+|--------------------------------------|--------------------------------|------------------------------|-------------------------------------------------------|
+| {4}`changeCapacity(int newCapacity)` | int basketCapacity             | newCapacity < 0              | String "New capacity must be non negative."           |
+|                                      |                                | newCapacity >= 0             |                                                       |
+|                                      |                                | && no baskets have more      | String "New basket capacity is *newCapacity*."        |
+|                                      |                                | items than newCapacity.      |                                                       |
+|                                      |                                | Baskets have more items than | String "New capacity must be larger than              |
+|                                      |                                | newCapacity.                 | number of items currently in basket."                 |
+| {7,9}`showInventory()`               | HashMap<Item item, int amount> | Inventory not empty.         | String "Bob's Bagels\nSKU\tPrice\tName\tVariant\n..." |
+|                                      | inventory                      | Inventory empty.             | String "No items in stock."                           |
 
 
 ### Class Item
 
-| Methods                                                       | Member variables | Scenario | Output/Return |
-|---------------------------------------------------------------|------------------|----------|---------------|
-| {7,9}`checkPrice()`                                           | double price     |          | double price  |
-|                                                               |                  |          |               |
-| `Item(String sku, String name, String variant, double price)` | String sku       |          |               |
-|                                                               | String name      |          |               |
-|                                                               | String variant   |          |               |
-|                                                               | double price     |          |               |
+| Methods                                           | Member variables | Scenario | Output/Return |
+|---------------------------------------------------|------------------|----------|---------------|
+| {7,9}`checkPrice()`                               | double price     |          | double price  |
+|                                                   |                  |          |               |
+| `Item(String name, String variant, double price)` | double price     |          |               |
+|                                                   | String name      |          |               |
+|                                                   | String variant   |          |               |
 
