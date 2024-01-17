@@ -13,6 +13,8 @@ public class CustomerTest {
     @Test
     public void testGetTotalCost() {
         Customer customer = new Customer();
+
+
     }
 
     @Test

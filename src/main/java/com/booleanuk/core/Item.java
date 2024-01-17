@@ -5,6 +5,8 @@ import java.util.ArrayList;
 public class Item {
 
     private ArrayList<String> skuCodes;
+
+    private double price;
     public Item() {
 
     }
@@ -18,4 +20,11 @@ public class Item {
         this.skuCodes = skuCodes;
     }
 
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    public double getPrice() {
+        return this.price;
+    }
 }
