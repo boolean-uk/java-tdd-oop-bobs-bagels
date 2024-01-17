@@ -2,19 +2,21 @@
 
 Accessor methods are not included in the domain model (eg. setCapacity(int), getBasket(), etc)
 
-| Class                    | Method                  | Return value | Class variable                           | Description                                         |
-|--------------------------|-------------------------|--------------|------------------------------------------|-----------------------------------------------------|
-| Store                    | itemStock(Item)         | int          | HashMap\<Item, Integer>                  | Checks if item is in stock                          |
-| Basket                   | addItem(Bagel)          | boolean      | ArrayList\<Item> basket                  | Adds a specific type of Bagel to the Basket         |
-|                          | removeItem(Bagel)       | boolean      | ArrayList\<Item> basket                  | Removes a specific type of Bagel from the Basket    |
-|                          | isFull()                | boolean      | ArrayList\<Item> basket<br/>int capacity | Checks if Basket is full based on capacity variable |
-|                          | getTotalCost()          | double       | ArrayList\<Item> basket                  | Returns the total cost of all items in basket       |
-| Item                     | *Only accessor methods* |              | String name<br/>double price             |                                                     |
-| Bagel *(extends Item)*   | addFilling(Filling)     | boolean      | ArrayList\<Filling> filling              | Adds a Filling to a specific Bagel                  |
-|                          | removeFilling(Filling)  | boolean      | ArrayList\<Filling> filling              | Removes a Filling from a specific Bagel             |
-| Filling *(extends Item)* | *Only accessor methods* |              | String name<br/>double price             |                                                     |
-| Coffee *(extends Item)*  | *Only accessor methods* |              | String name<br/>double price             |                                                     |
-
+| Class                    | Method                  | Return value | Class variable           | Description                                         |
+|--------------------------|-------------------------|--------------|--------------------------|-----------------------------------------------------|
+| Store                    | itemStock(Item)         | int          | HashMap\<Item, Integer>  | Checks if item is in stock                          |
+|                          | fetchItems()            | void         |                          |                                                     |
+|                          | getItemBySKU()          | Item         | ArrayList<Item>          |                                                     |
+| Basket                   | addItem(Item)           | boolean      | ArrayList\<Item>         | Adds a specific type of Item to the Basket          |
+|                          | removeItem(Item)        | boolean      | ArrayList\<Item>         | Removes a specific type of Item from the Basket     |
+|                          | isFull()                | boolean      | ArrayList\<Item><br/>int | Checks if Basket is full based on capacity variable |
+|                          | getTotalCost()          | double       | ArrayList\<Item>         | Returns the total cost of all items in basket       |
+|                          | clear()                 | void         | ArrayList\<Item>         |                                                     |
+| Item                     | *Only accessor methods* |              | String<br/>double        |                                                     |
+| Bagel *(extends Item)*   | addFilling(Filling)     | boolean      | ArrayList\<Filling>      | Adds a Filling to a specific Bagel                  |
+|                          | removeFilling(Filling)  | boolean      | ArrayList\<Filling>      | Removes a Filling from a specific Bagel             |
+| Coffee *(extends Item)*  |                         |              |                          |                                                     |
+| Filling *(extends Item)* |                         |              |                          |                                                     |
 
 # User Stories
 
