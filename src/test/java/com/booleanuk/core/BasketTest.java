@@ -145,4 +145,30 @@ class BasketTest {
         // Remove ham bagel, that has now been added
         Assertions.assertTrue(basket.removeItem("Bagel Everything"));
     }
+
+    // Check total cost in basket
+
+    @Test
+    public void testTotalCost() {
+        Basket basket = new Basket();
+        Assertions.assertEquals(0.0, basket.total);
+
+        Assertions.assertTrue(basket.addItem("Bagel Plain"));
+        Assertions.assertTrue(basket.addItem("Bagel Sesame"));
+        Assertions.assertTrue(basket.addItem("Coffee Capuccino"));
+        Assertions.assertTrue(basket.addItem("Filling Cheese"));
+
+        Assertions.assertEquals(basket.total, basket.getTotal());
+        Assertions.assertEquals(2.29, basket.getTotal());
+
+        Assertions.assertTrue(basket.removeItem("Bagel Sesame"));
+        Assertions.assertTrue(basket.addItem("Bagel Everything"));
+        Assertions.assertTrue(basket.addItem("Bagel Onion"));
+        Assertions.assertEquals(2.78, basket.getTotal());
+
+        Assertions.assertTrue(basket.addItem("Bagel Everything"));
+        Assertions.assertTrue(basket.addItem("Bagel Everything"));
+        Assertions.assertEquals(3.76, basket.getTotal());
+    }
+
 }
