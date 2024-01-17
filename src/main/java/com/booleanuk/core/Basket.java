@@ -16,7 +16,7 @@ public class Basket {
 		return items.contains(id);
 	}
 
-	public void addBagel(String id) throws NotInInventoryException {
+	public void addItem(String id) throws NotInInventoryException {
 		if (inventory.inInventory(id)) {
 			if (!isFull()) {
 				items.add(id);
@@ -25,7 +25,7 @@ public class Basket {
 		else {throw new NotInInventoryException(id);}
 	}
 
-	public void removeBagel(String id) throws NotInBasketException {
+	public void removeItem(String id) throws NotInBasketException {
 		if (items.contains(id)) {
 			items.remove(id);
 		} else {

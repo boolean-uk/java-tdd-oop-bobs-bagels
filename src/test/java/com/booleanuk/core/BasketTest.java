@@ -7,13 +7,13 @@ class BasketTest {
 
 
 	@Test
-	public void addBagelTest() {
+	public void addItemTest() {
 		Inventory inventory = new Inventory();
 		Basket basket = new Basket(inventory);
 		Assertions.assertFalse(basket.inBasket("BGLP"));
 		Assertions.assertFalse(basket.inBasket("BGLO"));
 		try {
-			basket.addBagel("BGLP");
+			basket.addItem("BGLP");
 		} catch (NotInInventoryException e) {
 			throw new RuntimeException(e);
 		}
@@ -22,18 +22,18 @@ class BasketTest {
 	}
 
 	@Test
-	public void removeBagelTest() {
+	public void removeItemTest() {
 		Inventory inventory = new Inventory();
 		Basket basket = new Basket(inventory);
 		try {
-			basket.addBagel("BGLP");
+			basket.addItem("BGLP");
 		} catch (NotInInventoryException e) {
 			throw new RuntimeException(e);
 		}
 		Assertions.assertTrue(basket.inBasket("BGLP"));
 		Assertions.assertFalse(basket.inBasket("BGLO"));
 		try {
-			basket.removeBagel("BGLP");
+			basket.removeItem("BGLP");
 		} catch (NotInBasketException e) {
 			throw new RuntimeException(e);
 		}
@@ -47,20 +47,33 @@ class BasketTest {
 		Basket basket = new Basket(inventory);
 		Assertions.assertFalse(basket.isFull());
 		try {
-			basket.addBagel("BGLP");
-			basket.addBagel("BGLO");
-			basket.addBagel("BGLP");
+			basket.addItem("BGLP");
+			basket.addItem("BGLO");
+			basket.addItem("BGLP");
 		} catch (NotInInventoryException e) {
 			throw new RuntimeException(e);
 		}
 		Assertions.assertTrue(basket.isFull());
 
 		try {
-			basket.removeBagel("BGLP");
+			basket.removeItem("BGLP");
 		} catch (NotInBasketException e) {
 			throw new RuntimeException(e);
 		}
 		Assertions.assertFalse(basket.isFull());
+
+	}
+	@Test
+	public void inBasketTest(){
+		Inventory inventory = new Inventory();
+		Basket basket = new Basket(inventory);
+		Assertions.assertFalse(basket.inBasket("BGLP"));
+		try {
+			basket.addItem("BGLP");
+		} catch (NotInInventoryException e) {
+			throw new RuntimeException(e);
+		}
+		Assertions.assertTrue(basket.inBasket("BGLP"));
 
 	}
 
