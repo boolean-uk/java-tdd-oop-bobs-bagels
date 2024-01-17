@@ -1,7 +1,7 @@
 package com.booleanuk.core;
 
 public class NotInInventoryException extends Exception {
-	public NotInInventoryException(int id) {
+	public NotInInventoryException(String id) {
 		super("No item with id:" + id + " in inventory.");
 	}
 }

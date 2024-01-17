@@ -1,13 +1,15 @@
 package com.booleanuk.core;
 
-public class Bagel {
-	int id;
+import java.util.ArrayList;
+
+public class Bagel extends Item{
+	String id;
 	String name;
 	double price;
-	public Bagel(int id,String name, double price){
-		this.id=id;
-		this.name=name;
-		this.price=price;
+	ArrayList<Filling> fillings;
+
+	public Bagel(String id, String name, double price) {
+		super(id, name, price);
 	}
 
 }
