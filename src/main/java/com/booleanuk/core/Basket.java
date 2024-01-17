@@ -76,6 +76,20 @@ public class Basket {
         basketArr = newArray;
     }
 
+    public double totalCost(){
+
+        return 0;
+    }
+
+    public String bagelPrices(){
+
+        return"";
+    }
+    public String fillingPrices(){
+
+        return"";
+    }
+
     public static void main(String[] args) {
         Basket basket = new Basket();
         basket.addToBasket("bagle");

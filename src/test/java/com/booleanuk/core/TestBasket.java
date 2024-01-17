@@ -54,4 +54,43 @@ public class TestBasket {
         boolean result = basket.removeFromBasket("FILE");
         Assertions.assertFalse(result);
     }
+
+    @Test
+    public void testTotalCostIsRight(){
+        Basket basket = new Basket();
+
+        basket.addToBasket("BGLO");
+        basket.addToBasket("BGLP");
+        basket.addToBasket("COFB");
+        Assertions.assertEquals(1.87d,basket.totalCost());
+    }
+
+    @Test
+    public void testShouldSeeBagelPrices(){
+        Basket basket = new Basket();
+
+        Assertions.assertEquals("String",basket.bagelPrices());
+    }
+
+    @Test
+    public void testChooseFilling(){
+        Basket basket = new Basket();
+
+        //Not ready at all
+        Assertions.assertFalse(basket.addToBasket("Fill"));
+    }
+
+    @Test
+    public void testShouldSeeFillingPrices(){
+        Basket basket = new Basket();
+
+        Assertions.assertEquals("String",basket.fillingPrices());
+    }
+
+    @Test
+    public void testCanOnlyAddExistingValues(){
+        Basket basket = new Basket();
+
+        Assertions.assertFalse(basket.addToBasket("BGLQ"));
+    }
 }
