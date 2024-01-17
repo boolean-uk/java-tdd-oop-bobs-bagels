@@ -40,7 +40,6 @@ As a Bob's Bagels manager,
 So that I can expand my business,
 I’d like to change the capacity of baskets.
 ```
-# NEED TO FIND SOLVE FOR CHECKING BASKETS AND UPDATING CAPACITY
 | Class      | Method                          | Variables    | Scenario                                                                                      | Return value                                           |
 |------------|---------------------------------|--------------|-----------------------------------------------------------------------------------------------|--------------------------------------------------------|
 | BobsBagels | setBasketCapacity(int capacity) |              | Capacity is lowered beyond a baskets number of items, the capacity remains unchanged          | Return "There are customers with more items in basket" |
