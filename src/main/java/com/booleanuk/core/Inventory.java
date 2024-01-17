@@ -15,22 +15,22 @@ public class Inventory {
         coffee = new ArrayList<>();
         fillings = new ArrayList<>();
         for(int i = 0; i < 20; i++){
-            bagels.add(new Bagel("Onion", 0.49));
-            bagels.add(new Bagel("Plain", 0.39));
-            bagels.add(new Bagel("Everything", 0.49));
-            bagels.add(new Bagel("Sesame", 0.49));
+            bagels.add(new Bagel("Bagel","Onion", 0.49));
+            bagels.add(new Bagel("Bagel","Plain", 0.39));
+            bagels.add(new Bagel("Bagel","Everything", 0.49));
+            bagels.add(new Bagel("Bagel","Sesame", 0.49));
 
-            coffee.add(new Coffee("Black", 1.19));
-            coffee.add(new Coffee("White", 1.19));
-            coffee.add(new Coffee("Cappuccino", 1.29));
-            coffee.add(new Coffee("Latte", 1.29));
+            coffee.add(new Coffee("Coffee","Black", 1.19));
+            coffee.add(new Coffee("Coffee", "White", 1.19));
+            coffee.add(new Coffee("Coffee", "Cappuccino", 1.29));
+            coffee.add(new Coffee("Coffee","Latte", 1.29));
 
-            fillings.add(new Filling("Bacon", 0.12));
-            fillings.add(new Filling("Egg", 0.12));
-            fillings.add(new Filling("Cheese", 0.12));
-            fillings.add(new Filling("Cream Cheese", 0.12));
-            fillings.add(new Filling("Smoked Salmon", 0.12));
-            fillings.add(new Filling("Ham", 0.12));
+            fillings.add(new Filling("Filling", "Bacon", 0.12));
+            fillings.add(new Filling("Filling","Egg", 0.12));
+            fillings.add(new Filling("Filling","Cheese", 0.12));
+            fillings.add(new Filling("Filling","Cream Cheese", 0.12));
+            fillings.add(new Filling("Filling","Smoked Salmon", 0.12));
+            fillings.add(new Filling("Filling","Ham", 0.12));
 
 
         }
@@ -82,6 +82,7 @@ public class Inventory {
             if(currentItem.getType().equals(type)){
                 count++;
                 items.add(currentItem);
+                iterator.remove();
                 if(count == amount){
                     return items;
                 }
@@ -89,5 +90,15 @@ public class Inventory {
         }
         return null;
     }
-
+    public void addItems(Item item){
+        if(item instanceof Bagel){
+            bagels.add(item);
+        }
+        else if(item instanceof Coffee){
+            coffee.add(item);
+        }
+        else if(item instanceof Filling){
+            fillings.add(item);
+        }
+    }
 }

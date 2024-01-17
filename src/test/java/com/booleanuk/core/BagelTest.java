@@ -9,6 +9,8 @@ public class BagelTest {
     public void testAddingItemToBasket(){
         Basket basket = new Basket();
         Assertions.assertTrue(basket.addItem("Coffee", "Black", 10));
+
+
     }
 
     /*  Test use case 2*/

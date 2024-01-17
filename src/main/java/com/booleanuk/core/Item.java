@@ -3,9 +3,11 @@ package com.booleanuk.core;
 class Item {
     protected String type;
     protected double price;
+    protected  String name;
 
-    public Item(String name, double price) {
-        this.type = name;
+    public Item(String name, String type, double price) {
+        this.type = type;
+        this.name = name;
         this.price = price;
     }
     public String getType(){
@@ -13,5 +15,8 @@ class Item {
     }
     public double getPrice(){
         return this.price;
+    }
+    public String getName(){
+        return this.name;
     }
 }
