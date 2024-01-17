@@ -74,5 +74,12 @@ public class BasketManagerTest {
     @Test
     public void testTotalCost(){
         BasketManager b = new BasketManager();
+        Assertions.assertTrue(b.totalCost() == 0);
+        b.add(item_a);
+        b.add(item_b);
+        b.add(item_c);
+        Assertions.assertEquals(30, b.totalCost());
+        Assertions.assertEquals(30, (b.remove(item_a).getPrice() + b.remove(item_b).getPrice() + b.remove(item_c).getPrice()));
+
     }
 }

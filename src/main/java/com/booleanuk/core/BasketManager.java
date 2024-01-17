@@ -22,7 +22,7 @@ public class BasketManager {
     }
 
     public Item remove(Item item) {
-        for(Item i : this.getBasket()) {
+        for(Item i : getBasket()) {
             if (i == item) {
                 getBasket().remove(i);
                 return i;
@@ -55,7 +55,12 @@ public class BasketManager {
     }
 
     public double totalCost() {
-        return 0.0;
+        double total = 0.0;
+        for(Item i : getBasket()) {
+            total += i.getPrice();
+        }
+        System.out.println(total);
+        return total;
     }
 
     /**
