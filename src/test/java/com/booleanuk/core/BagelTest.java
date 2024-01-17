@@ -27,8 +27,8 @@ public class BagelTest {
     @Test
     public void testAddingVanillaFilling(){
         Bagel bagel = new Bagel("plain");
-        Assertions.assertTrue(bagel.addFilling("vanilla"));
+        Assertions.assertTrue(bagel.addFilling("Bacon"));
         Assertions.assertFalse(bagel.addFilling("brick"));
-        Assertions.assertEquals("vanilla", bagel.getFilling());
+        Assertions.assertEquals("Bacon", bagel.getFilling());
     }
 }
