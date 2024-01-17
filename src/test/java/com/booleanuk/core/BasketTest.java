@@ -255,13 +255,22 @@ class BasketTest {
     public void testChooseFillingOfBagel() {
         Basket basket = new Basket();
 
-        Bagel bagel = new Bagel("Everything");
-
         Filling filling = new Filling("Egg");
 
         String result = basket.chooseBagelFilling(filling);
         Assertions.assertEquals("Egg", result);
+    }
 
+    //User Story 9
+    @Test
+    public void testReturnPriceOfEachFilling() {
+        Basket basket = new Basket();
+
+        Filling filling = new Filling("Egg");
+
+        String result = basket.costOfEachFilling(filling);
+
+        Assertions.assertEquals(0.12, result);
     }
 
 }

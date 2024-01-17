@@ -146,7 +146,7 @@ I'd like to be able to choose fillings for my bagel.
 |-----------|------------------------------------------------|-------------------------------------------------|------------------------------------------|----------------------------|
 | Basket    | HashMap<String, Inventory> itemsFullyDetailed; | String chooseBagelFilling(Filling bagelFilling) | I want to choose the filling of my bagel | Return affirming statement |
 | Inventory |                                                |                                                 |                                          |                            |
-| Bagel     |                                                |                                                 |                                          |                            |
+| Filling   |                                                |                                                 |                                          |                            |
 
 
 ## User Story 9.
@@ -155,6 +155,14 @@ So I don't over-spend,
 I'd like to know the cost of each filling before I add it to my bagel order.
 
 # Domain Model For User Story 9
+
+
+| Class     | Member Variables                               | Methods                                        | Scenario                               | Output/Result               |
+|-----------|------------------------------------------------|------------------------------------------------|----------------------------------------|-----------------------------|
+| Basket    | HashMap<String, Inventory> itemsFullyDetailed; | String costOfEachFilling(Filling bagelFilling) | I want to see the cost of each filling | Return cost of each filling |
+| Inventory |                                                |                                                |                                        |                             |
+| Filling   |                                                |                                                |                                        |                             |
+
 
 ## User Story 10.
 As the manager,
