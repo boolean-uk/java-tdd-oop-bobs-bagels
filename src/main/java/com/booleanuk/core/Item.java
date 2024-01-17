@@ -16,6 +16,11 @@ public class Item {
         this.filling = filling;
     }
 
+    public boolean addFilling(Item filling) {
+      setFilling(filling);
+      return false;
+    }
+
     @Override
     public String toString() {
         return "Item: {" +
