@@ -82,21 +82,21 @@ I want customers to only be able to order things that we stock in our inventory.
 
 
 
-| Class  | Variables                             | Methods                        | Scenarios                                  | Outputs            |
-|--------|---------------------------------------|--------------------------------|--------------------------------------------|--------------------|
-| Basket | ArrayList<Inventory> ? HashMap basket | add(Product item)              | If item is in the basket                   | false              |
-|        |                                       |                                | If item is not in the basket               | true               |
-|        |                                       | remove(Product item)           | If item exits                              | true               |
-|        |                                       |                                | If item doesn't exit                       | false/message      |
-|        |                                       | isFull()                       | If basket is full                          | true               |
-|        |                                       |                                | If basket is not full                      | false              |
-|        |                                       | changeCapacity(int newCapacity) | If basket capacity successfully changed    | true               |
-|        |                                       |                                | If basket capacity is not changed          | false              |
-|        |                                       | getTotalCost()                 | User wants to know the total cost          | sum of item prices |
-|        |                                       | getItemCost()                  | User wants to know the cost of item        | price of item      |
-|        |                                       | addFilling()                   | User wants to add filling to their bagel   | true               |
-|        |                                       | getFillingCost()               | User wants to know the cost of the filling | price              |
-|        |                                       | isItemInInventory()            | If item is in inventory                    | true               |
-|        |                                       |                                | If item is not in inventory                | false              |
+| Class  | Variables                 | Methods                        | Scenarios                                  | Outputs            |
+|--------|---------------------------|--------------------------------|--------------------------------------------|--------------------|
+| Basket | ArrayList<Product> basket | add(Product item)              | If item is in the basket                   | false              |
+|        |                           |                                | If item is not in the basket               | true               |
+|        |                           | remove(Product item)           | If item exits                              | true               |
+|        |                           |                                | If item doesn't exit                       | false/message      |
+|        |                           | isFull()                       | If basket is full                          | true               |
+|        |                           |                                | If basket is not full                      | false              |
+|        |                           | changeCapacity(int newCapacity) | If basket capacity successfully changed    | true               |
+|        |                           |                                | If basket capacity is not changed          | false              |
+|        |                           | getTotalCost()                 | User wants to know the total cost          | sum of item prices |
+|        |                           | getItemCost()                  | User wants to know the cost of item        | price of item      |
+|        |                           | addFilling()                   | User wants to add filling to their bagel   | true               |
+|        |                           | getFillingCost()               | User wants to know the cost of the filling | price              |
+|        |                           | isItemInInventory()            | If item is in inventory                    | true               |
+|        |                           |                                | If item is not in inventory                | false              |
 
 
