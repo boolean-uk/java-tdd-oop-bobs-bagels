@@ -21,4 +21,17 @@ public class Inventory {
         }
     }
 
+    public boolean isInStock(String sku){
+        if (bagelInventory.containsKey(sku)){
+            return bagelInventory.get(sku) > 0;
+        }
+        else if (coffeeInventory.containsKey(sku)){
+            return coffeeInventory.get(sku) > 0;
+        }
+        else if (fillingInventory.containsKey(sku)){
+            return coffeeInventory.get(sku) > 0;
+        }
+        return false;
+    }
+
 }
