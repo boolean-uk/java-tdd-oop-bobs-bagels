@@ -68,21 +68,50 @@ public class TestBasket {
 
     @Test
     public void testCapacity(){
+        Basket basket = new Basket(new Manager());
+        basket.updateCapacity(2);
 
+        Assertions.assertTrue(basket.add("COFB"));
+        Assertions.assertTrue(basket.add("COFB"));
+        Assertions.assertEquals(2, basket.items);
+        Assertions.assertFalse(basket.add("COFB"));
+        Assertions.assertTrue(basket.add("COFB"));
+        Assertions.assertEquals(2, basket.items);
     }
 
     @Test
     public void testShrinkingCapacityWhenItemsInBasket(){
+        Basket basket = new Basket(new Manager());
+        basket.add("FILE");
+        basket.add("FILE");
+        basket.add("FILE");
+        basket.add("FILE");
+        basket.add("FILE");
 
+        Assertions.assertEquals(5, basket.items);
+
+        basket.updateCapacity(3);
+
+        Assertions.assertEquals(0, basket.items);
     }
 
     @Test
     public void testDisplayMenu(){
+        Basket basket = new Basket(new User());
+        basket.displayMenu();
 
+        Assertions.assertTrue(false);
     }
 
     @Test
     public void testTotalCost(){
+        Basket basket = new Basket(new User());
+        basket.add("COFB");
+        basket.add("BGLS");
+        basket.add("BGLP");
+        basket.add("FILX");
+        basket.add("FILS");
 
+        Assertions.assertEquals(0.99 + 0.49 + 0.39 + 0.12 + 0.12, basket.totalCost());
     }
 }

@@ -39,11 +39,24 @@ public class Basket {
             } else {
                 products.remove(product);
             }
+            items--;
             return true;
         } else {
             System.out.println("This product is not in your cart.");
             return false;
         }
+    }
+
+    public void updateCapacity(int newCapacity){
+
+    }
+
+    public void displayMenu(){
+
+    }
+
+    public double totalCost(){
+        return 0.0;
     }
 
     public Product getProduct(String SKU){
