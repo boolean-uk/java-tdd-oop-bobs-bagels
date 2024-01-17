@@ -7,6 +7,7 @@ public class BasketManagerTest {
 
     Item item_a = new Item("XXX", 10.0, Item.Name.BAGEL, Item.Variant.CHEESE, null);
     Item item_b = new Item("FFF", 10.0, Item.Name.FILLING, Item.Variant.CHEESE, null);
+    Item item_c = new Item("NNN", 10.0, Item.Name.FILLING, Item.Variant.CHEESE, null);
 
     @Test
     public void testAdd(){
@@ -23,6 +24,14 @@ public class BasketManagerTest {
         BasketManager b = new BasketManager();
         b.add(item_a);
         Assertions.assertNotNull(b.remove(item_a));
+        Assertions.assertNull(b.remove(item_a));
+        b.add(item_b);
+        Assertions.assertSame(item_b, b.remove(item_b));
+        Assertions.assertNull(b.remove(item_c));
+        b.add(item_a);
+        b.add(item_b);
+        Assertions.assertNotEquals(item_a, b.remove(item_b));
+
     }
 
     @Test

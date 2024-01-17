@@ -22,6 +22,12 @@ public class BasketManager {
     }
 
     public Item remove(Item item) {
+        for(Item i : getBasket()) {
+            if (i == item) {
+                getBasket().remove(i);
+                return i;
+            }
+        }
         return null;
     }
 
