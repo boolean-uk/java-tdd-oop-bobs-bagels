@@ -1,0 +1,40 @@
+Store
+	- String name
+	- HashMap<Item, Integer> inventory
+	+ itemStock(Item item) int
+
+Basket
+	- ArrayList<Item> basket
+	- int capacity
+	+ addItem(Item item) boolean
+	+ removeItem(Item item) boolean
+	+ isFull() boolean
+	+ getTotalCost() double
+
+Item
+	# String name
+	# double price
+
+Bagel
+	- ArrayList<Filling> filling
+	+ addFilling(Filling) boolean
+	+ removeFilling(Filling) boolean
+
+// Unsure if i should include member variables inherited from Item or not
+Filling
+	- String name
+	- double price
+
+Coffee
+	- String name
+	- double price
+
+
+Store -- Basket
+Basket -0..*- Item
+
+Bagel -.- Item
+Coffee -.- Item
+Filling -.- Item
+
+Filling -- Bagel
