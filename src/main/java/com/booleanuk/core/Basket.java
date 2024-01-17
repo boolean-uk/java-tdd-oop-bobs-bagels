@@ -12,6 +12,7 @@ public class Basket {
         }
 
         public void addItem(Product product) {
+            bagelBasket.add(product);
              }
 
         public void removeItem(Product product) {
