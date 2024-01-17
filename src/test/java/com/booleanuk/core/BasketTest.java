@@ -76,4 +76,15 @@ class BasketTest {
 
         Assertions.assertEquals(2.49, basket.totalCost());
     }
+
+    @Test
+    public void returnsCorrectCostOfBagel() {
+        Bagel plainBagel = new Bagel("Plain bagel", 2.49); //As a shop owner I introduce a new product and set its price
+        Bagel eggBagel = new Bagel("Egg bagel", 2.69); //As a shop owner I introduce a new product and set its price
+
+        double plainBagelPrice = plainBagel.getPrice(); //As a customer I can access the bagels and return their price
+        double eggBagelPrice = eggBagel.getPrice(); //As a customer I can access the bagels and return their price
+
+        Assertions.assertEquals(2.49, plainBagelPrice);
+    }
 }
