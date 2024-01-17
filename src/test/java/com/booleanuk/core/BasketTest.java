@@ -9,13 +9,13 @@ public class BasketTest {
 
     @Test
     public void testInit() {
-        Basket basket = new Basket();
+        Basket basket = new Basket(5);
     }
 
 
     @Test
     public void testAddItemToBasket() {
-        Basket basket = new Basket();
+        Basket basket = new Basket(5);
 
         Bagel bagel = new Bagel("Plain");
 
@@ -28,13 +28,15 @@ public class BasketTest {
 
     @Test
     public void testRemoveItemFromBasket() {
-        Basket basket = new Basket();
+        Basket basket = new Basket(5);
 
-        Assertions.assertTrue(basket.addItemToBasket(new Bagel("Plain")));
+        Bagel bagel = new Bagel("Plain");
+
+        Assertions.assertTrue(basket.addItemToBasket(bagel));
 
         Assertions.assertFalse(basket.getItemList().isEmpty());
 
-        Assertions.assertTrue(basket.removeItemFromBasket("Plain"));
+        Assertions.assertTrue(basket.removeItemFromBasket(bagel));
 
         Assertions.assertTrue(basket.getItemList().isEmpty());
 
@@ -44,8 +46,7 @@ public class BasketTest {
     public void testCapacity() {
         Basket basket = new Basket(5);
 
-        basket.getCapacity();
-        Assertions.assertEquals(basket.getBasketCapacity);
+        Assertions.assertEquals(5, basket.getBasketCapacity());
 
     }
 

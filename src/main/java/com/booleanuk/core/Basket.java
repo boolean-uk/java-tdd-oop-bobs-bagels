@@ -6,8 +6,10 @@ public class Basket {
 
 
     private ArrayList<Item> itemList = new ArrayList<>();
+    private int basketCapacity = 0;
 
-    public Basket() {
+    public Basket(int basketCapacity) {
+        this.basketCapacity = basketCapacity;
 
     }
 
@@ -20,7 +22,13 @@ public class Basket {
         return new ArrayList<>(itemList);
     }
 
-    public boolean removeItemFromBasket(String plain) {
+    public boolean removeItemFromBasket(Item item) {
+        this.itemList.remove(item);
         return true;
+    }
+
+
+    public int getBasketCapacity() {
+        return this.basketCapacity;
     }
 }
