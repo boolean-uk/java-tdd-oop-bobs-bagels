@@ -22,6 +22,7 @@ public class BasketTest {
     @BeforeEach
     public void resetBasket() {
         basket.setBasket(new ArrayList<>());
+        basket.setCapacity(2);
     }
 
     @Test
@@ -53,5 +54,12 @@ public class BasketTest {
         Assertions.assertTrue(basket.addItem(itemToAdd));
         Assertions.assertTrue(basket.removeItem(itemToAdd));
         Assertions.assertEquals(0, basket.getBasket().size());
+    }
+
+    @Test
+    public void canChangeBasketCapacity() {
+        Assertions.assertEquals(2, basket.getCapacity());
+        basket.setCapacity(5);
+        Assertions.assertEquals(5, basket.getCapacity());
     }
 }
