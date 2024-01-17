@@ -16,14 +16,23 @@ public class Item {
         this.filling = filling;
     }
 
+    /**
+     * Logic: verify that 'this' is a bagel, and that argument is a filling
+     * @param filling
+     * @return true if filling was added, false if filling not added
+     */
     public boolean addFilling(Item filling) {
-        if ((this.getName() != Name.FILLING) && (filling.getName() == Name.FILLING)) {
+        if ((this.getName() == Name.BAGEL) && (filling.getName() == Name.FILLING)) {
         setFilling(filling);
         return true;
         }
       return false;
     }
 
+    /**
+     * Logic: override toString() with custom version.
+     * @return my PotAtos in a nicely formatted way. Seems to be useful based on previous exercises
+     */
     @Override
     public String toString() {
         return "Item: {" +

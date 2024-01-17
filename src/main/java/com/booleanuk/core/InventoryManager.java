@@ -11,6 +11,11 @@ public class InventoryManager {
         initializeInventory();
     }
 
+    /**
+     * Logic: Initialize Bob's Bagels current stockpile of Items
+     * Iterating for-loop, just modify array-elements to change stockpile
+     * Remember to ensure arrays of same length
+     */
     public void initializeInventory() {
         String[] SKU = new String[]{"BGLO", "BGLP", "BGLE", "BGLS", "COFB", "COFW", "COFC", "COFL", "FILB", "FILE", "FILC", "FILX", "FILS", "FILH"};
         double[] price = new double[]{.49, .39, .49, .49, .99, 1.19, 1.29, 1.29, .12, .12, .12, .12, .12, .12};
