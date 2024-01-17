@@ -50,7 +50,12 @@ public class BasketManager {
         return false;
     }
 
-    public boolean checkItemInInventory() {
+    public boolean checkItemInInventory(Item item) {
+        InventoryManager inv = new InventoryManager();
+        if (inv.getInventory().containsKey(item.getSKU())) {
+            return true;
+        }
+        System.out.println("We do not stock the following " + item.toString());
         return false;
     }
 

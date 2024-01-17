@@ -69,6 +69,9 @@ public class BasketManagerTest {
     @Test
     public void testCheckItemInInventory(){
         BasketManager b = new BasketManager();
+        InventoryManager inv = new InventoryManager();
+        Assertions.assertTrue(b.checkItemInInventory(inv.getInventory().get("COFB")));
+        Assertions.assertFalse(b.checkItemInInventory(item_a));
     }
 
     @Test
