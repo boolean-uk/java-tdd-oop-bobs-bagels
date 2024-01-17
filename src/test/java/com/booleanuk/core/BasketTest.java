@@ -50,6 +50,14 @@ public class BasketTest {
 
         Assertions.assertEquals(5, basket.getBasketCapacity());
 
+        Assertions.assertTrue(basket.setBasketCapacity(2));
+        Assertions.assertFalse(basket.setBasketCapacity(0));
+        Assertions.assertTrue(basket.setBasketCapacity(-1));
+
+        Assertions.assertEquals(2, basket.getBasketCapacity());
+
+
+
     }
 
 }
