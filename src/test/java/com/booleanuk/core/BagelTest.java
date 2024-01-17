@@ -15,13 +15,6 @@ public class BagelTest {
         Assertions.assertEquals("bagel1", abagel.addBagel("bagel1"));
 
     }
-    @Test
-    public void testRemoveBagel(){
-        Bagel abagel = new Bagel();
-        abagel.addBagel("bagel1");
-        Assertions.assertTrue(abagel.removeBagel("bagel1"));
-        Assertions.assertFalse(abagel.removeBagel("bagel2"));
-    }
     private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
 
     @Test
@@ -46,13 +39,11 @@ public class BagelTest {
     @Test
     public void testRemoveBagel(){
         Bagel abagel = new Bagel();
+        System.setOut(new PrintStream(outContent));
         abagel.addBagel("bagel1");
         Assertions.assertTrue(abagel.removeBagel("bagel1"));
         Assertions.assertFalse(abagel.removeBagel("bagel2"));
         assertEquals("Basket does not contain this bagel2", outContent.toString().trim());
     }
-    }
-
-
 
 }

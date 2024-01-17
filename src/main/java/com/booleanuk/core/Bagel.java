@@ -26,6 +26,7 @@ public class Bagel {
             bagelList.remove(bagel);
             return true;
         }
+        System.out.println("Basket does not contain this " + bagel);
         return false;
     }
 
@@ -41,6 +42,7 @@ public class Bagel {
         this.capacity=cap;
         return this.capacity;
     }
+
 
 
 
