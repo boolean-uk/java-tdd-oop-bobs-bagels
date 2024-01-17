@@ -11,13 +11,17 @@ import java.util.ArrayList;
 public class BasketTest {
     private static final String coffeeBlackSKU = "COFB";
     private static final String bagelPlainSKU = "BGLP";
-    private static Store bobsTest;
+
     private static Basket basket;
+    private static Item item1;
+    private static Item item2;
 
     @BeforeAll
     public static void setup() throws FileNotFoundException {
-        bobsTest = new Store("TesT Store");
+        Store bobsTest = new Store("TesT Store");
         basket = new Basket(2);
+        item1 = bobsTest.getItemBySKU(bagelPlainSKU);
+        item2 = bobsTest.getItemBySKU(coffeeBlackSKU);
     }
     @BeforeEach
     public void resetBasket() {
@@ -33,36 +37,30 @@ public class BasketTest {
 
     @Test
     public void canAddItemToBasket() {
-        Item itemToAdd = bobsTest.getItemBySKU(bagelPlainSKU);
-        Assertions.assertTrue(basket.addItem(itemToAdd));
+        Assertions.assertTrue(basket.addItem(item1));
         Assertions.assertEquals(1, basket.getBasket().size());
-        Assertions.assertEquals(itemToAdd, basket.getBasket().get(0));
+        Assertions.assertEquals(item1, basket.getBasket().get(0));
     }
 
     @Test
     public void canNotAddItemsWhenBasketIsFull() {
-        Item itemToAdd = bobsTest.getItemBySKU(bagelPlainSKU);
-        Assertions.assertTrue(basket.addItem(itemToAdd));
-        Assertions.assertTrue(basket.addItem(itemToAdd));
-        Assertions.assertFalse(basket.addItem(itemToAdd));
+        Assertions.assertTrue(basket.addItem(item1));
+        Assertions.assertTrue(basket.addItem(item1));
+        Assertions.assertFalse(basket.addItem(item1));
         Assertions.assertEquals(2, basket.getBasket().size());
     }
 
     @Test
     public void canRemoveItemFromBasket() {
-        Item itemToAdd = bobsTest.getItemBySKU(coffeeBlackSKU);
-        Assertions.assertTrue(basket.addItem(itemToAdd));
-        Assertions.assertTrue(basket.removeItem(itemToAdd));
+        Assertions.assertTrue(basket.addItem(item2));
+        Assertions.assertTrue(basket.removeItem(item2));
         Assertions.assertEquals(0, basket.getBasket().size());
     }
 
     @Test
     public void canNotRemoveItemFromBasketIfItDoesNotExist() {
-        Item itemToAdd = bobsTest.getItemBySKU(coffeeBlackSKU);
-        Item itemNotToAdd = bobsTest.getItemBySKU(bagelPlainSKU);
-
-        Assertions.assertTrue(basket.addItem(itemToAdd));
-        Assertions.assertFalse(basket.removeItem(itemNotToAdd));
+        Assertions.assertTrue(basket.addItem(item1));
+        Assertions.assertFalse(basket.removeItem(item2));
     }
 
     @Test
@@ -70,5 +68,14 @@ public class BasketTest {
         Assertions.assertEquals(2, basket.getCapacity());
         basket.setCapacity(5);
         Assertions.assertEquals(5, basket.getCapacity());
+    }
+
+    @Test
+    public void getTotalCost() {
+        Assertions.assertEquals(0, basket.getTotalCost());
+        basket.addItem(item1);
+        basket.addItem(item1);
+        basket.addItem(item2);
+        Assertions.assertEquals((0.39 + 0.39 + 0.99), basket.getTotalCost());
     }
 }
