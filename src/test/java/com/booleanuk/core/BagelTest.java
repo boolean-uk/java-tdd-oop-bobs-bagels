@@ -40,4 +40,14 @@ public class BagelTest {
 
 
     }
+    /* Test use case 5 */
+
+    /* Test use case 6 */
+    @Test
+    public void testGetTotalCostOfBasket(){
+        Basket basket = new Basket(20);
+        basket.addItem("Coffee", "Black", 3);
+        basket.addItem("Bagel", "Onion", 3);
+        Assertions.assertEquals(4.44, basket.getTotalCost());
+    }
 }

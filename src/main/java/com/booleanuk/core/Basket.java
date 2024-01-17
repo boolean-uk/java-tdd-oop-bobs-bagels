@@ -37,14 +37,12 @@ public class Basket {
             }
             return false;
     }
-    public ArrayList<Item> getAllItems(){
-        return this.items;
-    }
-    public int getCurrentBasketSize(){
-        return this.items.size();
-    }
+
     public boolean changeBasketCapacity(int capacity){
         return capacity >= this.items.size();
+    }
+    public double getTotalCost(){
+        return 0;
     }
 
 
