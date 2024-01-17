@@ -90,6 +90,11 @@ public class Store {
     }
 
     public boolean updateBasketCapacity(int newCapacity) {
+        for(Basket basket: baskets.values()) {
+            if(basket.getNoOfBagels()> newCapacity) {
+                return false;
+            }
+        }
         basketCapacity = newCapacity;
         return true;
     }
