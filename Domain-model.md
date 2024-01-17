@@ -74,7 +74,7 @@ I want customers to only be able to order things that we stock in our inventory.
 
 ## Domain Model
 
-Class Basket
+### Class Basket
 
 | Methods                      | Member variables                                          | Scenario                | Output/return                            |
 |------------------------------|-----------------------------------------------------------|-------------------------|------------------------------------------|
@@ -88,7 +88,7 @@ Class Basket
 |                              | double item.price                                         | Empty basket.           | double price = 0.0.                      |
 |                              |                                                           |                         |                                          |
 
-Class BobsBagelsShop
+### Class BobsBagelsShop
 
 | Methods                              | Member variables                 | Scenario                     | Output/Return                                         |
 |--------------------------------------|----------------------------------|------------------------------|-------------------------------------------------------|
@@ -102,7 +102,7 @@ Class BobsBagelsShop
 |                                      | inventory                        | Inventory empty.             | String "No items in stock."                           |
 
 
-Class Item
+### Class Item
 
 | Methods                                                       | Member variables | Scenario | Output/Return |
 |---------------------------------------------------------------|------------------|----------|---------------|
