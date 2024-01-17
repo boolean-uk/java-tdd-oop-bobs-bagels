@@ -79,12 +79,14 @@ class BasketTest {
 
     @Test
     public void returnsCorrectCostOfBagel() {
-        Bagel plainBagel = new Bagel("Plain bagel", 2.49); //As a shop owner I introduce a new product and set its price
-        Bagel eggBagel = new Bagel("Egg bagel", 2.69); //As a shop owner I introduce a new product and set its price
+        Bagel plainBagel = new Bagel("Plain", 2.49); //As a shop owner I introduce a new product and set its price
+        Bagel eggBagel = new Bagel("Egg", 2.69); //As a shop owner I introduce a new product and set its price
+        Bagel sourdoughBagel = new Bagel("Sourdough", 2.69);
 
         double plainBagelPrice = plainBagel.getPrice(); //As a customer I can access the bagels and return their price
         double eggBagelPrice = eggBagel.getPrice(); //As a customer I can access the bagels and return their price
+        String sourdoughBagelPrice = sourdoughBagel.getBagelPrice();
 
-        Assertions.assertEquals(2.49, plainBagelPrice);
+        Assertions.assertEquals("This bagel costs 2.69", sourdoughBagelPrice);
     }
 }

@@ -87,10 +87,10 @@ So I know what the damage will be,
 I'd like to know the cost of a bagel before I add it to my basket.
 ```
 
-| Method                    | Member variables                | Scenario                          | Output/Results              |
-|---------------------------|---------------------------------|-----------------------------------|-----------------------------|
-| costOfBagel(String bagel) | HashMap<String, Integer> bagels | If bagel *does* exists in list    | "This bagel costs: " + cost |
-|                           |                                 | If item *doesn't* exist in basket | "We do not sell this bagel" |
+| Method      | Member variables       | Scenario                          | Output/Results              |
+|-------------|------------------------|-----------------------------------|-----------------------------|
+| getPrice()  | private String variant | If bagel *does* exist in list     | "This bagel costs: " + cost |
+|             |                        | If item *doesn't* exist in basket | "We do not sell this bagel" |
 
 
 ```
