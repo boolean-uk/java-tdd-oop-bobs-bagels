@@ -29,4 +29,15 @@ public class BagelTest {
         basket.addItem("Filling", "Bacon", 1);
         Assertions.assertFalse(basket.addItem("Bagel", "Onion", 1));
     }
+
+    /* Test use case 4 */
+    @Test
+    public void testChangingBasketCapacity(){
+        Shop shop = new Shop();
+        shop.createBasket();
+        shop.getAllBaskets().get(0).addItem("Coffee", "Black", 5);
+        Assertions.assertTrue(shop.changeMaxCapacity(2));
+
+
+    }
 }

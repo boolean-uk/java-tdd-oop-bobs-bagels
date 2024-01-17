@@ -42,5 +42,9 @@ public class Basket {
     public ArrayList<Item> getAllItems(){
         return this.items;
     }
+    public int getCurrentBasketSize(){
+        return this.currentCapacity;
+    }
+
 
 }
