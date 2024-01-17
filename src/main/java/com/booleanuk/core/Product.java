@@ -41,7 +41,7 @@ public class Product {
     }
     @Override
     public String toString(){
-        return "Product: " +  getSKU() + " " +getName()+ " " + getPrice()+ " " + getVariant();
+        return getVariant() + " "+getName();
     }
 
     @Override
