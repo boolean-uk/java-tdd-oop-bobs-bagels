@@ -1,5 +1,8 @@
 package com.booleanuk.core.model;
 
+import com.booleanuk.core.model.item.Bagel;
+import com.booleanuk.core.model.item.Coffee;
+import com.booleanuk.core.model.item.Filling;
 import lombok.Data;
 
 import java.io.File;
@@ -40,9 +43,18 @@ public class Store {
         scanner.nextLine(); // Skip .csv header
         while (scanner.hasNext()) {
             String[] values = scanner.nextLine().split(",");
-            Item item = new Item(values[0], Double.parseDouble(values[1]), values[2], values[3]);
-            items.add(item);
-            inventory.put(item, Integer.valueOf(values[4]));
+            Item item = null;
+
+            switch (values[2]) {
+                case "Bagel" -> {item = new Bagel(values[0], Double.parseDouble(values[1]), values[2], values[3]);}
+                case "Coffee" -> {item = new Coffee(values[0], Double.parseDouble(values[1]), values[2], values[3]);}
+                case "Filling" -> {item = new Filling(values[0], Double.parseDouble(values[1]), values[2], values[3]);}
+            }
+
+            if (item != null) {
+                items.add(item);
+                inventory.put(item, Integer.valueOf(values[4]));
+            }
         }
     }
 }

@@ -29,4 +29,8 @@ public class Basket {
         }
         return basket.add(item);
     }
+
+    public boolean removeItem(Item item) {
+        return basket.remove(item);
+    }
 }
