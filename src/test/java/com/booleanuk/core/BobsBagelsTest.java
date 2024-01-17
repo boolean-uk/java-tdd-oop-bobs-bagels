@@ -49,7 +49,7 @@ class BobsBagelsTest {
         Basket basket = new Basket();
 
         basket.changeBasketCapacity(5);
-        Assertions.assertEquals(9, basket.basketCapacity);
+        Assertions.assertEquals(basket.basketCapacity, 9);
     }
 
     @Test
@@ -57,8 +57,14 @@ class BobsBagelsTest {
         Basket basket = new Basket();
 
         basket.changeBasketCapacity(-2);
-        Assertions.assertEquals(2, basket.basketCapacity);
+        Assertions.assertEquals(basket.basketCapacity, 2);
+    }
 
+    @Test
+    public void checkIfBasketSizeHandlesNegative() {
+        Basket basket = new Basket();
 
+        basket.changeBasketCapacity(-10);
+        Assertions.assertEquals(basket.basketCapacity, 4);
     }
 }
