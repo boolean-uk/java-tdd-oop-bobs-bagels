@@ -43,35 +43,37 @@ class BasketTest {
         Assertions.assertEquals(0, basket.basket.size());
     }
 
-    /*
-
+    // Remove
     @Test
-    public void removeChocolateFromEmptyBasketReturnFalse() {
-        Basket basket = new Basket(3);
-        boolean result = basket.removeBagel("choclate");
-        Assertions.assertFalse(result);
+    public void removeItemsValid() {
+        Basket basket = new Basket();
+        boolean result = basket.addItem("Bagel Onion");
+        Assertions.assertTrue(result);
+
+        Assertions.assertEquals(1, basket.basket.size());
+
+        result = basket.removeItem("Bagel Onion");
+        Assertions.assertTrue(result);
+
+        Assertions.assertEquals(0, basket.basket.size());
     }
 
     // 3.
     @Test
-    public void addBagelsToAFullBasketReturFalse() {
-        Basket basket = new Basket(3);
-        boolean result = basket.addBagel("choclate");
-        result = basket.addBagel("cheese");
-        result = basket.addBagel("creme");
-        result = basket.addBagel("ham");
+    public void removeItemsNotInBasket() {
+        Basket basket = new Basket();
+        boolean result = basket.addItem("Bagel Onion");
+        Assertions.assertTrue(result);
+
+        Assertions.assertEquals(1, basket.basket.size());
+
+        result = basket.removeItem("Bagel onion");
         Assertions.assertFalse(result);
+
+        Assertions.assertEquals(1, basket.basket.size());
     }
 
-    @Test
-    public void repeatedlyAddChocolateToAFullBasketReturnTrue() {
-        Basket basket = new Basket(3);
-        boolean result = basket.addBagel("choclate");
-        result = basket.addBagel("choclate");
-        result = basket.addBagel("choclate");
-        result = basket.addBagel("choclate");
-        Assertions.assertTrue(result);
-    }
+    /*
 
     // 4.
 
