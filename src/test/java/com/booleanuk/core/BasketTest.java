@@ -85,8 +85,16 @@ class BasketTest {
 
         double plainBagelPrice = plainBagel.getPrice(); //As a customer I can access the bagels and return their price
         double eggBagelPrice = eggBagel.getPrice(); //As a customer I can access the bagels and return their price
-        String sourdoughBagelPrice = sourdoughBagel.getBagelPrice();
+        String sourdoughBagelPrice = sourdoughBagel.getBagelPrice(); //Now as a String
 
         Assertions.assertEquals("This bagel costs 2.69", sourdoughBagelPrice);
+    }
+
+    @Test
+    public void checksIfFillingsExist() {
+        Filling peanutButter = new Filling("Peanut butter", 0.29);
+        Filling creamCheese = new Filling("Cream cheese", 0.19);
+
+        Assertions.assertEquals("Peanut butter, Cream cheese", Filling.getAllFillings());
     }
 }
