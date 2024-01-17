@@ -19,10 +19,10 @@ So I can change my order,
 I'd like to remove a bagel from my basket.
 ```
 
-| Classes | Methods                    | Scenario               | Returns |
-|---------|----------------------------|------------------------|---------|
-| Basket  | boolean removeItem(T item) | if item exists         | true    |
-|         |                            | it item does not exist | false   |
+| Classes | Methods                                      | Scenario               | Returns |
+|---------|----------------------------------------------|------------------------|---------|
+| Basket  | boolean removeItem(String name, String type) | if item exists         | true    |
+|         |                                              | it item does not exist | false   |
 
 ```
 3.
