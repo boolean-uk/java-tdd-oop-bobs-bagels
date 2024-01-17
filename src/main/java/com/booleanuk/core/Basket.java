@@ -24,6 +24,9 @@ public class Basket {
         if(this.basket.isEmpty()){
             return "Basket is empty";
         }
+        if(!this.basket.contains(item)){
+            return item + " is not in the basket!";
+        }
         this.basket.remove(item);
         return item +" removed from basket";
     }
