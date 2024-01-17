@@ -32,12 +32,18 @@ public class Inventory {
     public Inventory() {
         // Initiate hash maps
         inventory = new HashMap<>();
+        mapSKUtoTypeVariant = new HashMap<>();
+        mapTypeVariantToSKU = new HashMap<>();
 
+        String sku = "";
+        String typeVariant = "";
         // Fill hash map
         for (int i = 0; i < inventoryArray.length; i++) {
-            mapSKUtoTypeVariant.put(inventoryArray[i][0], inventoryArray[i][2] + " " + inventoryArray[i][3]);
-            mapTypeVariantToSKU.put(inventoryArray[i][2] + " " + inventoryArray[i][3], inventoryArray[i][0]);
-            inventory.put(inventoryArray[i][0], inventoryArray[i]);
+            sku = inventoryArray[i][0];
+            typeVariant = inventoryArray[i][2] + " " + inventoryArray[i][3];
+            mapSKUtoTypeVariant.put(sku, typeVariant);
+            mapTypeVariantToSKU.put(typeVariant, sku);
+            inventory.put(sku, inventoryArray[i]);
         }
 
 

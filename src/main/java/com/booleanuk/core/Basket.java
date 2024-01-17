@@ -4,63 +4,42 @@ import java.util.ArrayList;
 
 public class Basket {
     ArrayList<String> basket;
-    int basketCapacity;
+    int capacity;
+    Double total;
 
-    public Basket(int basketCapacity) {
+    Inventory inventory;
+
+    public Basket() {
+        inventory = new Inventory();
+
         this.basket = new ArrayList<>();
-        this.basketCapacity = basketCapacity;
+        this.capacity = 30;
+        this.total = 0.0;
     }
 
-/*
-        1.
-    As a member of the public,
-    So I can order a bagel before work,
-    I'd like to add a specific type of bagel to my basket.
- */
-    public boolean addBagel(String bagel) {
-        if (this.basket.size() >= this.basketCapacity)
+    public boolean addItem(String item) {
+        // Basket is full
+        if (this.basket.size() >= this.capacity)
             return false;
 
-        if (!this.basket.contains(bagel)) {
-            this.basket.add(bagel);
-        }
+        // The item is not in the inventory
+        if (!this.inventory.mapTypeVariantToSKU.containsKey(item))
+            return false;
+
+        // Add item by SKU code to
+        String sku = inventory.mapTypeVariantToSKU.get(item);
+        basket.add(sku);
+        total += Double.parseDouble(inventory.inventory.get(sku)[1]);
         return true;
     }
 
-/*
-            2.
-    As a member of the public,
-    So I can change my order,
-    I'd like to remove a bagel from my basket.
- */
-
-    public boolean removeBagel(String bagel) {
-        return this.basket.remove(bagel);
+    public boolean removeItem(String item) {
+        return this.basket.remove(item);
     }
 
-/*
-            3.
-    As a member of the public,
-    So that I can not overfill my small bagel basket
-    I'd like to know when my basket is full when I try adding an item beyond my basket capacity.
- */
-
-/*
-            4.
-    As a Bob's Bagels manager,
-    So that I can expand my business,
-    I’d like to change the capacity of baskets.
-*/
-    public int changeBasketCapacity(int newCapacity) {
-        this.basketCapacity = newCapacity;
-        return this.basketCapacity;
+    public int changeCapacity(int newCapacity) {
+        this.capacity = newCapacity;
+        return this.capacity;
     }
-
-/*
-            5.
-    As a member of the public
-    So that I can maintain my sanity
-    I'd like to know if I try to remove an item that doesn't exist in my basket.
- */
 
 }

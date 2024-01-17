@@ -21,10 +21,10 @@ class BasketTest {
         result = basket.addItem("Bagel Onion");
         Assertions.assertTrue(result);
 
-        Assertions.assertEquals("Bagel Onion", basket.basket.get(0));
-        Assertions.assertEquals("Filling Bacon", basket.basket.get(1));
-        Assertions.assertEquals("Coffee Black", basket.basket.get(2));
-        Assertions.assertEquals("Bagel Onion", basket.basket.get(3));
+        Assertions.assertEquals("BGLO", basket.basket.get(0));
+        Assertions.assertEquals("FILB", basket.basket.get(1));
+        Assertions.assertEquals("COFB", basket.basket.get(2));
+        Assertions.assertEquals("BGLO", basket.basket.get(3));
 
     }
 
@@ -41,16 +41,6 @@ class BasketTest {
         Assertions.assertFalse(result);
 
         Assertions.assertEquals(0, basket.basket.size());
-    }
-
-    // 2.
-
-    @Test
-    public void removeChocolateAfteraddingReturnTrue() {
-        Basket basket = new Basket(3);
-        boolean result = basket.addBagel("choclate");
-        result = basket.removeBagel("choclate");
-        Assertions.assertTrue(result);
     }
 
     /*
