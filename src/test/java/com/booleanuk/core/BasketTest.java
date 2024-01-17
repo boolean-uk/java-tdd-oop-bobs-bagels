@@ -70,6 +70,13 @@ class BasketTest {
         Assertions.assertTrue(basket.remove("Onion"));
         Assertions.assertFalse(basket.remove("Onion"));
     }
-
+    @Test
+    public void testTotalCostOfBasket(){
+        Basket basket = new Basket();
+        basket.add("Onion", 25.00);
+        basket.add("Chocolate", 30.00);
+        basket.add("Red berry", 35.00);
+        Assertions.assertEquals(90, basket.totalCost());
+    }
 
 }
