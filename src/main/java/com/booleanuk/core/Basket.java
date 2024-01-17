@@ -19,12 +19,31 @@ public class Basket {
         if(!bagel.getName().isEmpty()){
             if(!checkIfBasketIsFull()){
                 basket.add(bagel);
-                System.out.println("Added " + bagel.getName());
+                System.out.println("Added " + bagel.getName() + " with the price of: $" + bagel.getPrice());
+                this.total += bagel.getPrice();
                 return true;
             }
         }
         System.out.println("Could not add bagel");
         return false;
+    }
+    public boolean add(String bagelType, double price){
+        Bagel bagel = new Bagel(bagelType, price);
+        if(!bagel.getName().isEmpty()){
+            if(!checkIfBasketIsFull()){
+                basket.add(bagel);
+                System.out.println("Added " + bagel.getName() + " with the price of: $" + bagel.getPrice());
+                this.total += bagel.getPrice();
+                return true;
+            }
+        }
+        System.out.println("Could not add bagel");
+        return false;
+    }
+
+    public double totalCost(){
+        System.out.println("Total cost of basket: $" + this.total);
+        return this.total;
     }
 
     public boolean remove(String bagelType){

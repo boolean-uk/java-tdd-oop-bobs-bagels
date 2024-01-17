@@ -9,6 +9,10 @@ public class Bagel implements Product {
         this.bagel = name;
         this.price = 2.00;
     }
+    public Bagel(String name, double price){
+        this.bagel = name;
+        this.price = price;
+    }
     @Override
     public String getName(){
         return this.bagel;
