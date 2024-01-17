@@ -31,8 +31,8 @@ class BasketTest {
         basket.addItem(product);
         basket.addItem(product2);
         basket.addItem(product3);
-        basket.removeItem(product);
         Assertions.assertFalse(basket.bagelBasket.contains(product3));
+        Assertions.assertEquals(2,basket.bagelBasket.size());
     }
 
 
