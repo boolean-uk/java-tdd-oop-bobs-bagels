@@ -141,6 +141,14 @@ I'd like to be able to choose fillings for my bagel.
 
 # Domain Model For User Story 8
 
+
+| Class     | Member Variables                               | Methods                                         | Scenario                                 | Output/Result              |
+|-----------|------------------------------------------------|-------------------------------------------------|------------------------------------------|----------------------------|
+| Basket    | HashMap<String, Inventory> itemsFullyDetailed; | String chooseBagelFilling(Filling bagelFilling) | I want to choose the filling of my bagel | Return affirming statement |
+| Inventory |                                                |                                                 |                                          |                            |
+| Bagel     |                                                |                                                 |                                          |                            |
+
+
 ## User Story 9.
 As a customer,
 So I don't over-spend,

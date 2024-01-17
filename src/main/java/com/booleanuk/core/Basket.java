@@ -111,4 +111,6 @@ public class Basket {
         Inventory bagelType = itemsFullyDetailed.get(sku);
         return bagelType.getPrice();
     }
+
+    //User Story 8
 }

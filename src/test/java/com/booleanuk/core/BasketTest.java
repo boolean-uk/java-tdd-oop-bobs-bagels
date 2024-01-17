@@ -250,4 +250,18 @@ class BasketTest {
         Assertions.assertEquals(0.49, result);
     }
 
+    //User Story 8
+    @Test
+    public void testChooseFillingOfBagel() {
+        Basket basket = new Basket();
+
+        Bagel bagel = new Bagel("Everything");
+
+        Filling filling = new Filling("Egg");
+
+        String result = basket.chooseBagelFilling(filling.getVariant());
+        Assertions.assertEquals("Egg", result);
+
+    }
+
 }
