@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 public class BasketManagerTest {
 
     Item item_a = new Item("XXX", 10.0, Item.Name.BAGEL, Item.Variant.CHEESE, null);
+    Item item_b = new Item("FFF", 10.0, Item.Name.FILLING, Item.Variant.CHEESE, null);
 
     @Test
     public void testAdd(){
@@ -26,6 +27,10 @@ public class BasketManagerTest {
     public void testCheckCapacity(){
         BasketManager b = new BasketManager();
         Assertions.assertEquals(b.getCapacity(), b.checkCapacity());
+        Assertions.assertNotNull(b.checkCapacity());
+        b.add(item_a);
+        b.add(item_b);
+        Assertions.assertTrue((b.getCapacity() - b.getBasket().size()) == b.checkCapacity());
     }
 
     @Test

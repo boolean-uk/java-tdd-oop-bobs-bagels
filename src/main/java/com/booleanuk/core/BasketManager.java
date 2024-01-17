@@ -26,7 +26,7 @@ public class BasketManager {
     }
 
     public int checkCapacity() {
-        return 1;
+        return capacity - getBasket().size();
     }
 
     public void changeCapacity() {
