@@ -42,7 +42,11 @@ public class Basket {
         return capacity >= this.items.size();
     }
     public double getTotalCost(){
-        return 0;
+        double total = 0;
+        for(Item i : this.items){
+            total += i.getPrice();
+        }
+        return total;
     }
 
 
