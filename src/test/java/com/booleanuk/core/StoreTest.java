@@ -13,4 +13,15 @@ public class StoreTest {
         Assertions.assertEquals(1, store.getBaskets().size());
         Assertions.assertEquals(basketId, store.getBaskets().get(basketId).hashCode());
     }
+
+    @Test
+    public void addExistingBagelToBasketTest() {
+        Store store = new Store();
+        int basketId = store.createBasket();
+        Bagel bagel = new Bagel("Onion");
+        Assertions.assertFalse(store.getBaskets().get(basketId).getBagels().contains(bagel));
+        boolean expected = store.addBagelToBasket("Onion", basketId);
+        Assertions.assertTrue(expected);
+        Assertions.assertFalse(store.getBaskets().get(basketId).getBagels().contains(bagel));
+    }
 }

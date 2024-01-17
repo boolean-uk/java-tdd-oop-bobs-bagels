@@ -19,4 +19,8 @@ public class Store {
     public HashMap<Integer,Basket> getBaskets() {
         return baskets;
     }
+
+    public boolean addBagelToBasket(String onion, int basketId) {
+        return false;
+    }
 }
