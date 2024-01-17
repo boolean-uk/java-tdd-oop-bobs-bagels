@@ -28,7 +28,7 @@
 |                    | add()                | If I want to add Item                    | The added Item         | void    |
 |                    | remove()             | If I want to remove Item                 | The removed Item       | void    |
 |                    | checkCapacity()      | If I want to make sure not overfill      | The capacity remaining | Sys.out |
-|                    | changeCapacity()     | If I want to limit the baskets sizes     | void                   | void    |
+|                    | changeCapacity()     | If I want to limit the baskets sizes     | boolean                | void    |
 |                    | checkItemInBasket()  | If I want to check if item is in basket, | boolean                | Sys.out |
 |                    |                      | before I try to remove it                |                        |         |
 |                    | totalCost()          | If I want to know the value of Items,    | double                 | Sys.out |
