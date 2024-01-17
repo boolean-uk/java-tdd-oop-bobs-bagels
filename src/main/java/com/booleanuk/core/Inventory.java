@@ -9,8 +9,11 @@ public class Inventory {
     public HashMap<String, Double> coffees;
 
     public Inventory() {
+        this.bagels = new HashMap<>();
         createBagelInventory();
+        this.fillings = new HashMap<>();
         createFillingInventory();
+        this.coffees = new HashMap<>();
         createCoffeeInventory();
     }
 
