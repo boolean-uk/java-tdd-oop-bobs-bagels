@@ -35,7 +35,8 @@ public class Basket {
         return false;
     }
     public String changeCapacity(int newCapacity){
-
+        this.basket.ensureCapacity(newCapacity);
+        return "Basket size is updated to " + newCapacity;
     }
 
 }
