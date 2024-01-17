@@ -65,6 +65,29 @@ public class Inventory {
         }
         return false;
     }
-
+    public ArrayList<Item> getItems(String name, String type, int amount){
+        ArrayList<Item> items = new ArrayList<>();
+        int count = 0;
+        Iterator<Item> iterator;
+        switch (name) {
+            case "Bagel" -> iterator = bagels.iterator();
+            case "Coffee" -> iterator = coffee.iterator();
+            case "Filling" -> iterator = fillings.iterator();
+            default -> {
+                return null;
+            }
+        }
+        while(iterator.hasNext()){
+            Item currentItem = iterator.next();
+            if(currentItem.getType().equals(type)){
+                count++;
+                items.add(currentItem);
+                if(count == amount){
+                    return items;
+                }
+            }
+        }
+        return null;
+    }
 
 }

@@ -5,10 +5,4 @@ public class Coffee extends Item{
         super(type, price);
     }
 
-    public String getType() {
-        return type;
-    }
-    public double getPrice() {
-        return price;
-    }
 }

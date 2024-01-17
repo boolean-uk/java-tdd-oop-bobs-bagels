@@ -5,12 +5,5 @@ public class Bagel extends Item{
         super(type, price);
 
     }
-    public double getPrice() {
-        return price;
-    }
-
-    public String getType() {
-        return type;
-    }
 
 }

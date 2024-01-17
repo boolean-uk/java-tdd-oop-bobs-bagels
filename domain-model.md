@@ -7,10 +7,10 @@ So I can order a bagel before work,
 I'd like to add a specific type of bagel to my basket.
 ```
 
-| Classes | Methods                 | Scenario                    | Returns |
-|---------|-------------------------|-----------------------------|---------|
-| Basket  | boolean addItem(T item) | if item is in inventory     | true    |
-|         |                         | if item is not in inventory | false   |
+| Classes | Methods                                               | Scenario                    | Returns |
+|---------|-------------------------------------------------------|-----------------------------|---------|
+| Basket  | boolean addItem(String name, String type, int amount) | if item is in inventory     | true    |
+|         |                                                       | if item is not in inventory | false   |
 
 ```
 2.
