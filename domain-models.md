@@ -114,6 +114,18 @@ Class Customer
 |                 |                                        |                                     |               |
 
 
+Class Item
+
+| Class Variables | Methods           | Scenario                  | Output/Return |
+|-----------------|-------------------|---------------------------|---------------|
+| double price    |                   |                           |               |
+|                 | double getPrice() | Gets price of single item | void          |
+|                 |                   |                           |               |
+|                 |                   |                           |               |
+
+
+
+
 
 ```
 7.

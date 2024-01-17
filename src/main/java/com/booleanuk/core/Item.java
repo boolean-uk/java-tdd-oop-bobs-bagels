@@ -17,4 +17,5 @@ public class Item {
     public void setSkuCodes(ArrayList<String> skuCodes) {
         this.skuCodes = skuCodes;
     }
+
 }
