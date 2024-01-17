@@ -23,7 +23,12 @@ public class BagelTest {
         Assertions.assertEquals(2, bagel.getPrice());
         Bagel bagel2 = new Bagel("Red berry", 5);
         Assertions.assertEquals(5, bagel2.getPrice());
-
-
+    }
+    @Test
+    public void testAddingVanillaFilling(){
+        Bagel bagel = new Bagel("plain");
+        Assertions.assertTrue(bagel.addFilling("vanilla"));
+        Assertions.assertFalse(bagel.addFilling("brick"));
+        Assertions.assertEquals("vanilla", bagel.getFilling());
     }
 }
