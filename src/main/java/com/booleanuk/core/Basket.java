@@ -21,5 +21,11 @@ public class Basket {
 
     }
     public String remove(Product item){
+        if(this.basket.isEmpty()){
+            return "Basket is empty";
+        }
+        this.basket.remove(item);
+        return item +" removed from basket";
+    }
 
 }
