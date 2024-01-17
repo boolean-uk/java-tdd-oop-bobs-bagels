@@ -19,7 +19,7 @@ public class BasketTest {
 
         Bagel bagel = new Bagel();
 
-        basket.addItemToBasket(bagel);
+        Assertions.assertTrue(basket.addItemToBasket(bagel));
         ArrayList<Item> itemList = basket.getItemList();
 
         Assertions.assertTrue(itemList.contains(bagel));
