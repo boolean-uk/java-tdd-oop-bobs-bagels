@@ -9,6 +9,31 @@ I'd like to add a specific type of bagel to my basket.
 ```
 
 
+A little bit unsure how to domain model extended classes:
+Also unsure if i should add getters and setters to domain model.
+I have done it until now, but i think i will stop going forward. (Just tell me if i should have it)
+
+Class Item Extended by Bagel, Filling, Coffee
+
+
+| Class Variables              | Methods           | Scenario | Output/Return |
+|------------------------------|-------------------|----------|---------------|
+| String name                  | get/setName()     |          |               |
+| Map<String, double> variants | get/setSkuCodes() |          |               |
+| ArrayList<String skuCodes    | get/setVariant()  |          |               |
+| double price                 | get/setPrice()    |          |               |
+
+
+Class Person extended by Manager, Customer
+
+
+| Class Variables     | Methods            | Scenario | Output/Return |
+|---------------------|--------------------|----------|---------------|
+| String name         | get/setName()      |          |               |
+| String accessRights | get/AccessRights() |          |               |
+|                     |                    |          |               |
+|                     |                    |          |               |
+
 
 ## 1
 
@@ -20,6 +45,7 @@ Class Basket
 |                           | ArrayList<Item> getItemList()     | Gets a list of Items | ArrayList<Item> basketOfItems              |
 |                           |                                   |                      |                                            |
 |                           |                                   |                      |                                            |
+
 
 
 
@@ -135,12 +161,12 @@ I'd like to know the cost of a bagel before I add it to my basket.
 ```
 
 
-| Class Variables | Methods | Scenario | Output/Return |
-|-----------------|---------|----------|---------------|
-|                 |         |          |               |
-|                 |         |          |               |
-|                 |         |          |               |
-|                 |         |          |               |
+| Class Variables | Methods                             | Scenario                 | Output/Return |
+|-----------------|-------------------------------------|--------------------------|---------------|
+|                 | getTotalCost(ArrayList<Item> items) | Gets total cost of Items | double        |
+|                 | getCostOfItem(Item item)            | Gets cost of single item | double        |
+|                 |                                     |                          |               |
+|                 |                                     |                          |               |
 
 
 
@@ -152,13 +178,17 @@ So I can shake things up a bit,
 I'd like to be able to choose fillings for my bagel.
 ```
 
+Class Bagel extends Item
 
-| Class Variables | Methods | Scenario | Output/Return |
-|-----------------|---------|----------|---------------|
-|                 |         |          |               |
-|                 |         |          |               |
-|                 |         |          |               |
-|                 |         |          |               |
+| Class Variables             | Methods           | Scenario               | Output/Return                |
+|-----------------------------|-------------------|------------------------|------------------------------|
+| ArrayList<Filling> fillings | get/setFillings() | Sets and gets fillings | ArrayList<Filling> fillings  |
+|                             |                   |                        |                              |
+|                             |                   |                        |                              |
+|                             |                   |                        |                              |
+
+
+Class Filling extends item
 
 
 
