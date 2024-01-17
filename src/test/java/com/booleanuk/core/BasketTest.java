@@ -13,4 +13,12 @@ public class BasketTest {
         Assertions.assertEquals("Filling added.", actual);
     }
 
+    @Test
+    public void addFillingToNonExistentBagelTest() {
+        Basket basket = new Basket();
+        basket.addBagel(new Bagel("Onion"));
+        String actual = basket.addFilling("Cheese", "Plain");
+        Assertions.assertEquals("Your basket doesn't contain that bagel.", actual);
+    }
+
 }
