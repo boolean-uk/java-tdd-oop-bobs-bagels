@@ -14,12 +14,12 @@ I'd like to add a specific type of bagel to my basket.
 
 Class Basket
 
-| Class Variables | Methods                       | Scenario             | Output/Return |
-|-----------------|-------------------------------|----------------------|---------------|
-| ArrayList<Item> | boolean addBagel(Bagel bagel) | Adds bagel to basket | True/False    |
-|                 |                               |                      |               |
-|                 |                               |                      |               |
-|                 |                               |                      |               |
+| Class Variables | Methods                              | Scenario             | Output/Return                 |
+|-----------------|--------------------------------------|----------------------|-------------------------------|
+| ArrayList<Item> | boolean addItemToBasket(Bagel bagel) | Adds item to basket  | True/False                    |
+|                 | ArrayList<Item> getItemList()        | Gets a list of Items | ArrayList<Item> basketOfItems |
+|                 |                                      |                      |                               |
+|                 |                                      |                      |                               |
 
 
 
@@ -30,12 +30,12 @@ So I can change my order,
 I'd like to remove a bagel from my basket.
 ```
 
-| Class Variables | Methods | Scenario | Output/Return |
-|-----------------|---------|----------|---------------|
-|                 |         |          |               |
-|                 |         |          |               |
-|                 |         |          |               |
-|                 |         |          |               |
+| Class Variables | Methods                                 | Scenario                 | Output/Return |
+|-----------------|-----------------------------------------|--------------------------|---------------|
+| ArrayList<Item> | boolean removeItemFromBasket(Item item) | Removes item from basket | True/False    |
+|                 |                                         |                          |               |
+|                 |                                         |                          |               |
+|                 |                                         |                          |               |
 
 
 

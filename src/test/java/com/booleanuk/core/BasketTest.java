@@ -26,4 +26,20 @@ public class BasketTest {
 
     }
 
+    @Test
+    public void testRemoveItemFromBasket() {
+        Basket basket = new Basket();
+
+        Assertions.assertTrue(basket.addItemToBasket(new Bagel("Plain")));
+
+        Assertions.assertFalse(basket.getItemList().isEmpty());
+
+        Assertions.assertTrue(basket.removeItemFromBasket("Plain"));
+
+        Assertions.assertTrue(basket.getItemList().isEmpty());
+
+
+
+    }
+
 }
