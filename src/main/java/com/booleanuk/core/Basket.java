@@ -12,7 +12,7 @@ public class Basket {
     }
     public boolean add(Product item){
        if(this.basket.contains(item)){
-           System.out.println(item +"already added!");
+           System.out.println(item +" already added!");
            return false;
        }
        this.basket.add(item);
@@ -33,6 +33,9 @@ public class Basket {
             return true;
         }
         return false;
+    }
+    public String changeCapacity(int newCapacity){
+
     }
 
 }
