@@ -259,7 +259,7 @@ class BasketTest {
 
         Filling filling = new Filling("Egg");
 
-        String result = basket.chooseBagelFilling(filling.getVariant());
+        String result = basket.chooseBagelFilling(filling);
         Assertions.assertEquals("Egg", result);
 
     }
