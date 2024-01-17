@@ -34,7 +34,17 @@ public class Basket {
     }
 
     public boolean removeItem(String item) {
-        return this.basket.remove(item);
+        String sku = inventory.mapTypeVariantToSKU.get(item);
+        // Iterate through basket and remove first and only first instance of the item if the item in
+        // in the basket.
+        for (int i = 0; i < basket.size(); i++) {
+            if (basket.get(i).equals(sku)) {
+                this.basket.remove(sku);
+                total -= Double.parseDouble(inventory.inventory.get(sku)[1]);
+                return true;
+            }
+        }
+        return false;
     }
 
     public int changeCapacity(int newCapacity) {

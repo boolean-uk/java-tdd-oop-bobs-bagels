@@ -73,6 +73,22 @@ class BasketTest {
         Assertions.assertEquals(1, basket.basket.size());
     }
 
+    @Test
+    public void removeOnlyOneValidItem() {
+        Basket basket = new Basket();
+        boolean result = basket.addItem("Bagel Onion");
+        result = basket.addItem("Filling Bacon");
+        result = basket.addItem("Bagel Onion");
+        result = basket.addItem("Coffee Black");
+
+        Assertions.assertEquals(4, basket.basket.size());
+
+        result = basket.removeItem("Bagel Onion");
+        Assertions.assertTrue(result);
+
+        Assertions.assertEquals(3, basket.basket.size());
+    }
+
     /*
 
     // 4.
