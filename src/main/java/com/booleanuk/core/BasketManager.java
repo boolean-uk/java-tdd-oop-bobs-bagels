@@ -36,7 +36,9 @@ public class BasketManager {
     }
 
     public void changeCapacity(int newCapacity) {
-
+        if (newCapacity > 0) {
+            setCapacity(newCapacity);
+        }
     }
 
     public boolean checkItemInBasket() {
