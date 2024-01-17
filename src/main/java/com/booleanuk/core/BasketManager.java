@@ -14,6 +14,10 @@ public class BasketManager {
     }
 
     public Item add(Item item) {
+        if (checkCapacity() > 0) {
+            basket.add(item);
+            return item;
+        }
         return null;
     }
 
@@ -22,7 +26,7 @@ public class BasketManager {
     }
 
     public int checkCapacity() {
-        return 0;
+        return 1;
     }
 
     public void changeCapacity() {
