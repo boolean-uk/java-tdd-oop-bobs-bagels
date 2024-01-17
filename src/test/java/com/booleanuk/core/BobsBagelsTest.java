@@ -49,7 +49,7 @@ class BobsBagelsTest {
         Basket basket = new Basket();
 
         basket.changeBasketCapacity(5);
-        Assertions.assertEquals(basket.basketCapacity, 9);
+        Assertions.assertEquals(9, basket.basketCapacity);
     }
 
     @Test
@@ -57,7 +57,7 @@ class BobsBagelsTest {
         Basket basket = new Basket();
 
         basket.changeBasketCapacity(-2);
-        Assertions.assertEquals(basket.basketCapacity, 2);
+        Assertions.assertEquals(2, basket.basketCapacity);
     }
 
     @Test
@@ -65,30 +65,32 @@ class BobsBagelsTest {
         Basket basket = new Basket();
 
         basket.changeBasketCapacity(-10);
-        Assertions.assertEquals(basket.basketCapacity, 4);
+        Assertions.assertEquals(4, basket.basketCapacity);
     }
 
     @Test
     public void testTotalCostTwoItems(){
         Basket basket = new Basket();
+        Order order = new Order();
+
         basket.addBagel("BGLP");
         basket.addBagel("BGLP");
 
-
-        double total = basket.getTotatlCost();
-        Assertions.assertEquals(total, 0.78);
+        double total = order.getTotalCost(basket.bagelsList);
+        Assertions.assertEquals(0.78, total);
     }
     @Test
     public void testTotalCostFiveItems(){
         Basket basket = new Basket();
+        Order order = new Order();
+
 
         basket.addBagel("BGLP");
         basket.addBagel("BGLS");
         basket.addBagel("COFB");
         basket.addBagel("FILB");
-        basket.addBagel("FILC");
 
-        double total = basket.getTotatlCost();
-        Assertions.assertEquals(total, 2.11);
+        double total = order.getTotalCost(basket.bagelsList);
+        Assertions.assertEquals(1.99, total);
     }
 }

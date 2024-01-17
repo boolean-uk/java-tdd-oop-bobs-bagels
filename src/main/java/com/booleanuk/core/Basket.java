@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 public class Basket {
 
+
     public ArrayList<String> bagelsList = new ArrayList<>();
     int basketCapacity = 4;
     boolean basketIsFull = false;
