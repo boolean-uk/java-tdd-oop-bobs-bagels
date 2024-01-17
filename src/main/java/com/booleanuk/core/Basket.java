@@ -114,6 +114,8 @@ public class Basket {
 
     //User Story 8
     public String chooseBagelFilling(Filling bagelFilling) {
-        return "Egg";
+        String sku = bagelFilling.getSku();
+        Inventory fillingType = itemsFullyDetailed.get(sku);
+        return fillingType.getVariant();
     }
 }
