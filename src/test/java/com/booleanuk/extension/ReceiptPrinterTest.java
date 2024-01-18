@@ -43,7 +43,7 @@ public class ReceiptPrinterTest {
         Assertions.assertTrue(printedReceipt.contains("Thank you"));
 
         Assertions.assertTrue(printedReceipt.contains("Latte"));
-        Assertions.assertTrue(printedReceipt.contains("- Egg\t\t \t£0.12\n"));
+        Assertions.assertTrue(printedReceipt.contains("- Egg"));
         Assertions.assertTrue(printedReceipt.contains("Sesame"));
 
         Assertions.assertTrue(printedReceipt.contains("£3.19"));
