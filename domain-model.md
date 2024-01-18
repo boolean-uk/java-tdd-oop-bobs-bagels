@@ -124,10 +124,10 @@ As a customer,
 So I don't over-spend,
 I'd like to know the cost of each filling before I add it to my bagel order.
 ```
-| Class     | Method              | Variables                   | Scenario                                                           | Return value                              |
-|-----------|---------------------|-----------------------------|--------------------------------------------------------------------|-------------------------------------------|
-| Inventory | listFillingPrices() | ArrayList<Product> products | Fillings are organized into a String with fillings and their price | Return String list of fillings with price |
-|           |                     |                             | No fillings in products list                                       | Return "No fillings available"            |
+| Class     | Method             | Variables                   | Scenario                                                           | Return value                              |
+|-----------|--------------------|-----------------------------|--------------------------------------------------------------------|-------------------------------------------|
+| Inventory | listFillingCosts() | ArrayList<Product> products | Fillings are organized into a String with fillings and their price | Return String list of fillings with price |
+|           |                    |                             | No fillings in products list                                       | Return "No fillings available"            |
 ```
 10.
 As the manager,
