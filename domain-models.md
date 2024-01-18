@@ -210,6 +210,17 @@ Class Customer
 
 
 
+Class Filling
+
+| Class Variables             | Methods           | Scenario               | Output/Return                |
+|-----------------------------|-------------------|------------------------|------------------------------|
+| ArrayList<Filling> fillings | get/setFillings() | Sets and gets fillings | ArrayList<Filling> fillings  |
+|                             |                   |                        |                              |
+|                             |                   |                        |                              |
+|                             |                   |                        |                              |
+
+
+
 
 ```
 10.

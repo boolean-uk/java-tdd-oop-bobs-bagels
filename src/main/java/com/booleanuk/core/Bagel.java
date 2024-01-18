@@ -14,7 +14,7 @@ public class Bagel extends Item {
     }
 
     public boolean addFilling(Filling filling) {
-        fillings.add(filling);
+        this.fillings.add(filling);
         return true;
 
     }

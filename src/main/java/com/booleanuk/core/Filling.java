@@ -10,4 +10,6 @@ public class Filling extends Item {
     private void setPriceOfFilling(String variant) {
         this.setPrice(0.12);
     }
+
+
 }

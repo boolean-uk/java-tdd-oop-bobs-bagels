@@ -44,7 +44,7 @@ public class CustomerTest {
         Customer customer = new Customer();
         Basket basket = new Basket(5);
 
-        Assertions.assertTrue(customer.setBasket());
+        Assertions.assertTrue(customer.setBasket(basket));
 
         Assertions.assertEquals(basket, customer.getBasket());
 
@@ -52,7 +52,7 @@ public class CustomerTest {
         basket.addItemToBasket(new Filling("Egg"));
         basket.addItemToBasket(new Filling("Cheese"));
 
-        Assertions.assertEquals(0.12*3, customer.getCostOfFillings(basket));
+        Assertions.assertEquals(0.12*3, customer.getCostOfFillings(basket.getItemList()));
 
 
 
