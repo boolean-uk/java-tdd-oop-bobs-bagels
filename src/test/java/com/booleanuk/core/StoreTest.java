@@ -108,7 +108,12 @@ public class StoreTest {
     public void getCostOfInvalidBagelTest() {
         Store store = new Store();
         Assertions.assertEquals(-1, store.getCostOfBagel("Chocolate"));
+    }
 
+    @Test
+    public void getCostOfValidBagelTest() {
+        Store store = new Store();
+        Assertions.assertEquals(0.49, store.getCostOfBagel("Onion"));
     }
 
 }
