@@ -96,7 +96,19 @@ public class Order {
 
 
 
-        return "";
+        for (Inventory basket : basketList) {
+
+            String checkName = basket.getName();
+
+            if (checkName.equals(name)) {
+                return "The item can be removed.";
+            }
+
+        }
+            return "The item is not in the basket!";
+
+
+
     }
 
 	public double totalCost() {
