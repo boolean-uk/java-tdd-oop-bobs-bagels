@@ -107,6 +107,8 @@ public class Store {
     }
 
     public double getCostOfFilling(String filling) {
-        return -1;
-    }
+        if(!fillingCodes.containsKey(filling.toUpperCase())) {
+            return -1;
+        }
+        return prices.get(fillingCodes.get(filling.toUpperCase()));    }
 }
