@@ -51,20 +51,33 @@
 |           |                           |                                 |                               |          |
 | Inventory | String[] inventoryArray   |                                 |                               |          |
 |           |                           |                                 |                               |          |
-|           | HashMap<String, String[]> |                                 |                               |          |
+|           | HashMap<String, Item>     |                                 |                               |          |
 |           | inventory                 |                                 |                               |          |
 |           | key: SKU                  |                                 |                               |          |
 |           | value: array element from |                                 |                               |          |
 |           | inventory                 |                                 |                               |          |
-|           | HashMap<String, String>   |                                 |                               |          |
-|           | mapSKUtoTypeVariant       |                                 |                               |          |
-|           | (key: SKU,                |                                 |                               |          |
-|           | value: type+variant       |                                 |                               |          |
 |           |                           |                                 |                               |          |
 |           | HashMap<String, String>   |                                 |                               |          |
 |           | mapTypeVariantToSKU       |                                 |                               |          |
 |           | (key: SKU,                |                                 |                               |          |
 |           | value: type+variant       |                                 |                               |          |
+|           |                           |                                 |                               |          |
+|           |                           |                                 |                               |          |
+|           |                           |                                 |                               |          |
+|           |                           |                                 |                               |          |
+|           |                           |                                 |                               |          |
+| Item      | double price              | getX()                          |                               | x        |
+|           | Sting name                | where X is either of the class  |                               |          |
+|           | String type               | members                         |                               |          |
+|           | String nametype           |                                 |                               |          |
+|           |                           |                                 |                               |          |
+|           |                           |                                 |                               |          |
+|           |                           |                                 |                               |          |
+|           |                           |                                 |                               |          |
+|           |                           |                                 |                               |          |
+|           |                           |                                 |                               |          |
+|           |                           |                                 |                               |          |
+|           |                           |                                 |                               |          |
 |           |                           |                                 |                               |          |
 |           |                           |                                 |                               |          |
 |           |                           |                                 |                               |          |

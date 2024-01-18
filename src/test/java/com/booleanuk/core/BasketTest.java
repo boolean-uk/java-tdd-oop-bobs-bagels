@@ -175,12 +175,12 @@ class BasketTest {
     public void testGetPrize() {
         Basket basket = new Basket();
 
-        Assertions.assertEquals("0.39", basket.getPrice("Bagel Plain"));
-        Assertions.assertEquals("0.49", basket.getPrice("Bagel Sesame"));
-        Assertions.assertEquals("0.49", basket.getPrice("Bagel Everything"));
-        Assertions.assertEquals("0.49", basket.getPrice("Bagel Onion"));
-        Assertions.assertEquals("0.12", basket.getPrice("Filling Cheese"));
-        Assertions.assertEquals("1.29", basket.getPrice("Coffee Capuccino"));
+        Assertions.assertEquals(0.39, basket.getPrice("Bagel Plain"));
+        Assertions.assertEquals(0.49, basket.getPrice("Bagel Sesame"));
+        Assertions.assertEquals(0.49, basket.getPrice("Bagel Everything"));
+        Assertions.assertEquals(0.49, basket.getPrice("Bagel Onion"));
+        Assertions.assertEquals(0.12, basket.getPrice("Filling Cheese"));
+        Assertions.assertEquals(1.29, basket.getPrice("Coffee Capuccino"));
     }
 
     // Build bagel
@@ -207,7 +207,7 @@ class BasketTest {
 
     // Test for not allowing customers is incorporated with the adding testing.
 
-    // Checking the price for bagel and/or filling, is all in one mothod and tested together further up.
+    // Checking the price for bagel and/or filling, is all in one method and tested together further up.
 
 
 

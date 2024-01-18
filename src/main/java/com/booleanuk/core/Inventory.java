@@ -4,14 +4,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Inventory {
-
-    HashMap<String, String[]> inventory;
-
-    HashMap<String, String> mapSKUtoTypeVariant;
+    HashMap<String, Item> items;
     HashMap<String, String> mapTypeVariantToSKU;
-
-
-    String[][] inventoryArray =     {
+    String[][] itemsArray =     {
             {"BGLO", "0.49", "Bagel", "Onion"},
             {"BGLP", "0.39", "Bagel", "Plain"},
             {"BGLE", "0.49", "Bagel", "Everything"},
@@ -31,29 +26,15 @@ public class Inventory {
 
     public Inventory() {
         // Initiate hash maps
-        inventory = new HashMap<>();
-        mapSKUtoTypeVariant = new HashMap<>();
+        items = new HashMap<>();
         mapTypeVariantToSKU = new HashMap<>();
 
-        String sku = "";
-        String typeVariant = "";
         // Fill hash map
-        for (int i = 0; i < inventoryArray.length; i++) {
-            sku = inventoryArray[i][0];
-            typeVariant = inventoryArray[i][2] + " " + inventoryArray[i][3];
-            mapSKUtoTypeVariant.put(sku, typeVariant);
-            mapTypeVariantToSKU.put(typeVariant, sku);
-            inventory.put(sku, inventoryArray[i]);
+        for (String[] item: itemsArray) {
+            // Fills ut items map with sku as key, the value is the object containing price, name, type, and nametype
+            items.put(item[0], new Item(Double.parseDouble(item[1]), item[2], item[3]));
+            // Map go from typevariant to sku. Items can be used to go other way
+            mapTypeVariantToSKU.put(items.get(item[0]).getNametype(), item[0]);
         }
-
-
-
-
-
-    }
-
-    public static void main(String[] args) {
-        ArrayList<String[]> inventory = new ArrayList<>();
-
     }
 }

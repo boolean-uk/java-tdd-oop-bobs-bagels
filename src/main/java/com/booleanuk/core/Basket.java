@@ -39,8 +39,7 @@ public class Basket {
         // Add item by SKU code to
         String sku = inventory.mapTypeVariantToSKU.get(item);
         this.basket.add(sku);
-        String strPrice = this.inventory.inventory.get(sku)[1];
-        double price = Double.parseDouble(strPrice);
+        double price = this.inventory.items.get(sku).getPrice();
         this.total += price;
         this.total = Math.round(this.total*100.0) / 100.0;
         return true;
@@ -53,7 +52,8 @@ public class Basket {
         for (int i = 0; i < basket.size(); i++) {
             if (basket.get(i).equals(sku)) {
                 this.basket.remove(sku);
-                total -= Double.parseDouble(inventory.inventory.get(sku)[1]);
+                total -= this.inventory.items.get(sku).getPrice();
+                this.total = Math.round(this.total*100.0) / 100.0;
                 return true;
             }
         }
@@ -69,15 +69,15 @@ public class Basket {
         return this.total;
     }
 
-    public String getPrice(String item) {
+    public Double getPrice(String item) {
         String sku = this.inventory.mapTypeVariantToSKU.get(item);
-        return this.inventory.inventory.get(sku)[1];
+        return this.inventory.items.get(sku).getPrice();
     }
 
     public Boolean buildBagel(String[] fillings) {
         // Add plain bagel
         String item = "Bagel ";
-        double bagelCost = Double.parseDouble(inventory.inventory.get("BGLP")[1]);
+        double bagelCost = this.inventory.items.get("BGLP").getPrice();
         String fillingItem = "";
 
         for (String filling: fillings) {
@@ -86,7 +86,7 @@ public class Basket {
                 return false;
             }
             item = item + filling + ", ";
-            bagelCost += Double.parseDouble(inventory.inventory.get(inventory.mapTypeVariantToSKU.get(fillingItem))[1]);
+            bagelCost += this.inventory.items.get(inventory.mapTypeVariantToSKU.get(fillingItem)).getPrice();
         }
         // Add to basket. Remove last comma and space
         this.basket.add(item.substring(0, item.length()-2));
