@@ -55,6 +55,6 @@ class BasketTest {
         Product product2 = new Product( "",5,"Bagel2","");
         basket.addItem(product);
         basket.addItem(product2);
-        Assertions.assertEquals(15,basket.calculateTotalCost());
+        Assertions.assertEquals(10,basket.calculateTotalCost());
     }
 }
