@@ -67,6 +67,15 @@ public class Order {
     }
 	public boolean remove(String SKU, String itemType, String bagelName, double bagelPrice) {
 
+        for (Inventory inventory : inventoryList) {
+            if (inventory.getSku().equals(SKU) && inventory.getItemType().equals(itemType) && inventory.getName().equals(bagelName) && inventory.getPrice() == bagelPrice) {
+                basketList.remove(inventory);
+                return true;
+
+            }
+        }
+
+
         return false;
     }
 	public boolean isBasketFull() {
