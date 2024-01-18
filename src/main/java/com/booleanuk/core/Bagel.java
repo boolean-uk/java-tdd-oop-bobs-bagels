@@ -11,6 +11,7 @@ public class Bagel {
 
     public Bagel(String id, String[] fillings){
         this(id);
+        this.fillings = new HashMap<>();
         for (String fillingId : fillings){
             if(inventory.isFilling(fillingId)){
                 this.fillings.put(fillingId, new Filling(fillingId));
@@ -18,6 +19,7 @@ public class Bagel {
         }
     }
     public Bagel(String id){
+        this.inventory = new Inventory();
         this.name = "Bagel";
         switch (id) {
             case "BGLO" -> {
@@ -41,18 +43,18 @@ public class Bagel {
     }
 
     public double getPrice() {
-        return price;
+        return this.price;
     }
 
     public HashMap<String, Filling> getFillings() {
-        return fillings;
+        return this.fillings;
     }
 
     public String getName() {
-        return name;
+        return this.name;
     }
 
     public String getVariant() {
-        return variant;
+        return this.variant;
     }
 }
