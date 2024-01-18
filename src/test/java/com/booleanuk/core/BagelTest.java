@@ -46,4 +46,16 @@ public class BagelTest {
         assertEquals("Basket does not contain this bagel2", outContent.toString().trim());
     }
 
+//    @Test
+//    public void testTotalCost(){
+//        Bagel abagel = new Bagel();
+//        System.setOut(new PrintStream(outContent));
+//        abagel.addBagel("bagel1");
+//        Assertions.assertTrue(abagel.removeBagel("bagel1"));
+//        Assertions.assertFalse(abagel.removeBagel("bagel2"));
+//        assertEquals("Basket does not contain this bagel2", outContent.toString().trim());
+//    }
+
+
+
 }
