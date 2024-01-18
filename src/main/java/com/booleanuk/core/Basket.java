@@ -58,14 +58,30 @@ public class Basket {
         return true;
     }
 
-    private boolean isIdInKeys(String id){
-        for (Bagel bagel : products){
-            if (bagel.getId().equals(id)){
-                return true;
-            }
-        }
-        return false;
+    public int getCostOfBasket(){
+        return -1;
     }
+
+    public double getCostOfBagel(Bagel bagel){
+        double total = bagel.getPrice();
+        for(Filling filling : bagel.getFillings()){
+            total += getCostOfFilling(filling);
+        }
+        return total;
+    }
+
+    public double getCostOfFilling(Filling filling){
+        return filling.getPrice();
+    }
+
+//    private boolean isIdInKeys(String id){
+//        for (Bagel bagel : products){
+//            if (bagel.getId().equals(id)){
+//                return true;
+//            }
+//        }
+//        return false;
+//    }
 
     private boolean isBasketFull(){
         return (this.products.size()) >= maxSize;
