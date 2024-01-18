@@ -56,10 +56,10 @@ So that I can maintain my sanity
 I'd like to know if I try to remove an item that doesn't exist in my basket.
 ```
 
-| Classes | Methods                                   | Scenario            | Returns |
-|---------|-------------------------------------------|---------------------|---------|
-| Shop    | boolean removeItem(Basket basket, T item) | item exists         | true    |
-|         |                                           | item does not exist | false   |
+| Classes | Methods                         | Scenario            | Returns |
+|---------|---------------------------------|---------------------|---------|
+| Shop    | boolean removeItem(String name) | item exists         | true    |
+|         |                                 | item does not exist | false   |
 
 ```
 6.

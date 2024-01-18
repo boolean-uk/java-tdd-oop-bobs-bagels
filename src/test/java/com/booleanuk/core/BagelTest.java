@@ -41,6 +41,11 @@ public class BagelTest {
 
     }
     /* Test use case 5 */
+    @Test
+    public void testRemovingItemFromBasketThatDoesNotExist(){
+        Basket basket = new Basket(20);
+        Assertions.assertFalse(basket.removeItem("Coffee", "Black"));
+    }
 
     /* Test use case 6 */
     @Test
