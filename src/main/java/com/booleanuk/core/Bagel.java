@@ -28,4 +28,12 @@ public class Bagel extends Product {
         this.basePrice = price;
         updatePrice();
     }
+
+    public void addFilling(Filling filling) {
+        this.fillings.add(filling);
+    }
+
+    public ArrayList<Filling> getFillings() {
+        return this.fillings;
+    }
 }

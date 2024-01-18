@@ -18,22 +18,27 @@ public class BagelTest {
         Assertions.assertEquals(1.19, bagel.getBasePrice());
     }
 
-
     @Test
-    public void addFillingTest() {
-        Bagel bagel = new Bagel("Sesame", 1.29);
-        bagel.addFilling(new Filling("Ham", 0.19));
-        bagel.addFilling(new Filling("Butter", 0.09));
-
+    public void getFillingsTest() {
+        Bagel bagel = new Bagel("Poppy Seed", 1.29);
+        Assertions.assertTrue(bagel.getFillings().isEmpty());
     }
 
-
-
-    public void getFillingsTest() {
-        Bagel bagel = new Bagel("Sesame", 1.29);
-        bagel.addFilling(new Filling("Ham", 0.19));
+    @Test
+    public void addFillingsTest() {
+        Bagel bagel = new Bagel("Poppy Seed", 1.29);
         bagel.addFilling(new Filling("Butter", 0.09));
-
+        bagel.addFilling(new Filling("Ham", 0.29));
+        bagel.addFilling(new Filling("Cheese", 0.19));
+        Filling[] testFillings = {
+                new Filling("Butter", 0.09),
+                new Filling("Ham", 0.29),
+                new Filling("Cheese", 0.19)
+        };
+        for(int i = 0; i < bagel.getFillings().size(); i++) {
+            Assertions.assertEquals(testFillings[i].name, bagel.getFillings().get(i).name);
+            Assertions.assertEquals(testFillings[i].price, bagel.getFillings().get(i).getPrice());
+        }
 
     }
 
