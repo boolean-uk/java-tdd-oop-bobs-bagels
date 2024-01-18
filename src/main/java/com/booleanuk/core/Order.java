@@ -84,7 +84,13 @@ public class Order {
     }
 	public int updateBasket(int amount) {
 
-        return 0;
+
+            if (amount > basketList.size()) {
+                capacity = amount;
+            }
+
+
+            return capacity;
     }
 	public String canItemBeRemoved(String name) {
 
