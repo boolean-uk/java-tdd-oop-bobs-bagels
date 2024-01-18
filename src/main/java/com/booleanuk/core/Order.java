@@ -8,7 +8,7 @@ public class Order extends Inventory {
     private int totalCost;
 //    DecimalFormat df = new DecimalFormat("####.##");
     public double getTotalCost(ArrayList<String> list) {
-        HashMap<String, Double> inventoryPriceList = makeInventoryPriceList();
+        HashMap<String, Double> inventoryPriceList = getInventoryPriceList();
 
         double total = 0.00d;
 
