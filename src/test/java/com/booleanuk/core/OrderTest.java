@@ -117,5 +117,20 @@ public class OrderTest {
 
     }
 
+    @Test
+    public void testGetCost() {
+        Order basket1 = new Order();
+
+        double result = basket1.getCost("Onion");
+        double result2 = basket1.getCost("Plain");
+        double result3 = basket1.getCost("Everything");
+        Assertions.assertEquals(0.49, result);
+        Assertions.assertEquals(0.39, result2);
+        Assertions.assertEquals(0.49, result3);
+
+    }
+
+
+
 
 }
