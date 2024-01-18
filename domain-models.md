@@ -180,12 +180,12 @@ I'd like to be able to choose fillings for my bagel.
 
 Class Bagel extends Item
 
-| Class Variables             | Methods           | Scenario               | Output/Return                |
-|-----------------------------|-------------------|------------------------|------------------------------|
-| ArrayList<Filling> fillings | get/setFillings() | Sets and gets fillings | ArrayList<Filling> fillings  |
-|                             |                   |                        |                              |
-|                             |                   |                        |                              |
-|                             |                   |                        |                              |
+| Class Variables             | Methods           | Scenario                   | Output/Return               |
+|-----------------------------|-------------------|----------------------------|-----------------------------|
+| ArrayList<Filling> fillings | get/setFillings() | Sets and gets fillings     | ArrayList<Filling> fillings |
+|                             | removeFilling()   | removes filling from bagel | boolean                     |
+|                             |                   |                            |                             |
+|                             |                   |                            |                             |
 
 
 Class Filling extends item
