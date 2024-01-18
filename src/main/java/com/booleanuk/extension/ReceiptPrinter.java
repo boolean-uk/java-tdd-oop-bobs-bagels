@@ -44,16 +44,23 @@ public class ReceiptPrinter {
             // String name = item.getName();
             double price = item.getPrice();
 
-            sb.append(type).append("\t\t")
-                    .append(quantity).append("\t£")
-                    .append(String.format("%.2f", price*quantity)).append("\n");
-
             if (item instanceof Bagel && !((Bagel) item).getFilling().isEmpty()) {
+                double fillingTotal = 0;
                 for (Filling filling : ((Bagel) item).getFilling()) {
-                    sb.append("- ").append(filling.getVariant()).append("\t\t")
-                            .append(" \t£")
-                            .append(String.format("%.2f", filling.getPrice())).append("\n");
+                    fillingTotal += filling.getPrice();
                 }
+
+                sb.append(type).append("\t\t")
+                        .append(quantity).append("\t£")
+                        .append(String.format("%.2f", (price+fillingTotal)*quantity)).append("\n");
+
+                for (Filling filling : ((Bagel) item).getFilling()) {
+                    sb.append("- ").append(filling.getVariant()).append("\n");
+                }
+            } else {
+                sb.append(type).append("\t\t")
+                        .append(quantity).append("\t£")
+                        .append(String.format("%.2f", price*quantity)).append("\n");
             }
         }
 
