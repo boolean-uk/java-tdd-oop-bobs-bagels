@@ -144,4 +144,16 @@ public class StoreTest {
         Assertions.assertEquals(0.49+0.39, store.getCostOfBasket(basketId));
     }
 
+    @Test
+    public void getCostOfBasketContainingBagelsAndFillingsTest() {
+        Store store = new Store();
+        int basketId = store.createBasket();
+        store.addBagelToBasket("Onion", basketId);
+        store.addFilling("egg", "onion", basketId);
+        store.addBagelToBasket("Plain", basketId);
+        store.addFilling("cheese", "onion", basketId);
+        store.addFilling("cheese", "plain", basketId);
+        Assertions.assertEquals(0.49+0.39+3*0.12, store.getCostOfBasket(basketId));
+    }
+
 }
