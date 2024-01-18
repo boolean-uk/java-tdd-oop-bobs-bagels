@@ -64,8 +64,8 @@ public class CustomerTest {
         Customer customer = new Customer();
 
 
-        Map<String, Double> fillings = Map.of("Bacon", 0.12,"Egg", 0.12,"Cheese", 0.12,"Cream Cheese", 0.12,"Smoked Salmon", 0.12,"Ham", 0.12);
-        Assertions.assertTrue(fillings.equals(customer.getCostOfFillings()));
+        Map<String, Double> fillings = Map.of("FILB", 0.12,"FILE", 0.12,"FILC", 0.12,"FILX", 0.12,"FILS", 0.12,"FILH", 0.12);
+        Assertions.assertTrue(fillings.equals(customer.getFillingsInInventory()));
 
 
     }

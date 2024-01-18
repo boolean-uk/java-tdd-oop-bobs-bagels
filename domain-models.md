@@ -220,6 +220,15 @@ Class Filling
 |                             |                   |                        |                              |
 
 
+Class Inventory
+
+| Class Variables              | Methods       | Scenario      | Output/Return                   |
+|------------------------------|---------------|---------------|---------------------------------|
+| Map<String, Double> fillings | getFillings() | Gets fillings | Map<String, Double> of fillings |
+| Map<String, Double> Coffees  | getCoffees()  | Gets Coffees  | Map<String, Double> of coffees  |
+| Map<String, Double> Bagels   | getBagels()   | Gets Bagels   | Map<String, Double> of bagels   |
+|                              |               |               |                                 |
+
 
 
 ```

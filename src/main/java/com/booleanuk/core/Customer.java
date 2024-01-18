@@ -1,6 +1,7 @@
 package com.booleanuk.core;
 
 import java.util.ArrayList;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 public class Customer {
@@ -32,5 +33,14 @@ public class Customer {
 
     public double getCostOfFillingsInBasket(ArrayList<Item> basket) {
         return this.getTotalCost(basket.stream().filter(item -> item.getName().equalsIgnoreCase("Filling")).collect(Collectors.toCollection(ArrayList::new)));
+    }
+
+
+    public Map<String, Double> getFillingsInInventory() {
+        Inventory inventory = new Inventory();
+
+        return inventory.getFillings();
+
+
     }
 }
