@@ -132,6 +132,16 @@ public class Bagel {
         }
         return out;
     }
+    public boolean searchStock(String product){
+        initializeArr();
+        boolean value = false;
+
+        for (int i = 0; i < inventoryList.size(); i++){
+            if (inventoryList.get(i).SKU.equals(product)){
+                return true;
+            }
+        }
+    }
 
 }
 

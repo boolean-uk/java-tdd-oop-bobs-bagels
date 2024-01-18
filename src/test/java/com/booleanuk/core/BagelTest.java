@@ -98,8 +98,19 @@ public class BagelTest {
         Assertions.assertEquals(0.49, bagelCost);
         bagelCost = abagel.costFilling("Strawberry");
         Assertions.assertEquals(0.0, bagelCost);
-
     }
+    @Test
+    public void testIfBagelInStock(){
+        Bagel abagel = new Bagel();
+
+        boolean bagelCost = abagel.searchStock("BGLO");
+        Assertions.assertTrue( bagelCost);
+        bagelCost = abagel.searchStock("BGLS");
+        Assertions.assertTrue( bagelCost);
+        bagelCost = abagel.searchStock("BGLE");
+        }
+
+
 
 
 
