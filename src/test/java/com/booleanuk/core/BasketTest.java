@@ -72,13 +72,24 @@ public class BasketTest {
         basket.add("BGLP");
         basket.add("COFB");
 
-
         Assertions.assertEquals("[BGLO, BGLP]", basket.changeCapacity(2));
         Assertions.assertEquals(2,basket.basketList.size());
         basket.add("COFB");
         Assertions.assertEquals(2,basket.basketList.size());
 
+    }
 
+    @Test
+    public void testCheckPrice() {
+        Basket basket = new Basket();
 
+        Assertions.assertEquals(0.39,checkPrice("BGLP"));
+    }
+
+    @Test
+    public void testChechPriceFakeItem() {
+        Basket basket = new Basket();
+
+        Assertions.assertEquals("Error", checkPrice("Apple"));
     }
 }
