@@ -11,33 +11,33 @@ class FillingTest {
 
     @Test
     public void testGetName(){
-        Bagel bacon = new Bagel("BGLP");
-        Bagel egg = new Bagel("BGLO");
-        Bagel cheese = new Bagel("BGLE");
+        Filling bacon = new Filling("FILB");
+        Filling egg = new Filling("FILE");
+        Filling cheese = new Filling("FILC");
 
 
-        Assertions.assertEquals("Bagel", bacon.getName());
-        Assertions.assertEquals("Bagel", egg.getName());
-        Assertions.assertEquals("Bagel", cheese.getName());
+        Assertions.assertEquals("Filling", bacon.getName());
+        Assertions.assertEquals("Filling", egg.getName());
+        Assertions.assertEquals("Filling", cheese.getName());
 
     }
 
     @Test
     public void testGetVariant(){
-        Bagel bacon = new Bagel("BGLP");
-        Bagel egg = new Bagel("BGLO");
-        Bagel cheese = new Bagel("BGLE");
+        Filling bacon = new Filling("FILB");
+        Filling egg = new Filling("FILE");
+        Filling cheese = new Filling("FILC");
 
-        Assertions.assertEquals("Bagel", bacon.getVariant());
-        Assertions.assertEquals("Bagel", egg.getVariant());
-        Assertions.assertEquals("Bagel", cheese.getVariant());
+        Assertions.assertEquals("Bacon", bacon.getVariant());
+        Assertions.assertEquals("Egg", egg.getVariant());
+        Assertions.assertEquals("Cheese", cheese.getVariant());
     }
 
     @Test
     public void testGetPrice(){
-        Bagel bacon = new Bagel("BGLP");
-        Bagel egg = new Bagel("BGLO");
-        Bagel cheese = new Bagel("BGLE");
+        Filling bacon = new Filling("FILB");
+        Filling egg = new Filling("FILE");
+        Filling cheese = new Filling("FILC");
 
         Assertions.assertEquals(0.12, bacon.getPrice());
         Assertions.assertEquals(0.12, egg.getPrice());
