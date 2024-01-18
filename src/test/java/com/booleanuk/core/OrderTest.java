@@ -10,7 +10,7 @@ public class OrderTest {
     public void isItemInventory() {
         Order basket1 = new Order();
 
-        boolean result = basket1.add("Onion", 0.49);
+        boolean result = basket1.add("BGLO");
         Assertions.assertTrue(result);
     }
 
@@ -18,7 +18,7 @@ public class OrderTest {
     public void isItemNotInventory() {
         Order basket1 = new Order();
 
-        boolean result = basket1.add("Regular", 2.34);
+        boolean result = basket1.add("RATT");
         Assertions.assertFalse(result);
 
     }

@@ -29,10 +29,10 @@ public class Bagel {
 
     public Bagel(String bagelSku, String itemTypeBagel, String bagelName, double bagelPrice) {
 
-        this.bagelSku = bagelSku;
-        this.itemTypeBagel = itemTypeBagel;
-        this.bagelName = bagelName;
-        this.bagelPrice = bagelPrice;
+        this.setBagelSku(bagelSku);
+        this.setItemTypeBagel(itemTypeBagel);
+        this.setBagelName(bagelName);
+        this.setBagelPrice(bagelPrice);
 
 
 
@@ -57,17 +57,19 @@ public class Bagel {
         return bagelPrice;
     }
 
-
-    Bagel bagel1 = new Bagel("BGLO", "Bagel", "Onion", 0.49);
-    Bagel bagel2 = new Bagel("BGLP", "Bagel", "Plain", 0.39);
-    Bagel bagel3 = new Bagel("BGLE", "Bagel", "Everything", 0.49);
-    Bagel bagel4 = new Bagel("BGLS", "Bagel", "Sesame", 0.49);
-
-    public static void main(String[] args) {
-
-        Bagel bagel5 = new Bagel("fvf", "fvfr", "ffrf", 3.44);
-
-        System.out.println("Hei");
+    public void setBagelSku(String bagelSku) {
+        this.bagelSku = bagelSku;
     }
 
+    public void setBagelName(String bagelName) {
+        this.bagelName = bagelName;
+    }
+
+    public void setItemTypeBagel(String itemTypeBagel) {
+        this.itemTypeBagel = itemTypeBagel;
+    }
+
+    public void setBagelPrice(double bagelPrice) {
+        this.bagelPrice = bagelPrice;
+    }
 }
