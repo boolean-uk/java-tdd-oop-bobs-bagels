@@ -106,7 +106,7 @@ I want customers to only be able to order things that we stock in our inventory.
 
 | Methods                                                       | Member variables | Scenario | Output/Return |
 |---------------------------------------------------------------|------------------|----------|---------------|
-| {7,9}`checkPrice()`                                           | double price     |          | double price  |
+| {7,9}`getPrice()`                                             | double price     |          | double price  |
 |                                                               |                  |          |               |
 | `Item(String sku, String name, String variant, double price)` | double price     |          |               |
 |                                                               | String name      |          |               |
