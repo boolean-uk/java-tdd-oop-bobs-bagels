@@ -177,3 +177,22 @@ I want customers to only be able to order things that we stock in our inventory.
 |-----------|------------------------------------------------|----------------------------------------|---------------------|---------------|
 | Basket    | HashMap<String, Inventory> itemsFullyDetailed; | boolean mustBeInInventory(String item) | If in inventory     | Return true   |
 | Inventory |                                                |                                        | If not in inventory | Return false  |
+
+
+## Extensions
+
+# Extension 1
+
+# User Stories
+
+As a customer,
+So I can make a huge order,
+I want to see the total price for 12 Plain Bagels, 6 Onion Bagels, 3 Everything Bagels, and 1 black coffee.
+
+# Domain Model
+
+| Class  | Member Variables | Methods | Scenario | Output/Result |
+|--------|------------------|---------|----------|---------------|
+| Basket |                  |         |          |               |
+
+
