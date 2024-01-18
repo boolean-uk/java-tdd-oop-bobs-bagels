@@ -16,15 +16,16 @@ public final class Inventory {
     }
 
     public boolean isInInventory(String id){
-        return false;
+        return (isBagel(id) || isCoffee(id)|| isFilling(id));
     }
 
     public boolean isBagel(String id){
-        return false;
+        return bagels.containsKey(id);
     }
 
     public boolean isCoffee(String id){
-        return false;
+
+        return coffees.containsKey(id);
     }
     public boolean isFilling(String id){
         return fillings.containsKey(id);
@@ -37,5 +38,15 @@ public final class Inventory {
         fillings.put("FILX", new Filling("FILX"));
         fillings.put("FILS", new Filling("FILS"));
         fillings.put("FILH", new Filling("FILH"));
+
+        bagels.put("BGLO", new Bagel("BGLO"));
+        bagels.put("BGLP", new Bagel("BGLP"));
+        bagels.put("BGLE", new Bagel("BGLE"));
+        bagels.put("BGLS", new Bagel("BGLS"));
+
+        coffees.put("COFB", new Coffee("COFB"));
+        coffees.put("COFW", new Coffee("COFW"));
+        coffees.put("COFC", new Coffee("COFC"));
+        coffees.put("COFL", new Coffee("COFL"));
     }
 }

@@ -7,7 +7,7 @@ public class Bagel {
     private String name;
     private double price;
     private String variant;
-    private Inventory inventory;
+    private static final Inventory inventory = new Inventory();
 
     public Bagel(String id, String[] fillings){
         this(id);
@@ -19,7 +19,6 @@ public class Bagel {
         }
     }
     public Bagel(String id){
-        this.inventory = new Inventory();
         this.name = "Bagel";
         switch (id) {
             case "BGLO" -> {
