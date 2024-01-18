@@ -214,7 +214,7 @@ public class StoreTest {
         int basketId = store.createBasket();
         Assertions.assertFalse(store.getBaskets().get(basketId).getCoffees().contains("Latte"));
         Assertions.assertEquals("Coffee added." , store.addCoffeeToBasket("Latte", basketId));
-        Assertions.assertTrue(store.getBaskets().get(basketId).getCoffees().contains("Latte"));
+        Assertions.assertTrue(store.getBaskets().get(basketId).getCoffees().contains("LATTE"));
     }
 
     @Test
@@ -232,9 +232,9 @@ public class StoreTest {
         store.addCoffeeToBasket("Latte", basketId);
         store.addCoffeeToBasket("black", basketId);
         store.addCoffeeToBasket("white", basketId);
-        Assertions.assertTrue(store.getBaskets().get(basketId).getCoffees().contains("black"));
-        Assertions.assertTrue(store.removeCoffeeFromBasket("Black", basketId));
-        Assertions.assertFalse(store.getBaskets().get(basketId).getCoffees().contains("black"));
+        Assertions.assertTrue(store.getBaskets().get(basketId).getCoffees().contains("BLACK"));
+        Assertions.assertTrue(store.removeCoffeeFromBasket("BlaCk", basketId));
+        Assertions.assertFalse(store.getBaskets().get(basketId).getCoffees().contains("BLACK"));
     }
 
 

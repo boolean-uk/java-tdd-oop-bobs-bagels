@@ -149,6 +149,6 @@ public class Store {
     }
 
     public boolean removeCoffeeFromBasket(String coffee, int basketId) {
-        return false;
+        return baskets.get(basketId).removeCoffee(coffee);
     }
 }

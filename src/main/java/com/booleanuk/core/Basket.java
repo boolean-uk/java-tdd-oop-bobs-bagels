@@ -52,10 +52,14 @@ public class Basket {
     }
 
     public void addCoffee(String coffee) {
-        coffees.add(coffee);
+        coffees.add(coffee.toUpperCase());
     }
 
     public ArrayList<String> getCoffees() {
         return new ArrayList<>(coffees);
+    }
+
+    public boolean removeCoffee(String coffee) {
+        return coffees.remove(coffee.toUpperCase());
     }
 }

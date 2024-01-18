@@ -12,7 +12,7 @@ public class Bagel {
     }
 
     public Bagel(String name, ArrayList<String> fillings) {
-        this.name = name;
+        this.name = name.toUpperCase();
         this.fillings = fillings;
     }
 
