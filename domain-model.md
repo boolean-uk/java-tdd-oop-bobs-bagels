@@ -83,24 +83,24 @@ I want customers to only be able to order things that we stock in our inventory.
 |           |             | 10 isInInventory(String id)                  |          | true if is in inventory |
 
 
-| Classes  | Methods                                  | Member Variables    | Scenario                       | Output/Result                              |
-|----------|------------------------------------------|---------------------|--------------------------------|--------------------------------------------|
-| Customer |                                          | Basket basket       |                                |                                            |
-|          |                                          | inventory Inventory |                                |                                            |
-|          |                                          |                     |                                |                                            |
-|          | 1. 8. addToBasket(String id, String[])   |                     | if product in inventory        | add product to basket and return true      |
-|          |                                          |                     | if product not in inventory    | return false                               |
-|          |                                          |                     | if basket is full              | return false                               |
-|          |                                          |                     |                                |                                            |
-|          | 2. removeFromBasket(String id, String[]) |                     | if product in basket           | remove product from basket and return true |
-|          |                                          |                     | 5. if product not in in basket | return false                               |
-|          |                                          |                     |                                |                                            |
-|          | 7. 9. getCostOfProduct(id String)        |                     | if product in inventory        | return price                               |
-|          |                                          |                     | if product not in inventory    | return -1                                  |
-|          |                                          |                     |                                |                                            |
-|          | 6. getCostOfBasket()                     |                     |                                | return total cost of items in basket       |                                                   
-|          |                                          |                     |                                |                                            |
-|          |                                          |                     |                                |                                            |
+| Classes  | Methods                                  | Member Variables    | Scenario                          | Output/Result                              |
+|----------|------------------------------------------|---------------------|-----------------------------------|--------------------------------------------|
+| Customer |                                          | Basket basket       |                                   |                                            |
+|          |                                          | inventory Inventory |                                   |                                            |
+|          |                                          |                     |                                   |                                            |
+|          | 1. 8. addToBasket(String id, String[])   |                     | if product is bagel or coffee     | add product to basket and return true      |
+|          |                                          |                     | if product is not bagel or coffee | return false                               |
+|          |                                          |                     | if basket is full                 | return false                               |
+|          |                                          |                     |                                   |                                            |
+|          | 2. removeFromBasket(String id, String[]) |                     | if product in basket              | remove product from basket and return true |
+|          |                                          |                     | 5. if product not in in basket    | return false                               |
+|          |                                          |                     |                                   |                                            |
+|          | 7. 9. getCostOfProduct(id String)        |                     | if product in inventory           | return price                               |
+|          |                                          |                     | if product not in inventory       | return -1                                  |
+|          |                                          |                     |                                   |                                            |
+|          | 6. getCostOfBasket()                     |                     |                                   | return total cost of items in basket       |                                                   
+|          |                                          |                     |                                   |                                            |
+|          |                                          |                     |                                   |                                            |
 
 | Classes | Methods        | Member Variables             | Scenario                                             | Output/Result               |
 |---------|----------------|------------------------------|------------------------------------------------------|-----------------------------|
