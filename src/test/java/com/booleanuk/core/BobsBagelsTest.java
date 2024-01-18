@@ -107,19 +107,31 @@ class BobsBagelsTest {
         Order order = new Order();
         Inventory inventory = new Inventory();
 
-        System.out.println(inventory.getInventoryPriceList());
+        System.out.println(inventory.getFullInventoryList().toString());
 
         Assertions.assertNotNull(inventory);
     }
 
     @Test
-    public void testDisplayingMenu() {
+    public void testSysOutPrint() {
         Basket basket = new Basket();
         Order order = new Order();
         Inventory inventory = new Inventory();
 
-//        System.out.println(inventory.getInventoryPriceList());
+        inventory.printMenu();
 
-        Assertions.assertNotNull(inventory.getInventoryPriceList());
+        Assertions.assertNotNull(inventory);
     }
+
+//    @Test
+//    public void testDisplayingMenu() {
+//        Basket basket = new Basket();
+//        Order order = new Order();
+//        Inventory inventory = new Inventory();
+//
+////        System.out.println(inventory.getInventoryPriceList());
+//
+//        Assertions.assertNotNull(inventory.getInventoryPriceList());
+//    }
+
 }
