@@ -198,7 +198,7 @@ public class StoreTest {
     @Test
     public void getCostOfValidCoffeeTest() {
         Store store = new Store();
-        Assertions.assertEquals(-1, store.getCostOfCoffee("latte"));
+        Assertions.assertEquals(1.29, store.getCostOfCoffee("latte"));
     }
 
 
