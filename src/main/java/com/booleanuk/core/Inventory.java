@@ -15,20 +15,32 @@ public final class Inventory {
         populateMaps();
     }
 
-    public boolean isInInventory(String id){
+    public static boolean isInInventory(String id){
         return (isBagel(id) || isCoffee(id)|| isFilling(id));
     }
 
-    public boolean isBagel(String id){
+    public static boolean isBagel(String id){
         return bagels.containsKey(id);
     }
 
-    public boolean isCoffee(String id){
+    public static boolean isCoffee(String id){
 
         return coffees.containsKey(id);
     }
-    public boolean isFilling(String id){
+    public static boolean isFilling(String id){
         return fillings.containsKey(id);
+    }
+
+    public static HashMap<String, Bagel> getBagels() {
+        return bagels;
+    }
+
+    public static HashMap<String, Coffee> getCoffees() {
+        return coffees;
+    }
+
+    public static HashMap<String, Filling> getFillings() {
+        return fillings;
     }
 
     private void populateMaps(){

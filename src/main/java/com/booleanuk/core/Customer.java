@@ -18,6 +18,7 @@ public class Customer {
     }
 
     public double getCostOfProduct(String id){
+
         return -1;
     }
 

@@ -4,6 +4,7 @@ import java.util.HashMap;
 
 public class Bagel {
     private HashMap<String, Filling> fillings;
+    private String id;
     private String name;
     private double price;
     private String variant;
@@ -19,6 +20,7 @@ public class Bagel {
         }
     }
     public Bagel(String id){
+        this.id = id;
         this.name = "Bagel";
         switch (id) {
             case "BGLO" -> {
@@ -55,5 +57,9 @@ public class Bagel {
 
     public String getVariant() {
         return this.variant;
+    }
+
+    public String getId(){
+        return this.id;
     }
 }
