@@ -8,16 +8,13 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class BagelTest {
 
-    @BeforeEach
-    void setUp() {
+    @Test
+    public void testGetName(){
         Bagel plain = new Bagel("BGLP");
         Bagel onion = new Bagel("BGLO");
         Bagel everything = new Bagel("BGLE");
         Bagel sesame = new Bagel("BGLS");
-    }
 
-    @Test
-    public void testGetName(){
         Assertions.assertEquals("Bagel", plain.getName());
         Assertions.assertEquals("Bagel", onion.getName());
         Assertions.assertEquals("Bagel", everything.getName());
@@ -26,6 +23,11 @@ class BagelTest {
 
     @Test
     public void testGetVariant(){
+        Bagel plain = new Bagel("BGLP");
+        Bagel onion = new Bagel("BGLO");
+        Bagel everything = new Bagel("BGLE");
+        Bagel sesame = new Bagel("BGLS");
+
         Assertions.assertEquals("Plain", plain.getVariant());
         Assertions.assertEquals("Onion", onion.getVariant());
         Assertions.assertEquals("Everything", everything.getVariant());
@@ -34,6 +36,11 @@ class BagelTest {
 
     @Test
     public void testGetPrice(){
+        Bagel plain = new Bagel("BGLP");
+        Bagel onion = new Bagel("BGLO");
+        Bagel everything = new Bagel("BGLE");
+        Bagel sesame = new Bagel("BGLS");
+
         Assertions.assertEquals(0.39, plain.getPrice());
         Assertions.assertEquals(0.49, onion.getPrice());
         Assertions.assertEquals(0.49, everything.getPrice());
