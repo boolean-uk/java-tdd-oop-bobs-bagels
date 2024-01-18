@@ -65,13 +65,14 @@ As a Bob's Bagels manager,
 So that I can expand my business,
 I’d like to change the capacity of baskets.
 ```
-| Class      | Method                          | Variables    | Scenario                                                                                      | Return value                                           |
-|------------|---------------------------------|--------------|-----------------------------------------------------------------------------------------------|--------------------------------------------------------|
-| BobsBagels | setBasketCapacity(int capacity) |              | Capacity is lowered beyond a baskets number of items, the capacity remains unchanged          | Return "There are customers with more items in basket" |
-|            |                                 |              | Capacity is set to negative number                                                            | Return "Minimum capacity for baskets are 0"            |
-|            |                                 |              | Capacity is set to a number above zero and above or equal to the customer with the most items | Return "Capacity set to (num)"                         |
-| Basket     | setCapacity(int capacity)       | int capacity | Capacity is set to a positive int                                                             | Return true                                            |
-|            |                                 |              | Capacity is set to a negative number or zero                                                  | Return false                                           |
+| Class      | Method                          | Variables    | Scenario                                                                                                                        | Return value                                                                               |
+|------------|---------------------------------|--------------|---------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------|
+| BobsBagels | setBasketCapacity(int capacity) |              | Capacity is lowered beyond a baskets number of items, the capacity is changed, but manager is warned                            | Return "Capacity set to (num). There are customers with more product than (num) in basket" |
+|            |                                 |              | Capacity is set to negative number                                                                                              | Return "Minimum capacity for baskets are 0"                                                |
+|            |                                 |              | Capacity is set to a number above zero and above or equal to the customer with the most items                                   | Return "Capacity set to (num)"                                                             |
+| Basket     | setCapacity(int capacity)       | int capacity | Capacity is set to a positive int                                                                                               | Return true                                                                                |
+|            |                                 |              | Capacity is set to a negative number or zero                                                                                    | Return false                                                                               |
+|            |                                 |              | Capacity is set to number lower than this baskets number of products. Allowed, but customer won't be able to add any more items | Return true                                                                                |
 ```
 5.
 As a member of the public
