@@ -151,6 +151,19 @@ public class OrderTest {
 
     }
 
+    @Test
+    public void testGetCostFilling() {
+        Order basket1 = new Order();
+
+        double result = basket1.getFillingCost("Bacon");
+        double result2 = basket1.getFillingCost("Egg");
+        double result3 = basket1.getFillingCost("Ham");
+        Assertions.assertEquals(0.12, result);
+        Assertions.assertEquals(0.12, result2);
+        Assertions.assertEquals(0.12, result3);
+
+    }
+
 
 
 
