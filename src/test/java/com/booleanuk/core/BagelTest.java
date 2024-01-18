@@ -14,6 +14,7 @@ public class BagelTest {
     }
 
 
+    //Test Item variants
     @Test
     public void addFilling() {
         Bagel bagel = new Bagel("Plain");

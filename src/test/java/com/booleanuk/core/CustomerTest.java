@@ -31,6 +31,10 @@ public class CustomerTest {
         Customer customer = new Customer();
 
         Assertions.assertEquals(0.39, customer.getCostOfItem(new Bagel("plain")));
+        Assertions.assertEquals(0.49, customer.getCostOfItem(new Bagel("onion")));
+        Assertions.assertEquals(0.12, customer.getCostOfItem(new Filling("Bacon")));
+        Assertions.assertEquals(0.99, customer.getCostOfItem(new Coffee("Black")));
+        Assertions.assertEquals(1.29, customer.getCostOfItem(new Coffee("Capuccino")));
 
 
     }
