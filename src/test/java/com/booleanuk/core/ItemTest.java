@@ -15,7 +15,7 @@ public class ItemTest {
     }
 
     @Test
-    public void testCheckPrice() {
+    public void testGetPrice() {
         Item bglo = new Item("BGLO","Bagel", "Onion", 0.49);
         Item bglp = new Item("BGLP","Bagel", "Plain", 0.39);
         Assertions.assertEquals(0.49, bglo.getPrice());
