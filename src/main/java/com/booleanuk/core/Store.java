@@ -16,13 +16,15 @@ public class Store {
 
     private final double TWELWE_BAGELS_DISCOUNT_PRICE = 3.99;
     private final double SIX_BAGELS_DISCOUNT_PRICE = 2.49;
+    private final double COFFEE_AND_BAGEL_DISCOUNT = 1.25;
 
     public Store() {
         baskets = new HashMap<>();
         basketCapacity = 3;
-        initilizePrices();
-        initilizeCodes();
+        initializePrices();
+        initializeCodes();
     }
+
     public int createBasket() {
         Basket basket = new Basket();
         baskets.put(basket.hashCode(), basket);
@@ -81,6 +83,12 @@ public class Store {
         double cost = 0;
         HashMap<String, Integer> noOfEachKind = new HashMap<>();
         ArrayList<Bagel> bagels = baskets.get(basketId).getBagels();
+        ArrayList<String> coffees = baskets.get(basketId).getCoffees();
+
+        if(bagels.size() == 1 && coffees.size() == 1) {
+            return COFFEE_AND_BAGEL_DISCOUNT;
+        }
+
         for(Bagel bagel: bagels) {
             if(noOfEachKind.containsKey(bagel.getName())) {
                 noOfEachKind.put(bagel.getName(), noOfEachKind.get(bagel.getName())+1);
@@ -92,6 +100,7 @@ public class Store {
             }
         }
 
+        //See if discounts
         for(Map.Entry<String, Integer> e: noOfEachKind.entrySet()) {
             int noOfBagelsLeft = e.getValue();
             String name = e.getKey();
@@ -106,7 +115,7 @@ public class Store {
             cost += getCostOfBagel(name)*noOfBagelsLeft;
         }
 
-        for(String coffee: baskets.get(basketId).getCoffees()) {
+        for(String coffee: coffees) {
             cost += getCostOfCoffee(coffee);
         }
 
@@ -117,7 +126,7 @@ public class Store {
         return baskets.get(basketId).removeBagel(bagel, fillings);
     }
 
-    private void initilizePrices() {
+    private void initializePrices() {
         prices = new HashMap<>();
         prices.put("BGLO", 0.49);
         prices.put("BGLP", 0.39);
@@ -136,7 +145,7 @@ public class Store {
 
     }
 
-    private void initilizeCodes() {
+    private void initializeCodes() {
         bagelCodes = new HashMap<>();
         bagelCodes.put("ONION", "BGLO");
         bagelCodes.put("PLAIN", "BGLP");
