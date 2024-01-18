@@ -26,7 +26,7 @@ public class Store {
     }
 
     public HashMap<Integer,Basket> getBaskets() {
-        return baskets;
+        return new HashMap<>(baskets);
     }
 
     public String addBagelToBasket(String bagel, int basketId) {

@@ -7,7 +7,7 @@ public class Bagel {
     private ArrayList<String> fillings;
 
     public Bagel(String name) {
-        this.name = name;
+        this.name = name.toUpperCase();
         fillings = new ArrayList<>();
     }
 
@@ -34,7 +34,7 @@ public class Bagel {
     }
 
     public ArrayList<String> getFillings() {
-        return fillings;
+        return new ArrayList<>(fillings);
     }
 
     @Override
@@ -46,4 +46,8 @@ public class Bagel {
         return this.name.equalsIgnoreCase(other.name) && this.fillings.equals(other.fillings);
     }
 
+    @Override
+    public String toString() {
+        return name + (fillings.isEmpty()? "": " with " + fillings);
+    }
 }

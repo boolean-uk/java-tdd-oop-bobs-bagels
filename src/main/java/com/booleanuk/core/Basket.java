@@ -10,7 +10,7 @@ public class Basket {
     }
 
     public ArrayList<Bagel> getBagels() {
-        return bagels;
+        return new ArrayList<>(bagels);
     }
 
     public void addBagel(String bagel) {
@@ -44,4 +44,8 @@ public class Basket {
         return bagels.remove(new Bagel(bagel, upperCasedFillings));
     }
 
+    @Override
+    public String toString() {
+        return bagels.toString();
+    }
 }
