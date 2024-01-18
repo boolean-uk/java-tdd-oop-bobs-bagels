@@ -13,8 +13,8 @@ public class Basket {
         return bagels;
     }
 
-    public void addBagel(Bagel bagel) {
-        bagels.add(bagel);
+    public void addBagel(String bagel) {
+        bagels.add(new Bagel(bagel));
     }
 
     public int getNoOfBagels() {
@@ -36,7 +36,6 @@ public class Basket {
                 : "Your basket doesn't contain that bagel.";
     }
 
-    //TODO: refactor so we dont have to create bagel obj
     public boolean removeBagel(String bagel, ArrayList<String> fillings) {
         ArrayList<String> upperCasedFillings = new ArrayList<>();
         for(String filling: fillings) {

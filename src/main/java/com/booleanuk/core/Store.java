@@ -38,7 +38,7 @@ public class Store {
         if(basket.getNoOfBagels() >= basketCapacity) {
             return "You're basket is full!";
         }
-        baskets.get(basketId).addBagel(new Bagel(bagel));
+        baskets.get(basketId).addBagel(bagel);
         return "Bagel added.";
     }
 
