@@ -123,4 +123,19 @@ class BasketTest {
         Assertions.assertTrue(basket.setCapacity(1));
         Assertions.assertEquals("Basket is full", basket.add("BGLO"));
     }
+
+    @Test
+    public void testGetTotalCostForBasket() {
+        Basket basket = new Basket();
+        basket.add("BGLO");
+        basket.add("BGLO");
+        basket.add("BGLP");
+        Assertions.assertEquals(0.49+0.49+0.39, basket.totalCost());
+    }
+
+    @Test
+    public void testGetTotalCostForEmptyBasket() {
+        Basket basket = new Basket();
+        Assertions.assertEquals(0, basket.totalCost());
+    }
 }
