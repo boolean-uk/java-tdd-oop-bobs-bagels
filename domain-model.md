@@ -96,7 +96,7 @@ I want customers to only be able to order things that we stock in our inventory.
 |          |                                          |                     | 5. if product not in in basket | return false                               |
 |          |                                          |                     |                                |                                            |
 |          | 7. 9. getCostOfProduct(id String)        |                     | if product in inventory        | return price                               |
-|          |                                          |                     | if product not in inventory    | return false                               |
+|          |                                          |                     | if product not in inventory    | return -1                                  |
 |          |                                          |                     |                                |                                            |
 |          | 6. getCostOfBasket()                     |                     |                                | return total cost of items in basket       |                                                   
 |          |                                          |                     |                                |                                            |
@@ -114,16 +114,17 @@ I want customers to only be able to order things that we stock in our inventory.
 |         |                |                              |                                                      |                             |
 |         |                |                              |                                                      |                             |
 
-| Classes | Methods        | Member Variables                         | Scenario                                                   | Output/Result   |
-|---------|----------------|------------------------------------------|------------------------------------------------------------|-----------------|
-| Basket  |                | products Hashmap<String ids, int amount> |                                                            |                 |
-|         |                | inventory Inventory                      |                                                            |                 |
-|         |                | int maxSize                              |                                                            |                 |
-|         | add(String id) |                                          | if id in basket                                            | increase amount |
-|         |                |                                          | if id not in basket                                        | add to bas      |
-|         |                |                                          | 3. if existing amount plus new product exceeds maxCapacity | return false    |
-|         |                |                                          |                                                            |                 |
-|         |                |                                          |                                                            |                 |
-|         |                |                                          |                                                            |                 |
+| Classes | Methods              | Member Variables                         | Scenario                                                   | Output/Result      |
+|---------|----------------------|------------------------------------------|------------------------------------------------------------|--------------------|
+| Basket  |                      | products Hashmap<String ids, int amount> |                                                            |                    |
+|         |                      | inventory Inventory                      |                                                            |                    |
+|         |                      | int maxSize                              |                                                            |                    |
+|         | add(String id)       |                                          | if id in basket                                            | increase amount    |
+|         |                      |                                          | if id not in basket                                        | add to bas         |
+|         |                      |                                          | 3. if existing amount plus new product exceeds maxCapacity | return false       |
+|         | remove(String id)    |                                          |                                                            | decrease amount    |
+|         |                      |                                          |                                                            |                    |
+|         |                      |                                          |                                                            |                    |
+|         | setMaxSize(int size) |                                          |                                                            | change maxCapacity |
 
 
