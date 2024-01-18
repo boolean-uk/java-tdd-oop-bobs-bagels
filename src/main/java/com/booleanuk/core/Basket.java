@@ -1,9 +1,10 @@
 package com.booleanuk.core;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Basket {
-    private ArrayList<Item> items;
+    private List<Item> items;
     private int capacity;
     private double totalCost;
 
@@ -44,5 +45,9 @@ public class Basket {
 
     public double totalCost() {
         return totalCost;
+    }
+
+    public List<Item> getItems() {
+        return items;
     }
 }

@@ -1,18 +1,11 @@
 package com.booleanuk.core;
 
 public class Bagel extends Item {
-    private String variant;
-
-    public Bagel(String variant, double price) {
-        super("bagel", price);
-        this.variant = variant;
-    }
-
-    public String getVariant() {
-        return variant;
+    public Bagel(String variant, double price, String sku) {
+        super("Bagel", price, sku, variant);
     }
 
     public String getBagelPrice() {
-        return toString();
+        return "This bagel costs " + getPrice();
     }
 }

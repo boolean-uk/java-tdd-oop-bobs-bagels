@@ -3,11 +3,10 @@ package com.booleanuk.core;
 import java.util.ArrayList;
 
 public class Filling extends Item {
-    private String fillingType;
     private static ArrayList<Filling> allFillings = new ArrayList<>();
 
-    public Filling(String fillingType, double fillingCost) {
-        super(fillingType, fillingCost);
+    public Filling(String fillingType, double fillingCost, String sku) {
+        super(fillingType, fillingCost, sku, "N/A"); // "N/A" since fillings might not have a variant
         allFillings.add(this);
     }
 
