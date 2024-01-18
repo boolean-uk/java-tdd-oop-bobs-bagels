@@ -27,7 +27,8 @@ public class Basket {
         inventoryList.add(new Item("FILH", 0.12d, "Filling", "Ham"));
     }
 
-    public boolean add(String itemSKU){
+    public boolean addItem(String itemSKU){
+        //Checks if input exist in inventory
         for (int i = 0; i < inventoryList.size(); i++) {
             if(basketList.size() < capacity){
                 if(itemSKU.equals(inventoryList.get(i).getSku())){
@@ -46,7 +47,6 @@ public class Basket {
     }
 
     public boolean remove(String itemSKU) {
-
         if(basketList.contains(itemSKU)){
             basketList.remove(itemSKU);
             return true;
@@ -60,7 +60,7 @@ public class Basket {
             for (int j = 0; j < inventoryList.size(); j++) {
                 if (basketList.get(i).equals(inventoryList.get(j).getSku())){
                      totalPrice += inventoryList.get(j).getPrice();
-                    System.out.println(totalPrice);
+                    //System.out.println(totalPrice);
 
                 }
             }
@@ -80,23 +80,62 @@ public class Basket {
             newList.add(basketList.get(i));
         }
 
+        //Does not remove filling if added before change
+        for (int i = 0; i < basketList.size() ; i++) {
+            if (basketList.get(i).startsWith("FIL")){
+                System.out.println(basketList.get(i));
+            newList.add(basketList.get(i));}
+        }
+
         basketList = newList;
         return basketList.toString();
     }
 
+    public double checkPrice(String itemSKU) {
+        for (int i = 0; i < inventoryList.size(); i++) {
+            if (inventoryList.get(i).getSku().equals(itemSKU)){
+                return inventoryList.get(i).getPrice();
+            }
+        }
+        return 0;
+    }
+
+    public boolean addFilling(String itemSKU, String fillingSKU){
+        //Checks if input exist in inventory
+        for (int i = 0; i < inventoryList.size(); i++) {
+            if(itemSKU.equals(inventoryList.get(i).getSku())){
+                //ignores capacity of basket
+                basketList.add(fillingSKU);
+                return true;
+
+                //future problem, when using changeCapacity, it deletes the filling
+                //know the reason, hard to come up with solution based on what I have
+            }
+
+        }
+        return false;
+    }
+
+
+
     public static void main(String[] args) {
         Basket basket = new Basket();
 
-        System.out.println(basket.inventoryList.get(1).getPrice());
         System.out.println("tester ------------------");
-        basket.add("COFB"); //0.99
-        basket.add("BGLO"); //0.49
-        basket.add("BGLP"); //0.39, total 1.87
+        basket.addItem("COFB"); //0.99
+        basket.addItem("BGLO"); //0.49
+        basket.addItem("BGLP"); //0.39, total 1.87
+        System.out.println(basket.basketList);
+
+        System.out.println(basket.totalCost());
+        basket.addFilling("BGLO","FILE");
         //basket.add("COFW");
         //basket.remove("COFB");
         //basket.totalCost();
         System.out.println(basket.basketList);
-        System.out.println(basket.changeCapacity(2));
+
+        System.out.println(basket.changeCapacity(1));
+        System.out.println(basket.totalCost());
 
     }
     }
