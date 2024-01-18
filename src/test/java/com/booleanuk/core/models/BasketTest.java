@@ -1,6 +1,7 @@
 package com.booleanuk.core.models;
 
 import com.booleanuk.core.models.item.Bagel;
+import com.booleanuk.core.models.item.Coffee;
 import com.booleanuk.core.models.item.Filling;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
@@ -9,6 +10,7 @@ import org.junit.jupiter.api.Test;
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class BasketTest {
     private static final int DEFAULT_CAPACITY = 12;
@@ -99,5 +101,18 @@ public class BasketTest {
         Assertions.assertEquals(0, secondItem.getFilling().size());
         // Check that filling was set for first item
         Assertions.assertEquals(1, firstItem.getFilling().size());
+    }
+
+    @Test
+    public void getCorrectItemCount() {
+        Bagel firstItem = (Bagel) basket.addItem(item1);
+        basket.addItem(item1);
+        Coffee thirdItem = (Coffee) basket.addItem(item2);
+
+        HashMap<Item, Integer> actualCount = new HashMap<>();
+        actualCount.put(firstItem, 2);
+        actualCount.put(thirdItem, 1);
+
+        Assertions.assertEquals(actualCount, basket.getItemCount());
     }
 }
