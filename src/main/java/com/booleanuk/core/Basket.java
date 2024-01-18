@@ -27,6 +27,7 @@ public class Basket {
                 System.out.println("Basket is full");
                 return;
             }
+            System.out.println(product.getPrice());
             bagelBasket.add(product);
              }
 

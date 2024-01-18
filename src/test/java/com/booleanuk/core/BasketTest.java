@@ -66,4 +66,11 @@ class BasketTest {
         Assertions.assertEquals("Filling",basket.bagelBasket.get(0).getName());
 
     }
+    @Test
+    public void checkInventory(){
+       Inventory inventory = new Inventory();
+       Assertions.assertEquals("BGLP", inventory.getProduct("Plain").getSku());
+
+
+    }
 }

@@ -1,10 +1,10 @@
 package com.booleanuk.core;
 
 public class Product {
-    public String sku;
-    public double price;
-    public String name;
-    public String variant;
+    private String sku;
+    private double price;
+    private String name;
+    private String variant;
 
     public Product(String sku, double price, String name, String variant) {
         this.sku = sku;
