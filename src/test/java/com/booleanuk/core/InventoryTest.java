@@ -13,4 +13,16 @@ class InventoryTest {
         Assertions.assertFalse(inventory.getProducts().isEmpty());
     }
 
+    @Test
+    public void testGetExistingProductCost() {
+        Inventory inventory = new Inventory();
+        Assertions.assertEquals(0.49, inventory.getProductCost("BGLO"));
+    }
+
+    @Test
+    public void testGetNoneExistingProductCost() {
+        Inventory inventory = new Inventory();
+        Assertions.assertEquals(0, inventory.getProductCost("AAAAHHHH"));
+    }
+
 }
