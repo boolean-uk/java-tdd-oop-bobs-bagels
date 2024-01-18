@@ -22,7 +22,14 @@ class InventoryTest {
     @Test
     public void testGetNoneExistingProductCost() {
         Inventory inventory = new Inventory();
-        Assertions.assertEquals(0, inventory.getProductCost("AAAAHHHH"));
+        Assertions.assertEquals("", inventory.listFillingCosts());
+    }
+
+    @Test
+    public void testListFillingCosts() {
+        Inventory inventory = new Inventory();
+        inventory.getProducts().removeAll(inventory.getProducts().stream().filter(x -> x.getName().equals("Filling")).toList());
+        Assertions.assertEquals("No fillings available", inventory.listFillingCosts());
     }
 
 }
