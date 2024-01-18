@@ -114,33 +114,46 @@ class BasketTest {
 		} catch (NotInInventoryException e) {
 			throw new RuntimeException(e);
 		}
-		Assertions.assertEquals(0.39,basket.getTotalCost());
+		Assertions.assertEquals(0.39, basket.getTotalCost());
 	}
+
 	@Test
-	public void addFillingTest(){
+	public void addFillingTest() {
 		Inventory inventory = new Inventory();
 		Basket basket = new Basket(inventory);
 		try {
 			basket.addItem("BGLP");
-			basket.addExtra(0,"FILS");
+			basket.addExtra(0, "FILS");
 		} catch (NotInInventoryException e) {
 			throw new RuntimeException(e);
 		}
 
 
-
 	}
+
 	@Test
-	public void removeFillingTest(){
+	public void removeFillingTest() {
 		Inventory inventory = new Inventory();
 		Basket basket = new Basket(inventory);
 		try {
 			basket.addItem("BGLP");
-			basket.addExtra(0,"FILS");
+			basket.addExtra(0, "FILS");
 		} catch (NotInInventoryException e) {
 			throw new RuntimeException(e);
 		}
-		basket.removeExtra(0,"FILS");
+		basket.removeExtra(0, "FILS");
+	}
 
+	@Test
+	public void getPriceTest() {
+		Inventory inventory = new Inventory();
+		Basket basket = new Basket(inventory);
+		try {
+			Assertions.assertEquals(0.39, basket.getPrice("BGLP"));
+			Assertions.assertEquals(0.49, basket.getPrice("BGLO"));
+			Assertions.assertEquals(0.12, basket.getPrice("FILS"));
+		} catch (NotInInventoryException e) {
+			throw new RuntimeException(e);
+		}
 	}
 }
