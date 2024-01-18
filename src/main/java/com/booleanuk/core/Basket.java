@@ -4,9 +4,11 @@ import java.util.ArrayList;
 
 public class Basket {
     private ArrayList<Bagel> bagels;
+    private ArrayList<String> coffees;
 
     public Basket() {
         bagels = new ArrayList<>();
+        coffees = new ArrayList<>();
     }
 
     public ArrayList<Bagel> getBagels() {
@@ -47,5 +49,13 @@ public class Basket {
     @Override
     public String toString() {
         return bagels.toString();
+    }
+
+    public void addCoffee(String coffee) {
+        coffees.add(coffee);
+    }
+
+    public ArrayList<String> getCoffees() {
+        return new ArrayList<>(coffees);
     }
 }

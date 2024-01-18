@@ -208,5 +208,14 @@ public class StoreTest {
         Assertions.assertEquals("Bob's bagels doesn't have that coffee." , store.addCoffeeToBasket("Chocolate", basketId));
     }
 
+    @Test
+    public void addExistentCoffeeToBasketTest() {
+        Store store = new Store();
+        int basketId = store.createBasket();
+        Assertions.assertFalse(store.getBaskets().get(basketId).getCoffees().contains("Latte"));
+        Assertions.assertEquals("Coffee added." , store.addCoffeeToBasket("Latte", basketId));
+        Assertions.assertTrue(store.getBaskets().get(basketId).getCoffees().contains("Latte"));
+    }
+
 
 }

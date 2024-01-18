@@ -139,7 +139,12 @@ public class Store {
         return prices.get(coffeeCodes.get(coffee.toUpperCase()));
     }
 
+    //TODO: what do if nonexistent basketid
     public String addCoffeeToBasket(String coffee, int basketId) {
-        return "Bob's bagels doesn't have that coffee.";
+        if(!coffeeCodes.containsKey(coffee.toUpperCase())) {
+            return  "Bob's bagels doesn't have that coffee.";
+        }
+        baskets.get(basketId).addCoffee(coffee);
+        return "Coffee added.";
     }
 }
