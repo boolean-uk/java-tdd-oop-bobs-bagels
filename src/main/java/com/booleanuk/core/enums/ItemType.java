@@ -1,4 +1,4 @@
-package com.booleanuk.core.model;
+package com.booleanuk.core.enums;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

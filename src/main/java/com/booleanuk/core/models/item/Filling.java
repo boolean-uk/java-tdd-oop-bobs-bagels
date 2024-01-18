@@ -1,6 +1,6 @@
-package com.booleanuk.core.model.item;
+package com.booleanuk.core.models.item;
 
-import com.booleanuk.core.model.Item;
+import com.booleanuk.core.models.Item;
 
 public class Filling extends Item {
     public Filling(String SKU, double price, String name, String variant) {

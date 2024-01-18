@@ -1,6 +1,6 @@
-package com.booleanuk.core.model.item;
+package com.booleanuk.core.models.item;
 
-import com.booleanuk.core.model.Item;
+import com.booleanuk.core.models.Item;
 import lombok.Getter;
 
 import java.util.ArrayList;

@@ -1,10 +1,10 @@
 package com.booleanuk.core;
 
-import com.booleanuk.core.model.Basket;
-import com.booleanuk.core.model.ItemType;
-import com.booleanuk.core.model.Store;
-import com.booleanuk.core.model.item.Bagel;
-import com.booleanuk.core.model.item.Filling;
+import com.booleanuk.core.models.Basket;
+import com.booleanuk.core.enums.ItemType;
+import com.booleanuk.core.models.Store;
+import com.booleanuk.core.models.item.Bagel;
+import com.booleanuk.core.models.item.Filling;
 
 import java.io.FileNotFoundException;
 

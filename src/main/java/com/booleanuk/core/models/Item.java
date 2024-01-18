@@ -1,4 +1,4 @@
-package com.booleanuk.core.model;
+package com.booleanuk.core.models;
 
 import lombok.*;
 

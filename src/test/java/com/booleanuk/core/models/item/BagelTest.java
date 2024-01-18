@@ -1,4 +1,4 @@
-package com.booleanuk.core.model.item;
+package com.booleanuk.core.models.item;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
