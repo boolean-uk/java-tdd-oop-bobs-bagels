@@ -10,6 +10,9 @@ public class TestBasketExtension {
     public void testCheckout(){
         BasketExtension basket = new BasketExtension(new User());
         basket.add("COFB");
+        basket.add("COFB");
+        basket.add("BGLS");
+        basket.add("BGLS");
         basket.add("BGLS");
         basket.add("BGLP");
         basket.add("FILX");

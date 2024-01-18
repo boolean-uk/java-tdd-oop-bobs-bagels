@@ -86,6 +86,18 @@ public class Product {
         this.SKU = SKU;
     }
 
+    public String getName(){
+        return name;
+    }
+
+    public String getType(){
+        return type;
+    }
+
+    public double getPrice(){
+        return price;
+    }
+
     @Override
     public boolean equals(Object otherObj){
         if (getClass() == otherObj.getClass()){
