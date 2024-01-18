@@ -29,8 +29,15 @@ public class Bagel extends Product {
         updatePrice();
     }
 
+    @Override
+    public double getPrice() {
+        updatePrice();
+        return this.price;
+    }
+
     public void addFilling(Filling filling) {
         this.fillings.add(filling);
+        updatePrice();
     }
 
     public ArrayList<Filling> getFillings() {

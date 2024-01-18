@@ -19,6 +19,19 @@ public class BagelTest {
     }
 
     @Test
+    public void getPriceTest() {
+        Bagel bagel = new Bagel("Poppy Seed", 1.29);
+        Assertions.assertEquals(1.29, bagel.getPrice());
+    }
+
+    @Test
+    public void setPriceTest() {
+        Bagel bagel = new Bagel("Poppy Seed", 1.29);
+        bagel.setPrice(0.89);
+        Assertions.assertEquals(0.89, bagel.getPrice());
+    }
+
+    @Test
     public void getFillingsTest() {
         Bagel bagel = new Bagel("Poppy Seed", 1.29);
         Assertions.assertTrue(bagel.getFillings().isEmpty());
@@ -39,12 +52,9 @@ public class BagelTest {
             Assertions.assertEquals(testFillings[i].name, bagel.getFillings().get(i).name);
             Assertions.assertEquals(testFillings[i].price, bagel.getFillings().get(i).getPrice());
         }
+        Assertions.assertEquals(1.86, bagel.getPrice());
 
     }
 
-    @Test
-    public void getPriceTest() {
-
-    }
 
 }
