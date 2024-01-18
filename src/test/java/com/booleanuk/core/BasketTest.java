@@ -66,4 +66,27 @@ class BasketTest {
         //Set max to negative number
         Assertions.assertFalse(basket.setMaxSize(-20));
     }
+
+    @Test
+    public void testGetCostOfFilling(){
+        Basket basket = new Basket();
+        Filling filling1 = new Filling("FILB");
+
+        //Test get cost of filling
+        Assertions.assertEquals(0.12, basket.getCostOfFilling(filling1));
+
+    }
+    @Test
+    public void testGetCostOfBagel(){
+        Basket basket = new Basket();
+        Bagel bagelplain = new Bagel("BGLP");
+        Filling filling1 = new Filling("FILB");
+        Filling filling2 = new Filling("FILE");
+        Bagel bagelWithFilling = new Bagel("BGLP", new Filling[]{filling1, filling2});
+
+        //Get cost of plain bagel
+        Assertions.assertEquals(0.39, basket.getCostOfBagel(bagelplain));
+
+        //Get cost of bagel with filling on
+        Assertions.assertEquals(0.63, basket.getCostOfBagel(bagelWithFilling));    }
 }
