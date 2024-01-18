@@ -18,7 +18,7 @@ public class BobsBagelsShop {
         StringBuilder output;
         output = new StringBuilder("Bob's Bagels\nSKU\tPrice\tName\tVariant\n");
         for (Item item : inventory.keySet()) {
-            String itemString = "bglo\t"+item.checkPrice()+"\t"+item.name+"\t"+item.variant+"\n";
+            String itemString = item.sku+"\t"+item.checkPrice()+"\t"+item.name+"\t"+item.variant+"\n";
             output.append(itemString);
         }
         return output.toString();
