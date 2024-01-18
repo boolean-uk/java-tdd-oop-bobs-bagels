@@ -35,4 +35,10 @@ public class Basket {
         return bagelExists? "All bagels of that kind in your basket already has that filling."
                 : "Your basket doesn't contain that bagel.";
     }
+
+    //TODO: refactor so we dont have to create bagel obj
+    public boolean removeBagel(String bagel, ArrayList<String> fillings) {
+        return bagels.remove(new Bagel(bagel));
+    }
+
 }

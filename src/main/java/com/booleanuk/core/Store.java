@@ -130,6 +130,6 @@ public class Store {
     }
 
     public boolean removeBagelFromBasket(String bagel, ArrayList<String> fillings, int basketId) {
-        return false;
+        return baskets.get(basketId).removeBagel(bagel, fillings);
     }
 }

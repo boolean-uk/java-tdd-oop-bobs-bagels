@@ -16,7 +16,7 @@ public class Bagel {
             return false;
         }
         Bagel other = (Bagel) obj;
-        return this.name.equals(other.name);
+        return this.name.equalsIgnoreCase(other.name);
     }
 
     public boolean addFilling(String filling) {
