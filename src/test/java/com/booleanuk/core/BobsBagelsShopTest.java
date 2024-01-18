@@ -19,11 +19,15 @@ public class BobsBagelsShopTest {
         Assertions.assertEquals("No items in stock.", shop.showInventory());
 
         Item bglo = new Item("BGLO","Bagel", "Onion", 0.49);
-        //Item bglp = new Item("BGLP","Bagel", "Plain", 0.39);
+        Item bglp = new Item("BGLP","Bagel", "Plain", 0.39);
         HashMap<Item, Integer> testInventory = new HashMap<>();
         testInventory.put(bglo, 100);
-        //testInventory.put(bglp, 100);
+        testInventory.put(bglp, 100);
         BobsBagelsShop shop2 = new BobsBagelsShop(testInventory, 3);
-        Assertions.assertEquals("Bob's Bagels\nSKU\tPrice\tName\tVariant\nBGLO\t0.49\tBagel\tOnion\n", shop2.showInventory());
+        Assertions.assertEquals(
+                "Bob's Bagels\n" +
+                        "SKU\tPrice\tName\tVariant\n" +
+                        "BGLO\t0.49\tBagel\tOnion\n" +
+                        "BGLP\t0.39\tBagel\tPlain\n", shop2.showInventory());
     }
 }
