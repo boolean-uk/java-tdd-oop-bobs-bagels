@@ -97,7 +97,7 @@ public class BagelTest {
         bagelCost = abagel.costFilling("Sesame");
         Assertions.assertEquals(0.49, bagelCost);
         bagelCost = abagel.costFilling("Strawberry");
-        Assertions.assertEquals(null, bagelCost);
+        Assertions.assertEquals(0.0, bagelCost);
 
     }
 

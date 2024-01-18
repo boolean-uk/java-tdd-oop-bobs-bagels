@@ -122,7 +122,15 @@ public class Bagel {
         }
         return out;
     }
-
-
+    public double costFilling(String filling){
+        double out=0.0;
+        initializeArr();
+        for (int i = 0; i < inventoryList.size(); i++){
+            if (inventoryList.get(i).variant.equals(filling)){
+                out = inventoryList.get(i).price;
+            }
+        }
+        return out;
+    }
 }
 
