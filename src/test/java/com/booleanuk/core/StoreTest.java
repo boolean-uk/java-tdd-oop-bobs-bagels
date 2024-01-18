@@ -222,7 +222,19 @@ public class StoreTest {
         Store store = new Store();
         int basketId = store.createBasket();
         store.addCoffeeToBasket("Latte", basketId);
-        Assertions.assertFalse(store.removeCoffeeFromBasket("coffee", basketId));
+        Assertions.assertFalse(store.removeCoffeeFromBasket("Black", basketId));
+    }
+
+    @Test
+    public void removeExistentCoffeeToBasketTest() {
+        Store store = new Store();
+        int basketId = store.createBasket();
+        store.addCoffeeToBasket("Latte", basketId);
+        store.addCoffeeToBasket("black", basketId);
+        store.addCoffeeToBasket("white", basketId);
+        Assertions.assertTrue(store.getBaskets().get(basketId).getCoffees().contains("black"));
+        Assertions.assertTrue(store.removeCoffeeFromBasket("Black", basketId));
+        Assertions.assertFalse(store.getBaskets().get(basketId).getCoffees().contains("black"));
     }
 
 
