@@ -33,10 +33,22 @@ public class CustomerTest {
         Customer customer = new Customer();
 
 
-
-
         Assertions.assertEquals(2.49, customer.getTotalCost(Map.of(new Bagel("Plain"), 6)));
         Assertions.assertEquals(3.99, customer.getTotalCost(Map.of(new Bagel("Plain"), 12)));
+
+        Map<Item, Integer> map = Map.of(
+                new Bagel("Plain"), 4,
+                new Coffee("Black"), 4);
+
+
+        Map<Item, Integer> map2 = Map.of(
+                new Bagel("Plain"), 7,
+                new Coffee("Black"), 4);
+
+        Assertions.assertEquals(1.25*4, customer.getTotalCost(map));
+        Assertions.assertEquals(1.25 + 2.49, customer.getTotalCost(map2));
+
+
 
     }
 

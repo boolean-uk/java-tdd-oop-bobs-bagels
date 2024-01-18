@@ -39,9 +39,6 @@ public class Customer {
 
         return cost;
 
-      /*  return items.entrySet().stream().map()
-                .map(Item::getPrice)
-                .reduce(0.00, Double::sum);*/
     }
 
     public double getCostOfItem(Item item) {
