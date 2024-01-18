@@ -152,7 +152,7 @@ public class StoreTest {
         store.addFilling("egg", "onion", basketId);
         store.addBagelToBasket("Plain", basketId);
         store.addFilling("cheese", "onion", basketId);
-        store.addFilling("cheese", "plain", basketId);
+        store.addFilling("cheese", "Plain", basketId);
         Assertions.assertEquals(0.49+0.39+3*0.12, store.getCostOfBasket(basketId));
     }
 

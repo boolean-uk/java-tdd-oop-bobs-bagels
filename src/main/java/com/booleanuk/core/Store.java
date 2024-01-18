@@ -119,7 +119,12 @@ public class Store {
         ArrayList<Bagel> bagels = baskets.get(basketId).getBagels();
         for(Bagel bagel: bagels) {
             cost += getCostOfBagel(bagel.getName());
+            for(String filling: bagel.getFillings()) {
+                cost += getCostOfFilling(filling);
+            }
         }
+        cost = Math.round(cost * 100);
+        cost = cost/100;
         return cost;
     }
 }

@@ -35,4 +35,8 @@ public class Bagel {
     public boolean hasFilling(String filling) {
         return fillings.contains(filling.toUpperCase());
     }
+
+    public ArrayList<String> getFillings() {
+        return fillings;
+    }
 }

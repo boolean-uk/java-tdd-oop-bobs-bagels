@@ -24,7 +24,7 @@ public class Basket {
     public String addFilling(String filling, String bagel) {
         boolean bagelExists = false;
         for(Bagel b: bagels) {
-            if(b.getName().equals(bagel)) {
+            if(b.getName().equalsIgnoreCase(bagel)) {
                 bagelExists = true;
                 if(!b.hasFilling(filling)) {
                     b.addFilling(filling);
