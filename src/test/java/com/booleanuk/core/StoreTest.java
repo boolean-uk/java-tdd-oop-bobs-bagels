@@ -116,4 +116,10 @@ public class StoreTest {
         Assertions.assertEquals(0.49, store.getCostOfBagel("Onion"));
     }
 
+    @Test
+    public void getCostOfInvalidFillingTest() {
+        Store store = new Store();
+        Assertions.assertEquals(-1, store.getCostOfFilling("Chocolate"));
+    }
+
 }

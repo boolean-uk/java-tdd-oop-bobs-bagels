@@ -105,4 +105,8 @@ public class Store {
         }
         return prices.get(bagelCodes.get(bagel.toUpperCase()));
     }
+
+    public double getCostOfFilling(String filling) {
+        return -1;
+    }
 }
