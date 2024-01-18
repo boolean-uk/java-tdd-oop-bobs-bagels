@@ -1,50 +1,53 @@
 package com.booleanuk.core;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class Inventory {
-    Bagel bagels = new Bagel();
-    Coffee coffee = new Coffee();
-    Filling filling = new Filling();
+    private List<Product> menu;
+    private HashMap<String, Integer> inventory;
 
-    HashMap<String, Integer> bagelInventory = new HashMap<>();
-    HashMap<String, Integer> coffeeInventory = new HashMap<>();
-    HashMap<String, Integer> fillingInventory = new HashMap<>();
+    public Inventory() {
+        this.menu = new ArrayList<>();
+        this.inventory = new HashMap<>();
+    }
 
-    public Inventory(){
-        for (int i = 0; i < filling.sku.length; i++){
-            if (i < 4){
-                bagelInventory.put(bagels.sku[i], 30);
-                coffeeInventory.put(coffee.sku[i],25);
-            }
-            fillingInventory.put(filling.sku[i],50);
-        }
+    public Integer getInventory(String sku) {
+        return inventory.get(sku);
+    }
+
+    public void addToMenu(Product item, int stock){
+        menu.add(item);
+        inventory.put(item.getSku(), stock);
     }
 
     public boolean isInStock(String sku){
-        if (bagelInventory.containsKey(sku)){
-            return bagelInventory.get(sku) > 0;
-        }
-        else if (coffeeInventory.containsKey(sku)){
-            return coffeeInventory.get(sku) > 0;
-        }
-        else if (fillingInventory.containsKey(sku)){
-            return coffeeInventory.get(sku) > 0;
-        }
-        return false;
+        return inventory.containsKey(sku) && inventory.get(sku) > 0;
+    }
+    /*
+    public Product getProduct(String sku){
+        for (Product item: menu){
+            if (item.getSku().equals(sku)){
+                return item;
+            }
+        }return null;
     }
 
-    public String updateStock(String sku, int amount){
-        if (bagelInventory.containsKey(sku)){
-            bagelInventory.put(sku,amount);
-        }
-        else if (coffeeInventory.containsKey(sku)){
-            coffeeInventory.put(sku,amount);
-        }
-        else if (fillingInventory.containsKey(sku)){
-            fillingInventory.put(sku, amount);
-        }
-        return sku + " stock has been updated";
-    }
+     */
 
+    public void decreaseStock(String sku){
+        if (inventory.containsKey(sku)){
+            int inStock = inventory.get(sku);
+            if (inStock > 0){
+                inventory.put(sku, inStock -1 );
+            }
+            else {
+                System.out.println("Item out of stock");
+            }
+
+        }else {
+            System.out.println("Item Not Found");
+        }
+    }
 }

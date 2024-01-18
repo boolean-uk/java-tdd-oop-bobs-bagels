@@ -1,65 +1,67 @@
 package com.booleanuk.core;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class Product {
     protected String type;
-    protected String [] variant;
-    protected String [] sku;
-    protected double [] price;
+    protected String variant;
+    protected String sku;
+    protected double price;
 
+    public Product(String type, String sku, String variant, double price) {
+        this.type = type;
+        this.sku = sku;
+        this.variant = variant;
+        this.price = price;
+    }
+
+    public String getType() {
+        return type;
+    }
+    public String getSku() {
+        return sku;
+    }
+    public String getVariant() {
+        return variant;
+    }
+    public double getPrice() {
+        return price;
+    }
 }
 
 class Bagel extends Product{
-    public String [][] bagels = new String[4][4];
+    private List<String> fillings;
 
-    public Bagel() {
-        super();
-        this.type = "Bagel";
-        sku = new String[]{"BGLO","BGLP","BGLE","BLGS"};
-        variant = new String[]{"Onion", "Plain","Everything","Sesame"};
-        price = new double[]{0.49, 0.39,0.49,0.49};
-        for (int i = 0; i <sku.length; i++){
-            bagels[i][0] = sku[i];
-            bagels[i][1] = type;
-            bagels[i][2] = variant[i];
-            bagels[i][3] = String.valueOf(price[i]);
-        }
+    public Bagel(String sku, String variant, double price) {
+        super("Bagel", sku, variant, price);
+        this.fillings = new ArrayList<>();
+    }
+    public List<String> getFillings() {
+        return fillings;
+    }
+    public void addFillings(String filling) {
+        fillings.add(filling);
     }
 }
 
 class Coffee extends Product{
-    public String [][] coffee = new String[4][4];
-    public Coffee() {
-        super();
-        this.type = "Coffee";
-        sku = new String[]{"COFB","COFW","COFC","COFL"};
-        variant = new String[]{"Black", "White","Cappuccino","Latte"};
-        price = new double[]{0.99, 1.99, 1.29, 1.29};
-        for (int i = 0; i <sku.length; i++){
-            coffee[i][0] = sku[i];
-            coffee[i][1] = type;
-            coffee[i][2] = variant[i];
-            coffee[i][3] = String.valueOf(price[i]);
-        }
+    private String type;
+
+    public Coffee(String sku, String variant, double price) {
+        super("Coffee", sku, variant, price);
+        this.type = type;
+    }
+
+    public String getType() {
+        return type;
     }
 }
 
 class Filling extends Product{
-    public String [][] filling = new String[6][4];
-    public Filling() {
-        super();
-        this.type = "Filling";
-        sku = new String[]{"FILB","FILE","FILC","FILX", "FILS", "FILH"};
-        variant = new String[]{"Bacon", "Egg","Cheese","Cream Cheese",
-                "Smoked Salmon", "Ham"};
-        price = new double[]{0.12};
-        for (int i = 0; i <sku.length; i++){
-            filling[i][0] = sku[i];
-            filling[i][1] = type;
-            filling[i][2] = variant[i];
-            filling[i][3] = String.valueOf(price[0]);
-        }
+    public Filling(String sku, String variant, double price) {
+        super("Filling", sku, variant, price);
     }
 }
 

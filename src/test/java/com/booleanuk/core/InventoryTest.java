@@ -1,35 +1,39 @@
 package com.booleanuk.core;
 
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.io.PrintStream;
+
 public class InventoryTest {
-    @Test
-    public void testHasStockValue(){
-        Inventory inventory = new Inventory();
-        Assertions.assertEquals(30, inventory.bagelInventory.get("BGLO"));
-        Assertions.assertEquals(25,inventory.coffeeInventory.get("COFC"));
-        Assertions.assertEquals(50, inventory.fillingInventory.get("FILH"));
+    private Inventory inventory;
+    @BeforeEach
+    void setUp(){
+        inventory = new Inventory();
     }
 
     @Test
-    public void testIfInStock(){
-        Inventory inventory = new Inventory();
-        Assertions.assertEquals(true, inventory.isInStock("BGLO"));
+    public void testAddToMenu(){
+        Bagel onionBagel = new Bagel("BGLO", "Onion", 0.49);
+        inventory.addToMenu(onionBagel,20);
+        Assertions.assertTrue(inventory.isInStock("BGLO"));
+        Assertions.assertEquals(20, inventory.getInventory("BGLO"));
     }
 
     @Test
-    public void testIfNotInStock(){
-        Inventory inventory = new Inventory();
-        inventory.bagelInventory.put("BGLO", 0);
-        Assertions.assertEquals(false, inventory.isInStock("BGLO"));
+    public void testDecreaseStock(){
+        Coffee blackCoffee = new Coffee("COFB", "Black",0.99);
+        inventory.addToMenu(blackCoffee, 15);
+        inventory.decreaseStock("COFB");
+        Assertions.assertEquals(14, inventory.getInventory("COFB"));
     }
 
     @Test
-    public void testUpdateStock(){
-        Inventory inventory = new Inventory();
-        Assertions.assertEquals(50, inventory.fillingInventory.get("FILC"));
-        Assertions.assertEquals("FILC stock has been updated", inventory.updateStock("FILC",30));
+    public void testOutOfStock(){
+        Filling egg = new Filling("FILE","Egg",0.12);
+        inventory.addToMenu(egg,0);
+        Assertions.assertEquals(0, inventory.getInventory("FILE"));
     }
 
 }
