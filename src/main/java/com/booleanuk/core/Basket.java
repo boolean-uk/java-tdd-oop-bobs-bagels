@@ -69,4 +69,9 @@ public class Basket {
         return this.total;
     }
 
+    public String getPrice(String item) {
+        String sku = this.inventory.mapTypeVariantToSKU.get(item);
+        return this.inventory.inventory.get(sku)[1];
+    }
+
 }

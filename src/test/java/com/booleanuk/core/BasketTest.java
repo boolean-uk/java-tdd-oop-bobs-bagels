@@ -182,4 +182,29 @@ class BasketTest {
         Assertions.assertEquals("0.12", basket.getPrice("Filling Cheese"));
         Assertions.assertEquals("1.29", basket.getPrice("Coffee Capuccino"));
     }
+
+    // Build bagel
+    @Test
+    public void testBuildBagelAllFillings() {
+        Basket basket = new Basket();
+        String[] fillings = {"Bacon", "Egg", "Cheese", "Cream Cheese", "Smoked Salmon", "Ham"};
+        Boolean result = basket.buildBagel(fillings);
+        Assertions.assertTrue(result);
+        Assertions.assertEquals("Bagel Bacon, Egg, Cheese, Cream Cheese, Smoked Salmon, Ham", basket.getBasketItemAtIndex(0));
+        Assertions.assertEquals(1, basket.getBasketSize());
+
+        String[] fillings1 = {"Egg", "Cheese", "Cream Cheese", "Ham"};
+        result = basket.buildBagel(fillings1);
+        Assertions.assertTrue(result);
+        Assertions.assertEquals("Bagel Egg, Cheese, Cream Cheese, Ham", basket.getBasketItemAtIndex(1));
+        Assertions.assertEquals(2, basket.getBasketSize());
+
+        String[] fillings2 = {"Tomato", "Eggs"};
+        result = basket.buildBagel(fillings2);
+        Assertions.assertFalse(result);
+        Assertions.assertEquals(1, basket.getBasketSize());
+    }
+
+
+
 }
