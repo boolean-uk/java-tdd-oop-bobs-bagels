@@ -27,4 +27,12 @@ public class Inventory {
     public List<Product> getProducts() {
         return products;
     }
+
+    public double getProductCost(String sku) {
+        if (this.products.stream().anyMatch(x -> x.getSku().equals(sku))) {
+            return this.products.stream().filter(x -> x.getSku().equals(sku)).findFirst().get().getPrice();
+        } else {
+            return 0;
+        }
+    }
 }
