@@ -101,4 +101,25 @@ class BobsBagelsTest {
         Assertions.assertEquals(1.99, total, 0.0001);
     }
 
+    @Test
+    public void testDisplayingMenu() {
+        Basket basket = new Basket();
+        Order order = new Order();
+        Inventory inventory = new Inventory();
+
+        System.out.println(inventory.getInventoryPriceList());
+
+        Assertions.assertNotNull(inventory);
+    }
+
+    @Test
+    public void testDisplayingMenu() {
+        Basket basket = new Basket();
+        Order order = new Order();
+        Inventory inventory = new Inventory();
+
+//        System.out.println(inventory.getInventoryPriceList());
+
+        Assertions.assertNotNull(inventory.getInventoryPriceList());
+    }
 }
