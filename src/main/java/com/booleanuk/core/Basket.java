@@ -97,4 +97,11 @@ public class Basket {
 	public int getSize() {
 		return this.size;
 	}
+
+	public double getPrice(String id) throws NotInInventoryException {
+		if (inventory.inInventory(id)) {
+			return inventory.getPrice(id);
+		}
+		else {throw new NotInInventoryException(id);}
+	}
 }
