@@ -248,4 +248,24 @@ public class BasketTest {
 
         Assertions.assertEquals(expected, testBasket.getBasket());
     }
+
+    @Test
+    public void testAddMultipleFillings() {
+        Basket testBasket = new Basket();
+        SKUConverter converter = new SKUConverter();
+
+        Bagel plain = new Bagel("Plain", converter.getSKU("Plain"));
+        testBasket.addItem(plain);
+        Filling bacon = new Filling("Bacon", converter.getSKU("Bacon"));
+        testBasket.addBagelFilling(plain, bacon);
+        Filling cheese = new Filling("Cheese", converter.getSKU("Cheese"));
+
+        Assertions.assertTrue(testBasket.addBagelFilling(plain, cheese));
+
+        ArrayList<String> expectedFillingsInPlainBagel = new ArrayList<>();
+        expectedFillingsInPlainBagel.add(bacon.getName());
+        expectedFillingsInPlainBagel.add(cheese.getName());
+
+        Assertions.assertEquals(expectedFillingsInPlainBagel, plain.getFillings());
+    }
 }

@@ -83,7 +83,7 @@ public class Basket {
     }
 
     public boolean addBagelFilling(Bagel bagel, Filling filling) {
-        if (this.basket.contains(bagel) && !this.inventory.isInInventory(filling.getsKU())) {
+        if (this.basket.contains(bagel) && this.inventory.isInInventory(filling.getsKU())) {
             bagel.addFilling(filling.getName());
             return true;
         }
