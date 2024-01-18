@@ -56,7 +56,7 @@ class BasketTest {
     public void testRemoveBagelFromBasket() {
         Basket basket = new Basket();
         basket.add("BGLO");
-        Assertions.assertTrue(basket.remove("BGLO"));
+        Assertions.assertEquals("Product removed from basket", basket.remove("BGLO"));
         Assertions.assertFalse(basket.getBasketMap().containsKey("BGLO"));
     }
 
@@ -66,7 +66,7 @@ class BasketTest {
         basket.add("BGLO");
         basket.add("BGLP");
         basket.add("BGLE");
-        Assertions.assertTrue(basket.remove("BGLP"));
+        Assertions.assertEquals("Product removed from basket", basket.remove("BGLP"));
         Assertions.assertFalse(basket.getBasketMap().containsKey("BGLP"));
 
     }
@@ -77,20 +77,20 @@ class BasketTest {
         basket.add("BGLO");
         basket.add("BGLO");
         basket.add("BGLO");
-        Assertions.assertTrue(basket.remove("BGLO"));
+        Assertions.assertEquals("Product removed from basket", basket.remove("BGLO"));
         Assertions.assertEquals(2, (int) basket.getBasketMap().get("BGLO"));
     }
 
     @Test
     public void testRemoveNoneExistingBagelFromBasket() {
         Basket basket = new Basket();
-        Assertions.assertFalse(basket.remove("AAAHHH"));
+        Assertions.assertEquals("Product is not in basket", basket.remove("AAAHHH"));
     }
 
     @Test
     public void testRemoveBagelNotInBasket() {
         Basket basket = new Basket();
-        Assertions.assertFalse(basket.remove("BGLO"));
+        Assertions.assertEquals("Product is not in basket", basket.remove("BGLO"));
     }
 
     @Test
