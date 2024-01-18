@@ -238,12 +238,14 @@ So we don't get any weird requests,
 I want customers to only be able to order things that we stock in our inventory.
 ```
 
+Class Customer
 
-| Class Variables | Methods | Scenario | Output/Return |
-|-----------------|---------|----------|---------------|
-|                 |         |          |               |
-|                 |         |          |               |
-|                 |         |          |               |
-|                 |         |          |               |
+
+| Class Variables | Methods               | Scenario                | Output/Return |
+|-----------------|-----------------------|-------------------------|---------------|
+|                 | order(String skuCode) | customer orders an item | boolean       |
+|                 |                       |                         |               |
+|                 |                       |                         |               |
+|                 |                       |                         |               |
 
 

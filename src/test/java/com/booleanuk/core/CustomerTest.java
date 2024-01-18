@@ -70,6 +70,14 @@ public class CustomerTest {
 
     }
 
+    @Test
+    public void testOrder() {
+        Customer customer = new Customer();
+
+        Assertions.assertTrue(customer.order("FILB"));
+        Assertions.assertFalse(customer.order("FIIILb"));
+    }
+
 
 
 
