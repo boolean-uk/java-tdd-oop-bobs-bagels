@@ -12,6 +12,15 @@ public class BobsBagelsShop {
     }
 
     public String showInventory() {
-        return "";
+        if (this.inventory.isEmpty()) {
+            return "No items in stock.";
+        }
+        StringBuilder output;
+        output = new StringBuilder("Bob's Bagels\nSKU\tPrice\tName\tVariant\n");
+        for (Item item : inventory.keySet()) {
+            String itemString = "bglo\t"+item.checkPrice()+"\t"+item.name+"\t"+item.variant+"\n";
+            output.append(itemString);
+        }
+        return output.toString();
     }
 }
