@@ -2,10 +2,7 @@ package com.booleanuk.core.model;
 
 import lombok.*;
 
-// Using @Data makes tests fail because it changed .equals ?
-@Getter
-@Setter
-@ToString
+@Data
 @AllArgsConstructor
 public class Item {
     private final String SKU;

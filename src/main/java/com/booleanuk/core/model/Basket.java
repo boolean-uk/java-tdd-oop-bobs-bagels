@@ -48,7 +48,7 @@ public class Basket {
 
     public void addFillingToBagel(Bagel bagel, Filling filling) {
         for (Item item : basket) {
-            if (item.equals(bagel)) {
+            if (item == bagel) {
                 ((Bagel) item).addFilling(new Filling(filling));
             }
         }
