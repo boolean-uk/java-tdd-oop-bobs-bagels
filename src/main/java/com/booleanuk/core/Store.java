@@ -138,4 +138,8 @@ public class Store {
         }
         return prices.get(coffeeCodes.get(coffee.toUpperCase()));
     }
+
+    public String addCoffeeToBasket(String coffee, int basketId) {
+        return "Bob's bagels doesn't have that coffee.";
+    }
 }

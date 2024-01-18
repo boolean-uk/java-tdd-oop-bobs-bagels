@@ -201,5 +201,12 @@ public class StoreTest {
         Assertions.assertEquals(1.29, store.getCostOfCoffee("latte"));
     }
 
+    @Test
+    public void addNonExistentCoffeeToBasketTest() {
+        Store store = new Store();
+        int basketId = store.createBasket();
+        Assertions.assertEquals("Bob's bagels doesn't have that coffee." , store.addCoffeeToBasket("Chocolate", basketId));
+    }
+
 
 }
