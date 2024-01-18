@@ -76,6 +76,14 @@ public class Basket {
     }
 
     public String changeCapacity(int newCapacity) {
-        return "";
+        if (newCapacity < 0) {
+            return "New capacity must be non negative.";
+        }
+        else if (newCapacity >= this.checkSize()) {
+            return "New basket capacity is " + newCapacity +".";
+        }
+        else {
+            return "New capacity must be larger than number of items currently in basket.";
+        }
     }
 }
