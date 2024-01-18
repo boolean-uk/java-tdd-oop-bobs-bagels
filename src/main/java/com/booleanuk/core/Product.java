@@ -3,6 +3,8 @@ package com.booleanuk.core;
 public class Product {
 
 
+
+
     protected String sku;
     protected String name;
     protected String variant;
@@ -28,5 +30,20 @@ public class Product {
         this.sku = this.name.substring(0,2).toUpperCase() + this.variant.substring(0,1).toUpperCase();
     }
 
+    public String getSku() {
+        return sku;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getVariant() {
+        return variant;
+    }
+
+    public double getPrice() {
+        return price;
+    }
 
 }
