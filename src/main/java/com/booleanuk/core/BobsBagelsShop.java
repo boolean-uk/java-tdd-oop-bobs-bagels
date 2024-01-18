@@ -3,12 +3,10 @@ package com.booleanuk.core;
 import java.util.HashMap;
 
 public class BobsBagelsShop {
-    public HashMap<Item, Integer> inventory;
-    public int basketCapacity;
+    private HashMap<Item, Integer> inventory;
 
-    public BobsBagelsShop(HashMap<Item, Integer> newInventory, int capacity) {
+    public BobsBagelsShop(HashMap<Item, Integer> newInventory) {
         this.inventory = newInventory;
-        this.basketCapacity = capacity;
     }
 
     public String showInventory() {
@@ -22,5 +20,9 @@ public class BobsBagelsShop {
             output.append(itemString);
         }
         return output.toString();
+    }
+
+    public HashMap<Item, Integer> getInventory() {
+        return this.inventory;
     }
 }
