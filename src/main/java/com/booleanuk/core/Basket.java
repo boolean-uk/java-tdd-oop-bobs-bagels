@@ -5,15 +5,15 @@ import java.util.ArrayList;
 public class Basket {
 
 
-    private ArrayList<String> bagelsList = new ArrayList<>();
+    private ArrayList<String> itemList = new ArrayList<>();
     private int basketCapacity = 4;
 
-    public ArrayList<String> getBagelsList() {
-        return bagelsList;
+    public ArrayList<String> getItemList() {
+        return itemList;
     }
 
-    public void setBagelsList(ArrayList<String> bagelsList) {
-        this.bagelsList = bagelsList;
+    public void setItemList(ArrayList<String> itemList) {
+        this.itemList = itemList;
     }
 
     public int getBasketCapacity() {
@@ -35,25 +35,25 @@ public class Basket {
     private boolean basketIsFull = false;
 
     public Basket() {
-        this.bagelsList = new ArrayList<>();
+        this.itemList = new ArrayList<>();
     }
 
-    public boolean addBagel(String bagel) {
-        if (bagelsList.size() == basketCapacity) {
+    public boolean addItem(String item) {
+        if (itemList.size() == basketCapacity) {
             System.out.println("Basket is full");
             return false;
         } else {
-            return this.bagelsList.add(bagel);
+            return this.itemList.add(item);
         }
 
     }
 
-    public boolean removeBagel(String bagel) {
-        if (bagelsList.isEmpty()) {
+    public boolean removeItem(String item) {
+        if (itemList.isEmpty()) {
             System.out.println("Can't remove item from empty basket");
             return false;
         }
-        return this.bagelsList.remove(bagel);
+        return this.itemList.remove(item);
 
     }
 
