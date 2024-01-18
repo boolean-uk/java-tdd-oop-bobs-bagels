@@ -1,6 +1,5 @@
 package com.booleanuk.core;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Inventory {
@@ -36,5 +35,8 @@ public class Inventory {
             // Map go from typevariant to sku. Items can be used to go other way
             mapTypeVariantToSKU.put(items.get(item[0]).getNametype(), item[0]);
         }
+    }
+
+    public static class BasketItem {
     }
 }
