@@ -76,17 +76,17 @@ I want customers to only be able to order things that we stock in our inventory.
 
 ### Class Basket
 
-| Methods                    | Member variables                                       | Scenario                | Output/return                            |
-|----------------------------|--------------------------------------------------------|-------------------------|------------------------------------------|
-| {1,3,8, 10}`add(Item sku)` | HashMap<Item item, int amount> basketContent           | sku *in* inventory and  | String "Item *sku* added to basket."     |
-|                            | HashMap<Item item, int amount> BobsBagelShop.inventory | basket *is not* full.   |                                          |
-|                            | int BobsBagelShop.basketCapacity                       | sku *not in* inventory. | String "Chosen item not in stock."       |
-|                            |                                                        | basket *is* full.       | String "Basket is full."                 |
-| {2,5}`remove(Item sku)`    | HashMap<Item item, int amount> basketContent           | sku *not in* basket.    | String "Item *sku* not in basket."       |
-|                            |                                                        | sku *in* basket.        | String "Item *sku* removed from basket." |
-| {6}`totalCost()`           | HashMap<Item item, int amount> basketContent           | Not empty basket.       | double price                             |
-|                            | double item.price                                      | Empty basket.           | double price = 0.0.                      |
-|                            |                                                        |                         |                                          |
+| Methods                     | Member variables                                       | Scenario                 | Output/return                             |
+|-----------------------------|--------------------------------------------------------|--------------------------|-------------------------------------------|
+| {1,3,8, 10}`add(Item item)` | HashMap<Item item, int amount> basketContent           | item *in* inventory and  | String "Item *item* added to basket."     |
+|                             | HashMap<Item item, int amount> BobsBagelShop.inventory | basket *is not* full.    |                                           |
+|                             | int BobsBagelShop.basketCapacity                       | item *not in* inventory. | String "Chosen item not in stock."        |
+|                             |                                                        | basket *is* full.        | String "Basket is full."                  |
+| {2,5}`remove(Item item)`    | HashMap<Item item, int amount> basketContent           | item *not in* basket.    | String "Item *item* not in basket."       |
+|                             |                                                        | item *in* basket.        | String "Item *item* removed from basket." |
+| {6}`totalCost()`            | HashMap<Item item, int amount> basketContent           | Not empty basket.        | double price                              |
+|                             | double item.price                                      | Empty basket.            | double price = 0.0.                       |
+|                             |                                                        |                          |                                           |
 
 ### Class BobsBagelsShop
 
@@ -104,11 +104,12 @@ I want customers to only be able to order things that we stock in our inventory.
 
 ### Class Item
 
-| Methods                                           | Member variables | Scenario | Output/Return |
-|---------------------------------------------------|------------------|----------|---------------|
-| {7,9}`checkPrice()`                               | double price     |          | double price  |
-|                                                   |                  |          |               |
-| `Item(String name, String variant, double price)` | double price     |          |               |
-|                                                   | String name      |          |               |
-|                                                   | String variant   |          |               |
+| Methods                                                       | Member variables | Scenario | Output/Return |
+|---------------------------------------------------------------|------------------|----------|---------------|
+| {7,9}`checkPrice()`                                           | double price     |          | double price  |
+|                                                               |                  |          |               |
+| `Item(String sku, String name, String variant, double price)` | double price     |          |               |
+|                                                               | String name      |          |               |
+|                                                               | String variant   |          |               |
+|                                                               | String sku       |          |               |
 
