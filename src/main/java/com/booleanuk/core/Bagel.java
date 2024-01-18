@@ -7,13 +7,37 @@ public class Bagel {
     private String name;
     private double price;
     private String variant;
+    private Inventory inventory;
 
-
+    public Bagel(String id, String[] fillings){
+        this(id);
+        for (String fillingId : fillings){
+            if(inventory.isFilling(fillingId)){
+                this.fillings.put(fillingId, new Filling(fillingId));
+            }
+        }
+    }
     public Bagel(String id){
-//        switch (id){
-//            case "BGLO":
-//                this.
-//        }
+        this.name = "Bagel";
+        switch (id) {
+            case "BGLO" -> {
+                this.variant = "Onion";
+                this.price = 0.49;
+            }
+            case "BGLP" -> {
+                this.variant = "Plain";
+                this.price = 0.39;
+            }
+            case "BGLE" -> {
+                this.variant = "Everything";
+                this.price = 0.49;
+            }
+            case "BGLS" -> {
+                this.variant = "Sesame";
+                this.price = 0.49;
+            }
+            default -> throw new IllegalStateException("Unexpected value: " + id);
+        }
     }
 
     public double getPrice() {
