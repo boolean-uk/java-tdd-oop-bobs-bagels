@@ -20,7 +20,7 @@ public class BagelTest {
         Bagel bagel = new Bagel("Plain");
         Filling filling = new Filling("Bacon");
         Assertions.assertTrue(bagel.addFilling(filling));
-        Assertions.assertTrue(bagel.getFillings(filling).contains());
+        Assertions.assertTrue(bagel.getFillings().contains(filling));
 
     }
 
@@ -31,10 +31,10 @@ public class BagelTest {
         Filling filling = new Filling("Bacon");
 
 
-        Assertions.assertTrue(bagel.addFilling(new Filling("Bacon")));
-        Assertions.assertTrue(bagel.getFillings(filling).contains());
+        Assertions.assertTrue(bagel.addFilling(filling));
+        Assertions.assertTrue(bagel.getFillings().contains(filling));
         Assertions.assertTrue(bagel.removeFilling(filling));
-        Assertions.assertFalse(bagel.getFillings(filling).contains());
+        Assertions.assertFalse(bagel.getFillings().contains(filling));
 
     }
 }

@@ -1,6 +1,7 @@
 package com.booleanuk.core;
 
 import java.util.ArrayList;
+import java.util.Collection;
 
 public class Bagel extends Item {
 
@@ -25,5 +26,14 @@ public class Bagel extends Item {
         } else {
             this.setPrice(0.49);
         }
+    }
+
+    public boolean removeFilling(Filling filling) {
+        this.fillings.remove(filling);
+        return true;
+    }
+
+    public ArrayList<Filling> getFillings() {
+        return this.fillings;
     }
 }
