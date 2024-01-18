@@ -100,6 +100,9 @@ public class Store {
     }
 
     public double getCostOfBagel(String bagel) {
-        return -1;
+        if(!bagelCodes.containsKey(bagel.toUpperCase())) {
+            return -1;
+        }
+        return prices.get(bagelCodes.get(bagel.toUpperCase()));
     }
 }
