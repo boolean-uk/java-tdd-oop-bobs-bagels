@@ -30,7 +30,7 @@ public class Basket {
         }
         else {
             if (this.basketContent.containsKey(item)){
-                this.basketContent.replace(item,this.basketContent.get(item) + 1);
+                this.basketContent.replace(item, this.basketContent.get(item) + 1);
             }
             else {
                 this.basketContent.put(item, 1);
@@ -39,8 +39,19 @@ public class Basket {
         }
     }
 
-    public void remove(Item item) {
-
+    public String remove(Item item) {
+        if (this.basketContent.containsKey(item)) {
+            if (this.basketContent.get(item) == 1) {
+                this.basketContent.remove(item);
+            }
+            else {
+                this.basketContent.replace(item, this.basketContent.get(item) - 1);
+            }
+            return "Item " + item.getSku() + " removed from basket.";
+        }
+        else {
+            return "Item " + item.getSku() +" not in basket.";
+        }
     }
 
     public double totalCost() {
