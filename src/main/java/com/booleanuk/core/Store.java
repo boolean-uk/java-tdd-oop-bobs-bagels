@@ -110,5 +110,10 @@ public class Store {
         if(!fillingCodes.containsKey(filling.toUpperCase())) {
             return -1;
         }
-        return prices.get(fillingCodes.get(filling.toUpperCase()));    }
+        return prices.get(fillingCodes.get(filling.toUpperCase()));
+    }
+
+    public double getCostOfBasket(int basketId) {
+        return 0;
+    }
 }

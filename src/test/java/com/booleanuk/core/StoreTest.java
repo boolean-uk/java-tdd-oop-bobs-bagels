@@ -128,4 +128,11 @@ public class StoreTest {
         Assertions.assertEquals(0.12, store.getCostOfFilling("cheese"));
     }
 
+    @Test
+    public void getCostOfEmptyBasketTest() {
+        Store store = new Store();
+        int basketId = store.createBasket();
+        Assertions.assertEquals(0, store.getCostOfBasket(basketId));
+    }
+
 }
