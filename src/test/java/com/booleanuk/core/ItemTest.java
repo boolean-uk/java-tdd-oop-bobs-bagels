@@ -7,8 +7,8 @@ public class ItemTest {
 
     @Test
     public void testItemConstructor() {
-        Item bglo = new Item("BGLO",""Bagel", "Onion", 0.49);"
-                Assertions.assertEquals("BGLO", bglo.sku);
+        Item bglo = new Item("BGLO","Bagel", "Onion", 0.49);
+        Assertions.assertEquals("BGLO", bglo.sku);
         Assertions.assertEquals("Bagel", bglo.name);
         Assertions.assertEquals("Onion", bglo.variant);
         Assertions.assertEquals(0.49, bglo.checkPrice());
