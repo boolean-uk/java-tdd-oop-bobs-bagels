@@ -32,6 +32,18 @@ public class Store {
         return null;
     }
 
+    public ArrayList<Item> getItemsByItemType(ItemType itemType) {
+        ArrayList<Item> itemsByType = new ArrayList<>();
+
+        for (Item item : inventory) {
+            if (item.getName().equals(itemType.getDisplayName())) {
+                itemsByType.add(item);
+            }
+        }
+
+        return itemsByType;
+    }
+
     private void fetchItems() throws FileNotFoundException {
         // Should be some kind of db that is updated when something (price, inventory) changes
         String file = FILE_NAME + EXT;

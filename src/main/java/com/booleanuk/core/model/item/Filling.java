@@ -10,4 +10,14 @@ public class Filling extends Item {
     public Filling(Filling another) {
         super(another);
     }
+
+    @Override
+    public String toString() {
+        return "Filling[" +
+                "SKU=" + getSKU() +
+                ", price=" + getPrice() +
+                ", name=" + getName() +
+                ", variant=" + getVariant() +
+                "]";
+    }
 }

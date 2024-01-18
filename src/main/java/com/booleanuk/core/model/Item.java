@@ -1,10 +1,8 @@
 package com.booleanuk.core.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
+// Using @Data makes tests fail because it changed .equals ?
 @Getter
 @Setter
 @AllArgsConstructor

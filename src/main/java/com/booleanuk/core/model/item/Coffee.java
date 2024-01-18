@@ -10,4 +10,14 @@ public class Coffee extends Item {
     public Coffee(Coffee another) {
         super(another);
     }
+
+    @Override
+    public String toString() {
+        return "Coffee[" +
+                "SKU=" + getSKU() +
+                ", price=" + getPrice() +
+                ", name=" + getName() +
+                ", variant=" + getVariant() +
+                "]";
+    }
 }

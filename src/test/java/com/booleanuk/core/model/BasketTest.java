@@ -58,11 +58,8 @@ public class BasketTest {
     @Test
     public void canNotAddItemsWhenBasketIsFull() {
         basket.setCapacity(2);
-        System.out.println(item1);
         basket.addItem(item1);
-        System.out.println(basket.getBasket().get(0));
         basket.addItem(item1);
-        System.out.println(basket.getBasket().get(1));
         basket.addItem(item1);
         Assertions.assertEquals(2, basket.getBasket().size());
     }
@@ -94,13 +91,17 @@ public class BasketTest {
     @Test
     public void canAddFillingToOneBagelAndNotOthersOfTheSameVariant() {
         // Add two of the same items
-        Item firstItem = basket.addItem(item1);
-        Item secondItem = basket.addItem(item1);
+        Bagel firstItem = (Bagel) basket.addItem(item1);
+        Bagel secondItem = (Bagel) basket.addItem(item1);
+        System.out.println(firstItem);
+        System.out.println(secondItem);
         // Change the filling of one of them
-        ((Bagel) firstItem).addFillingToBagel((Filling) item3);
+        basket.addFillingToBagel(firstItem, (Filling) item3);
+        System.out.println(firstItem);
+        System.out.println(secondItem);
         // Check that filling was not set for the second item
-        Assertions.assertEquals(0, ((Bagel) secondItem).getFilling().size());
+        Assertions.assertEquals(0, secondItem.getFilling().size());
         // Check that filling was set for first item
-        Assertions.assertEquals(1, ((Bagel) firstItem).getFilling().size());
+        Assertions.assertEquals(1, firstItem.getFilling().size());
     }
 }

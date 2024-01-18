@@ -19,7 +19,7 @@ public class Basket {
     }
     public Basket(int capacity) {
         this.basket = new ArrayList<>();
-        this.capacity = capacity;
+        setCapacity(capacity);
     }
 
     public Item addItem(Item item) {
@@ -43,6 +43,19 @@ public class Basket {
         return cost;
     }
 
+    public Bagel addFillingToBagel(Bagel bagel, Filling filling) {
+        Filling addedFillingCopy = null;
+
+        for (Item item : basket) {
+            if (item.equals(bagel)) {
+                addedFillingCopy = new Filling(filling);
+                ((Bagel) item).addFilling(addedFillingCopy);
+            }
+        }
+        basket.add(addedFillingCopy);
+        return bagel;
+    }
+
     private Item createItemCopy(Item item) {
         if (item instanceof Bagel) {
             return new Bagel((Bagel) item);
@@ -50,9 +63,15 @@ public class Basket {
             return new Coffee((Coffee) item);
         } else if (item instanceof Filling) {
             return new Filling((Filling) item);
-        } else {
-            // Make generic Item copy
-            return new Item(item);
         }
+        // Make generic Item copy
+        return new Item(item);
+    }
+
+    public void setCapacity(int capacity) {
+        if (capacity < 0) {
+            throw new IllegalArgumentException();
+        }
+        this.capacity = capacity;
     }
 }

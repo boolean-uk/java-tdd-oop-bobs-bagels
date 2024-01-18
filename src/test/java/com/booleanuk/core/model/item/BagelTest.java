@@ -9,7 +9,7 @@ public class BagelTest {
         Bagel bagel = new Bagel("BGLP", 0.39, "Bagel", "Plain");
         Filling filling = new Filling("FILC", 0.12, "Filling", "Cheese");
         Assertions.assertEquals(0, bagel.getFilling().size());
-        bagel.addFillingToBagel(filling);
+        bagel.addFilling(filling);
         Assertions.assertEquals(1, bagel.getFilling().size());
     }
 }
