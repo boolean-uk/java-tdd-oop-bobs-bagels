@@ -11,10 +11,37 @@ public class Customer {
     public Customer() {
     }
 
-    public double getTotalCost(ArrayList<Item> items) {
-        return items.stream()
+    public double getTotalCost(Map<Item,Integer> items) {
+        double cost = 0.00;
+        int discount12 = 0;
+        int discount6 = 0;
+
+        Inventory inventory = new Inventory();
+        for(Map.Entry<Item, Integer> entry : items.entrySet()) {
+            if(inventory.getBagels().containsKey(entry.getKey().getSkuCode())) {
+
+                int quantity = entry.getValue();
+
+                int rest = entry.getValue() % 12;
+                if(rest >= 6) {
+                    discount6++;
+                }
+                while(quantity % 12 == 0) {
+                    quantity /= 12;
+                    discount12++;
+                }
+
+                cost += getCostOfItem(entry.getKey()) * (rest % 6);
+            }
+        }
+        cost += discount12 * 3.99;
+        cost += discount6 * 2.49;
+
+        return cost;
+
+      /*  return items.entrySet().stream().map()
                 .map(Item::getPrice)
-                .reduce(0.00, Double::sum);
+                .reduce(0.00, Double::sum);*/
     }
 
     public double getCostOfItem(Item item) {
@@ -31,9 +58,11 @@ public class Customer {
         return this.basket;
     }
 
-    public double getCostOfFillingsInBasket(ArrayList<Item> basket) {
-        return this.getTotalCost(basket.stream().filter(item -> item.getName().equalsIgnoreCase("Filling")).collect(Collectors.toCollection(ArrayList::new)));
+/*
+    public double getCostOfFillingsInBasket(Map<Item, Integer> basket) {
+        return this.getTotalCost(basket.entrySet().stream().filter(item -> item.getKey().getName().equalsIgnoreCase("Filling")).collect(Collectors.toList()));
     }
+*/
 
 
     public Map<String, Double> getFillingsInInventory() {

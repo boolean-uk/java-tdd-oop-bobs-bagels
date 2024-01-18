@@ -16,12 +16,12 @@ I have done it until now, but i think i will stop going forward. (Just tell me i
 Class Item Extended by Bagel, Filling, Coffee
 
 
-| Class Variables              | Methods           | Scenario | Output/Return |
-|------------------------------|-------------------|----------|---------------|
-| String name                  | get/setName()     |          |               |
-| Map<String, double> variants | get/setSkuCodes() |          |               |
-| ArrayList<String skuCodes    | get/setVariant()  |          |               |
-| double price                 | get/setPrice()    |          |               |
+| Class Variables              | Methods          | Scenario | Output/Return |
+|------------------------------|------------------|----------|---------------|
+| String name                  | get/setName()    |          |               |
+| Map<String, double> variants | get/setSkuCode() |          |               |
+| String skuCode               | get/setVariant() |          |               |
+| double price                 | get/setPrice()   |          |               |
 
 
 Class Person extended by Manager, Customer
@@ -39,12 +39,12 @@ Class Person extended by Manager, Customer
 
 Class Basket
 
-| Class Variables           | Methods                           | Scenario             | Output/Return                              |
-|---------------------------|-----------------------------------|----------------------|--------------------------------------------|
-| ArrayList<Item> itemList  | String addItemToBasket(Item item) | Adds item to basket  | Comment on what went wrong or if it worked |
-|                           | ArrayList<Item> getItemList()     | Gets a list of Items | ArrayList<Item> basketOfItems              |
-|                           |                                   |                      |                                            |
-|                           |                                   |                      |                                            |
+| Class Variables               | Methods                             | Scenario             | Output/Return                              |
+|-------------------------------|-------------------------------------|----------------------|--------------------------------------------|
+| Map<Item,Integer> itemList    | String addItemToBasket(Item item)   | Adds item to basket  | Comment on what went wrong or if it worked |
+|                               | Map<Item,Integer> getItemList()     | Gets a list of Items | Map<Item,Integer> basketOfItems            |
+|                               |                                     |                      |                                            |
+|                               |                                     |                      |                                            |
 
 
 
@@ -56,12 +56,12 @@ So I can change my order,
 I'd like to remove a bagel from my basket.
 ```
 
-| Class Variables          | Methods                                | Scenario                 | Output/Return                               |
-|--------------------------|----------------------------------------|--------------------------|---------------------------------------------|
-| ArrayList<Item> itemList | String removeItemFromBasket(Item item) | Removes item from basket | Comment on what went wrong or if it worked  |
-|                          |                                        |                          |                                             |
-|                          |                                        |                          |                                             |
-|                          |                                        |                          |                                             |
+| Class Variables             | Methods                                | Scenario                 | Output/Return                               |
+|-----------------------------|----------------------------------------|--------------------------|---------------------------------------------|
+| Map<Item,Integer> itemList  | String removeItemFromBasket(Item item) | Removes item from basket | Comment on what went wrong or if it worked  |
+|                             |                                        |                          |                                             |
+|                             |                                        |                          |                                             |
+|                             |                                        |                          |                                             |
 
 
 
@@ -77,12 +77,12 @@ I'd like to know when my basket is full when I try adding an item beyond my bask
 
 Class Basket
 
-| Class Variables          | Methods                           | Scenario                                              | Output/Return                                 |
-|--------------------------|-----------------------------------|-------------------------------------------------------|-----------------------------------------------|
-| ArrayList<Item> itemList | String addItemToBasket(Item item) | Comments on what went wrong whn adding above capacity | Comment on what went wrong or if it worked    |
-| int capacity             |                                   |                                                       |                                               |
-|                          |                                   |                                                       |                                               |
-|                          |                                   |                                                       |                                               |
+| Class Variables              | Methods                           | Scenario                                              | Output/Return                                 |
+|------------------------------|-----------------------------------|-------------------------------------------------------|-----------------------------------------------|
+| Map<Item,Integer> itemList   | String addItemToBasket(Item item) | Comments on what went wrong whn adding above capacity | Comment on what went wrong or if it worked    |
+| int capacity                 |                                   |                                                       |                                               |
+|                              |                                   |                                                       |                                               |
+|                              |                                   |                                                       |                                               |
 
 
 
@@ -95,12 +95,12 @@ I’d like to change the capacity of baskets.
 
 Class Basket
 
-| Class Variables          | Methods                           | Scenario                                              | Output/Return                              |
-|--------------------------|-----------------------------------|-------------------------------------------------------|--------------------------------------------|
-| ArrayList<Item> itemList | String addItemToBasket(Item item) | Comments on what went wrong whn adding above capacity | Comment on what went wrong or if it worked |
-| int capacity             | int getBasketCapacity()           | Gets basket capacity                                  | int                                        |
-|                          | setBasketCapacity(int capacity)   | Sets basket capacity                                  | boolean                                    |
-|                          |                                   |                                                       |                                            |
+| Class Variables             | Methods                           | Scenario                                              | Output/Return                              |
+|-----------------------------|-----------------------------------|-------------------------------------------------------|--------------------------------------------|
+| Map<Item,Integer> itemList  | String addItemToBasket(Item item) | Comments on what went wrong whn adding above capacity | Comment on what went wrong or if it worked |
+| int capacity                | int getBasketCapacity()           | Gets basket capacity                                  | int                                        |
+|                             | setBasketCapacity(int capacity)   | Sets basket capacity                                  | boolean                                    |
+|                             |                                   |                                                       |                                            |
 
 
 
@@ -113,12 +113,12 @@ I'd like to know if I try to remove an item that doesn't exist in my basket.
 
 Class basket
 
-| Class Variables          | Methods                                | Scenario                 | Output/Return                               |
-|--------------------------|----------------------------------------|--------------------------|---------------------------------------------|
-| ArrayList<Item> itemList | String removeItemFromBasket(Item item) | Removes item from basket | Comment on what went wrong or if it worked  |
-|                          |                                        |                          |                                             |
-|                          |                                        |                          |                                             |
-|                          |                                        |                          |                                             |
+| Class Variables             | Methods                                | Scenario                 | Output/Return                               |
+|-----------------------------|----------------------------------------|--------------------------|---------------------------------------------|
+| Map<Item,Integer> itemList  | String removeItemFromBasket(Item item) | Removes item from basket | Comment on what went wrong or if it worked  |
+|                             |                                        |                          |                                             |
+|                             |                                        |                          |                                             |
+|                             |                                        |                          |                                             |
 
 
 
@@ -132,12 +132,12 @@ I'd like to know the total cost of items in my basket.
 Class Customer
 
 
-| Class Variables | Methods                                | Scenario                            | Output/Return |
-|-----------------|----------------------------------------|-------------------------------------|---------------|
-|                 | getTotalCost(ArrayList<Item> itemList) | Calculates total price of item list | double        |
-|                 | getCostOfItem(Item item)               | Gets price of single item           | double        |
-|                 |                                        |                                     |               |
-|                 |                                        |                                     |               |
+| Class Variables | Methods                                   | Scenario                            | Output/Return |
+|-----------------|-------------------------------------------|-------------------------------------|---------------|
+|                 | getTotalCost(Map<Item,Integer>  itemList) | Calculates total price of item list | double        |
+|                 | getCostOfItem(Item item)                  | Gets price of single item           | double        |
+|                 |                                           |                                     |               |
+|                 |                                           |                                     |               |
 
 
 Class Item
@@ -161,12 +161,12 @@ I'd like to know the cost of a bagel before I add it to my basket.
 ```
 
 
-| Class Variables | Methods                             | Scenario                 | Output/Return |
-|-----------------|-------------------------------------|--------------------------|---------------|
-|                 | getTotalCost(ArrayList<Item> items) | Gets total cost of Items | double        |
-|                 | getCostOfItem(Item item)            | Gets cost of single item | double        |
-|                 |                                     |                          |               |
-|                 |                                     |                          |               |
+| Class Variables | Methods                               | Scenario                 | Output/Return |
+|-----------------|---------------------------------------|--------------------------|---------------|
+|                 | getTotalCost(Map<Item,Integer> items) | Gets total cost of Items | double        |
+|                 | getCostOfItem(Item item)              | Gets cost of single item | double        |
+|                 |                                       |                          |               |
+|                 |                                       |                          |               |
 
 
 
@@ -253,6 +253,17 @@ Class Customer
 
 ``
 Extension 1
-As a
+As a customer 
+I want discounts to be added correctly to my basket price
 ``
+Class Customer
+
+
+| Class Variables | Methods               | Scenario                | Output/Return |
+|-----------------|-----------------------|-------------------------|---------------|
+|                 | order(String skuCode) | customer orders an item | boolean       |
+|                 |                       |                         |               |
+|                 |                       |                         |               |
+|                 |                       |                         |               |
+
 

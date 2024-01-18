@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Item {
 
-    private ArrayList<String> skuCodes;
+    private String skuCode;
     private String name;
     private double price;
     private String variant;
@@ -18,12 +18,12 @@ public class Item {
     }
 
 
-    public ArrayList<String> getSkuCodes() {
-        return skuCodes;
+    public String getSkuCode() {
+        return skuCode;
     }
 
-    public void setSkuCodes(ArrayList<String> skuCodes) {
-        this.skuCodes = skuCodes;
+    public void setSkuCode(String skuCodes) {
+        this.skuCode = skuCodes;
     }
 
     public void setPrice(double price) {

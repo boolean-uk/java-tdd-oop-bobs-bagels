@@ -5,6 +5,7 @@ public class Coffee extends Item {
         super(variant);
         this.setName("Coffee");
         this.setPriceOfCoffee(variant);
+        this.setSkuCode("COF" + variant.toUpperCase().charAt(0));
     }
 
     private void setPriceOfCoffee(String variant) {

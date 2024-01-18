@@ -12,6 +12,7 @@ public class Bagel extends Item {
         super(variant);
         this.setName("Bagel");
         this.setPriceOfBagel(variant);
+        this.setSkuCode("BGL" + variant.toUpperCase().charAt(0));
     }
 
     public boolean addFilling(Filling filling) {

@@ -1,11 +1,13 @@
 package com.booleanuk.core;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Basket {
 
 
-    private ArrayList<Item> itemList = new ArrayList<>();
+    private Map<Item, Integer> itemList = new HashMap<>();
     private int basketCapacity = 0;
 
     public Basket(int basketCapacity) {
@@ -14,16 +16,21 @@ public class Basket {
     }
 
     public boolean addItemToBasket(Item item) {
-        itemList.add(item);
+
+        if(itemList.isEmpty()) {
+            itemList.put(item, 1);
+            return true;
+        }
+        itemList.put(item, itemList.get(item) +1);
         return true;
     }
 
-    public ArrayList<Item> getItemList() {
-        return new ArrayList<>(itemList);
+    public Map<Item, Integer> getItemList() {
+        return this.itemList;
     }
 
     public boolean removeItemFromBasket(Item item) {
-        if(this.itemList.contains(item)) {
+        if(this.itemList.containsKey(item)) {
             this.itemList.remove(item);
             return true;
         }

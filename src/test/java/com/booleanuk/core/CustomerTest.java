@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.Map;
 
 public class CustomerTest {
@@ -19,36 +20,23 @@ public class CustomerTest {
     public void testGetTotalCost() {
         Customer customer = new Customer();
 
-        Bagel bagel1 = new Bagel("Plain");
-        Bagel bagel2 = new Bagel("Plain");
-        Bagel bagel3 = new Bagel("Plain");
 
 
-        Assertions.assertEquals(0.39*3, customer.getTotalCost(new ArrayList<>(Arrays.asList(bagel1, bagel2, bagel3))));
+
+        Assertions.assertEquals(0.39*3, customer.getTotalCost(Map.of(new Bagel("Plain"), 3)));
 
 
     }
 
     @Test
-    public void testGetTotalCostDiscount12(){
+    public void testGetTotalCostDiscount6And12(){
         Customer customer = new Customer();
 
-        Bagel bagel1 = new Bagel("Plain");
-        Bagel bagel2 = new Bagel("Plain");
-        Bagel bagel3 = new Bagel("Plain");
-        Bagel bagel4 = new Bagel("Plain");
-        Bagel bagel5 = new Bagel("Plain");
-        Bagel bagel6 = new Bagel("Plain");
-        Bagel bagel7 = new Bagel("Plain");
-        Bagel bagel8 = new Bagel("Plain");
-        Bagel bagel9 = new Bagel("Plain");
-        Bagel bagel10 = new Bagel("Plain");
-        Bagel bagel11 = new Bagel("Plain");
-        Bagel bagel12 = new Bagel("Plain");
 
 
-        Assertions.assertEquals(2.49, customer.getTotalCost(new ArrayList<>(Arrays.asList(bagel1, bagel2, bagel3, bagel4, bagel5, bagel6))));
-        Assertions.assertEquals(3.99, customer.getTotalCost(new ArrayList<>(Arrays.asList(bagel1, bagel2, bagel3, bagel4, bagel5, bagel6, bagel7, bagel8, bagel9, bagel10, bagel11, bagel12))));
+
+        Assertions.assertEquals(2.49, customer.getTotalCost(Map.of(new Bagel("Plain"), 6)));
+        Assertions.assertEquals(3.99, customer.getTotalCost(Map.of(new Bagel("Plain"), 12)));
 
     }
 
@@ -66,7 +54,8 @@ public class CustomerTest {
 
     }
 
-    @Test
+    //As it isnt necessary for the user stories i have commented it out as of now
+/*    @Test
     public void testGetCostOfFillingsInBasket() {
         Customer customer = new Customer();
         Basket basket = new Basket(5);
@@ -83,7 +72,7 @@ public class CustomerTest {
         Assertions.assertEquals(0.12*3, customer.getCostOfFillingsInBasket(basket.getItemList()));
 
 
-    }
+    }*/
 
     @Test
     public void testGetCostOfFillings() {
