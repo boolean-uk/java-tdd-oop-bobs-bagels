@@ -25,4 +25,8 @@ public class BobsBagelsShop {
     public HashMap<Item, Integer> getInventory() {
         return this.inventory;
     }
+
+    public void setInventory(HashMap<Item, Integer> newInventory) {
+        this.inventory = newInventory;
+    }
 }

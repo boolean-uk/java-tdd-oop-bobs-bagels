@@ -31,9 +31,15 @@ public class Basket {
         else {
             if (this.basketContent.containsKey(item)){
                 this.basketContent.replace(item, this.basketContent.get(item) + 1);
+                HashMap<Item, Integer> tempInventory = this.shop.getInventory();
+                tempInventory.replace(item, tempInventory.get(item) - 1);
+                this.shop.setInventory(tempInventory);
             }
             else {
                 this.basketContent.put(item, 1);
+                HashMap<Item, Integer> tempInventory = this.shop.getInventory();
+                tempInventory.replace(item, tempInventory.get(item) - 1);
+                this.shop.setInventory(tempInventory);
             }
             return "Item " + item.getSku() + " added to basket.";
         }
