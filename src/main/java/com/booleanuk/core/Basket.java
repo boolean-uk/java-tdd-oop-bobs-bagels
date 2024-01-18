@@ -55,7 +55,16 @@ public class Basket {
     }
 
     public double totalCost() {
-        return 0.0;
+        if (this.basketContent.isEmpty()){
+            return 0.0;
+        }
+        else {
+            double totalPrice = 0.0;
+            for (Item item : this.basketContent.keySet()) {
+                totalPrice += (item.getPrice() * this.basketContent.get(item));
+            }
+            return totalPrice;
+        }
     }
 
     public String changeCapacity(int newCapacity) {
