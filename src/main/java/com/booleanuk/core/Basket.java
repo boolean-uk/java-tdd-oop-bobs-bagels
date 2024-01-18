@@ -33,4 +33,16 @@ public class Basket {
         }
         return false;
     }
+
+    public boolean remove(String sku) {
+        if (this.basketMap.containsKey(sku)) {
+            if (this.basketMap.get(sku) == 1) {
+                this.basketMap.remove(sku);
+            } else {
+                this.basketMap.put(sku, this.basketMap.get(sku)-1);
+            }
+            return true;
+        }
+        return false;
+    }
 }
