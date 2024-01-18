@@ -72,5 +72,13 @@ public class OrderTest {
 
     }
 
+    @Test
+    public void hasListBeenUpdated() {
+        Order basket1 = new Order();
+
+        int result = basket1.updateBasket(30);
+        Assertions.assertEquals(30, result);
+    }
+
 
 }
