@@ -1,5 +1,6 @@
 package com.booleanuk.core;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Store {
@@ -114,6 +115,11 @@ public class Store {
     }
 
     public double getCostOfBasket(int basketId) {
-        return 0;
+        double cost = 0;
+        ArrayList<Bagel> bagels = baskets.get(basketId).getBagels();
+        for(Bagel bagel: bagels) {
+            cost += getCostOfBagel(bagel.getName());
+        }
+        return cost;
     }
 }
