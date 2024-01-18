@@ -172,7 +172,7 @@ public class BasketTest {
         Assertions.assertEquals(5, testBasket.getBasketCapacity());
     }
 
-    @Test
+    @Test /* User story 6 */
     public void testShowCostOfAllItemsInBasket() {
         Basket testBasket = new Basket();
         SKUConverter converter = new SKUConverter();
@@ -188,8 +188,41 @@ public class BasketTest {
         testBasket.addItem(sesame);
         testBasket.addItem(black);
 
-        double expectedPrice = 0.39 + 0.49 + 0.99 + 0.49 + 0.99;
+        double expectedPrice = 0.39 + 0.49 + 1.19 + 0.49 + 0.99;
 
         Assertions.assertEquals(expectedPrice, testBasket.showTotalCostInBasket(), 0.01);
     }
+
+    @Test /* User story 7 and 9 */
+    public void testShowCostOfAllItemsInInventory() {
+        Basket testBasket = new Basket();
+
+        String expectedBagelOutput = "Bagels:\n";
+
+        expectedBagelOutput += "Onion costs £" + 0.49 + "\n";
+        expectedBagelOutput += "Plain costs £" + 0.39 + "\n";
+        expectedBagelOutput += "Everything costs £" + 0.49 + "\n";
+        expectedBagelOutput += "Sesame costs £" + 0.49 + "\n";
+
+        Assertions.assertEquals(expectedBagelOutput, testBasket.getBagelPrices());
+
+        String expectedCoffeeOutput = "Coffees:\n";
+        expectedCoffeeOutput += "Black costs £" + 0.99 + "\n";
+        expectedCoffeeOutput += "White costs £" + 1.19 + "\n";
+        expectedCoffeeOutput += "Cappuccino costs £" + 1.29 + "\n";
+        expectedCoffeeOutput += "Latte costs £" + 1.29 + "\n";
+
+        Assertions.assertEquals(expectedCoffeeOutput, testBasket.getCoffeePrices());
+
+        String expectedFillingOutput = "Fillings:\n";
+        expectedFillingOutput += "Bacon costs £" + 0.12 + "\n";
+        expectedFillingOutput += "Egg costs £" + 0.12 + "\n";
+        expectedFillingOutput += "Cheese costs £" + 0.12 + "\n";
+        expectedFillingOutput += "Cream Cheese costs £" + 0.12 + "\n";
+        expectedFillingOutput += "Smoked Salmon costs £" + 0.12 + "\n";
+        expectedFillingOutput += "Ham costs £" + 0.12 + "\n";
+
+        Assertions.assertEquals(expectedFillingOutput, testBasket.getFillingPrices());
+    }
+
 }

@@ -57,27 +57,43 @@ public class Basket {
     public double showTotalCostInBasket() {
         double totalCost = 0;
         for (Item item : this.basket) {
-            totalCost += costOfItem(item.getsKU());
+            totalCost += costOfItem(item.getName());
         }
         return totalCost;
     }
 
-    public double costOfItem(String sKU) {
-        if (this.inventory.isInInventory(sKU)) {
-            return this.inventory.getPrice(sKU);
+    public double costOfItem(String name) {
+        return this.inventory.getPrice(name);
+    }
+
+    public String getBagelPrices() {
+        String output = "Bagels:\n";
+        for (String name : this.inventory.getBagelPrices().keySet()) {
+            output += name + " costs £" + this.inventory.getBagelPrices().get(name) + "\n";
         }
-        return 0;
+        return output;
+    }
+
+    public String getCoffeePrices() {
+        String output = "Coffees:\n";
+        for (String name : this.inventory.getCoffeePrices().keySet()) {
+            output += name + " costs £" + this.inventory.getCoffeePrices().get(name) + "\n";
+        }
+        return output;
+    }
+
+    public String getFillingPrices() {
+        String output = "Fillings:\n";
+        for (String name : this.inventory.getFillingPrices().keySet()) {
+            output += name + " costs £" + this.inventory.getFillingPrices().get(name) + "\n";
+        }
+        return output;
     }
 
     public void addBagelFilling(Bagel bagel, Filling filling) {
 
     }
 
-
-
-    public void showCostOfFillings() {
-
-    }
 
     public ArrayList<Item> getBasket() {
         return this.basket;
