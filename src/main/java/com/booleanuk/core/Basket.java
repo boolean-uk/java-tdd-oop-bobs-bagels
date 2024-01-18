@@ -68,11 +68,7 @@ public class Basket {
     public double totalCost() {
         double cost = 0;
         for(Map.Entry<String, Integer> entry: this.basketMap.entrySet()) {
-            for(Product product: this.inventory.getProducts()) {
-                if(entry.getKey().equals(product.getSku())) {
-                    cost += product.getPrice()*entry.getValue();
-                }
-            }
+                    cost += this.inventory.getProductCost(entry.getKey())*entry.getValue();
         }
         return cost;
     }
