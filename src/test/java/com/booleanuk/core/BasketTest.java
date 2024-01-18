@@ -205,6 +205,10 @@ class BasketTest {
         Assertions.assertEquals(2, basket.getBasketSize());
     }
 
+    // Test for not allowing customers is incorporated with the adding testing.
+
+    // Checking the price for bagel and/or filling, is all in one mothod and tested together further up.
+
 
 
 }
