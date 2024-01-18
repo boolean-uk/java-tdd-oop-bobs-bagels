@@ -20,4 +20,12 @@ public class Bagel extends Product {
         this.price = newPrice;
     }
 
+    public double getBasePrice() {
+        return this.basePrice;
+    }
+
+    public void setBasePrice(double price) {
+        this.basePrice = price;
+        updatePrice();
+    }
 }

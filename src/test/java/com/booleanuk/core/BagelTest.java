@@ -1,4 +1,4 @@
-package com.booleanuk.core;
+    package com.booleanuk.core;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -27,8 +27,13 @@ public class BagelTest {
 
     }
 
-    public void getFillings() {
+
+
+    public void getFillingsTest() {
         Bagel bagel = new Bagel("Sesame", 1.29);
+        bagel.addFilling(new Filling("Ham", 0.19));
+        bagel.addFilling(new Filling("Butter", 0.09));
+
 
     }
 

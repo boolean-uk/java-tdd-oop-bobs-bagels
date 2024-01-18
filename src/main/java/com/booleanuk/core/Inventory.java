@@ -3,6 +3,10 @@ package com.booleanuk.core;
 import java.util.HashMap;
 
 public class Inventory {
-    HashMap<Product, Integer> stock;
+    private HashMap<Product, Integer> stock;
+
+    public Inventory() {
+        this.stock = new HashMap<>();
+    }
 
 }
