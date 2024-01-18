@@ -4,10 +4,10 @@ import java.util.ArrayList;
 
 public class Item {
 
-    String sku;
-    double price;
-    String name;
-    String variant;
+    private String sku;
+    private double price;
+    private String name;
+    private String variant;
 
     public Item(String sku, double price, String name, String variant) {
         this.sku = sku;
