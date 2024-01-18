@@ -100,10 +100,10 @@ So I can shake things up a bit,
 I'd like to be able to choose fillings for my bagel.
 ```
 
-| Method                    | Member variables                  | Scenario                           | Output/Results |
-|---------------------------|-----------------------------------|------------------------------------|----------------|
-| fillBagel(String filling) | HashMap<String, Integer> fillings | If filling *does* exist in list    | true           |
-|                           |                                   | If filling *doesn't* exist in list | false          |
+| Method          | Member variables                  | Scenario                           | Output/Results |
+|-----------------|-----------------------------------|------------------------------------|----------------|
+| checkFillings() | HashMap<String, Integer> fillings | If filling *does* exist in list    | true           |
+|                 |                                   | If filling *doesn't* exist in list | false          |
 
 
 ```

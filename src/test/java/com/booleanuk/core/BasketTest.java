@@ -95,6 +95,18 @@ class BasketTest {
         Filling peanutButter = new Filling("Peanut butter", 0.29);
         Filling creamCheese = new Filling("Cream cheese", 0.19);
 
-        Assertions.assertEquals("Peanut butter, Cream cheese", Filling.getAllFillings());
+        String allFillings = Filling.getAllFillingNames();
+
+        Assertions.assertEquals("Peanut butter, Cream cheese", allFillings);
+    }
+
+    @Test
+    public void returnsCorrectCostOfFillings() {
+        Filling peanutButter = new Filling("Peanut butter", 0.29);
+        Filling creamCheese = new Filling("Cream cheese", 0.19);
+
+        String allFillingsPrices = Filling.getAllFillingPrices();
+
+        Assertions.assertEquals("Peanut butter price: 0.29, Cream cheese price: 0.19", allFillingsPrices);
     }
 }
