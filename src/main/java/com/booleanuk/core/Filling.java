@@ -2,7 +2,7 @@ package com.booleanuk.core;
 
 public class Filling {
 
-    String fillingType;
+    private String filling;
 
     private String variant;
     private String sku;
@@ -62,11 +62,13 @@ public class Filling {
         this.sku = sku;
     }
 
-    public String getFillingType() {
-        return fillingType;
+    public String getFilling() {
+        return filling;
     }
 
-    public void setFillingType(String fillingType) {
-        this.fillingType = fillingType;
+    public void setFilling(String filling) {
+        this.filling = filling;
     }
+
+
 }

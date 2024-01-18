@@ -2,7 +2,7 @@ package com.booleanuk.core;
 
 public class Bagel {
 
-    String bagel;
+    private String bagel;
 
     private String variant;
     private String sku;
@@ -41,6 +41,7 @@ public class Bagel {
         return variant;
     }
 
+
     public String getSku() {
         return sku;
     }
@@ -52,4 +53,11 @@ public class Bagel {
     public void setBagel(String bagel) {
         this.bagel = bagel;
     }
+
+    @Override
+    public String toString() {
+        return variant;
+    }
+
+
 }

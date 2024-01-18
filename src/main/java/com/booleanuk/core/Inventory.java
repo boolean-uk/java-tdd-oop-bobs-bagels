@@ -49,4 +49,15 @@ public class Inventory {
         this.variant = variant;
     }
 
+    @Override
+    public String toString() {
+        return "Inventory{" +
+                "sku='" + sku + "'" +
+                ", price=" + price +
+                ", name='" + name + "'" +
+                ", variant='" + variant + "'" +
+                '}';
+    }
+
+
 }

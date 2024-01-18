@@ -6,19 +6,19 @@ import java.util.HashMap;
 public class Basket {
 
     //String type;
-    ArrayList<Bagel> bagels;
-    ArrayList<String> itemsList;
+    private ArrayList<Bagel> bagels;
+    private ArrayList<String> itemsList;
 
-    HashMap<String, Double> itemsMap;
+    private HashMap<String, Double> itemsMap;
 
-    HashMap<String, Inventory> itemsFullyDetailed;
+    private HashMap<String, Inventory> itemsFullyDetailed;
 
-    HashMap<Bagel, Integer> bagelsWithCost;
+    //HashMap<Bagel, Integer> bagelsWithCost;
 
-    HashMap<String, Double[]> itemsWithQuantity;
+    private HashMap<String, Double[]> itemsWithQuantity;
 
 
-    int basketSize = 5;
+    private int basketSize = 5;
 
     public Basket() {
         bagels = new ArrayList<>(5);
@@ -92,8 +92,8 @@ public class Basket {
     }
 
     //User Story 6
-    public void addItem(String item, double quantity, double costPerUnit) {
-        itemsWithQuantity.put(item, new Double[] { quantity, costPerUnit });
+    public void addItem(String item, double quantity, double pricePerItem) {
+        itemsWithQuantity.put(item, new Double[] { quantity, pricePerItem });
     }
 
     public double totalCostOfItems() {
@@ -132,4 +132,54 @@ public class Basket {
         }
         return false;
     }
+
+    public ArrayList<Bagel> getBagels() {
+        return bagels;
+    }
+
+    public void setBagels(ArrayList<Bagel> bagels) {
+        this.bagels = bagels;
+    }
+
+    public ArrayList<String> getItemsList() {
+        return itemsList;
+    }
+
+    public void setItemsList(ArrayList<String> itemsList) {
+        this.itemsList = itemsList;
+    }
+
+    public HashMap<String, Double> getItemsMap() {
+        return itemsMap;
+    }
+
+    public void setItemsMap(HashMap<String, Double> itemsMap) {
+        this.itemsMap = itemsMap;
+    }
+
+    public HashMap<String, Inventory> getItemsFullyDetailed() {
+        return itemsFullyDetailed;
+    }
+
+    public void setItemsFullyDetailed(HashMap<String, Inventory> itemsFullyDetailed) {
+        this.itemsFullyDetailed = itemsFullyDetailed;
+    }
+
+    public HashMap<String, Double[]> getItemsWithQuantity() {
+        return itemsWithQuantity;
+    }
+
+    public void setItemsWithQuantity(HashMap<String, Double[]> itemsWithQuantity) {
+        this.itemsWithQuantity = itemsWithQuantity;
+    }
+
+    public int getBasketSize() {
+        return basketSize;
+    }
+
+    public void setBasketSize(int basketSize) {
+        this.basketSize = basketSize;
+    }
+
+
 }

@@ -113,10 +113,11 @@ I'd like to know the total cost of items in my basket.
 # Domain Model For User Story 6
 
 
-| Class  | Member variables                              | Methods                                                     | Scenario           | Output/Result                |
-|--------|-----------------------------------------------|-------------------------------------------------------------|--------------------|------------------------------|
-| Basket | HashMap<String, Integer[]> itemsWithQuantity; | int totalCost(HashMap<String, Integer> item, int totalCost) | if all items added | Return totalCost as a double |
-|        |                                               |                                                             | if no items added  | Return 0                     |
+| Class  | Member variables                              | Methods                                                        | Scenario           | Output/Result                |
+|--------|-----------------------------------------------|----------------------------------------------------------------|--------------------|------------------------------|
+| Basket | HashMap<String, Integer[]> itemsWithQuantity; | double totalCostOfItems()                                      | if all items added | Return totalCost as a double |
+|        |                                               |                                                                | if no items added  | Return 0                     |
+|        |                                               | void addItem(String item, double quantity, double costPerUnit) |                    |                              |
 
 
 
