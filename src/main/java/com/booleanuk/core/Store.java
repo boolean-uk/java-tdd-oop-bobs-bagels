@@ -128,4 +128,8 @@ public class Store {
         cost = cost/100;
         return cost;
     }
+
+    public boolean removeBagelFromBasket(String bagel, ArrayList<String> fillings, int basketId) {
+        return false;
+    }
 }

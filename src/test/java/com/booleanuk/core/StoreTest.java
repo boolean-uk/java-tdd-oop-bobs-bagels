@@ -3,6 +3,8 @@ package com.booleanuk.core;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+
 public class StoreTest {
 
     @Test
@@ -154,6 +156,14 @@ public class StoreTest {
         store.addFilling("cheese", "onion", basketId);
         store.addFilling("cheese", "Plain", basketId);
         Assertions.assertEquals(0.49+0.39+3*0.12, store.getCostOfBasket(basketId));
+    }
+
+    @Test
+    public void removeNonexistentBagelFromBasketTest() {
+        Store store = new Store();
+        int basketId = store.createBasket();
+        store.addBagelToBasket("Onion", basketId);
+        Assertions.assertFalse(store.removeBagelFromBasket("plain", new ArrayList<>(), basketId));
     }
 
 }
