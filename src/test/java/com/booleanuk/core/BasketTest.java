@@ -9,16 +9,16 @@ class BasketTest {
     @Test
     public void testAdd(){
        Basket basket = new Basket();
-       basket.setMaxSize(3);
+       basket.setMaxSize(2);
 
-       //Add Coffee or Bagel
+       //Add Bagel
        Assertions.assertTrue(basket.add("BGLO"));
-       Assertions.assertTrue(basket.add("COFB"));
 
-       Assertions.assertTrue(basket.add("BGLO", new String[]{} ));
+       //Add bagel with correct fillings
+       Assertions.assertTrue(basket.add("BGLO", new String[]{"FILX", "FILC"} ));
 
-       //Assertions.assertFalse();
-
+       //Add bagel with incorrect fillings
+       Assertions.assertFalse(basket.add("BGLO", new String[]{"FILX", "FIL"}));
 
        //Add Filling (You can not only buy a filling)
        Assertions.assertFalse(basket.add("FILC"));
