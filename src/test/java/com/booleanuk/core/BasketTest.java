@@ -71,7 +71,14 @@ public class BasketTest {
         basket.add("BGLO");
         basket.add("BGLP");
         basket.add("COFB");
-        Assertions.assertEquals(2,basket.changeCapacity(2));
+
+
         Assertions.assertEquals("[BGLO, BGLP]", basket.changeCapacity(2));
+        Assertions.assertEquals(2,basket.basketList.size());
+        basket.add("COFB");
+        Assertions.assertEquals(2,basket.basketList.size());
+
+
+
     }
 }

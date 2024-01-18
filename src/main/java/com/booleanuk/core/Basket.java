@@ -69,6 +69,21 @@ public class Basket {
         return totalPrice;
     }
 
+    public String changeCapacity (int capacity) {
+        ArrayList <String> newList = new ArrayList<>();
+        this.capacity = capacity;
+
+        for (int i = 0; i < basketList.size() ; i++) {
+            if(i >= capacity){
+                break;
+            }
+            newList.add(basketList.get(i));
+        }
+
+        basketList = newList;
+        return basketList.toString();
+    }
+
     public static void main(String[] args) {
         Basket basket = new Basket();
 
@@ -79,7 +94,9 @@ public class Basket {
         basket.add("BGLP"); //0.39, total 1.87
         //basket.add("COFW");
         //basket.remove("COFB");
-        basket.totalCost();
-        //System.out.println(basket.basketList);
+        //basket.totalCost();
+        System.out.println(basket.basketList);
+        System.out.println(basket.changeCapacity(2));
+
     }
     }
