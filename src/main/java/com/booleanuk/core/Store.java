@@ -98,4 +98,8 @@ public class Store {
         basketCapacity = newCapacity;
         return true;
     }
+
+    public double getCostOfBagel(String bagel) {
+        return -1;
+    }
 }

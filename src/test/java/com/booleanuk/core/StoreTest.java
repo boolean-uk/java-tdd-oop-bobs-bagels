@@ -104,4 +104,11 @@ public class StoreTest {
         Assertions.assertFalse(store.updateBasketCapacity(2));
     }
 
+    @Test
+    public void getCostOfInvalidBagelTest() {
+        Store store = new Store();
+        Assertions.assertEquals(-1, store.getCostOfBagel("Chocolate"));
+
+    }
+
 }
