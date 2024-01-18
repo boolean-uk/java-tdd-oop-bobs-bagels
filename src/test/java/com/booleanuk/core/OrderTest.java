@@ -42,5 +42,35 @@ public class OrderTest {
 
     }
 
+    @Test
+    public void basketIsFull() {
+        Order basket1 = new Order();
+
+        basket1.add("BGLO", "Bagel", "Onion", 0.49);
+        basket1.add("BGLO", "Bagel", "Onion", 0.49);
+        basket1.add("BGLO", "Bagel", "Onion", 0.49);
+        basket1.add("BGLO", "Bagel", "Onion", 0.49);
+        basket1.add("BGLO", "Bagel", "Onion", 0.49);
+        basket1.add("BGLO", "Bagel", "Onion", 0.49);
+        basket1.add("BGLO", "Bagel", "Onion", 0.49);
+        basket1.add("BGLO", "Bagel", "Onion", 0.49);
+        basket1.add("BGLO", "Bagel", "Onion", 0.49);
+        basket1.add("BGLO", "Bagel", "Onion", 0.49);
+        basket1.add("BGLO", "Bagel", "Onion", 0.49);
+        boolean result = basket1.isBasketFull();
+        Assertions.assertTrue(result);
+
+    }
+
+
+    @Test
+    public void basketIsNotFull() {
+        Order basket1 = new Order();
+
+        boolean result = basket1.isBasketFull();
+        Assertions.assertFalse(result);
+
+    }
+
 
 }
