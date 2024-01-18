@@ -50,9 +50,12 @@ public class Basket {
         return false;
     }
 
-    public String setMaxSize(int max){
+    public boolean setMaxSize(int max){
+        if(max < 0){
+            return false;
+        }
         this.maxSize = max;
-        return "";
+        return true;
     }
 
     private boolean isIdInKeys(String id){
