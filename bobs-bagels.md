@@ -71,9 +71,10 @@ I want customers to only be able to order things that we stock in our inventory.
 
 ### Bagel Class (subclass to Item)
 
-| Methods | Member Variables  |
-|---------|-------------------|
-|         | String filling    |
+| Methods                    | Member Variables            |
+|----------------------------|-----------------------------|
+| getFillings()              | ArrayList\<String> fillings |
+| addFilling(String filling) |                             |
 
 ### Filling Class (subclass to Item)
 
@@ -91,12 +92,13 @@ I want customers to only be able to order things that we stock in our inventory.
 ### Inventory Class
 (everything that can be ordered)
 
-| Methods                         | Member Variables                 |
-|---------------------------------|----------------------------------|
-| isInInventory(String name)      | HashMap<String, double> bagels   |
-| changeCapacity(int newCapacity) | HashMap<String, double> coffees  |
-|                                 | HashMap<String, double> fillings |
-|                                 | int capacity;                    |   
+| Methods                   | Member Variables                            |
+|---------------------------|---------------------------------------------|
+| isInInventory(String sKU) | LinkedHashMap<String, double> bagelPrices   |
+| getPrice(String name)     | LinkedHashMap<String, double> coffeePrices  |
+| getBagelPrice()           | LinkedHashMap<String, double> fillingPrices |
+| getFillingPrices()        | ArrayList<String> inventoryStock            |   
+| getCoffeePrices()         |                                             |
 
 ### SKUConverter Class
 
@@ -109,28 +111,41 @@ I want customers to only be able to order things that we stock in our inventory.
 | Methods                                       | Member Variables        |
 |-----------------------------------------------|-------------------------|
 | addItem(Item item)                            | ArrayList\<Item> basket |
-| removeItem(Item item)                         | int bagelsInBasket      |
-| showTotalCostInBasket()                       | int coffeesInBasket     |
-| addBagelFilling(Bagel bagel, Filling filling) | int fillingsInBasket    |
-| showCostOfBagel(String name)                  |                         |
-| showCostOfFillings()                          |                         |
+| removeItem(Item item)                         | Inventory inventory     |
+| changeBasketCapacity(int newCapacity)         | int capacity            |
+| showTotalCostInBasket()                       |                         |
+| costOfItem(String name)                       |                         |
+| getBagelPrices()                              |                         |
+| getCoffeePrices()                             |                         |
+| getFillingPrices()                            |                         |
+| addBagelFilling(Bagel bagel, Filling filling) |                         |
+| getBasket()                                   |                         |
+| getBasketCapacity()                           |                         |
 
-| Scenario                                                          | Return Value/Output/Result                                                 |
-|-------------------------------------------------------------------|----------------------------------------------------------------------------|
-| Customer adds new bagel to empty basket                           | Returns true and adds bagel to the basket list.                            |
-| Customer adds new bagel. Basket contains 5 bagels. Capacity is 5. | Returns false and outputs "Basket is full".                                |
-| Customer removes bagel from basket. Bagel exists in the basket.   | Returns true and bagel is removed from the basket list.                    |
-| Customer removes bagel from basket. Basket contains 0 bagels.     | Returns false.                                                             |
-| Customer tries to remove a bagel that is not in the basket.       | Returns false and outputs "That bagel is not in the basket".               |
-| Manager wants to change capacity to 10 from 5.                    | Returns basket size as int (10). Size of the basket list is changed to 10. |
-| Manager wants to change capacity to 4 from 5.                     | Returns basket size as int (4). Size of the basket list is changed to 4.   |
-| Customer wants to see the cost of items in basket.                | Returns the price of all the items in the basket.                          |
-| Customer wants to see the price of a specific bagel (exists)      | Returns the price of the specified bagel.                                  |
-| ------------------------II------------------(does not exist)      | Returns -1 and "This item does not exist at our store!".                   |
-| Customer wants to choose filling for a bagel (bagel exists)       | Adds filling to the specified bagel.                                       |
-| ------------------------II------------------(does not exist)      | Creates a new bagel with the requested bagel and adds it to basket.        |
-| Customer wants to know the price for each filling.                | Returns the price for each filling.                                        |
-| Customer tries to order an item that is not in inventory.         | Returns "This item does not exist at our store!".                          |
+| Scenario                                                          | Return Value/Output/Result                                                  |
+|-------------------------------------------------------------------|-----------------------------------------------------------------------------|
+| 1 & 3 & 10                                                        |                                                                             |
+| Customer adds new bagel to empty basket                           | Returns true and adds bagel to the basket list.                             |
+| Customer adds new bagel. Basket contains 5 bagels. Capacity is 5. | Returns false and outputs "Basket is full".                                 |
+| 2 & 5                                                             |                                                                             |
+| Customer removes bagel from basket. Bagel exists in the basket.   | Returns "Removed item from basket.". Bagel is removed from the basket list. |
+| Customer removes bagel from basket. Basket contains 0 bagels.     | Returns "Basket is empty, can't remove items.".                             |
+| Customer tries to remove a bagel that is not in the basket.       | Returns "Can't remove item, item not in basket.".                           |
+| 4                                                                 |                                                                             |
+| Manager wants to change capacity to 10 from 5.                    | Returns basket size as int (10). Size of the basket list is changed to 10.  |
+| Manager wants to change capacity to 4 from 5.                     | Returns basket size as int (4). Size of the basket list is changed to 4.    |
+| 6                                                                 |                                                                             |
+| Customer wants to see the cost of items in basket.                | Returns the price of all the items in the basket.                           |
+| 7                                                                 |                                                                             |
+| Customer wants to see the price of a specific item (exists)       | Returns the price of the specified item.                                    |
+| ------------------------II------------------(does not exist)      | Returns -1 and "This item does not exist at our store!".                    |
+| 8 & 10                                                            |                                                                             |
+| Customer wants to choose filling for a bagel (bagel exists)       | Adds filling to the specified bagel.                                        |
+| ------------------------II------------------(does not exist)      | Creates a new bagel with the requested bagel and adds it to basket.         |
+| 9                                                                 |                                                                             |
+| Customer wants to know the price for each filling.                | Returns the price for each filling.                                         |
+| 10                                                                |                                                                             |
+| Customer tries to order an item that is not in inventory.         | Returns "This item does not exist at our store!".                           |
 
 
 
