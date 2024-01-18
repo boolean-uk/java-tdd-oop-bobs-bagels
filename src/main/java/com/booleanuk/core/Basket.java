@@ -2,6 +2,7 @@ package com.booleanuk.core;
 
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.Map;
 
 public class Basket {
     private HashMap<String, Integer> basketMap;
@@ -60,5 +61,17 @@ public class Basket {
             return "Product removed from basket";
         }
         return "Product is not in basket";
+    }
+
+    public double totalCost() {
+        double cost = 0;
+        for(Map.Entry<String, Integer> entry: this.basketMap.entrySet()) {
+            for(Product product: this.inventory.getProducts()) {
+                if(entry.getKey().equals(product.getSku())) {
+                    cost += product.getPrice()*entry.getValue();
+                }
+            }
+        }
+        return cost;
     }
 }
