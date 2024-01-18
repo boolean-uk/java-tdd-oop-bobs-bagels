@@ -54,6 +54,10 @@ public class Basket {
     }
 
     public boolean remove(Bagel bagel){
+        if (products.contains(bagel)){
+            products.remove(bagel);
+            return true;
+        }
         return false;
     }
 
