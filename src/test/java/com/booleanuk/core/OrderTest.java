@@ -7,7 +7,7 @@ public class OrderTest {
 
 
     @Test
-    public void isItemInventory() {
+    public void isBagelInventory() {
         Order basket1 = new Order();
 
         boolean result = basket1.add("BGLO", "Bagel", "Onion", 0.49);
@@ -15,7 +15,7 @@ public class OrderTest {
     }
 
     @Test
-    public void isItemNotInventory() {
+    public void isBagelNotInventory() {
         Order basket1 = new Order();
 
         boolean result = basket1.add("RATT", "ggg", "ddd", 0.3);
@@ -127,6 +127,27 @@ public class OrderTest {
         Assertions.assertEquals(0.49, result);
         Assertions.assertEquals(0.39, result2);
         Assertions.assertEquals(0.49, result3);
+
+    }
+
+    @Test
+    public void isFillingInventory() {
+        Order basket1 = new Order();
+
+        boolean result1 = basket1.chooseFilling("FILB", "Filling", "Bacon", 0.12);
+        boolean result2 = basket1.chooseFilling("FILE", "Filling", "Egg", 0.12);
+        Assertions.assertTrue(result1);
+        Assertions.assertTrue(result2);
+    }
+
+    @Test
+    public void isFillingNotInventory() {
+        Order basket1 = new Order();
+
+        boolean result1 = basket1.chooseFilling("RATT", "ggg", "ddd", 0.3);
+        boolean result2 = basket1.chooseFilling("RATP", "ggg", "ddd", 0.3);
+        Assertions.assertFalse(result1);
+        Assertions.assertFalse(result2);
 
     }
 
