@@ -52,4 +52,18 @@ class BasketTest {
         //Add filling to bagel not in basket
         Assertions.assertFalse(basket.addFillings(bagel2, new Filling[]{filling1}));
     }
+
+    @Test
+    public void testSetMax(){
+        Basket basket = new Basket();
+
+        //Set max to positive number
+        Assertions.assertTrue(basket.setMaxSize(10));
+
+        //Set max to zero
+        Assertions.assertTrue(basket.setMaxSize(0));
+
+        //Set max to negative number
+        Assertions.assertFalse(basket.setMaxSize(-20));
+    }
 }
