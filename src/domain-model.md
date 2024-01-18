@@ -99,11 +99,11 @@ So I can shake things up a bit,
 I'd like to be able to choose fillings for my bagel.
 
 
-| Classes | Methods                        | Members            | Scenario                | Output        |
-|---------|--------------------------------|--------------------|-------------------------|---------------|
-| Order   | chooseFilling(String fillName) | String fillingName | If item is in list      | return true;  |
-|         |                                |                    | If item is not in list  | return false; |
-|         |                                |                    |                         |               |
+| Classes | Methods                                                                              | Members            | Scenario                | Output        |
+|---------|--------------------------------------------------------------------------------------|--------------------|-------------------------|---------------|
+| Order   | chooseFilling(String SKU, String itemType, String fillingName, double fillingPrice ) | String fillingName | If item is in list      | return true;  |
+|         |                                                                                      |                    | If item is not in list  | return false; |
+|         |                                                                                      |                    |                         |               |
 
 
 9.

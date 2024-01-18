@@ -57,8 +57,8 @@ public class Order {
 
         for (Inventory inventory : inventoryList) {
             if (inventory.getSku().equals(SKU) && inventory.getItemType().equals(itemType) && inventory.getName().equals(bagelName) && inventory.getPrice() == bagelPrice) {
-                Inventory bagel10 = new Inventory(SKU, itemType, bagelName, bagelPrice);
-                basketList.add(bagel10);
+                Inventory bagel = new Inventory(SKU, itemType, bagelName, bagelPrice);
+                basketList.add(bagel);
                 return true;
 
             }
@@ -134,11 +134,19 @@ public class Order {
         }
         return 0;
     }
-	public double chooseFilling(String fillingName) {
+	public boolean chooseFilling(String SKU, String itemType, String fillingName, double fillingPrice ) {
 
-        return 0;
+        for (Inventory inventory : inventoryList) {
+            if (inventory.getSku().equals(SKU) && inventory.getItemType().equals(itemType) && inventory.getName().equals(fillingName) && inventory.getPrice() == fillingPrice) {
+                Inventory filling = new Inventory(SKU, itemType, fillingName, fillingPrice);
+                basketList.add(filling);
+                return true;
+
+            }
+        }
+        return false;
     }
-	public double getFillingCost(String fillingName) {
+	public double getFillingCost(String SKU, String itemType, String bagelName, double bagelPrice ) {
 
         return 0;
     }
