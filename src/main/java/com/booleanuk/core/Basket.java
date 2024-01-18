@@ -16,27 +16,6 @@ public class Basket {
         this.maxSize = 10;
     }
 
-    //Add if there are fillings
-//    public boolean add(String id, String[] fillingIds){
-//
-//        if(Inventory.isBagel(id)){
-//            //If basket is full
-//            if (isBasketFull()){
-//                return false;
-//            }else{
-//                //if one of the filling ids are wrong
-//                for (String fillingId : fillingIds){
-//                    if(!Inventory.isFilling(fillingId)){
-//                        return false;
-//                    }
-//                }
-//                this.products.add(new Bagel(id,fillingIds));
-//            }
-//            return true;
-//    }
-//        return false;
-//    }
-
     public boolean add(Bagel bagel){
 
         //If there is an invalid id or a filling
@@ -61,7 +40,13 @@ public class Basket {
         return false;
     }
 
-    public boolean addFillings(Bagel bagel,  String[] fillingIds){
+    public boolean addFillings(Bagel bagel,  Filling[] fillings){
+        if(products.contains(bagel)){
+            for (Filling filling : fillings){
+                bagel.addFilling(filling);
+                return true;
+            }
+        }
         return false;
     }
 

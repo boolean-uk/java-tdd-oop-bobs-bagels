@@ -23,7 +23,7 @@ class BasketTest {
     @Test
     public void testRemove(){
         Basket basket = new Basket();
-        Bagel bagel1 = new Bagel("BGLO", new String[]{"FILX", "FILC"});
+        Bagel bagel1 = new Bagel("BGLO");
         Bagel bagel2 = new Bagel("BGLO");
         basket.add(bagel1);
 
@@ -37,7 +37,7 @@ class BasketTest {
     @Test
     public void testAddFillings(){
         Basket basket = new Basket();
-        Bagel bagel = new Bagel("BGLO", new String[]{"FILX", "FILC"});
+        Bagel bagel = new Bagel("BGLO");
         Bagel bagel2 = new Bagel("BGLO");
         Filling filling1 = new Filling("FILB");
         Filling filling2 = new Filling("FILE");
