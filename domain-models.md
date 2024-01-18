@@ -199,12 +199,14 @@ So I don't over-spend,
 I'd like to know the cost of each filling before I add it to my bagel order.
 ```
 
-| Class Variables | Methods | Scenario | Output/Return |
-|-----------------|---------|----------|---------------|
-|                 |         |          |               |
-|                 |         |          |               |
-|                 |         |          |               |
-|                 |         |          |               |
+Class Customer 
+
+| Class Variables | Methods                                               | Scenario                             | Output/Return           |
+|-----------------|-------------------------------------------------------|--------------------------------------|-------------------------|
+| Basket basket   | double getCostOfItem(Item item)                       | Gets the cost of one item            | double cost of the item |
+|                 | double getCostOfFillings(ArrayList<Filling> fillings) | Gets the cost of all fillings chosen | double cost of fillings |
+|                 |                                                       |                                      |                         |
+|                 |                                                       |                                      |                         |
 
 
 

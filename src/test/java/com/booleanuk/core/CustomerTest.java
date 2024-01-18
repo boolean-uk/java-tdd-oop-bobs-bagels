@@ -39,5 +39,26 @@ public class CustomerTest {
 
     }
 
+    @Test
+    public void testGetCostOfFillings() {
+        Customer customer = new Customer();
+        Basket basket = new Basket(5);
+
+        customer.setBasket();
+
+        Assertions.assertEquals(basket, customer.getBasket());
+
+        basket.addItemToBasket(new Filling("Bacon"));
+        basket.addItemToBasket(new Filling("Egg"));
+        basket.addItemToBasket(new Filling("Cheese"));
+
+        Assertions.assertEquals(0.12*3, customer.getCostOfFillings(basket));
+
+
+
+    }
+
+
+
 
 }
