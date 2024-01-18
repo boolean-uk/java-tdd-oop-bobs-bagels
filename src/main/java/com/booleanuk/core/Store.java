@@ -85,8 +85,13 @@ public class Store {
         ArrayList<Bagel> bagels = baskets.get(basketId).getBagels();
         ArrayList<String> coffees = baskets.get(basketId).getCoffees();
 
+        //If customer buys one coffee and one bagel
         if(bagels.size() == 1 && coffees.size() == 1) {
-            return COFFEE_AND_BAGEL_DISCOUNT;
+            cost += COFFEE_AND_BAGEL_DISCOUNT;
+            for(String filling: bagels.get(0).getFillings()) {
+                cost += getCostOfFilling(filling);
+            }
+            return cost;
         }
 
         for(Bagel bagel: bagels) {
