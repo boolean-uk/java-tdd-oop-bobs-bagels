@@ -76,17 +76,19 @@ I want customers to only be able to order things that we stock in our inventory.
 
 Basket
 
-| Member Variables                | Methods                         | Scenario                                                                  | Output                                                                                       | Satisfies User Story |
-|---------------------------------|---------------------------------|---------------------------------------------------------------------------|----------------------------------------------------------------------------------------------|----------------------|
-| HashMap<Products, int> products | add(String SKU)                 | Add product to basket, if already in basket increase amount.              | "Added <PRODUCT\> to basket", returns true if added.                                         | S1 & S8 & S10        |
-| int capacity                    |                                 | Cannot add more products than capacity allows. Checks if item is on menu. | "Your basket is full", returns false if not added.                                           | S3                   |
-| int items                       | remove(String SKU)              | Remove product from basket, receive message when not in basket.           | "Removed <PRODUCT> from basket", returns true if removed.                                    | S2                   |
-| User user                       |                                 | Remove item that's not in basket.                                         | "This product is not in your cart", returns false if not removed.                            | S5                   |
-|                                 | updateCapacity(int newCapacity) | Allows managers to update capacity. Needs authorization.                  | "Capacity updated." \|\| "Cannot update capacity." returns true if updated, false otherwise. | S4                   |
-|                                 | totalCost()                     | Displays the total cost of all items in basket.                           | Sum of every item's price, takes account of amounts.                                         | S6                   |
-|                                 | displayMenu()                   | To see what a products costs before buying.                               | Displays products and price of each product.                                                 | S7 & S9              |
-|                                 | showBasket()                    | To see what is in basket.                                                 | Displays all items in basket.                                                                |                      |
-|                                 | howManyInBasket(String SKU)     |                                |                                                                                              |                      |
+| Member Variables                 | Methods                         | Scenario                                                                  | Output                                                                                       | Satisfies User Story |
+|----------------------------------|---------------------------------|---------------------------------------------------------------------------|----------------------------------------------------------------------------------------------|----------------------|
+| HashMap<Products, int\> products | add(String SKU)                 | Add product to basket, if already in basket increase amount.              | "Added <PRODUCT\> to basket", returns true if added.                                         | S1 & S8 & S10        |
+| int capacity                     |                                 | Cannot add more products than capacity allows. Checks if item is on menu. | "Your basket is full", returns false if not added.                                           | S3                   |
+| int items                        | remove(String SKU)              | Remove product from basket, receive message when not in basket.           | "Removed <PRODUCT> from basket", returns true if removed.                                    | S2                   |
+| User user                        |                                 | Remove item that's not in basket.                                         | "This product is not in your cart", returns false if not removed.                            | S5                   |
+|                                  | updateCapacity(int newCapacity) | Allows managers to update capacity. Needs authorization.                  | "Capacity updated." \|\| "Cannot update capacity." returns true if updated, false otherwise. | S4                   |
+|                                  | totalCost()                     | Displays the total cost of all items in basket.                           | Sum of every item's price, takes account of amounts.                                         | S6                   |
+|                                  | displayMenu()                   | To see what a products costs before buying.                               | Displays products and price of each product.                                                 | S7 & S9              |
+|                                  | getProducts()                   | getter for products variable. to see what is in basket.                   | products                                                                                     |                      |
+|                                  | getUser()                       | getter for user variable.                                                 | user                                                                                         |                      |
+|                                  | getCapacity()                   | getter for capacity variable.                                             | capacity                                                                                     |                      |
+|                                  | setCapacity(String)             | setter for capacity variable.                                             | Can set new value for capacity if user is manager and the new value is a positive number.    |                      |
 
 Product
 
@@ -96,6 +98,8 @@ Product
 | String type      | Every product is either of type bagel, coffee or filling |
 | double price     | Price of product                                         |
 | String name      | Name of product                                          |
+
+
 
 
 

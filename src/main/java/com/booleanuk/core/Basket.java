@@ -3,19 +3,19 @@ package com.booleanuk.core;
 import java.util.HashMap;
 
 public class Basket {
-    private HashMap<Product, Integer> products;
+    public HashMap<Product, Integer> products;
     private User user;
     private int capacity;
     private int items;
 
-    public Basket(User user){
+    public Basket(User user) {
         this.user = user;
         products = new HashMap<>();
         setCapacity(10);
         items = 0;
     }
 
-    public HashMap<Product, Integer> getProducts(){
+    public HashMap<Product, Integer> getProducts() {
         return products;
     }
 
@@ -27,8 +27,8 @@ public class Basket {
         return capacity;
     }
 
-    private void setCapacity(int capacity) {
-        if (capacity > 0){
+    private void setCapacity(int capacity) throws IllegalArgumentException {
+        if (capacity > 0) {
             this.capacity = capacity;
         } else {
             throw new IllegalArgumentException("Invalid value for capacity.");
@@ -39,15 +39,15 @@ public class Basket {
         return items;
     }
 
-    public boolean add(String SKU){
-        if (items < capacity){
+    public boolean add(String SKU) {
+        if (items < capacity) {
             if (getProduct(SKU) != null) {
                 Product product = getProduct(SKU);
                 products.put(product, products.get(product) + 1);
             } else {
                 try {
                     products.put(new Product(SKU), 1);
-                } catch (IllegalStateException e){
+                } catch (IllegalStateException e) {
                     System.out.println("This item is not on the menu.");
                     return false;
                 }
@@ -59,11 +59,11 @@ public class Basket {
         return false;
     }
 
-    public boolean remove(String SKU){
-        if (getProduct(SKU) != null){
+    public boolean remove(String SKU) {
+        if (getProduct(SKU) != null) {
             Product product = getProduct(SKU);
 
-            if (products.get(product) > 1){
+            if (products.get(product) > 1) {
                 products.put(product, products.get(product) - 1);
             } else {
                 products.remove(product);
@@ -76,11 +76,11 @@ public class Basket {
         }
     }
 
-    public void updateCapacity(int newCapacity){
+    public void updateCapacity(int newCapacity) {
         if (user instanceof Manager){
             setCapacity(newCapacity);
 
-            if (newCapacity < items){
+            if (newCapacity < items) {
                 products = new HashMap<>();
                 items = 0;
 
@@ -88,8 +88,11 @@ public class Basket {
                         "Cart can only hold " + newCapacity + " items. " +
                         "Your basket has been reset.");
             }
+        } else {
+            System.out.println("You cannot do that");
         }
     }
+
 
     public double totalCost(){
         double totalCost = 0;
