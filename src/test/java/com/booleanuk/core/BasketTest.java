@@ -65,6 +65,8 @@ class BasketTest {
 
         //Set max to negative number
         Assertions.assertFalse(basket.setMaxSize(-20));
+
+        Assertions.assertEquals(0, Basket.getMaxSize());
     }
 
     @Test

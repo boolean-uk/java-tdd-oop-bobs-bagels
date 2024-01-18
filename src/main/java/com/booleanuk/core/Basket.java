@@ -8,12 +8,12 @@ public class Basket {
     private ArrayList<Bagel> products;
     //private HashMap<Bagel, Integer> products;
     private static final Inventory inventory = new Inventory();
-    private int maxSize;
+    private static int maxSize;
 
     public Basket(){
         //this.products = new HashMap<>();
         this.products = new ArrayList<>();
-        this.maxSize = 10;
+        maxSize = 10;
     }
 
     public boolean add(Bagel bagel){
@@ -50,12 +50,20 @@ public class Basket {
         return false;
     }
 
-    public boolean setMaxSize(int max){
+    public static boolean setMaxSize(int max){
         if(max < 0){
             return false;
         }
-        this.maxSize = max;
+        maxSize = max;
         return true;
+    }
+
+    public static int getMaxSize() {
+        return maxSize;
+    }
+
+    public ArrayList<Bagel> getProducts() {
+        return products;
     }
 
     public double getCostOfBasket(){

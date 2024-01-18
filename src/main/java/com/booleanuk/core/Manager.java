@@ -6,12 +6,14 @@ public class Manager {
 
     private Basket basket;
     private Inventory inventory;
-    private ArrayList<Customer> customers;
+    private ArrayList<Basket> baskets;
 
     public Manager(){
+        baskets = new ArrayList<>();
     }
 
-    public String setBasket(){
-        return "";
+    public void setBasketSize(int size){
+        //for()
+        Basket.setMaxSize(size);
     }
 }

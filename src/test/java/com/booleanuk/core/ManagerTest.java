@@ -22,8 +22,8 @@ class ManagerTest {
         //Test if baskets with a larger size than new max clears
         manager.setBasketSize(1);
 
-        Assertions.assertEquals(0, basket1.getProducts.size());
-        Assertions.assertEquals(1, basket2.getProducts.size());
+        Assertions.assertEquals(0, basket1.getProducts().size());
+        Assertions.assertEquals(1, basket2.getProducts().size());
 
     }
 }
