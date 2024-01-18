@@ -93,12 +93,8 @@ public class BasketTest {
         // Add two of the same items
         Bagel firstItem = (Bagel) basket.addItem(item1);
         Bagel secondItem = (Bagel) basket.addItem(item1);
-        System.out.println(firstItem);
-        System.out.println(secondItem);
         // Change the filling of one of them
         basket.addFillingToBagel(firstItem, (Filling) item3);
-        System.out.println(firstItem);
-        System.out.println(secondItem);
         // Check that filling was not set for the second item
         Assertions.assertEquals(0, secondItem.getFilling().size());
         // Check that filling was set for first item

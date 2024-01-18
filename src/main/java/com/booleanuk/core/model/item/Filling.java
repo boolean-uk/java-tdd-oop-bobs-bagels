@@ -13,11 +13,11 @@ public class Filling extends Item {
 
     @Override
     public String toString() {
-        return "Filling[" +
+        return "Filling(" +
                 "SKU=" + getSKU() +
                 ", price=" + getPrice() +
                 ", name=" + getName() +
                 ", variant=" + getVariant() +
-                "]";
+                ")";
     }
 }

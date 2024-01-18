@@ -1,8 +1,6 @@
 package com.booleanuk.core.model;
 
-import com.booleanuk.core.model.item.Bagel;
-import com.booleanuk.core.model.item.Coffee;
-import com.booleanuk.core.model.item.Filling;
+import com.booleanuk.core.model.item.*;
 import lombok.Data;
 
 import java.util.ArrayList;
@@ -39,21 +37,21 @@ public class Basket {
         double cost = 0;
         for (Item item : basket) {
             cost += item.getPrice();
+            if (item instanceof Bagel) {
+                for (Filling filling : ((Bagel) item).getFilling()) {
+                    cost += filling.getPrice();
+                }
+            }
         }
         return cost;
     }
 
-    public Bagel addFillingToBagel(Bagel bagel, Filling filling) {
-        Filling addedFillingCopy = null;
-
+    public void addFillingToBagel(Bagel bagel, Filling filling) {
         for (Item item : basket) {
             if (item.equals(bagel)) {
-                addedFillingCopy = new Filling(filling);
-                ((Bagel) item).addFilling(addedFillingCopy);
+                ((Bagel) item).addFilling(new Filling(filling));
             }
         }
-        basket.add(addedFillingCopy);
-        return bagel;
     }
 
     private Item createItemCopy(Item item) {

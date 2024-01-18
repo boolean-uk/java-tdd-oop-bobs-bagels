@@ -5,6 +5,7 @@ import lombok.*;
 // Using @Data makes tests fail because it changed .equals ?
 @Getter
 @Setter
+@ToString
 @AllArgsConstructor
 public class Item {
     private final String SKU;

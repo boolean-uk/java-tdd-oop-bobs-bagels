@@ -25,13 +25,13 @@ public class Bagel extends Item {
 
     @Override
     public String toString() {
-        return "Bagel[" +
+        return "Bagel(" +
                 "id=" + System.identityHashCode(this) +
                 ", SKU=" + getSKU() +
                 ", price=" + getPrice() +
                 ", name=" + getName() +
                 ", variant=" + getVariant() +
                 ", filling=" + filling +
-                "]";
+                ")";
     }
 }

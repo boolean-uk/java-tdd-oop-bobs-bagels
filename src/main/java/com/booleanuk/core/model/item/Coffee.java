@@ -13,11 +13,11 @@ public class Coffee extends Item {
 
     @Override
     public String toString() {
-        return "Coffee[" +
+        return "Coffee(" +
                 "SKU=" + getSKU() +
                 ", price=" + getPrice() +
                 ", name=" + getName() +
                 ", variant=" + getVariant() +
-                "]";
+                ")";
     }
 }
