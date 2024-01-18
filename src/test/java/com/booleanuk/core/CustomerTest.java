@@ -40,7 +40,7 @@ public class CustomerTest {
     }
 
     @Test
-    public void testGetCostOfFillings() {
+    public void testGetCostOfFillingsInBasket() {
         Customer customer = new Customer();
         Basket basket = new Basket(5);
 
@@ -51,8 +51,17 @@ public class CustomerTest {
         basket.addItemToBasket(new Filling("Bacon"));
         basket.addItemToBasket(new Filling("Egg"));
         basket.addItemToBasket(new Filling("Cheese"));
+        basket.addItemToBasket(new Bagel("Plain"));
 
-        Assertions.assertEquals(0.12*3, customer.getCostOfFillings(basket.getItemList()));
+        Assertions.assertEquals(0.12*3, customer.getCostOfFillingsInBasket(basket.getItemList()));
+
+
+    }
+
+    @Test
+    public void testGetCostOfFillingsAfterA() {
+        Customer customer = new Customer();
+        Basket basket = new Basket(5);
 
 
 

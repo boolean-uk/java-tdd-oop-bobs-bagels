@@ -29,7 +29,7 @@ public class Customer {
         return this.basket;
     }
 
-    public double getCostOfFillings(ArrayList<Item> fillings) {
+    public double getCostOfFillingsInBasket(ArrayList<Item> fillings) {
         return this.getTotalCost(fillings);
     }
 }
