@@ -2,30 +2,41 @@
 
 Note: the domain model is subject to change before the assignment is complete
 
-| Comment | Class     | Fields                               | Methods                                | Situation | Output / Response |
-|---------|-----------|--------------------------------------|----------------------------------------|-----------|-------------------|
-|         | Product   | String sku                           |                                        |           |                   |
-|         |           | String name                          |                                        |           |                   |
-|         |           | String variant                       |                                        |           |                   |
-|         |           | double price                         |                                        |           |                   |
-|         |           |                                      | double getPrice()                      |           |                   |
-|         | Bagel     | ArrayList<Filling> fillings          |                                        |           |                   |
-|         |           |                                      | boolean addFilling(Filling filling)    |           |                   |
-|         |           |                                      | double getPrice()                      |           |                   |
-|         | Coffee    |                                      |                                        |           |                   |
-|         |           |                                      |                                        |           |                   |
-|         | Filling   |                                      |                                        |           |                   |
-|         |           |                                      |                                        |           |                   |
-|         | Inventory | HashMap<Product, number> stock       |                                        |           |                   |
-|         |           |                                      | boolean inStock()                      |           |                   |
-|         | Basket    | HashMap<Product, number> basketItems |                                        |           |                   |
-|         |           | int basketLimit                      |                                        |           |                   |
-|         |           |                                      | boolean addProduct(Product product)    |           |                   |
-|         |           |                                      | boolean removeProduct(Product product) |           |                   |
-|         |           |                                      | boolean isFull()                       |           |                   |
-|         |           |                                      | void setCapacity(int basketLimit)      |           |                   |
-|         |           |                                      | boolean inBasket()                     |           |                   |
-|         |           |                                      | double sumPrice()                      |           |                   |
+| Comment | Class     | Fields                                | Methods                                | Situation                            | Output / Response                           |
+|---------|-----------|---------------------------------------|----------------------------------------|--------------------------------------|---------------------------------------------|
+|         | Product   | String sku                            |                                        |                                      |                                             |
+|         |           | String name                           |                                        |                                      |                                             |
+|         |           | String variant                        |                                        |                                      |                                             |
+|         |           | double price                          |                                        |                                      |                                             |
+|         |           |                                       | double getPrice()                      | Get product price outside of class   | returns a double representing product price |
+|         |           |                                       | String getVariant()                    | get product variant outside of class | returns a String containing product variant |
+|         |           |                                       | String getName()                       | get product name outside of class    | returns a String containing product name    |
+|         |           |                                       | String getSku()                        |                                      |                                             |
+|         |           |                                       | void setPrice(double price)            |                                      |                                             |
+|         |           |                                       | void setVariant(String variant)        |                                      |                                             |
+|         |           |                                       | void setName(String name)              |                                      |                                             |
+|         |           |                                       | void setSku(String sku)                |                                      |                                             |
+|         | Bagel     | ArrayList<Filling> fillings           |                                        |                                      |                                             |
+|         |           |                                       | boolean addFilling(Filling filling)    |                                      |                                             |
+|         |           |                                       | boolean removeFilling(Filling filling) |                                      |                                             |
+|         |           |                                       | double getPrice()                      |                                      |                                             |
+|         | Coffee    |                                       |                                        |                                      |                                             |
+|         |           |                                       |                                        |                                      |                                             |
+|         | Filling   |                                       |                                        |                                      |                                             |
+|         |           |                                       |                                        |                                      |                                             |
+|         | Inventory | HashMap<Product, Integer> stock       |                                        |                                      |                                             |
+|         |           |                                       | boolean addStock()                     |                                      |                                             |
+|         |           |                                       | boolean removeStock()                  |                                      |                                             |
+|         |           |                                       | boolean inStock()                      |                                      |                                             |
+|         | Basket    | HashMap<Product, Integer> basketItems |                                        |                                      |                                             |
+|         |           | int basketLimit                       |                                        |                                      |                                             |
+|         |           |                                       | boolean addProduct(Product product)    |                                      |                                             |
+|         |           |                                       | boolean removeProduct(Product product) |                                      |                                             |
+|         |           |                                       |                                        |                                      |                                             |
+|         |           |                                       | boolean isFull()                       |                                      |                                             |
+|         |           |                                       | void setCapacity(int basketLimit)      |                                      |                                             |
+|         |           |                                       | boolean inBasket()                     |                                      |                                             |
+|         |           |                                       | double sumPrice()                      |                                      |                                             |
 
 ### User Stories
 ```
