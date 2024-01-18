@@ -72,4 +72,35 @@ public class BasketTest {
         Assertions.assertFalse(testBasket.removeItem(plain));
         Assertions.assertEquals(expected, testBasket.getBasket());
     }
+
+    @Test
+    public void testRemoveBagelThatIsNotInBasket() {
+        Basket testBasket = new Basket();
+        SKUConverter converter = new SKUConverter();
+
+        ArrayList<Item> expected = new ArrayList<>();
+
+        Bagel plain = new Bagel("Plain", converter.getSKU("Plain"));
+        Bagel onion = new Bagel("Onion", converter.getSKU("Onion"));
+        Coffee white = new Coffee("White", converter.getSKU("White"));
+        Bagel sesame = new Bagel("Sesame", converter.getSKU("Sesame"));
+        Coffee black = new Coffee("Black", converter.getSKU("Black"));
+
+        testBasket.addItem(plain);
+        testBasket.addItem(onion);
+        testBasket.addItem(white);
+        testBasket.addItem(sesame);
+        testBasket.addItem(black);
+
+        expected.add(plain);
+        expected.add(onion);
+        expected.add(white);
+        expected.add(sesame);
+        expected.add(black);
+
+        Bagel everything = new Bagel("Everything", converter.getSKU("Everything"));
+
+        Assertions.assertFalse(testBasket.removeItem(everything));
+        Assertions.assertEquals(expected, testBasket.getBasket());
+    }
 }
