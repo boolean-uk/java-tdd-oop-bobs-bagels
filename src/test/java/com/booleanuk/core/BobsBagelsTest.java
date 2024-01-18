@@ -100,4 +100,5 @@ class BobsBagelsTest {
 
         Assertions.assertEquals(1.99, total, 0.0001);
     }
+
 }
