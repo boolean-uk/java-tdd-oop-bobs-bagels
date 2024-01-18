@@ -80,5 +80,23 @@ public class OrderTest {
         Assertions.assertEquals(30, result);
     }
 
+    @Test
+    public void testItemCanBeRemoved() {
+        Order basket1 = new Order();
+
+        basket1.add("BGLO", "Bagel", "Onion", 0.49);
+        String result = basket1.canItemBeRemoved("Onion");
+        Assertions.assertEquals("The item can be removed.", result);
+    }
+
+    @Test
+    public void testItemCannotBeRemoved() {
+        Order basket1 = new Order();
+
+        String result = basket1.canItemBeRemoved("Fried");
+        Assertions.assertEquals("The item is not in the basket!", result);
+
+    }
+
 
 }
