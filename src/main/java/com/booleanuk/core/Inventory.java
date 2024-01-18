@@ -27,6 +27,16 @@ public class Inventory {
         return coffees.containsKey(sKU);
     }
 
+    public double getPrice(String sKU) {
+        if (this.bagels.containsKey(sKU)) {
+            return this.bagels.get(sKU);
+        }
+        else if (this.coffees.containsKey(sKU)) {
+            return this.coffees.get(sKU);
+        }
+        return this.fillings.get(sKU);
+    }
+
     private void createBagelInventory() {
         this.bagels.put("BGLO", 0.49);
         this.bagels.put("BGLP", 0.39);

@@ -12,11 +12,11 @@ public class Item {
     }
 
     public String getName() {
-        return name;
+        return this.name;
     }
 
     public String getsKU() {
-        return sKU;
+        return this.sKU;
     }
 
 

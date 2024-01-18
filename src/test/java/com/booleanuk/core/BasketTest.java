@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 
 public class BasketTest {
-    @Test
+    @Test /* User story 1 */
     public void testAddBagelToEmptyBasket() {
         Basket testBasket = new Basket();
         SKUConverter converter = new SKUConverter();
@@ -18,7 +18,7 @@ public class BasketTest {
         Assertions.assertTrue(testBasket.addItem(plain));
     }
 
-    @Test
+    @Test /* User story 3 */
     public void testAddBagelToFullBasket() {
         Basket testBasket = new Basket();
         SKUConverter converter = new SKUConverter();
@@ -32,7 +32,7 @@ public class BasketTest {
         Assertions.assertFalse(testBasket.addItem(new Bagel("Plain", converter.getSKU("Plain"))));
     }
 
-    @Test
+    @Test /* User story 2 */
     public void testRemoveBagelFromBasket() {
         Basket testBasket = new Basket();
         SKUConverter converter = new SKUConverter();
@@ -62,7 +62,7 @@ public class BasketTest {
         Assertions.assertEquals(expected, testBasket.getBasket());
     }
 
-    @Test
+    @Test /* User story 2 */
     public void testRemoveBagelFromEmptyBasket() {
         Basket testBasket = new Basket();
         SKUConverter converter = new SKUConverter();
@@ -77,7 +77,7 @@ public class BasketTest {
         Assertions.assertEquals(expected, testBasket.getBasket());
     }
 
-    @Test
+    @Test /* User story 5 */
     public void testRemoveBagelThatIsNotInBasket() {
         Basket testBasket = new Basket();
         SKUConverter converter = new SKUConverter();
@@ -110,7 +110,7 @@ public class BasketTest {
         Assertions.assertEquals(expected, testBasket.getBasket());
     }
 
-    @Test
+    @Test /* User story 4 */
     public void testChangeToBiggerCapacityAndAddItemsAfter() {
         Basket testBasket = new Basket();
         SKUConverter converter = new SKUConverter();
@@ -152,7 +152,7 @@ public class BasketTest {
         Assertions.assertEquals(expected, testBasket.getBasket());
     }
 
-    @Test
+    @Test /* User story 4 */
     public void testChangeToSmallerCapacity() {
         Basket testBasket = new Basket();
         SKUConverter converter = new SKUConverter();
@@ -170,5 +170,26 @@ public class BasketTest {
 
         Assertions.assertFalse(testBasket.changeBasketCapacity(3));
         Assertions.assertEquals(5, testBasket.getBasketCapacity());
+    }
+
+    @Test
+    public void testShowCostOfAllItemsInBasket() {
+        Basket testBasket = new Basket();
+        SKUConverter converter = new SKUConverter();
+
+        Bagel plain = new Bagel("Plain", converter.getSKU("Plain"));
+        Bagel onion = new Bagel("Onion", converter.getSKU("Onion"));
+        Coffee white = new Coffee("White", converter.getSKU("White"));
+        Bagel sesame = new Bagel("Sesame", converter.getSKU("Sesame"));
+        Coffee black = new Coffee("Black", converter.getSKU("Black"));
+        testBasket.addItem(plain);
+        testBasket.addItem(onion);
+        testBasket.addItem(white);
+        testBasket.addItem(sesame);
+        testBasket.addItem(black);
+
+        double expectedPrice = 0.39 + 0.49 + 0.99 + 0.49 + 0.99;
+
+        Assertions.assertEquals(expectedPrice, testBasket.showTotalCostInBasket(), 0.01);
     }
 }

@@ -28,7 +28,7 @@ public class Basket {
             System.out.print("This item does not exist at our store!");
             return false;
         }
-        if (basket.size() == this.basketCapacity) {
+        if (this.basket.size() == this.basketCapacity) {
             System.out.print("Your basket is at its capacity, can't add item!");
             return false;
         }
@@ -37,10 +37,10 @@ public class Basket {
     }
 
     public String removeItem(Item item) {
-        if (basket.remove(item)) {
+        if (this.basket.remove(item)) {
             return "Removed " + item.getName() + "from basket.";
         }
-        if (basket.isEmpty()) {
+        if (this.basket.isEmpty()) {
             return "Basket is empty, can't remove items.";
         }
         return "Can't remove " + item.getName() + ", item not in basket.";
@@ -55,16 +55,25 @@ public class Basket {
     }
 
     public double showTotalCostInBasket() {
-        return -1.0;
+        double totalCost = 0;
+        for (Item item : this.basket) {
+            totalCost += costOfItem(item.getsKU());
+        }
+        return totalCost;
+    }
+
+    public double costOfItem(String sKU) {
+        if (this.inventory.isInInventory(sKU)) {
+            return this.inventory.getPrice(sKU);
+        }
+        return 0;
     }
 
     public void addBagelFilling(Bagel bagel, Filling filling) {
 
     }
 
-    public void showCostOfBagel(String name) {
 
-    }
 
     public void showCostOfFillings() {
 
