@@ -10,7 +10,7 @@ class BasketTest {
     @Test
     public void testAddBagelToBasket() {
         Basket basket = new Basket();
-        Assertions.assertTrue(basket.add("BGLO"));
+        Assertions.assertEquals("Product added to basket", basket.add("BGLO"));
         Assertions.assertTrue(basket.getBasketMap().containsKey("BGLO"));
     }
 
@@ -38,7 +38,18 @@ class BasketTest {
     @Test
     public void testAddNoneExistingBagelToBasket() {
         Basket basket = new Basket();
-        Assertions.assertFalse(basket.add("AAAHHH"));
+        basket.add("BGLO");
+        basket.add("BGLO");
+        basket.add("BGLO");
+        basket.add("BGLO");
+        basket.add("BGLO");
+        Assertions.assertEquals("Basket is full", basket.add("BGLO"));
+    }
+
+    @Test
+    public void testAddBagelToFullBasket() {
+        Basket basket = new Basket();
+        Assertions.assertEquals("Product not found", basket.add("AAAHHH"));
     }
 
     @Test
