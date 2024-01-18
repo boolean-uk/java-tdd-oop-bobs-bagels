@@ -6,6 +6,13 @@ public class Item {
     private String variant;
     private double price;
 
+    public Item(String sku, String name, String variant, double price) {
+        this.setSku(sku);
+        this.setName(name);
+        this.setVariant(variant);
+        this.setPrice(price);
+    }
+
     public String getSku() {
         return this.sku;
     }
@@ -28,13 +35,6 @@ public class Item {
 
     public void setVariant(String variant) {
         this.variant = variant;
-    }
-
-    public Item(String sku, String name, String variant, double price) {
-        this.setSku(sku);
-        this.setName(name);
-        this.setVariant(variant);
-        this.setPrice(price);
     }
 
     public double getPrice() {
