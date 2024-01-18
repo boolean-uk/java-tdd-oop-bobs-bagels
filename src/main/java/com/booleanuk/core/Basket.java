@@ -33,10 +33,14 @@ public class Basket {
         return false;
     }
 
-    public String add(String sku) {
-        if (this.basketMap.values().stream()
+    public int getNumberOfItems() {
+        return this.basketMap.values().stream()
                 .mapToInt(Integer::valueOf)
-                .sum() >= this.capacity) {
+                .sum();
+    }
+
+    public String add(String sku) {
+        if (this.getNumberOfItems() >= this.capacity) {
             return "Basket is full";
         }
         if (this.basketMap.containsKey(sku)) {
