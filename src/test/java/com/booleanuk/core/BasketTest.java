@@ -27,6 +27,26 @@ public class BasketTest {
     }
 
     @Test
+    public void addDecreaseNumberOfItemsInStock() {
+        HashMap<Item, Integer> testInventory = new HashMap<>();
+        Item bglo = new Item("BGLO","Bagel", "Onion", 0.49);
+        Item bglp = new Item("BGLP","Bagel", "Plain", 0.39);
+        testInventory.put(bglo, 100);
+        testInventory.put(bglp, 100);
+        BobsBagelsShop shop = new BobsBagelsShop(testInventory);
+        Assertions.assertEquals(100, shop.getInventory().get(bglo));
+        Assertions.assertEquals(100, shop.getInventory().get(bglp));
+
+        Basket basket = new Basket(shop, 3);
+        basket.add(bglo);
+        Assertions.assertEquals(99, shop.getInventory().get(bglo));
+        basket.add(bglo);
+        basket.add(bglp);
+        Assertions.assertEquals(98, shop.getInventory().get(bglo));
+        Assertions.assertEquals(99, shop.getInventory().get(bglp));
+    }
+
+    @Test
     public void remove() {
         HashMap<Item, Integer> testInventory = new HashMap<>();
         Item bglo = new Item("BGLO","Bagel", "Onion", 0.49);
