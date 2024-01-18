@@ -11,6 +11,13 @@ public class Inventory {
     public Inventory() {
         this.menu = new ArrayList<>();
         this.inventory = new HashMap<>();
+
+        Bagel onionBagel = new Bagel("BGLO", "Onion", 0.49 );
+        Bagel plainBagel = new Bagel("BGLP", "Plain", 0.49 );
+        Bagel everythingBagel = new Bagel("BGLE", "Everything", 0.49 );
+        Bagel sesameBagel = new Bagel("BGLS", "Sesame", 0.49 );
+        Coffee blackCoffee = new Coffee("COFB", "Black",0.99);
+        Filling baconFilling = new Filling("FILB", "Bacon",0.12);
     }
 
     public Integer getInventory(String sku) {
