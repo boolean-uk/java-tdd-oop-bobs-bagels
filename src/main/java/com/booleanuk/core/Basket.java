@@ -40,9 +40,7 @@ public class Basket {
                 for (Item item : fillingsTemp) {
 
                     i.addItems(item);
-
                 }
-
                 i.addItems(bagel);
                 return false;
             }

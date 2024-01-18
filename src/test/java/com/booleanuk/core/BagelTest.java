@@ -72,5 +72,15 @@ public class BagelTest {
         fillingsTest.add("FILC");
         Assertions.assertTrue(basket.addFillingWithBagel("BGLO", fillingsTest));
     }
+    @Test
+    public void testAddingFillingToBagelWhenOutOfStock(){
+        Basket basket = new Basket(40);
+        ArrayList<String> fillingsTest = new ArrayList<>();
+        for(int i = 0; i < 22; i++){
+            fillingsTest.add("FILB");
+        }
+        Assertions.assertFalse(basket.addFillingWithBagel("BGLO", fillingsTest));
+        Assertions.assertTrue(Inventory.getInstance().checkInventory("FILB", 20));
+    }
 
 }
