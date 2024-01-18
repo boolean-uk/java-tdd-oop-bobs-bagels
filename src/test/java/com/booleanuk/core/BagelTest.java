@@ -4,6 +4,8 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.HashMap;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class BagelTest {
@@ -45,5 +47,17 @@ class BagelTest {
         Assertions.assertEquals(0.49, onion.getPrice());
         Assertions.assertEquals(0.49, everything.getPrice());
         Assertions.assertEquals(0.49, sesame.getPrice());
+    }
+
+    @Test
+    public void testGetFilling(){
+        Bagel plain = new Bagel("BGLP", new String[]{"FILX", "FILS", "FILC"});
+        HashMap<String, Filling> fillings = new HashMap<>();
+        fillings.put("FILX", new Filling("FILX"));
+        fillings.put("FILS", new Filling("FILS"));
+        fillings.put("FILC", new Filling("FILC"));
+
+        Assertions.assertEquals(fillings, plain.getFillings());
+
     }
 }
