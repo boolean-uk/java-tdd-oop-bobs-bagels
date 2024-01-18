@@ -44,7 +44,7 @@ public class CustomerTest {
         Customer customer = new Customer();
         Basket basket = new Basket(5);
 
-        customer.setBasket();
+        Assertions.assertTrue(customer.setBasket());
 
         Assertions.assertEquals(basket, customer.getBasket());
 
