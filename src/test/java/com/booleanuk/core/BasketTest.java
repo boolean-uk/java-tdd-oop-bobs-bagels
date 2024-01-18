@@ -11,7 +11,7 @@ class BasketTest {
     public void testAddBagelToBasket() {
         Basket basket = new Basket();
         Assertions.assertTrue(basket.add("BGLO"));
-        Assertions.assertTrue(basket.basketMap.containsKey("BGLO"));
+        Assertions.assertTrue(basket.getBasketMap().containsKey("BGLO"));
     }
 
     @Test
@@ -20,9 +20,9 @@ class BasketTest {
         basket.add("BGLO");
         basket.add("BGLP");
         basket.add("BGLE");
-        Assertions.assertTrue(basket.basketMap.containsKey("BGLO"));
-        Assertions.assertTrue(basket.basketMap.containsKey("BGLP"));
-        Assertions.assertTrue(basket.basketMap.containsKey("BGLE"));
+        Assertions.assertTrue(basket.getBasketMap().containsKey("BGLO"));
+        Assertions.assertTrue(basket.getBasketMap().containsKey("BGLP"));
+        Assertions.assertTrue(basket.getBasketMap().containsKey("BGLE"));
     }
 
     @Test
@@ -31,8 +31,8 @@ class BasketTest {
         basket.add("BGLO");
         basket.add("BGLO");
         basket.add("BGLO");
-        Assertions.assertTrue(basket.basketMap.containsKey("BGLO"));
-        Assertions.assertEquals(3, (int) basket.basketMap.get("BGLO"));
+        Assertions.assertTrue(basket.getBasketMap().containsKey("BGLO"));
+        Assertions.assertEquals(3, (int) basket.getBasketMap().get("BGLO"));
     }
 
     @Test
