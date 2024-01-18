@@ -74,6 +74,16 @@ public class BagelTest {
         Bagel abagel = new Bagel();
         Assertions.assertTrue(abagel.inventoryAllPrint());
     }
+    @Test
+    public void testChooseFilling(){
+        Bagel abagel = new Bagel();
+        String bagelType = abagel.chooseFilling("Plain");
+        Assertions.assertEquals("BGLP", bagelType);
+        bagelType = abagel.chooseFilling("Everything");
+        Assertions.assertEquals("BGLE", bagelType);
+        bagelType = abagel.chooseFilling("Sesame");
+        Assertions.assertEquals("BGLS", bagelType);
+    }
 
 
 
