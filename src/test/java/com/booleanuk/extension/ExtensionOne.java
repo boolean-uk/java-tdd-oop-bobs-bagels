@@ -80,4 +80,16 @@ public class ExtensionOne {
         Assertions.assertEquals(1.25, store.getCostOfBasket(basketId), 0.001);
     }
 
+    @Test
+    public void discountOneCoffeeAndOneBagelWithFillingsTest() {
+        Store store = new Store();
+        int basketId = store.createBasket();
+        store.addBagelToBasket("plain", basketId);
+        store.addCoffeeToBasket("black", basketId);
+        store.addFilling("hAM", "plain", basketId);
+        store.addFilling("egG", "plain", basketId);
+
+        Assertions.assertEquals(1.25+0.12*2, store.getCostOfBasket(basketId), 0.001);
+    }
+
 }
