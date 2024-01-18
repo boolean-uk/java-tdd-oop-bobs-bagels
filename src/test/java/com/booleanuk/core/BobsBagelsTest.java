@@ -134,4 +134,21 @@ class BobsBagelsTest {
 //        Assertions.assertNotNull(inventory.getInventoryPriceList());
 //    }
 
+    @Test
+    public void testGetItemPric(){
+        Basket basket = new Basket();
+        Order order = new Order();
+        Inventory inventory = new Inventory();
+
+        inventory.getInventoryPriceList();
+
+        Assertions.assertEquals(0.49, inventory.getItemPrice("BGLO"));
+        Assertions.assertEquals(0.39, inventory.getItemPrice("BGLP"));
+        Assertions.assertEquals(1.19, inventory.getItemPrice("COFW"));
+        Assertions.assertEquals(1.29, inventory.getItemPrice("COFL"));
+        Assertions.assertEquals(0.12, inventory.getItemPrice("FILC"));
+        Assertions.assertEquals(0.12, inventory.getItemPrice("FILH"));
+
+
+    }
 }
