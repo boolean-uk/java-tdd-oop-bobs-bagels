@@ -26,6 +26,7 @@ public class Basket {
         }
     }
     public boolean addFillingWithBagel(String bagelSKU, ArrayList<String> fillings ) {
+
         if (checkCurrentCapacity() + (fillings.size() + 1) > maxCapacity) {
             return false;
         }
