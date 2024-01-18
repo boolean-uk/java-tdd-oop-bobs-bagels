@@ -10,7 +10,7 @@ class InventoryTest {
     @Test
     public void testInventoryConstructorAddsProducts() {
         Inventory inventory = new Inventory();
-        Assertions.assertFalse(inventory.products.isEmpty());
+        Assertions.assertFalse(inventory.getProducts().isEmpty());
     }
 
 }

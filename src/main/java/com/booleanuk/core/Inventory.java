@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Inventory {
-    List<Product> products;
+    private List<Product> products;
 
     public Inventory() {
         this.products = new ArrayList<>();
@@ -22,5 +22,9 @@ public class Inventory {
         this.products.add(new Product("FILX",	0.12,	"Filling",	"Cream Cheese"));
         this.products.add(new Product("FILS",	0.12,	"Filling",	"Smoked Salmon"));
         this.products.add(new Product("FILH",	0.12,	"Filling",	"Ham"));
+    }
+
+    public List<Product> getProducts() {
+        return products;
     }
 }
