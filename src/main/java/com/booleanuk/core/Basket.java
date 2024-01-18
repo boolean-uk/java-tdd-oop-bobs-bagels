@@ -49,5 +49,8 @@ public class Basket {
         }
         return total;
     }
+    public double getItemCost(Product item){
+
+    }
 
 }

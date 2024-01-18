@@ -70,4 +70,19 @@ public class BasketTest {
         basket.add(bagel2);
         Assertions.assertEquals(0.88, basket.getTotalCost());
     }
+    @Test
+    public void shouldReturnItemCost(){
+        Basket basket = new Basket(4);
+        Bagel bagel1 = new Bagel("BGLO",0.49, "Bagel", "Onion" );
+        Bagel bagel2 = new Bagel("BGLP", 0.39, "Bagel", "Plain");
+        Assertions.assertEquals(0.49, basket.getItemCost(bagel1));
+        Assertions.assertEquals(0.39, basket.getItemCost(bagel2));
+        Assertions.assertNotEquals(0.19, basket.getItemCost(bagel1));
+        Assertions.assertNotEquals(0.29, basket.getItemCost(bagel2));
+
+
+
+
+
+    }
 }
