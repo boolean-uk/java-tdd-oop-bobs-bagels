@@ -2,7 +2,9 @@ package com.booleanuk.core;
 
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class Basket {
     private HashMap<String, Integer> basketMap;
@@ -73,5 +75,27 @@ public class Basket {
             }
         }
         return cost;
+    }
+
+    public String addFilling(String sku) {
+        //List<String> bagelSku = this.inventory.getProducts().stream().filter(x -> x.getName().equals("Bagel")).map(Product::getSku).toList();
+        if (Collections.disjoint(this.basketMap.keySet(), this.inventory.getProducts().stream().filter(x -> x.getName().equals("Bagel")).map(Product::getSku).toList())) {
+            return "You need to add a bagel to your basket";
+        }
+        for(Product product: this.inventory.getProducts()) {
+            if(sku.equals(product.getSku())) {
+                if (product.getName().equals("Filling")) {
+                    String addMessage = this.add(sku);
+                    if(addMessage.equals("Product added to basket")) {
+                        return "Filling added";
+                    } else {
+                        return addMessage;
+                    }
+                } else {
+                    return "Product needs to be a filling";
+                }
+            }
+        }
+        return "Filling was not found";
     }
 }
