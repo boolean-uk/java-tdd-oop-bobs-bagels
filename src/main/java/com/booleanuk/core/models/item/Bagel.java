@@ -41,8 +41,7 @@ public class Bagel extends Item {
     @Override
     public String toString() {
         return "Bagel(" +
-                "id=" + System.identityHashCode(this) +
-                ", SKU=" + getSKU() +
+                "SKU=" + getSKU() +
                 ", price=" + getPrice() +
                 ", name=" + getName() +
                 ", variant=" + getVariant() +

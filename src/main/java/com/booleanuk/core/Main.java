@@ -47,7 +47,8 @@ public class Main {
         basket.removeItem(bagelPlain2);
 
         // User wants to see the updated total
-        System.out.println("Total cost: " + basket.getTotalCost());
+        System.out.println("The basket minus one bagel: " + basket.getBasket());
+        System.out.println("Updated total cost: " + basket.getTotalCost());
 
         // User wants the receipt
         ReceiptPrinter receiptPrinter = new ReceiptPrinter(store, basket);
