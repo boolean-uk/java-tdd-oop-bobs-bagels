@@ -75,9 +75,13 @@ public class Basket {
     }
 
     public double getFillingCost(Filling item){
+        return item.getPrice();
     }
 
 
+    public boolean isItemInInventory(Product item) {
+
+    }
 
     public static void main(String[] args) {
         Inventory inventory = new Inventory();

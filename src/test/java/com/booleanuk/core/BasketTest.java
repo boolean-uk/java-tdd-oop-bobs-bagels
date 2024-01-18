@@ -115,4 +115,23 @@ public class BasketTest {
         Assertions.assertEquals(0.12, basket.getFillingCost(filling2));
     }
 
+    @Test
+    public void isItemInInventoryShouldReturnTrue(){
+        Inventory inventory = new Inventory();
+        Basket basket = new Basket( inventory, 4);
+        Bagel bagel1 = new Bagel("BGLO",0.49, "Bagel", "Onion" );
+        Bagel bagel2 = new Bagel("BGLP", 0.39, "Bagel", "Plain");
+        Assertions.assertTrue(basket.isItemInInventory(bagel1));
+        Assertions.assertTrue(basket.isItemInInventory(bagel2));
+    }
+    @Test
+    public void isItemInInventoryShouldReturnFalse(){
+        Inventory inventory = new Inventory();
+        Basket basket = new Basket( inventory, 4);
+        Bagel bagel1 = new Bagel("BGL",0.49, "Bagel", "Onion" );
+        Bagel bagel2 = new Bagel("BGL", 0.39, "Bagel", "Plain");
+        Assertions.assertFalse(basket.isItemInInventory(bagel1));
+        Assertions.assertFalse(basket.isItemInInventory(bagel2));
+    }
+
 }
