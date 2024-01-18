@@ -44,6 +44,12 @@ public class Basket {
     public double getTotalCost(){
         double total = 0;
         for(Item i : this.items){
+            if(i instanceof Bagel){
+                Bagel bagel = (Bagel) i;
+                for(Filling f : bagel.getFillings()){
+                    total+= f.getPrice();
+                }
+            }
             total += i.getPrice();
         }
         return total;
