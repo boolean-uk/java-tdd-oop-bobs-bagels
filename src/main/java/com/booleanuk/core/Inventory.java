@@ -1,7 +1,12 @@
 package com.booleanuk.core;
 
 
+import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
+import java.util.stream.Stream;
+
+import static java.util.stream.Collectors.toMap;
 
 public class Inventory {
 
@@ -28,5 +33,11 @@ public class Inventory {
 
     public Map<String, Double> getBagels() {
         return this.bagels;
+    }
+
+    public Map<String, Double> getInventoryMap() {
+        return Stream.of(this.getBagels().entrySet(), this.getCoffees().entrySet(), this.getFillings().entrySet())
+                .flatMap(Set::stream)
+                .collect((toMap(Map.Entry::getKey, Map.Entry::getValue)));
     }
 }

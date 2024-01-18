@@ -45,4 +45,9 @@ public class Customer {
     }
 
 
+    public boolean order(String skuCode) {
+        Inventory inventory = new Inventory();
+
+        return inventory.getInventoryMap().containsKey(skuCode);
+    }
 }
