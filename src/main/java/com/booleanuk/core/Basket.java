@@ -25,7 +25,7 @@ public class Basket {
             System.out.print("This item does not exist at our store!");
             return false;
         }
-        if (basket.size() == this.inventory.capacity) {
+        if (basket.size() == this.inventory.getCapacity()) {
             System.out.print("Your basket is at its capacity, can't add item!");
             return false;
         }
@@ -34,7 +34,7 @@ public class Basket {
     }
 
     public boolean removeItem(Item item) {
-        return false;
+        return basket.remove(item);
     }
 
     public double showTotalCostInBasket() {
@@ -51,6 +51,10 @@ public class Basket {
 
     public void showCostOfFillings() {
 
+    }
+
+    public ArrayList<Item> getBasket() {
+        return this.basket;
     }
 
     public static void main(String[] args) {

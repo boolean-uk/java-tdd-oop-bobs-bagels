@@ -4,10 +4,10 @@ import java.util.HashMap;
 
 public class Inventory {
 
-    public HashMap<String, Double> bagels;
-    public HashMap<String, Double> fillings;
-    public HashMap<String, Double> coffees;
-    public int capacity;
+    private HashMap<String, Double> bagels;
+    private HashMap<String, Double> fillings;
+    private HashMap<String, Double> coffees;
+    private int capacity;
 
     public Inventory() {
         this.bagels = new HashMap<>();
@@ -31,6 +31,10 @@ public class Inventory {
 
     public void changeCapacity(int newCapacity) {
         this.capacity = newCapacity;
+    }
+
+    public int getCapacity() {
+        return this.capacity;
     }
 
     private void createBagelInventory() {
