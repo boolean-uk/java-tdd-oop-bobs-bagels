@@ -35,4 +35,15 @@ public class Inventory {
             return 0;
         }
     }
+
+    public String listFillingCosts() {
+        String fillingsList = "";
+        for (Product product: this.getProducts().stream().filter(x -> x.getName().equals("Filling")).toList()) {
+            fillingsList = fillingsList.concat(product.getVariant()+": "+product.getPrice()+"$\n");
+        }
+        if (fillingsList.isEmpty()) {
+            return "No fillings available";
+        }
+        return fillingsList.substring(0,fillingsList.length()-1);
+    }
 }
