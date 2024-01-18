@@ -58,8 +58,13 @@ public class Basket {
         return true;
     }
 
-    public int getCostOfBasket(){
-        return -1;
+    public double getCostOfBasket(){
+        double total = 0;
+
+        for (Bagel bagel: products){
+            total += getCostOfBagel(bagel);
+        }
+        return total;
     }
 
     public double getCostOfBagel(Bagel bagel){
@@ -73,15 +78,6 @@ public class Basket {
     public double getCostOfFilling(Filling filling){
         return filling.getPrice();
     }
-
-//    private boolean isIdInKeys(String id){
-//        for (Bagel bagel : products){
-//            if (bagel.getId().equals(id)){
-//                return true;
-//            }
-//        }
-//        return false;
-//    }
 
     private boolean isBasketFull(){
         return (this.products.size()) >= maxSize;
