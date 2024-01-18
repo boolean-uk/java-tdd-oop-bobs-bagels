@@ -49,11 +49,11 @@ public class Bagel {
     }
 
 
-    public String addBagel(String bagel){
+    public String addBagel(String bagel, double price, String product, String variant){
         if (inventoryList.contains(bagel)){
             return null;
         }
-        Inventory tempInv = new Inventory(bagel);
+        Inventory tempInv = new Inventory(bagel,price,product,variant);
         inventoryList.add(tempInv);
         return bagel;
     }

@@ -12,7 +12,7 @@ public class BagelTest {
     @Test
     public void testAddBagel(){
         Bagel abagel = new Bagel();
-        Assertions.assertEquals("bagel1", abagel.addBagel("bagel1"));
+        Assertions.assertEquals("bagel1", abagel.addBagel("bagel1", 2.0, "bagel","plain"));
 
     }
     private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
@@ -20,11 +20,12 @@ public class BagelTest {
     @Test
     public void testBasketFull(){
         Bagel abagel = new Bagel();
-        abagel.addBagel("bagel1");
-        abagel.addBagel("bagel2");
-        abagel.addBagel("bagel4");
-        abagel.addBagel("bagel5");
-        abagel.addBagel("bagel6");
+        abagel.addBagel("bagel1", 2.0, "bagel","plain");
+        abagel.addBagel("bagel2", 2.0, "bagel","plain");
+        abagel.addBagel("bagel3", 2.0, "bagel","plain");
+        abagel.addBagel("bagel4", 2.0, "bagel","plain");
+        abagel.addBagel("bagel5", 2.0, "bagel","plain");
+        abagel.addBagel("bagel6", 2.0, "bagel","plain");
         System.setOut(new PrintStream(outContent));
         Assertions.assertTrue(abagel.basketFull());
         assertEquals("Basket Full", outContent.toString().trim());
@@ -40,21 +41,23 @@ public class BagelTest {
     public void testRemoveBagel(){
         Bagel abagel = new Bagel();
         System.setOut(new PrintStream(outContent));
-        abagel.addBagel("bagel1");
+        abagel.addBagel("bagel1", 2.0, "bagel","plain");
         Assertions.assertTrue(abagel.removeBagel("bagel1"));
         Assertions.assertFalse(abagel.removeBagel("bagel2"));
         assertEquals("Basket does not contain this bagel2", outContent.toString().trim());
     }
 
-//    @Test
-//    public void testTotalCost(){
-//        Bagel abagel = new Bagel();
-//        System.setOut(new PrintStream(outContent));
-//        abagel.addBagel("bagel1");
-//        Assertions.assertTrue(abagel.removeBagel("bagel1"));
-//        Assertions.assertFalse(abagel.removeBagel("bagel2"));
-//        assertEquals("Basket does not contain this bagel2", outContent.toString().trim());
-//    }
+    @Test
+    public void testTotalCost(){
+        Bagel abagel = new Bagel();
+        System.setOut(new PrintStream(outContent));
+        abagel.addBagel("bagel1", 2.0, "bagel","plain");
+        abagel.addBagel("bagel2", 2.0, "bagel","plain");
+        abagel.addBagel("bagel3", 2.0, "bagel","plain");
+        abagel.addBagel("bagel4", 2.0, "bagel","plain");
+        Assertions.assertEquals(8.0, abagel.totalCost());
+        assertEquals("Basket does not contain this bagel2", outContent.toString().trim());
+    }
 
 
 
