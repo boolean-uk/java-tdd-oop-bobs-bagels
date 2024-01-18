@@ -41,7 +41,7 @@ public class Basket {
         }
 
 
-        public double calculateTotalCost(Inventory inventory) {
+        public double calculateTotalCost() {
 
             return 0;
         }
