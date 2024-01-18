@@ -10,23 +10,23 @@ public class BasketTest {
         Basket basket = new Basket();
         String bagel = "BGLO";
 
-        Assertions.assertTrue(basket.add(bagel));
+        Assertions.assertTrue(basket.addItem(bagel));
     }
 
     @Test
     public void testAddingFake() {
         Basket basket = new Basket();
 
-        Assertions.assertFalse(basket.add("Carrot"));
+        Assertions.assertFalse(basket.addItem("Carrot"));
     }
 
     @Test
     public void testCapacityCheck() {
         Basket basket = new Basket();
-        basket.add("BGLO");
-        basket.add("BGLP");
-        basket.add("COFB");
-        basket.add("COFW");
+        basket.addItem("BGLO");
+        basket.addItem("BGLP");
+        basket.addItem("COFB");
+        basket.addItem("COFW");
 
         Assertions.assertEquals(3,basket.basketList.size());
     }
@@ -34,9 +34,9 @@ public class BasketTest {
     @Test
     public void testRemoveItem() {
         Basket basket = new Basket();
-        basket.add("BGLO");
-        basket.add("BGLP");
-        basket.add("COFB");
+        basket.addItem("BGLO");
+        basket.addItem("BGLP");
+        basket.addItem("COFB");
 
         Assertions.assertEquals(3, basket.basketList.size());
         Assertions.assertTrue(basket.remove("BGLP"));
@@ -45,9 +45,9 @@ public class BasketTest {
     @Test
     public void testRemoveFakeItem() {
         Basket basket = new Basket();
-        basket.add("BGLO");
-        basket.add("BGLP");
-        basket.add("COFB");
+        basket.addItem("BGLO");
+        basket.addItem("BGLP");
+        basket.addItem("COFB");
 
         Assertions.assertEquals(3, basket.basketList.size());
         Assertions.assertFalse(basket.remove("Carrot"));
@@ -58,9 +58,9 @@ public class BasketTest {
     @Test
     public void testTotalPrice() {
         Basket basket = new Basket();
-        basket.add("BGLO");
-        basket.add("BGLP");
-        basket.add("COFB");
+        basket.addItem("BGLO");
+        basket.addItem("BGLP");
+        basket.addItem("COFB");
 
         Assertions.assertEquals(1.87, basket.totalCost());
     }
@@ -68,13 +68,13 @@ public class BasketTest {
     @Test
     public void testChangeCapacity() {
         Basket basket = new Basket();
-        basket.add("BGLO");
-        basket.add("BGLP");
-        basket.add("COFB");
+        basket.addItem("BGLO");
+        basket.addItem("BGLP");
+        basket.addItem("COFB");
 
         Assertions.assertEquals("[BGLO, BGLP]", basket.changeCapacity(2));
         Assertions.assertEquals(2,basket.basketList.size());
-        basket.add("COFB");
+        basket.addItem("COFB");
         Assertions.assertEquals(2,basket.basketList.size());
 
     }
@@ -83,13 +83,21 @@ public class BasketTest {
     public void testCheckPrice() {
         Basket basket = new Basket();
 
-        Assertions.assertEquals(0.39,checkPrice("BGLP"));
+        Assertions.assertEquals(0.39,basket.checkPrice("BGLP"));
     }
 
     @Test
     public void testChechPriceFakeItem() {
         Basket basket = new Basket();
 
-        Assertions.assertEquals("Error", checkPrice("Apple"));
+        Assertions.assertEquals(0.0, basket.checkPrice("Apple"));
+    }
+
+    @Test
+    public void testAddFilling() {
+        Basket basket = new Basket();
+        basket.addItem("BGLO");
+        basket.addItem("BGLP");
+        Assertions.assertEquals("[BGLO, FILE, BGLP]",basket.addFilling("BGLO", "FILE"));
     }
 }
