@@ -74,4 +74,26 @@ public class Basket {
         return this.inventory.inventory.get(sku)[1];
     }
 
+    public Boolean buildBagel(String[] fillings) {
+        // Add plain bagel
+        String item = "Bagel ";
+        double bagelCost = Double.parseDouble(inventory.inventory.get("BGLP")[1]);
+        String fillingItem = "";
+
+        for (String filling: fillings) {
+            fillingItem = "Filling " + filling;
+            if (!inventory.mapTypeVariantToSKU.containsKey(fillingItem)) {
+                return false;
+            }
+            item = item + filling + ", ";
+            bagelCost += Double.parseDouble(inventory.inventory.get(inventory.mapTypeVariantToSKU.get(fillingItem))[1]);
+        }
+        // Add to basket. Remove last comma and space
+        this.basket.add(item.substring(0, item.length()-2));
+        this.total += bagelCost;
+        this.total = Math.round(this.total*100.0) / 100.0;
+
+        return true;
+    }
+
 }

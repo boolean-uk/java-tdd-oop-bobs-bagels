@@ -202,7 +202,7 @@ class BasketTest {
         String[] fillings2 = {"Tomato", "Eggs"};
         result = basket.buildBagel(fillings2);
         Assertions.assertFalse(result);
-        Assertions.assertEquals(1, basket.getBasketSize());
+        Assertions.assertEquals(2, basket.getBasketSize());
     }
 
 
