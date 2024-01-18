@@ -80,7 +80,7 @@ public class Basket {
 
 
     public boolean isItemInInventory(Product item) {
-
+       return inventoryProduct.getInventoryItem().contains(item);
     }
 
     public static void main(String[] args) {
