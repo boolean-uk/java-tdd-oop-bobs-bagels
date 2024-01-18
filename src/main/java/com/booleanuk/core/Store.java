@@ -2,6 +2,7 @@ package com.booleanuk.core;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 //TODO: check upper vs lowercase
 public class Store {
@@ -12,6 +13,9 @@ public class Store {
     private HashMap<String, String> fillingCodes;
 
     private int basketCapacity;
+
+    private final double TWELWE_BAGELS_DISCOUNT_PRICE = 3.99;
+    private final double SIX_BAGELS_DISCOUNT_PRICE = 2.49;
 
     public Store() {
         baskets = new HashMap<>();
@@ -75,12 +79,35 @@ public class Store {
 
     public double getCostOfBasket(int basketId) {
         double cost = 0;
+        HashMap<String, Integer> noOfEachKind = new HashMap<>();
         ArrayList<Bagel> bagels = baskets.get(basketId).getBagels();
         for(Bagel bagel: bagels) {
-            cost += getCostOfBagel(bagel.getName());
+            if(noOfEachKind.containsKey(bagel.getName())) {
+                noOfEachKind.put(bagel.getName(), noOfEachKind.get(bagel.getName())+1);
+            } else {
+                noOfEachKind.put(bagel.getName(), 1);
+            }
             for(String filling: bagel.getFillings()) {
                 cost += getCostOfFilling(filling);
             }
+        }
+
+        for(Map.Entry<String, Integer> e: noOfEachKind.entrySet()) {
+            int noOfBagelsLeft = e.getValue();
+            String name = e.getKey();
+            while(noOfBagelsLeft-12 >= 0) {
+                cost += TWELWE_BAGELS_DISCOUNT_PRICE;
+                noOfBagelsLeft -= 12;
+            }
+            while(noOfBagelsLeft-6 >= 0) {
+                cost += SIX_BAGELS_DISCOUNT_PRICE;
+                noOfBagelsLeft -= 6;
+            }
+            cost += getCostOfBagel(name)*noOfBagelsLeft;
+        }
+
+        for(String coffee: baskets.get(basketId).getCoffees()) {
+            cost += getCostOfCoffee(coffee);
         }
 
         return cost;
