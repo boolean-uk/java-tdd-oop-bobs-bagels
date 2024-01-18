@@ -13,13 +13,13 @@ public class TestBasket {
         basket.add("BGLO");
         basket.add("FILE");
 
-        Assertions.assertEquals(5, basket.items);
+        Assertions.assertEquals(5, basket.getItems());
 
         basket.add("BGLP");
         basket.add("BGLO");
         basket.add("BGLE");
 
-        Assertions.assertEquals(8, basket.items);
+        Assertions.assertEquals(8, basket.getItems());
     }
 
     @Test
@@ -27,13 +27,13 @@ public class TestBasket {
         boolean thrown = false;
         Basket basket = new Basket(new User());
 
-        Assertions.assertEquals(0, basket.items);
+        Assertions.assertEquals(0, basket.getItems());
         Assertions.assertFalse(basket.add("BLABLA"));
         Assertions.assertFalse(basket.add("BGLU"));
         Assertions.assertFalse(basket.add("HOOGA"));
-        Assertions.assertEquals(0, basket.items);
+        Assertions.assertEquals(0, basket.getItems());
         Assertions.assertTrue(basket.add("FILE"));
-        Assertions.assertEquals(1, basket.items);
+        Assertions.assertEquals(1, basket.getItems());
     }
 
     @Test
@@ -44,12 +44,11 @@ public class TestBasket {
         basket.add("COFW");
         basket.add("COFC");
 
-        Assertions.assertEquals(4, basket.items);
-
+        Assertions.assertEquals(4, basket.getItems());
         Assertions.assertTrue(basket.remove("COFC"));
         Assertions.assertTrue(basket.remove("COFW"));
         Assertions.assertTrue(basket.remove("FILS"));
-        Assertions.assertEquals(1, basket.items);
+        Assertions.assertEquals(1, basket.getItems());
         Assertions.assertFalse(basket.remove("FILS"));
     }
 
@@ -73,10 +72,24 @@ public class TestBasket {
 
         Assertions.assertTrue(basket.add("COFB"));
         Assertions.assertTrue(basket.add("COFB"));
-        Assertions.assertEquals(2, basket.items);
+        Assertions.assertEquals(2, basket.getItems());
         Assertions.assertFalse(basket.add("COFB"));
         Assertions.assertFalse(basket.add("COFB"));
-        Assertions.assertEquals(2, basket.items);
+        Assertions.assertEquals(2, basket.getItems());
+    }
+
+    @Test
+    public void testCapacityNegativeValue(){
+        boolean errorThrown = false;
+        Basket basket = new Basket(new Manager());
+
+        try {
+            basket.updateCapacity(-56);
+        } catch (IllegalArgumentException e) {
+            errorThrown = true;
+        }
+
+        Assertions.assertTrue(errorThrown);
     }
 
     @Test
@@ -88,11 +101,11 @@ public class TestBasket {
         basket.add("FILE");
         basket.add("FILE");
 
-        Assertions.assertEquals(5, basket.items);
+        Assertions.assertEquals(5, basket.getItems());
 
         basket.updateCapacity(3);
 
-        Assertions.assertEquals(0, basket.items);
+        Assertions.assertEquals(0, basket.getItems());
     }
 
     @Test

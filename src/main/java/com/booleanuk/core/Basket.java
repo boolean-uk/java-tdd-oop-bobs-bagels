@@ -3,16 +3,40 @@ package com.booleanuk.core;
 import java.util.HashMap;
 
 public class Basket {
-    HashMap<Product, Integer> products;
-    User user;
-    int capacity;
-    int items;
+    private HashMap<Product, Integer> products;
+    private User user;
+    private int capacity;
+    private int items;
 
     public Basket(User user){
         this.user = user;
         products = new HashMap<>();
-        capacity = 10;
+        setCapacity(10);
         items = 0;
+    }
+
+    public HashMap<Product, Integer> getProducts(){
+        return products;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public int getCapacity() {
+        return capacity;
+    }
+
+    private void setCapacity(int capacity) {
+        if (capacity > 0){
+            this.capacity = capacity;
+        } else {
+            throw new IllegalArgumentException("Invalid value for capacity.");
+        }
+    }
+
+    public int getItems() {
+        return items;
     }
 
     public boolean add(String SKU){
@@ -54,7 +78,7 @@ public class Basket {
 
     public void updateCapacity(int newCapacity){
         if (user instanceof Manager){
-            capacity = newCapacity;
+            setCapacity(newCapacity);
 
             if (newCapacity < items){
                 products = new HashMap<>();
@@ -75,7 +99,7 @@ public class Basket {
         return totalCost;
     }
 
-    public Product getProduct(String SKU){
+    private Product getProduct(String SKU){
         for (Product product : products.keySet()){
             if (SKU.equals(product.SKU)) {
                 return product;
