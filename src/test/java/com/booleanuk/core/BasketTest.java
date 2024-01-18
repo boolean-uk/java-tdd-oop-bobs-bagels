@@ -6,13 +6,15 @@ import org.junit.jupiter.api.Test;
 public class BasketTest {
     @Test
     public void addingItemShouldReturnTrue(){
-        Basket basket = new Basket( 4);
+        Inventory inventory = new Inventory();
+        Basket basket = new Basket( inventory, 4);
         Assertions.assertTrue(basket.add((new Bagel("BGLO",0.49, "Bagel", "onion"))));
         Assertions.assertTrue(basket.add((new Bagel("BGLP", 0.39, "Bagel", "Plain"))));
     }
     @Test
     public void addingItemShouldReturnFalse(){
-        Basket basket = new Basket( 4);
+        Inventory inventory = new Inventory();
+        Basket basket = new Basket( inventory, 4);
         basket.add(new Bagel("BGLO",0.49, "Bagel", "Onion" ));
         boolean result =  basket.add(new Bagel("BGLO",0.49, "Bagel", "Onion" ));
         Assertions.assertFalse(result);
@@ -20,7 +22,8 @@ public class BasketTest {
     }
     @Test
     public void removingItemWhenItemIsInBasket(){
-        Basket basket = new Basket(4);
+        Inventory inventory = new Inventory();
+        Basket basket = new Basket( inventory, 4);
         Bagel bagel1 = new Bagel("BGLO",0.49, "Bagel", "Onion" );
         Bagel bagel2 = new Bagel("BGLP", 0.39, "Bagel", "Plain");
         basket.add(bagel1);
@@ -29,7 +32,8 @@ public class BasketTest {
     }
     @Test
     public void removingItemWhenBasketIsEmpty(){
-        Basket basket = new Basket(4);
+        Inventory inventory = new Inventory();
+        Basket basket = new Basket( inventory, 4);
         Bagel bagel1 = new Bagel("BGLO",0.49, "Bagel", "Onion" );
         basket.add(bagel1);
         basket.remove(bagel1);
@@ -37,7 +41,8 @@ public class BasketTest {
     }
     @Test
     public void isFullShouldReturnTrue(){
-        Basket basket = new Basket(4);
+        Inventory inventory = new Inventory();
+        Basket basket = new Basket( inventory, 4);
         Bagel bagel1 = new Bagel("BGLO",0.49, "Bagel", "Onion" );
         Bagel bagel2 = new Bagel("BGLP", 0.39, "Bagel", "Plain");
         Bagel bagel3 = new Bagel("BGLE", 0.49, "Bagel", "Everything" );
@@ -50,12 +55,14 @@ public class BasketTest {
     }
     @Test
     public void shouldChangeBasketCapacity(){
-        Basket basket = new Basket(4);
+        Inventory inventory = new Inventory();
+        Basket basket = new Basket( inventory, 4);
         Assertions.assertEquals("Basket size is updated to 8", basket.changeCapacity(8));
     }
     @Test
     public void removingItemNotInBasket(){
-        Basket basket = new Basket(4);
+        Inventory inventory = new Inventory();
+        Basket basket = new Basket( inventory, 4);
         Bagel bagel1 = new Bagel("BGLO",0.49, "Bagel", "Onion" );
         Bagel bagel2 = new Bagel("BGLP", 0.39, "Bagel", "Plain");
         basket.add(bagel1);
@@ -63,7 +70,8 @@ public class BasketTest {
     }
     @Test
     public void shouldReTurnTotalCost(){
-        Basket basket = new Basket(4);
+        Inventory inventory = new Inventory();
+        Basket basket = new Basket( inventory, 4);
         Bagel bagel1 = new Bagel("BGLO",0.49, "Bagel", "Onion" );
         Bagel bagel2 = new Bagel("BGLP", 0.39, "Bagel", "Plain");
         basket.add(bagel1);
@@ -72,17 +80,30 @@ public class BasketTest {
     }
     @Test
     public void shouldReturnItemCost(){
-        Basket basket = new Basket(4);
+        Inventory inventory = new Inventory();
+        Basket basket = new Basket( inventory, 4);
         Bagel bagel1 = new Bagel("BGLO",0.49, "Bagel", "Onion" );
         Bagel bagel2 = new Bagel("BGLP", 0.39, "Bagel", "Plain");
         Assertions.assertEquals(0.49, basket.getItemCost(bagel1));
         Assertions.assertEquals(0.39, basket.getItemCost(bagel2));
         Assertions.assertNotEquals(0.19, basket.getItemCost(bagel1));
         Assertions.assertNotEquals(0.29, basket.getItemCost(bagel2));
-
-
-
-
-
     }
+    @Test
+    public void shouldAddFillingToBasket(){
+        Inventory inventory = new Inventory();
+        Basket basket = new Basket(inventory,4);
+        Bagel bagel1 = new Bagel("BGLO",0.49, "Bagel", "Onion" );
+        basket.add(bagel1);
+        Filling filling = new Filling("FILB",0.12, "Filling", "Bacon");
+        Assertions.assertEquals("Bacon Filling is added", basket.addingFillingWhenBagelInBasket(filling));
+    }
+    @Test
+    public void shouldNotAddFillingWhenNoBagelInBasket(){
+        Inventory inventory = new Inventory();
+        Basket basket = new Basket(inventory,4);
+        Filling filling = new Filling("FILB",0.12, "Filling", "Bacon");
+        Assertions.assertEquals("Please select a bagel before adding filling", basket.addingFillingWhenBagelInBasket(filling));
+    }
+
 }
