@@ -4,17 +4,17 @@
 ```
 1.
 As a member of the public,
-So I can order a bagel before work,
-I'd like to add a specific type of bagel to my basket.
+So I can order a item before work,
+I'd like to add a specific type of item to my basket.
 
 2.
 As a member of the public,
 So I can change my order,
-I'd like to remove a bagel from my basket.
+I'd like to remove a item from my basket.
 
 3.
 As a member of the public,
-So that I can not overfill my small bagel basket
+So that I can not overfill my small item basket
 I'd like to know when my basket is full when I try adding an item beyond my basket capacity.
 
 4.
@@ -30,22 +30,22 @@ I'd like to know if I try to remove an item that doesn't exist in my basket.
 6.
 As a customer,
 So I know how much money I need,
-I'd like to know the total cost of items in my basket.
+I'd like to know the total cost of item in my basket.
 
 7.
 As a customer,
 So I know what the damage will be,
-I'd like to know the cost of a bagel before I add it to my basket.
+I'd like to know the cost of a item before I add it to my basket.
 
 8.
 As a customer,
 So I can shake things up a bit,
-I'd like to be able to choose fillings for my bagel.
+I'd like to be able to choose fillings for my item.
 
 9.
 As a customer,
 So I don't over-spend,
-I'd like to know the cost of each filling before I add it to my bagel order.
+I'd like to know the cost of each filling before I add it to my item order.
 
 10.
 As the manager,
