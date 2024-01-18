@@ -17,9 +17,12 @@ Note: the domain model is subject to change before the assignment is complete
 |         |           |                                       | void setName(String name)              |                                            |                                             |
 |         |           |                                       | void setSku(String sku)                |                                            |                                             |
 |         | Bagel     | ArrayList<Filling> fillings           |                                        |                                            |                                             |
+|         |           | double basePrice                      |                                        |                                            |                                             |
 |         |           |                                       | boolean addFilling(Filling filling)    |                                            |                                             |
 |         |           |                                       | boolean removeFilling(Filling filling) |                                            |                                             |
 |         |           |                                       | double getPrice()                      |                                            |                                             |
+|         |           |                                       | double getBasePrice()                  |                                            |                                             |
+|         |           |                                       | double setBasePrice()                  |                                            |                                             |
 |         | Coffee    |                                       |                                        |                                            |                                             |
 |         |           |                                       |                                        |                                            |                                             |
 |         | Filling   |                                       |                                        |                                            |                                             |
