@@ -10,9 +10,9 @@ class ProductTest {
     @Test
     public void testProductConstructor() {
         Product product = new Product("BGLO",0.49,"Bagel","Onion");
-        Assertions.assertEquals("BGLO",product.sku);
-        Assertions.assertEquals(0.49,product.price);
-        Assertions.assertEquals("Bagel",product.name);
-        Assertions.assertEquals("Onion",product.variant);
+        Assertions.assertEquals("BGLO",product.getSku());
+        Assertions.assertEquals(0.49,product.getPrice());
+        Assertions.assertEquals("Bagel",product.getName());
+        Assertions.assertEquals("Onion",product.getVariant());
     }
 }
