@@ -5,10 +5,10 @@ import java.util.Map;
 
 public class InventoryManager {
 
-    private Map<String, Item> inventory = new HashMap<>();
+    private Map<String, Item> inventory;
 
     public InventoryManager() {
-        initializeInventory();
+        this.initializeInventory();
     }
 
     /**
@@ -16,7 +16,8 @@ public class InventoryManager {
      * Iterating for-loop, just modify array-elements to change stockpile
      * Remember to ensure arrays of same length
      */
-    public void initializeInventory() {
+    private void initializeInventory() {
+        inventory = new HashMap<>();
         String[] SKU = new String[]{"BGLO", "BGLP", "BGLE", "BGLS", "COFB", "COFW", "COFC", "COFL", "FILB", "FILE", "FILC", "FILX", "FILS", "FILH"};
         double[] price = new double[]{.49, .39, .49, .49, .99, 1.19, 1.29, 1.29, .12, .12, .12, .12, .12, .12};
         Item.Name[] name = new Item.Name[]{Item.Name.BAGEL, Item.Name.BAGEL, Item.Name.BAGEL, Item.Name.BAGEL, Item.Name.COFFEE, Item.Name.COFFEE, Item.Name.COFFEE, Item.Name.COFFEE, Item.Name.FILLING, Item.Name.FILLING, Item.Name.FILLING, Item.Name.FILLING, Item.Name.FILLING, Item.Name.FILLING};

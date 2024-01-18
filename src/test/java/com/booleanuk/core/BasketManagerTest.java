@@ -64,10 +64,6 @@ public class BasketManagerTest {
     /**
      * might be redundant
      */
-    @Test
-    public void testCheckItemInBasket(){
-        BasketManager b = new BasketManager();
-    }
 
     @Test
     public void testCheckItemInInventory(){

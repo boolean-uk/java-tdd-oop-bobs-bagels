@@ -9,8 +9,7 @@ public class BasketManager {
     private int capacity;
 
     public BasketManager() {
-        this.basket = new ArrayList<>();
-        this.capacity = 10;
+        this.setBasket();
     }
 
     /**
@@ -32,6 +31,9 @@ public class BasketManager {
      * @return item
      */
     public Item remove(Item item) {
+        if (!checkItemInBasket(item)) {
+            return null;
+        }
         for(Item i : getBasket()) {
             if (i == item) {
                 getBasket().remove(i);
@@ -39,6 +41,14 @@ public class BasketManager {
             }
         }
         return null;
+    }
+
+    /**
+     * Dont know if NEEDED - LOOK ON USER STORIES WITH MARIT
+     * @return
+     */
+    private boolean checkItemInBasket(Item item) {
+        return getBasket().contains(item) ? true : false;
     }
 
     /**
@@ -63,14 +73,6 @@ public class BasketManager {
             setCapacity(newCapacity);
             return true;
         }
-        return false;
-    }
-
-    /**
-     * Dont know if NEEDED - LOOK ON USER STORIES WITH MARIT
-     * @return
-     */
-    public boolean checkItemInBasket() {
         return false;
     }
 
@@ -118,8 +120,9 @@ public class BasketManager {
      * Setters for member variables
      */
 
-    public void setBasket(List<Item> basket) {
-        this.basket = basket;
+    public void setBasket() {
+        this.capacity = 10;
+        this.basket = new ArrayList<>(this.capacity);
     }
 
     public void setCapacity(int capacity) {

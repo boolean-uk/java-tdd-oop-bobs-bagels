@@ -9,11 +9,11 @@ public class Item {
     private Item filling;
 
     public Item(String SKU, double price, Name name, Variant variant, Item filling) {
-        this.SKU = SKU;
-        this.price = price;
-        this.name = name;
-        this.variant = variant;
-        this.filling = filling;
+        this.setSKU(SKU);
+        this.setPrice(price);
+        this.setName(name);
+        this.setVariant(variant);
+        this.setFilling(filling);
     }
 
     /**
