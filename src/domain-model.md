@@ -5,11 +5,11 @@ I'd like to add a specific type of bagel to my basket.
 
 
 
-| Classes | Methods          | Members | Scenario                  | Output |
-|---------|------------------|---------|---------------------------|--------|
-| Order   | add(String SKU ) |         | Item is not already added | true   |
-|         |                  |         | Item is already added     | false  |
-|         |                  |         |                           |        |
+| Classes | Methods                                                               | Members | Scenario                  | Output |
+|---------|-----------------------------------------------------------------------|---------|---------------------------|--------|
+| Order   | add(String SKU, String itemType, String bagelName, double bagelPrice) |         | Item is not already added | true   |
+|         |                                                                       |         | Item is already added     | false  |
+|         |                                                                       |         |                           |        |
 
 
 2.
@@ -19,11 +19,11 @@ I'd like to remove a bagel from my basket.
 
 
 
-| Classes | Methods             | Members | Scenario                             | Output |
-|---------|---------------------|---------|--------------------------------------|--------|
-| Order   | remove(String SKU)  |         | Item is in list, and can get removed | true   |
-|         |                     |         | Item is not existing in list         | false  |
-|         |                     |         |                                      |        |
+| Classes | Methods                                                                   | Members | Scenario                             | Output |
+|---------|---------------------------------------------------------------------------|---------|--------------------------------------|--------|
+| Order   | remove(String SKU, String itemType, String bagelName, double bagelPrice ) |         | Item is in list, and can get removed | true   |
+|         |                                                                           |         | Item is not existing in list         | false  |
+|         |                                                                           |         |                                      |        |
 
 
 3.

@@ -4,58 +4,68 @@ import java.util.ArrayList;
 
 public class Order {
 
-    Bagel bagel1 = new Bagel("BGLO", "Bagel", "Onion", 0.49);
-    Bagel bagel2 = new Bagel("BGLP", "Bagel", "Plain", 0.39);
-    Bagel bagel3 = new Bagel("BGLE", "Bagel", "Everything", 0.49);
-    Bagel bagel4 = new Bagel("BGLS", "Bagel", "Sesame", 0.49);
-    Coffee coffee1 = new Coffee("COFB", "Bagel", "Onion", 0.99);
-    Coffee coffee2 = new Coffee("COFW", "Bagel", "Onion", 1.19);
-    Coffee coffee3 = new Coffee("COFC", "Bagel", "Onion", 1.29);
-    Coffee coffee4 = new Coffee("COFL", "Bagel", "Onion", 1.29);
-    Filling fill1 = new Filling("FILB", "Filling", "Bacon", 0.12);
-    Filling fill2 = new Filling("FILE", "Filling", "Egg", 0.12);
-    Filling fill3 = new Filling("FILC", "Filling", "Cheese", 0.12);
-    Filling fill4 = new Filling("FILX", "Filling", "Cream Cheese", 0.12);
-    Filling fill5 = new Filling("FILS", "Filling", "Smoked Salmon", 0.12);
-    Filling fill6 = new Filling("FILH", "Filling", "Ham", 0.12);
+    Inventory bagel1 = new Inventory("BGLO", "Bagel", "Onion", 0.49);
+    Inventory bagel2 = new Inventory("BGLP", "Bagel", "Plain", 0.39);
+    Inventory bagel3 = new Inventory("BGLE", "Bagel", "Everything", 0.49);
+    Inventory bagel4 = new Inventory("BGLS", "Bagel", "Sesame", 0.49);
+    Inventory coffee1 = new Inventory("COFB", "Bagel", "Onion", 0.99);
+    Inventory coffee2 = new Inventory("COFW", "Bagel", "Onion", 1.19);
+    Inventory coffee3 = new Inventory("COFC", "Bagel", "Onion", 1.29);
+    Inventory coffee4 = new Inventory("COFL", "Bagel", "Onion", 1.29);
+    Inventory fill1 = new Inventory("FILB", "Filling", "Bacon", 0.12);
+    Inventory fill2 = new Inventory("FILE", "Filling", "Egg", 0.12);
+    Inventory fill3 = new Inventory("FILC", "Filling", "Cheese", 0.12);
+    Inventory fill4 = new Inventory("FILX", "Filling", "Cream Cheese", 0.12);
+    Inventory fill5 = new Inventory("FILS", "Filling", "Smoked Salmon", 0.12);
+    Inventory fill6 = new Inventory("FILH", "Filling", "Ham", 0.12);
     ArrayList<Bagel> bagelList;
     ArrayList<Coffee> coffeeList;
     ArrayList<Filling> fillingList;
+    ArrayList<Inventory> inventoryList;
+    ArrayList<Inventory> basketList;
+
+
     int capacity = 10;
 
     public Order(){
-        this.bagelList = new ArrayList<>(capacity);
-        this.coffeeList = new ArrayList<>(capacity);
-        this.fillingList = new ArrayList<>(capacity);
+        this.inventoryList = new ArrayList<>();
+        this.basketList = new ArrayList<>(capacity);
         initialize();
 
     }
 
     public void initialize() {
-        bagelList.add(bagel1);
-        bagelList.add(bagel2);
-        bagelList.add(bagel3);
-        bagelList.add(bagel4);
-        coffeeList.add(coffee1);
-        coffeeList.add(coffee2);
-        coffeeList.add(coffee3);
-        coffeeList.add(coffee4);
-        fillingList.add(fill1);
-        fillingList.add(fill2);
-        fillingList.add(fill3);
-        fillingList.add(fill4);
-        fillingList.add(fill5);
-        fillingList.add(fill6);
+        inventoryList.add(bagel1);
+        inventoryList.add(bagel2);
+        inventoryList.add(bagel3);
+        inventoryList.add(bagel4);
+        inventoryList.add(coffee1);
+        inventoryList.add(coffee2);
+        inventoryList.add(coffee3);
+        inventoryList.add(coffee4);
+        inventoryList.add(fill1);
+        inventoryList.add(fill2);
+        inventoryList.add(fill3);
+        inventoryList.add(fill4);
+        inventoryList.add(fill5);
+        inventoryList.add(fill6);
     }
 
 
-    public boolean add(String sku) {
+    public boolean add(String SKU, String itemType, String bagelName, double bagelPrice) {
 
 
+        for (Inventory inventory : inventoryList) {
+            if (inventory.getSku().equals(SKU) && inventory.getItemType().equals(itemType) && inventory.getName().equals(bagelName) && inventory.getPrice() == bagelPrice) {
+                Inventory bagel10 = new Inventory(SKU, itemType, bagelName, bagelPrice);
+                basketList.add(bagel10);
+                return true;
 
+            }
+        }
         return false;
     }
-	public boolean remove(String sku) {
+	public boolean remove(String SKU, String itemType, String bagelName, double bagelPrice) {
 
         return false;
     }
