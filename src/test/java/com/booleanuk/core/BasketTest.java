@@ -62,6 +62,15 @@ public class BasketTest {
         basket.add("BGLP");
         basket.add("COFB");
 
-        Assertions.assertEquals(13.2, basket.totalCost());
+        Assertions.assertEquals(1.87, basket.totalCost());
+    }
+
+    @Test
+    public void testChangeCapacity() {
+        Basket basket = new Basket();
+        basket.add("BGLO");
+        basket.add("BGLP");
+        basket.add("COFB");
+        Assertions.assertEquals(2,basket.changeCapacity(2));
     }
 }
