@@ -146,7 +146,15 @@ public class Order {
         }
         return false;
     }
-	public double getFillingCost(String SKU, String itemType, String bagelName, double bagelPrice ) {
+	public double getFillingCost(String fillName) {
+        for (Inventory basket : inventoryList) {
+            if (basket.getName().equals(fillName)) {
+
+                return basket.getPrice();
+
+            }
+
+        }
 
         return 0;
     }
