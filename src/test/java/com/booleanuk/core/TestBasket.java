@@ -125,9 +125,5 @@ public class TestBasket {
 
         Assertions.assertEquals(0.99 + 0.49 + 0.39 + 0.12 + 0.12, basket.totalCost());
     }
-
-    @Test
-    public void testInventory(){
-
-    }
 }
+

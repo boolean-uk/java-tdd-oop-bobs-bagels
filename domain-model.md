@@ -89,6 +89,8 @@ Basket
 |                                  | getUser()                       | getter for user variable.                                                 | user                                                                                         |                      |
 |                                  | getCapacity()                   | getter for capacity variable.                                             | capacity                                                                                     |                      |
 |                                  | setCapacity(String)             | setter for capacity variable.                                             | Can set new value for capacity if user is manager and the new value is a positive number.    |                      |
+|                                  | checkout()                      | for when the customer wants to pay.                                       | displays a receipt                                                                           |                      |
+|                                  |                                 |                                                                           |                                                                                              |                      |
 
 Product
 

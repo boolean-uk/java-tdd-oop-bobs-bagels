@@ -3,10 +3,10 @@ package com.booleanuk.core;
 import java.util.HashMap;
 
 public class Basket {
-    public HashMap<Product, Integer> products;
-    private User user;
-    private int capacity;
-    private int items;
+    protected HashMap<Product, Integer> products;
+    protected User user;
+    protected int capacity;
+    protected int items;
 
     public Basket(User user) {
         this.user = user;
