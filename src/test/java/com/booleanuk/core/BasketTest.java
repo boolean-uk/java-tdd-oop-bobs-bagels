@@ -63,6 +63,36 @@ public class BasketTest {
     }
 
     @Test
+    public void checkSize() {
+        HashMap<Item, Integer> testInventory = new HashMap<>();
+        Item bglo = new Item("BGLO","Bagel", "Onion", 0.49);
+        Item bglp = new Item("BGLP","Bagel", "Plain", 0.39);
+        testInventory.put(bglo, 100);
+        testInventory.put(bglp, 100);
+        BobsBagelsShop shop = new BobsBagelsShop(testInventory);
+        Basket basket = new Basket(shop, 3);
+        basket.add(bglo);
+        basket.add(bglp);
+        basket.add(bglo);
+        Assertions.assertEquals(3, basket.checkSize());
+
+        Basket basket2 = new Basket(shop, 3);
+        Assertions.assertEquals(0, basket.checkSize());
+    }
+
+    @Test
     public void changeCapacity() {
+        HashMap<Item, Integer> testInventory = new HashMap<>();
+        Item bglo = new Item("BGLO","Bagel", "Onion", 0.49);
+        Item bglp = new Item("BGLP","Bagel", "Plain", 0.39);
+        testInventory.put(bglo, 100);
+        testInventory.put(bglp, 100);
+        BobsBagelsShop shop = new BobsBagelsShop(testInventory);
+        Basket basket = new Basket(shop, 3);
+        basket.add(bglo);
+        basket.add(bglp);
+        basket.add(bglo);
+
+
     }
 }
