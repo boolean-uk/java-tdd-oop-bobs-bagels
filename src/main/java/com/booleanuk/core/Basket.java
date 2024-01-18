@@ -11,7 +11,7 @@ public class Basket {
     public Basket() {
         this.basketMap = new HashMap<>();
         this.inventory = new Inventory();
-        this.capacity = 5;
+        this.setCapacity(5);
     }
 
     public HashMap<String, Integer> getBasketMap() {
@@ -20,6 +20,14 @@ public class Basket {
 
     public Inventory getInventory() {
         return inventory;
+    }
+
+    public boolean setCapacity(int capacity) {
+        if (capacity > 0) {
+            this.capacity = capacity;
+            return true;
+        }
+        return false;
     }
 
     public String add(String sku) {
