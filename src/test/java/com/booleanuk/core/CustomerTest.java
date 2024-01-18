@@ -20,9 +20,6 @@ public class CustomerTest {
     public void testGetTotalCost() {
         Customer customer = new Customer();
 
-
-
-
         Assertions.assertEquals(0.39*3, customer.getTotalCost(Map.of(new Bagel("Plain"), 3)));
 
 
@@ -46,7 +43,7 @@ public class CustomerTest {
                 new Coffee("Black"), 4);
 
         Assertions.assertEquals(1.25*4, customer.getTotalCost(map));
-        Assertions.assertEquals(1.25 + 2.49, customer.getTotalCost(map2));
+        Assertions.assertEquals(2.49 + 1.25+ 0.99*3, customer.getTotalCost(map2));
 
 
 

@@ -1,8 +1,6 @@
 package com.booleanuk.core;
 
-import java.util.ArrayList;
-import java.util.Map;
-import java.util.stream.Collectors;
+import java.util.*;
 
 public class Customer {
 
@@ -15,31 +13,96 @@ public class Customer {
         double cost = 0.00;
         int discount12 = 0;
         int discount6 = 0;
+        ArrayList<Item> restBagelsList = new ArrayList<>();
+        ArrayList<Item> restCoffeesList = new ArrayList<>();
 
         Inventory inventory = new Inventory();
         for(Map.Entry<Item, Integer> entry : items.entrySet()) {
+
             if(inventory.getBagels().containsKey(entry.getKey().getSkuCode())) {
 
+                int restBagels = 0;
                 int quantity = entry.getValue();
 
-                int rest = entry.getValue() % 12;
-                if(rest >= 6) {
-                    discount6++;
-                }
+
+
                 while(quantity % 12 == 0) {
                     quantity /= 12;
                     discount12++;
                 }
 
-                cost += getCostOfItem(entry.getKey()) * (rest % 6);
+                if(quantity % 6 == 0) {
+                    quantity /= 6;
+                    discount6++;
+
+                }
+
+                System.out.println(quantity);
+
+                //System.out.println(restBagels % 6);
+
+
+               //cost += getCostOfItem(entry.getKey()) * (restBagels % 6);
+                for(int i = 0; i < quantity; i++) {
+                    restBagelsList.add(entry.getKey());
+
+                }
+            }
+
+            if(inventory.getCoffees().containsKey(entry.getKey().getSkuCode())) {
+                for(int i = 0; i < entry.getValue(); i++) {
+                    restCoffeesList.add(entry.getKey());
+                    System.out.println("asdasdasd");
+                }
+
+            }
+            if(inventory.getFillings().containsKey(entry.getKey().getSkuCode())) {
+                cost += entry.getKey().getPrice();
+                System.out.println("asdasdasdasd");
+            }
+
+        }
+
+/*        restBagelsList.sort(new Comparator<>() {
+            @Override
+            public int compare(Item bagel1, Item bagel2) {
+                return Double.compare(bagel1.getPrice(), bagel2.getPrice());
+            }
+        });*/
+        System.out.println("The cost" + cost);
+
+        System.out.println("Bagelsize" + restBagelsList.size());
+        System.out.println("CoffeSize" + restCoffeesList.size());
+
+        if(restCoffeesList.size() <= restBagelsList.size()) {
+                for (int i = 0; i < restBagelsList.size(); i++) {
+                    if(i <= restCoffeesList.size() -1) {
+                        cost += 1.25;
+                    } else {
+                        System.out.println("Add normal bagel");
+                        cost += restBagelsList.get(i).getPrice();
+                    }
+
+                }
+        } else {
+            for (int i = 0; i < restCoffeesList.size(); i++) {
+                if(i <= restBagelsList.size() -1 ) {
+                    cost += 1.25;
+                } else {
+                    System.out.println("add one normal cofeee");
+                    cost += restCoffeesList.get(i).getPrice();
+                }
+
             }
         }
-        cost += discount12 * 3.99;
-        cost += discount6 * 2.49;
+
+
+            cost +=discount12 *3.99;
+            cost +=discount6 *2.49;
 
         return cost;
 
-    }
+        }
 
     public double getCostOfItem(Item item) {
         return item.getPrice();
