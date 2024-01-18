@@ -34,8 +34,13 @@ public class Main {
 
         b.add(inv.getInventory().get("BGLO"));
         b.getBasket().get(0).addFilling(inv.getInventory().get("FILC"));
+        b.getBasket().get(0).addFilling(inv.getInventory().get("FILE"));
         b.add(inv.getInventory().get("COFW"));
         b.add(inv.getInventory().get("COFB"));
         b.add(inv.getInventory().get("FILX"));
+
+        for (int i = 0; i < b.getBasket().size(); i++) {
+            System.out.println(b.getBasket().get(i).toString());
+        }
     }
 }

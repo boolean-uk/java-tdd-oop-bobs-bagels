@@ -16,16 +16,22 @@ public class Item {
         this.setFilling(filling);
     }
 
+    // Overloaded constructor to represent a filling ONLY WHEN inside a Bagel Item
+    public Item(Variant variant) {
+        this.setVariant(variant);
+    }
+
     /**
      * Logic: verify that 'this' is a bagel, and that argument is a filling
      * @param filling
      * @return true if filling was added, false if filling not added
      */
     public boolean addFilling(Item filling) {
-        if ((this.getName() == Name.BAGEL) && (filling.getName() == Name.FILLING)) {
+        if ((this.getName() == Name.BAGEL) && (filling.getName() == Name.FILLING) && (this.getFilling() == null)) {
         setFilling(filling);
         return true;
         }
+        System.out.println("This " + this.getVariant() + " " + this.getName() + " already has filling!");
       return false;
     }
 
@@ -40,7 +46,7 @@ public class Item {
                 ", price: " + price +
                 ", name: " + name +
                 ", variant: " + variant +
-                ", filling: " + (filling != null ? filling.toString() : "None") +
+                ", filling: " + (filling != null ? filling.getVariant() : "None") +
                 '}';
     }
 

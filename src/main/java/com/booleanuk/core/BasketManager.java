@@ -18,7 +18,7 @@ public class BasketManager {
      * @return item
      */
     public Item add(Item item) {
-        if (checkCapacity() > 0) {
+        if ((checkCapacity() > 0) && checkItemInInventory(item)) {
             getBasket().add(item);
             return item;
         }
@@ -87,7 +87,7 @@ public class BasketManager {
         if (inv.getInventory().containsKey(item.getSKU())) {
             return true;
         }
-        System.out.println("We do not stock the following " + item.toString());
+        System.out.println("We do not stock the following: " + item.toString());
         return false;
     }
 
@@ -120,7 +120,7 @@ public class BasketManager {
      * Setters for member variables
      */
 
-    public void setBasket() {
+    private void setBasket() {
         this.capacity = 10;
         this.basket = new ArrayList<>(this.capacity);
     }

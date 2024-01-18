@@ -5,9 +5,13 @@ import org.junit.jupiter.api.Test;
 
 public class BasketManagerTest {
 
-    Item item_a = new Item("XXX", 10.0, Item.Name.BAGEL, Item.Variant.CHEESE, null);
-    Item item_b = new Item("FFF", 10.0, Item.Name.FILLING, Item.Variant.CHEESE, null);
-    Item item_c = new Item("NNN", 10.0, Item.Name.FILLING, Item.Variant.CHEESE, null);
+    InventoryManager inv = new InventoryManager();
+
+    Item item_a = inv.getInventory().get("BGLO");
+    Item item_b = inv.getInventory().get("FILC");
+    Item item_c = inv.getInventory().get("FILH");
+
+
 
     @Test
     public void testAdd(){
@@ -68,20 +72,20 @@ public class BasketManagerTest {
     @Test
     public void testCheckItemInInventory(){
         BasketManager b = new BasketManager();
-        InventoryManager inv = new InventoryManager();
-        Assertions.assertTrue(b.checkItemInInventory(inv.getInventory().get("COFB")));
-        Assertions.assertFalse(b.checkItemInInventory(item_a));
+        Assertions.assertFalse(b.checkItemInInventory(new Item(null, 0.0, null, null, null)));
+        Assertions.assertTrue(b.checkItemInInventory(item_a));
     }
 
     @Test
     public void testTotalCost(){
         BasketManager b = new BasketManager();
         Assertions.assertTrue(b.totalCost() == 0);
+        double cost = item_a.getPrice() + item_b.getPrice() + item_c.getPrice();
         b.add(item_a);
         b.add(item_b);
         b.add(item_c);
-        Assertions.assertEquals(30, b.totalCost());
-        Assertions.assertEquals(30, (b.remove(item_a).getPrice() + b.remove(item_b).getPrice() + b.remove(item_c).getPrice()));
+        Assertions.assertEquals(cost, b.totalCost());
+        Assertions.assertEquals(cost, (b.remove(item_a).getPrice() + b.remove(item_b).getPrice() + b.remove(item_c).getPrice()));
 
     }
 }
