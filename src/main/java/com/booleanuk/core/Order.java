@@ -67,7 +67,7 @@ public class Order {
     }
 	public boolean remove(String SKU, String itemType, String bagelName, double bagelPrice) {
 
-        for (Inventory inventory : inventoryList) {
+        for (Inventory inventory : basketList) {
             if (inventory.getSku().equals(SKU) && inventory.getItemType().equals(itemType) && inventory.getName().equals(bagelName) && inventory.getPrice() == bagelPrice) {
                 basketList.remove(inventory);
                 return true;
@@ -113,7 +113,15 @@ public class Order {
 
 	public double totalCost() {
 
-        return 0.00;
+        double cost = 0;
+        for (Inventory basket : basketList) {
+            cost += basket.getPrice();
+
+
+        }
+
+
+        return cost;
     }
 	public double getCost(String bagelName) {
 
