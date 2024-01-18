@@ -1,29 +1,38 @@
 package com.booleanuk.core;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Basket {
 
-    private HashMap<Bagel, Integer> products;
+    private ArrayList<Bagel> products;
+    //private HashMap<Bagel, Integer> products;
     private static final Inventory inventory = new Inventory();
     private int maxSize;
 
     public Basket(){
-        this.products = new HashMap<>();
+        //this.products = new HashMap<>();
+        this.products = new ArrayList<>();
         this.maxSize = 10;
     }
 
+    //Add if there are fillings
     public boolean add(String id, String[] fillingIds){
 
-        //If there are fillings
         if(Inventory.isBagel(id)){
-        //For each fillingId check if its in inventory
-        for (String fillingId : fillingIds){
-            if(Inventory.isFilling(fillingId)){
-
+            //If basket is full
+            if((this.products.size()) >= maxSize){
+                return false;
+            }else{
+                //if one of the filling ids are wrong
+                for (String fillingId : fillingIds){
+                    if(!Inventory.isFilling(fillingId)){
+                        return false;
+                    }
+                }
+                this.products.add(new Bagel(id,fillingIds));
             }
-        }
-        return false;
+            return true;
     }
         return false;
     }
@@ -35,17 +44,12 @@ public class Basket {
             return false;
         }
         //If basket is full
-        if((this.getTotalAmount() + 1) > maxSize){
+        if((this.products.size()) >= maxSize){
             return false;
         }
+        //Add bagel
+        this.products.add(new Bagel(id));
 
-        // if there is a bagel with the same id
-        if(isIdInKeys(id)){
-            //int currentAmount = this.products.get();
-            //this.products.put(new Bagel(id), currentAmount + 1);
-        }else {
-            this.products.put(new Bagel(id), 1);
-        }
         return true;
     }
 
@@ -59,20 +63,12 @@ public class Basket {
     }
 
     private boolean isIdInKeys(String id){
-        for (Bagel bagel : products.keySet()){
+        for (Bagel bagel : products){
             if (bagel.getId().equals(id)){
                 return true;
             }
         }
         return false;
-    }
-
-    private int getTotalAmount(){
-        int totalAmount = 0;
-        for (int amount : this.products.values()){
-            totalAmount += amount;
-        }
-        return totalAmount;
     }
 
 }
