@@ -17,43 +17,47 @@ public class Basket {
     }
 
     //Add if there are fillings
-    public boolean add(String id, String[] fillingIds){
+//    public boolean add(String id, String[] fillingIds){
+//
+//        if(Inventory.isBagel(id)){
+//            //If basket is full
+//            if (isBasketFull()){
+//                return false;
+//            }else{
+//                //if one of the filling ids are wrong
+//                for (String fillingId : fillingIds){
+//                    if(!Inventory.isFilling(fillingId)){
+//                        return false;
+//                    }
+//                }
+//                this.products.add(new Bagel(id,fillingIds));
+//            }
+//            return true;
+//    }
+//        return false;
+//    }
 
-        if(Inventory.isBagel(id)){
-            //If basket is full
-            if((this.products.size()) >= maxSize){
-                return false;
-            }else{
-                //if one of the filling ids are wrong
-                for (String fillingId : fillingIds){
-                    if(!Inventory.isFilling(fillingId)){
-                        return false;
-                    }
-                }
-                this.products.add(new Bagel(id,fillingIds));
-            }
-            return true;
-    }
-        return false;
-    }
+    public boolean add(Bagel bagel){
 
-    public boolean add(String id){
-
-        //If theres an invalid id or a filling
-        if(!Inventory.isInInventory(id) || Inventory.isFilling(id)){
+        //If there is an invalid id or a filling
+        if(!Inventory.isInInventory(bagel.getId()) || Inventory.isFilling(bagel.getId())){
             return false;
         }
         //If basket is full
-        if((this.products.size()) >= maxSize){
+        if(isBasketFull()){
             return false;
         }
         //Add bagel
-        this.products.add(new Bagel(id));
+        this.products.add(bagel);
 
         return true;
     }
 
-    public boolean remove(String id){
+    public boolean remove(Bagel bagel){
+        return false;
+    }
+
+    public boolean addFillings(Bagel bagel,  String[] fillingIds){
         return false;
     }
 
@@ -69,6 +73,10 @@ public class Basket {
             }
         }
         return false;
+    }
+
+    private boolean isBasketFull(){
+        return (this.products.size()) >= maxSize;
     }
 
 }

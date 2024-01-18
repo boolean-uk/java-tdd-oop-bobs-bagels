@@ -19,7 +19,7 @@ public class Bagel {
             }
         }
     }
-    public Bagel(String id){
+    public Bagel(String id) throws IllegalStateException {
         this.id = id;
         this.name = "Bagel";
         switch (id) {
