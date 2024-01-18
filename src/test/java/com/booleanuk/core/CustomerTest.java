@@ -39,9 +39,16 @@ public class CustomerTest {
         Bagel bagel4 = new Bagel("Plain");
         Bagel bagel5 = new Bagel("Plain");
         Bagel bagel6 = new Bagel("Plain");
+        Bagel bagel7 = new Bagel("Plain");
+        Bagel bagel8 = new Bagel("Plain");
+        Bagel bagel9 = new Bagel("Plain");
+        Bagel bagel10 = new Bagel("Plain");
+        Bagel bagel11 = new Bagel("Plain");
+        Bagel bagel12 = new Bagel("Plain");
 
 
-        Assertions.assertEquals(3.99, customer.getTotalCost(new ArrayList<>(Arrays.asList(bagel1, bagel2, bagel3, bagel4, bagel5, bagel6))));
+        Assertions.assertEquals(2.49, customer.getTotalCost(new ArrayList<>(Arrays.asList(bagel1, bagel2, bagel3, bagel4, bagel5, bagel6))));
+        Assertions.assertEquals(3.99, customer.getTotalCost(new ArrayList<>(Arrays.asList(bagel1, bagel2, bagel3, bagel4, bagel5, bagel6, bagel7, bagel8, bagel9, bagel10, bagel11, bagel12))));
 
     }
 
