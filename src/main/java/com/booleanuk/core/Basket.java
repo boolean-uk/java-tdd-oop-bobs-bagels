@@ -5,9 +5,34 @@ import java.util.ArrayList;
 public class Basket {
 
 
-    public ArrayList<String> bagelsList = new ArrayList<>();
-    int basketCapacity = 4;
-    boolean basketIsFull = false;
+    private ArrayList<String> bagelsList = new ArrayList<>();
+    private int basketCapacity = 4;
+
+    public ArrayList<String> getBagelsList() {
+        return bagelsList;
+    }
+
+    public void setBagelsList(ArrayList<String> bagelsList) {
+        this.bagelsList = bagelsList;
+    }
+
+    public int getBasketCapacity() {
+        return basketCapacity;
+    }
+
+    public void setBasketCapacity(int basketCapacity) {
+        this.basketCapacity = basketCapacity;
+    }
+
+    public boolean isBasketIsFull() {
+        return basketIsFull;
+    }
+
+    public void setBasketIsFull(boolean basketIsFull) {
+        this.basketIsFull = basketIsFull;
+    }
+
+    private boolean basketIsFull = false;
 
     public Basket() {
         this.bagelsList = new ArrayList<>();

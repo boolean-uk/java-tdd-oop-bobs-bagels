@@ -5,8 +5,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Order extends Inventory {
-    public int totalCost;
-    DecimalFormat df = new DecimalFormat("####.##");
+    private int totalCost;
+//    DecimalFormat df = new DecimalFormat("####.##");
     public double getTotalCost(ArrayList<String> list) {
         HashMap<String, Double> inventoryPriceList = makeInventoryPriceList();
 
@@ -15,8 +15,8 @@ public class Order extends Inventory {
         for(String item : list) {
             if(inventoryPriceList.containsKey(item)){
 
-                total += Double.parseDouble(df.format(inventoryPriceList.get(item)));
-//                total += inventoryPriceList.get(item);
+//                total += Double.parseDouble(df.format(inventoryPriceList.get(item)));
+                total += inventoryPriceList.get(item);
             } else {
                 System.out.println("Item: " + item + " is not in order is not in inventory");
             }

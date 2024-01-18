@@ -10,6 +10,7 @@ class BobsBagelsTest {
         Basket basket = new Basket();
 
         boolean result = basket.addBagel("plain");
+
         Assertions.assertTrue(result);
     }
 
@@ -20,6 +21,7 @@ class BobsBagelsTest {
 
         basket.addBagel("plain");
         boolean result = basket.removeBagel("plain");
+
         Assertions.assertTrue(result);
     }
 
@@ -28,12 +30,14 @@ class BobsBagelsTest {
         Basket basket = new Basket();
 
         boolean result = basket.removeBagel("bread");
+
         Assertions.assertFalse(result);
     }
 
     @Test
     public void checkIfBasketIsFull() {
         Basket basket = new Basket();
+
         basket.addBagel("plain");
         basket.addBagel("chocolate");
         basket.addBagel("honey");
@@ -49,7 +53,8 @@ class BobsBagelsTest {
         Basket basket = new Basket();
 
         basket.changeBasketCapacity(5);
-        Assertions.assertEquals(9, basket.basketCapacity);
+
+        Assertions.assertEquals(9, basket.getBasketCapacity());
     }
 
     @Test
@@ -57,7 +62,8 @@ class BobsBagelsTest {
         Basket basket = new Basket();
 
         basket.changeBasketCapacity(-2);
-        Assertions.assertEquals(2, basket.basketCapacity);
+
+        Assertions.assertEquals(2, basket.getBasketCapacity());
     }
 
     @Test
@@ -65,7 +71,8 @@ class BobsBagelsTest {
         Basket basket = new Basket();
 
         basket.changeBasketCapacity(-10);
-        Assertions.assertEquals(4, basket.basketCapacity);
+
+        Assertions.assertEquals(4, basket.getBasketCapacity());
     }
 
     @Test
@@ -75,9 +82,9 @@ class BobsBagelsTest {
 
         basket.addBagel("BGLP");
         basket.addBagel("BGLP");
+        double total = order.getTotalCost(basket.getBagelsList());
 
-        double total = order.getTotalCost(basket.bagelsList);
-        Assertions.assertEquals(0.78, total);
+        Assertions.assertEquals(0.78, total, 0.0001);
     }
     @Test
     public void testTotalCostFiveItems(){
@@ -89,8 +96,8 @@ class BobsBagelsTest {
         basket.addBagel("BGLS");
         basket.addBagel("COFB");
         basket.addBagel("FILB");
+        double total = order.getTotalCost(basket.getBagelsList());
 
-        double total = order.getTotalCost(basket.bagelsList);
-        Assertions.assertEquals(1.99, total);
+        Assertions.assertEquals(1.99, total, 0.0001);
     }
 }

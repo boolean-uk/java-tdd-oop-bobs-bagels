@@ -25,7 +25,6 @@ public class Inventory extends Basket {
         inventoryPriceList.put("FILS", 0.12);
         inventoryPriceList.put("FILH", 0.12);
 
-
         return inventoryPriceList;
     }
 
