@@ -5,11 +5,19 @@ import com.booleanuk.core.models.Store;
 import com.booleanuk.core.models.item.Bagel;
 import com.booleanuk.core.models.item.Filling;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import java.io.FileNotFoundException;
+import java.util.Locale;
 
 public class ReceiptPrinterTest {
+
+    @BeforeAll
+    public static void setUp() {
+        // Set locale to UK so there is a dot and not a comma in the prices
+        Locale.setDefault(Locale.UK);
+    }
 
     @Test
     public void testCorrectPrintOutput() throws FileNotFoundException {
@@ -34,7 +42,7 @@ public class ReceiptPrinterTest {
         Assertions.assertTrue(printedReceipt.contains("Thank you"));
 
         Assertions.assertTrue(printedReceipt.contains("Latte"));
-        Assertions.assertTrue(printedReceipt.contains("Egg"));
+        Assertions.assertTrue(printedReceipt.contains("- Egg\t\t \t£0.12\n"));
         Assertions.assertTrue(printedReceipt.contains("Sesame"));
 
         Assertions.assertTrue(printedReceipt.contains("£3.19"));

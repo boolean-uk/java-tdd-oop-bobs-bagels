@@ -4,6 +4,7 @@ import com.booleanuk.core.models.Item;
 import lombok.Getter;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 @Getter
 public class Bagel extends Item {
@@ -21,6 +22,20 @@ public class Bagel extends Item {
 
     public boolean addFilling(Filling filling) {
         return this.filling.add(filling);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        Bagel bagel = (Bagel) o;
+        return Objects.equals(filling, bagel.filling);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), filling);
     }
 
     @Override

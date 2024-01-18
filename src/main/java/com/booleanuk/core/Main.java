@@ -5,6 +5,7 @@ import com.booleanuk.core.enums.ItemType;
 import com.booleanuk.core.models.Store;
 import com.booleanuk.core.models.item.Bagel;
 import com.booleanuk.core.models.item.Filling;
+import com.booleanuk.extension.ReceiptPrinter;
 
 import java.io.FileNotFoundException;
 
@@ -26,10 +27,13 @@ public class Main {
         System.out.println("Cost of latte: " + store.getItemBySKU("COFL").getPrice());
 
         // User picks some bagels and some coffee
-        // Two plain bagels, one sesame with egg and bacon, one latte
+        // Four plain bagels, one sesame with egg and bacon, one latte
         basket.addItem(store.getItemBySKU("BGLP"));
+        basket.addItem(store.getItemBySKU("BGLP"));
+        Bagel bagelPlain1 = (Bagel) basket.addItem(store.getItemBySKU("BGLP"));
         Bagel bagelPlain2 = (Bagel) basket.addItem(store.getItemBySKU("BGLP"));
         Bagel bagelSesame = (Bagel) basket.addItem(store.getItemBySKU("BGLS"));
+        basket.addFillingToBagel(bagelPlain1, (Filling) store.getItemBySKU("FILH"));
         basket.addFillingToBagel(bagelSesame, (Filling) store.getItemBySKU("FILE"));
         basket.addFillingToBagel(bagelSesame, (Filling) store.getItemBySKU("FILB"));
         basket.addItem(store.getItemBySKU("COFL"));
@@ -43,5 +47,9 @@ public class Main {
 
         // User wants to see the updated total
         System.out.println("Total cost: " + basket.getTotalCost());
+
+        // User wants the receipt
+        ReceiptPrinter receiptPrinter = new ReceiptPrinter(store, basket);
+        System.out.println(receiptPrinter.print());
     }
 }

@@ -4,6 +4,7 @@ import com.booleanuk.core.models.item.*;
 import lombok.Data;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 @Data
 public class Basket {
@@ -44,6 +45,20 @@ public class Basket {
             }
         }
         return cost;
+    }
+
+    public HashMap<Item, Integer> getItemCount() {
+        HashMap<Item, Integer> itemCount = new HashMap<>();
+        for (Item item : this.basket) {
+            if (itemCount.get(item) == null) {
+                itemCount.put(item, 1);
+                continue;
+            }
+
+            int currentCount = itemCount.get(item);
+            itemCount.put(item, currentCount + 1);
+        }
+        return itemCount;
     }
 
     public void addFillingToBagel(Bagel bagel, Filling filling) {
