@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Map;
 
 public class CustomerTest {
 
@@ -59,10 +60,12 @@ public class CustomerTest {
     }
 
     @Test
-    public void testGetCostOfFillingsAfterA() {
+    public void testGetCostOfFillings() {
         Customer customer = new Customer();
-        Basket basket = new Basket(5);
 
+
+        Map<String, Double> fillings = Map.of("Bacon", 0.12,"Egg", 0.12,"Cheese", 0.12,"Cream Cheese", 0.12,"Smoked Salmon", 0.12,"Ham", 0.12);
+        Assertions.assertTrue(fillings.equals(customer.getCostOfFillings()));
 
 
     }
