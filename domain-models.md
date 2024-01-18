@@ -205,7 +205,7 @@ Class Customer
 |-----------------|-------------------------------------------------------|--------------------------------------|-------------------------|
 | Basket basket   | double getCostOfItem(Item item)                       | Gets the cost of one item            | double cost of the item |
 |                 | double getCostOfFillings(ArrayList<Filling> fillings) | Gets the cost of all fillings chosen | double cost of fillings |
-|                 |                                                       |                                      |                         |
+|                 | get/setBasket(Basket basket) basket                   | Gets and sets basket                 | Basket/boolean          |
 |                 |                                                       |                                      |                         |
 
 
