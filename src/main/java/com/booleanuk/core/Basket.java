@@ -5,9 +5,9 @@ import java.util.ArrayList;
 import static java.lang.Math.round;
 
 public class Basket {
-    ArrayList<String> basket;
-    int capacity;
-    double total;
+    private ArrayList<String> basket;
+    private int capacity;
+    private double total;
 
     Inventory inventory;
 
@@ -17,6 +17,14 @@ public class Basket {
         this.basket = new ArrayList<>();
         this.capacity = 30;
         this.total = 0.0;
+    }
+
+    public String getBasketItemAtIndex(int index) {
+        return this.basket.get(index);
+    }
+
+    public int getBasketSize() {
+        return this.basket.size();
     }
 
     public boolean addItem(String item) {

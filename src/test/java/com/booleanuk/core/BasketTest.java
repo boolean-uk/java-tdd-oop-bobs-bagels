@@ -21,10 +21,10 @@ class BasketTest {
         result = basket.addItem("Bagel Onion");
         Assertions.assertTrue(result);
 
-        Assertions.assertEquals("BGLO", basket.basket.get(0));
-        Assertions.assertEquals("FILB", basket.basket.get(1));
-        Assertions.assertEquals("COFB", basket.basket.get(2));
-        Assertions.assertEquals("BGLO", basket.basket.get(3));
+        Assertions.assertEquals("BGLO", basket.getBasketItemAtIndex(0));
+        Assertions.assertEquals("FILB", basket.getBasketItemAtIndex(1));
+        Assertions.assertEquals("COFB", basket.getBasketItemAtIndex(2));
+        Assertions.assertEquals("BGLO", basket.getBasketItemAtIndex(3));
 
     }
 
@@ -40,7 +40,7 @@ class BasketTest {
         result = basket.addItem("Filling Bagel");
         Assertions.assertFalse(result);
 
-        Assertions.assertEquals(0, basket.basket.size());
+        Assertions.assertEquals(0, basket.getBasketSize());
     }
 
     // Remove
@@ -50,12 +50,12 @@ class BasketTest {
         boolean result = basket.addItem("Bagel Onion");
         Assertions.assertTrue(result);
 
-        Assertions.assertEquals(1, basket.basket.size());
+        Assertions.assertEquals(1, basket.getBasketSize());
 
         result = basket.removeItem("Bagel Onion");
         Assertions.assertTrue(result);
 
-        Assertions.assertEquals(0, basket.basket.size());
+        Assertions.assertEquals(0, basket.getBasketSize());
     }
 
     // 3.
@@ -65,12 +65,12 @@ class BasketTest {
         boolean result = basket.addItem("Bagel Onion");
         Assertions.assertTrue(result);
 
-        Assertions.assertEquals(1, basket.basket.size());
+        Assertions.assertEquals(1, basket.getBasketSize());
 
         result = basket.removeItem("Bagel onion");
         Assertions.assertFalse(result);
 
-        Assertions.assertEquals(1, basket.basket.size());
+        Assertions.assertEquals(1, basket.getBasketSize());
     }
 
     @Test
@@ -81,12 +81,12 @@ class BasketTest {
         result = basket.addItem("Bagel Onion");
         result = basket.addItem("Coffee Black");
 
-        Assertions.assertEquals(4, basket.basket.size());
+        Assertions.assertEquals(4, basket.getBasketSize());
 
         result = basket.removeItem("Bagel Onion");
         Assertions.assertTrue(result);
 
-        Assertions.assertEquals(3, basket.basket.size());
+        Assertions.assertEquals(3, basket.getBasketSize());
     }
 
     // Capacity
@@ -117,7 +117,7 @@ class BasketTest {
         result = basket.addItem("Bagel Onion");
         Assertions.assertFalse(result);
 
-        Assertions.assertEquals(2, basket.basket.size());
+        Assertions.assertEquals(2, basket.getBasketSize());
     }
 
 
@@ -151,14 +151,13 @@ class BasketTest {
     @Test
     public void testTotalCost() {
         Basket basket = new Basket();
-        Assertions.assertEquals(0.0, basket.total);
+        Assertions.assertEquals(0.0, basket.getTotal());
 
         Assertions.assertTrue(basket.addItem("Bagel Plain"));
         Assertions.assertTrue(basket.addItem("Bagel Sesame"));
         Assertions.assertTrue(basket.addItem("Coffee Capuccino"));
         Assertions.assertTrue(basket.addItem("Filling Cheese"));
 
-        Assertions.assertEquals(basket.total, basket.getTotal());
         Assertions.assertEquals(2.29, basket.getTotal());
 
         Assertions.assertTrue(basket.removeItem("Bagel Sesame"));
