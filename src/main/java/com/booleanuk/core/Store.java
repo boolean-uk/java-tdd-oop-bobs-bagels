@@ -133,6 +133,9 @@ public class Store {
     }
 
     public double getCostOfCoffee(String coffee) {
-        return -1;
+        if(!coffeeCodes.containsKey(coffee.toUpperCase())) {
+            return  -1;
+        }
+        return prices.get(coffeeCodes.get(coffee.toUpperCase()));
     }
 }
