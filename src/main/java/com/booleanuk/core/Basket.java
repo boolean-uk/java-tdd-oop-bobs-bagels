@@ -80,6 +80,7 @@ public class Basket {
             return "New capacity must be non negative.";
         }
         else if (newCapacity >= this.checkSize()) {
+            this.basketCapacity = newCapacity;
             return "New basket capacity is " + newCapacity +".";
         }
         else {
