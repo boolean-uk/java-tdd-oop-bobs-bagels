@@ -135,4 +135,13 @@ public class StoreTest {
         Assertions.assertEquals(0, store.getCostOfBasket(basketId));
     }
 
+    @Test
+    public void getCostOfBasketContainingOnlyBagelsTest() {
+        Store store = new Store();
+        int basketId = store.createBasket();
+        store.addBagelToBasket("Onion", basketId);
+        store.addBagelToBasket("Plain", basketId);
+        Assertions.assertEquals(0.49+0.39, store.getCostOfBasket(basketId));
+    }
+
 }
