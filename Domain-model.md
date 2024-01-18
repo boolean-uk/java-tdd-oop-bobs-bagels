@@ -80,7 +80,7 @@ I want customers to only be able to order things that we stock in our inventory.
 |--------------------------------------|--------------------------------------------------------|------------------------------|------------------------------------------------|
 | {1,3,8, 10}`add(Item item)`          | HashMap<Item item, int amount> basketContent           | item *in* inventory and      | String "Item *item* added to basket."          |
 |                                      | HashMap<Item item, int amount> BobsBagelShop.inventory | basket *is not* full.        |                                                |
-|                                      | int BobsBagelShop.basketCapacity                       | item *not in* inventory.     | String "Chosen item not in stock."             |
+|                                      | int basketCapacity                                     | item *not in* inventory.     | String "Chosen item not in stock."             |
 |                                      |                                                        | basket *is* full.            | String "Basket is full."                       |
 | {2,5}`remove(Item item)`             | HashMap<Item item, int amount> basketContent           | item *not in* basket.        | String "Item *item* not in basket."            |
 |                                      |                                                        | item *in* basket.            | String "Item *item* removed from basket."      |
