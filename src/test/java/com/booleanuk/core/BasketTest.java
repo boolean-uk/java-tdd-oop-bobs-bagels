@@ -56,7 +56,9 @@ public class BasketTest {
         expected.add(sesame);
         expected.add(black);
 
-        Assertions.assertTrue(testBasket.removeItem(plain));
+        String expectedString = "Removed " + plain.getName() + "from basket.";
+
+        Assertions.assertEquals(expectedString, testBasket.removeItem(plain));
         Assertions.assertEquals(expected, testBasket.getBasket());
     }
 
@@ -69,7 +71,9 @@ public class BasketTest {
 
         Bagel plain = new Bagel("Plain", converter.getSKU("Plain"));
 
-        Assertions.assertFalse(testBasket.removeItem(plain));
+        String expectedString = "Basket is empty, can't remove items.";
+
+        Assertions.assertEquals(expectedString, testBasket.removeItem(plain));
         Assertions.assertEquals(expected, testBasket.getBasket());
     }
 
@@ -100,7 +104,51 @@ public class BasketTest {
 
         Bagel everything = new Bagel("Everything", converter.getSKU("Everything"));
 
-        Assertions.assertFalse(testBasket.removeItem(everything));
+        String expectedString = "Can't remove " + everything.getName() + ", item not in basket.";
+
+        Assertions.assertEquals(expectedString, testBasket.removeItem(everything));
+        Assertions.assertEquals(expected, testBasket.getBasket());
+    }
+
+    @Test
+    public void testChangeToBiggerCapacityAndAddItemsAfter() {
+        Basket testBasket = new Basket();
+        SKUConverter converter = new SKUConverter();
+
+        Bagel plain = new Bagel("Plain", converter.getSKU("Plain"));
+        Bagel onion = new Bagel("Onion", converter.getSKU("Onion"));
+        Coffee white = new Coffee("White", converter.getSKU("White"));
+        Bagel sesame = new Bagel("Sesame", converter.getSKU("Sesame"));
+        Coffee black = new Coffee("Black", converter.getSKU("Black"));
+        testBasket.addItem(plain);
+        testBasket.addItem(onion);
+        testBasket.addItem(white);
+        testBasket.addItem(sesame);
+        testBasket.addItem(black);
+
+        testBasket.getInventory().changeCapacity(10);
+        Assertions.assertEquals(10, testBasket.getInventory().getCapacity());
+
+        Bagel plain2 = new Bagel("Plain", converter.getSKU("Plain"));
+        Bagel everything = new Bagel("Everything", converter.getSKU("Everything"));
+        Coffee cappu = new Coffee("Cappuccino", converter.getSKU("Cappuccino"));
+        Coffee latte = new Coffee("Latte", converter.getSKU("Latte"));
+        testBasket.addItem(plain2);
+        testBasket.addItem(everything);
+        testBasket.addItem(cappu);
+        testBasket.addItem(latte);
+
+        ArrayList<Item> expected = new ArrayList<>();
+        expected.add(plain);
+        expected.add(onion);
+        expected.add(white);
+        expected.add(sesame);
+        expected.add(black);
+        expected.add(plain2);
+        expected.add(everything);
+        expected.add(cappu);
+        expected.add(latte);
+
         Assertions.assertEquals(expected, testBasket.getBasket());
     }
 }

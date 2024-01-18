@@ -33,8 +33,14 @@ public class Basket {
         return true;
     }
 
-    public boolean removeItem(Item item) {
-        return basket.remove(item);
+    public String removeItem(Item item) {
+        if (basket.remove(item)) {
+            return "Removed " + item.getName() + "from basket.";
+        }
+        if (basket.isEmpty()) {
+            return "Basket is empty, can't remove items.";
+        }
+        return "Can't remove " + item.getName() + ", item not in basket.";
     }
 
     public double showTotalCostInBasket() {
@@ -55,6 +61,10 @@ public class Basket {
 
     public ArrayList<Item> getBasket() {
         return this.basket;
+    }
+
+    public Inventory getInventory() {
+        return this.inventory;
     }
 
     public static void main(String[] args) {
