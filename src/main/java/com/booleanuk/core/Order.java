@@ -124,7 +124,14 @@ public class Order {
         return cost;
     }
 	public double getCost(String bagelName) {
+        for (Inventory basket : inventoryList) {
+            if (basket.getName().equals(bagelName)) {
 
+               return basket.getPrice();
+
+            }
+
+        }
         return 0;
     }
 	public double chooseFilling(String fillingName) {
