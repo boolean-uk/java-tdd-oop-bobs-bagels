@@ -30,8 +30,6 @@ public class Basket {
     public boolean add(String itemSKU){
         for (int i = 0; i < inventoryList.size(); i++) {
             if(basketList.size() < capacity){
-                System.out.println(itemSKU);
-                System.out.println(inventoryList.get(i).getSku());
                 if(itemSKU.equals(inventoryList.get(i).getSku())){
                     basketList.add(inventoryList.get(i).getSku()
 //                            + " "
@@ -56,17 +54,32 @@ public class Basket {
         return false;
     }
 
+    public double totalCost() {
+        double totalPrice = 0;
+        for (int i = 0; i < basketList.size(); i++) {
+            for (int j = 0; j < inventoryList.size(); j++) {
+                if (basketList.get(i).equals(inventoryList.get(j).getSku())){
+                     totalPrice += inventoryList.get(j).getPrice();
+                    System.out.println(totalPrice);
+
+                }
+            }
+
+        }
+        return totalPrice;
+    }
+
     public static void main(String[] args) {
         Basket basket = new Basket();
-        //basket.makeInventoryList();
 
         System.out.println(basket.inventoryList.get(1).getPrice());
         System.out.println("tester ------------------");
-        basket.add("COFB");
-        basket.add("BGLO");
-        basket.add("BGLP");
-        basket.add("COFW");
-        basket.remove("COFB");
-        System.out.println(basket.basketList);
+        basket.add("COFB"); //0.99
+        basket.add("BGLO"); //0.49
+        basket.add("BGLP"); //0.39, total 1.87
+        //basket.add("COFW");
+        //basket.remove("COFB");
+        basket.totalCost();
+        //System.out.println(basket.basketList);
     }
     }
