@@ -92,7 +92,8 @@ public class BasketTest {
         basket.add(bglo);
         basket.add(bglp);
         basket.add(bglo);
-
-
+        Assertions.assertEquals("New capacity must be non negative.", basket.changeCapacity(-2));
+        Assertions.assertEquals("New basket capacity is 5.", basket.changeCapacity(5));
+        Assertions.assertEquals("New capacity must be larger than number of items currently in basket.", basket.changeCapacity(2));
     }
 }
