@@ -29,7 +29,7 @@
 |           |                           | getTotal()                      | checks class member total     | total    |
 |           |                           |                                 |                               |          |
 |           |                           |                                 |                               |          |
-|           |                           | checkPrice(String item)         | looks up price in inventory   | price    |
+|           |                           | getPrice(String item)           | looks up price in inventory   | price    |
 |           |                           |                                 |                               |          |
 |           |                           |                                 |                               |          |
 |           |                           | buildBagel(String[] fillings)   | Adds plain bagel to basket    | true     |

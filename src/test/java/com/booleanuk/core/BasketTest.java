@@ -170,4 +170,16 @@ class BasketTest {
         Assertions.assertEquals(3.76, basket.getTotal());
     }
 
+    // Get price of one item
+    @Test
+    public void testGetPrize() {
+        Basket basket = new Basket();
+
+        Assertions.assertEquals("0.39", basket.getPrice("Bagel Plain"));
+        Assertions.assertEquals("0.49", basket.getPrice("Bagel Sesame"));
+        Assertions.assertEquals("0.49", basket.getPrice("Bagel Everything"));
+        Assertions.assertEquals("0.49", basket.getPrice("Bagel Onion"));
+        Assertions.assertEquals("0.12", basket.getPrice("Filling Cheese"));
+        Assertions.assertEquals("1.29", basket.getPrice("Coffee Capuccino"));
+    }
 }
