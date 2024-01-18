@@ -10,12 +10,20 @@ public class Bagel extends Item {
     public Bagel(String variant) {
         super(variant);
         this.setName("Bagel");
-        this.setPrice(0.39);
+        this.setPriceOfBagel(variant);
     }
 
     public boolean addFilling(Filling filling) {
         fillings.add(filling);
         return true;
 
+    }
+
+    private void setPriceOfBagel(String variant) {
+        if(variant.equalsIgnoreCase("Plain")) {
+            this.setPrice(0.39);
+        } else {
+            this.setPrice(0.49);
+        }
     }
 }

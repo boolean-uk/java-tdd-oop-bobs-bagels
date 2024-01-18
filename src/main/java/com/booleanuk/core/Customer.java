@@ -9,7 +9,7 @@ public class Customer {
                 .reduce(0.00, Double::sum);
     }
 
-    public double getCostOfItem(Bagel bagel) {
-        return bagel.getPrice();
+    public double getCostOfItem(Item item) {
+        return item.getPrice();
     }
 }
