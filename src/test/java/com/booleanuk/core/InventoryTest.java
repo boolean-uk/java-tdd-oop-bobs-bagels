@@ -17,7 +17,7 @@ public class InventoryTest {
 
 
         Assertions.assertTrue(fillings.equals(inventory.getFillings()));
-        Assertions.assertTrue(coffees.equals(inventory.getCoffes()));
+        Assertions.assertTrue(coffees.equals(inventory.getCoffees()));
         Assertions.assertTrue(bagels.equals(inventory.getBagels()));
 
     }
