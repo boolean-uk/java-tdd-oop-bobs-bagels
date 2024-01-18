@@ -31,7 +31,7 @@ public class Filling extends Item {
     public static String getAllFillingPrices() {
         StringBuilder fillingNamesAndPrices = new StringBuilder();
         for (Filling filling : allFillings) {
-            fillingNamesAndPrices.append(filling.getItemName()).append(" price: " + filling.getPrice()).append(", ");
+            fillingNamesAndPrices.append(filling.getItemName()).append(" price: ").append(filling.getPrice()).append(", ");
         }
 
         if (!allFillings.isEmpty()) {
