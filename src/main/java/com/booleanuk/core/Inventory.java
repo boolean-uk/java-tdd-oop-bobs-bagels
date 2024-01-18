@@ -3,7 +3,6 @@ package com.booleanuk.core;
 import java.util.ArrayList;
 
 
-
 public class Inventory {
 	ArrayList<Item> inventory;
 
@@ -13,7 +12,7 @@ public class Inventory {
 	}
 
 	public boolean inInventory(String id) {
-		boolean inInventory=false;
+		boolean inInventory = false;
 		for (Item item : inventory) {
 			if (item.id.equals(id)) {
 				return true;
@@ -21,21 +20,46 @@ public class Inventory {
 		}
 		return false;
 	}
-	private void init(){
-		Item item1 = new Bagel("BGLO","Onion",0.49);
-		Item item2 = new Bagel("BGLP","Plain",0.39);
-		Item item3 = new Bagel("BGLE","Everything",0.49);
-		Item item4 = new Bagel("BGLS","Sesame",0.49);
-		Item item5 = new Coffee("COFB","Black",0.99);
-		Item item6 = new Coffee("COFW","White",1.19);
-		Item item7 = new Coffee("COFC","Cappuccino",1.29);
-		Item item8 = new Coffee("COFL","Latte",1.29);
-		Item item9 = new Filling("FILB","Bacon",0.12);
-		Item item10 = new Filling("FILE","Egg",0.12);
-		Item item11 = new Filling("FILC","Cheese",0.12);
-		Item item12 = new Filling("FILX","Cream Cheese",0.12);
-		Item item13 = new Filling("FILS","Smoked Salmon",0.12);
-		Item item14 = new Filling("FILH","Ham",0.12);
+
+	public String getFillings() {
+		StringBuilder sb = new StringBuilder();
+		for (Item item : inventory) {
+			if (item instanceof Filling) {
+				sb.append(item.name + ":\t" + item.price + "\n");
+			}
+
+		}
+		if (!sb.isEmpty()) {
+			sb.deleteCharAt(sb.length() - 1);
+		}
+		return sb.toString();
+	}
+
+	public double getPrice(String id) {
+		double price = 0;
+		for (Item item : inventory) {
+			if (item.id.equals(id)){
+				return item.price;
+			}
+		}
+		return price;
+	}
+
+	private void init() {
+		Item item1 = new Bagel("BGLO", "Onion", 0.49);
+		Item item2 = new Bagel("BGLP", "Plain", 0.39);
+		Item item3 = new Bagel("BGLE", "Everything", 0.49);
+		Item item4 = new Bagel("BGLS", "Sesame", 0.49);
+		Item item5 = new Coffee("COFB", "Black", 0.99);
+		Item item6 = new Coffee("COFW", "White", 1.19);
+		Item item7 = new Coffee("COFC", "Cappuccino", 1.29);
+		Item item8 = new Coffee("COFL", "Latte", 1.29);
+		Item item9 = new Filling("FILB", "Bacon", 0.12);
+		Item item10 = new Filling("FILE", "Egg", 0.12);
+		Item item11 = new Filling("FILC", "Cheese", 0.12);
+		Item item12 = new Filling("FILX", "Cream Cheese", 0.12);
+		Item item13 = new Filling("FILS", "Smoked Salmon", 0.12);
+		Item item14 = new Filling("FILH", "Ham", 0.12);
 
 		inventory.add(item1);
 		inventory.add(item2);
