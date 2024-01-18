@@ -1,7 +1,5 @@
 package com.booleanuk.core;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -30,6 +28,7 @@ public class Bagel implements Product {
         initFillings();
     }
     public Bagel(String name, double price){
+
         this.bagel = name;
         this.price = price;
         this.filling = "bland";

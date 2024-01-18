@@ -7,9 +7,8 @@ public class InventoryTest {
     @Test
     public void testIfBagelInInventory(){
         Inventory inv = new Inventory();
-        Assertions.assertFalse(inv.tryFetchBagel("Gingerbread"));
-        Assertions.assertTrue(inv.tryFetchBagel("Bacon"));
-        Assertions.assertFalse(inv.tryFetchBagel("Black"));
+        Assertions.assertTrue(inv.getBagel("Bacon"));
+        Assertions.assertFalse(inv.getBagel("Chicken"));
     }
     @Test
     public void testIfCoffeeInInventory(){
