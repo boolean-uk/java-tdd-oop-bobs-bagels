@@ -16,9 +16,9 @@ public class InventoryTest {
         Map<String, Double> bagels = Map.of("BGLO", 0.49,"BGLP", 0.39,"BGLE", 0.49);
 
 
-        Assertions.assertTrue(fillings.equals(inventory.getFillings()));
-        Assertions.assertTrue(coffees.equals(inventory.getCoffees()));
-        Assertions.assertTrue(bagels.equals(inventory.getBagels()));
+        Assertions.assertEquals(fillings, inventory.getFillings());
+        Assertions.assertEquals(coffees, inventory.getCoffees());
+        Assertions.assertEquals(bagels, inventory.getBagels());
 
     }
 }
