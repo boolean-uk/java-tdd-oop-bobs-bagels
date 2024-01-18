@@ -6,28 +6,56 @@ import org.junit.jupiter.api.Test;
 public class ProductTest {
 
     @Test
-    public void getPrice() {
+    public void getPriceTest() {
         Product product = new Product("apple", 0.39);
         Assertions.assertEquals(0.39, product.getPrice());
 
     }
 
     @Test
-    public void getVariant() {
+    public void getVariantTest() {
         Product product = new Product("apple", 0.39);
         Assertions.assertEquals("apple", product.getVariant());
     }
 
     @Test
-    public void getName() {
+    public void getNameTest() {
         Product product = new Product("apple", 0.39);
         Assertions.assertEquals("Other", product.getName());
     }
 
     @Test
-    public void getSku() {
+    public void getSkuTest() {
         Product product = new Product("apple", 0.39);
         Assertions.assertEquals("OTHA", product.getSku());
+    }
+
+    @Test
+    public void setPriceTest() {
+        Product product = new Product("apple", 0.39);
+        product.setPrice(0.49);
+        Assertions.assertEquals(0.49, product.getPrice());
+    }
+
+    @Test
+    public void setVariantTest() {
+        Product product = new Product("apple", 0.39);
+        product.setVariant("Granny Smith");
+        Assertions.assertEquals("Granny Smith", product.getVariant());
+    }
+
+    @Test
+    public void setNameTest() {
+        Product product = new Product("apple", 0.39);
+        product.setName("Fruit");
+        Assertions.assertEquals("Fruit", product.getName());
+    }
+
+    @Test
+    public void setSku() {
+        Product product = new Product("apple", 0.39);
+        product.setSku("FRua");
+        Assertions.assertEquals("FRUA", product.getSku());
     }
 
 }
