@@ -74,6 +74,10 @@ public class Basket {
 
     }
 
+    public double getFillingCost(Filling item){
+    }
+
+
 
     public static void main(String[] args) {
         Inventory inventory = new Inventory();

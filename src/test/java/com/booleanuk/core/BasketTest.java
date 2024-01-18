@@ -105,5 +105,14 @@ public class BasketTest {
         Filling filling = new Filling("FILB",0.12, "Filling", "Bacon");
         Assertions.assertEquals("Please select a bagel before adding filling", basket.addingFillingWhenBagelInBasket(filling));
     }
+    @Test
+    public void shouldReturnFillingCost(){
+        Inventory inventory = new Inventory();
+        Basket basket = new Basket( inventory, 4);
+        Filling filling1 = new Filling("FILB",0.12, "Filling", "Bacon");
+        Filling filling2 = new Filling("FILC",0.12, "Filling", "Cheese");
+        Assertions.assertEquals(0.12, basket.getFillingCost(filling1));
+        Assertions.assertEquals(0.12, basket.getFillingCost(filling2));
+    }
 
 }
