@@ -35,6 +35,11 @@ public class Bagel extends Product {
         return this.price;
     }
 
+    @Override
+    public void setPrice(double price) {
+        setBasePrice(price);
+    }
+
     public void addFilling(Filling filling) {
         this.fillings.add(filling);
         updatePrice();
