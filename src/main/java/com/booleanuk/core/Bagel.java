@@ -5,7 +5,7 @@ import java.util.HashMap;
 
 public class Bagel {
     String bagel;
-    //ArrayList<String> bagelList;
+    ArrayList<Inventory> basketList;
 
     ArrayList<Inventory> inventoryList;
     int key=0;
@@ -13,8 +13,8 @@ public class Bagel {
     int capacity=0;
     public Bagel(){
         this.capacity= 15;
-        //this.bagelList=new ArrayList<>(capacity);
-        this.inventoryList = new ArrayList<>(capacity);
+        this.basketList=new ArrayList<>(capacity);
+        this.inventoryList = new ArrayList<>();
         initializeArr();
     }
     public void initializeArr(){
@@ -50,18 +50,18 @@ public class Bagel {
 
 
     public String addBagel(String bagel, double price, String product, String variant){
-        if (inventoryList.contains(bagel)){
+        if (basketList.contains(bagel)){
             return null;
         }
         Inventory tempInv = new Inventory(bagel,price,product,variant);
-        inventoryList.add(tempInv);
+        basketList.add(tempInv);
         return bagel;
     }
 
     public boolean removeBagel(String bagel){
-        for (int i = 0; i<inventoryList.size(); i++){
-            if (inventoryList.get(i).SKU.equals(bagel)){
-                inventoryList.remove(i);
+        for (int i = 0; i<basketList.size(); i++){
+            if (basketList.get(i).SKU.equals(bagel)){
+                basketList.remove(i);
                 return true;
             }
         }
@@ -70,7 +70,7 @@ public class Bagel {
     }
 
     public boolean basketFull(){
-        if (inventoryList.size()>capacity){
+        if (basketList.size()>capacity){
             System.out.println("Basket Full");
             return true;
         }
@@ -84,10 +84,32 @@ public class Bagel {
     public static void main(String[] args) {
         Bagel bagel = new Bagel();
         Inventory a = new Inventory("bagel1");
-        bagel.inventoryList.add(a);
+        bagel.basketList.add(a);
         //bagel.inventoryList.remove(a);
-        System.out.println(bagel.inventoryList.toString());
+        System.out.println(bagel.basketList.toString());
+        System.out.println(bagel.inventoryAllPrint());
     }
+    public double totalCost(){
+        double totalCost=0;
+        for (int i = 0; i < basketList.size(); i++){
+            totalCost += basketList.get(i).price;
+        }
+        return totalCost;
+    }
+
+    public boolean inventoryAllPrint(){
+        String inv = " ";
+        initializeArr();
+        for (int i = 0; i < inventoryList.size(); i++){
+            inv += "SKU = " + inventoryList.get(i).SKU+ '\n' ;
+            inv += "Price = " + inventoryList.get(i).price+ '\n' ;
+            inv += "Name = " + inventoryList.get(i).name + '\n';
+            inv += "Variant = " + inventoryList.get(i).variant + '\n'+'\n'+'\n';
+        }
+        System.out.println(inv);
+        return true;
+    }
+
 
 }
 
