@@ -110,4 +110,14 @@ class BasketTest {
 
         Assertions.assertEquals("Egg price: 0.29, Bree price: 0.19", allFillingsPrices);
     }
+
+    @Test
+    public void testIfCustomerCanAddNonexistentProduct() {
+        StoreInventory products = new StoreInventory();
+        Store store = new Store();
+
+        Basket basket = new Basket();
+
+        Assertions.assertEquals(false, store.addToBasket(basket, "NonexistentItem"));
+    }
 }
