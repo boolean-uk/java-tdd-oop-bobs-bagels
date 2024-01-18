@@ -12,24 +12,52 @@ public class Basket {
         this.maxCapacity = maxCapacity;
         items = new ArrayList<>();
     }
-    public boolean addItem(String type, String name, int amount){
-        if(amount + this.items.size() > maxCapacity){
+    public boolean addItem(String SKU, int amount){
+        if(amount + checkCurrentCapacity() > maxCapacity){
             return false;
         }
         Inventory i = Inventory.getInstance();
-        if(i.checkInventory(type, name, amount)){
-            items.addAll(i.getItems(type, name, amount));
+        if(i.checkInventory(SKU, amount)){
+            items.addAll(i.getItems(SKU, amount));
             return true;
         }
         else{
             return false;
         }
     }
-    public boolean removeItem(String name, String type){
+    public boolean addFillingWithBagel(String bagelSKU, ArrayList<String> fillings ) {
+        if (checkCurrentCapacity() + (fillings.size() + 1) > maxCapacity) {
+            return false;
+        }
+        Inventory i = Inventory.getInstance();
+        Bagel bagel = (Bagel) i.getItems(bagelSKU, 1).get(0);
+        ArrayList<Filling> fillingsTemp = new ArrayList<>();
+
+        for (String s : fillings) {
+            if (i.checkInventory(s, 1)) {
+                fillingsTemp.add((Filling) i.getItems(s, 1).get(0));
+            } else {
+                for (Item item : fillingsTemp) {
+
+                    i.addItems(item);
+
+                }
+
+                i.addItems(bagel);
+                return false;
+            }
+
+        }
+        bagel.addFillings(fillingsTemp);
+        items.add(bagel);
+        return true;
+
+    }
+    public boolean removeItem(String SKU){
             Iterator<Item> iterator = items.iterator();
             while(iterator.hasNext()){
                 Item currentItem = iterator.next();
-                if(currentItem.getType().equals(type) && currentItem.getName().equals(name)){
+                if(currentItem.getSKU().equals(SKU)){
                     iterator.remove();
                     Inventory.getInstance().addItems(currentItem);
                     return true;
@@ -44,8 +72,7 @@ public class Basket {
     public double getTotalCost(){
         double total = 0;
         for(Item i : this.items){
-            if(i instanceof Bagel){
-                Bagel bagel = (Bagel) i;
+            if(i instanceof Bagel bagel){
                 for(Filling f : bagel.getFillings()){
                     total+= f.getPrice();
                 }
@@ -54,6 +81,20 @@ public class Basket {
         }
         return total;
     }
+    private int checkCurrentCapacity(){
+        int capacity = items.size();
+        for(Item i : items){
+            if(i instanceof Bagel){
+                for(Filling ignored : ((Bagel) i).getFillings()){
+                    capacity += 1;
+                }
+            }
+        }
+        return capacity;
+    }
+    private void checkItemValidity(Item item){
 
+
+    }
 
 }
