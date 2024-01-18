@@ -3,6 +3,7 @@ package com.booleanuk.core;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+//TODO: check upper vs lowercase
 public class Store {
     private HashMap<Integer, Basket> baskets;
     private HashMap<String, Double> prices;
