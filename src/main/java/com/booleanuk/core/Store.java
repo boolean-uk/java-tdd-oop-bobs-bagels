@@ -132,4 +132,7 @@ public class Store {
 
     }
 
+    public double getCostOfCoffee(String coffee) {
+        return -1;
+    }
 }

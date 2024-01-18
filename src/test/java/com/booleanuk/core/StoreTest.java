@@ -189,5 +189,11 @@ public class StoreTest {
         Assertions.assertTrue(store.removeBagelFromBasket("onion", new ArrayList<>(Arrays.asList("cheese","egg")), basketId));
     }
 
+    @Test
+    public void getCostOfInvalidCoffeeTest() {
+        Store store = new Store();
+        Assertions.assertEquals(-1, store.getCostOfCoffee("Chocolate"));
+    }
+
 
 }
