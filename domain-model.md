@@ -1,5 +1,30 @@
 # Domain model Bob's Bagels
+```
+BobsBagels
+	- Baskets: List<Basket>
+	+ setBasketCapacity(capacity: int) String
 
+Basket
+	- basketMap: HashMap<String, Integer>
+	- capacity: int
+	- inventory: Inventory
+	+ add(sku: String) String
+	+ remove(sku: String) String
+	+ setCapacity(capacity: int) boolean
+	+ totalCost() double
+	+ addFilling(sku: String) String
+
+Inventory
+	- products: List<products>
+	+ getProductCost(sku: String) double
+	+ listFillingPrices() String
+
+Product
+	- sku: String
+	- price: double
+	- name: String
+	- Variant: String
+```
 ```
 1.
 As a member of the public,
@@ -31,7 +56,7 @@ I'd like to know when my basket is full when I try adding an item beyond my bask
 | Class  | Method          | Variables                          | Scenario                                                                                  | Return value                     |
 |--------|-----------------|------------------------------------|-------------------------------------------------------------------------------------------|----------------------------------|
 | Basket | add(String sku) | HashMap<String, Integer> basketMap | Empty / Invalid SKU input                                                                 | Return "Product not found"       |
-|        |                 |                                    | Valid SKU input, basket does not contain product, product added to basketMap with value 1 | Return "Product added to basket" |
+|        |                 | int capacity                       | Valid SKU input, basket does not contain product, product added to basketMap with value 1 | Return "Product added to basket" |
 |        |                 |                                    | Valid SKU input, basket already contains product, value for product increased by 1        | Return "Product added to basket" |
 |        |                 |                                    | Basket already full, nothing added to basket                                              | Return "Basket is full"          |
 ```
