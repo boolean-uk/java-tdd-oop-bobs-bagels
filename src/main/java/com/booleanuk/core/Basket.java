@@ -5,20 +5,20 @@ import java.util.HashMap;
 
 public class Basket {
 
-    //String type;
+    private ArrayList<Inventory> basketList;
+    private ArrayList<Inventory> inventoryList;
+
+    private int basketSize = 5;
+
+    //All the fields below will be removed and the code refactored
+    //as its more efficient using an ArrayList of the Inventory class
+    //for the logic in the methods than having multiple different lists and maps.
     private ArrayList<Bagel> bagels;
     private ArrayList<String> itemsList;
 
     private HashMap<String, Double> itemsMap;
-
     private HashMap<String, Inventory> itemsFullyDetailed;
-
-    //HashMap<Bagel, Integer> bagelsWithCost;
-
     private HashMap<String, Double[]> itemsWithQuantity;
-
-
-    private int basketSize = 5;
 
     public Basket() {
         bagels = new ArrayList<>(5);
@@ -40,12 +40,6 @@ public class Basket {
         itemsFullyDetailed.put("FILX", new Inventory("FILX", 0.12, "Filling", "Cream Cheese"));
         itemsFullyDetailed.put("FILS", new Inventory("FILS", 0.12, "Filling", "Smoked Salmon"));
         itemsFullyDetailed.put("FILH", new Inventory("FILH", 0.12, "Filling", "Ham"));
-
-        //User Story 3
-        /*
-        bagels.add("Chocolate");
-        bagels.add("Vanilla");
-        bagels.add("Banana"); */
     }
 
     //User Story 1
