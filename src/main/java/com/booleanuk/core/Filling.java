@@ -13,4 +13,12 @@ public class Filling {
     public double getPrice() {
         return price;
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getVariant() {
+        return variant;
+    }
 }

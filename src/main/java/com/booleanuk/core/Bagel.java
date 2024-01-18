@@ -10,10 +10,25 @@ public class Bagel {
 
 
     public Bagel(String id){
-        //switch (id.charAt(4))
+//        switch (id){
+//            case "BGLO":
+//                this.
+//        }
     }
 
     public double getPrice() {
         return price;
+    }
+
+    public HashMap<String, Filling> getFillings() {
+        return fillings;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getVariant() {
+        return variant;
     }
 }

@@ -15,4 +15,8 @@ public class Coffee {
     public double getPrice() {
         return price;
     }
+
+    public String getName() {
+        return name;
+    }
 }
