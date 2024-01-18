@@ -80,49 +80,50 @@ I want customers to only be able to order things that we stock in our inventory.
 |           |             | isBagel(String id)                           |          | true if is a bagel      |
 |           |             | isCoffee(String id)                          |          | true if is a coffee     |
 |           |             | isFilling(String id)                         |          | true id is a filling    |
-|           |             | isInInventory(String id)                     |          | true if is in inventory |
+|           |             | 10 isInInventory(String id)                  |          | true if is in inventory |
 
 
-| Classes  | Methods                               | Member Variables    | Scenario                    | Output/Result                              |
-|----------|---------------------------------------|---------------------|-----------------------------|--------------------------------------------|
-| Customer |                                       | Basket basket       |                             |                                            |
-|          |                                       | inventory Inventory |                             |                                            |
-|          |                                       |                     |                             |                                            |
-|          | addToBasket(String id, String[])      |                     | if product in inventory     | add product to basket and return true      |
-|          |                                       |                     | if product not in inventory | return false                               |
-|          | removeFromBasket(String id, String[]) |                     | if product in basket        | remove product from basket and return true |
-|          |                                       |                     | if product not in in basket | return false                               |
-|          |                                       |                     |                             |                                            |
-|          | getCostOfProduct(id String)           |                     | if product in inventory     | return price                               |
-|          |                                       |                     | if product not in inventory | return false                               |
-|          |                                       |                     |                             |                                            |
-|          | getCostOfBasket()                     |                     |                             | return total cost of items in basket       |
-|          |                                       |                     |                             |                                            |
-|          |                                       |                     |                             |                                            |
-|          |                                       |                     |                             |                                            |
+| Classes  | Methods                                  | Member Variables    | Scenario                       | Output/Result                              |
+|----------|------------------------------------------|---------------------|--------------------------------|--------------------------------------------|
+| Customer |                                          | Basket basket       |                                |                                            |
+|          |                                          | inventory Inventory |                                |                                            |
+|          |                                          |                     |                                |                                            |
+|          | 1. 8. addToBasket(String id, String[])   |                     | if product in inventory        | add product to basket and return true      |
+|          |                                          |                     | if product not in inventory    | return false                               |
+|          |                                          |                     | if basket is full              | return false                               |
+|          |                                          |                     |                                |                                            |
+|          | 2. removeFromBasket(String id, String[]) |                     | if product in basket           | remove product from basket and return true |
+|          |                                          |                     | 5. if product not in in basket | return false                               |
+|          |                                          |                     |                                |                                            |
+|          | 7. 9. getCostOfProduct(id String)        |                     | if product in inventory        | return price                               |
+|          |                                          |                     | if product not in inventory    | return false                               |
+|          |                                          |                     |                                |                                            |
+|          | 6. getCostOfBasket()                     |                     |                                | return total cost of items in basket       |                                                   
+|          |                                          |                     |                                |                                            |
+|          |                                          |                     |                                |                                            |
 
-| Classes | Methods     | Member Variables    | Scenario | Output/Result            |
-|---------|-------------|---------------------|----------|--------------------------|
-| Manager |             | basket Basket       |          |                          |
-|         |             | inventory Inventory |          |                          |
-|         |             |                     |          |                          |
-|         | setBasket() |                     |          | change maxSize of basket |
-|         |             |                     |          |                          |
-|         |             |                     |          |                          |
-|         |             |                     |          |                          |
-|         |             |                     |          |                          |
-|         |             |                     |          |                          |
+| Classes | Methods        | Member Variables             | Scenario                                             | Output/Result               |
+|---------|----------------|------------------------------|------------------------------------------------------|-----------------------------|
+| Manager |                | basket Basket                |                                                      |                             |
+|         |                | inventory Inventory          |                                                      |                             |
+|         |                | ArrayList<Customer> customer |                                                      |                             |
+|         | 4. setBasket() |                              |                                                      | change maxSize of basket    |
+|         |                |                              | if a customer has more products than the new maxSize | clear that customers basket |
+|         |                |                              |                                                      |                             |
+|         |                |                              |                                                      |                             |
+|         |                |                              |                                                      |                             |
+|         |                |                              |                                                      |                             |
 
-| Classes | Methods | Member Variables      | Scenario | Output/Result |
-|---------|---------|-----------------------|----------|---------------|
-| Basket  |         | ArrayList<String ids> |          |               |
-|         |         | Inventory             |          |               |
-|         |         |                       |          |               |
-|         |         |                       |          |               |
-|         |         |                       |          |               |
-|         |         |                       |          |               |
-|         |         |                       |          |               |
-|         |         |                       |          |               |
-|         |         |                       |          |               |
+| Classes | Methods        | Member Variables                         | Scenario                                                   | Output/Result   |
+|---------|----------------|------------------------------------------|------------------------------------------------------------|-----------------|
+| Basket  |                | products Hashmap<String ids, int amount> |                                                            |                 |
+|         |                | inventory Inventory                      |                                                            |                 |
+|         |                | int maxSize                              |                                                            |                 |
+|         | add(String id) |                                          | if id in basket                                            | increase amount |
+|         |                |                                          | if id not in basket                                        | add to bas      |
+|         |                |                                          | 3. if existing amount plus new product exceeds maxCapacity | return false    |
+|         |                |                                          |                                                            |                 |
+|         |                |                                          |                                                            |                 |
+|         |                |                                          |                                                            |                 |
 
 
