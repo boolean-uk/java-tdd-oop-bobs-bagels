@@ -1,27 +1,27 @@
 package com.booleanuk.core;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Bagel {
-    private HashMap<String, Filling> fillings;
+    private ArrayList<Filling> fillings;
+    //private HashMap<Filling, Integer> fillings;
     private String id;
     private String name;
     private double price;
     private String variant;
     private static final Inventory inventory = new Inventory();
 
-    public Bagel(String id, String[] fillings){
+    public Bagel(String id, Filling[] fillings){
         this(id);
-        this.fillings = new HashMap<>();
-        for (String fillingId : fillings){
-            if(inventory.isFilling(fillingId)){
-                this.fillings.put(fillingId, new Filling(fillingId));
-            }
+        for (Filling filling : fillings){
+            this.addFilling(filling);
         }
     }
     public Bagel(String id) throws IllegalStateException {
         this.id = id;
         this.name = "Bagel";
+        this.fillings = new ArrayList<>();
         switch (id) {
             case "BGLO" -> {
                 this.variant = "Onion";
@@ -43,11 +43,14 @@ public class Bagel {
         }
     }
 
+    public void addFilling(Filling filling){
+        this.fillings.add(filling);
+    }
     public double getPrice() {
         return this.price;
     }
 
-    public HashMap<String, Filling> getFillings() {
+    public ArrayList<Filling> getFillings() {
         return this.fillings;
     }
 
