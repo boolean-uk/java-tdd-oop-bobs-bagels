@@ -11,6 +11,8 @@ public class Basket {
     private int fillingsInBasket;
     private int coffeesInBasket;
     private Inventory inventory;
+    private int basketCapacity;
+
 
     public Basket() {
         this.basket = new ArrayList<>();
@@ -18,6 +20,7 @@ public class Basket {
         this.fillingsInBasket = EMPTY;
         this.coffeesInBasket = EMPTY;
         this.inventory = new Inventory();
+        this.basketCapacity = 5;
     }
 
     public boolean addItem(Item item) {
@@ -25,7 +28,7 @@ public class Basket {
             System.out.print("This item does not exist at our store!");
             return false;
         }
-        if (basket.size() == this.inventory.getCapacity()) {
+        if (basket.size() == this.basketCapacity) {
             System.out.print("Your basket is at its capacity, can't add item!");
             return false;
         }
@@ -41,6 +44,14 @@ public class Basket {
             return "Basket is empty, can't remove items.";
         }
         return "Can't remove " + item.getName() + ", item not in basket.";
+    }
+
+    public boolean changeBasketCapacity(int newCapacity) {
+        if (newCapacity < this.basketCapacity) {
+            return false;
+        }
+        this.basketCapacity = newCapacity;
+        return true;
     }
 
     public double showTotalCostInBasket() {
@@ -61,6 +72,10 @@ public class Basket {
 
     public ArrayList<Item> getBasket() {
         return this.basket;
+    }
+
+    public int getBasketCapacity() {
+        return this.basketCapacity;
     }
 
     public Inventory getInventory() {

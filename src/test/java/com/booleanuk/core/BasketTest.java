@@ -126,8 +126,8 @@ public class BasketTest {
         testBasket.addItem(sesame);
         testBasket.addItem(black);
 
-        testBasket.getInventory().changeCapacity(10);
-        Assertions.assertEquals(10, testBasket.getInventory().getCapacity());
+        Assertions.assertTrue(testBasket.changeBasketCapacity(10));
+        Assertions.assertEquals(10, testBasket.getBasketCapacity());
 
         Bagel plain2 = new Bagel("Plain", converter.getSKU("Plain"));
         Bagel everything = new Bagel("Everything", converter.getSKU("Everything"));
@@ -150,5 +150,25 @@ public class BasketTest {
         expected.add(latte);
 
         Assertions.assertEquals(expected, testBasket.getBasket());
+    }
+
+    @Test
+    public void testChangeToSmallerCapacity() {
+        Basket testBasket = new Basket();
+        SKUConverter converter = new SKUConverter();
+
+        Bagel plain = new Bagel("Plain", converter.getSKU("Plain"));
+        Bagel onion = new Bagel("Onion", converter.getSKU("Onion"));
+        Coffee white = new Coffee("White", converter.getSKU("White"));
+        Bagel sesame = new Bagel("Sesame", converter.getSKU("Sesame"));
+        Coffee black = new Coffee("Black", converter.getSKU("Black"));
+        testBasket.addItem(plain);
+        testBasket.addItem(onion);
+        testBasket.addItem(white);
+        testBasket.addItem(sesame);
+        testBasket.addItem(black);
+
+        Assertions.assertFalse(testBasket.changeBasketCapacity(3));
+        Assertions.assertEquals(5, testBasket.getBasketCapacity());
     }
 }
