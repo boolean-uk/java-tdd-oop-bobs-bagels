@@ -58,6 +58,7 @@ I want customers to only be able to order things that we stock in our inventory.
 |-----------|--------------------------------------|-------------------------------------------------|--------------------------------|
 | Inventory | inInventory(String id)               | Item is in inventory                            | true                           |
 |           |                                      | Item is not in inventory                        | false                          |
+|           | getFillings()                        | Return all Fillings in Inventory                | String                         |
 | Basket    | addItem(String id)                   | Item type is available, not in basket           | add item to basket             |
 |           |                                      | Item type is available, already in basket       | increase amount in basket      |
 |           |                                      | Item type is not available                      | throw exception NoSuchBagel    |
