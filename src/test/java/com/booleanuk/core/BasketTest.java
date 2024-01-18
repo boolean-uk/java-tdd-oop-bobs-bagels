@@ -92,27 +92,15 @@ class BasketTest {
 
     @Test
     public void checksIfFillingsExist() {
-        Filling peanutButter = new Filling("Peanut butter", 0.29, "1");
-        Filling creamCheese = new Filling("Cream cheese", 0.19, "2");
+        StoreInventory fillings = new StoreInventory();
 
-        String allFillings = Filling.getAllFillingNames();
-
-        Assertions.assertEquals("Peanut butter, Cream cheese", allFillings);
-
+        Assertions.assertEquals("Bacon, Egg, Cheese, Cream Cheese, Smoked Salmon, Ham", Filling.getAllFillingNames());
     }
 
     @Test
     public void returnsCorrectCostOfFillings() {
-        StoreInventory products = new StoreInventory();
-        Store store = new Store(products);
-
-        Basket basket = new Basket();
-
-        store.addToBasket(basket, "FILB");
-
-        String allFillingsPrices = Filling.getAllFillingPrices();
-
-        Assertions.assertEquals("Egg price: 0.29, Bree price: 0.19", allFillingsPrices);
+        Assertions.assertEquals("Bacon price: 0.12, Egg price: 0.12, Cheese price: 0.12, " +
+                "Cream Cheese price: 0.12, Smoked Salmon price: 0.12, Ham price: 0.12", Filling.getAllFillingPrices());
     }
 
     @Test
