@@ -7,17 +7,17 @@ import java.util.HashMap;
 public class Store {
     private HashMap<Integer, Basket> baskets;
     private HashMap<String, Double> prices;
-    HashMap<String, String> bagelCodes;
-    HashMap<String, String> coffeeCodes;
-    HashMap<String, String> fillingCodes;
+    private HashMap<String, String> bagelCodes;
+    private HashMap<String, String> coffeeCodes;
+    private HashMap<String, String> fillingCodes;
 
     private int basketCapacity;
 
     public Store() {
         baskets = new HashMap<>();
+        basketCapacity = 3;
         initilizePrices();
         initilizeCodes();
-        basketCapacity = 3;
     }
     public int createBasket() {
         Basket basket = new Basket();
@@ -47,6 +47,47 @@ public class Store {
             return "Bob's bagels doesn't have that filling.";
         }
         return baskets.get(basketId).addFilling(filling, bagel);
+    }
+
+    public boolean updateBasketCapacity(int newCapacity) {
+        for(Basket basket: baskets.values()) {
+            if(basket.getNoOfBagels()> newCapacity) {
+                return false;
+            }
+        }
+        basketCapacity = newCapacity;
+        return true;
+    }
+
+    public double getCostOfBagel(String bagel) {
+        if(!bagelCodes.containsKey(bagel.toUpperCase())) {
+            return -1;
+        }
+        return prices.get(bagelCodes.get(bagel.toUpperCase()));
+    }
+
+    public double getCostOfFilling(String filling) {
+        if(!fillingCodes.containsKey(filling.toUpperCase())) {
+            return -1;
+        }
+        return prices.get(fillingCodes.get(filling.toUpperCase()));
+    }
+
+    public double getCostOfBasket(int basketId) {
+        double cost = 0;
+        ArrayList<Bagel> bagels = baskets.get(basketId).getBagels();
+        for(Bagel bagel: bagels) {
+            cost += getCostOfBagel(bagel.getName());
+            for(String filling: bagel.getFillings()) {
+                cost += getCostOfFilling(filling);
+            }
+        }
+        cost = Math.round(cost * 100);
+        return cost/100;
+    }
+
+    public boolean removeBagelFromBasket(String bagel, ArrayList<String> fillings, int basketId) {
+        return baskets.get(basketId).removeBagel(bagel, fillings);
     }
 
     private void initilizePrices() {
@@ -91,45 +132,4 @@ public class Store {
 
     }
 
-    public boolean updateBasketCapacity(int newCapacity) {
-        for(Basket basket: baskets.values()) {
-            if(basket.getNoOfBagels()> newCapacity) {
-                return false;
-            }
-        }
-        basketCapacity = newCapacity;
-        return true;
-    }
-
-    public double getCostOfBagel(String bagel) {
-        if(!bagelCodes.containsKey(bagel.toUpperCase())) {
-            return -1;
-        }
-        return prices.get(bagelCodes.get(bagel.toUpperCase()));
-    }
-
-    public double getCostOfFilling(String filling) {
-        if(!fillingCodes.containsKey(filling.toUpperCase())) {
-            return -1;
-        }
-        return prices.get(fillingCodes.get(filling.toUpperCase()));
-    }
-
-    public double getCostOfBasket(int basketId) {
-        double cost = 0;
-        ArrayList<Bagel> bagels = baskets.get(basketId).getBagels();
-        for(Bagel bagel: bagels) {
-            cost += getCostOfBagel(bagel.getName());
-            for(String filling: bagel.getFillings()) {
-                cost += getCostOfFilling(filling);
-            }
-        }
-        cost = Math.round(cost * 100);
-        cost = cost/100;
-        return cost;
-    }
-
-    public boolean removeBagelFromBasket(String bagel, ArrayList<String> fillings, int basketId) {
-        return baskets.get(basketId).removeBagel(bagel, fillings);
-    }
 }

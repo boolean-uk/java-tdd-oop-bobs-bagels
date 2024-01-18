@@ -5,6 +5,7 @@ import java.util.ArrayList;
 public class Bagel {
     private String name;
     private ArrayList<String> fillings;
+
     public Bagel(String name) {
         this.name = name;
         fillings = new ArrayList<>();
@@ -13,15 +14,6 @@ public class Bagel {
     public Bagel(String name, ArrayList<String> fillings) {
         this.name = name;
         this.fillings = fillings;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if(!(obj instanceof Bagel)) {
-            return false;
-        }
-        Bagel other = (Bagel) obj;
-        return this.name.equalsIgnoreCase(other.name) && this.fillings.equals(other.fillings);
     }
 
     public boolean addFilling(String filling) {
@@ -44,4 +36,15 @@ public class Bagel {
     public ArrayList<String> getFillings() {
         return fillings;
     }
+
+
+    @Override
+    public boolean equals(Object obj) {
+        if(!(obj instanceof Bagel)) {
+            return false;
+        }
+        Bagel other = (Bagel) obj;
+        return this.name.equalsIgnoreCase(other.name) && this.fillings.equals(other.fillings);
+    }
+
 }
