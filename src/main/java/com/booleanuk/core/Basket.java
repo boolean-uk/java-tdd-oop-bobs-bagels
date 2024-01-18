@@ -6,9 +6,19 @@ import java.util.Map;
 
 public class Basket {
         public ArrayList<Product> bagelBasket;
-        public int size=2;
 
-        public Basket() {
+
+    private int size=2;
+    public int getSize() {
+        return size;
+    }
+
+    public void setSize(int size) {
+        this.size = size;
+    }
+
+
+    public Basket() {
             this.bagelBasket = new ArrayList<>();
         }
 
@@ -20,10 +30,16 @@ public class Basket {
             bagelBasket.add(product);
              }
 
-        public void removeItem(Product product) {
-            bagelBasket.remove(product);
+        public boolean removeItem(Product product) {
+            if (bagelBasket.contains(product)){
+                bagelBasket.remove(product);
+                return true;
+            }
+            System.out.println("Item not in basket");
+            return false;
 
         }
+
 
         public double calculateTotalCost(Inventory inventory) {
 
