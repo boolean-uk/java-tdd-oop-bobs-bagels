@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class StoreTest {
 
@@ -172,6 +173,20 @@ public class StoreTest {
         int basketId = store.createBasket();
         store.addBagelToBasket("Onion", basketId);
         Assertions.assertTrue(store.removeBagelFromBasket("onion", new ArrayList<>(), basketId));
+    }
+
+    @Test
+    public void removeExistentBagelWithFillingsFromBasketTest() {
+        Store store = new Store();
+        int basketId = store.createBasket();
+        store.addBagelToBasket("Onion", basketId);
+        store.addBagelToBasket("plain", basketId);
+        store.addFilling("cheese", "onion", basketId);
+        store.addBagelToBasket("Onion", basketId);
+        store.addBagelToBasket("plain", basketId);
+        store.addFilling("egg", "onion", basketId);
+        store.addFilling("cheese", "onion", basketId);
+        Assertions.assertTrue(store.removeBagelFromBasket("onion", new ArrayList<>(Arrays.asList("cheese","egg")), basketId));
     }
 
 }
