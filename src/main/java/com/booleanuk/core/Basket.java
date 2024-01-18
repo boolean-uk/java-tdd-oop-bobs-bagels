@@ -38,7 +38,11 @@ public class Basket {
 
     //TODO: refactor so we dont have to create bagel obj
     public boolean removeBagel(String bagel, ArrayList<String> fillings) {
-        return bagels.remove(new Bagel(bagel));
+        ArrayList<String> upperCasedFillings = new ArrayList<>();
+        for(String filling: fillings) {
+            upperCasedFillings.add(filling.toUpperCase());
+        }
+        return bagels.remove(new Bagel(bagel, upperCasedFillings));
     }
 
 }

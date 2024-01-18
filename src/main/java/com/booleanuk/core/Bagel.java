@@ -10,6 +10,11 @@ public class Bagel {
         fillings = new ArrayList<>();
     }
 
+    public Bagel(String name, ArrayList<String> fillings) {
+        this.name = name;
+        this.fillings = fillings;
+    }
+
     @Override
     public boolean equals(Object obj) {
         if(!(obj instanceof Bagel)) {
