@@ -67,6 +67,14 @@ public class Basket {
         }
     }
 
+    public int checkSize() {
+        int size = 0;
+        for (Item item : this.basketContent.keySet()) {
+            size += this.basketContent.get(item);
+        }
+        return size;
+    }
+
     public String changeCapacity(int newCapacity) {
         return "";
     }

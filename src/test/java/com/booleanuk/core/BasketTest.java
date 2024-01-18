@@ -77,7 +77,7 @@ public class BasketTest {
         Assertions.assertEquals(3, basket.checkSize());
 
         Basket basket2 = new Basket(shop, 3);
-        Assertions.assertEquals(0, basket.checkSize());
+        Assertions.assertEquals(0, basket2.checkSize());
     }
 
     @Test
