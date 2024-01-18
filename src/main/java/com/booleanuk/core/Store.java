@@ -147,4 +147,8 @@ public class Store {
         baskets.get(basketId).addCoffee(coffee);
         return "Coffee added.";
     }
+
+    public boolean removeCoffeeFromBasket(String coffee, int basketId) {
+        return false;
+    }
 }

@@ -217,5 +217,13 @@ public class StoreTest {
         Assertions.assertTrue(store.getBaskets().get(basketId).getCoffees().contains("Latte"));
     }
 
+    @Test
+    public void removeNonExistentCoffeeToBasketTest() {
+        Store store = new Store();
+        int basketId = store.createBasket();
+        store.addCoffeeToBasket("Latte", basketId);
+        Assertions.assertFalse(store.removeCoffeeFromBasket("coffee", basketId));
+    }
+
 
 }
