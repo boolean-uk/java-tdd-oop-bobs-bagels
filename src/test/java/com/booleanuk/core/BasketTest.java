@@ -14,7 +14,7 @@ public class BasketTest {
         testInventory.put(bglo, 100);
         testInventory.put(bglp, 100);
         BobsBagelsShop shop = new BobsBagelsShop(testInventory);
-        Basket basket = new Basket(3);
+        Basket basket = new Basket(shop, 3);
         Assertions.assertEquals("Item BGLO added to basket.", basket.add(bglo));
         Assertions.assertEquals("Item BGLP added to basket.", basket.add(bglp));
 

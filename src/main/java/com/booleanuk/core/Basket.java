@@ -5,10 +5,12 @@ import java.util.HashMap;
 public class Basket {
     private HashMap<Item, Integer> basketContent;
     private int basketCapacity;
+    private BobsBagelsShop shop;
 
-    public Basket(int basketCapacity) {
+    public Basket(BobsBagelsShop shop, int basketCapacity) {
         this.basketContent = new HashMap<>();
         this.basketCapacity = basketCapacity;
+        this.shop = shop;
     }
 
     public HashMap<Item, Integer> getBasketContent() {
@@ -19,8 +21,22 @@ public class Basket {
         return this.basketCapacity;
     }
 
-    public void add(Item item) {
-
+    public String add(Item item) {
+        if (this.getBasketContent().size() >= this.getBasketCapacity()) {
+            return "Basket is full.";
+        }
+        else if (!this.shop.getInventory().containsKey(item)) {
+            return "Chosen item not in stock.";
+        }
+        else {
+            if (this.basketContent.containsKey(item)){
+                this.basketContent.replace(item,this.basketContent.get(item) + 1);
+            }
+            else {
+                this.basketContent.put(item, 1);
+            }
+            return "Item " + item.getSku() + " added to basket.";
+        }
     }
 
     public void remove(Item item) {
