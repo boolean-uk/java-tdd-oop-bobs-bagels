@@ -70,4 +70,14 @@ public class ExtensionOne {
         Assertions.assertEquals(10.43 + 0.12*10, store.getCostOfBasket(basketId), 0.001);
     }
 
+    @Test
+    public void discountOneCoffeeAndOneBagelTest() {
+        Store store = new Store();
+        int basketId = store.createBasket();
+        store.addBagelToBasket("plain", basketId);
+        store.addCoffeeToBasket("black", basketId);
+
+        Assertions.assertEquals(1.25, store.getCostOfBasket(basketId), 0.001);
+    }
+
 }
