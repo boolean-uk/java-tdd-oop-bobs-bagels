@@ -6,7 +6,7 @@ public class Basket {
     private ArrayList<Bagel> bagels;
 
     public Basket() {
-        bagels = new ArrayList<Bagel>();
+        bagels = new ArrayList<>();
     }
 
     public ArrayList<Bagel> getBagels() {

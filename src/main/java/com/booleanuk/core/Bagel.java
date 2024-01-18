@@ -37,7 +37,6 @@ public class Bagel {
         return fillings;
     }
 
-
     @Override
     public boolean equals(Object obj) {
         if(!(obj instanceof Bagel)) {

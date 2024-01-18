@@ -82,8 +82,8 @@ public class Store {
                 cost += getCostOfFilling(filling);
             }
         }
-        cost = Math.round(cost * 100);
-        return cost/100;
+
+        return cost;
     }
 
     public boolean removeBagelFromBasket(String bagel, ArrayList<String> fillings, int basketId) {
