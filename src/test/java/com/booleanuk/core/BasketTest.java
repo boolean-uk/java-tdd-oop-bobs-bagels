@@ -92,4 +92,35 @@ class BasketTest {
         Basket basket = new Basket();
         Assertions.assertFalse(basket.remove("BGLO"));
     }
+
+    @Test
+    public void testSetBasketCapacity() {
+        Basket basket = new Basket();
+        Assertions.assertTrue(basket.setCapacity(3));
+    }
+
+    @Test
+    public void testSetBasketCapacityAndAddMoreThanLimit() {
+        Basket basket = new Basket();
+        basket.add("BGLO");
+        Assertions.assertTrue(basket.setCapacity(1));
+        Assertions.assertEquals("Basket is full", basket.add("BGLO"));
+    }
+
+    @Test
+    public void testSetBasketCapacityBelowNumberOfProducts() {
+        Basket basket = new Basket();
+        basket.add("BGLO");
+        basket.add("BGLO");
+        Assertions.assertTrue(basket.setCapacity(1));
+    }
+
+    @Test
+    public void testSetBasketCapacityBelowNumberOfProductsThenAdd() {
+        Basket basket = new Basket();
+        basket.add("BGLO");
+        basket.add("BGLO");
+        Assertions.assertTrue(basket.setCapacity(1));
+        Assertions.assertEquals("Basket is full", basket.add("BGLO"));
+    }
 }
