@@ -8,9 +8,10 @@ import com.booleanuk.core.models.item.Filling;
 import com.booleanuk.extension.ReceiptPrinter;
 
 import java.io.FileNotFoundException;
+import java.net.URISyntaxException;
 
 public class Main {
-    public static void main(String[] args) throws FileNotFoundException {
+    public static void main(String[] args) throws FileNotFoundException, URISyntaxException {
         Store store = new Store("Bob's Bagels");
         System.out.println("Store object: " + store);
 

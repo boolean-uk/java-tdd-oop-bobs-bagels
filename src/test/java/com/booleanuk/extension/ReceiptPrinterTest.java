@@ -9,6 +9,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import java.io.FileNotFoundException;
+import java.net.URISyntaxException;
 import java.util.Locale;
 
 public class ReceiptPrinterTest {
@@ -20,7 +21,7 @@ public class ReceiptPrinterTest {
     }
 
     @Test
-    public void testCorrectPrintOutput() throws FileNotFoundException {
+    public void testCorrectPrintOutput() throws FileNotFoundException, URISyntaxException {
         Store store = new Store("Bob's Bagels");
         Basket basket = new Basket();
 

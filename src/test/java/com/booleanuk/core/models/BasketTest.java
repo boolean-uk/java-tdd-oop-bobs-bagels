@@ -9,6 +9,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.io.FileNotFoundException;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -24,7 +25,7 @@ public class BasketTest {
     private static Item item3;
 
     @BeforeAll
-    public static void setup() throws FileNotFoundException {
+    public static void setup() throws FileNotFoundException, URISyntaxException {
         Store bobsTest = new Store("TesT Store");
         basket = new Basket();
         item1 = bobsTest.getItemBySKU(bagelPlainSKU);

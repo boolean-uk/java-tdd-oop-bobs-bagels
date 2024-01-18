@@ -7,6 +7,9 @@ import com.booleanuk.core.models.item.Filling;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -14,11 +17,13 @@ public class FileHandler {
     private static final String FILE_NAME = "inventory";
     private static final String EXT = ".csv";
 
-    public static ArrayList<Item> fetchInventoryItemsToStore() throws FileNotFoundException {
+    public static ArrayList<Item> fetchInventoryItemsToStore() throws FileNotFoundException, URISyntaxException {
         ArrayList<Item> inventory = new ArrayList<>();
         // Should be some kind of db that is updated when something (price, inventory) changes
-        String file = FILE_NAME + EXT;
-        Scanner scanner = new Scanner(new File(file));
+        URL url = FileHandler.class.getClassLoader().getResource(FILE_NAME + EXT);
+        assert url != null;
+        File file = new File(url.toURI());
+        Scanner scanner = new Scanner(file);
 
         scanner.nextLine(); // Skip .csv header
         while (scanner.hasNext()) {
