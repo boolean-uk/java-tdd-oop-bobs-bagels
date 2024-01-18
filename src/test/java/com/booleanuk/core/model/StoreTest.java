@@ -12,6 +12,6 @@ public class StoreTest {
         Store bobsBagels = new Store("Bob's Bagels");
         Assertions.assertEquals("Bob's Bagels", bobsBagels.getName());
         // inventory db file has 14 different items at this time
-        Assertions.assertEquals(14, bobsBagels.getItems().size());
+        Assertions.assertEquals(14, bobsBagels.getInventory().size());
     }
 }

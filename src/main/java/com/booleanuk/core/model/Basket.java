@@ -1,5 +1,8 @@
 package com.booleanuk.core.model;
 
+import com.booleanuk.core.model.item.Bagel;
+import com.booleanuk.core.model.item.Coffee;
+import com.booleanuk.core.model.item.Filling;
 import lombok.Data;
 
 import java.util.ArrayList;
@@ -19,16 +22,16 @@ public class Basket {
         this.capacity = capacity;
     }
 
-    public boolean addItem(Item item) {
-        // TODO Decrease stock
+    public Item addItem(Item item) {
         if (basket.size() >= capacity) {
-            return false;
+            return null;
         }
-        return basket.add(item);
+        Item itemCopy = createItemCopy(item); // Make copy of inventory item
+        basket.add(itemCopy);
+        return itemCopy;
     }
 
     public boolean removeItem(Item item) {
-        // TODO Increase stock
         return basket.remove(item);
     }
 
@@ -38,5 +41,18 @@ public class Basket {
             cost += item.getPrice();
         }
         return cost;
+    }
+
+    private Item createItemCopy(Item item) {
+        if (item instanceof Bagel) {
+            return new Bagel((Bagel) item);
+        } else if (item instanceof Coffee) {
+            return new Coffee((Coffee) item);
+        } else if (item instanceof Filling) {
+            return new Filling((Filling) item);
+        } else {
+            // Make generic Item copy
+            return new Item(item);
+        }
     }
 }
