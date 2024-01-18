@@ -3,10 +3,10 @@ package com.booleanuk.core;
 import java.util.Objects;
 
 public class Product {
-    String sku;
-    double price;
-    String name;
-    String variant;
+    private String sku;
+    private double price;
+    private String name;
+    private String variant;
 
     public Product(String sku, double price, String name, String variant){
         this.sku = sku;
