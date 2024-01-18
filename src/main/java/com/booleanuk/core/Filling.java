@@ -21,25 +21,23 @@ public class Filling extends Item {
             fillingNames.append(filling.getItemName()).append(", ");
         }
 
-        // Remove the trailing comma and space if there are fillings
         if (!allFillings.isEmpty()) {
             fillingNames.delete(fillingNames.length() - 2, fillingNames.length());
         }
 
         return fillingNames.toString();
     }
-/*
+
     public static String getAllFillingPrices() {
-        StringBuilder fillingNames = new StringBuilder();
+        StringBuilder fillingNamesAndPrices = new StringBuilder();
         for (Filling filling : allFillings) {
-            fillingNames.append(filling.getPrice()).append(", ");
+            fillingNamesAndPrices.append(filling.getItemName()).append(" price: " + filling.getPrice()).append(", ");
         }
 
-        // Remove the trailing comma and space if there are fillings
         if (!allFillings.isEmpty()) {
-            fillingNames.delete(fillingNames.length() - 2, fillingNames.length());
+            fillingNamesAndPrices.delete(fillingNamesAndPrices.length() - 2, fillingNamesAndPrices.length());
         }
 
-        return fillingNames.toString();
-    }*/
+        return fillingNamesAndPrices.toString();
+    }
 }
