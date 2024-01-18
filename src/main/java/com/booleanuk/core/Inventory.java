@@ -17,24 +17,28 @@ public class Inventory extends Basket {
 
     public HashMap<String, Double> getInventoryPriceList(){
         this.inventoryPriceList = new HashMap<>();
-        inventoryPriceList.put("BGLO", 0.49);
-        inventoryPriceList.put("BGLP", 0.39);
-        inventoryPriceList.put("BGLE", 0.49);
-        inventoryPriceList.put("BGLS", 0.49);
+        this.inventoryPriceList.put("BGLO", 0.49);
+        this.inventoryPriceList.put("BGLP", 0.39);
+        this.inventoryPriceList.put("BGLE", 0.49);
+        this.inventoryPriceList.put("BGLS", 0.49);
 
-        inventoryPriceList.put("COFB", 0.99);
-        inventoryPriceList.put("COFW", 1.19);
-        inventoryPriceList.put("COFC", 1.29);
-        inventoryPriceList.put("COFL", 1.29);
+        this.inventoryPriceList.put("COFB", 0.99);
+        this.inventoryPriceList.put("COFW", 1.19);
+        this.inventoryPriceList.put("COFC", 1.29);
+        this.inventoryPriceList.put("COFL", 1.29);
 
-        inventoryPriceList.put("FILB", 0.12);
-        inventoryPriceList.put("FILE", 0.12);
-        inventoryPriceList.put("FILC", 0.12);
-        inventoryPriceList.put("FILX", 0.12);
-        inventoryPriceList.put("FILS", 0.12);
-        inventoryPriceList.put("FILH", 0.12);
+        this.inventoryPriceList.put("FILB", 0.12);
+        this.inventoryPriceList.put("FILE", 0.12);
+        this.inventoryPriceList.put("FILC", 0.12);
+        this.inventoryPriceList.put("FILX", 0.12);
+        this.inventoryPriceList.put("FILS", 0.12);
+        this.inventoryPriceList.put("FILH", 0.12);
 
         return inventoryPriceList;
+    }
+
+    public double getItemPrice(String key) {
+        return inventoryPriceList.get(key);
     }
 
     public ArrayList<String> getFullInventoryList() {
