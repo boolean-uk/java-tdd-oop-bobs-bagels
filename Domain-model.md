@@ -92,7 +92,8 @@ I want customers to only be able to order things that we stock in our inventory.
 |                                      |                                                        | items than newCapacity.      |                                                |
 |                                      |                                                        | Baskets have more items than | String "New capacity must be larger than       |
 |                                      |                                                        | newCapacity.                 | number of items currently in basket."          |
-|                                      |                                                        |                              |                                                |
+| {3,4}`checkSize()`                   | HashMap<Item item, int amount> basketContent           | Not empty basket.            | int numberOfItems                              |
+|                                      |                                                        | Empty basket.                | int 0                                          |
 
 ### Class BobsBagelsShop
 
