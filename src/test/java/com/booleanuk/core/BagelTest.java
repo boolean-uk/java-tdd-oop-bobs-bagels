@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -51,13 +52,22 @@ class BagelTest {
 
     @Test
     public void testGetFilling(){
-        Bagel plain = new Bagel("BGLP", new String[]{"FILX", "FILS", "FILC"});
-        HashMap<String, Filling> fillings = new HashMap<>();
-        fillings.put("FILX", new Filling("FILX"));
-        fillings.put("FILS", new Filling("FILS"));
-        fillings.put("FILC", new Filling("FILC"));
+        Filling filling1 = new Filling("FILX");
+        Filling filling2 = new Filling("FILS");
+        Filling filling3 = new Filling("FILC");
+        Bagel plain = new Bagel("BGLP", new Filling[]{filling1,filling2,filling3});
+        ArrayList<Filling> fillings = new ArrayList<>();
+        fillings.add(filling1);
+        fillings.add(filling2);
+        fillings.add(filling3);
 
-        Assertions.assertEquals(fillings.keySet(), plain.getFillings().keySet());
-
+        Assertions.assertEquals(fillings, plain.getFillings());
+    }
+    @Test
+    public void testAddFilling(){
+        Filling filling1 = new Filling("FILX");
+        Bagel plain = new Bagel("BGLP");
+        plain.addFilling(filling1);
+        Assertions.assertEquals(plain.getFillings().get(0), filling1);
     }
 }
