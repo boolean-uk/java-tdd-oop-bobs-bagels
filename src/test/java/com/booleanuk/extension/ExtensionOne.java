@@ -42,4 +42,32 @@ public class ExtensionOne {
         Assertions.assertEquals(20, store.getBaskets().get(basketId).getNoOfBagels());
         Assertions.assertEquals(10.43, store.getCostOfBasket(basketId), 0.001);
     }
+
+    @Test
+    public void discountMultipriceBagelDifferentBagelsWithFillingsTest() {
+        Store store = new Store();
+        store.updateBasketCapacity(100);
+        int basketId = store.createBasket();
+
+        for(int i=0; i < 12; i++) {
+            store.addBagelToBasket("plain", basketId);
+        }
+        for(int i=0; i < 6; i++) {
+            store.addBagelToBasket("Everything", basketId);
+            store.addFilling("cheese", "everything", basketId);
+        }
+        for(int i=0; i < 2; i++) {
+            store.addBagelToBasket("oNIoN", basketId);
+            store.addFilling("hAM", "everything", basketId);
+            store.addFilling("egG", "everything", basketId);
+
+        }
+        for(int i=0; i < 3; i++) {
+            store.addCoffeeToBasket("blaCk", basketId);
+        }
+
+        Assertions.assertEquals(20, store.getBaskets().get(basketId).getNoOfBagels());
+        Assertions.assertEquals(10.43 + 0.12*10, store.getCostOfBasket(basketId), 0.001);
+    }
+
 }
