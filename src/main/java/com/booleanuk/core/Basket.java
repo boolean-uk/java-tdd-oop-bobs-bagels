@@ -6,11 +6,11 @@ public class Basket {
 
     private static final int EMPTY = 0;
 
-    public ArrayList<Item> basket;
-    public int bagelsInBasket;
-    public int fillingsInBasket;
-    public int coffeesInBasket;
-    public Inventory inventory;
+    private ArrayList<Item> basket;
+    private int bagelsInBasket;
+    private int fillingsInBasket;
+    private int coffeesInBasket;
+    private Inventory inventory;
 
     public Basket() {
         this.basket = new ArrayList<>();
@@ -33,8 +33,8 @@ public class Basket {
         return true;
     }
 
-    public void removeItem(Item item) {
-
+    public boolean removeItem(Item item) {
+        return false;
     }
 
     public double showTotalCostInBasket() {
