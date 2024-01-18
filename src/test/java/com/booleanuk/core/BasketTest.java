@@ -28,6 +28,19 @@ public class BasketTest {
 
     @Test
     public void remove() {
+        HashMap<Item, Integer> testInventory = new HashMap<>();
+        Item bglo = new Item("BGLO","Bagel", "Onion", 0.49);
+        Item bglp = new Item("BGLP","Bagel", "Plain", 0.39);
+        Item bgle = new Item("BGLE","Bagel", "Everything", 0.49);
+        testInventory.put(bglo, 100);
+        testInventory.put(bglp, 100);
+        BobsBagelsShop shop = new BobsBagelsShop(testInventory);
+        Basket basket = new Basket(shop, 3);
+        basket.add(bglo);
+        basket.add(bglp);
+        Assertions.assertEquals("Item BGLE not in basket.", basket.remove(bgle));
+        Assertions.assertEquals("Item BGLO removed from basket.", basket.remove(bglo));
+        Assertions.assertEquals(1, basket.getBasketContent().size());
     }
 
     @Test
