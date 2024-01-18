@@ -42,6 +42,7 @@ public class ProductTest {
         Product product = new Product("apple", 0.39);
         product.setVariant("Granny Smith");
         Assertions.assertEquals("Granny Smith", product.getVariant());
+        Assertions.assertEquals("FRUG", product.getSku());
     }
 
     @Test
@@ -49,6 +50,7 @@ public class ProductTest {
         Product product = new Product("apple", 0.39);
         product.setName("Fruit");
         Assertions.assertEquals("Fruit", product.getName());
+        Assertions.assertEquals("FRUA", product.getSku());
     }
 
     @Test

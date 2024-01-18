@@ -52,7 +52,7 @@ public class Product {
     }
 
     public void setSku(String sku) {
-        this.sku = sku;
+        this.sku = sku.toUpperCase();
     }
 
     public void setName(String name) {
