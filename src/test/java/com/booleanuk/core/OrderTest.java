@@ -23,5 +23,24 @@ public class OrderTest {
 
     }
 
+    @Test
+    public void isItemRemovable() {
+        Order basket1 = new Order();
+
+
+        basket1.add("BGLO", "Bagel", "Onion", 0.49);
+        boolean result = basket1.remove("BGLO", "Bagel", "Onion", 0.49);
+        Assertions.assertTrue(result);
+    }
+
+    @Test
+    public void isItemNotRemovable() {
+        Order basket1 = new Order();
+
+        boolean result = basket1.remove("RATT", "ggg", "ddd", 0.3);
+        Assertions.assertFalse(result);
+
+    }
+
 
 }
