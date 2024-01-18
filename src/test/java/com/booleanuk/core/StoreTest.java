@@ -166,4 +166,12 @@ public class StoreTest {
         Assertions.assertFalse(store.removeBagelFromBasket("plain", new ArrayList<>(), basketId));
     }
 
+    @Test
+    public void removeExistentBagelNoFillingsFromBasketTest() {
+        Store store = new Store();
+        int basketId = store.createBasket();
+        store.addBagelToBasket("Onion", basketId);
+        Assertions.assertTrue(store.removeBagelFromBasket("onion", new ArrayList<>(), basketId));
+    }
+
 }
