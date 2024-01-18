@@ -138,9 +138,10 @@ public class Bagel {
 
         for (int i = 0; i < inventoryList.size(); i++){
             if (inventoryList.get(i).SKU.equals(product)){
-                return true;
+                value= true;
             }
         }
+        return value;
     }
 
 }
