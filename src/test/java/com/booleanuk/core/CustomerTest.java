@@ -24,7 +24,25 @@ public class CustomerTest {
         Bagel bagel3 = new Bagel("Plain");
 
 
-        Assertions.assertEquals(0.39*3, customer.getTotalCost(new ArrayList<Item>(Arrays.asList(bagel1, bagel2, bagel3))));
+        Assertions.assertEquals(0.39*3, customer.getTotalCost(new ArrayList<>(Arrays.asList(bagel1, bagel2, bagel3))));
+
+
+    }
+
+    @Test
+    public void testGetTotalCostDiscount12(){
+        Customer customer = new Customer();
+
+        Bagel bagel1 = new Bagel("Plain");
+        Bagel bagel2 = new Bagel("Plain");
+        Bagel bagel3 = new Bagel("Plain");
+        Bagel bagel4 = new Bagel("Plain");
+        Bagel bagel5 = new Bagel("Plain");
+        Bagel bagel6 = new Bagel("Plain");
+
+
+        Assertions.assertEquals(3.99, customer.getTotalCost(new ArrayList<>(Arrays.asList(bagel1, bagel2, bagel3, bagel4, bagel5, bagel6))));
+
     }
 
     @Test
@@ -36,6 +54,7 @@ public class CustomerTest {
         Assertions.assertEquals(0.12, customer.getCostOfItem(new Filling("Bacon")));
         Assertions.assertEquals(0.99, customer.getCostOfItem(new Coffee("Black")));
         Assertions.assertEquals(1.29, customer.getCostOfItem(new Coffee("Capuccino")));
+
 
 
     }
@@ -76,6 +95,8 @@ public class CustomerTest {
 
         Assertions.assertTrue(customer.order("FILB"));
         Assertions.assertFalse(customer.order("FIIILb"));
+
+
     }
 
 

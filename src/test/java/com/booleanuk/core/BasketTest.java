@@ -56,8 +56,6 @@ public class BasketTest {
 
         Assertions.assertEquals(2, basket.getBasketCapacity());
 
-
-
     }
 
 }
