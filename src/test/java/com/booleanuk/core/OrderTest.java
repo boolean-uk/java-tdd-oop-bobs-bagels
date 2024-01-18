@@ -98,5 +98,24 @@ public class OrderTest {
 
     }
 
+    @Test
+    public void testTotalCostCorrect() {
+        Order basket1 = new Order();
+
+        basket1.add("BGLO", "Bagel", "Onion", 0.49);
+        basket1.add("BGLP", "Bagel", "Plain", 0.39);
+        double result = basket1.totalCost();
+        Assertions.assertEquals(0.88, result);
+    }
+
+    @Test
+    public void testTotalCostWrong() {
+        Order basket1 = new Order();
+
+        double result = basket1.totalCost();
+        Assertions.assertEquals(0, result);
+
+    }
+
 
 }
