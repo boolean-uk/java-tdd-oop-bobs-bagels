@@ -109,6 +109,19 @@ public class Bagel {
         System.out.println(inv);
         return true;
     }
+    public String chooseFilling(String filling){
+        String out="";
+        initializeArr();
+        for (int i = 0; i < inventoryList.size(); i++){
+            if (inventoryList.get(i).variant.equals(filling)){
+                out = inventoryList.get(i).SKU;
+            }
+        }
+        if (out.equals("")){
+            return "Error";
+        }
+        return out;
+    }
 
 
 }

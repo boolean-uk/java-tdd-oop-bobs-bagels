@@ -83,7 +83,24 @@ public class BagelTest {
         Assertions.assertEquals("BGLE", bagelType);
         bagelType = abagel.chooseFilling("Sesame");
         Assertions.assertEquals("BGLS", bagelType);
+        bagelType = abagel.chooseFilling("Strawberry");
+        Assertions.assertEquals("Error", bagelType);
     }
+    @Test
+    public void testCostofFilling(){
+        Bagel abagel = new Bagel();
+
+        double bagelCost = abagel.costFilling("Plain");
+        Assertions.assertEquals(0.39, bagelCost);
+        bagelCost = abagel.costFilling("Everything");
+        Assertions.assertEquals(0.49, bagelCost);
+        bagelCost = abagel.costFilling("Sesame");
+        Assertions.assertEquals(0.49, bagelCost);
+        bagelCost = abagel.costFilling("Strawberry");
+        Assertions.assertEquals(null, bagelCost);
+
+    }
+
 
 
 
