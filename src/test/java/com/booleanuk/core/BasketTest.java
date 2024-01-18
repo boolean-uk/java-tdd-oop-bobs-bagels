@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 
 public class BasketTest {
-    @Test /* User story 1 */
+    @Test /* User story 1 and 10*/
     public void testAddBagelToEmptyBasket() {
         Basket testBasket = new Basket();
         SKUConverter converter = new SKUConverter();
@@ -18,7 +18,7 @@ public class BasketTest {
         Assertions.assertTrue(testBasket.addItem(plain));
     }
 
-    @Test /* User story 3 */
+    @Test /* User story 3 and 10*/
     public void testAddBagelToFullBasket() {
         Basket testBasket = new Basket();
         SKUConverter converter = new SKUConverter();
@@ -225,4 +225,27 @@ public class BasketTest {
         Assertions.assertEquals(expectedFillingOutput, testBasket.getFillingPrices());
     }
 
+    @Test /* User story 8 and 10*/
+    public void testAddFillingToOneBagel() {
+        Basket testBasket = new Basket();
+        SKUConverter converter = new SKUConverter();
+
+        Bagel plain = new Bagel("Plain", converter.getSKU("Plain"));
+        Filling bacon = new Filling("Bacon", converter.getSKU("Bacon"));
+
+        Assertions.assertFalse(testBasket.addBagelFilling(plain, bacon));
+
+        testBasket.addItem(plain);
+        Assertions.assertTrue(testBasket.addBagelFilling(plain, bacon));
+
+        ArrayList<String> expectedFillingsInBagel = new ArrayList<>();
+        expectedFillingsInBagel.add(bacon.getName());
+
+        Assertions.assertEquals(expectedFillingsInBagel, plain.getFillings());
+
+        ArrayList<Item> expected = new ArrayList<>();
+        expected.add(plain);
+
+        Assertions.assertEquals(expected, testBasket.getBasket());
+    }
 }

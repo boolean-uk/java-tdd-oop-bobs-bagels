@@ -4,21 +4,13 @@ import java.util.ArrayList;
 
 public class Basket {
 
-    private static final int EMPTY = 0;
-
     private ArrayList<Item> basket;
-    private int bagelsInBasket;
-    private int fillingsInBasket;
-    private int coffeesInBasket;
-    private Inventory inventory;
+    private final Inventory inventory;
     private int basketCapacity;
 
 
     public Basket() {
         this.basket = new ArrayList<>();
-        this.bagelsInBasket = EMPTY;
-        this.fillingsInBasket = EMPTY;
-        this.coffeesInBasket = EMPTY;
         this.inventory = new Inventory();
         this.basketCapacity = 5;
     }
@@ -90,10 +82,13 @@ public class Basket {
         return output;
     }
 
-    public void addBagelFilling(Bagel bagel, Filling filling) {
-
+    public boolean addBagelFilling(Bagel bagel, Filling filling) {
+        if (this.basket.contains(bagel) && !this.inventory.isInInventory(filling.getsKU())) {
+            bagel.addFilling(filling.getName());
+            return true;
+        }
+        return false;
     }
-
 
     public ArrayList<Item> getBasket() {
         return this.basket;
@@ -101,10 +96,6 @@ public class Basket {
 
     public int getBasketCapacity() {
         return this.basketCapacity;
-    }
-
-    public Inventory getInventory() {
-        return this.inventory;
     }
 
     public static void main(String[] args) {

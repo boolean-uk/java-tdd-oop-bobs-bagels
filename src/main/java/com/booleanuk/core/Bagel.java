@@ -1,21 +1,21 @@
 package com.booleanuk.core;
 
-import java.util.HashMap;
+import java.util.ArrayList;
 
 public class Bagel extends Item {
 
-    private String filling;
+    private ArrayList<String> fillings;
 
     public Bagel(String name, String sKU) {
         super(name, sKU);
-        this.filling = "Nothing";
+        this.fillings = new ArrayList<>();
     }
 
-    public String getFilling() {
-        return this.filling;
+    public ArrayList<String> getFillings() {
+        return this.fillings;
     }
 
-    public void setFilling(String filling) {
-        this.filling = filling;
+    public void addFilling(String filling) {
+        this.fillings.add(filling);
     }
 }
