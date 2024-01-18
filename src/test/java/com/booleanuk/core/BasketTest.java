@@ -138,4 +138,31 @@ class BasketTest {
         Basket basket = new Basket();
         Assertions.assertEquals(0, basket.totalCost());
     }
+
+    @Test
+    public void testAddFillingWithBagelInBasket() {
+        Basket basket = new Basket();
+        basket.add("BGLO");
+        Assertions.assertEquals("Filling added", basket.addFilling("FILB"));
+    }
+
+    @Test
+    public void testAddFillingWithNoBagelInBasket() {
+        Basket basket = new Basket();
+        Assertions.assertEquals("You need to add a bagel to your basket", basket.addFilling("FILB"));
+    }
+
+    @Test
+    public void testAddNoneExistingFillingWithBagelInBasket() {
+        Basket basket = new Basket();
+        basket.add("BGLO");
+        Assertions.assertEquals("Filling was not found", basket.addFilling("AAHHHH"));
+    }
+
+    @Test
+    public void testAddProductThatIsNotFillingWithBagelInBasket() {
+        Basket basket = new Basket();
+        basket.add("BGLO");
+        Assertions.assertEquals("Product needs to be a filling", basket.addFilling("COFB"));
+    }
 }
