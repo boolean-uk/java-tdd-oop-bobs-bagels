@@ -45,7 +45,6 @@ public class Inventory {
             e.printStackTrace();
         }
     }
-
     public HashMap<String, Item> getBagelInventory() {
         return bagelInventory;
     }
@@ -60,7 +59,7 @@ public class Inventory {
         for (Map.Entry<String, Item> entry : inventory.entrySet()) {
             String sku = entry.getKey();
             Item item = entry.getValue();
-            System.out.println("Variant: " + item.getVariant() + ", Price: " + item.getPrice());
+            System.out.println("SKU: " + sku + ", Variant: " + item.getVariant() + ", Price: " + item.getPrice());
         }
         System.out.println("-------------------------------");
     }

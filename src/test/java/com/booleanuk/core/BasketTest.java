@@ -4,20 +4,19 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 public class BasketTest {
+
     private Basket basket;
     private Item testItem;
+    @Test
+    public void addAndRemoveItemTest() {
+        basket = new Basket(10);
+        testItem = new Item("Bagel", 2.5, "test");
+        basket.addItems(testItem, 2);
+        Assertions.assertEquals(5, basket.getTotalCost());
 
-    @Test
-    public void addBagelTest(){
-        basket = new Basket(10);
-        testItem = new Item("Beige", 1.23);
-        Assertions.assertTrue(basket.addBagel(testItem));
+        basket.removeItems(testItem, 1);
+        Assertions.assertEquals(2.5, basket.getTotalCost());
+
     }
-    @Test
-    public void removeBagelTest(){
-        basket = new Basket(10);
-        testItem = new Item("Beige", 1.23);
-        basket.addBagel(testItem);
-        Assertions.assertTrue(basket.removeBagel(testItem));
-    }
+
 }

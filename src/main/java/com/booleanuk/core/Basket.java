@@ -12,7 +12,7 @@ public class Basket {
         this.items = new ArrayList<>();
     }
 
-    public Boolean addItems(Item item){
+    public Boolean addItems(Item item, int quantity){
         if (items.size() + quantity <= capacity) {
             for (int i = 0; i < quantity; i++) {
                 items.add(item);
@@ -24,7 +24,6 @@ public class Basket {
     public boolean removeItems(Item item, int quantity) {
         for (int i = 0; i < quantity; i++) {
             if (!items.remove(item)) {
-                // If the item is not found, return false
                 return false;
             }
         }

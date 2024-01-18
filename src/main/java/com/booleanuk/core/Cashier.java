@@ -13,7 +13,7 @@ public class Cashier {
         this.basket = basket;
     }
 
-    private boolean doChoice(char choice) {
+    private boolean doChoice(char choice, Scanner userInput) {
         boolean exit = false;
         switch (choice) {
             case 'v':
@@ -22,10 +22,40 @@ public class Cashier {
                 inventory.printInventory(inventory.getFillingInventory(), "Filling Inventory");
                 break;
             case 'a':
-                // add products
+                System.out.print("Enter SKU of the product to add: ");
+                String skuToAdd = userInput.next().trim().toUpperCase();
+
+                if (inventory.getBagelInventory().containsKey(skuToAdd)) {
+                    Item itemToAdd = inventory.getBagelInventory().get(skuToAdd);
+                    System.out.print("Enter quantity to add: ");
+                    int quantityToAdd = userInput.nextInt();
+
+                    if (basket.addItems(itemToAdd, quantityToAdd)) {
+                        System.out.println(quantityToAdd + " " + itemToAdd.getVariant() + "(s) added to the basket.");
+                    } else {
+                        System.out.println("Not enough space in the basket to add " + quantityToAdd + " " + itemToAdd.getVariant() + "(s).");
+                    }
+                } else {
+                    System.out.println("Invalid SKU. Product not found in the inventory.");
+                }
                 break;
             case 'r':
-                // remove products
+                System.out.print("Enter SKU of the product to remove: ");
+                String skuToRemove = userInput.next().trim().toUpperCase();
+
+                if (inventory.getBagelInventory().containsKey(skuToRemove)) {
+                    Item itemToAdd = inventory.getBagelInventory().get(skuToRemove);
+                    System.out.print("Enter quantity to remove: ");
+                    int quantityToAdd = userInput.nextInt();
+
+                    if (basket.addItems(itemToAdd, quantityToAdd)) {
+                        System.out.println(quantityToAdd + " " + itemToAdd.getVariant() + "(s) removed from the basket.");
+                    } else {
+                        System.out.println("Not enough space in the basket to add " + quantityToAdd + " " + itemToAdd.getVariant() + "(s).");
+                    }
+                } else {
+                    System.out.println("Invalid SKU. Product not found in the inventory.");
+                }
                 break;
             case 'c':
                 // show basket
@@ -35,6 +65,9 @@ public class Cashier {
                 break;
             case 'm':
                 // change capacity of basket
+                break;
+            case 'x':
+                menu();
                 break;
             case 'q':
                 exit = true;
@@ -52,6 +85,7 @@ public class Cashier {
         System.out.println("c. Show basket");
         System.out.println("p. Pay for basket");
         System.out.println("m. Change capacity of basket");
+        System.out.println("x. Back to menu");
         System.out.println("q. Exit");
         System.out.println("===========================");
         System.out.print("Enter your choice: ");
@@ -66,7 +100,7 @@ public class Cashier {
         cashier.menu();
         while (!exit) {
             char choice = cashier.userInput.next().charAt(0);
-            exit = cashier.doChoice(choice);
+            exit = cashier.doChoice(choice, cashier.userInput);
         }
     }
 }
