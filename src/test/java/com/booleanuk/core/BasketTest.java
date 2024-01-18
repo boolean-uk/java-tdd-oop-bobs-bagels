@@ -88,5 +88,21 @@ class BasketTest {
         Assertions.assertEquals(0.39, basket.getCostOfBagel(bagelplain));
 
         //Get cost of bagel with filling on
-        Assertions.assertEquals(0.63, basket.getCostOfBagel(bagelWithFilling));    }
+        Assertions.assertEquals(0.63, basket.getCostOfBagel(bagelWithFilling));
+    }
+    @Test
+    public void testGetTotalCost(){
+        Bagel bagelplain = new Bagel("BGLP");
+        Bagel bagelOnion = new Bagel("BGLO");
+        Filling filling1 = new Filling("FILB");
+        Filling filling2 = new Filling("FILE");
+        Bagel bagelWithFilling = new Bagel("BGLP", new Filling[]{filling1, filling2});
+        Basket basket = new Basket();
+
+        basket.add(bagelplain);
+        basket.add(bagelWithFilling);
+        basket.add(bagelOnion);
+
+        Assertions.assertEquals( 1.51,basket.getCostOfBasket());
+    }
 }
