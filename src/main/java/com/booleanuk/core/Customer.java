@@ -9,6 +9,7 @@ public class Customer {
     private Basket basket;
 
     public Customer() {
+
     }
 
     public double getTotalCost(Map<Item,Integer> items) {

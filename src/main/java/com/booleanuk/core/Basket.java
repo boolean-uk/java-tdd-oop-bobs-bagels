@@ -17,8 +17,7 @@ public class Basket {
     }
 
     public boolean addItemToBasket(Item item) {
-
-        if(itemList.isEmpty()) {
+        if(itemList.isEmpty() || itemList.get(item) == null) {
             itemList.put(item, 1);
             return true;
         }

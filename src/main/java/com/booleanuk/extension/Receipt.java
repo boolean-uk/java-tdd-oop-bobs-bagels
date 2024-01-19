@@ -21,6 +21,7 @@ public class Receipt {
 
     public String printBasket() {
 
+        System.out.println(formatDate() + "\n" + formatBasketValues(this.customer.getBasket().getItemList()) + "\n" + formatSavings(this.customer.getBasket().getItemList()));
         return formatDate() + "\n" + formatBasketValues(this.customer.getBasket().getItemList()) + "\n" + formatSavings(this.customer.getBasket().getItemList());
 
 
