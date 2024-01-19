@@ -29,8 +29,9 @@ public class Main {
     public static void main(String[] args) {
         InventoryManager inv = new InventoryManager();
         BasketManager b = new BasketManager();
+        //inv.costEachFilling();
 
-        //printReceipt(b.getBasket());
+        printReceipt(b.getBasket());
 
         b.add(inv.getInventory().get("BGLO"));
         b.getBasket().get(0).addFilling(inv.getInventory().get("FILC"));
@@ -38,6 +39,9 @@ public class Main {
         b.add(inv.getInventory().get("COFW"));
         b.add(inv.getInventory().get("COFB"));
         b.add(inv.getInventory().get("FILX"));
+        b.add(inv.getInventory().get("ItemNotInStock"));
+
+
 
         for (int i = 0; i < b.getBasket().size(); i++) {
             System.out.println(b.getBasket().get(i).toString());

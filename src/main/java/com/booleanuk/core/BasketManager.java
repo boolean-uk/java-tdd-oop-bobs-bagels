@@ -18,9 +18,11 @@ public class BasketManager {
      * @return item
      */
     public Item add(Item item) {
-        if ((checkCapacity() > 0) && checkItemInInventory(item)) {
-            getBasket().add(item);
-            return item;
+        if (checkItemInInventory(item)) {
+            if ((checkCapacity() > 0)) {
+                getBasket().add(item);
+                return item;
+            }
         }
         return null;
     }
@@ -84,10 +86,14 @@ public class BasketManager {
      */
     public boolean checkItemInInventory(Item item) {
         InventoryManager inv = new InventoryManager();
-        if (inv.getInventory().containsKey(item.getSKU())) {
-            return true;
+        try {
+            if (inv.getInventory().containsKey(item.getSKU())) {
+                return true;
+            }
+        } catch (NullPointerException e) {
+            System.out.println("We do not stock the requested item!");
+            return false;
         }
-        System.out.println("We do not stock the following: " + item.toString());
         return false;
     }
 

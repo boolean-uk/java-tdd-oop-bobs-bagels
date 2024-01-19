@@ -26,7 +26,19 @@ public class InventoryManager {
         for (int i = 0; i < SKU.length; i++) {
             this.inventory.put(SKU[i], new Item(SKU[i], price[i], name[i], variant[i], null));
         }
+        printInventory();
     }
+
+    private void printInventory() {
+        System.out.println("Inventory:");
+            System.out.println("-------------------------------------------------");
+        for (Map.Entry<String, Item> entry : inventory.entrySet()) {
+            Item item = entry.getValue();
+            System.out.printf("|%-5s | %-10s | %-15s | %-5.2fDKK,- |%n", item.getSKU(), item.getName(), item.getVariant(), item.getPrice());
+        }
+        System.out.println("-------------------------------------------------");
+    }
+
 
     /**
      * Logic: Iterate through the stock and retrieve all the prices for items which are categorised as filling
