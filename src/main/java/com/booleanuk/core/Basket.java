@@ -99,7 +99,7 @@ public class Basket {
     public double totalCost(){
         double totalCost = 0;
         for (Product product : products.keySet()){
-            totalCost += product.price*products.get(product);
+            totalCost += product.getPrice()*products.get(product);
         }
         return totalCost;
     }

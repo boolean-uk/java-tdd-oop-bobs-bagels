@@ -1,12 +1,10 @@
 package com.booleanuk.core;
 
-import javax.swing.plaf.ProgressBarUI;
-
 public class Product {
     final String SKU;
-    final String type;
-    final double price;
-    final String name;
+    private final String type;
+    private final double price;
+    private final String name;
 
 
     public Product(String SKU) throws IllegalStateException{

@@ -22,19 +22,19 @@ public class TestProducts {
         Product p14 = new Product("FILH");
         Product p14_ = new Product("FILH");
 
-        Assertions.assertEquals(0.49, p1.price);
-        Assertions.assertEquals(0.39, p2.price);
+        Assertions.assertEquals(0.49, p1.getPrice());
+        Assertions.assertEquals(0.39, p2.getPrice());
         Assertions.assertTrue(p3.equals("BGLE"));
-        Assertions.assertEquals("Bagel", p4.type);
-        Assertions.assertEquals("Black", p5.name);
+        Assertions.assertEquals("Bagel", p4.getType());
+        Assertions.assertEquals("Black", p5.getName());
         Assertions.assertTrue(p6.equals("COFW"));
-        Assertions.assertEquals(1.29, p7.price);
-        Assertions.assertEquals("Latte", p8.name);
-        Assertions.assertEquals("Filling", p9.type);
-        Assertions.assertEquals(0.12, p10.price);
+        Assertions.assertEquals(1.29, p7.getPrice());
+        Assertions.assertEquals("Latte", p8.getName());
+        Assertions.assertEquals("Filling", p9.getType());
+        Assertions.assertEquals(0.12, p10.getPrice());
         Assertions.assertTrue(p11.equals("FILC"));
-        Assertions.assertEquals("Cream Cheese", p12.name);
-        Assertions.assertEquals("Filling", p13.type);
+        Assertions.assertEquals("Cream Cheese", p12.getName());
+        Assertions.assertEquals("Filling", p13.getType());
         Assertions.assertTrue(p14.equals(p14_));
     }
 
@@ -43,7 +43,7 @@ public class TestProducts {
         boolean errorThrown = false;
 
         try {
-            Product p = new Product("HEHE");
+            new Product("HEHE");
         } catch (IllegalStateException e){
             errorThrown = true;
         }
