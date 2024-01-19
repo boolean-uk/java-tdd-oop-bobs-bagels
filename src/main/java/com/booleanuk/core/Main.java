@@ -32,8 +32,6 @@ public class Main {
         BasketManager b = new BasketManager();
         //inv.costEachFilling();
 
-        printReceipt(b.getBasket());
-
         b.add(inv.getInventory().get("BGLO"));
         b.getBasket().get(0).addFilling(inv.getInventory().get("FILC"));
         b.getBasket().get(0).addFilling(inv.getInventory().get("FILE"));
@@ -44,5 +42,7 @@ public class Main {
 
         b.showContentsBasket();
         b.totalCost();
+
+        printReceipt(b.getBasket());
     }
 }

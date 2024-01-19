@@ -109,7 +109,7 @@ public class BasketManager {
                 total += i.getFilling().getPrice();
             }
         }
-        System.out.println(total);
+        System.out.println(total+ " DKK,-");
         return total;
     }
 
