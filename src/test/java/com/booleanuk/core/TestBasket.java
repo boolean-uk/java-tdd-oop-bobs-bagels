@@ -29,6 +29,14 @@ public class TestBasket {
         basket.addProductToBasket("Bagel","Plain","Yes");
         basket.addProductToBasket("Bagel","Plain","Yes");
         basket.addProductToBasket("Bagel","Plain","Yes");
+        basket.addProductToBasket("Bagel","Plain","Yes");
+        basket.addProductToBasket("Bagel","Plain","Yes");
+        basket.addProductToBasket("Bagel","Plain","Yes");
+        basket.addProductToBasket("Bagel","Plain","Yes");
+        basket.addProductToBasket("Bagel","Plain","Yes");
+        basket.addProductToBasket("Bagel","Plain","Yes");
+        basket.addProductToBasket("Bagel","Plain","Yes");
+        basket.addProductToBasket("Bagel","Plain","Yes");
         Assertions.assertEquals("Basket is full",basket.addProductToBasket("Bagel","Everything","Yes"));
     }
 

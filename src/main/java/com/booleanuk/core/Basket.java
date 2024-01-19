@@ -10,7 +10,7 @@ public class Basket {
     public ArrayList<Inventory> inventoryList;
 
     public Basket(){
-        this.basketArr = new String[5];
+        this.basketArr = new String[13];
         this.inventoryList = new ArrayList<>();
         inventoryList.add(new Inventory("BGLO",0.49d,"Bagel","Onion"));
         inventoryList.add(new Inventory("BGLP",0.39d,"Bagel","Plain"));
@@ -156,7 +156,7 @@ public class Basket {
         }
 
         //Makes the original array == the new array
-        basketArr = newArray;
+        this.basketArr = newArray;
     }
     public double checkCurrentPrice(String product,String variant){
         double currentPrice = 0;
@@ -169,6 +169,17 @@ public class Basket {
     }
 
     public double totalCost(){
+        //Discount boolean
+        boolean bglo = false;
+        boolean bglp = false;
+        boolean bgle = false;
+        boolean cofb = false;
+        //Discount counter
+        int bgloCounter = 0;
+        int bglpCounter = 0;
+        int bgleCounter = 0;
+        int cofbCounter = 0;
+        //Return double
         double total=0.0d;
         for (int i = 0; i < basketArr.length; i++) {
             //Check if it is empty
@@ -221,7 +232,6 @@ public class Basket {
                     System.out.println("That product doesnt exist");
                 }
 
-
             }else if(input.equals("b")){
                 System.out.println("Your basket: "+Arrays.toString(basket.basketArr));
                 System.out.println("What product would you like to remove?");
@@ -246,6 +256,7 @@ public class Basket {
                 String newSize = scanner.nextLine();
                 try{
                     basket.changeBasketCapacity(Integer.parseInt(newSize));
+                    System.out.println("Capacity changed to "+newSize);
                 }catch (Exception e){
                     System.out.println("Write a valid number");
                 }
@@ -253,97 +264,7 @@ public class Basket {
                 System.out.println("Your basket: "+Arrays.toString(basket.basketArr));
             }
         }
-
-
-        /*
-        String product = "Coffee";
-        String variant = "Black";
-        System.out.println(basket.addProductToBasket(product,variant,"Yes"));
-        System.out.println(basket.addProductToBasket(product,variant,"Yes"));
-        System.out.println(basket.addProductToBasket("Bagel","Plain","Yes"));
-        System.out.println("Totalcost: "+basket.totalCost());
-        System.out.println(Arrays.toString(basket.basketArr));
-        basket.removeFromBasket("COFB");
-        System.out.println(Arrays.toString(basket.basketArr));
-
-        /*
-        System.out.println(basket.addBagelToBasket("Bogle"));
-        System.out.println(basket.addBagelToBasket("Bagel"));
-        System.out.println(basket.addBagelToBasket("Bagel"));
-        System.out.println(basket.addBagelToBasket("Bagel"));
-        System.out.println(basket.addBagelToBasket("Bagel"));
-        System.out.println(basket.addBagelToBasket("Bagel"));
-        System.out.println(basket.addBagelToBasket("Bagel"));
-        System.out.println(Arrays.toString(basket.basketArr));
-
-         */
-
-    }
-    /*
-    public String addBagelToBasket(String product,String variant,String yesOrNo){
-        //String for return
-        String output = "";
-        System.out.println("What product would you like?");
-        System.out.println(product);
-        //First check if the basket is full
-        if (this.basketArr[this.basketArr.length - 1] == null) {
-            System.out.println("Basket has space");
-            //Check if the product exists
-            for (int i = 0;i<inventoryList.size();i++) {
-                Inventory item = inventoryList.get(i);
-                if (item.getName().equals(product)) {
-                    System.out.println("Product exists");
-                    System.out.println("What variant would you like?");
-                    System.out.println(variant);
-                    //Check what variant the user wants
-                    for (Inventory item2 : inventoryList){
-                        if (item2.getVariant().equals(variant)){
-                            System.out.println("Variant exists");
-                            //Ask the user if they still want it
-                            double price = item2.getPrice();
-                            System.out.println("The price is: "+price+". Do you still want it?");
-                            System.out.println(yesOrNo);
-                            if (yesOrNo.equals("Yes")) {
-                                //Go through the array to find the first empty slot
-                                for (int j = 0; j < basketArr.length; j++) {
-                                    //Add the bagel if the slot is empty
-                                    if (this.basketArr[j] == null) {
-                                        this.basketArr[j] = item2.getSKU();
-                                        output += item2.getName() + item2.getVariant()+" added to basket";
-                                        //Stops the loop when the product is added
-                                        break;
-                                    }
-                                }
-                            }else{
-                                //Stops the loop if the user doesnt want it
-                                output = "Okey then";
-                                break;
-                            }
-                        } else{
-                            //If variant doesnt exist return new output
-                            output = "That variant doesnt exist";
-                            break;
-                        }
-                    }
-
-
-                } else{
-                    //If product doesnt exist return new output
-                    output = "That product doesnt exist";
-                    break;
-                }
-
-            }
-
-        } else{
-            output = "Basket is full";
-        }
-
-        return output;
     }
 
-
-
-     */
 }
 
