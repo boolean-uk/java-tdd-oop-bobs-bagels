@@ -37,9 +37,8 @@ public class Basket {
         }
         return true;
     }
-
-    public ArrayList<Item> showBasket() {
-        return new ArrayList<>(items);
+    public String showBasket() {
+        return new ArrayList<>(items).toString();
     }
 
     public double getTotalCost() {
@@ -49,4 +48,5 @@ public class Basket {
         }
         return totalCost;
     }
+
 }

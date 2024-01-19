@@ -30,4 +30,9 @@ public class Item {
     public double getTotalCost(){
         return price * quantity;
     }
+    @Override
+    public String toString() {
+        return getType() + ", " + getPrice() + ", " + getVariant();
+    }
+
 }

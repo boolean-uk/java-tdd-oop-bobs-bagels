@@ -54,10 +54,8 @@ public class BasketTest {
         basket = new Basket(5);
         testItem = new Item("Bagel", 1, "test");
         basket.addItems(testItem, 1);
-
-        Assertions.assertEquals("Bagel, 1, test", basket.showBasket());
-
-
+        String showBasket = basket.showBasket();
+        Assertions.assertEquals("[Bagel, 1.0, test]", showBasket);
     }
 
 
