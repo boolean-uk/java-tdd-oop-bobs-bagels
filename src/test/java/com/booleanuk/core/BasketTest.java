@@ -108,6 +108,14 @@ public class BasketTest {
 
     @Test
     public void isBasketFullTest() {
+        Basket basket = new Basket(2);
+        Product product1 = new Product("Apple", 0.19);
+        Product product2 = new Product("Orange", 0.29);
+
+        Assertions.assertFalse(basket.isBasketFull());
+        basket.addProduct(product1);
+        basket.addProduct(product2);
+        Assertions.assertTrue(basket.isBasketFull());
 
     }
 }

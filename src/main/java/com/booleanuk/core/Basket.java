@@ -1,8 +1,6 @@
 package com.booleanuk.core;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.function.Predicate;
 
 public class Basket {
     private ArrayList<Product> basketItems;
@@ -49,6 +47,21 @@ public class Basket {
         }
     }
 
+    public int getCapacity() {
+        return this.basketLimit;
+    }
 
+    public void setCapacity(int capacity) {
+        if(this.basketItems.size() < capacity) {
+            this.basketLimit = capacity;
+        }
+    }
+
+    public boolean isBasketFull() {
+        if(this.basketItems.size() >= basketLimit) {
+            return true;
+        }
+        return false;
+    }
 
 }
