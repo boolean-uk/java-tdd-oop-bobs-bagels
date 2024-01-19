@@ -1,5 +1,6 @@
 package com.booleanuk.core;
 
+import com.booleanuk.extension.Discounts;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -186,5 +187,46 @@ class BasketTest {
         Basket basket = new Basket(inventory);
         basket.add("BGLO");
         Assertions.assertEquals("Product needs to be a filling", basket.addFilling("COFB"));
+    }
+
+    @Test
+    public void testTotalCostDiscountsMultipleTypeProducts() {
+        Inventory inventory = new Inventory();
+        Discounts discounts = new Discounts(inventory);
+        Basket basket = new Basket(inventory, discounts);
+        basket.setCapacity(30);
+        basket.add("BGLO"); basket.add("BGLO");
+        for(int i = 0; i < 12; i++) {
+            basket.add("BGLP");
+        }
+        for(int i = 0; i < 6; i++) {
+            basket.add("BGLE");
+        }
+        basket.add("COFB"); basket.add("COFB"); basket.add("COFB");
+        Assertions.assertEquals(10.43, basket.totalCostDiscount());
+    }
+
+    @Test
+    public void testTotalCostDiscountsOneTypeProduct() {
+        Inventory inventory = new Inventory();
+        Discounts discounts = new Discounts(inventory);
+        Basket basket = new Basket(inventory, discounts);
+        basket.setCapacity(30);
+        for(int i = 0; i < 16; i++) {
+            basket.add("BGLP");
+        }
+        Assertions.assertEquals(5.55, basket.totalCostDiscount());
+    }
+
+    @Test
+    public void testTotalCostDiscountsNoDiscounts() {
+        Inventory inventory = new Inventory();
+        Discounts discounts = new Discounts(inventory);
+        Basket basket = new Basket(inventory, discounts);
+        basket.setCapacity(30);
+        for(int i = 0; i < 16; i++) {
+            basket.add("BGLS");
+        }
+        Assertions.assertEquals(0.49*16.0, basket.totalCostDiscount());
     }
 }
