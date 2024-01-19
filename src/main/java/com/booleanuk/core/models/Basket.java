@@ -1,8 +1,11 @@
 package com.booleanuk.core.models;
 
 import com.booleanuk.core.models.item.*;
+import com.booleanuk.extension.DiscountManager;
 import lombok.Data;
 
+import java.io.FileNotFoundException;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -35,6 +38,13 @@ public class Basket {
     }
 
     public double getTotalCost() {
+        DiscountManager discountManager;
+        try {
+            discountManager = new DiscountManager(this);
+        } catch (Exception e) {
+            discountManager = null;
+        }
+
         double cost = 0;
         for (Item item : basket) {
             cost += item.getPrice();
@@ -43,6 +53,10 @@ public class Basket {
                     cost += filling.getPrice();
                 }
             }
+        }
+
+        if (discountManager != null) {
+            cost -= discountManager.getBasketDiscount();
         }
         return cost;
     }

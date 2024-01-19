@@ -31,7 +31,8 @@ public class DiscountManagerTest {
         basket.addItem(coffeeBlack);
         basket.addItem(coffeeBlack);
 
-        Assertions.assertEquals(1.14, DiscountManager.getTotalDiscount(basket));
-        Assertions.assertEquals(10.43, basket.getDiscountedTotal());
+        DiscountManager dm = new DiscountManager(basket);
+        Assertions.assertEquals(1.14, dm.getBasketDiscount(), 0.01);
+        Assertions.assertEquals(10.43, basket.getTotalCost(),  0.01);
     }
 }
