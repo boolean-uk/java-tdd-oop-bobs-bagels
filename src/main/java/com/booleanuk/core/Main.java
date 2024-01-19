@@ -6,6 +6,7 @@ import com.booleanuk.core.models.Store;
 import com.booleanuk.core.models.item.Bagel;
 import com.booleanuk.core.models.item.Filling;
 import com.booleanuk.extension.ReceiptPrinter;
+import com.booleanuk.extension.TwilioService;
 
 import java.io.FileNotFoundException;
 import java.net.URISyntaxException;
@@ -56,6 +57,9 @@ public class Main {
 
         // User wants the receipt
         ReceiptPrinter receiptPrinter = new ReceiptPrinter(store, basket);
-        System.out.println(receiptPrinter.print());
+        String receipt = receiptPrinter.print();
+        System.out.println(receipt);
+        // Twilio will fail because of no valid sender, receiver and auth code set in configuration file
+        // TwilioService.sendReceipt("number_here", receipt);
     }
 }

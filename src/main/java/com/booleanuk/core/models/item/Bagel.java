@@ -8,7 +8,7 @@ import java.util.Objects;
 
 @Getter
 public class Bagel extends Item {
-    ArrayList<Filling> filling;
+    private final ArrayList<Filling> filling;
 
     public Bagel(String SKU, double price, String name, String variant) {
         super(SKU, price, name, variant);
