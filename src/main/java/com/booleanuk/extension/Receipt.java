@@ -1,8 +1,6 @@
 package com.booleanuk.extension;
 
-import com.booleanuk.core.Basket;
-import com.booleanuk.core.Customer;
-import com.booleanuk.core.Item;
+import com.booleanuk.core.*;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -29,25 +27,51 @@ public class Receipt {
 
     public String formatDate() {
 
-        return new SimpleDateFormat("dd-MM-yyyy").format(new Date());
+        return "     " + new SimpleDateFormat("dd-MM-yyyy : HH-mm-ss").format(new Date());
     }
 
     public String formatBasketValues(Map<Item, Integer> basketMap) {
-        String returnString = "--------------------";
 
+
+        String returnString = String.format("%-15s %5s %10s", "Item", "Qty", "Price");
+
+        returnString += "\n--------------------------------\n";
 
         for(Map.Entry<Item, Integer> entry : basketMap.entrySet()) {
-            returnString += "\n" + entry.getKey().getVariant() +
-                    " " + entry.getKey().getName() + "       " + entry.getValue() + "  £" +
-                    (entry.getKey().getPrice() * entry.getValue());
 
-
+            returnString += String.format("%-15s %5d %10.2f", entry.getKey().getVariant() + " " + entry.getKey().getName(),entry.getValue(), (entry.getValue() * entry.getKey().getPrice()));
+            returnString += "\n";
         }
-        returnString += "\n--------------------";
+
+        returnString += "--------------------------------";
         return returnString;
     }
 
     public String formatSavings(Map<Item, Integer> basketMap) {
         return "";
+    }
+
+
+    public static void main(String[] args) {
+
+        Customer customer = new Customer();
+
+        Basket basket = new Basket(5);
+
+        basket.addItemToBasket(new Bagel("Plain"));
+        basket.addItemToBasket(new Bagel("Plain"));
+        basket.addItemToBasket(new Bagel("Plain"));
+        basket.addItemToBasket(new Filling("Bacon"));
+        basket.addItemToBasket(new Coffee("White"));
+
+        System.out.println(new Bagel("plain").getName());
+
+        customer.setBasket(basket);
+        Receipt receipt = new Receipt(customer);
+
+
+        receipt.printBasket();
+
+
     }
 }

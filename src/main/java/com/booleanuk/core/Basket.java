@@ -1,6 +1,9 @@
+
+
 package com.booleanuk.core;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -17,11 +20,19 @@ public class Basket {
     }
 
     public boolean addItemToBasket(Item item) {
-        if(itemList.isEmpty() || itemList.get(item) == null) {
+
+        if(itemList.isEmpty()) {
             itemList.put(item, 1);
             return true;
         }
-        itemList.put(item, itemList.get(item) +1);
+
+        for(Item itemFromList : getItemList().keySet()) {
+            if(itemFromList.getSkuCode().equals(item.getSkuCode())) {
+                itemList.put(itemFromList, itemList.get(itemFromList) +1);
+                break;
+            }
+        }
+
         return true;
     }
 

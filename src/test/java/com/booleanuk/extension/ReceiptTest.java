@@ -25,7 +25,7 @@ public class ReceiptTest {
 
         //I have not formatted string that much before so i dont know how it will turn out, therefore i have no expected value as of yet"
         Assertions.assertEquals("19-01-2024", receipt.formatDate());
-        Assertions.assertEquals("--------------------\n" + "Plain Bagel       1  £0.39\n" + "Plain Bagel       1  £0.39\n" + "Plain Bagel       1  £0.39\n" + "Bacon Filling       1  £0.12\n" + "White Coffee       1  £1.19\n" + "--------------------", receipt.formatBasketValues(basket.getItemList()));
+        Assertions.assertEquals("--------------------\n" + "Plain Bagel       1  \u00A30.39\n" + "Plain Bagel       1  £0.39\n" + "Plain Bagel       1  £0.39\n" + "Bacon Filling       1  £0.12\n" + "White Coffee       1  £1.19\n" + "--------------------", receipt.formatBasketValues(basket.getItemList()));
         Assertions.assertEquals("", receipt.formatSavings(basket.getItemList()));
         Assertions.assertEquals("", receipt.printBasket());
 
