@@ -14,6 +14,7 @@ public class Receipt {
         this.basket = basket;
         this.dateAndTime = LocalDateTime.now();
         this.dateAndTime = this.dateAndTime.minusNanos(this.dateAndTime.getNano());
+        this.receipt = "";
     }
 
     public String generateReceipt() {
@@ -47,7 +48,11 @@ public class Receipt {
     }
 
     public boolean printReceipt() {
-        return false;
+        if (this.receipt.isEmpty()) {
+            return false;
+        }
+        System.out.println(this.receipt);
+        return true;
     }
 
     public LocalDateTime getDateAndTime() {
