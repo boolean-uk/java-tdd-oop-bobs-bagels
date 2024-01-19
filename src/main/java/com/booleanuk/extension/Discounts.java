@@ -21,4 +21,14 @@ public class Discounts {
     public List<BulkDiscount> getBulkDiscounts() {
         return bulkDiscounts;
     }
+
+    public double calculateBulkDiscount(String sku, int num) {
+        if (this.bulkDiscounts.stream().anyMatch(x->x.getSku().equals(sku))) {
+            if (this.bulkDiscounts.stream().filter(x -> x.getSku().equals(sku)).findFirst().get().getNumber() <= num) {
+                return (double) Math.round((((double) num * inventory.getProductCost(sku))
+                        - this.bulkDiscounts.stream().filter(x -> x.getSku().equals(sku)).findFirst().get().getPrice()) * 100) /100;
+            }
+        }
+        return 0;
+    }
 }
