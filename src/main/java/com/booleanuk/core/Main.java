@@ -3,6 +3,7 @@ package com.booleanuk.core;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.SortedMap;
 
 public class Main {
 
@@ -27,7 +28,7 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        InventoryManager inv = new InventoryManager();
+        InventoryManager inv = new InventoryManager(true);
         BasketManager b = new BasketManager();
         //inv.costEachFilling();
 
@@ -41,10 +42,7 @@ public class Main {
         b.add(inv.getInventory().get("FILX"));
         b.add(inv.getInventory().get("ItemNotInStock"));
 
-
-
-        for (int i = 0; i < b.getBasket().size(); i++) {
-            System.out.println(b.getBasket().get(i).toString());
-        }
+        b.showContentsBasket();
+        b.totalCost();
     }
 }

@@ -11,6 +11,11 @@ public class InventoryManager {
         this.initializeInventory();
     }
 
+    public InventoryManager(boolean display) {
+        this.initializeInventory();
+        this.printInventory();
+    }
+
     /**
      * Logic: Initialize Bob's Bagels current stockpile of Items
      * Iterating for-loop, just modify array-elements to change stockpile
@@ -26,17 +31,16 @@ public class InventoryManager {
         for (int i = 0; i < SKU.length; i++) {
             this.inventory.put(SKU[i], new Item(SKU[i], price[i], name[i], variant[i], null));
         }
-        printInventory();
     }
 
     private void printInventory() {
         System.out.println("Inventory:");
-            System.out.println("-------------------------------------------------");
+            System.out.println("  -------------------------------------------------");
         for (Map.Entry<String, Item> entry : inventory.entrySet()) {
             Item item = entry.getValue();
-            System.out.printf("|%-5s | %-10s | %-15s | %-5.2fDKK,- |%n", item.getSKU(), item.getName(), item.getVariant(), item.getPrice());
+            System.out.printf("| %-5s | %-10s | %-15s | %-5.2fDKK,- |%n", item.getSKU(), item.getName(), item.getVariant(), item.getPrice());
         }
-        System.out.println("-------------------------------------------------");
+        System.out.println("  -------------------------------------------------");
     }
 
 

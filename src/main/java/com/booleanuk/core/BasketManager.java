@@ -105,9 +105,18 @@ public class BasketManager {
         double total = 0.0;
         for(Item i : getBasket()) {
             total += i.getPrice();
+            if (i.getFilling() != null) {
+                total += i.getFilling().getPrice();
+            }
         }
         System.out.println(total);
         return total;
+    }
+
+    public void showContentsBasket() {
+        for(Item item : getBasket()) {
+            System.out.println(item.toString());
+        }
     }
 
     /**
