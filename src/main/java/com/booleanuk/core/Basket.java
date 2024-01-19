@@ -16,8 +16,8 @@ public class Basket {
         this.basketLimit = basketLimit;
     }
 
-    public getBasketItems() {
-
+    public HashMap<Product, Integer> getBasketItems() {
+        return this.basketItems;
     }
 
 }

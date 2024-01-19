@@ -7,17 +7,20 @@ public class BasketTest {
     @Test
     public void getBasketItemsTest() {
         Basket basket = new Basket();
-        Assertions.assertEquals(0, basket.GetBasketItems().size());
+        Assertions.assertEquals(0, basket.getBasketItems().size());
     }
 
     @Test
     public void addProductTest() {
         Basket basket = new Basket();
-        Assertions.assertEquals(0, basket.GetBasketItems().size());
-        basket.addProduct(new Product("Apple", 0.19));
-        Assertions.assertEquals(1, basket.GetBasketItems().size());
-        Assertions.assertEquals("Apple", basket.getBasketItems().get(0).getVariant());
-        Assertions.assertEquals(0.19, basket.getBasketItems().get(0).getPrice());
+        Product product = new Product("Apple", 0.19);
+        basket.addProduct(product);
+        basket.addProduct(product);
+
+        Assertions.assertEquals(1, basket.getBasketItems().size());
+        Assertions.assertTrue(basket.getBasketItems().containsKey(product));
+        Assertions.assertEquals(2, basket.getBasketItems().get(product));
+        Assertions.assertEquals(0.19, basket.getBasketItems());
     }
 
     @Test
