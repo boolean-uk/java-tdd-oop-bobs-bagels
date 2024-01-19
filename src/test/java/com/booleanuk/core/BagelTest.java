@@ -89,12 +89,12 @@ public class BagelTest {
     public void testGettingCostOfAllFillings(){
         Inventory i = Inventory.getInstance();
         String expected = "List of Fillings:\n" +
-                "Filling{SKU='FILB', type='Filling', name='Bacon', price=0.12}\n" +
-                "Filling{SKU='FILE', type='Filling', name='Egg', price=0.12}\n" +
-                "Filling{SKU='FILC', type='Filling', name='Cheese', price=0.12}\n" +
-                "Filling{SKU='FILX', type='Filling', name='Cream Cheese', price=0.12}\n" +
-                "Filling{SKU='FILS', type='Filling', name='Smoked Salmon', price=0.12}\n" +
-                "Filling{SKU='FILH', type='Filling', name='Ham', price=0.12}";
+                "Filling{SKU='FILB', type='Bacon', price=0.12}\n" +
+                "Filling{SKU='FILE', type='Egg', price=0.12}\n" +
+                "Filling{SKU='FILC', type='Cheese', price=0.12}\n" +
+                "Filling{SKU='FILX', type='Cream Cheese', price=0.12}\n" +
+                "Filling{SKU='FILS', type='Smoked Salmon', price=0.12}\n" +
+                "Filling{SKU='FILH', type='Ham', price=0.12}\n";
         Assertions.assertEquals(expected, i.listFillings());
 
     }

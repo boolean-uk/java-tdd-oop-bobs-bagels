@@ -136,7 +136,8 @@ public class Inventory {
         String s = "List of Fillings:\n";
 
         for (Filling filling : fillings) {
-
+            s+= "Filling{SKU='" + filling.getSKU() + "', type='" + filling.getType()
+                    + "', price=" + filling.getPrice() + "}\n";
         }
         return s;
     }
