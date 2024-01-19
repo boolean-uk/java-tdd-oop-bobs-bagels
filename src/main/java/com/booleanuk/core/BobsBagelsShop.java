@@ -14,9 +14,9 @@ public class BobsBagelsShop {
             return "No items in stock.";
         }
         StringBuilder output;
-        output = new StringBuilder("Bob's Bagels\nSKU\tPrice\tName\tVariant\n");
+        output = new StringBuilder("Bob's Bagels\nSKU\t\tPrice\tName\tVariant\n");
         for (Item item : inventory.keySet()) {
-            String itemString = item.getSku()+"\t"+item.getPrice()+"\t"+item.getName()+"\t"+item.getVariant()+"\n";
+            String itemString = item.getSku()+"\t\t"+item.getPrice()+"\t"+item.getName()+"\t"+item.getVariant()+"\n";
             output.append(itemString);
         }
         return output.toString();
