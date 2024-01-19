@@ -26,9 +26,9 @@ public class BobsBagelsShopTest {
         Assertions.assertEquals(
                 """
                         Bob's Bagels
-                        SKU\tPrice\tName\tVariant
-                        BGLO\t0.49\tBagel\tOnion
-                        BGLP\t0.39\tBagel\tPlain
+                        SKU\t\tPrice\tName\tVariant
+                        BGLO\t\t0.49\tBagel\tOnion
+                        BGLP\t\t0.39\tBagel\tPlain
                         """, shop2.showInventory());
     }
 }
