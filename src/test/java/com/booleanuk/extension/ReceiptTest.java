@@ -23,10 +23,16 @@ public class ReceiptTest {
 
         Assertions.assertEquals("Basket is empty.", receipt.generateReceipt());
         basket.add(bglo);
-        Assertions.assertEquals("Header\nBGLO\nFooter", receipt.generateReceipt());
+        Assertions.assertEquals("    ~~~ Bob's Bagels ~~~\n\n    " +
+                        receipt.getDateAndTime().toString().replace("T", " ") +
+                        "\n\n----------------------------\n"+
+                "BGLO\nFooter", receipt.generateReceipt());
         basket.add(bglo);
         basket.add(bglp);
-        Assertions.assertEquals("Header\nBGLO\nBGLP\nFooter", receipt.generateReceipt());
+        Assertions.assertEquals("    ~~~ Bob's Bagels ~~~\n\n    " +
+                receipt.getDateAndTime().toString().replace("T", " ") +
+                "\n\n----------------------------\n"+
+                "BGLO\nBGLP\nFooter", receipt.generateReceipt());
     }
 
     @Test
