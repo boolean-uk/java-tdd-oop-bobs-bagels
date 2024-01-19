@@ -114,11 +114,30 @@ public class CustomerTest {
                 new Bagel("Plain"), 4,
                 new Coffee("Black"), 4);
 
+        basket.addItemToBasket(new Bagel("Plain"));
+        basket.addItemToBasket(new Bagel("Plain"));
+        basket.addItemToBasket(new Bagel("Plain"));
+        basket.addItemToBasket(new Bagel("Plain"));
+
+        basket.addItemToBasket(new Coffee("Black"));
+        basket.addItemToBasket(new Coffee("Black"));
+        basket.addItemToBasket(new Coffee("Black"));
+        basket.addItemToBasket(new Coffee("Black"));
+
+
+
         Map<String, ArrayList<Double>> discounts = customer.getDiscounts();
 
+
         double finalDiscount = 0.00;
+        System.out.println("adcbbsd");
+        System.out.println(discounts.values().toString());
+        System.out.println(discounts.entrySet().toString());
+        System.out.println(discounts.get("CoffeeBagelDeal"));
         for(ArrayList<Double> saving : discounts.values()) {
-            for(Double dob : saving) {
+            System.out.println(saving.toString());
+            System.out.println("asdasdasd");
+            for(double dob : saving) {
                 finalDiscount += dob;
             }
         }
@@ -127,8 +146,10 @@ public class CustomerTest {
 
         discounts = customer.getDiscounts();
         finalDiscount = 0.00;
+
         for(ArrayList<Double> saving : discounts.values()) {
-            for(Double dob : saving) {
+
+            for(double dob : saving) {
                 finalDiscount += dob;
             }
         }

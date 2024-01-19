@@ -12,6 +12,7 @@ public class Customer {
     public Customer() {
         this.discounts = new HashMap<>();
 
+
     }
 
     public double getTotalCost(Map<Item,Integer> items) {
@@ -93,14 +94,17 @@ public class Customer {
     private void addDiscount(String sku, double v) {
 
         if(this.discounts.get(sku) != null) {
+            System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaa");
             ArrayList<Double> newList = new ArrayList<>(this.discounts.get(sku));
             newList.add(v);
             this.discounts.put(sku, newList);
         } else {
+            System.out.println("bbbbbbbbbbbbbbbbbbbb");
             ArrayList<Double> newList = new ArrayList<>();
             newList.add(v);
             this.discounts.put(sku, newList);
         }
+        System.out.println(this.getDiscounts());
     }
 
     public double getCostOfItem(Item item) {
@@ -142,4 +146,5 @@ public class Customer {
     public Map<String, ArrayList<Double>> getDiscounts() {
         return this.discounts;
     }
+
 }
