@@ -57,7 +57,6 @@ public class Basket {
         return false;
     }
 
-
     public double totalCost() {
         double totalPrice = 0;
         for (int i = 0; i < basketList.size(); i++) {
@@ -77,17 +76,13 @@ public class Basket {
         ArrayList <String> newList = new ArrayList<>();
         this.capacity = capacity;
 
-        for (int i = 0; i < basketList.size() ; i++) {
-            if(i >= capacity){
-                break;
-            }
+        for (int i = 0; i < capacity ; i++) {
             newList.add(basketList.get(i));
         }
 
-        //Does not remove filling before changing capacity
+        //Does not remove filling after changing capacity
         for (int i = 0; i < basketList.size() ; i++) {
             if (basketList.get(i).startsWith("FIL")){
-                System.out.println(basketList.get(i));
             newList.add(basketList.get(i));}
         }
 
@@ -126,5 +121,10 @@ public class Basket {
 //  (adding 1 bagel + 4 filling = full basket, bad practice) Work around is to use addFilling after everything
 //  problem 2, when using changeCapacity to less, it deletes the filling to the bagel
 //  know the reason, hard to come up with solution based on what I have
+
+    //Make discount item
+    //make method to count amount of bagel, resets at 12
+    //method has arraylist<String> discount
+    //the left over bagels compares with coffee
 
     }

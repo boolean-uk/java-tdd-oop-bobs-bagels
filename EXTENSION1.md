@@ -28,9 +28,10 @@ Every Bagel is available for the `6 for 2.49` and `12 for 3.99` offer, but filli
 ```
 
 ```
-16x BGLP = 5.55
-           ----
-           5.55
+16x BGLP = 5.55 => 12x BGLP = 3.99
+                    4x BGLP = 1.56
+           ----               ----
+           5.55               5.55
 ```
 
 ## Task
