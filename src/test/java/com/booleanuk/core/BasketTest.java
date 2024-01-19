@@ -229,4 +229,44 @@ class BasketTest {
         }
         Assertions.assertEquals(0.49*16.0, basket.totalCostDiscount());
     }
+
+    @Test
+    public void testReceiptDiscountWithDiscounts() {
+        Inventory inventory = new Inventory();
+        Discounts discounts = new Discounts(inventory);
+        Basket basket = new Basket(inventory, discounts);
+        basket.setCapacity(30);
+        basket.add("BGLO"); basket.add("BGLO");
+        for(int i = 0; i < 12; i++) {
+            basket.add("BGLP");
+        }
+        for(int i = 0; i < 6; i++) {
+            basket.add("BGLE");
+        }
+        basket.add("COFB"); basket.add("COFB"); basket.add("COFB");
+        String receipt = basket.receiptDiscount();
+        Assertions.assertTrue(receipt.contains("$10.43"));
+        Assertions.assertTrue(receipt.contains("(-$0.69)"));
+        Assertions.assertTrue(receipt.contains("(-$0.45)"));
+        Assertions.assertTrue(receipt.contains("Onion Bagel"));
+        Assertions.assertTrue(receipt.contains("Plain Bagel"));
+        Assertions.assertTrue(receipt.contains("Everything Bagel"));
+        Assertions.assertTrue(receipt.contains("Coffee"));
+        Assertions.assertTrue(receipt.contains("You saved a total of $1.14"));
+
+    }
+
+    @Test
+    public void testReceiptDiscountWithoutDiscounts() {
+        Inventory inventory = new Inventory();
+        Discounts discounts = new Discounts(inventory);
+        Basket basket = new Basket(inventory, discounts);
+        basket.setCapacity(30);
+        basket.add("BGLO"); basket.add("BGLO");
+        basket.add("COFB"); basket.add("COFB"); basket.add("COFB");
+
+        String receipt = basket.receiptDiscount();
+        Assertions.assertFalse(receipt.contains("You saved a total of"));
+        Assertions.assertFalse(receipt.contains("(-$"));
+    }
 }
