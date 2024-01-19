@@ -26,10 +26,16 @@ class BasketTest {
     public void testAddWrongBagel(){
         Basket basket = new Basket();
 
-        Bagel bagelWrong = new Bagel("BGLO", 0.69, "Plain");
+        Bagel bagelWrongPrice = new Bagel("BGLO", 0.69, "Onion");
+        Bagel bagelWrongVariant = new Bagel("BGLO", 0.39, "Plain");
+        Bagel bagelWrongId = new Bagel("BGL", 0.39, "Plain");
 
         //Add Wrong Bagel
-        Assertions.assertFalse(basket.add(bagelWrong));
+        Assertions.assertFalse(basket.add(bagelWrongPrice));
+        Assertions.assertFalse(basket.add(bagelWrongVariant));
+        Assertions.assertFalse(basket.add(bagelWrongId));
+        Assertions.assertFalse(basket.add(bagelWrongPrice));
+
 
     }
 

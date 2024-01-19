@@ -15,11 +15,10 @@ public class Basket {
 
     public boolean add(Bagel bagel){
 
-//        //If there is an invalid id or a filling
-//        if(!Inventory.isInInventory(bagel.getId()) || Inventory.isFilling(bagel.getId())){
-//            return false;
-//        }
-
+        //If the product is not in inventory
+        if(!Inventory.isValidBagel(bagel)){
+            return false;
+        }
 
         //If basket is full
         if(isBasketFull()){

@@ -8,27 +8,32 @@ public final class Inventory {
     private static HashMap<String, Coffee> coffees;
     private static HashMap<String, Filling> fillings;
 
-    public Inventory(){
+    static {
+        // Initialize maps in the static block
         fillings = new HashMap<>();
         coffees = new HashMap<>();
         bagels = new HashMap<>();
         populateMaps();
     }
+    private Inventory(){
 
-    public static boolean isInInventory(String id){
-        return (isBagel(id) || isCoffee(id)|| isFilling(id));
+    }
+//    public static boolean isInInventory(String id){
+//        return (isValidBagel() || isValidCoffee()|| isValidFilling());
+//    }
+
+    public static boolean isValidBagel(Bagel bagel){
+        Bagel inventoryBagel = bagels.get(bagel.getId());
+        return inventoryBagel != null && inventoryBagel.getPrice() == bagel.getPrice() && inventoryBagel.getVariant().equals(bagel.getVariant());
     }
 
-    public static boolean isBagel(String id){
-        return bagels.containsKey(id);
+    public static boolean isValidCoffee(Coffee coffee){
+        Coffee inventoryCoffee = coffees.get(coffee.getId());
+        return inventoryCoffee!= null && inventoryCoffee.getPrice() == coffee.getPrice() && inventoryCoffee.getVariant().equals(coffee.getVariant());
     }
-
-    public static boolean isCoffee(String id){
-
-        return coffees.containsKey(id);
-    }
-    public static boolean isFilling(String id){
-        return fillings.containsKey(id);
+    public static boolean isValidFilling(Filling filling){
+        Filling inventoryFilling = fillings.get(filling.getId());
+        return inventoryFilling!= null && inventoryFilling.getPrice() == filling.getPrice() && inventoryFilling.getVariant().equals(filling.getVariant());
     }
 
     public static HashMap<String, Bagel> getBagels() {
@@ -43,7 +48,7 @@ public final class Inventory {
         return fillings;
     }
 
-    private void populateMaps(){
+    private static void populateMaps(){
 
         // Filling items
         fillings.put("FILB", new Filling("FILB", 0.12, "Bacon"));
