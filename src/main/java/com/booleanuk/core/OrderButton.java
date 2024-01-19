@@ -7,6 +7,7 @@ import java.util.Scanner;
 
 public class OrderButton extends Button {
     public Callable targetBasketAdder;
+    public String itemFullName;
 
     public OrderButton(String name) {
         super(name);
@@ -17,7 +18,7 @@ public class OrderButton extends Button {
     }
 
     public void makeOrder(String uuid) {
-        System.out.println("Specify the amount for " + displayName + ":");
+        System.out.println("Specify the amount for " + itemFullName + ":");
         Scanner _scanner = new Scanner(System.in);
 
         try {

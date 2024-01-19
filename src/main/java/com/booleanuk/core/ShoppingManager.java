@@ -1,5 +1,9 @@
 package com.booleanuk.core;
 
+import com.migzus.terminal.menus.Button;
+import com.migzus.terminal.menus.Callable;
+import com.migzus.terminal.menus.Menu;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -33,10 +37,60 @@ public class ShoppingManager {
             _capacity = Integer.parseInt(_scanner.next());
         }
         catch (Exception e) {
-            System.out.println("That is not a valid number! Terminating order.");
+            System.out.println("'" + _scanner.next() + "' is not a valid number! Only accepted inputs are whole numbers above 0.");
         }
 
-        basket.setCapacity(_capacity);
+        final int _originalCapacity = basket.getCapacity();
+
+        if (basket.setCapacity(_capacity) == Error.OK)
+            System.out.println("Successfully changed the basket capacity from " + _originalCapacity + " to " + _capacity);
+        else
+            System.out.println("'" + _capacity + "' is not a valid number! Only accepted inputs are whole numbers above 0.");
+    }
+
+    public void printBasket() {
+        StringBuilder _sb = new StringBuilder();
+
+        for (Order order : basket.orders) {
+            Item _item = getItem(order.itemUUID);
+            if (_item == null) continue;
+
+            _sb.append("\t(x").append(order.amount).append(")\t").append(_item.variant).append(" ").append(_item.category).append("\n");
+        }
+
+        System.out.println("\n--- Basket ---\n" + _sb + "--------------");
+    }
+
+    public void printReceipt() {
+        System.out.println("Currently, in this version of Bobs Bagels. Checkout has yet to be implemented.");
+    }
+
+    public void populateMenu(Menu targetMenu) {
+        if (targetMenu == null) return;
+
+        targetMenu.clearButtons();
+
+        for (Order order : basket.orders) {
+            Item _item = ShoppingManager.getItem(order. itemUUID);
+
+            if (_item == null) continue;
+
+            RemoveOrderButton _btn = new RemoveOrderButton("£" + _item.price + "\t(x" + order.amount + ")\t" + _item.variant + " " + _item.category);
+            _btn.itemFullName = _item.variant + " " + _item.category;
+            _btn.callable = new Callable(_btn, "removeOrder", order.itemUUID);
+            _btn.targetBasketRemover = new Callable(basket, "removeCallback");
+            _btn.onRefreshButtonList = new Callable(this, "populateMenu", targetMenu);
+
+            targetMenu.pushButton(_btn);
+        }
+
+        targetMenu.pushWhitespace();
+        targetMenu.pushButton(new Button("Checkout", new Callable(this, "printReceipt")));
+        targetMenu.pushButton(new Button("Return to Store", new Callable(targetMenu, "unfocus")));
+    }
+
+    public void printTotalPrice() {
+        System.out.println(" - Total Price £" + String.format("%.2f", basket.calculateTotalPrice()) + " -");
     }
 
     public void changeBasketCapacity(int newCapacity) {

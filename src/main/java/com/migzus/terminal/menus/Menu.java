@@ -4,19 +4,26 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Menu {
+    public static boolean isMenuGrabbingFocus = false;
     public static Menu currentActiveMenu;
     public Menu parentMenu;
 
     public Callable afterMenuPrintCallback;
+    public Callable onFocus;
 
     public String name = "Menu";
 
     private int selectIndex;
     private final ArrayList<Button> buttons = new ArrayList<>();
+    private final ArrayList<Integer> whitespaceIndices = new ArrayList<>();
     private boolean hasFocus;
 
     public Menu(String newName) {
         name = newName;
+    }
+
+    public void pushWhitespace() {
+        whitespaceIndices.add(buttons.size() - 1);
     }
 
     public void pushButton(Button btn) {
@@ -74,13 +81,18 @@ public class Menu {
 
     public void focus() {
         hasFocus = true;
+        isMenuGrabbingFocus = true;
+
+        if (onFocus != null)
+            onFocus.call();
 
         if (Menu.currentActiveMenu != null) {
-            Menu.currentActiveMenu.unfocus();
             parentMenu = Menu.currentActiveMenu;
+            Menu.currentActiveMenu.unfocus();
         }
 
         Menu.currentActiveMenu = this;
+        isMenuGrabbingFocus = false;
 
         printMenu();
         update();
@@ -95,16 +107,22 @@ public class Menu {
 
         if (parentMenu != null) {
             Menu.currentActiveMenu = null;
-            parentMenu.focus();
+            if (!Menu.isMenuGrabbingFocus)
+                parentMenu.focus();
         }
     }
 
     public void printMenu() {
         Menu.clearScreen();
 
+        int _whitespaceIndex = 0;
         StringBuilder _buttonListing = new StringBuilder();
-        for (int i = 0; i < buttons.size(); i++)
+        for (int i = 0; i < buttons.size(); i++) {
             _buttonListing.append(i == selectIndex ? " -> " : "    ").append(buttons.get(i).displayName).append("\n");
+
+            if (_whitespaceIndex < whitespaceIndices.size() && whitespaceIndices.get(_whitespaceIndex) == i)
+                _buttonListing.append("\n");
+        }
 
         System.out.println("   " + name + "\n" +
                 "-".repeat(name.length() + 6) + "\n" +
@@ -112,6 +130,11 @@ public class Menu {
 
         if (afterMenuPrintCallback != null)
             afterMenuPrintCallback.call();
+    }
+
+    public void clearButtons() {
+        whitespaceIndices.clear();
+        buttons.clear();
     }
 
     public static void clearScreen() {

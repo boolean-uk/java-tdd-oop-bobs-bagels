@@ -47,6 +47,6 @@ public class BobsBagelCoreTest {
         _sm.basket.add("BGLP", 2);
         _sm.basket.add("FILB", 2);
 
-        Assertions.assertEquals((0.39 + 0.12) * 2.0, _sm.basket.calculateTotalPrice());
+        Assertions.assertEquals((0.39 + 0.12) * 2.0, _sm.basket.calculateTotalPrice(), 0.001);
     }
 }

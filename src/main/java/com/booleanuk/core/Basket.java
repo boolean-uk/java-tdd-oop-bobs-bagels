@@ -3,7 +3,7 @@ package com.booleanuk.core;
 import java.util.ArrayList;
 
 public class Basket {
-    private final ArrayList<Order> orders = new ArrayList<>();
+    public final ArrayList<Order> orders = new ArrayList<>();
     private int capacity = 24;
 
     public void addCallback(String uuid, int amount) {
@@ -16,6 +16,17 @@ public class Basket {
                 System.out.println("Cannot add the selected item. Item invalid UUID: Cannot have an id of: " + uuid);
             case OK ->
                 System.out.println(amount + " item(s) successfully added to your basket. Current available item slots left: " + getLeftovers());
+        }
+    }
+
+    public void removeCallback(String uuid, int amount) {
+        switch (remove(uuid, amount)) {
+            case INVALID ->
+                System.out.println("The amount cannot be 0. No action will be taken.");
+            case EMPTY ->
+                System.out.println("The provided item was already empty. Cannot remove more items for as it is already 0");
+            case OK ->
+                System.out.println("Successfully removed items from your order.");
         }
     }
 
@@ -74,9 +85,10 @@ public class Basket {
         orders.clear();
     }
 
-    public void setCapacity(int newCapacity) {
-        if (newCapacity < 1) return;
+    public Error setCapacity(int newCapacity) {
+        if (newCapacity < 1) return Error.INVALID;
         capacity = newCapacity;
+        return Error.OK;
     }
 
     public int getCapacity() {
