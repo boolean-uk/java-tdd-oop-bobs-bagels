@@ -29,9 +29,10 @@ public class Basket {
         for(Item itemFromList : getItemList().keySet()) {
             if(itemFromList.getSkuCode().equals(item.getSkuCode())) {
                 itemList.put(itemFromList, itemList.get(itemFromList) +1);
-                break;
+                return true;
             }
         }
+        itemList.put(item, +1);
 
         return true;
     }
