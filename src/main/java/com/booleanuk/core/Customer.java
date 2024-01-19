@@ -31,13 +31,13 @@ public class Customer {
                 while(quantity >= 12) {
                     quantity -= 12;
                     discount12++;
-                    this.discounts.put(entry.getKey().getSkuCode(), entry.getKey().getPrice()*12 - 3.99);
+                    this.addDiscount(entry.getKey().getSkuCode(), entry.getKey().getPrice()* 12 - 3.99);
                 }
 
                 if(quantity >= 6) {
                     quantity-= 6;
                     discount6++;
-                    this.discounts.put(entry.getKey().getSkuCode(), entry.getKey().getPrice()*12 - 3.99);
+                    this.addDiscount(entry.getKey().getSkuCode(), entry.getKey().getPrice()*6 - 2.49);
                 }
 
 
@@ -62,6 +62,8 @@ public class Customer {
                 for (int i = 0; i < restBagelsList.size(); i++) {
                     if(i <= restCoffeesList.size() -1) {
                         cost += 1.25;
+                        this.addDiscount("CoffeeBagelDeal" , 1.25);
+
                     } else {
                         System.out.println("Add normal bagel");
                         cost += restBagelsList.get(i).getPrice();
@@ -72,12 +74,12 @@ public class Customer {
             for (int i = 0; i < restCoffeesList.size(); i++) {
                 if(i <= restBagelsList.size() -1 ) {
                     cost += 1.25;
-                } else {
-                    System.out.println("add one normal cofeee");
+                    this.addDiscount("CoffeeBagelDeal" , 1.25);
+            } else {
                     cost += restCoffeesList.get(i).getPrice();
                 }
-            }
         }
+            }
 
             cost +=discount12 *3.99;
             cost +=discount6 *2.49;
@@ -87,6 +89,19 @@ public class Customer {
         return Double.parseDouble(String.valueOf(costRounded));
 
         }
+
+    private void addDiscount(String sku, double v) {
+
+        if(this.discounts.get(sku) != null) {
+            ArrayList<Double> newList = new ArrayList<>(this.discounts.get(sku));
+            newList.add(v);
+            this.discounts.put(sku, newList);
+        } else {
+            ArrayList<Double> newList = new ArrayList<>();
+            newList.add(v);
+            this.discounts.put(sku, newList);
+        }
+    }
 
     public double getCostOfItem(Item item) {
         return item.getPrice();
