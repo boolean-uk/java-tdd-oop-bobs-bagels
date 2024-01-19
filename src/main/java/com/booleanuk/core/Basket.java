@@ -178,21 +178,4 @@ public class Basket {
 
         return stringBuilder.toString();
     }
-
-    public static void main(String[] args) {
-        Inventory inventory1 = new Inventory();
-        Discounts discounts1 = new Discounts(inventory1);
-        Basket basket1 = new Basket(inventory1, discounts1);
-        basket1.setCapacity(30);
-        basket1.add("BGLO"); basket1.add("BGLO");
-        for(int i = 0; i < 12; i++) {
-            basket1.add("BGLP");
-        }
-        for(int i = 0; i < 6; i++) {
-            basket1.add("BGLE");
-        }
-        basket1.add("COFB"); basket1.add("COFB"); basket1.add("COFB");
-
-        System.out.println(basket1.receiptDiscount());
-    }
 }
