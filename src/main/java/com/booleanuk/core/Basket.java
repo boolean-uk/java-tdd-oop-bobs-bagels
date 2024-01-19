@@ -2,6 +2,7 @@ package com.booleanuk.core;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.function.Predicate;
 
 public class Basket {
     private ArrayList<Product> basketItems;
@@ -35,5 +36,19 @@ public class Basket {
         this.basketItems.addAll(products);
 
     }
+
+    public void removeProduct(Product product) {
+        this.basketItems.remove(product);
+    }
+
+    public void removeProduct(String productName) {
+        for(int i = 0; i < this.basketItems.size(); i++) {
+            if(basketItems.get(i).name.equals(productName)) {
+                this.basketItems.remove(i);
+            }
+        }
+    }
+
+
 
 }

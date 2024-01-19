@@ -54,7 +54,7 @@ public class BasketTest {
     }
 
     @Test
-    public void removeProductTest() {
+    public void removeProductTest1() {
         Basket basket = new Basket();
         Product product1 = new Product("Apple", 0.19);
         Product product2 = new Product("Orange", 0.29);
@@ -74,13 +74,36 @@ public class BasketTest {
     }
 
     @Test
-    public void getCapacityTest() {
+    public void removeProductTest2() {
+        Basket basket = new Basket();
+        Product product1 = new Product("Apple", 0.19);
+        Product product2 = new Product("Orange", 0.29);
+
+        basket.addProduct(product1);
+        basket.addProduct(product2);
+
+        ArrayList<Product> productsTest = new ArrayList<>();
+        productsTest.add(new Product("Orange", 0.29));
+
+        basket.removeProduct("Apple");
+
+        Assertions.assertEquals(1, basket.getBasketItems().size());
+        Assertions.assertEquals(productsTest, basket.getBasketItems());
+
 
     }
 
     @Test
-    public void setCapacityTest() {
+    public void getCapacityTest() {
+        Basket basket = new Basket(3);
+        Assertions.assertEquals(3, basket.getCapacity());
+    }
 
+    @Test
+    public void setCapacityTest() {
+        Basket basket = new Basket(3);
+        basket.setCapacity(5);
+        Assertions.assertEquals(5, basket.getCapacity());
     }
 
     @Test
