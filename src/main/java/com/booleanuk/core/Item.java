@@ -1,16 +1,21 @@
 package com.booleanuk.core;
 
 public class Item {
-
+    private String sku;
     private String type;
     private double price;
     private String variant;
     private int quantity;
-    public Item(String type, double price, String variant){
+    public Item(String sku, String type, double price, String variant){
+        this.sku = sku;
         this.type = type;
         this.price = price;
         this.variant = variant;
         this.quantity = 1;
+    }
+
+    public String getSku() {
+        return sku;
     }
     public String getType(){
         return type;
@@ -32,7 +37,7 @@ public class Item {
     }
     @Override
     public String toString() {
-        return getType() + ", " + getPrice() + ", " + getVariant();
+        return getSku() + ", " + getType() + ", " + getPrice() + ", " + getVariant();
     }
 
 }

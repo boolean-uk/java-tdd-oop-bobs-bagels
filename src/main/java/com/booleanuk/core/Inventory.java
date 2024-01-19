@@ -15,10 +15,8 @@ public class Inventory {
 
     public Inventory(String filePath) {
         try {
-            // Read lines from the CSV file
             List<String> lines = Files.readAllLines(Paths.get(filePath));
 
-            // Skip the header line
             for (int i = 1; i < lines.size(); i++) {
                 String[] values = lines.get(i).split(",");
 
@@ -27,7 +25,7 @@ public class Inventory {
                 String name = values[2].trim();
                 String variant = values[3].trim();
 
-                Item item = new Item(name, price, variant);
+                Item item = new Item(sku, name, price, variant);
 
                 switch (name) {
                     case "Bagel":
@@ -62,6 +60,20 @@ public class Inventory {
             System.out.println("SKU: " + sku + ", Variant: " + item.getVariant() + ", Price: " + item.getPrice());
         }
         System.out.println("-------------------------------");
+    }
+    public Item getItemBySKU(String sku) {
+        if (sku.length() >= 3) {
+            String inventoryType = sku.substring(0, 3);
+            switch (inventoryType) {
+                case "BGL":
+                    return bagelInventory.get(sku);
+                case "COF":
+                    return coffeeInventory.get(sku);
+                case "FIL":
+                    return fillingInventory.get(sku);
+            }
+        }
+        return null;
     }
     public double getBagelPrice(String type) {
         return bagelInventory.get(type).getPrice();

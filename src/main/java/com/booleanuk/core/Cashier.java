@@ -24,47 +24,41 @@ public class Cashier {
             case 'a':
                 System.out.print("Enter SKU of the product to add: ");
                 String skuToAdd = userInput.next().trim().toUpperCase();
+                System.out.print("Enter quantity to add: ");
+                int quantityToAdd = userInput.nextInt();
 
-                if (inventory.getBagelInventory().containsKey(skuToAdd)) {
-                    Item itemToAdd = inventory.getBagelInventory().get(skuToAdd);
-                    System.out.print("Enter quantity to add: ");
-                    int quantityToAdd = userInput.nextInt();
-
-                    if (basket.addItems(itemToAdd, quantityToAdd)) {
-                        System.out.println(quantityToAdd + " " + itemToAdd.getVariant() + "(s) added to the basket.");
-                    } else {
-                        System.out.println("Not enough space in the basket to add " + quantityToAdd + " " + itemToAdd.getVariant() + "(s).");
-                    }
+                if (basket.addItems(inventory, skuToAdd, quantityToAdd)) {
+                    System.out.println(quantityToAdd + " " + skuToAdd + "(s) added to the basket.");
                 } else {
-                    System.out.println("Invalid SKU. Product not found in the inventory.");
+                    System.out.println("Unable to add items to the basket. Please check SKU and quantity.");
                 }
                 break;
             case 'r':
                 System.out.print("Enter SKU of the product to remove: ");
                 String skuToRemove = userInput.next().trim().toUpperCase();
+                System.out.print("Enter quantity to remove: ");
+                int quantityToRemove = userInput.nextInt();
 
-                if (inventory.getBagelInventory().containsKey(skuToRemove)) {
-                    Item itemToAdd = inventory.getBagelInventory().get(skuToRemove);
-                    System.out.print("Enter quantity to remove: ");
-                    int quantityToAdd = userInput.nextInt();
-
-                    if (basket.addItems(itemToAdd, quantityToAdd)) {
-                        System.out.println(quantityToAdd + " " + itemToAdd.getVariant() + "(s) removed from the basket.");
-                    } else {
-                        System.out.println("Not enough space in the basket to add " + quantityToAdd + " " + itemToAdd.getVariant() + "(s).");
-                    }
+                if (basket.removeItems(inventory, skuToRemove, quantityToRemove)) {
+                    System.out.println(quantityToRemove + " " + skuToRemove + "(s) removed from the basket.");
                 } else {
-                    System.out.println("Invalid SKU. Product not found in the inventory.");
+                    System.out.println("Unable to remove items from the basket. Please check SKU and quantity.");
                 }
                 break;
             case 'c':
-                // show basket
+                System.out.println(basket.showBasket());
                 break;
             case 'p':
                 // pay for basket
                 break;
             case 'm':
-                // change capacity of basket
+                System.out.println("Enter ned capacity: ");
+                int newCapacity = userInput.nextInt();
+                if (basket.changeCapacity(newCapacity)){
+                    System.out.println("Capacity changed");
+                } else {
+                    System.out.println("Not able to change capacity");
+                }
                 break;
             case 'x':
                 menu();

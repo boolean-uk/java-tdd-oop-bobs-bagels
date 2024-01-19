@@ -10,41 +10,29 @@ public class BasketTest {
     @Test
     public void addAndRemoveItemTest() {
         basket = new Basket(10);
-        testItem = new Item("Bagel", 2.5, "test");
-        basket.addItems(testItem, 2);
-        Assertions.assertEquals(5, basket.getTotalCost());
+        Inventory inventory = new Inventory("src/main/java/com/booleanuk/core/inventory.csv");
+        basket.addItems(inventory, "BGLO", 2);
+        Assertions.assertEquals(0.98, basket.getTotalCost());
 
-        basket.removeItems(testItem, 1);
-        Assertions.assertEquals(2.5, basket.getTotalCost());
+        basket.removeItems(inventory, "BGLO", 1);
+        Assertions.assertEquals(0.49, basket.getTotalCost());
     }
-
-    @Test
-    public void testItem(){
-        basket = new Basket(10);
-        testItem = new Item("Bagel", 2.5, "test");
-        basket.addItems(testItem, 2);
-
-        Assertions.assertEquals("Bagel", testItem.getType());
-        Assertions.assertEquals(2.5, testItem.getPrice());
-        Assertions.assertEquals("test", testItem.getVariant());
-    }
-
     @Test
     public void testBasketCapacity(){
         basket = new Basket(5);
-        testItem = new Item("Bagel", 1, "test");
-        basket.addItems(testItem, 3);
+        Inventory inventory = new Inventory("src/main/java/com/booleanuk/core/inventory.csv");
+        basket.addItems(inventory, "BGLO", 3);
 
-        Assertions.assertFalse(basket.addItems(testItem, 3));
-        Assertions.assertTrue(basket.addItems(testItem, 2));
+        Assertions.assertFalse(basket.addItems(inventory, "BGLO", 3));
+        Assertions.assertTrue(basket.addItems(inventory, "BGLO", 2));
     }
     @Test
     public void changeBasketCapacity(){
         basket = new Basket(5);
+        Inventory inventory = new Inventory("src/main/java/com/booleanuk/core/inventory.csv");
         Assertions.assertTrue((basket.changeCapacity(10)));
+        basket.addItems(inventory, "BGLO", 10);
 
-        testItem = new Item("Bagel", 1, "test");
-        basket.addItems(testItem, 10);
         Assertions.assertFalse((basket.changeCapacity(9)));
         Assertions.assertTrue((basket.changeCapacity(20)));
     }
@@ -52,10 +40,10 @@ public class BasketTest {
     @Test
     public void showBasket(){
         basket = new Basket(5);
-        testItem = new Item("Bagel", 1, "test");
-        basket.addItems(testItem, 1);
+        Inventory inventory = new Inventory("src/main/java/com/booleanuk/core/inventory.csv");
+        basket.addItems(inventory, "BGLO", 1);
         String showBasket = basket.showBasket();
-        Assertions.assertEquals("[Bagel, 1.0, test]", showBasket);
+        Assertions.assertEquals("[BGLO, Bagel, 0.49, Onion]", showBasket);
     }
 
 

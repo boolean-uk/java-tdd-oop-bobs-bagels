@@ -20,20 +20,24 @@ public class Basket {
         return false;
     }
 
-    public Boolean addItems(Item item, int quantity){
-        if (items.size() + quantity <= capacity) {
-            for (int i = 0; i < quantity; i++) {
-                items.add(item);
-            }
-            return true;
+    public boolean addItems(Inventory inventory, String sku, int quantity) {
+        Item itemToAdd = inventory.getItemBySKU(sku);
+        if (itemToAdd == null || items.size() + quantity > capacity) {
+            return false;
         }
-        return false;
-    }
-    public boolean removeItems(Item item, int quantity) {
+
         for (int i = 0; i < quantity; i++) {
-            if (!items.remove(item)) {
-                return false;
-            }
+            items.add(itemToAdd);
+        }
+        return true;
+    }
+    public boolean removeItems(Inventory inventory, String skuToRemove, int quantityToRemove) {
+        Item itemToRemove = inventory.getItemBySKU(skuToRemove);
+        if (itemToRemove != null && items.contains(itemToRemove)) {
+            return false;
+        }
+        for (int i = 0; i < quantityToRemove; i++) {
+            items.remove(itemToRemove);
         }
         return true;
     }
