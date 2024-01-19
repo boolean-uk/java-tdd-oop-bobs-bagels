@@ -3,7 +3,7 @@ package com.booleanuk.core;
 import java.util.ArrayList;
 
 public class Basket {
-    public final ArrayList<Order> orders = new ArrayList<>();
+    private ArrayList<Order> orders = new ArrayList<>();
     private int capacity = 24;
 
     public void addCallback(String uuid, int amount) {
@@ -81,6 +81,10 @@ public class Basket {
         return _outPrice;
     }
 
+    public double calculateTotalPriceWithDiscounts() {
+        return 0.0;
+    }
+
     public void clearBasket() {
         orders.clear();
     }
@@ -88,6 +92,20 @@ public class Basket {
     public Error setCapacity(int newCapacity) {
         if (newCapacity < 1) return Error.INVALID;
         capacity = newCapacity;
+
+        if (capacity < orders.size()) {
+            ArrayList<Order> _newOrderList = new ArrayList<>();
+
+            for (int i = 0; i < capacity; i++)
+                _newOrderList.add(orders.get(i));
+
+            orders = _newOrderList;
+
+            // this is not really an error, but more of a warning. we still changed the capacity
+            // however it is to notify the end user that some items from the basket will be removed
+            return Error.VAL_TOO_LOW;
+        }
+
         return Error.OK;
     }
 
@@ -104,5 +122,12 @@ public class Basket {
 
     private int getLeftovers() {
         return capacity - getCurrentCapacityUsage();
+    }
+
+    public Order[] getOrders() {
+        Order[] _outOrders = new Order[orders.size()];
+        for (int i = 0; i < orders.size(); i++)
+            _outOrders[i] = orders.get(i);
+        return _outOrders;
     }
 }

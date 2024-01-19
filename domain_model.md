@@ -8,18 +8,25 @@
 
 ## class Basket
 
-| Members                   | Methods                           | Scenario                                                                                                                                                                                                                                                 | Output  |
-|---------------------------|-----------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------|
-| `ArrayList<String> items` | `add(String uuid, int amount)`    | Adds the amount given the type of item by its `uuid`. If the item already exists it just adds to the already existing value. Anything below 1 is invalid and throws a warning.                                                                           | boolean |
-|                           | `remove(String uuid, int amount)` | Removes the amount given the type of item by its `uuid`. If there are no items with the given id we throw an error. If the amount is -1 we remove all items of that id.<br>Returns true or false depending on if it could remove an amount successfully. | boolean |
-|                           | `calculateTotalPrice()`           | Calculates the total price of all items.                                                                                                                                                                                                                 | Price   |
+| Members                  | Methods                              | Scenario                                                                                                                                                                                                                 | Output |
+|--------------------------|--------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------|
+| `ArrayList<Order> items` | `add(String uuid, int amount)`       | Adds the amount given the type of item by its `uuid`. If the item already exists it just adds to the already existing value. Anything below 1 is invalid and throws a warning.<br>Returns an Error depending on success. | Error  |
+|                          | `remove(String uuid, int amount)`    | Removes the amount given the type of item by its `uuid`. If there are no items with the given id we throw an error. If the amount is -1 we remove all items of that id.<br>Returns an Error depending on success.        | Error  |
+|                          | `calculateTotalPrice()`              | Calculates the total price of all items.                                                                                                                                                                                 | double |
+|                          | `calculateTotalPriceWithDiscounts()` | Does the equivalent to that of `calculateTotalPrice()` however also takes into account all the discounts.                                                                                                                | double |
+
+## abstract class Discount
+
+| Methods                      | Scenario                                                                                                                                                                                     | Output |
+|------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------|
+| `applyDiscount(Order order)` | Depending on what implementation for the extended classes, the discount will be returned.<br>The class is abstract so that classes that extends Discount are forced to override this method. | double |
 
 
 ## class Item
 
 | Members             |
 |---------------------|
-| `Price price`       |
+| `double price`      |
 | `String uuid`       |
 | `Category category` |
 | `String variant`    |
@@ -30,15 +37,6 @@
 |-------------------|
 | `int amount`      |
 | `String itemuuid` |
-
-
-## class Price
-
-| Members            | Methods                 | Scenario                                                               | Output |
-|--------------------|-------------------------|------------------------------------------------------------------------|--------|
-| `int real`         | `toString()`            | Converts the price to a string.                                        | String |
-| `int decimal`      | `add(Price a, Price b)` | Adds the two prices together, with respect to decimals and everything. | Price  |
-| `int decimalCount` |                         |                                                                        |        |
 
 
 ## enum Category

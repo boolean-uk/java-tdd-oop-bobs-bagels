@@ -26,6 +26,12 @@ public class ShoppingManager {
         add(new Item(0.12, "Ham", "FILH", Category.FILLING));
     }};
 
+    public final static ArrayList<Discount> discounts = new ArrayList<>(){{
+        add(new NumberOfItemsDiscount(Category.BAGEL, 6, 2.44));
+        add(new NumberOfItemsDiscount(Category.BAGEL, 12, 3.99));
+        add(new ConditionalDiscount(new Category[]{ Category.COFFEE, Category.BAGEL }, 1.25));
+    }};
+
     public Basket basket = new Basket();
 
     public void changeBasketCapacityCallback() {
@@ -51,7 +57,7 @@ public class ShoppingManager {
     public void printBasket() {
         StringBuilder _sb = new StringBuilder();
 
-        for (Order order : basket.orders) {
+        for (Order order : basket.getOrders()) {
             Item _item = getItem(order.itemUUID);
             if (_item == null) continue;
 
@@ -70,7 +76,7 @@ public class ShoppingManager {
 
         targetMenu.clearButtons();
 
-        for (Order order : basket.orders) {
+        for (Order order : basket.getOrders()) {
             Item _item = ShoppingManager.getItem(order. itemUUID);
 
             if (_item == null) continue;
