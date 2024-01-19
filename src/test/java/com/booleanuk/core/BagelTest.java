@@ -98,6 +98,12 @@ public class BagelTest {
         Assertions.assertEquals(expected, i.listFillings());
 
     }
+    /* Test use case 10 */
+    @Test
+    public void testAddingItemNotInInventory(){
+        Basket basket = new Basket(10);
+        Assertions.assertFalse(basket.addItem("BGLO", 2));
+    }
 
     /* Additional tests */
     @Test
