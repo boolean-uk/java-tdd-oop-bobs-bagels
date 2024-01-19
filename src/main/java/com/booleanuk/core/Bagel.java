@@ -5,13 +5,11 @@ import java.util.HashMap;
 
 public class Bagel {
     private ArrayList<Filling> fillings;
-    //private HashMap<Filling, Integer> fillings;
     private String id;
     private String name;
     private double price;
     private String variant;
-    private static final Inventory inventory = new Inventory();
-
+;
     public Bagel(String id, Filling[] fillings){
         this(id);
         for (Filling filling : fillings){

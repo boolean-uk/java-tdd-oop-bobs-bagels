@@ -9,7 +9,7 @@ class BasketTest {
     @Test
     public void testAdd(){
        Basket basket = new Basket();
-       basket.setMaxSize(1);
+       Basket.setMaxSize(1);
        Bagel bagelRight = new Bagel("BGLO");
 
        //Add Bagel

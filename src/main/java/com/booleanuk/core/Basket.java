@@ -1,27 +1,25 @@
 package com.booleanuk.core;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class Basket {
 
     private ArrayList<Bagel> products;
-    //private HashMap<Bagel, Integer> products;
-    private static final Inventory inventory = new Inventory();
     private static int maxSize;
 
     public Basket(){
-        //this.products = new HashMap<>();
+
         this.products = new ArrayList<>();
         maxSize = 10;
     }
 
     public boolean add(Bagel bagel){
 
-        //If there is an invalid id or a filling
-        if(!Inventory.isInInventory(bagel.getId()) || Inventory.isFilling(bagel.getId())){
-            return false;
-        }
+//        //If there is an invalid id or a filling
+//        if(!Inventory.isInInventory(bagel.getId()) || Inventory.isFilling(bagel.getId())){
+//            return false;
+//        }
+
         //If basket is full
         if(isBasketFull()){
             return false;
@@ -85,6 +83,10 @@ public class Basket {
 
     public double getCostOfFilling(Filling filling){
         return filling.getPrice();
+    }
+
+    public void clearBasket(){
+        this.products.clear();
     }
 
     private boolean isBasketFull(){

@@ -12,13 +12,14 @@ class ManagerTest {
         Manager manager = new Manager();
         Basket basket1 = new Basket();
         Basket basket2 = new Basket();
+        manager.addBasket(basket1);
+        manager.addBasket(basket2);
 
         basket1.add(new Bagel("BGLO"));
         basket1.add(new Bagel("BGLO"));
         basket2.add(new Bagel("BGLP"));
 
         //
-
         //Test if baskets with a larger size than new max clears
         manager.setBasketSize(1);
 
