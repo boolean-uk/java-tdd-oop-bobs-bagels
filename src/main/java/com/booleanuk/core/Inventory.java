@@ -72,23 +72,27 @@ public class Inventory {
 
         //See if discounts
         for(Map.Entry<String, Integer> e: noOfEachKind.entrySet()) {
-            int noOfBagelsLeft = e.getValue();
-            String name = e.getKey();
-            while(noOfBagelsLeft-12 >= 0) {
-                cost += TWELWE_BAGELS_DISCOUNT_PRICE;
-                noOfBagelsLeft -= 12;
-            }
-            while(noOfBagelsLeft-6 >= 0) {
-                cost += SIX_BAGELS_DISCOUNT_PRICE;
-                noOfBagelsLeft -= 6;
-            }
-            cost += getCostOfBagel(name)*noOfBagelsLeft;
+            cost += getCostForOfBundleOfBagels(e.getKey(), e.getValue());
         }
 
         for(String coffee: coffees) {
             cost += getCostOfCoffee(coffee);
         }
 
+        return cost;
+    }
+
+    public double getCostForOfBundleOfBagels(String bagel, int noOfBagels) {
+        double cost = 0;
+        while(noOfBagels-12 >= 0) {
+            cost += TWELWE_BAGELS_DISCOUNT_PRICE;
+            noOfBagels -= 12;
+        }
+        while(noOfBagels-6 >= 0) {
+            cost += SIX_BAGELS_DISCOUNT_PRICE;
+            noOfBagels -= 6;
+        }
+        cost += getCostOfBagel(bagel)*noOfBagels;
         return cost;
     }
 

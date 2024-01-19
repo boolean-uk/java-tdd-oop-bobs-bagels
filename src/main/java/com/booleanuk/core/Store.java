@@ -2,17 +2,21 @@ package com.booleanuk.core;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 //TODO: check upper vs lowercase
 public class Store {
     private HashMap<Integer, Basket> baskets;
     private Inventory inventory;
     private int basketCapacity;
+    private String name;
 
     public Store() {
         baskets = new HashMap<>();
         basketCapacity = 3;
         inventory = new Inventory();
+        name = "Bob's Bagels";
     }
 
     public int createBasket() {
@@ -89,6 +93,43 @@ public class Store {
     }
 
     public Receipt createReceipt(int basketId) {
-        return new Receipt();
+        HashMap<String, Double> prices = new HashMap<>();
+        LinkedHashMap<String, Integer> quantities = new LinkedHashMap<>();
+        Basket basket = baskets.get(basketId);
+        String name;
+
+        for(Bagel bagel: basket.getBagels()) {
+            name =  bagel.getName() + " Bagel";
+            if(!quantities.containsKey(name)) {
+                quantities.put(name, 1);
+            } else {
+                quantities.put(name, quantities.get(name)+1);
+            }
+            for(String filling: bagel.getFillings()) {
+                name =  filling + " Filling";
+                if(!prices.containsKey(name)) {
+                    prices.put(name, getCostOfFilling(filling));
+                    quantities.put(name, 0);
+                } else {
+                    quantities.put(name, quantities.get(name)+1);
+                }
+            }
+        }
+
+        for(Map.Entry<String, Integer> e: quantities.entrySet()) {
+            prices.put(e.getKey(), inventory.getCostForOfBundleOfBagels(e.getKey().substring(0, e.getKey().length()-6), quantities.get(e.getKey())));
+        }
+
+        for(String coffee: basket.getCoffees()) {
+            name =  coffee + " Coffee";
+            if(!prices.containsKey(name)) {
+                prices.put(name, getCostOfCoffee(coffee));
+                quantities.put(name, 0);
+            } else {
+                quantities.put(name, quantities.get(name)+1);
+            }
+        }
+
+        return new Receipt(prices, quantities, getCostOfBasket(basketId), this.name, 28);
     }
 }

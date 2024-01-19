@@ -5,6 +5,9 @@ import com.booleanuk.core.Receipt;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class ExtensionTwoTest {
 
     @Test
@@ -13,21 +16,24 @@ public class ExtensionTwoTest {
         int basketId = store.createBasket();
         store.addBagelToBasket("Plain", basketId);
         Receipt receipt = store.createReceipt(basketId);
-
+        Date date = new Date();
+        int width = 28;
+        String dateFormatted = new SimpleDateFormat("dd-MM-yyyy").format(date) + " " + new SimpleDateFormat("H:mm:ss").format(date);
+        dateFormatted = " ".repeat((width-dateFormatted.length())/2)+dateFormatted;
         String expected =
-                        "    ~~~ Bob's Bagels ~~~   " +
-                        "\n" +
-                        "\n   2021-03-16 21:38:44 " +
+                        " ".repeat(4)+"~~~ Bob's Bagels ~~~" +
+                        "\n\n" +
+                        dateFormatted+
                         "\n" +
                         "\n----------------------------" +
                         "\n" +
-                        "\nPlain Bagel         1  \u00A30.39" +
+                        "\nPLAIN BAGEL        1   \u00A30.39" +
                         "\n" +
                         "\n----------------------------" +
                         "\nTotal                  \u00A30.39" +
                         "\n" +
-                        "\n        Thank you" +
-                        "\n     for your order!";
+                        "\n         Thank you" +
+                        "\n      for your order!";
 
         Assertions.assertEquals(expected, receipt.toString());
     }
@@ -36,25 +42,29 @@ public class ExtensionTwoTest {
     public void createReceiptForSeveralProductsTest() {
         Store store = new Store();
         int basketId = store.createBasket();
+        store.updateBasketCapacity(16);
         for(int i=0; i < 16; i++) {
             store.addBagelToBasket("plain", basketId);
         }
         Receipt receipt = store.createReceipt(basketId);
-
+        Date date = new Date();
+        int width = 28;
+        String dateFormatted = new SimpleDateFormat("dd-MM-yyyy").format(date) + " " + new SimpleDateFormat("H:mm:ss").format(date);
+        dateFormatted = " ".repeat((width-dateFormatted.length())/2)+dateFormatted;
         String expected =
-                "    ~~~ Bob's Bagels ~~~   " +
-                        "\n" +
-                        "\n   2021-03-16 21:38:44 " +
+                " ".repeat(4)+"~~~ Bob's Bagels ~~~" +
+                        "\n\n" +
+                        dateFormatted+
                         "\n" +
                         "\n----------------------------" +
                         "\n" +
-                        "\nPlain Bagel        16  \u00A35.55" +
+                        "\nPLAIN BAGEL        16  \u00A35.55" +
                         "\n" +
                         "\n----------------------------" +
                         "\nTotal                  \u00A35.55" +
                         "\n" +
-                        "\n        Thank you" +
-                        "\n     for your order!";
+                        "\n         Thank you" +
+                        "\n      for your order!";
 
         System.out.println(expected);
         Assertions.assertEquals(expected, receipt.toString());
