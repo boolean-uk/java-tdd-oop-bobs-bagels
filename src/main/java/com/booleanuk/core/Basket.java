@@ -38,12 +38,9 @@ public class Basket {
         return false;
     }
 
-    public boolean addFillings(Bagel bagel,  Filling[] fillings){
+    protected boolean addFillings(Bagel bagel,  ArrayList<Filling> fillings){
         if(products.contains(bagel)){
-            for (Filling filling : fillings){
-                bagel.addFilling(filling);
-                return true;
-            }
+            return bagel.addFillings(fillings);
         }
         return false;
     }
@@ -85,7 +82,7 @@ public class Basket {
         return filling.getPrice();
     }
 
-    public void clearBasket(){
+    protected void clearBasket(){
         this.products.clear();
     }
 

@@ -36,17 +36,17 @@ public final class Inventory {
         return inventoryFilling!= null && inventoryFilling.getPrice() == filling.getPrice() && inventoryFilling.getVariant().equals(filling.getVariant());
     }
 
-    public static HashMap<String, Bagel> getBagels() {
-        return bagels;
-    }
-
-    public static HashMap<String, Coffee> getCoffees() {
-        return coffees;
-    }
-
-    public static HashMap<String, Filling> getFillings() {
-        return fillings;
-    }
+//    public static HashMap<String, Bagel> getBagels() {
+//        return bagels;
+//    }
+//
+//    public static HashMap<String, Coffee> getCoffees() {
+//        return coffees;
+//    }
+//
+//    public static HashMap<String, Filling> getFillings() {
+//        return fillings;
+//    }
 
     private static void populateMaps(){
 

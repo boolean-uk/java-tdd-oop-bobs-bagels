@@ -42,96 +42,91 @@ As the manager,
 So we don't get any weird requests,
 I want customers to only be able to order things that we stock in our inventory.
 
-| Classes | Methods    | Member Variables           | Scenario | Output/Result |
-|---------|------------|----------------------------|----------|---------------|
-| Bagel   |            | HashMap<Fillings> fillings |          |               |
-|         |            | String name                |          |               |
-|         |            | double price               |          |               |
-|         |            | String variant             |          |               |
-|         |            |                            |          |               |
-|         | getPrice() |                            |          | return price  |
-|         | getId()    |                            |          | return Id     |
-|         | get        |                            |          |               |
-|         |            |                            |          |               |
-|         |            |                            |          |               |
-|         |            |                            |          |               |
-|         |            |                            |          |               |
+| Classes | Methods             | Member Variables             | Scenario | Output/Result                           |
+|---------|---------------------|------------------------------|----------|-----------------------------------------|
+| Bagel   |                     | ArrayList<Fillings> fillings |          |                                         |
+|         |                     | String id                    |          |                                         |
+|         |                     | String name                  |          |                                         |
+|         |                     | double price                 |          |                                         |
+|         |                     | String variant               |          |                                         |
+|         |                     |                              |          |                                         |
+|         | addFilling(Filling) |                              |          | Adds fillings if they are in inventory  |
+|         | getPrice()          |                              |          | return price                            |
+|         | getId()             |                              |          | return Id                               |
+|         | getFillings()       |                              |          | return fillings                         |
+|         | getName()           |                              |          | return name                             |
+|         | getVariant()        |                              |          | return Variant                          |
+|         |                     |                              |          |                                         |
+|         |                     |                              |          |                                         |
 
 
 
-| Classes | Methods     | Member Variables | Scenario | Output/Result  |
-|---------|-------------|------------------|----------|----------------|
-| Coffee  |             | String name      |          |                |
-|         |             | double price     |          |                |
-|         |             | String variant   |          |                |
-|         |             |                  |          |                |
-|         | getPrice()  |                  |          | return price   |     
-|         |             |                  |          |                |
+| Classes | Methods          | Member Variables | Scenario | Output/Result         |
+|---------|------------------|------------------|----------|-----------------------|
+| Coffee  |                  | String name      |          |                       |
+|         |                  | String id        |          |                       |
+|         |                  | double price     |          |                       |
+|         |                  | String variant   |          |                       |
+|         |                  |                  |          |                       |
+|         | getPrice()       |                  |          | return price          |     
+|         | getId()          |                  |          | return Id             |
+|         | getName()        |                  |          | return name           |
+|         | getVariant()     |                  |          | return Variant        |
 
-| Classes | Methods     | Member Variables | Scenario | Output/Result  |
-|---------|-------------|------------------|----------|----------------|
-| Filling |             | String name      |          |                |
-|         |             | double price     |          |                |
-|         |             | String variant   |          |                |
-|         |             |                  |          |                |
-|         | getPrice()  |                  |          | return price   |     
-|         |             |                  |          |                |
+| Classes | Methods      | Member Variables | Scenario | Output/Result  |
+|---------|--------------|------------------|----------|----------------|
+| Filling |              | String name      |          |                |
+|         |              | String id        |          |                |
+|         |              | double price     |          |                |
+|         |              | String variant   |          |                |
+|         |              |                  |          |                |
+|         | getPrice()   |                  |          | return price   |     
+|         | getId()      |                  |          | return Id      |
+|         | getName()    |                  |          | return name    |
+|         | getVariant() |                  |          | return Variant | 
 
+| Classes   | Methods     | Member Variables                             | Scenario                                                   | Output/Result |
+|-----------|-------------|----------------------------------------------|------------------------------------------------------------|---------------|
+| Inventory |             | bagels hashMap<String id, Bagel bagel>       |                                                            |               |
+|           |             | coffees hashMap<String id, Coffee coffee>    |                                                            |               |
+|           |             | fillings hashMap<String id, Filling filling> |                                                            |               |
+|           |             |                                              |                                                            |               |
+|           |             | isValidBagel(String id)                      | Check if the bagel/coffee/filling is part of the inventory |               |
+|           |             | isValidCoffee(String id)                     |                                                            |               |
+|           |             | isValidFilling(String id)                    |                                                            |               |
 
-| Classes   | Methods     | Member Variables                             | Scenario | Output/Result           |
-|-----------|-------------|----------------------------------------------|----------|-------------------------|
-| Inventory |             | bagels hashMap<String id, Bagel bagel>       |          |                         |
-|           |             | coffees hashMap<String id, Coffee coffee>    |          |                         |
-|           |             | fillings hashMap<String id, Filling filling> |          |                         |
-|           |             |                                              |          |                         |
-|           |             | isBagel(String id)                           |          | true if is a bagel      |
-|           |             | isCoffee(String id)                          |          | true if is a coffee     |
-|           |             | isFilling(String id)                         |          | true id is a filling    |
-|           |             | 10 isInInventory(String id)                  |          | true if is in inventory |
+| Classes | Methods            | Member Variables              | Scenario                                             | Output/Result                 |
+|---------|--------------------|-------------------------------|------------------------------------------------------|-------------------------------|
+| Manager |                    | basket Basket                 |                                                      |                               |
+|         |                    | ArrayList<Basketr> customer   |                                                      |                               |
+|         |                    |                               |                                                      |                               |
+|         | 4. setBasketSize() |                               |                                                      | change maxSize of basket      |
+|         |                    |                               | if a customer has more products than the new maxSize | clear that customers basket   |
+|         | addBasket(Basket)  |                               |                                                      | add basket to list of baskets |
+|         |                    |                               |                                                      |                               |
+|         |                    |                               |                                                      |                               |
+|         |                    |                               |                                                      |                               |
 
-
-| Classes  | Methods                                  | Member Variables    | Scenario                          | Output/Result                              |
-|----------|------------------------------------------|---------------------|-----------------------------------|--------------------------------------------|
-| Customer |                                          | Basket basket       |                                   |                                            |
-|          |                                          | inventory Inventory |                                   |                                            |
-|          |                                          |                     |                                   |                                            |
-|          | 1. 8. addToBasket(String id, String[])   |                     | if product is bagel or coffee     | add product to basket and return true      |
-|          |                                          |                     | if product is not bagel or coffee | return false                               |
-|          |                                          |                     | if basket is full                 | return false                               |
-|          |                                          |                     |                                   |                                            |
-|          | 2. removeFromBasket(String id, String[]) |                     | if product in basket              | remove product from basket and return true |
-|          |                                          |                     | 5. if product not in in basket    | return false                               |
-|          |                                          |                     |                                   |                                            |
-|          | 7. 9. getCostOfProduct(id String)        |                     | if product in inventory           | return price                               |
-|          |                                          |                     | if product not in inventory       | return -1                                  |
-|          |                                          |                     |                                   |                                            |
-|          | 6. getCostOfBasket()                     |                     |                                   | return total cost of items in basket       |                                                   
-|          |                                          |                     |                                   |                                            |
-|          |                                          |                     |                                   |                                            |
-
-| Classes | Methods        | Member Variables             | Scenario                                             | Output/Result               |
-|---------|----------------|------------------------------|------------------------------------------------------|-----------------------------|
-| Manager |                | basket Basket                |                                                      |                             |
-|         |                | inventory Inventory          |                                                      |                             |
-|         |                | ArrayList<Customer> customer |                                                      |                             |
-|         | 4. setBasket() |                              |                                                      | change maxSize of basket    |
-|         |                |                              | if a customer has more products than the new maxSize | clear that customers basket |
-|         |                |                              |                                                      |                             |
-|         |                |                              |                                                      |                             |
-|         |                |                              |                                                      |                             |
-|         |                |                              |                                                      |                             |
-
-| Classes | Methods              | Member Variables                         | Scenario                                                   | Output/Result      |
-|---------|----------------------|------------------------------------------|------------------------------------------------------------|--------------------|
-| Basket  |                      | products Hashmap<String ids, int amount> |                                                            |                    |
-|         |                      | inventory Inventory                      |                                                            |                    |
-|         |                      | int maxSize                              |                                                            |                    |
-|         | add(String id)       |                                          | if id in basket                                            | increase amount    |
-|         |                      |                                          | if id not in basket                                        | add to bas         |
-|         |                      |                                          | 3. if existing amount plus new product exceeds maxCapacity | return false       |
-|         | remove(String id)    |                                          |                                                            | decrease amount    |
-|         |                      |                                          |                                                            |                    |
-|         |                      |                                          |                                                            |                    |
-|         | setMaxSize(int size) |                                          |                                                            | change maxCapacity |
-
-
+| Classes | Methods              | Member Variables                   | Scenario                                                   | Output/Result                             |
+|---------|----------------------|------------------------------------|------------------------------------------------------------|-------------------------------------------|
+| Basket  |                      | products ArrayList<Bagel> products |                                                            |                                           |
+|         |                      | int maxSize                        |                                                            |                                           |
+|         |                      |                                    |                                                            |                                           |
+|         | add(String id)       |                                    |                                                            |                                           |
+|         |                      |                                    | 10. If product not in inventory                            | return false                              |
+|         |                      |                                    | 3. if existing amount plus new product exceeds maxCapacity | return false                              |
+|         |                      |                                    | else                                                       | add to basket                             |
+|         | remove(String id)    |                                    | If product not in basket                                   | return false                              |
+|         |                      |                                    | If product in basket                                       | remove from basket and return true        |
+|         | setMaxSize(int size) |                                    |                                                            | Changes maxSize                           |
+|         |                      |                                    |                                                            |                                           |
+|         | addFillings()        |                                    |                                                            | Adds fillings if they are in inventory    |
+|         |                      |                                    |                                                            |                                           |
+|         | getCostOfBagel()     |                                    |                                                            | Returns price of a bagel and its fillings |
+|         | getCostOfBasket()    |                                    |                                                            | Returns entire cost of basket             |
+|         | getCostOfFilling()   |                                    |                                                            | Returns Cost Of Filling                   |
+|         |                      |                                    |                                                            |                                           |
+|         | getProducts()        |                                    |                                                            | returns all products                      |
+|         | clearBasket()        |                                    |                                                            | empties basket                            |
+|         |                      |                                    |                                                            |                                           |
+|         |                      |                                    |                                                            |                                           |

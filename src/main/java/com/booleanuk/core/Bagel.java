@@ -12,7 +12,7 @@ public class Bagel {
 
     public Bagel(String id, double price, String variant, ArrayList<Filling> fillings){
         this(id, price, variant);
-        this.fillings = fillings;
+        addFillings(fillings);
     }
 
     public Bagel(String id, double price, String variant) {
@@ -20,11 +20,14 @@ public class Bagel {
         this.name = "Bagel";
         this.price = price;
         this.variant = variant;
-
         this.fillings = new ArrayList<>();
     }
-    public void addFilling(Filling filling){
-        this.fillings.add(filling);
+    public boolean addFillings(ArrayList<Filling> fillings){
+        if (fillings.stream().allMatch(Inventory::isValidFilling)){
+            this.fillings.addAll(fillings);
+            return true;
+        }
+        return false;
     }
     public String getId(){
         return this.id;

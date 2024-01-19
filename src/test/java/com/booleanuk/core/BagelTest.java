@@ -62,17 +62,32 @@ class BagelTest {
         Bagel plain = new Bagel("BGLP", 0.39, "Plain", fillings);
 
         ArrayList<Filling> fillingsTest = new ArrayList<>();
-        fillings.add(filling1);
-        fillings.add(filling2);
-        fillings.add(filling3);
+        fillingsTest.add(filling1);
+        fillingsTest.add(filling2);
+        fillingsTest.add(filling3);
 
         Assertions.assertEquals(fillings, plain.getFillings());
     }
     @Test
     public void testAddFilling(){
         Filling filling1 = new Filling("FILB", 0.12, "Bacon");
+        Filling fillingBad = new Filling("FIL", 0.12, "Cheese");
+        Filling filling2 = new Filling("FILC", 0.12, "Cheese");
         Bagel plain = new Bagel("BGLP", 0.39, "Plain");
-        plain.addFilling(filling1);
+
+        ArrayList<Filling> fillings = new ArrayList<>();
+        fillings.add(filling1);
+
+        ArrayList<Filling> fillingsBad = new ArrayList<>();
+        fillingsBad.add(filling1);
+        fillingsBad.add(fillingBad);
+        fillingsBad.add(filling2);
+
+        //Test list with one wrong filling
+        Assertions.assertFalse(plain.addFillings(fillingsBad));
+
+        //Test list with one good fillings
+        plain.addFillings(fillings);
         Assertions.assertEquals(plain.getFillings().get(0), filling1);
     }
 }

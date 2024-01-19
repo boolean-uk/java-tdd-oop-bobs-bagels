@@ -71,19 +71,23 @@ class BasketTest {
         Filling filling1 = new Filling("FILB", 0.12, "Bacon");
         Filling filling2 = new Filling("FILE", 0.12, "Egg");
         Filling fillingWrong = new Filling("FIL", 0.12, "Egg");
+
+        ArrayList<Filling> fillings = new ArrayList<Filling>();
+        fillings.add(filling1);
+        fillings.add(filling2);
+
+        ArrayList<Filling>  wrongfillings = new ArrayList<Filling>();
+        wrongfillings.add(fillingWrong);
         basket.add(bagel);
 
-        //Add single filling to bagel in basket
-        Assertions.assertTrue(basket.addFillings(bagel, new Filling[]{filling1}));
-
         //Add multiple filling to bagel in basket
-        Assertions.assertTrue(basket.addFillings(bagel, new Filling[]{filling1, filling2}));
+        Assertions.assertTrue(basket.addFillings(bagel, fillings));
 
         //Add incorrect filling
-        Assertions.assertFalse(basket.addFillings(bagel, new Filling[]{fillingWrong}));
+        Assertions.assertFalse(basket.addFillings(bagel, wrongfillings));
 
         //Add filling to bagel not in basket
-        Assertions.assertFalse(basket.addFillings(bagel2, new Filling[]{filling1}));
+        Assertions.assertFalse(basket.addFillings(bagel2, fillings));
     }
 
     @Test
