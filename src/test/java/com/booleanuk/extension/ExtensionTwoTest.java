@@ -66,7 +66,52 @@ public class ExtensionTwoTest {
                         "\n         Thank you" +
                         "\n      for your order!";
 
-        System.out.println(expected);
+        Assertions.assertEquals(expected, receipt.toString());
+
+    }
+
+    @Test
+    public void createReceiptForSeveralProductsOfDifferentKindsTest() {
+        Store store = new Store();
+        store.updateBasketCapacity(100);
+        int basketId = store.createBasket();
+
+        for(int i=0; i < 2; i++) {
+            store.addBagelToBasket("oNIoN", basketId);
+        }
+        for(int i=0; i < 12; i++) {
+            store.addBagelToBasket("plain", basketId);
+        }
+        for(int i=0; i < 6; i++) {
+            store.addBagelToBasket("Everything", basketId);
+        }
+        for(int i=0; i < 3; i++) {
+            store.addCoffeeToBasket("blaCk", basketId);
+        }
+
+        Receipt receipt = store.createReceipt(basketId);
+        Date date = new Date();
+        int width = 28;
+        String dateFormatted = new SimpleDateFormat("dd-MM-yyyy").format(date) + " " + new SimpleDateFormat("H:mm:ss").format(date);
+        dateFormatted = " ".repeat((width-dateFormatted.length())/2)+dateFormatted;
+        String expected =
+                " ".repeat(4)+"~~~ Bob's Bagels ~~~" +
+                        "\n\n" +
+                        dateFormatted+
+                        "\n" +
+                        "\n----------------------------" +
+                        "\n" +
+                        "\nONION BAGEL        2   \u00A30.98" +
+                        "\nPLAIN BAGEL        12  \u00A33.99" +
+                        "\nEVERYTHING BAGEL   6   \u00A32.49" +
+                        "\nBLACK COFFEE       3   \u00A32.97" +
+                        "\n" +
+                        "\n----------------------------" +
+                        "\nTotal                  \u00A310.43" +
+                        "\n" +
+                        "\n         Thank you" +
+                        "\n      for your order!";
+
         Assertions.assertEquals(expected, receipt.toString());
 
     }
