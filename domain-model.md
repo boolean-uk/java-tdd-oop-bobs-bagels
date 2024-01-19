@@ -1,39 +1,5 @@
 # Domain model Bob's Bagels
 ```
-BobsBagels
-	- Baskets: List<Basket>
-	+ setBasketCapacity(capacity: int) String
-
-Basket
-	- basketMap: HashMap<String, Integer>
-	- capacity: int
-	- inventory: Inventory
-	+ add(sku: String) String
-	+ remove(sku: String) String
-	+ setCapacity(capacity: int) boolean
-	+ totalCost() double
-	+ addFilling(sku: String) String
-
-Inventory
-	- products: List<products>
-	+ getProductCost(sku: String) double
-	+ listFillingPrices() String
-
-Product
-	- sku: String
-	- price: double
-	- name: String
-	- Variant: String
-Discounts
-	- bulkDiscounts: List<BulkDiscount>
-	- inventory: Inventory
-	+ calculateBulkDiscount(sku: String, num: Int) double
-BulkDiscount
-	- sku: String
-	- number: int
-	- price: double
-```
-```
 1.
 As a member of the public,
 So I can order a bagel before work,
@@ -144,7 +110,7 @@ I want customers to only be able to order things that we stock in our inventory.
 ```
 #### Inventory class implemented
 
-## Exercise 1
+## Extension 1
 #### Only implementing bulk buy discounts for now
 ```
 As the manager,
@@ -180,5 +146,55 @@ I'd like to know what the total cost of items in my basket will be after the dis
 | Discount | calculateBulkDiscount(String sku, int num) | List<BulkDiscount> bulkDiscounts   | There is a discount for the input element. The amount you save by utilizing the discount is calculated | Return saved amount (double)                                      |
 |          |                                            | Inventory inventory                | There is no discount                                                                                   | Return 0                                                          |
 
+## Extension 3
+```
+As a customer,
+So I know how much money I spent and saved,
+I'd like a receipt of my basket with the total cost and the money saved from discounts displayed for each item.
+```
+| Class    | Method                                     | Variables                          | Scenario                                             | Return value                                                                 |
+|----------|--------------------------------------------|------------------------------------|------------------------------------------------------|------------------------------------------------------------------------------|
+| Basket   | totalCostDiscount()                        | HashMap<String, Integer> basketMap | Basket has multiple products in it, but no discounts | Return String receipt                                                        |
+|          |                                            | Discount discount                  | Basket has multiple products in it, with discounts.  | Return String receipt with money saved through discount displayed under item |
+|          |                                            |                                    | Basket is empty                                      | Return String receipt with no items and total of 0.00                        |
 # Class diagram:
-![](assets/class-diagram-1.png)
+![](assets/class-diagram.png)
+
+```
+BobsBagels
+	- Baskets: List<Basket>
+	+ setBasketCapacity(capacity: int) String
+
+Basket
+	- basketMap: HashMap<String, Integer>
+	- capacity: int
+	- inventory: Inventory
+	- discounts: Discounts
+	+ add(sku: String) String
+	+ remove(sku: String) String
+	+ setCapacity(capacity: int) boolean
+	+ getNumberOfItems() int
+	+ totalCost() double
+	+ addFilling(sku: String) String
+	+ totalCostDiscount() double
+	+ receiptDiscount() String
+
+Inventory
+	- products: List<products>
+	+ getProductCost(sku: String) double
+	+ listFillingPrices() String
+
+Product
+	- sku: String
+	- price: double
+	- name: String
+	- Variant: String
+Discounts
+	- bulkDiscounts: List<BulkDiscount>
+	- inventory: Inventory
+	+ calculateBulkDiscount(sku: String, num: Int) double
+BulkDiscount
+	- sku: String
+	- number: int
+	- price: double
+```
