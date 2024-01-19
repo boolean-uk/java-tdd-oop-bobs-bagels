@@ -90,8 +90,6 @@ public class CustomerTest {
 
         Map<String, Double> fillings = Map.of("FILB", 0.12,"FILE", 0.12,"FILC", 0.12,"FILX", 0.12,"FILS", 0.12,"FILH", 0.12);
         Assertions.assertEquals(fillings, customer.getFillingsInInventory());
-
-
     }
 
     @Test

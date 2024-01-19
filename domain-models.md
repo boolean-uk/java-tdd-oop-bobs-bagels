@@ -266,4 +266,18 @@ Class Customer
 |                 |                       |                         |               |
 |                 |                       |                         |               |
 
+``
+Extension 2 and 3
+As a customer
+I want to get a receipt of my purchase and show correct savings
+``
+Class Receipt
+
+
+| Class Variables | Methods                              | Scenario                                       | Output/Return |
+|-----------------|--------------------------------------|------------------------------------------------|---------------|
+|                 | printBasket()                        | After purchase customer want a receipt printed | void          |
+|                 | String formatDate(Date date)         | Format date to string for receipt              | String        |
+|                 | String formatTotal(double total)     | Formats total to string for receipt            | String        |
+|                 | String formatSavings(double savings) | Format savings to string for receipt           | String        |
 

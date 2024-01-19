@@ -71,7 +71,6 @@ public class Customer {
                     System.out.println("add one normal cofeee");
                     cost += restCoffeesList.get(i).getPrice();
                 }
-
             }
         }
 
