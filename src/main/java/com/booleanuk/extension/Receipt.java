@@ -23,9 +23,12 @@ public class Receipt {
         StringBuilder receipt = new StringBuilder();
         receipt.append(createHeader());
         for (Item item : basket.getBasketContent().keySet()) {
-            String itemRow = item.getSku() + "\n";
+            int amount = basket.getBasketContent().get(item);
+            String itemRow = item.getSku() + "\t" +  amount + "\t" + item.getPrice() * amount + "\n";
             receipt.append(itemRow);
         }
+        receipt.append("\n----------------------------\nTotal                  \u00A3") ;
+        receipt.append(basket.totalCost());
         receipt.append(createFooter());
         this.receipt = receipt.toString();
         return receipt.toString();
@@ -35,12 +38,12 @@ public class Receipt {
         String header = "";
         header += "    ~~~ Bob's Bagels ~~~\n\n    ";
         header += this.dateAndTime.toString().replace("T", " ");
-        header += "\n\n----------------------------\n";
+        header += "\n\n----------------------------\n\n";
         return header;
     }
 
     public String createFooter() {
-        return "\n        Thank you\n      for your order!";
+        return "\n\n        Thank you\n      for your order!";
     }
 
     public boolean printReceipt() {

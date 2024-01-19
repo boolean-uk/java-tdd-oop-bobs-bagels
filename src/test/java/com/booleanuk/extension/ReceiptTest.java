@@ -29,7 +29,8 @@ public class ReceiptTest {
         basket.add(bglp);
         Assertions.assertTrue(receipt.generateReceipt().contains("BGLO\t2\t0.98\n"));
         Assertions.assertTrue(receipt.generateReceipt().contains("BGLP\t1\t0.39\n"));
-        Assertions.assertTrue(receipt.generateReceipt().contains("Total                 £"+basket.totalCost()));
+        Assertions.assertTrue(receipt.generateReceipt().contains("\n----------------------------\nTotal                  \u00A3" + basket.totalCost()));
+        System.out.println(receipt.generateReceipt());
     }
 
     @Test
@@ -45,8 +46,8 @@ public class ReceiptTest {
 
         Assertions.assertEquals("    ~~~ Bob's Bagels ~~~\n\n    " +
                 receipt.getDateAndTime().toString().replace("T", " ")+
-                "\n\n----------------------------\n", receipt.createHeader());
-        Assertions.assertEquals("\n        Thank you\n      for your order!", receipt.createFooter());
+                "\n\n----------------------------\n\n", receipt.createHeader());
+        Assertions.assertEquals("\n\n        Thank you\n      for your order!", receipt.createFooter());
     }
 
     @Test
