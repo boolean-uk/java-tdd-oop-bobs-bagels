@@ -1,3 +1,4 @@
+
 package com.booleanuk.extension;
 
 import com.booleanuk.core.*;
@@ -11,7 +12,8 @@ public class ReceiptTest {
         Customer customer = new Customer();
 
         Basket basket = new Basket(5);
-        Receipt receipt = new Receipt(basket, customer);
+        customer.setBasket(basket);
+        Receipt receipt = new Receipt(customer);
 
         basket.addItemToBasket(new Bagel("Plain"));
         basket.addItemToBasket(new Bagel("Plain"));
@@ -22,8 +24,6 @@ public class ReceiptTest {
 
 
         //I have not formatted string that much before so i dont know how it will turn out, therefore i have no expected value as of yet"
-
-
         Assertions.assertEquals("", receipt.formatDate());
         Assertions.assertEquals("", receipt.formatBasketValues(basket.getItemList()));
         Assertions.assertEquals("", receipt.formatSavings(basket.getItemList()));

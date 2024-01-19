@@ -10,19 +10,18 @@ import java.util.Map;
 
 public class Receipt {
 
-    private final Basket basket;
     private final Customer customer;
 
-    public Receipt(Basket basket, Customer customer) {
-        this.basket = basket;
+    public Receipt(Customer customer) {
         this.customer = customer;
+
     }
 
 
 
     public String printBasket() {
 
-        return formatDate() + "\n" + formatBasketValues(this.basket.getItemList()) + "\n" + formatSavings(this.basket.getItemList());
+        return formatDate() + "\n" + formatBasketValues(this.customer.getBasket().getItemList()) + "\n" + formatSavings(this.customer.getBasket().getItemList());
 
 
     }
@@ -48,6 +47,6 @@ public class Receipt {
     }
 
     public String formatSavings(Map<Item, Integer> basketMap) {
-        double discount =
+        return "";
     }
 }
