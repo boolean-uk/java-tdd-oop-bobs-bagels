@@ -47,6 +47,7 @@ Store
 |                                                                                |                                   | Customer wants to add a coffee that doesn't exist                                                            | "Bob's bagels doesn't have that coffee."                              |
 | removeCoffeeFromBasket(String coffee, int basketId)                            |                                   | Customer wants to remove an existing coffee from their basket                                                | true                                                                  |
 |                                                                                |                                   | Customer wants to remove a non-existent coffee from their basket                                             | false                                                                 |
+| printReceipt(int basketId)                                                     |                                   | Customer wants to have a receipt over their purchase                                                         | Prints the receipt to the terminal                                    |
 
 Inventory
 
@@ -59,3 +60,12 @@ Inventory
 |                                                                                |                                                                                                                                                         | Customer wants to know the cost of a non-existing filling                                                    | -1               |
 | getCostOfCoffee(String coffee)                                                 |                                                                                                                                                         | Customer wants to know the cost of an existing coffee                                                        | cost as a double |
 |                                                                                |                                                                                                                                                         | Customer wants to know the cost of a non-existing coffee                                                     | -1               |
+
+Receipt 
+
+| Members                             |
+|-------------------------------------|
+| Date date                           |
+| HashMap<String, Double> prices      |
+| HashMap<String, Integer> quantities |
+| double totalCost                    |
