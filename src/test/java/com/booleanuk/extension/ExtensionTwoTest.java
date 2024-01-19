@@ -107,7 +107,7 @@ public class ExtensionTwoTest {
                         "\nBLACK COFFEE       3   \u00A32.97" +
                         "\n" +
                         "\n----------------------------" +
-                        "\nTotal                  \u00A310.43" +
+                        "\nTotal                 \u00A310.43" +
                         "\n" +
                         "\n         Thank you" +
                         "\n      for your order!";

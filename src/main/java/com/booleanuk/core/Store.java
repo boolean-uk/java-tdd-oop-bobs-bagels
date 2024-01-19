@@ -92,6 +92,7 @@ public class Store {
         return baskets.get(basketId).removeCoffee(coffee);
     }
 
+    //TODO: refactor this horrible thing
     public Receipt createReceipt(int basketId) {
         HashMap<String, Double> prices = new HashMap<>();
         LinkedHashMap<String, Integer> quantities = new LinkedHashMap<>();
@@ -99,37 +100,42 @@ public class Store {
         String name;
 
         for(Bagel bagel: basket.getBagels()) {
-            name =  bagel.getName() + " Bagel";
+            name =  bagel.getName() + " BAGEL";
             if(!quantities.containsKey(name)) {
                 quantities.put(name, 1);
             } else {
                 quantities.put(name, quantities.get(name)+1);
             }
             for(String filling: bagel.getFillings()) {
-                name =  filling + " Filling";
-                if(!prices.containsKey(name)) {
-                    prices.put(name, getCostOfFilling(filling));
-                    quantities.put(name, 0);
+                name =  filling + " FILLING";
+                if(!quantities.containsKey(name)) {
+                    quantities.put(name, 1);
                 } else {
                     quantities.put(name, quantities.get(name)+1);
                 }
             }
         }
 
-        for(Map.Entry<String, Integer> e: quantities.entrySet()) {
-            prices.put(e.getKey(), inventory.getCostForOfBundleOfBagels(e.getKey().substring(0, e.getKey().length()-6), quantities.get(e.getKey())));
-        }
-
         for(String coffee: basket.getCoffees()) {
-            name =  coffee + " Coffee";
-            if(!prices.containsKey(name)) {
-                prices.put(name, getCostOfCoffee(coffee));
-                quantities.put(name, 0);
+            name =  coffee + " COFFEE";
+            if(!quantities.containsKey(name)) {
+                quantities.put(name, 1);
             } else {
                 quantities.put(name, quantities.get(name)+1);
             }
         }
 
+        for(Map.Entry<String, Integer> e: quantities.entrySet()) {
+            String item = e.getKey();
+            int quantity = e.getValue();
+            if (item.contains("BAGEL")) {
+                prices.put(item, inventory.getCostForOfBundleOfBagels(item.substring(0, item.length() - 6), quantity));
+            } else if (item.contains("COFFEE")){
+                prices.put(item, getCostOfCoffee(item.substring(0, item.length() - 7))*quantity);
+            } else if (item.contains("FILLING")){
+                prices.put(item, getCostOfFilling(item.substring(0, item.length() - 8))*quantity);
+            }
+        }
         return new Receipt(prices, quantities, getCostOfBasket(basketId), this.name, 28);
     }
 }
