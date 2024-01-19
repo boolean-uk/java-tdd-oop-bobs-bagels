@@ -9,35 +9,35 @@ class BasketTest {
     @Test
     public void addMultipleValidItems() {
         Basket basket = new Basket();
-        boolean result = basket.addItem("Bagel Onion");
+        boolean result = basket.addItem("Bagel Onion", 1);
         Assertions.assertTrue(result);
 
-        result = basket.addItem("Filling Bacon");
+        result = basket.addItem("Filling Bacon", 1);
         Assertions.assertTrue(result);
 
-        result = basket.addItem("Coffee Black");
+        result = basket.addItem("Coffee Black", 1);
         Assertions.assertTrue(result);
 
-        result = basket.addItem("Bagel Onion");
+        result = basket.addItem("Bagel Onion", 3);
         Assertions.assertTrue(result);
 
-        Assertions.assertEquals("BGLO", basket.getBasketItemAtIndex(0));
-        Assertions.assertEquals("FILB", basket.getBasketItemAtIndex(1));
-        Assertions.assertEquals("COFB", basket.getBasketItemAtIndex(2));
-        Assertions.assertEquals("BGLO", basket.getBasketItemAtIndex(3));
+        Assertions.assertEquals("Bagel Onion", basket.getBasketItem("BGLO").getItem());
+        Assertions.assertEquals("Filling Bacon", basket.getBasketItem("FILB").getItem());
+        Assertions.assertEquals("Coffee Black", basket.getBasketItem("COFB").getItem());
+        Assertions.assertEquals(4, basket.getBasketItem("BGLO").getQuantity());
 
     }
 
     @Test
     public void addMultipleInValidItems() {
         Basket basket = new Basket();
-        boolean result = basket.addItem("Choclate");
+        boolean result = basket.addItem("Choclate", 1);
         Assertions.assertFalse(result);
 
-        result = basket.addItem("Bagel Black");
+        result = basket.addItem("Bagel Black", 1);
         Assertions.assertFalse(result);
 
-        result = basket.addItem("Filling Bagel");
+        result = basket.addItem("Filling Bagel", 1);
         Assertions.assertFalse(result);
 
         Assertions.assertEquals(0, basket.getBasketSize());
@@ -47,12 +47,12 @@ class BasketTest {
     @Test
     public void removeItemsValid() {
         Basket basket = new Basket();
-        boolean result = basket.addItem("Bagel Onion");
+        boolean result = basket.addItem("Bagel Onion", 1);
         Assertions.assertTrue(result);
 
         Assertions.assertEquals(1, basket.getBasketSize());
 
-        result = basket.removeItem("Bagel Onion");
+        result = basket.removeItem("Bagel Onion", 1);
         Assertions.assertTrue(result);
 
         Assertions.assertEquals(0, basket.getBasketSize());
@@ -62,12 +62,12 @@ class BasketTest {
     @Test
     public void removeItemsNotInBasket() {
         Basket basket = new Basket();
-        boolean result = basket.addItem("Bagel Onion");
+        boolean result = basket.addItem("Bagel Onion", 1);
         Assertions.assertTrue(result);
 
         Assertions.assertEquals(1, basket.getBasketSize());
 
-        result = basket.removeItem("Bagel onion");
+        result = basket.removeItem("Bagel onion", 1);
         Assertions.assertFalse(result);
 
         Assertions.assertEquals(1, basket.getBasketSize());
@@ -76,14 +76,14 @@ class BasketTest {
     @Test
     public void removeOnlyOneValidItem() {
         Basket basket = new Basket();
-        boolean result = basket.addItem("Bagel Onion");
-        result = basket.addItem("Filling Bacon");
-        result = basket.addItem("Bagel Onion");
-        result = basket.addItem("Coffee Black");
+        boolean result = basket.addItem("Bagel Onion", 1);
+        result = basket.addItem("Filling Bacon", 1);
+        result = basket.addItem("Bagel Onion", 1);
+        result = basket.addItem("Coffee Black", 1);
 
         Assertions.assertEquals(4, basket.getBasketSize());
 
-        result = basket.removeItem("Bagel Onion");
+        result = basket.removeItem("Bagel Onion", 1);
         Assertions.assertTrue(result);
 
         Assertions.assertEquals(3, basket.getBasketSize());
@@ -111,10 +111,10 @@ class BasketTest {
         Basket basket = new Basket();
         int newCapacity = 2;
         int intResult = basket.changeCapacity(newCapacity);
-        boolean result = basket.addItem("Bagel Onion");
-        result = basket.addItem("Filling Bacon");
+        boolean result = basket.addItem("Bagel Onion", 1);
+        result = basket.addItem("Filling Bacon", 1);
         Assertions.assertTrue(result);
-        result = basket.addItem("Bagel Onion");
+        result = basket.addItem("Bagel Onion", 1);
         Assertions.assertFalse(result);
 
         Assertions.assertEquals(2, basket.getBasketSize());
@@ -127,23 +127,23 @@ class BasketTest {
         Basket basket = new Basket();
         int intResult = basket.changeCapacity(3);
         // Add 4 items to a max 3 items basket. Fours add should return false, the rest true
-        Assertions.assertTrue(basket.addItem("Bagel Plain"));
-        Assertions.assertTrue(basket.addItem("Bagel Sesame"));
-        Assertions.assertTrue(basket.addItem("Coffee Capuccino"));
-        Assertions.assertFalse(basket.addItem("Filling Cheese"));
+        Assertions.assertTrue(basket.addItem("Bagel Plain", 1));
+        Assertions.assertTrue(basket.addItem("Bagel Sesame", 1));
+        Assertions.assertTrue(basket.addItem("Coffee Capuccino", 1));
+        Assertions.assertFalse(basket.addItem("Filling Cheese", 1));
 
         // Remove banana to add cheese and salami. Salami should return fail, the rest true
-        Assertions.assertTrue(basket.removeItem("Bagel Sesame"));
-        Assertions.assertTrue(basket.addItem("Bagel Everything"));
-        Assertions.assertFalse(basket.addItem("Bagel Onion"));
+        Assertions.assertTrue(basket.removeItem("Bagel Sesame", 1));
+        Assertions.assertTrue(basket.addItem("Bagel Everything", 1));
+        Assertions.assertFalse(basket.addItem("Bagel Onion", 1));
 
         // Change capacity to 5 and add the extra bagels
         Assertions.assertEquals(5, basket.changeCapacity(5));
-        Assertions.assertTrue(basket.addItem("Bagel Everything"));
-        Assertions.assertTrue(basket.addItem("Bagel Everything"));
+        Assertions.assertTrue(basket.addItem("Bagel Everything", 1));
+        Assertions.assertTrue(basket.addItem("Bagel Everything", 1));
 
         // Remove ham bagel, that has now been added
-        Assertions.assertTrue(basket.removeItem("Bagel Everything"));
+        Assertions.assertTrue(basket.removeItem("Bagel Everything", 1));
     }
 
     // Check total cost in basket
@@ -153,20 +153,20 @@ class BasketTest {
         Basket basket = new Basket();
         Assertions.assertEquals(0.0, basket.getTotal());
 
-        Assertions.assertTrue(basket.addItem("Bagel Plain"));
-        Assertions.assertTrue(basket.addItem("Bagel Sesame"));
-        Assertions.assertTrue(basket.addItem("Coffee Capuccino"));
-        Assertions.assertTrue(basket.addItem("Filling Cheese"));
+        Assertions.assertTrue(basket.addItem("Bagel Plain", 1));
+        Assertions.assertTrue(basket.addItem("Bagel Sesame", 1));
+        Assertions.assertTrue(basket.addItem("Coffee Capuccino", 1));
+        Assertions.assertTrue(basket.addItem("Filling Cheese", 1));
 
         Assertions.assertEquals(2.29, basket.getTotal());
 
-        Assertions.assertTrue(basket.removeItem("Bagel Sesame"));
-        Assertions.assertTrue(basket.addItem("Bagel Everything"));
-        Assertions.assertTrue(basket.addItem("Bagel Onion"));
+        Assertions.assertTrue(basket.removeItem("Bagel Sesame", 1));
+        Assertions.assertTrue(basket.addItem("Bagel Everything", 1));
+        Assertions.assertTrue(basket.addItem("Bagel Onion", 1));
         Assertions.assertEquals(2.78, basket.getTotal());
 
-        Assertions.assertTrue(basket.addItem("Bagel Everything"));
-        Assertions.assertTrue(basket.addItem("Bagel Everything"));
+        Assertions.assertTrue(basket.addItem("Bagel Everything", 1));
+        Assertions.assertTrue(basket.addItem("Bagel Everything", 1));
         Assertions.assertEquals(3.76, basket.getTotal());
     }
 
@@ -188,21 +188,21 @@ class BasketTest {
     public void testBuildBagelAllFillings() {
         Basket basket = new Basket();
         String[] fillings = {"Bacon", "Egg", "Cheese", "Cream Cheese", "Smoked Salmon", "Ham"};
-        Boolean result = basket.buildBagel(fillings);
+        boolean result = basket.buildBagel(2, fillings);
         Assertions.assertTrue(result);
-        Assertions.assertEquals("Bagel Bacon, Egg, Cheese, Cream Cheese, Smoked Salmon, Ham", basket.getBasketItemAtIndex(0));
-        Assertions.assertEquals(1, basket.getBasketSize());
+        Assertions.assertEquals("Bagel Bacon, Egg, Cheese, Cream Cheese, Smoked Salmon, Ham", basket.getBasketItem("BGLB1").getItem());
+        Assertions.assertEquals(2, basket.getBasketSize());
 
         String[] fillings1 = {"Egg", "Cheese", "Cream Cheese", "Ham"};
-        result = basket.buildBagel(fillings1);
+        result = basket.buildBagel(1, fillings1);
         Assertions.assertTrue(result);
-        Assertions.assertEquals("Bagel Egg, Cheese, Cream Cheese, Ham", basket.getBasketItemAtIndex(1));
-        Assertions.assertEquals(2, basket.getBasketSize());
+        Assertions.assertEquals("Bagel Egg, Cheese, Cream Cheese, Ham", basket.getBasketItem("BGLB2").getItem());
+        Assertions.assertEquals(3, basket.getBasketSize());
 
         String[] fillings2 = {"Tomato", "Eggs"};
-        result = basket.buildBagel(fillings2);
+        result = basket.buildBagel(3, fillings2);
         Assertions.assertFalse(result);
-        Assertions.assertEquals(2, basket.getBasketSize());
+        Assertions.assertEquals(3, basket.getBasketSize());
     }
 
     // Test for not allowing customers is incorporated with the adding testing.
