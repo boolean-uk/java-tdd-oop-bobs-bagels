@@ -9,7 +9,7 @@ public class Item {
     private double price;
     private String variant;
     public Item(String variant) {
-        this.variant = variant;
+        this.setVariant(variant);
 
     }
 
@@ -40,5 +40,13 @@ public class Item {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getVariant() {
+        return variant;
+    }
+
+    public void setVariant(String variant) {
+        this.variant = variant;
     }
 }
