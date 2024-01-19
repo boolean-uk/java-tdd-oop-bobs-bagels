@@ -7,11 +7,12 @@ import java.util.Map;
 public class Basket {
 
 
-    private Map<Item, Integer> itemList = new HashMap<>();
+    private Map<Item, Integer> itemList;
     private int basketCapacity = 0;
 
     public Basket(int basketCapacity) {
         this.basketCapacity = basketCapacity;
+        this.itemList = new HashMap<>();
 
     }
 

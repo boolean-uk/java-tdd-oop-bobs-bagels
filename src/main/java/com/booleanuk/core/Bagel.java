@@ -5,11 +5,12 @@ import java.util.Collection;
 
 public class Bagel extends Item {
 
-    private ArrayList<Filling> fillings = new ArrayList<>();
+    private ArrayList<Filling> fillings;
 
 
     public Bagel(String variant) {
         super(variant);
+        this.fillings = new ArrayList<>();
         this.setName("Bagel");
         this.setPriceOfBagel(variant);
         this.setSkuCode("BGL" + variant.toUpperCase().charAt(0));
