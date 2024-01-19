@@ -11,14 +11,23 @@ class BasketTest {
     @Test
     public void testAddRightBagel(){
        Basket basket = new Basket();
-       Basket.setMaxSize(1);
-       Bagel bagelRight = new Bagel("BGLO", 0.49, "Onion");
+       Basket.setMaxSize(2);
+       Bagel bagelNoFillings = new Bagel("BGLO", 0.49, "Onion");
 
-       //Add Bagel
-       Assertions.assertTrue(basket.add(bagelRight));
+       Filling filling1 = new Filling("FILB", 0.12, "Bacon");
+       ArrayList<Filling> fillings = new ArrayList<>();
+       fillings.add(filling1);
+
+       Bagel bagelWfillings = new Bagel("BGLO", 0.49, "Onion", fillings);
+
+       //Add Bagel With no filling
+       Assertions.assertTrue(basket.add(bagelNoFillings));
+
+        //Add Bagel With filling
+        Assertions.assertTrue(basket.add(bagelWfillings));
 
        //Try adding with a full basket
-       Assertions.assertFalse(basket.add(bagelRight));
+       Assertions.assertFalse(basket.add(bagelNoFillings));
 
     }
 
@@ -29,6 +38,8 @@ class BasketTest {
         Bagel bagelWrongPrice = new Bagel("BGLO", 0.69, "Onion");
         Bagel bagelWrongVariant = new Bagel("BGLO", 0.39, "Plain");
         Bagel bagelWrongId = new Bagel("BGL", 0.39, "Plain");
+
+
 
         //Add Wrong Bagel
         Assertions.assertFalse(basket.add(bagelWrongPrice));
@@ -59,6 +70,7 @@ class BasketTest {
         Bagel bagel2 = new Bagel("BGLO", 0.49, "Onion");
         Filling filling1 = new Filling("FILB", 0.12, "Bacon");
         Filling filling2 = new Filling("FILE", 0.12, "Egg");
+        Filling fillingWrong = new Filling("FIL", 0.12, "Egg");
         basket.add(bagel);
 
         //Add single filling to bagel in basket
@@ -66,6 +78,9 @@ class BasketTest {
 
         //Add multiple filling to bagel in basket
         Assertions.assertTrue(basket.addFillings(bagel, new Filling[]{filling1, filling2}));
+
+        //Add incorrect filling
+        Assertions.assertFalse(basket.addFillings(bagel, new Filling[]{fillingWrong}));
 
         //Add filling to bagel not in basket
         Assertions.assertFalse(basket.addFillings(bagel2, new Filling[]{filling1}));
