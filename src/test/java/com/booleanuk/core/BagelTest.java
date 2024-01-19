@@ -3,6 +3,7 @@ package com.booleanuk.core;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -27,6 +28,7 @@ public class BagelTest {
     /* Test use case 3 */
     @Test
     public void testAddingOverMaxCapacity(){
+
         Basket basket = new Basket(2);
         basket.addItem("COFB", 1);
         basket.addItem("FILB", 1);
@@ -103,6 +105,15 @@ public class BagelTest {
     public void testAddingItemNotInInventory(){
         Basket basket = new Basket(10);
         Assertions.assertFalse(basket.addItem("BGLX", 2));
+    }
+    @Test
+    public void testAddingBagelWithFillingNotInInventory(){
+        Basket basket = new Basket(20);
+        ArrayList<String> fillings = new ArrayList<>();
+        fillings.add("FILX");
+        fillings.add("FILS");
+        fillings.add("FILZ");
+        Assertions.assertFalse(basket.addFillingWithBagel("BGLO", fillings));
     }
 
     /* Additional tests */

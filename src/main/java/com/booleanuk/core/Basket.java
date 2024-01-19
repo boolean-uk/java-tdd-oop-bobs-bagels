@@ -15,7 +15,7 @@ public class Basket {
         items = new ArrayList<>();
     }
     public boolean addItem(String SKU, int amount){
-        if(amount + checkCurrentCapacity() > maxCapacity && !checkItemValidity(SKU)){
+        if(amount + checkCurrentCapacity() > maxCapacity || !checkItemValidity(SKU)){
             return false;
         }
         Inventory i = Inventory.getInstance();
@@ -29,7 +29,7 @@ public class Basket {
     }
     public boolean addFillingWithBagel(String bagelSKU, ArrayList<String> fillings ) {
 
-        if (checkCurrentCapacity() + (fillings.size() + 1) > maxCapacity && !checkItemValidity(bagelSKU) && !checkItemValidity(fillings)) {
+        if (checkCurrentCapacity() + (fillings.size() + 1) > maxCapacity ||(!checkItemValidity(bagelSKU) && !checkItemValidity(fillings)) ) {
             return false;
         }
         Inventory i = Inventory.getInstance();

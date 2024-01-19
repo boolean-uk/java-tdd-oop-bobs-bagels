@@ -42,6 +42,9 @@ public class Inventory {
         }
         return instance;
     }
+    public static void resetInstance() {
+        instance = null;
+    }
     public boolean checkInventory(String SKU, int amount){
         int count = 0;
         Iterator<Item> iterator;

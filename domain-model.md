@@ -115,11 +115,9 @@ As the manager,
 So we don't get any weird requests,
 I want customers to only be able to order things that we stock in our inventory.
 ```
-| Classes   | Methods                                                | Scenario                            | Returns            |
-|-----------|--------------------------------------------------------|-------------------------------------|--------------------|
-| Inventory | ArrayList<Bagel> getBagel(String name, int amount)     | If bagel is in inventory            | ArrayList<Bagel>   |
-|           |                                                        | If enough bagel is not in inventory | null               |
-|           | ArrayList<Filling> getFilling(String name, int amount) | If enough filling is in inventory   | ArrayList<Filling> |
-|           |                                                        | If filling is not in inventory      | null               |
-|           | ArrayList<Coffee> getCoffee(int amount)                | Method called                       | ArrayList<Coffee>  |
-|           |                                                        |                                     |                    |
+| Classes | Methods                                                                    | Scenario             | Returns |
+|---------|----------------------------------------------------------------------------|----------------------|---------|
+| Basket  | boolean addItem(String SKU, int amount)                                    | If SKU is valid      | true    |
+|         |                                                                            | if SKU is not valid  | false   |
+|         | boolean   addFillingWithBagel(String bagelSKU, ArrayList<String> fillings) | If SKU is valid      | true    |
+|         |                                                                            | If SKU is not valid  | false   |
