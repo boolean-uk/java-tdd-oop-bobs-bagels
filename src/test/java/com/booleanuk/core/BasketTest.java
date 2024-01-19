@@ -11,6 +11,7 @@ class BasketTest {
        Basket basket = new Basket();
        Basket.setMaxSize(1);
        Bagel bagelRight = new Bagel("BGLO");
+       Coffee coffee = new Coffee("COFB");
 
        //Add Bagel
        Assertions.assertTrue(basket.add(bagelRight));
