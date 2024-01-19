@@ -2,7 +2,6 @@ package com.booleanuk.core;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
 
 //TODO: check upper vs lowercase
 public class Store {
@@ -39,7 +38,7 @@ public class Store {
         return "Bagel added.";
     }
 
-    public String addFilling(String filling, String bagel, int basketId) {
+    public String addFillingToBagelInBasket(String filling, String bagel, int basketId) {
         if(!inventory.hasFilling(filling)) {
             return "Bob's bagels doesn't have that filling.";
         }
@@ -87,5 +86,9 @@ public class Store {
 
     public boolean removeCoffeeFromBasket(String coffee, int basketId) {
         return baskets.get(basketId).removeCoffee(coffee);
+    }
+
+    public Receipt createReceipt(int basketId) {
+        return new Receipt();
     }
 }

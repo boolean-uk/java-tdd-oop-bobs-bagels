@@ -4,7 +4,7 @@ import com.booleanuk.core.Store;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-public class ExtensionOne {
+public class ExtensionOneTest {
 
     @Test
     public void discountMultipriceBagelTest() {
@@ -54,12 +54,12 @@ public class ExtensionOne {
         }
         for(int i=0; i < 6; i++) {
             store.addBagelToBasket("Everything", basketId);
-            store.addFilling("cheese", "everything", basketId);
+            store.addFillingToBagelInBasket("cheese", "everything", basketId);
         }
         for(int i=0; i < 2; i++) {
             store.addBagelToBasket("oNIoN", basketId);
-            store.addFilling("hAM", "everything", basketId);
-            store.addFilling("egG", "everything", basketId);
+            store.addFillingToBagelInBasket("hAM", "everything", basketId);
+            store.addFillingToBagelInBasket("egG", "everything", basketId);
 
         }
         for(int i=0; i < 3; i++) {
@@ -86,8 +86,8 @@ public class ExtensionOne {
         int basketId = store.createBasket();
         store.addBagelToBasket("plain", basketId);
         store.addCoffeeToBasket("black", basketId);
-        store.addFilling("hAM", "plain", basketId);
-        store.addFilling("egG", "plain", basketId);
+        store.addFillingToBagelInBasket("hAM", "plain", basketId);
+        store.addFillingToBagelInBasket("egG", "plain", basketId);
 
         Assertions.assertEquals(1.25+0.12*2, store.getCostOfBasket(basketId), 0.001);
     }

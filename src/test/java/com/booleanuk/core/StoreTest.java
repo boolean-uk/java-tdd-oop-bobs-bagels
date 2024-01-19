@@ -55,7 +55,7 @@ public class StoreTest {
         Store store = new Store();
         int basketId = store.createBasket();
         store.addBagelToBasket("Onion", basketId);
-        String actual = store.addFilling("Lettuce", "Onion", basketId);
+        String actual = store.addFillingToBagelInBasket("Lettuce", "Onion", basketId);
         Assertions.assertEquals("Bob's bagels doesn't have that filling.", actual);
     }
 
@@ -67,11 +67,11 @@ public class StoreTest {
         store.addBagelToBasket("Onion", basketId);
         store.addBagelToBasket("Onion", basketId);
 
-        store.addFilling("Cheese", "Onion", basketId);
-        store.addFilling("Cheese", "Onion", basketId);
-        store.addFilling("Egg", "Onion", basketId);
+        store.addFillingToBagelInBasket("Cheese", "Onion", basketId);
+        store.addFillingToBagelInBasket("Cheese", "Onion", basketId);
+        store.addFillingToBagelInBasket("Egg", "Onion", basketId);
 
-        String actual = store.addFilling("Cheese", "Onion", basketId);
+        String actual = store.addFillingToBagelInBasket("Cheese", "Onion", basketId);
 
         Assertions.assertEquals("All bagels of that kind in your basket already has that filling.", actual);
     }
@@ -152,10 +152,10 @@ public class StoreTest {
         Store store = new Store();
         int basketId = store.createBasket();
         store.addBagelToBasket("Onion", basketId);
-        store.addFilling("egg", "onion", basketId);
+        store.addFillingToBagelInBasket("egg", "onion", basketId);
         store.addBagelToBasket("Plain", basketId);
-        store.addFilling("cheese", "onion", basketId);
-        store.addFilling("cheese", "Plain", basketId);
+        store.addFillingToBagelInBasket("cheese", "onion", basketId);
+        store.addFillingToBagelInBasket("cheese", "Plain", basketId);
         Assertions.assertEquals(0.49+0.39+3*0.12, store.getCostOfBasket(basketId), 0.0001);
     }
 
@@ -181,11 +181,11 @@ public class StoreTest {
         int basketId = store.createBasket();
         store.addBagelToBasket("Onion", basketId);
         store.addBagelToBasket("plain", basketId);
-        store.addFilling("cheese", "onion", basketId);
+        store.addFillingToBagelInBasket("cheese", "onion", basketId);
         store.addBagelToBasket("Onion", basketId);
         store.addBagelToBasket("plain", basketId);
-        store.addFilling("egg", "onion", basketId);
-        store.addFilling("cheese", "onion", basketId);
+        store.addFillingToBagelInBasket("egg", "onion", basketId);
+        store.addFillingToBagelInBasket("cheese", "onion", basketId);
         Assertions.assertTrue(store.removeBagelFromBasket("onion", new ArrayList<>(Arrays.asList("cheese","egg")), basketId));
     }
 
