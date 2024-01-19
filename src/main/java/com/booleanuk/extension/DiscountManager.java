@@ -20,12 +20,15 @@ public class DiscountManager {
 
     private static double calculateMultiPriceDiscount(Basket basket, String sku, int quantityThreshold, double discount) {
         double totalDiscount = 0.0;
-        Item item = basket.getBasket().stream().filter(i -> i.getSKU().equals(sku)).findFirst().orElse(null);
-        if (item != null) {
-            int itemCount = basket.getItemCount().getOrDefault(item, 0);
-            if (itemCount >= quantityThreshold) {
-                totalDiscount += discount;
+        int itemCount = 0;
+
+        for (Item item : basket.getBasket()) {
+            if (item.getSKU().equalsIgnoreCase(sku)) {
+                itemCount++;
             }
+        }
+        if (itemCount >= quantityThreshold) {
+            totalDiscount += discount;
         }
         return totalDiscount;
     }

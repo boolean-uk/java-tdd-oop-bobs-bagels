@@ -77,7 +77,7 @@ public class ReceiptPrinter {
                 .append(String.format("%.2f", basket.getTotalCost())).append("\n\n");
 
         if (discount > 0) {
-            sb.append("   You saved £").append(String.format("%.2f", discount)).append("\n\ton this shop!\n\n");
+            sb.append("   You saved £").append(String.format("%.2f", discount)).append("\n\t on this shop\n\n");
         }
 
         sb.append(FOOTER);

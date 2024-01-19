@@ -30,7 +30,7 @@ public class Main {
         // User picks some bagels and some coffee
         // Thirteen plain bagels (one with ham), one sesame bagel with egg and bacon, one latte
         Bagel plain = (Bagel) store.getItemBySKU("BGLP");
-        for (int i = 0; i < 12; i++) {
+        for (int i = 0; i < 10; i++) {
             basket.addItem(plain);
         }
         Bagel bagelPlain1 = (Bagel) basket.addItem(plain);
