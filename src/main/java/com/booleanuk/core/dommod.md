@@ -98,5 +98,7 @@
 |            |                             |                          |                                 |            |
 
 
+TODO: Implement receipt and discounts
+
 
 
