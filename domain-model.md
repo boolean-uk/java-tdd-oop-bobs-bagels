@@ -47,7 +47,7 @@ Store
 |                                                                                |                                   | Customer wants to add a coffee that doesn't exist                                                            | "Bob's bagels doesn't have that coffee."                              |
 | removeCoffeeFromBasket(String coffee, int basketId)                            |                                   | Customer wants to remove an existing coffee from their basket                                                | true                                                                  |
 |                                                                                |                                   | Customer wants to remove a non-existent coffee from their basket                                             | false                                                                 |
-| printReceipt(int basketId)                                                     |                                   | Customer wants to have a receipt over their purchase                                                         | Prints the receipt to the terminal                                    |
+| getReceipt(int basketId)                                                       |                                   | Customer wants to have a receipt over their purchase                                                         | Receipt object of the purchase                                        |
 
 Inventory
 
@@ -67,5 +67,7 @@ Receipt
 |-------------------------------------|
 | Date date                           |
 | HashMap<String, Double> prices      |
-| HashMap<String, Integer> quantities |
+| LinkedHashMap<String, Integer> quantities |
 | double totalCost                    |
+| String storeName                    |
+| int width                           |
