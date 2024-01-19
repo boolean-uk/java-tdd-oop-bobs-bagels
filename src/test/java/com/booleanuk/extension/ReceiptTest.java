@@ -26,8 +26,8 @@ public class ReceiptTest {
 
 
         Assertions.assertEquals("", receipt.formatDate());
-        Assertions.assertEquals("", receipt.formatTotal());
-        Assertions.assertEquals("", receipt.formatSavings());
+        Assertions.assertEquals("", receipt.formatTotal(basket.getItemList()));
+        Assertions.assertEquals("", receipt.formatSavings(basket.getItemList()));
         Assertions.assertEquals("", receipt.printBasket(basket));
 
     }
