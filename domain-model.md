@@ -24,6 +24,14 @@ Product
 	- price: double
 	- name: String
 	- Variant: String
+Discounts
+	- bulkDiscounts: List<BulkDiscount>
+	- inventory: Inventory
+	+ calculateBulkDiscount(sku: String, num: Int) double
+BulkDiscount
+	- sku: String
+	- number: int
+	- price: double
 ```
 ```
 1.
@@ -135,6 +143,42 @@ So we don't get any weird requests,
 I want customers to only be able to order things that we stock in our inventory.
 ```
 #### Inventory class implemented
+
+## Exercise 1
+#### Only implementing bulk buy discounts for now
+```
+As the manager,
+To hype up our restaurant and draw in more customers,
+I want to implement discounts for some bulk buys.
+```
+#### Implement a Discounts and BulkDiscount class
+```
+Assumptions:
+ - There is only a maximum of one type of bulk discount for each specific product
+```
+| Discount            |
+|---------------------|
+| List<BulkDiscount>  |
+| Inventory inventory |
+
+| BulkDiscount  |
+|---------------|
+| sku: String   |
+| number: int   |
+| price: double |
+
+```
+As a customer,
+So I know how much money I need,
+I'd like to know what the total cost of items in my basket will be after the discounts are added in.
+```
+| Class    | Method                                     | Variables                          | Scenario                                                                                               | Return value                                                      |
+|----------|--------------------------------------------|------------------------------------|--------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------|
+| Basket   | totalCostDiscount()                        | HashMap<String, Integer> basketMap | Basket has multiple products in it, but no discounts                                                   | Return sum of all products (double)                               |
+|          |                                            | Discount discount                  | Basket has multiple products in it, with discounts.                                                    | Return sum of all products - saved amount from discounts (double) |
+|          |                                            | Inventory inventory                | Basket is empty                                                                                        | Return 0                                                          |
+| Discount | calculateBulkDiscount(String sku, int num) | List<BulkDiscount> bulkDiscounts   | There is a discount for the input element. The amount you save by utilizing the discount is calculated | Return saved amount (double)                                      |
+|          |                                            | Inventory inventory                | There is no discount                                                                                   | Return 0                                                          |
 
 # Class diagram:
 ![](assets/class-diagram-1.png)

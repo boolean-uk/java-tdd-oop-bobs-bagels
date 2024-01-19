@@ -3,6 +3,7 @@ package com.booleanuk.core;
 import java.util.ArrayList;
 import java.util.List;
 
+// TODO: Pause work on this, outside scope of exercise
 public class BobsBagels {
     private List<Basket> baskets;
 
