@@ -24,7 +24,7 @@ public class Receipt {
         receipt.append(createHeader());
         for (Item item : basket.getBasketContent().keySet()) {
             int amount = basket.getBasketContent().get(item);
-            String itemRow = item.getSku() + "\t" +  amount + "\t" + item.getPrice() * amount + "\n";
+            String itemRow = item.getVariant() + " " + item.getName() + "\t\t" +  amount + "\t\u00A3" + item.getPrice() * amount + "\n";
             receipt.append(itemRow);
         }
         receipt.append("\n----------------------------\nTotal                  \u00A3") ;
