@@ -13,6 +13,7 @@ public class Receipt {
     public Receipt(Basket basket) {
         this.basket = basket;
         this.dateAndTime = LocalDateTime.now();
+        this.dateAndTime = this.dateAndTime.minusNanos(this.dateAndTime.getNano());
     }
 
     public String generateReceipt() {
@@ -31,7 +32,11 @@ public class Receipt {
     }
 
     public String createHeader() {
-        return "Header\n";
+        String header = "";
+        header += "    ~~~ Bob's Bagels ~~~\n\n    ";
+        header += this.dateAndTime.toString().replace("T", " ");
+        header += "\n\n----------------------------\n";
+        return header;
     }
 
     public String createFooter() {
@@ -40,5 +45,9 @@ public class Receipt {
 
     public boolean printReceipt() {
         return false;
+    }
+
+    public LocalDateTime getDateAndTime() {
+        return this.dateAndTime;
     }
 }

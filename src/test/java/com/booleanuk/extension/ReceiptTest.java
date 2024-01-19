@@ -39,12 +39,10 @@ public class ReceiptTest {
         BobsBagelsShop shop = new BobsBagelsShop(testInventory);
         Basket basket = new Basket(shop, 3);
         Receipt receipt = new Receipt(basket);
-        Assertions.assertEquals(
-                "    ~~~ Bob's Bagels ~~~\n" +
-                "\n" +
-                "    2021-03-16 21:38:44\n" +
-                "\n" +
-                "----------------------------\n", receipt.createHeader());
+
+        Assertions.assertEquals("    ~~~ Bob's Bagels ~~~\n\n    " +
+                receipt.getDateAndTime().toString().replace("T", " ")+
+                "\n\n----------------------------\n", receipt.createHeader());
     }
 
     @Test
