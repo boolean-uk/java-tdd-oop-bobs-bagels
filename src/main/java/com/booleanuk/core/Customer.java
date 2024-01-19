@@ -1,5 +1,6 @@
 package com.booleanuk.core;
 
+import java.util.Scanner;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class Customer {
@@ -7,12 +8,15 @@ public class Customer {
     private int id;
     private String name;
     private Basket inventory;
+    private Store store;
+    private Scanner scanner = new Scanner(System.in);
 
-    public Customer(String name) {
+    public Customer(String name, Store store) {
         count = new AtomicInteger(0);
         this.id = count.incrementAndGet();
         this.name = name;
-        this.inventory = new Basket();
+        this.inventory = new Basket(this);
+        this.store = store;
     }
 
     public int getId() {
@@ -30,20 +34,83 @@ public class Customer {
     public void setName(String name) {
         this.name = name;
     }
+    public Store getStore() {
+        return store;
+    }
 
     public double calculateCostBeforeOrder() {
-        return -1;
+        return this.inventory.calculateTotalCost();
     }
 
-    public Basket chooseFilling(String sku) {
-        return this.inventory;
+    public Basket chooseFilling() {
+        System.out.println("We detected a bagel in your inventory\nWould you like to order a filling?");
+        System.out.println("SKU \t Cost \t Name \t Variant");
+        for(Item item : inventory.getItems()) {
+            if(item.getInstance().toString().equals("Filling")) {
+                System.out.println(item);
+            }
+        }
+        Item filling = store.findItemInList(scanner.nextLine());
+        if(filling != null) {
+            inventory.getItems().add(filling);
+            System.out.println("Filling has been added! Thank you!");
+        } else {
+            System.out.println("Filling was not found, too bad");
+        }
+        return inventory;
     }
 
-    public boolean order(String sku) {
-        return false;
+    public Basket order(String input) {
+        Item item = store.findItemInList(input);
+        if(inventory.getItems().size() >= store.getCapacity()) {
+            System.out.println("Your basket is full");
+        } else if(item != null) {
+            this.inventory.addItem(item);
+            System.out.println("This item has been added to your basket \n" + item.toString());
+        } else {
+            System.out.println("The item was not found");
+        }
+        return inventory;
     }
 
-    public boolean deleteItems(String sku) {
-        return false;
+    public Basket finishedOrdering() {
+        if(inventory.getItems().isEmpty()) {
+            return inventory;
+        }
+        boolean basketContainsBagel = false;
+        for(Item item : inventory.getItems()) {
+            if(item.getClass().toString().equals("Bagel")) {
+                basketContainsBagel = true;
+            }
+        }
+        if(basketContainsBagel) {
+            chooseFilling();
+        }
+        return inventory;
+    }
+
+    public String deleteItems(String sku) {
+        for(Item item : this.inventory.getItems()) {
+            if(item.getSKU().matches(sku)) {
+                this.inventory.getItems().remove(item);
+                return item.getName() + " " + item.getVariant() + " was deleted";
+
+            }
+        }
+        return "The item was not found, and could not be deleted";
+    }
+
+    public String confirmFinished() {
+        String confirmation= "";
+        System.out.println("Are you done shopping?");
+        String input = scanner.nextLine();
+        if(input.equals("y")) {
+            confirmation = "quit";
+        } else if(input.equals("n")) {
+            confirmation = "continue";
+        } else {
+            confirmFinished();
+        }
+        return confirmation;
     }
 }

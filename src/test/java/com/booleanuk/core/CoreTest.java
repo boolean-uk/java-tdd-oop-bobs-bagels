@@ -4,7 +4,10 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.io.InputStream;
+import java.io.PrintStream;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 class CoreTest {
     private ArrayList<Item> itemsInStock;
@@ -71,7 +74,7 @@ class CoreTest {
             add(new Coffee("COFW", 0.99, "Coffee", "White"));
         }};
         customer.getInventory().getItems().addAll(fillItems);
-        Assertions.assertEquals("Coffee White has been deleted", customer.deleteItems("COFW"));
+        Assertions.assertEquals("Coffee White was deleted", customer.deleteItems("COFW"));
     }
 
     @Test
@@ -80,7 +83,7 @@ class CoreTest {
             add(new Bagel("BGLO", 0.49, "Bagel", "Onion"));
         }};
         customer.getInventory().getItems().addAll(fillItems);
-        Assertions.assertEquals("Bagel Plain was not found", customer.deleteItems("BGLP"));
+        Assertions.assertEquals("The item was not found, and could not be deleted", customer.deleteItems("BGLP"));
     }
 
     @Test
@@ -91,15 +94,15 @@ class CoreTest {
             add(new Bagel("BGLO", 0.49, "Bagel", "Onion"));
         }};
         customer.getInventory().getItems().addAll(fillItems);
-        Assertions.assertEquals("Bagel Onion has been deleted", customer.deleteItems("BGLO"));
-        Assertions.assertEquals("Vanilla", customer.getInventory().getItems().get(customer.getInventory().getItems().size()-1).getSKU());
+        Assertions.assertEquals("Bagel Onion was deleted", customer.deleteItems("BGLO"));
+        Assertions.assertEquals("BGLO", customer.getInventory().getItems().get(customer.getInventory().getItems().size()-1).getSKU());
     }
 
     @Test
     public void ChangeCapacityTest() {
-        Assertions.assertEquals(5, Store.BASKETCAPACITY);
+        Assertions.assertEquals(5, store.getCapacity());
         store.setCapacity(7);
-        Assertions.assertEquals(7, Store.BASKETCAPACITY);
+        Assertions.assertEquals(7, store.getCapacity());
     }
 
     @Test
@@ -142,8 +145,8 @@ class CoreTest {
         customer.getInventory().getItems().addAll(fillItems);
         store.setCapacity(3);
         Assertions.assertEquals(3, customer.getInventory().getItems().size());
-        Assertions.assertEquals(3, Store.BASKETCAPACITY);
-        Assertions.assertEquals("Plain", customer.getInventory().getItems().get(customer.getInventory().getItems().size()-1).getSKU());
+        Assertions.assertEquals(3, store.getCapacity());
+        Assertions.assertEquals("BGLO", customer.getInventory().getItems().get(customer.getInventory().getItems().size()-1).getSKU());
     }
 
     @Test
@@ -178,7 +181,7 @@ class CoreTest {
 
     @Test
     public void wrongInputInOrderGivesFalse() {
-        Assertions.assertFalse(customer.order("Hi there"));
+        Assertions.assertFalse(customer.order("Hello there"));
     }
 }
 

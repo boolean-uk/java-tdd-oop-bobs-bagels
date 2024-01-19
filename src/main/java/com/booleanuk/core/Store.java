@@ -1,14 +1,16 @@
 package com.booleanuk.core;
 
 import java.util.ArrayList;
+import java.util.InputMismatchException;
+import java.util.Scanner;
 
 public class Store {
-    public static int BASKETCAPACITY;
+    private int basketCapacity;
     private ArrayList<Item> itemsInStock;
     private ArrayList<Customer> customerList;
 
     public Store(int basketCapacity) {
-        BASKETCAPACITY = basketCapacity;
+        this.basketCapacity = basketCapacity;
         this.itemsInStock = new ArrayList<>() {{
             add(new Bagel("BGLO", 0.49, "Bagel", "Onion"));
             add(new Bagel("BGLP", 0.39, "Bagel", "Plain"));
@@ -36,8 +38,9 @@ public class Store {
         return customerList;
     }
 
-    private boolean AddItemInStock(Item item) {
-        return false;
+    private boolean addItemInStock(String sku, double cost, String name, String variant) {
+        itemsInStock.add(new Item(sku, cost, name, variant));
+        return true;
     }
 
     private boolean deleteItemFromStock(Item item) {
@@ -45,21 +48,123 @@ public class Store {
     }
 
     public Customer addCustomer(String name) {
-        Customer newCustomer = new Customer(name);
-        this.customerList.add(newCustomer);
+        Customer newCustomer = new Customer(name, this);
+        customerList.add(newCustomer);
         return newCustomer;
     }
 
     private Customer findCustomerFromList(String name) {
-        return new Customer("Hi there");
+        for (Customer customer : customerList) {
+            if (customer.getName().matches(name)) {
+                System.out.println("Found customer with name" + customer.getName());
+                return customer;
+            }
+        }
+        System.out.println("Did not find customer with name " + name);
+        return null;
     }
 
     private Customer findCustomerFromList(int id) {
-        return new Customer("Hi there");
+        for(Customer customer : customerList) {
+            if(customer.getId() == id) {
+                System.out.println("Found customer with name" + customer.getName());
+                return customer;
+            }
+        }
+        System.out.println("Did not find customer with id " + id);
+        return null;
     }
 
+    public Item findItemInList(String sku) {
+        for(Item item : itemsInStock) {
+            if(item.getSKU().matches(sku)) {
+                return item;
+            }
+        }
+        return null;
+    }
+
+    public int getCapacity() {
+        return basketCapacity;
+    }
     public boolean setCapacity(int newCapacity) {
-        return false;
+        this.basketCapacity = newCapacity;
+        return capacityChanged();
+    }
+
+    private boolean capacityChanged() {
+        boolean hasChanged = false;
+        if(customerList.isEmpty()) {
+            return true;
+        }
+        for(Customer customer : this.customerList) {
+            if(!customer.getInventory().capacityChanged()) {
+                hasChanged = false;
+                return hasChanged;
+            }
+        }
+        return hasChanged;
+    }
+
+    public void printStoreMethods() {
+        Scanner scanner = new Scanner(System.in);
+        String input = scanner.nextLine();
+        String menu = "1: Add a new item in stock\n2: Set a new capacity";
+        while(!input.equals("quit")) {
+            switch (scanner.nextLine()) {
+                case "1": {
+                    String sku = "";
+                    double cost = 0.0;
+                    String name = "";
+                    String variant = "";
+                    System.out.println("Provide SKU");
+                    sku = scanner.nextLine();
+                    System.out.println("Provide cost");
+                    boolean isDouble = false;
+                    while (!isDouble) {
+                        try {
+                            cost = scanner.nextDouble();
+                            isDouble = true;
+                        } catch (InputMismatchException e) {
+                            System.out.println("You didn't provide a double");
+                        }
+                    }
+                    System.out.println("Bagel, Coffee or Filling?");
+                    boolean isCorrectType = false;
+                    while (!isCorrectType) {
+                        input = scanner.nextLine();
+                        if(input.equals("Bagel") || input.equals("Coffee") || input.equals("Filling")) {
+                            name = input;
+                        }
+                    }
+                    System.out.println("Provide Variant");
+                    variant = scanner.nextLine();
+                    itemsInStock.add(new Item(sku, cost, name, variant));
+                    System.out.println("A new item was added to stock!");
+                    break;
+                }
+                case "2": {
+                    boolean isNumber = false;
+                    int newCapacity = -1;
+                    while(!isNumber) {
+                        try {
+                            newCapacity = scanner.nextInt();
+                            isNumber = true;
+                        } catch(InputMismatchException e) {
+                            System.out.println("Please provide a whole number");
+                        }
+                    }
+                    setCapacity(newCapacity);
+                }
+                case "0": {
+                    input = "quit";
+                }
+                default: {
+                    System.out.println("Please provide a valid input");
+                }
+            }
+        }
+        System.out.println("Back to main menu");
     }
 
 }
