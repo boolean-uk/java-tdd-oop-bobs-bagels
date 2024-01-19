@@ -3,6 +3,8 @@ package com.booleanuk.core;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+
 public class BasketTest {
     @Test
     public void getBasketItemsTest() {
@@ -13,13 +15,16 @@ public class BasketTest {
     @Test
     public void addProductTest1() {
         Basket basket = new Basket();
-        Product product = new Product("Apple", 0.19);
-        basket.addProduct(product);
-        basket.addProduct(product);
+        Product product1 = new Product("Apple", 0.19);
+        Product product2 = new Product("Orange", 0.29);
+        basket.addProduct(product1);
+        basket.addProduct(product2);
 
         Assertions.assertEquals(2, basket.getBasketItems().size());
-        Assertions.assertTrue(basket.getBasketItems().contains(product));
-        Assertions.assertEquals(0.19, basket.getBasketItems().get(0));
+        Assertions.assertTrue(basket.getBasketItems().contains(product1));
+        Assertions.assertTrue(basket.getBasketItems().contains(product2));
+        Assertions.assertEquals(0.19, basket.getBasketItems().get(0).getPrice());
+        Assertions.assertEquals(0.29, basket.getBasketItems().get(1).getPrice());
     }
 
     @Test
@@ -29,8 +34,23 @@ public class BasketTest {
         basket.addProduct(product, 2);
         Assertions.assertEquals(2, basket.getBasketItems().size());
         Assertions.assertTrue(basket.getBasketItems().contains(product));
-        Assertions.assertEquals(0.19, basket.getBasketItems().get(0));
+        Assertions.assertEquals(0.19, basket.getBasketItems().get(1).getPrice());
 
+    }
+
+    @Test
+    public void addProductTest3() {
+        Basket basket = new Basket();
+        Product product1 = new Product("Apple", 0.19);
+        Product product2 = new Product("Orange", 0.29);
+        ArrayList<Product> products = new ArrayList<>();
+        basket.addProduct(products);
+
+        Assertions.assertEquals(2, basket.getBasketItems().size());
+        Assertions.assertTrue(basket.getBasketItems().contains(product1));
+        Assertions.assertTrue(basket.getBasketItems().contains(product2));
+        Assertions.assertEquals(0.19, basket.getBasketItems().get(0).getPrice());
+        Assertions.assertEquals(0.29, basket.getBasketItems().get(1).getPrice());
     }
 
     @Test

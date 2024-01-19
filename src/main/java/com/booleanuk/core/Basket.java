@@ -25,5 +25,15 @@ public class Basket {
         basketItems.add(product);
     }
 
+    public void addProduct(Product product, int number) {
+        for(int i = 0; i < number; i++) {
+            this.basketItems.add(product);
+        }
+    }
+
+    public void addProduct(ArrayList<Product> products) {
+        this.basketItems.addAll(products);
+
+    }
 
 }
