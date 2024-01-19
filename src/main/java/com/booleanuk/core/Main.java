@@ -1,7 +1,7 @@
 package com.booleanuk.core;
 
-import com.booleanuk.core.models.Basket;
 import com.booleanuk.core.enums.ItemType;
+import com.booleanuk.core.models.Basket;
 import com.booleanuk.core.models.Store;
 import com.booleanuk.core.models.item.Bagel;
 import com.booleanuk.core.models.item.Filling;

@@ -21,8 +21,8 @@ public class ReceiptPrinter {
 
     private final Store store;
     private final Basket basket;
-    private StringBuilder sb;
-    private LocalDateTime dateTime;
+    private final StringBuilder sb;
+    private final LocalDateTime dateTime;
 
     public ReceiptPrinter(Store store, Basket basket) {
         this.store = store;

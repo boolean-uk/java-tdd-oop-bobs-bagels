@@ -1,6 +1,7 @@
 package com.booleanuk.core.models;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
 
 @Data
 @AllArgsConstructor
