@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 public class TestBasket {
     @Test
     public void testAdd(){
-        Basket basket = new Basket(new User());
+        Basket basket = new Basket();
         basket.add("BGLP");
         basket.add("BGLO");
         basket.add("BGLE");
@@ -25,7 +25,7 @@ public class TestBasket {
     @Test
     public void testAddProductNotInMenu(){
         boolean thrown = false;
-        Basket basket = new Basket(new User());
+        Basket basket = new Basket();
 
         Assertions.assertEquals(0, basket.getItems());
         Assertions.assertFalse(basket.add("BLABLA"));
@@ -38,7 +38,7 @@ public class TestBasket {
 
     @Test
     public void testRemove(){
-        Basket basket = new Basket(new User());
+        Basket basket = new Basket();
         basket.add("FILS");
         basket.add("COFL");
         basket.add("COFW");
@@ -79,6 +79,18 @@ public class TestBasket {
     }
 
     @Test
+    public void testCustomerCantChangeCapacity(){
+        Basket basket = new Basket();
+
+        Assertions.assertEquals(10, basket.getCapacity());
+
+        basket.updateCapacity(5);
+
+        Assertions.assertNotEquals(5, basket.getCapacity());
+        Assertions.assertEquals(10, basket.getCapacity());
+    }
+
+    @Test
     public void testCapacityNegativeValue(){
         boolean errorThrown = false;
         Basket basket = new Basket(new Manager());
@@ -110,7 +122,7 @@ public class TestBasket {
 
     @Test
     public void testDisplayMenu(){
-        Basket basket = new Basket(new User());
+        Basket basket = new Basket();
         basket.displayMenu();
     }
 
@@ -123,7 +135,7 @@ public class TestBasket {
         basket.add("FILX");
         basket.add("FILS");
 
-        Assertions.assertEquals(0.99 + 0.49 + 0.39 + 0.12 + 0.12, basket.totalCost());
+        Assertions.assertEquals(0.99 + 0.49 + 0.39 + 0.12 + 0.12, basket.totalCost(), 0.00001);
     }
 }
 

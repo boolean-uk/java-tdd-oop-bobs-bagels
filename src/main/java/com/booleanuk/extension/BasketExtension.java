@@ -6,21 +6,25 @@ import com.booleanuk.core.User;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.HashMap;
 
 public class BasketExtension extends Basket {
 
-    public BasketExtension(User user) {
+    public BasketExtension(User user){
         super(user);
     }
 
-    public void checkout(){
+    public BasketExtension(){
+        this(null);
+    }
+
+    public boolean checkout(){
         if (items > 0){
             printReceipt();
-            products = new HashMap<>();
-            items = 0;
+            emptyBasket();
+            return true;
         } else {
             System.out.println("Your cart is empty.");
+            return false;
         }
     }
 
@@ -35,7 +39,7 @@ public class BasketExtension extends Basket {
 
         for (Product product : products.keySet()){
             String item = product.getName() + " " + product.getType();
-            System.out.printf(" %-25s %-3s \u00A3%5.2f %n", item, products.get(product), product.getPrice());
+            System.out.printf(" %-25s %-3s \u00A3%5.2f %n", item, products.get(product), product.getPrice()*products.get(product));
         }
 
         System.out.printf("%n--------------------------------------%n");

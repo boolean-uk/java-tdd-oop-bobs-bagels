@@ -8,6 +8,7 @@ public class Product {
     final double price;
     final String name;
 
+
     public Product(String SKU) throws IllegalStateException{
 
         switch (SKU) {

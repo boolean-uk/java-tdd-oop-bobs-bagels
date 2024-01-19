@@ -10,17 +10,25 @@ public class Basket {
 
     public Basket(User user) {
         this.user = user;
-        products = new HashMap<>();
         setCapacity(10);
+        emptyBasket();
+    }
+
+    public Basket(){
+        this(null);
+    }
+
+    protected void emptyBasket(){
+        products = new HashMap<>();
         items = 0;
+    }
+
+    public int getItems() {
+        return items;
     }
 
     public HashMap<Product, Integer> getProducts() {
         return products;
-    }
-
-    public User getUser() {
-        return user;
     }
 
     public int getCapacity() {
@@ -33,10 +41,6 @@ public class Basket {
         } else {
             throw new IllegalArgumentException("Invalid value for capacity.");
         }
-    }
-
-    public int getItems() {
-        return items;
     }
 
     public boolean add(String SKU) {
@@ -81,8 +85,7 @@ public class Basket {
             setCapacity(newCapacity);
 
             if (newCapacity < items) {
-                products = new HashMap<>();
-                items = 0;
+                emptyBasket();
 
                 System.out.println("The capacity has been updated. " +
                         "Cart can only hold " + newCapacity + " items. " +
@@ -92,7 +95,6 @@ public class Basket {
             System.out.println("You cannot do that");
         }
     }
-
 
     public double totalCost(){
         double totalCost = 0;
