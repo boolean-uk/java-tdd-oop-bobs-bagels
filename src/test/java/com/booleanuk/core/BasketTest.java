@@ -9,20 +9,27 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class BasketTest {
     @Test
-    public void testAdd(){
+    public void testAddRightBagel(){
        Basket basket = new Basket();
        Basket.setMaxSize(1);
        Bagel bagelRight = new Bagel("BGLO", 0.49, "Onion");
-       Bagel bagelWrong = new Bagel("BGLO", 0.69, "Onion");
-
-       //Add Wrong Bagel
-       Assertions.assertFalse(basket.add(bagelWrong));
 
        //Add Bagel
        Assertions.assertTrue(basket.add(bagelRight));
 
        //Try adding with a full basket
        Assertions.assertFalse(basket.add(bagelRight));
+
+    }
+
+    @Test
+    public void testAddWrongBagel(){
+        Basket basket = new Basket();
+
+        Bagel bagelWrong = new Bagel("BGLO", 0.69, "Plain");
+
+        //Add Wrong Bagel
+        Assertions.assertFalse(basket.add(bagelWrong));
 
     }
 
