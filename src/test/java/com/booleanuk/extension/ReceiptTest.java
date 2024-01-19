@@ -23,12 +23,12 @@ public class ReceiptTest {
 
         Assertions.assertEquals("Basket is empty.", receipt.generateReceipt());
         basket.add(bglo);
-        Assertions.assertTrue(receipt.generateReceipt().contains("Onion Bagel\t\t\t1\t\u00A30.49\n"));
+        Assertions.assertTrue(receipt.generateReceipt().contains("Onion Bagel\t\t1\t\u00A30.49\n"));
 
         basket.add(bglo);
         basket.add(bglp);
-        Assertions.assertTrue(receipt.generateReceipt().contains("Onion Bagel\t\t\t2\t\u00A30.98\n"));
-        Assertions.assertTrue(receipt.generateReceipt().contains("Plain Bagel\t\t\t1\t\u00A30.39\n"));
+        Assertions.assertTrue(receipt.generateReceipt().contains("Onion Bagel\t\t2\t\u00A30.98\n"));
+        Assertions.assertTrue(receipt.generateReceipt().contains("Plain Bagel\t\t1\t\u00A30.39\n"));
         Assertions.assertTrue(receipt.generateReceipt().contains("\n----------------------------\nTotal                  \u00A3" + basket.totalCost()));
         System.out.println(receipt.generateReceipt());
     }
