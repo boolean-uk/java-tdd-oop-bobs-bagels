@@ -48,8 +48,8 @@ public class Basket {
     }
 
     //User Story 3
-    public String bagelBasketIsFull(int basketSize) {
-        if (this.basketList.size() >= basketSize) {
+    public String bagelBasketIsFull() {
+        if (this.basketList.size() >= this.basketSize) {
             return "Basket is full!";
         }
         return "Basket is not full!";

@@ -65,7 +65,7 @@ class BasketTest {
         basket.getBasketList().add(item5);
 
 
-        String result = basket.bagelBasketIsFull(basket.getBasketSize());
+        String result = basket.bagelBasketIsFull();
 
         Assertions.assertEquals("Basket is full!", result);
     }
@@ -87,7 +87,7 @@ class BasketTest {
         basket.getBasketList().add(item4);
         //basket.getBasketList().add(item5);
 
-        String result = basket.bagelBasketIsFull(basket.getBasketSize());
+        String result = basket.bagelBasketIsFull();
 
         Assertions.assertEquals("Basket is not full!", result);
     }
