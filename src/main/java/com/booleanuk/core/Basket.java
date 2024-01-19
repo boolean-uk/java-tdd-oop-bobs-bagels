@@ -1,5 +1,7 @@
 package com.booleanuk.core;
 
+import org.w3c.dom.ls.LSOutput;
+
 import java.util.ArrayList;
 
 public class Basket {
@@ -40,7 +42,8 @@ public class Basket {
                               );
                     return true;
                 }
-            }
+
+            }else return false;
         }
         System.out.println(basketList);
         return false;
@@ -53,6 +56,7 @@ public class Basket {
         }
         return false;
     }
+
 
     public double totalCost() {
         double totalPrice = 0;
@@ -80,7 +84,7 @@ public class Basket {
             newList.add(basketList.get(i));
         }
 
-        //Does not remove filling if added before change
+        //Does not remove filling before changing capacity
         for (int i = 0; i < basketList.size() ; i++) {
             if (basketList.get(i).startsWith("FIL")){
                 System.out.println(basketList.get(i));
@@ -100,42 +104,27 @@ public class Basket {
         return 0;
     }
 
-    public boolean addFilling(String itemSKU, String fillingSKU){
+    public String addFilling(String itemSKU, String fillingSKU){
         //Checks if input exist in inventory
         for (int i = 0; i < inventoryList.size(); i++) {
             if(itemSKU.equals(inventoryList.get(i).getSku())){
-                //ignores capacity of basket
-                basketList.add(fillingSKU);
-                return true;
-
-                //future problem, when using changeCapacity, it deletes the filling
-                //know the reason, hard to come up with solution based on what I have
+                //Adds the filling next to the bagel, instead of adding at the end of list
+                //Better visual for which filling belongs to which bagel
+                for (int j = 0; j < basketList.size(); j++) {
+                    if (itemSKU.equals(basketList.get(j))){
+                        basketList.add(j+1,fillingSKU);
+                        return basketList.toString();
+                    }
+                }
             }
 
         }
-        return false;
+        return basketList.toString();
     }
 
+//  problem 1, adding too much filling will restrict adding Item
+//  (adding 1 bagel + 4 filling = full basket, bad practice) Work around is to use addFilling after everything
+//  problem 2, when using changeCapacity to less, it deletes the filling to the bagel
+//  know the reason, hard to come up with solution based on what I have
 
-
-    public static void main(String[] args) {
-        Basket basket = new Basket();
-
-        System.out.println("tester ------------------");
-        basket.addItem("COFB"); //0.99
-        basket.addItem("BGLO"); //0.49
-        basket.addItem("BGLP"); //0.39, total 1.87
-        System.out.println(basket.basketList);
-
-        System.out.println(basket.totalCost());
-        basket.addFilling("BGLO","FILE");
-        //basket.add("COFW");
-        //basket.remove("COFB");
-        //basket.totalCost();
-        System.out.println(basket.basketList);
-
-        System.out.println(basket.changeCapacity(1));
-        System.out.println(basket.totalCost());
-
-    }
     }

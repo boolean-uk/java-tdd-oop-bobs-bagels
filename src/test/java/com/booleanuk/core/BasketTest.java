@@ -87,7 +87,15 @@ public class BasketTest {
     }
 
     @Test
-    public void testChechPriceFakeItem() {
+    public void testCheckPriceFilling() {
+        Basket basket = new Basket();
+
+        Assertions.assertEquals(0.12, basket.checkPrice("FILE"));
+    }
+
+
+    @Test
+    public void testCheckPriceFakeItem() {
         Basket basket = new Basket();
 
         Assertions.assertEquals(0.0, basket.checkPrice("Apple"));
