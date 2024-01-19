@@ -24,4 +24,21 @@ public class InventoryTest {
         Assertions.assertTrue(stock.contains(product1));
         Assertions.assertTrue(stock.contains(product2));
     }
+
+    @Test
+    public void removeStockTest() {
+        Inventory inventory = new Inventory();
+        Product product1 = new Product("Leaf", 0.01);
+        Product product2 = new Product("Twig", 0.02);
+        inventory.addStock(product1);
+        inventory.addStock(product2);
+
+        inventory.removeStock(product1);
+
+        ArrayList<Product> stock = inventory.getStock();
+
+        Assertions.assertFalse(stock.contains(product1));
+        Assertions.assertTrue(stock.contains(product2));
+
+    }
 }
