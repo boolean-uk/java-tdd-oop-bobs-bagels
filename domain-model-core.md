@@ -37,7 +37,7 @@ Note: the domain model is subject to change before the assignment is complete
 |         |           | int basketLimit                       |                                     |      |      |                                            |                                             |
 |         |           |                                       | void addProduct(Product product)    |      |      |                                            |                                             |
 |         |           |                                       | void removeProduct(Product product) |      |      |                                            |                                             |
-|         |           |                                       |                                     |      |      |                                            |                                             |
+|         |           |                                       | void getBasketItems()               | x    |      |                                            |                                             |
 |         |           |                                       | boolean isFull()                    |      |      |                                            |                                             |
 |         |           |                                       | void setCapacity(int basketLimit)   |      |      |                                            |                                             |
 |         |           |                                       | boolean inBasket()                  |      |      |                                            |                                             |

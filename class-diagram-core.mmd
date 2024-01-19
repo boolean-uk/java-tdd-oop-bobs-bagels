@@ -6,6 +6,8 @@ classDiagram
     Product <|-- Coffee
     Product <|-- Filling
     Filling <.. Bagel
+    Product <.. Inventory
+    Product <.. Basket
     class Product {
         -String sku
         -String name

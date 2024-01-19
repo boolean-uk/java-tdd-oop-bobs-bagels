@@ -8,7 +8,7 @@ public class Basket {
 
     public Basket() {
         this.basketItems = new HashMap<>();
-        this.basketLimit = 14;
+        this.basketLimit = 14; // Probably should be some way to set default limit
     }
 
     public Basket(int basketLimit) {
@@ -16,5 +16,8 @@ public class Basket {
         this.basketLimit = basketLimit;
     }
 
+    public getBasketItems() {
+
+    }
 
 }
