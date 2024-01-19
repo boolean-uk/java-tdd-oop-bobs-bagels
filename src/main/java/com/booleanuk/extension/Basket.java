@@ -1,4 +1,4 @@
-package com.booleanuk.core;
+package com.booleanuk.extension;
 
 import java.util.ArrayList;
 
@@ -38,7 +38,7 @@ public class Basket {
         return false;
     }
 
-    public boolean addFillings(Bagel bagel,  ArrayList<Filling> fillings){
+    protected boolean addFillings(Bagel bagel, ArrayList<Filling> fillings){
         if(products.contains(bagel)){
             return bagel.addFillings(fillings);
         }
