@@ -22,6 +22,7 @@ public class Basket {
     }
 
     public double calculateTotalCost() {
+        this.totalCost = 0;
         if(!this.items.isEmpty()) {
             for(Item item : items) {
                 this.totalCost += item.getCost();
@@ -31,8 +32,9 @@ public class Basket {
         return this.totalCost;
     }
 
-    public Item addItem(Item newItem) {
-        return new Item("", -1, "", "");
+    public String addItem(Item newItem) {
+        this.items.add(newItem);
+        return "A new item has been added\n" + newItem;
     }
 
     public boolean capacityChanged() {

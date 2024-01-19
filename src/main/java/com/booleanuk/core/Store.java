@@ -43,8 +43,13 @@ public class Store {
         return true;
     }
 
-    private boolean deleteItemFromStock(Item item) {
-        return false;
+    private boolean deleteItemFromStock(String sku) {
+        Item item = findItemInList(sku);
+        if(item != null) {
+            itemsInStock.remove(item);
+            return true;
+        }
+            return false;
     }
 
     public Customer addCustomer(String name) {
@@ -107,10 +112,11 @@ public class Store {
     }
 
     public void printStoreMethods() {
-        Scanner scanner = new Scanner(System.in);
-        String input = scanner.nextLine();
         String menu = "1: Add a new item in stock\n2: Set a new capacity";
+        Scanner scanner = new Scanner(System.in);
+        String input = "";
         while(!input.equals("quit")) {
+            System.out.println(menu);
             switch (scanner.nextLine()) {
                 case "1": {
                     String sku = "";
@@ -135,6 +141,7 @@ public class Store {
                         input = scanner.nextLine();
                         if(input.equals("Bagel") || input.equals("Coffee") || input.equals("Filling")) {
                             name = input;
+                            isCorrectType = true;
                         }
                     }
                     System.out.println("Provide Variant");
@@ -148,23 +155,34 @@ public class Store {
                     int newCapacity = -1;
                     while(!isNumber) {
                         try {
-                            newCapacity = scanner.nextInt();
+                            newCapacity = Integer.parseInt(scanner.nextLine());
                             isNumber = true;
+                            System.out.println("Capacity was set to " + newCapacity);
                         } catch(InputMismatchException e) {
                             System.out.println("Please provide a whole number");
                         }
                     }
                     setCapacity(newCapacity);
+                    break;
                 }
                 case "0": {
                     input = "quit";
+                    break;
                 }
                 default: {
                     System.out.println("Please provide a valid input");
+                    break;
                 }
             }
         }
         System.out.println("Back to main menu");
+    }
+
+    public void printAllItems() {
+        System.out.println("SKU \t Cost \t Name \t Variant");
+        for(Item item : itemsInStock) {
+            System.out.println(item);
+        }
     }
 
 }

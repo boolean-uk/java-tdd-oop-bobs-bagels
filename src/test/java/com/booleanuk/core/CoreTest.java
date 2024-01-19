@@ -4,8 +4,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.io.InputStream;
-import java.io.PrintStream;
+import java.io.ByteArrayInputStream;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -36,13 +35,13 @@ class CoreTest {
     }
     @Test
     public void orderCoffeeInEmptyBasketTest() {
-        Assertions.assertTrue(customer.order("COFB"));
+        Assertions.assertEquals(customer.getInventory(), customer.order("COFB"));
     }
 
     @Test
     public void orderCoffeeInBasketWithElementsTest() {
         customer.getInventory().addItem(store.getItemsInStock().get(5));
-        Assertions.assertTrue(customer.order("COFW"));
+        Assertions.assertEquals(customer.getInventory(), customer.order("COFW"));
     }
 
     @Test
@@ -55,7 +54,7 @@ class CoreTest {
             add(new Filling("FILE", 0.12, "Filling", "Egg"));
         }};
         customer.getInventory().getItems().addAll(fillItems);
-        Assertions.assertFalse(customer.order("COFL"));
+        Assertions.assertEquals(customer.getInventory().getItems().size(), customer.order("COFL").getItems().size());
     }
 
     @Test
@@ -65,7 +64,7 @@ class CoreTest {
             add(new Coffee("COFC", 1.29, "Coffee", "Cappuccino"));
         }};
         customer.getInventory().getItems().addAll(fillItems);
-        Assertions.assertTrue(customer.order("COFW"));
+        Assertions.assertEquals(customer.getInventory(), customer.order("COFW"));
     }
 
     @Test
@@ -116,7 +115,7 @@ class CoreTest {
         }};
         customer.getInventory().getItems().addAll(fillItems);
         store.setCapacity(6);
-        Assertions.assertTrue(customer.order("COFW"));
+        Assertions.assertEquals(customer.getInventory(), customer.order("COFW"));
     }
 
     @Test
@@ -176,12 +175,17 @@ class CoreTest {
             add(new Bagel("BGLO", 0.49, "Bagel", "Onion"));
         }};
         customer.getInventory().getItems().addAll(fillItems);
-        Assertions.assertEquals("Bacon", customer.chooseFilling("FILB").getItems().get(0).getVariant());
+        String userInput = "FILB";
+        ByteArrayInputStream inputStream = new ByteArrayInputStream(userInput.getBytes());
+        Scanner scanner = new Scanner(inputStream);
+        Basket basket = customer.chooseFilling(scanner);
+        Assertions.assertEquals("FILB", basket.getItems().get(basket.getItems().size()-1).getSKU());
     }
 
     @Test
     public void wrongInputInOrderGivesFalse() {
-        Assertions.assertFalse(customer.order("Hello there"));
+        Basket basket = customer.getInventory();
+        Assertions.assertEquals(customer.getInventory(), customer.order("Hello there"));
     }
 }
 

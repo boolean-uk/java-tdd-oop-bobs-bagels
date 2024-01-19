@@ -42,7 +42,7 @@ public class Customer {
         return this.inventory.calculateTotalCost();
     }
 
-    public Basket chooseFilling() {
+    public Basket chooseFilling(Scanner scanner) {
         System.out.println("We detected a bagel in your inventory\nWould you like to order a filling?");
         System.out.println("SKU \t Cost \t Name \t Variant");
         for(Item item : inventory.getItems()) {
@@ -79,12 +79,13 @@ public class Customer {
         }
         boolean basketContainsBagel = false;
         for(Item item : inventory.getItems()) {
-            if(item.getClass().toString().equals("Bagel")) {
+            if (item.getClass().toString().equals("Bagel")) {
                 basketContainsBagel = true;
+                break;
             }
         }
         if(basketContainsBagel) {
-            chooseFilling();
+            chooseFilling(scanner);
         }
         return inventory;
     }
@@ -102,7 +103,7 @@ public class Customer {
 
     public String confirmFinished() {
         String confirmation= "";
-        System.out.println("Are you done shopping?");
+        System.out.println("Are you done shopping? (y/n)");
         String input = scanner.nextLine();
         if(input.equals("y")) {
             confirmation = "quit";
@@ -112,5 +113,20 @@ public class Customer {
             confirmFinished();
         }
         return confirmation;
+    }
+
+    public void showInventory() {
+        if(!this.inventory.getItems().isEmpty()) {
+            System.out.println("SKU \t Cost \t Name \t Variant");
+            for(Item item : this.inventory.getItems()) {
+                System.out.println(item);
+            }
+        } else {
+            System.out.println("There are none items in your basket!");
+        }
+    }
+
+    public String userInput() {
+        return scanner.nextLine();
     }
 }
