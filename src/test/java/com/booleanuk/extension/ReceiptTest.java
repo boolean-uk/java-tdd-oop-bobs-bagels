@@ -20,8 +20,11 @@ public class ReceiptTest {
         basket.addItemToBasket(new Filling("Bacon"));
         basket.addItemToBasket(new Coffee("White"));
 
-        Assertions.assertEquals("",receipt.printBasket(basket));
 
+        Assertions.assertEquals("", receipt.formatDate());
+        Assertions.assertEquals("", receipt.formatTotal());
+        Assertions.assertEquals("", receipt.formatSavings());
+        Assertions.assertEquals("", receipt.printBasket(basket));
 
     }
 }
