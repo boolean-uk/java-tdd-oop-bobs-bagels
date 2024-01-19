@@ -2,18 +2,16 @@ package com.booleanuk.core;
 
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 public class Basket {
     private HashMap<String, Integer> basketMap;
     private Inventory inventory;
     private int capacity;
 
-    public Basket() {
+    public Basket(Inventory inventory) {
         this.basketMap = new HashMap<>();
-        this.inventory = new Inventory();
+        this.inventory = inventory;
         this.setCapacity(5);
     }
 

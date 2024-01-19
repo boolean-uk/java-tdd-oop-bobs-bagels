@@ -1,6 +1,8 @@
 package com.booleanuk.core;
 
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -9,14 +11,16 @@ class BasketTest {
 
     @Test
     public void testAddBagelToBasket() {
-        Basket basket = new Basket();
+        Inventory inventory = new Inventory();
+        Basket basket = new Basket(inventory);
         Assertions.assertEquals("Product added to basket", basket.add("BGLO"));
         Assertions.assertTrue(basket.getBasketMap().containsKey("BGLO"));
     }
 
     @Test
     public void testAddMultipleBagelsToBasket() {
-        Basket basket = new Basket();
+        Inventory inventory = new Inventory();
+        Basket basket = new Basket(inventory);
         basket.add("BGLO");
         basket.add("BGLP");
         basket.add("BGLE");
@@ -27,7 +31,8 @@ class BasketTest {
 
     @Test
     public void testAddMultipleOffSameBagelToBasket() {
-        Basket basket = new Basket();
+        Inventory inventory = new Inventory();
+        Basket basket = new Basket(inventory);
         basket.add("BGLO");
         basket.add("BGLO");
         basket.add("BGLO");
@@ -37,7 +42,8 @@ class BasketTest {
 
     @Test
     public void testAddNoneExistingBagelToBasket() {
-        Basket basket = new Basket();
+        Inventory inventory = new Inventory();
+        Basket basket = new Basket(inventory);
         basket.add("BGLO");
         basket.add("BGLO");
         basket.add("BGLO");
@@ -48,13 +54,15 @@ class BasketTest {
 
     @Test
     public void testAddBagelToFullBasket() {
-        Basket basket = new Basket();
+        Inventory inventory = new Inventory();
+        Basket basket = new Basket(inventory);
         Assertions.assertEquals("Product not found", basket.add("AAAHHH"));
     }
 
     @Test
     public void testRemoveBagelFromBasket() {
-        Basket basket = new Basket();
+        Inventory inventory = new Inventory();
+        Basket basket = new Basket(inventory);
         basket.add("BGLO");
         Assertions.assertEquals("Product removed from basket", basket.remove("BGLO"));
         Assertions.assertFalse(basket.getBasketMap().containsKey("BGLO"));
@@ -62,7 +70,8 @@ class BasketTest {
 
     @Test
     public void testRemoveMultipleBagelsFromBasket() {
-        Basket basket = new Basket();
+        Inventory inventory = new Inventory();
+        Basket basket = new Basket(inventory);
         basket.add("BGLO");
         basket.add("BGLP");
         basket.add("BGLE");
@@ -73,7 +82,8 @@ class BasketTest {
 
     @Test
     public void testRemoveMultipleOffSameBagelFromBasket() {
-        Basket basket = new Basket();
+        Inventory inventory = new Inventory();
+        Basket basket = new Basket(inventory);
         basket.add("BGLO");
         basket.add("BGLO");
         basket.add("BGLO");
@@ -83,25 +93,29 @@ class BasketTest {
 
     @Test
     public void testRemoveNoneExistingBagelFromBasket() {
-        Basket basket = new Basket();
+        Inventory inventory = new Inventory();
+        Basket basket = new Basket(inventory);
         Assertions.assertEquals("Product is not in basket", basket.remove("AAAHHH"));
     }
 
     @Test
     public void testRemoveBagelNotInBasket() {
-        Basket basket = new Basket();
+        Inventory inventory = new Inventory();
+        Basket basket = new Basket(inventory);
         Assertions.assertEquals("Product is not in basket", basket.remove("BGLO"));
     }
 
     @Test
     public void testSetBasketCapacity() {
-        Basket basket = new Basket();
+        Inventory inventory = new Inventory();
+        Basket basket = new Basket(inventory);
         Assertions.assertTrue(basket.setCapacity(3));
     }
 
     @Test
     public void testSetBasketCapacityAndAddMoreThanLimit() {
-        Basket basket = new Basket();
+        Inventory inventory = new Inventory();
+        Basket basket = new Basket(inventory);
         basket.add("BGLO");
         Assertions.assertTrue(basket.setCapacity(1));
         Assertions.assertEquals("Basket is full", basket.add("BGLO"));
@@ -109,7 +123,8 @@ class BasketTest {
 
     @Test
     public void testSetBasketCapacityBelowNumberOfProducts() {
-        Basket basket = new Basket();
+        Inventory inventory = new Inventory();
+        Basket basket = new Basket(inventory);
         basket.add("BGLO");
         basket.add("BGLO");
         Assertions.assertTrue(basket.setCapacity(1));
@@ -117,7 +132,8 @@ class BasketTest {
 
     @Test
     public void testSetBasketCapacityBelowNumberOfProductsThenAdd() {
-        Basket basket = new Basket();
+        Inventory inventory = new Inventory();
+        Basket basket = new Basket(inventory);
         basket.add("BGLO");
         basket.add("BGLO");
         Assertions.assertTrue(basket.setCapacity(1));
@@ -126,7 +142,8 @@ class BasketTest {
 
     @Test
     public void testGetTotalCostForBasket() {
-        Basket basket = new Basket();
+        Inventory inventory = new Inventory();
+        Basket basket = new Basket(inventory);
         basket.add("BGLO");
         basket.add("BGLO");
         basket.add("BGLP");
@@ -135,33 +152,38 @@ class BasketTest {
 
     @Test
     public void testGetTotalCostForEmptyBasket() {
-        Basket basket = new Basket();
+        Inventory inventory = new Inventory();
+        Basket basket = new Basket(inventory);
         Assertions.assertEquals(0, basket.totalCost());
     }
 
     @Test
     public void testAddFillingWithBagelInBasket() {
-        Basket basket = new Basket();
+        Inventory inventory = new Inventory();
+        Basket basket = new Basket(inventory);
         basket.add("BGLO");
         Assertions.assertEquals("Filling added", basket.addFilling("FILB"));
     }
 
     @Test
     public void testAddFillingWithNoBagelInBasket() {
-        Basket basket = new Basket();
+        Inventory inventory = new Inventory();
+        Basket basket = new Basket(inventory);
         Assertions.assertEquals("You need to add a bagel to your basket", basket.addFilling("FILB"));
     }
 
     @Test
     public void testAddNoneExistingFillingWithBagelInBasket() {
-        Basket basket = new Basket();
+        Inventory inventory = new Inventory();
+        Basket basket = new Basket(inventory);
         basket.add("BGLO");
         Assertions.assertEquals("Filling was not found", basket.addFilling("AAHHHH"));
     }
 
     @Test
     public void testAddProductThatIsNotFillingWithBagelInBasket() {
-        Basket basket = new Basket();
+        Inventory inventory = new Inventory();
+        Basket basket = new Basket(inventory);
         basket.add("BGLO");
         Assertions.assertEquals("Product needs to be a filling", basket.addFilling("COFB"));
     }
