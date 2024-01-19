@@ -4,8 +4,6 @@ import com.booleanuk.core.models.item.*;
 import com.booleanuk.extension.DiscountManager;
 import lombok.Data;
 
-import java.io.FileNotFoundException;
-import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -38,13 +36,6 @@ public class Basket {
     }
 
     public double getTotalCost() {
-        DiscountManager discountManager;
-        try {
-            discountManager = new DiscountManager(this);
-        } catch (Exception e) {
-            discountManager = null;
-        }
-
         double cost = 0;
         for (Item item : basket) {
             cost += item.getPrice();
@@ -54,11 +45,15 @@ public class Basket {
                 }
             }
         }
-
-        if (discountManager != null) {
-            cost -= discountManager.getBasketDiscount();
+        double discount;
+        try {
+            discount = DiscountManager.getBasketDiscount(this);
+        } catch (Exception e) {
+            System.err.println("DiscountManager could not read file");
+            discount = 0.0;
         }
-        return cost;
+
+        return cost - discount;
     }
 
     public HashMap<Item, Integer> getItemCount() {

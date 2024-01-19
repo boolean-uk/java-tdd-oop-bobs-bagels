@@ -9,23 +9,16 @@ import java.net.URISyntaxException;
 import java.util.ArrayList;
 
 public class DiscountManager {
-    Basket basket;
-    ArrayList<String[]> bulkDiscounts;
-
-    public DiscountManager(Basket basket) throws FileNotFoundException, URISyntaxException {
-        this.basket = basket;
-        this.bulkDiscounts = FileHandler.fetchBulkDiscountsFromFile();
-    }
-
-    public double getBasketDiscount() {
+    public static double getBasketDiscount(Basket basket) throws FileNotFoundException, URISyntaxException {
+        ArrayList<String[]> bulkDiscounts = FileHandler.fetchBulkDiscountsFromFile();
         double totalDiscount = 0.0;
         for (String[] bulkDiscount : bulkDiscounts) {
-            totalDiscount += calculateMultiPriceDiscount(bulkDiscount[0], Integer.parseInt(bulkDiscount[1]), Double.parseDouble(bulkDiscount[2])-Double.parseDouble(bulkDiscount[3]));
+            totalDiscount += calculateMultiPriceDiscount(basket, bulkDiscount[0], Integer.parseInt(bulkDiscount[1]), Double.parseDouble(bulkDiscount[2])-Double.parseDouble(bulkDiscount[3]));
         }
         return totalDiscount;
     }
 
-    private double calculateMultiPriceDiscount(String sku, int quantityThreshold, double discount) {
+    private static double calculateMultiPriceDiscount(Basket basket, String sku, int quantityThreshold, double discount) {
         double totalDiscount = 0.0;
         Item item = basket.getBasket().stream().filter(i -> i.getSKU().equals(sku)).findFirst().orElse(null);
         if (item != null) {
