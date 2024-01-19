@@ -1,4 +1,4 @@
-# Bob's Bagels
+# Bob's Bagels Core
 
 
 ## User Stories
@@ -114,3 +114,34 @@ I want customers to only be able to order things that we stock in our inventory.
 |                                                               | String variant   |          |               |
 |                                                               | String sku       |          |               |
 
+
+# Bob's Bagels Extension
+
+
+## User Stories
+```
+11.
+As a customer,
+So I can double check that I paid for the right amount of items,
+I'd like to get a receipt of my purchase.
+```
+
+```
+12.
+As a customer,
+So I can see the price of every item and the total price,
+I'd like to get a receipt of my purchase.
+```
+
+## Domain model
+
+### Class Receipt
+
+| Methods                        | Member variables     | Scenario            | Output/Return                  |
+|--------------------------------|----------------------|---------------------|--------------------------------|
+| generateReceipt(Basket basket) | String receipt       | Empty basket.       | String "Basket is empty."      |
+|                                |                      | Not empty basket.   | String receipt.                |
+| createHeader()                 | DateTime dateAndTime |                     | String header.                 |
+| createFooter()                 |                      |                     | String footer.                 |
+| printReceipt()                 | String receipt       | Receipt (non)empty. | boolean printed.               |
+|                                |                      |                     | system.out.println of receipt. |
