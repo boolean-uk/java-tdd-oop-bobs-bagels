@@ -18,11 +18,7 @@ public class Receipt {
 
 
     public String printBasket() {
-
-        System.out.println(formatDate() + "\n" + formatBasketValues(this.customer.getBasket().getItemList()) + "\n" + formatSavings(this.customer.getBasket().getItemList()));
-        return formatDate() + "\n" + formatBasketValues(this.customer.getBasket().getItemList()) + "\n" + formatSavings(this.customer.getBasket().getItemList());
-
-
+        return formatDate() + "\n" + formatBasketValues(this.customer.getBasket().getItemList()) + "\n" + formatSavings(this.customer.getBasket().getItemList())  + "Total                       " + this.customer.getTotalCost(this.customer.getBasket().getItemList());
     }
 
     public String formatDate() {
@@ -31,6 +27,7 @@ public class Receipt {
     }
 
     public String formatBasketValues(Map<Item, Integer> basketMap) {
+
 
 
         String returnString = String.format("%-15s %5s %10s", "Item", "Qty", "Price");
@@ -44,6 +41,7 @@ public class Receipt {
         }
 
         returnString += "--------------------------------";
+
         return returnString;
     }
 
@@ -70,7 +68,7 @@ public class Receipt {
         Receipt receipt = new Receipt(customer);
 
 
-        receipt.printBasket();
+        System.out.println(receipt.printBasket());
 
 
     }

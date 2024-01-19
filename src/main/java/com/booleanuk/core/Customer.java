@@ -7,8 +7,10 @@ import java.util.*;
 public class Customer {
 
     private Basket basket;
+    private Map<String, Double> discounts;
 
     public Customer() {
+        this.discounts = new HashMap<>();
 
     }
 
@@ -29,6 +31,7 @@ public class Customer {
                 while(quantity >= 12) {
                     quantity -= 12;
                     discount12++;
+
                 }
 
                 if(quantity >= 6) {

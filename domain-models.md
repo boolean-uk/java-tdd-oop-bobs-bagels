@@ -267,9 +267,9 @@ Class Customer
 |                 |                       |                         |               |
 
 ``
-Extension 2 and 3
+Extension 2 
 As a customer
-I want to get a receipt of my purchase and show correct savings
+I want to get a receipt of my purchase
 ``
 Class Receipt
 
@@ -281,4 +281,20 @@ Class Receipt
 |                 | String formatBasketValues(Map<Item,Integer> basketMap) | Formats basketMap to string for receipt        | String        |
 |                 | String formatSavings(double savings)                   | Format savings to string for receipt           | String        |
 |                 |                                                        |                                                |               |
+
+``
+Extension 3
+As a customer
+I want to get a receipt of my purchase with savings
+``
+
+Class Customer
+
+
+| Class Variables               | Methods                          | Scenario       | Output/Return |
+|-------------------------------|----------------------------------|----------------|---------------|
+| Map<String, Double> discounts | Map<String, Double> getDiscounts | Gets discounts | boolean       |
+|                               |                                  |                |               |
+|                               |                                  |                |               |
+|                               |                                  |                |               |
 

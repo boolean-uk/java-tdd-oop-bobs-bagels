@@ -102,6 +102,32 @@ public class CustomerTest {
 
     }
 
+    @Test
+    public void testDiscounts() {
+        Customer customer = new Customer();
+
+        Basket basket = new Basket(5);
+
+        customer.setBasket(basket);
+
+        Map<Item, Integer> map = Map.of(
+                new Bagel("Plain"), 4,
+                new Coffee("Black"), 4);
+
+        Map<String, Double> discounts = customer.getDiscounts();
+
+        double finalDiscount = 0.00;
+        for(double saving : discounts.values()) {
+            finalDiscount += saving;
+        }
+
+        Assertions.assertEquals((0.99*4 + 0.39*4) - customer.getTotalCost(map),finalDiscount );
+
+
+
+
+    }
+
 
 
 
