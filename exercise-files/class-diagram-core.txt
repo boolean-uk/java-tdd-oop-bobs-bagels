@@ -1,36 +1,35 @@
+// Unsure how stuff like extension, enum or static methods/classes should be displayed
+
 Store
 	- String name
 	- ArrayList<Item> items
-	- HashMap<Item, Integer> inventory
-	+ itemStock(Item item) int
-	+ fetchInventory() void
+	+ getItemByItemType(ItemType type) Item
 	+ getItemBySKU(String sku) Item
 
 Basket
 	- ArrayList<Item> basket
 	- int capacity
-	+ addItem(Item item) boolean
+	+ addItem(Item item) Item
 	+ removeItem(Item item) boolean
 	+ isFull() boolean
 	+ getTotalCost() double
-	+ clear() void
 
 Item
-	# String name
-	# double price
+	- String SKU
+	- String name
+	- double price
+	- String variant
 
 Bagel
 	- ArrayList<Filling> filling
-	+ addFilling(Filling) boolean
-	+ removeFilling(Filling) boolean
+	+ addFilling(Filling filling) boolean
+	+ removeFilling(Filling filling) boolean
 
 Filling
-	- String name
-	- double price
+
 
 Coffee
-	- String name
-	- double price
+
 
 Store -- Basket
 Basket -0..*- Item

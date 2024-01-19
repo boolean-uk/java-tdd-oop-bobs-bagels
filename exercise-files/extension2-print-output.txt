@@ -4,20 +4,20 @@
 
 ~~~ Bob's Bagels ~~~
 
- 2024-01-18 13:22:06
+ 2024-01-19 10:42:26
 
 ---------------------
 
 Latte		1	£1.29
-Sesame		1	£0.49
-- Egg		 	£0.12
-- Bacon		 	£0.12
-Plain		1	£0.39
-- Ham		 	£0.12
-Plain		2	£0.78
+Sesame		1	£0.73
+- Egg
+- Bacon
+Plain		2	£1.02
+- Ham
+Plain		4	£1.56
 
 ---------------------
 
-Total			£3.31
+Total			£4.60
 
 	 Thank you !
