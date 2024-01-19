@@ -7,6 +7,7 @@ public class Inventory {
 	ArrayList<Item> inventory;
 	ArrayList<DiscountBulk> discountsBulk;
 	ArrayList<DiscountCombo> discountsCombo;
+
 	public Inventory() {
 		init();
 	}
@@ -48,45 +49,86 @@ public class Inventory {
 	public ArrayList<DiscountBulk> getDiscountsBulk() {
 		return discountsBulk;
 	}
-	public ArrayList<String> getDiscountBulkIds(){
+
+	public ArrayList<String> getDiscountBulkIds() {
 		ArrayList<String> ids = new ArrayList<>();
-		for (DiscountBulk disc:discountsBulk){
+		for (DiscountBulk disc : discountsBulk) {
 			ids.add(disc.getId());
 		}
 		return ids;
 	}
-	public double getBulkAmount(String id){
-		for(DiscountBulk item : discountsBulk){
-			if(item.getId().equals(id)){
+
+	public double getBulkAmount(String id) {
+		for (DiscountBulk item : discountsBulk) {
+			if (item.getId().equals(id)) {
 				return item.getAmount();
 			}
 		}
 		return 0;
 	}
-	public int getBulkBulk(String id){
-		for(DiscountBulk item : discountsBulk){
-			if(item.getId().equals(id)){
+
+	public int getBulkBulk(String id) {
+		for (DiscountBulk item : discountsBulk) {
+			if (item.getId().equals(id)) {
 				return item.getBulk();
 			}
 		}
 		return 0;
 	}
+
 	public ArrayList<DiscountCombo> getDiscountsCombo() {
 		return discountsCombo;
 	}
+
 	public boolean hasDiscount(String id) {
 
-			for(DiscountBulk discount:discountsBulk) {
-				if (discount.getId().equals(id)) return true;
+		for (DiscountBulk discount : discountsBulk) {
+			if (discount.getId().equals(id)) return true;
+		}
+		for (DiscountCombo discount : discountsCombo) {
+			for (String itemId : ((DiscountCombo) discount).comboItems) {
+				if (itemId.equals(id)) return true;
 			}
-			for(DiscountCombo discount :discountsCombo) {
-				for (String itemId : ((DiscountCombo) discount).comboItems) {
-					if (itemId.equals(id)) return true;
-				}
 
-			}
+		}
 
 		return false;
+	}
+
+	public boolean hasDiscountBulk(String id) {
+		for (DiscountBulk discount : discountsBulk) {
+			if (discount.getId().equals(id)) return true;
+		}
+
+
+		return false;
+	}
+
+	public boolean hasDiscountCombo(String id) {
+		for (DiscountCombo discount : discountsCombo) {
+			for (String itemId : ((DiscountCombo) discount).comboItems) {
+				if (itemId.equals(id)) return true;
+			}
+
+		}
+
+		return false;
+	}
+
+	public ArrayList<String[]> getDiscountComboPairs() {
+		ArrayList<String[]> pairs = new ArrayList<>();
+		for (DiscountCombo combo : discountsCombo) {
+			pairs.add(combo.comboItems);
+		}
+		return pairs;
+	}
+	public double getDiscountComboAmount(String[] pair) {
+		for (DiscountCombo combo : discountsCombo){
+			if (combo.getComboItems()==pair){
+				return combo.getNewPrice();
+			}
+		}
+		return 0;
 	}
 
 	private void init() {
@@ -135,6 +177,7 @@ public class Inventory {
 		inventory.add(item14);
 
 	}
+
 
 
 }

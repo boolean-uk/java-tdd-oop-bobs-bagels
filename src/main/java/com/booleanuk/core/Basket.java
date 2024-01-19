@@ -80,7 +80,6 @@ public class Basket {
 
 
 	public double getTotalCost() {
-		//ArrayList<String> discountsBulk = inventory.getDiscountBulkIds();
 		ArrayList<String> itemsLeft = new ArrayList<>(items.values());
 		ArrayList<String> discountItems = new ArrayList<>();
 		double total = 0;
@@ -88,14 +87,13 @@ public class Basket {
 		ArrayList<String> hasDiscount = new ArrayList<>();
 		HashMap<String, Integer> bulkAmount = new HashMap<>();
 		for (String item : uniqueItems) {
-			if (inventory.hasDiscount(item)) {
+			if (inventory.hasDiscountBulk(item)) {
 				hasDiscount.add(item);
 			}
 		}
 		for (String item : hasDiscount) {
 			bulkAmount.put(item, Collections.frequency(items.values(), item));
 		}
-		System.out.println(bulkAmount);
 
 
 		for (String bulkItem : bulkAmount.keySet()) {
@@ -114,19 +112,54 @@ public class Basket {
 				}
 				movedItems++;
 			}
-
-
 		}
 		for (String item : discountItems) {
 			double price = inventory.getBulkAmount(item);
 			total += price;
 		}
-		for (String item : itemsLeft) {
-			double price = inventory.getPrice(item);
-			total += price;
+
+		HashSet<String[]> discountPairs = new HashSet<>();
+		ArrayList<String[]> comboPairs = inventory.getDiscountComboPairs();
+		for (String[] pair : comboPairs) {
+			if (containsAllItems(itemsLeft, pair)) {
+				discountPairs.add(pair);
+			}
 		}
-		System.out.println(discountItems);
-		System.out.println(itemsLeft);
+		for (String[] pair : discountPairs) {
+			HashMap<String, Integer> occurrences = countOccurrences(itemsLeft, pair);
+			int smallest = Integer.MAX_VALUE;
+			for (Integer i : occurrences.values()) {
+				if (i < smallest) {
+					smallest = i;
+				}
+
+
+			}
+			for (int i = 0; i < pair.length; i++) {
+				int removed = 0;
+				for (int j = 0; j < itemsLeft.size(); j++) {
+					if (removed < smallest && itemsLeft.get(j).equals(pair[i])) {
+						itemsLeft.remove(j);
+						removed++;
+						j--;
+
+					}
+
+				}
+				for (int j = 0; j < smallest; j++) {
+					total += inventory.getDiscountComboAmount(pair);
+				}
+			}
+		}
+		for (String item : itemsLeft) {
+			total += inventory.getPrice(item);
+		}
+		for (ArrayList<String> extras : extra.values()) {
+			for (String item : extras) {
+				total += inventory.getPrice(item);
+			}
+		}
+
 		return total;
 	}
 
@@ -140,5 +173,43 @@ public class Basket {
 		} else {
 			throw new NotInInventoryException(id);
 		}
+	}
+
+	private static boolean containsAllItems(ArrayList<String> items, String[] array) {
+		for (String str : array) {
+			boolean found = false;
+
+			for (String item : items) {
+				if (item.contains(str)) {
+					found = true;
+					break;
+				}
+			}
+
+			if (!found) {
+				return false;
+			}
+		}
+		return true;
+	}
+
+	private static HashMap<String, Integer> countOccurrences(ArrayList<String> items, String[] stringsToCount) {
+		HashMap<String, Integer> occurrences = new HashMap<>();
+		for (String str : items) {
+			if (containsString(stringsToCount, str)) {
+				occurrences.put(str, occurrences.getOrDefault(str, 0) + 1);
+			}
+		}
+
+		return occurrences;
+	}
+
+	private static boolean containsString(String[] array, String target) {
+		for (String str : array) {
+			if (str.contains(target)) {
+				return true;
+			}
+		}
+		return false;
 	}
 }
