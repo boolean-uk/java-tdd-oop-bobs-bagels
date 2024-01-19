@@ -1,27 +1,10 @@
 package com.booleanuk.core;
 
-public class Coffee implements Product{
-    String name;
-    String flavor;
-    double price;
+public class Coffee extends Product{
 
-
-    public Coffee(String flavor){
-        this.flavor = flavor;
-        this.name = flavor + " coffee";
-        this.price = 1.00;
+    public Coffee(double price, String sku, String variant){
+        super("Coffee", price, sku, variant);
     }
 
-    @Override
-    public String getName(){
-        return this.name;
-    }
-    @Override
-    public double getPrice(){
-        return this.price;
-    }
-    public String getFlavor(){
-        return this.flavor;
-    }
 
 }

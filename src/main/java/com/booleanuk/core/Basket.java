@@ -1,39 +1,30 @@
 package com.booleanuk.core;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class Basket {
 
-    ArrayList<Bagel> basket;
-    double total;
-    int capacity;
-    public Basket(){
-        this.basket = new ArrayList<>();
-        this.total = 0;
-        this.capacity = 5;
+    private List<Product> basket;
+    private List<Product> inventory;
+    private double total;
+    private int capacity;
+
+
+    public Basket(Inventory inv){
+        this.inventory = inv.getProducts();
+        this.basket = setBasket();
+        this.total = setTotal();
+        this.capacity = setCapacity();
     }
 
-    public boolean add(String bagelType){
-        Bagel bagel = new Bagel(bagelType);
-        if(!bagel.getName().isEmpty()){
-            if(!checkIfBasketIsFull()){
-                basket.add(bagel);
-                System.out.println("Added " + bagel.getName() + " with the price of: $" + bagel.getPrice());
-                this.total += bagel.getPrice();
-                return true;
-            }
-        }
-        System.out.println("Could not add bagel");
-        return false;
-    }
-    public boolean add(String bagelType, double price){
-        Bagel bagel = new Bagel(bagelType, price);
-        if(!bagel.getName().isEmpty()){
-            if(!checkIfBasketIsFull()){
-                basket.add(bagel);
-                System.out.println("Added " + bagel.getName() + " with the price of: $" + bagel.getPrice());
-                this.total += bagel.getPrice();
+    public boolean add(Product product){
+        for (Product value : inventory) {
+            if (Objects.equals(value.getSku(), product.getSku())) {
+                basket.add(product);
+                System.out.println("Added " + product.getItemName() + " with the price of: $" + product.getPrice());
+                this.total += product.getPrice();
                 return true;
             }
         }
@@ -46,16 +37,15 @@ public class Basket {
         return this.total;
     }
 
-    public boolean remove(String bagelType){
+    public boolean remove(String productSKU){
         for (int i = 0; i < basket.size(); i++) {
-            if(Objects.equals(basket.get(i).getName(), bagelType)){
-                System.out.println("Removing " + basket.get(i).getName() + " from list");
+            if(Objects.equals(basket.get(i).getSku(), productSKU)){
+                System.out.println("Removing " + basket.get(i).getItemName() + " from list");
                 basket.remove(basket.get(i));
                 return true;
             }
         }
-
-        System.out.println("Bagel not found");
+        System.out.println("Product not found not found");
         return false;
     }
 
@@ -72,6 +62,21 @@ public class Basket {
         this.capacity = capacity;
     }
 
+    public double setTotal(){
+        return 0;
+    }
+    public double getTotal(){
+        return this.total;
+    }
+    public List<Product> setBasket(){
+        return new ArrayList<>();
+    }
+    public List<Product> getBasket(){
+        return this.basket;
+    }
+    public int setCapacity(){
+        return 5;
+    }
 
     public void clearList(){
         this.basket.clear();
