@@ -5,15 +5,15 @@ import java.util.HashMap;
 public class Basket {
     private ArrayList<Product> basket;
     private int size;
-     Inventory inventoryProduct;
+     Inventory inventory;
      /**Constructs a new Basket object
       *
      * @param size The maximum size of the basket
      * */
-    public Basket( int size ){
+    public Basket( Inventory inventory, int size ){
         this.basket = new ArrayList<>();
         this.size = size;
-        this.inventoryProduct = new Inventory();
+        this.inventory = inventory;
     }
 
     /**
@@ -138,7 +138,7 @@ public class Basket {
      * @return true if the product is in the inventory, otherwise false
      */
     public boolean isItemInInventory(Product item) {
-       return inventoryProduct.getInventoryItem().contains(item);
+       return inventory.getInventoryItem().contains(item);
     }
 
 }
