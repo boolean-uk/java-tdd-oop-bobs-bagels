@@ -10,7 +10,7 @@ public class Basket {
     public ArrayList<Inventory> inventoryList;
 
     public Basket(){
-        this.basketArr = new String[13];
+        this.basketArr = new String[25];
         this.inventoryList = new ArrayList<>();
         inventoryList.add(new Inventory("BGLO",0.49d,"Bagel","Onion"));
         inventoryList.add(new Inventory("BGLP",0.39d,"Bagel","Plain"));
@@ -169,15 +169,9 @@ public class Basket {
     }
 
     public double totalCost(){
-        //Discount boolean
-        boolean bglo = false;
-        boolean bglp = false;
-        boolean bgle = false;
-        boolean cofb = false;
-        //Discount counter
-        int bgloCounter = 0;
+        //Item counter for discount
+        int bglCounter = 0;
         int bglpCounter = 0;
-        int bgleCounter = 0;
         int cofbCounter = 0;
         //Return double
         double total=0.0d;
@@ -186,19 +180,136 @@ public class Basket {
             if(basketArr[i]!=null){
                 for (Inventory item : inventoryList) {
                     if (basketArr[i].equals(item.getSKU())) {
+                        //Check for discounts, if it is found, count discounts
+                        if(item.getSKU().equals("BGLP")){
+                            bglpCounter++;
+                        }else if(item.getName().equals("Bagel")){
+                            bglCounter++;
+                        }else if(item.getSKU().equals("COFB")) {
+                            cofbCounter++;
+                        }
+                        //Add the price of every item that is found
                         total+=item.getPrice();
                     }
                 }
             }
 
         }
+        //Discount boolean if discount detected
+        boolean bglDisc = false;
+        boolean bglpDisc = false;
+        boolean cofb = false;
+
+        //Check amount of discounts
+        int bgl12Discounts = 0;
+        int bgl6Discounts = 0;
+        //Check if discounts are found for bagels with toppings
+        if(bglCounter>=6) {
+            while (bglCounter >= 6) {
+                if (bglCounter >= 12) {
+                    bgl12Discounts++;
+                    //Subtract the difference of bagels with toppings
+                    double difference = 1.89d;
+                    total = total - difference;
+                    //Discount detected
+                    bglDisc = true;
+                    //Remove the bagels to run the loop again
+                    bglCounter = bglCounter - 12;
+                } else if (bglCounter >= 6) {
+                    bgl6Discounts++;
+                    double difference1 = 0.49d;
+                    total = total - difference1;
+                    bglDisc = true;
+                    bglCounter = bglCounter - 6;
+                }
+            }
+        }
+        //Discounts for bagel plain
+        int bglp12Discounts = 0;
+        if(bglpCounter>=12) {
+            while (bglpCounter>=12){
+                bglp12Discounts++;
+                //Subtract the difference of bagel plain
+                double difference = 0.69d;
+                total = total - difference;
+                //Discount detected
+                bglpDisc = true;
+                //Remove the bagels to run the loop again
+                bglpCounter = bglpCounter - 12;
+            }
+        }
+
+        //Check if coffee is combined with a bagel
+        int cofbDiscCounter = 0;
+        if (cofbCounter!=0) {
+            while (cofbCounter > 0) {
+                if (bglCounter > 0) {
+                    //Remove the difference for every extra bagel that combines with a coffee
+                    double differenceBgl = 0.26d;
+                    for (int i = 0; i < bglCounter; i++) {
+                        //Remove the coffee that has been discounted with a bagel
+                        cofbCounter = cofbCounter - 1;
+                        //Remove the bagel
+                        bglCounter = bglCounter-1;
+                        total = total - differenceBgl;
+                        cofbDiscCounter++;
+                    }
+                    //Coffee discount detected
+                    cofb = true;
+                } else if (bglpCounter > 0) {
+                    //Difference for bagel plain
+                    double differenceBglp = 0.13d;
+                    for (int i = 0; i < bglpCounter; i++) {
+                        cofbCounter = cofbCounter - 1;
+                        bglpCounter = bglpCounter-1;
+                        total = total - differenceBglp;
+                        cofbDiscCounter++;
+                    }
+                    cofb = true;
+                } else{
+                    //Exit the loop if none of the conditions are met
+                    cofbCounter=0;
+                }
+            }
+        }
+        if(bglDisc){
+            System.out.println("You got: "+bgl12Discounts+" discounts for 12 bagels with toppings");
+            System.out.println("You got: "+bgl6Discounts+" discounts for 6 bagels with toppings");
+        }
+        if(bglpDisc){
+            System.out.println("You got: "+bglp12Discounts+" discounts for 12 plain bagels");
+        }
+        if(cofb){
+            System.out.println("You got: "+cofbDiscCounter+" discounts on your coffee black with a bagel");
+        }
         return total;
+
     }
     public static void main(String[] args) {
         Basket basket = new Basket();
+
+        basket.addProductToBasket("Coffee","Black","Yes");
+        basket.addProductToBasket("Coffee","Black","Yes");
+        basket.addProductToBasket("Bagel","Onion","Yes");
+        basket.addProductToBasket("Bagel","Onion","Yes");
+        basket.addProductToBasket("Bagel","Onion","Yes");
+        basket.addProductToBasket("Bagel","Onion","Yes");
+        basket.addProductToBasket("Bagel","Onion","Yes");
+        basket.addProductToBasket("Bagel","Onion","Yes");
+        basket.addProductToBasket("Bagel","Plain","Yes");
+        basket.addProductToBasket("Bagel","Onion","Yes");
+        basket.addProductToBasket("Bagel","Onion","Yes");
+        basket.addProductToBasket("Bagel","Onion","Yes");
+        basket.addProductToBasket("Bagel","Onion","Yes");
+        basket.addProductToBasket("Bagel","Onion","Yes");
+        basket.addProductToBasket("Bagel","Onion","Yes");
+        basket.addProductToBasket("Bagel","Plain","Yes");
+        System.out.println(basket.totalCost());
+
+
+        /*
         Scanner scanner = new Scanner(System.in);
         String input = "";
-        basket.addProductToBasket("Coffee","Black","Yes");
         //Menu for the user
         while (!input.equals("x")){
             System.out.println("\nWhat would you like to do?");
@@ -264,6 +375,8 @@ public class Basket {
                 System.out.println("Your basket: "+Arrays.toString(basket.basketArr));
             }
         }
+
+         */
     }
 
 }
