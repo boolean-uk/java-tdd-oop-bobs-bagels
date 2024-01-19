@@ -1,7 +1,9 @@
 package com.booleanuk.core;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Iterator;
+import java.util.List;
 
 public class Basket {
     private ArrayList<Item> items;
@@ -13,7 +15,7 @@ public class Basket {
         items = new ArrayList<>();
     }
     public boolean addItem(String SKU, int amount){
-        if(amount + checkCurrentCapacity() > maxCapacity){
+        if(amount + checkCurrentCapacity() > maxCapacity && !checkItemValidity(SKU)){
             return false;
         }
         Inventory i = Inventory.getInstance();
@@ -27,7 +29,7 @@ public class Basket {
     }
     public boolean addFillingWithBagel(String bagelSKU, ArrayList<String> fillings ) {
 
-        if (checkCurrentCapacity() + (fillings.size() + 1) > maxCapacity) {
+        if (checkCurrentCapacity() + (fillings.size() + 1) > maxCapacity && !checkItemValidity(bagelSKU) && !checkItemValidity(fillings)) {
             return false;
         }
         Inventory i = Inventory.getInstance();
@@ -94,9 +96,29 @@ public class Basket {
         }
         return capacity;
     }
-    private void checkItemValidity(Item item){
+    private boolean checkItemValidity(String SKU){
+       if(getListOfCodes().contains(SKU)){
+           return true;
+       }
+       else{
+           return false;
+       }
 
-
+    }
+    private boolean checkItemValidity(ArrayList<String> itemsSku){
+        for(String s : itemsSku){
+            if(!getListOfCodes().contains(s)){
+                return false;
+            }
+        }
+        return true;
+    }
+    private List<String> getListOfCodes(){
+        return Arrays.asList(
+                "BGLO", "BGLP", "BGLE", "BGLS", // Bagels
+                "COFB", "COFW", "COFC", "COFL", // Coffee
+                "FILB", "FILE", "FILC", "FILX", "FILS", "FILH" // Fillings
+        );
     }
 
 }

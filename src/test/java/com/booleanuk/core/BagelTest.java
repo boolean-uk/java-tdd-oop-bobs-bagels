@@ -102,7 +102,7 @@ public class BagelTest {
     @Test
     public void testAddingItemNotInInventory(){
         Basket basket = new Basket(10);
-        Assertions.assertFalse(basket.addItem("BGLO", 2));
+        Assertions.assertFalse(basket.addItem("BGLX", 2));
     }
 
     /* Additional tests */
@@ -118,7 +118,6 @@ public class BagelTest {
         Bagel bagel = new Bagel("BGLO", "Bagel", "Onion", 0.49);
         Inventory i = Inventory.getInstance();
 
-        // Assuming FILX and FILS are different fillings with distinct SKUs
         Filling filling1 = new Filling("FILX", "Filling", "Cream Cheese", 0.12);
         Filling filling2 = new Filling("FILS", "Filling", "Smoked Salmon", 0.12);
 
@@ -127,12 +126,12 @@ public class BagelTest {
         fillings.addAll(i.getItems("FILS", 2));
         bagel.addFillings(fillings);
 
-        // Constructing the expected list with unique instances
+
         ArrayList<Item> expected = new ArrayList<>();
         expected.add(filling1);
-        expected.add(filling1); // Adding a duplicate for testing
+        expected.add(filling1);
         expected.add(filling2);
-        expected.add(filling2); // Adding a duplicate for testing
+        expected.add(filling2);
 
         Assertions.assertEquals(expected.get(0).toString(), fillings.get(0).toString());
         Assertions.assertEquals(expected.get(1).toString(), fillings.get(1).toString());
