@@ -49,5 +49,16 @@ public class BasketTest {
         Assertions.assertTrue((basket.changeCapacity(20)));
     }
 
+    @Test
+    public void showBasket(){
+        basket = new Basket(5);
+        testItem = new Item("Bagel", 1, "test");
+        basket.addItems(testItem, 1);
+
+        Assertions.assertEquals("Bagel, 1, test", basket.showBasket());
+
+
+    }
+
 
 }

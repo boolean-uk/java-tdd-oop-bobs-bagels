@@ -37,6 +37,11 @@ public class Basket {
         }
         return true;
     }
+
+    public ArrayList<Item> showBasket() {
+        return new ArrayList<>(items);
+    }
+
     public double getTotalCost() {
         double totalCost = 0;
         for (Item item : items) {
