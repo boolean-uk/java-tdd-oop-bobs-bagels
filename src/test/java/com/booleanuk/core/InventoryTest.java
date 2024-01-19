@@ -38,4 +38,17 @@ class InventoryTest {
         Assertions.assertEquals("No fillings available", inventory.listFillingCosts());
     }
 
+    @Test
+    public void testFindProductInList() {
+        Inventory inventory = new Inventory();
+        Assertions.assertEquals("Bagel", inventory.findProduct("BGLO").getName());
+        Assertions.assertEquals(0.49, inventory.findProduct("BGLO").getPrice());
+        Assertions.assertEquals("Onion", inventory.findProduct("BGLO").getVariant());
+    }
+
+    @Test
+    public void testFindProductNotInList() {
+        Inventory inventory = new Inventory();
+        Assertions.assertEquals(null, inventory.findProduct("AAAAHHHH"));
+    }
 }
