@@ -183,6 +183,7 @@ Inventory
 	- products: List<products>
 	+ getProductCost(sku: String) double
 	+ listFillingPrices() String
+	+ findProduct() Product
 
 Product
 	- sku: String
