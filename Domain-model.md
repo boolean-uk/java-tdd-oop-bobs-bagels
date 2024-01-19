@@ -137,11 +137,11 @@ I'd like to get a receipt of my purchase.
 
 ### Class Receipt
 
-| Methods                        | Member variables     | Scenario            | Output/Return                  |
-|--------------------------------|----------------------|---------------------|--------------------------------|
-| generateReceipt(Basket basket) | String receipt       | Empty basket.       | String "Basket is empty."      |
-|                                |                      | Not empty basket.   | String receipt.                |
-| createHeader()                 | DateTime dateAndTime |                     | String header.                 |
-| createFooter()                 |                      |                     | String footer.                 |
-| printReceipt()                 | String receipt       | Receipt (non)empty. | boolean printed.               |
-|                                |                      |                     | system.out.println of receipt. |
+| Methods           | Member variables     | Scenario            | Output/Return                  |
+|-------------------|----------------------|---------------------|--------------------------------|
+| generateReceipt() | String receipt       | Empty basket.       | String "Basket is empty."      |
+|                   | Basket basket        | Not empty basket.   | String receipt.                |
+| createHeader()    | DateTime dateAndTime |                     | String header.                 |
+| createFooter()    |                      |                     | String footer.                 |
+| printReceipt()    | String receipt       | Receipt (non)empty. | boolean printed.               |
+|                   |                      |                     | system.out.println of receipt. |
