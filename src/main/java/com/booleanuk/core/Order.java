@@ -3,21 +3,21 @@ package com.booleanuk.core;
 import java.util.ArrayList;
 
 public class Order {
-
-    Inventory bagel1 = new Inventory("BGLO", "Bagel", "Onion", 0.49);
-    Inventory bagel2 = new Inventory("BGLP", "Bagel", "Plain", 0.39);
-    Inventory bagel3 = new Inventory("BGLE", "Bagel", "Everything", 0.49);
-    Inventory bagel4 = new Inventory("BGLS", "Bagel", "Sesame", 0.49);
-    Inventory coffee1 = new Inventory("COFB", "Bagel", "Onion", 0.99);
-    Inventory coffee2 = new Inventory("COFW", "Bagel", "Onion", 1.19);
-    Inventory coffee3 = new Inventory("COFC", "Bagel", "Onion", 1.29);
-    Inventory coffee4 = new Inventory("COFL", "Bagel", "Onion", 1.29);
-    Inventory fill1 = new Inventory("FILB", "Filling", "Bacon", 0.12);
-    Inventory fill2 = new Inventory("FILE", "Filling", "Egg", 0.12);
-    Inventory fill3 = new Inventory("FILC", "Filling", "Cheese", 0.12);
-    Inventory fill4 = new Inventory("FILX", "Filling", "Cream Cheese", 0.12);
-    Inventory fill5 = new Inventory("FILS", "Filling", "Smoked Salmon", 0.12);
-    Inventory fill6 = new Inventory("FILH", "Filling", "Ham", 0.12);
+    //Inventory from boolean
+    private Inventory bagel1 = new Inventory("BGLO", "Bagel", "Onion", 0.49);
+    private Inventory bagel2 = new Inventory("BGLP", "Bagel", "Plain", 0.39);
+    private Inventory bagel3 = new Inventory("BGLE", "Bagel", "Everything", 0.49);
+    private Inventory bagel4 = new Inventory("BGLS", "Bagel", "Sesame", 0.49);
+    private Inventory coffee1 = new Inventory("COFB", "Coffee", "Black", 0.99);
+    private Inventory coffee2 = new Inventory("COFW", "Coffee", "White", 1.19);
+    private Inventory coffee3 = new Inventory("COFC", "Coffee", "Cappuccino", 1.29);
+    private Inventory coffee4 = new Inventory("COFL", "Coffee", "Latte", 1.29);
+    private Inventory fill1 = new Inventory("FILB", "Filling", "Bacon", 0.12);
+    private Inventory fill2 = new Inventory("FILE", "Filling", "Egg", 0.12);
+    private Inventory fill3 = new Inventory("FILC", "Filling", "Cheese", 0.12);
+    private Inventory fill4 = new Inventory("FILX", "Filling", "Cream Cheese", 0.12);
+    private Inventory fill5 = new Inventory("FILS", "Filling", "Smoked Salmon", 0.12);
+    private Inventory fill6 = new Inventory("FILH", "Filling", "Ham", 0.12);
     ArrayList<Bagel> bagelList;
     ArrayList<Coffee> coffeeList;
     ArrayList<Filling> fillingList;
@@ -35,6 +35,7 @@ public class Order {
     }
 
     public void initialize() {
+        //Adding the inventory from boolean into the list.
         inventoryList.add(bagel1);
         inventoryList.add(bagel2);
         inventoryList.add(bagel3);
@@ -157,6 +158,13 @@ public class Order {
         }
 
         return 0;
+    }
+
+    public String receipt() {
+
+
+
+        return "";
     }
 
 

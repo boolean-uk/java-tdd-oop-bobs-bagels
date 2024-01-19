@@ -1,10 +1,10 @@
 package com.booleanuk.core;
 
 public class Inventory {
-    String sku;
-    String itemType;
-    String name;
-    double price;
+    private String sku;
+    private String itemType;
+    private String name;
+    private double price;
 
     public Inventory(String sku, String itemType, String name, double price) {
 

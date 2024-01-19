@@ -164,6 +164,40 @@ public class OrderTest {
 
     }
 
+    @Test
+    public void testGetReceipt() {
+        Order basket1 = new Order();
+
+
+        basket1.add("BGLO", "Bagel", "Onion", 0.49);
+        basket1.add("BGLP", "Bagel", "Plain", 0.39);
+        basket1.add("COFW", "Coffee", "White", 1.19);
+        basket1.add("FILE", "Filling", "Egg", 0.12);
+        basket1.add("FILX", "Filling", "Cream Cheese", 0.12);
+        String result = basket1.receipt();
+        Assertions.assertEquals("Receipt Here: ", result);
+
+
+
+    }
+
+    @Test
+    public void testGetReceiptWithInvalidItems() {
+        Order basket1 = new Order();
+
+
+        basket1.add("rr", "rr", "rr", 0.49);
+        basket1.add("rr", "rr", "rr", 0.39);
+        basket1.add("COFW", "Coffee", "White", 1.19);
+        basket1.add("FILE", "Filling", "Egg", 0.12);
+        basket1.add("FILX", "Filling", "Cream Cheese", 0.12);
+        String result = basket1.receipt();
+        Assertions.assertEquals("Receipt Here: ", result);
+
+
+
+    }
+
 
 
 

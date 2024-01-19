@@ -126,4 +126,15 @@ I want customers to only be able to order things that we stock in our inventory.
  
 Do checks and set up an inventory!
 
+#EXTENSION 2
+
+11. To keep a record of what I have bought, 
+Receipts would be efficient. I would like to see a total cost, the amount of each individual item, their names and cost price.
+I would also like the time of the purchase, so that I can trace the transaction, if needed.
+
+| Classes | Methods   | Members     | Scenario                      | Output               |
+|---------|-----------|-------------|-------------------------------|----------------------|
+| Order   | receipt() | String time | If items are added beforehand | return receipt       |
+|         |           | int amount  | If no items are added         | return empty receipt |
+|         |           |             |                               |                      |
 
