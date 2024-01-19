@@ -26,13 +26,15 @@ public class ReceiptTest {
         Assertions.assertEquals("    ~~~ Bob's Bagels ~~~\n\n    " +
                         receipt.getDateAndTime().toString().replace("T", " ") +
                         "\n\n----------------------------\n"+
-                "BGLO\nFooter", receipt.generateReceipt());
+                "BGLO\n" +
+                "\n        Thank you\n      for your order!", receipt.generateReceipt());
         basket.add(bglo);
         basket.add(bglp);
         Assertions.assertEquals("    ~~~ Bob's Bagels ~~~\n\n    " +
                 receipt.getDateAndTime().toString().replace("T", " ") +
                 "\n\n----------------------------\n"+
-                "BGLO\nBGLP\nFooter", receipt.generateReceipt());
+                "BGLO\nBGLP\n" +
+                "\n        Thank you\n      for your order!", receipt.generateReceipt());
     }
 
     @Test
