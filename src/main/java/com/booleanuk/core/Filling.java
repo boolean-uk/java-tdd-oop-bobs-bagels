@@ -1,40 +1,20 @@
 package com.booleanuk.core;
 
 public class Filling {
+    private String id;
     private String name;
     private double price;
     private String variant;
 
-
-    public Filling(String id){
+    public Filling(String id, double price, String variant) {
+        this.id = id;
         this.name = "Filling";
-        switch (id) {
-            case "FILB" -> {
-                this.variant = "Bacon";
-                this.price = 0.12;
-            }
-            case "FILE" -> {
-                this.variant = "Egg";
-                this.price = 0.12;
-            }
-            case "FILC" -> {
-                this.variant = "Cheese";
-                this.price = 0.12;
-            }
-            case "FILX" -> {
-                this.variant = "Cream Cheese";
-                this.price = 0.12;
-            }
-            case "FILS" -> {
-                this.variant = "Smoked Salmon";
-                this.price = 0.12;
-            }
-            case "FILH" -> {
-                this.variant = "Ham";
-                this.price = 0.12;
-            }
-            default -> throw new IllegalStateException("Unexpected value: " + id);
-        }
+        this.price = price;
+        this.variant = variant;
+    }
+
+    public String getId() {
+        return id;
     }
 
     public double getPrice() {
@@ -49,3 +29,6 @@ public class Filling {
         return variant;
     }
 }
+
+
+
