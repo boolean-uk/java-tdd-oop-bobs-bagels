@@ -3,7 +3,7 @@ package com.booleanuk.core;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class Inventory extends Basket {
+public class Inventory {
 
     private String SKU;
     private double price;
@@ -13,10 +13,12 @@ public class Inventory extends Basket {
     private HashMap<String, Double> inventoryPriceList;
     private ArrayList<String> fullInventoryList;
 
-
+    public Inventory() {
+        this.inventoryPriceList = new HashMap<>();
+    }
 
     public HashMap<String, Double> getInventoryPriceList(){
-        this.inventoryPriceList = new HashMap<>();
+//        this.inventoryPriceList = new HashMap<>();
         this.inventoryPriceList.put("BGLO", 0.49);
         this.inventoryPriceList.put("BGLP", 0.39);
         this.inventoryPriceList.put("BGLE", 0.49);

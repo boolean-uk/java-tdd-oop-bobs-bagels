@@ -4,9 +4,14 @@ import java.util.ArrayList;
 
 public class Basket {
 
-
-    private ArrayList<String> itemList = new ArrayList<>();
+    private ArrayList<String> itemList;
     private int basketCapacity = 4;
+
+    private Inventory inventory;
+
+    public Basket() {
+        this.itemList = new ArrayList<>();
+    }
 
     public ArrayList<String> getItemList() {
         return itemList;
@@ -34,12 +39,14 @@ public class Basket {
 
     private boolean basketIsFull = false;
 
-    public Basket() {
-        this.itemList = new ArrayList<>();
-    }
+
 
     public boolean addItem(String item) {
-        if (itemList.size() == basketCapacity) {
+        inventory = new Inventory();
+        if(!inventory.getInventoryPriceList().containsKey(item)) {
+            System.out.println("Item is not in inventory");
+            return false;
+        } else if(itemList.size() == basketCapacity) {
             System.out.println("Basket is full");
             return false;
         } else {
