@@ -6,10 +6,12 @@ public class Basket {
 
     private ArrayList<Inventory> basketList;
     private ArrayList<Inventory> inventoryList;
+    private ArrayList<Bagel> bagelList;
     private int basketSize = 5;
 
     public Basket() {
-        basketList = new ArrayList<>(5);
+        basketList = new ArrayList<>();
+        bagelList = new ArrayList<>();
         inventoryList = new ArrayList<>();
         inventoryList.add(new Inventory("BGLO", 0.49, "Bagel", "Onion"));
         inventoryList.add(new Inventory("BGLP", 0.39, "Bagel", "Plain"));
@@ -29,31 +31,25 @@ public class Basket {
 
     //User Story 1
     public boolean addBagelVariantToBasket(Bagel bagelVariant) {
-        if (basketList.size() < basketSize) {
-            for (Inventory item : inventoryList) {
-                if (item.getVariant().equals(bagelVariant.getVariant())) {
-                    basketList.add(item);
-                    return true;
-                }
-            }
+        if (!bagelList.contains(bagelVariant)) {
+            bagelList.add(bagelVariant);
+            return true;
         }
         return false;
     }
 
     //User Story 2
     public boolean removeBagelVariantFromBasket(Bagel bagelVariant) {
-        for (Inventory item : basketList) {
-            if (item.getVariant().equals(bagelVariant.getVariant())) {
-                basketList.remove(item);
-                return true;
-            }
+        if (bagelList.contains(bagelVariant)) {
+            bagelList.remove(bagelVariant);
+            return true;
         }
         return false;
     }
 
     //User Story 3
-    public String bagelBasketIsFull() {
-        if (this.basketList.size() >= this.basketSize) {
+    public String bagelBasketIsFull(int basketSize) {
+        if (this.basketList.size() >= basketSize) {
             return "Basket is full!";
         }
         return "Basket is not full!";
@@ -69,13 +65,11 @@ public class Basket {
     }
 
     //User Story 5
-    public String canRemoveItemInBasket(String itemVariant) {
-        for (Inventory item : basketList) {
-            if (item.getVariant().equals(itemVariant)) {
-                return "Item is in basket and can be removed.";
-            }
+    public String canRemoveItemInBasket(Inventory item) {
+        if (basketList.contains(item)) {
+            return "Item is in basket and can be removed.";
         }
-        return "Item is not in basket and can't be removed.";
+        return "Item is not in basket and can not be removed.";
     }
 
     //User Story 6

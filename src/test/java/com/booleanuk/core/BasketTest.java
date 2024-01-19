@@ -7,18 +7,32 @@ import java.util.ArrayList;
 
 class BasketTest {
 
-    //User Story 1
+    //User Story 1 Case 1 - Bagel not already in basket
     @Test
-    public void bagelAddedToBasketReturnTrue() {
+    public void testBagelIsNotInBasket() {
+        Basket basket = new Basket();
+
+        Bagel bagel = new Bagel("Onion");
+
+        boolean bagelAdded = basket.addBagelVariantToBasket(bagel);
+
+        Assertions.assertTrue(bagelAdded);
+    }
+
+
+    //User Story 1 Case 2 - Bagel already in basket
+    @Test
+    public void testBagelIsInBasket() {
         Basket basket = new Basket();
         Bagel bagel = new Bagel("Onion");
 
         basket.addBagelVariantToBasket(bagel);
 
-        boolean bagelAdded = true;
+        boolean bagelAddedAgain = basket.addBagelVariantToBasket(bagel);
 
-        Assertions.assertTrue(bagelAdded);
+        Assertions.assertFalse(bagelAddedAgain);
     }
+
 
     //User Story 2
     @Test
@@ -27,9 +41,8 @@ class BasketTest {
         Bagel bagel = new Bagel("Onion");
 
         basket.addBagelVariantToBasket(bagel);
-        basket.removeBagelVariantFromBasket(bagel);
 
-        boolean bagelRemoved = true;
+        boolean bagelRemoved = basket.removeBagelVariantFromBasket(bagel);
 
         Assertions.assertTrue(bagelRemoved);
     }
@@ -39,13 +52,20 @@ class BasketTest {
     public void testReturnBasketIsFull() {
         Basket basket = new Basket();
 
-        basket.addBagelVariantToBasket(new Bagel("Onion"));
-        basket.addBagelVariantToBasket(new Bagel("Plain"));
-        basket.addBagelVariantToBasket(new Bagel("Everything"));
-        basket.addBagelVariantToBasket(new Bagel("Sesame"));
-        basket.addBagelVariantToBasket(new Bagel("Onion"));
+        Inventory item1 = new Inventory("BGLE", 0.49, "Bagel", "Everything");
+        Inventory item2 = new Inventory("BGLO", 0.49, "Bagel", "Onion");
+        Inventory item3 = new Inventory("BGLP", 0.39, "Bagel", "Plain");
+        Inventory item4 = new Inventory("BGLS", 0.59, "Bagel", "Sesame");
+        Inventory item5 = new Inventory("COFB", 0.99, "Coffee", "Black");
 
-        String result = basket.bagelBasketIsFull();
+        basket.getBasketList().add(item1);
+        basket.getBasketList().add(item2);
+        basket.getBasketList().add(item3);
+        basket.getBasketList().add(item4);
+        basket.getBasketList().add(item5);
+
+
+        String result = basket.bagelBasketIsFull(basket.getBasketSize());
 
         Assertions.assertEquals("Basket is full!", result);
     }
@@ -55,12 +75,19 @@ class BasketTest {
     public void testReturnBasketIsNotFull() {
         Basket basket = new Basket();
 
-        basket.addBagelVariantToBasket(new Bagel("Onion"));
-        basket.addBagelVariantToBasket(new Bagel("Plain"));
-        basket.addBagelVariantToBasket(new Bagel("Everything"));
-        basket.addBagelVariantToBasket(new Bagel("Sesame"));
+        Inventory item1 = new Inventory("BGLE", 0.49, "Bagel", "Everything");
+        Inventory item2 = new Inventory("BGLO", 0.49, "Bagel", "Onion");
+        Inventory item3 = new Inventory("BGLP", 0.39, "Bagel", "Plain");
+        Inventory item4 = new Inventory("BGLS", 0.59, "Bagel", "Sesame");
+        //Inventory item5 = new Inventory("COFB", 0.99, "Coffee", "Black");
 
-        String result = basket.bagelBasketIsFull();
+        basket.getBasketList().add(item1);
+        basket.getBasketList().add(item2);
+        basket.getBasketList().add(item3);
+        basket.getBasketList().add(item4);
+        //basket.getBasketList().add(item5);
+
+        String result = basket.bagelBasketIsFull(basket.getBasketSize());
 
         Assertions.assertEquals("Basket is not full!", result);
     }
@@ -90,12 +117,11 @@ class BasketTest {
     public void canRemoveItemFromBasket() {
         Basket basket = new Basket();
 
-        basket.addBagelVariantToBasket(new Bagel("Onion"));
-        basket.addBagelVariantToBasket(new Bagel("Plain"));
-        basket.addBagelVariantToBasket(new Bagel("Everything"));
-        basket.addBagelVariantToBasket(new Bagel("Sesame"));
+        Inventory item = new Inventory("BGLE", 0.49, "Bagel", "Everything");
 
-        String result = basket.canRemoveItemInBasket("Plain");
+        basket.getBasketList().add(item);
+
+        String result = basket.canRemoveItemInBasket(item);
 
         Assertions.assertEquals("Item is in basket and can be removed.", result);
     }
@@ -105,15 +131,18 @@ class BasketTest {
     public void canNotRemoveItemFromBasket() {
         Basket basket = new Basket();
 
-        basket.addBagelVariantToBasket(new Bagel("Onion"));
-        basket.addBagelVariantToBasket(new Bagel("Plain"));
-        basket.addBagelVariantToBasket(new Bagel("Everything"));
+        //ArrayList<Inventory> basketList = new ArrayList<>();
 
-        String result = basket.canRemoveItemInBasket("Sesame");
+        Inventory item = new Inventory("BGLE", 0.49, "Bagel", "Everything");
 
-        Assertions.assertEquals("Item is not in basket and can't be removed.", result);
+        /*
+        basketList.add(item);
+        basketList.remove(item); */
+
+        String result = basket.canRemoveItemInBasket(item);
+
+        Assertions.assertEquals("Item is not in basket and can not be removed.", result);
     }
-
     //User Story 6
     @Test
     void testTotalCostOfItems() {
