@@ -3,10 +3,8 @@ package com.booleanuk.core;
 public class Bagel {
 
     private String bagel;
-
     private String variant;
     private String sku;
-
     private double price;
 
     public Bagel(String variant) {

@@ -20,6 +20,13 @@ Version 1
 | Basket | ArrayList<Bagel> bagels | addBagelTypeToBasket(String bagelType) | If bagel type added to basket     | Return true   |
 | Bagel  |                         |                                        | If bagel type not added to basket | Return false  |
 
+Version 2
+
+| Class  | Member variables                | Methods                                   | Scenario                             | Output/Result |
+|--------|---------------------------------|-------------------------------------------|--------------------------------------|---------------|
+| Basket | ArrayList<Inventory> basketList | addBagelTypeToBasket(String bagelVariant) | If bagel type is added to basket     | Return true   |
+| Bagel  |                                 |                                           | If bagel type is not added to basket | Return false  |
+
 
 ## User Story 2
 2.
@@ -41,6 +48,12 @@ Version 1
 | Basket | ArrayList<Bagel> bagels | removeBagelTypeFromBasket(String bagelType) | If bagel type removed from basket | Return true   |
 | Bagel  |                         |                                             | If bagel type not removed basket  | Return false  |
 
+Version 3
+
+| Class  | Member variables                | Methods                                       | Scenario                                 | Output/Result |
+|--------|---------------------------------|-----------------------------------------------|------------------------------------------|---------------|
+| Basket | ArrayList<Inventory> basketList | removeBagelTypeFromBasket(Bagel bagelVariant) | If bagel type is removed from basket     | Return true   |
+| Bagel  |                                 |                                               | If bagel type is not removed from basket | Return false  |
 
 
 ## User Story 3
@@ -70,6 +83,13 @@ Version 2
 | Basket | ArrayList<Bagel> bagels | basketIsFull() | If basket is full     | Return "Basket is full!"     |
 | Bagel  | int basketSize          |                | If basket is not full | Return "Basket is not full." |
 
+Version 3
+
+| Class  | Member variables                | Methods             | Scenario              | Output/Result                |
+|--------|---------------------------------|---------------------|-----------------------|------------------------------|
+| Basket | ArrayList<Inventory> basketList | bagelBasketIsFull() | If basket is full     | Return "Basket is full!"     |
+|        | int basketSize                  |                     | If basket is not full | Return "Basket is not full." |
+
 
 ## User Story 4
 4.
@@ -81,10 +101,10 @@ I’d like to change the capacity of baskets.
 
 Version 1
 
-| Class  | Member variables        | Methods                                                | Scenario                          | Output/Result                            |
-|--------|-------------------------|--------------------------------------------------------|-----------------------------------|------------------------------------------|
-| Basket | ArrayList<Bagel> bagels | changeBasketCapacity(int oldDapacity, int newCapacity) | If basket capacity is changed     | Return "Basket capacity change!"         |
-|        |                         |                                                        | if basket capacity is not changed | Return "Basket is capacity is the same." |
+| Class  | Member variables | Methods                               | Scenario                          | Output/Result                            |
+|--------|------------------|---------------------------------------|-----------------------------------|------------------------------------------|
+| Basket | int basketSize   | changeBasketCapacity(int newCapacity) | If basket capacity is changed     | Return "Basket capacity is changed."     |
+|        |                  |                                       | if basket capacity is not changed | Return "Basket capacity is not changed." |
 
 
 ## User Story 5
@@ -100,10 +120,17 @@ Basket  ArrayList<String> bagels        canRemoveItemInBasket()   Remove a speci
 # Domain Model For User Story 5
 Version 1
 
-| Class  | Member variables        | Methods                            | Scenario                      | Output/Result                                       |
-|--------|-------------------------|------------------------------------|-------------------------------|-----------------------------------------------------|
-| Basket | ArrayList<Bagel> bagels | canRemoveItemInBasket(String item) | Item exist in basket          | Return "Item is in basket and can be removed"       |
-|        |                         |                                    | Item does not exist in basket | Return "Item is not in basket and can't be removed" |
+| Class  | Member variables                 | Methods                               | Scenario                      | Output/Result                                       |
+|--------|----------------------------------|---------------------------------------|-------------------------------|-----------------------------------------------------|
+| Basket | ArrayList<Inventory> basketList; | canRemoveItemInBasket(String variant) | Item exist in basket          | Return "Item is in basket and can be removed"       |
+|        |                                  |                                       | Item does not exist in basket | Return "Item is not in basket and can't be removed" |
+
+Version 2
+
+| Class     | Member variables                 | Methods                                   | Scenario                         | Output/Result                                       |
+|-----------|----------------------------------|-------------------------------------------|----------------------------------|-----------------------------------------------------|
+| Basket    | ArrayList<Inventory> basketList; | canRemoveItemInBasket(String itemVariant) | If item exist in basket          | Return "Item is in basket and can be removed"       |
+| Inventory |                                  |                                           | If item does not exist in basket | Return "Item is not in basket and can't be removed" |
 
 ## User Story 6.
 As a customer,
@@ -113,13 +140,10 @@ I'd like to know the total cost of items in my basket.
 # Domain Model For User Story 6
 
 
-| Class  | Member variables                              | Methods                                                        | Scenario           | Output/Result                |
-|--------|-----------------------------------------------|----------------------------------------------------------------|--------------------|------------------------------|
-| Basket | HashMap<String, Integer[]> itemsWithQuantity; | double totalCostOfItems()                                      | if all items added | Return totalCost as a double |
-|        |                                               |                                                                | if no items added  | Return 0                     |
-|        |                                               | void addItem(String item, double quantity, double costPerUnit) |                    |                              |
-
-
+| Class  | Member variables                 | Methods                                                        | Scenario           | Output/Result                |
+|--------|----------------------------------|----------------------------------------------------------------|--------------------|------------------------------|
+| Basket | ArrayList<Inventory> basketList; | double totalCostOfItems()                                      | if all items added | Return totalCost as a double |
+|        |                                  |                                                                | if no items added  | Return 0.0                   |
 
 ## User Story 7.
 As a customer,
@@ -128,11 +152,11 @@ I'd like to know the cost of a bagel before I add it to my basket.
 
 # Domain Model For User Story 7
 
-| Class     | Member Variables                        | Methods                                      | Scenario             | Output/Result                    |
-|-----------|-----------------------------------------|----------------------------------------------|----------------------|----------------------------------|
-| Basket    | HashMap<Bagel, Integer> bagelsWithCost; | double returnCostOfBagel(Bagel bagelVariant) | I want cost of bagel | Return cost of bagel as a double |
-| Inventory |                                         |                                              |                      |                                  |
-| Bagel     |                                         |                                              |                      |                                  |
+| Class     | Member Variables                   | Methods                                      | Scenario             | Output/Result                    |
+|-----------|------------------------------------|----------------------------------------------|----------------------|----------------------------------|
+| Basket    | ArrayList<Inventory> inventoryList | double returnCostOfBagel(Bagel bagelVariant) | I want cost of bagel | Return cost of bagel as a double |
+| Inventory |                                    |                                              |                      |                                  |
+| Bagel     |                                    |                                              |                      |                                  |
 
 
 ## User Story 8.
@@ -143,11 +167,11 @@ I'd like to be able to choose fillings for my bagel.
 # Domain Model For User Story 8
 
 
-| Class     | Member Variables                               | Methods                                         | Scenario                                 | Output/Result                          |
-|-----------|------------------------------------------------|-------------------------------------------------|------------------------------------------|----------------------------------------|
-| Basket    | HashMap<String, Inventory> itemsFullyDetailed; | String chooseBagelFilling(Filling bagelFilling) | I want to choose the filling of my bagel | Return affirming statement as a String |
-| Inventory |                                                |                                                 |                                          |                                        |
-| Filling   |                                                |                                                 |                                          |                                        |
+| Class     | Member Variables                   | Methods                                         | Scenario                                 | Output/Result                          |
+|-----------|------------------------------------|-------------------------------------------------|------------------------------------------|----------------------------------------|
+| Basket    | ArrayList<Inventory> inventoryList | String chooseBagelFilling(Filling bagelFilling) | I want to choose the filling of my bagel | Return affirming statement as a String |
+| Inventory |                                    |                                                 |                                          |                                        |
+| Filling   |                                    |                                                 |                                          |                                        |
 
 
 ## User Story 9.
@@ -158,11 +182,11 @@ I'd like to know the cost of each filling before I add it to my bagel order.
 # Domain Model For User Story 9
 
 
-| Class     | Member Variables                               | Methods                                        | Scenario                               | Output/Result                      |
-|-----------|------------------------------------------------|------------------------------------------------|----------------------------------------|------------------------------------|
-| Basket    | HashMap<String, Inventory> itemsFullyDetailed; | double costOfEachFilling(Filling bagelFilling) | I want to see the cost of each filling | Return cost of filling as a double |
-| Inventory |                                                |                                                |                                        |                                    |
-| Filling   |                                                |                                                |                                        |                                    |
+| Class     | Member Variables                   | Methods                                        | Scenario                               | Output/Result                      |
+|-----------|------------------------------------|------------------------------------------------|----------------------------------------|------------------------------------|
+| Basket    | ArrayList<Inventory> inventoryList | double costOfEachFilling(Filling bagelFilling) | I want to see the cost of each filling | Return cost of filling as a double |
+| Inventory |                                    |                                                |                                        |                                    |
+| Filling   |                                    |                                                |                                        |                                    |
 
 
 ## User Story 10.
@@ -173,10 +197,10 @@ I want customers to only be able to order things that we stock in our inventory.
 # Domain Model For User Story 10
 
 
-| Class     | Member Variables                               | Methods                                | Scenario            | Output/Result |
-|-----------|------------------------------------------------|----------------------------------------|---------------------|---------------|
-| Basket    | HashMap<String, Inventory> itemsFullyDetailed; | boolean mustBeInInventory(String item) | If in inventory     | Return true   |
-| Inventory |                                                |                                        | If not in inventory | Return false  |
+| Class     | Member Variables                   | Methods                               | Scenario            | Output/Result |
+|-----------|------------------------------------|---------------------------------------|---------------------|---------------|
+| Basket    | ArrayList<Inventory> inventoryList | boolean mustBeInInventory(String sku) | If in inventory     | Return true   |
+| Inventory |                                    |                                       | If not in inventory | Return false  |
 
 
 ## Extensions

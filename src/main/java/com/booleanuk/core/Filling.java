@@ -3,10 +3,8 @@ package com.booleanuk.core;
 public class Filling {
 
     private String filling;
-
     private String variant;
     private String sku;
-
     double price;
 
     public Filling(String variant) {

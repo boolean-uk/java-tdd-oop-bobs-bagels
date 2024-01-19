@@ -1,7 +1,6 @@
 package com.booleanuk.core;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class Basket {
 
@@ -29,10 +28,10 @@ public class Basket {
     }
 
     //User Story 1
-    public boolean addBagelTypeToBasket(Bagel bagelType) {
+    public boolean addBagelVariantToBasket(Bagel bagelVariant) {
         if (basketList.size() < basketSize) {
             for (Inventory item : inventoryList) {
-                if (item.getVariant().equals(bagelType.getVariant())) {
+                if (item.getVariant().equals(bagelVariant.getVariant())) {
                     basketList.add(item);
                     return true;
                 }
@@ -42,9 +41,9 @@ public class Basket {
     }
 
     //User Story 2
-    public boolean removeBagelTypeFromBasket(Bagel bagelType) {
+    public boolean removeBagelVariantFromBasket(Bagel bagelVariant) {
         for (Inventory item : basketList) {
-            if (item.getVariant().equals(bagelType.getVariant())) {
+            if (item.getVariant().equals(bagelVariant.getVariant())) {
                 basketList.remove(item);
                 return true;
             }
@@ -70,27 +69,16 @@ public class Basket {
     }
 
     //User Story 5
-    public String canRemoveItemInBasket(String variant) {
+    public String canRemoveItemInBasket(String itemVariant) {
         for (Inventory item : basketList) {
-            if (item.getVariant().equals(variant)) {
+            if (item.getVariant().equals(itemVariant)) {
                 return "Item is in basket and can be removed.";
             }
         }
         return "Item is not in basket and can't be removed.";
     }
 
-    //User Story 6 Method 1
-    public void addItem(String item, double quantity, double pricePerItem) {
-        // Assuming quantity is unused in the new implementation
-        for (Inventory inventoryItem : inventoryList) {
-            if (inventoryItem.getName().equals(item)) {
-                basketList.add(new Inventory(inventoryItem.getSku(), pricePerItem, item, inventoryItem.getVariant()));
-                return;
-            }
-        }
-    }
-
-    //User Story 6 Method 2
+    //User Story 6
     public double totalCostOfItems() {
         double totalCost = 0.00;
         for (Inventory item : basketList) {
