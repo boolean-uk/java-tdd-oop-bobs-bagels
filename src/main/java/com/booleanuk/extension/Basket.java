@@ -1,9 +1,10 @@
 package com.booleanuk.extension;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Iterator;
-import java.util.List;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.util.*;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 public class Basket {
     private ArrayList<Item> items;
@@ -13,6 +14,9 @@ public class Basket {
     public Basket(int maxCapacity){
         this.maxCapacity = maxCapacity;
         items = new ArrayList<>();
+    }
+    public int getCurrentCapacity(){
+        return this.items.size();
     }
     public boolean addItem(String SKU, int amount){
         if(amount + checkCurrentCapacity() > maxCapacity || !checkItemValidity(SKU)){
@@ -83,8 +87,41 @@ public class Basket {
             }
             total += i.getPrice();
         }
-        return total;
+        return parsePrice(Double.toString(total - applyDiscounts()));
     }
+    private double parsePrice(String price){
+        BigDecimal pp = new BigDecimal(price);
+        pp = pp.setScale(2, RoundingMode.HALF_UP);
+        return pp.doubleValue();
+    }
+    private double applyDiscounts(){
+        double totalDiscount = 0;
+        Map<String, Long> bagelQuantities = getItemQuantities();
+
+        for(Map.Entry<String, Long> entry : bagelQuantities.entrySet()){
+            String itemSKU = entry.getKey();
+            long itemQuantity = entry.getValue();
+            double itemPrice = 0;
+            if(itemQuantity >= 12 && itemSKU.startsWith("B")){
+                itemPrice = Double.parseDouble(Inventory.getInstance().getPriceInfo(itemSKU));
+                totalDiscount += (itemPrice * 12) - 3.99;
+
+            }
+            else if(itemQuantity >= 6 && itemSKU.startsWith("B") && !itemSKU.endsWith("P")){
+                itemPrice = Double.parseDouble(Inventory.getInstance().getPriceInfo(itemSKU));
+                totalDiscount += (itemPrice * 6) - 2.49;
+            }
+        }
+        return totalDiscount;
+    }
+    private Map<String, Long> getItemQuantities() {
+        List<String> bagelSKUs = items.stream()
+                .map(Item::getSKU)
+                .toList();
+
+        return bagelSKUs.stream().collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+    }
+
     private int checkCurrentCapacity(){
         int capacity = items.size();
         for(Item i : items){

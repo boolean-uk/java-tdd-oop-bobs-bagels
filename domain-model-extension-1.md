@@ -7,8 +7,8 @@
 
 
 2.  As the shop owner,
-    so that I can make money,
-    I want to make sure that a customer can only use one discount per purchase
+    so that I can make customers happy,
+    I want to make sure that a customer can only use valid discounts per purchase
 ```
 
 | Classes | Methods            | Scenario               | Returns                     |
