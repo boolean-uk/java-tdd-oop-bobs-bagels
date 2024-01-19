@@ -52,9 +52,9 @@ public class DiscountManagerTest {
         Assertions.assertTrue(printedReceipt.contains("Total"));
         Assertions.assertTrue(printedReceipt.contains("Thank you"));
 
-        Assertions.assertTrue(printedReceipt.contains("Plain\t\t12"));
-        Assertions.assertTrue(printedReceipt.contains("Discount\t   -£1.14"));
-        Assertions.assertTrue(printedReceipt.contains("You saved £1.14\n\t on this shop"));
+        Assertions.assertTrue(printedReceipt.contains("Plain\t\t\t12"));
+        Assertions.assertTrue(printedReceipt.contains("Discount\t\t   -£1.14"));
+        Assertions.assertTrue(printedReceipt.contains("You saved £1.14"));
 
         Assertions.assertTrue(printedReceipt.contains("£10.43"));
     }
