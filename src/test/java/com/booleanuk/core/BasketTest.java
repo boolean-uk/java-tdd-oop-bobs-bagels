@@ -47,9 +47,12 @@ class BasketTest {
 		Basket basket = new Basket(inventory);
 		Assertions.assertFalse(basket.isFull());
 		try {
-			basket.addItem("BGLP");
-			basket.addItem("BGLO");
-			basket.addItem("BGLP");
+			for (int i = 0; i < 30; i++) {
+
+				basket.addItem("BGLP");
+			}
+
+
 		} catch (NotInInventoryException e) {
 			throw new RuntimeException(e);
 		}
@@ -88,7 +91,7 @@ class BasketTest {
 	public void setSizeTest() {
 		Inventory inventory = new Inventory();
 		Basket basket = new Basket(inventory);
-		Assertions.assertEquals(3, basket.getSize());
+		Assertions.assertEquals(30, basket.getSize());
 		try {
 			basket.setSize(2);
 		} catch (UnableToChangeBasketSizeException e) {
@@ -155,5 +158,59 @@ class BasketTest {
 		} catch (NotInInventoryException e) {
 			throw new RuntimeException(e);
 		}
+
+	}
+
+	@Test
+	public void buyBulkTest() {
+		Inventory inventory = new Inventory();
+		Basket basket2 = new Basket(inventory);
+		for (int i = 0; i < 12; i++) {
+			try {
+				basket2.addItem("BGLP");
+			} catch (NotInInventoryException e) {
+				throw new RuntimeException(e);
+			}
+		}
+		Assertions.assertEquals(3.99,basket2.getTotalCost(),0.01);
+
+		for (int i = 0; i < 6; i++) {
+			try {
+				basket2.addItem("BGLO");
+			} catch (NotInInventoryException e) {
+				throw new RuntimeException(e);
+			}
+		}
+		Assertions.assertEquals(3.99+2.49,basket2.getTotalCost(),0.01);
+		Basket basket3 = new Basket(inventory);
+		try {
+			basket3.addItem("BGLO");
+			basket3.addItem("COFB");
+		} catch (NotInInventoryException e) {
+			throw new RuntimeException(e);
+		}
+		//Assertions.assertEquals(1.25,basket3.getTotalCost(),0.01);
+
+		Basket basket = new Basket(inventory);
+		try {
+			basket.addItem("BGLO");
+			basket.addItem("BGLO");
+			for (int i = 0; i < 12; i++) {
+
+				basket.addItem("BGLP");
+			}
+			for (int i = 0; i < 6; i++) {
+
+				basket.addItem("BGLE");
+			}
+
+			basket.addItem("COFB");
+			basket.addItem("COFB");
+			basket.addItem("COFB");
+			Assertions.assertEquals(10.43,basket.getTotalCost());
+		} catch (NotInInventoryException e) {
+			throw new RuntimeException(e);
+		}
+
 	}
 }

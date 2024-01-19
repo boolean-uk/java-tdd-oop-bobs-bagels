@@ -5,9 +5,9 @@ import java.util.ArrayList;
 
 public class Inventory {
 	ArrayList<Item> inventory;
-
+	ArrayList<DiscountBulk> discountsBulk;
+	ArrayList<DiscountCombo> discountsCombo;
 	public Inventory() {
-		this.inventory = new ArrayList<>();
 		init();
 	}
 
@@ -38,14 +38,72 @@ public class Inventory {
 	public double getPrice(String id) {
 		double price = 0;
 		for (Item item : inventory) {
-			if (item.id.equals(id)){
+			if (item.id.equals(id)) {
 				return item.price;
 			}
 		}
 		return price;
 	}
 
+	public ArrayList<DiscountBulk> getDiscountsBulk() {
+		return discountsBulk;
+	}
+	public ArrayList<String> getDiscountBulkIds(){
+		ArrayList<String> ids = new ArrayList<>();
+		for (DiscountBulk disc:discountsBulk){
+			ids.add(disc.getId());
+		}
+		return ids;
+	}
+	public double getBulkAmount(String id){
+		for(DiscountBulk item : discountsBulk){
+			if(item.getId().equals(id)){
+				return item.getAmount();
+			}
+		}
+		return 0;
+	}
+	public int getBulkBulk(String id){
+		for(DiscountBulk item : discountsBulk){
+			if(item.getId().equals(id)){
+				return item.getBulk();
+			}
+		}
+		return 0;
+	}
+	public ArrayList<DiscountCombo> getDiscountsCombo() {
+		return discountsCombo;
+	}
+	public boolean hasDiscount(String id) {
+
+			for(DiscountBulk discount:discountsBulk) {
+				if (discount.getId().equals(id)) return true;
+			}
+			for(DiscountCombo discount :discountsCombo) {
+				for (String itemId : ((DiscountCombo) discount).comboItems) {
+					if (itemId.equals(id)) return true;
+				}
+
+			}
+
+		return false;
+	}
+
 	private void init() {
+		this.discountsBulk = new ArrayList<>();
+		this.discountsCombo = new ArrayList<>();
+
+		DiscountBulk d1 = new DiscountBulk("BGLO", 6, 0.45);
+		DiscountBulk d2 = new DiscountBulk("BGLP", 12, 0.69);
+		DiscountBulk d3 = new DiscountBulk("BGLE", 6, 0.45);
+		DiscountCombo d4 = new DiscountCombo(new String[]{"BGL", "COF"}, 1.25);
+		discountsBulk.add(d1);
+		discountsBulk.add(d2);
+		discountsBulk.add(d3);
+		discountsCombo.add(d4);
+
+
+		this.inventory = new ArrayList<>();
 		Item item1 = new Bagel("BGLO", "Onion", 0.49);
 		Item item2 = new Bagel("BGLP", "Plain", 0.39);
 		Item item3 = new Bagel("BGLE", "Everything", 0.49);
@@ -77,4 +135,6 @@ public class Inventory {
 		inventory.add(item14);
 
 	}
+
+
 }
