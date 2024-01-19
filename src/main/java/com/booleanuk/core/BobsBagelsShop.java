@@ -14,7 +14,7 @@ public class BobsBagelsShop {
             return "No items in stock.";
         }
         StringBuilder output;
-        output = new StringBuilder("Bob's Bagels\nSKU\t\tPrice\tName\tVariant\n");
+        output = new StringBuilder("Bob's Bagels\nSKU\t\tPrice\tName\tVariant\n--------------------------------------\n");
         for (Item item : inventory.keySet()) {
             String itemString = item.getSku()+"\t"+item.getPrice()+"\t"+item.getName()+"\t"+item.getVariant()+"\n";
             output.append(itemString);

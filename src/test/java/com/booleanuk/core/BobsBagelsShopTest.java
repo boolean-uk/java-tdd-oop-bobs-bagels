@@ -27,6 +27,7 @@ public class BobsBagelsShopTest {
                 """
                         Bob's Bagels
                         SKU\t\tPrice\tName\tVariant
+                        --------------------------------------
                         BGLO\t0.49\tBagel\tOnion
                         BGLP\t0.39\tBagel\tPlain
                         """, shop2.showInventory());
