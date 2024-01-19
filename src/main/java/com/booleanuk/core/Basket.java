@@ -12,6 +12,14 @@ public class Basket {
         this.items = new ArrayList<>();
     }
 
+    public Boolean changeCapacity(int newCapacity){
+        if (newCapacity >= items.size()) {
+            this.capacity = newCapacity;
+            return true;
+        }
+        return false;
+    }
+
     public Boolean addItems(Item item, int quantity){
         if (items.size() + quantity <= capacity) {
             for (int i = 0; i < quantity; i++) {
