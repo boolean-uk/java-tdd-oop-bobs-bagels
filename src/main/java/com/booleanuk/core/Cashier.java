@@ -49,7 +49,8 @@ public class Cashier {
                 System.out.println(basket.showBasket());
                 break;
             case 'p':
-                // pay for basket
+                System.out.println(basket.showBasket());
+                System.out.println(basket.getTotalCost());
                 break;
             case 'm':
                 System.out.println("Enter ned capacity: ");

@@ -46,5 +46,13 @@ public class BasketTest {
         Assertions.assertEquals("[BGLO, Bagel, 0.49, Onion]", showBasket);
     }
 
+    @Test
+    public void getCoastTest(){
+        basket = new Basket(5);
+        Inventory inventory = new Inventory("src/main/java/com/booleanuk/core/inventory.csv");
+        basket.addItems(inventory, "BGLO", 1);
+        Assertions.assertEquals(0.49, basket.getTotalCost());
+    }
+
 
 }
