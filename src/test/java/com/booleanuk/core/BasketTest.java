@@ -94,10 +94,29 @@ public class BasketTest {
     }
 
     @Test
-    public void testAddFilling() {
+    public void testAddFillingToBagel() {
         Basket basket = new Basket();
         basket.addItem("BGLO");
         basket.addItem("BGLP");
         Assertions.assertEquals("[BGLO, FILE, BGLP]",basket.addFilling("BGLO", "FILE"));
+    }
+
+    @Test
+    public void testAddFillingToBagel2() {
+        Basket basket = new Basket();
+        basket.addItem("BGLO");
+        basket.addItem("BGLP");
+        Assertions.assertEquals("[BGLO, BGLP, FILE]",basket.addFilling("BGLP", "FILE"));
+    }
+    @Test
+    public void testAddMoreFillingToBagel() {
+        Basket basket = new Basket();
+        basket.addItem("BGLO");
+        basket.addItem("BGLP");
+        basket.addItem("COFB");
+        basket.addFilling("BGLO","FILC");
+        basket.addFilling("BGLO","FILX");
+        basket.addFilling("BGLP","FILX");
+        Assertions.assertEquals("[BGLO, FILE, FILX, FILC, BGLP, FILX, COFB]",basket.addFilling("BGLO", "FILE"));
     }
 }
