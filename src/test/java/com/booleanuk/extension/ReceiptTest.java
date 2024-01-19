@@ -52,6 +52,21 @@ public class ReceiptTest {
 
     @Test
     public void printReceipt() {
+        HashMap<Item, Integer> testInventory = new HashMap<>();
+        Item bglo = new Item("BGLO","Bagel", "Onion", 0.49);
+        Item bglp = new Item("BGLP","Bagel", "Plain", 0.39);
+        testInventory.put(bglo, 10);
+        testInventory.put(bglp, 10);
+        BobsBagelsShop shop = new BobsBagelsShop(testInventory);
+        Basket basket = new Basket(shop, 3);
+        basket.add(bglo);
+        basket.add(bglp);
+        basket.add(bglp);
+        Receipt receipt = new Receipt(basket);
 
+        Assertions.assertFalse(receipt.printReceipt());
+
+        receipt.generateReceipt();
+        Assertions.assertTrue(receipt.printReceipt());
     }
 }
