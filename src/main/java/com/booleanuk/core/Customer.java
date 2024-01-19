@@ -1,5 +1,7 @@
 package com.booleanuk.core;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.*;
 
 public class Customer {
@@ -21,28 +23,19 @@ public class Customer {
 
             if(inventory.getBagels().containsKey(entry.getKey().getSkuCode())) {
 
-                int restBagels = 0;
                 int quantity = entry.getValue();
 
-
-
-                while(quantity % 12 == 0) {
-                    quantity /= 12;
+                while(quantity >= 12) {
+                    quantity -= 12;
                     discount12++;
                 }
 
-                if(quantity % 6 == 0) {
-                    quantity /= 6;
+                if(quantity >= 6) {
+                    quantity-= 6;
                     discount6++;
-
                 }
 
-                System.out.println(quantity);
 
-                //System.out.println(restBagels % 6);
-
-
-               //cost += getCostOfItem(entry.getKey()) * (restBagels % 6);
                 for(int i = 0; i < quantity; i++) {
                     restBagelsList.add(entry.getKey());
 
@@ -52,27 +45,13 @@ public class Customer {
             if(inventory.getCoffees().containsKey(entry.getKey().getSkuCode())) {
                 for(int i = 0; i < entry.getValue(); i++) {
                     restCoffeesList.add(entry.getKey());
-                    System.out.println("asdasdasd");
                 }
 
             }
             if(inventory.getFillings().containsKey(entry.getKey().getSkuCode())) {
                 cost += entry.getKey().getPrice();
-                System.out.println("asdasdasdasd");
             }
-
         }
-
-/*        restBagelsList.sort(new Comparator<>() {
-            @Override
-            public int compare(Item bagel1, Item bagel2) {
-                return Double.compare(bagel1.getPrice(), bagel2.getPrice());
-            }
-        });*/
-        System.out.println("The cost" + cost);
-
-        System.out.println("Bagelsize" + restBagelsList.size());
-        System.out.println("CoffeSize" + restCoffeesList.size());
 
         if(restCoffeesList.size() <= restBagelsList.size()) {
                 for (int i = 0; i < restBagelsList.size(); i++) {
@@ -96,11 +75,12 @@ public class Customer {
             }
         }
 
-
             cost +=discount12 *3.99;
             cost +=discount6 *2.49;
 
-        return cost;
+        BigDecimal costRounded = new BigDecimal(cost).setScale(2, RoundingMode.HALF_UP);
+
+        return Double.parseDouble(String.valueOf(costRounded));
 
         }
 
