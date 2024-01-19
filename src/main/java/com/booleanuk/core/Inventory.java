@@ -93,9 +93,9 @@ public class Inventory {
 		this.discountsBulk = new ArrayList<>();
 		this.discountsCombo = new ArrayList<>();
 
-		DiscountBulk d1 = new DiscountBulk("BGLO", 6, 0.45);
-		DiscountBulk d2 = new DiscountBulk("BGLP", 12, 0.69);
-		DiscountBulk d3 = new DiscountBulk("BGLE", 6, 0.45);
+		DiscountBulk d1 = new DiscountBulk("BGLO", 6, 0.415);
+		DiscountBulk d2 = new DiscountBulk("BGLP", 12, 0.3325);
+		DiscountBulk d3 = new DiscountBulk("BGLE", 6, 0.415);
 		DiscountCombo d4 = new DiscountCombo(new String[]{"BGL", "COF"}, 1.25);
 		discountsBulk.add(d1);
 		discountsBulk.add(d2);

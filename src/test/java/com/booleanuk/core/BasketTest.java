@@ -181,7 +181,8 @@ class BasketTest {
 				throw new RuntimeException(e);
 			}
 		}
-		Assertions.assertEquals(3.99+2.49,basket2.getTotalCost(),0.01);
+		Assertions.assertEquals(3.99+2.49,basket2.getTotalCost(),0.001);
+
 		Basket basket3 = new Basket(inventory);
 		try {
 			basket3.addItem("BGLO");
@@ -189,7 +190,7 @@ class BasketTest {
 		} catch (NotInInventoryException e) {
 			throw new RuntimeException(e);
 		}
-		//Assertions.assertEquals(1.25,basket3.getTotalCost(),0.01);
+		Assertions.assertEquals(1.25,basket3.getTotalCost(),0.01);
 
 		Basket basket = new Basket(inventory);
 		try {
@@ -203,7 +204,6 @@ class BasketTest {
 
 				basket.addItem("BGLE");
 			}
-
 			basket.addItem("COFB");
 			basket.addItem("COFB");
 			basket.addItem("COFB");

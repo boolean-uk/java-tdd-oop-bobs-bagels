@@ -1,9 +1,6 @@
 package com.booleanuk.core;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashMap;
+import java.util.*;
 
 public class Basket {
 	private int itemIndex;
@@ -81,33 +78,55 @@ public class Basket {
 		}
 	}
 
+
 	public double getTotalCost() {
-		ArrayList<String> discountsBulk= inventory.getDiscountBulkIds();
+		//ArrayList<String> discountsBulk = inventory.getDiscountBulkIds();
+		ArrayList<String> itemsLeft = new ArrayList<>(items.values());
+		ArrayList<String> discountItems = new ArrayList<>();
 		double total = 0;
-
-
-
-
-		for (String id : items.values()) {
-			total += inventory.getPrice(id);
-			System.out.println(total+", "+id);
-		}
-		for (ArrayList<String> extras : extra.values()) {
-			for (String id : extras) {
-				total += inventory.getPrice(id);
-				System.out.println(total+", "+id);
+		HashSet<String> uniqueItems = new HashSet<>(items.values());
+		ArrayList<String> hasDiscount = new ArrayList<>();
+		HashMap<String, Integer> bulkAmount = new HashMap<>();
+		for (String item : uniqueItems) {
+			if (inventory.hasDiscount(item)) {
+				hasDiscount.add(item);
 			}
 		}
-		for(String discountId : discountsBulk){
-			if (items.containsValue(discountId)){
-				int freq= Collections.frequency(items.values(),discountId);
-				int bulk = inventory.getBulkBulk(discountId);
-				double amount=inventory.getBulkAmount(discountId);
-				total-=(freq/bulk)*amount;
-				System.out.println(total+", "+discountId+", "+(freq/bulk)*amount);
-			}
+		for (String item : hasDiscount) {
+			bulkAmount.put(item, Collections.frequency(items.values(), item));
 		}
-		System.out.println();
+		System.out.println(bulkAmount);
+
+
+		for (String bulkItem : bulkAmount.keySet()) {
+			int input = bulkAmount.get(bulkItem);
+			int target = inventory.getBulkBulk(bulkItem);
+
+			int closestMultiple = Math.round((float) input / target) * target;
+			int movedItems = 0;
+			while (movedItems < closestMultiple) {
+				for (int i = 0; i < itemsLeft.size(); i++) {
+					if (itemsLeft.get(i).equals(bulkItem)) {
+						discountItems.add(bulkItem);
+						itemsLeft.remove(i);
+						i--;
+					}
+				}
+				movedItems++;
+			}
+
+
+		}
+		for (String item : discountItems) {
+			double price = inventory.getBulkAmount(item);
+			total += price;
+		}
+		for (String item : itemsLeft) {
+			double price = inventory.getPrice(item);
+			total += price;
+		}
+		System.out.println(discountItems);
+		System.out.println(itemsLeft);
 		return total;
 	}
 
