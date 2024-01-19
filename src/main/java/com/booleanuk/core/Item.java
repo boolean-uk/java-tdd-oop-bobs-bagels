@@ -3,12 +3,13 @@ package com.booleanuk.core;
 import java.util.HashMap;
 
 public class Item {
-    private String name;
-    private String sKU;
+    private final String name;
+    private final String sKU;
+
 
     public Item(String name, String sKU) {
-        this.name = name;
-        this.sKU = sKU;
+            this.name = name;
+            this.sKU = sKU;
     }
 
     public String getName() {

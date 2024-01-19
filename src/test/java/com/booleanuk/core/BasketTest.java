@@ -6,12 +6,12 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 
 public class BasketTest {
-    @Test /* User story 1 and 10*/
+    @Test /* User story 1 */
     public void testAddBagelToEmptyBasket() {
-        Basket testBasket = new Basket();
-        SKUConverter converter = new SKUConverter();
+        Inventory testInventory = new Inventory();
+        Basket testBasket = new Basket(testInventory);
 
-        String sKU = converter.getSKU("Plain");
+        String sKU = testInventory.getSKU("Plain");
 
         Bagel plain = new Bagel("Plain", sKU);
 
@@ -20,30 +20,30 @@ public class BasketTest {
 
     @Test /* User story 3 and 10*/
     public void testAddBagelToFullBasket() {
-        Basket testBasket = new Basket();
-        SKUConverter converter = new SKUConverter();
+        Inventory testInventory = new Inventory();
+        Basket testBasket = new Basket(testInventory);
 
-        testBasket.addItem(new Bagel("Plain", converter.getSKU("Plain")));
-        testBasket.addItem(new Bagel("Onion", converter.getSKU("Onion")));
-        testBasket.addItem(new Bagel("Everything", converter.getSKU("Everything")));
-        testBasket.addItem(new Bagel("Sesame", converter.getSKU("Sesame")));
-        testBasket.addItem(new Coffee("Black", converter.getSKU("Black")));
+        testBasket.addItem(new Bagel("Plain", testInventory.getSKU("Plain")));
+        testBasket.addItem(new Bagel("Onion", testInventory.getSKU("Onion")));
+        testBasket.addItem(new Bagel("Everything", testInventory.getSKU("Everything")));
+        testBasket.addItem(new Bagel("Sesame", testInventory.getSKU("Sesame")));
+        testBasket.addItem(new Coffee("Black", testInventory.getSKU("Black")));
 
-        Assertions.assertFalse(testBasket.addItem(new Bagel("Plain", converter.getSKU("Plain"))));
+        Assertions.assertFalse(testBasket.addItem(new Bagel("Plain", testInventory.getSKU("Plain"))));
     }
 
     @Test /* User story 2 */
     public void testRemoveBagelFromBasket() {
-        Basket testBasket = new Basket();
-        SKUConverter converter = new SKUConverter();
+        Inventory testInventory = new Inventory();
+        Basket testBasket = new Basket(testInventory);
 
         ArrayList<Item> expected = new ArrayList<>();
 
-        Bagel plain = new Bagel("Plain", converter.getSKU("Plain"));
-        Bagel onion = new Bagel("Onion", converter.getSKU("Onion"));
-        Bagel every = new Bagel("Everything", converter.getSKU("Everything"));
-        Bagel sesame = new Bagel("Sesame", converter.getSKU("Sesame"));
-        Coffee black = new Coffee("Black", converter.getSKU("Black"));
+        Bagel plain = new Bagel("Plain", testInventory.getSKU("Plain"));
+        Bagel onion = new Bagel("Onion", testInventory.getSKU("Onion"));
+        Bagel every = new Bagel("Everything", testInventory.getSKU("Everything"));
+        Bagel sesame = new Bagel("Sesame", testInventory.getSKU("Sesame"));
+        Coffee black = new Coffee("Black", testInventory.getSKU("Black"));
 
         testBasket.addItem(plain);
         testBasket.addItem(onion);
@@ -64,12 +64,12 @@ public class BasketTest {
 
     @Test /* User story 2 */
     public void testRemoveBagelFromEmptyBasket() {
-        Basket testBasket = new Basket();
-        SKUConverter converter = new SKUConverter();
+        Inventory testInventory = new Inventory();
+        Basket testBasket = new Basket(testInventory);
 
         ArrayList<Item> expected = new ArrayList<>();
 
-        Bagel plain = new Bagel("Plain", converter.getSKU("Plain"));
+        Bagel plain = new Bagel("Plain", testInventory.getSKU("Plain"));
 
         String expectedString = "Basket is empty, can't remove items.";
 
@@ -79,16 +79,16 @@ public class BasketTest {
 
     @Test /* User story 5 */
     public void testRemoveBagelThatIsNotInBasket() {
-        Basket testBasket = new Basket();
-        SKUConverter converter = new SKUConverter();
+        Inventory testInventory = new Inventory();
+        Basket testBasket = new Basket(testInventory);
 
         ArrayList<Item> expected = new ArrayList<>();
 
-        Bagel plain = new Bagel("Plain", converter.getSKU("Plain"));
-        Bagel onion = new Bagel("Onion", converter.getSKU("Onion"));
-        Coffee white = new Coffee("White", converter.getSKU("White"));
-        Bagel sesame = new Bagel("Sesame", converter.getSKU("Sesame"));
-        Coffee black = new Coffee("Black", converter.getSKU("Black"));
+        Bagel plain = new Bagel("Plain", testInventory.getSKU("Plain"));
+        Bagel onion = new Bagel("Onion", testInventory.getSKU("Onion"));
+        Coffee white = new Coffee("White", testInventory.getSKU("White"));
+        Bagel sesame = new Bagel("Sesame", testInventory.getSKU("Sesame"));
+        Coffee black = new Coffee("Black", testInventory.getSKU("Black"));
 
         testBasket.addItem(plain);
         testBasket.addItem(onion);
@@ -102,7 +102,7 @@ public class BasketTest {
         expected.add(sesame);
         expected.add(black);
 
-        Bagel everything = new Bagel("Everything", converter.getSKU("Everything"));
+        Bagel everything = new Bagel("Everything", testInventory.getSKU("Everything"));
 
         String expectedString = "Can't remove " + everything.getName() + ", item not in basket.";
 
@@ -112,14 +112,14 @@ public class BasketTest {
 
     @Test /* User story 4 */
     public void testChangeToBiggerCapacityAndAddItemsAfter() {
-        Basket testBasket = new Basket();
-        SKUConverter converter = new SKUConverter();
+        Inventory testInventory = new Inventory();
+        Basket testBasket = new Basket(testInventory);
 
-        Bagel plain = new Bagel("Plain", converter.getSKU("Plain"));
-        Bagel onion = new Bagel("Onion", converter.getSKU("Onion"));
-        Coffee white = new Coffee("White", converter.getSKU("White"));
-        Bagel sesame = new Bagel("Sesame", converter.getSKU("Sesame"));
-        Coffee black = new Coffee("Black", converter.getSKU("Black"));
+        Bagel plain = new Bagel("Plain", testInventory.getSKU("Plain"));
+        Bagel onion = new Bagel("Onion", testInventory.getSKU("Onion"));
+        Coffee white = new Coffee("White", testInventory.getSKU("White"));
+        Bagel sesame = new Bagel("Sesame", testInventory.getSKU("Sesame"));
+        Coffee black = new Coffee("Black", testInventory.getSKU("Black"));
         testBasket.addItem(plain);
         testBasket.addItem(onion);
         testBasket.addItem(white);
@@ -129,10 +129,10 @@ public class BasketTest {
         Assertions.assertTrue(testBasket.changeBasketCapacity(10));
         Assertions.assertEquals(10, testBasket.getBasketCapacity());
 
-        Bagel plain2 = new Bagel("Plain", converter.getSKU("Plain"));
-        Bagel everything = new Bagel("Everything", converter.getSKU("Everything"));
-        Coffee cappu = new Coffee("Cappuccino", converter.getSKU("Cappuccino"));
-        Coffee latte = new Coffee("Latte", converter.getSKU("Latte"));
+        Bagel plain2 = new Bagel("Plain", testInventory.getSKU("Plain"));
+        Bagel everything = new Bagel("Everything", testInventory.getSKU("Everything"));
+        Coffee cappu = new Coffee("Cappuccino", testInventory.getSKU("Cappuccino"));
+        Coffee latte = new Coffee("Latte", testInventory.getSKU("Latte"));
         testBasket.addItem(plain2);
         testBasket.addItem(everything);
         testBasket.addItem(cappu);
@@ -154,14 +154,14 @@ public class BasketTest {
 
     @Test /* User story 4 */
     public void testChangeToSmallerCapacity() {
-        Basket testBasket = new Basket();
-        SKUConverter converter = new SKUConverter();
+        Inventory testInventory = new Inventory();
+        Basket testBasket = new Basket(testInventory);
 
-        Bagel plain = new Bagel("Plain", converter.getSKU("Plain"));
-        Bagel onion = new Bagel("Onion", converter.getSKU("Onion"));
-        Coffee white = new Coffee("White", converter.getSKU("White"));
-        Bagel sesame = new Bagel("Sesame", converter.getSKU("Sesame"));
-        Coffee black = new Coffee("Black", converter.getSKU("Black"));
+        Bagel plain = new Bagel("Plain", testInventory.getSKU("Plain"));
+        Bagel onion = new Bagel("Onion", testInventory.getSKU("Onion"));
+        Coffee white = new Coffee("White", testInventory.getSKU("White"));
+        Bagel sesame = new Bagel("Sesame", testInventory.getSKU("Sesame"));
+        Coffee black = new Coffee("Black", testInventory.getSKU("Black"));
         testBasket.addItem(plain);
         testBasket.addItem(onion);
         testBasket.addItem(white);
@@ -174,14 +174,14 @@ public class BasketTest {
 
     @Test /* User story 6 */
     public void testShowCostOfAllItemsInBasket() {
-        Basket testBasket = new Basket();
-        SKUConverter converter = new SKUConverter();
+        Inventory testInventory = new Inventory();
+        Basket testBasket = new Basket(testInventory);
 
-        Bagel plain = new Bagel("Plain", converter.getSKU("Plain"));
-        Bagel onion = new Bagel("Onion", converter.getSKU("Onion"));
-        Coffee white = new Coffee("White", converter.getSKU("White"));
-        Bagel sesame = new Bagel("Sesame", converter.getSKU("Sesame"));
-        Coffee black = new Coffee("Black", converter.getSKU("Black"));
+        Bagel plain = new Bagel("Plain", testInventory.getSKU("Plain"));
+        Bagel onion = new Bagel("Onion", testInventory.getSKU("Onion"));
+        Coffee white = new Coffee("White", testInventory.getSKU("White"));
+        Bagel sesame = new Bagel("Sesame", testInventory.getSKU("Sesame"));
+        Coffee black = new Coffee("Black", testInventory.getSKU("Black"));
         testBasket.addItem(plain);
         testBasket.addItem(onion);
         testBasket.addItem(white);
@@ -195,7 +195,8 @@ public class BasketTest {
 
     @Test /* User story 7 and 9 */
     public void testShowCostOfAllItemsInInventory() {
-        Basket testBasket = new Basket();
+        Inventory testInventory = new Inventory();
+        Basket testBasket = new Basket(testInventory);
 
         String expectedBagelOutput = "Bagels:\n";
 
@@ -227,11 +228,11 @@ public class BasketTest {
 
     @Test /* User story 8 and 10*/
     public void testAddFillingToOneBagel() {
-        Basket testBasket = new Basket();
-        SKUConverter converter = new SKUConverter();
+        Inventory testInventory = new Inventory();
+        Basket testBasket = new Basket(testInventory);
 
-        Bagel plain = new Bagel("Plain", converter.getSKU("Plain"));
-        Filling bacon = new Filling("Bacon", converter.getSKU("Bacon"));
+        Bagel plain = new Bagel("Plain", testInventory.getSKU("Plain"));
+        Filling bacon = new Filling("Bacon", testInventory.getSKU("Bacon"));
 
         Assertions.assertFalse(testBasket.addBagelFilling(plain, bacon));
 
@@ -251,14 +252,14 @@ public class BasketTest {
 
     @Test
     public void testAddMultipleFillings() {
-        Basket testBasket = new Basket();
-        SKUConverter converter = new SKUConverter();
+        Inventory testInventory = new Inventory();
+        Basket testBasket = new Basket(testInventory);
 
-        Bagel plain = new Bagel("Plain", converter.getSKU("Plain"));
+        Bagel plain = new Bagel("Plain", testInventory.getSKU("Plain"));
         testBasket.addItem(plain);
-        Filling bacon = new Filling("Bacon", converter.getSKU("Bacon"));
+        Filling bacon = new Filling("Bacon", testInventory.getSKU("Bacon"));
         testBasket.addBagelFilling(plain, bacon);
-        Filling cheese = new Filling("Cheese", converter.getSKU("Cheese"));
+        Filling cheese = new Filling("Cheese", testInventory.getSKU("Cheese"));
 
         Assertions.assertTrue(testBasket.addBagelFilling(plain, cheese));
 
@@ -267,5 +268,16 @@ public class BasketTest {
         expectedFillingsInPlainBagel.add(cheese.getName());
 
         Assertions.assertEquals(expectedFillingsInPlainBagel, plain.getFillings());
+    }
+
+    @Test
+    public void testIfValidCustomerOrder() {
+        Inventory testInventory = new Inventory();
+
+        String customerOrder = "Chocolate";
+        Assertions.assertFalse(testInventory.canItemBeOrdered(customerOrder));
+
+        customerOrder = "Plain";
+        Assertions.assertTrue(testInventory.canItemBeOrdered(customerOrder));
     }
 }

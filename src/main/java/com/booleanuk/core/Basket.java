@@ -5,13 +5,13 @@ import java.util.ArrayList;
 public class Basket {
 
     private ArrayList<Item> basket;
-    private final Inventory inventory;
+    private Inventory inventory;
     private int basketCapacity;
 
 
-    public Basket() {
+    public Basket(Inventory inventory) {
         this.basket = new ArrayList<>();
-        this.inventory = new Inventory();
+        this.inventory = inventory;
         this.basketCapacity = 5;
     }
 
@@ -99,10 +99,10 @@ public class Basket {
     }
 
     public static void main(String[] args) {
-        Basket test = new Basket();
-        SKUConverter converter = new SKUConverter();
+        Inventory inventory = new Inventory();
+        Basket test = new Basket(inventory);
 
-        String sKU = converter.getSKU("Plain");
+        String sKU = inventory.getSKU("Plain");
         System.out.println(sKU);
         Bagel plain = new Bagel("Plain", sKU);
 

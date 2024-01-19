@@ -97,14 +97,10 @@ I want customers to only be able to order things that we stock in our inventory.
 | isInInventory(String sKU) | LinkedHashMap<String, double> bagelPrices   |
 | getPrice(String name)     | LinkedHashMap<String, double> coffeePrices  |
 | getBagelPrice()           | LinkedHashMap<String, double> fillingPrices |
-| getFillingPrices()        | ArrayList<String> inventoryStock            |   
+| getFillingPrices()        | HashMap<String, String> inventoryStock      |   
 | getCoffeePrices()         |                                             |
+| getSKU(String name)       |                                             |
 
-### SKUConverter Class
-
-| Methods             | Member Variables                  |
-|---------------------|-----------------------------------|
-| getSKU(String name) | HashMap<String, String> nameToSKU |
 
 ### Basket Class
 
@@ -145,7 +141,7 @@ I want customers to only be able to order things that we stock in our inventory.
 | 9                                                                 |                                                                             |
 | Customer wants to know the price for each filling.                | Returns the price for each filling.                                         |
 | 10                                                                |                                                                             |
-| Customer tries to order an item that is not in inventory.         | Returns "This item does not exist at our store!".                           |
+| Customer tries to order an item that is not in inventory.         | Returns false.                                                              |
 
 
 

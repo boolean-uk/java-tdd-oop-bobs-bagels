@@ -6,10 +6,10 @@ import java.util.LinkedHashMap;
 
 public class Inventory {
 
-    private LinkedHashMap<String, Double> bagelPrices;
-    private LinkedHashMap<String, Double> fillingPrices;
-    private LinkedHashMap<String, Double> coffeePrices;
-    private ArrayList<String> inventoryStock;
+    private final LinkedHashMap<String, Double> bagelPrices;
+    private final LinkedHashMap<String, Double> fillingPrices;
+    private final LinkedHashMap<String, Double> coffeePrices;
+    private final HashMap<String, String> inventoryStock;
 
     public Inventory() {
         this.bagelPrices = new LinkedHashMap<>();
@@ -18,12 +18,25 @@ public class Inventory {
         createFillingPrices();
         this.coffeePrices = new LinkedHashMap<>();
         createCoffeePrices();
-        this.inventoryStock = new ArrayList<>();
+        this.inventoryStock = new HashMap<>();
         createInventoryStock();
     }
 
     public boolean isInInventory(String sKU) {
-        return inventoryStock.contains(sKU);
+        for (String item : this.inventoryStock.values()) {
+            if (sKU.equals(item)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean canItemBeOrdered(String name) {
+        return (this.inventoryStock.containsKey(name));
+    }
+
+    public String getSKU(String name) {
+        return this.inventoryStock.get(name);
     }
 
     public double getPrice(String name) {
@@ -72,19 +85,19 @@ public class Inventory {
     }
 
     private void createInventoryStock() {
-        this.inventoryStock.add("BGLO");
-        this.inventoryStock.add("BGLP");
-        this.inventoryStock.add("BGLE");
-        this.inventoryStock.add("BGLS");
-        this.inventoryStock.add("FILB");
-        this.inventoryStock.add("FILE");
-        this.inventoryStock.add("FILC");
-        this.inventoryStock.add("FILX");
-        this.inventoryStock.add("FILS");
-        this.inventoryStock.add("FILH");
-        this.inventoryStock.add("COFB");
-        this.inventoryStock.add("COFW");
-        this.inventoryStock.add("COFC");
-        this.inventoryStock.add("COFL");
+        this.inventoryStock.put("Onion", "BGLO");
+        this.inventoryStock.put("Plain", "BGLP");
+        this.inventoryStock.put("Everything", "BGLE");
+        this.inventoryStock.put("Sesame", "BGLS");
+        this.inventoryStock.put("Bacon", "FILB");
+        this.inventoryStock.put("Egg", "FILE");
+        this.inventoryStock.put("Cheese", "FILC");
+        this.inventoryStock.put("Cream Cheese", "FILX");
+        this.inventoryStock.put("Smoked Salmon", "FILS");
+        this.inventoryStock.put("Ham", "FILH");
+        this.inventoryStock.put("Black", "COFB");
+        this.inventoryStock.put("White", "COFW");
+        this.inventoryStock.put("Cappuccino", "COFC");
+        this.inventoryStock.put("Latte", "COFL");
     }
 }
