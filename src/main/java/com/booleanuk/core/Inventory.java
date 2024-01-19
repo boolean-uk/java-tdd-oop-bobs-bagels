@@ -75,13 +75,4 @@ public class Inventory {
         }
         return null;
     }
-    public double getBagelPrice(String type) {
-        return bagelInventory.get(type).getPrice();
-    }
-    public double getFillingPrice(String type) {
-        return fillingInventory.get(type).getPrice();
-    }
-    public double getCoffeePrice(String type) {
-        return coffeeInventory.get(type).getPrice();
-    }
 }

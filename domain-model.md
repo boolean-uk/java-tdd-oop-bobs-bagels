@@ -53,30 +53,24 @@ So we don't get any weird requests,
 I want customers to only be able to order things that we stock in our inventory.
 ```
 
-| Class                | Method                             | Member                                            | Scenario                     | Return                |
-|----------------------|------------------------------------|---------------------------------------------------|------------------------------|-----------------------|
-| Cashier              | menu()                             | userInput                                         |                              | requests              |
-|                      | doChoice(choice)                   | userInput                                         |                              | request               |
-| Receipt              | calculateTotalCost(itemsMap)       | itemsMap<String item, int quantity>               | Get cost                     | Double                |
-|                      | getProducts(itemsMap)              | itemsMap<String item, int quantity>               | show products                | String[] All products |
-|                      | getReceipt(itemsMap, productPrice) | itemsMap<String item, int quantity>, productPrice | Show receipt                 | String                |
-| Basket               | addItem(item, quantity)            | String item, Integer quantity                     | full basket                  | false                 |
-|                      |                                    |                                                   | add item                     | true                  |
-|                      |                                    |                                                   | Item not found               | false                 |
-|                      | removeItem(item, quantity)         | String item, Integer quantity                     | remove item                  | true                  |
-|                      |                                    |                                                   | Item not found               | false                 |
-|                      | basketCapacity()                   | Integer capacity                                  | Show capacity                | Int                   |    
-|                      | basketSize()                       |                                                   | Show current size            | Int                   |
-|                      | changeCapacity(newCapacity)        | Integer capacity                                  | set capacity                 | String                |
-| Inventory            | getProductType()                   |                                                   | Get all types                | String[]              |
-|                      | getProductsOfType(type)            | String type                                       | Get all products of one type | String[]              |
-|                      |                                    |                                                   | Invalid type                 | String                |
-|                      | getAllProducts()                   |                                                   | Show all products            | String[]              |
-| Product              | getType()                          |                                                   | invalid type                 | false                 |
-|                      |                                    |                                                   | Valid type                   | true                  |
-|                      | getCost()                          |                                                   | invalid type                 | false                 |
-|                      |                                    |                                                   | Valid type                   | Int                   | 
-|                      | getSKU()                           |                                                   | invalid type                 | false                 |
-|                      |                                    |                                                   | Valid type                   | true                  |                                    |                                                   |                              |                       |
-| Coffee/Bagel/Filling | getCoffee/Bagel/Filling(type)      | Coffee/Bagel/Filling-Type                         | invalid type                 | false                 |
-|                      |                                    |                                                   | valid type                   | true                  |
+| Class                | Method                                   | Member                                                | Scenario                     | Return         |
+|----------------------|------------------------------------------|-------------------------------------------------------|------------------------------|----------------|
+| Cashier              | menu()                                   | userInput                                             |                              | response       |
+|                      | doChoice(choice)                         | userInput                                             |                              | response       |
+|                      | main()                                   |                                                       |                              |                |
+| Basket               | addItem(Inventory, item, quantity)       | Class Inventory, String item, Integer quantity        | full basket                  | false          |
+|                      |                                          |                                                       | add item                     | true           |
+|                      |                                          |                                                       | Item not found               | false          |
+|                      | removeItem(Inventory, sku, quantity)     | Class Inventory, String item, Integer quantity        | remove item                  | true           |
+|                      |                                          |                                                       | Item not found               | false          |
+|                      | changeCapacity(capacity)                 | Integer capacity                                      | Changed capacity             | true           |
+|                      |                                          |                                                       | Unable to change capacity    | false          |
+|                      | getTotalCost()                           | ArrayList<Item>                                       | Get total cost               | Return cost    |
+| Inventory            | printInventory(inventory, inventoryName) | HashMap<String, Item> inventory, String inventoryName | Show all added products      | String[]       |
+|                      | getProductsBySku(sku)                    | String sku                                            | Get all products of one type | String[]       |
+|                      | getAllProducts()                         |                                                       | Show all products            | String[]       |
+| Item                 | getType()                                |                                                       | get type                     | String type    |
+|                      | getVariant()                             |                                                       | get variant                  | String variant |
+|                      | getSku()                                 |                                                       | get sku                      | String sku     |
+|                      | getPrice()                               |                                                       | get price                    | double price   |
+|                      | getQuantity()                            |                                                       | get quantity                 | int quantity   |  
