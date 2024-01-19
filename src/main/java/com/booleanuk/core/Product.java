@@ -17,9 +17,6 @@ public class Product {
         this.price = price;
     }
 
-    public String getType() {
-        return type;
-    }
     public String getSku() {
         return sku;
     }
@@ -29,34 +26,24 @@ public class Product {
     public double getPrice() {
         return price;
     }
+
+    public String getType(){
+        return type;
+    }
 }
 
 class Bagel extends Product{
-    private List<String> fillings;
-
     public Bagel(String sku, String variant, double price) {
         super("Bagel", sku, variant, price);
-        this.fillings = new ArrayList<>();
-    }
-    public List<String> getFillings() {
-        return fillings;
-    }
-    public void addFillings(String filling) {
-        fillings.add(filling);
     }
 }
 
 class Coffee extends Product{
-    private String type;
 
     public Coffee(String sku, String variant, double price) {
         super("Coffee", sku, variant, price);
-        this.type = type;
     }
 
-    public String getType() {
-        return type;
-    }
 }
 
 class Filling extends Product{

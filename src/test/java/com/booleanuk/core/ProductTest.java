@@ -28,6 +28,4 @@ public class ProductTest {
         Assertions.assertEquals(0.12, item.getPrice());
     }
 
-
-
 }

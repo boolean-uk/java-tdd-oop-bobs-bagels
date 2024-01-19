@@ -11,13 +11,6 @@ public class Inventory {
     public Inventory() {
         this.menu = new ArrayList<>();
         this.inventory = new HashMap<>();
-
-        Bagel onionBagel = new Bagel("BGLO", "Onion", 0.49 );
-        Bagel plainBagel = new Bagel("BGLP", "Plain", 0.49 );
-        Bagel everythingBagel = new Bagel("BGLE", "Everything", 0.49 );
-        Bagel sesameBagel = new Bagel("BGLS", "Sesame", 0.49 );
-        Coffee blackCoffee = new Coffee("COFB", "Black",0.99);
-        Filling baconFilling = new Filling("FILB", "Bacon",0.12);
     }
 
     public Integer getInventory(String sku) {
@@ -29,19 +22,19 @@ public class Inventory {
         inventory.put(item.getSku(), stock);
     }
 
+    public String getMenu(){
+       StringBuilder entireMenu = new StringBuilder("Menu: \n");
+       for (Product item : menu){
+           entireMenu.append(item.getSku()).append(": ").append(item.getType()).append( " - ")
+                   .append(item.getVariant()).append(" - ").append(item.getPrice()).append("$ \n");
+       }
+       return entireMenu.toString();
+    }
+
     public boolean isInStock(String sku){
         return inventory.containsKey(sku) && inventory.get(sku) > 0;
     }
-    /*
-    public Product getProduct(String sku){
-        for (Product item: menu){
-            if (item.getSku().equals(sku)){
-                return item;
-            }
-        }return null;
-    }
 
-     */
 
     public void decreaseStock(String sku){
         if (inventory.containsKey(sku)){
