@@ -16,7 +16,7 @@ public class Main {
         System.out.println("Store object: " + store);
 
         // User enters the store
-        Basket basket = new Basket();
+        Basket basket = new Basket(50);
         System.out.println("Basket object: " + basket);
 
         // User would like to see a list of all bagels and fillings
@@ -28,14 +28,14 @@ public class Main {
         System.out.println("Cost of latte: " + store.getItemBySKU("COFL").getPrice());
 
         // User picks some bagels and some coffee
-        // Seven plain bagels (one with ham), one sesame bagel with egg and bacon, one latte
-        basket.addItem(store.getItemBySKU("BGLP"));
-        basket.addItem(store.getItemBySKU("BGLP"));
-        basket.addItem(store.getItemBySKU("BGLP"));
-        basket.addItem(store.getItemBySKU("BGLP"));
-        Bagel bagelPlain1 = (Bagel) basket.addItem(store.getItemBySKU("BGLP"));
-        Bagel bagelPlain2 = (Bagel) basket.addItem(store.getItemBySKU("BGLP"));
-        Bagel bagelPlain3 = (Bagel) basket.addItem(store.getItemBySKU("BGLP"));
+        // Thirteen plain bagels (one with ham), one sesame bagel with egg and bacon, one latte
+        Bagel plain = (Bagel) store.getItemBySKU("BGLP");
+        for (int i = 0; i < 12; i++) {
+            basket.addItem(plain);
+        }
+        Bagel bagelPlain1 = (Bagel) basket.addItem(plain);
+        Bagel bagelPlain2 = (Bagel) basket.addItem(plain);
+        Bagel bagelPlain3 = (Bagel) basket.addItem(plain);
         Bagel bagelSesame = (Bagel) basket.addItem(store.getItemBySKU("BGLS"));
         basket.addFillingToBagel(bagelPlain1, (Filling) store.getItemBySKU("FILH"));
         basket.addFillingToBagel(bagelPlain3, (Filling) store.getItemBySKU("FILH"));

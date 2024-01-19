@@ -38,12 +38,12 @@ public class ReceiptPrinterTest {
         System.out.println(printedReceipt);
 
         // Check for key elements, specific items, and correct cost in the receipt
-        Assertions.assertTrue(printedReceipt.contains("~~~ Bob's Bagels ~~~"));
+        Assertions.assertTrue(printedReceipt.contains("Bob's Bagels"));
         Assertions.assertTrue(printedReceipt.contains("Total"));
         Assertions.assertTrue(printedReceipt.contains("Thank you"));
 
         Assertions.assertTrue(printedReceipt.contains("Latte"));
-        Assertions.assertTrue(printedReceipt.contains("- Egg"));
+        Assertions.assertTrue(printedReceipt.contains("⋅ Egg"));
         Assertions.assertTrue(printedReceipt.contains("Sesame"));
 
         Assertions.assertTrue(printedReceipt.contains("£3.19"));

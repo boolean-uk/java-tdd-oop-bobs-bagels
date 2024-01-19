@@ -7,15 +7,17 @@ import com.booleanuk.core.models.item.Bagel;
 import com.booleanuk.core.models.item.Filling;
 import lombok.Data;
 
+import java.io.FileNotFoundException;
+import java.net.URISyntaxException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 
 @Data
 public class ReceiptPrinter {
-    private static final String HEADER = "~~~ Bob's Bagels ~~~";
+    private static final String HEADER = "\n\t Bob's Bagels";
     private static final String SEPARATOR = "---------------------";
-    private static final String FOOTER = "\t Thank you !";
+    private static final String FOOTER = "\t Thank you:)";
 
     private final Store store;
     private final Basket basket;
@@ -29,13 +31,13 @@ public class ReceiptPrinter {
         this.dateTime = LocalDateTime.now();
     }
 
-    public String print() {
+    public String print() throws FileNotFoundException, URISyntaxException {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         String formattedDateTime = dateTime.format(formatter);
 
         sb.append(HEADER).append("\n\n")
                 .append(" ").append(formattedDateTime).append("\n\n")
-                .append(SEPARATOR).append("\n\n");
+                .append(SEPARATOR).append("\n");
 
         for (HashMap.Entry<Item, Integer> entry : basket.getItemCount().entrySet()) {
             Item item = entry.getKey();
@@ -55,7 +57,7 @@ public class ReceiptPrinter {
                         .append(String.format("%.2f", (price+fillingTotal)*quantity)).append("\n");
 
                 for (Filling filling : ((Bagel) item).getFilling()) {
-                    sb.append("- ").append(filling.getVariant()).append("\n");
+                    sb.append("⋅ ").append(filling.getVariant()).append("\n");
                 }
             } else {
                 sb.append(type).append("\t\t")
@@ -64,11 +66,21 @@ public class ReceiptPrinter {
             }
         }
 
-        sb.append("\n").append(SEPARATOR).append("\n\n")
-                .append("Total").append("\t\t\t£")
-                .append(String.format("%.2f", basket.getTotalCost())).append("\n\n")
-                .append(FOOTER);
+        double discount = DiscountManager.getBasketDiscount(basket);
 
+        if (discount > 0) {
+            sb.append("\nDiscount\t   -£").append(String.format("%.2f", discount)).append("\n");
+        }
+
+        sb.append(SEPARATOR).append("\n")
+                .append("Total").append("\t\t\t£")
+                .append(String.format("%.2f", basket.getTotalCost())).append("\n\n");
+
+        if (discount > 0) {
+            sb.append("   You saved £").append(String.format("%.2f", discount)).append("\n\ton this shop!\n\n");
+        }
+
+        sb.append(FOOTER);
         return sb.toString();
     }
 }
