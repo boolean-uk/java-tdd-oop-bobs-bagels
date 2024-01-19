@@ -12,4 +12,13 @@ public class Receipt {
 
 
     }
+
+    public String formatDate() {
+    }
+
+    public String formatTotal() {
+    }
+
+    public String formatSavings() {
+    }
 }
