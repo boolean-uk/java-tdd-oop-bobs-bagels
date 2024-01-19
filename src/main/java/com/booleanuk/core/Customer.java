@@ -7,7 +7,7 @@ import java.util.*;
 public class Customer {
 
     private Basket basket;
-    private Map<String, Double> discounts;
+    private Map<String, ArrayList<Double>> discounts;
 
     public Customer() {
         this.discounts = new HashMap<>();
@@ -31,12 +31,13 @@ public class Customer {
                 while(quantity >= 12) {
                     quantity -= 12;
                     discount12++;
-                    this.discounts.put(entry.getKey().getSkuCode(), )
+                    this.discounts.put(entry.getKey().getSkuCode(), entry.getKey().getPrice()*12 - 3.99);
                 }
 
                 if(quantity >= 6) {
                     quantity-= 6;
                     discount6++;
+                    this.discounts.put(entry.getKey().getSkuCode(), entry.getKey().getPrice()*12 - 3.99);
                 }
 
 

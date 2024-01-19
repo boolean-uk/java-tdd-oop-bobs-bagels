@@ -114,7 +114,7 @@ public class CustomerTest {
                 new Bagel("Plain"), 4,
                 new Coffee("Black"), 4);
 
-        Map<String, Double> discounts = customer.getDiscounts();
+        Map<String, ArrayList<Double>> discounts = customer.getDiscounts();
 
         double finalDiscount = 0.00;
         for(double saving : discounts.values()) {
