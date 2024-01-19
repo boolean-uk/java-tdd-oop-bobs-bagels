@@ -11,7 +11,7 @@ import java.util.HashMap;
 
 public class ReceiptTest {
     @Test
-    void generateReceipt() {
+    public void generateReceipt() {
         HashMap<Item, Integer> testInventory = new HashMap<>();
         Item bglo = new Item("BGLO","Bagel", "Onion", 0.49);
         Item bglp = new Item("BGLP","Bagel", "Plain", 0.39);
@@ -20,6 +20,7 @@ public class ReceiptTest {
         BobsBagelsShop shop = new BobsBagelsShop(testInventory);
         Basket basket = new Basket(shop, 3);
         Receipt receipt = new Receipt(basket);
+
         Assertions.assertEquals("Basket is empty.", receipt.generateReceipt());
         basket.add(bglo);
         Assertions.assertEquals("Header\nBGLO\nFooter", receipt.generateReceipt());
@@ -29,14 +30,28 @@ public class ReceiptTest {
     }
 
     @Test
-    void createHeader() {
+    public void createHeader() {
+        HashMap<Item, Integer> testInventory = new HashMap<>();
+        Item bglo = new Item("BGLO","Bagel", "Onion", 0.49);
+        Item bglp = new Item("BGLP","Bagel", "Plain", 0.39);
+        testInventory.put(bglo, 10);
+        testInventory.put(bglp, 10);
+        BobsBagelsShop shop = new BobsBagelsShop(testInventory);
+        Basket basket = new Basket(shop, 3);
+        Receipt receipt = new Receipt(basket);
+        Assertions.assertEquals(
+                "    ~~~ Bob's Bagels ~~~\n" +
+                "\n" +
+                "    2021-03-16 21:38:44\n" +
+                "\n" +
+                "----------------------------\n", receipt.createHeader());
     }
 
     @Test
-    void createFooter() {
+    public void createFooter() {
     }
 
     @Test
-    void printReceipt() {
+    public void printReceipt() {
     }
 }
