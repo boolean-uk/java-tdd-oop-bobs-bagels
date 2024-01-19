@@ -40,7 +40,7 @@ public class Receipt {
     }
 
     public String createFooter() {
-        return "Footer";
+        return "\n        Thank you\n      for your order!";
     }
 
     public boolean printReceipt() {
