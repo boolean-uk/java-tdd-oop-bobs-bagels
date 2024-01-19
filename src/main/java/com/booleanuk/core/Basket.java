@@ -7,9 +7,22 @@ import java.util.Objects;
 public class Basket {
 
     private List<Product> basket;
-    private List<Product> inventory;
+    private final List<Product> inventory;
+    private final List<Product> fillings;
+
     private double total;
     private int capacity;
+
+
+    public void getFillings(){
+        Inventory inv = new Inventory();
+        for (int i = 0; i < inv.getProducts().size(); i++) {
+            if(Objects.equals(inv.getProducts().get(i).getItemName(), "Filling")){
+                //System.out.println("Added item!");
+                fillings.add(inv.getProducts().get(i));
+            }
+        }
+    }
 
 
     public Basket(Inventory inv){
@@ -17,30 +30,49 @@ public class Basket {
         this.basket = setBasket();
         this.total = setTotal();
         this.capacity = setCapacity();
+        this.fillings = new ArrayList<>();
+        getFillings();
     }
+
 
     public boolean add(Product product){
+        if(checkIfBasketIsFull()){
+            return false;
+        }
         for (Product value : inventory) {
+            // product is a filling
+            if(product instanceof Filling){
+                for (Product item : this.basket) {
+                    //find bagel with empty filling
+                    if (item instanceof Bagel) {
+                        if (((Bagel) item).getFilling() == null) {
+                            // add filling :D
+                            ((Bagel) item).addFilling((Bagel) item, (Filling) product);
+                            System.out.println("ADDED FILLING TO BAGEL");
+                            return true;
+                        }
+                    }
+                }
+            }
+
             if (Objects.equals(value.getSku(), product.getSku())) {
-                basket.add(product);
-                System.out.println("Added " + product.getItemName() + " with the price of: $" + product.getPrice());
-                this.total += product.getPrice();
-                return true;
+                if(!checkIfBasketIsFull()){
+                    basket.add(product);
+                    System.out.println("Added " + product.getItemName() + " with the price of: $" + product.getPrice());
+                    this.total += product.getPrice();
+                    return true;
+                }
             }
         }
-        System.out.println("Could not add bagel");
+        System.out.println("Could not add product");
         return false;
-    }
-
-    public double totalCost(){
-        System.out.println("Total cost of basket: $" + this.total);
-        return this.total;
     }
 
     public boolean remove(String productSKU){
         for (int i = 0; i < basket.size(); i++) {
             if(Objects.equals(basket.get(i).getSku(), productSKU)){
                 System.out.println("Removing " + basket.get(i).getItemName() + " from list");
+                this.total -= basket.get(i).getPrice();
                 basket.remove(basket.get(i));
                 return true;
             }
@@ -56,6 +88,10 @@ public class Basket {
         }
         System.out.println("Basket is not full");
         return false;
+    }
+    public double totalCost(){
+        System.out.println("Total cost of basket: $" + this.getTotal());
+        return this.getTotal();
     }
 
     public void changeCapacity(int capacity){
@@ -81,4 +117,6 @@ public class Basket {
     public void clearList(){
         this.basket.clear();
     }
+
+
 }

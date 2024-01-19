@@ -5,11 +5,11 @@ So I can order a bagel before work,
 I'd like to add a specific type of bagel to my basket.
 ```
 
-| Classes | Methods           | Scenario                  | Output       |
-|---------|-------------------|---------------------------|--------------|
-| Basket  | add(String bagel) | User adds bagel to basket | return true  |
-|         |                   | User adds empty name      | return false |
-|         |                   | User adds invalid bagel   | return false |
+| Classes | Methods              | Scenario                  | Output       |
+|---------|----------------------|---------------------------|--------------|
+| Basket  | add(Product product) | User adds bagel to basket | return true  |
+|         |                      | User adds empty name      | return false |
+|         |                      | User adds invalid bagel   | return false |
 
 
 ```
@@ -18,12 +18,10 @@ As a member of the public,
 So I can change my order,
 I'd like to remove a bagel from my basket.
 ```
-| Classes | member variables        | Methods              | Scenario                                   | Output       |
-|---------|-------------------------|----------------------|--------------------------------------------|--------------|
-| Basket  | ArrayList<Bagel> basket | remove(String bagel) | if bagel in basket                         | return true  |
-|         |                         |                      | if bagel is null<br/> if bagel not in list | return false |
-| Bagel   | String name             | getName()            | get name of bagel                          | return name  |
-|         | double price            | getPrice()           | get price of bagel                         | return price |
+| Classes | member variables                                 | Methods                   | Scenario                                   | Output       |
+|---------|--------------------------------------------------|---------------------------|--------------------------------------------|--------------|
+| Basket  | ArrayList<Product> basket<br/> String productSKU | remove(String productSKU) | if bagels SKU in basket                    | return true  |
+|         |                                                  |                           | if bagels SKU is null or not in inventory  | return false |
 
 
 
@@ -34,11 +32,11 @@ So that I can not overfill my small bagel basket
 I'd like to know when my basket is full when I try adding an item beyond my basket capacity.
 ```
 
-| Classes | member variables        | Methods          | Scenario             | Output       |
-|---------|-------------------------|------------------|----------------------|--------------|
-| Basket  | Arraylist<Bagel> basket | checkIfFull()    | if list not full     | return true  |
-|         |                         |                  | if list is full      | return false |
-|         |                         |                  | if bagel is null     | return false |
+| Classes | member variables                           | Methods          | Scenario                    | Output       |
+|---------|--------------------------------------------|------------------|-----------------------------|--------------|
+| Basket  | Arraylist<Product> basket<br/>Int capacity | checkIfFull()    | if list less than capacity  | return true  |
+|         |                                            |                  | if list more than capacity  | return false |
+|         |                                            |                  | if bagel is null            | return false |
 
 ```
 4.
@@ -59,10 +57,10 @@ So that I can maintain my sanity
 I'd like to know if I try to remove an item that doesn't exist in my basket.
 ```
 
-| Classes | Methods                              | Scenario             | Output                              |
-|---------|--------------------------------------|----------------------|-------------------------------------|
-| Basket  | tryRemoveBagelInBasket(String bagel) | if bagel not in list | return "Bagel not in list"          |
-|         |                                      | if bagel in list     | return "Bagel is removed from list" |
+| Classes | Methods                   | Scenario             | Output       |
+|---------|---------------------------|----------------------|--------------|
+| Basket  | remove(String productSKU) | if bagel not in list | return false |
+|         |                           | if bagel in list     | return true  |
 
 ```
 6.
@@ -82,11 +80,11 @@ So I know what the damage will be,
 I'd like to know the cost of a bagel before I add it to my basket.
 ```
 
-| Classes | Methods    | Scenario                 | Output             |
-|---------|------------|--------------------------|--------------------|
-| Bagel   | getPrice() | user gets price of bagel | return costOfBagel |
-|         |            |                          |                    |
-|         |            |                          |                    |
+| Classes | Methods    | Scenario                   | Output                    |
+|---------|------------|----------------------------|---------------------------|
+| Product | getPrice() | user gets price of product | return product.getPrice() |
+|         |            |                            |                           |
+|         |            |                            |                           |
 
 ```
 8.

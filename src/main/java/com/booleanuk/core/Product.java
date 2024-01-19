@@ -14,22 +14,18 @@ public class Product {
     }
 
     public String getItemName() {
-        System.out.println("Name: " + this.itemName);
         return this.itemName;
     }
 
     public double getPrice() {
-        System.out.println("Price:" + this.price);
         return this.price;
     }
 
     public String getSku() {
-        System.out.println("SKU:" + this.sku);
         return this.sku;
     }
 
     public String getVariant() {
-        System.out.println("Variant: " + this.variant);
         return this.variant;
     }
 

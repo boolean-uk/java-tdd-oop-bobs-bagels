@@ -38,11 +38,11 @@ class BasketTest {
         basket.add(new Product("Bagel", 0.49, "BGLO", "Onion"));
         Assertions.assertFalse(basket.checkIfBasketIsFull());
         for (int i = 1; i < 5; i++) {
-            basket.add(new Product("Bagel", 0.49, "BGLO" + i, "Onion" + i));
+            basket.add(new Product("Bagel", 0.49, "BGLO", "Onion"));
         }
         Assertions.assertTrue(basket.checkIfBasketIsFull());
         for (int i = 5; i < 9; i++) {
-            basket.add(new Product("Bagel", 0.49, "BGLO" + i, "Onion" + i));
+            basket.add(new Product("Bagel", 0.49, "BGLO", "Onion"));
         }
         Assertions.assertTrue(basket.checkIfBasketIsFull());
     }
@@ -53,15 +53,15 @@ class BasketTest {
         basket.changeCapacity(17);
         Assertions.assertFalse(basket.checkIfBasketIsFull());
         for (int i = 1; i < 5; i++) {
-            basket.add(new Product("Bagel", 0.49, "BGLO" + i, "Onion" + i));
+            basket.add(new Product("Bagel", 0.49, "BGLO", "Onion"));
         }
         Assertions.assertFalse(basket.checkIfBasketIsFull());
         for (int i = 5; i < 9; i++) {
-            basket.add(new Product("Bagel", 0.49, "BGLO" + i, "Onion" + i));
+            basket.add(new Product("Bagel", 0.49, "BGLO", "Onion"));
         }
         Assertions.assertFalse(basket.checkIfBasketIsFull());
         for (int i = 10; i < 18; i++) {
-            basket.add(new Product("Bagel", 0.49, "BGLO" + i, "Onion" + i));
+            basket.add(new Product("Bagel", 0.49, "BGLO", "Onion"));
         }
         Assertions.assertTrue(basket.checkIfBasketIsFull());
     }
