@@ -38,7 +38,7 @@ public class BasketTest {
     }
 
     @Test
-    public void showBasket(){
+    public void showBasketTest(){
         basket = new Basket(5);
         Inventory inventory = new Inventory("src/main/java/com/booleanuk/core/inventory.csv");
         basket.addItems(inventory, "BGLO", 1);
