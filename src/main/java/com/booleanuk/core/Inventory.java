@@ -125,4 +125,19 @@ public class Inventory {
 
         return "No item found";
     }
+    public String listFillings(){
+        ArrayList<Filling> fillings = new ArrayList<>();
+        fillings.add(new Filling("FILB","Filling", "Bacon", 0.12));
+        fillings.add(new Filling("FILE","Filling","Egg", 0.12));
+        fillings.add(new Filling("FILC","Filling","Cheese", 0.12));
+        fillings.add(new Filling("FILX","Filling","Cream Cheese", 0.12));
+        fillings.add(new Filling("FILS","Filling","Smoked Salmon", 0.12));
+        fillings.add(new Filling("FILH","Filling","Ham", 0.12));
+        String s = "List of Fillings:\n";
+
+        for (Filling filling : fillings) {
+
+        }
+        return s;
+    }
 }

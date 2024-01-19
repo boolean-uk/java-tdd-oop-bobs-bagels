@@ -32,7 +32,7 @@ public class Basket {
         }
         Inventory i = Inventory.getInstance();
         Bagel bagel = (Bagel) i.getItems(bagelSKU, 1).get(0);
-        ArrayList<Filling> fillingsTemp = new ArrayList<>();
+        ArrayList<Item> fillingsTemp = new ArrayList<>();
 
         for (String s : fillings) {
             if (i.checkInventory(s, 1)) {
@@ -57,6 +57,9 @@ public class Basket {
             while(iterator.hasNext()){
                 Item currentItem = iterator.next();
                 if(currentItem.getSKU().equals(SKU)){
+                    if(currentItem.getSKU().startsWith("B")){
+                        ((Bagel) currentItem).removeAllFillings();
+                    }
                     iterator.remove();
                     Inventory.getInstance().addItems(currentItem);
                     return true;
@@ -72,7 +75,7 @@ public class Basket {
         double total = 0;
         for(Item i : this.items){
             if(i instanceof Bagel bagel){
-                for(Filling f : bagel.getFillings()){
+                for(Item f : bagel.getFillings()){
                     total+= f.getPrice();
                 }
             }
@@ -84,7 +87,7 @@ public class Basket {
         int capacity = items.size();
         for(Item i : items){
             if(i instanceof Bagel){
-                for(Filling ignored : ((Bagel) i).getFillings()){
+                for(Item ignored : ((Bagel) i).getFillings()){
                     capacity += 1;
                 }
             }

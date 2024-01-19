@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class BagelTest {
     /* Test use case 1 */
@@ -81,6 +82,57 @@ public class BagelTest {
         }
         Assertions.assertFalse(basket.addFillingWithBagel("BGLO", fillingsTest));
         Assertions.assertTrue(Inventory.getInstance().checkInventory("FILB", 20));
+    }
+
+    /* Test use case 9 */
+    @Test
+    public void testGettingCostOfAllFillings(){
+        Inventory i = Inventory.getInstance();
+        String expected = "List of Fillings:\n" +
+                "Filling{SKU='FILB', type='Filling', name='Bacon', price=0.12}\n" +
+                "Filling{SKU='FILE', type='Filling', name='Egg', price=0.12}\n" +
+                "Filling{SKU='FILC', type='Filling', name='Cheese', price=0.12}\n" +
+                "Filling{SKU='FILX', type='Filling', name='Cream Cheese', price=0.12}\n" +
+                "Filling{SKU='FILS', type='Filling', name='Smoked Salmon', price=0.12}\n" +
+                "Filling{SKU='FILH', type='Filling', name='Ham', price=0.12}";
+        Assertions.assertEquals(expected, i.listFillings());
+
+    }
+
+    /* Additional tests */
+    @Test
+    public void testCreatingAndPrintingBagel(){
+        Bagel bagel = new Bagel("BGLO", "Bagel", "Onion", 0.49);
+
+        Assertions.assertEquals("BGLO", bagel.getSKU());
+        Assertions.assertEquals("Bagel", bagel.getName());
+    }
+    @Test
+    public void testCreatingBagelWithFillings(){
+        Bagel bagel = new Bagel("BGLO", "Bagel", "Onion", 0.49);
+        Inventory i = Inventory.getInstance();
+
+        // Assuming FILX and FILS are different fillings with distinct SKUs
+        Filling filling1 = new Filling("FILX", "Filling", "Cream Cheese", 0.12);
+        Filling filling2 = new Filling("FILS", "Filling", "Smoked Salmon", 0.12);
+
+        ArrayList<Item> fillings = new ArrayList<>();
+        fillings.addAll(i.getItems("FILX", 2));
+        fillings.addAll(i.getItems("FILS", 2));
+        bagel.addFillings(fillings);
+
+        // Constructing the expected list with unique instances
+        ArrayList<Item> expected = new ArrayList<>();
+        expected.add(filling1);
+        expected.add(filling1); // Adding a duplicate for testing
+        expected.add(filling2);
+        expected.add(filling2); // Adding a duplicate for testing
+
+        Assertions.assertEquals(expected.get(0).toString(), fillings.get(0).toString());
+        Assertions.assertEquals(expected.get(1).toString(), fillings.get(1).toString());
+        Assertions.assertEquals(expected.get(2).toString(), fillings.get(2).toString());
+        Assertions.assertEquals(expected.get(3).toString(), fillings.get(3).toString());
+
     }
 
 }
