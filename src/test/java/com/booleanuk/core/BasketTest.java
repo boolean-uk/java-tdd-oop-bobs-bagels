@@ -44,6 +44,8 @@ public class BasketTest {
         Product product1 = new Product("Apple", 0.19);
         Product product2 = new Product("Orange", 0.29);
         ArrayList<Product> products = new ArrayList<>();
+        products.add(product1);
+        products.add(product2);
         basket.addProduct(products);
 
         Assertions.assertEquals(2, basket.getBasketItems().size());
@@ -68,7 +70,7 @@ public class BasketTest {
         basket.removeProduct(product1);
 
         Assertions.assertEquals(1, basket.getBasketItems().size());
-        Assertions.assertEquals(productsTest, basket.getBasketItems());
+        Assertions.assertIterableEquals(productsTest, basket.getBasketItems());
 
 
     }

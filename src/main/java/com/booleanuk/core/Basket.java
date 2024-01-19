@@ -32,7 +32,6 @@ public class Basket {
 
     public void addProduct(ArrayList<Product> products) {
         this.basketItems.addAll(products);
-
     }
 
     public void removeProduct(Product product) {

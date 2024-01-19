@@ -30,18 +30,20 @@ Note: the domain model is subject to change before the assignment is complete
 |         | Filling   |                                |                                            |      |      |                                            |                                             |
 |         |           |                                |                                            |      |      |                                            |                                             |
 |         | Inventory | ArrayList<Product> stock       |                                            |      |      |                                            |                                             |
+|         |           |                                | ArrayList<Product> getStock()              |      |      |                                            |                                             |
 |         |           |                                | boolean addStock()                         |      |      |                                            |                                             |
 |         |           |                                | boolean removeStock()                      |      |      |                                            |                                             |
 |         |           |                                | boolean inStock()                          |      |      |                                            |                                             |
 |         | Basket    | ArrayList<Product> basketItems |                                            |      |      |                                            |                                             |
 |         |           | int basketLimit                |                                            |      |      |                                            |                                             |
-|         |           |                                | void addProduct(Product product)           | x    |      |                                            |                                             |
+|         |           |                                | void addProduct(Product product)           |      |      |                                            |                                             |
 |         |           |                                | void removeProduct(Product product)        |      |      |                                            |                                             |
 |         |           |                                | HashMap<Product, Integer> getBasketItems() | x    |      |                                            |                                             |
-|         |           |                                | boolean isFull()                           |      |      |                                            |                                             |
-|         |           |                                | void setCapacity(int basketLimit)          |      |      |                                            |                                             |
-|         |           |                                | boolean inBasket()                         |      |      |                                            |                                             |
-|         |           |                                | double sumPrice()                          |      |      |                                            |                                             |
+|         |           |                                | boolean isBasketFull()                     | x    |      |                                            |                                             |
+|         |           |                                | void setCapacity(int basketLimit)          | x    |      |                                            |                                             |
+|         |           |                                | boolean inBasket()                         | x    |      |                                            |                                             |
+|         |           |                                |                                            |      |      |                                            |                                             |
+|         | Checkout  |                                | double sumPrice(ArrayList<Product>)        |      |      |                                            |                                             |
 
 ### User Stories
 ```
