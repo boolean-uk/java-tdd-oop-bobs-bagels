@@ -23,18 +23,13 @@ public class ReceiptTest {
 
         Assertions.assertEquals("Basket is empty.", receipt.generateReceipt());
         basket.add(bglo);
-        Assertions.assertEquals("    ~~~ Bob's Bagels ~~~\n\n    " +
-                        receipt.getDateAndTime().toString().replace("T", " ") +
-                        "\n\n----------------------------\n"+
-                "BGLO\n" +
-                "\n        Thank you\n      for your order!", receipt.generateReceipt());
+        Assertions.assertTrue(receipt.generateReceipt().contains("BGLO\n"));
+
         basket.add(bglo);
         basket.add(bglp);
-        Assertions.assertEquals("    ~~~ Bob's Bagels ~~~\n\n    " +
-                receipt.getDateAndTime().toString().replace("T", " ") +
-                "\n\n----------------------------\n"+
-                "BGLO\nBGLP\n" +
-                "\n        Thank you\n      for your order!", receipt.generateReceipt());
+        Assertions.assertTrue(receipt.generateReceipt().contains("BGLO\t2\t0.98\n"));
+        Assertions.assertTrue(receipt.generateReceipt().contains("BGLP\t1\t0.39\n"));
+        Assertions.assertTrue(receipt.generateReceipt().contains("Total                 £"+basket.totalCost()));
     }
 
     @Test
