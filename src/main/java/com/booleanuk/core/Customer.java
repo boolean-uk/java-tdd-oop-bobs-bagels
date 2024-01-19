@@ -31,7 +31,7 @@ public class Customer {
                 while(quantity >= 12) {
                     quantity -= 12;
                     discount12++;
-
+                    this.discounts.put(entry.getKey().getSkuCode(), )
                 }
 
                 if(quantity >= 6) {
@@ -121,5 +121,9 @@ public class Customer {
         Inventory inventory = new Inventory();
 
         return inventory.getInventoryMap().containsKey(skuCode);
+    }
+
+    public Map<String, Double> getDiscounts() {
+        return this.discounts;
     }
 }

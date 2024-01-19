@@ -123,6 +123,13 @@ public class CustomerTest {
 
         Assertions.assertEquals((0.99*4 + 0.39*4) - customer.getTotalCost(map),finalDiscount );
 
+        discounts = customer.getDiscounts();
+        finalDiscount = 0.00;
+        for(double saving : discounts.values()) {
+            finalDiscount += saving;
+        }
+
+        Assertions.assertEquals((0.39*12) - 3.99, customer.getTotalCost(Map.of(new Bagel("Plain"), 12)));
 
 
 
