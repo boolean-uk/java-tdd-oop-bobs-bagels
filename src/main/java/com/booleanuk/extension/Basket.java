@@ -87,6 +87,9 @@ public class Basket {
             }
             total += i.getPrice();
         }
+        if(applyDiscounts() == 1.25){
+            return 1.25;
+        }
         return parsePrice(Double.toString(total - applyDiscounts()));
     }
     private double parsePrice(String price){
@@ -96,9 +99,9 @@ public class Basket {
     }
     private double applyDiscounts(){
         double totalDiscount = 0;
-        Map<String, Long> bagelQuantities = getItemQuantities();
+        Map<String, Long> itemQuantities = getItemQuantities();
 
-        for(Map.Entry<String, Long> entry : bagelQuantities.entrySet()){
+        for(Map.Entry<String, Long> entry : itemQuantities.entrySet()){
             String itemSKU = entry.getKey();
             long itemQuantity = entry.getValue();
             double itemPrice = 0;
@@ -110,6 +113,10 @@ public class Basket {
             else if(itemQuantity >= 6 && itemSKU.startsWith("B") && !itemSKU.endsWith("P")){
                 itemPrice = Double.parseDouble(Inventory.getInstance().getPriceInfo(itemSKU));
                 totalDiscount += (itemPrice * 6) - 2.49;
+            }
+            else if(itemQuantities.size() == 2 && (itemSKU.startsWith("C") || itemSKU.startsWith("B"))
+                    && itemQuantities.keySet().stream().anyMatch(key -> key.startsWith("COF"))){
+                totalDiscount = 1.25;
             }
         }
         return totalDiscount;

@@ -24,6 +24,7 @@ public class BagelTest {
     }
     @Test
     public void testGettingAValidDiscount6PlainBagels(){
+        Inventory.resetInstance();
         Basket basket = new Basket(30);
         basket.addItem("BGLP", 6);
         Assertions.assertEquals(2.34, basket.getTotalCost());
@@ -31,6 +32,7 @@ public class BagelTest {
     }
     @Test
     public void testGettingDiscountsOnBigOrder(){
+        Inventory.resetInstance();
         Basket basket = new Basket(40);
         basket.addItem("BGLO", 2);
         basket.addItem("BGLP", 12);
