@@ -8,6 +8,7 @@ public class DiscountCombo {
 
 	public DiscountCombo(String[] comboItems, double newPrice) {
 		this.comboItems=comboItems;
+		this.newPrice=newPrice;
 
 	}
 	public String[] getComboItems() {

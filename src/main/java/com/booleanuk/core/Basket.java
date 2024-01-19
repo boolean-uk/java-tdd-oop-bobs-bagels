@@ -132,23 +132,23 @@ public class Basket {
 				if (i < smallest) {
 					smallest = i;
 				}
-
-
 			}
+
 			for (int i = 0; i < pair.length; i++) {
 				int removed = 0;
 				for (int j = 0; j < itemsLeft.size(); j++) {
-					if (removed < smallest && itemsLeft.get(j).equals(pair[i])) {
+					if (removed < smallest && itemsLeft.get(j).contains(pair[i])) {
 						itemsLeft.remove(j);
 						removed++;
 						j--;
 
 					}
+					removed=0;
+				}
 
-				}
-				for (int j = 0; j < smallest; j++) {
-					total += inventory.getDiscountComboAmount(pair);
-				}
+			}
+			for (int j = 0; j < smallest; j++) {
+				total += inventory.getDiscountComboAmount(pair);
 			}
 		}
 		for (String item : itemsLeft) {
@@ -206,7 +206,7 @@ public class Basket {
 
 	private static boolean containsString(String[] array, String target) {
 		for (String str : array) {
-			if (str.contains(target)) {
+			if (target.contains(str)) {
 				return true;
 			}
 		}
