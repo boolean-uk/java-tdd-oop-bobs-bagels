@@ -13,10 +13,10 @@ class BagelTest {
 
     @Test
     public void testGetName(){
-        Bagel plain = new Bagel("BGLP");
-        Bagel onion = new Bagel("BGLO");
-        Bagel everything = new Bagel("BGLE");
-        Bagel sesame = new Bagel("BGLS");
+        Bagel onion = new Bagel("BGLO", 0.49, "Onion");
+        Bagel plain = new Bagel("BGLP", 0.39, "Plain");
+        Bagel everything = new Bagel("BGLE", 0.49, "Everything");
+        Bagel sesame = new Bagel("BGLS", 0.49, "Sesame");
 
         Assertions.assertEquals("Bagel", plain.getName());
         Assertions.assertEquals("Bagel", onion.getName());
@@ -26,10 +26,10 @@ class BagelTest {
 
     @Test
     public void testGetVariant(){
-        Bagel plain = new Bagel("BGLP");
-        Bagel onion = new Bagel("BGLO");
-        Bagel everything = new Bagel("BGLE");
-        Bagel sesame = new Bagel("BGLS");
+        Bagel onion = new Bagel("BGLO", 0.49, "Onion");
+        Bagel plain = new Bagel("BGLP", 0.39, "Plain");
+        Bagel everything = new Bagel("BGLE", 0.49, "Everything");
+        Bagel sesame = new Bagel("BGLS", 0.49, "Sesame");
 
         Assertions.assertEquals("Plain", plain.getVariant());
         Assertions.assertEquals("Onion", onion.getVariant());
@@ -39,10 +39,10 @@ class BagelTest {
 
     @Test
     public void testGetPrice(){
-        Bagel plain = new Bagel("BGLP");
-        Bagel onion = new Bagel("BGLO");
-        Bagel everything = new Bagel("BGLE");
-        Bagel sesame = new Bagel("BGLS");
+        Bagel onion = new Bagel("BGLO", 0.49, "Onion");
+        Bagel plain = new Bagel("BGLP", 0.39, "Plain");
+        Bagel everything = new Bagel("BGLE", 0.49, "Everything");
+        Bagel sesame = new Bagel("BGLS", 0.49, "Sesame");
 
         Assertions.assertEquals(0.39, plain.getPrice());
         Assertions.assertEquals(0.49, onion.getPrice());
@@ -52,11 +52,16 @@ class BagelTest {
 
     @Test
     public void testGetFilling(){
-        Filling filling1 = new Filling("FILX");
-        Filling filling2 = new Filling("FILS");
-        Filling filling3 = new Filling("FILC");
-        Bagel plain = new Bagel("BGLP", new Filling[]{filling1,filling2,filling3});
+        Filling filling1 = new Filling("FILB", 0.12, "Bacon");
+        Filling filling2 = new Filling("FILE", 0.12, "Egg");
+        Filling filling3 = new Filling("FILC", 0.12, "Cheese");
         ArrayList<Filling> fillings = new ArrayList<>();
+        fillings.add(filling1);
+        fillings.add(filling2);
+        fillings.add(filling3);
+        Bagel plain = new Bagel("BGLP", 0.39, "Plain", fillings);
+
+        ArrayList<Filling> fillingsTest = new ArrayList<>();
         fillings.add(filling1);
         fillings.add(filling2);
         fillings.add(filling3);
@@ -65,8 +70,8 @@ class BagelTest {
     }
     @Test
     public void testAddFilling(){
-        Filling filling1 = new Filling("FILX");
-        Bagel plain = new Bagel("BGLP");
+        Filling filling1 = new Filling("FILB", 0.12, "Bacon");
+        Bagel plain = new Bagel("BGLP", 0.39, "Plain");
         plain.addFilling(filling1);
         Assertions.assertEquals(plain.getFillings().get(0), filling1);
     }

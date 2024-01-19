@@ -3,6 +3,8 @@ package com.booleanuk.core;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class BasketTest {
@@ -10,8 +12,8 @@ class BasketTest {
     public void testAdd(){
        Basket basket = new Basket();
        Basket.setMaxSize(1);
-       Bagel bagelRight = new Bagel("BGLO");
-       Coffee coffee = new Coffee("COFB");
+       Bagel bagelRight = new Bagel("BGLO", 0.49, "Onion");
+       //Coffee coffee = new Coffee("COFB", 0.99,"Black");
 
        //Add Bagel
        Assertions.assertTrue(basket.add(bagelRight));
@@ -24,8 +26,8 @@ class BasketTest {
     @Test
     public void testRemove(){
         Basket basket = new Basket();
-        Bagel bagel1 = new Bagel("BGLO");
-        Bagel bagel2 = new Bagel("BGLO");
+        Bagel bagel1 = new Bagel("BGLO", 0.49, "Onion");
+        Bagel bagel2 = new Bagel("BGLO", 0.49, "Onion");
         basket.add(bagel1);
 
         //Remove bagel not in basket
@@ -38,10 +40,10 @@ class BasketTest {
     @Test
     public void testAddFillings(){
         Basket basket = new Basket();
-        Bagel bagel = new Bagel("BGLO");
-        Bagel bagel2 = new Bagel("BGLO");
-        Filling filling1 = new Filling("FILB");
-        Filling filling2 = new Filling("FILE");
+        Bagel bagel = new Bagel("BGLO", 0.49, "Onion");
+        Bagel bagel2 = new Bagel("BGLO", 0.49, "Onion");
+        Filling filling1 = new Filling("FILB", 0.12, "Bacon");
+        Filling filling2 = new Filling("FILE", 0.12, "Egg");
         basket.add(bagel);
 
         //Add single filling to bagel in basket
@@ -59,13 +61,13 @@ class BasketTest {
         Basket basket = new Basket();
 
         //Set max to positive number
-        Assertions.assertTrue(basket.setMaxSize(10));
+        Assertions.assertTrue(Basket.setMaxSize(10));
 
         //Set max to zero
-        Assertions.assertTrue(basket.setMaxSize(0));
+        Assertions.assertTrue(Basket.setMaxSize(0));
 
         //Set max to negative number
-        Assertions.assertFalse(basket.setMaxSize(-20));
+        Assertions.assertFalse(Basket.setMaxSize(-20));
 
         Assertions.assertEquals(0, Basket.getMaxSize());
     }
@@ -73,7 +75,7 @@ class BasketTest {
     @Test
     public void testGetCostOfFilling(){
         Basket basket = new Basket();
-        Filling filling1 = new Filling("FILB");
+        Filling filling1 = new Filling("FILB", 0.12, "Bacon");
 
         //Test get cost of filling
         Assertions.assertEquals(0.12, basket.getCostOfFilling(filling1));
@@ -82,10 +84,15 @@ class BasketTest {
     @Test
     public void testGetCostOfBagel(){
         Basket basket = new Basket();
-        Bagel bagelplain = new Bagel("BGLP");
-        Filling filling1 = new Filling("FILB");
-        Filling filling2 = new Filling("FILE");
-        Bagel bagelWithFilling = new Bagel("BGLP", new Filling[]{filling1, filling2});
+        Bagel bagelplain = new Bagel("BGLP", 0.39, "Plain");
+        Filling filling1 = new Filling("FILB", 0.12, "Bacon");
+        Filling filling2 = new Filling("FILE", 0.12, "Egg");
+
+        ArrayList<Filling> fillings = new ArrayList<>();
+        fillings.add(filling1);
+        fillings.add(filling2);
+
+        Bagel bagelWithFilling = new Bagel("BGLP", 0.39, "Plain", fillings);
 
         //Get cost of plain bagel
         Assertions.assertEquals(0.39, basket.getCostOfBagel(bagelplain));
@@ -95,11 +102,17 @@ class BasketTest {
     }
     @Test
     public void testGetTotalCost(){
-        Bagel bagelplain = new Bagel("BGLP");
-        Bagel bagelOnion = new Bagel("BGLO");
-        Filling filling1 = new Filling("FILB");
-        Filling filling2 = new Filling("FILE");
-        Bagel bagelWithFilling = new Bagel("BGLP", new Filling[]{filling1, filling2});
+        Bagel bagelplain = new Bagel("BGLP", 0.39, "Plain");
+        Bagel bagelOnion = new Bagel("BGLO", 0.49, "Onion");
+        Filling filling1 = new Filling("FILB", 0.12, "Bacon");
+        Filling filling2 = new Filling("FILE", 0.12, "Egg");
+
+        ArrayList<Filling> fillings = new ArrayList<>();
+        fillings.add(filling1);
+        fillings.add(filling2);
+
+        Bagel bagelWithFilling = new Bagel("BGLP", 0.39, "Plain", fillings);
+
         Basket basket = new Basket();
 
         basket.add(bagelplain);
