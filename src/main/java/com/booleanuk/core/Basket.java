@@ -7,62 +7,54 @@ public class Basket {
 
     private ArrayList<Inventory> basketList;
     private ArrayList<Inventory> inventoryList;
-
     private int basketSize = 5;
 
-    //All the fields below will be removed and the code refactored
-    //as its more efficient using an ArrayList of the Inventory class
-    //for the logic in the methods than having multiple different lists and maps.
-    private ArrayList<Bagel> bagels;
-    private ArrayList<String> itemsList;
-
-    private HashMap<String, Double> itemsMap;
-    private HashMap<String, Inventory> itemsFullyDetailed;
-    private HashMap<String, Double[]> itemsWithQuantity;
-
     public Basket() {
-        bagels = new ArrayList<>(5);
-        itemsList = new ArrayList<>();
-        itemsMap = new HashMap<>();
-        itemsWithQuantity = new HashMap<>();
-        itemsFullyDetailed = new HashMap<>();
-        itemsFullyDetailed.put("BGLO", new Inventory("BGLO", 0.49, "Bagel", "Onion"));
-        itemsFullyDetailed.put("BGLP", new Inventory("BGLP", 0.39, "Bagel", "Plain"));
-        itemsFullyDetailed.put("BGLE", new Inventory("BGLE", 0.49, "Bagel", "Everything"));
-        itemsFullyDetailed.put("BGLS", new Inventory("BGLS", 0.49, "Bagel", "Sesame"));
-        itemsFullyDetailed.put("COFB", new Inventory("COFB", 0.99, "Coffee", "Black"));
-        itemsFullyDetailed.put("COFW", new Inventory("COFW", 1.19, "Coffee", "White"));
-        itemsFullyDetailed.put("COFC", new Inventory("COFC", 1.29, "Coffee", "Cappuccino"));
-        itemsFullyDetailed.put("COFL", new Inventory("COFL", 1.29, "Coffee", "Latte"));
-        itemsFullyDetailed.put("FILB", new Inventory("FILB", 0.12, "Filling", "Bacon"));
-        itemsFullyDetailed.put("FILE", new Inventory("FILE", 0.12, "Filling", "Egg"));
-        itemsFullyDetailed.put("FILC", new Inventory("FILC", 0.12, "Filling", "Cheese"));
-        itemsFullyDetailed.put("FILX", new Inventory("FILX", 0.12, "Filling", "Cream Cheese"));
-        itemsFullyDetailed.put("FILS", new Inventory("FILS", 0.12, "Filling", "Smoked Salmon"));
-        itemsFullyDetailed.put("FILH", new Inventory("FILH", 0.12, "Filling", "Ham"));
+        basketList = new ArrayList<>(5);
+        inventoryList = new ArrayList<>();
+        inventoryList.add(new Inventory("BGLO", 0.49, "Bagel", "Onion"));
+        inventoryList.add(new Inventory("BGLP", 0.39, "Bagel", "Plain"));
+        inventoryList.add(new Inventory("BGLE", 0.49, "Bagel", "Everything"));
+        inventoryList.add(new Inventory("BGLS", 0.49, "Bagel", "Sesame"));
+        inventoryList.add(new Inventory("COFB", 0.99, "Coffee", "Black"));
+        inventoryList.add(new Inventory("COFW", 1.19, "Coffee", "White"));
+        inventoryList.add(new Inventory("COFC", 1.29, "Coffee", "Cappuccino"));
+        inventoryList.add(new Inventory("COFL", 1.29, "Coffee", "Latte"));
+        inventoryList.add(new Inventory("FILB", 0.12, "Filling", "Bacon"));
+        inventoryList.add(new Inventory("FILE", 0.12, "Filling", "Egg"));
+        inventoryList.add(new Inventory("FILC", 0.12, "Filling", "Cheese"));
+        inventoryList.add(new Inventory("FILX", 0.12, "Filling", "Cream Cheese"));
+        inventoryList.add(new Inventory("FILS", 0.12, "Filling", "Smoked Salmon"));
+        inventoryList.add(new Inventory("FILH", 0.12, "Filling", "Ham"));
     }
 
     //User Story 1
     public boolean addBagelTypeToBasket(Bagel bagelType) {
-        if (this.bagels.contains(bagelType)) {
-            return false;
+        if (basketList.size() < basketSize) {
+            for (Inventory item : inventoryList) {
+                if (item.getVariant().equals(bagelType.getVariant())) {
+                    basketList.add(item);
+                    return true;
+                }
+            }
         }
-        this.bagels.add(bagelType);
-        return true;
+        return false;
     }
 
     //User Story 2
     public boolean removeBagelTypeFromBasket(Bagel bagelType) {
-        if (this.bagels.contains(bagelType)) {
-            this.bagels.remove(bagelType);
-            return true;
+        for (Inventory item : basketList) {
+            if (item.getVariant().equals(bagelType.getVariant())) {
+                basketList.remove(item);
+                return true;
+            }
         }
         return false;
     }
 
     //User Story 3
     public String bagelBasketIsFull() {
-        if (this.bagels.size() >= this.basketSize) {
+        if (this.basketList.size() >= this.basketSize) {
             return "Basket is full!";
         }
         return "Basket is not full!";
@@ -70,7 +62,7 @@ public class Basket {
 
     //User story 4
     public String changeBasketCapacity(int newCapacity) {
-        if(newCapacity > this.basketSize) {
+        if (newCapacity > this.basketSize) {
             this.basketSize = newCapacity;
             return "Basket capacity is changed.";
         }
@@ -78,93 +70,93 @@ public class Basket {
     }
 
     //User Story 5
-    public String canRemoveItemInBasket(String item) {
-        if(this.itemsList.contains(item)) {
-            return "Item is in basket and can be removed.";
+    public String canRemoveItemInBasket(String variant) {
+        for (Inventory item : basketList) {
+            if (item.getVariant().equals(variant)) {
+                return "Item is in basket and can be removed.";
+            }
         }
         return "Item is not in basket and can't be removed.";
     }
 
-    //User Story 6
+    //User Story 6 Method 1
     public void addItem(String item, double quantity, double pricePerItem) {
-        itemsWithQuantity.put(item, new Double[] { quantity, pricePerItem });
+        // Assuming quantity is unused in the new implementation
+        for (Inventory inventoryItem : inventoryList) {
+            if (inventoryItem.getName().equals(item)) {
+                basketList.add(new Inventory(inventoryItem.getSku(), pricePerItem, item, inventoryItem.getVariant()));
+                return;
+            }
+        }
     }
 
+    //User Story 6 Method 2
     public double totalCostOfItems() {
         double totalCost = 0.00;
-        for (Double[] value : this.itemsWithQuantity.values()) {
-            totalCost += value[0] * value[1]; // quantity * cost per unit
+        for (Inventory item : basketList) {
+            totalCost += item.getPrice();
         }
         return totalCost;
     }
 
     //User Story 7
     public double returnCostOfBagel(Bagel bagelVariant) {
-        String sku = bagelVariant.getSku();
-        Inventory bagelType = itemsFullyDetailed.get(sku);
-        return bagelType.getPrice();
+        for (Inventory item : inventoryList) {
+            if (item.getName().equals("Bagel") && item.getVariant().equals(bagelVariant.getVariant())) {
+                return item.getPrice();
+            }
+        }
+        return 0.0;
     }
 
     //User Story 8
     public String chooseBagelFilling(Filling bagelFilling) {
         String sku = bagelFilling.getSku();
-        Inventory fillingType = itemsFullyDetailed.get(sku);
-        return fillingType.getVariant();
+        for (Inventory item : inventoryList) {
+            if (item.getSku().equals(sku)) {
+                return item.getVariant();
+            }
+        }
+        return "Filling type does not exist.";
     }
+
 
     //User Story 9
     public double costOfEachFilling(Filling bagelFilling) {
         String sku = bagelFilling.getSku();
-        Inventory fillingType = itemsFullyDetailed.get(sku);
-        return fillingType.getPrice();
+        for (Inventory item : inventoryList) {
+            if (item.getSku().equals(sku)) {
+                return item.getPrice();
+            }
+        }
+        return 0.0;
     }
+
 
     //User Story 10
     public boolean mustBeInInventory(String sku) {
-        if(itemsFullyDetailed.containsKey(sku)) {
-            return true;
+        for (Inventory item : inventoryList) {
+            if (item.getSku().equals(sku)) {
+                return true;
+            }
         }
         return false;
     }
 
-    public ArrayList<Bagel> getBagels() {
-        return bagels;
+    public ArrayList<Inventory> getBasketList() {
+        return basketList;
     }
 
-    public void setBagels(ArrayList<Bagel> bagels) {
-        this.bagels = bagels;
+    public void setBasketList(ArrayList<Inventory> basketList) {
+        this.basketList = basketList;
     }
 
-    public ArrayList<String> getItemsList() {
-        return itemsList;
+    public ArrayList<Inventory> getInventoryList() {
+        return inventoryList;
     }
 
-    public void setItemsList(ArrayList<String> itemsList) {
-        this.itemsList = itemsList;
-    }
-
-    public HashMap<String, Double> getItemsMap() {
-        return itemsMap;
-    }
-
-    public void setItemsMap(HashMap<String, Double> itemsMap) {
-        this.itemsMap = itemsMap;
-    }
-
-    public HashMap<String, Inventory> getItemsFullyDetailed() {
-        return itemsFullyDetailed;
-    }
-
-    public void setItemsFullyDetailed(HashMap<String, Inventory> itemsFullyDetailed) {
-        this.itemsFullyDetailed = itemsFullyDetailed;
-    }
-
-    public HashMap<String, Double[]> getItemsWithQuantity() {
-        return itemsWithQuantity;
-    }
-
-    public void setItemsWithQuantity(HashMap<String, Double[]> itemsWithQuantity) {
-        this.itemsWithQuantity = itemsWithQuantity;
+    public void setInventoryList(ArrayList<Inventory> inventoryList) {
+        this.inventoryList = inventoryList;
     }
 
     public int getBasketSize() {
@@ -174,6 +166,4 @@ public class Basket {
     public void setBasketSize(int basketSize) {
         this.basketSize = basketSize;
     }
-
-
 }
