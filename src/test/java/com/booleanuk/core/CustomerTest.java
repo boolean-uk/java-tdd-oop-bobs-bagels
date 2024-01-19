@@ -117,18 +117,21 @@ public class CustomerTest {
         Map<String, ArrayList<Double>> discounts = customer.getDiscounts();
 
         double finalDiscount = 0.00;
-        for(double saving : discounts.values()) {
-            finalDiscount += saving;
+        for(ArrayList<Double> saving : discounts.values()) {
+            for(Double dob : saving) {
+                finalDiscount += dob;
+            }
         }
 
         Assertions.assertEquals((0.99*4 + 0.39*4) - customer.getTotalCost(map),finalDiscount );
 
         discounts = customer.getDiscounts();
         finalDiscount = 0.00;
-        for(double saving : discounts.values()) {
-            finalDiscount += saving;
+        for(ArrayList<Double> saving : discounts.values()) {
+            for(Double dob : saving) {
+                finalDiscount += dob;
+            }
         }
-
         Assertions.assertEquals((0.39*12) - 3.99, customer.getTotalCost(Map.of(new Bagel("Plain"), 12)));
 
 

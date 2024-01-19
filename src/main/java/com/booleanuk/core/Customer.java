@@ -124,7 +124,7 @@ public class Customer {
         return inventory.getInventoryMap().containsKey(skuCode);
     }
 
-    public Map<String, Double> getDiscounts() {
+    public Map<String, ArrayList<Double>> getDiscounts() {
         return this.discounts;
     }
 }
