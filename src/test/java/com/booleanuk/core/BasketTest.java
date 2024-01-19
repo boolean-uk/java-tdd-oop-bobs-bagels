@@ -61,9 +61,12 @@ public class BasketTest {
         Basket basket = new Basket( 4);
         Bagel bagel1 = new Bagel("BGLO",0.49, "Bagel", "Onion" );
         Bagel bagel2 = new Bagel("BGLP", 0.39, "Bagel", "Plain");
+        Filling filling = new Filling("FILB",0.12, "Filling", "Bacon");
+
         basket.add(bagel1);
         basket.add(bagel2);
-        Assertions.assertEquals(0.88, basket.getTotalCost());
+        basket.addingFillingWhenBagelInBasket(filling);
+        Assertions.assertEquals(1.0, basket.getTotalCost());
     }
     @Test
     public void shouldReturnItemCost(){

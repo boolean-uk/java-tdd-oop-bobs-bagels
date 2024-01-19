@@ -96,7 +96,7 @@ public class Basket {
      * @param item the product which the cost is to be retrieved
      * @return the cost of the specified product
      */
-    public double getItemCost(Product item){
+    public double getItemCost(Bagel item){
         return item.getPrice();
     }
 
