@@ -135,7 +135,7 @@ public class TestBasket {
         basket.add("FILX");
         basket.add("FILS");
 
-        Assertions.assertEquals(0.99 + 0.49 + 0.39 + 0.12 + 0.12, basket.totalCost(), 0.00001);
+        Assertions.assertEquals(0.99 + 0.49 + 0.39 + 0.12 + 0.12, basket.totalCost(), 0e11);
     }
 }
 
