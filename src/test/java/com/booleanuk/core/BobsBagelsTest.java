@@ -135,7 +135,7 @@ class BobsBagelsTest {
 //    }
 
     @Test
-    public void testGetItemPric(){
+    public void testGetItemPrice(){
         Basket basket = new Basket();
         Order order = new Order();
         Inventory inventory = new Inventory();
@@ -148,6 +148,18 @@ class BobsBagelsTest {
         Assertions.assertEquals(1.29, inventory.getItemPrice("COFL"));
         Assertions.assertEquals(0.12, inventory.getItemPrice("FILC"));
         Assertions.assertEquals(0.12, inventory.getItemPrice("FILH"));
+    }
+
+    @Test
+    public void testAddItemNotInInventory() {
+        Basket basket = new Basket();
+        Order order = new Order();
+        Inventory inventory = new Inventory();
+
+        Assertions.assertFalse(basket.addItem("banana"));
+        Assertions.assertTrue(basket.addItem("BGLO"));
+        Assertions.assertTrue(basket.addItem("COFC"));
+        Assertions.assertFalse(basket.addItem("COFQ"));
 
 
     }
