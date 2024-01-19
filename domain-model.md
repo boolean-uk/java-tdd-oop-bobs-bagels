@@ -10,6 +10,7 @@ So I can change my order,
 I'd like to remove a bagel from my basket.
 3.
 As a member of the public,
+
 So that I can not overfill my small bagel basket
 I'd like to know when my basket is full when I try adding an item beyond my basket capacity.
 4.
@@ -49,7 +50,13 @@ I want customers to only be able to order things that we stock in our inventory.
 |         |            | String variant             |          |               |
 |         |            |                            |          |               |
 |         | getPrice() |                            |          | return price  |
+|         | getId()    |                            |          | return Id     |
+|         | get        |                            |          |               |
 |         |            |                            |          |               |
+|         |            |                            |          |               |
+|         |            |                            |          |               |
+|         |            |                            |          |               |
+
 
 
 | Classes | Methods     | Member Variables | Scenario | Output/Result  |

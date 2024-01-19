@@ -36,7 +36,6 @@ class BasketTest {
         Assertions.assertFalse(basket.add(bagelWrongId));
         Assertions.assertFalse(basket.add(bagelWrongPrice));
 
-
     }
 
     @Test
