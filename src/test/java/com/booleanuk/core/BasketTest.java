@@ -55,6 +55,21 @@ public class BasketTest {
 
     @Test
     public void removeProductTest() {
+        Basket basket = new Basket();
+        Product product1 = new Product("Apple", 0.19);
+        Product product2 = new Product("Orange", 0.29);
+
+        basket.addProduct(product1);
+        basket.addProduct(product2);
+
+        ArrayList<Product> productsTest = new ArrayList<>();
+        productsTest.add(new Product("Orange", 0.29));
+
+        basket.removeProduct(product1);
+
+        Assertions.assertEquals(1, basket.getBasketItems().size());
+        Assertions.assertEquals(productsTest, basket.getBasketItems());
+
 
     }
 
