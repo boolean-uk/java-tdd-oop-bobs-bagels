@@ -35,7 +35,7 @@ Note: the domain model is subject to change before the assignment is complete
 |         |           |                                | boolean inStock()                          |      |      |                                            |                                             |
 |         | Basket    | ArrayList<Product> basketItems |                                            |      |      |                                            |                                             |
 |         |           | int basketLimit                |                                            |      |      |                                            |                                             |
-|         |           |                                | void addProduct(Product product)           |      |      |                                            |                                             |
+|         |           |                                | void addProduct(Product product)           | x    |      |                                            |                                             |
 |         |           |                                | void removeProduct(Product product)        |      |      |                                            |                                             |
 |         |           |                                | HashMap<Product, Integer> getBasketItems() | x    |      |                                            |                                             |
 |         |           |                                | boolean isFull()                           |      |      |                                            |                                             |

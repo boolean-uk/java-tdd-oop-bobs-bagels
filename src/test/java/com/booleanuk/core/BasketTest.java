@@ -11,16 +11,26 @@ public class BasketTest {
     }
 
     @Test
-    public void addProductTest() {
+    public void addProductTest1() {
         Basket basket = new Basket();
         Product product = new Product("Apple", 0.19);
         basket.addProduct(product);
         basket.addProduct(product);
 
-        Assertions.assertEquals(1, basket.getBasketItems().size());
-        Assertions.assertTrue(basket.getBasketItems().containsKey(product));
-        Assertions.assertEquals(2, basket.getBasketItems().get(product));
-        Assertions.assertEquals(0.19, basket.getBasketItems());
+        Assertions.assertEquals(2, basket.getBasketItems().size());
+        Assertions.assertTrue(basket.getBasketItems().contains(product));
+        Assertions.assertEquals(0.19, basket.getBasketItems().get(0));
+    }
+
+    @Test
+    public void addProductTest2() {
+        Basket basket = new Basket();
+        Product product = new Product("Apple", 0.19);
+        basket.addProduct(product, 2);
+        Assertions.assertEquals(2, basket.getBasketItems().size());
+        Assertions.assertTrue(basket.getBasketItems().contains(product));
+        Assertions.assertEquals(0.19, basket.getBasketItems().get(0));
+
     }
 
     @Test
