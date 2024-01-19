@@ -23,7 +23,7 @@ public class ReceiptTest {
 
         Assertions.assertEquals("Basket is empty.", receipt.generateReceipt());
         basket.add(bglo);
-        Assertions.assertTrue(receipt.generateReceipt().contains("BGLO\n"));
+        Assertions.assertTrue(receipt.generateReceipt().contains("BGLO\t1\t0.49\n"));
 
         basket.add(bglo);
         basket.add(bglp);
