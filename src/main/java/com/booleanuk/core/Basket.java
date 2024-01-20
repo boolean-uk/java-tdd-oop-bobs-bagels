@@ -8,6 +8,7 @@ public class Basket {
      Inventory inventory;
      /**Constructs a new Basket object
       *
+      * @param inventory The inventory of the shop
      * @param size The maximum size of the basket
      * */
     public Basket( Inventory inventory, int size ){
@@ -133,7 +134,7 @@ public class Basket {
     }
 
     /**
-     * Checks if a specific product is present in the inventory
+     * Checks if a specific product is in the inventory
      * @param item the product to check if it is in the inventory
      * @return true if the product is in the inventory, otherwise false
      */
