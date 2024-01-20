@@ -1,73 +1,66 @@
 Basket
 
-| Methods                                                | Members                    | Scenario                                                                                                | Output                                                             |
-|--------------------------------------------------------|----------------------------|---------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------|
-| addBagel(String bagel)                                 | ArrayList\<Bagel> bagels   | Customer wants to add an existing bagel to the basket when it's not full                                | void                                                               |
-| removeBagel(String bagel, ArrayList\<String> fillings) |                            | Customer wants to remove a bagel with specified fillings that there exists one or more of in the basket | true                                                               |
-|                                                        |                            | Customer wants to remove a bagel with specified fillings that doesn't exist in the basket               | false                                                              |
-| addFilling(String filling, String bagel)               |                            | Customer wants to add a filling to an existing bagel in their basket                                    | "Filling added."                                                   |
-|                                                        |                            | Customer wants to add a filling to a bagel that doesn't exist in the basket                             | "Your basket doesn't contain that bagel."                          |
-|                                                        |                            | Customer wants to add a filling to a bagel in their basket that already has that filling                | "All bagels of that kind in your basket already has that filling." |
-|                                                        |                            |                                                                                                         |                                                                    |
-| addCoffee(String coffee)                               | ArrayList\<String> coffees | Customer wants to add an existing coffee to the basket                                                  | void                                                               |
-| removeCoffee(String coffee)                            |                            | Customer wants to remove a coffee that there exists one or more of in the basket                        | true                                                               |
-|                                                        |                            | Customer wants to remove a coffee that doesn't exist in the basket                                      | false                                                              |
+| Methods                                  | Members                    | Scenario                                                                                                | Output                                                             |
+|------------------------------------------|----------------------------|---------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------|
+| add(Item item)                           | ArrayList\<Item> items     | Customer wants to add an existing item to the basket when it's not full                                 | void                                                               |
+| remove(Item item)                        |                            | Customer wants to remove a bagel with specified fillings that there exists one or more of in the basket | true                                                               |
+|                                          |                            | Customer wants to remove a bagel with specified fillings that doesn't exist in the basket               | false                                                              |
+
 
 Bagel
 
-| Methods                     | Members                     | Scenario                                                                | Output                                                             |
-|-----------------------------|-----------------------------|-------------------------------------------------------------------------|--------------------------------------------------------------------|
-| addFilling(String filling)  | ArrayList\<String> fillings | Customer wants to add a filling that doesn't already exist on the bagel | true                                                               |
-|                             | String name                 | Customer wants to add a filling that already exist on the bagel         | false                                                              |
+| Methods                     | Members                      | Scenario                                                                | Output                                                             |
+|-----------------------------|------------------------------|-------------------------------------------------------------------------|--------------------------------------------------------------------|
+| addFilling(Filling filling) | ArrayList\<Filling> fillings | Customer wants to add a filling that doesn't already exist on the bagel | true                                                               |
+|                             | String name,<br/>String sku  | Customer wants to add a filling that already exist on the bagel         | false                                                              |
+
+Coffee
+
+| Members                      |
+|------------------------------|
+| String name,<br/>String sku  |
+
+Filling
+
+| Members                      |
+|------------------------------|
+| String name,<br/>String sku  |
 
 
-Store 
+Store
 
-| Methods                                                                        | Members                           | Scenario                                                                                                     | Output                                                                |
-|--------------------------------------------------------------------------------|-----------------------------------|--------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------|
-| createBasket()                                                                 | HashMap\<Integer, Basket> baskets | Customer wants to shop                                                                                       | A basket id as an int                                                 |
-| getCostOfBasket(int basketId)                                                  | Inventory inventory               | Customer wants to know the cost of their basket                                                              | cost as a double                                                      |
-|                                                                                |                                   | Customer wants to know the cost of a non-existing bagel                                                      | -1                                                                    |
-| getCostOfFilling(String filling)                                               |                                   | Customer wants to know the cost of an existing filling                                                       | cost as a double                                                      |
-|                                                                                |                                   | Customer wants to know the cost of a non-existing filling                                                    | -1                                                                    |
-| addBagelToBasket(String bagel, int basketId)                                   | int basketCapacity                | Customer wants to add an existing bagel to the basket when it's not full                                     | "Bagel added."                                                        |
-|                                                                                |                                   | Customer wants to add an existing bagel to the basket when it's full                                         | "You're basket is full!"                                              |
-|                                                                                |                                   | Customer wants to add a bagel that doesn't exist                                                             | "Bob's bagels doesn't have that bagel."                               |
-| addFilling(String filling, String bagel, int basketId)                         |                                   | Customer wants to add a filling that doesn't exist in the inventory                                          | "Bob's bagels doesn't have that filling."                             |
-|                                                                                |                                   | Customer wants to add an existing filling to a bagel that doesn't exist in the basket                        | "Your basket doesn't contain that bagel."                             |
-|                                                                                |                                   | Customer wants to add an existing filling to an existing bagel in their basket                               | "Filling added."                                                      |
-|                                                                                |                                   | Customer wants to add an existing filling to an existing bagel in their basket that already has that filling | "The bagel(s) of that kind in your basket already have that filling." |
-| updateBasketCapacity(int newCapacity)                                          |                                   | Updating the capacity to a number higher or equal to the current items in all basket                         | true                                                                  |
-|                                                                                |                                   | Updating the capacity to a number lower than the current number of items in at least one basket              | false                                                                 |
-| removeBagelFromBasket(String bagel, ArrayList\<String> fillings, int basketId) |                                   | Customer wants to remove an existing bagel from their basket                                                 | true                                                                  |
-|                                                                                |                                   | Customer wants to remove a non-existent bagel from their basket                                              | false                                                                 |
-| getCostOfCoffee(String coffee)                                                 |                                   | Customer wants to know the cost of an existing coffee                                                        | cost as a double                                                      |
-|                                                                                |                                   | Customer wants to know the cost of a non-existing coffee                                                     | -1                                                                    |
-| addCoffeeToBasket(String coffee, int basketId)                                 |                                   | Customer wants to add an existing coffee to the basket                                                       | "Coffee added."                                                       |
-|                                                                                |                                   | Customer wants to add a coffee that doesn't exist                                                            | "Bob's bagels doesn't have that coffee."                              |
-| removeCoffeeFromBasket(String coffee, int basketId)                            |                                   | Customer wants to remove an existing coffee from their basket                                                | true                                                                  |
-|                                                                                |                                   | Customer wants to remove a non-existent coffee from their basket                                             | false                                                                 |
-| getReceipt(int basketId)                                                       |                                   | Customer wants to have a receipt over their purchase                                                         | Receipt object of the purchase                                        |
+| Methods                                             | Members                           | Scenario                                                                                        | Output                                          |
+|-----------------------------------------------------|-----------------------------------|-------------------------------------------------------------------------------------------------|-------------------------------------------------|
+| createBasket()                                      | HashMap\<Integer, Basket> baskets | Customer wants to shop                                                                          | A basket id as an int                           |
+| getCostOfBasket(int basketId)                       | Inventory inventory               | Customer wants to know the cost of their basket                                                 | cost as a double                                |
+| getCostOfItem(Item item)                            |                                   | Customer wants to know the cost of an existing item                                             | cost as a double                                |
+|                                                     |                                   | Customer wants to know the cost of a non-existing item                                          | -1                                              |
+| addItemToBasket(Item item, int basketId)            | int basketCapacity                | Customer wants to add an existing item to the basket when it's not full                         | item.toString() + " added."                     |
+|                                                     |                                   | Customer wants to add an existing item to the basket when it's full                             | "You're basket is full!"                        |
+|                                                     |                                   | Customer wants to add a item that doesn't exist                                                 | "Bob's bagels doesn't carry " + item.toString() |
+| updateBasketCapacity(int newCapacity)               |                                   | Updating the capacity to a number higher or equal to the current items in all basket            | true                                            |
+|                                                     |                                   | Updating the capacity to a number lower than the current number of items in at least one basket | false                                           |
+| removeItemFromBasket(Item item, int basketId)       |                                   | Customer wants to remove an existing item from their basket                                     | true                                            |
+|                                                     |                                   | Customer wants to remove a non-existent item from their basket                                  | false                                           |
+| getReceipt(int basketId)                            |                                   | Customer wants to have a receipt of their purchase                                              | Receipt object of the purchase                  |
 
 Inventory
 
-| Methods                                                                        | Members                                                                                                                                                 | Scenario                                                                                                     | Output           |
-|--------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------|------------------|
-| getCostOfBasket(int basketId)                                                  | HashMap\<String, Double> prices<br/> double TWELWE_BAGELS_DISCOUNT_PRICE,<br/>double SIX_BAGELS_DISCOUNT_PRICE, <br/> double COFFEE_AND_BAGEL_DISCOUNT  | Customer wants to know the cost of their basket                                                              | cost as a double |
-| getCostOfBagel(String bagel)                                                   | HashMap\<String, String> bagelCodes,<br/> HashMap\<String, String> coffeeCodes, <br/>HashMap\<String, String> fillingCodes                              | Customer wants to know the cost of an existing bagel                                                         | cost as a double |
-|                                                                                |                                                                                                                                                         | Customer wants to know the cost of a non-existing bagel                                                      | -1               |
-| getCostOfFilling(String filling)                                               |                                                                                                                                                         | Customer wants to know the cost of an existing filling                                                       | cost as a double |
-|                                                                                |                                                                                                                                                         | Customer wants to know the cost of a non-existing filling                                                    | -1               |
-| getCostOfCoffee(String coffee)                                                 |                                                                                                                                                         | Customer wants to know the cost of an existing coffee                                                        | cost as a double |
-|                                                                                |                                                                                                                                                         | Customer wants to know the cost of a non-existing coffee                                                     | -1               |
+| Methods                       | Members                                                                                                                                                | Scenario                                                  | Output           |
+|-------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------|------------------|
+| getCostOfBasket(int basketId) | HashMap\<String, Double> prices<br/> double TWELWE_BAGELS_DISCOUNT_PRICE,<br/>double SIX_BAGELS_DISCOUNT_PRICE, <br/> double COFFEE_AND_BAGEL_DISCOUNT | Customer wants to know the cost of their basket           | cost as a double |
+| getCostOfItem(Item item)      | HashMap\<Item, String> itemCodes                                                                                                                       | Customer wants to know the cost of an existing item       | cost as a double |
+|                               |                                                                                                                                                        | Customer wants to know the cost of a non-existing item    | -1               |
+| hasItem(Item item)            |                                                                                                                                                        | Customer wants to add an existing item to their basket    | true             |
+|                               |                                                                                                                                                        | Customer wants to add a non-existing item to their basket | false            |
 
-Receipt 
+Receipt
 
-| Members                             |
-|-------------------------------------|
-| Date date                           |
-| HashMap<String, Double> prices      |
+| Members                                   |
+|-------------------------------------------|
+| Date date                                 |
+| HashMap<String, Double> prices            |
 | LinkedHashMap<String, Integer> quantities |
-| double totalCost                    |
-| String storeName                    |
-| int width                           |
+| double totalCost                          |
+| String storeName                          |
+| int width                                 |
