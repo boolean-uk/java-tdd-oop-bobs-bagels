@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class ExtensionOneTest {
 
@@ -45,7 +46,7 @@ public class ExtensionOneTest {
             store.addItemToBasket(new Coffee("black"), basketId);
         }
 
-        Assertions.assertEquals(20, store.getBaskets().get(basketId).getNoOfItems());
+        Assertions.assertEquals(23, store.getBaskets().get(basketId).getNoOfItems());
         Assertions.assertEquals(10.43, store.getCostOfBasket(basketId), 0.001);
     }
 
@@ -59,17 +60,16 @@ public class ExtensionOneTest {
             store.addItemToBasket(new Bagel("plain"), basketId);
         }
         for(int i=0; i < 6; i++) {
-            store.addItemToBasket(new Bagel("everything", new ArrayList<>(Arrays.asList(new Filling("ham")))), basketId);
+            store.addItemToBasket(new Bagel("everything", new ArrayList<>(List.of(new Filling("ham")))), basketId);
         }
         for(int i=0; i < 2; i++) {
-            store.addItemToBasket(new Bagel("plain", new ArrayList<>(Arrays.asList(new Filling("ham"), new Filling("egg")))), basketId);
-
+            store.addItemToBasket(new Bagel("ONION", new ArrayList<>(Arrays.asList(new Filling("ham"), new Filling("egg")))), basketId);
         }
         for(int i=0; i < 3; i++) {
             store.addItemToBasket(new Coffee("black"), basketId);
         }
 
-        Assertions.assertEquals(20, store.getBaskets().get(basketId).getNoOfItems());
+        Assertions.assertEquals(23, store.getBaskets().get(basketId).getNoOfItems());
         Assertions.assertEquals(10.43 + 0.12*10, store.getCostOfBasket(basketId), 0.001);
     }
 

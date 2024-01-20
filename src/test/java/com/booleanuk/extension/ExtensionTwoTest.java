@@ -29,7 +29,7 @@ public class ExtensionTwoTest {
                         "\n" +
                         "\n----------------------------" +
                         "\n" +
-                        "\nPLAIN BAGEL        1   \u00A30.39" +
+                        "\nPlain Bagel        1   \u00A30.39" +
                         "\n" +
                         "\n----------------------------" +
                         "\nTotal                  \u00A30.39" +
@@ -60,7 +60,7 @@ public class ExtensionTwoTest {
                         "\n" +
                         "\n----------------------------" +
                         "\n" +
-                        "\nPLAIN BAGEL        16  \u00A35.55" +
+                        "\nPlain Bagel        16  \u00A35.55" +
                         "\n" +
                         "\n----------------------------" +
                         "\nTotal                  \u00A35.55" +
@@ -103,10 +103,10 @@ public class ExtensionTwoTest {
                         "\n" +
                         "\n----------------------------" +
                         "\n" +
-                        "\nONION BAGEL        2   \u00A30.98" +
-                        "\nPLAIN BAGEL        12  \u00A33.99" +
-                        "\nEVERYTHING BAGEL   6   \u00A32.49" +
-                        "\nBLACK COFFEE       3   \u00A32.97" +
+                        "\nOnion Bagel        2   \u00A30.98" +
+                        "\nPlain Bagel        12  \u00A33.99" +
+                        "\nEverything Bagel   6   \u00A32.49" +
+                        "\nBlack Coffee       3   \u00A32.97" +
                         "\n" +
                         "\n----------------------------" +
                         "\nTotal                 \u00A310.43" +

@@ -30,13 +30,14 @@ public class Inventory {
 
         //TODO: fix
         //If customer buys one coffee and one bagel
-//        if(bagels.size() == 1 && coffees.size() == 1) {
-//            cost += COFFEE_AND_BAGEL_DISCOUNT;
-//            for(String filling: bagels.get(0).getFillings()) {
-//                cost += getCostOfFilling(filling);
-//            }
-//            return cost;
-//        }
+        if(items.size() == 2 && ((items.get(0) instanceof Coffee && items.get(1) instanceof Bagel) || (items.get(1) instanceof Coffee && items.get(0) instanceof Bagel))) {
+            cost += COFFEE_AND_BAGEL_DISCOUNT;
+            Bagel bagel = (Bagel) (items.get(0) instanceof Bagel? items.get(0) : items.get(1));
+            for(Filling filling: bagel.getFillings()) {
+                cost += getCostOfItem(filling);
+            }
+            return cost;
+        }
 
         for(Item item: items) {
             if(item instanceof Bagel bagel) {
@@ -55,6 +56,8 @@ public class Inventory {
 
         //See if discounts
         for(Map.Entry<String, Integer> e: noOfEachKind.entrySet()) {
+            System.out.println(e.getKey()+" "+getCostForOfBundleOfBagels(new Bagel(e.getKey()), e.getValue()));
+
             cost += getCostForOfBundleOfBagels(new Bagel(e.getKey()), e.getValue());
         }
 
