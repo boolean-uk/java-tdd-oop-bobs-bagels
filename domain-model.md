@@ -1,17 +1,20 @@
 
-| Class          | Methods                         | Scenario                                                   | Output                                                               |
-|----------------|---------------------------------|------------------------------------------------------------|----------------------------------------------------------------------|
-| `Basket   `    | `add(item, quantity)          ` | if there is capacity, add number of items to basket        | "Added item to basket" "Your basket is full"                         |
-|                | `remove(item, quantity)       ` | remove number of items from basket only if item in basket, | "Removed item"                                                       |
-|                | `setCap(capacity)             ` | set max capacity of basket                                 | "Changed capacity"                                                   | 
-|                | `getCap(capacity)             ` | get max capacity of basket                                 | "Return maximum capacity"                                            |
-|                | `existsInBasket(item)         ` | check if item exists in basket                             | "Return true if exists, false if not"                                |
-|                | `getTotalPrice(basket)        ` | get total price of all items in basket                     | "Total price is for sum of all (item in items) * price * quantity) " |
-|                | `getPrice(item)               ` | get price of a single item in basket                       | "Return price of item in inventory"                                  | 
-|                |                                 |                                                            |                                                                      |
-| `Inventory`    | `add(item, quantity)          ` | add a number of items to inventory                         | "Added number of items to inventory"                                 |
-|                | `existsInStock(item)`           | check if number of item exists in stock                    | "Return true if exists, false if not"                                |
-| `Item     `    | `getAttributes()              ` | get attributes of item, such as inventory, price etc.      | "Return attributes"                                                   |
+| Class       | Methods                          | Scenario                                                                                | Output                                                               |
+|-------------|----------------------------------|-----------------------------------------------------------------------------------------|----------------------------------------------------------------------|
+| `Basket   ` | `add(item, quantity, inventory)` | if there is capacity in basket and item is in inventory, add number of items to basket  | "Added item to basket" "Your basket is full"                         |
+|             | `remove(item, quantity)        ` | remove number of items from basket only if item in basket,                              | "Removed item"                                                       |
+|             | `setCap(capacity)              ` | set max capacity of basket                                                              | "Changed capacity"                                                   | 
+|             | `getCap(capacity)              ` | get max capacity of basket                                                              | "Return maximum capacity"                                            |
+|             | `existsInBasket(item)          ` | check if item exists in basket                                                          | "Return true if exists, false if not"                                |
+|             | `getTotalPrice(basket)         ` | get total price of all items in basket                                                  | "Total price is for sum of all (item in items) * price * quantity) " |
+|             | `getPrice(item)                ` | get price of a single item in basket                                                    | "Return price of item in inventory"                                  | 
+|             | `getNoItems()                  ` | get number of items in basket                                                           | "Return number of items in basket"                                   |
+|             | `applyDiscount()`              ` | get discount of items in basket                                                         | "Return discounted double for item in basket"                        |
+| `Inventory` | `add(item, quantity)           ` | add a number of items to inventory                                                      | "Added number of items to inventory"                                 |
+|             | `existsInStock(item)           ` | check if number of item exists in stock                                                 | "Return true if exists, false if not"                                |
+|             | `generateSKU(item, variant)    ` | get SKU from first three chars of item, if variant add 4th char.                        | "Return SKU of 3 or 4 chars"                                         |
+| `Item     ` | `getAttributes()               ` | get attributes of item, such as inventory, price etc.                                   | "Return attributes"                                                  |
+|             | `getPrice(item, price)         ` | get attributes of item, such as inventory, price etc.                                   | "Return attributes"                                                  |
 
 
 ```
@@ -75,4 +78,29 @@ As the manager,
 So we don't get any weird requests,
 I want customers to only be able to order things that we stock in our inventory.
 ```
+```
+11.
+As a manager,
+To keep track of things,
+I want to create a code for unique items in the inventory. 
+```
+```
+12.
+As a manager,
+To boost sales,
+I want to create special offers for bulk purchases or popular combinations of items. 
+```
+```
+13.
+As a manager,
+To keep track of things,
+I want to create categories of items and subcategorize products. 
+```
+```
+14.
+As a customer,
+So I can maximize value,
+I want to have an itemized overview per item including bulk discounts.
+```
+
 
