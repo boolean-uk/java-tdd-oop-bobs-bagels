@@ -29,29 +29,35 @@ public class Store {
         return new HashMap<>(baskets);
     }
 
-    public String addBagelToBasket(String bagel, int basketId) {
-        if(!inventory.hasBagel(bagel)) {
-            return "Bob's bagels doesn't have that bagel.";
-        }
+    public String addItemToBasket(Item item, int basketId) {
         Basket basket = baskets.get(basketId);
 
-        if(basket.getNoOfBagels() >= basketCapacity) {
+        if(basket.getNoOfItems() >= basketCapacity) {
             return "You're basket is full!";
         }
-        baskets.get(basketId).addBagel(bagel);
-        return "Bagel added.";
-    }
+        if(item instanceof Bagel bagel) {
+            for(Filling filling : bagel.getFillings()) {
+                if(!inventory.hasItem(filling)) {
+                    return name + " doesn't have " + filling.getName() + " " + filling.getClass().getSimpleName() + ".";
+                }
+            }
+            if(!inventory.hasItem(new Bagel(item.getName()))) {
+                return name + " doesn't have " + item.getName() + " " + item.getClass().getSimpleName() + ".";
+            }
+          //  baskets.get(basketId).addItem(new Bagel(bagel));
+        } else {
+            if (!inventory.hasItem(item)) {
+                return name + " doesn't have " + item.getName() + " " + item.getClass().getSimpleName() + ".";
+            }
 
-    public String addFillingToBagelInBasket(String filling, String bagel, int basketId) {
-        if(!inventory.hasFilling(filling)) {
-            return "Bob's bagels doesn't have that filling.";
         }
-        return baskets.get(basketId).addFilling(filling, bagel);
+        baskets.get(basketId).addItem(item);
+        return item.getName() + " " + item.getClass().getSimpleName() + " added.";
     }
 
     public boolean updateBasketCapacity(int newCapacity) {
         for(Basket basket: baskets.values()) {
-            if(basket.getNoOfBagels()> newCapacity) {
+            if(basket.getNoOfItems()> newCapacity) {
                 return false;
             }
         }
@@ -59,81 +65,57 @@ public class Store {
         return true;
     }
 
-    public double getCostOfBagel(String bagel) {
-        return inventory.getCostOfBagel(bagel);
-    }
-
-    public double getCostOfFilling(String filling) {
-        return inventory.getCostOfFilling(filling);
+    public double getCostOfItem(Item item) {
+        return inventory.getCostOfItem(item);
     }
 
     public double getCostOfBasket(int basketId) {
         return inventory.getCostOfBasket(baskets.get(basketId));
     }
 
-    public boolean removeBagelFromBasket(String bagel, ArrayList<String> fillings, int basketId) {
-        return baskets.get(basketId).removeBagel(bagel, fillings);
-    }
-
-    public double getCostOfCoffee(String coffee) {
-        return inventory.getCostOfCoffee(coffee);
-    }
-
     //TODO: what do if nonexistent basketid
-    public String addCoffeeToBasket(String coffee, int basketId) {
-        if(!inventory.hasCoffee(coffee)) {
-            return  "Bob's bagels doesn't have that coffee.";
-        }
-        baskets.get(basketId).addCoffee(coffee);
-        return "Coffee added.";
-    }
-
-    public boolean removeCoffeeFromBasket(String coffee, int basketId) {
-        return baskets.get(basketId).removeCoffee(coffee);
+    public boolean removeItemFromBasket(Item item, int basketId) {
+        return baskets.get(basketId).removeItem(item);
     }
 
     //TODO: refactor this horrible thing
     public Receipt createReceipt(int basketId) {
-        HashMap<String, Double> prices = new HashMap<>();
-        LinkedHashMap<String, Integer> quantities = new LinkedHashMap<>();
-        Basket basket = baskets.get(basketId);
-        String name;
+        HashMap<Item, Double> prices = new HashMap<>();
+        LinkedHashMap<Item, Integer> quantities = new LinkedHashMap<>();
 
-        for(Bagel bagel: basket.getBagels()) {
-            name =  bagel.getName() + " BAGEL";
-            if(!quantities.containsKey(name)) {
-                quantities.put(name, 1);
-            } else {
-                quantities.put(name, quantities.get(name)+1);
-            }
-            for(String filling: bagel.getFillings()) {
-                name =  filling + " FILLING";
-                if(!quantities.containsKey(name)) {
-                    quantities.put(name, 1);
+        Basket basket = baskets.get(basketId);
+
+        for(Item item: basket.getItems()) {
+            if (item instanceof Bagel) {
+                Bagel bagel = new Bagel(item.getName());
+                if (!quantities.containsKey(bagel)) {
+                    quantities.put(bagel, 1);
                 } else {
-                    quantities.put(name, quantities.get(name)+1);
+                    quantities.put(bagel, quantities.get(bagel) + 1);
+                }
+                for (Filling filling : ((Bagel) item).getFillings()) {
+                    if (!quantities.containsKey(filling)) {
+                        quantities.put(filling, 1);
+                    } else {
+                        quantities.put(filling, quantities.get(filling) + 1);
+                    }
+                }
+            } else {
+                if (!quantities.containsKey(item)) {
+                    quantities.put(item, 1);
+                } else {
+                    quantities.put(item, quantities.get(item) + 1);
                 }
             }
         }
 
-        for(String coffee: basket.getCoffees()) {
-            name =  coffee + " COFFEE";
-            if(!quantities.containsKey(name)) {
-                quantities.put(name, 1);
-            } else {
-                quantities.put(name, quantities.get(name)+1);
-            }
-        }
-
-        for(Map.Entry<String, Integer> e: quantities.entrySet()) {
-            String item = e.getKey();
+        for(Map.Entry<Item, Integer> e: quantities.entrySet()) {
+            Item item = e.getKey();
             int quantity = e.getValue();
-            if (item.contains("BAGEL")) {
-                prices.put(item, inventory.getCostForOfBundleOfBagels(item.substring(0, item.length() - 6), quantity));
-            } else if (item.contains("COFFEE")){
-                prices.put(item, getCostOfCoffee(item.substring(0, item.length() - 7))*quantity);
-            } else if (item.contains("FILLING")){
-                prices.put(item, getCostOfFilling(item.substring(0, item.length() - 8))*quantity);
+            if (item instanceof Bagel) {
+                prices.put(item, inventory.getCostForOfBundleOfBagels((Bagel) item, quantity));
+            } else {
+                prices.put(item, getCostOfItem(item)*quantity);
             }
         }
         return new Receipt(prices, quantities, getCostOfBasket(basketId), this.name, 28);

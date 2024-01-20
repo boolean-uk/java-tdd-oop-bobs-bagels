@@ -1,8 +1,14 @@
 package com.booleanuk.extension;
 
+import com.booleanuk.core.Bagel;
+import com.booleanuk.core.Coffee;
+import com.booleanuk.core.Filling;
 import com.booleanuk.core.Store;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class ExtensionOneTest {
 
@@ -13,10 +19,10 @@ public class ExtensionOneTest {
         int basketId = store.createBasket();
 
         for(int i=0; i < 16; i++) {
-            store.addBagelToBasket("plain", basketId);
+            store.addItemToBasket(new Bagel("plain"), basketId);
         }
 
-        Assertions.assertEquals(16, store.getBaskets().get(basketId).getNoOfBagels());
+        Assertions.assertEquals(16, store.getBaskets().get(basketId).getNoOfItems());
         Assertions.assertEquals(5.55, store.getCostOfBasket(basketId), 0.001);
     }
 
@@ -27,19 +33,19 @@ public class ExtensionOneTest {
         int basketId = store.createBasket();
 
         for(int i=0; i < 12; i++) {
-            store.addBagelToBasket("plain", basketId);
+            store.addItemToBasket(new Bagel("plain"), basketId);
         }
         for(int i=0; i < 6; i++) {
-            store.addBagelToBasket("Everything", basketId);
+            store.addItemToBasket(new Bagel("Everything"), basketId);
         }
         for(int i=0; i < 2; i++) {
-            store.addBagelToBasket("oNIoN", basketId);
+            store.addItemToBasket(new Bagel("onion"), basketId);
         }
         for(int i=0; i < 3; i++) {
-            store.addCoffeeToBasket("blaCk", basketId);
+            store.addItemToBasket(new Coffee("black"), basketId);
         }
 
-        Assertions.assertEquals(20, store.getBaskets().get(basketId).getNoOfBagels());
+        Assertions.assertEquals(20, store.getBaskets().get(basketId).getNoOfItems());
         Assertions.assertEquals(10.43, store.getCostOfBasket(basketId), 0.001);
     }
 
@@ -50,23 +56,20 @@ public class ExtensionOneTest {
         int basketId = store.createBasket();
 
         for(int i=0; i < 12; i++) {
-            store.addBagelToBasket("plain", basketId);
+            store.addItemToBasket(new Bagel("plain"), basketId);
         }
         for(int i=0; i < 6; i++) {
-            store.addBagelToBasket("Everything", basketId);
-            store.addFillingToBagelInBasket("cheese", "everything", basketId);
+            store.addItemToBasket(new Bagel("everything", new ArrayList<>(Arrays.asList(new Filling("ham")))), basketId);
         }
         for(int i=0; i < 2; i++) {
-            store.addBagelToBasket("oNIoN", basketId);
-            store.addFillingToBagelInBasket("hAM", "everything", basketId);
-            store.addFillingToBagelInBasket("egG", "everything", basketId);
+            store.addItemToBasket(new Bagel("plain", new ArrayList<>(Arrays.asList(new Filling("ham"), new Filling("egg")))), basketId);
 
         }
         for(int i=0; i < 3; i++) {
-            store.addCoffeeToBasket("blaCk", basketId);
+            store.addItemToBasket(new Coffee("black"), basketId);
         }
 
-        Assertions.assertEquals(20, store.getBaskets().get(basketId).getNoOfBagels());
+        Assertions.assertEquals(20, store.getBaskets().get(basketId).getNoOfItems());
         Assertions.assertEquals(10.43 + 0.12*10, store.getCostOfBasket(basketId), 0.001);
     }
 
@@ -74,8 +77,8 @@ public class ExtensionOneTest {
     public void discountOneCoffeeAndOneBagelTest() {
         Store store = new Store();
         int basketId = store.createBasket();
-        store.addBagelToBasket("plain", basketId);
-        store.addCoffeeToBasket("black", basketId);
+        store.addItemToBasket(new Bagel("plain"), basketId);
+        store.addItemToBasket(new Coffee("black"), basketId);
 
         Assertions.assertEquals(1.25, store.getCostOfBasket(basketId), 0.001);
     }
@@ -84,10 +87,8 @@ public class ExtensionOneTest {
     public void discountOneCoffeeAndOneBagelWithFillingsTest() {
         Store store = new Store();
         int basketId = store.createBasket();
-        store.addBagelToBasket("plain", basketId);
-        store.addCoffeeToBasket("black", basketId);
-        store.addFillingToBagelInBasket("hAM", "plain", basketId);
-        store.addFillingToBagelInBasket("egG", "plain", basketId);
+        store.addItemToBasket(new Bagel("plain", new ArrayList<>(Arrays.asList(new Filling("ham"), new Filling("egg")))), basketId);
+        store.addItemToBasket(new Coffee("black"), basketId);
 
         Assertions.assertEquals(1.25+0.12*2, store.getCostOfBasket(basketId), 0.001);
     }

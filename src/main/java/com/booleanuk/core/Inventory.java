@@ -6,9 +6,7 @@ import java.util.Map;
 
 public class Inventory {
     private HashMap<String, Double> prices;
-    private HashMap<String, String> bagelCodes;
-    private HashMap<String, String> coffeeCodes;
-    private HashMap<String, String> fillingCodes;
+    private HashMap<Item, String> skuCodes;
     private final double TWELWE_BAGELS_DISCOUNT_PRICE = 3.99;
     private final double SIX_BAGELS_DISCOUNT_PRICE = 2.49;
     private final double COFFEE_AND_BAGEL_DISCOUNT = 1.25;
@@ -18,71 +16,52 @@ public class Inventory {
         initializeCodes();
     }
 
-    public boolean hasBagel(String bagel) {
-        return bagelCodes.containsKey(bagel.toUpperCase());
-    }
-
-    public boolean hasFilling(String filling) {
-        return fillingCodes.containsKey(filling.toUpperCase());
-    }
-
-    public boolean hasCoffee(String coffee) {
-        return coffeeCodes.containsKey(coffee.toUpperCase());
-    }
-
-    public double getCostOfBagel(String bagel) {
-        if(!bagelCodes.containsKey(bagel.toUpperCase())) {
+    public double getCostOfItem(Item item) {
+        if(!skuCodes.containsKey(item)) {
             return -1;
         }
-        return prices.get(bagelCodes.get(bagel.toUpperCase()));
-    }
-
-    public double getCostOfFilling(String filling) {
-        if(!fillingCodes.containsKey(filling.toUpperCase())) {
-            return -1;
-        }
-        return prices.get(fillingCodes.get(filling.toUpperCase()));
+        return prices.get(skuCodes.get(item));
     }
 
     public double getCostOfBasket(Basket basket) {
         double cost = 0;
         HashMap<String, Integer> noOfEachKind = new HashMap<>();
-        ArrayList<Bagel> bagels = basket.getBagels();
-        ArrayList<String> coffees = basket.getCoffees();
+        ArrayList<Item> items = basket.getItems();
 
+        //TODO: fix
         //If customer buys one coffee and one bagel
-        if(bagels.size() == 1 && coffees.size() == 1) {
-            cost += COFFEE_AND_BAGEL_DISCOUNT;
-            for(String filling: bagels.get(0).getFillings()) {
-                cost += getCostOfFilling(filling);
-            }
-            return cost;
-        }
+//        if(bagels.size() == 1 && coffees.size() == 1) {
+//            cost += COFFEE_AND_BAGEL_DISCOUNT;
+//            for(String filling: bagels.get(0).getFillings()) {
+//                cost += getCostOfFilling(filling);
+//            }
+//            return cost;
+//        }
 
-        for(Bagel bagel: bagels) {
-            if(noOfEachKind.containsKey(bagel.getName())) {
-                noOfEachKind.put(bagel.getName(), noOfEachKind.get(bagel.getName())+1);
+        for(Item item: items) {
+            if(item instanceof Bagel bagel) {
+                if (noOfEachKind.containsKey(bagel.getName())) {
+                    noOfEachKind.put(bagel.getName(), noOfEachKind.get(bagel.getName()) + 1);
+                } else {
+                    noOfEachKind.put(bagel.getName(), 1);
+                }
+                for (Filling filling : bagel.getFillings()) {
+                    cost += getCostOfItem(filling);
+                }
             } else {
-                noOfEachKind.put(bagel.getName(), 1);
-            }
-            for(String filling: bagel.getFillings()) {
-                cost += getCostOfFilling(filling);
+                cost +=getCostOfItem(item);
             }
         }
 
         //See if discounts
         for(Map.Entry<String, Integer> e: noOfEachKind.entrySet()) {
-            cost += getCostForOfBundleOfBagels(e.getKey(), e.getValue());
-        }
-
-        for(String coffee: coffees) {
-            cost += getCostOfCoffee(coffee);
+            cost += getCostForOfBundleOfBagels(new Bagel(e.getKey()), e.getValue());
         }
 
         return cost;
     }
 
-    public double getCostForOfBundleOfBagels(String bagel, int noOfBagels) {
+    public double getCostForOfBundleOfBagels(Bagel bagel, int noOfBagels) {
         double cost = 0;
         while(noOfBagels-12 >= 0) {
             cost += TWELWE_BAGELS_DISCOUNT_PRICE;
@@ -92,7 +71,7 @@ public class Inventory {
             cost += SIX_BAGELS_DISCOUNT_PRICE;
             noOfBagels -= 6;
         }
-        cost += getCostOfBagel(bagel)*noOfBagels;
+        cost += getCostOfItem(bagel)*noOfBagels;
         return cost;
     }
 
@@ -116,34 +95,28 @@ public class Inventory {
     }
 
     private void initializeCodes() {
-        bagelCodes = new HashMap<>();
-        bagelCodes.put("ONION", "BGLO");
-        bagelCodes.put("PLAIN", "BGLP");
-        bagelCodes.put("EVERYTHING", "BGLE");
-        bagelCodes.put("SESAME", "BGLS");
+        skuCodes = new HashMap<>();
+        skuCodes.put(new Bagel("ONION"), "BGLO");
+        skuCodes.put(new Bagel("PLAIN"), "BGLP");
+        skuCodes.put(new Bagel("EVERYTHING"), "BGLE");
+        skuCodes.put(new Bagel("SESAME"), "BGLS");
 
-        coffeeCodes = new HashMap<>();
-        coffeeCodes.put("BLACK","COFB");
-        coffeeCodes.put("WHITE","COFW");
-        coffeeCodes.put("CAPUCCINO","COFC");
-        coffeeCodes.put("LATTE","COFL");
+        skuCodes.put(new Coffee("BLACK"),"COFB");
+        skuCodes.put(new Coffee("WHITE"),"COFW");
+        skuCodes.put(new Coffee("CAPPUCCINO"),"COFC");
+        skuCodes.put(new Coffee("LATTE"),"COFL");
 
-        fillingCodes = new HashMap<>();
-        fillingCodes.put("BACON","FILB");
-        fillingCodes.put("EGG","FILE");
-        fillingCodes.put("CHEESE","FILC");
-        fillingCodes.put("CREAM CHEESE","FILX");
-        fillingCodes.put("SMOKED SALMON","FILS");
-        fillingCodes.put("HAM","FILH");
+        skuCodes.put(new Filling("BACON"),"FILB");
+        skuCodes.put(new Filling("EGG"),"FILE");
+        skuCodes.put(new Filling("CHEESE"),"FILC");
+        skuCodes.put(new Filling("CREAM CHEESE"),"FILX");
+        skuCodes.put(new Filling("SMOKED SALMON"),"FILS");
+        skuCodes.put(new Filling("HAM"),"FILH");
 
     }
 
-    public double getCostOfCoffee(String coffee) {
-        if(!coffeeCodes.containsKey(coffee.toUpperCase())) {
-            return  -1;
-        }
-        return prices.get(coffeeCodes.get(coffee.toUpperCase()));
+    public boolean hasItem(Item item) {
+
+        return skuCodes.containsKey(item);
     }
-
-
 }

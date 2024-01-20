@@ -8,15 +8,15 @@ import java.util.Map;
 
 public class Receipt {
     private Date date;
-    private HashMap<String, Double> prices;
-    private LinkedHashMap<String, Integer> quantities;
+    private HashMap<Item, Double> prices;
+    private LinkedHashMap<Item, Integer> quantities;
     private double totalCost;
     private String storeName;
     private int width;
     private int priceOffSet;
     private String decorativeLine;
 
-    public Receipt(HashMap<String, Double> prices, LinkedHashMap<String, Integer> quantities, double totalCost, String storeName, int width) {
+    public Receipt(HashMap<Item, Double> prices, LinkedHashMap<Item, Integer> quantities, double totalCost, String storeName, int width) {
         date = new Date();
         this.prices = prices;
         this.quantities = quantities;
@@ -35,17 +35,19 @@ public class Receipt {
 
     private String formatProductData() {
         String string = "";
-        String name;
+        Item item;
         int quantity;
         String cost;
         String quantityAndCost = "";
+        String name;
 
-        for(Map.Entry<String, Integer> entry: quantities.entrySet()) {
-            name = entry.getKey();
+        for(Map.Entry<Item, Integer> entry: quantities.entrySet()) {
+            item = entry.getKey();
             quantity = entry.getValue();
-            cost = String.format("%.2f", prices.get(name));
+            cost = String.format("%.2f", prices.get(item));
+            name = item.getName()+ " " + item.getClass().getSimpleName();
             quantityAndCost = quantity + " ".repeat(priceOffSet - String.valueOf(quantity).length()-String.valueOf(cost).length()-1) + "\u00A3"+cost;
-            string += "\n" + name.toUpperCase() + " ".repeat(width-name.length()-priceOffSet) + quantityAndCost;
+            string += "\n" + name + " ".repeat(width-name.length()-priceOffSet) + quantityAndCost;
         }
 
         return string;

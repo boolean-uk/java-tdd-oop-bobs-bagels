@@ -1,39 +1,22 @@
 package com.booleanuk.core;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
-public class Bagel {
-    private String name;
-    private ArrayList<String> fillings;
+public class Bagel extends Item{
+    private ArrayList<Filling> fillings;
 
     public Bagel(String name) {
-        this.name = name.toUpperCase();
+        super(name);
         fillings = new ArrayList<>();
     }
 
-    public Bagel(String name, ArrayList<String> fillings) {
-        this.name = name.toUpperCase();
-        this.fillings = fillings;
+    public Bagel(String name, ArrayList<Filling> fillings) {
+        super(name);
+        this.fillings = Objects.requireNonNullElseGet(fillings, ArrayList::new);
     }
 
-    public boolean addFilling(String filling) {
-        filling = filling.toUpperCase();
-        if(fillings.contains(filling)) {
-            return false;
-        }
-        fillings.add(filling);
-        return true;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public boolean hasFilling(String filling) {
-        return fillings.contains(filling.toUpperCase());
-    }
-
-    public ArrayList<String> getFillings() {
+    public ArrayList<Filling> getFillings() {
         return new ArrayList<>(fillings);
     }
 
@@ -43,11 +26,11 @@ public class Bagel {
             return false;
         }
         Bagel other = (Bagel) obj;
-        return this.name.equalsIgnoreCase(other.name) && this.fillings.equals(other.fillings);
+        return super.equals(other) && this.fillings.equals(other.fillings);
     }
 
     @Override
     public String toString() {
-        return name + (fillings.isEmpty()? "": " with " + fillings);
+        return super.getName() + (fillings.isEmpty()? "": " with " + fillings);
     }
 }

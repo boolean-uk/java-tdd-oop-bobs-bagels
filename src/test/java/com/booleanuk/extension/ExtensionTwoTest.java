@@ -1,5 +1,7 @@
 package com.booleanuk.extension;
 
+import com.booleanuk.core.Bagel;
+import com.booleanuk.core.Coffee;
 import com.booleanuk.core.Store;
 import com.booleanuk.core.Receipt;
 import org.junit.jupiter.api.Assertions;
@@ -14,7 +16,7 @@ public class ExtensionTwoTest {
     public void createReceiptForOneProductTest() {
         Store store = new Store();
         int basketId = store.createBasket();
-        store.addBagelToBasket("Plain", basketId);
+        store.addItemToBasket(new Bagel("plain"), basketId);
         Receipt receipt = store.createReceipt(basketId);
         Date date = new Date();
         int width = 28;
@@ -44,7 +46,7 @@ public class ExtensionTwoTest {
         int basketId = store.createBasket();
         store.updateBasketCapacity(16);
         for(int i=0; i < 16; i++) {
-            store.addBagelToBasket("plain", basketId);
+            store.addItemToBasket(new Bagel("plain"), basketId);
         }
         Receipt receipt = store.createReceipt(basketId);
         Date date = new Date();
@@ -77,16 +79,16 @@ public class ExtensionTwoTest {
         int basketId = store.createBasket();
 
         for(int i=0; i < 2; i++) {
-            store.addBagelToBasket("oNIoN", basketId);
+            store.addItemToBasket(new Bagel("onion"), basketId);
         }
         for(int i=0; i < 12; i++) {
-            store.addBagelToBasket("plain", basketId);
+            store.addItemToBasket(new Bagel("plain"), basketId);
         }
         for(int i=0; i < 6; i++) {
-            store.addBagelToBasket("Everything", basketId);
+            store.addItemToBasket(new Bagel("everything"), basketId);
         }
         for(int i=0; i < 3; i++) {
-            store.addCoffeeToBasket("blaCk", basketId);
+            store.addItemToBasket(new Coffee("blaCk"), basketId);
         }
 
         Receipt receipt = store.createReceipt(basketId);
