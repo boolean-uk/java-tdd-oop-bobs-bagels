@@ -21,14 +21,25 @@ public class Basket {
     public ArrayList<Item> list = new ArrayList<>();
     public int capacity = 3;
     public String add(Item item) {
-        if (list.size() < capacity) {
-            if (list.contains(item)) {
-                return "This item already exists in the Basket";
+        boolean exists = false;
+        for (Item it : Items){
+            if (item.getSku().equals(it.getSku())) {
+                exists = true;
+                break;
             }
-            list.add(item);
-            return "Item successfully added";
         }
-        return "Your Basket is full";
+        if (exists) {
+            if (list.size() < capacity) {
+                if (list.contains(item)) {
+                    return "This item already exists in the Basket";
+                }
+                list.add(item);
+                return "Item successfully added";
+            }
+            return "Your Basket is full";
+        } else {
+            return "Item is not in the inventory";
+        }
     }
 
     public String remove(Item item) {
