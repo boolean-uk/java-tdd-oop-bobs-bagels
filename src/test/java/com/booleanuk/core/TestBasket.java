@@ -18,7 +18,8 @@ class BasketTest {
             new Item("FILC", 0.12, "Filling", "Cheese"),
             new Item("FILX", 0.12, "Filling", "Cream Cheese"),
             new Item("FILS", 0.12, "Filling", "Smoked Salmon"),
-            new Item("FILH", 0.12, "Filling", "Ham")
+            new Item("FILH", 0.12, "Filling", "Ham"),
+            new Item("FILm", 0.12, "Filling", "bacon")
     };
     @Test
     public void addingAnItemToBasketReturnTrue(){
@@ -61,5 +62,10 @@ class BasketTest {
         basket.add(Items[4]);
         basket.add(Items[7]);
         Assertions.assertEquals(2.77, basket.totalCost());
+    }
+    @Test
+    public void addAnotherItem() {
+        Basket basket = new Basket();
+        Assertions.assertEquals("Item is not in the inventory", basket.add(Items[14]));
     }
 }
