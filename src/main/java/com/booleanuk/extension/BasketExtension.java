@@ -48,4 +48,23 @@ public class BasketExtension extends Basket {
         System.out.printf(" %23s %n", "Thank you");
         System.out.printf(" %26s %n%n", "for your order!");
     }
+
+    private Product getProductFromType(String type){
+        for (Product product : products.keySet()){
+            if (product.getType().equals(type)){
+                return product;
+            }
+        }
+        return null;
+    }
+
+    private int countOfType(String type){
+        int count = 0;
+        for (Product product : products.keySet()){
+            if (product.getType().equals(type)){
+                count++;
+            }
+        }
+        return count;
+    }
 }

@@ -1,6 +1,7 @@
 package com.booleanuk.core;
 
 public class Product {
+
     final String SKU;
     private final String type;
     private final double price;
