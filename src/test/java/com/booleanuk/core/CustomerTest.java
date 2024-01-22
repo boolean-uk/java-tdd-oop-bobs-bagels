@@ -8,6 +8,8 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
+import static java.lang.Thread.sleep;
+
 public class CustomerTest {
 
     @Test
@@ -103,10 +105,10 @@ public class CustomerTest {
     }
 
     @Test
-    public void testDiscounts() {
+    public void testDiscounts() throws InterruptedException {
         Customer customer = new Customer();
 
-        Basket basket = new Basket(5);
+        Basket basket = new Basket(10);
 
         customer.setBasket(basket);
 
@@ -129,31 +131,69 @@ public class CustomerTest {
         Map<String, ArrayList<Double>> discounts = customer.getDiscounts();
 
 
+        //As of now, totalCost has to be ran before getting discount, this does seem wrong as i test discount without getting total cost.
+        //However i would need to change alot of my code and logic of getting discounts to make this work othere way. Or make discount run
+        //like how total cost is ran without the cost getting calculated.
+
+        double totalCost = customer.getTotalCost(basket.getItemList());
         double finalDiscount = 0.00;
-        System.out.println("adcbbsd");
-        System.out.println(discounts.values().toString());
-        System.out.println(discounts.entrySet().toString());
-        System.out.println(discounts.get("CoffeeBagelDeal"));
-        for(ArrayList<Double> saving : discounts.values()) {
-            System.out.println(saving.toString());
-            System.out.println("asdasdasd");
-            for(double dob : saving) {
-                finalDiscount += dob;
-            }
-        }
-
-        Assertions.assertEquals((0.99*4 + 0.39*4) - customer.getTotalCost(map),finalDiscount );
-
-        discounts = customer.getDiscounts();
-        finalDiscount = 0.00;
-
-        for(ArrayList<Double> saving : discounts.values()) {
+        for(ArrayList<Double> saving : customer.getDiscounts().values()) {
 
             for(double dob : saving) {
                 finalDiscount += dob;
             }
         }
-        Assertions.assertEquals((0.39*12) - 3.99, customer.getTotalCost(Map.of(new Bagel("Plain"), 12)));
+
+        System.out.println(customer.getTotalCost(map));
+
+        Assertions.assertEquals(((0.99*4 + 0.39*4) - 1.25*4),finalDiscount );
+
+
+
+
+
+
+        Customer customer2 = new Customer();
+        Basket basket2 = new Basket(10);
+
+
+
+        basket2.addItemToBasket(new Bagel("Plain"));
+        basket2.addItemToBasket(new Bagel("Plain"));
+        basket2.addItemToBasket(new Bagel("Plain"));
+        basket2.addItemToBasket(new Bagel("Plain"));
+        basket2.addItemToBasket(new Bagel("Plain"));
+        basket2.addItemToBasket(new Bagel("Plain"));
+        basket2.addItemToBasket(new Bagel("Plain"));
+        basket2.addItemToBasket(new Bagel("Plain"));
+        basket2.addItemToBasket(new Bagel("Plain"));
+        basket2.addItemToBasket(new Bagel("Plain"));
+        basket2.addItemToBasket(new Bagel("Plain"));
+        basket2.addItemToBasket(new Bagel("Plain"));
+
+        customer2.setBasket(basket2);
+
+        double finalDiscount2 = 0.00;
+
+        //As of now, totalCost has to be ran before getting discount, this does seem wrong as i test discount without getting total cost.
+        //However i would need to change alot of my code and logic of getting discounts to make this work othere way. Or make discount run
+        //like how total cost is ran without the cost getting calculated.
+
+        double totalCost2 = customer2.getTotalCost(basket2.getItemList());
+
+        for(ArrayList<Double> saving : customer2.getDiscounts().values()) {
+
+            for(double dob : saving) {
+                finalDiscount2 += dob;
+            }
+        }
+
+
+
+
+
+        double expectedPrice = (0.39*12) - 3.99;
+        Assertions.assertEquals(expectedPrice, finalDiscount2);
 
 
 

@@ -19,6 +19,7 @@ public class Basket {
 
     }
 
+    //Need to check for basketCapacity
     public boolean addItemToBasket(Item item) {
 
         if(itemList.isEmpty()) {
