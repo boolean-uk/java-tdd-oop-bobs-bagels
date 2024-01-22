@@ -21,3 +21,6 @@ gradle-app.setting
 .classpath
 
 .idea
+
+# ignore all stupid mega build files from intellij
+*.hprof

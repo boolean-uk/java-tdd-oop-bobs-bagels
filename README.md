@@ -1,3 +1,14 @@
+# Notice! (Before you start)
+
+This project uses menus. Which means you have to navigate through the project as if it was a normal application with menus.
+(Although, be it more jank, because you have to press an action button then press enter to submit the action...)
+
+### Controls
+- Up = w
+- Down = s
+- Confirm = c
+- Quit/Return = q
+
 # Bob's Bagels - Object-oriented Programming
 
 ![](./assets/bagels.jpg)
