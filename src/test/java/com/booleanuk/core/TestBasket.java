@@ -23,7 +23,8 @@ class BasketTest {
     };
     @Test
     public void addingAnItemToBasketReturnTrue(){
-        Basket basket = new Basket();
+        Member customer = new Member();
+        Basket basket = new Basket(customer);
 
         Assertions.assertEquals("Item successfully added", basket.add(Items[0]));
         Assertions.assertEquals("This item already exists in the Basket", basket.add(Items[0]));
@@ -34,20 +35,23 @@ class BasketTest {
 
     @Test
     public void removingAnItemFromBasketReturnTrue(){
-        Basket basket = new Basket();
+        Member customer = new Member();
+        Basket basket = new Basket(customer);
         basket.add(Items[0]);
         Assertions.assertEquals("Item successfully removed", basket.remove(Items[0]));
     }
 
     @Test
-    public void checkingChangedCapacity() {
-        Basket basket = new Basket();
+    public void checkingChangedCapacity() throws UserException {
+        Member manager = new Member();
+        Basket basket = new Basket(manager);
         basket.change(5);
         Assertions.assertEquals("New capacity: 5", basket.change(5));
     }
     @Test
     public void seeTotalCost() {
-        Basket basket = new Basket();
+        Member customer = new Member();
+        Basket basket = new Basket(customer);
         basket.add(Items[0]);
         basket.add(Items[4]);
         basket.add(Items[7]);
@@ -55,12 +59,14 @@ class BasketTest {
     }
     @Test
     public void addAnotherItem() {
-        Basket basket = new Basket();
+        Member customer = new Member();
+        Basket basket = new Basket(customer);
         Assertions.assertEquals("Item is not in the inventory", basket.add(Items[14]));
     }
     @Test
     public void seeTheCostOfAnItem() {
-        Basket basket = new Basket();
+        Member customer = new Member();
+        Basket basket = new Basket(customer);
         Assertions.assertEquals(0.12, basket.seeCost(Items[9]));
     }
 }

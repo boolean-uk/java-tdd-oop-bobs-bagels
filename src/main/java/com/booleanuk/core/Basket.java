@@ -4,9 +4,12 @@ import java.util.ArrayList;
 import java.util.Map;
 
 public class Basket {
+    Member member;
+    public Basket(Member member) {
+        this.member = member;
+    }
     Inventory in = new Inventory();
     Map<String, Item> items = in.items;
-
     public ArrayList<Item> list = new ArrayList<>();
     public int capacity = 3;
     public String add(Item item) {
@@ -33,7 +36,10 @@ public class Basket {
     }
 
 
-    public String change(int newCap) {
+    public String change(int newCap) throws UserException  {
+        if (member.toString().equals("customer".toLowerCase())){
+            throw new UserException("You can't do that");
+        }
         if (newCap < list.size()) {
             return "New capacity is smaller than the items in the basket";
         }
