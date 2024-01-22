@@ -10,7 +10,7 @@ public class ExtensionExercise1 {
     private ArrayList<Inventory> inventoryList;
 
     public ExtensionExercise1() {
-        basketList = new ArrayList<>(5);
+        basketList = new ArrayList<>();
         inventoryList = new ArrayList<>();
         inventoryList.add(new Inventory("BGLO", 0.49, "Bagel", "Onion"));
         inventoryList.add(new Inventory("BGLP", 0.39, "Bagel", "Plain"));
@@ -18,14 +18,13 @@ public class ExtensionExercise1 {
         inventoryList.add(new Inventory("COFB", 0.99, "Coffee", "Black"));
     }
 
-    int countBGLO = 0;
-    int countBGLP = 0;
-    int countBGLE = 0;
-
-    int countCOFB = 0;
-
     public double returnItemsWithDiscount() {
-        double price = 0.0;
+
+        int countBGLO = 0;
+        int countBGLP = 0;
+        int countBGLE = 0;
+        int countCOFB = 0;
+
         for (Inventory items : basketList) {
             if (items.getSku().equals("BGLO")) {
                 countBGLO++;
@@ -42,18 +41,23 @@ public class ExtensionExercise1 {
                 countCOFB++;
             }
         }
+
+
+        double price = 0.0;
+
         if (countBGLO >= 6) {
-            price += (countBGLO / 6) * 2.49;
+            price += ( (countBGLO / 6) * 2.49);
         }
-        else if (countBGLP >= 12) {
-            price += (countBGLP / 12) * 3.99;
+        if (countBGLP >= 12) {
+            price += ( (countBGLP / 12) * 3.99);
         }
-        else if(countBGLE >= 6) {
-            price += (countBGLE / 6) * 2.49;
+        if(countBGLE >= 6) {
+            price += ( (countBGLE / 6) * 2.49);
         }
-        else if (countCOFB >= 1) {
-            price += (countCOFB / 1) * 1.25;
+        if (countCOFB > 0 && (countBGLP > 0 || countBGLP > 0 || countBGLE > 0)) {
+            price += ( (countCOFB / 1) + (countBGLO / 1) + (countBGLP / 1) + (countBGLE / 1) * 1.25);
         }
+        System.out.println(price);
         return price;
     }
 
@@ -71,5 +75,10 @@ public class ExtensionExercise1 {
 
     public void setInventoryList(ArrayList<Inventory> inventoryList) {
         this.inventoryList = inventoryList;
+    }
+
+    public static void main(String[] args) {
+        ExtensionExercise1 extensionExercise1 = new ExtensionExercise1();
+        extensionExercise1.returnItemsWithDiscount();
     }
 }

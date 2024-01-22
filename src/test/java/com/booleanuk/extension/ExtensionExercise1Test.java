@@ -4,13 +4,13 @@ import com.booleanuk.core.Inventory;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 class ExtensionExercise1Test {
 
     @Test
     void returnItemsWithDiscount() {
         ExtensionExercise1 extensionExercise1 = new ExtensionExercise1();
+
+        extensionExercise1.getBasketList().clear();
 
         for(int i = 0; i < 6; i++) {
             extensionExercise1.getBasketList().add(new Inventory("BGLO", 0.49, "Bagel", "Onion"));
