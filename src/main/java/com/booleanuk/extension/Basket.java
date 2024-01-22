@@ -18,7 +18,7 @@ public class Basket {
     public boolean add(Product product){
 
         //If the product is not in inventory
-        if(!Inventory.isValidProduct(product) || product.getName().equals("Fillings")){
+        if(!Inventory.isValidProduct(product) || product.getName().equals("Filling")){
             return false;
         }
 
@@ -79,15 +79,16 @@ public class Basket {
     }
 
     public double getCostOfProduct(Product product){
-        double total = product.getPrice();
-        for(Filling filling : product.getFillings()){
-            total += getCostOfFilling(filling);
+        double price = 0;
+        if (product.getName().equals("Bagel")){
+            price = product.getPrice();
+            for(Filling filling : product.getFillings()){
+                price += filling.getPrice();
+            }
+        }else {
+            price = product.getPrice();
         }
-        return total;
-    }
-
-    public double getCostOfFilling(Filling filling){
-        return filling.getPrice();
+        return price;
     }
 
     protected void clearBasket(){

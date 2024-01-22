@@ -1,5 +1,6 @@
 package com.booleanuk.extension;
 
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -7,9 +8,9 @@ import java.util.ArrayList;
 
 class BasketTest {
     @Test
-    public void testAddRightBagel(){
+    public void testAddRight(){
         Basket basket = new  Basket();
-        Basket.setMaxSize(2);
+        Basket.setMaxSize(3);
         Bagel bagelNoFillings = new  Bagel("BGLO", 0.49, "Onion");
 
         Filling filling1 = new  Filling("FILB", 0.12, "Bacon");
@@ -21,8 +22,12 @@ class BasketTest {
        //Add Bagel With no filling
        Assertions.assertTrue(basket.add(bagelNoFillings));
 
-        //Add Bagel With filling
+       //Add Bagel With filling
         Assertions.assertTrue(basket.add(bagelWfillings));
+
+        //AddCoffee
+        Coffee black = new Coffee("COFB", 0.99, "Black");
+        Assertions.assertTrue(basket.add(black));
 
        //Try adding with a full basket
        Assertions.assertFalse(basket.add(bagelNoFillings));
@@ -30,14 +35,12 @@ class BasketTest {
     }
 
     @Test
-    public void testAddWrongBagel(){
+    public void testAddWrong(){
          Basket basket = new  Basket();
 
          Bagel bagelWrongPrice = new  Bagel("BGLO", 0.69, "Onion");
          Bagel bagelWrongVariant = new  Bagel("BGLO", 0.39, "Plain");
          Bagel bagelWrongId = new  Bagel("BGL", 0.39, "Plain");
-
-
 
         //Add Wrong Bagel
         Assertions.assertFalse(basket.add(bagelWrongPrice));
@@ -45,6 +48,10 @@ class BasketTest {
         Assertions.assertFalse(basket.add(bagelWrongId));
         Assertions.assertFalse(basket.add(bagelWrongPrice));
 
+        Filling filling1 = new Filling("FILB", 0.12, "Bacon");
+
+        //Add filling
+        Assertions.assertFalse(basket.add(filling1));
     }
 
     @Test
@@ -105,12 +112,22 @@ class BasketTest {
     }
 
     @Test
-    public void testGetCostOfFilling(){
+    public void testGetCostOfCoffee(){
          Basket basket = new  Basket();
-         Filling filling1 = new  Filling("FILB", 0.12, "Bacon");
+         Filling coffee = new  Filling("COFB", 0.99, "Black");
 
-        //Test get cost of filling
-        Assertions.assertEquals(0.12, basket.getCostOfFilling(filling1));
+        //Test get cost of Coffee
+        Assertions.assertEquals(0.99, basket.getCostOfProduct(coffee));
+
+    }
+
+    @Test
+    public void testGetCostOfFilling(){
+        Basket basket = new  Basket();
+        Filling filling1 = new  Filling("FILB", 0.12, "Bacon");
+
+        //Test get cost of Filling
+        Assertions.assertEquals(0.12, basket.getCostOfProduct(filling1));
 
     }
     @Test
@@ -132,6 +149,7 @@ class BasketTest {
         //Get cost of bagel with filling on
         Assertions.assertEquals(0.63, basket.getCostOfProduct(bagelWithFilling));
     }
+
     @Test
     public void testGetTotalCostNoDisCount(){
          Bagel bagelplain = new  Bagel("BGLP", 0.39, "Plain");
