@@ -119,7 +119,7 @@ class BasketTest {
         Coffee coffee = new Coffee("COFB", 0.99, "Black");
 
         //Test get cost of filling
-        Assertions.assertEquals(0.12, basket.getCostOfCoffee(coffee));
+        Assertions.assertEquals(0.99, basket.getCostOfProduct(coffee));
 
     }
     @Test

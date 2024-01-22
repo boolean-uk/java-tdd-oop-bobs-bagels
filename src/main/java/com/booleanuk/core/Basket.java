@@ -67,23 +67,23 @@ public class Basket {
         double total = 0;
 
         for (Product product: products){
-            total += getCostOfBagel(product);
+            total += getCostOfProduct(product);
         }
         return total;
     }
 
-    public double getCostOfBagel(Product product){
-        double total = product.getPrice();
-        for(Filling filling : product.getFillings()){
-            total += getCostOfFilling(filling);
+    public double getCostOfProduct(Product product){
+        double price = 0;
+        if (product.getName().equals("Bagel")){
+            price = product.getPrice();
+            for(Filling filling : product.getFillings()){
+                price += filling.getPrice();
+            }
+        }else {
+            price = product.getPrice();
         }
-        return total;
+        return price;
     }
-
-    public double getCostOfFilling(Filling filling){
-        return filling.getPrice();
-    }
-
     protected void clearBasket(){
         this.products.clear();
     }
