@@ -48,11 +48,11 @@ public class BasketTest {
 
     @Test
     public void testDecreaseStockWhenAdded(){
-        Assertions.assertEquals(10, inventory.getInventory(bagel.sku));
+        Assertions.assertEquals(10, inventory.getInventory(bagel.getSku()));
         basket.addItem(bagel);
-        Assertions.assertEquals(9, inventory.getInventory(bagel.sku));
+        Assertions.assertEquals(9, inventory.getInventory(bagel.getSku()));
         basket.addItem(bagel);
-        Assertions.assertEquals(8, inventory.getInventory(bagel.sku));
+        Assertions.assertEquals(8, inventory.getInventory(bagel.getSku()));
     }
 
     @Test
