@@ -69,4 +69,33 @@ public class ReceiptTest {
         receipt.generateReceipt();
         Assertions.assertTrue(receipt.printReceipt());
     }
+
+    @Test
+    public void generateReceiptWithDiscount() {
+        HashMap<Item, Integer> testInventory = new HashMap<>();
+        Item bglo = new Item("BGLO","Bagel", "Onion", 0.49);
+        Item bglp = new Item("BGLP","Bagel", "Plain", 0.39);
+        testInventory.put(bglo, 50);
+        testInventory.put(bglp, 50);
+        BobsBagelsShop shop = new BobsBagelsShop(testInventory);
+        Basket basket = new Basket(shop, 20);
+        Receipt receipt = new Receipt(basket);
+
+        Assertions.assertEquals("Basket is empty.", receipt.generateReceiptWithDiscount());
+
+        basket.add(bglo); basket.add(bglo); basket.add(bglo); basket.add(bglo); basket.add(bglo); basket.add(bglo); basket.add(bglo); basket.add(bglo);
+        Assertions.assertTrue(receipt.generateReceiptWithDiscount().contains("Onion Bagel\t\t8\t\u00A33.27\n"));
+        Assertions.assertTrue(receipt.generateReceiptWithDiscount().contains("(-\u00A30.65)"));
+
+        basket.add(bglo); basket.add(bglo); basket.add(bglo); basket.add(bglo); basket.add(bglo); basket.add(bglo); basket.add(bglo); basket.add(bglo);
+        Assertions.assertTrue(receipt.generateReceiptWithDiscount().contains("Onion Bagel\t\t16\t\u00A35.95\n"));
+        Assertions.assertTrue(receipt.generateReceiptWithDiscount().contains("(-\u00A31.89)"));
+
+        basket.add(bglp); basket.add(bglp);
+        Assertions.assertTrue(receipt.generateReceiptWithDiscount().contains("Onion Bagel\t\t16\t\u00A35.95\n"));
+        Assertions.assertTrue(receipt.generateReceiptWithDiscount().contains("(-\u00A31.89)"));
+        Assertions.assertTrue(receipt.generateReceiptWithDiscount().contains("Plain Bagel\t\t2\t\u00A30.78\n"));
+        Assertions.assertTrue(receipt.generateReceipt().contains("\n----------------------------\nTotal                  \u00A3" + 6.73));
+        System.out.println(receipt.generateReceipt());
+    }
 }
