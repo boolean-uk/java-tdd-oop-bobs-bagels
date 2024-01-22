@@ -1,6 +1,6 @@
 package com.booleanuk.core;
 
-class Bagel implements Product {
+public class Bagel implements Product {
     private String sku;
     private String variant;
    private String type;

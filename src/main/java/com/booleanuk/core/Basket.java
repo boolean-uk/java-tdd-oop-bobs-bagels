@@ -39,7 +39,7 @@ public class Basket {
         else if (basketIsFull()){
             return "Can't add anymore, basket is full";
         }
-        else if (!inventory.isInStock(item.getSku())){
+        else if (item != null && !inventory.isInStock(item.getSku())) {
             return "Out of Stock";
         }
 

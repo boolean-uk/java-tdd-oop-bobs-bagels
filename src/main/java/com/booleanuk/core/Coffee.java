@@ -1,6 +1,6 @@
 package com.booleanuk.core;
 
-class Coffee implements Product {
+public class Coffee implements Product {
     private String sku;
     private String variant;
     private String type;

@@ -3,10 +3,11 @@ package com.booleanuk.core;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Inventory {
     private List<Product> menu;
-    private HashMap<String, Integer> inventory;
+    private Map<String, Integer> inventory;
 
     public Inventory() {
         this.menu = new ArrayList<>();

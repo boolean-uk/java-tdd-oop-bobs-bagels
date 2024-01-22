@@ -1,6 +1,6 @@
 package com.booleanuk.core;
 
-class Filling implements Product {
+public class Filling implements Product {
     private String sku;
     private String variant;
     private String type;
