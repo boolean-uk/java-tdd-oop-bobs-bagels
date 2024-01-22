@@ -18,11 +18,6 @@ public class Basket {
         this(null);
     }
 
-    protected void emptyBasket(){
-        products = new HashMap<>();
-        items = 0;
-    }
-
     public int getItems() {
         return items;
     }
@@ -43,14 +38,32 @@ public class Basket {
         }
     }
 
+    protected void emptyBasket(){
+        products = new HashMap<>();
+        items = 0;
+    }
+
     public boolean add(String SKU) {
         if (items < capacity) {
+
             if (getProduct(SKU) != null) {
                 Product product = getProduct(SKU);
                 products.put(product, products.get(product) + 1);
+
             } else {
                 try {
-                    products.put(new Product(SKU), 1);
+                    Product product;
+                    if (SKU.startsWith("B")){
+                        product = new Bagel(SKU);
+                    } else if (SKU.startsWith("C")){
+                        product = new Coffee(SKU);
+                    } else if (SKU.startsWith("F")){
+                        product = new Filling(SKU);
+                    } else {
+                        throw new IllegalStateException();
+                    }
+                    products.put(product, 1);
+
                 } catch (IllegalStateException e) {
                     System.out.println("This item is not on the menu.");
                     return false;
@@ -74,6 +87,7 @@ public class Basket {
             }
             items--;
             return true;
+
         } else {
             System.out.println("This product is not in your cart.");
             return false;
@@ -106,7 +120,7 @@ public class Basket {
 
     private Product getProduct(String SKU){
         for (Product product : products.keySet()){
-            if (SKU.equals(product.SKU)) {
+            if (product.getSKU().equals(SKU)) {
                 return product;
             }
         }
