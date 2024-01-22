@@ -1,19 +1,23 @@
 package com.booleanuk.core;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
 public class Inventory {
     private HashMap<String, Double> prices;
     private HashMap<Item, String> skuCodes;
-    private final double TWELWE_BAGELS_DISCOUNT_PRICE = 3.99;
-    private final double SIX_BAGELS_DISCOUNT_PRICE = 2.49;
+//    private final double TWELWE_BAGELS_DISCOUNT_PRICE = 3.99;
+//    private final double SIX_BAGELS_DISCOUNT_PRICE = 2.49;
     private final double COFFEE_AND_BAGEL_DISCOUNT = 1.25;
+    private HashMap<String, ArrayList<Discount>> bundleDiscounts;
 
     public Inventory() {
         initializePrices();
         initializeCodes();
+        initializeDiscounts();
+
     }
 
     public double getCostOfItem(Item item) {
@@ -25,7 +29,7 @@ public class Inventory {
 
     public double getCostOfBasket(Basket basket) {
         double cost = 0;
-        HashMap<String, Integer> noOfEachKind = new HashMap<>();
+        HashMap<String, Integer> bundlesItems = new HashMap<>();
         ArrayList<Item> items = basket.getItems();
 
         //TODO: fix
@@ -33,48 +37,59 @@ public class Inventory {
         if(items.size() == 2 && ((items.get(0) instanceof Coffee && items.get(1) instanceof Bagel) || (items.get(1) instanceof Coffee && items.get(0) instanceof Bagel))) {
             cost += COFFEE_AND_BAGEL_DISCOUNT;
             Bagel bagel = (Bagel) (items.get(0) instanceof Bagel? items.get(0) : items.get(1));
-            for(Filling filling: bagel.getFillings()) {
-                cost += getCostOfItem(filling);
+            for(Item item: bagel.getContainedItems()) {
+                cost += getCostOfItem(item);
             }
+
             return cost;
         }
 
+        String sku;
         for(Item item: items) {
-            if(item instanceof Bagel bagel) {
-                if (noOfEachKind.containsKey(bagel.getName())) {
-                    noOfEachKind.put(bagel.getName(), noOfEachKind.get(bagel.getName()) + 1);
+
+            //Check if the item has discounts
+            sku = skuCodes.get(item);
+            if(bundleDiscounts.containsKey(sku)) {
+                if (bundlesItems.containsKey(sku)) {
+                    bundlesItems.put(sku, bundlesItems.get(sku) + 1);
                 } else {
-                    noOfEachKind.put(bagel.getName(), 1);
+                    bundlesItems.put(sku, 1);
                 }
-                for (Filling filling : bagel.getFillings()) {
-                    cost += getCostOfItem(filling);
-                }
-            } else {
+            }else {
                 cost +=getCostOfItem(item);
+            }
+            //check if the item contains other items and add those to the cost
+            if(item.containsOtherItems()) {
+                for (Item containedItem : item.getContainedItems()) {
+                    cost += getCostOfItem(containedItem);
+                }
             }
         }
 
         //See if discounts
-        for(Map.Entry<String, Integer> e: noOfEachKind.entrySet()) {
-            System.out.println(e.getKey()+" "+getCostForOfBundleOfBagels(new Bagel(e.getKey()), e.getValue()));
-
-            cost += getCostForOfBundleOfBagels(new Bagel(e.getKey()), e.getValue());
+        for(Map.Entry<String, Integer> e: bundlesItems.entrySet()) {
+            cost += getCostForOfBundle(e.getKey(), e.getValue());
         }
 
         return cost;
     }
 
-    public double getCostForOfBundleOfBagels(Bagel bagel, int noOfBagels) {
+    public double getCostForOfBundle(Item item, int quantity) {
+        return getCostForOfBundle(skuCodes.get(item), quantity);
+    }
+
+    //TODO: generalize?
+    public double getCostForOfBundle(String sku, int quantity) {
         double cost = 0;
-        while(noOfBagels-12 >= 0) {
-            cost += TWELWE_BAGELS_DISCOUNT_PRICE;
-            noOfBagels -= 12;
+
+        for(Discount discount: bundleDiscounts.get(sku)) {
+            while(quantity-discount.getQuantity() >= 0) {
+                cost += discount.getCost();
+                quantity -= discount.getQuantity();
+            }
         }
-        while(noOfBagels-6 >= 0) {
-            cost += SIX_BAGELS_DISCOUNT_PRICE;
-            noOfBagels -= 6;
-        }
-        cost += getCostOfItem(bagel)*noOfBagels;
+
+        cost += prices.get(sku)*quantity;
         return cost;
     }
 
@@ -118,8 +133,27 @@ public class Inventory {
 
     }
 
+    private void initializeDiscounts() {
+        bundleDiscounts = new HashMap<>();
+
+        //TODO: this is dependent on inserting highest quantity first, how can we assure this?
+        //sort with implemented compare method?
+        ArrayList<Discount> discountData = new ArrayList<>(Arrays.asList(new Discount(3.99, 12), new Discount(2.49, 6)));
+
+        bundleDiscounts.put("BGLO", discountData);
+        bundleDiscounts.put("BGLP", discountData);
+        bundleDiscounts.put("BGLE", discountData);
+        bundleDiscounts.put("BGLS", discountData);
+
+    }
+
+    public boolean hasDiscount(Item item) {
+        return bundleDiscounts.containsKey(skuCodes.get(item));
+    }
+
     public boolean hasItem(Item item) {
 
         return skuCodes.containsKey(item);
     }
+
 }

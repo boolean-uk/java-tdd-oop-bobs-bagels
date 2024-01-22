@@ -22,6 +22,16 @@ public class Basket {
     }
 
     public boolean removeItem(Item item) {
+        if(item.containsOtherItems()) {
+            for (int i = 0; i < items.size(); i++) {
+                if (item.getName().equals(items.get(i).getName()) && item.getContainedItems().equals(items.get(i).getContainedItems())) {
+                    items.remove(i);
+                    return true;
+                }
+            }
+        } else {
+            return items.remove(item);
+        }
         return items.remove(item);
     }
 

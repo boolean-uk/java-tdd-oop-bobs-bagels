@@ -46,7 +46,7 @@ public class Receipt {
             quantity = entry.getValue();
             cost = String.format("%.2f", prices.get(item));
             name = item.getName()+ " " + item.getClass().getSimpleName();
-            quantityAndCost = quantity + " ".repeat(priceOffSet - String.valueOf(quantity).length()-String.valueOf(cost).length()-1) + "\u00A3"+cost;
+            quantityAndCost = quantity + " ".repeat(priceOffSet - String.valueOf(quantity).length()- String.valueOf(cost).length()-1) + "\u00A3"+cost;
             string += "\n" + name + " ".repeat(width-name.length()-priceOffSet) + quantityAndCost;
         }
 
@@ -54,16 +54,12 @@ public class Receipt {
     }
 
     private String formatTotalCost() {
-        String cost = "\u00A3"+String.format("%.2f", totalCost);
+        String cost = "\u00A3"+ String.format("%.2f", totalCost);
         return "Total" + " ".repeat(width-("Total"+cost).length())+cost;
     }
 
     private String formatStoreName() {
         return " ".repeat((width-(storeName).length()-8)/2)+"~~~ " + storeName + " ~~~";
-    }
-
-    private String newLines(int n) {
-        return "\n".repeat(n);
     }
 
     private String formatEndMessage() {

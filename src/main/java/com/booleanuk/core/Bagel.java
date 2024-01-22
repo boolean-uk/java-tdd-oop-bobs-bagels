@@ -16,17 +16,14 @@ public class Bagel extends Item{
         this.fillings = Objects.requireNonNullElseGet(fillings, ArrayList::new);
     }
 
-    public ArrayList<Filling> getFillings() {
+    @Override
+    public ArrayList<Item> getContainedItems() {
         return new ArrayList<>(fillings);
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if(!(obj instanceof Bagel)) {
-            return false;
-        }
-        Bagel other = (Bagel) obj;
-        return super.equals(other) && this.fillings.equals(other.fillings);
+    public boolean containsOtherItems() {
+        return !fillings.isEmpty();
     }
 
     @Override

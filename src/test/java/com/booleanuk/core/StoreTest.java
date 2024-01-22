@@ -156,7 +156,7 @@ public class StoreTest {
         Store store = new Store();
         int basketId = store.createBasket();
         store.addItemToBasket(new Bagel("Onion", new ArrayList<>(List.of(new Filling("egg"), new Filling("cheese")))), basketId);
-        store.addItemToBasket(new Bagel("plaIN", new ArrayList<>(List.of(new Filling("cheese")))), basketId);
+        System.out.println(store.addItemToBasket(new Bagel("plaIN", new ArrayList<>(List.of(new Filling("cheese")))), basketId));
         Assertions.assertEquals(0.49+0.39+3*0.12, store.getCostOfBasket(basketId), 0.0001);
     }
 

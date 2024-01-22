@@ -1,7 +1,10 @@
 package com.booleanuk.core;
 
+import java.util.ArrayList;
+
 public class Item {
 
+    //TODO : make into interface??
     private String name;
 
     public Item(String name) {
@@ -10,6 +13,14 @@ public class Item {
 
     public String getName() {
         return name;
+    }
+
+    public boolean containsOtherItems() {
+        return false;
+    }
+
+    public ArrayList<Item> getContainedItems() {
+        return null;
     }
 
     @Override
