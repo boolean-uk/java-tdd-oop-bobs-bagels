@@ -3,9 +3,7 @@ package com.booleanuk.extension;
 import com.booleanuk.core.*;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 public class Receipt{
     private Basket basket;
@@ -13,15 +11,6 @@ public class Receipt{
         this.basket = new Basket(new Inventory(),6);
     }
 
-    public int calculateItemQuantity(Basket basket, Product item){
-        int itemCounter = 0;
-        for (int i = 0; i < basket.getItemBasket().size(); i++){
-            if (basket.getItemBasket().get(i) == item){
-                itemCounter++;
-            }
-        }
-        return itemCounter;
-    }
 
     public double calculateTotalItemCost(Basket basket, Product item){
         double price = 0;
@@ -33,6 +22,32 @@ public class Receipt{
         return price;
     }
 
+    public void generateReceipt(Basket basket){
+        StringBuilder receipt = new StringBuilder();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        double totalBasketValue = basket.calculateTotalCost();
+        receipt.append("~~~ Bob's Bagels ~~~\n\n".indent(7));
+        receipt.append(dateFormat.format(new Date()).indent(8)).append("\n");
+        receipt.append("------------------------------------\n");
+
+        Map<Product, Integer> itemQuantities = new HashMap<>();
+
+        for (Product item : basket.getItemBasket()) {
+            itemQuantities.put(item, itemQuantities.getOrDefault(item, 0) + 1);
+        }
+
+        for (Map.Entry<Product, Integer> entry : itemQuantities.entrySet()) {
+            Product item = entry.getKey();
+            int quantity = entry.getValue();
+            receipt.append(String.format("%-25s%-5d£%.2f\n", item.getType() + " " + item.getVariant(),
+                    quantity, calculateTotalItemCost(basket, item) * quantity));
+        }
+
+        receipt.append("\n").append("------------------------------------\n");
+        receipt.append(String.format("Total%25s£%.2f\n\n", "", totalBasketValue));
+
+        System.out.println(receipt.toString());
+    }
 
 }
 
