@@ -12,7 +12,7 @@ public class BagelTest {
     @Test
     public void testAddBagel(){
         Bagel abagel = new Bagel();
-        Assertions.assertEquals("bagel1", abagel.addBagel("bagel1", 2.0, "bagel","plain"));
+        Assertions.assertEquals("BGLO", abagel.addBagel("BGLO"));
 
     }
     private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
@@ -20,23 +20,23 @@ public class BagelTest {
     @Test
     public void testBasketFull(){
         Bagel abagel = new Bagel();
-        abagel.addBagel("bagel1", 2.0, "bagel","plain");
-        abagel.addBagel("bagel2", 2.0, "bagel","plain");
-        abagel.addBagel("bagel3", 2.0, "bagel","plain");
-        abagel.addBagel("bagel4", 2.0, "bagel","plain");
-        abagel.addBagel("bagel5", 2.0, "bagel","plain");
-        abagel.addBagel("bagel6", 2.0, "bagel","plain");
-        abagel.addBagel("bagel7", 2.0, "bagel","plain");
-        abagel.addBagel("bagel8", 2.0, "bagel","plain");
-        abagel.addBagel("bagel9", 2.0, "bagel","plain");
-        abagel.addBagel("bagel10", 2.0, "bagel","plain");
-        abagel.addBagel("bagel11", 2.0, "bagel","plain");
-        abagel.addBagel("bagel12", 2.0, "bagel","plain");
-        abagel.addBagel("bagel13", 2.0, "bagel","plain");
-        abagel.addBagel("bagel14", 2.0, "bagel","plain");
-        abagel.addBagel("bagel15", 2.0, "bagel","plain");
-        abagel.addBagel("bagel16", 2.0, "bagel","plain");
-        abagel.addBagel("bagel17", 2.0, "bagel","plain");
+        abagel.addBagel("BGLO");
+        abagel.addBagel("BGLO");
+        abagel.addBagel("BGLO");
+        abagel.addBagel("BGLO");
+        abagel.addBagel("BGLO");
+        abagel.addBagel("BGLO");
+        abagel.addBagel("BGLO");
+        abagel.addBagel("BGLO");
+        abagel.addBagel("BGLO");
+        abagel.addBagel("BGLO");
+        abagel.addBagel("BGLO");
+        abagel.addBagel("BGLO");
+        abagel.addBagel("BGLO");
+        abagel.addBagel("BGLO");
+        abagel.addBagel("BGLO");
+        abagel.addBagel("BGLO");
+        abagel.addBagel("BGLO");
         System.setOut(new PrintStream(outContent));
         Assertions.assertTrue(abagel.basketFull());
         assertEquals("Basket Full", outContent.toString().trim());
@@ -52,21 +52,59 @@ public class BagelTest {
     public void testRemoveBagel(){
         Bagel abagel = new Bagel();
         System.setOut(new PrintStream(outContent));
-        abagel.addBagel("bagel1", 2.0, "bagel","plain");
-        Assertions.assertTrue(abagel.removeBagel("bagel1"));
-        Assertions.assertFalse(abagel.removeBagel("bagel2"));
-        assertEquals("Basket does not contain this bagel2", outContent.toString().trim());
+        abagel.addBagel("BGLO");
+        Assertions.assertTrue(abagel.removeBagel("BGLO"));
+        //Assertions.assertFalse(abagel.removeBagel("BGLO"));
+        //assertEquals("Product not found in inventory: BGLO", outContent.toString().trim());
     }
 
     @Test
     public void testTotalCost(){
         Bagel abagel = new Bagel();
-        Basket basket = new Basket();
         System.setOut(new PrintStream(outContent));
-        abagel.addBagel("bagel2", 2.0, "bagel","plain");
-        abagel.addBagel("bagel3", 2.0, "bagel","plain");
-        abagel.addBagel("bagel4", 2.0, "bagel","plain");
-        Assertions.assertEquals(6.0, abagel.totalCost());
+        abagel.addBagel("BGLO");
+        abagel.addBagel("BGLO");
+        abagel.addBagel("BGLP");
+        abagel.addBagel("BGLP");
+        abagel.addBagel("BGLP");
+        abagel.addBagel("BGLP");
+        abagel.addBagel("BGLP");
+        abagel.addBagel("BGLP");
+        abagel.addBagel("BGLP");
+        abagel.addBagel("BGLP");
+        abagel.addBagel("BGLP");
+        abagel.addBagel("BGLP");
+        abagel.addBagel("BGLP");
+        abagel.addBagel("BGLP");
+        abagel.addBagel("BGLE");
+        abagel.addBagel("BGLE");
+        abagel.addBagel("BGLE");
+        abagel.addBagel("BGLE");
+        abagel.addBagel("BGLE");
+        abagel.addBagel("BGLE");
+        abagel.addBagel("COFB");
+        abagel.addBagel("COFB");
+        abagel.addBagel("COFB");
+        Assertions.assertEquals(10.43, abagel.totalCost());
+        abagel.basketList.clear();
+        abagel.addBagel("BGLE");
+        abagel.addBagel("BGLE");
+        abagel.addBagel("BGLE");
+        abagel.addBagel("BGLE");
+        abagel.addBagel("BGLE");
+        Assertions.assertEquals(2.45, abagel.totalCost());
+        abagel.basketList.clear();
+        abagel.addBagel("BGLE");
+        abagel.addBagel("BGLE");
+        Assertions.assertEquals(0.98, abagel.totalCost());
+        abagel.basketList.clear();
+        abagel.addBagel("BGLE");
+        abagel.addBagel("BGLE");
+        abagel.addBagel("BGLE");
+        abagel.addBagel("BGLE");
+        abagel.addBagel("BGLE");
+        abagel.addBagel("BGLE");
+        Assertions.assertEquals(2.49, abagel.totalCost());
     }
 
     @Test

@@ -1,7 +1,10 @@
 package com.booleanuk.core;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 public class Bagel {
     String bagel;
@@ -10,10 +13,10 @@ public class Bagel {
     ArrayList<Inventory> inventoryList;
     int key=0;
 
-    int capacity=0;
+    int capacity = 0;
     public Bagel(){
-        this.capacity= 15;
-        this.basketList=new ArrayList<>(capacity);
+        this.capacity = 15;
+        this.basketList = new ArrayList<>(capacity);
         this.inventoryList = new ArrayList<>();
         initializeArr();
     }
@@ -49,13 +52,15 @@ public class Bagel {
     }
 
 
-    public String addBagel(String bagel, double price, String product, String variant){
-        if (basketList.contains(bagel)){
-            return null;
+    public String addBagel(String SKU){
+        for(Inventory item : inventoryList){
+            if(item.SKU.equals(SKU)){
+                basketList.add(item);
+                return SKU;
+            }
         }
-        Inventory tempInv = new Inventory(bagel,price,product,variant);
-        basketList.add(tempInv);
-        return bagel;
+        System.out.println("Product not found in inventory: " + SKU);
+        return null;
     }
 
     public boolean removeBagel(String bagel){
@@ -83,19 +88,129 @@ public class Bagel {
     }
     public static void main(String[] args) {
         Bagel bagel = new Bagel();
-        Inventory a = new Inventory("bagel1");
-        bagel.basketList.add(a);
+//        Inventory a = new Inventory("bagel1");
+//        bagel.basketList.add(a);
         //bagel.inventoryList.remove(a);
-        System.out.println(bagel.basketList.toString());
         System.out.println(bagel.inventoryAllPrint());
+        bagel.addBagel("BGLO");
+        bagel.addBagel("BGLO");
+        bagel.addBagel("BGLP");
+        bagel.addBagel("BGLP");
+        bagel.addBagel("BGLP");
+        bagel.addBagel("BGLP");
+        bagel.addBagel("BGLP");
+        bagel.addBagel("BGLP");
+        bagel.addBagel("BGLP");
+        bagel.addBagel("BGLP");
+        bagel.addBagel("BGLP");
+        bagel.addBagel("BGLP");
+        bagel.addBagel("BGLP");
+        bagel.addBagel("BGLP");
+        bagel.addBagel("BGLE");
+        bagel.addBagel("BGLE");
+        bagel.addBagel("BGLE");
+        bagel.addBagel("BGLE");
+        bagel.addBagel("BGLE");
+        bagel.addBagel("BGLE");
+        bagel.addBagel("COFB");
+        bagel.addBagel("COFB");
+        bagel.addBagel("COFB");
+        System.out.println(bagel.basketList.toString());
+        System.out.println(bagel.totalCost());
+
     }
     public double totalCost(){
         double totalCost=0;
+        int countOnion = 0;
+        int countPlain = 0;
+        int countEverything = 0;
+        int count = 0;
+        int countCoffe=0;
+        boolean coffeeBagel = false;
+
         for (int i = 0; i < basketList.size(); i++){
+            if (basketList.get(i).SKU.equals("BGLO")){
+                countOnion++;
+                count++;
+            }else if (basketList.get(i).SKU.equals("BGLP")){
+                countPlain++;
+                count++;
+            }else if (basketList.get(i).SKU.equals("BGLE")){
+                countEverything++;
+                count++;
+            }else if (basketList.get(i).SKU.equals("COFB")){
+                coffeeBagel = true;
+                count++;
+                countCoffe++;
+            }
             totalCost += basketList.get(i).price;
         }
-        return totalCost;
+        if (countOnion >= 6){
+            int discountGroupsOnion = countOnion / 6;
+            totalCost -= discountGroupsOnion * (0.49 * 6 - 2.49);
+        }
+        if (countPlain >= 12){
+            int discountGroupsPlain = countPlain / 12;
+            totalCost -= discountGroupsPlain * (0.39 * 12 - 3.99);
+        }
+        if (countEverything >= 6){
+            int discountGroupsEverything = countEverything / 6;
+            totalCost -= discountGroupsEverything * (0.49 * 6 - 2.49);
+        }
+        if (coffeeBagel && countCoffe == 1){
+            totalCost -= (0.99 + 0.49 - 1.25);
+        }
+
+        System.out.println(countOnion);
+        System.out.println(countPlain);
+        System.out.println(countEverything);
+        System.out.println(countCoffe);
+        System.out.println(count);
+
+        double finalValue = Math.round(totalCost * 100) / 100.0;
+        printReceipt(finalValue, count);
+        return finalValue;
     }
+    public void printReceipt(double totalCost, int totalProducts){
+        LocalDateTime date = LocalDateTime.now();
+
+        String newDate = date.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+        for (Inventory item : basketList) {
+            System.out.println("SKU: " + item.SKU + ", Name: " + item.name + ", Variant: " + item.variant + ", Price: " + item.price);
+        }
+        System.out.println("        ~~~ Bob's Bagels ~~~       \n" +
+                            "        " + newDate +             "\n" +
+                            "----------------------------------\n" +
+                            "Products----------Quant-Price\n" +
+                            formatTableOrder() +
+
+                            "----------------------------------\n" +
+                            "Total              " + totalProducts + "   £" + totalCost + "\n" +
+                            "             Thank you        \n" +
+                            "          for your order!        ");
+    }
+
+    public String formatTableOrder(){
+        HashMap<String, Integer> countMap = new HashMap<>();
+        HashMap<String, Double> priceMap = new HashMap<>();
+
+        for (int i = 0; i<basketList.size(); i++) {
+            String key = basketList.get(i).variant + " " + basketList.get(i).name;
+            countMap.put(key, countMap.getOrDefault(key, 0) + 1);
+            priceMap.put(key, basketList.get(i).price);
+        }
+
+        StringBuilder out = new StringBuilder();
+        for (Map.Entry<String, Integer> entry : countMap.entrySet()) {
+            String key = entry.getKey();
+            int count = entry.getValue();
+            double total = count * priceMap.get(key);
+            out.append(String.format("%-18s %2d   £%.2f\n", key, count, total));
+        }
+        return out.toString();
+    }
+
+
 
     public boolean inventoryAllPrint(){
         String inv = " ";
@@ -132,6 +247,7 @@ public class Bagel {
         }
         return out;
     }
+
     public boolean searchStock(String product){
         initializeArr();
         boolean value = false;
@@ -142,7 +258,6 @@ public class Bagel {
             }
         }
         return value;
-
     }
 
 }
