@@ -38,6 +38,7 @@ public class Receipt {
     public String formatBasketValues(Map<Item, Integer> basketMap) {
 
 
+        //I know this is weird, calling a function just to get discounts initialized, however i need a change alot of code to fix this so i rather not.
         double totalCost = customer.getTotalCost(customer.getBasket().getItemList());
         Map<String, ArrayList<Double>> discounts = customer.getDiscounts();
         int discountCoffeeBagelDeal = 0;

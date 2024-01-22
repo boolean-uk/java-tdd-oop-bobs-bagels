@@ -52,7 +52,7 @@ public class Customer {
             }
 
 
-            System.out.println("The Cost is: " + cost);
+
             if(inventory.getCoffees().containsKey(entry.getKey().getSkuCode())) {
                 for(int i = 0; i < entry.getValue(); i++) {
                     restCoffeesList.add(entry.getKey());
@@ -89,7 +89,6 @@ public class Customer {
             cost +=discount12 *3.99;
             cost +=discount6 *2.49;
 
-        System.out.println("Cost " + cost);
 
         BigDecimal costRounded = new BigDecimal(cost).setScale(2, RoundingMode.HALF_UP);
 

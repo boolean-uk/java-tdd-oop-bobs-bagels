@@ -145,7 +145,6 @@ public class CustomerTest {
             }
         }
 
-        System.out.println(customer.getTotalCost(map));
 
         Assertions.assertEquals(((0.99*4 + 0.39*4) - 1.25*4),finalDiscount );
 
@@ -225,7 +224,6 @@ public class CustomerTest {
         Receipt receipt = new Receipt(customer);
 
         double totalCost = customer.getTotalCost(basket.getItemList());
-        System.out.println(receipt.printBasket());
 
         Assertions.assertEquals(6.3, totalCost);
 
