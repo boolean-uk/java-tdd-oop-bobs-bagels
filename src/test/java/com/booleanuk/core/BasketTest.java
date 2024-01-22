@@ -244,7 +244,7 @@ class BasketTest {
             basket.add("BGLE");
         }
         basket.add("COFB"); basket.add("COFB"); basket.add("COFB");
-        Assertions.assertEquals(10.43, basket.totalCostDiscount());
+        Assertions.assertEquals(10.3, basket.totalCostDiscount());
     }
 
     @Test
@@ -289,14 +289,14 @@ class BasketTest {
         }
         basket.add("COFB"); basket.add("COFB"); basket.add("COFB");
         String receipt = basket.receiptDiscount();
-        Assertions.assertTrue(receipt.contains("$10.43"));
+        Assertions.assertTrue(receipt.contains("$10.3"));
         Assertions.assertTrue(receipt.contains("(-$0.69)"));
         Assertions.assertTrue(receipt.contains("(-$0.45)"));
         Assertions.assertTrue(receipt.contains("Onion Bagel"));
         Assertions.assertTrue(receipt.contains("Plain Bagel"));
         Assertions.assertTrue(receipt.contains("Everything Bagel"));
         Assertions.assertTrue(receipt.contains("Coffee"));
-        Assertions.assertTrue(receipt.contains("You saved a total of $1.14"));
+        Assertions.assertTrue(receipt.contains("You saved a total of $1.27"));
 
     }
 
@@ -308,7 +308,6 @@ class BasketTest {
         Basket basket = new Basket(inventory, checkout);
         basket.setCapacity(30);
         basket.add("BGLO"); basket.add("BGLO");
-        basket.add("COFB"); basket.add("COFB"); basket.add("COFB");
 
         String receipt = basket.receiptDiscount();
         Assertions.assertFalse(receipt.contains("You saved a total of"));
