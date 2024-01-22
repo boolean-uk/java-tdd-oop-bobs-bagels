@@ -16,7 +16,7 @@ class ReceiptTest {
         newStore.addToBasket(basket, "BGLP");
         newStore.addToBasket(basket, "BGLP");
         newStore.addToBasket(basket, "FILC");
-        basket.modifyCapacity(10);
+        basket.modifyCapacity(7);
         newStore.addToBasket(basket, "COFB");
 
         Receipt receipt = new Receipt(basket, newStore);
@@ -25,7 +25,7 @@ class ReceiptTest {
 
         Assertions.assertTrue(yourReceipt.indexOf("Thank you") != -1);
         Assertions.assertTrue(yourReceipt.indexOf("Bagel") != -1);
-        Assertions.assertTrue(yourReceipt.indexOf("Coffee") != -1);
+        Assertions.assertTrue(yourReceipt.indexOf("Black") != -1);
         Assertions.assertFalse(yourReceipt.indexOf("Waffles") != -1);
     }
 }

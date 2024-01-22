@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Basket {
-    private List<Item> items;
+    private final List<Item> items;
     private int capacity;
     private double totalCost;
 
@@ -51,7 +51,7 @@ public class Basket {
         return items;
     }
 
-    public int getQuantity(Item item) {
+/*    public int getQuantity(Item item) {
         int initialQuantity = 0;
 
         for(Item basketItems : items) {
@@ -61,5 +61,5 @@ public class Basket {
         }
 
         return initialQuantity;
-    }
+    }*/
 }

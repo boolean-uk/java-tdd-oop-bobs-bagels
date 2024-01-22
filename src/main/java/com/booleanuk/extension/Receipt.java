@@ -6,17 +6,15 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class Receipt {
-    private Basket basket;
-    private Store store;
+    private final Basket basket;
     private StringBuilder sb;
 
     public Receipt(Basket basket, Store store) {
         this.basket = basket;
-        this.store = store;
     }
 
     public StringBuilder generateReceipt() {
-        SimpleDateFormat dateAndTime = new SimpleDateFormat("yyyy-MM-dd HH-mm-ss");
+        SimpleDateFormat dateAndTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         List<Item> items = basket.getItems();
 
         StringBuilder receipt = new StringBuilder();
@@ -24,21 +22,21 @@ public class Receipt {
                 append(dateAndTime.format(new Date())).append("\n\n").
                 append("----------------------------\n\n");
 
-        Map<String, Double> itemCostMap = new HashMap<>();
-        Map<String, Integer> itemQuantityMap = new HashMap<>();
+        Map<String, Double> itemCost = new HashMap<>();
+        Map<String, Integer> itemQuantity = new HashMap<>();
 
         for (Item item : items) {
             String key = (item.getVariant().equals("N/A") ? "" : item.getVariant() + " ") + item.getItemName();
-            double cost = itemCostMap.getOrDefault(key, 0.0) + item.getPrice();
-            int quantity = itemQuantityMap.getOrDefault(key, 0) + 1;
+            double cost = itemCost.getOrDefault(key, 0.0) + item.getPrice();
+            int quantity = itemQuantity.getOrDefault(key, 0) + 1;
 
-            itemCostMap.put(key, cost);
-            itemQuantityMap.put(key, quantity);
+            itemCost.put(key, cost);
+            itemQuantity.put(key, quantity);
         }
 
-        for (Map.Entry<String, Double> entry : itemCostMap.entrySet()) {
+        for (Map.Entry<String, Double> entry : itemCost.entrySet()) {
             String itemName = entry.getKey();
-            int quantity = itemQuantityMap.get(itemName);
+            int quantity = itemQuantity.get(itemName);
             double totalCost = entry.getValue();
 
             receipt.append(String.format("%-20s %-2d £%.2f\n", itemName, quantity, totalCost));
