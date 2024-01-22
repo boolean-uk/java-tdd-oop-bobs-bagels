@@ -5,19 +5,20 @@ import java.util.HashMap;
 
 public class Basket {
 
-    private HashMap<Bagel, Integer> products;
+   //  private HashMap<Bagel, Integer> products;
+    private ArrayList<Product> products;
     private static int maxSize;
 
     public Basket(){
 
-        this.products = new HashMap<>();
+        this.products = new ArrayList<>();
         maxSize = 10;
     }
 
-    public boolean add(Bagel bagel){
+    public boolean add(Product product){
 
         //If the product is not in inventory
-        if(!Inventory.isValidBagel(bagel)){
+        if(!Inventory.isValidProduct(product)){
             return false;
         }
 
@@ -25,30 +26,22 @@ public class Basket {
         if(isBasketFull()){
             return false;
         }
-
-        //If there is a bagel of same sort
-        for (Bagel b : products.keySet()){
-            if(b.getId().equals(bagel.getId())){
-
-            }
-        }
-
         //Add bagel
-        this.products.put(bagel, 1);
+        this.products.add(product);
 
         return true;
     }
 
-    public boolean remove(Bagel bagel){
-        if (products.containsKey(bagel)){
-            products.remove(bagel);
+    public boolean remove(Product product){
+        if (products.contains(product)){
+            products.remove(product);
             return true;
         }
         return false;
     }
 
     public boolean addFillings(Bagel bagel,  ArrayList<Filling> fillings){
-        if(products.containsKey(bagel)){
+        if(products.contains(bagel)){
             return bagel.addFillings(fillings);
         }
         return false;
@@ -66,22 +59,22 @@ public class Basket {
         return maxSize;
     }
 
-    public HashMap<Bagel, Integer> getProducts() {
+    public ArrayList<Product> getProducts() {
         return products;
     }
 
     public double getCostOfBasket(){
         double total = 0;
 
-        for (Bagel bagel: products.keySet()){
-            total += getCostOfBagel(bagel);
+        for (Product product: products){
+            total += getCostOfBagel(product);
         }
         return total;
     }
 
-    public double getCostOfBagel(Bagel bagel){
-        double total = bagel.getPrice();
-        for(Filling filling : bagel.getFillings()){
+    public double getCostOfBagel(Product product){
+        double total = product.getPrice();
+        for(Filling filling : product.getFillings()){
             total += getCostOfFilling(filling);
         }
         return total;

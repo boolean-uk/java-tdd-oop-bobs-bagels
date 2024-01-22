@@ -23,7 +23,7 @@ public class Bagel implements Product{
         this.fillings = new ArrayList<>();
     }
     public boolean addFillings(ArrayList<Filling> fillings){
-        if (fillings.stream().allMatch(Inventory::isValidFilling)){
+        if (fillings.stream().allMatch(Inventory::isValidProduct)){
             this.fillings.addAll(fillings);
             return true;
         }
