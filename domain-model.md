@@ -65,10 +65,10 @@ As a customer,
 So I know how much money I need,
 I'd like to know the total cost of items in my basket.
 ```
-| Class  | Method      | Variables                          | Scenario                           | Return value                        |
-|--------|-------------|------------------------------------|------------------------------------|-------------------------------------|
-| Basket | totalCost() | HashMap<String, Integer> basketMap | Basket has multiple products in it | Return sum of all products (double) |
-|        |             |                                    | Basket is empty                    | Return 0                            |
+| Class    | Method      | Variables                          | Scenario                           | Return value                        |
+|----------|-------------|------------------------------------|------------------------------------|-------------------------------------|
+| Checkout | totalCost() | HashMap<String, Integer> basketMap | Basket has multiple products in it | Return sum of all products (double) |
+|          |             |                                    | Basket is empty                    | Return 0                            |
 ```
 7.
 As a customer,
@@ -111,21 +111,28 @@ I want customers to only be able to order things that we stock in our inventory.
 #### Inventory class implemented
 
 ## Extension 1
-#### Only implementing bulk buy discounts for now
 ```
 As the manager,
 To hype up our restaurant and draw in more customers,
-I want to implement discounts for some bulk buys.
+I want to implement discounts for some bulk and combo buys.
 ```
-#### Implement a Discounts and BulkDiscount class
+#### Implement Discounts and Discount interface, implemented by BulkDiscount and ComboDiscount
 ```
 Assumptions:
- - There is only a maximum of one type of bulk discount for each specific product
+ - There is only a maximum of one type of discount for each specific product
+ - The combo discount is for one specific product in combination with another type of product
+ - The combo discount can include products already part of a bulk discount
+ - The combo discount uses the lowest cost product of the other type it combines with
 ```
-| Discount            |
+| Discounts           |
 |---------------------|
-| List<BulkDiscount>  |
+| List<Discount>      |
 | Inventory inventory |
+
+| Discount      |
+|---------------|
+| sku: String   |
+| price: double |
 
 | BulkDiscount  |
 |---------------|
@@ -133,18 +140,27 @@ Assumptions:
 | number: int   |
 | price: double |
 
+| ComboDiscount |
+|---------------|
+| sku: String   |
+| name: String  |
+| price: double |
 ```
 As a customer,
 So I know how much money I need,
 I'd like to know what the total cost of items in my basket will be after the discounts are added in.
 ```
-| Class    | Method                                     | Variables                          | Scenario                                                                                               | Return value                                                      |
-|----------|--------------------------------------------|------------------------------------|--------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------|
-| Basket   | totalCostDiscount()                        | HashMap<String, Integer> basketMap | Basket has multiple products in it, but no discounts                                                   | Return sum of all products (double)                               |
-|          |                                            | Discount discount                  | Basket has multiple products in it, with discounts.                                                    | Return sum of all products - saved amount from discounts (double) |
-|          |                                            | Inventory inventory                | Basket is empty                                                                                        | Return 0                                                          |
-| Discount | calculateBulkDiscount(String sku, int num) | List<BulkDiscount> bulkDiscounts   | There is a discount for the input element. The amount you save by utilizing the discount is calculated | Return saved amount (double)                                      |
-|          |                                            | Inventory inventory                | There is no discount                                                                                   | Return 0                                                          |
+| Class     | Method                                                                          | Variables                | Scenario                                                                                               | Return value                                                      |
+|-----------|---------------------------------------------------------------------------------|--------------------------|--------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------|
+| Basket    | totalCostDiscount(HashMap<String, Integer> basketMap)                           | Inventory inventory      | Basket has multiple products in it, but no discounts                                                   | Return sum of all products (double)                               |
+|           |                                                                                 | Discount discount        | Basket has multiple products in it, with discounts.                                                    | Return sum of all products - saved amount from discounts (double) |
+|           |                                                                                 |                          | Basket is empty                                                                                        | Return 0                                                          |
+| Discounts | calculateDiscount(String sku, HashMap<String, Integer> basketMap)               | List<Discount> discounts | No discount found                                                                                      | Return 0                                                          |
+|           |                                                                                 |                          | Discount found, the type of discount is discerned and the appropriate discount method is called        | Return value returned from calculateCombo/BulkDiscount            |
+| Discounts | calculateBulkDiscount(String sku, int num, BulkDiscount discount)               | Inventory inventory      | There is a discount for the input element. The amount you save by utilizing the discount is calculated | Return saved amount (double)                                      |
+|           |                                                                                 |                          | The discount item is not found in inventory                                                            | Return 0                                                          |
+| Discounts | calculateComboDiscount(String sku, Set<String> skuList, ComboDiscount discount) | Inventory inventory      | There is a discount for the input element. The amount you save by utilizing the discount is calculated | Return saved amount (double)                                      |
+|           |                                                                                 |                          | The discount item is not found in inventory                                                            | Return 0                                                          |
 
 ## Extension 3
 ```
@@ -152,13 +168,15 @@ As a customer,
 So I know how much money I spent and saved,
 I'd like a receipt of my basket with the total cost and the money saved from discounts displayed for each item.
 ```
-| Class    | Method                                     | Variables                          | Scenario                                             | Return value                                                                 |
-|----------|--------------------------------------------|------------------------------------|------------------------------------------------------|------------------------------------------------------------------------------|
-| Basket   | totalCostDiscount()                        | HashMap<String, Integer> basketMap | Basket has multiple products in it, but no discounts | Return String receipt                                                        |
-|          |                                            | Discount discount                  | Basket has multiple products in it, with discounts.  | Return String receipt with money saved through discount displayed under item |
-|          |                                            |                                    | Basket is empty                                      | Return String receipt with no items and total of 0.00                        |
+| Class    | Method                                              | Variables           | Scenario                                             | Return value                                                                 |
+|----------|-----------------------------------------------------|---------------------|------------------------------------------------------|------------------------------------------------------------------------------|
+| Checkout | receiptDiscount(HashMap<String, Integer> basketMap) | Inventory inventory | Basket has multiple products in it, but no discounts | Return String receipt                                                        |
+|          |                                                     | Discount discount   | Basket has multiple products in it, with discounts.  | Return String receipt with money saved through discount displayed under item |
+|          |                                                     |                     | Basket is empty                                      | Return String receipt with no items and total of 0.00                        |
+
 # Class diagram:
-![](assets/class-diagram.png)
+![](assets/class-diagram1.png)
+![](assets/class-diagram2.png)
 
 ```
 BobsBagels
@@ -174,11 +192,14 @@ Basket
 	+ remove(sku: String) String
 	+ setCapacity(capacity: int) boolean
 	+ getNumberOfItems() int
-	+ totalCost() double
 	+ addFilling(sku: String) String
 	+ totalCostDiscount() double
 	+ receiptDiscount() String
-
+	+ totalCost() double
+Checkout
+    + totalCost() double
+    + totalCostDiscount() double
+	+ receiptDiscount() String
 Inventory
 	- products: List<products>
 	+ getProductCost(sku: String) double
@@ -191,11 +212,22 @@ Product
 	- name: String
 	- Variant: String
 Discounts
-	- bulkDiscounts: List<BulkDiscount>
+	- discounts: List<Discount>
 	- inventory: Inventory
-	+ calculateBulkDiscount(sku: String, num: Int) double
+	+ calculateBulkDiscount(String sku, int num, BulkDiscount discount) double
+	+ calculateComboDiscount(String sku, Set<String> skuList, ComboDiscount discount) double
+	+ calculateDiscount(String sku, HashMap<String, Integer> basketMap) double
+Discount (Interface)
+    - sku: String
+    - price: double
+    + getSku() String
+    + getPrice() double
 BulkDiscount
 	- sku: String
 	- number: int
+	- price: double
+ComboDiscount
+	- sku: String
+	- name: String
 	- price: double
 ```
