@@ -17,6 +17,7 @@ public class CheckoutTest {
     @BeforeEach
     public void makeDummyData() {
 
+        productsStock = new ArrayList<>();
         productsStock.add(new Product("Debris", "Twig",0.03));
         productsStock.add(new Bagel("Poppy Seed", 1.39));
         productsStock.add(new Coffee("Cappucino", 2.29));
@@ -32,12 +33,14 @@ public class CheckoutTest {
     }
 
     @Test
-    public void sumPrice() {
-        basket.addProduct(new Product("Debris", "Twig",0.03));
+    public void sumPriceTest() {
         Bagel bagel = new Bagel("Poppy Seed", 1.39);
         Filling filling = new Filling("Bacon", 0.19);
         Coffee coffee = new Coffee("Cappucino", 2.29);
-
+        basket.addProduct(new Product("Debris", "Twig",0.03));
+        basket.addProduct(bagel);
+        basket.addProduct(filling);
+        basket.addProduct(coffee);
         Assertions.assertEquals(3.9, checkout.sumPrice(basket));
     }
     @Test
