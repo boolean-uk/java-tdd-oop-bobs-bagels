@@ -184,13 +184,13 @@ public class OrderTest {
                 "2024-01-22 12:23:52\n" +
                 "\n" +
                 "----------------------------\n" +
-                "Bagel     Onion          1   $0.49\n" +
-                "Bagel     Plain          1   $0.39\n" +
-                "Coffee    White          1   $1.19\n" +
-                "Filling   Egg            1   $0.12\n" +
-                "Filling   Cream Cheese   1   $0.12\n" +
+                "Bagel     Onion          1   £0.49\n" +
+                "Bagel     Plain          1   £0.39\n" +
+                "Coffee    White          1   £1.19\n" +
+                "Filling   Egg            1   £0.12\n" +
+                "Filling   Cream Cheese   1   £0.12\n" +
                 "----------------------------\n" +
-                "Total:              $2.31\n" +
+                "Total:              £2.31\n" +
                 "\n" +
                 "        Thank you\n" +
                 "      for your order!", result);
@@ -215,11 +215,11 @@ public class OrderTest {
                 "2024-01-22 12:23:52\n" +
                 "\n" +
                 "----------------------------\n" +
-                "Coffee    White          1   $1.19\n" +
-                "Filling   Egg            1   $0.12\n" +
-                "Filling   Cream Cheese   1   $0.12\n" +
+                "Coffee    White          1   £1.19\n" +
+                "Filling   Egg            1   £0.12\n" +
+                "Filling   Cream Cheese   1   £0.12\n" +
                 "----------------------------\n" +
-                "Total:              $1.43\n" +
+                "Total:              £1.43\n" +
                 "\n" +
                 "        Thank you\n" +
                 "      for your order!", result);
@@ -251,11 +251,11 @@ public class OrderTest {
                 "2024-01-22 12:23:52\n" +
                 "\n" +
                 "----------------------------\n" +
-                "Coffee    White          1   $1.19\n" +
-                "Filling   Egg            5   $0.60\n" +
-                "Filling   Cream Cheese   1   $0.12\n" +
+                "Coffee    White          1   £1.19\n" +
+                "Filling   Egg            5   £0.60\n" +
+                "Filling   Cream Cheese   1   £0.12\n" +
                 "----------------------------\n" +
-                "Total:              $1.91\n" +
+                "Total:              £1.91\n" +
                 "\n" +
                 "        Thank you\n" +
                 "      for your order!", result);

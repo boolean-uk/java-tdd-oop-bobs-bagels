@@ -209,7 +209,7 @@ public class Order {
                 receipt.append(String.format("%-4d", itemCount));
 
                 // Format and append itemTotal
-                receipt.append(String.format("$%.2f", itemTotal));
+                receipt.append(String.format("£%.2f", itemTotal));
 
                 // Start a new line
                 receipt.append("\n");
@@ -220,7 +220,7 @@ public class Order {
         }
 
         receipt.append("----------------------------\n");
-        receipt.append(String.format("%-20s$%.2f\n\n", "Total:", totalCost()));
+        receipt.append(String.format("%-20s£%.2f\n\n", "Total:", totalCost()));
         receipt.append("        Thank you\n      for your order!");
 
         return receipt.toString();
