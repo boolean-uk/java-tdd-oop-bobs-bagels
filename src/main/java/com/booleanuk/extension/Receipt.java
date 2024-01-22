@@ -12,16 +12,6 @@ public class Receipt{
     }
 
 
-    public double calculateTotalItemCost(Basket basket, Product item){
-        double price = 0;
-        for (int i = 0; i < basket.getItemBasket().size(); i++){
-            if (basket.getItemBasket().get(i) == item){
-                price += item.getPrice();
-            }
-        }
-        return price;
-    }
-
     public void generateReceipt(Basket basket){
         StringBuilder receipt = new StringBuilder();
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -40,13 +30,13 @@ public class Receipt{
             Product item = entry.getKey();
             int quantity = entry.getValue();
             receipt.append(String.format("%-25s%-5d£%.2f\n", item.getType() + " " + item.getVariant(),
-                    quantity, calculateTotalItemCost(basket, item) * quantity));
+                    quantity, item.getPrice() * quantity));
         }
 
         receipt.append("\n").append("------------------------------------\n");
-        receipt.append(String.format("Total%25s£%.2f\n\n", "", totalBasketValue));
+        receipt.append(String.format("Total: "+"%-18s%-5d£%.2f\n"," ",basket.getItemBasket().size(), totalBasketValue));
 
-        System.out.println(receipt.toString());
+        System.out.println(receipt);
     }
 
 }

@@ -24,18 +24,6 @@ public class ReceiptTest {
         inventory.addToMenu(filling,20);
     }
 
-
-    @Test
-    public void testTotalItemCost(){
-        Receipt receipt = new Receipt();
-        basket.addItem(bagel);
-        basket.addItem(bagel);
-        basket.addItem(bagel);
-        basket.addItem(coffee);
-        basket.addItem(filling);
-        Assertions.assertEquals(1.47, receipt.calculateTotalItemCost(basket,bagel));
-        Assertions.assertEquals(0.99, receipt.calculateTotalItemCost(basket,coffee));
-    }
     @Test
     public void testReceiptGenerator(){
         Receipt receipt = new Receipt();
@@ -50,7 +38,6 @@ public class ReceiptTest {
     @Test
     public void test2ReceiptGenerator(){
         Receipt receipt = new Receipt();
-        basket.addItem(bagel);
         basket.addItem(bagel);
         basket.addItem(bagel);
         basket.addItem(bagel);
