@@ -68,16 +68,22 @@ public class Receipt {
         receipt.append(createHeader());
 
         HashMap<Item, double[]> mapPriceAndSavings = this.basket.discountPerItem();
+        double totalSavings = 0.0;
         for (Item item : basket.getBasketContent().keySet()) {
             int amount = basket.getBasketContent().get(item);
             String itemRow = item.getVariant() + " " + item.getName() + "\t\t" +  amount + "\t\u00A3" + mapPriceAndSavings.get(item)[0] + "\n";
-            if (mapPriceAndSavings.get(item)[1] != 0.0){
-                itemRow += "                  (-\u00A3" + mapPriceAndSavings.get(item)[1] + ")\n";
+            double saving = mapPriceAndSavings.get(item)[1];
+            if (saving != 0.0){
+                itemRow += "                  (-\u00A3" + saving + ")\n";
+                totalSavings += saving;
             }
             receipt.append(itemRow);
         }
-        receipt.append("\n----------------------------\nTotal                  \u00A3") ;
+        receipt.append("\n----------------------------\nTotal               \u00A3") ;
         receipt.append(basket.totalCostWithDiscount(mapPriceAndSavings));
+        receipt.append("\n\nYou saved a total of £");
+        receipt.append(totalSavings);
+        receipt.append("\n      on this purchase.");
         receipt.append(createFooter());
         this.receipt = receipt.toString();
         return receipt.toString();

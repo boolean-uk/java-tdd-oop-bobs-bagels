@@ -96,7 +96,7 @@ public class ReceiptTest {
         Assertions.assertTrue(receipt.generateReceiptWithDiscount().contains("(-\u00A31.89)"));
         Assertions.assertTrue(receipt.generateReceiptWithDiscount().contains("Plain Bagel\t\t2\t\u00A30.78\n"));
         Assertions.assertFalse(receipt.generateReceiptWithDiscount().contains("(-\u00A30.0)"));
-        Assertions.assertTrue(receipt.generateReceiptWithDiscount().contains("\n----------------------------\nTotal                  \u00A3" + 6.73));
+        Assertions.assertTrue(receipt.generateReceiptWithDiscount().contains("\n----------------------------\nTotal               \u00A3" + 6.73));
         System.out.println(receipt.generateReceiptWithDiscount());
     }
 }
