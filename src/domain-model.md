@@ -166,9 +166,9 @@ discount where i would get rewarded for adding multiple things in my basket.
 
 Every Bagel is available for the `6 for 2.49` and `12 for 3.99` offer, but fillings still cost the extra amount per bagel.
 
-| Classes | Methods   | Members     | Scenario                      | Output               |
-|---------|-----------|-------------|-------------------------------|----------------------|
-| Order   | receipt() | String time | If items are added beforehand | return receipt       |
-|         |           | int amount  | If no items are added         | return empty receipt |
-|         |           |             |                               |                      |
+| Classes | Methods     | Members    | Scenario                            | Output                       |
+|---------|-------------|------------|-------------------------------------|------------------------------|
+| Order   | discount()  |            | If items meet discount requirements | return receipt with discount |
+|         | totalCost() | int amount | If items do not meet discount req.  | return regular receipt       |
+|         |             |            |                                     |                              |
 
