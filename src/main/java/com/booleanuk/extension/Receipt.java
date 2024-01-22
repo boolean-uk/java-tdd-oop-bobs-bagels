@@ -25,7 +25,9 @@ public class Receipt {
     public String printBasket() {
 
         double totalCost = this.customer.getTotalCost(customer.getBasket().getItemList());
-        return formatDate() + "\n" + formatBasketValues(this.customer.getBasket().getItemList()) + "\n"  + "Total                       " + totalCost;
+        String basketValues = formatBasketValues(this.customer.getBasket().getItemList());
+
+        return formatDate() + "\n" + basketValues  + "\n"  + "Total                       " + totalCost;
     }
 
     public String formatDate() {
