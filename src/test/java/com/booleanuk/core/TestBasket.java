@@ -39,16 +39,6 @@ class BasketTest {
         Assertions.assertEquals("Item successfully removed", basket.remove(Items[0]));
     }
 
-    //@Test
-    //public void checkingTheCapacityReturnsTrue() {
-        //Basket basket = new Basket();
-        //basket.add(Items[0]);
-        //basket.add(Items[1]);
-        //basket.add(Items[2]);
-        //basket.add(Items[3]);
-       // Assertions.assertEquals("You have reached the capacity of the basket.", basket.getCapacity());
-    //}
-
     @Test
     public void checkingChangedCapacity() {
         Basket basket = new Basket();
@@ -67,5 +57,10 @@ class BasketTest {
     public void addAnotherItem() {
         Basket basket = new Basket();
         Assertions.assertEquals("Item is not in the inventory", basket.add(Items[14]));
+    }
+    @Test
+    public void seeTheCostOfAnItem() {
+        Basket basket = new Basket();
+        Assertions.assertEquals(0.12, basket.seeCost(Items[9]));
     }
 }

@@ -1,34 +1,16 @@
 package com.booleanuk.core;
 
 import java.util.ArrayList;
+import java.util.Map;
+
 public class Basket {
-    Item[] Items = {
-            new Item("BGLO", 0.49, "Bagel", "Onion"),
-            new Item("BGLP", 0.39, "Bagel", "Plain"),
-            new Item("BGLE", 0.49, "Bagel", "Everything"),
-            new Item("BGLS", 0.49, "Bagel", "Sesame"),
-            new Item("COFB", 0.99, "Coffee", "Black"),
-            new Item("COFW", 1.19, "Coffee", "White"),
-            new Item("COFC", 1.29, "Coffee", "Cappuccino"),
-            new Item("COFL", 1.29, "Coffee", "Latte"),
-            new Item("FILB", 0.12, "Filling", "Bacon"),
-            new Item("FILE", 0.12, "Filling", "Egg"),
-            new Item("FILC", 0.12, "Filling", "Cheese"),
-            new Item("FILX", 0.12, "Filling", "Cream Cheese"),
-            new Item("FILS", 0.12, "Filling", "Smoked Salmon"),
-            new Item("FILH", 0.12, "Filling", "Ham")
-    };
+    Inventory in = new Inventory();
+    Map<String, Item> items = in.items;
+
     public ArrayList<Item> list = new ArrayList<>();
     public int capacity = 3;
     public String add(Item item) {
-        boolean exists = false;
-        for (Item it : Items){
-            if (item.getSku().equals(it.getSku())) {
-                exists = true;
-                break;
-            }
-        }
-        if (exists) {
+        if (items.containsKey(item.getSku())){
             if (list.size() < capacity) {
                 if (list.contains(item)) {
                     return "This item already exists in the Basket";
