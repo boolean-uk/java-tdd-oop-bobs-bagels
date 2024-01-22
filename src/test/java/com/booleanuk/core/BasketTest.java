@@ -202,7 +202,7 @@ class BasketTest {
 			basket.addItem("BGLP");
 			basket.addItem("BGLP");
 			basket.addItem("BGLP");
-			Assertions.assertEquals(5.55, basket.getTotalCost(),0.1);
+			Assertions.assertEquals(5.55, basket.getTotalCost(), 0.1);
 		} catch (NotInInventoryException e) {
 			throw new RuntimeException(e);
 		}
@@ -210,28 +210,48 @@ class BasketTest {
 		try {
 			basket4.addItem("BGLO");
 			basket4.addItem("BGLO");
-			Assertions.assertEquals(0.49+0.49, basket4.getTotalCost(), 0.1);
+			Assertions.assertEquals(0.49 + 0.49, basket4.getTotalCost(), 0.1);
 
 			for (int i = 0; i < 12; i++) {
 
 				basket4.addItem("BGLP");
 			}
-			Assertions.assertEquals(0.49+0.49+3.99, basket4.getTotalCost(), 0.1);
+			Assertions.assertEquals(0.49 + 0.49 + 3.99, basket4.getTotalCost(), 0.1);
 
 			for (int i = 0; i < 6; i++) {
 
 				basket4.addItem("BGLE");
 			}
-			Assertions.assertEquals(0.49+0.49+3.99+2.49, basket4.getTotalCost(), 0.1);
+			Assertions.assertEquals(0.49 + 0.49 + 3.99 + 2.49, basket4.getTotalCost(), 0.1);
 			basket4.addItem("COFB");
 			basket4.addItem("COFB");
-			Assertions.assertEquals(1.25+1.25+3.99+2.49, basket4.getTotalCost(), 0.1);
+			Assertions.assertEquals(1.25 + 1.25 + 3.99 + 2.49, basket4.getTotalCost(), 0.1);
 			basket4.addItem("COFB");
-			Assertions.assertEquals(1.25+1.25+3.99+2.49+0.99, basket4.getTotalCost(), 0.1);
+			Assertions.assertEquals(1.25 + 1.25 + 3.99 + 2.49 + 0.99, basket4.getTotalCost(), 0.1);
 
 		} catch (NotInInventoryException e) {
 			throw new RuntimeException(e);
 		}
 
+	}
+
+	@Test
+	public void printReceiptTest() {
+		Inventory inventory = new Inventory();
+		Basket basket = new Basket(inventory);
+		String receipt = basket.printReceipt();
+		String example =
+				"    ~~~ Bob's Bagels ~~~\n" +
+						"\n" +
+						"    2021-03-16 21:38:44\n" +
+						"\n" +
+						"----------------------------\n" +
+
+						"----------------------------\n" +
+						"Total                 £0\n" +
+						"\n" +
+						"        Thank you\n" +
+						"      for your order!";
+		Assertions.assertEquals(example, receipt);
 	}
 }
