@@ -13,6 +13,8 @@ public class Basket {
     private ArrayList<Item> items;
     private int quantity;
 
+    private double totalPrice;
+
     public Basket(int capacity) {
         this.capacity = capacity;
         this.items = new ArrayList<>();
@@ -75,11 +77,7 @@ public class Basket {
     }
 
     private String getTotalCost() {
-        double totalCost = 0;
-        for (Item item : items) {
-            totalCost += item.getTotalCost();
-        }
-        return String.format("£%.2f", totalCost);
+        return String.format("£%.2f", this.totalPrice);
     }
 
     private StringBuilder getDiscount(StringBuilder result) {
@@ -87,19 +85,40 @@ public class Basket {
         for (Item uniqueItem : uniqueItems) {
             String itemName = uniqueItem.getType() + " " + uniqueItem.getVariant();
             int quantity = Collections.frequency(items, uniqueItem);
-            double totalCost = uniqueItem.getPrice() * quantity;
+            double discountedPrice = calculateDiscountedPrice(uniqueItem, quantity);
+            this.totalPrice += discountedPrice;
 
-            if (uniqueItems.size() == 12) {
-
-
-            } else if (uniqueItems.size() == 6) {
-
-
-            } else {
-                result.append(String.format("%-20s %-4d £%.2f\n", itemName, quantity, totalCost));
-            }
-            return result;
+            result.append(String.format("%-20s %-4d £%.2f\n", itemName, quantity, discountedPrice));
         }
 
+        return result;
     }
+    private double calculateDiscountedPrice(Item item, int quantity) {
+        double discountedPrice = 0.0;
+
+        if (item.getType().equals("Bagel")) {
+            int remainingBagels;
+
+            // 12 deal
+            int deal12Quantity = quantity / 12;
+            discountedPrice += deal12Quantity * 3.99;
+            remainingBagels = quantity % 12;
+
+            // 6 bagel deal
+            int deal6Quantity = remainingBagels / 6;
+            discountedPrice += deal6Quantity * 2.49;
+            remainingBagels %= 6;
+
+            // normal price
+            discountedPrice += remainingBagels * item.getPrice();
+        } else if (item.getType().equals("Coffee")) {
+            discountedPrice = item.getPrice() * quantity;
+        } else {
+            discountedPrice = item.getPrice() * quantity;
+        }
+
+        return discountedPrice;
+    }
+
+
 }
