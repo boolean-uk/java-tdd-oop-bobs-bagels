@@ -2,6 +2,8 @@ package com.booleanuk.extension;
 
 import com.booleanuk.core.*;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -47,8 +49,36 @@ public class Receipt {
 
         returnString += "\n--------------------------------\n";
 
+
         for(Item item : listOfItems) {
-            returnString += String.format("%-15s %5d %10.2f", item.getVariant() + " " + item.getName(),basketMap.get(item), (basketMap.get(item) * item.getPrice()));
+            double discount = 0.00;
+            double discountCorrect = 0.00;
+            BigDecimal discountRounded = new BigDecimal(discount);
+
+            if(discounts.get(item.getSkuCode()) != null) {
+                discount = discounts.get(item.getSkuCode()).stream().mapToDouble(f -> f).sum();
+                discountRounded = new BigDecimal(discount).setScale(2, RoundingMode.HALF_UP);
+                discountCorrect = Double.parseDouble(String.valueOf(discountRounded));
+            }
+
+
+
+            returnString += String.format("%-15s %5d %10.2f", item.getVariant() + " " + item.getName(),basketMap.get(item), (basketMap.get(item) * item.getPrice() - discountCorrect));
+
+            for(String str: discounts.keySet()) {
+                if(str.equalsIgnoreCase(item.getSkuCode())) {
+
+
+                    String negativeOrPositive = "";
+                    if(Double.parseDouble(String.valueOf(discountRounded)) >= 0) {
+                        negativeOrPositive = "-";
+                    } else{
+                        negativeOrPositive = "+";
+                    }
+
+                            returnString += "\n                         (" + negativeOrPositive + Math.abs(Double.parseDouble(String.valueOf(discountRounded))) + ")";
+                }
+            }
             returnString += "\n";
 
         }
@@ -59,6 +89,8 @@ public class Receipt {
     }
 
     public String formatSavings(Map<Item, Integer> basketMap) {
+
+
         return "";
     }
 
