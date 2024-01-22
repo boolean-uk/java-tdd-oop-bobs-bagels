@@ -157,6 +157,7 @@ class BasketTest {
     @Test
     public void testTwelveDiscountForBagels (){
         Basket basket = new Basket();
+        Basket.setMaxSize(100);
         Bagel bagel1 = new  Bagel("BGLP", 0.39, "Plain");
         Bagel bagel2 = new  Bagel("BGLP", 0.39, "Plain");
         Bagel bagel3 = new  Bagel("BGLP", 0.39, "Plain");
@@ -185,6 +186,7 @@ class BasketTest {
         basket.add(bagel10);
         basket.add(bagel11);
         basket.add(bagel12);
+        System.out.println(basket.getProducts().size());
 
         Assertions.assertEquals(3.99, basket.getCostOfBasket());
 

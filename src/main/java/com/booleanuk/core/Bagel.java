@@ -2,7 +2,7 @@ package com.booleanuk.core;
 
 import java.util.ArrayList;
 
-public class Bagel {
+public class Bagel implements Product{
     private ArrayList<Filling> fillings;
     private String id;
     private String name;
@@ -29,15 +29,14 @@ public class Bagel {
         }
         return false;
     }
+    public ArrayList<Filling> getFillings() {
+        return this.fillings;
+    }
     public String getId(){
         return this.id;
     }
     public double getPrice() {
         return this.price;
-    }
-
-    public ArrayList<Filling> getFillings() {
-        return this.fillings;
     }
 
     public String getName() {

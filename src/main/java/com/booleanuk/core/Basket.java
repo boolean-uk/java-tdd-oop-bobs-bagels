@@ -1,15 +1,16 @@
 package com.booleanuk.core;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Basket {
 
-    private ArrayList<Bagel> products;
+    private HashMap<Bagel, Integer> products;
     private static int maxSize;
 
     public Basket(){
 
-        this.products = new ArrayList<>();
+        this.products = new HashMap<>();
         maxSize = 10;
     }
 
@@ -24,14 +25,22 @@ public class Basket {
         if(isBasketFull()){
             return false;
         }
+
+        //If there is a bagel of same sort
+        for (Bagel b : products.keySet()){
+            if(b.getId().equals(bagel.getId())){
+
+            }
+        }
+
         //Add bagel
-        this.products.add(bagel);
+        this.products.put(bagel, 1);
 
         return true;
     }
 
     public boolean remove(Bagel bagel){
-        if (products.contains(bagel)){
+        if (products.containsKey(bagel)){
             products.remove(bagel);
             return true;
         }
@@ -39,7 +48,7 @@ public class Basket {
     }
 
     public boolean addFillings(Bagel bagel,  ArrayList<Filling> fillings){
-        if(products.contains(bagel)){
+        if(products.containsKey(bagel)){
             return bagel.addFillings(fillings);
         }
         return false;
@@ -57,14 +66,14 @@ public class Basket {
         return maxSize;
     }
 
-    public ArrayList<Bagel> getProducts() {
+    public HashMap<Bagel, Integer> getProducts() {
         return products;
     }
 
     public double getCostOfBasket(){
         double total = 0;
 
-        for (Bagel bagel: products){
+        for (Bagel bagel: products.keySet()){
             total += getCostOfBagel(bagel);
         }
         return total;

@@ -1,6 +1,8 @@
 package com.booleanuk.core;
 
-public class Filling {
+import java.util.ArrayList;
+
+public class Filling implements Product{
     private String id;
     private String name;
     private double price;
@@ -27,6 +29,16 @@ public class Filling {
 
     public String getVariant() {
         return variant;
+    }
+
+    @Override
+    public boolean addFillings(ArrayList<Filling> fillings) {
+        return false;
+    }
+
+    @Override
+    public ArrayList<Filling> getFillings() {
+        return null;
     }
 }
 

@@ -1,14 +1,16 @@
 package com.booleanuk.extension;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Basket {
 
+    private  HashMap<String, Integer> qtyMap;
     private ArrayList<Bagel> products;
     private static int maxSize;
 
     public Basket(){
-
+        this.qtyMap = new HashMap<>();
         this.products = new ArrayList<>();
         maxSize = 10;
     }
@@ -62,11 +64,17 @@ public class Basket {
     }
 
     public double getCostOfBasket(){
+        calculateDiscounts();
         double total = 0;
+
+//        for (Filling filling : bagel.getFillings()){
+//
+//        }
 
         for (Bagel bagel: products){
             total += getCostOfBagel(bagel);
         }
+
         return total;
     }
 
@@ -88,6 +96,33 @@ public class Basket {
 
     private boolean isBasketFull(){
         return (this.products.size()) >= maxSize;
+    }
+
+    private double calculateDiscounts(){
+
+        //Add all products to a map.
+        System.out.println(products.size());
+        for (Bagel product : this.products){
+            if (!qtyMap.containsKey(product.getId())){
+                qtyMap.put(product.getId(), 1);
+            }
+            else {
+                int currentAmount = qtyMap.get(product.getId());
+                qtyMap.put(product.getId(), currentAmount +1);
+            }
+        }
+        System.out.println(qtyMap);
+
+        double res = 0;
+        for (int qty : qtyMap.values()){
+            while (qty>12){
+                qty -= 12;
+                res += 3.99;
+            }
+        }
+        System.out.println(res);
+        System.out.println(qtyMap);
+        return res;
     }
 
 }
