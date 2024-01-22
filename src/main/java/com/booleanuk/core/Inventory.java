@@ -12,13 +12,18 @@ public class Inventory {
 
     private HashMap<String, Double> inventoryPriceList;
     private ArrayList<String> fullInventoryList;
+    private Order order;
 
     public Inventory() {
         this.inventoryPriceList = new HashMap<>();
     }
+    public Inventory(Order order) {
+        this.order = new Order();
+        this.inventoryPriceList = new HashMap<>();
+    }
 
     public HashMap<String, Double> getInventoryPriceList(){
-//        this.inventoryPriceList = new HashMap<>();
+        this.inventoryPriceList = new HashMap<>();
         this.inventoryPriceList.put("BGLO", 0.49);
         this.inventoryPriceList.put("BGLP", 0.39);
         this.inventoryPriceList.put("BGLE", 0.49);

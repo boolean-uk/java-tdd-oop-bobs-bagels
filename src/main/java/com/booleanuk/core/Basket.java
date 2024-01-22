@@ -11,6 +11,11 @@ public class Basket {
 
     public Basket() {
         this.itemList = new ArrayList<>();
+        this.inventory = new Inventory();
+    }
+    public Basket(Inventory inventory) {
+        this.itemList = new ArrayList<>();
+        this.inventory = new Inventory();
     }
 
     public ArrayList<String> getItemList() {
@@ -42,7 +47,7 @@ public class Basket {
 
 
     public boolean addItem(String item) {
-        inventory = new Inventory();
+
         if(!inventory.getInventoryPriceList().containsKey(item)) {
             System.out.println("Item is not in inventory");
             return false;
