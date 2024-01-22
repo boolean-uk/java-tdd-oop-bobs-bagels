@@ -12,7 +12,8 @@ public class Basket {
 
     public Basket(){
         this.basketArr = new String[35];
-        this.fillingArr = new String[70];
+        //This should have been arraylist, but yeah
+        this.fillingArr = new String[50];
         this.inventoryList = new ArrayList<>();
         inventoryList.add(new Inventory("BGLO",0.49d,"Bagel","Onion"));
         inventoryList.add(new Inventory("BGLP",0.39d,"Bagel","Plain"));
@@ -236,7 +237,6 @@ public class Basket {
                     }
                 }
             }
-
         }
         //Discount boolean if discount detected
         boolean bglDisc = false;
