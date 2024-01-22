@@ -9,15 +9,16 @@ import lombok.Data;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import static com.booleanuk.core.util.Constants.BASKET_CAPACITY_DEFAULT;
+
 @Data
 public class Basket {
-    private static final int DEFAULT_CAPACITY = 12;
     private ArrayList<Item> basket;
     private int capacity;
 
     public Basket() {
         this.basket = new ArrayList<>();
-        this.capacity = 12;
+        this.capacity = BASKET_CAPACITY_DEFAULT;
     }
     public Basket(int capacity) {
         this.basket = new ArrayList<>();
@@ -95,7 +96,7 @@ public class Basket {
 
     public void setCapacity(int capacity) {
         if (capacity < 0) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("Basket capacity cannot be negative");
         }
         this.capacity = capacity;
     }

@@ -8,7 +8,17 @@ import lombok.Getter;
 public enum ItemType {
     BAGEL("Bagel"),
     COFFEE("Coffee"),
-    FILLING("Filling");
+    FILLING("Filling"),
+    GENERIC("");
 
     private final String displayName;
+
+    public static ItemType getItemTypeFromString(String input) {
+        for (ItemType itemType : ItemType.values()) {
+            if (itemType.getDisplayName().equals(input)) {
+                return itemType;
+            }
+        }
+        return GENERIC;
+    }
 }
