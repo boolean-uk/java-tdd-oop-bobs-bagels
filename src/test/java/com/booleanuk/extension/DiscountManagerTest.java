@@ -21,8 +21,9 @@ public class DiscountManagerTest {
     }
 
     @Test
-    public void doesCalculateTheCorrectDiscount() throws FileNotFoundException, URISyntaxException {
+    public void doesCalculateTheCorrectDiscount() {
         // EXTENSION 1 - Example 1
+        // FIXME Example 1 in the .md file is wrong. It does not apply the coffee-bagel discount to the onion bagels
         Item bagelOnion = store.getItemBySKU("BGLO");
         basket.addItem(bagelOnion);
         basket.addItem(bagelOnion);
@@ -39,12 +40,12 @@ public class DiscountManagerTest {
         basket.addItem(coffeeBlack);
         basket.addItem(coffeeBlack);
 
-        Assertions.assertEquals(1.14, DiscountManager.calculateBasketBagelDiscounts(basket), 0.01);
-        Assertions.assertEquals(10.43, basket.getTotalCost(),  0.01);
+        Assertions.assertEquals(1.6, DiscountManager.calculateBasketBagelDiscounts(basket), 0.01);
+        Assertions.assertEquals(9.97, basket.getTotalCost(),  0.01); // 10.43 is wrong
     }
 
     @Test
-    public void testOneBagelHasMultipleDiscounts() throws FileNotFoundException, URISyntaxException {
+    public void testOneBagelHasMultipleDiscounts() {
         // EXTENSION 1 - Example 2
         Item bagelEverything = store.getItemBySKU("BGLP");
         for (int i = 0; i < 16; i++) {
@@ -54,5 +55,71 @@ public class DiscountManagerTest {
         Assertions.assertEquals(16, basket.getBasket().size());
         Assertions.assertEquals(0.69, DiscountManager.calculateBasketBagelDiscounts(basket), 0.01);
         Assertions.assertEquals(5.55, basket.getTotalCost(),  0.01);
+
+        for (int i = 0; i < 8; i++) {
+            basket.addItem(bagelEverything);
+        }
+
+        Assertions.assertEquals(24, basket.getBasket().size());
+        Assertions.assertEquals(1.38, DiscountManager.calculateBasketBagelDiscounts(basket), 0.01);
+        Assertions.assertEquals(7.98, basket.getTotalCost(),  0.01);
+    }
+
+    @Test
+    public void testOneBagelHasMultipleDifferentBulkDiscounts() {
+        Item bagelEverything = store.getItemBySKU("BGLE");
+        for (int i = 0; i < 16; i++) {
+            basket.addItem(bagelEverything);
+        }
+
+        Assertions.assertEquals(1.89, DiscountManager.calculateBasketBagelDiscounts(basket), 0.01);
+        Assertions.assertEquals(5.95, basket.getTotalCost(),  0.01);
+
+        for (int i = 0; i < 4; i++) {
+            basket.addItem(bagelEverything);
+        }
+
+        Assertions.assertEquals(20, basket.getBasket().size());
+        Assertions.assertEquals(1.89 + 0.45, DiscountManager.calculateBasketBagelDiscounts(basket), 0.01);
+        Assertions.assertEquals(7.46, basket.getTotalCost(),  0.01);
+    }
+
+    @Test
+    public void testPlainBagelAndCoffeeComboDiscount() {
+        basket.addItem(store.getItemBySKU("BGLP"));
+        basket.addItem(store.getItemBySKU("COFB"));
+
+        Assertions.assertEquals(0.13, DiscountManager.calculateBasketBagelDiscounts(basket), 0.01);
+        Assertions.assertEquals(1.25, basket.getTotalCost(),  0.01);
+    }
+
+    @Test
+    public void testOtherBagelAndCoffeeComboDiscount() {
+        basket.addItem(store.getItemBySKU("BGLE"));
+        basket.addItem(store.getItemBySKU("COFB"));
+
+        Assertions.assertEquals(0.23, DiscountManager.calculateBasketBagelDiscounts(basket), 0.01);
+        Assertions.assertEquals(1.25, basket.getTotalCost(),  0.01);
+    }
+
+    @Test
+    public void testTwoBagelsAndOneCoffeeComboDiscount() {
+        basket.addItem(store.getItemBySKU("BGLE"));
+        basket.addItem(store.getItemBySKU("BGLE"));
+        basket.addItem(store.getItemBySKU("COFB"));
+
+        Assertions.assertEquals(0.23, DiscountManager.calculateBasketBagelDiscounts(basket), 0.01);
+        Assertions.assertEquals(1.74, basket.getTotalCost(),  0.01);
+    }
+
+    @Test
+    public void testOneBagelsAndThreeCoffeeComboDiscount() {
+        basket.addItem(store.getItemBySKU("BGLP"));
+        basket.addItem(store.getItemBySKU("COFB"));
+        basket.addItem(store.getItemBySKU("COFB"));
+        basket.addItem(store.getItemBySKU("COFB"));
+
+        Assertions.assertEquals(0.13, DiscountManager.calculateBasketBagelDiscounts(basket), 0.01);
+        Assertions.assertEquals(3.23, basket.getTotalCost(),  0.01);
     }
 }

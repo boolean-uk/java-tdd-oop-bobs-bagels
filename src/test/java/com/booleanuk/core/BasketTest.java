@@ -1,6 +1,5 @@
 package com.booleanuk.core;
 
-import com.booleanuk.core.*;
 import com.booleanuk.core.items.Bagel;
 import com.booleanuk.core.items.Coffee;
 import com.booleanuk.core.items.Filling;
@@ -88,8 +87,8 @@ public class BasketTest {
         Assertions.assertEquals(0.39, basket.getTotalCost());
         basket.addItem(item1);
         Assertions.assertEquals(0.78, basket.getTotalCost());
-        basket.addItem(item2);
-        Assertions.assertEquals(1.77, basket.getTotalCost());
+        basket.addItem(item1);
+        Assertions.assertEquals(1.17, basket.getTotalCost());
     }
 
     @Test
