@@ -8,7 +8,8 @@ class BasketTest {
     // Add functionality
     @Test
     public void addMultipleValidItems() {
-        Basket basket = new Basket();
+        Inventory inventory = new Inventory();
+        Basket basket = new Basket(inventory);
         boolean result = basket.addItem("Bagel Onion", 1);
         Assertions.assertTrue(result);
 
@@ -21,16 +22,17 @@ class BasketTest {
         result = basket.addItem("Bagel Onion", 3);
         Assertions.assertTrue(result);
 
-        Assertions.assertEquals("Bagel Onion", basket.getBasketItem("BGLO").getItem());
-        Assertions.assertEquals("Filling Bacon", basket.getBasketItem("FILB").getItem());
-        Assertions.assertEquals("Coffee Black", basket.getBasketItem("COFB").getItem());
+        Assertions.assertEquals("Bagel Onion", basket.getBasketItem("BGLO").getNametype());
+        Assertions.assertEquals("Filling Bacon", basket.getBasketItem("FILB").getNametype());
+        Assertions.assertEquals("Coffee Black", basket.getBasketItem("COFB").getNametype());
         Assertions.assertEquals(4, basket.getBasketItem("BGLO").getQuantity());
 
     }
 
     @Test
     public void addMultipleInValidItems() {
-        Basket basket = new Basket();
+        Inventory inventory = new Inventory();
+        Basket basket = new Basket(inventory);
         boolean result = basket.addItem("Choclate", 1);
         Assertions.assertFalse(result);
 
@@ -46,7 +48,8 @@ class BasketTest {
     // Remove
     @Test
     public void removeItemsValid() {
-        Basket basket = new Basket();
+        Inventory inventory = new Inventory();
+        Basket basket = new Basket(inventory);
         boolean result = basket.addItem("Bagel Onion", 1);
         Assertions.assertTrue(result);
 
@@ -61,7 +64,8 @@ class BasketTest {
     // 3.
     @Test
     public void removeItemsNotInBasket() {
-        Basket basket = new Basket();
+        Inventory inventory = new Inventory();
+        Basket basket = new Basket(inventory);
         boolean result = basket.addItem("Bagel Onion", 1);
         Assertions.assertTrue(result);
 
@@ -75,7 +79,8 @@ class BasketTest {
 
     @Test
     public void removeOnlyOneValidItem() {
-        Basket basket = new Basket();
+        Inventory inventory = new Inventory();
+        Basket basket = new Basket(inventory);
         boolean result = basket.addItem("Bagel Onion", 1);
         result = basket.addItem("Filling Bacon", 1);
         result = basket.addItem("Bagel Onion", 1);
@@ -92,7 +97,8 @@ class BasketTest {
     // Capacity
     @Test
     public void updateBasketCapacityTo5() {
-        Basket basket = new Basket();
+        Inventory inventory = new Inventory();
+        Basket basket = new Basket(inventory);
         int newCapacity = 5;
         int result = basket.changeCapacity(newCapacity);
         Assertions.assertEquals(5, result);
@@ -100,7 +106,8 @@ class BasketTest {
 
     @Test
     public void updateBasketCapacityTo10() {
-        Basket basket = new Basket();
+        Inventory inventory = new Inventory();
+        Basket basket = new Basket(inventory);
         int newCapacity = 10;
         int result = basket.changeCapacity(newCapacity);
         Assertions.assertEquals(10, result);
@@ -108,7 +115,8 @@ class BasketTest {
 
     @Test
     public void addBeyondCapacity() {
-        Basket basket = new Basket();
+        Inventory inventory = new Inventory();
+        Basket basket = new Basket(inventory);
         int newCapacity = 2;
         int intResult = basket.changeCapacity(newCapacity);
         boolean result = basket.addItem("Bagel Onion", 1);
@@ -124,7 +132,8 @@ class BasketTest {
     // Overall Test after first five user stories
     @Test
     public void overallTest() {
-        Basket basket = new Basket();
+        Inventory inventory = new Inventory();
+        Basket basket = new Basket(inventory);
         int intResult = basket.changeCapacity(3);
         // Add 4 items to a max 3 items basket. Fours add should return false, the rest true
         Assertions.assertTrue(basket.addItem("Bagel Plain", 1));
@@ -150,7 +159,8 @@ class BasketTest {
 
     @Test
     public void testTotalCost() {
-        Basket basket = new Basket();
+        Inventory inventory = new Inventory();
+        Basket basket = new Basket(inventory);
         Assertions.assertEquals(0.0, basket.getTotal());
 
         Assertions.assertTrue(basket.addItem("Bagel Plain", 1));
@@ -173,7 +183,8 @@ class BasketTest {
     // Get price of one item
     @Test
     public void testGetPrize() {
-        Basket basket = new Basket();
+        Inventory inventory = new Inventory();
+        Basket basket = new Basket(inventory);
 
         Assertions.assertEquals(0.39, basket.getPrice("Bagel Plain"));
         Assertions.assertEquals(0.49, basket.getPrice("Bagel Sesame"));
@@ -186,17 +197,18 @@ class BasketTest {
     // Build bagel
     @Test
     public void testBuildBagelAllFillings() {
-        Basket basket = new Basket();
+        Inventory inventory = new Inventory();
+        Basket basket = new Basket(inventory);
         String[] fillings = {"Bacon", "Egg", "Cheese", "Cream Cheese", "Smoked Salmon", "Ham"};
         boolean result = basket.buildBagel(2, fillings);
         Assertions.assertTrue(result);
-        Assertions.assertEquals("Bagel Bacon, Egg, Cheese, Cream Cheese, Smoked Salmon, Ham", basket.getBasketItem("BGLB1").getItem());
+        Assertions.assertEquals("Bagel Bacon, Egg, Cheese, Cream Cheese, Smoked Salmon, Ham", basket.getBasketItem("BGLB1").getNametype());
         Assertions.assertEquals(2, basket.getBasketSize());
 
         String[] fillings1 = {"Egg", "Cheese", "Cream Cheese", "Ham"};
         result = basket.buildBagel(1, fillings1);
         Assertions.assertTrue(result);
-        Assertions.assertEquals("Bagel Egg, Cheese, Cream Cheese, Ham", basket.getBasketItem("BGLB2").getItem());
+        Assertions.assertEquals("Bagel Egg, Cheese, Cream Cheese, Ham", basket.getBasketItem("BGLB2").getNametype());
         Assertions.assertEquals(3, basket.getBasketSize());
 
         String[] fillings2 = {"Tomato", "Eggs"};
@@ -208,6 +220,20 @@ class BasketTest {
     // Test for not allowing customers is incorporated with the adding testing.
 
     // Checking the price for bagel and/or filling, is all in one method and tested together further up.
+
+    // Extensions
+    // Discounts
+
+    @Test
+    public void testDiscountSixBagels() {
+        Inventory inventory = new Inventory();
+        Discount discount = new Discount();
+        Basket basket = new Basket(inventory, discount);
+        boolean result = basket.addItem("Bagel Onion", 6);
+        Assertions.assertTrue(result);
+
+        Assertions.assertEquals(2.49, basket.getTotal());
+    }
 
 
 

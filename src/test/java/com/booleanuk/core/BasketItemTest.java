@@ -7,10 +7,10 @@ public class BasketItemTest {
 
     @Test
     public void testBasketItem() {
-        BasketItem basketItem1 = new BasketItem("scissors",2, 1.28);
-        BasketItem basketItem2 = new BasketItem("battery",1, 3.5);
+        BasketItem basketItem1 = new BasketItem("scissors", "hand",2, 1.28);
+        BasketItem basketItem2 = new BasketItem("battery", "lithium",1, 3.5);
 
-        Assertions.assertEquals("scissors", basketItem1.getItem());
+        Assertions.assertEquals("scissors", basketItem1.getName());
         Assertions.assertEquals(3.5, basketItem2.getPrice());
         Assertions.assertEquals(2, basketItem1.getQuantity());
 

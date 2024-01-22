@@ -1,22 +1,25 @@
 package com.booleanuk.core;
 
-public class BasketItem {
-    private String item;
+public class BasketItem implements Item{
+    private String name;
+    private String type;
+    private String nametype;
     private int quantity;
     private double price;
     private String[] fillings;
     private int numFillings;
 
-
-
-    public BasketItem(String item, int quantity, double price) {
-        this.item = item;
+    public BasketItem(String name, String type, int quantity, double price) {
+        this.name = name;
+        this.type = type;
+        this.nametype = name + " " + type;
         this.quantity = quantity;
         this.price = price;
     }
 
-    public BasketItem(String item, int quantity, double price, String[] fillings) {
-        this.item = item;
+    public BasketItem(String name, String nametype, int quantity, double price, String[] fillings) {
+        this.name = name;
+        this.nametype = nametype;
         this.quantity = quantity;
         this.price = price;
         this.fillings = fillings;
@@ -39,8 +42,15 @@ public class BasketItem {
         return price;
     }
 
-    public String getItem() {
-        return item;
+    public String getName() {
+        return name;
+    }
+    public String getType() {
+        return type;
+    }
+
+    public String getNametype() {
+        return nametype;
     }
 
     public String[] getFillings() {
@@ -55,7 +65,7 @@ public class BasketItem {
         return numFillings;
     }
 
-    public void setItem(String item) {
-        this.item = item;
+    public void setName(String name) {
+        this.name = name;
     }
 }

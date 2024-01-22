@@ -7,8 +7,8 @@ public class ItemTest {
 
     @Test
     public void testGetters() {
-        Item saw = new Item(12.99, "Saw", "Handheld");
-        Item anotherSaw = new Item(52.99, "Saw", "Motor");
+        InventoryItem saw = new InventoryItem(12.99, "Saw", "Handheld");
+        InventoryItem anotherSaw = new InventoryItem(52.99, "Saw", "Motor");
 
         Assertions.assertEquals(12.99, saw.getPrice());
         Assertions.assertEquals("Saw", saw.getName());

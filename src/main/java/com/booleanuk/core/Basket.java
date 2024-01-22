@@ -11,11 +11,19 @@ public class Basket {
     private int capacity;
     private double total;
     Inventory inventory;
+    Discount discount;
     int bglbIncrementor = 0;
 
-    public Basket() {
-        inventory = new Inventory();
+    public Basket(Inventory inventory) {
+        this.inventory = inventory;
+        this.basket = new HashMap<>();
+        this.capacity = 30;
+        this.total = 0.0;
+    }
 
+    public Basket(Inventory inventory, Discount discount) {
+        this.inventory = inventory;
+        this.discount = discount;
         this.basket = new HashMap<>();
         this.capacity = 30;
         this.total = 0.0;
@@ -51,7 +59,9 @@ public class Basket {
         }
         // Item not in basket, then put key by sku and value as BasketItem with name, price and quantity.
         else {
-            this.basket.put(sku, new BasketItem(item, quantity, price));
+            String name = inventory.items.get(sku).getName();
+            String type = inventory.items.get(sku).getType();
+            this.basket.put(sku, new BasketItem(name, type, quantity, price));
         }
 
         // Update total
@@ -152,8 +162,9 @@ public class Basket {
 
         // Add to basket and build a bagel to sku map
         bagelCost = Math.round(bagelCost*100.0) / 100.0;
-        this.bglbMap.put(item.substring(0, item.length()-2), sku);
-        this.basket.put(sku, new BasketItem(item.substring(0, item.length()-2), quantity, bagelCost, fillings));
+        String nametype = item.substring(0, item.length()-2);
+        this.bglbMap.put(nametype, sku);
+        this.basket.put(sku, new BasketItem("Bagel", nametype, quantity, bagelCost, fillings));
 
         // Update total
         updateTotal();
