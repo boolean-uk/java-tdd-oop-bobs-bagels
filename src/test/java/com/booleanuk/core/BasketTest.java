@@ -114,12 +114,21 @@ class BasketTest {
     }
 
     @Test
+    public void testGetCostOfCoffee(){
+        Basket basket = new Basket();
+        Coffee coffee = new Coffee("COFB", 0.99, "Black");
+
+        //Test get cost of filling
+        Assertions.assertEquals(0.12, basket.getCostOfCoffee(coffee));
+
+    }
+    @Test
     public void testGetCostOfFilling(){
         Basket basket = new Basket();
         Filling filling1 = new Filling("FILB", 0.12, "Bacon");
 
         //Test get cost of filling
-        Assertions.assertEquals(0.12, basket.getCostOfFilling(filling1));
+        Assertions.assertEquals(0.12, basket.getCostOfProduct(filling1));
 
     }
     @Test
@@ -136,10 +145,10 @@ class BasketTest {
         Bagel bagelWithFilling = new Bagel("BGLP", 0.39, "Plain", fillings);
 
         //Get cost of plain bagel
-        Assertions.assertEquals(0.39, basket.getCostOfBagel(bagelplain));
+        Assertions.assertEquals(0.39, basket.getCostOfProduct(bagelplain));
 
         //Get cost of bagel with filling on
-        Assertions.assertEquals(0.63, basket.getCostOfBagel(bagelWithFilling));
+        Assertions.assertEquals(0.63, basket.getCostOfProduct(bagelWithFilling));
     }
     @Test
     public void testGetTotalCost(){
