@@ -118,7 +118,6 @@ public class Store {
             double cost = 0;
             if (inventory.hasBundleDiscountForItem(item)) {
                 double bundleCost = inventory.getCostForBundle(item, quantity);
-                System.out.println(bundleCost);
                 if(bundleCost > 0) {
                     prices.put(item, prices.get(item) + bundleCost);
                     int noOfItemsToRemove = quantity - inventory.getRemainderAfterBundle(item, quantity);
@@ -156,7 +155,6 @@ public class Store {
         }
 
         for(Item item: notInBundles) {
-            System.out.println(item);
             prices.put(item, prices.get(item) + getCostOfItem(item));
         }
         if(withDiscountData) {

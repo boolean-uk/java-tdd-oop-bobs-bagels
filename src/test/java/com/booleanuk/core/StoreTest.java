@@ -26,7 +26,6 @@ public class StoreTest {
         Assertions.assertFalse(store.getBaskets().get(basketId).getItems().contains(bagel));
         String actual = store.addItemToBasket(bagel, basketId);
         Assertions.assertEquals("Onion Bagel added.", actual);
-        System.out.println(store.getBaskets().get(basketId).getItems());
         Assertions.assertTrue(store.getBaskets().get(basketId).getItems().contains(bagel));
     }
 
@@ -156,7 +155,7 @@ public class StoreTest {
         Store store = new Store();
         int basketId = store.createBasket();
         store.addItemToBasket(new Bagel("Onion", new ArrayList<>(List.of(new Filling("egg"), new Filling("cheese")))), basketId);
-        System.out.println(store.addItemToBasket(new Bagel("plaIN", new ArrayList<>(List.of(new Filling("cheese")))), basketId));
+        store.addItemToBasket(new Bagel("plaIN", new ArrayList<>(List.of(new Filling("cheese")))), basketId);
         Assertions.assertEquals(0.49+0.39+3*0.12, store.getCostOfBasket(basketId), 0.0001);
     }
 
