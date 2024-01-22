@@ -131,3 +131,14 @@ I want customers to only be able to order things that we stock in our inventory.
 |        |                  |                           |                            |                 |
 
 
+```
+Domain model for EXTENSION 1
+```
+
+| Class  | Method            | Member Variables           | Scenario                                                           | Result              |
+|--------|-------------------|----------------------------|--------------------------------------------------------------------|---------------------|
+| Basket | double discount() | ArrayList<Item> inventory  | Create 3 new items in inventory with SKU: DIS6, DIS12, DISCB.      | return double price |
+|        |                   | ArrayList<String> basket   | Iterate through the basket to count the amount of bagels and add   |                     |
+|        |                   | ArrayList<String> discount | the discount SKU to the discount-list and calculate the totalprice |                     |
+|        |                   |                            |                                                                    |                     |
+
