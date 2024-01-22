@@ -176,19 +176,8 @@ class BasketTest {
     public void testTwelveDiscountForBagels (){
         Basket basket = new Basket();
         Basket.setMaxSize(100);
-        Bagel bagel1 = new  Bagel("BGLP", 0.39, "Plain");
-        Bagel bagel2 = new  Bagel("BGLP", 0.39, "Plain");
-        Bagel bagel3 = new  Bagel("BGLP", 0.39, "Plain");
-        Bagel bagel4 = new  Bagel("BGLP", 0.39, "Plain");
-        Bagel bagel5 = new  Bagel("BGLP", 0.39, "Plain");
-        Bagel bagel6 = new  Bagel("BGLP", 0.39, "Plain");
-        Bagel bagel7 = new  Bagel("BGLP", 0.39, "Plain");
-        Bagel bagel8 = new  Bagel("BGLP", 0.39, "Plain");
-        Bagel bagel9 = new  Bagel("BGLP", 0.39, "Plain");
-        Bagel bagel10 = new  Bagel("BGLP", 0.39, "Plain");
-        Bagel bagel11 = new  Bagel("BGLP", 0.39, "Plain");
-        Bagel bagel12 = new  Bagel("BGLP", 0.39, "Plain");
-        Bagel bagel13 = new  Bagel("BGLP", 0.39, "Plain");
+        Bagel bagelplain = new  Bagel("BGLP", 0.39, "Plain");
+        Bagel bagelWithFilling = new  Bagel("BGLP", 0.39, "Plain");
 
         Filling filling1 = new  Filling("FILB", 0.12, "Bacon");
         Filling filling2 = new  Filling("FILE", 0.12, "Egg");
@@ -197,26 +186,25 @@ class BasketTest {
         fillings.add(filling1);
         fillings.add(filling2);
 
-        bagel1.addFillings(fillings);
+        bagelWithFilling.addFillings(fillings);
 
         //exactly 12-discount
-        basket.add(bagel1);
-        basket.add(bagel2);
-        basket.add(bagel3);
-        basket.add(bagel4);
-        basket.add(bagel5);
-        basket.add(bagel6);
-        basket.add(bagel7);
-        basket.add(bagel8);
-        basket.add(bagel9);
-        basket.add(bagel10);
-        basket.add(bagel11);
-        basket.add(bagel12);
-        System.out.println(basket.getProducts().size());
+        basket.add(bagelplain);
+        basket.add(bagelplain);
+        basket.add(bagelplain);
+        basket.add(bagelplain);
+        basket.add(bagelplain);
+        basket.add(bagelplain);
+        basket.add(bagelplain);
+        basket.add(bagelplain);
+        basket.add(bagelplain);
+        basket.add(bagelplain);
+        basket.add(bagelplain);
+        basket.add(bagelWithFilling);
 
         Assertions.assertEquals(3.99+0.24, basket.getCostOfBasket());
 
-        basket.add(bagel13);
+        basket.add(bagelplain);
 
         //more than 12-discount
         Assertions.assertEquals(3.99+0.24+0.49, basket.getCostOfBasket());
