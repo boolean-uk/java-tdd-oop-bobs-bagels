@@ -211,13 +211,16 @@ I want customers to only be able to order things that we stock in our inventory.
 
 As a customer,
 So I can make a huge order,
-I want to see the total price for 12 Plain Bagels, 6 Onion Bagels, 3 Everything Bagels, and 1 black coffee.
+I want to see the total price for discounted bagels and coffee.
 
 # Domain Model
 
-| Class  | Member Variables | Methods | Scenario | Output/Result |
-|--------|------------------|---------|----------|---------------|
-| Basket |                  |         |          |               |
+| Class              | Member Variables | Methods                          | Scenario | Output/Result |
+|--------------------|------------------|----------------------------------|----------|---------------|
+| ExtensionExercise1 | int countBGLO    | double returnItemsWithDiscount() |          |               |
+|                    | int countBGLP    |                                  |          |               |
+|                    | int countBGLE    |                                  |          |               |
+|                    | int countCOFB    |                                  |          |               |
 
 # Extension 2
 

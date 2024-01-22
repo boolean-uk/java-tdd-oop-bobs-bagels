@@ -18,23 +18,41 @@ public class ExtensionExercise1 {
         inventoryList.add(new Inventory("COFB", 0.99, "Coffee", "Black"));
     }
 
+    int countBGLO = 0;
+    int countBGLP = 0;
+    int countBGLE = 0;
+
+    int countCOFB = 0;
+
     public double returnItemsWithDiscount() {
         double price = 0.0;
         for (Inventory items : basketList) {
-            if (basketList.contains("BGLO") && basketList.size() == 6) {
-                price += 2.49;
+            if (items.getSku().equals("BGLO")) {
+                countBGLO++;
             }
-            else if (basketList.contains("BGLP") && basketList.size() == 12) {
-                price += 3.99;
+            else if (items.getSku().equals("BGLP")) {
+                countBGLP++;
             }
-            else if (basketList.contains("BGLE") && basketList.size() == 6) {
-                price += 2.49;
+            else if (items.getSku().equals("BGLE")) {
+                countBGLE++;
             }
-            else if ((basketList.contains("COFB") && basketList.contains("BGLO") && basketList.size() == 2) ||
-                    (basketList.contains("COFB") && basketList.contains("BGLP")) && basketList.size() == 2||
-                    (basketList.contains("COFB") && basketList.contains("BGLE")) && basketList.size() == 2) {
-                price += 1.25;
+            else if ((items.getSku().equals("COFB") && items.getSku().equals("BGLO")) ||
+                    ((items.getSku().equals("COFB") && items.getSku().equals("BGLP")) ||
+                    ((items.getSku().equals("COFB") && items.getSku().equals("BGLE"))))) {
+                countCOFB++;
             }
+        }
+        if (countBGLO >= 6) {
+            price += (countBGLO / 6) * 2.49;
+        }
+        else if (countBGLP >= 12) {
+            price += (countBGLP / 12) * 3.99;
+        }
+        else if(countBGLE >= 6) {
+            price += (countBGLE / 6) * 2.49;
+        }
+        else if (countCOFB >= 1) {
+            price += (countCOFB / 1) * 1.25;
         }
         return price;
     }
