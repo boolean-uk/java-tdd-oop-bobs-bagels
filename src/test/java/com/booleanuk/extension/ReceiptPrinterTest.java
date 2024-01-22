@@ -35,7 +35,7 @@ public class ReceiptPrinterTest {
 
         ReceiptPrinter receiptPrinter = new ReceiptPrinter(store, basket);
         String printedReceipt = receiptPrinter.print();
-        System.out.println(printedReceipt);
+        // System.out.println(printedReceipt);
 
         // Check for key elements, specific items, and correct cost in the receipt
         Assertions.assertTrue(printedReceipt.contains("Bob's Bagels"));

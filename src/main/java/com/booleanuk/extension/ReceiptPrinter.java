@@ -66,7 +66,7 @@ public class ReceiptPrinter {
             }
         }
 
-        double discount = DiscountManager.getBasketDiscount(basket);
+        double discount = DiscountManager.calculateBasketBagelDiscounts(basket);
 
         if (discount > 0) {
             sb.append("\nDiscount\t\t   -£").append(String.format("%.2f", discount)).append("\n");

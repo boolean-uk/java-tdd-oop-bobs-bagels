@@ -49,7 +49,7 @@ public class Basket {
         }
         double discount;
         try {
-            discount = DiscountManager.getBasketDiscount(this);
+            discount = DiscountManager.calculateBasketBagelDiscounts(this);
         } catch (Exception e) {
             System.err.println("DiscountManager could not read file");
             discount = 0.0;

@@ -15,21 +15,6 @@ import java.util.Scanner;
 public class FileHandler {
     private static final String EXT = ".csv";
     private static final String FILE_NAME_INVENTORY = "inventory";
-    private static final String FILE_NAME_DISCOUNT_BULK = "bulk-discounts";
-
-    public static ArrayList<String[]> fetchBulkDiscountsFromFile() throws URISyntaxException, FileNotFoundException {
-        URL url = FileHandler.class.getClassLoader().getResource(FILE_NAME_DISCOUNT_BULK + EXT);
-        assert url != null;
-        File file = new File(url.toURI());
-        Scanner scanner = new Scanner(file);
-
-        ArrayList<String[]> bulkDiscounts = new ArrayList<>();
-        scanner.nextLine();
-        while (scanner.hasNext()) {
-            bulkDiscounts.add(scanner.nextLine().split(","));
-        }
-        return bulkDiscounts;
-    }
 
     public static ArrayList<Item> fetchInventoryItemsToStore() throws FileNotFoundException, URISyntaxException {
         ArrayList<Item> inventory = new ArrayList<>();

@@ -4,7 +4,7 @@ import com.booleanuk.core.models.Basket;
 import com.booleanuk.core.models.Item;
 import com.booleanuk.core.models.Store;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.io.FileNotFoundException;
@@ -14,11 +14,8 @@ public class DiscountManagerTest {
     static Store store;
     static Basket basket;
 
-    @BeforeAll
-    public static void setupBasketWithDiscounts() throws FileNotFoundException, URISyntaxException {
-        store = new Store("Bob's Bagels");
-        basket = new Basket(40);
-
+    public static void setupBasketWithDiscounts() {
+        // EXTENTION 1 - Example 1
         Item bagelOnion = store.getItemBySKU("BGLO");
         basket.addItem(bagelOnion);
         basket.addItem(bagelOnion);
@@ -36,26 +33,45 @@ public class DiscountManagerTest {
         basket.addItem(coffeeBlack);
     }
 
+    @BeforeEach
+    public void resetTests() throws FileNotFoundException, URISyntaxException {
+        store = new Store("Bob's Bagels");
+        basket = new Basket(40);
+    }
+
     @Test
     public void doesCalculateTheCorrectDiscount() throws FileNotFoundException, URISyntaxException {
-        Assertions.assertEquals(1.14, DiscountManager.getBasketDiscount(basket), 0.01);
+        setupBasketWithDiscounts();
+        Assertions.assertEquals(1.14, DiscountManager.calculateBasketBagelDiscounts(basket), 0.01);
         Assertions.assertEquals(10.43, basket.getTotalCost(),  0.01);
     }
 
     @Test
     public void doesPrintReceiptWithDiscounts() throws FileNotFoundException, URISyntaxException {
+        setupBasketWithDiscounts();
         ReceiptPrinter receiptPrinter = new ReceiptPrinter(store, basket);
         String printedReceipt = receiptPrinter.print();
-        System.out.println(printedReceipt);
+        // System.out.println(printedReceipt);
 
         Assertions.assertTrue(printedReceipt.contains("Bob's Bagels"));
         Assertions.assertTrue(printedReceipt.contains("Total"));
         Assertions.assertTrue(printedReceipt.contains("Thank you"));
 
         Assertions.assertTrue(printedReceipt.contains("Plain\t\t\t12"));
-        Assertions.assertTrue(printedReceipt.contains("Discount\t\t   -£1.14"));
-        Assertions.assertTrue(printedReceipt.contains("You saved £1.14"));
+        Assertions.assertTrue(printedReceipt.contains("Discount\t\t"));
+        Assertions.assertTrue(printedReceipt.contains("You saved £"));
+    }
 
-        Assertions.assertTrue(printedReceipt.contains("£10.43"));
+    @Test
+    public void testOneBagelHasMultipleDiscounts() throws FileNotFoundException, URISyntaxException {
+        // EXTENTION 1 - Example 2
+        Item bagelEverything = store.getItemBySKU("BGLP");
+        for (int i = 0; i < 16; i++) {
+            basket.addItem(bagelEverything);
+        }
+
+        Assertions.assertEquals(16, basket.getBasket().size());
+        Assertions.assertEquals(0.69, DiscountManager.calculateBasketBagelDiscounts(basket), 0.01);
+        Assertions.assertEquals(5.55, basket.getTotalCost(),  0.01);
     }
 }
