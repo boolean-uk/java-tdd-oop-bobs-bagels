@@ -30,6 +30,11 @@ public class Receipt {
 
     public String formatBasketValues(Map<Item, Integer> basketMap) {
 
+
+        double totalCost = customer.getTotalCost(customer.getBasket().getItemList());
+        Map<String, ArrayList<Double>> discounts = customer.getDiscounts();
+
+
         ArrayList<Item> listOfItems = new ArrayList<>(basketMap.keySet());
         listOfItems.sort(new Comparator<Item>() {
             @Override
