@@ -116,6 +116,8 @@ public class ShoppingManager {
         _receipt += centerText("Thank you", _receiptWidth) + "\n" + centerText("for your order!", _receiptWidth) + "\n";
 
         System.out.println(_receipt);
+
+        basket.clearBasket();
     }
 
     public void populateMenu(Menu targetMenu) {

@@ -108,11 +108,17 @@ public class Basket {
         if (newCapacity < 1) return Error.INVALID;
         capacity = newCapacity;
 
-        if (capacity < orders.size()) {
-            ArrayList<Order> _newOrderList = new ArrayList<>();
+        if (capacity < getCurrentCapacityUsage()) {
+            final ArrayList<Order> _newOrderList = new ArrayList<>();
+            int _newAmount = 0;
 
-            for (int i = 0; i < capacity; i++)
-                _newOrderList.add(orders.get(i));
+            for (Order order : orders) {
+                if (_newAmount + order.amount > capacity)
+                    break;
+
+                _newOrderList.add(order);
+                _newAmount += order.amount;
+            }
 
             orders = _newOrderList;
 
