@@ -119,4 +119,13 @@ public class Basket {
         }
         return mapPriceAndSavings;
     }
+
+    public double totalCostWithDiscount() {
+        HashMap<Item, double[]> mapPriceAndSavings = this.discountPerItem();
+        double price = 0.0;
+        for (double[] priceAndSaving: mapPriceAndSavings.values()) {
+            price += priceAndSaving[0];
+        }
+        return price;
+    }
 }
