@@ -5,14 +5,12 @@ public class Filling implements Item {
     private double price;
     private Item.Name name;
     private Item.Variant variant;
-    private Item filling;
 
     public Filling(String SKU, double price, Item.Name name, Item.Variant variant, Item filling) {
         this.setSKU(SKU);
         this.setPrice(price);
         this.setName(name);
         this.setVariant(variant);
-        this.setFilling(filling);
     }
 
     // Overloaded constructor to represent a filling ONLY WHEN inside a Bagel Item
@@ -26,11 +24,6 @@ public class Filling implements Item {
      * @return true if filling was added, false if filling not added
      */
     public boolean addFilling(Item filling) {
-        if ((this.getName() == Item.Name.BAGEL) && (filling.getName() == Item.Name.FILLING) && (this.getFilling() == null)) {
-            setFilling(filling);
-            return true;
-        }
-        System.out.println("This " + this.getVariant() + " " + this.getName() + " already has filling!");
         return false;
     }
 
@@ -45,7 +38,6 @@ public class Filling implements Item {
                 ", price: " + price +
                 ", name: " + name +
                 ", variant: " + variant +
-                ", filling: " + (filling != null ? filling.getVariant() : "None") +
                 '}';
     }
 
@@ -70,7 +62,7 @@ public class Filling implements Item {
     }
 
     public Item getFilling() {
-        return filling;
+        return null;
     }
 
     /**
@@ -94,6 +86,6 @@ public class Filling implements Item {
     }
 
     public void setFilling(Item filling) {
-        this.filling = filling;
+
     }
 }
