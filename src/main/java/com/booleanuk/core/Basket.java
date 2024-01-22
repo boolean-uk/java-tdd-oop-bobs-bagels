@@ -89,11 +89,8 @@ public class Basket {
             if (_item == null) continue; // item is somehow invalid
             _outPrice += _item.price * order.amount;
 
-            if (_item.discount != null) {
-                double _priceOff = _item.discount.applyDiscount(order, getOrders());
-                System.out.println(_priceOff);
-                _outPrice -= _priceOff;
-            }
+            if (_item.discount != null)
+                _outPrice -= _item.discount.applyDiscount(order, getOrders());
         }
 
         return _outPrice;

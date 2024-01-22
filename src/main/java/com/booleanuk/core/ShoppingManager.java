@@ -84,19 +84,35 @@ public class ShoppingManager {
 
         final int _receiptWidth = _longestName + 12;
         StringBuilder _stringInOrder = new StringBuilder();
+        double _totalSavings = 0.0;
 
         for (Order order : orders) {
             Item _item = getItem(order.itemUUID);
             if (_item == null) continue;
             String _name = _item.getFullName();
-            _stringInOrder.append(_item.getFullName()).append(" ".repeat(_longestName - _name.length())).append("   ").append(order.amount).append("   £").append(new DecimalFormat("0.00").format(getPriceCount(order.itemUUID, order.amount))).append("\n");
+            _stringInOrder.append(_item.getFullName()).append(" ".repeat(_longestName - _name.length())).append("   ").append(order.amount).append("   £").append(doubleToStringFormatter(getPriceCount(order.itemUUID, order.amount))).append("\n");
+
+            if (_item.discount != null) {
+                double _discount = _item.discount.applyDiscount(order, orders);
+
+                if (!isZeroApprox(_discount)) { // this just checks if we did get a discount or not
+                    _stringInOrder.append(" ".repeat(_receiptWidth - 7)).append("(-£").append(doubleToStringFormatter(_discount)).append(")\n");
+                    _totalSavings += _discount;
+                }
+            }
         }
 
         String _receipt = centerText("~~~ Bob's Bagels ~~~", _receiptWidth) + "\n\n";
 
         _receipt += centerText(getDateTime(), _receiptWidth) + "\n\n";
         _receipt += "-".repeat(_receiptWidth) + "\n\n" + _stringInOrder + "\n" + "-".repeat(_receiptWidth) + "\n";
-        _receipt += "Total" + " ".repeat(_receiptWidth - 9) + "£" + new DecimalFormat("0.00").format(basket.calculateTotalPrice()) + "\n\n";
+        _receipt += "Total" + " ".repeat(_receiptWidth - 9) + "£" + doubleToStringFormatter(basket.calculateTotalPriceWithDiscounts()) + "\n\n";
+
+        if (!isZeroApprox(_totalSavings)) {
+            _receipt += centerText("You saved a total of £" + doubleToStringFormatter(_totalSavings), _receiptWidth) + "\n";
+            _receipt += centerText("on this shop", _receiptWidth) + "\n\n";
+        }
+
         _receipt += centerText("Thank you", _receiptWidth) + "\n" + centerText("for your order!", _receiptWidth) + "\n";
 
         System.out.println(_receipt);
@@ -127,7 +143,7 @@ public class ShoppingManager {
     }
 
     public void printTotalPrice() {
-        System.out.println(" - Total Price £" + String.format("%.2f", basket.calculateTotalPrice()) + " -");
+        System.out.println(" - Total Price (Without Discounts) £" + String.format("%.2f", basket.calculateTotalPrice()) + " -");
     }
 
     public void changeBasketCapacity(int newCapacity) {
@@ -147,15 +163,23 @@ public class ShoppingManager {
         return null;
     }
 
+    public static String doubleToStringFormatter(double number) {
+        return new DecimalFormat("0.00").format(number);
+    }
+
     public static String getDateTime() {
         return DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss").format(LocalDateTime.now());
     }
 
     public static String centerText(String text, int length) {
-        return " ".repeat((length - text.length()) / 2) + text;
+        return centerText(text, length, " ");
     }
 
     public static String centerText(String text, int length, String paddingString) {
         return paddingString.repeat((length - text.length()) / 2) + text;
+    }
+
+    public static boolean isZeroApprox(double value) {
+        return value < 0.000001 && value > -0.000001;
     }
 }
