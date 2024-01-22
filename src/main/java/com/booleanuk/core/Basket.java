@@ -34,32 +34,33 @@ public class Basket {
         getFillings();
     }
 
-
     public boolean add(Product product){
         if(checkIfBasketIsFull()){
             return false;
         }
         for (Product value : inventory) {
+
+            // cant get this to work, skipping for now
+
             // product is a filling
-            if(product instanceof Filling){
-                for (Product item : this.basket) {
-                    //find bagel with empty filling
-                    if (item instanceof Bagel) {
-                        if (((Bagel) item).getFilling() == null) {
-                            // add filling :D
-                            ((Bagel) item).addFilling((Bagel) item, (Filling) product);
-                            System.out.println("ADDED FILLING TO BAGEL");
-                            return true;
-                        }
-                    }
-                }
-            }
+//            if(product instanceof Filling){
+//                for (Product item : this.basket) {
+//                    //find bagel with empty filling
+//                    if (item instanceof Bagel) {
+//                        if (((Bagel) item).getFilling() == null) {
+//                            // add filling :D
+//                            ((Bagel) item).addFilling((Bagel) item, (Filling) product);
+//                            System.out.println("ADDED FILLING TO BAGEL");
+//                            return true;
+//                        }
+//                    }
+//                }
+//            }
 
             if (Objects.equals(value.getSku(), product.getSku())) {
                 if(!checkIfBasketIsFull()){
                     basket.add(product);
                     System.out.println("Added " + product.getItemName() + " with the price of: $" + product.getPrice());
-                    this.total += product.getPrice();
                     return true;
                 }
             }
@@ -72,7 +73,6 @@ public class Basket {
         for (int i = 0; i < basket.size(); i++) {
             if(Objects.equals(basket.get(i).getSku(), productSKU)){
                 System.out.println("Removing " + basket.get(i).getItemName() + " from list");
-                this.total -= basket.get(i).getPrice();
                 basket.remove(basket.get(i));
                 return true;
             }
@@ -102,7 +102,11 @@ public class Basket {
         return 0;
     }
     public double getTotal(){
-        return this.total;
+        double total = 0;
+        for (Product product : this.basket) {
+            total += product.getPrice();
+        }
+        return total;
     }
     public List<Product> setBasket(){
         return new ArrayList<>();

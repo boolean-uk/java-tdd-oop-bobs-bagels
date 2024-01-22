@@ -19,8 +19,6 @@ class BasketTest {
         Assertions.assertFalse(basket.add(new Product("Burger", 0.48, "BGRC", "Cheese")));
         Assertions.assertTrue(basket.add(new Product("Coffee", 0.39, "COFB", "Black")));
         Assertions.assertFalse(basket.add(new Product("Coffee", 0.49, "COFC", "Cuppacchino")));
-
-
     }
     @Test
     public void testTryRemoveBagelFromList(){
@@ -83,5 +81,4 @@ class BasketTest {
         basket.add(new Product("Bagel", 0.39, "BGLS", "Sesame"));
         Assertions.assertEquals(1.17, basket.totalCost());
     }
-
 }
