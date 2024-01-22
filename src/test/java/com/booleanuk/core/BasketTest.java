@@ -66,6 +66,13 @@ public class BasketTest {
     }
 
     @Test
+    public void testTotalPriceNoItem() {
+        Basket basket = new Basket();
+
+        Assertions.assertEquals(0, basket.totalCost());
+    }
+
+    @Test
     public void testChangeCapacity() {
         Basket basket = new Basket();
         basket.addItem("BGLO");
