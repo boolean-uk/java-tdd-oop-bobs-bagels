@@ -219,4 +219,20 @@ I want to see the total price for 12 Plain Bagels, 6 Onion Bagels, 3 Everything 
 |--------|------------------|---------|----------|---------------|
 | Basket |                  |         |          |               |
 
+# Extension 2
+
+# User Story 
+
+As a customer,
+So I can see what I bought,
+I want to get a receipt with all items and their name, quantity and price
+
+# Domain Model
+
+| Class              | Member Variables                           | Methods                | Scenario                                                                  | Output/Result              |
+|--------------------|--------------------------------------------|------------------------|---------------------------------------------------------------------------|----------------------------|
+| ExtensionExercise2 | Map<Inventory, Integer> inventoryMap       | String returnReceipt() | I want to get a receipt with all items and their name, quantity and price | Return receipt as a String |
+|                    | void addItem(Inventory item, int quantity) |                        |                                                                           |                            |
+|                    |                                            |                        |                                                                           |                            |
+
 
