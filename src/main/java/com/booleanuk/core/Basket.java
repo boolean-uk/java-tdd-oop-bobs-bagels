@@ -76,8 +76,10 @@ public class Basket {
         int num12 = 0;
         int num6 = 0;
         int rest = 0;
+
         BasketItem basketItem;
 
+        ArrayList<Double> bagelsNotBundled = new ArrayList<Double>();
         double priceTotal = 0.0;
         double priceTotalNoDiscount = 0;
         double priceSavedTotal = 0.0;
@@ -113,11 +115,14 @@ public class Basket {
                 if (num6 > 0) {
                     basketItem.setNumDiscountItems(basketItem.getNumDiscountItems()+num6);
                     basketItem.setNum6Discount(num6);
-                    discountPrice += discount.discountMap.get("BGL12").getPrice();
+                    discountPrice += discount.discountMap.get("BGL6").getPrice();
                     priceSaved += (6 * num6 * basketItem.getPrice()) - discountPrice;
                 }
                 if (rest > 0) {
                     priceTotal += rest * basketItem.getPrice();
+                    for (int i = 0; i < rest; i++){
+                        bagelsNotBundled.add(basketItem.getPrice());
+                    }
                 }
                 priceTotal += discountPrice;
                 priceSavedTotal += priceSaved;
@@ -130,14 +135,70 @@ public class Basket {
                 priceSaved = 0.0;
             }
 
-            // Discount detection for number of same objects here
         }
 
-        // Check for combo discounts
-        //for (BasketItem basketItem: basket.values())
-        //{
-            // Discount detection for number of same objects here
-        //}
+        // Iterate through to view coffee and fillings
+        for (String sku: basket.keySet())
+        {
+            // Extract value object
+            basketItem = basket.get(sku);
+
+            // Reset all discount statuses
+            basketItem.resetDiscount();
+
+            if (sku.startsWith("FIL")) {
+                // Check quantity of fillings
+                quantity = basketItem.getQuantity();
+                priceTotal += quantity * basketItem.getPrice();
+
+            }
+
+            // Check is current basket item is a bagel
+            if (sku.startsWith("COF")){
+                // Check quantity of coffee
+                quantity = basketItem.getQuantity();
+
+                // check for left over bagels that has not been discounted in a 6 or 12 bundle
+                int i = 0;
+                while (!bagelsNotBundled.isEmpty() && i <= quantity){
+                    // find most expensive bagel
+                    double max = 0.0;
+                    for (double price: bagelsNotBundled) {
+                        if (price > max){
+                            max = price;
+                        }
+                    }
+                    int index = bagelsNotBundled.indexOf(max);
+                    double bagelPrice = bagelsNotBundled.get(index);
+                    bagelsNotBundled.remove(index);
+
+                    double originalPrice = bagelPrice + basketItem.getPrice();
+                    double newPrice = discount.discountMap.get("COF").getPrice();
+
+                    discountPrice += newPrice;
+                    priceSaved += (originalPrice - newPrice);
+                    priceTotal -= bagelPrice;
+
+                    priceSavedTotal += priceSaved;
+                    priceTotal += discountPrice;
+
+                    discountPrice = 0.0;
+                    priceSaved = 0.0;
+
+                    i++;
+                }
+                if (i < quantity){
+                    int restCoffee = quantity - i;
+                    priceTotal += restCoffee * basketItem.getPrice();
+
+                }
+                priceSavedTotal += priceSaved;
+                priceTotal += discountPrice;
+
+                discountPrice = 0.0;
+                priceSaved = 0.0;
+            }
+        }
 
         this.total = Math.round(priceTotal*100.0) / 100.0;
     }

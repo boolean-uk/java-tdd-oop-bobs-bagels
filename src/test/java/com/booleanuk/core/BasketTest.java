@@ -235,6 +235,54 @@ class BasketTest {
         Assertions.assertEquals(2.49, basket.getTotal());
     }
 
+    @Test
+    public void testDiscountTwelveBagels() {
+        Inventory inventory = new Inventory();
+        Discount discount = new Discount();
+        Basket basket = new Basket(inventory, discount);
+        boolean result = basket.addItem("Bagel Everything", 12);
+        Assertions.assertTrue(result);
+
+        Assertions.assertEquals(3.99, basket.getTotal());
+    }
+
+    @Test
+    public void testDiscountSixteenBagels() {
+        Inventory inventory = new Inventory();
+        Discount discount = new Discount();
+        Basket basket = new Basket(inventory, discount);
+        boolean result = basket.addItem("Bagel Plain", 16);
+        Assertions.assertTrue(result);
+
+        Assertions.assertEquals(5.55, basket.getTotal());
+    }
+
+    @Test
+    public void testDiscountBagelAndCoffee() {
+        Inventory inventory = new Inventory();
+        Discount discount = new Discount();
+        Basket basket = new Basket(inventory, discount);
+        boolean result = basket.addItem("Coffee Black", 1);
+        result = basket.addItem("Bagel Plain", 1);
+        Assertions.assertTrue(result);
+
+        Assertions.assertEquals(1.25, basket.getTotal());
+    }
+
+    @Test
+    public void testDiscountExtensionBigOrder() {
+        Inventory inventory = new Inventory();
+        Discount discount = new Discount();
+        Basket basket = new Basket(inventory, discount);
+        boolean result = basket.addItem("Bagel Onion", 2);
+        result = basket.addItem("Bagel Plain", 12);
+        result = basket.addItem("Bagel Everything", 6);
+        result = basket.addItem("Coffee Black", 3);
+        Assertions.assertTrue(result);
+
+        Assertions.assertEquals(9.97, basket.getTotal());
+    }
+
 
 
 }
