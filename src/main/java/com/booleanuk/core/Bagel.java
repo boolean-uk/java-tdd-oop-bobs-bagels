@@ -127,6 +127,7 @@ public class Bagel {
         int count = 0;
         int countCoffe=0;
         boolean coffeeBagel = false;
+        double totalSaved = 0.0;
 
         for (int i = 0; i < basketList.size(); i++){
             if (basketList.get(i).SKU.equals("BGLO")){
@@ -148,17 +149,21 @@ public class Bagel {
         if (countOnion >= 6){
             int discountGroupsOnion = countOnion / 6;
             totalCost -= discountGroupsOnion * (0.49 * 6 - 2.49);
+            totalSaved += 2.49;
         }
         if (countPlain >= 12){
             int discountGroupsPlain = countPlain / 12;
             totalCost -= discountGroupsPlain * (0.39 * 12 - 3.99);
+            totalSaved += 3.99;
         }
         if (countEverything >= 6){
             int discountGroupsEverything = countEverything / 6;
             totalCost -= discountGroupsEverything * (0.49 * 6 - 2.49);
+            totalSaved += 2.49;
         }
         if (coffeeBagel && countCoffe == 1){
             totalCost -= (0.99 + 0.49 - 1.25);
+            totalSaved += 1.25;
         }
 
         System.out.println(countOnion);
@@ -168,10 +173,10 @@ public class Bagel {
         System.out.println(count);
 
         double finalValue = Math.round(totalCost * 100) / 100.0;
-        printReceipt(finalValue, count);
+        printReceipt(finalValue, count, totalSaved);
         return finalValue;
     }
-    public void printReceipt(double totalCost, int totalProducts){
+    public void printReceipt(double totalCost, int totalProducts, double saved){
         LocalDateTime date = LocalDateTime.now();
 
         String newDate = date.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
@@ -186,6 +191,7 @@ public class Bagel {
 
                             "----------------------------------\n" +
                             "Total              " + totalProducts + "   £" + totalCost + "\n" +
+                            "\n    You saved a total of £"+saved+"\n" +
                             "             Thank you        \n" +
                             "          for your order!        ");
     }
@@ -203,9 +209,33 @@ public class Bagel {
         StringBuilder out = new StringBuilder();
         for (Map.Entry<String, Integer> entry : countMap.entrySet()) {
             String key = entry.getKey();
+            double discount =0.00;
             int count = entry.getValue();
             double total = count * priceMap.get(key);
             out.append(String.format("%-18s %2d   £%.2f\n", key, count, total));
+            if (key.contains("Onion")){
+                if (count >= 6){
+                    discount = 0.45;
+                    String sdis =  "(-£"+discount+")";
+                    out.append(String.format("%-10s %-8s   %-1s\n", " "," ",sdis));
+                }
+            }
+            if (key.contains("Plain")){
+                if (count >= 12){
+                    discount = 0.69;
+                    String sdis =  "(-£"+discount+")";
+                    out.append(String.format("%-10s %-8s   %-1s\n", " "," ",sdis));
+                }
+            }
+            if (key.contains("Everything")){
+                if (count >= 6){
+                    discount = 0.45;
+                    String sdis =  "(-£"+discount+")";
+                    out.append(String.format("%-10s %-8s   %-1s\n", " "," ",sdis));
+                }
+            }
+
+
         }
         return out.toString();
     }
