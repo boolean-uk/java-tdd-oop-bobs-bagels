@@ -14,9 +14,11 @@ public class Receipt {
     public Receipt() {
     }
 
-    // If there is no items in the basket, the customer should not be able to print a receipt.
-
-    public void printReceipt(Basket basket, Inventory inventory) {
+    public boolean printReceipt(Basket basket, Inventory inventory) {
+        if (basket.getBasket().isEmpty()) {
+            System.out.print("You have no items in your basket, can't print receipt!\n");
+            return false;
+        }
         String receiptOutput = "";
         receiptOutput += "       ~~~ Bob's Bagels ~~~       \n";
         receiptOutput += "\n";
@@ -32,6 +34,8 @@ public class Receipt {
         receiptOutput += getEndMessageForReceipt();
 
         System.out.print(receiptOutput);
+
+        return true;
     }
 
     private String getDateTimeForReceipt() {
