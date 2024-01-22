@@ -80,90 +80,18 @@ public class Basket {
 
 
 	public double getTotalCost() {
-		ArrayList<String> itemsLeft = new ArrayList<>(items.values());
-		ArrayList<String> discountItems = new ArrayList<>();
 		double total = 0;
+		ArrayList<String> itemsLeft = new ArrayList<>(items.values());
 		HashSet<String> uniqueItems = new HashSet<>(items.values());
-		ArrayList<String> hasDiscount = new ArrayList<>();
-		HashMap<String, Integer> bulkAmount = new HashMap<>();
-		for (String item : uniqueItems) {
-			if (inventory.hasDiscountBulk(item)) {
-				hasDiscount.add(item);
-			}
-		}
-		for (String item : hasDiscount) {
-			bulkAmount.put(item, Collections.frequency(items.values(), item));
-		}
+		ArrayList<String> hasDiscount = fillHasDisciunt(uniqueItems);
+		HashMap<String, Integer> bulkAmount = fillBulkAmount(hasDiscount);
+		ArrayList<String> discountItems = moveDiscountItems(itemsLeft, bulkAmount);
+		HashSet<String[]> discountPairs = fillDiscountPairs(itemsLeft);
 
-
-		for (String bulkItem : bulkAmount.keySet()) {
-			int input = bulkAmount.get(bulkItem);
-			int target = inventory.getBulkBulk(bulkItem);
-
-			int closestMultiple = Math.round((float) input / target) * target;
-			int movedItems = 0;
-				for (int i = 0; i < itemsLeft.size(); i++) {
-					if(!(movedItems<closestMultiple)){
-						break;
-					}
-					if (itemsLeft.get(i).equals(bulkItem)) {
-						discountItems.add(bulkItem);
-						itemsLeft.remove(i);
-						i--;
-						movedItems++;
-
-					}
-
-
-			}
-		}
-		for (String item : discountItems) {
-			double price = inventory.getBulkAmount(item);
-			total += price;
-		}
-
-		HashSet<String[]> discountPairs = new HashSet<>();
-		ArrayList<String[]> comboPairs = inventory.getDiscountComboPairs();
-		for (String[] pair : comboPairs) {
-			if (containsAllItems(itemsLeft, pair)) {
-				discountPairs.add(pair);
-			}
-		}
-		for (String[] pair : discountPairs) {
-			HashMap<String, Integer> occurrences = countOccurrences(itemsLeft, pair);
-			int smallest = Integer.MAX_VALUE;
-			for (Integer i : occurrences.values()) {
-				if (i < smallest) {
-					smallest = i;
-				}
-			}
-
-			for (int i = 0; i < pair.length; i++) {
-				int removed = 0;
-				for (int j = 0; j < itemsLeft.size(); j++) {
-					if (removed < smallest && itemsLeft.get(j).contains(pair[i])) {
-						itemsLeft.remove(j);
-						removed++;
-						j--;
-
-					}
-				}
-				removed=0;
-
-
-			}
-			for (int j = 0; j < smallest; j++) {
-				total += inventory.getDiscountComboAmount(pair);
-			}
-		}
-		for (String item : itemsLeft) {
-			total += inventory.getPrice(item);
-		}
-		for (ArrayList<String> extras : extra.values()) {
-			for (String item : extras) {
-				total += inventory.getPrice(item);
-			}
-		}
+		total += calcBulkTotal(discountItems);
+		total += calcComboTotal(discountPairs, itemsLeft);
+		total += calcItemsTotal(itemsLeft);
+		total += calcExtraTotal(extra);
 
 		return total;
 	}
@@ -217,4 +145,126 @@ public class Basket {
 		}
 		return false;
 	}
+	private ArrayList<String> fillHasDisciunt(HashSet<String> uniqueItems) {
+		ArrayList<String> hasDiscount = new ArrayList<>();
+
+		for (String item : uniqueItems) {
+			if (inventory.hasDiscountBulk(item)) {
+				hasDiscount.add(item);
+			}
+		}
+		return hasDiscount;
+	}
+
+	private HashMap<String, Integer> fillBulkAmount(ArrayList<String> hasDiscount) {
+		HashMap<String, Integer> bulkAmount = new HashMap<>();
+		for (String item : hasDiscount) {
+			bulkAmount.put(item, Collections.frequency(items.values(), item));
+		}
+		return bulkAmount;
+	}
+
+	private HashSet<String[]> fillDiscountPairs(ArrayList<String> itemsLeft) {
+		HashSet<String[]> discountPairs = new HashSet<>();
+		ArrayList<String[]> comboPairs = inventory.getDiscountComboPairs();
+		for (String[] pair : comboPairs) {
+			if (containsAllItems(itemsLeft, pair)) {
+				discountPairs.add(pair);
+			}
+		}
+		return discountPairs;
+	}
+
+	private int calcSmallest(ArrayList<String> itemsLeft, String[] pair) {
+		HashMap<String, Integer> occurrences = countOccurrences(itemsLeft, pair);
+		int smallest = Integer.MAX_VALUE;
+		for (Integer i : occurrences.values()) {
+			if (i < smallest) {
+				smallest = i;
+			}
+		}
+		return smallest;
+	}
+
+	private int calcClosestMultiple(HashMap<String, Integer> bulkAmount, String bulkItem) {
+		int input = bulkAmount.get(bulkItem);
+		int target = inventory.getBulkBulk(bulkItem);
+		return Math.round((float) input / target) * target;
+	}
+
+	private ArrayList<String> moveDiscountItems(ArrayList<String> itemsLeft, HashMap<String, Integer> bulkAmount) {
+		ArrayList<String> discountItems = new ArrayList<>();
+		for (String bulkItem : bulkAmount.keySet()) {
+			int closestMultiple = calcClosestMultiple(bulkAmount, bulkItem);
+			int movedItems = 0;
+			for (int i = 0; i < itemsLeft.size(); i++) {
+				if (!(movedItems < closestMultiple)) {
+					break;
+				}
+				if (itemsLeft.get(i).equals(bulkItem)) {
+					discountItems.add(bulkItem);
+					itemsLeft.remove(i);
+					i--;
+					movedItems++;
+
+				}
+			}
+		}
+		return discountItems;
+	}
+
+	private void removeComboitems(ArrayList<String> itemsLeft, String[] pair, int smallest) {
+		for (String s : pair) {
+			int removed = 0;
+			for (int j = 0; j < itemsLeft.size(); j++) {
+				if (removed < smallest && itemsLeft.get(j).contains(s)) {
+					itemsLeft.remove(j);
+					removed++;
+					j--;
+
+				}
+			}
+			removed = 0;
+		}
+	}
+
+	private double calcBulkTotal(ArrayList<String> discountItems) {
+		double total = 0;
+		for (String item : discountItems) {
+			double price = inventory.getBulkAmount(item);
+			total += price;
+		}
+		return total;
+	}
+
+	private double calcComboTotal(HashSet<String[]> discountPairs, ArrayList<String> itemsLeft) {
+		double total = 0;
+		for (String[] pair : discountPairs) {
+			int smallest = calcSmallest(itemsLeft, pair);
+			removeComboitems(itemsLeft, pair, smallest);
+			for (int j = 0; j < smallest; j++) {
+				total += inventory.getDiscountComboAmount(pair);
+			}
+		}
+		return total;
+	}
+
+	private double calcItemsTotal(ArrayList<String> itemsLeft) {
+		double total = 0;
+		for (String item : itemsLeft) {
+			total += inventory.getPrice(item);
+		}
+		return total;
+	}
+
+	private double calcExtraTotal(HashMap<Integer,ArrayList<String>> extra) {
+		double total = 0;
+		for (ArrayList<String> extras : extra.values()) {
+			for (String item : extras) {
+				total += inventory.getPrice(item);
+			}
+		}
+		return total;
+	}
+
 }
