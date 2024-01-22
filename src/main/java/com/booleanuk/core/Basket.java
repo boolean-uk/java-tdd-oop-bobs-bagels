@@ -1,8 +1,8 @@
-package com.booleanuk.core.models;
+package com.booleanuk.core;
 
-import com.booleanuk.core.models.item.Bagel;
-import com.booleanuk.core.models.item.Coffee;
-import com.booleanuk.core.models.item.Filling;
+import com.booleanuk.core.items.Bagel;
+import com.booleanuk.core.items.Coffee;
+import com.booleanuk.core.items.Filling;
 import com.booleanuk.extension.DiscountManager;
 import lombok.Data;
 

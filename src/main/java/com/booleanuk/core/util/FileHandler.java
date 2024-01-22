@@ -1,9 +1,9 @@
 package com.booleanuk.core.util;
 
-import com.booleanuk.core.models.Item;
-import com.booleanuk.core.models.item.Bagel;
-import com.booleanuk.core.models.item.Coffee;
-import com.booleanuk.core.models.item.Filling;
+import com.booleanuk.core.Item;
+import com.booleanuk.core.items.Bagel;
+import com.booleanuk.core.items.Coffee;
+import com.booleanuk.core.items.Filling;
 
 import java.io.File;
 import java.io.FileNotFoundException;

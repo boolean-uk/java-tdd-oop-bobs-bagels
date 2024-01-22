@@ -1,9 +1,9 @@
 package com.booleanuk.extension;
 
-import com.booleanuk.core.models.Basket;
-import com.booleanuk.core.models.Item;
-import com.booleanuk.core.models.Store;
-import com.booleanuk.core.models.item.Bagel;
+import com.booleanuk.core.Basket;
+import com.booleanuk.core.Item;
+import com.booleanuk.core.Store;
+import com.booleanuk.core.items.Bagel;
 
 import java.io.FileNotFoundException;
 import java.net.URISyntaxException;

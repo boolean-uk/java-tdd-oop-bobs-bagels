@@ -1,8 +1,8 @@
 package com.booleanuk.extension;
 
-import com.booleanuk.core.models.Basket;
-import com.booleanuk.core.models.Item;
-import com.booleanuk.core.models.Store;
+import com.booleanuk.core.Basket;
+import com.booleanuk.core.Item;
+import com.booleanuk.core.Store;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -15,7 +15,6 @@ public class DiscountManagerTest {
     static Basket basket;
 
     public static void setupBasketWithDiscounts() {
-        // EXTENTION 1 - Example 1
         Item bagelOnion = store.getItemBySKU("BGLO");
         basket.addItem(bagelOnion);
         basket.addItem(bagelOnion);
@@ -41,6 +40,7 @@ public class DiscountManagerTest {
 
     @Test
     public void doesCalculateTheCorrectDiscount() throws FileNotFoundException, URISyntaxException {
+        // EXTENTION 1 - Example 1
         setupBasketWithDiscounts();
         Assertions.assertEquals(1.14, DiscountManager.calculateBasketBagelDiscounts(basket), 0.01);
         Assertions.assertEquals(10.43, basket.getTotalCost(),  0.01);
@@ -48,6 +48,7 @@ public class DiscountManagerTest {
 
     @Test
     public void doesPrintReceiptWithDiscounts() throws FileNotFoundException, URISyntaxException {
+        // EXTENTION 1 - Example 1
         setupBasketWithDiscounts();
         ReceiptPrinter receiptPrinter = new ReceiptPrinter(store, basket);
         String printedReceipt = receiptPrinter.print();

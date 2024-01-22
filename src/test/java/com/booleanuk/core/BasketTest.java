@@ -1,8 +1,9 @@
-package com.booleanuk.core.models;
+package com.booleanuk.core;
 
-import com.booleanuk.core.models.item.Bagel;
-import com.booleanuk.core.models.item.Coffee;
-import com.booleanuk.core.models.item.Filling;
+import com.booleanuk.core.*;
+import com.booleanuk.core.items.Bagel;
+import com.booleanuk.core.items.Coffee;
+import com.booleanuk.core.items.Filling;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;

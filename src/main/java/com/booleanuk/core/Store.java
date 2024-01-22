@@ -1,4 +1,4 @@
-package com.booleanuk.core.models;
+package com.booleanuk.core;
 
 import com.booleanuk.core.enums.ItemType;
 import com.booleanuk.core.util.FileHandler;

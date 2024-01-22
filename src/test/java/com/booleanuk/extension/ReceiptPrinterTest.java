@@ -1,9 +1,9 @@
 package com.booleanuk.extension;
 
-import com.booleanuk.core.models.Basket;
-import com.booleanuk.core.models.Store;
-import com.booleanuk.core.models.item.Bagel;
-import com.booleanuk.core.models.item.Filling;
+import com.booleanuk.core.Basket;
+import com.booleanuk.core.Store;
+import com.booleanuk.core.items.Bagel;
+import com.booleanuk.core.items.Filling;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
