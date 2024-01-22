@@ -45,7 +45,7 @@
 |                                  |                       | of each filling before adding |                       |         |
 
 
-# Class Item
+# Class Bagel
 
 | Member Variables | Methods      | Scenario                                            | Return | Output  |
 |------------------|--------------|-----------------------------------------------------|--------|---------|
@@ -57,7 +57,25 @@
 |                  | addFilling() | If I want to associate a filling with an Item       | void   | void    |
 |                  | getPrice()   | If I want to know the price before adding to basket | int    | Sys.out |
 
+# Class Coffee
 
+| Member Variables | Methods      | Scenario                                            | Return | Output  |
+|-----------------|--------------|-----------------------------------------------------|--------|---------|
+| SKU: String     |              |                                                     |        |         |
+| price: double   |              |                                                     |        |         |
+| name: enum      |              |                                                     |        |         |
+| variant: enum   |              |                                                     |        |         |
+|                 | getPrice()   | If I want to know the price before adding to basket | int    | Sys.out |
+
+# Class Filling
+
+| Member Variables | Methods      | Scenario                                            | Return | Output  |
+|------------------|--------------|-----------------------------------------------------|--------|---------|
+| SKU: String      |              |                                                     |        |         |
+| price: double    |              |                                                     |        |         |
+| name: enum       |              |                                                     |        |         |
+| variant: enum    |              |                                                     |        |         |
+|                  | getPrice()   | If I want to know the price before adding to basket | int    | Sys.out |
 
 ## Class Diagram
 

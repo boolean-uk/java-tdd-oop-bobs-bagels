@@ -29,11 +29,11 @@ public class InventoryManager {
         Item.Variant[] variant = new Item.Variant[]{Item.Variant.ONION, Item.Variant.PLAIN, Item.Variant.EVERYTHING, Item.Variant.SESAME, Item.Variant.BLACK, Item.Variant.WHITE, Item.Variant.CAPUCCINO, Item.Variant.LATTE, Item.Variant.BACON, Item.Variant.EGG, Item.Variant.CHEESE, Item.Variant.CREAM_CHEESE, Item.Variant.SMOKED_SALMON, Item.Variant.HAM};
 
         for (int i = 0; i < SKU.length; i++) {
-            if (name[0] == Item.Name.BAGEL) {
+            if (name[i] == Item.Name.BAGEL) {
                 this.inventory.put(SKU[i], new Bagel(SKU[i], price[i], name[i], variant[i], null));
-            } else if (name[0] == Item.Name.COFFEE) {
+            } else if (name[i] == Item.Name.COFFEE) {
                 this.inventory.put(SKU[i], new Coffee(SKU[i], price[i], name[i], variant[i], null));
-            } else if (name[0] == Item.Name.FILLING) {
+            } else if (name[i] == Item.Name.FILLING) {
                 this.inventory.put(SKU[i], new Filling(SKU[i], price[i], name[i], variant[i], null));
             }
         }

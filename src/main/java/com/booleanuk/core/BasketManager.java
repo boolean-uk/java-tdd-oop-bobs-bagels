@@ -220,7 +220,7 @@ public class BasketManager {
 
         System.out.println("             ____________________________\n");
         System.out.printf("%-15s %-25s %-8s %-15s%n", "Total", "", "", String.format("%.2f%s", total, "DKK,-"));
-        System.out.println("             ____________________________\n");
+        System.out.println("___________________________________________________________\n");
 
         System.out.println("Contact Information:");
         System.out.println("Telephone: +45 ....");
