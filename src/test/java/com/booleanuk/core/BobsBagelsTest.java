@@ -9,7 +9,7 @@ class BobsBagelsTest {
     public void addItemToBasketReturnTrue() {
         Basket basket = new Basket();
 
-        boolean result = basket.addItem("plain");
+        boolean result = basket.addItem("BGLO");
 
         Assertions.assertTrue(result);
     }
@@ -19,8 +19,8 @@ class BobsBagelsTest {
     public void removeItemFromBasket() {
         Basket basket = new Basket();
 
-        basket.addItem("plain");
-        boolean result = basket.removeItem("plain");
+        basket.addItem("BGLO");
+        boolean result = basket.removeItem("BGLO");
 
         Assertions.assertTrue(result);
     }
@@ -78,7 +78,9 @@ class BobsBagelsTest {
     @Test
     public void testTotalCostTwoItems(){
         Basket basket = new Basket();
-        Order order = new Order();
+        Inventory inventory = new Inventory();
+        Order order = new Order(inventory);
+
 
         basket.addItem("BGLP");
         basket.addItem("BGLP");
@@ -89,7 +91,8 @@ class BobsBagelsTest {
     @Test
     public void testTotalCostFiveItems(){
         Basket basket = new Basket();
-        Order order = new Order();
+        Inventory inventory = new Inventory();
+        Order order = new Order(inventory);
 
 
         basket.addItem("BGLP");
@@ -103,9 +106,9 @@ class BobsBagelsTest {
 
     @Test
     public void testDisplayingMenu() {
-        Basket basket = new Basket();
         Order order = new Order();
         Inventory inventory = new Inventory();
+        Basket basket = new Basket(inventory);
 
         System.out.println(inventory.getFullInventoryList().toString());
 
@@ -114,9 +117,9 @@ class BobsBagelsTest {
 
     @Test
     public void testSysOutPrint() {
-        Basket basket = new Basket();
         Order order = new Order();
         Inventory inventory = new Inventory();
+        Basket basket = new Basket(inventory);
 
         inventory.printMenu();
 
@@ -136,9 +139,10 @@ class BobsBagelsTest {
 
     @Test
     public void testGetItemPrice(){
-        Basket basket = new Basket();
+
         Order order = new Order();
         Inventory inventory = new Inventory();
+        Basket basket = new Basket(inventory);
 
         inventory.getInventoryPriceList();
 
@@ -152,15 +156,30 @@ class BobsBagelsTest {
 
     @Test
     public void testAddItemNotInInventory() {
-        Basket basket = new Basket();
+
         Order order = new Order();
         Inventory inventory = new Inventory();
+        Basket basket = new Basket(inventory);
 
         Assertions.assertFalse(basket.addItem("banana"));
         Assertions.assertTrue(basket.addItem("BGLO"));
         Assertions.assertTrue(basket.addItem("COFC"));
         Assertions.assertFalse(basket.addItem("COFQ"));
+    }
 
+    @Test
+    public void testReceiptExistsAndCharacters() {
+        Basket basket = new Basket();
+        Order order = new Order();
+
+        basket.addItem("BGLP");
+        basket.addItem("BGLS");
+        basket.addItem("COFB");
+        basket.addItem("FILB");
+        String receipt = order.generateReceipt(basket.getItemList());
+
+        Assertions.assertNotNull(receipt);
+        Assertions.assertTrue(receipt.length() > 50);
 
     }
 }
