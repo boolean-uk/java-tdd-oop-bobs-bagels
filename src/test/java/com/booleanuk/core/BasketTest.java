@@ -9,7 +9,7 @@ public class BasketTest {
     @Test
     public void getBasketItemsTest() {
         Basket basket = new Basket();
-        Assertions.assertEquals(0, basket.getBasketItems().size());
+        Assertions.assertEquals(0, basket.getInventory().size());
     }
 
     @Test
@@ -20,11 +20,11 @@ public class BasketTest {
         basket.addProduct(product1);
         basket.addProduct(product2);
 
-        Assertions.assertEquals(2, basket.getBasketItems().size());
-        Assertions.assertTrue(basket.getBasketItems().contains(product1));
-        Assertions.assertTrue(basket.getBasketItems().contains(product2));
-        Assertions.assertEquals(0.19, basket.getBasketItems().get(0).getPrice());
-        Assertions.assertEquals(0.29, basket.getBasketItems().get(1).getPrice());
+        Assertions.assertEquals(2, basket.getInventory().size());
+        Assertions.assertTrue(basket.getInventory().contains(product1));
+        Assertions.assertTrue(basket.getInventory().contains(product2));
+        Assertions.assertEquals(0.19, basket.getInventory().get(0).getPrice());
+        Assertions.assertEquals(0.29, basket.getInventory().get(1).getPrice());
     }
 
     @Test
@@ -32,9 +32,9 @@ public class BasketTest {
         Basket basket = new Basket();
         Product product = new Product("Apple", 0.19);
         basket.addProduct(product, 2);
-        Assertions.assertEquals(2, basket.getBasketItems().size());
-        Assertions.assertTrue(basket.getBasketItems().contains(product));
-        Assertions.assertEquals(0.19, basket.getBasketItems().get(1).getPrice());
+        Assertions.assertEquals(2, basket.getInventory().size());
+        Assertions.assertTrue(basket.getInventory().contains(product));
+        Assertions.assertEquals(0.19, basket.getInventory().get(1).getPrice());
 
     }
 
@@ -48,11 +48,11 @@ public class BasketTest {
         products.add(product2);
         basket.addProduct(products);
 
-        Assertions.assertEquals(2, basket.getBasketItems().size());
-        Assertions.assertTrue(basket.getBasketItems().contains(product1));
-        Assertions.assertTrue(basket.getBasketItems().contains(product2));
-        Assertions.assertEquals(0.19, basket.getBasketItems().get(0).getPrice());
-        Assertions.assertEquals(0.29, basket.getBasketItems().get(1).getPrice());
+        Assertions.assertEquals(2, basket.getInventory().size());
+        Assertions.assertTrue(basket.getInventory().contains(product1));
+        Assertions.assertTrue(basket.getInventory().contains(product2));
+        Assertions.assertEquals(0.19, basket.getInventory().get(0).getPrice());
+        Assertions.assertEquals(0.29, basket.getInventory().get(1).getPrice());
     }
 
     @Test
@@ -69,8 +69,8 @@ public class BasketTest {
 
         basket.removeProduct(product1);
 
-        Assertions.assertEquals(1, basket.getBasketItems().size());
-        Assertions.assertIterableEquals(productsTest, basket.getBasketItems());
+        Assertions.assertEquals(1, basket.getInventory().size());
+        Assertions.assertIterableEquals(productsTest, basket.getInventory());
 
 
     }
@@ -89,8 +89,8 @@ public class BasketTest {
 
         basket.removeProduct("Apple");
 
-        Assertions.assertEquals(1, basket.getBasketItems().size());
-        Assertions.assertEquals(productsTest, basket.getBasketItems());
+        Assertions.assertEquals(1, basket.getInventory().size());
+        Assertions.assertEquals(productsTest, basket.getInventory());
 
 
     }

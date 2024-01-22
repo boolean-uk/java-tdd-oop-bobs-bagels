@@ -2,13 +2,13 @@ package com.booleanuk.core;
 
 import java.util.ArrayList;
 
-public class Basket {
+public class Basket implements Inventory {
     private ArrayList<Product> basketItems;
     private int basketLimit;
 
     public Basket() {
         this.basketItems = new ArrayList<>();
-        this.basketLimit = 14; // Probably should be some way to set default limit
+        this.basketLimit = 14; // Probably should be some way to set default limit.
     }
 
     public Basket(int basketLimit) {
@@ -16,26 +16,48 @@ public class Basket {
         this.basketLimit = basketLimit;
     }
 
-    public ArrayList<Product> getBasketItems() {
+    @Override
+    public ArrayList<Product> getInventory() {
         return this.basketItems;
     }
 
+    @Override
     public void addProduct(Product product) {
-        basketItems.add(product);
+        if(basketItems.size() < basketLimit) {
+            basketItems.add(product);
+        } else {
+            System.out.println("Your basket is at capacity. " + product.getName() + " not added.");
+        }
     }
 
     public void addProduct(Product product, int number) {
         for(int i = 0; i < number; i++) {
-            this.basketItems.add(product);
+            addProduct(product);
         }
     }
 
     public void addProduct(ArrayList<Product> products) {
-        this.basketItems.addAll(products);
+        if((products.size() + this.basketItems.size()) < basketLimit) {
+            double sumPrice = 0;
+            for(Product product : products) {
+                sumPrice += product.getPrice();
+                System.out.println(
+                        product.getSku() + " " + product.getName() + " " + product.getVariant() + ": " + product.getPrice()
+                );
+            }
+            System.out.println("The total cost of the items added to the basket: " + sumPrice +"£");
+            this.basketItems.addAll(products);
+        } else {
+            System.out.println("Your basket is at capacity. Product(s) not added");
+        }
     }
 
     public void removeProduct(Product product) {
-        this.basketItems.remove(product);
+        if(this.basketItems.contains(product)) {
+            this.basketItems.remove(product);
+        } else {
+            System.out.println(product.getName() + " doesen't seem to be in your basket");
+        }
     }
 
     public void removeProduct(String productName) {
@@ -54,6 +76,7 @@ public class Basket {
         if(this.basketItems.size() < capacity) {
             this.basketLimit = capacity;
         }
+        System.out.println("This basket contains more items than the specified capacity");
     }
 
     public boolean isBasketFull() {
@@ -61,6 +84,11 @@ public class Basket {
             return true;
         }
         return false;
+    }
+
+    @Override
+    public boolean inInventory(Product product) {
+        return basketItems.contains(product);
     }
 
 }
