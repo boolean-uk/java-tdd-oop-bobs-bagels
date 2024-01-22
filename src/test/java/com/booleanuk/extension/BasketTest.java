@@ -207,6 +207,6 @@ class BasketTest {
         basket.add(bagelplain);
 
         //more than 12-discount
-        Assertions.assertEquals(3.99+0.24+0.49, basket.getCostOfBasket());
+        Assertions.assertEquals(3.99+0.24+0.39, basket.getCostOfBasket());
     }
 }

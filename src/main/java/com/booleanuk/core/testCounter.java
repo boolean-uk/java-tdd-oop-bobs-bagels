@@ -3,13 +3,18 @@ package com.booleanuk.core;
 public class testCounter {
 
     public static void main(String[] args) {
-        System.out.println(testCount(45,4));
+        System.out.println(testCount(13));
     }
-    public static int testCount(int amount, int discountValue){
+    public static int testCount(int amount){
         int count = 0;
-        int orgDisc = discountValue;
+        int discountValue = 12;
         while (discountValue < amount){
-            discountValue += orgDisc;
+            discountValue += 12;
+            count ++;
+        }
+        discountValue = 6;
+        while (discountValue < amount){
+            discountValue += 6;
             count ++;
         }
         return count;

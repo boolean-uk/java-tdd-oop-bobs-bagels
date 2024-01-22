@@ -2,16 +2,17 @@ package com.booleanuk.extension;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 
 public class Basket {
 
-    private  HashMap<String, Integer> qtyMap;
     private ArrayList<Product> products;
     private static int maxSize;
+    double totalPrice;
 
     public Basket(){
-        this.qtyMap = new HashMap<>();
         this.products = new ArrayList<>();
+        this.totalPrice = 0;
         maxSize = 10;
     }
 
@@ -64,18 +65,26 @@ public class Basket {
     }
 
     public double getCostOfBasket(){
-        calculateDiscounts();
-        double total = 0;
 
-//        for (Filling filling : bagel.getFillings()){
-//
-//        }
+        //Clone basket to be able to remove from copy
+        ArrayList<Product> temporaryProducts = this.products;
 
-        for (Product product: products){
-            total += getCostOfProduct(product);
+        //Add all fillings first where discounts does not apply.
+        for (Product product: temporaryProducts){
+            if (product.getName().equals("Bagel")){
+                for (Filling filling : product.getFillings()){
+                    totalPrice += getCostOfProduct(filling);
+                }
+            }
         }
 
-        return total;
+        ArrayList<Product> restOfProducts = calculateDiscounts(temporaryProducts);
+
+        for (Product product : restOfProducts){
+            totalPrice += getCostOfProduct(product);
+        }
+
+        return totalPrice;
     }
 
     public double getCostOfProduct(Product product){
@@ -91,6 +100,59 @@ public class Basket {
         return price;
     }
 
+    private ArrayList<Product> calculateDiscounts(ArrayList<Product> temporaryProducts){
+
+        //Initilise map for keeping track of qantity of each product
+        HashMap<String, Integer> qtyMap = new HashMap<>();
+
+        //Initialise map to store what's being removed
+        HashMap<String, Integer> removeMap = new HashMap<>();
+
+        //Clone basket to be able to remove from basket
+
+
+        //Add all products to a map.
+
+        for (Product product : temporaryProducts) {
+            if (!qtyMap.containsKey(product.getId())) {
+                qtyMap.put(product.getId(), 1);
+            } else {
+                int currentAmount = qtyMap.get(product.getId());
+                qtyMap.put(product.getId(), currentAmount + 1);
+            }
+        }
+
+        for (String id : qtyMap.keySet()){
+            if(id.contains("BGL")){
+                int amount = qtyMap.get(id);
+                while (amount>= 12){
+                   amount -= 12;
+                   totalPrice += 3.99;
+                   removeMap.put(id, 12);                 }
+                while (amount >= 6){
+                    amount -= 6;
+                    totalPrice += 2.49;
+                    removeMap.put(id, 6);
+                }
+            }
+        }
+
+        for (String removedProductId : removeMap.keySet()){
+            int amount = removeMap.get(removedProductId);
+            Iterator<Product> iterator = temporaryProducts.iterator();
+            while (iterator.hasNext() && amount > 0) {
+                Product product = iterator.next();
+                if (removedProductId.equals(product.getId())) {
+                    iterator.remove();
+                    amount--;
+                }
+            }
+        }
+
+        return temporaryProducts;
+    }
+
+
     protected void clearBasket(){
         this.products.clear();
     }
@@ -98,32 +160,4 @@ public class Basket {
     private boolean isBasketFull(){
         return (this.products.size()) >= maxSize;
     }
-
-    private double calculateDiscounts(){
-
-        //Add all products to a map.
-        System.out.println(products.size());
-        for (Product product : this.products){
-            if (!qtyMap.containsKey(product.getId())){
-                qtyMap.put(product.getId(), 1);
-            }
-            else {
-                int currentAmount = qtyMap.get(product.getId());
-                qtyMap.put(product.getId(), currentAmount +1);
-            }
-        }
-        System.out.println(qtyMap);
-
-        double res = 0;
-        for (int qty : qtyMap.values()){
-            while (qty>12){
-                qty -= 12;
-                res += 3.99;
-            }
-        }
-        System.out.println(res);
-        System.out.println(qtyMap);
-        return res;
-    }
-
 }
