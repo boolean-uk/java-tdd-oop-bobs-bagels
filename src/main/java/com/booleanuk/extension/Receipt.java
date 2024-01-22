@@ -70,8 +70,10 @@ public class Receipt {
         HashMap<Item, double[]> mapPriceAndSavings = this.basket.discountPerItem();
         for (Item item : basket.getBasketContent().keySet()) {
             int amount = basket.getBasketContent().get(item);
-            String itemRow = item.getVariant() + " " + item.getName() + "\t\t" +  amount + "\t\u00A3" + mapPriceAndSavings.get(item)[0] + "\n"
-                    + "(-\u00A3" + mapPriceAndSavings.get(item)[1] + ")\n";
+            String itemRow = item.getVariant() + " " + item.getName() + "\t\t" +  amount + "\t\u00A3" + mapPriceAndSavings.get(item)[0] + "\n";
+            if (mapPriceAndSavings.get(item)[1] != 0.0){
+                itemRow += "                  (-\u00A3" + mapPriceAndSavings.get(item)[1] + ")\n";
+            }
             receipt.append(itemRow);
         }
         receipt.append("\n----------------------------\nTotal                  \u00A3") ;
