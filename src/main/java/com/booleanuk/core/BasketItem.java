@@ -8,6 +8,11 @@ public class BasketItem implements Item{
     private double price;
     private String[] fillings;
     private int numFillings;
+    private int numDiscountItems = 0;
+    private int num12Discount = 0;
+    private int num6Discount = 0;
+    private double discountPrice = 0.0;
+    private double saved = 0.0;
 
     public BasketItem(String name, String type, int quantity, double price) {
         this.name = name;
@@ -67,5 +72,13 @@ public class BasketItem implements Item{
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public void resetDiscount() {
+        this.numDiscountItems = 0;
+        this.num12Discount = 0;
+        this.num6Discount = 0;
+        this.discountPrice = 0.0;
+        this.saved = 0.0;
     }
 }
