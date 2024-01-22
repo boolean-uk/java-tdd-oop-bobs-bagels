@@ -1,0 +1,222 @@
+@startuml
+
+/' diagram meta data start
+config=StructureConfiguration;
+{
+  "projectClassification": {
+    "searchMode": "OpenProject", // OpenProject, AllProjects
+    "includedProjects": "",
+    "pathEndKeywords": "*.impl",
+    "isClientPath": "",
+    "isClientName": "",
+    "isTestPath": "",
+    "isTestName": "",
+    "isMappingPath": "",
+    "isMappingName": "",
+    "isDataAccessPath": "",
+    "isDataAccessName": "",
+    "isDataStructurePath": "",
+    "isDataStructureName": "",
+    "isInterfaceStructuresPath": "",
+    "isInterfaceStructuresName": "",
+    "isEntryPointPath": "",
+    "isEntryPointName": "",
+    "treatFinalFieldsAsMandatory": false
+  },
+  "graphRestriction": {
+    "classPackageExcludeFilter": "",
+    "classPackageIncludeFilter": "",
+    "classNameExcludeFilter": "",
+    "classNameIncludeFilter": "",
+    "methodNameExcludeFilter": "",
+    "methodNameIncludeFilter": "",
+    "removeByInheritance": "", // inheritance/annotation based filtering is done in a second step
+    "removeByAnnotation": "",
+    "removeByClassPackage": "", // cleanup the graph after inheritance/annotation based filtering is done
+    "removeByClassName": "",
+    "cutMappings": false,
+    "cutEnum": true,
+    "cutTests": true,
+    "cutClient": true,
+    "cutDataAccess": false,
+    "cutInterfaceStructures": false,
+    "cutDataStructures": false,
+    "cutGetterAndSetter": true,
+    "cutConstructors": true
+  },
+  "graphTraversal": {
+    "forwardDepth": 6,
+    "backwardDepth": 6,
+    "classPackageExcludeFilter": "",
+    "classPackageIncludeFilter": "",
+    "classNameExcludeFilter": "",
+    "classNameIncludeFilter": "",
+    "methodNameExcludeFilter": "",
+    "methodNameIncludeFilter": "",
+    "hideMappings": false,
+    "hideDataStructures": false,
+    "hidePrivateMethods": true,
+    "hideInterfaceCalls": true, // indirection: implementation -> interface (is hidden) -> implementation
+    "onlyShowApplicationEntryPoints": false, // root node is included
+    "useMethodCallsForStructureDiagram": "ForwardOnly" // ForwardOnly, BothDirections, No
+  },
+  "details": {
+    "aggregation": "GroupByClass", // ByClass, GroupByClass, None
+    "showClassGenericTypes": true,
+    "showMethods": true,
+    "showMethodParameterNames": true,
+    "showMethodParameterTypes": true,
+    "showMethodReturnType": true,
+    "showPackageLevels": 2,
+    "showDetailedClassStructure": true
+  },
+  "rootClass": "com.booleanuk.core.OrderButton",
+  "extensionCallbackMethod": "" // qualified.class.name#methodName - signature: public static String method(String)
+}
+diagram meta data end '/
+
+
+
+digraph g {
+    rankdir="TB"
+    splines=polyline
+    
+
+'nodes 
+subgraph cluster_1074230675 { 
+   	label=migzus
+	labeljust=l
+	fillcolor="#ececec"
+	style=filled
+   
+   subgraph cluster_1356110627 { 
+   	label=terminal
+	labeljust=l
+	fillcolor="#d8d8d8"
+	style=filled
+   
+   Button2013303286[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)Button</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+   callable: Callable [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >+   disabled: boolean [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >+   displayName: String [0..1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ onSelect()</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+Callable2013303286[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)Callable</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   args: Object[] [0..*]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   method: Method [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   obj: Object [0..1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ call(args: Object...): Object</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+Menu2013303286[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)Menu</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+   afterMenuPrintCallback: Callable [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   buttons: ArrayList&lt;Button&gt; [0..*]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   hasFocus: boolean [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >+   name: String [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >+   onFocus: Callable [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >+   parentMenu: Menu [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   selectIndex: int [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   whitespaceIndices: ArrayList&lt;Integer&gt; [0..*]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ clearButtons()</TD></TR>
+<TR><TD ALIGN="LEFT" >+ clearScreen()</TD></TR>
+<TR><TD ALIGN="LEFT" >+ focus()</TD></TR>
+<TR><TD ALIGN="LEFT" >+ hasButton(btnName: String): boolean</TD></TR>
+<TR><TD ALIGN="LEFT" >+ popButton(btnName: String)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ printMenu()</TD></TR>
+<TR><TD ALIGN="LEFT" >+ pushButton(btn: Button)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ pushWhitespace()</TD></TR>
+<TR><TD ALIGN="LEFT" >+ unfocus()</TD></TR>
+<TR><TD ALIGN="LEFT" >+ update()</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+} 
+} 
+
+subgraph cluster_2058424510 { 
+   	label=booleanuk
+	labeljust=l
+	fillcolor="#ececec"
+	style=filled
+   
+   subgraph cluster_543727311 { 
+   	label=core
+	labeljust=l
+	fillcolor="#d8d8d8"
+	style=filled
+   
+   OrderButton1325589212[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)OrderButton</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+   itemFullName: String [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >+   targetBasketAdder: Callable [0..1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ makeOrder(uuid: String)</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+RemoveOrderButton1325589212[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)RemoveOrderButton</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+   itemFullName: String [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >+   onRefreshButtonList: Callable [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >+   targetBasketRemover: Callable [0..1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ removeOrder(uuid: String)</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+} 
+} 
+
+'edges    
+Button2013303286 -> Callable2013303286[label="callable
+[0..1]"];
+Button2013303286 -> OrderButton1325589212[arrowhead=none, arrowtail=empty, dir=both];
+Button2013303286 -> RemoveOrderButton1325589212[arrowhead=none, arrowtail=empty, dir=both];
+Menu2013303286 -> Button2013303286[label="buttons
+[0..*]"];
+OrderButton1325589212 -> Callable2013303286[label="targetBasketAdder
+[0..1]"];
+RemoveOrderButton1325589212 -> Callable2013303286[label="onRefreshButtonList
+[0..1]"];
+RemoveOrderButton1325589212 -> Callable2013303286[label="targetBasketRemover
+[0..1]"];
+    
+}
+@enduml
