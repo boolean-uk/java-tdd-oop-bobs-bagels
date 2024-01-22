@@ -4,6 +4,7 @@ import com.booleanuk.core.Basket;
 import com.booleanuk.core.Item;
 
 import java.time.LocalDateTime;
+import java.util.HashMap;
 
 public class Receipt {
     private String receipt;
@@ -57,5 +58,26 @@ public class Receipt {
 
     public LocalDateTime getDateAndTime() {
         return this.dateAndTime;
+    }
+
+    public String generateReceiptWithDiscount() {
+        if (basket.getBasketContent().isEmpty()) {
+            return "Basket is empty.";
+        }
+        StringBuilder receipt = new StringBuilder();
+        receipt.append(createHeader());
+
+        HashMap<Item, double[]> mapPriceAndSavings = this.basket.discountPerItem();
+        for (Item item : basket.getBasketContent().keySet()) {
+            int amount = basket.getBasketContent().get(item);
+            String itemRow = item.getVariant() + " " + item.getName() + "\t\t" +  amount + "\t\u00A3" + mapPriceAndSavings.get(item)[0] + "\n"
+                    + "(-\u00A3" + mapPriceAndSavings.get(item)[1] + ")\n";
+            receipt.append(itemRow);
+        }
+        receipt.append("\n----------------------------\nTotal                  \u00A3") ;
+        receipt.append(basket.totalCostWithDiscount(mapPriceAndSavings));
+        receipt.append(createFooter());
+        this.receipt = receipt.toString();
+        return receipt.toString();
     }
 }
