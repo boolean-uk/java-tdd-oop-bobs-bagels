@@ -61,6 +61,18 @@ As the manager,
 So we don't get any weird requests,
 I want customers to only be able to order things that we stock in our inventory.
 ```
+```
+11.
+As a customer,
+So I can keep tabs on how much I spend,
+I want to be able to get the repeipt of my purchase.
+```
+```
+12.
+As the manager,
+So we don't waste any receipt paper,
+I don't want customers to be able to print out receipts if nothing has been purchased.
+```
 
 ### Item Class
 
@@ -144,4 +156,16 @@ I want customers to only be able to order things that we stock in our inventory.
 | Customer tries to order an item that is not in inventory.         | Returns false.                                                              |
 
 
+### Receipt Class
 
+| Methods                     | Member Variables    |
+|-----------------------------|---------------------|
+| printReceipt(Basket basket) | Inventory inventory |
+|                             |                     |
+
+| Scenario                                                    | Return Value/Output/Result                                                                            |
+|-------------------------------------------------------------|-------------------------------------------------------------------------------------------------------|
+| 11                                                          |                                                                                                       |
+| Customer prints out receipt after buying some items.        | Prints out, in the terminal, a receipt of all the items bought with quantity and price for each item. |
+| 12                                                          |                                                                                                       |
+| Customer tries to print out a receipt with an empty basket. | Prints out nothing.                                                                                   |
