@@ -10,7 +10,7 @@ public class Basket {
 
     public Basket() {
         this.items = new ArrayList<>();
-        this.capacity = 2;
+        this.capacity = 5;
     }
 
     public boolean add(Item item) {
@@ -49,5 +49,17 @@ public class Basket {
 
     public List<Item> getItems() {
         return items;
+    }
+
+    public int getQuantity(Item item) {
+        int initialQuantity = 0;
+
+        for(Item basketItems : items) {
+            if(basketItems == item) {
+                initialQuantity++;
+            }
+        }
+
+        return initialQuantity;
     }
 }

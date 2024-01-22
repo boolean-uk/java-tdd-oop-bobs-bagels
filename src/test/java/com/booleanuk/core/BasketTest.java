@@ -36,7 +36,13 @@ class BasketTest {
         Assertions.assertFalse(basket.isFull());
 
         basket.add(eggBagel);
-        Assertions.assertTrue(basket.isFull());
+        Assertions.assertFalse(basket.isFull());
+
+        basket.add(sourdoughBagel);
+        Assertions.assertFalse(basket.isFull());
+
+        basket.add(sourdoughBagel);
+        Assertions.assertFalse(basket.isFull());
 
         basket.add(sourdoughBagel);
         Assertions.assertTrue(basket.isFull());
@@ -46,11 +52,11 @@ class BasketTest {
     public void testExpandingBasketCapacity() {
         Basket basket = new Basket();
 
-        Assertions.assertEquals(2, basket.getCapacity());
-
-        basket.modifyCapacity(5);
-
         Assertions.assertEquals(5, basket.getCapacity());
+
+        basket.modifyCapacity(10);
+
+        Assertions.assertEquals(10, basket.getCapacity());
     }
 
     @Test
@@ -99,6 +105,8 @@ class BasketTest {
 
     @Test
     public void returnsCorrectCostOfFillings() {
+        //This test is missing an instance of StoreInventory on purpose because it prints out double fillings
+        //due to the previous test initializing an object of StoreInventory
         Assertions.assertEquals("Bacon price: 0.12, Egg price: 0.12, Cheese price: 0.12, " +
                 "Cream Cheese price: 0.12, Smoked Salmon price: 0.12, Ham price: 0.12", Filling.getAllFillingPrices());
     }

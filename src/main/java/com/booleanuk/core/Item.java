@@ -28,8 +28,4 @@ public class Item {
     public String getVariant() {
         return variant;
     }
-
-    public String toString() {
-        return "This " + itemName + " with SKU " + sku + " costs " + price;
-    }
 }
