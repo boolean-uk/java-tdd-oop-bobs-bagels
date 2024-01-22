@@ -76,15 +76,21 @@ public class Basket {
         result.append("\n--------------------------------\n");
         result.append(String.format("%5s %-1s", "", "Have a good day!"));
 
-
         return result.toString();
     }
-    public String getTotalCost() {
+    private String getTotalCost() {
         double totalCost = 0;
         for (Item item : items) {
             totalCost += item.getTotalCost();
         }
         return String.format("£%.2f", totalCost);
+    }
+
+    private String getDiscount(){
+
+
+
+        return "Discount";
     }
 
 }
