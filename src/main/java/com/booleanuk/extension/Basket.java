@@ -18,7 +18,7 @@ public class Basket {
     public boolean add(Product product){
 
         //If the product is not in inventory
-        if(!Inventory.isValidProduct(product)){
+        if(!Inventory.isValidProduct(product) || product.getName().equals("Fillings")){
             return false;
         }
 

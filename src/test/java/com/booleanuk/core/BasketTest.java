@@ -11,7 +11,7 @@ class BasketTest {
     @Test
     public void testAddRight(){
        Basket basket = new Basket();
-       Basket.setMaxSize(2);
+       Basket.setMaxSize(3);
        Bagel bagelNoFillings = new Bagel("BGLO", 0.49, "Onion");
 
        Filling filling1 = new Filling("FILB", 0.12, "Bacon");
