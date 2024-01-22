@@ -3,6 +3,8 @@ package com.booleanuk.core;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
+
 public class TestBasket {
     @Test
     public void testAddProductToBasket(){
@@ -23,7 +25,7 @@ public class TestBasket {
     @Test
     public void testAddToBasketDontExtendCapacity(){
         Basket basket = new Basket();
-
+        basket.changeBasketCapacity(7);
         basket.addProductToBasket("Bagel","Plain","Yes");
         basket.addProductToBasket("Bagel","Plain","Yes");
         basket.addProductToBasket("Bagel","Plain","Yes");
@@ -70,7 +72,8 @@ public class TestBasket {
 
         basket.addProductToBasket("Bagel","Plain","Yes");
         basket.addProductToBasket("Bagel","Plain","Yes");
-        Assertions.assertEquals(0.78d,basket.totalCost());
+        basket.addFilling("Egg","Yes");
+        Assertions.assertEquals(0.90d,basket.totalCost());
     }
 
     @Test
@@ -96,8 +99,10 @@ public class TestBasket {
     @Test
     public void testChooseFilling(){
         Basket basket = new Basket();
+        basket.addProductToBasket("Bagel","Everything","Yes");
+        basket.addFilling("Egg","Yes");
 
-        Assertions.assertEquals("Filling Egg added to basket",basket.addProductToBasket("Filling","Egg","Yes"));
+        Assertions.assertEquals("FILE", basket.fillingArr[0]);
     }
 
     @Test
@@ -120,5 +125,81 @@ public class TestBasket {
         basket.addProductToBasket("Bagel","Plain","Yes");
         basket.addProductToBasket("Bagel","Plain","Yes");
         Assertions.assertEquals("That product doesnt exist",basket.addProductToBasket("Bogle","Plain","Yes"));
+    }
+    @Test
+    public void testShouldGiveDiscountFor12(){
+        Basket basket = new Basket();
+        basket.addProductToBasket("Bagel","Plain","Yes");
+        basket.addProductToBasket("Bagel","Plain","Yes");
+        basket.addProductToBasket("Bagel","Plain","Yes");
+        basket.addProductToBasket("Bagel","Plain","Yes");
+        basket.addProductToBasket("Bagel","Plain","Yes");
+        basket.addProductToBasket("Bagel","Plain","Yes");
+        basket.addProductToBasket("Bagel","Plain","Yes");
+        basket.addProductToBasket("Bagel","Plain","Yes");
+        basket.addProductToBasket("Bagel","Plain","Yes");
+        basket.addProductToBasket("Bagel","Plain","Yes");
+        basket.addProductToBasket("Bagel","Plain","Yes");
+        basket.addProductToBasket("Bagel","Plain","Yes");
+        Assertions.assertEquals(3.99,basket.totalCost());
+    }
+
+    @Test
+    public void testShouldGiveDiscountFor6(){
+        Basket basket = new Basket();
+        basket.addProductToBasket("Bagel","Everything","Yes");
+        basket.addProductToBasket("Bagel","Everything","Yes");
+        basket.addProductToBasket("Bagel","Everything","Yes");
+        basket.addProductToBasket("Bagel","Everything","Yes");
+        basket.addProductToBasket("Bagel","Everything","Yes");
+        basket.addProductToBasket("Bagel","Everything","Yes");
+        Assertions.assertEquals(2.49,basket.totalCost());
+    }
+
+    @Test
+    public void testShouldGiveDiscountForCoffeeWithBagle(){
+        Basket basket = new Basket();
+
+        basket.addProductToBasket("Coffee","Black","Yes");
+        basket.addProductToBasket("Bagel","Onion","Yes");
+        Assertions.assertEquals(1.25,basket.totalCost());
+    }
+
+    @Test
+    public void testShouldGiveDiscountFor6AndForCoffeeWithBagle(){
+        Basket basket = new Basket();
+        basket.addProductToBasket("Bagel","Everything","Yes");
+        basket.addProductToBasket("Bagel","Everything","Yes");
+        basket.addProductToBasket("Bagel","Everything","Yes");
+        basket.addProductToBasket("Bagel","Everything","Yes");
+        basket.addProductToBasket("Bagel","Everything","Yes");
+        basket.addProductToBasket("Bagel","Everything","Yes");
+        basket.addProductToBasket("Coffee","Black","Yes");
+        basket.addProductToBasket("Bagel","Onion","Yes");
+        Assertions.assertEquals(3.74,basket.totalCost());
+    }
+    @Test
+    public void testShouldGiveDiscountFor6AndForCoffeeWithBagleAndNotForSingleBagel(){
+        Basket basket = new Basket();
+        basket.addProductToBasket("Bagel","Everything","Yes");
+        basket.addProductToBasket("Bagel","Everything","Yes");
+        basket.addProductToBasket("Bagel","Everything","Yes");
+        basket.addProductToBasket("Bagel","Everything","Yes");
+        basket.addProductToBasket("Bagel","Everything","Yes");
+        basket.addProductToBasket("Bagel","Everything","Yes");
+        basket.addProductToBasket("Coffee","Black","Yes");
+        basket.addProductToBasket("Bagel","Onion","Yes");
+        basket.addProductToBasket("Bagel","Plain","Yes");
+        Assertions.assertEquals(4.13,basket.totalCost());
+    }
+    @Test
+    public void testShouldSeeCleanBasket(){
+        Basket basket = new Basket();
+        basket.addProductToBasket("Bagel","Plain","Yes");
+        basket.addProductToBasket("Bagel","Plain","Yes");
+        basket.addFilling("Egg","Yes");
+        basket.addProductToBasket("Coffee","Black","Yes");
+        basket.addFilling("Egg","Yes");
+        Assertions.assertEquals("[Bagel Plain, Bagel Plain Filling: Egg Filling: Egg, Coffee Black]",basket.makeCleanBasket());
     }
 }

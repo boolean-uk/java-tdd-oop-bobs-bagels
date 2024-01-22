@@ -92,10 +92,12 @@ Inventory class
 |            | String variant   |                                 |              |
 Basket class
 
-| Methods          | Member variables    | Scenario                              | Output/result    |
-|------------------|---------------------|---------------------------------------|------------------|
-| checkTotalCost() | String[] basketArr  | check the price for each item         | return totalCost |
-|                  |                     | in the basket and add it to totalCost |                  |
+| Methods            | Member variables    | Scenario                                                    | Output/result      |
+|--------------------|---------------------|-------------------------------------------------------------|--------------------|
+| checkTotalCost()   | String[] basketArr  | check the price for each item                               |                    |
+|                    |                     | in the basket and add it to totalCost, and add fillingCosts | return totalCost   |
+|                    |                     |                                                             |                    |
+| totalFillingCost() |                     | the total cost of every filling in fillingArr               | return fillingCost |
 
 ```
 7.
@@ -119,11 +121,11 @@ I'd like to be able to choose fillings for my bagel.
 ```
 Basket class
 
-| Methods                     | Member variables    | Scenario                         | Output/result       |
-|-----------------------------|---------------------|----------------------------------|---------------------|
-| addToBasket(String product) | String[] basketArr  | If the product added is a bagel: | return confirmation |
-|                             |                     | ask the user if they want to add |                     |
-|                             |                     | filling to it                    |                     |
+| Methods                    | Member variables    | Scenario                                        | Output/result       |
+|----------------------------|---------------------|-------------------------------------------------|---------------------|
+| addFlling(String product)  | String[] basketArr  | If the product added is a bagel:                | return confirmation |
+|                            | String[] fillingArr | ask the user if they want to add filling to it, |                     |
+|                            |                     | add the filling and bagel position to List      |                     |
 
 ```
 9.
@@ -152,3 +154,18 @@ Basket class
 | addToBasket(String product) | String[] basketArr  | Before the method runs, it checks | return confirmation |
 |                             |                     | if the input is valid             |                     |
 |                             |                     |                                   |                     |
+
+```
+11.
+As the customer,
+So I will get some discounts,
+I want to know that i get the right discount amount.
+```
+Basket class
+
+| Methods      | Member variables    | Scenario                                | Output/result    |
+|--------------|---------------------|-----------------------------------------|------------------|
+| totalCost()  | String[] basketArr  | check name of each name in the for loop | return totalCost |
+|              |                     | add a counter to know if it is bagel    |                  |
+|              |                     | with topping or plain, and for coffee   |                  |
+|              |                     | Make discounts according to counter     |                  |
