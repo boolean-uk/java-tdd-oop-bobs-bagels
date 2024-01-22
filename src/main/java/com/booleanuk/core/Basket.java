@@ -71,10 +71,64 @@ public class Basket {
     }
 
     public void updateTotal() {
+
+        int quantity = 0;
+        int num12 = 0;
+        int num6 = 0;
+        int rest = 0;
+        BasketItem basketItem;
+
         double priceTotal = 0.0;
-        for (BasketItem basketItem: basket.values())
+        double priceTotalNoDiscount = 0;
+        double priceSavedTotal = 0.0;
+        double priceSaved = 0.0;
+        double discountPrice = 0.0;
+        // iterate basket by keys
+
+        for (String sku: basket.keySet())
         {
-            priceTotal += (basketItem.getQuantity() * basketItem.getPrice());
+            // Extract value object
+            basketItem = basket.get(sku);
+
+            // Reset all discount statuses
+            basketItem.resetDiscount();
+
+            // Check is current basket item is a bagel
+            if (sku.startsWith("BGL")){
+                // Check quantity of bagels
+                quantity = basketItem.getQuantity();
+
+                // Check if quantity is in sets of 12 or 6 or both
+                num12 = quantity / 12;
+                num6 = (quantity - 12 * num12) / 6;
+
+                // Check remaining number of bagels
+                rest = quantity - 12 * num12 - 6 * num6;
+                if (num12 > 0) {
+                    basketItem.setNumDiscountItems(basketItem.getNumDiscountItems()+num12);
+                    basketItem.setNum12Discount(num12);
+                    discountPrice += discount.discountMap.get("BGL12").getPrice();
+                    priceSaved += (12*num12*basketItem.getPrice()) - discountPrice;
+                }
+                if (num6 > 0) {
+                    basketItem.setNumDiscountItems(basketItem.getNumDiscountItems()+num6);
+                    basketItem.setNum6Discount(num6);
+                    discountPrice += discount.discountMap.get("BGL12").getPrice();
+                    priceSaved += (6 * num6 * basketItem.getPrice()) - discountPrice;
+                }
+                if (rest > 0) {
+                    priceTotal += rest * basketItem.getPrice();
+                }
+                priceTotal += discountPrice;
+                priceSavedTotal += priceSaved;
+                basketItem.setDiscountPrice(Math.round((discountPrice*100.0)/100.0));
+                basketItem.setSaved(Math.round((priceSaved*100.0)/100.0));
+
+                priceTotalNoDiscount += quantity * basketItem.getPrice();
+
+                discountPrice = 0.0;
+                priceSaved = 0.0;
+            }
 
             // Discount detection for number of same objects here
         }

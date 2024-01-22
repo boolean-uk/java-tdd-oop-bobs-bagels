@@ -74,6 +74,51 @@ public class BasketItem implements Item{
         this.name = name;
     }
 
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public int getNumDiscountItems() {
+        return numDiscountItems;
+    }
+
+    public void setNumDiscountItems(int numDiscountItems) {
+        this.numDiscountItems = numDiscountItems;
+    }
+
+    public int getNum12Discount() {
+        return num12Discount;
+    }
+
+    public void setNum12Discount(int num12Discount) {
+        this.num12Discount = num12Discount;
+    }
+
+    public int getNum6Discount() {
+        return num6Discount;
+    }
+
+    public void setNum6Discount(int num6Discount) {
+        this.num6Discount = num6Discount;
+    }
+
+    public double getDiscountPrice() {
+        return discountPrice;
+    }
+
+    public void setDiscountPrice(double discountPrice) {
+        this.discountPrice = discountPrice;
+    }
+
+    public double getSaved() {
+        return saved;
+    }
+
+    public void setSaved(double saved) {
+        this.saved = saved;
+    }
+
     public void resetDiscount() {
         this.numDiscountItems = 0;
         this.num12Discount = 0;
