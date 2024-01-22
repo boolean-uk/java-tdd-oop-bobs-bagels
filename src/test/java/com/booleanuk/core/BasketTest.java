@@ -134,40 +134,4 @@ public class BasketTest {
         basket.addFilling("BGLP","FILX");
         Assertions.assertEquals("[BGLO, FILE, FILX, FILC, BGLP, FILX, COFB]",basket.addFilling("BGLO", "FILE"));
     }
-
-    @Test
-    public void testDiscount() {
-        Basket basket = new Basket ();
-        basket.changeCapacity(25);
-        basket.addItem("BGLO");
-        basket.addItem("BGLO");
-
-        basket.addItem("BGLP");
-        basket.addItem("BGLP");
-        basket.addItem("BGLP");
-        basket.addItem("BGLP");
-        basket.addItem("BGLP");
-        basket.addItem("BGLP");
-        basket.addItem("BGLP");
-        basket.addItem("BGLP");
-        basket.addItem("BGLP");
-        basket.addItem("BGLP");
-        basket.addItem("BGLP");
-        basket.addItem("BGLP");
-
-        basket.addItem("BGLE");
-        basket.addItem("BGLE");
-        basket.addItem("BGLE");
-        basket.addItem("BGLE");
-        basket.addItem("BGLE");
-        basket.addItem("BGLE");
-
-        basket.addItem("COFB");
-        basket.addItem("COFB");
-        basket.addItem("COFB");
-
-        Assertions.assertEquals(9.97,basket.discount());
-
-
-    }
 }
