@@ -1,6 +1,9 @@
 package com.booleanuk.core;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class BasketManager {
@@ -142,5 +145,87 @@ public class BasketManager {
 
     public void setCapacity(int capacity) {
         this.capacity = capacity;
+    }
+
+    /**
+     * -------------------------------
+     * EXTENSION 2
+     *--------------------------------
+     */
+
+    public void printReceipt() {
+        InventoryManager inv = new InventoryManager();
+        LocalDateTime dateTime = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        String formattedDateTime = dateTime.format(formatter);
+
+        // Iterate through the basket to collect items
+        HashMap<String, Integer> frequencyCounter = new HashMap<>();
+        for(Item item : getBasket()) {
+            if (frequencyCounter.containsKey(item.getSKU())) {
+                frequencyCounter.put(item.getSKU(), frequencyCounter.get(item.getSKU()) + 1);
+            } else {
+                frequencyCounter.put(item.getSKU(), 1);
+            }
+        }
+
+        // Header of the receipt
+        System.out.println("                ~~~ !Bob's Bagels ~~~\n");
+        System.out.println("                 " + formattedDateTime + "\n");
+        System.out.println("             ____________SIDES___________\n");
+
+        // Print the quantity of each item based on the frequencyCounter above
+
+        for (String key : frequencyCounter.keySet()) {
+            System.out.printf("%-15s %-25s %-8d %-15s%n",
+                    inv.getInventory().get(key).getVariant(),
+                    inv.getInventory().get(key).getName(),
+                    frequencyCounter.get(key),
+                    String.format("%.2f%s", inv.getInventory().get(key).getPrice() * frequencyCounter.get(key), "DKK,-"));
+        }
+
+        System.out.println();
+        System.out.println("             __________FILLINGS__________\n");
+
+        frequencyCounter.clear();
+
+        for(Item item : getBasket()) {
+            if ((item.getFilling() != null)) {
+                if ((frequencyCounter.containsKey(item.getFilling().getSKU()))) {
+                    frequencyCounter.put(item.getFilling().getSKU(), frequencyCounter.get(item.getFilling().getSKU()) + 1);
+                } else {
+                    frequencyCounter.put(item.getFilling().getSKU(), 1);
+                }
+            } else {
+                continue;
+            }
+        }
+
+        for (String key : frequencyCounter.keySet()) {
+            System.out.printf("%-15s %-25s %-8d %-15s%n",
+                    inv.getInventory().get(key).getVariant(),
+                    inv.getInventory().get(key).getName(),
+                    frequencyCounter.get(key),
+                    String.format("%.2f%s", inv.getInventory().get(key).getPrice() * frequencyCounter.get(key), "DKK,-"));
+        }
+
+        // stolen logic from totalCost()
+        double total = 0.0;
+        for(Item i : getBasket()) {
+            total += i.getPrice();
+            if (i.getFilling() != null) {
+                total += i.getFilling().getPrice();
+            }
+        }
+
+        System.out.println("             ____________________________\n");
+        System.out.printf("%-15s %-25s %-8s %-15s%n", "Total", "", "", String.format("%.2f%s", total, "DKK,-"));
+        System.out.println("             ____________________________\n");
+
+        System.out.println("Contact Information:");
+        System.out.println("Telephone: +45 ....");
+        System.out.println("Opening hours: 08:30 - 16:30");
+        System.out.println("___________________________________________________________\n");
+
     }
 }

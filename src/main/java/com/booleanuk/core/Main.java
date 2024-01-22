@@ -6,32 +6,13 @@ import java.util.List;
 import java.util.SortedMap;
 
 public class Main {
-
-    /**
-     * play with receipt method extensions_2
-     * @param lst
-     */
-    public static void printReceipt(List<Item> lst) {
-        LocalDateTime dateTime = LocalDateTime.now();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-        String formattedDateTime = dateTime.format(formatter);
-
-        System.out.println("                ~~~ !Bob's Bagels ~~~\n");
-        System.out.println("                 " + formattedDateTime + "\n");
-        System.out.println("             ____________________________\n");
-
-        System.out.println("  ____      ____ ");
-        System.out.println(" | __ )    / __ \\ ");
-        System.out.println(" |  _ \\  | |  | |");
-        System.out.println(" | |_) |  | |  | |");
-        System.out.println(" |____/   \\\\____/ ");
-    }
-
     public static void main(String[] args) {
         InventoryManager inv = new InventoryManager(true);
         BasketManager b = new BasketManager();
         //inv.costEachFilling();
 
+        b.add(inv.getInventory().get("BGLO"));
+        b.add(inv.getInventory().get("BGLO"));
         b.add(inv.getInventory().get("BGLO"));
         b.getBasket().get(0).addFilling(inv.getInventory().get("FILC"));
         b.getBasket().get(0).addFilling(inv.getInventory().get("FILE"));
@@ -40,9 +21,9 @@ public class Main {
         b.add(inv.getInventory().get("FILX"));
         b.add(inv.getInventory().get("ItemNotInStock"));
 
-        b.showContentsBasket();
-        b.totalCost();
+        //b.showContentsBasket();
+        //b.totalCost();
 
-        printReceipt(b.getBasket());
+        b.printReceipt();
     }
 }
