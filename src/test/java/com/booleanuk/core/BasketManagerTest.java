@@ -72,7 +72,7 @@ public class BasketManagerTest {
     @Test
     public void testCheckItemInInventory(){
         BasketManager b = new BasketManager();
-        Assertions.assertFalse(b.checkItemInInventory(new Item(null, 0.0, null, null, null)));
+        Assertions.assertFalse(b.checkItemInInventory(new Bagel(null, 0.0, null, null, null)));
         Assertions.assertTrue(b.checkItemInInventory(item_a));
     }
 
@@ -86,6 +86,5 @@ public class BasketManagerTest {
         b.add(item_c);
         Assertions.assertEquals(cost, b.totalCost());
         Assertions.assertEquals(cost, (b.remove(item_a).getPrice() + b.remove(item_b).getPrice() + b.remove(item_c).getPrice()));
-
     }
 }
