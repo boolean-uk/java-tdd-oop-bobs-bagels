@@ -133,10 +133,10 @@ public class Store {
         }
 
         for(ArrayList<Item> comboItems: inventory.getComboDiscounts().keySet()) {
-            int comboPrice = 0;
+            double comboPrice = 0;
 
             while(inventory.containsComboItems(notInBundles, comboItems)) {
-                comboPrice += inventory.getComboDiscounts().get(comboItems);
+                comboPrice = inventory.getComboDiscounts().get(comboItems);
                 double totalOriginalCost = 0;
                 Item lastItem = null;
                 for(Item comboItem: comboItems) {
@@ -148,7 +148,7 @@ public class Store {
                 }
 
                 double discount = totalOriginalCost-( discounts.get(comboItems.get(0)) + comboPrice);
-                discounts.put(lastItem, discount);
+                discounts.put(lastItem, discounts.get(lastItem)+discount);
                 totalDiscounts += discount;
                 prices.put(comboItems.get(0), prices.get(comboItems.get(0)) + comboPrice);
 
@@ -156,6 +156,7 @@ public class Store {
         }
 
         for(Item item: notInBundles) {
+            System.out.println(item);
             prices.put(item, prices.get(item) + getCostOfItem(item));
         }
         if(withDiscountData) {

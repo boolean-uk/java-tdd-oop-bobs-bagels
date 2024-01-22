@@ -106,7 +106,7 @@ public class ExtensionTwoTest {
                         "\n" +
                         "\nPlain Bagel        12  \u00A33.99" +
                         "\nEverything Bagel   6   \u00A32.49" +
-                        "\nBlack Coffee       3   \u00A33.99" +
+                        "\nBlack Coffee       3   \u00A33.49" +
                         "\nOnion Bagel        2   \u00A30.00" +
                         "\n" +
                         "\n----------------------------" +
@@ -156,7 +156,7 @@ public class ExtensionTwoTest {
                         "\nEgg Filling        2   \u00A30.24" +
                         "\nPlain Bagel        12  \u00A33.99" +
                         "\nEverything Bagel   6   \u00A32.49" +
-                        "\nBlack Coffee       3   \u00A33.99" +
+                        "\nBlack Coffee       3   \u00A33.49" +
                         "\nOnion Bagel        2   \u00A30.00" +
                         "\n" +
                         "\n----------------------------" +
