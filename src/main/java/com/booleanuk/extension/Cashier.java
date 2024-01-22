@@ -47,11 +47,9 @@ public class Cashier {
                 break;
             case 'c':
                 System.out.println(basket.showBasket());
-                System.out.println(basket.getTotalCost());
                 break;
             case 'p':
                 System.out.println(basket.showBasket());
-                System.out.println(basket.getTotalCost());
                 basket.clearItems();
                 break;
             case 'm':

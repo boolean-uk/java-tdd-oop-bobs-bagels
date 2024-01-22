@@ -37,7 +37,7 @@ public class Item {
     }
     @Override
     public String toString() {
-        return getSku() + ", " + getType() + ", " + getPrice() + ", " + getVariant();
+        return getVariant() + " " + getType() + " " + getQuantity() + " " + getPrice();
     }
 
 }

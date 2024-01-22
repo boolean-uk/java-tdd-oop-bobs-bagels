@@ -44,8 +44,8 @@ public class Basket {
         if (itemToRemove != null && items.contains(itemToRemove)) {
             for (int i = 0; i < quantityToRemove; i++) {
                 items.remove(itemToRemove);
-                return true;
                 }
+            return true;
             }
         System.out.println("Item was not found");
         return false;
