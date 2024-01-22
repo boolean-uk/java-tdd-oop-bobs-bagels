@@ -2,55 +2,56 @@
 
 Note: the domain model is subject to change before the assignment is complete
 
-| Comment | Class                 | Fields                         | Methods                                    | Test | Done | Situation                                  | Output / Response                           |
-|---------|-----------------------|--------------------------------|--------------------------------------------|------|------|--------------------------------------------|---------------------------------------------|
-|         | Product               | String sku                     |                                            |      |      |                                            |                                             |
-|         |                       | String name                    |                                            |      |      |                                            |                                             |
-|         |                       | String variant                 |                                            |      |      |                                            |                                             |
-|         |                       | double price                   |                                            |      |      |                                            |                                             |
-|         |                       |                                | double getPrice()                          | x    | x    | Get product price outside of class         | returns a double representing product price |
-|         |                       |                                | String getVariant()                        | x    | x    | get product variant outside of class       | returns a String containing product variant |
-|         |                       |                                | String getName()                           | x    | x    | get product name outside of class          | returns a String containing product name    |
-|         |                       |                                | String getSku()                            | x    | x    |                                            |                                             |
-|         |                       |                                | void setPrice(double price)                | x    | x    | Change product price from outside of class | the product                                 |
-|         |                       |                                | void setVariant(String variant)            | x    | x    |                                            |                                             |
-|         |                       |                                | void setName(String name)                  | x    | x    |                                            |                                             |
-|         |                       |                                | void setSku(String sku)                    | x    | x    |                                            |                                             |
-|         | Bagel                 | ArrayList<Filling> fillings    |                                            |      |      |                                            |                                             |
-|         |                       | double basePrice               |                                            |      |      |                                            |                                             |
-|         |                       |                                | void addFilling(Filling filling)           | x    | x    |                                            |                                             |
-|         |                       |                                | void removeFilling(Filling filling)        |      |      |                                            |                                             |
-|         |                       |                                | void getFillings()                         | x    | x    |                                            |                                             |
-|         |                       |                                | double getPrice()                          | x    | x    |                                            |                                             |
-|         |                       |                                | void setPrice()                            | x    | x    |                                            |                                             |
-|         |                       |                                | void getBasePrice()                        | x    | x    |                                            |                                             |
-|         |                       |                                | double setBasePrice()                      | x    | x    |                                            |                                             |
-|         | Coffee                |                                |                                            |      |      |                                            |                                             |
-|         |                       |                                |                                            |      |      |                                            |                                             |
-|         | Filling               |                                |                                            |      |      |                                            |                                             |
-|         |                       |                                |                                            |      |      |                                            |                                             |
-|         | Stock                 | ArrayList<Product> stock       |                                            |      |      |                                            |                                             |
-|         |                       |                                | ArrayList<Product> getStock()              | x    | x    |                                            |                                             |
-|         |                       |                                | boolean addStock(Product product)          | x    | x    |                                            |                                             |
-|         |                       |                                | boolean removeStock()                      | x    | x    |                                            |                                             |
-|         |                       |                                | boolean inStock(Product product)           | x    | x    |                                            |                                             |
-|         | Basket                | ArrayList<Product> basketItems |                                            |      |      |                                            |                                             |
-|         |                       | int basketLimit                |                                            |      |      |                                            |                                             |
-|         |                       |                                | void addProduct(Product product)           |      |      |                                            |                                             |
-|         |                       |                                | void removeProduct(Product product)        |      |      |                                            |                                             |
-|         |                       |                                | boolean inBasket()                         | x    |      |                                            |                                             |
-|         |                       |                                | HashMap<Product, Integer> getBasketItems() | x    |      |                                            |                                             |
-|         |                       |                                | boolean isBasketFull()                     | x    |      |                                            |                                             |
-|         |                       |                                | void setCapacity(int basketLimit)          | x    |      |                                            |                                             |
-|         |                       |                                |                                            |      |      |                                            |                                             |
-|         | Checkout              | ArrayList<Predicate> discounts |                                            |      |      |                                            |                                             |
-|         |                       | Inventory inventory            |                                            |      |      |                                            |                                             |
-|         |                       |                                | double sumPrice(ArrayList<Product>)        |      |      |                                            |                                             |
-|         |                       |                                | void order(Basket basket)                  |      |      |                                            |                                             |
-|         |                       |                                |                                            |      |      |                                            |                                             |
-|         | (Interface) Inventory |                                | addProduct(Product product)                |      |      |                                            |                                             |
-|         |                       |                                | removeProduct(Product product)             |      |      |                                            |                                             |
-|         |                       |                                | boolean inInventory                        |      |      |                                            |                                             |
+| Comment | Class                 | Fields                         | Methods                             | Test | Done | Situation                                  | Output / Response                           |
+|---------|-----------------------|--------------------------------|-------------------------------------|------|------|--------------------------------------------|---------------------------------------------|
+|         | Product               | String sku                     |                                     |      |      |                                            |                                             |
+|         |                       | String name                    |                                     |      |      |                                            |                                             |
+|         |                       | String variant                 |                                     |      |      |                                            |                                             |
+|         |                       | double price                   |                                     |      |      |                                            |                                             |
+|         |                       |                                | double getPrice()                   | x    | x    | Get product price outside of class         | returns a double representing product price |
+|         |                       |                                | String getVariant()                 | x    | x    | get product variant outside of class       | returns a String containing product variant |
+|         |                       |                                | String getName()                    | x    | x    | get product name outside of class          | returns a String containing product name    |
+|         |                       |                                | String getSku()                     | x    | x    |                                            |                                             |
+|         |                       |                                | void setPrice(double price)         | x    | x    | Change product price from outside of class | the product                                 |
+|         |                       |                                | void setVariant(String variant)     | x    | x    |                                            |                                             |
+|         |                       |                                | void setName(String name)           | x    | x    |                                            |                                             |
+|         |                       |                                | void setSku(String sku)             | x    | x    |                                            |                                             |
+|         | Bagel                 | ArrayList<Filling> fillings    |                                     |      |      |                                            |                                             |
+|         |                       | double basePrice               |                                     |      |      |                                            |                                             |
+|         |                       |                                | void addFilling(Filling filling)    | x    | x    |                                            |                                             |
+|         |                       |                                | void removeFilling(Filling filling) |      |      |                                            |                                             |
+|         |                       |                                | void getFillings()                  | x    | x    |                                            |                                             |
+|         |                       |                                | double getPrice()                   | x    | x    |                                            |                                             |
+|         |                       |                                | void setPrice()                     | x    | x    |                                            |                                             |
+|         |                       |                                | void getBasePrice()                 | x    | x    |                                            |                                             |
+|         |                       |                                | double setBasePrice()               | x    | x    |                                            |                                             |
+|         | Coffee                |                                |                                     |      |      |                                            |                                             |
+|         |                       |                                |                                     |      |      |                                            |                                             |
+|         | Filling               |                                |                                     |      |      |                                            |                                             |
+|         |                       |                                |                                     |      |      |                                            |                                             |
+|         | Stock                 | ArrayList<Product> stock       |                                     |      |      |                                            |                                             |
+|         |                       |                                | ArrayList<Product> getStock()       | x    | x    |                                            |                                             |
+|         |                       |                                | boolean addStock(Product product)   | x    | x    |                                            |                                             |
+|         |                       |                                | boolean removeStock()               | x    | x    |                                            |                                             |
+|         |                       |                                | boolean inStock(Product product)    | x    | x    |                                            |                                             |
+|         | Basket                | ArrayList<Product> basketItems |                                     |      |      |                                            |                                             |
+|         |                       | int basketLimit                |                                     |      |      |                                            |                                             |
+|         |                       |                                | void addProduct(Product product)    | x    | x    |                                            |                                             |
+|         |                       |                                | void removeProduct(Product product) | x    | x    |                                            |                                             |
+|         |                       |                                | boolean inBasket(Product product)   | x    | x    |                                            |                                             |
+|         |                       |                                | ArrayList<Product> getProducts()    | x    | x    |                                            |                                             |
+|         |                       |                                | boolean isBasketFull()              | x    | x    |                                            |                                             |
+|         |                       |                                | void setCapacity(int basketLimit)   | x    | x    |                                            |                                             |
+|         |                       |                                |                                     |      |      |                                            |                                             |
+|         | Checkout              | ArrayList<Predicate> discounts |                                     |      |      |                                            |                                             |
+|         |                       | Stock stock                    |                                     |      |      |                                            |                                             |
+|         |                       |                                | double sumPrice(Basket basket)      |      |      |                                            |                                             |
+|         |                       |                                | applyDiscounts(Basket basket)       |      |      |                                            |                                             |
+|         |                       |                                | boolean order(Basket basket)        |      |      |                                            |                                             |
+|         |                       |                                |                                     |      |      |                                            |                                             |
+|         | (Interface) Inventory |                                | addProduct(Product product)         |      | x    |                                            |                                             |
+|         |                       |                                | removeProduct(Product product)      |      | x    |                                            |                                             |
+|         |                       |                                | boolean inInventory                 |      | x    |                                            |                                             |
 
 ### User Stories
 ```
@@ -96,21 +97,21 @@ I'd like to know the total cost of items in my basket.
 ```
 
 ```
-7. 
-As a customer, x
+7. x
+As a customer, 
 So I know what the damage will be,
 I'd like to know the cost of a bagel before I add it to my basket.
 ```
 
 ```
-8. 
+8. x
 As a customer,
 So I can shake things up a bit,
 I'd like to be able to choose fillings for my bagel.
 ```
 
 ```
-9. 
+9. x
 As a customer,
 So I don't over-spend,
 I'd like to know the cost of each filling before I add it to my bagel order.

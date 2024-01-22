@@ -24,6 +24,9 @@ public class Basket implements Inventory {
     @Override
     public void addProduct(Product product) {
         if(basketItems.size() < basketLimit) {
+            System.out.println(
+                    product.getSku() + " " + product.getName() + " " + product.getVariant() + ": " + product.getPrice()
+            );
             basketItems.add(product);
         } else {
             System.out.println("Your basket is at capacity. " + product.getName() + " not added.");
@@ -31,9 +34,14 @@ public class Basket implements Inventory {
     }
 
     public void addProduct(Product product, int number) {
+        System.out.println(
+                product.getSku() + " " + product.getName() + " " + product.getVariant() + ": " + product.getPrice()
+                        + "\nNumber: " + number + " \tTotal: " + (product.getPrice() * number)
+        );
         for(int i = 0; i < number; i++) {
             addProduct(product);
         }
+
     }
 
     public void addProduct(ArrayList<Product> products) {

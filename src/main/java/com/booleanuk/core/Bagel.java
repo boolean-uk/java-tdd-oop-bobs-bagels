@@ -41,6 +41,9 @@ public class Bagel extends Product {
     }
 
     public void addFilling(Filling filling) {
+        System.out.println(
+                filling.getSku() + " " + filling.getName() + " " + filling.getVariant() + ": " + filling.getPrice()
+        );
         this.fillings.add(filling);
         updatePrice();
     }
