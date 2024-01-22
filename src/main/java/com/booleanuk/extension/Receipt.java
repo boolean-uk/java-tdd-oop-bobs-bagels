@@ -21,8 +21,11 @@ public class Receipt {
 
 
 
+    //Dont know why but if i return string with this.customer.getTotalCost(customer.getBasket().getItemList()); i get 3.8 using main which is wrong but if i initialize it before passing it in and pass in totalcost, i get 6.3 which is correct ???
     public String printBasket() {
-        return formatDate() + "\n" + formatBasketValues(this.customer.getBasket().getItemList()) + "\n"  + "Total                       " + this.customer.getTotalCost(this.customer.getBasket().getItemList());
+
+        double totalCost = this.customer.getTotalCost(customer.getBasket().getItemList());
+        return formatDate() + "\n" + formatBasketValues(this.customer.getBasket().getItemList()) + "\n"  + "Total                       " + totalCost;
     }
 
     public String formatDate() {

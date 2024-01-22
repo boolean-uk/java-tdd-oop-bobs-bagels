@@ -9,6 +9,7 @@ public class Customer {
     private Basket basket;
     private Map<String, ArrayList<Double>> discounts;
 
+
     public Customer() {
         this.discounts = new HashMap<>();
 
@@ -50,6 +51,8 @@ public class Customer {
                 }
             }
 
+
+            System.out.println("The Cost is: " + cost);
             if(inventory.getCoffees().containsKey(entry.getKey().getSkuCode())) {
                 for(int i = 0; i < entry.getValue(); i++) {
                     restCoffeesList.add(entry.getKey());
@@ -80,8 +83,8 @@ public class Customer {
             } else {
                     cost += restCoffeesList.get(i).getPrice();
                 }
-        }
             }
+        }
 
             cost +=discount12 *3.99;
             cost +=discount6 *2.49;
@@ -95,7 +98,6 @@ public class Customer {
         }
 
     private void addDiscount(String sku, double v) {
-        System.out.println("before add discount" + this.getDiscounts());
         if(this.discounts.get(sku) != null) {
             ArrayList<Double> newList = new ArrayList<>(this.discounts.get(sku));
             newList.add(v);
@@ -105,7 +107,6 @@ public class Customer {
             newList.add(v);
             this.discounts.put(sku, newList);
         }
-        System.out.println("After add discount" + this.getDiscounts());
     }
 
     public double getCostOfItem(Item item) {

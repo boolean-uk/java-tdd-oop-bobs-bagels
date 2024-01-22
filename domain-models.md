@@ -279,7 +279,7 @@ Class Receipt
 |                 | printBasket()                                          | After purchase customer want a receipt printed | void          |
 |                 | String formatDate(Date date)                           | Format date to string for receipt              | String        |
 |                 | String formatBasketValues(Map<Item,Integer> basketMap) | Formats basketMap to string for receipt        | String        |
-|                 | String formatSavings(double savings)                   | Format savings to string for receipt           | String        |
+|                 |                                                        |                                                |               |
 |                 |                                                        |                                                |               |
 
 ``

@@ -220,15 +220,14 @@ public class CustomerTest {
         basket.addItemToBasket(new Coffee("White"));
         basket.addItemToBasket(new Bagel("Plain"));
 
-        System.out.println(new Bagel("plain").getName());
 
         customer.setBasket(basket);
         Receipt receipt = new Receipt(customer);
 
-
+        double totalCost = customer.getTotalCost(basket.getItemList());
         System.out.println(receipt.printBasket());
 
-        Assertions.assertEquals(6.3, customer.getTotalCost(customer.getBasket().getItemList()));
+        Assertions.assertEquals(6.3, totalCost);
 
     }
 
