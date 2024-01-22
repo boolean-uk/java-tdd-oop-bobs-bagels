@@ -39,10 +39,13 @@ public class BasketTest {
         basket.add(bglo); basket.add(bglo); basket.add(bglo); basket.add(bglo); basket.add(bglo); basket.add(bglo); basket.add(bglo); basket.add(bglo);
         basket.add(bglo); basket.add(bglo); basket.add(bglo); basket.add(bglo); basket.add(bglo); basket.add(bglo); basket.add(bglo); basket.add(bglo);
 
+        HashMap<Item, double[]> mapPriceAndSavings = basket.discountPerItem();
         // Originally 16 Onion bagels = 7.84, new price 5.95, savings = 1.89
-        Assertions.assertEquals(5.95, basket.totalCostWithDiscount());
+        Assertions.assertEquals(5.95, basket.totalCostWithDiscount(mapPriceAndSavings));
+
 
         Basket basket2 = new Basket(shop, 3);
-        Assertions.assertEquals(0.0, basket2.totalCostWithDiscount());
+        HashMap<Item, double[]> mapPriceAndSavings2 = basket2.discountPerItem();
+        Assertions.assertEquals(0.0, basket2.totalCostWithDiscount(mapPriceAndSavings2));
     }
 }
