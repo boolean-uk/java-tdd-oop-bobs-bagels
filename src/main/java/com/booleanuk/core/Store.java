@@ -83,9 +83,10 @@ public class Store {
                 for (Item containedItem : item.getContainedItems()) {
                     if (!quantities.containsKey(containedItem)) {
                         quantities.put(containedItem, 1);
-                        prices.put(containedItem, 0.0);
+                        prices.put(containedItem, getCostOfItem(containedItem));
                     } else {
                         quantities.put(containedItem, quantities.get(containedItem) + 1);
+                        prices.put(containedItem, prices.get(containedItem)+getCostOfItem(containedItem));
                     }
                 }
             }
@@ -115,11 +116,8 @@ public class Store {
 
         for(ArrayList<Item> comboItems: inventory.getComboDiscounts().keySet()) {
             int comboPrice = 0;
-            System.out.println("jejj "+comboItems);
-            System.out.println("ok  "+notInBundles);
 
             while(inventory.containsComboItems(notInBundles, comboItems)) {
-                System.out.println(comboItems);
                 comboPrice += inventory.getComboDiscounts().get(comboItems);
                 for(Item comboItem: comboItems) {
                     notInBundles.remove(comboItem);

@@ -1,13 +1,12 @@
 package com.booleanuk.extension;
 
-import com.booleanuk.core.Bagel;
-import com.booleanuk.core.Coffee;
-import com.booleanuk.core.Store;
-import com.booleanuk.core.Receipt;
+import com.booleanuk.core.*;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.LinkedHashMap;
 
@@ -121,5 +120,54 @@ public class ExtensionTwoTest {
     }
 
 
-    //TODO: add test with fillings
+    @Test
+    public void createReceiptForSeveralProductsOfDifferentKindsWithFillingsTest() {
+
+        Store store = new Store();
+        store.updateBasketCapacity(100);
+        int basketId = store.createBasket();
+
+        for(int i=0; i < 2; i++) {
+            store.addItemToBasket(new Bagel("ONION", new ArrayList<>(Arrays.asList(new Filling("ham"), new Filling("egg")))), basketId);
+        }
+        for(int i=0; i < 12; i++) {
+            store.addItemToBasket(new Bagel("plain"), basketId);
+        }
+        for(int i=0; i < 6; i++) {
+            store.addItemToBasket(new Bagel("everything"), basketId);
+        }
+        for(int i=0; i < 3; i++) {
+            store.addItemToBasket(new Coffee("blaCk"), basketId);
+        }
+
+        Receipt receipt = store.createReceipt(basketId);
+        Date date = new Date();
+        int width = 28;
+        String dateFormatted = new SimpleDateFormat("dd-MM-yyyy").format(date) + " " + new SimpleDateFormat("H:mm:ss").format(date);
+        dateFormatted = " ".repeat((width-dateFormatted.length())/2)+dateFormatted;
+        String expected =
+                " ".repeat(4)+"~~~ Bob's Bagels ~~~" +
+                        "\n\n" +
+                        dateFormatted+
+                        "\n" +
+                        "\n----------------------------" +
+                        "\n" +
+                        "\nHam Filling        2   \u00A30.24" +
+                        "\nEgg Filling        2   \u00A30.24" +
+                        "\nPlain Bagel        12  \u00A33.99" +
+                        "\nEverything Bagel   6   \u00A32.49" +
+                        "\nBlack Coffee       3   \u00A33.99" +
+                        "\nOnion Bagel        2   \u00A30.00" +
+                        "\n" +
+                        "\n----------------------------" +
+                        "\nTotal                 \u00A3" + (store.getCostOfBasket(basketId)*100)/100+
+                        "\n" +
+                        "\n         Thank you" +
+                        "\n      for your order!";
+
+        Assertions.assertEquals(expected, receipt.toString());
+
+    }
+
+    //TODO: fix so filling is after the bagel its on?
 }
