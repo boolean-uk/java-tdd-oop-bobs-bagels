@@ -1,12 +1,15 @@
 package com.booleanuk.core;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Basket {
 
     private ArrayList<Inventory> basketList;
     private ArrayList<Inventory> inventoryList;
     private ArrayList<Bagel> bagelList;
+
     private int basketSize = 5;
 
     public Basket() {

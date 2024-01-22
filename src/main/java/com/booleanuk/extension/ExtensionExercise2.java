@@ -1,12 +1,10 @@
 package com.booleanuk.extension;
 
+import com.booleanuk.core.Basket;
 import com.booleanuk.core.Inventory;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 public class ExtensionExercise2 {
 
@@ -32,8 +30,12 @@ public class ExtensionExercise2 {
           for your order!
     */
     private ArrayList<Inventory> inventoryList;
+
+    private Map<Inventory, Integer> inventoryMap;
+
     public ExtensionExercise2() {
         inventoryList = new ArrayList<>();
+        inventoryMap = new HashMap<>();
         inventoryList.add(new Inventory("BGLO", 0.49, "Bagel", "Onion"));
         inventoryList.add(new Inventory("BGLP", 0.39, "Bagel", "Plain"));
         inventoryList.add(new Inventory("BGLE", 0.49, "Bagel", "Everything"));
@@ -54,16 +56,23 @@ public class ExtensionExercise2 {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
         String receipt = "    ~~~ Bob's Bagels ~~~    \n"
-                       + "   " + dateFormat.format(new Date()) + "   \n"
-                       + "----------------------------\n\n";
+                + "   " + dateFormat.format(new Date()) + "   \n"
+                + "----------------------------\n\n";
 
         double total = 0.0;
-        int quantity = 0;
+        int quantity;
 
-        for(Inventory item : inventoryList) {
-            quantity = 1;
-            double price = item.getPrice() * quantity;
-            total += price;
+        //For each loop reference: https://stackoverflow.com/questions/1066589/iterate-through-a-hashmap
+        for (Map.Entry<Inventory, Integer> entry : inventoryMap.entrySet()) { //Loops through each entry in the hashmap
+            Inventory item = entry.getKey(); //Gets the key from the entry
+
+            quantity = entry.getValue(); //Gets the value from the entry
+
+            double price = item.getPrice() * quantity; //Gets the price of the entry's item (item.getPrice()) and
+                                                        // multiplies it by its quantity to get the total price for
+                                                        // that items entry
+
+            total += price; //Adds the total price for each items entry (price variable) to the total price for all items
             receipt += item.getVariant() + " " + item.getName() + "     " + quantity + " £" + price + "     \n";
         }
 
@@ -82,5 +91,16 @@ public class ExtensionExercise2 {
 
     public void setInventoryList(ArrayList<Inventory> inventoryList) {
         this.inventoryList = inventoryList;
+    }
+
+    //Extension 2
+    // The method below adds a new item to the hashmap, and after sets the default quantity to 0 if the item
+    // doesn't already exist in the hashmap, if it does, it increments its quantity.
+    public void addItem(Inventory item, int quantity) {
+        inventoryMap.put(item, inventoryMap.getOrDefault(item, 0) + quantity);
+    }
+
+    public Map<Inventory, Integer> getInventoryMap() {
+        return inventoryMap;
     }
 }
