@@ -95,7 +95,6 @@ public class Inventory {
     }
 
 
-    //TODO: generalize?
     public double getCostForBundle(Item item, int quantity) {
         String sku = skuCodes.get(item);
         double cost = 0;

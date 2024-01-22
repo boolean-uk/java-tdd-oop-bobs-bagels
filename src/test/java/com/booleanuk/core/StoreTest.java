@@ -60,25 +60,6 @@ public class StoreTest {
         Assertions.assertEquals("Bob's Bagels doesn't have Lettuce Filling.", actual);
     }
 
-    //TODO: remove?
-//    @Test
-//    public void addFillingThatAllGivenBagelsAlreadyHaveTest() {
-//        Store store = new Store();
-//        int basketId = store.createBasket();
-//        Bagel bagel = new Bagel("Onion");
-//
-//        store.addItemToBasket(new Bagel("Onion"), basketId);
-//        store.addItemToBasket(new Bagel("Onion"), basketId);
-//
-//        store.addFillingToBagelInBasket("Cheese", "Onion", basketId);
-//        store.addFillingToBagelInBasket("Cheese", "Onion", basketId);
-//        store.addFillingToBagelInBasket("Egg", "Onion", basketId);
-//
-//        String actual = store.addFillingToBagelInBasket("Cheese", "Onion", basketId);
-//
-//        Assertions.assertEquals("All bagels of that kind in your basket already has that filling.", actual);
-//    }
-
     @Test
     public void updateBasketCapacityToValid() {
         Store store = new Store();

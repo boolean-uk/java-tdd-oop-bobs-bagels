@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-//TODO: check upper vs lowercase
 public class Store {
     private HashMap<Integer, Basket> baskets;
     private Inventory inventory;
