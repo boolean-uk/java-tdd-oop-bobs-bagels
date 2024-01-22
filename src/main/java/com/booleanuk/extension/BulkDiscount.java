@@ -1,6 +1,6 @@
 package com.booleanuk.extension;
 
-public class BulkDiscount {
+public class BulkDiscount implements Discount{
     private String sku;
     private int number;
     private double price;
