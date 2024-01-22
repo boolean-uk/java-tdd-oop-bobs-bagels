@@ -138,3 +138,37 @@ I would also like the time of the purchase, so that I can trace the transaction,
 |         |           | int amount  | If no items are added         | return empty receipt |
 |         |           |             |                               |                      |
 
+#EXTENSION 1
+
+12. As a customer, i would like some sort of discount when buying multiple items from Bob's Bagels. This could mean meal deals.. or any kind of
+discount where i would get rewarded for adding multiple things in my basket.
+#### Example orders
+```
+2x BGLO  = 0.98
+12x BGLP = 3.99
+6x BGLE  = 2.49
+3x COF   = 2.97
+           ----
+          10.43
+```
+
+```
+16x BGLP = 5.55
+           ----
+           5.55
+```
+| SKU  | Name   | Variant    | Price | Special offers          |
+|------|--------|------------|-------|-------------------------|
+| BGLO | Bagel  | Onion      | .49   | 6 for 2.49              |
+| BGLP | Bagel  | Plain      | .39   | 12 for 3.99             |
+| BGLE | Bagel  | Everything | .49   | 6 for 2.49              |
+| COFB | Coffee | Black      | .99   | Coffee & Bagel for 1.25 |
+
+Every Bagel is available for the `6 for 2.49` and `12 for 3.99` offer, but fillings still cost the extra amount per bagel.
+
+| Classes | Methods   | Members     | Scenario                      | Output               |
+|---------|-----------|-------------|-------------------------------|----------------------|
+| Order   | receipt() | String time | If items are added beforehand | return receipt       |
+|         |           | int amount  | If no items are added         | return empty receipt |
+|         |           |             |                               |                      |
+

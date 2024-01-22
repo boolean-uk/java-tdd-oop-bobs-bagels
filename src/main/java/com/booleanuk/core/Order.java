@@ -191,35 +191,40 @@ public class Order {
 
         Set<String> printedItems = new HashSet<>();
 
-        for (Inventory item : basketList) {
-            String itemName = item.getName();
-            String itemType = item.getItemType();
-
-            if (!printedItems.contains(itemName)) {
-                int itemCount = getCount(itemName);
-                double itemTotal = itemCount * item.getPrice();
-
-                receipt.append(String.format("%-10s", itemType));
-
-                receipt.append(String.format("%-15s", itemName));
+        if (basketList.size() > 1) {
 
 
-                receipt.append(String.format("%-4d", itemCount));
+            for (Inventory item : basketList) {
+                String itemName = item.getName();
+                String itemType = item.getItemType();
 
-                receipt.append(String.format("£%.2f", itemTotal));
+                if (!printedItems.contains(itemName)) {
+                    int itemCount = getCount(itemName);
+                    double itemTotal = itemCount * item.getPrice();
 
-                receipt.append("\n");
+                    receipt.append(String.format("%-10s", itemType));
+
+                    receipt.append(String.format("%-15s", itemName));
 
 
-                printedItems.add(itemName);
+                    receipt.append(String.format("%-4d", itemCount));
+
+                    receipt.append(String.format("£%.2f", itemTotal));
+
+                    receipt.append("\n");
+
+
+                    printedItems.add(itemName);
+                }
             }
+
+            receipt.append("----------------------------\n");
+            receipt.append(String.format("%-20s£%.2f\n\n", "Total:", totalCost()));
+            receipt.append("        Thank you\n      for your order!");
+
+            return receipt.toString();
         }
-
-        receipt.append("----------------------------\n");
-        receipt.append(String.format("%-20s£%.2f\n\n", "Total:", totalCost()));
-        receipt.append("        Thank you\n      for your order!");
-
-        return receipt.toString();
+        return "Nothing added.";
     }
 
 

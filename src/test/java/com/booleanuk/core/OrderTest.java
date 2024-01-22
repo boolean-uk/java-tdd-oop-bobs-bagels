@@ -262,6 +262,18 @@ public class OrderTest {
     }
 
 
+    @Test
+    public void testGetReceiptWithNoItems() throws ParseException {
+        // Use a fixed date and time for the test
+
+
+        Order basket1 = new Order();
+        String result = basket1.receipt();
+
+        // Assert against the fixed date and time
+        Assertions.assertEquals("Nothing added.", result);
+    }
+
 
 
 }
