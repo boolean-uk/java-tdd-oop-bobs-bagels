@@ -170,16 +170,40 @@ class BobsBagelsTest {
     @Test
     public void testReceiptExistsAndCharacters() {
         Basket basket = new Basket();
-        Order order = new Order();
+        Inventory inventory = new Inventory();
+        Order order = new Order(inventory);
+
+        basket.changeBasketCapacity(6);
 
         basket.addItem("BGLP");
-        basket.addItem("BGLS");
+        basket.addItem("BGLP");
         basket.addItem("COFB");
         basket.addItem("FILB");
-        String receipt = order.generateReceipt(basket.getItemList());
+        basket.addItem("FILB");
+        basket.addItem("BGLP");
+        basket.addItem("BGLP");
+        basket.addItem("COFB");
+        basket.addItem("FILB");
+        basket.addItem("FILB");
 
+        String receipt = order.generateReceipt(basket.getItemList());
+//        System.out.println(receipt);
         Assertions.assertNotNull(receipt);
         Assertions.assertTrue(receipt.length() > 50);
+
+    }
+
+    @Test
+    public void testReiceptNoItems() {
+        Basket basket = new Basket();
+        Inventory inventory = new Inventory();
+        Order order = new Order(inventory);
+
+        String receipt = order.generateReceipt(basket.getItemList());
+        System.out.println(receipt);
+
+        Assertions.assertNotNull(receipt);
+        Assertions.assertFalse(receipt.length() < 100);
 
     }
 }
