@@ -39,7 +39,7 @@ public class BasketTest {
         basket.addItem("COFB");
 
         Assertions.assertEquals(3, basket.basketList.size());
-        Assertions.assertTrue(basket.remove("BGLP"));
+        Assertions.assertTrue(basket.removeItem("BGLP"));
         Assertions.assertEquals(2, basket.basketList.size());
     }
     @Test
@@ -50,7 +50,7 @@ public class BasketTest {
         basket.addItem("COFB");
 
         Assertions.assertEquals(3, basket.basketList.size());
-        Assertions.assertFalse(basket.remove("Carrot"));
+        Assertions.assertFalse(basket.removeItem("Carrot"));
         Assertions.assertEquals(3, basket.basketList.size());
 
     }
@@ -77,6 +77,13 @@ public class BasketTest {
         basket.addItem("COFB");
         Assertions.assertEquals(2,basket.basketList.size());
 
+    }
+
+    @Test
+    public void testCapacityBeforeAdd() {
+        Basket basket = new Basket();
+        basket.changeCapacity(5);
+        Assertions.assertEquals(5,basket.capacity);
     }
 
     @Test
@@ -126,5 +133,41 @@ public class BasketTest {
         basket.addFilling("BGLO","FILX");
         basket.addFilling("BGLP","FILX");
         Assertions.assertEquals("[BGLO, FILE, FILX, FILC, BGLP, FILX, COFB]",basket.addFilling("BGLO", "FILE"));
+    }
+
+    @Test
+    public void testDiscount() {
+        Basket basket = new Basket ();
+        basket.changeCapacity(25);
+        basket.addItem("BGLO");
+        basket.addItem("BGLO");
+
+        basket.addItem("BGLP");
+        basket.addItem("BGLP");
+        basket.addItem("BGLP");
+        basket.addItem("BGLP");
+        basket.addItem("BGLP");
+        basket.addItem("BGLP");
+        basket.addItem("BGLP");
+        basket.addItem("BGLP");
+        basket.addItem("BGLP");
+        basket.addItem("BGLP");
+        basket.addItem("BGLP");
+        basket.addItem("BGLP");
+
+        basket.addItem("BGLE");
+        basket.addItem("BGLE");
+        basket.addItem("BGLE");
+        basket.addItem("BGLE");
+        basket.addItem("BGLE");
+        basket.addItem("BGLE");
+
+        basket.addItem("COFB");
+        basket.addItem("COFB");
+        basket.addItem("COFB");
+
+        Assertions.assertEquals(9.97,basket.discount());
+
+
     }
 }
