@@ -56,5 +56,26 @@ public class ReceiptTest {
 
     }
 
+    @Test
+    public void testDiscountPrintCoffeeBagelDeal() {
+        Customer customer = new Customer();
 
+        Basket basket = new Basket(5);
+        customer.setBasket(basket);
+        Receipt receipt = new Receipt(customer);
+
+        basket.addItemToBasket(new Bagel("Plain"));
+        basket.addItemToBasket(new Bagel("Plain"));
+        basket.addItemToBasket(new Bagel("Plain"));
+        basket.addItemToBasket(new Coffee("Black"));
+        basket.addItemToBasket(new Coffee("Black"));
+        basket.addItemToBasket(new Coffee("Black"));
+
+
+
+
+        Assertions.assertEquals("     " + new SimpleDateFormat("dd-MM-yyyy : HH-mm-ss").format(new Date()), receipt.formatDate());
+        Assertions.assertEquals("Item              Qty      Price\n" + "--------------------------------\n" + "CoffeeBagelDeal         3       3.75\n" + "                         (-0.39)\n" + "--------------------------------", receipt.formatBasketValues(basket.getItemList()));
+
+    }
 }

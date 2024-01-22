@@ -37,6 +37,7 @@ public class Receipt {
         Map<String, ArrayList<Double>> discounts = customer.getDiscounts();
 
 
+
         ArrayList<Item> listOfItems = new ArrayList<>(basketMap.keySet());
         listOfItems.sort(new Comparator<Item>() {
             @Override
@@ -61,8 +62,6 @@ public class Receipt {
                 discountCorrect = Double.parseDouble(String.valueOf(discountRounded));
             }
 
-
-
             returnString += String.format("%-15s %5d %10.2f", item.getVariant() + " " + item.getName(),basketMap.get(item), (basketMap.get(item) * item.getPrice() - discountCorrect));
 
             for(String str: discounts.keySet()) {
@@ -83,7 +82,10 @@ public class Receipt {
 
         }
 
+
         returnString += "--------------------------------";
+
+
 
         return returnString;
     }
@@ -105,6 +107,8 @@ public class Receipt {
         basket.addItemToBasket(new Bagel("Plain"));
         basket.addItemToBasket(new Bagel("Plain"));
         basket.addItemToBasket(new Filling("Bacon"));
+        basket.addItemToBasket(new Coffee("White"));
+        basket.addItemToBasket(new Coffee("White"));
         basket.addItemToBasket(new Coffee("White"));
 
         System.out.println(new Bagel("plain").getName());
