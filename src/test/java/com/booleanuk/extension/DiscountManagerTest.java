@@ -14,7 +14,15 @@ public class DiscountManagerTest {
     static Store store;
     static Basket basket;
 
-    public static void setupBasketWithDiscounts() {
+    @BeforeEach
+    public void resetTests() throws FileNotFoundException, URISyntaxException {
+        store = new Store("Bob's Bagels");
+        basket = new Basket(40);
+    }
+
+    @Test
+    public void doesCalculateTheCorrectDiscount() throws FileNotFoundException, URISyntaxException {
+        // EXTENSION 1 - Example 1
         Item bagelOnion = store.getItemBySKU("BGLO");
         basket.addItem(bagelOnion);
         basket.addItem(bagelOnion);
@@ -30,42 +38,14 @@ public class DiscountManagerTest {
         basket.addItem(coffeeBlack);
         basket.addItem(coffeeBlack);
         basket.addItem(coffeeBlack);
-    }
 
-    @BeforeEach
-    public void resetTests() throws FileNotFoundException, URISyntaxException {
-        store = new Store("Bob's Bagels");
-        basket = new Basket(40);
-    }
-
-    @Test
-    public void doesCalculateTheCorrectDiscount() throws FileNotFoundException, URISyntaxException {
-        // EXTENTION 1 - Example 1
-        setupBasketWithDiscounts();
         Assertions.assertEquals(1.14, DiscountManager.calculateBasketBagelDiscounts(basket), 0.01);
         Assertions.assertEquals(10.43, basket.getTotalCost(),  0.01);
     }
 
     @Test
-    public void doesPrintReceiptWithDiscounts() throws FileNotFoundException, URISyntaxException {
-        // EXTENTION 1 - Example 1
-        setupBasketWithDiscounts();
-        ReceiptPrinter receiptPrinter = new ReceiptPrinter(store, basket);
-        String printedReceipt = receiptPrinter.print();
-        // System.out.println(printedReceipt);
-
-        Assertions.assertTrue(printedReceipt.contains("Bob's Bagels"));
-        Assertions.assertTrue(printedReceipt.contains("Total"));
-        Assertions.assertTrue(printedReceipt.contains("Thank you"));
-
-        Assertions.assertTrue(printedReceipt.contains("Plain\t\t\t12"));
-        Assertions.assertTrue(printedReceipt.contains("Discount\t\t"));
-        Assertions.assertTrue(printedReceipt.contains("You saved £"));
-    }
-
-    @Test
     public void testOneBagelHasMultipleDiscounts() throws FileNotFoundException, URISyntaxException {
-        // EXTENTION 1 - Example 2
+        // EXTENSION 1 - Example 2
         Item bagelEverything = store.getItemBySKU("BGLP");
         for (int i = 0; i < 16; i++) {
             basket.addItem(bagelEverything);

@@ -47,6 +47,7 @@ public class Basket {
                 }
             }
         }
+
         double discount;
         try {
             discount = DiscountManager.calculateBasketBagelDiscounts(this);

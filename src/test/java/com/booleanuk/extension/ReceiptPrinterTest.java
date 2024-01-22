@@ -1,6 +1,7 @@
 package com.booleanuk.extension;
 
 import com.booleanuk.core.Basket;
+import com.booleanuk.core.Item;
 import com.booleanuk.core.Store;
 import com.booleanuk.core.items.Bagel;
 import com.booleanuk.core.items.Filling;
@@ -47,5 +48,28 @@ public class ReceiptPrinterTest {
         Assertions.assertTrue(printedReceipt.contains("Sesame"));
 
         Assertions.assertTrue(printedReceipt.contains("£3.19"));
+    }
+
+    @Test
+    public void doesPrintReceiptWithDiscounts() throws FileNotFoundException, URISyntaxException {
+        Store store = new Store("Bob's Bagels");
+        Basket basket = new Basket();
+
+        Item bagelEverything = store.getItemBySKU("BGLP");
+        for (int i = 0; i < 16; i++) {
+            basket.addItem(bagelEverything);
+        }
+
+        ReceiptPrinter receiptPrinter = new ReceiptPrinter(store, basket);
+        String printedReceipt = receiptPrinter.print();
+        // System.out.println(printedReceipt);
+
+        Assertions.assertTrue(printedReceipt.contains("Bob's Bagels"));
+        Assertions.assertTrue(printedReceipt.contains("Total"));
+        Assertions.assertTrue(printedReceipt.contains("Thank you"));
+
+        Assertions.assertTrue(printedReceipt.contains("Plain\t\t\t12"));
+        Assertions.assertTrue(printedReceipt.contains("Discount\t\t"));
+        Assertions.assertTrue(printedReceipt.contains("You saved £"));
     }
 }
