@@ -10,7 +10,6 @@ public class Basket {
     private final List<Product> inventory;
     private final List<Product> fillings;
 
-    private double total;
     private int capacity;
 
 
@@ -28,7 +27,6 @@ public class Basket {
     public Basket(Inventory inv){
         this.inventory = inv.getProducts();
         this.basket = setBasket();
-        this.total = setTotal();
         this.capacity = setCapacity();
         this.fillings = new ArrayList<>();
         getFillings();
@@ -98,9 +96,6 @@ public class Basket {
         this.capacity = capacity;
     }
 
-    public double setTotal(){
-        return 0;
-    }
     public double getTotal(){
         double total = 0;
         for (Product product : this.basket) {
