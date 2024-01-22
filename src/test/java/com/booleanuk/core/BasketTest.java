@@ -4,6 +4,8 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 public class BasketTest {
     @Test /* User story 1 */
@@ -239,7 +241,7 @@ public class BasketTest {
         testBasket.addItem(plain);
         Assertions.assertTrue(testBasket.addBagelFilling(plain, bacon));
 
-        ArrayList<String> expectedFillingsInBagel = new ArrayList<>();
+        Set<String> expectedFillingsInBagel = new HashSet<>();
         expectedFillingsInBagel.add(bacon.getName());
 
         Assertions.assertEquals(expectedFillingsInBagel, plain.getFillings());
@@ -263,7 +265,7 @@ public class BasketTest {
 
         Assertions.assertTrue(testBasket.addBagelFilling(plain, cheese));
 
-        ArrayList<String> expectedFillingsInPlainBagel = new ArrayList<>();
+        Set<String> expectedFillingsInPlainBagel = new HashSet<>();
         expectedFillingsInPlainBagel.add(bacon.getName());
         expectedFillingsInPlainBagel.add(cheese.getName());
 
