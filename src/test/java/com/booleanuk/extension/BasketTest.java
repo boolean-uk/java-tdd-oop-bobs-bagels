@@ -209,4 +209,49 @@ class BasketTest {
         //more than 12-discount
         Assertions.assertEquals(3.99+0.24+0.39, basket.getCostOfBasket());
     }
+
+    @Test
+    public void testEighteenDiscountForBagels (){
+        Basket basket = new Basket();
+        Basket.setMaxSize(100);
+        Bagel bagelplain = new  Bagel("BGLP", 0.39, "Plain");
+        Bagel bagelWithFilling = new  Bagel("BGLP", 0.39, "Plain");
+
+        Filling filling1 = new  Filling("FILB", 0.12, "Bacon");
+        Filling filling2 = new  Filling("FILE", 0.12, "Egg");
+
+        ArrayList<Filling> fillings = new ArrayList<>();
+        fillings.add(filling1);
+        fillings.add(filling2);
+
+        bagelWithFilling.addFillings(fillings);
+
+        //exactly 18-discount
+        basket.add(bagelWithFilling);
+        basket.add(bagelplain);
+        basket.add(bagelplain);
+        basket.add(bagelplain);
+        basket.add(bagelplain);
+        basket.add(bagelplain);
+        basket.add(bagelplain);
+        basket.add(bagelplain);
+        basket.add(bagelplain);
+        basket.add(bagelplain);
+        basket.add(bagelplain);
+        basket.add(bagelplain);
+        basket.add(bagelplain);
+        basket.add(bagelplain);
+        basket.add(bagelplain);
+        basket.add(bagelplain);
+        basket.add(bagelplain);
+        basket.add(bagelplain);
+
+        //more than 12-discount
+        Assertions.assertEquals(3.99+2.49+0.24, basket.getCostOfBasket());
+
+        basket.add(bagelplain);
+
+        //more than 18-discount
+        Assertions.assertEquals(3.99+2.49+0.24+0.39, basket.getCostOfBasket());
+    }
 }

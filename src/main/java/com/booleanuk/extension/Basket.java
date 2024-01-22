@@ -87,19 +87,6 @@ public class Basket {
         return totalPrice;
     }
 
-    public double getCostOfProduct(Product product){
-        double price = 0;
-        if (product.getName().equals("Bagel")){
-            price = product.getPrice();
-            for(Filling filling : product.getFillings()){
-                price += filling.getPrice();
-            }
-        }else {
-            price = product.getPrice();
-        }
-        return price;
-    }
-
     private ArrayList<Product> calculateDiscounts(ArrayList<Product> temporaryProducts){
 
         //Initilise map for keeping track of qantity of each product
@@ -126,9 +113,9 @@ public class Basket {
             if(id.contains("BGL")){
                 int amount = qtyMap.get(id);
                 while (amount>= 12){
-                   amount -= 12;
-                   totalPrice += 3.99;
-                   removeMap.put(id, 12);                 }
+                    amount -= 12;
+                    totalPrice += 3.99;
+                    removeMap.put(id, 12);                 }
                 while (amount >= 6){
                     amount -= 6;
                     totalPrice += 2.49;
@@ -152,6 +139,18 @@ public class Basket {
         return temporaryProducts;
     }
 
+    public double getCostOfProduct(Product product){
+        double price = 0;
+        if (product.getName().equals("Bagel")){
+            price = product.getPrice();
+            for(Filling filling : product.getFillings()){
+                price += filling.getPrice();
+            }
+        }else {
+            price = product.getPrice();
+        }
+        return price;
+    }
 
     protected void clearBasket(){
         this.products.clear();
