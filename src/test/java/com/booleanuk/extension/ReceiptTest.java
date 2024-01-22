@@ -47,4 +47,14 @@ public class ReceiptTest {
         Assertions.assertEquals(1.47, receipt.calculateTotalItemCost(basket,bagel));
         Assertions.assertEquals(0.99, receipt.calculateTotalItemCost(basket,coffee));
     }
+    @Test
+    public void testRecieptGenerator(){
+        Receipt receipt = new Receipt();
+        basket.addItem(bagel);
+        basket.addItem(bagel);
+        basket.addItem(coffee);
+        basket.addItem(filling);
+        basket.addItem(filling);
+        System.out.println(receipt.generateReceipt(basket));
+    }
 }

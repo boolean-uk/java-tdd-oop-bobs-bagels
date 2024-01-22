@@ -2,16 +2,42 @@ package com.booleanuk.extension;
 
 import com.booleanuk.core.*;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
-import java.util.Scanner;
+import java.util.List;
 
-public class Reciept {
-    Inventory inventory;
-    Basket basket;
-    public Reciept(){
-        this.inventory = new Inventory();
-        basket = new Basket(inventory,8);
-        /*
+public class Receipt{
+    private Basket basket;
+    public Receipt(){
+        this.basket = new Basket(new Inventory(),6);
+    }
+
+    public int calculateItemQuantity(Basket basket, Product item){
+        int itemCounter = 0;
+        for (int i = 0; i < basket.getItemBasket().size(); i++){
+            if (basket.getItemBasket().get(i) == item){
+                itemCounter++;
+            }
+        }
+        return itemCounter;
+    }
+
+    public double calculateTotalItemCost(Basket basket, Product item){
+        double price = 0;
+        for (int i = 0; i < basket.getItemBasket().size(); i++){
+            if (basket.getItemBasket().get(i) == item){
+                price += item.getPrice();
+            }
+        }
+        return price;
+    }
+
+
+}
+
+/*
+Menu:
         Product onion = new Product("Bagel","BGLO","Onion",0.49);
         Product plain = new Product("Bagel","BGLP","Plain",0.39);
         Product everything = new Product("Bagel","BGLE","Everything",0.49);
@@ -40,37 +66,4 @@ public class Reciept {
         inventory.addToMenu(creamCheese, 25);
         inventory.addToMenu(smokedSalmon, 15);
         inventory.addToMenu(ham, 40);
-
          */
-    }
-
-    public int countItem(Product item){
-        int amountPerItem = 0;
-        for (int i = 0; i < basket.getItemBasket().size(); i++){
-            if (basket.getItemBasket().equals(item)){
-                amountPerItem++;
-            }
-        }
-        return amountPerItem;
-    }
-
-    public String itemizedReciept(Basket basket){
-        StringBuilder currentBasket = new StringBuilder();
-        Date today = new Date();
-        currentBasket.append("    ~~~ Bob's Bagels ~~~    \n").append("\n")
-                .append(today).append("\n").append("\n").append("----------------------------\n")
-                .append("\n");
-        for (Product item: basket.getItemBasket()){
-            currentBasket.append(item.getVariant()).append(" ").append(item.getType())
-                    .append("       ").append(item.getVariant()).append(countItem(item)).append("  ").append("£")
-                    .append(item.getPrice())
-                    .append(item.getPrice()).append("\n");
-        }
-        return currentBasket.toString();
-    }
-
-    public static void main(String[] args){
-        Reciept reciept = new Reciept();
-        System.out.println(reciept.itemizedReciept(reciept.basket));
-    }
-}
