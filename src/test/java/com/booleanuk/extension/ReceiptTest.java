@@ -27,10 +27,9 @@ public class ReceiptTest {
 
 
 
-        //The test works sometimes and sometimes not, the reason being that getting items from map is somewhat random.
 
         Assertions.assertEquals("     " + new SimpleDateFormat("dd-MM-yyyy : HH-mm-ss").format(new Date()), receipt.formatDate());
-        Assertions.assertEquals("Item              Qty      Price\n" + "--------------------------------\n" + "Plain Bagel         3       1.17\n" + "Bacon Filling       1       0.12\n" + "White Coffee        1       1.19\n" + "--------------------------------", receipt.formatBasketValues(basket.getItemList()));
+        Assertions.assertEquals("Item              Qty      Price\n" + "--------------------------------\n" + "Plain Bagel         3       1.17\n" + "White Coffee        1       1.19\n" + "Bacon Filling       1       0.12\n" + "--------------------------------", receipt.formatBasketValues(basket.getItemList()));
 
     }
 }

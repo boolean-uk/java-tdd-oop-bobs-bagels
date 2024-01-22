@@ -3,6 +3,8 @@ package com.booleanuk.extension;
 import com.booleanuk.core.*;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.Map;
 
@@ -28,16 +30,22 @@ public class Receipt {
 
     public String formatBasketValues(Map<Item, Integer> basketMap) {
 
-
+        ArrayList<Item> listOfItems = new ArrayList<>(basketMap.keySet());
+        listOfItems.sort(new Comparator<Item>() {
+            @Override
+            public int compare(Item o1, Item o2) {
+                return o1.getName().compareTo(o2.getName());
+            }
+        });
 
         String returnString = String.format("%-15s %5s %10s", "Item", "Qty", "Price");
 
         returnString += "\n--------------------------------\n";
 
-        for(Map.Entry<Item, Integer> entry : basketMap.entrySet()) {
-
-            returnString += String.format("%-15s %5d %10.2f", entry.getKey().getVariant() + " " + entry.getKey().getName(),entry.getValue(), (entry.getValue() * entry.getKey().getPrice()));
+        for(Item item : listOfItems) {
+            returnString += String.format("%-15s %5d %10.2f", item.getVariant() + " " + item.getName(),basketMap.get(item), (basketMap.get(item) * item.getPrice()));
             returnString += "\n";
+
         }
 
         returnString += "--------------------------------";
