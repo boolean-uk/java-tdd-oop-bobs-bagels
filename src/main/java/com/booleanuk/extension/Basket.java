@@ -81,7 +81,7 @@ public class Basket {
         ArrayList<Product> restOfProducts = calculateDiscounts(temporaryProducts);
 
         for (Product product : restOfProducts){
-            totalPrice += getCostOfProduct(product);
+            totalPrice += product.getPrice();
         }
 
         return totalPrice;
@@ -119,7 +119,12 @@ public class Basket {
                 while (amount >= 6){
                     amount -= 6;
                     totalPrice += 2.49;
-                    removeMap.put(id, 6);
+                    if(removeMap.containsKey(id)){
+                        removeMap.put(id, removeMap.get(id) + 6);
+                    }else{
+                        removeMap.put(id, 6);
+                    }
+
                 }
             }
         }
