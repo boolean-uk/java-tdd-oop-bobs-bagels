@@ -94,12 +94,10 @@ public class Inventory {
 
     }
 
-    public double getCostForBundle(Item item, int quantity) {
-        return getCostForBundle(skuCodes.get(item), quantity);
-    }
 
     //TODO: generalize?
-    public double getCostForBundle(String sku, int quantity) {
+    public double getCostForBundle(Item item, int quantity) {
+        String sku = skuCodes.get(item);
         double cost = 0;
 
         for(Discount discount: bundleDiscounts.get(sku)) {
@@ -113,11 +111,7 @@ public class Inventory {
     }
 
     public int getRemainderAfterBundle(Item item, int quantity) {
-        return getRemainderAfterBundle(skuCodes.get(item), quantity);
-    }
-
-    public int getRemainderAfterBundle(String sku, int quantity) {
-
+        String sku = skuCodes.get(item);
         for(Discount discount: bundleDiscounts.get(sku)) {
             while(quantity-discount.getQuantity() >= 0) {
                 quantity -= discount.getQuantity();
@@ -125,20 +119,6 @@ public class Inventory {
         }
 
         return quantity;
-    }
-
-    public double getCostForCombo(String sku, int quantity) {
-        double cost = 0;
-
-        for(Discount discount: bundleDiscounts.get(sku)) {
-            while(quantity-discount.getQuantity() >= 0) {
-                cost += discount.getCost();
-                quantity -= discount.getQuantity();
-            }
-        }
-
-        cost += prices.get(sku)*quantity;
-        return cost;
     }
 
     private void initializePrices() {
@@ -210,7 +190,7 @@ public class Inventory {
 
     }
 
-    public boolean hasBundleDiscount(Item item) {
+    public boolean hasBundleDiscountForItem(Item item) {
         return bundleDiscounts.containsKey(skuCodes.get(item));
     }
 //
@@ -226,5 +206,4 @@ public class Inventory {
     public HashMap<ArrayList<Item>, Double> getComboDiscounts() {
         return new HashMap<>(comboDiscounts);
     }
-
 }

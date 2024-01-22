@@ -72,3 +72,13 @@ Receipt
 | double totalCost                          |
 | String storeName                          |
 | int width                                 |
+
+
+Discount
+
+| Members      |
+|--------------|
+| Double cost  |
+| int quantity |
+
+
