@@ -13,21 +13,23 @@ public class Basket {
     private ArrayList<Item> items;
     private int quantity;
 
-    public Basket(int capacity){
+    public Basket(int capacity) {
         this.capacity = capacity;
         this.items = new ArrayList<>();
     }
-    public void clearItems(){
+
+    public void clearItems() {
         items.clear();
     }
 
-    public Boolean changeCapacity(int newCapacity){
+    public Boolean changeCapacity(int newCapacity) {
         if (newCapacity >= items.size()) {
             this.capacity = newCapacity;
             return true;
         }
         return false;
     }
+
     public boolean addItems(Inventory inventory, String sku, int quantity) {
         Item itemToAdd = inventory.getItemBySKU(sku);
         if (itemToAdd == null) {
@@ -44,33 +46,26 @@ public class Basket {
         }
         return true;
     }
+
     public boolean removeItems(Inventory inventory, String skuToRemove, int quantityToRemove) {
         Item itemToRemove = inventory.getItemBySKU(skuToRemove);
         if (itemToRemove != null && items.contains(itemToRemove)) {
             for (int i = 0; i < quantityToRemove; i++) {
                 items.remove(itemToRemove);
-                }
-            return true;
             }
+            return true;
+        }
         System.out.println("Item was not found");
         return false;
     }
+
     public String showBasket() {
-        Set<Item> uniqueItems = new HashSet<>(items);
         StringBuilder result = new StringBuilder();
         result.append(String.format("%3s %-1s", "", "~~~ Bob's Bagels ~~~\n"));
         DateTimeFormatter timeNow = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
-        result.append(String.format("%3s %-1s", "",LocalDateTime.now().format(timeNow)));
+        result.append(String.format("%3s %-1s", "", LocalDateTime.now().format(timeNow)));
         result.append("\n--------------------------------\n");
-
-        for (Item uniqueItem : uniqueItems) {
-            String itemName = uniqueItem.getType() + " " + uniqueItem.getVariant();
-            int quantity = Collections.frequency(items, uniqueItem);
-            double totalCost = uniqueItem.getPrice() * quantity;
-
-            result.append(String.format("%-20s %-4d £%.2f\n", itemName, quantity, totalCost));
-        }
-
+        getDiscount(result);
         result.append("--------------------------------\n");
         result.append(String.format("%-26s", "Total Price ") + getTotalCost());
         result.append("\n--------------------------------\n");
@@ -78,6 +73,7 @@ public class Basket {
 
         return result.toString();
     }
+
     private String getTotalCost() {
         double totalCost = 0;
         for (Item item : items) {
@@ -86,11 +82,24 @@ public class Basket {
         return String.format("£%.2f", totalCost);
     }
 
-    private String getDiscount(){
+    private StringBuilder getDiscount(StringBuilder result) {
+        Set<Item> uniqueItems = new HashSet<>(items);
+        for (Item uniqueItem : uniqueItems) {
+            String itemName = uniqueItem.getType() + " " + uniqueItem.getVariant();
+            int quantity = Collections.frequency(items, uniqueItem);
+            double totalCost = uniqueItem.getPrice() * quantity;
+
+            if (uniqueItems.size() == 12) {
 
 
+            } else if (uniqueItems.size() == 6) {
 
-        return "Discount";
+
+            } else {
+                result.append(String.format("%-20s %-4d £%.2f\n", itemName, quantity, totalCost));
+            }
+            return result;
+        }
+
     }
-
 }
