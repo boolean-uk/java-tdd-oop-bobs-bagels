@@ -172,7 +172,7 @@ class BasketTest {
 				throw new RuntimeException(e);
 			}
 		}
-		Assertions.assertEquals(3.99,basket2.getTotalCost(),0.01);
+		Assertions.assertEquals(3.99, basket2.getTotalCost(), 0.01);
 
 		for (int i = 0; i < 6; i++) {
 			try {
@@ -181,7 +181,7 @@ class BasketTest {
 				throw new RuntimeException(e);
 			}
 		}
-		Assertions.assertEquals(3.99+2.49,basket2.getTotalCost(),0.001);
+		Assertions.assertEquals(3.99 + 2.49, basket2.getTotalCost(), 0.001);
 
 		Basket basket3 = new Basket(inventory);
 		try {
@@ -190,24 +190,45 @@ class BasketTest {
 		} catch (NotInInventoryException e) {
 			throw new RuntimeException(e);
 		}
-		Assertions.assertEquals(1.25,basket3.getTotalCost(),0.01);
-
+		Assertions.assertEquals(1.25, basket3.getTotalCost(), 0.01);
 		Basket basket = new Basket(inventory);
 		try {
-			basket.addItem("BGLO");
-			basket.addItem("BGLO");
 			for (int i = 0; i < 12; i++) {
 
 				basket.addItem("BGLP");
 			}
+			Assertions.assertEquals(3.99, basket.getTotalCost(), 0.1);
+			basket.addItem("BGLP");
+			basket.addItem("BGLP");
+			basket.addItem("BGLP");
+			basket.addItem("BGLP");
+			Assertions.assertEquals(5.55, basket.getTotalCost(),0.1);
+		} catch (NotInInventoryException e) {
+			throw new RuntimeException(e);
+		}
+		Basket basket4 = new Basket(inventory);
+		try {
+			basket4.addItem("BGLO");
+			basket4.addItem("BGLO");
+			Assertions.assertEquals(0.49+0.49, basket4.getTotalCost(), 0.1);
+
+			for (int i = 0; i < 12; i++) {
+
+				basket4.addItem("BGLP");
+			}
+			Assertions.assertEquals(0.49+0.49+3.99, basket4.getTotalCost(), 0.1);
+
 			for (int i = 0; i < 6; i++) {
 
-				basket.addItem("BGLE");
+				basket4.addItem("BGLE");
 			}
-			basket.addItem("COFB");
-			basket.addItem("COFB");
-			basket.addItem("COFB");
-			//Assertions.assertEquals(10.43,basket.getTotalCost());
+			Assertions.assertEquals(0.49+0.49+3.99+2.49, basket4.getTotalCost(), 0.1);
+			basket4.addItem("COFB");
+			basket4.addItem("COFB");
+			Assertions.assertEquals(1.25+1.25+3.99+2.49, basket4.getTotalCost(), 0.1);
+			basket4.addItem("COFB");
+			Assertions.assertEquals(1.25+1.25+3.99+2.49+0.99, basket4.getTotalCost(), 0.1);
+
 		} catch (NotInInventoryException e) {
 			throw new RuntimeException(e);
 		}

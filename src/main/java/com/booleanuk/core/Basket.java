@@ -102,15 +102,19 @@ public class Basket {
 
 			int closestMultiple = Math.round((float) input / target) * target;
 			int movedItems = 0;
-			while (movedItems < closestMultiple) {
 				for (int i = 0; i < itemsLeft.size(); i++) {
+					if(!(movedItems<closestMultiple)){
+						break;
+					}
 					if (itemsLeft.get(i).equals(bulkItem)) {
 						discountItems.add(bulkItem);
 						itemsLeft.remove(i);
 						i--;
+						movedItems++;
+
 					}
-				}
-				movedItems++;
+
+
 			}
 		}
 		for (String item : discountItems) {
@@ -143,8 +147,9 @@ public class Basket {
 						j--;
 
 					}
-					removed=0;
 				}
+				removed=0;
+
 
 			}
 			for (int j = 0; j < smallest; j++) {
