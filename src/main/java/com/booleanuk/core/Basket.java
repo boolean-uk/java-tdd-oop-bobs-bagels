@@ -1,5 +1,6 @@
 package com.booleanuk.core;
 
+import java.util.Formatter;
 import java.util.HashMap;
 
 public class Basket {
@@ -92,5 +93,30 @@ public class Basket {
         else {
             return "New capacity must be larger than number of items currently in basket.";
         }
+    }
+
+    public HashMap<Item, double[]> discountPerItem() {
+        HashMap<Item, double[]> mapPriceAndSavings = new HashMap<>();
+        if (this.basketContent.isEmpty()){
+            return mapPriceAndSavings;
+        }
+        for (Item item: this.basketContent.keySet()) {
+            double[] priceAndSavings = new double[2];
+            int amount = this.basketContent.get(item);
+            double fullPrice = item.getPrice() * amount;
+            if (amount >= 12) {
+                priceAndSavings[0] = 3.99 + (amount - 12) * item.getPrice();
+            }
+            else if (amount >= 6) {
+                priceAndSavings[0] = 2.29 + (amount - 6) * item.getPrice();
+            }
+            else {
+                priceAndSavings[0] = amount * item.getPrice();
+            }
+            double savings = fullPrice - priceAndSavings[0];
+            priceAndSavings[1] = Math.ceil(savings * 100) / 100;
+            mapPriceAndSavings.put(item, priceAndSavings);
+        }
+        return mapPriceAndSavings;
     }
 }
