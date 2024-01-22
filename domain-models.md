@@ -41,7 +41,7 @@ Class Basket
 
 | Class Variables               | Methods                             | Scenario             | Output/Return                              |
 |-------------------------------|-------------------------------------|----------------------|--------------------------------------------|
-| Map<Item,Integer> itemList    | String addItemToBasket(Item item)   | Adds item to basket  | Comment on what went wrong or if it worked |
+| Map<Item,Integer> itemList    | boolean addItemToBasket(Item item)   | Adds item to basket  | Comment on what went wrong or if it worked |
 |                               | Map<Item,Integer> getItemList()     | Gets a list of Items | Map<Item,Integer> basketOfItems            |
 |                               |                                     |                      |                                            |
 |                               |                                     |                      |                                            |
@@ -58,7 +58,7 @@ I'd like to remove a bagel from my basket.
 
 | Class Variables             | Methods                                | Scenario                 | Output/Return                               |
 |-----------------------------|----------------------------------------|--------------------------|---------------------------------------------|
-| Map<Item,Integer> itemList  | String removeItemFromBasket(Item item) | Removes item from basket | Comment on what went wrong or if it worked  |
+| Map<Item,Integer> itemList  | boolean removeItemFromBasket(Item item) | Removes item from basket | Comment on what went wrong or if it worked  |
 |                             |                                        |                          |                                             |
 |                             |                                        |                          |                                             |
 |                             |                                        |                          |                                             |
@@ -77,12 +77,12 @@ I'd like to know when my basket is full when I try adding an item beyond my bask
 
 Class Basket
 
-| Class Variables              | Methods                           | Scenario                                              | Output/Return                                 |
-|------------------------------|-----------------------------------|-------------------------------------------------------|-----------------------------------------------|
-| Map<Item,Integer> itemList   | String addItemToBasket(Item item) | Comments on what went wrong whn adding above capacity | Comment on what went wrong or if it worked    |
-| int capacity                 |                                   |                                                       |                                               |
-|                              |                                   |                                                       |                                               |
-|                              |                                   |                                                       |                                               |
+| Class Variables              | Methods                           | Scenario                                               | Output/Return                                 |
+|------------------------------|-----------------------------------|--------------------------------------------------------|-----------------------------------------------|
+| Map<Item,Integer> itemList   | boolean addItemToBasket(Item item) | Comments on what went wrong when adding above capacity | Comment on what went wrong or if it worked    |
+| int capacity                 |                                   |                                                        |                                               |
+|                              |                                   |                                                        |                                               |
+|                              |                                   |                                                        |                                               |
 
 
 
@@ -95,12 +95,12 @@ I’d like to change the capacity of baskets.
 
 Class Basket
 
-| Class Variables             | Methods                           | Scenario                                              | Output/Return                              |
-|-----------------------------|-----------------------------------|-------------------------------------------------------|--------------------------------------------|
-| Map<Item,Integer> itemList  | String addItemToBasket(Item item) | Comments on what went wrong whn adding above capacity | Comment on what went wrong or if it worked |
-| int capacity                | int getBasketCapacity()           | Gets basket capacity                                  | int                                        |
-|                             | setBasketCapacity(int capacity)   | Sets basket capacity                                  | boolean                                    |
-|                             |                                   |                                                       |                                            |
+| Class Variables             | Methods                            | Scenario                                              | Output/Return                              |
+|-----------------------------|------------------------------------|-------------------------------------------------------|--------------------------------------------|
+| Map<Item,Integer> itemList  | boolean addItemToBasket(Item item) | Comments on what went wrong whn adding above capacity | Comment on what went wrong or if it worked |
+| int capacity                | int getBasketCapacity()            | Gets basket capacity                                  | int                                        |
+|                             | setBasketCapacity(int capacity)    | Sets basket capacity                                  | boolean                                    |
+|                             |                                    |                                                       |                                            |
 
 
 
@@ -115,7 +115,7 @@ Class basket
 
 | Class Variables             | Methods                                | Scenario                 | Output/Return                               |
 |-----------------------------|----------------------------------------|--------------------------|---------------------------------------------|
-| Map<Item,Integer> itemList  | String removeItemFromBasket(Item item) | Removes item from basket | Comment on what went wrong or if it worked  |
+| Map<Item,Integer> itemList  | boolean removeItemFromBasket(Item item) | Removes item from basket | Comment on what went wrong or if it worked  |
 |                             |                                        |                          |                                             |
 |                             |                                        |                          |                                             |
 |                             |                                        |                          |                                             |
@@ -259,12 +259,12 @@ I want discounts to be added correctly to my basket price
 Class Customer
 
 
-| Class Variables | Methods               | Scenario                | Output/Return |
-|-----------------|-----------------------|-------------------------|---------------|
-|                 | order(String skuCode) | customer orders an item | boolean       |
-|                 |                       |                         |               |
-|                 |                       |                         |               |
-|                 |                       |                         |               |
+| Class Variables                          | Methods                                | Scenario                   | Output/Return |
+|------------------------------------------|----------------------------------------|----------------------------|---------------|
+| Map<String, ArrayList<Double>> discounts | order(String skuCode)                  | customer orders an item    | boolean       |
+| Basket basket                            | getTotalCost(Map<Item,Integer> items)  | Gets total cost of itemMap | double        |
+|                                          |                                        |                            |               |
+|                                          |                                        |                            |               |
 
 ``
 Extension 2 
@@ -276,7 +276,7 @@ Class Receipt
 
 | Class Variables | Methods                                                | Scenario                                       | Output/Return |
 |-----------------|--------------------------------------------------------|------------------------------------------------|---------------|
-|                 | printBasket()                                          | After purchase customer want a receipt printed | void          |
+|                 | printBasket()                                          | After purchase customer want a receipt printed | String        |
 |                 | String formatDate(Date date)                           | Format date to string for receipt              | String        |
 |                 | String formatBasketValues(Map<Item,Integer> basketMap) | Formats basketMap to string for receipt        | String        |
 |                 |                                                        |                                                |               |
@@ -291,10 +291,10 @@ I want to get a receipt of my purchase with savings
 Class Customer
 
 
-| Class Variables                          | Methods                                     | Scenario       | Output/Return                                                              |
-|------------------------------------------|---------------------------------------------|----------------|----------------------------------------------------------------------------|
-| Map<String, ArrayList<Double>> discounts | Map<String, ArrayList<Double>> getDiscounts | Gets discounts | Map<String, ArrayList<Double>> of sku codes connected to list of discounts |
-|                                          |                                             |                |                                                                            |
-|                                          |                                             |                |                                                                            |
-|                                          |                                             |                |                                                                            |
+| Class Variables                          | Methods                                     | Scenario                       | Output/Return                                                              |
+|------------------------------------------|---------------------------------------------|--------------------------------|----------------------------------------------------------------------------|
+| Map<String, ArrayList<Double>> discounts | Map<String, ArrayList<Double>> getDiscounts | Gets discounts                 | Map<String, ArrayList<Double>> of sku codes connected to list of discounts |
+| Basket basket                            | addDiscount(String sku, double v)           | Adds discount to discounts map | void                                                                       |
+|                                          | getDiscounts()                              | gets discounts as map          | Map<String, ArrayList<Double>> discounts                                   |
+|                                          | getTotalCost(Map<Item,Integer> items)       | Gets total cost of itemMap     | double                                                                     |
 

@@ -46,7 +46,7 @@ public class BasketTest {
     }
 
     @Test
-    public void testCapacity() {
+    public void testCapacityChange() {
         Basket basket = new Basket(5);
 
         Assertions.assertEquals(5, basket.getBasketCapacity());
@@ -56,7 +56,20 @@ public class BasketTest {
         Assertions.assertFalse(basket.setBasketCapacity(-1));
 
         Assertions.assertEquals(2, basket.getBasketCapacity());
+    }
+
+    @Test
+    public void testCapacityNotEnough() {
+        Basket basket = new Basket(5);
+
+        Assertions.assertTrue(basket.addItemToBasket(new Bagel("Plain")));
+        Assertions.assertTrue(basket.addItemToBasket(new Bagel("Plain")));
+        Assertions.assertTrue(basket.addItemToBasket(new Bagel("Plain")));
+        Assertions.assertTrue(basket.addItemToBasket(new Bagel("Plain")));
+        Assertions.assertTrue(basket.addItemToBasket(new Bagel("Plain")));
+
 
     }
+
 
 }

@@ -22,20 +22,23 @@ public class Basket {
     //Need to check for basketCapacity
     public boolean addItemToBasket(Item item) {
 
-        if(itemList.isEmpty()) {
-            itemList.put(item, 1);
-            return true;
-        }
-
-        for(Item itemFromList : getItemList().keySet()) {
-            if(itemFromList.getSkuCode().equals(item.getSkuCode())) {
-                itemList.put(itemFromList, itemList.get(itemFromList) +1);
+        if(this.itemList.size() < getBasketCapacity()) {
+            if(itemList.isEmpty()) {
+                itemList.put(item, 1);
                 return true;
             }
-        }
-        itemList.put(item, +1);
 
-        return true;
+            for(Item itemFromList : getItemList().keySet()) {
+                if(itemFromList.getSkuCode().equals(item.getSkuCode())) {
+                    itemList.put(itemFromList, itemList.get(itemFromList) +1);
+                    return true;
+                }
+            }
+            itemList.put(item, +1);
+
+        }
+
+        return false;
     }
 
     public Map<Item, Integer> getItemList() {
