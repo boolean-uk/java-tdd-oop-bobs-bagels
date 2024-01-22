@@ -10,9 +10,9 @@ class BagelTest {
     @Test
     public void testGetName(){
         Bagel onion = new  Bagel("BGLO", 0.49, "Onion");
-         Bagel plain = new  Bagel("BGLP", 0.39, "Plain");
-         Bagel everything = new  Bagel("BGLE", 0.49, "Everything");
-         Bagel sesame = new  Bagel("BGLS", 0.49, "Sesame");
+        Bagel plain = new  Bagel("BGLP", 0.39, "Plain");
+        Bagel everything = new  Bagel("BGLE", 0.49, "Everything");
+        Bagel sesame = new  Bagel("BGLS", 0.49, "Sesame");
 
         Assertions.assertEquals("Bagel", plain.getName());
         Assertions.assertEquals("Bagel", onion.getName());
@@ -62,7 +62,7 @@ class BagelTest {
         fillingsTest.add(filling2);
         fillingsTest.add(filling3);
 
-        Assertions.assertEquals(fillings, plain.getFillings());
+        Assertions.assertEquals(fillingsTest, plain.getFillings());
     }
     @Test
     public void testAddFilling(){

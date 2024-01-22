@@ -6,7 +6,7 @@ import java.util.HashMap;
 public class Basket {
 
     private  HashMap<String, Integer> qtyMap;
-    private ArrayList<Bagel> products;
+    private ArrayList<Product> products;
     private static int maxSize;
 
     public Basket(){
@@ -15,10 +15,10 @@ public class Basket {
         maxSize = 10;
     }
 
-    public boolean add(Bagel bagel){
+    public boolean add(Product product){
 
         //If the product is not in inventory
-        if(!Inventory.isValidBagel(bagel)){
+        if(!Inventory.isValidProduct(product)){
             return false;
         }
 
@@ -27,14 +27,14 @@ public class Basket {
             return false;
         }
         //Add bagel
-        this.products.add(bagel);
+        this.products.add(product);
 
         return true;
     }
 
-    public boolean remove(Bagel bagel){
-        if (products.contains(bagel)){
-            products.remove(bagel);
+    public boolean remove(Product product){
+        if (products.contains(product)){
+            products.remove(product);
             return true;
         }
         return false;
@@ -59,7 +59,7 @@ public class Basket {
         return maxSize;
     }
 
-    public ArrayList<Bagel> getProducts() {
+    public ArrayList<Product> getProducts() {
         return products;
     }
 
@@ -71,16 +71,16 @@ public class Basket {
 //
 //        }
 
-        for (Bagel bagel: products){
-            total += getCostOfBagel(bagel);
+        for (Product product: products){
+            total += getCostOfProduct(product);
         }
 
         return total;
     }
 
-    public double getCostOfBagel(Bagel bagel){
-        double total = bagel.getPrice();
-        for(Filling filling : bagel.getFillings()){
+    public double getCostOfProduct(Product product){
+        double total = product.getPrice();
+        for(Filling filling : product.getFillings()){
             total += getCostOfFilling(filling);
         }
         return total;
@@ -102,7 +102,7 @@ public class Basket {
 
         //Add all products to a map.
         System.out.println(products.size());
-        for (Bagel product : this.products){
+        for (Product product : this.products){
             if (!qtyMap.containsKey(product.getId())){
                 qtyMap.put(product.getId(), 1);
             }

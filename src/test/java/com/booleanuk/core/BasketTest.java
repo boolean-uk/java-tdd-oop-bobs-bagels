@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class BasketTest {
     @Test
-    public void testAddRightBagel(){
+    public void testAddRight(){
        Basket basket = new Basket();
        Basket.setMaxSize(2);
        Bagel bagelNoFillings = new Bagel("BGLO", 0.49, "Onion");
@@ -26,26 +26,33 @@ class BasketTest {
         //Add Bagel With filling
         Assertions.assertTrue(basket.add(bagelWfillings));
 
+        //AddCoffee
+        Coffee black = new Coffee("COFB", 0.99, "Black");
+        Assertions.assertTrue(basket.add(black));
+
        //Try adding with a full basket
        Assertions.assertFalse(basket.add(bagelNoFillings));
 
     }
 
     @Test
-    public void testAddWrongBagel(){
+    public void testAddWrong(){
         Basket basket = new Basket();
 
         Bagel bagelWrongPrice = new Bagel("BGLO", 0.69, "Onion");
         Bagel bagelWrongVariant = new Bagel("BGLO", 0.39, "Plain");
         Bagel bagelWrongId = new Bagel("BGL", 0.39, "Plain");
 
-
-
         //Add Wrong Bagel
         Assertions.assertFalse(basket.add(bagelWrongPrice));
         Assertions.assertFalse(basket.add(bagelWrongVariant));
         Assertions.assertFalse(basket.add(bagelWrongId));
         Assertions.assertFalse(basket.add(bagelWrongPrice));
+
+        Filling filling1 = new Filling("FILB", 0.12, "Bacon");
+
+        //Add filling
+        Assertions.assertFalse(basket.add(filling1));
 
     }
 

@@ -6,52 +6,12 @@ public final class Inventory {
 
     private static HashMap<String, Product> products;
 
-//    private static HashMap<String, Bagel> bagels;
-//    private static HashMap<String, Coffee> coffees;
-//    private static HashMap<String, Filling> fillings;
-
     static {
-        // Initialize maps in the static block
-//        fillings = new HashMap<>();
-//        coffees = new HashMap<>();
-//        bagels = new HashMap<>();
-
         products = new HashMap<>();
-
         populateMaps();
     }
     private Inventory(){
-
     }
-//    public static boolean isInInventory(String id){
-//        return (isValidBagel() || isValidCoffee()|| isValidFilling());
-//    }
-
-//    public static boolean isValidBagel(Bagel bagel){
-//        Bagel inventoryBagel = bagels.get(bagel.getId());
-//        return inventoryBagel != null && inventoryBagel.getPrice() == bagel.getPrice() && inventoryBagel.getVariant().equals(bagel.getVariant());
-//    }
-//
-//    public static boolean isValidCoffee(Coffee coffee){
-//        Coffee inventoryCoffee = coffees.get(coffee.getId());
-//        return inventoryCoffee!= null && inventoryCoffee.getPrice() == coffee.getPrice() && inventoryCoffee.getVariant().equals(coffee.getVariant());
-//    }
-//    public static boolean isValidFilling(Filling filling){
-//        Filling inventoryFilling = fillings.get(filling.getId());
-//        return inventoryFilling!= null && inventoryFilling.getPrice() == filling.getPrice() && inventoryFilling.getVariant().equals(filling.getVariant());
-//    }
-
-//    public static HashMap<String, Bagel> getBagels() {
-//        return bagels;
-//    }
-//
-//    public static HashMap<String, Coffee> getCoffees() {
-//        return coffees;
-//    }
-//
-//    public static HashMap<String, Filling> getFillings() {
-//        return fillings;
-//    }
 
     public static HashMap<String, Product> getProducts(){
         return products;
@@ -84,3 +44,45 @@ public final class Inventory {
         products.put("COFL", new Coffee("COFL", 1.29, "Latte"));
     }
 }
+
+//    public static boolean isInInventory(String id){
+//        return (isValidBagel() || isValidCoffee()|| isValidFilling());
+//    }
+
+//    public static boolean isValidBagel(Bagel bagel){
+//        Bagel inventoryBagel = bagels.get(bagel.getId());
+//        return inventoryBagel != null && inventoryBagel.getPrice() == bagel.getPrice() && inventoryBagel.getVariant().equals(bagel.getVariant());
+//    }
+//
+//    public static boolean isValidCoffee(Coffee coffee){
+//        Coffee inventoryCoffee = coffees.get(coffee.getId());
+//        return inventoryCoffee!= null && inventoryCoffee.getPrice() == coffee.getPrice() && inventoryCoffee.getVariant().equals(coffee.getVariant());
+//    }
+//    public static boolean isValidFilling(Filling filling){
+//        Filling inventoryFilling = fillings.get(filling.getId());
+//        return inventoryFilling!= null && inventoryFilling.getPrice() == filling.getPrice() && inventoryFilling.getVariant().equals(filling.getVariant());
+//    }
+
+//    public static HashMap<String, Bagel> getBagels() {
+//        return bagels;
+//    }
+//
+//    public static HashMap<String, Coffee> getCoffees() {
+//        return coffees;
+//    }
+//
+//    public static HashMap<String, Filling> getFillings() {
+//        return fillings;
+//    }
+
+
+// Initialize maps in the static block
+//        fillings = new HashMap<>();
+//        coffees = new HashMap<>();
+//        bagels = new HashMap<>();
+
+
+
+//    private static HashMap<String, Bagel> bagels;
+//    private static HashMap<String, Coffee> coffees;
+//    private static HashMap<String, Filling> fillings;

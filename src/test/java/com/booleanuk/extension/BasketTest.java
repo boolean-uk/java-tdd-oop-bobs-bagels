@@ -127,10 +127,10 @@ class BasketTest {
          Bagel bagelWithFilling = new  Bagel("BGLP", 0.39, "Plain", fillings);
 
         //Get cost of plain bagel
-        Assertions.assertEquals(0.39, basket.getCostOfBagel(bagelplain));
+        Assertions.assertEquals(0.39, basket.getCostOfProduct(bagelplain));
 
         //Get cost of bagel with filling on
-        Assertions.assertEquals(0.63, basket.getCostOfBagel(bagelWithFilling));
+        Assertions.assertEquals(0.63, basket.getCostOfProduct(bagelWithFilling));
     }
     @Test
     public void testGetTotalCostNoDisCount(){
