@@ -133,15 +133,44 @@ So I can see the price of every item and the total price,
 I'd like to get a receipt of my purchase.
 ```
 
+```
+13.
+As a Bob's Bagels manager,
+So I can improve upselling,
+I'd like to offer discounts to customers bying multiple items from the shop.
+```
+
+```
+14.
+As a customer,
+So I can see which items I got a discount on,
+I'd like to get a receipt that includes the savings.
+```
+
 ## Domain model
 
 ### Class Receipt
 
-| Methods           | Member variables     | Scenario            | Output/Return                  |
-|-------------------|----------------------|---------------------|--------------------------------|
-| generateReceipt() | String receipt       | Empty basket.       | String "Basket is empty."      |
-|                   | Basket basket        | Not empty basket.   | String receipt.                |
-| createHeader()    | DateTime dateAndTime |                     | String header.                 |
-| createFooter()    |                      |                     | String footer.                 |
-| printReceipt()    | String receipt       | Receipt (non)empty. | boolean printed.               |
-|                   |                      |                     | system.out.println of receipt. |
+| Methods                       | Member variables                                                | Scenario            | Output/Return                  |
+|-------------------------------|-----------------------------------------------------------------|---------------------|--------------------------------|
+| generateReceipt()             | String receipt                                                  | Empty basket.       | String "Basket is empty."      |
+|                               | Basket basket                                                   | Not empty basket.   | String receipt.                |
+| createHeader()                | DateTime dateAndTime                                            |                     | String header.                 |
+| createFooter()                |                                                                 |                     | String footer.                 |
+| printReceipt()                | String receipt                                                  | Receipt (non)empty. | boolean printed.               |
+|                               |                                                                 |                     | system.out.println of receipt. |
+| generateReceiptWithDiscount() | String receipt                                                  | Empty basket.       | String "Basket is empty."      |
+|                               | Basket basket                                                   | Not empty basket.   | String receipt.                |
+|                               | Hashmap<Item item, double[] priceAndSavings> mapPriceAndSavings |                     |                                |
+
+
+### Class Basket
+
+| Methods                     | Member variables                                                 | Scenario          | Output/Return                                |
+|-----------------------------|------------------------------------------------------------------|-------------------|----------------------------------------------|
+| {13}discountPerItem()       | HashMap<Item item, int amount> basketContent                     | Not empty basket. | Hashmap<Item item, double[] priceAndSavings> |
+|                             | double item.getPrice()                                           |                   | Sum of price and savings is original price.  |
+|                             |                                                                  |                   |                                              |
+| {13}totalCostWithDiscount() | Hashmap<Item item, double[] priceAndSavings> mapPriceAndSavings  | Not empty basket. | double price                                 |
+|                             |                                                                  | Empty basket.     | double price = 0.0.                          |
+|                             |                                                                  | No discounts.     | Returns same double price as totalCost().    |
