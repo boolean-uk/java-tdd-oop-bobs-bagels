@@ -1,11 +1,32 @@
 package com.booleanuk.core;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class main {
     public static void main(String[] args) {
-        main main = new main();
-        main.start();
+        Store store = new Store(5);
+        Customer customer = new Customer("Espen", store);
+        Basket basket = new Basket(customer);
+        ArrayList<Item> items = basket.getItems();
+        items.add(new Filling("FILB", 0.12, "Filling", "Bacon"));
+        items.add(new Bagel("BGLS", 0.49, "Bagel", "Sesame"));
+        items.add(new Coffee("COFB", 0.99, "Coffee", "Black"));
+        items.add(new Bagel("BGLS", 0.49, "Bagel", "Sesame"));
+        items.add(new Bagel("BGLS", 0.49, "Bagel", "Sesame"));
+        items.add(new Coffee("COFC", 1.29, "Coffee", "Cappuccino"));
+        items.add(new Coffee("COFC", 1.29, "Coffee", "Cappuccino"));
+        items.add(new Bagel("BGLS", 0.49, "Bagel", "Sesame"));
+        items.add(new Bagel("BGLE", 0.49, "Bagel", "Everything"));
+        items.add(new Bagel("BGLS", 0.49, "Bagel", "Sesame"));
+        items.add(new Bagel("BGLS", 0.49, "Bagel", "Sesame"));
+        items.add(new Coffee("COFL", 1.29, "Coffee", "Latte"));
+        items.add(new Bagel("BGLS", 0.49, "Bagel", "Sesame"));
+        items.add(new Coffee("COFW", 1.19, "Coffee", "White"));
+
+        System.out.println(basket.applyDiscounts());
+        //main main = new main();
+        //main.start();
     }
 
     public void start() {

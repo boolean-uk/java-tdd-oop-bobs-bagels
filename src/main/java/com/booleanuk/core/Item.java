@@ -6,12 +6,14 @@ public class Item {
     private String name;
     private double cost;
     private String variant;
+    private boolean isDiscounted;
 
     public Item(String SKU, double cost, String name, String variant) {
         this.SKU = SKU;
         this.cost = cost;
         this.name = name;
         this.variant = variant;
+        this.isDiscounted = false;
     }
     public String getSKU() {
         return SKU;
@@ -41,12 +43,20 @@ public class Item {
         this.variant = variant;
     }
 
+    public boolean isDiscounted() {
+        return this.isDiscounted;
+    }
+
+    public void setDiscounted(boolean isDiscounted) {
+        this.isDiscounted = isDiscounted;
+    }
+
     public Class getInstance() {
         return getClass();
     }
 
     @Override
     public String toString() {
-        return this.SKU + "\t" + this.cost + "\t" + this.name + "\t" + this.variant;
+        return this.SKU + "\t" + String.format("%.2f", this.cost) + "\t" + this.name + "\t" + this.variant + "\n";
     }
 }

@@ -125,8 +125,4 @@ public class Customer {
             System.out.println("There are none items in your basket!");
         }
     }
-
-    public String userInput() {
-        return scanner.nextLine();
-    }
 }
