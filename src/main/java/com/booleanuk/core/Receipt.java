@@ -10,7 +10,9 @@ public class Receipt {
     private Date date;
     private HashMap<Item, Double> prices;
     private LinkedHashMap<Item, Integer> quantities;
+    private HashMap<Item, Double> discounts;
     private double totalCost;
+    private double totalDiscount;
     private String storeName;
     private int width;
     private int priceOffSet;
@@ -21,6 +23,19 @@ public class Receipt {
         this.prices = prices;
         this.quantities = quantities;
         this.totalCost = totalCost;
+        this.storeName = storeName;
+        this.width = width;
+        priceOffSet = 9;
+        decorativeLine = "-".repeat(width);
+    }
+
+    public Receipt(HashMap<Item, Double> prices, LinkedHashMap<Item, Integer> quantities, HashMap<Item, Double> discounts, double totalCost, double totalDiscount, String storeName, int width) {
+        date = new Date();
+        this.prices = prices;
+        this.quantities = quantities;
+        this.discounts = discounts;
+        this.totalCost = totalCost;
+        this.totalDiscount = totalDiscount;
         this.storeName = storeName;
         this.width = width;
         priceOffSet = 9;
@@ -48,6 +63,10 @@ public class Receipt {
             name = item.getName()+ " " + item.getClass().getSimpleName();
             quantityAndCost = quantity + " ".repeat(priceOffSet - String.valueOf(quantity).length()- String.valueOf(cost).length()-1) + "\u00A3"+cost;
             string += "\n" + name + " ".repeat(width-name.length()-priceOffSet) + quantityAndCost;
+            if(discounts != null && discounts.get(item) != 0) {
+                String discount = "(-\u00A3" + discounts.get(item) + ")";
+                string += "\n" + " ".repeat(width-discount.length()) + discount;
+            }
         }
 
         return string;
@@ -62,6 +81,18 @@ public class Receipt {
         return " ".repeat((width-(storeName).length()-8)/2)+"~~~ " + storeName + " ~~~";
     }
 
+
+    private String formatSavingsMessage() {
+        String savingsMessage = "";
+        if(discounts != null) {
+            String firstLine = "You saved a total of \u00A3" + totalDiscount;
+            String secondLine = "on this shop";
+            savingsMessage += " ".repeat((width - firstLine.length()) / 2) + firstLine;
+            savingsMessage += "\n" + " ".repeat((width - secondLine.length()) / 2) + secondLine;
+        }
+        return savingsMessage;
+    }
+
     private String formatEndMessage() {
         String endMessage = " ".repeat((width-("Thank you").length())/2)+ "Thank you";
         endMessage += "\n" + " ".repeat((width-("for your order!").length())/2)+ "for your order!";
@@ -70,7 +101,12 @@ public class Receipt {
 
     @Override
     public String toString() {
-        return String.format("%s\n\n%s\n\n%s\n%s\n\n%s\n%s\n\n%s", formatStoreName(), formatDate(), decorativeLine,
-                formatProductData(), decorativeLine, formatTotalCost(), formatEndMessage());
+        if (discounts == null) {
+            return String.format("%s\n\n%s\n\n%s\n%s\n\n%s\n%s\n\n%s", formatStoreName(), formatDate(), decorativeLine,
+                    formatProductData(), decorativeLine, formatTotalCost(), formatEndMessage());
+        } else {
+            return String.format("%s\n\n%s\n\n%s\n%s\n\n%s\n%s\n\n%s\n\n%s", formatStoreName(), formatDate(), decorativeLine,
+                    formatProductData(), decorativeLine, formatTotalCost(), formatSavingsMessage(), formatEndMessage());
+        }
     }
 }

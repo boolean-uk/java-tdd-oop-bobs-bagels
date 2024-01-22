@@ -34,8 +34,8 @@ public class ExtensionThreeTest {
                         "\n----------------------------" +
                         "\nTotal                  \u00A30.39" +
                         "\n" +
-                        "\n   You saved a total of \u00A30"+
-                        "\n         on this shop"+
+                        "\n You saved a total of \u00A30.0"+
+                        "\n        on this shop"+
                         "\n" +
                         "\n         Thank you" +
                         "\n      for your order!";
