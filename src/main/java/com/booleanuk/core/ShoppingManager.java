@@ -4,17 +4,21 @@ import com.migzus.terminal.menus.Button;
 import com.migzus.terminal.menus.Callable;
 import com.migzus.terminal.menus.Menu;
 
+import java.text.DecimalFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class ShoppingManager {
     // this could technically be stored in a file and parsed when read... however, the task require no such feature
     public final static ArrayList<Item> availableItems = new ArrayList<>(){{
-        add(new Item(0.49, "Onion", "BGLO", Category.BAGEL));
-        add(new Item(0.39, "Plain", "BGLP", Category.BAGEL));
-        add(new Item(0.49, "Everything", "BGLE", Category.BAGEL));
-        add(new Item(0.49, "Sesame", "BGLS", Category.BAGEL));
-        add(new Item(0.99, "Black", "COFB", Category.COFFEE));
+        add(new Item(0.49, "Onion", "BGLO", Category.BAGEL, new NumberOfItemsDiscount(6, 2.49)));
+        add(new Item(0.39, "Plain", "BGLP", Category.BAGEL, new NumberOfItemsDiscount(12, 3.99)));
+        add(new Item(0.49, "Everything", "BGLE", Category.BAGEL, new NumberOfItemsDiscount(6, 2.49)));
+        add(new Item(0.49, "Sesame", "BGLS", Category.BAGEL, new NumberOfItemsDiscount(6, 2.49)));
+        // for some reason Extension 1 includes one more type of discount, but doesn't apply it. So I'll leave this commented out
+        add(new Item(0.99, "Black", "COFB", Category.COFFEE)); // , new ConditionalDiscount(new Category[]{ Category.BAGEL }, 1.25)
         add(new Item(1.19, "White", "COFW", Category.COFFEE));
         add(new Item(1.29, "Capuccino", "COFC", Category.COFFEE));
         add(new Item(1.29, "Latte", "COFL", Category.COFFEE));
@@ -24,12 +28,6 @@ public class ShoppingManager {
         add(new Item(0.12, "Cream Cheese", "FILX", Category.FILLING));
         add(new Item(0.12, "Smoked Salmon", "FILS", Category.FILLING));
         add(new Item(0.12, "Ham", "FILH", Category.FILLING));
-    }};
-
-    public final static ArrayList<Discount> discounts = new ArrayList<>(){{
-        add(new NumberOfItemsDiscount(Category.BAGEL, 6, 2.44));
-        add(new NumberOfItemsDiscount(Category.BAGEL, 12, 3.99));
-        add(new ConditionalDiscount(new Category[]{ Category.COFFEE, Category.BAGEL }, 1.25));
     }};
 
     public Basket basket = new Basket();
@@ -67,8 +65,41 @@ public class ShoppingManager {
         System.out.println("\n--- Basket ---\n" + _sb + "--------------");
     }
 
-    public void printReceipt() {
-        System.out.println("Currently, in this version of Bobs Bagels. Checkout has yet to be implemented.");
+    public void checkout() {
+        if (basket.isEmpty()) {
+            System.out.println("Your basket is empty. There is no reason to checkout.");
+            return;
+        }
+
+        Menu.clearScreen();
+
+        final Order[] orders = basket.getOrders();
+        int _longestName = 0;
+
+        for (Order order : orders) {
+            Item _item = getItem(order.itemUUID);
+            if (_item == null) continue;
+            _longestName = Math.max(_longestName, _item.getFullName().length());
+        }
+
+        final int _receiptWidth = _longestName + 12;
+        StringBuilder _stringInOrder = new StringBuilder();
+
+        for (Order order : orders) {
+            Item _item = getItem(order.itemUUID);
+            if (_item == null) continue;
+            String _name = _item.getFullName();
+            _stringInOrder.append(_item.getFullName()).append(" ".repeat(_longestName - _name.length())).append("   ").append(order.amount).append("   £").append(new DecimalFormat("0.00").format(getPriceCount(order.itemUUID, order.amount))).append("\n");
+        }
+
+        String _receipt = centerText("~~~ Bob's Bagels ~~~", _receiptWidth) + "\n\n";
+
+        _receipt += centerText(getDateTime(), _receiptWidth) + "\n\n";
+        _receipt += "-".repeat(_receiptWidth) + "\n\n" + _stringInOrder + "\n" + "-".repeat(_receiptWidth) + "\n";
+        _receipt += "Total" + " ".repeat(_receiptWidth - 9) + "£" + new DecimalFormat("0.00").format(basket.calculateTotalPrice()) + "\n\n";
+        _receipt += centerText("Thank you", _receiptWidth) + "\n" + centerText("for your order!", _receiptWidth) + "\n";
+
+        System.out.println(_receipt);
     }
 
     public void populateMenu(Menu targetMenu) {
@@ -91,7 +122,7 @@ public class ShoppingManager {
         }
 
         targetMenu.pushWhitespace();
-        targetMenu.pushButton(new Button("Checkout", new Callable(this, "printReceipt")));
+        targetMenu.pushButton(new Button("Checkout", new Callable(this, "checkout")));
         targetMenu.pushButton(new Button("Return to Store", new Callable(targetMenu, "unfocus")));
     }
 
@@ -103,10 +134,28 @@ public class ShoppingManager {
         basket.setCapacity(newCapacity);
     }
 
+    public static double getPriceCount(String uuid, int count) {
+        Item _item = getItem(uuid);
+        if (_item == null) return 0.0;
+        return _item.price * count;
+    }
+
     public static Item getItem(String uuid) {
         for (Item item : availableItems)
             if (item.uuid.equals(uuid))
                 return item;
         return null;
+    }
+
+    public static String getDateTime() {
+        return DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss").format(LocalDateTime.now());
+    }
+
+    public static String centerText(String text, int length) {
+        return " ".repeat((length - text.length()) / 2) + text;
+    }
+
+    public static String centerText(String text, int length, String paddingString) {
+        return paddingString.repeat((length - text.length()) / 2) + text;
     }
 }

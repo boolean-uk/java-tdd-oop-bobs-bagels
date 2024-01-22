@@ -82,11 +82,29 @@ public class Basket {
     }
 
     public double calculateTotalPriceWithDiscounts() {
-        return 0.0;
+        double _outPrice = 0.0;
+
+        for (Order order : orders) {
+            Item _item = ShoppingManager.getItem(order.itemUUID);
+            if (_item == null) continue; // item is somehow invalid
+            _outPrice += _item.price * order.amount;
+
+            if (_item.discount != null) {
+                double _priceOff = _item.discount.applyDiscount(order, getOrders());
+                System.out.println(_priceOff);
+                _outPrice -= _priceOff;
+            }
+        }
+
+        return _outPrice;
     }
 
     public void clearBasket() {
         orders.clear();
+    }
+
+    public boolean isEmpty() {
+        return orders.isEmpty();
     }
 
     public Error setCapacity(int newCapacity) {

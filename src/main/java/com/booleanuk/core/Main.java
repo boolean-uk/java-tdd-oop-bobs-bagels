@@ -15,8 +15,8 @@ public class Main {
         Menu _buyItems = new Menu("Order Menu");
 
         for (Item item : ShoppingManager.availableItems) {
-            OrderButton _orderButton = new OrderButton("£" + item.price + "\t" + item.variant + " " + item.category);
-            _orderButton.itemFullName = item.variant + " " + item.category;
+            OrderButton _orderButton = new OrderButton("£" + item.price + "\t" + item.getFullName());
+            _orderButton.itemFullName = item.getFullName();
             _orderButton.callable = new Callable(_orderButton, "makeOrder", item.uuid);
             _orderButton.targetBasketAdder = new Callable(_sm.basket, "addCallback");
             _buyItems.pushButton(_orderButton);

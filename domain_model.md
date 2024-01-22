@@ -30,6 +30,7 @@
 | `String uuid`       |
 | `Category category` |
 | `String variant`    |
+| `Discount discount` |
 
 ## class Order
 
