@@ -90,10 +90,10 @@ public class Basket {
         return false;
     }
 
-    public int getAmountOfItemInBasket(Item item) {
+    public int getAmountOfItemInBasket(String name) {
         int counter = 0;
         for (Item basketItem : this.basket) {
-            if (item == basketItem) {
+            if (name.equals(basketItem.getName())) {
                 counter++;
             }
         }
