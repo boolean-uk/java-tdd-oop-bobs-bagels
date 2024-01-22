@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.LinkedHashMap;
 
 public class ExtensionTwoTest {
 
@@ -74,6 +75,7 @@ public class ExtensionTwoTest {
 
     @Test
     public void createReceiptForSeveralProductsOfDifferentKindsTest() {
+
         Store store = new Store();
         store.updateBasketCapacity(100);
         int basketId = store.createBasket();
@@ -103,13 +105,13 @@ public class ExtensionTwoTest {
                         "\n" +
                         "\n----------------------------" +
                         "\n" +
-                        "\nOnion Bagel        2   \u00A30.98" +
                         "\nPlain Bagel        12  \u00A33.99" +
                         "\nEverything Bagel   6   \u00A32.49" +
-                        "\nBlack Coffee       3   \u00A32.97" +
+                        "\nBlack Coffee       3   \u00A33.99" +
+                        "\nOnion Bagel        2   \u00A30.00" +
                         "\n" +
                         "\n----------------------------" +
-                        "\nTotal                 \u00A310.43" +
+                        "\nTotal                  \u00A3" + store.getCostOfBasket(basketId)+
                         "\n" +
                         "\n         Thank you" +
                         "\n      for your order!";

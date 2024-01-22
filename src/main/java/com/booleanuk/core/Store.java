@@ -1,5 +1,6 @@
 package com.booleanuk.core;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -71,7 +72,7 @@ public class Store {
         return baskets.get(basketId).removeItem(item);
     }
 
-    public Receipt createReceipt(int basketId) {
+    public Receipt createReceipt2(int basketId) {
         HashMap<Item, Double> prices = new HashMap<>();
         LinkedHashMap<Item, Integer> quantities = new LinkedHashMap<>();
 
@@ -98,12 +99,80 @@ public class Store {
         for(Map.Entry<Item, Integer> e: quantities.entrySet()) {
             Item item = e.getKey();
             int quantity = e.getValue();
-            if (inventory.hasDiscount(item)) {
-                prices.put(item, inventory.getCostForOfBundle(item, quantity));
+            if (inventory.hasBundleDiscount(item)) {
+                prices.put(item, inventory.getCostForBundle(item, quantity));
             } else {
                 prices.put(item, getCostOfItem(item)*quantity);
             }
         }
         return new Receipt(prices, quantities, getCostOfBasket(basketId), this.name, 28);
     }
+
+
+    public Receipt createReceipt(int basketId) {
+        HashMap<Item, Double> prices = new HashMap<>();
+        LinkedHashMap<Item, Integer> quantities = new LinkedHashMap<>();
+
+        Basket basket = baskets.get(basketId);
+
+        for(Item item: basket.getItems()) {
+            if (item.containsOtherItems()) {
+                for (Item containedItem : item.getContainedItems()) {
+                    if (!quantities.containsKey(containedItem)) {
+                        quantities.put(containedItem, 1);
+                        prices.put(containedItem, 0.0);
+                    } else {
+                        quantities.put(containedItem, quantities.get(containedItem) + 1);
+                    }
+                }
+            }
+            if (!quantities.containsKey(item)) {
+                quantities.put(item, 1);
+                prices.put(item, 0.0);
+            } else {
+                quantities.put(item, quantities.get(item) + 1);
+            }
+
+        }
+
+        ArrayList<Item> notInBundles = new ArrayList<>(basket.getItems());
+
+        for(Map.Entry<Item, Integer> e: quantities.entrySet()) {
+            Item item = e.getKey();
+            int quantity = e.getValue();
+            double cost = 0;
+            if (inventory.hasBundleDiscount(item)) {
+                prices.put(item, prices.get(item) + inventory.getCostForBundle(item, quantity));
+                int noOfItemsToRemove = quantity - inventory.getRemainderAfterBundle(item, quantity);
+                for(int i = 0; i < noOfItemsToRemove; i++) {
+                    notInBundles.remove(item);
+                }
+            }
+        }
+
+        for(ArrayList<Item> comboItems: inventory.getComboDiscounts().keySet()) {
+            int comboPrice = 0;
+            System.out.println("jejj "+comboItems);
+            System.out.println("ok  "+notInBundles);
+
+            while(inventory.containsComboItems(notInBundles, comboItems)) {
+                System.out.println(comboItems);
+                comboPrice += inventory.getComboDiscounts().get(comboItems);
+                for(Item comboItem: comboItems) {
+                    notInBundles.remove(comboItem);
+                    int quantity = quantities.remove(comboItem);
+                    quantities.put(comboItem, quantity);
+                }
+                prices.put(comboItems.get(0), prices.get(comboItems.get(0)) + comboPrice);
+
+            }
+        }
+
+        for(Item item: notInBundles) {
+            prices.put(item, prices.get(item) + getCostOfItem(item));
+        }
+
+        return new Receipt(prices, quantities, getCostOfBasket(basketId), this.name, 28);
+    }
+
 }

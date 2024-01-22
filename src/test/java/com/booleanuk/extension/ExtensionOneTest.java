@@ -47,7 +47,7 @@ public class ExtensionOneTest {
         }
 
         Assertions.assertEquals(23, store.getBaskets().get(basketId).getNoOfItems());
-        Assertions.assertEquals(10.43, store.getCostOfBasket(basketId), 0.001);
+        Assertions.assertEquals(10.43-0.98-2.97+1.25*2+0.99, store.getCostOfBasket(basketId), 0.001);
     }
 
     @Test
@@ -70,7 +70,7 @@ public class ExtensionOneTest {
         }
 
         Assertions.assertEquals(23, store.getBaskets().get(basketId).getNoOfItems());
-        Assertions.assertEquals(10.43 + 0.12*10, store.getCostOfBasket(basketId), 0.001);
+        Assertions.assertEquals((10.43-0.98-2.97+1.25*2+0.99) + 0.12*10, store.getCostOfBasket(basketId), 0.001);
     }
 
     @Test

@@ -12,12 +12,12 @@ public class Inventory {
 //    private final double SIX_BAGELS_DISCOUNT_PRICE = 2.49;
     private final double COFFEE_AND_BAGEL_DISCOUNT = 1.25;
     private HashMap<String, ArrayList<Discount>> bundleDiscounts;
-
+    private HashMap<ArrayList<Item>, Double> comboDiscounts;
     public Inventory() {
         initializePrices();
         initializeCodes();
-        initializeDiscounts();
-
+        initializeBundleDiscounts();
+        initializeComboDiscounts();
     }
 
     public double getCostOfItem(Item item) {
@@ -29,35 +29,26 @@ public class Inventory {
 
     public double getCostOfBasket(Basket basket) {
         double cost = 0;
-        HashMap<String, Integer> bundlesItems = new HashMap<>();
+        HashMap<Item, Integer> bundlesItems = new HashMap<>();
         ArrayList<Item> items = basket.getItems();
 
-        //TODO: fix
-        //If customer buys one coffee and one bagel
-        if(items.size() == 2 && ((items.get(0) instanceof Coffee && items.get(1) instanceof Bagel) || (items.get(1) instanceof Coffee && items.get(0) instanceof Bagel))) {
-            cost += COFFEE_AND_BAGEL_DISCOUNT;
-            Bagel bagel = (Bagel) (items.get(0) instanceof Bagel? items.get(0) : items.get(1));
-            for(Item item: bagel.getContainedItems()) {
-                cost += getCostOfItem(item);
-            }
-
-            return cost;
-        }
+        ArrayList<Item> notInBundlesItems = new ArrayList<>();
 
         String sku;
         for(Item item: items) {
 
             //Check if the item has discounts
             sku = skuCodes.get(item);
-            if(bundleDiscounts.containsKey(sku)) {
-                if (bundlesItems.containsKey(sku)) {
-                    bundlesItems.put(sku, bundlesItems.get(sku) + 1);
+            if(bundleDiscounts.containsKey(sku) ) {
+                if (bundlesItems.containsKey(item)) {
+                    bundlesItems.put(item, bundlesItems.get(item) + 1);
                 } else {
-                    bundlesItems.put(sku, 1);
+                    bundlesItems.put(item, 1);
                 }
-            }else {
-                cost +=getCostOfItem(item);
+            } else {
+                notInBundlesItems.add(item);
             }
+
             //check if the item contains other items and add those to the cost
             if(item.containsOtherItems()) {
                 for (Item containedItem : item.getContainedItems()) {
@@ -67,19 +58,76 @@ public class Inventory {
         }
 
         //See if discounts
-        for(Map.Entry<String, Integer> e: bundlesItems.entrySet()) {
-            cost += getCostForOfBundle(e.getKey(), e.getValue());
+        for(Map.Entry<Item, Integer> e: bundlesItems.entrySet()) {
+            cost += getCostForBundle(e.getKey(), e.getValue());
+
+            int itemsLeft = getRemainderAfterBundle(e.getKey(), e.getValue());
+            for (int i = 0; i < itemsLeft; i++ ) {
+                notInBundlesItems.add(e.getKey());
+            }
+        }
+
+        for(ArrayList<Item> comboItems: comboDiscounts.keySet()) {
+            while(containsComboItems(notInBundlesItems, comboItems)) {
+                cost += comboDiscounts.get(comboItems);
+                for(Item comboItem: comboItems) {
+                    notInBundlesItems.remove(comboItem);
+                }
+            }
+        }
+
+        for(Item item: notInBundlesItems) {
+            cost += getCostOfItem(item);
+        }
+
+
+        return cost;
+    }
+
+    public boolean containsComboItems(ArrayList<Item> items, ArrayList<Item> comboItems) {
+        for(Item comboItem: comboItems) {
+            if(!items.contains(comboItem)) {
+                return false;
+            }
+        }
+        return true;
+
+    }
+
+    public double getCostForBundle(Item item, int quantity) {
+        return getCostForBundle(skuCodes.get(item), quantity);
+    }
+
+    //TODO: generalize?
+    public double getCostForBundle(String sku, int quantity) {
+        double cost = 0;
+
+        for(Discount discount: bundleDiscounts.get(sku)) {
+            while(quantity-discount.getQuantity() >= 0) {
+                cost += discount.getCost();
+                quantity -= discount.getQuantity();
+            }
         }
 
         return cost;
     }
 
-    public double getCostForOfBundle(Item item, int quantity) {
-        return getCostForOfBundle(skuCodes.get(item), quantity);
+    public int getRemainderAfterBundle(Item item, int quantity) {
+        return getRemainderAfterBundle(skuCodes.get(item), quantity);
     }
 
-    //TODO: generalize?
-    public double getCostForOfBundle(String sku, int quantity) {
+    public int getRemainderAfterBundle(String sku, int quantity) {
+
+        for(Discount discount: bundleDiscounts.get(sku)) {
+            while(quantity-discount.getQuantity() >= 0) {
+                quantity -= discount.getQuantity();
+            }
+        }
+
+        return quantity;
+    }
+
+    public double getCostForCombo(String sku, int quantity) {
         double cost = 0;
 
         for(Discount discount: bundleDiscounts.get(sku)) {
@@ -133,11 +181,12 @@ public class Inventory {
 
     }
 
-    private void initializeDiscounts() {
+    private void initializeBundleDiscounts() {
         bundleDiscounts = new HashMap<>();
 
         //TODO: this is dependent on inserting highest quantity first, how can we assure this?
         //sort with implemented compare method?
+
         ArrayList<Discount> discountData = new ArrayList<>(Arrays.asList(new Discount(3.99, 12), new Discount(2.49, 6)));
 
         bundleDiscounts.put("BGLO", discountData);
@@ -147,13 +196,35 @@ public class Inventory {
 
     }
 
-    public boolean hasDiscount(Item item) {
+    private void initializeComboDiscounts() {
+        comboDiscounts = new HashMap<>();
+        ArrayList<Item> discountData;
+        Coffee coffee = new Coffee("Black");
+
+        for(Item item: skuCodes.keySet()) {
+            if(item instanceof Bagel) {
+                discountData = new ArrayList<>(Arrays.asList(coffee, item));
+                comboDiscounts.put(discountData, 1.25);
+            }
+        }
+
+    }
+
+    public boolean hasBundleDiscount(Item item) {
         return bundleDiscounts.containsKey(skuCodes.get(item));
     }
+//
+//    public boolean hasComboDiscount(Item item) {
+//        return bundleDiscounts.containsKey(skuCodes.get(item));
+//    }
 
     public boolean hasItem(Item item) {
 
         return skuCodes.containsKey(item);
+    }
+
+    public HashMap<ArrayList<Item>, Double> getComboDiscounts() {
+        return new HashMap<>(comboDiscounts);
     }
 
 }
