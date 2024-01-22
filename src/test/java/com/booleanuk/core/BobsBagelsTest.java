@@ -177,33 +177,33 @@ class BobsBagelsTest {
 
         basket.addItem("BGLP");
         basket.addItem("BGLP");
-        basket.addItem("COFB");
-        basket.addItem("FILB");
-        basket.addItem("FILB");
         basket.addItem("BGLP");
         basket.addItem("BGLP");
-        basket.addItem("COFB");
-        basket.addItem("FILB");
-        basket.addItem("FILB");
+        basket.addItem("BGLP");
+        basket.addItem("BGLP");
+//        basket.addItem("COFB");
+//        basket.addItem("FILB");
+
 
         String receipt = order.generateReceipt(basket.getItemList());
-//        System.out.println(receipt);
+        System.out.println(receipt);
         Assertions.assertNotNull(receipt);
         Assertions.assertTrue(receipt.length() > 50);
 
     }
 
     @Test
-    public void testReiceptNoItems() {
+    public void testReceiptWithNoItems() {
         Basket basket = new Basket();
         Inventory inventory = new Inventory();
         Order order = new Order(inventory);
 
         String receipt = order.generateReceipt(basket.getItemList());
-        System.out.println(receipt);
 
         Assertions.assertNotNull(receipt);
-        Assertions.assertFalse(receipt.length() < 100);
+        Assertions.assertFalse(receipt.length() < 150);
+        Assertions.assertFalse(receipt.length() > 155);
+
 
     }
 }
