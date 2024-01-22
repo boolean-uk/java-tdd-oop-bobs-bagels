@@ -1,7 +1,5 @@
 package com.booleanuk.core;
 
-import org.w3c.dom.ls.LSOutput;
-
 import java.util.ArrayList;
 
 public class Basket {
@@ -49,7 +47,7 @@ public class Basket {
         return false;
     }
 
-    public boolean remove(String itemSKU) {
+    public boolean removeItem(String itemSKU) {
         if(basketList.contains(itemSKU)){
             basketList.remove(itemSKU);
             return true;
@@ -59,6 +57,8 @@ public class Basket {
 
     public double totalCost() {
         double totalPrice = 0;
+        //Running 2 loops, try to match from basket to inventory,
+        // if match: get the pricetag from inventory
         for (int i = 0; i < basketList.size(); i++) {
             for (int j = 0; j < inventoryList.size(); j++) {
                 if (basketList.get(i).equals(inventoryList.get(j).getSku())){
@@ -76,15 +76,19 @@ public class Basket {
         ArrayList <String> newList = new ArrayList<>();
         this.capacity = capacity;
 
-        for (int i = 0; i < capacity ; i++) {
-            newList.add(basketList.get(i));
+        if (!basketList.isEmpty()){
+            for (int i = 0; i < capacity ; i++) {
+                newList.add(basketList.get(i));
+            }
+
+            //Does not remove filling after changing capacity
+            for (int i = 0; i < basketList.size() ; i++) {
+                if (basketList.get(i).startsWith("FIL")){
+                    newList.add(basketList.get(i));}
+            }
         }
 
-        //Does not remove filling after changing capacity
-        for (int i = 0; i < basketList.size() ; i++) {
-            if (basketList.get(i).startsWith("FIL")){
-            newList.add(basketList.get(i));}
-        }
+
 
         basketList = newList;
         return basketList.toString();
@@ -104,7 +108,6 @@ public class Basket {
         for (int i = 0; i < inventoryList.size(); i++) {
             if(itemSKU.equals(inventoryList.get(i).getSku())){
                 //Adds the filling next to the bagel, instead of adding at the end of list
-                //Better visual for which filling belongs to which bagel
                 for (int j = 0; j < basketList.size(); j++) {
                     if (itemSKU.equals(basketList.get(j))){
                         basketList.add(j+1,fillingSKU);
@@ -120,6 +123,7 @@ public class Basket {
 //  problem 1, adding too much filling will restrict adding Item
 //  (adding 1 bagel + 4 filling = full basket, bad practice) Work around is to use addFilling after everything
 //  problem 2, when using changeCapacity to less, it deletes the filling to the bagel
+//  problem 3, removing the bagel does not remove the filling from basket
 //  know the reason, hard to come up with solution based on what I have
 
     //Make discount item
@@ -127,4 +131,102 @@ public class Basket {
     //method has arraylist<String> discount
     //the left over bagels compares with coffee
 
+    //--------------------------EXTENSION 1--------------------------//
+    public double discount() {
+        double price = 0;
+        ArrayList<String> discount = new ArrayList<>();
+        inventoryList.add(new Item("DIS6", 2.49d, "Discount", "6 bagels"));
+        inventoryList.add(new Item("DIS12", 3.99d, "Discount", "12 bagels"));
+        inventoryList.add(new Item("DISCB", 1.25d, "Discount", "Coffee + Bagel"));
+
+        int counterBGL = 0;
+        int counterCOF = 0;
+
+        for (int i = 0; i < basketList.size(); i++) {
+            if (basketList.get(i).startsWith("BGL")){
+                counterBGL ++;
+            } else if (basketList.get(i).startsWith("COF")){
+                counterCOF ++;
+            }else if (basketList.get(i).startsWith("FIL")){
+                discount.add(basketList.get(i));
+            }
+        }
+        //Converts to discount code starts here
+        System.out.println(counterBGL);
+        System.out.println(counterCOF);
+
+        int discount12 = counterBGL/12; // 20/12 = 1
+        int remainingAfter12 = counterBGL%12; // 20%12 = 8
+        int discount6 = remainingAfter12/6; // 8/6 = 1
+        int remainingAfter6 = remainingAfter12%6; // 8%6 = 2
+
+        //Generating how many discounts for bagel
+        for (int i = 0; i < discount12; i++) {
+            discount.add("DIS12");
+        }
+
+        for (int i = 0; i < discount6; i++) {
+            discount.add("DIS6");
+        }
+
+        //Generating how many discounts with coffee + bagel
+        if (counterCOF >= remainingAfter6){
+            int discountCB = counterCOF*remainingAfter6/counterCOF;
+            for (int i = 0; i < discountCB ; i++) {
+                discount.add("DISCB");
+            }
+            int remainer = counterCOF - remainingAfter6;
+            int counter = 0;
+            System.out.println(remainer);
+            for (int i = 0; i < remainer; i++) {
+                for (int j = 0; j < basketList.size(); j++) {
+                    if (basketList.get(j).startsWith("COF") & counter < remainer){
+                        counter++;
+                        discount.add(basketList.get(j));
+                    }
+                }
+            }
+        }
+        if (remainingAfter6 > counterCOF){
+            int discountCB = remainingAfter6*counterCOF/remainingAfter6;
+            for (int i = 0; i < discountCB; i++) {
+                discount.add("DISCB");
+            }
+            int remainer = remainingAfter6 - counterCOF;
+            int counter = 0;
+            for (int i = 0; i < remainer; i++) {
+                for (int j = 0; j < basketList.size(); j++) {
+                    if (basketList.get(j).startsWith("BGL") & counter < remainer){
+                        counter++;
+                        discount.add(basketList.get(j));
+                    }
+                }
+            }
+        }
+        System.out.println(discount.toString());
+
+        //Calculate the total price with discount
+        for (int i = 0; i < discount.size(); i++) {
+            for (int j = 0; j < inventoryList.size(); j++) {
+                if (discount.get(i).equals(inventoryList.get(j).getSku())){
+                    price += inventoryList.get(j).getPrice();
+                }
+            }
+        }
+        return Double.parseDouble(String.format("%.2f",price));
     }
+
+    //problem -> discount only to the first item
+
+    public static void main(String[] args) {
+        int num = 25/12;
+        int num2 = 25%12;
+        int num3 = 4/6;
+        int num4 = 4%6;
+        int num5 = -2-(-3);
+//        System.out.println(num4);
+//        System.out.println(num3);
+        System.out.println(num5);
+        System.out.println(num2);
+    }
+}

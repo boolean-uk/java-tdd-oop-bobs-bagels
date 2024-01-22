@@ -68,7 +68,6 @@ public class BasketTest {
     @Test
     public void testTotalPriceNoItem() {
         Basket basket = new Basket();
-
         Assertions.assertEquals(0, basket.totalCost());
     }
 

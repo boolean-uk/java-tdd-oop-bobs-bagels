@@ -38,4 +38,108 @@ public class BasketTestExtenstion1 {
 
         Assertions.assertEquals(9.97,basket.discount());
     }
+
+    @Test
+    public void testDiscount2() {
+        Basket basket = new Basket();
+        basket.changeCapacity(25);
+        basket.addItem("BGLP");
+        basket.addItem("BGLP");
+        basket.addItem("BGLP");
+        basket.addItem("BGLP");
+        basket.addItem("BGLP");
+        basket.addItem("BGLP");
+        basket.addItem("BGLP");
+        basket.addItem("BGLP");
+        basket.addItem("BGLP");
+        basket.addItem("BGLP");
+        basket.addItem("BGLP");
+        basket.addItem("BGLP");
+        basket.addItem("BGLP");
+        basket.addItem("BGLP");
+        basket.addItem("BGLP");
+        basket.addItem("BGLP");
+
+        Assertions.assertEquals(5.55,basket.discount());
+    }
+    @Test
+    public void testDiscount3() {
+        Basket basket = new Basket();
+        basket.changeCapacity(25);
+        basket.addItem("BGLP");
+        basket.addItem("BGLP");
+        basket.addItem("BGLP");
+        basket.addItem("BGLP");
+        basket.addItem("BGLP");
+        basket.addItem("BGLP");
+        basket.addItem("BGLP");
+        basket.addItem("BGLP");
+        basket.addItem("BGLP");
+        basket.addItem("BGLP");
+        basket.addItem("BGLP");
+        basket.addItem("BGLP");
+        basket.addItem("BGLP");
+        basket.addItem("BGLP");
+        basket.addItem("BGLP");
+        basket.addItem("BGLP");
+        basket.addItem("COFB"); //0.99 => 1.25
+        basket.addItem("COFC"); //1.29 => 1.25
+
+        Assertions.assertEquals(3.99+1.25+1.25+0.39+0.39,basket.discount());
+    }
+
+    @Test
+    public void testDiscount4() {
+        Basket basket = new Basket();
+        basket.changeCapacity(25);
+        basket.addItem("BGLP");
+        basket.addItem("BGLP");
+        basket.addItem("FILE"); // .12
+
+
+        Assertions.assertEquals(0.9,basket.discount());
+    }
+
+    @Test
+    public void testDiscount5() {
+        Basket basket = new Basket();
+        basket.changeCapacity(25);
+        basket.addItem("BGLP"); // 16 bgl
+        basket.addItem("BGLP");
+        basket.addItem("BGLP");
+        basket.addItem("BGLP");
+        basket.addItem("BGLP");
+        basket.addItem("BGLP");
+        basket.addItem("BGLP");
+        basket.addItem("BGLP");
+        basket.addItem("BGLP");
+        basket.addItem("BGLP");
+        basket.addItem("BGLP");
+        basket.addItem("BGLP");
+        basket.addItem("BGLP");
+        basket.addItem("BGLP");
+        basket.addItem("BGLP");
+        basket.addItem("BGLP");
+        basket.addItem("COFB"); //0.99 => 1.25
+        basket.addItem("COFC"); //1.29 => 1.25
+        basket.addItem("FILE");
+        basket.addItem("FILE");
+        basket.addItem("FILE");
+
+        Assertions.assertEquals(3.99+1.25+1.25+0.39+0.39+0.12+0.12+0.12,basket.discount());
+    }
+
+    @Test
+    public void testDiscountMix() {
+        Basket basket = new Basket();
+        basket.changeCapacity(12);
+        basket.addItem("BGLO");
+        basket.addItem("COFB");
+        basket.addItem("COFC");
+        basket.addFilling("BGLO","FILC");
+        basket.addFilling("BGLO","FILX");
+        basket.addFilling("BGLP","FILX");
+
+        Assertions.assertEquals(0,basket.discount());
+    }
 }
