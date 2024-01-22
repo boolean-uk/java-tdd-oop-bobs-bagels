@@ -291,10 +291,10 @@ I want to get a receipt of my purchase with savings
 Class Customer
 
 
-| Class Variables               | Methods                          | Scenario       | Output/Return |
-|-------------------------------|----------------------------------|----------------|---------------|
-| Map<String, Double> discounts | Map<String, Double> getDiscounts | Gets discounts | boolean       |
-|                               |                                  |                |               |
-|                               |                                  |                |               |
-|                               |                                  |                |               |
+| Class Variables                          | Methods                                     | Scenario       | Output/Return                                                              |
+|------------------------------------------|---------------------------------------------|----------------|----------------------------------------------------------------------------|
+| Map<String, ArrayList<Double>> discounts | Map<String, ArrayList<Double>> getDiscounts | Gets discounts | Map<String, ArrayList<Double>> of sku codes connected to list of discounts |
+|                                          |                                             |                |                                                                            |
+|                                          |                                             |                |                                                                            |
+|                                          |                                             |                |                                                                            |
 

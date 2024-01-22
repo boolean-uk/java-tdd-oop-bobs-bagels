@@ -1,5 +1,6 @@
 package com.booleanuk.core;
 
+import com.booleanuk.extension.Receipt;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -196,6 +197,38 @@ public class CustomerTest {
         Assertions.assertEquals(expectedPrice, finalDiscount2);
 
 
+
+    }
+
+
+    @Test
+    public void testTotalCostAfterDiscounts() {
+        Customer customer = new Customer();
+
+        Basket basket = new Basket(15);
+
+        basket.addItemToBasket(new Bagel("Plain"));
+        basket.addItemToBasket(new Bagel("Plain"));
+        basket.addItemToBasket(new Bagel("Plain"));
+        basket.addItemToBasket(new Bagel("Plain"));
+        basket.addItemToBasket(new Bagel("Plain"));
+        basket.addItemToBasket(new Bagel("Plain"));
+        basket.addItemToBasket(new Bagel("Plain"));
+        basket.addItemToBasket(new Filling("Bacon"));
+        basket.addItemToBasket(new Coffee("White"));
+        basket.addItemToBasket(new Coffee("White"));
+        basket.addItemToBasket(new Coffee("White"));
+        basket.addItemToBasket(new Bagel("Plain"));
+
+        System.out.println(new Bagel("plain").getName());
+
+        customer.setBasket(basket);
+        Receipt receipt = new Receipt(customer);
+
+
+        System.out.println(receipt.printBasket());
+
+        Assertions.assertEquals(6.3, customer.getTotalCost(customer.getBasket().getItemList()));
 
     }
 

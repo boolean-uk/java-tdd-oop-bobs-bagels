@@ -22,7 +22,7 @@ public class Receipt {
 
 
     public String printBasket() {
-        return formatDate() + "\n" + formatBasketValues(this.customer.getBasket().getItemList()) + "\n" + formatSavings(this.customer.getBasket().getItemList())  + "Total                       " + this.customer.getTotalCost(this.customer.getBasket().getItemList());
+        return formatDate() + "\n" + formatBasketValues(this.customer.getBasket().getItemList()) + "\n"  + "Total                       " + this.customer.getTotalCost(this.customer.getBasket().getItemList());
     }
 
     public String formatDate() {
@@ -143,10 +143,7 @@ public class Receipt {
         return returnString;
     }
 
-    public String formatSavings(Map<Item, Integer> basketMap) {
 
-        return "";
-    }
 
 
     public static void main(String[] args) {
@@ -166,6 +163,7 @@ public class Receipt {
         basket.addItemToBasket(new Coffee("White"));
         basket.addItemToBasket(new Coffee("White"));
         basket.addItemToBasket(new Coffee("White"));
+        basket.addItemToBasket(new Bagel("Plain"));
 
         System.out.println(new Bagel("plain").getName());
 
