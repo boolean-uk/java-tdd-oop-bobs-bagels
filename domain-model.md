@@ -126,3 +126,18 @@ I want customers to only be able to order things that we stock in our inventory.
 | Inventory |                              | ArrayList<String> stockList |                      | return true        |
 | Order     |                              |                             | if item not in stock | Don't add item and |
 |           |                              |                             |                      | return false       |
+
+
+## Extension 2
+
+```
+As a customer,
+So I can see if my order is correct,
+I want a receipt with all my items and prices.
+```
+| Class  | Methods                                     | Member variables           | Scenario              | Outputs/Results |
+|--------|---------------------------------------------|----------------------------|-----------------------|-----------------|
+| Order  | generateReceipt(ArrayList<String> itemList) | ArrayList<String> itemList | If receipt has items  | return receipt  |
+|        |                                             | StringBuilder receipt      |                       |                 |
+|        |                                             | totalCost                  | if no items in basket | return receipt  |
+|        |                                             |                            |                       | without items   |
