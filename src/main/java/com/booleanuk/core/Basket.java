@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class Basket {
 
     private ArrayList<Item> basket;
-    private Inventory inventory;
+    private final Inventory inventory;
     private int basketCapacity;
 
 
@@ -90,6 +90,16 @@ public class Basket {
         return false;
     }
 
+    public int getAmountOfItemInBasket(Item item) {
+        int counter = 0;
+        for (Item basketItem : this.basket) {
+            if (item == basketItem) {
+                counter++;
+            }
+        }
+        return counter;
+    }
+
     public ArrayList<Item> getBasket() {
         return this.basket;
     }
@@ -100,11 +110,11 @@ public class Basket {
 
     public static void main(String[] args) {
         Inventory inventory = new Inventory();
-        Basket test = new Basket(inventory);
+        //Basket test = new Basket(inventory);
 
         String sKU = inventory.getSKU("Plain");
         System.out.println(sKU);
-        Bagel plain = new Bagel("Plain", sKU);
+        //Bagel plain = new Bagel("Plain", sKU);
 
     }
 }

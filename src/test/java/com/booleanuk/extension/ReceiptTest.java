@@ -6,6 +6,8 @@ import org.junit.jupiter.api.Test;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class ReceiptTest {
 
@@ -46,12 +48,15 @@ public class ReceiptTest {
         Assertions.assertTrue(inventory.canItemBeOrdered(item5));
         basket.addBagelFilling(bagel2, new Filling(item6, inventory.getSKU(item6)));
 
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        LocalDateTime dateTime = LocalDateTime.now();
+
         String expectedReceipt = "";
         expectedReceipt += "       ~~~ Bob's Bagels ~~~       \n";
         expectedReceipt += "\n";
-        expectedReceipt += "2024-01-22\n";
+        expectedReceipt += "        " + dtf.format(dateTime) + "       \n";
         expectedReceipt += "\n";
-        expectedReceipt += "----------------------------------\n";
+        expectedReceipt += "-----------------------------------\n";
         expectedReceipt += "\n";
         expectedReceipt += "Plain Bagel               1\n";
         expectedReceipt += "with Bacon filling        1  £0.51\n";
@@ -60,13 +65,13 @@ public class ReceiptTest {
         expectedReceipt += "with Cream Cheese filling 1  £0.61\n";
         expectedReceipt += "Black Coffee              1  £0.99\n";
         expectedReceipt += "\n";
-        expectedReceipt += "----------------------------------\n";
-        expectedReceipt += "Total                        £3.30\n";
+        expectedReceipt += "-----------------------------------\n";
+        expectedReceipt += "Total                         £3.3\n";
         expectedReceipt += "\n";
         expectedReceipt += "            Thank you             \n";
-        expectedReceipt += "          for your order!         \n";
+        expectedReceipt += "         for your order!          \n";
 
-        receipt.printReceipt();
+        receipt.printReceipt(basket, inventory);
         Assertions.assertEquals(expectedReceipt, outContent.toString());
     }
 }
