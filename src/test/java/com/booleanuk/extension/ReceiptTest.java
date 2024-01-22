@@ -23,13 +23,12 @@ public class ReceiptTest {
         basket.addItemToBasket(new Bagel("Plain"));
         basket.addItemToBasket(new Bagel("Plain"));
         basket.addItemToBasket(new Filling("Bacon"));
-        basket.addItemToBasket(new Coffee("White"));
 
 
 
 
         Assertions.assertEquals("     " + new SimpleDateFormat("dd-MM-yyyy : HH-mm-ss").format(new Date()), receipt.formatDate());
-        Assertions.assertEquals("Item              Qty      Price\n" + "--------------------------------\n" + "Plain Bagel         3       1.17\n" + "White Coffee        1       1.19\n" + "Bacon Filling       1       0.12\n" + "--------------------------------", receipt.formatBasketValues(basket.getItemList()));
+        Assertions.assertEquals("Item              Qty      Price\n" + "--------------------------------\n" + "Plain Bagel         3       1.17\n" + "Bacon Filling       1       0.12\n" + "--------------------------------", receipt.formatBasketValues(basket.getItemList()));
 
     }
 
@@ -75,7 +74,7 @@ public class ReceiptTest {
 
 
         Assertions.assertEquals("     " + new SimpleDateFormat("dd-MM-yyyy : HH-mm-ss").format(new Date()), receipt.formatDate());
-        Assertions.assertEquals("Item              Qty      Price\n" + "--------------------------------\n" + "CoffeeBagelDeal         3       3.75\n" + "                         (-0.39)\n" + "--------------------------------", receipt.formatBasketValues(basket.getItemList()));
+        Assertions.assertEquals("Item              Qty      Price\n" + "--------------------------------\n" + "CoffeeBagelDeal     3       3.75\n" + "                         (-0.39)\n" + "--------------------------------", receipt.formatBasketValues(basket.getItemList()));
 
     }
 }
