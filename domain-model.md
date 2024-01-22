@@ -55,13 +55,7 @@ So that I can not overfill my small bagel basket
 I'd like to know when my basket is full when I try adding an item beyond my basket capacity.
 ```
 
-Class Basket
-
-| Class vars                                | Methods         | Scenario                                  | Return/Result |
-|-------------------------------------------|-----------------|-------------------------------------------|---------------|
-| HashMap<Bagel, ArrayList<Filling>> basket | isAlreadyFull() | if basket is full and bagel was not added | true          |
-| int maxCapacity                           |                 | if basket is not full and bagel was added | false         |
-
+When calling the Basket class's addBagel method and the basket is already full, it will return false.
 
 ```
 User story 4
@@ -72,10 +66,10 @@ I’d like to change the capacity of baskets.
 
 Class Basket
 
-| Class vars                                | Methods                                          | Scenario                   | Return/Result |
-|-------------------------------------------|--------------------------------------------------|----------------------------|---------------|
-| HashMap<Bagel, ArrayList<Filling>> basket | changeCapacityOfBasket(int numberOfExtraIndices) | if extra capacity is added | int           |
-| int maxCapacity                           |                                                  |                            |               |
+| Class vars                                | Methods                                       | Scenario                     | Return/Result |
+|-------------------------------------------|-----------------------------------------------|------------------------------|---------------|
+| HashMap<Bagel, ArrayList<Filling>> basket | extendCapacityOfBasket(int additionalIndices) | what is the new basket size? | int           |
+| int maxCapacity                           |                                               |                              |               |
 
 
 ```
@@ -119,12 +113,12 @@ I'd like to know the cost of a bagel before I add it to my basket.
 
 Class Bagel
 
-| Class vars       | Methods   | Scenario | Return/Result |
-|------------------|-----------|----------|---------------|
-| String name      | getCost() |          | double        |
-| String productID |           |          |               |
-| String uniqueID  |           |          |               |
-| double price     |           |          |               |
+| Class vars       | Methods    | Scenario | Return/Result |
+|------------------|------------|----------|---------------|
+| String name      | getPrice() |          | double        |
+| String productID |            |          |               |
+| String uniqueID  |            |          |               |
+| double price     |            |          |               |
 
 
 ```
@@ -151,18 +145,26 @@ Class Inventory
 
 | Class vars                            | Methods                    | Scenario | Return/Result |
 |---------------------------------------|----------------------------|----------|---------------|
-| HashMap<Filling, Integer> allFillings | getAvailableFillingsInfo() |          |               |
-| HashMap<Bagel, Integer> allBagels     |                            |          |               |
+| HashMap<Bagel, Integer> allBagels     | getAvailableFillingsInfo() |          |               |
+| HashMap<Filling, Integer> allFillings |                            |          |               |
 | HashMap<Coffee, Integer> allCoffees   |                            |          |               |
 
 
 Class Filling
 
-| Class vars       | Methods                                              | Scenario | Return/Result |
-|------------------|------------------------------------------------------|----------|---------------|
-| String name      | Filling(String name, String productID, double price) |          |               |
-| String productID | getCost()                                            |          | double        |
-| double price     |                                                      |          |               |
+| Class vars       | Methods    | Scenario | Return/Result |
+|------------------|------------|----------|---------------|
+| String name      | getPrice() |          | double        |
+| String productID |            |          |               |
+| double price     |            |          |               |
+
+Class Basket
+
+| Class vars                                | Methods                     | Scenario | Return/Result |
+|-------------------------------------------|-----------------------------|----------|---------------|
+| HashMap<Bagel, ArrayList<Filling>> basket | Basket(Inventory inventory) |          |               |
+| int maxCapacity                           |                             |          |               |
+| Inventory inventory                       |                             |          |               |
 
 
 ```
@@ -175,6 +177,6 @@ Class Inventory
 
 | Class vars                            | Methods             | Scenario | Return/Result |
 |---------------------------------------|---------------------|----------|---------------|
-| HashMap<Filling, Integer> allFillings | getAvailableItems() |          |               |
-| HashMap<Bagel, Integer> allBagels     |                     |          |               |
+| HashMap<Bagel, Integer> allBagels     | getAvailableItems() |          |               |
+| HashMap<Filling, Integer> allFillings |                     |          |               |
 | HashMap<Coffee, Integer> allCoffees   |                     |          |               |
