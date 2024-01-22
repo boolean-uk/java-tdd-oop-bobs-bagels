@@ -35,7 +35,7 @@ public class Receipt {
         this.quantities = quantities;
         this.discounts = discounts;
         this.totalCost = totalCost;
-        this.totalDiscount = totalDiscount;
+        this.totalDiscount = (totalDiscount*100)/100;
         this.storeName = storeName;
         this.width = width;
         priceOffSet = 9;
@@ -64,7 +64,7 @@ public class Receipt {
             quantityAndCost = quantity + " ".repeat(priceOffSet - String.valueOf(quantity).length()- String.valueOf(cost).length()-1) + "\u00A3"+cost;
             string += "\n" + name + " ".repeat(width-name.length()-priceOffSet) + quantityAndCost;
             if(discounts != null && discounts.get(item) != 0) {
-                String discount = "(-\u00A3" + discounts.get(item) + ")";
+                String discount = "(-\u00A3" + String.format("%,.2f", discounts.get(item)) + ")";
                 string += "\n" + " ".repeat(width-discount.length()) + discount;
             }
         }
@@ -85,7 +85,7 @@ public class Receipt {
     private String formatSavingsMessage() {
         String savingsMessage = "";
         if(discounts != null) {
-            String firstLine = "You saved a total of \u00A3" + totalDiscount;
+            String firstLine = "You saved a total of \u00A3" + String.format("%,.2f", totalDiscount);
             String secondLine = "on this shop";
             savingsMessage += " ".repeat((width - firstLine.length()) / 2) + firstLine;
             savingsMessage += "\n" + " ".repeat((width - secondLine.length()) / 2) + secondLine;

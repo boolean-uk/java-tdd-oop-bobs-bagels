@@ -118,15 +118,16 @@ public class Store {
             double cost = 0;
             if (inventory.hasBundleDiscountForItem(item)) {
                 double bundleCost = inventory.getCostForBundle(item, quantity);
+                System.out.println(bundleCost);
                 if(bundleCost > 0) {
                     prices.put(item, prices.get(item) + bundleCost);
-                    double discount = quantity * getCostOfItem(item) - (discounts.get(item) + bundleCost);
-                    discounts.put(item, discount);
-                    totalDiscounts += discount;
                     int noOfItemsToRemove = quantity - inventory.getRemainderAfterBundle(item, quantity);
                     for (int i = 0; i < noOfItemsToRemove; i++) {
                         notInBundles.remove(item);
                     }
+                    double discount = noOfItemsToRemove * getCostOfItem(item) - (discounts.get(item) + bundleCost);
+                    discounts.put(item, discount);
+                    totalDiscounts += discount;
                 }
             }
         }
