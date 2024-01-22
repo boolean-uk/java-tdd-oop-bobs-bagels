@@ -28,4 +28,21 @@ public class BasketTest {
         Assertions.assertEquals(5.95, basket.discountPerItem().get(bglo)[0]);
         Assertions.assertEquals(1.89, basket.discountPerItem().get(bglo)[1]);
     }
+
+    @Test
+    public void totalCostWithDiscount() {
+        HashMap<Item, Integer> testInventory = new HashMap<>();
+        Item bglo = new Item("BGLO","Bagel", "Onion", 0.49);
+        testInventory.put(bglo, 50);
+        BobsBagelsShop shop = new BobsBagelsShop(testInventory);
+        Basket basket = new Basket(shop, 16);
+        basket.add(bglo); basket.add(bglo); basket.add(bglo); basket.add(bglo); basket.add(bglo); basket.add(bglo); basket.add(bglo); basket.add(bglo);
+        basket.add(bglo); basket.add(bglo); basket.add(bglo); basket.add(bglo); basket.add(bglo); basket.add(bglo); basket.add(bglo); basket.add(bglo);
+
+        // Originally 16 Onion bagels = 7.84, new price 5.95, savings = 1.89
+        Assertions.assertEquals(5.95, basket.totalCostWithDiscount());
+
+        Basket basket2 = new Basket(shop, 3);
+        Assertions.assertEquals(0.0, basket2.totalCostWithDiscount());
+    }
 }
