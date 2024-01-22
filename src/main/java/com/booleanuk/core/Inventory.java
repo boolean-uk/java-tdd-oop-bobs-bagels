@@ -46,16 +46,13 @@ public class Inventory {
 		return price;
 	}
 
-	public ArrayList<DiscountBulk> getDiscountsBulk() {
-		return discountsBulk;
-	}
-
-	public ArrayList<String> getDiscountBulkIds() {
-		ArrayList<String> ids = new ArrayList<>();
-		for (DiscountBulk disc : discountsBulk) {
-			ids.add(disc.getId());
+	public String getName(String id) throws NotInInventoryException {
+		for (Item item : inventory) {
+			if (item.getId().equals(id)) {
+				return item.getName();
+			}
 		}
-		return ids;
+		throw new NotInInventoryException(id);
 	}
 
 	public double getBulkAmount(String id) {
@@ -76,41 +73,11 @@ public class Inventory {
 		return 0;
 	}
 
-	public ArrayList<DiscountCombo> getDiscountsCombo() {
-		return discountsCombo;
-	}
-
-	public boolean hasDiscount(String id) {
-
-		for (DiscountBulk discount : discountsBulk) {
-			if (discount.getId().equals(id)) return true;
-		}
-		for (DiscountCombo discount : discountsCombo) {
-			for (String itemId : ((DiscountCombo) discount).comboItems) {
-				if (itemId.equals(id)) return true;
-			}
-
-		}
-
-		return false;
-	}
-
 	public boolean hasDiscountBulk(String id) {
 		for (DiscountBulk discount : discountsBulk) {
 			if (discount.getId().equals(id)) return true;
 		}
 
-
-		return false;
-	}
-
-	public boolean hasDiscountCombo(String id) {
-		for (DiscountCombo discount : discountsCombo) {
-			for (String itemId : ((DiscountCombo) discount).comboItems) {
-				if (itemId.equals(id)) return true;
-			}
-
-		}
 
 		return false;
 	}
@@ -122,9 +89,10 @@ public class Inventory {
 		}
 		return pairs;
 	}
+
 	public double getDiscountComboAmount(String[] pair) {
-		for (DiscountCombo combo : discountsCombo){
-			if (combo.getComboItems()==pair){
+		for (DiscountCombo combo : discountsCombo) {
+			if (combo.getComboItems() == pair) {
 				return combo.getNewPrice();
 			}
 		}
@@ -177,7 +145,6 @@ public class Inventory {
 		inventory.add(item14);
 
 	}
-
 
 
 }

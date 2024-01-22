@@ -1,5 +1,7 @@
 package com.booleanuk.core;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 public class Basket {
@@ -78,6 +80,17 @@ public class Basket {
 		}
 	}
 
+	public int getSize() {
+		return this.size;
+	}
+
+	public double getPrice(String id) throws NotInInventoryException {
+		if (inventory.inInventory(id)) {
+			return inventory.getPrice(id);
+		} else {
+			throw new NotInInventoryException(id);
+		}
+	}
 
 	public double getTotalCost() {
 		double total = 0;
@@ -92,20 +105,53 @@ public class Basket {
 		total += calcComboTotal(discountPairs, itemsLeft);
 		total += calcItemsTotal(itemsLeft);
 		total += calcExtraTotal(extra);
-
 		return total;
 	}
 
-	public int getSize() {
-		return this.size;
-	}
-
-	public double getPrice(String id) throws NotInInventoryException {
-		if (inventory.inInventory(id)) {
-			return inventory.getPrice(id);
-		} else {
-			throw new NotInInventoryException(id);
+	public String printReceipt() {
+		HashSet<String> uniqueItems = new HashSet<>(items.values());
+		HashMap<String, Integer> itemOcurrance = countOccurrences(new ArrayList<>(items.values()), uniqueItems.toArray(new String[0]));
+		StringBuilder sb = new StringBuilder();
+		sb.append("\n    ~~~ Bob's Bagels ~~~\n");
+		LocalDateTime currentTime = LocalDateTime.now();
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+		String formattedTime = currentTime.format(formatter);
+		sb.append("    ").append(formattedTime).append("\n");
+		sb.append("----------------------------\n");
+		for (String item : uniqueItems) {
+			try {
+				sb.append(String.format("%-10s", inventory.getName(item)));
+			} catch (NotInInventoryException e) {
+				throw new RuntimeException(e);
+			}
+			sb.append("       ");
+			sb.append(itemOcurrance.get(item));
+			sb.append("\t\t\u00A3");
+			sb.append(String.format("%.2f", inventory.getPrice(item)));
+			sb.append("\n");
 		}
+		for (ArrayList<String> extras : extra.values()) {
+			uniqueItems = new HashSet<>(extras);
+			itemOcurrance = countOccurrences(new ArrayList<>(extras), uniqueItems.toArray(new String[0]));
+			for (String item : extras) {
+				try {
+					sb.append(String.format("%-15s", inventory.getName(item)));
+				} catch (NotInInventoryException e) {
+					throw new RuntimeException(e);
+				}
+				sb.append("  ");
+				sb.append(itemOcurrance.get(item));
+
+				sb.append("\t\t\u00A3");
+				sb.append(String.format("%.2f", inventory.getPrice(item)));
+				sb.append("\n");
+			}
+		}
+		sb.append("----------------------------\n");
+		sb.append("Total\t\t\t\t\t\u00A3").append(String.format("%.2f", getTotalCost())).append("\n");
+		sb.append("\n        Thank you\n	 for your order !\n");
+		System.out.println(sb);
+		return sb.toString();
 	}
 
 	private static boolean containsAllItems(ArrayList<String> items, String[] array) {
@@ -145,6 +191,7 @@ public class Basket {
 		}
 		return false;
 	}
+
 	private ArrayList<String> fillHasDisciunt(HashSet<String> uniqueItems) {
 		ArrayList<String> hasDiscount = new ArrayList<>();
 
@@ -189,6 +236,9 @@ public class Basket {
 	private int calcClosestMultiple(HashMap<String, Integer> bulkAmount, String bulkItem) {
 		int input = bulkAmount.get(bulkItem);
 		int target = inventory.getBulkBulk(bulkItem);
+		if (Math.round((float) input / target) * target > input) {
+			return 0;
+		}
 		return Math.round((float) input / target) * target;
 	}
 
@@ -257,7 +307,7 @@ public class Basket {
 		return total;
 	}
 
-	private double calcExtraTotal(HashMap<Integer,ArrayList<String>> extra) {
+	private double calcExtraTotal(HashMap<Integer, ArrayList<String>> extra) {
 		double total = 0;
 		for (ArrayList<String> extras : extra.values()) {
 			for (String item : extras) {

@@ -3,6 +3,9 @@ package com.booleanuk.core;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 class BasketTest {
 
 
@@ -232,6 +235,21 @@ class BasketTest {
 		} catch (NotInInventoryException e) {
 			throw new RuntimeException(e);
 		}
+		Basket basket5 = new Basket(inventory);
+
+		try {
+			basket5.addItem("BGLP");
+			basket5.addItem("BGLP");
+			basket5.addItem("BGLP");
+			basket5.addItem("BGLP");
+			basket5.addItem("BGLP");
+			basket5.addItem("BGLP");
+			Assertions.assertEquals(0.39 * 6, basket5.getTotalCost(), 0.1);
+
+
+		} catch (NotInInventoryException e) {
+			throw new RuntimeException(e);
+		}
 
 	}
 
@@ -240,18 +258,155 @@ class BasketTest {
 		Inventory inventory = new Inventory();
 		Basket basket = new Basket(inventory);
 		String receipt = basket.printReceipt();
-		String example =
-				"    ~~~ Bob's Bagels ~~~\n" +
-						"\n" +
-						"    2021-03-16 21:38:44\n" +
-						"\n" +
-						"----------------------------\n" +
-
-						"----------------------------\n" +
-						"Total                 £0\n" +
-						"\n" +
-						"        Thank you\n" +
-						"      for your order!";
+		LocalDateTime currentTime = LocalDateTime.now();
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+		String formattedTime = currentTime.format(formatter);
+		String example = "\n    ~~~ Bob's Bagels ~~~\n" +
+				"    " + formattedTime + "\n" +
+				"----------------------------\n" +
+				"----------------------------\n" +
+				"Total\t\t\t\t\t\u00A30.00\n" +
+				"\n" +
+				"        Thank you\n" +
+				"\t for your order !\n";
 		Assertions.assertEquals(example, receipt);
+
+		try {
+			basket.addItem("BGLP");
+			example = "\n    ~~~ Bob's Bagels ~~~\n" +
+					"    " + formattedTime + "\n" +
+					"----------------------------\n" +
+					"Plain            1\t\t\u00A30.39\n" +
+					"----------------------------\n" +
+					"Total\t\t\t\t\t\u00A30.39\n" +
+					"\n" +
+					"        Thank you\n" +
+					"\t for your order !\n";
+			receipt = basket.printReceipt();
+			Assertions.assertEquals(example, receipt);
+		} catch (NotInInventoryException e) {
+			throw new RuntimeException(e);
+		}
+
+		try {
+			basket.addItem("BGLP");
+			example = "\n    ~~~ Bob's Bagels ~~~\n" +
+					"    " + formattedTime + "\n" +
+					"----------------------------\n" +
+					"Plain            2\t\t\u00A30.39\n" +
+					"----------------------------\n" +
+					"Total\t\t\t\t\t\u00A30.78\n" +
+					"\n" +
+					"        Thank you\n" +
+					"\t for your order !\n";
+			receipt = basket.printReceipt();
+			Assertions.assertEquals(example, receipt);
+		} catch (NotInInventoryException e) {
+			throw new RuntimeException(e);
+		}
+		try {
+			basket.addItem("BGLP");
+			basket.addItem("BGLP");
+			basket.addItem("BGLP");
+			basket.addItem("BGLP");
+			example = "\n    ~~~ Bob's Bagels ~~~\n" +
+					"    " + formattedTime + "\n" +
+					"----------------------------\n" +
+					"Plain            6\t\t\u00A30.39\n" +
+					"----------------------------\n" +
+					"Total\t\t\t\t\t\u00A32.34\n" +
+					"\n" +
+					"        Thank you\n" +
+					"\t for your order !\n";
+			receipt = basket.printReceipt();
+			Assertions.assertEquals(example, receipt);
+		} catch (NotInInventoryException e) {
+			throw new RuntimeException(e);
+		}
+		try {
+			for (int i = 0; i < 5; i++) {
+				basket.addItem("BGLO");
+			}
+			example = "\n    ~~~ Bob's Bagels ~~~\n" +
+					"    " + formattedTime + "\n" +
+					"----------------------------\n" +
+					"Plain            6\t\t\u00A30.39\n" +
+					"Onion            5\t\t\u00A30.49\n" +
+					"----------------------------\n" +
+					"Total\t\t\t\t\t\u00A34.79\n" +
+					"\n" +
+					"        Thank you\n" +
+					"\t for your order !\n";
+			receipt = basket.printReceipt();
+			Assertions.assertEquals(example, receipt);
+		} catch (NotInInventoryException e) {
+			throw new RuntimeException(e);
+		}
+		try {
+			basket = new Basket(inventory);
+			basket.addItem("COFB");
+
+			example = "\n    ~~~ Bob's Bagels ~~~\n" +
+					"    " + formattedTime + "\n" +
+					"----------------------------\n" +
+					"Black            1\t\t\u00A30.99\n" +
+					"----------------------------\n" +
+					"Total\t\t\t\t\t\u00A30.99\n" +
+					"\n" +
+					"        Thank you\n" +
+					"\t for your order !\n";
+			receipt = basket.printReceipt();
+			Assertions.assertEquals(example, receipt);
+		} catch (NotInInventoryException e) {
+			throw new RuntimeException(e);
+		}
+		try {
+			basket = new Basket(inventory);
+			basket.addItem("BGLP");
+			basket.addExtra(0, "FILX");
+			basket.addExtra(0, "FILS");
+
+			example = "\n    ~~~ Bob's Bagels ~~~\n" +
+					"    " + formattedTime + "\n" +
+					"----------------------------\n" +
+					"Plain            1\t\t\u00A30.39\n" +
+					"Cream Cheese     1\t\t\u00A30.12\n" +
+					"Smoked Salmon    1\t\t\u00A30.12\n" +
+					"----------------------------\n" +
+					"Total\t\t\t\t\t\u00A30.63\n" +
+					"\n" +
+					"        Thank you\n" +
+					"\t for your order !\n";
+			receipt = basket.printReceipt();
+			Assertions.assertEquals(example, receipt);
+		} catch (NotInInventoryException e) {
+			throw new RuntimeException(e);
+		}
+		try {
+			basket = new Basket(inventory);
+			basket.addItem("BGLP");
+			basket.addItem("BGLO");
+			basket.addItem("BGLO");
+			basket.addExtra(0, "FILX");
+			basket.addExtra(0, "FILS");
+			basket.addExtra(1, "FILH");
+			example = "\n    ~~~ Bob's Bagels ~~~\n" +
+					"    " + formattedTime + "\n" +
+					"----------------------------\n" +
+					"Plain            1\t\t\u00A30.39\n" +
+					"Onion            2\t\t\u00A30.49\n" +
+					"Cream Cheese     1\t\t\u00A30.12\n" +
+					"Smoked Salmon    1\t\t\u00A30.12\n" +
+					"Ham              1\t\t\u00A30.12\n" +
+					"----------------------------\n" +
+					"Total\t\t\t\t\t\u00A31.73\n" +
+					"\n" +
+					"        Thank you\n" +
+					"\t for your order !\n";
+			receipt = basket.printReceipt();
+			Assertions.assertEquals(example, receipt);
+		} catch (NotInInventoryException e) {
+			throw new RuntimeException(e);
+		}
 	}
 }
