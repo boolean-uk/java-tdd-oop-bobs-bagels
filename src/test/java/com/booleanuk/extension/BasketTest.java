@@ -190,6 +190,14 @@ class BasketTest {
         Bagel bagel12 = new  Bagel("BGLP", 0.39, "Plain");
         Bagel bagel13 = new  Bagel("BGLP", 0.39, "Plain");
 
+        Filling filling1 = new  Filling("FILB", 0.12, "Bacon");
+        Filling filling2 = new  Filling("FILE", 0.12, "Egg");
+
+        ArrayList<Filling> fillings = new ArrayList<>();
+        fillings.add(filling1);
+        fillings.add(filling2);
+
+        bagel1.addFillings(fillings);
 
         //exactly 12-discount
         basket.add(bagel1);
@@ -206,11 +214,11 @@ class BasketTest {
         basket.add(bagel12);
         System.out.println(basket.getProducts().size());
 
-        Assertions.assertEquals(3.99, basket.getCostOfBasket());
+        Assertions.assertEquals(3.99+0.24, basket.getCostOfBasket());
 
         basket.add(bagel13);
 
         //more than 12-discount
-        Assertions.assertEquals(4.38, basket.getCostOfBasket());
+        Assertions.assertEquals(3.99+0.24+0.49, basket.getCostOfBasket());
     }
 }
