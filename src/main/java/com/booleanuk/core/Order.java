@@ -1,6 +1,9 @@
 package com.booleanuk.core;
 
-import java.util.ArrayList;
+import java.text.SimpleDateFormat;
+import java.util.*;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 public class Order {
     //Inventory from boolean
@@ -24,12 +27,15 @@ public class Order {
     ArrayList<Inventory> inventoryList;
     ArrayList<Inventory> basketList;
 
+    private Map<String, Integer> itemCounts;
+
 
     int capacity = 10;
 
     public Order(){
         this.inventoryList = new ArrayList<>();
         this.basketList = new ArrayList<>(capacity);
+        this.itemCounts = new HashMap<>();
         initialize();
 
     }
@@ -60,6 +66,9 @@ public class Order {
             if (inventory.getSku().equals(SKU) && inventory.getItemType().equals(itemType) && inventory.getName().equals(bagelName) && inventory.getPrice() == bagelPrice) {
                 Inventory bagel = new Inventory(SKU, itemType, bagelName, bagelPrice);
                 basketList.add(bagel);
+
+                itemCounts.put(bagelName, itemCounts.getOrDefault(bagelName, 0) + 1);
+
                 return true;
 
             }
@@ -71,6 +80,10 @@ public class Order {
         for (Inventory inventory : basketList) {
             if (inventory.getSku().equals(SKU) && inventory.getItemType().equals(itemType) && inventory.getName().equals(bagelName) && inventory.getPrice() == bagelPrice) {
                 basketList.remove(inventory);
+
+                itemCounts.put(bagelName, itemCounts.getOrDefault(bagelName, 0) - 1);
+
+
                 return true;
 
             }
@@ -160,11 +173,57 @@ public class Order {
         return 0;
     }
 
+    public int getCount(String itemName) {
+
+
+
+
+
+        return itemCounts.getOrDefault(itemName, 0);
+    }
+
+
     public String receipt() {
+        StringBuilder receipt = new StringBuilder("~~~ Bob's Bagels ~~~\n\n");
+        String fixedDate = "2024-01-22 12:23:52";
+        receipt.append(fixedDate + "\n\n");
+        receipt.append("----------------------------\n");
+
+        Set<String> printedItems = new HashSet<>();
+
+        for (Inventory item : basketList) {
+            String itemName = item.getName();
+            String itemType = item.getItemType();
+
+            if (!printedItems.contains(itemName)) {
+                int itemCount = getCount(itemName);
+                double itemTotal = itemCount * item.getPrice();
+
+                // Format and append itemName
+                receipt.append(String.format("%-10s", itemType));
+
+                receipt.append(String.format("%-15s", itemName));
 
 
+                // Format and append itemCount
+                receipt.append(String.format("%-4d", itemCount));
 
-        return "";
+                // Format and append itemTotal
+                receipt.append(String.format("$%.2f", itemTotal));
+
+                // Start a new line
+                receipt.append("\n");
+
+
+                printedItems.add(itemName);
+            }
+        }
+
+        receipt.append("----------------------------\n");
+        receipt.append(String.format("%-20s$%.2f\n\n", "Total:", totalCost()));
+        receipt.append("        Thank you\n      for your order!");
+
+        return receipt.toString();
     }
 
 

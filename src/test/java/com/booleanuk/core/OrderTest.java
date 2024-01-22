@@ -3,6 +3,10 @@ package com.booleanuk.core;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class OrderTest {
 
 
@@ -175,7 +179,21 @@ public class OrderTest {
         basket1.add("FILE", "Filling", "Egg", 0.12);
         basket1.add("FILX", "Filling", "Cream Cheese", 0.12);
         String result = basket1.receipt();
-        Assertions.assertEquals("Receipt Here: ", result);
+        Assertions.assertEquals("~~~ Bob's Bagels ~~~\n" +
+                "\n" +
+                "2024-01-22 12:23:52\n" +
+                "\n" +
+                "----------------------------\n" +
+                "Bagel     Onion          1   $0.49\n" +
+                "Bagel     Plain          1   $0.39\n" +
+                "Coffee    White          1   $1.19\n" +
+                "Filling   Egg            1   $0.12\n" +
+                "Filling   Cream Cheese   1   $0.12\n" +
+                "----------------------------\n" +
+                "Total:              $2.31\n" +
+                "\n" +
+                "        Thank you\n" +
+                "      for your order!", result);
 
 
 
@@ -192,10 +210,55 @@ public class OrderTest {
         basket1.add("FILE", "Filling", "Egg", 0.12);
         basket1.add("FILX", "Filling", "Cream Cheese", 0.12);
         String result = basket1.receipt();
-        Assertions.assertEquals("Receipt Here: ", result);
+        Assertions.assertEquals("~~~ Bob's Bagels ~~~\n" +
+                "\n" +
+                "2024-01-22 12:23:52\n" +
+                "\n" +
+                "----------------------------\n" +
+                "Coffee    White          1   $1.19\n" +
+                "Filling   Egg            1   $0.12\n" +
+                "Filling   Cream Cheese   1   $0.12\n" +
+                "----------------------------\n" +
+                "Total:              $1.43\n" +
+                "\n" +
+                "        Thank you\n" +
+                "      for your order!", result);
 
 
 
+    }
+
+    @Test
+    public void testGetReceiptWithMultipleItems() throws ParseException {
+        // Use a fixed date and time for the test
+        String fixedDate = "2024-01-22 12:23:52";
+        Date fixedDateObj = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(fixedDate);
+
+        Order basket1 = new Order();
+
+        basket1.add("COFW", "Coffee", "White", 1.19);
+        basket1.add("FILE", "Filling", "Egg", 0.12);
+        basket1.add("FILE", "Filling", "Egg", 0.12);
+        basket1.add("FILE", "Filling", "Egg", 0.12);
+        basket1.add("FILE", "Filling", "Egg", 0.12);
+        basket1.add("FILE", "Filling", "Egg", 0.12);
+        basket1.add("FILX", "Filling", "Cream Cheese", 0.12);
+        String result = basket1.receipt();
+
+        // Assert against the fixed date and time
+        Assertions.assertEquals("~~~ Bob's Bagels ~~~\n" +
+                "\n" +
+                "2024-01-22 12:23:52\n" +
+                "\n" +
+                "----------------------------\n" +
+                "Coffee    White          1   $1.19\n" +
+                "Filling   Egg            5   $0.60\n" +
+                "Filling   Cream Cheese   1   $0.12\n" +
+                "----------------------------\n" +
+                "Total:              $1.91\n" +
+                "\n" +
+                "        Thank you\n" +
+                "      for your order!", result);
     }
 
 
