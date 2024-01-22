@@ -110,16 +110,17 @@ I'd like to know the cost of each filling before I add it to my bagel order.
 |         |                                                                   |                   | else                       | return false |
 |         |                                                                   |                   |                            |              |
 
-
+```
 10.
 As the manager,
 So we don't get any weird requests,
 I want customers to only be able to order things that we stock in our inventory.
 ```
-| Classes   | member variables        | Methods          | Scenario                         | Output       |
-|-----------|-------------------------|------------------|----------------------------------|--------------|
-| Inventory | Arraylist<Bagel> basket | addToInventory() | Adds list of bagels to inventory | return true  |
-|           |                         |                  | else                             | return false |
-|           |                         |                  |                                  |              |
-| Inventory | Arraylist<Bagel> basket | isBagelInStock() | Bagel is in inventory            | return true  |
-|           |                         |                  | Bagel not in inventory           | return false |
+
+| Classes   | member variables       | Methods         | Scenario                                | Output               |
+|-----------|------------------------|-----------------|-----------------------------------------|----------------------|
+| Inventory | List<Product> products | getProducts()   | Lists all products in store's inventory | return List<Product> |
+|           | List<Product> products | getItemBySku()  | If item.sku in list                     | return Product       |
+|           |                        |                 | else                                    | return null          |
+| Inventory | List<Product> products | ProductInList() | Product is in inventory                 | return true          |
+|           |                        |                 | Product not in inventory                | return false         |

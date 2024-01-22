@@ -49,13 +49,4 @@ public class Inventory {
         System.out.println("Product not in list");
         return false;
     }
-
-    // Add a product to the basket based on SKU
-    public boolean addToBasket(Basket basket, String sku) {
-        Product product = getItemBySku(sku);
-        if (product != null) {
-            return basket.add(product);
-        }
-        return false; // Item with the given SKU doesn't exist in the store's inventory
-    }
 }
