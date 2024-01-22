@@ -29,4 +29,3 @@ class ReceiptTest {
         Assertions.assertFalse(yourReceipt.indexOf("Waffles") != -1);
     }
 }
-
