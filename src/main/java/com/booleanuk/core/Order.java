@@ -199,19 +199,15 @@ public class Order {
                 int itemCount = getCount(itemName);
                 double itemTotal = itemCount * item.getPrice();
 
-                // Format and append itemName
                 receipt.append(String.format("%-10s", itemType));
 
                 receipt.append(String.format("%-15s", itemName));
 
 
-                // Format and append itemCount
                 receipt.append(String.format("%-4d", itemCount));
 
-                // Format and append itemTotal
                 receipt.append(String.format("£%.2f", itemTotal));
 
-                // Start a new line
                 receipt.append("\n");
 
 
