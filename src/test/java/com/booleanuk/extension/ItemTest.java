@@ -4,11 +4,11 @@ import com.booleanuk.core.InventoryItem;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-public class ItemExTest {
+public class ItemTest {
 
     @Test
     public void testGetters() {
-        ItemEx saw = new ItemEx(12.99, "Saw", "Handheld");
+        InventoryItem saw = new InventoryItem(12.99, "Saw", "Handheld");
         InventoryItem anotherSaw = new InventoryItem(52.99, "Saw", "Motor");
 
         Assertions.assertEquals(12.99, saw.getPrice());

@@ -1,12 +1,12 @@
 package com.booleanuk.extension;
 
-public class ItemEx {
+public class InventoryItem implements Item {
     private double price;
     private String name;
     private String type;
     private String nametype;
 
-    public ItemEx(double price, String name, String type) {
+    public InventoryItem(double price, String name, String type) {
         this.price = price;
         this.name = name;
         this.type = type;

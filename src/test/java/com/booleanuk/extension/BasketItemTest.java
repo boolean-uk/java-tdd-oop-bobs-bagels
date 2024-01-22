@@ -4,14 +4,14 @@ import com.booleanuk.core.BasketItem;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-public class BasketItemExTest {
+public class BasketItemTest {
 
     @Test
     public void testBasketItem() {
-        BasketItemEx basketItem1 = new BasketItemEx("scissors",2, 1.28);
-        BasketItemEx basketItem2 = new BasketItemEx("battery",1, 3.5);
+        BasketItem basketItem1 = new BasketItem("scissors", "hand",2, 1.28);
+        BasketItem basketItem2 = new BasketItem("battery", "lithium",1, 3.5);
 
-        Assertions.assertEquals("scissors", basketItem1.getItem());
+        Assertions.assertEquals("scissors", basketItem1.getName());
         Assertions.assertEquals(3.5, basketItem2.getPrice());
         Assertions.assertEquals(2, basketItem1.getQuantity());
 

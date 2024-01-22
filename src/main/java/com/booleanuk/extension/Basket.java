@@ -1,9 +1,7 @@
-package com.booleanuk.core;
+package com.booleanuk.extension;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-
-import static java.lang.Math.round;
 
 public class Basket {
     private HashMap<String, BasketItem> basket;

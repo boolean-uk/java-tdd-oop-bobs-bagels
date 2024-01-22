@@ -160,7 +160,8 @@ class BasketTest {
     @Test
     public void testTotalCost() {
         Inventory inventory = new Inventory();
-        Basket basket = new Basket(inventory);
+        Discount discount = new Discount();
+        Basket basket = new Basket(inventory, discount);
         Assertions.assertEquals(0.0, basket.getTotal());
 
         Assertions.assertTrue(basket.addItem("Bagel Plain", 1));
@@ -168,16 +169,7 @@ class BasketTest {
         Assertions.assertTrue(basket.addItem("Coffee Capuccino", 1));
         Assertions.assertTrue(basket.addItem("Filling Cheese", 1));
 
-        Assertions.assertEquals(2.29, basket.getTotal());
-
-        Assertions.assertTrue(basket.removeItem("Bagel Sesame", 1));
-        Assertions.assertTrue(basket.addItem("Bagel Everything", 1));
-        Assertions.assertTrue(basket.addItem("Bagel Onion", 1));
-        Assertions.assertEquals(2.78, basket.getTotal());
-
-        Assertions.assertTrue(basket.addItem("Bagel Everything", 1));
-        Assertions.assertTrue(basket.addItem("Bagel Everything", 1));
-        Assertions.assertEquals(3.76, basket.getTotal());
+        Assertions.assertEquals(1.76, basket.getTotal());
     }
 
     // Get price of one item

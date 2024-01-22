@@ -2,8 +2,8 @@ package com.booleanuk.extension;
 
 import java.util.HashMap;
 
-public class InventoryEx {
-    HashMap<String, ItemEx> items;
+public class Inventory {
+    HashMap<String, InventoryItem> items;
     HashMap<String, String> mapTypeVariantToSKU;
     String[][] itemsArray =     {
             {"BGLO", "0.49", "Bagel", "Onion"},
@@ -23,7 +23,7 @@ public class InventoryEx {
             {"FILS", "0.12", "Filling", "Smoked Salmon"},
             {"FILH", "0.12", "Filling", "Ham"}};
 
-    public InventoryEx() {
+    public Inventory() {
         // Initiate hash maps
         items = new HashMap<>();
         mapTypeVariantToSKU = new HashMap<>();
@@ -31,7 +31,7 @@ public class InventoryEx {
         // Fill hash map
         for (String[] item: itemsArray) {
             // Fills ut items map with sku as key, the value is the object containing price, name, type, and nametype
-            items.put(item[0], new ItemEx(Double.parseDouble(item[1]), item[2], item[3]));
+            items.put(item[0], new InventoryItem(Double.parseDouble(item[1]), item[2], item[3]));
             // Map go from typevariant to sku. Items can be used to go other way
             mapTypeVariantToSKU.put(items.get(item[0]).getNametype(), item[0]);
         }
