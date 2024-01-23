@@ -287,6 +287,5 @@ public class ExtensionThreeTest {
                         "\n      for your order!";
 
         Assertions.assertEquals(expected, receipt.toString());
-
     }
 }
