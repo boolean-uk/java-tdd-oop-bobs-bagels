@@ -61,4 +61,8 @@ public class Inventory {
         }
         return false;
     }
+
+    public boolean isCoffeeInInventory(String sku) {
+        return true;
+    }
 }

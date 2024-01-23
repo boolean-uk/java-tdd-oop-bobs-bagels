@@ -10,4 +10,8 @@ public class Coffee {
         this.sku = sku;
         this.price = price;
     }
+
+    public String getSku() {
+        return this.sku;
+    }
 }

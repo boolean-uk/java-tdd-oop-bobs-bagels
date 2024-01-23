@@ -126,7 +126,7 @@ public class BasketTest {
         Assertions.assertTrue(addedFillingThatIsInInventory);
 
         Coffee coffee = new Coffee("Black", "COFB", 0.99);
-        boolean coffeeIsInInventory = inventory.isCoffeeInInventory(coffee);
+        boolean coffeeIsInInventory = inventory.isCoffeeInInventory(coffee.getSku());
         Assertions.assertTrue(coffeeIsInInventory);
     }
 
@@ -144,7 +144,7 @@ public class BasketTest {
         Assertions.assertFalse(addedFillingThatIsInInventory);
 
         Coffee coffee = new Coffee("Black", "COFFEE", 0.99);
-        boolean coffeeIsInInventory = inventory.isCoffeeInInventory(coffee);
+        boolean coffeeIsInInventory = inventory.isCoffeeInInventory(coffee.getSku());
         Assertions.assertFalse(coffeeIsInInventory);
     }
 }
