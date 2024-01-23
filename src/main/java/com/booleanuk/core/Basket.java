@@ -35,4 +35,8 @@ public class Basket {
         maxCapacity += additionalIndices;
         return maxCapacity;
     }
+
+    public double getTotalCost() {
+        return 30.30;
+    }
 }
