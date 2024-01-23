@@ -15,8 +15,8 @@ public class Basket {
         this.inventoryProduct = new Inventory();
     }
 
-    public boolean addItem(Product item) {
-        if (isFull() || item.getQuantity() > capacity) {
+    public boolean addItem(Bagel item) {
+        if (isFull() || item.getQuantity() > this.capacity) {
             return false;
         }
         else if(!isItemInInventory(item)){
@@ -28,7 +28,7 @@ public class Basket {
         return true;
     }
 
-    public String remove(Bagel item){
+    public String remove(Product item){
         if(this.basket.isEmpty()){
             return "Basket is empty";
         }
@@ -41,7 +41,7 @@ public class Basket {
 
 
     public boolean isFull(){
-        if( this.basket.size() >= capacity){
+        if( this.basket.size() >= this.capacity){
             System.out.println("Basket is full");
             return true;
         }
@@ -93,20 +93,5 @@ public class Basket {
        return inventoryProduct.getInventoryItem().contains(item);
     }
 
-
-
-    public static void main(String[] arg){
-        Basket basket = new Basket(30);
-        Product bagel = new Bagel("BGLO",0.49, "Bagel", "Onion" );
-        Product discountQuantity12 = new QuantityDiscountProduct("BGLP", 3.99, "Bagel","Plain", 12);
-        Product quantityDiscountProduct6 = new QuantityDiscountProduct("BGLE", 2.49, "Bagel", "Everything", 6);
-        basket.addItem(bagel);
-        basket.addItem(bagel);
-        basket.addItem(discountQuantity12);
-        basket.addItem(quantityDiscountProduct6);
-
-        System.out.println(basket.getTotalCost());
-
-    }
 
 }

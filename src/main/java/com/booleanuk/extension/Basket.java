@@ -1,5 +1,7 @@
 package com.booleanuk.extension;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 
 public class Basket {
@@ -92,35 +94,10 @@ public class Basket {
         for(Product item : basket){
            total+= item.getPrice();
         }
-        return total;
+        BigDecimal roundedTotal = BigDecimal.valueOf(total).setScale(2, RoundingMode.HALF_UP);
+        return roundedTotal.doubleValue();
     }
 
-
-//    public double getTotalCostWithDiscount(){
-//        double totalAfterDiscount = 0.00;
-//        double total = 0.0;
-//        int countQuantity = 0;
-//        for(Product item : basket){
-//           if(item instanceof Bagel){
-//               if(item.getSKU().equals("BGLO")){
-//                   countQuantity ++;
-//                   if(countQuantity <= 5){
-//                       totalAfterDiscount += item.getPrice();
-//                   }
-//                   else if(countQuantity == 6){
-//                       totalAfterDiscount = (totalAfterDiscount + item.getPrice()) - 0.45;
-//                   }
-//                   else {
-//                       totalAfterDiscount += item.getPrice();
-//                   }
-//
-//               }
-//           }
-//           total += totalAfterDiscount + item.getPrice();
-//
-//        }
-//        return total - totalAfterDiscount;
-//    }
 
     /**
      *
