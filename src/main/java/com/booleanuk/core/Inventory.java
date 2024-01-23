@@ -28,9 +28,9 @@ public class Inventory {
         inventory.add(new Filling("FILH", 0.12, "Ham"));
     }
 
-    public Product getProduct(String variant) {
+    public Product getProduct(String Sku) {
         for (Product product : inventory) {
-            if (product.getVariant().equalsIgnoreCase(variant)) {
+            if (product.getSku().equalsIgnoreCase(Sku)) {
                 return product;
             }
         }

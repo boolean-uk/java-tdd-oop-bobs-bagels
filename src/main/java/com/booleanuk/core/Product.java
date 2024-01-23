@@ -6,6 +6,8 @@ public class Product {
     private String name;
     private String variant;
 
+    public int quantity;
+
     public Product(String sku, double price, String name, String variant) {
         this.sku = sku;
         this.price = price;
@@ -27,5 +29,8 @@ public class Product {
 
     public String getVariant() {
         return variant;
+    }
+    public int getQuantity() {
+        return quantity;
     }
 }
