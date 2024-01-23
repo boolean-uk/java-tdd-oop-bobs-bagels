@@ -13,6 +13,6 @@ public class Bagel {
     }
 
     public double getPrice() {
-        return 10.10;
+        return this.price;
     }
 }
