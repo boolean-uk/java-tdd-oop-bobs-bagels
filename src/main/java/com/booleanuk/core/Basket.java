@@ -1,29 +1,22 @@
 package com.booleanuk.core;
+
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class Basket {
     private ArrayList<Product> basket;
-    private int size;
+    private int capacity;
      Inventory inventoryProduct;
-     /**Constructs a new Basket object
-      *
-     * @param size The maximum size of the basket
-     * */
-    public Basket( int size ){
+
+    public Basket( int capacity ){
         this.basket = new ArrayList<>();
-        this.size = size;
+        this.capacity = capacity;
         this.inventoryProduct = new Inventory();
     }
 
-    /**
-     *
-     * @param item The bagel to be added to the basket
-     * @return true if the bagel was added successfully, false if the bagel was already in the basket or if the basket is full
-     */
-
-    public boolean add(Bagel item) {
-        if (isFull()) {
+    public boolean addItem(Product item) {
+        if (isFull() || item.getQuantity() > capacity) {
             return false;
         }
         else if(!isItemInInventory(item)){
@@ -35,14 +28,6 @@ public class Basket {
         return true;
     }
 
-    /**
-     *
-     * @param item The bagel to be removed from the basket
-     * @return a string indicating the result of removing
-     * "Basket is empty" if the basket is empty
-     * "Item id not in the basket" if the item is not found in the basket
-     * "Item removed from basket" if the item is successfully removed
-     */
     public String remove(Bagel item){
         if(this.basket.isEmpty()){
             return "Basket is empty";
@@ -54,13 +39,9 @@ public class Basket {
         return item +" removed from basket";
     }
 
-    /**
-     *
-     * @return true if the basket is full, otherwise false
-     */
 
     public boolean isFull(){
-        if( this.basket.size() >= size){
+        if( this.basket.size() >= capacity){
             System.out.println("Basket is full");
             return true;
         }
@@ -68,46 +49,27 @@ public class Basket {
 
     }
 
-    /**
-     *
-     * @param newCapacity the new capacity to set for the basket
-     * @return a string indicating that the basket size has been updated to the specified capacity
-     */
     public String changeCapacity(int newCapacity){
         this.basket.ensureCapacity(newCapacity);
         return "Basket size is updated to " + newCapacity;
     }
 
-    /**
-     *
-     * @return the total cost of all products in the basket
-     */
 
     public double getTotalCost(){
         double total = 0.0;
+
         for(Product item : basket){
            total+= item.getPrice();
         }
-        return total;
+        BigDecimal roundedTotal = BigDecimal.valueOf(total).setScale(2, RoundingMode.HALF_UP);
+        return roundedTotal.doubleValue();
     }
 
-    /**
-     *
-     * @param item the product which the cost is to be retrieved
-     * @return the cost of the specified product
-     */
     public double getItemCost(Bagel item){
         return item.getPrice();
     }
 
-    /**
-     * Adds a filling to the basket, but only if a bagel is already added in the basket
-     * @param filling filling to be added to the basket
-     * @return a string indicating the result
-     * "Filling is added" if the filling is successfully added
-     * "Please select a bagel before adding filling" if no bagel is found in the basket
-     */
-    public String addingFillingWhenBagelInBasket( Filling filling) {
+    public String addingFillingWhenBagelInBasket( Product filling) {
         boolean bagelInBasket = false;
         for(Product item : this.basket){
             if(item instanceof Bagel){
@@ -123,22 +85,28 @@ public class Basket {
         }
     }
 
-    /**
-     * Retrieves the cost of a specific filling
-     * @param item the filling which the cost is to be retrieves
-     * @return the cost of the specified filling
-     */
     public double getFillingCost(Filling item){
         return item.getPrice();
     }
 
-    /**
-     * Checks if a specific product is present in the inventory
-     * @param item the product to check if it is in the inventory
-     * @return true if the product is in the inventory, otherwise false
-     */
     public boolean isItemInInventory(Product item) {
        return inventoryProduct.getInventoryItem().contains(item);
+    }
+
+
+
+    public static void main(String[] arg){
+        Basket basket = new Basket(30);
+        Product bagel = new Bagel("BGLO",0.49, "Bagel", "Onion" );
+        Product discountQuantity12 = new QuantityDiscountProduct("BGLP", 3.99, "Bagel","Plain", 12);
+        Product quantityDiscountProduct6 = new QuantityDiscountProduct("BGLE", 2.49, "Bagel", "Everything", 6);
+        basket.addItem(bagel);
+        basket.addItem(bagel);
+        basket.addItem(discountQuantity12);
+        basket.addItem(quantityDiscountProduct6);
+
+        System.out.println(basket.getTotalCost());
+
     }
 
 }

@@ -1,6 +1,5 @@
-package com.booleanuk.core;
+package com.booleanuk.extension;
 
-import java.util.Arrays;
 import java.util.Objects;
 
 public class Product {
