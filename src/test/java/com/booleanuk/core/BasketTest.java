@@ -250,6 +250,18 @@ class BasketTest {
 		} catch (NotInInventoryException e) {
 			throw new RuntimeException(e);
 		}
+		try {
+			basket5.addExtra(0, "FILX");
+			basket5.addExtra(0, "FILS");
+			basket5.addExtra(1, "FILH");
+
+
+			Assertions.assertEquals(0.39 * 6 + 0.12 * 3, basket5.getTotalCost(), 0.1);
+
+
+		} catch (NotInInventoryException e) {
+			throw new RuntimeException(e);
+		}
 
 	}
 
@@ -261,27 +273,29 @@ class BasketTest {
 		LocalDateTime currentTime = LocalDateTime.now();
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 		String formattedTime = currentTime.format(formatter);
-		String example = "\n    ~~~ Bob's Bagels ~~~\n" +
-				"    " + formattedTime + "\n" +
-				"----------------------------\n" +
-				"----------------------------\n" +
-				"Total\t\t\t\t\t\u00A30.00\n" +
+		String example = "\n          ~~~ Bob's Bagels ~~~\n" +
+				"           " + formattedTime + "\n" +
+				"----------------------------------------\n" +
+				"----------------------------------------\n" +
+				"Total\t\t\t\t\t\t\t\u00A30.00\n" +
 				"\n" +
-				"        Thank you\n" +
-				"\t for your order !\n";
+				"               Thank you\n" +
+				"\t        for your order !\n";
 		Assertions.assertEquals(example, receipt);
 
 		try {
 			basket.addItem("BGLP");
-			example = "\n    ~~~ Bob's Bagels ~~~\n" +
-					"    " + formattedTime + "\n" +
-					"----------------------------\n" +
-					"Plain            1\t\t\u00A30.39\n" +
-					"----------------------------\n" +
-					"Total\t\t\t\t\t\u00A30.39\n" +
+			formattedTime = currentTime.format(formatter);
+
+			example = "\n          ~~~ Bob's Bagels ~~~\n" +
+					"           " + formattedTime + "\n" +
+					"----------------------------------------\n" +
+					"Bagel Plain                 1   \u00A30.39\n" +
+					"----------------------------------------\n" +
+					"Total\t\t\t\t\t\t\t\u00A30.39\n" +
 					"\n" +
-					"        Thank you\n" +
-					"\t for your order !\n";
+					"               Thank you\n" +
+					"\t        for your order !\n";
 			receipt = basket.printReceipt();
 			Assertions.assertEquals(example, receipt);
 		} catch (NotInInventoryException e) {
@@ -290,15 +304,17 @@ class BasketTest {
 
 		try {
 			basket.addItem("BGLP");
-			example = "\n    ~~~ Bob's Bagels ~~~\n" +
-					"    " + formattedTime + "\n" +
-					"----------------------------\n" +
-					"Plain            2\t\t\u00A30.39\n" +
-					"----------------------------\n" +
-					"Total\t\t\t\t\t\u00A30.78\n" +
+			formattedTime = currentTime.format(formatter);
+
+			example = "\n          ~~~ Bob's Bagels ~~~\n" +
+					"           " + formattedTime + "\n" +
+					"----------------------------------------\n" +
+					"Bagel Plain                 2   \u00A30.39\n" +
+					"----------------------------------------\n" +
+					"Total\t\t\t\t\t\t\t\u00A30.78\n" +
 					"\n" +
-					"        Thank you\n" +
-					"\t for your order !\n";
+					"               Thank you\n" +
+					"\t        for your order !\n";
 			receipt = basket.printReceipt();
 			Assertions.assertEquals(example, receipt);
 		} catch (NotInInventoryException e) {
@@ -309,15 +325,17 @@ class BasketTest {
 			basket.addItem("BGLP");
 			basket.addItem("BGLP");
 			basket.addItem("BGLP");
-			example = "\n    ~~~ Bob's Bagels ~~~\n" +
-					"    " + formattedTime + "\n" +
-					"----------------------------\n" +
-					"Plain            6\t\t\u00A30.39\n" +
-					"----------------------------\n" +
-					"Total\t\t\t\t\t\u00A32.34\n" +
+			formattedTime = currentTime.format(formatter);
+
+			example = "\n          ~~~ Bob's Bagels ~~~\n" +
+					"           " + formattedTime + "\n" +
+					"----------------------------------------\n" +
+					"Bagel Plain                 6   \u00A30.39\n" +
+					"----------------------------------------\n" +
+					"Total\t\t\t\t\t\t\t\u00A32.34\n" +
 					"\n" +
-					"        Thank you\n" +
-					"\t for your order !\n";
+					"               Thank you\n" +
+					"\t        for your order !\n";
 			receipt = basket.printReceipt();
 			Assertions.assertEquals(example, receipt);
 		} catch (NotInInventoryException e) {
@@ -327,16 +345,18 @@ class BasketTest {
 			for (int i = 0; i < 5; i++) {
 				basket.addItem("BGLO");
 			}
-			example = "\n    ~~~ Bob's Bagels ~~~\n" +
-					"    " + formattedTime + "\n" +
-					"----------------------------\n" +
-					"Plain            6\t\t\u00A30.39\n" +
-					"Onion            5\t\t\u00A30.49\n" +
-					"----------------------------\n" +
-					"Total\t\t\t\t\t\u00A34.79\n" +
+			formattedTime = currentTime.format(formatter);
+
+			example = "\n          ~~~ Bob's Bagels ~~~\n" +
+					"           " + formattedTime + "\n" +
+					"----------------------------------------\n" +
+					"Bagel Plain                 6   \u00A30.39\n" +
+					"Bagel Onion                 5   \u00A30.49\n" +
+					"----------------------------------------\n" +
+					"Total\t\t\t\t\t\t\t\u00A34.79\n" +
 					"\n" +
-					"        Thank you\n" +
-					"\t for your order !\n";
+					"               Thank you\n" +
+					"\t        for your order !\n";
 			receipt = basket.printReceipt();
 			Assertions.assertEquals(example, receipt);
 		} catch (NotInInventoryException e) {
@@ -345,16 +365,17 @@ class BasketTest {
 		try {
 			basket = new Basket(inventory);
 			basket.addItem("COFB");
+			formattedTime = currentTime.format(formatter);
 
-			example = "\n    ~~~ Bob's Bagels ~~~\n" +
-					"    " + formattedTime + "\n" +
-					"----------------------------\n" +
-					"Black            1\t\t\u00A30.99\n" +
-					"----------------------------\n" +
-					"Total\t\t\t\t\t\u00A30.99\n" +
+			example = "\n          ~~~ Bob's Bagels ~~~\n" +
+					"           " + formattedTime + "\n" +
+					"----------------------------------------\n" +
+					"Coffee Black                1   \u00A30.99\n" +
+					"----------------------------------------\n" +
+					"Total\t\t\t\t\t\t\t\u00A30.99\n" +
 					"\n" +
-					"        Thank you\n" +
-					"\t for your order !\n";
+					"               Thank you\n" +
+					"\t        for your order !\n";
 			receipt = basket.printReceipt();
 			Assertions.assertEquals(example, receipt);
 		} catch (NotInInventoryException e) {
@@ -365,18 +386,20 @@ class BasketTest {
 			basket.addItem("BGLP");
 			basket.addExtra(0, "FILX");
 			basket.addExtra(0, "FILS");
+			formattedTime = currentTime.format(formatter);
 
-			example = "\n    ~~~ Bob's Bagels ~~~\n" +
-					"    " + formattedTime + "\n" +
-					"----------------------------\n" +
-					"Plain            1\t\t\u00A30.39\n" +
-					"Cream Cheese     1\t\t\u00A30.12\n" +
-					"Smoked Salmon    1\t\t\u00A30.12\n" +
-					"----------------------------\n" +
-					"Total\t\t\t\t\t\u00A30.63\n" +
+			example = "\n          ~~~ Bob's Bagels ~~~\n" +
+					"           " + formattedTime + "\n" +
+					"----------------------------------------\n" +
+					"Bagel Plain                 1   \u00A30.39\n" +
+					"Filling Cream Cheese        1   \u00A30.12\n" +
+					"Filling Smoked Salmon       1   \u00A30.12\n" +
+					"----------------------------------------\n" +
+					"Total\t\t\t\t\t\t\t\u00A30.63\n" +
 					"\n" +
-					"        Thank you\n" +
-					"\t for your order !\n";
+
+					"               Thank you\n" +
+					"\t        for your order !\n";
 			receipt = basket.printReceipt();
 			Assertions.assertEquals(example, receipt);
 		} catch (NotInInventoryException e) {
@@ -390,23 +413,146 @@ class BasketTest {
 			basket.addExtra(0, "FILX");
 			basket.addExtra(0, "FILS");
 			basket.addExtra(1, "FILH");
-			example = "\n    ~~~ Bob's Bagels ~~~\n" +
-					"    " + formattedTime + "\n" +
-					"----------------------------\n" +
-					"Plain            1\t\t\u00A30.39\n" +
-					"Onion            2\t\t\u00A30.49\n" +
-					"Cream Cheese     1\t\t\u00A30.12\n" +
-					"Smoked Salmon    1\t\t\u00A30.12\n" +
-					"Ham              1\t\t\u00A30.12\n" +
-					"----------------------------\n" +
-					"Total\t\t\t\t\t\u00A31.73\n" +
+			formattedTime = currentTime.format(formatter);
+
+			example = "\n          ~~~ Bob's Bagels ~~~\n" +
+					"           " + formattedTime + "\n" +
+					"----------------------------------------\n" +
+					"Bagel Plain                 1   \u00A30.39\n" +
+					"Bagel Onion                 2   \u00A30.49\n" +
+					"Filling Cream Cheese        1   \u00A30.12\n" +
+					"Filling Smoked Salmon       1   \u00A30.12\n" +
+					"Filling Ham                 1   \u00A30.12\n" +
+					"----------------------------------------\n" +
+					"Total\t\t\t\t\t\t\t\u00A31.73\n" +
 					"\n" +
-					"        Thank you\n" +
-					"\t for your order !\n";
+					"               Thank you\n" +
+					"\t        for your order !\n";
 			receipt = basket.printReceipt();
 			Assertions.assertEquals(example, receipt);
 		} catch (NotInInventoryException e) {
 			throw new RuntimeException(e);
 		}
+	}
+
+	@Test
+	public void printReceiptDiscountTest() {
+		LocalDateTime currentTime = LocalDateTime.now();
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+		Inventory inventory = new Inventory();
+		Basket basket = new Basket(inventory);
+		String example;
+		try {
+			basket.addItem("BGLP");
+			basket.addItem("COFB");
+			String formattedTime = currentTime.format(formatter);
+			example = "\n          ~~~ Bob's Bagels ~~~\n" +
+					"           " + formattedTime + "\n" +
+					"----------------------------------------\n" +
+					"Bagel + Coffee Combo        1   \u00A31.25\n" +
+					"----------------------------------------\n" +
+					"Total\t\t\t\t\t\t\t\u00A31.25\n" +
+					"\n" +
+					"               Thank you\n" +
+					"\t        for your order !\n";
+			Assertions.assertEquals(example, basket.printReceipt());
+		} catch (NotInInventoryException e) {
+			throw new RuntimeException(e);
+		}
+		try {
+			basket.addItem("BGLP");
+			basket.addItem("COFB");
+			String formattedTime = currentTime.format(formatter);
+			example = "\n          ~~~ Bob's Bagels ~~~\n" +
+					"           " + formattedTime + "\n" +
+					"----------------------------------------\n" +
+					"Bagel + Coffee Combo        2   \u00A31.25\n" +
+					"----------------------------------------\n" +
+					"Total\t\t\t\t\t\t\t\u00A32.50\n" +
+					"\n" +
+					"               Thank you\n" +
+					"\t        for your order !\n";
+			Assertions.assertEquals(example, basket.printReceipt());
+		} catch (NotInInventoryException e) {
+			throw new RuntimeException(e);
+		}
+		try {
+			for (int i = 0; i < 6; i++) {
+				basket.addItem("BGLO");
+
+			}
+			String formattedTime = currentTime.format(formatter);
+			example = "\n          ~~~ Bob's Bagels ~~~\n" +
+					"           " + formattedTime + "\n" +
+					"----------------------------------------\n" +
+					"Bagel Onion                 6   \u00A30.49\n" +
+					"                              (-\u00A30.45)\n" +
+					"Bagel + Coffee Combo        2   \u00A31.25\n" +
+					"----------------------------------------\n" +
+					"Total\t\t\t\t\t\t\t\u00A34.99\n" +
+					"\n" +
+					"               Thank you\n" +
+					"\t        for your order !\n";
+			Assertions.assertEquals(example, basket.printReceipt());
+		} catch (NotInInventoryException e) {
+			throw new RuntimeException(e);
+		}
+		try {
+			for (int i = 0; i < 6; i++) {
+				basket.addItem("BGLO");
+			}
+			for (int i = 0; i < 12; i++) {
+				basket.addItem("BGLP");
+			}
+			basket.addItem("COFB");
+
+			String formattedTime = currentTime.format(formatter);
+			example = "\n          ~~~ Bob's Bagels ~~~\n" +
+					"           " + formattedTime + "\n" +
+					"----------------------------------------\n" +
+					"Bagel Plain                12   \u00A30.39\n" +
+					"                              (-\u00A30.69)\n" +
+					"Bagel Onion                12   \u00A30.49\n" +
+					"                              (-\u00A30.90)\n" +
+					"Bagel + Coffee Combo        2   \u00A31.25\n" +
+					"Coffee Black                1   \u00A30.99\n" +
+
+					"----------------------------------------\n" +
+					"Total\t\t\t\t\t\t\t\u00A312.46\n" +
+					"\n" +
+					"               Thank you\n" +
+					"\t        for your order !\n";
+			Assertions.assertEquals(example, basket.printReceipt());
+		} catch (NotInInventoryException e) {
+			throw new RuntimeException(e);
+		}
+		try {
+			basket.addExtra(0, "FILH");
+			basket.addExtra(0, "FILX");
+			basket.addExtra(4, "FILS");
+			String formattedTime = currentTime.format(formatter);
+			example = "\n          ~~~ Bob's Bagels ~~~\n" +
+					"           " + formattedTime + "\n" +
+					"----------------------------------------\n" +
+					"Bagel Plain                12   \u00A30.39\n" +
+					"                              (-\u00A30.69)\n" +
+					"Bagel Onion                12   \u00A30.49\n" +
+					"                              (-\u00A30.90)\n" +
+					"Bagel + Coffee Combo        2   \u00A31.25\n" +
+					"Coffee Black                1   \u00A30.99\n" +
+					"Filling Ham                 1   \u00A30.12\n" +
+					"Filling Cream Cheese        1   \u00A30.12\n" +
+					"Filling Smoked Salmon       1   \u00A30.12\n" +
+					"----------------------------------------\n" +
+					"Total\t\t\t\t\t\t\t\u00A312.82\n" +
+					"\n" +
+					"               Thank you\n" +
+					"\t        for your order !\n";
+			Assertions.assertEquals(example, basket.printReceipt());
+		} catch (NotInInventoryException e) {
+			throw new RuntimeException(e);
+		}
+
+
 	}
 }
