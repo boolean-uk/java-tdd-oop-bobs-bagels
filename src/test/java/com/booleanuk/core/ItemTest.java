@@ -18,7 +18,11 @@ public class ItemTest {
     public void testGetPrice() {
         Item bglo = new Bagel("BGLO", "Onion", 0.49);
         Item bglp = new Bagel("BGLP","Plain", 0.39);
+        Item cofl = new Coffee("COFL", "Latte", 1.29);
+        Item filx = new Filling("FILX", "Cream Cheese", 0.12);
         Assertions.assertEquals(0.49, bglo.getPrice());
         Assertions.assertEquals(0.39, bglp.getPrice());
+        Assertions.assertEquals(1.29, cofl.getPrice());
+        Assertions.assertEquals(0.12, filx.getPrice());
     }
 }
