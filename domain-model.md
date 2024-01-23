@@ -174,15 +174,48 @@ I'd like a receipt of my basket with the total cost and the money saved from dis
 |          |                                                     | Discount discount   | Basket has multiple products in it, with discounts.  | Return String receipt with money saved through discount displayed under item |
 |          |                                                     |                     | Basket is empty                                      | Return String receipt with no items and total of 0.00                        |
 
+## Extension 4
+```
+As a customer,
+So I can check what I have bought and when it will arrive,
+I'd like a text message with my order summary and time of delivery when I'm complete.
+```
+| Class     | Method                                           | Variables           | Scenario                                             | Return value                                                                     |
+|-----------|--------------------------------------------------|---------------------|------------------------------------------------------|----------------------------------------------------------------------------------|
+| Checkout  | orderSummary(HashMap<String, Integer> basketMap) | Inventory inventory | Basket has multiple products in it, but no discounts | Return String order summary with time to delivery = +1 minute each item from now |
+|           |                                                  | Discount discount   | Basket has multiple products in it, with discounts.  | Return /\ with money saved through discount displayed beside item                |
+|           |                                                  |                     | Basket is empty                                      | Return "Order is empty"                                                          |
+| TwilioApp | main                                             | Basket basket       | Basket already premade                               | Returns orderSummary for premade basket                                          |
+
+```
+As a customer,
+So I can can conveniently order from my own home,
+I'd like to be able to order via text message.
+```
+
+| Class      | Method                          | Variables                   | Scenario                                                                                                                     | Return value                                      |
+|------------|---------------------------------|-----------------------------|------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------|
+| BobsBagels | getBasket(String phoneNumber)   | Map<String, Basket> baskets | Basket of user with input phonenumber is in Baskets                                                                          | Return Basket                                     |
+|            |                                 |                             | Basket of user is not in Baskets, add a basket for user                                                                      | Return Basket                                     |
+| TwilioApp  | main                            | BobsBagels bobsBagels       | User sends message "add 'sku'", add method is called on users basket with input sku                                          | Return response from add via sms to user          |
+|            |                                 | Basket basket               | User sends message "remove 'sku'", remove method is called on users basket with input sku                                    | Return response from remove via sms to user       |
+|            |                                 |                             | User sends message "order", orderSummary method is called on users basket. orderSummary will also clear the users basket now | Return response from orderSummary via sms to user |
+|            |                                 |                             | The message does not begin with either add, remove or order.                                                                 | Return invalid message to user via sms            |
+
+| BobsBagels                  |
+|-----------------------------|
+| Map<String, Basket> baskets |
+
+
 # Class diagram:
 ![](assets/class-diagram1.png)
 ![](assets/class-diagram2.png)
 
 ```
 BobsBagels
-	- Baskets: List<Basket>
+	- Baskets: Map<String, Basket>
 	+ setBasketCapacity(capacity: int) String
-
+	+ getBasket(phonenumber: String) Basket
 Basket
 	- basketMap: HashMap<String, Integer>
 	- capacity: int
@@ -193,19 +226,16 @@ Basket
 	+ setCapacity(capacity: int) boolean
 	+ getNumberOfItems() int
 	+ addFilling(sku: String) String
-	+ totalCostDiscount() double
-	+ receiptDiscount() String
-	+ totalCost() double
 Checkout
-    + totalCost() double
-    + totalCostDiscount() double
-	+ receiptDiscount() String
+    + totalCost(HashMap<String, Integer> basketMap) double
+    + totalCostDiscount(HashMap<String, Integer> basketMap) double
+	+ receiptDiscount(HashMap<String, Integer> basketMap) String
+	+ orderSummary(HashMap<String, Integer> basketMap) String
 Inventory
 	- products: List<products>
 	+ getProductCost(sku: String) double
 	+ listFillingPrices() String
 	+ findProduct() Product
-
 Product
 	- sku: String
 	- price: double
