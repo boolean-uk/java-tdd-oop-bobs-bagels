@@ -24,13 +24,13 @@ public class ReceiptTest {
 
         Assertions.assertEquals("Basket is empty.", receipt.generateReceipt());
         basket.add(bglo);
-        Assertions.assertTrue(receipt.generateReceipt().contains("Onion Bagel\t\t1\t\u00A30.49\n"));
+        Assertions.assertTrue(receipt.generateReceipt().contains("Onion Bagel\t\t1\t£0.49\n"));
 
         basket.add(bglo);
         basket.add(bglp);
-        Assertions.assertTrue(receipt.generateReceipt().contains("Onion Bagel\t\t2\t\u00A30.98\n"));
-        Assertions.assertTrue(receipt.generateReceipt().contains("Plain Bagel\t\t1\t\u00A30.39\n"));
-        Assertions.assertTrue(receipt.generateReceipt().contains("\n----------------------------\nTotal                  \u00A3" + basket.totalCost()));
+        Assertions.assertTrue(receipt.generateReceipt().contains("Onion Bagel\t\t2\t£0.98\n"));
+        Assertions.assertTrue(receipt.generateReceipt().contains("Plain Bagel\t\t1\t£0.39\n"));
+        Assertions.assertTrue(receipt.generateReceipt().contains("\n----------------------------\nTotal                  £" + basket.totalCost()));
         System.out.println(receipt.generateReceipt());
     }
 
@@ -85,19 +85,19 @@ public class ReceiptTest {
         Assertions.assertEquals("Basket is empty.", receipt.generateReceiptWithDiscount());
 
         basket.add(bglo); basket.add(bglo); basket.add(bglo); basket.add(bglo); basket.add(bglo); basket.add(bglo); basket.add(bglo); basket.add(bglo);
-        Assertions.assertTrue(receipt.generateReceiptWithDiscount().contains("Onion Bagel\t\t8\t\u00A33.27\n"));
-        Assertions.assertTrue(receipt.generateReceiptWithDiscount().contains("(-\u00A30.65)"));
+        Assertions.assertTrue(receipt.generateReceiptWithDiscount().contains("Onion Bagel\t\t8\t£3.27\n"));
+        Assertions.assertTrue(receipt.generateReceiptWithDiscount().contains("(-£0.65)"));
 
         basket.add(bglo); basket.add(bglo); basket.add(bglo); basket.add(bglo); basket.add(bglo); basket.add(bglo); basket.add(bglo); basket.add(bglo);
-        Assertions.assertTrue(receipt.generateReceiptWithDiscount().contains("Onion Bagel\t\t16\t\u00A35.95\n"));
-        Assertions.assertTrue(receipt.generateReceiptWithDiscount().contains("(-\u00A31.89)"));
+        Assertions.assertTrue(receipt.generateReceiptWithDiscount().contains("Onion Bagel\t\t16\t£5.95\n"));
+        Assertions.assertTrue(receipt.generateReceiptWithDiscount().contains("(-£1.89)"));
 
         basket.add(bglp); basket.add(bglp);
-        Assertions.assertTrue(receipt.generateReceiptWithDiscount().contains("Onion Bagel\t\t16\t\u00A35.95\n"));
-        Assertions.assertTrue(receipt.generateReceiptWithDiscount().contains("(-\u00A31.89)"));
-        Assertions.assertTrue(receipt.generateReceiptWithDiscount().contains("Plain Bagel\t\t2\t\u00A30.78\n"));
-        Assertions.assertFalse(receipt.generateReceiptWithDiscount().contains("(-\u00A30.0)"));
-        Assertions.assertTrue(receipt.generateReceiptWithDiscount().contains("\n----------------------------\nTotal               \u00A3" + 6.73));
+        Assertions.assertTrue(receipt.generateReceiptWithDiscount().contains("Onion Bagel\t\t16\t£5.95\n"));
+        Assertions.assertTrue(receipt.generateReceiptWithDiscount().contains("(-£1.89)"));
+        Assertions.assertTrue(receipt.generateReceiptWithDiscount().contains("Plain Bagel\t\t2\t£0.78\n"));
+        Assertions.assertFalse(receipt.generateReceiptWithDiscount().contains("(-£0.0)"));
+        Assertions.assertTrue(receipt.generateReceiptWithDiscount().contains("\n----------------------------\nTotal               £" + 6.73));
         System.out.println(receipt.generateReceiptWithDiscount());
     }
 }

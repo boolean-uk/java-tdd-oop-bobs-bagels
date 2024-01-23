@@ -26,10 +26,10 @@ public class Receipt {
         receipt.append(createHeader());
         for (Item item : basket.getBasketContent().keySet()) {
             int amount = basket.getBasketContent().get(item);
-            String itemRow = item.getVariant() + " " + item.getName() + "\t\t" +  amount + "\t\u00A3" + item.getPrice() * amount + "\n";
+            String itemRow = item.getVariant() + " " + item.getName() + "\t\t" +  amount + "\t£" + item.getPrice() * amount + "\n";
             receipt.append(itemRow);
         }
-        receipt.append("\n----------------------------\nTotal                  \u00A3") ;
+        receipt.append("\n----------------------------\nTotal                  £") ;
         receipt.append(basket.totalCost());
         receipt.append(createFooter());
         this.receipt = receipt.toString();
@@ -71,15 +71,15 @@ public class Receipt {
         double totalSavings = 0.0;
         for (Item item : basket.getBasketContent().keySet()) {
             int amount = basket.getBasketContent().get(item);
-            String itemRow = item.getVariant() + " " + item.getName() + "\t\t" +  amount + "\t\u00A3" + mapPriceAndSavings.get(item)[0] + "\n";
+            String itemRow = item.getVariant() + " " + item.getName() + "\t\t" +  amount + "\t£" + mapPriceAndSavings.get(item)[0] + "\n";
             double saving = mapPriceAndSavings.get(item)[1];
             if (saving != 0.0){
-                itemRow += "                  (-\u00A3" + saving + ")\n";
+                itemRow += "                  (-£" + saving + ")\n";
                 totalSavings += saving;
             }
             receipt.append(itemRow);
         }
-        receipt.append("\n----------------------------\nTotal               \u00A3") ;
+        receipt.append("\n----------------------------\nTotal               £") ;
         receipt.append(basket.totalCostWithDiscount(mapPriceAndSavings));
         receipt.append("\n\nYou saved a total of £");
         receipt.append(totalSavings);
