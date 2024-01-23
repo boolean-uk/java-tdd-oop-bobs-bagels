@@ -1,18 +1,19 @@
 package com.booleanuk.extension;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
+import java.util.Map;
 
 public class Basket {
 
     private ArrayList<Product> products;
     private static int maxSize;
-    double totalPrice;
+
 
     public Basket(){
         this.products = new ArrayList<>();
-        this.totalPrice = 0;
         maxSize = 10;
     }
 
@@ -65,7 +66,7 @@ public class Basket {
     }
 
     public double getCostOfBasket(){
-
+        double total = 0;
         //Clone basket to be able to remove from copy
         ArrayList<Product> temporaryProducts = this.products;
 
@@ -73,76 +74,120 @@ public class Basket {
         for (Product product: temporaryProducts){
             if (product.getName().equals("Bagel")){
                 for (Filling filling : product.getFillings()){
-                    totalPrice += getCostOfProduct(filling);
+                    total += getCostOfProduct(filling);
                 }
             }
         }
 
-        ArrayList<Product> restOfProducts = calculateDiscounts(temporaryProducts);
 
-        for (Product product : restOfProducts){
-            totalPrice += product.getPrice();
+        for (Product product : products){
+            total += product.getPrice();
         }
 
-        return totalPrice;
+        double discount = calculateDiscounts();
+        return roundDouble(total - discount);
     }
 
-    private ArrayList<Product> calculateDiscounts(ArrayList<Product> temporaryProducts){
 
-        //Initilise map for keeping track of qantity of each product
-        HashMap<String, Integer> qtyMap = new HashMap<>();
+   private double calculateDiscounts(){
+        double discountPrice = 0;
+        Map<String, Integer> quantityMap = getQuantityMap();
 
-        //Initialise map to store what's being removed
-        HashMap<String, Integer> removeMap = new HashMap<>();
+        for(Map.Entry<String, Integer> entry: quantityMap.entrySet()){
+            String id = entry.getKey();
+            int quantity = entry.getValue();
 
-        //Clone basket to be able to remove from basket
-
-
-        //Add all products to a map.
-
-        for (Product product : temporaryProducts) {
-            if (!qtyMap.containsKey(product.getId())) {
-                qtyMap.put(product.getId(), 1);
-            } else {
-                int currentAmount = qtyMap.get(product.getId());
-                qtyMap.put(product.getId(), currentAmount + 1);
-            }
-        }
-
-        for (String id : qtyMap.keySet()){
-            if(id.contains("BGL")){
-                int amount = qtyMap.get(id);
-                while (amount>= 12){
-                    amount -= 12;
-                    totalPrice += 3.99;
-                    removeMap.put(id, 12);                 }
-                while (amount >= 6){
-                    amount -= 6;
-                    totalPrice += 2.49;
-                    if(removeMap.containsKey(id)){
-                        removeMap.put(id, removeMap.get(id) + 6);
-                    }else{
-                        removeMap.put(id, 6);
-                    }
-
+            if (id.contains("BGL")){
+                while (quantity >= 12){
+                    discountPrice += (Inventory.getProductById(id).getPrice() * 12 ) - 3.99;
+                    quantity -= 12;
+                }
+                while (quantity >= 6){
+                    discountPrice += (Inventory.getProductById(id).getPrice() * 6 ) - 2.49;
+                    quantity -= 6;
                 }
             }
         }
 
-        for (String removedProductId : removeMap.keySet()){
-            int amount = removeMap.get(removedProductId);
-            Iterator<Product> iterator = temporaryProducts.iterator();
-            while (iterator.hasNext() && amount > 0) {
-                Product product = iterator.next();
-                if (removedProductId.equals(product.getId())) {
-                    iterator.remove();
-                    amount--;
-                }
-            }
-        }
+        return discountPrice;
+   }
 
-        return temporaryProducts;
-    }
+//    private ArrayList<Product> calculateDiscounts(ArrayList<Product> temporaryProducts){
+//
+//        //Initilise map for keeping track of qantity of each product
+//        HashMap<String, Integer> qtyMap = new HashMap<>();
+//
+//        //Initialise map to store what's being removed
+//        HashMap<String, Integer> removeMap = new HashMap<>();
+//
+//
+//        //Add all products to a map.
+//        for (Product product : temporaryProducts) {
+//            if (!qtyMap.containsKey(product.getId())) {
+//                qtyMap.put(product.getId(), 1);
+//            } else {
+//                int currentAmount = qtyMap.get(product.getId());
+//                qtyMap.put(product.getId(), currentAmount + 1);
+//            }
+//        }
+//
+//        //Calculate bagel discount.
+//        for (String id : qtyMap.keySet()){
+//            if(id.contains("BGL")){
+//                int amount = qtyMap.get(id);
+//                while (amount>= 12){
+//                    amount -= 12;
+//                    totalPrice += 3.99;
+//                    qtyMap.put(id, amount-=12);
+//                    removeMap.put(id, 12);                 }
+//                while (amount >= 6){
+//                    amount -= 6;
+//                    totalPrice += 2.49;
+//                    qtyMap.put(id, amount-=6);
+//                    if(removeMap.containsKey(id)){
+//                        removeMap.put(id, removeMap.get(id) + 6);
+//                    }else{
+//                        removeMap.put(id, 6);
+//                    }
+//                }
+//            }
+//        }
+//
+//        //Remove products from temporary products
+//        for (String removedProductId : removeMap.keySet()){
+//            int amount = removeMap.get(removedProductId);
+//            Iterator<Product> iterator = temporaryProducts.iterator();
+//            while (iterator.hasNext() && amount > 0) {
+//                Product product = iterator.next();
+//                if (removedProductId.equals(product.getId())) {
+//                    iterator.remove();
+//                    amount--;
+//                }
+//            }
+//        }
+//
+//        //Calculate bagel+coffee discount.
+//        System.out.println(qtyMap);
+//        int bagelAmount = 0;
+//        int coffeeAmount = 0;
+//        for(String key : qtyMap.keySet()){
+//            if (key.contains("BGL")){
+//                 bagelAmount += qtyMap.get(key);
+//            }
+//            if (key.contains("COF")){
+//                coffeeAmount += qtyMap.get(key);
+//
+//            }
+//        }
+//
+//        int bagelAndCofees = 0;
+//
+//        bagelAndCofees += Math.min(coffeeAmount, bagelAmount);
+//
+//        System.out.println(removeMap + "removeMap");
+//
+//        return temporaryProducts;
+//    }
 
     public double getCostOfProduct(Product product){
         double price = 0;
@@ -163,5 +208,25 @@ public class Basket {
 
     private boolean isBasketFull(){
         return (this.products.size()) >= maxSize;
+    }
+
+    private HashMap<String, Integer> getQuantityMap(){
+        HashMap<String, Integer> quantityMap = new HashMap<>();
+        for (Product product : products) {
+            if (!quantityMap.containsKey(product.getId())) {
+                quantityMap.put(product.getId(), 1);
+            } else {
+                int currentAmount = quantityMap.get(product.getId());
+               quantityMap.put(product.getId(), currentAmount + 1);
+            }
+        }
+        return quantityMap;
+    }
+
+    private double roundDouble (double value){
+        BigDecimal bigDecimalValue = new BigDecimal(value);
+        bigDecimalValue = bigDecimalValue.setScale(2, RoundingMode.HALF_UP);
+        double formattedValue = bigDecimalValue.doubleValue();
+        return formattedValue;
     }
 }
