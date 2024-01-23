@@ -139,7 +139,6 @@ public class BasketTestExtenstion1 {
         basket.addFilling("BGLO","FILC");
         basket.addFilling("BGLO","FILX");
 
-
         Assertions.assertEquals(2.48,basket.discount());
     }
 

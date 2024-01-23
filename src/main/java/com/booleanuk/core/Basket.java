@@ -44,7 +44,6 @@ public class Basket {
 
             }else return false;
         }
-        System.out.println(basketList);
         return false;
     }
 
@@ -64,8 +63,6 @@ public class Basket {
             for (int j = 0; j < inventoryList.size(); j++) {
                 if (basketList.get(i).equals(inventoryList.get(j).getSku())){
                      totalPrice += inventoryList.get(j).getPrice();
-                    //System.out.println(totalPrice);
-
                 }
             }
 
@@ -154,9 +151,6 @@ public class Basket {
             }
         }
         //Converts to discount code starts here
-        System.out.println(counterBGL);
-        System.out.println(counterCOF);
-
         int discount12 = counterBGL/12; // 20/12 = 1
         int remainingAfter12 = counterBGL%12; // 20%12 = 8
         int discount6 = remainingAfter12/6; // 8/6 = 1
@@ -179,7 +173,6 @@ public class Basket {
             }
             int remainder = counterCOF - remainingAfter6;
             int counter = 0;
-            System.out.println(remainder);
             for (int i = 0; i < remainder; i++) {
                 for (int j = 0; j < basketList.size(); j++) {
                     if (basketList.get(j).startsWith("COF") & counter < remainder){
@@ -194,19 +187,17 @@ public class Basket {
             for (int i = 0; i < discountCB; i++) {
                 discount.add("DISCB");
             }
-            int remainer = remainingAfter6 - counterCOF;
+            int remainder = remainingAfter6 - counterCOF;
             int counter = 0;
-            for (int i = 0; i < remainer; i++) {
+            for (int i = 0; i < remainder; i++) {
                 for (int j = 0; j < basketList.size(); j++) {
-                    if (basketList.get(j).startsWith("BGL") & counter < remainer){
+                    if (basketList.get(j).startsWith("BGL") & counter < remainder){
                         counter++;
                         discount.add(basketList.get(j));
                     }
                 }
             }
         }
-        System.out.println(discount.toString());
-
         //Calculate the total price with discount
         for (int i = 0; i < discount.size(); i++) {
             for (int j = 0; j < inventoryList.size(); j++) {
@@ -218,18 +209,5 @@ public class Basket {
         return Double.parseDouble(String.format("%.2f",price));
     }
 
-    //problem -> no proper way to choose which coffee and bagel gets discount, chooses first in basketlist
-    // Can get cheaper based on positioning of bagel and coffee
 
-    public static void main(String[] args) {
-        int num = 25/12;
-        int num2 = 25%12;
-        int num3 = 4/6;
-        int num4 = 4%6;
-        int num5 = -2-(-3);
-//        System.out.println(num4);
-//        System.out.println(num3);
-        System.out.println(num5);
-        System.out.println(num2);
-    }
 }
