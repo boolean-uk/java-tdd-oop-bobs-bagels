@@ -19,7 +19,7 @@ class BobsBagelsTest {
         Basket b = new Basket(inventory, checkout);
         b.add("BGLO");
         b.add("BGLO");
-        bb.getBaskets().add(b);
+        bb.getBaskets().put("2342353453", b);
         Assertions.assertEquals("Capacity set to 1. There are customers with more than 1 product in basket", bb.setBasketCapacity(1));
     }
 
@@ -43,4 +43,11 @@ class BobsBagelsTest {
         Assertions.assertEquals("Capacity set to 3", bb.setBasketCapacity(3));
     }
 
+    @Test
+    public void testGetBasket() {
+        BobsBagels bb = new BobsBagels();
+        bb.getBasket("1234");
+        Assertions.assertEquals("Basket", bb.getBasket("1234").getClass().getSimpleName());
+
+    }
 }

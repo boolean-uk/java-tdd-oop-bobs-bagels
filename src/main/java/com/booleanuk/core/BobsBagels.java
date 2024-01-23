@@ -1,18 +1,30 @@
 package com.booleanuk.core;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.booleanuk.extension.Discounts;
 
-// TODO: Pause work on this, outside scope of exercise
+import java.util.HashMap;
+import java.util.Map;
+
 public class BobsBagels {
-    private List<Basket> baskets;
+    private Map<String, Basket> baskets;
+    private Inventory inventory;
+    private Discounts discounts;
+    private Checkout checkout;
 
     public BobsBagels() {
-        this.baskets = new ArrayList<>();
+        this.baskets = new HashMap<>();
+        this.inventory = new Inventory();
+        this.discounts = new Discounts(inventory);
+        this.checkout = new Checkout(inventory, discounts);
     }
 
-    public List<Basket> getBaskets() {
+    public Map<String, Basket> getBaskets() {
         return baskets;
+    }
+
+    public Basket getBasket(String phoneNumber) {
+        this.baskets.putIfAbsent(phoneNumber, new Basket(this.inventory, this.checkout));
+        return this.baskets.get(phoneNumber);
     }
 
     public String setBasketCapacity(int cap) {
@@ -20,15 +32,16 @@ public class BobsBagels {
             return "Minimum capacity for baskets are 1";
         }
         boolean overCap = false;
-        for (Basket basket: this.baskets) {
-            if (basket.getNumberOfItems() > cap) {
+        for(Map.Entry<String, Basket> entry: baskets.entrySet()) {
+            if (entry.getValue().getNumberOfItems() > cap) {
                 overCap = true;
             }
-            basket.setCapacity(cap);
+            entry.getValue().setCapacity(cap);
         }
         if (overCap) {
             return "Capacity set to 1. There are customers with more than 1 product in basket";
         }
         return "Capacity set to 3";
     }
+
 }
