@@ -154,8 +154,9 @@ Class Inventory
 | Class vars                     | Methods          | Scenario                         | Return/Result |
 |--------------------------------|------------------|----------------------------------|---------------|
 | ArrayList<Bagel> allBagels     | getAllFillings() | get every filling name and price | ArrayList     |
-| ArrayList<Filling> allFillings |                  |                                  |               |
+| ArrayList<Filling> allFillings | Inventory()      |                                  |               |
 | ArrayList<Coffee> allCoffees   |                  |                                  |               |
+|                                |                  |                                  |               |
 
 
 Class Filling
