@@ -247,7 +247,7 @@ class BasketTest {
         basket.add(bagelplain);
 
         //exactly 18-discount
-        Assertions.assertEquals(3.99+2.49+0.24, basket.getCostOfBasket());
+        Assertions.assertEquals(6.72, basket.getCostOfBasket());
 
         basket.add(bagelplain);
 
@@ -287,7 +287,7 @@ class BasketTest {
         basket.add(bagelOnion);
         basket.add(bagelOnion);
 
-        Assertions.assertEquals(2.49+2.49+0.24, basket.getCostOfBasket());
+        Assertions.assertEquals(5.22, basket.getCostOfBasket());
 
     }
 
@@ -297,15 +297,18 @@ class BasketTest {
         Basket.setMaxSize(100);
         Bagel bagelplain = new  Bagel("BGLP", 0.39, "Plain");
         Bagel bagelOnion = new  Bagel("BGLO", 0.49, "Onion");
-        Coffee coffee = new Coffee("COFB", 0.99, "Black");
+        Coffee cofeewhite = new Coffee("COFW", 1.19, "White");
+        Coffee coffeeBlack = new Coffee("COFB", 0.99, "Black");
 
         //2 Bagels and one Coffee
         basket.add(bagelplain);
         basket.add(bagelOnion);
+        basket.add(bagelplain);
 
-        basket.add(coffee);
+        basket.add(cofeewhite);
+        basket.add(coffeeBlack);
 
-        Assertions.assertEquals(0.49+1.25, basket.getCostOfBasket());
+        Assertions.assertEquals(0.49+2.50, basket.getCostOfBasket());
 
     }
 }

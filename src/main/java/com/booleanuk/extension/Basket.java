@@ -100,14 +100,51 @@ public class Basket {
             if (id.contains("BGL")){
                 while (quantity >= 12){
                     discountPrice += (Inventory.getProductById(id).getPrice() * 12 ) - 3.99;
+                    quantityMap.put(id, quantityMap.get(id) - 12);
                     quantity -= 12;
+
                 }
                 while (quantity >= 6){
                     discountPrice += (Inventory.getProductById(id).getPrice() * 6 ) - 2.49;
+                    quantityMap.put(id, quantityMap.get(id) - 6);
                     quantity -= 6;
                 }
             }
         }
+
+        ArrayList<Product> coffeesLeft = new ArrayList<>();
+        ArrayList<Product> bagelsLeft = new ArrayList<>();
+
+       for(Map.Entry<String, Integer> entry: quantityMap.entrySet()){
+           String id = entry.getKey();
+           int quantity = entry.getValue();
+           if (entry.getKey().contains("BGL")){
+               for (int i = 0; i<quantity; i++){
+                   bagelsLeft.add(Inventory.getProductById(id));
+               }
+           }else if (entry.getKey().contains("COF")){
+               for (int i = 0; i<quantity; i++){
+                   coffeesLeft.add(Inventory.getProductById(id));
+               }
+           }
+       }
+
+       //Sort lists on price
+
+       sortList(coffeesLeft);
+       sortList(bagelsLeft);
+
+       int pairs = Math.min(coffeesLeft.size(), bagelsLeft.size());
+
+       System.out.println(pairs);
+
+       for (int i = 0; i<pairs; i++){
+           double coffeePrice = coffeesLeft.get(i).getPrice();
+           double bagelPrice = bagelsLeft.get(i).getPrice();
+
+           discountPrice += ((coffeePrice + bagelPrice) - 1.25);
+
+       }
 
         return discountPrice;
    }
@@ -228,5 +265,10 @@ public class Basket {
         bigDecimalValue = bigDecimalValue.setScale(2, RoundingMode.HALF_UP);
         double formattedValue = bigDecimalValue.doubleValue();
         return formattedValue;
+    }
+
+    private void sortList(ArrayList<Product> list){
+        list.sort((p1,p2)
+                ->  Double.compare(p1.getPrice(), p2.getPrice()));
     }
 }

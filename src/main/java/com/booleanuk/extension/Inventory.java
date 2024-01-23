@@ -15,6 +15,9 @@ public final class Inventory {
 
     }
 
+    public static Product getProductById(String id){
+        return products.get(id);
+    }
     public static HashMap<String, Product> getProducts() {
         return products;
     }
@@ -25,7 +28,6 @@ public final class Inventory {
     }
 
     private static void populateMaps(){
-
         // Filling items
         products.put("FILB", new Filling("FILB", 0.12, "Bacon"));
         products.put("FILE", new Filling("FILE", 0.12, "Egg"));

@@ -48,3 +48,15 @@ Coffee, Bagel and Filling will extend this class
 |         | getId()          |                  |          | return Id             |
 |         | getName()        |                  |          | return name           |
 |         | getVariant()     |                  |          | return Variant        |
+
+| Classes              | Methods          | Member Variables | Scenario | Output/Result         |
+|----------------------|------------------|------------------|----------|-----------------------|
+| DiscountCalculator() |                  | String name      |          |                       |
+|                      |                  | String id        |          |                       |
+|                      |                  | double price     |          |                       |
+|                      |                  | String variant   |          |                       |
+|                      |                  |                  |          |                       |
+|                      | getPrice()       |                  |          | return price          |     
+|                      | getId()          |                  |          | return Id             |
+|                      | getName()        |                  |          | return name           |
+|                      | getVariant()     |                  |          | return Variant        |
