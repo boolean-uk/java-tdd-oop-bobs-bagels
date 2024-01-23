@@ -1,56 +1,24 @@
 package com.booleanuk.core;
 
-public class Item {
+public interface Item {
 
-    private String sku;
-    private double price;
-    private String name;
-    private String variant;
-    public Item(String sku, double price, String name, String variant) {
-        this.sku = sku;
-        this.price = price;
-        this.name = name;
-        this.variant = variant;
-    }
-    public String getSku() {
-        return sku;
-    }
 
-    public void setSku(String sku) {
-        this.sku = sku;
-    }
+    public String getSku();
 
-    public double getPrice() {
-        return price;
-    }
+    public void setSku(String sku);
 
-    public void setPrice(double price) {
-        this.price = price;
-    }
+    public double getPrice();
 
-    public String getName() {
-        return name;
-    }
+    public void setPrice(double price);
 
-    public void setName(String name) {
-        this.name = name;
-    }
+    public String getName();
 
-    public String getVariant() {
-        return variant;
-    }
+    public void setName(String name);
 
-    public void setVariant(String variant) {
-        this.variant = variant;
-    }
+    public String getVariant();
+
+    public void setVariant(String variant);
     @Override
-    public String toString() {
-        return "Item{" +
-                "sku='" + sku + '\'' +
-                ", price=" + price +
-                ", name='" + name + '\'' +
-                ", variant='" + variant + '\'' +
-                '}';
-    }
+    public String toString();
 
 }

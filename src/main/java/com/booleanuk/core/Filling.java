@@ -1,11 +1,11 @@
 package com.booleanuk.core;
 
-public class Bagel implements Item {
+public class Filling implements Item{
     private String sku;
     private double price;
     private String name;
     private String variant;
-    public Bagel(String sku, double price, String name, String variant) {
+    public Filling(String sku, double price, String name, String variant) {
         this.sku = sku;
         this.price = price;
         this.name = name;

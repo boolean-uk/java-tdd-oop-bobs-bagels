@@ -37,7 +37,7 @@ public class Basket {
 
 
     public String change(int newCap) throws UserException  {
-        if (member.toString().equals("customer".toLowerCase())){
+        if (member.toString().equalsIgnoreCase("customer")){
             throw new UserException("You can't do that");
         }
         if (newCap < list.size()) {
