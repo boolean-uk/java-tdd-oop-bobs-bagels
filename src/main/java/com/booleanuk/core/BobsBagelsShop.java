@@ -32,20 +32,20 @@ public class BobsBagelsShop {
 
     public BobsBagelsShop() {
         HashMap<Item, Integer> fullInventory = new HashMap<>();
-        Item bglo = new Bagel("BGLO","Bagel", "Onion", 0.49);
-        Item bglp = new Bagel("BGLP","Bagel", "Plain", 0.39);
-        Item bgle = new Bagel("BGLE","Bagel", "Everything", 0.49);
-        Item bgls = new Bagel("BGLS","Bagel", "Sesame", 0.49);
-        Item cofb = new Coffee("COFB", "Coffee", "Black", 0.99);
-        Item cofw = new Coffee("COFW", "Coffee", "White", 1.19);
-        Item cofc = new Coffee("COFC", "Coffee", "Capuccino", 1.29);
-        Item cofl = new Coffee("COFL", "Coffee", "Latte", 1.29);
-        Item filb = new Filling("FILB", "Filling", "Bacon", 0.12);
-        Item file = new Filling("FILE", "Filling", "Egg", 0.12);
-        Item filc = new Filling("FILC", "Filling", "Cheese", 0.12);
-        Item filx = new Filling("FILX", "Filling", "Cream Cheese", 0.12);
-        Item fils = new Filling("FILS", "Filling", "Smoked Salmon", 0.12);
-        Item filh = new Filling("FILH", "Filling", "Ham", 0.12);
+        Item bglo = new Bagel("BGLO", "Onion", 0.49);
+        Item bglp = new Bagel("BGLP","Plain", 0.39);
+        Item bgle = new Bagel("BGLE","Everything", 0.49);
+        Item bgls = new Bagel("BGLS", "Sesame", 0.49);
+        Item cofb = new Coffee("COFB",  "Black", 0.99);
+        Item cofw = new Coffee("COFW",  "White", 1.19);
+        Item cofc = new Coffee("COFC",  "Capuccino", 1.29);
+        Item cofl = new Coffee("COFL",  "Latte", 1.29);
+        Item filb = new Filling("FILB",  "Bacon", 0.12);
+        Item file = new Filling("FILE",  "Egg", 0.12);
+        Item filc = new Filling("FILC",  "Cheese", 0.12);
+        Item filx = new Filling("FILX",  "Cream Cheese", 0.12);
+        Item fils = new Filling("FILS",  "Smoked Salmon", 0.12);
+        Item filh = new Filling("FILH",  "Ham", 0.12);
         fullInventory.put(bglo, 30);
         fullInventory.put(bglp, 30);
         fullInventory.put(bgle, 30);
