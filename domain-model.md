@@ -9,20 +9,21 @@ I'd like to add a specific type of bagel to my basket.
 
 Class Basket
 
-| Class vars                                | Methods               | Scenario                        | Return/Result |
-|-------------------------------------------|-----------------------|---------------------------------|---------------|
-| HashMap<Bagel, ArrayList<Filling>> basket | addBagel(Bagel bagel) | if bagel is added to basket     | true          |
-| int maxCapacity                           |                       | if bagel is not added to basket | false         |
-| int currentIndex                          |                       |                                 |               |
+| Class vars              | Methods               | Scenario                        | Return/Result |
+|-------------------------|-----------------------|---------------------------------|---------------|
+| ArrayList<Bagel> basket | addBagel(Bagel bagel) | if bagel is added to basket     | true          |
+| int maxCapacity         |                       | if bagel is not added to basket | false         |
+| int currentIndex        |                       |                                 |               |
 
 Class Bagel
 
-| Class vars       | Methods                                            | Scenario | Return/Result |
-|------------------|----------------------------------------------------|----------|---------------|
-| String name      | Bagel(String name, String productID, double price) |          |               |
-| String productID |                                                    |          |               |
-| String uniqueID  |                                                    |          |               |
-| double price     |                                                    |          |               |
+| Class vars                  | Methods                                            | Scenario | Return/Result |
+|-----------------------------|----------------------------------------------------|----------|---------------|
+| String name                 | Bagel(String name, String productID, double price) |          |               |
+| String productID            |                                                    |          |               |
+| String uniqueID             |                                                    |          |               |
+| double price                |                                                    |          |               |
+| ArrayList<Filling> fillings |                                                    |          |               |
 
 Class Filling
 
@@ -42,11 +43,11 @@ I'd like to remove a bagel from my basket.
 
 Class Basket
 
-| Class vars                                | Methods                  | Scenario                        | Return/Result |
-|-------------------------------------------|--------------------------|---------------------------------|---------------|
-| HashMap<Bagel, ArrayList<Filling>> basket | removeBagel(Bagel bagel) | if bagel is removed from basket | true          |
-| int maxCapacity                           |                          | if bagel is not in basket       | false         |
-| int currentIndex                          |                          |                                 |               |
+| Class vars              | Methods                  | Scenario                        | Return/Result |
+|-------------------------|--------------------------|---------------------------------|---------------|
+| ArrayList<Bagel> basket | removeBagel(Bagel bagel) | if bagel is removed from basket | true          |
+| int maxCapacity         |                          | if bagel is not in basket       | false         |
+| int currentIndex        |                          |                                 |               |
 
 
 ```
@@ -67,11 +68,11 @@ I’d like to change the capacity of baskets.
 
 Class Basket
 
-| Class vars                                | Methods                                       | Scenario                     | Return/Result |
-|-------------------------------------------|-----------------------------------------------|------------------------------|---------------|
-| HashMap<Bagel, ArrayList<Filling>> basket | extendCapacityOfBasket(int additionalIndices) | what is the new basket size? | int           |
-| int maxCapacity                           |                                               |                              |               |
-| int currentIndex                          |                                               |                              |               |
+| Class vars              | Methods                                       | Scenario                     | Return/Result |
+|-------------------------|-----------------------------------------------|------------------------------|---------------|
+| ArrayList<Bagel> basket | extendCapacityOfBasket(int additionalIndices) | what is the new basket size? | int           |
+| int maxCapacity         |                                               |                              |               |
+| int currentIndex        |                                               |                              |               |
 
 
 ```
@@ -92,11 +93,11 @@ I'd like to know the total cost of items in my basket.
 
 Class Basket
 
-| Class vars                                | Methods        | Scenario             | Return/Result |
-|-------------------------------------------|----------------|----------------------|---------------|
-| HashMap<Bagel, ArrayList<Filling>> basket | getTotalCost() | calculate the bagels | double        |
-| int maxCapacity                           |                |                      |               |
-| int currentIndex                          |                |                      |               |
+| Class vars              | Methods        | Scenario                                         | Return/Result |
+|-------------------------|----------------|--------------------------------------------------|---------------|
+| ArrayList<Bagel> basket | getTotalCost() | calculate the total cost of all bagels in basket | double        |
+| int maxCapacity         |                |                                                  |               |
+| int currentIndex        |                |                                                  |               |
 
 
 ```
@@ -108,12 +109,13 @@ I'd like to know the cost of a bagel before I add it to my basket.
 
 Class Bagel
 
-| Class vars       | Methods    | Scenario | Return/Result |
-|------------------|------------|----------|---------------|
-| String name      | getPrice() |          | double        |
-| String productID |            |          |               |
-| String uniqueID  |            |          |               |
-| double price     |            |          |               |
+| Class vars                  | Methods    | Scenario | Return/Result |
+|-----------------------------|------------|----------|---------------|
+| String name                 | getPrice() |          | double        |
+| String productID            |            |          |               |
+| String uniqueID             |            |          |               |
+| double price                |            |          |               |
+| ArrayList<Filling> fillings |            |          |               |
 
 
 ```
@@ -125,11 +127,21 @@ I'd like to be able to choose fillings for my bagel.
 
 Class Basket
 
-| Class vars                                | Methods                                         | Scenario                   | Return/Result |
-|-------------------------------------------|-------------------------------------------------|----------------------------|---------------|
-| HashMap<Bagel, ArrayList<Filling>> basket | addFillingToBagel(Bagel bagel, Filling filling) | if filling/s was added     | true          |
-| int maxCapacity                           |                                                 | if filling/s was not added | false         |
-| int currentIndex                          |                                                 |                            |               |
+| Class vars              | Methods                                         | Scenario                 | Return/Result |
+|-------------------------|-------------------------------------------------|--------------------------|---------------|
+| ArrayList<Bagel> basket | addFillingToBagel(Bagel bagel, Filling filling) | if filling was added     | true          |
+| int maxCapacity         |                                                 | if filling was not added | false         |
+| int currentIndex        |                                                 |                          |               |
+
+Class Bagel
+
+| Class vars                  | Methods      | Scenario                 | Return/Result |
+|-----------------------------|--------------|--------------------------|---------------|
+| String name                 | addFilling() | if filling was added     | true          |
+| String productID            |              | if filling was not added | false         |
+| String uniqueID             |              |                          |               |
+| double price                |              |                          |               |
+| ArrayList<Filling> fillings |              |                          |               |
 
 ```
 User story 9
@@ -156,12 +168,12 @@ Class Filling
 
 Class Basket
 
-| Class vars                                | Methods                     | Scenario | Return/Result |
-|-------------------------------------------|-----------------------------|----------|---------------|
-| HashMap<Bagel, ArrayList<Filling>> basket | Basket(Inventory inventory) |          |               |
-| int maxCapacity                           |                             |          |               |
-| int currentIndex                          |                             |          |               |
-| Inventory inventory                       |                             |          |               |
+| Class vars              | Methods                     | Scenario | Return/Result |
+|-------------------------|-----------------------------|----------|---------------|
+| ArrayList<Bagel> basket | Basket(Inventory inventory) |          |               |
+| int maxCapacity         |                             |          |               |
+| int currentIndex        |                             |          |               |
+| Inventory inventory     |                             |          |               |
 
 
 ```

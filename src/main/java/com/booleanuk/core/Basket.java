@@ -6,18 +6,18 @@ import java.util.HashMap;
 
 public class Basket {
     Inventory inventory;
-    HashMap<Bagel, ArrayList<Filling>> basket;
+    ArrayList<Bagel> basket;
     int maxCapacity = 5;
     int currentIndex = 0;
 
     public Basket(Inventory inventory) {
         this.inventory = inventory;
-        this.basket = new HashMap<>();
+        this.basket = new ArrayList<>();
     }
 
     public boolean addBagel(Bagel bagel) {
         if(currentIndex < maxCapacity) {
-            basket.put(bagel, new ArrayList<>());
+            basket.add(bagel);
             currentIndex++;
             return true;
         }
@@ -25,7 +25,7 @@ public class Basket {
     }
 
     public boolean removeBagel(Bagel bagel) {
-        if (basket.containsKey(bagel)) {
+        if (basket.contains(bagel)) {
             basket.remove(bagel);
             return true;
         }
@@ -40,7 +40,7 @@ public class Basket {
     public double getTotalCost() {
         double totalCost = 0.0;
 
-        for(Bagel bagel : basket.keySet()) {
+        for(Bagel bagel : basket) {
             totalCost += bagel.price;
         }
 
@@ -50,6 +50,12 @@ public class Basket {
     }
 
     public boolean addFillingToBagel(Bagel bagel, Filling filling) {
+        for (Bagel b : basket) {
+            if (bagel.equals(b)) {
+                b.addFilling(filling);
+                break;
+            }
+        }
         return true;
     }
 }
