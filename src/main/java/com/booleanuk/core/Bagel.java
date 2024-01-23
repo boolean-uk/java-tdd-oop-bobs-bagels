@@ -8,7 +8,7 @@ import java.util.Map;
 
 public class Bagel {
     String bagel;
-    ArrayList<Inventory> basketList;
+    public ArrayList<Inventory> basketList;
 
     ArrayList<Inventory> inventoryList;
     int key=0;
@@ -91,7 +91,7 @@ public class Bagel {
 //        Inventory a = new Inventory("bagel1");
 //        bagel.basketList.add(a);
         //bagel.inventoryList.remove(a);
-        System.out.println(bagel.inventoryAllPrint());
+        //System.out.println(bagel.inventoryAllPrint());
         bagel.addBagel("BGLO");
         bagel.addBagel("BGLO");
         bagel.addBagel("BGLP");
@@ -115,7 +115,7 @@ public class Bagel {
         bagel.addBagel("COFB");
         bagel.addBagel("COFB");
         bagel.addBagel("COFB");
-        System.out.println(bagel.basketList.toString());
+        //System.out.println(bagel.basketList.toString());
         System.out.println(bagel.totalCost());
 
     }
@@ -166,11 +166,11 @@ public class Bagel {
             totalSaved += 1.25;
         }
 
-        System.out.println(countOnion);
-        System.out.println(countPlain);
-        System.out.println(countEverything);
-        System.out.println(countCoffe);
-        System.out.println(count);
+//        System.out.println(countOnion);
+//        System.out.println(countPlain);
+//        System.out.println(countEverything);
+//        System.out.println(countCoffe);
+//        System.out.println(count);
 
         double finalValue = Math.round(totalCost * 100) / 100.0;
         printReceipt(finalValue, count, totalSaved);
@@ -180,9 +180,9 @@ public class Bagel {
         LocalDateTime date = LocalDateTime.now();
 
         String newDate = date.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
-        for (Inventory item : basketList) {
-            System.out.println("SKU: " + item.SKU + ", Name: " + item.name + ", Variant: " + item.variant + ", Price: " + item.price);
-        }
+//        for (Inventory item : basketList) {
+//            System.out.println("SKU: " + item.SKU + ", Name: " + item.name + ", Variant: " + item.variant + ", Price: " + item.price);
+//        }
         System.out.println("        ~~~ Bob's Bagels ~~~       \n" +
                             "        " + newDate +             "\n" +
                             "----------------------------------\n" +
