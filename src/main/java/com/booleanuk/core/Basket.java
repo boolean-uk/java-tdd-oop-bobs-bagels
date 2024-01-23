@@ -103,10 +103,10 @@ public class Basket {
             double[] priceAndSavings = new double[2];
             int amount = this.basketContent.get(item);
             double fullPrice = item.getPrice() * amount;
-            if (amount >= 12) {
+            if (item.getName().equals("Bagel") && amount >= 12) {
                 priceAndSavings[0] = 3.99 + (amount - 12) * item.getPrice();
             }
-            else if (amount >= 6) {
+            else if (item.getName().equals("Bagel") && amount >= 6) {
                 priceAndSavings[0] = 2.29 + (amount - 6) * item.getPrice();
             }
             else {
