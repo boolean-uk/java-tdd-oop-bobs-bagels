@@ -23,4 +23,12 @@ public class Inventory {
     public ArrayList<Filling> getAllFillings() {
         return this.allFillings;
     }
+
+    public boolean isBagelInInventory(Bagel bagel) {
+        return true;
+    }
+
+    public boolean isFillingInInventory(Filling filling) {
+        return true;
+    }
 }
