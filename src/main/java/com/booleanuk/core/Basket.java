@@ -7,7 +7,7 @@ import java.util.*;
 public class Basket {
 	private int itemIndex;
 	private int size = 30;
-	final Inventory inventory;
+	private Inventory inventory;
 	private HashMap<Integer, String> items;
 	private HashMap<Integer, ArrayList<String>> extra;
 
@@ -15,7 +15,6 @@ public class Basket {
 		this.items = new HashMap<>();
 		this.extra = new HashMap<>();
 		this.inventory = inventory;
-
 	}
 
 	public boolean inBasket(String id) {
@@ -109,15 +108,18 @@ public class Basket {
 	}
 
 	public String printReceipt() {
+
+		StringBuilder sb = new StringBuilder();
+		recieptStart(sb);
+		recieptItems(sb);
+		recieptEnding(sb);
+		System.out.println(sb);
+		return sb.toString();
+	}
+
+	private void recieptItems(StringBuilder sb) {
 		HashSet<String> uniqueItems = new HashSet<>(items.values());
 		HashMap<String, Integer> itemOcurrance = countOccurrences(new ArrayList<>(items.values()), uniqueItems.toArray(new String[0]));
-		StringBuilder sb = new StringBuilder();
-		sb.append("\n    ~~~ Bob's Bagels ~~~\n");
-		LocalDateTime currentTime = LocalDateTime.now();
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-		String formattedTime = currentTime.format(formatter);
-		sb.append("    ").append(formattedTime).append("\n");
-		sb.append("----------------------------\n");
 		for (String item : uniqueItems) {
 			try {
 				sb.append(String.format("%-10s", inventory.getName(item)));
@@ -147,11 +149,78 @@ public class Basket {
 				sb.append("\n");
 			}
 		}
+	}
+
+	private void recieptEnding(StringBuilder sb) {
 		sb.append("----------------------------\n");
 		sb.append("Total\t\t\t\t\t\u00A3").append(String.format("%.2f", getTotalCost())).append("\n");
 		sb.append("\n        Thank you\n	 for your order !\n");
-		System.out.println(sb);
-		return sb.toString();
+	}
+
+	private void recieptStart(StringBuilder sb) {
+		sb.append("\n    ~~~ Bob's Bagels ~~~\n");
+		LocalDateTime currentTime = LocalDateTime.now();
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+		String formattedTime = currentTime.format(formatter);
+		sb.append("    ").append(formattedTime).append("\n");
+		sb.append("----------------------------\n");
+	}
+
+	private double calcBulkTotal(ArrayList<String> discountItems) {
+		double total = 0;
+		for (String item : discountItems) {
+			double price = inventory.getBulkAmount(item);
+			total += price;
+		}
+		return total;
+	}
+
+	private double calcComboTotal(HashSet<String[]> discountPairs, ArrayList<String> itemsLeft) {
+		double total = 0;
+		for (String[] pair : discountPairs) {
+			int smallest = calcSmallest(itemsLeft, pair);
+			removeComboitems(itemsLeft, pair, smallest);
+			for (int j = 0; j < smallest; j++) {
+				total += inventory.getDiscountComboAmount(pair);
+			}
+		}
+		return total;
+	}
+
+	private double calcItemsTotal(ArrayList<String> itemsLeft) {
+		double total = 0;
+		for (String item : itemsLeft) {
+			total += inventory.getPrice(item);
+		}
+		return total;
+	}
+
+	private double calcExtraTotal(HashMap<Integer, ArrayList<String>> extra) {
+		double total = 0;
+		for (ArrayList<String> extras : extra.values()) {
+			for (String item : extras) {
+				total += inventory.getPrice(item);
+			}
+		}
+		return total;
+	}
+	private int calcSmallest(ArrayList<String> itemsLeft, String[] pair) {
+		HashMap<String, Integer> occurrences = countOccurrences(itemsLeft, pair);
+		int smallest = Integer.MAX_VALUE;
+		for (Integer i : occurrences.values()) {
+			if (i < smallest) {
+				smallest = i;
+			}
+		}
+		return smallest;
+	}
+	private int calcClosestMultiple(HashMap<String, Integer> bulkAmount, String bulkItem) {
+		int input = bulkAmount.get(bulkItem);
+		int target = inventory.getBulkBulk(bulkItem);
+		if (Math.round((float) input / target) * target > input) {
+			return 0;
+		}
+		return Math.round((float) input / target) * target;
 	}
 
 	private static boolean containsAllItems(ArrayList<String> items, String[] array) {
@@ -222,26 +291,6 @@ public class Basket {
 		return discountPairs;
 	}
 
-	private int calcSmallest(ArrayList<String> itemsLeft, String[] pair) {
-		HashMap<String, Integer> occurrences = countOccurrences(itemsLeft, pair);
-		int smallest = Integer.MAX_VALUE;
-		for (Integer i : occurrences.values()) {
-			if (i < smallest) {
-				smallest = i;
-			}
-		}
-		return smallest;
-	}
-
-	private int calcClosestMultiple(HashMap<String, Integer> bulkAmount, String bulkItem) {
-		int input = bulkAmount.get(bulkItem);
-		int target = inventory.getBulkBulk(bulkItem);
-		if (Math.round((float) input / target) * target > input) {
-			return 0;
-		}
-		return Math.round((float) input / target) * target;
-	}
-
 	private ArrayList<String> moveDiscountItems(ArrayList<String> itemsLeft, HashMap<String, Integer> bulkAmount) {
 		ArrayList<String> discountItems = new ArrayList<>();
 		for (String bulkItem : bulkAmount.keySet()) {
@@ -278,43 +327,6 @@ public class Basket {
 		}
 	}
 
-	private double calcBulkTotal(ArrayList<String> discountItems) {
-		double total = 0;
-		for (String item : discountItems) {
-			double price = inventory.getBulkAmount(item);
-			total += price;
-		}
-		return total;
-	}
 
-	private double calcComboTotal(HashSet<String[]> discountPairs, ArrayList<String> itemsLeft) {
-		double total = 0;
-		for (String[] pair : discountPairs) {
-			int smallest = calcSmallest(itemsLeft, pair);
-			removeComboitems(itemsLeft, pair, smallest);
-			for (int j = 0; j < smallest; j++) {
-				total += inventory.getDiscountComboAmount(pair);
-			}
-		}
-		return total;
-	}
-
-	private double calcItemsTotal(ArrayList<String> itemsLeft) {
-		double total = 0;
-		for (String item : itemsLeft) {
-			total += inventory.getPrice(item);
-		}
-		return total;
-	}
-
-	private double calcExtraTotal(HashMap<Integer, ArrayList<String>> extra) {
-		double total = 0;
-		for (ArrayList<String> extras : extra.values()) {
-			for (String item : extras) {
-				total += inventory.getPrice(item);
-			}
-		}
-		return total;
-	}
 
 }
