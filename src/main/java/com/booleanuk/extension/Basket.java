@@ -17,7 +17,7 @@ public class Basket {
         maxSize = 10;
     }
 
-    public boolean add(Product product){
+    public boolean add(Product product, int amount){
 
         //If the product is not in inventory
         if(!Inventory.isValidProduct(product) || product.getName().equals("Filling")){
@@ -28,9 +28,10 @@ public class Basket {
         if(isBasketFull()){
             return false;
         }
-        //Add bagel
-        this.products.add(product);
-
+        //Add bagels
+        for(int i = 0; i<amount; i++){
+            this.products.add(product);
+        }
         return true;
     }
 

@@ -20,17 +20,17 @@ class BasketTest {
         Bagel bagelWfillings = new  Bagel("BGLO", 0.49, "Onion", fillings);
 
        //Add Bagel With no filling
-       Assertions.assertTrue(basket.add(bagelNoFillings));
+       Assertions.assertTrue(basket.add(bagelNoFillings, 1));
 
        //Add Bagel With filling
-        Assertions.assertTrue(basket.add(bagelWfillings));
+        Assertions.assertTrue(basket.add(bagelWfillings, 1));
 
         //AddCoffee
         Coffee black = new Coffee("COFB", 0.99, "Black");
-        Assertions.assertTrue(basket.add(black));
+        Assertions.assertTrue(basket.add(black, 1));
 
        //Try adding with a full basket
-       Assertions.assertFalse(basket.add(bagelNoFillings));
+       Assertions.assertFalse(basket.add(bagelNoFillings, 1));
 
     }
 
@@ -43,15 +43,15 @@ class BasketTest {
          Bagel bagelWrongId = new  Bagel("BGL", 0.39, "Plain");
 
         //Add Wrong Bagel
-        Assertions.assertFalse(basket.add(bagelWrongPrice));
-        Assertions.assertFalse(basket.add(bagelWrongVariant));
-        Assertions.assertFalse(basket.add(bagelWrongId));
-        Assertions.assertFalse(basket.add(bagelWrongPrice));
+        Assertions.assertFalse(basket.add(bagelWrongPrice, 1));
+        Assertions.assertFalse(basket.add(bagelWrongVariant, 1));
+        Assertions.assertFalse(basket.add(bagelWrongId, 1));
+        Assertions.assertFalse(basket.add(bagelWrongPrice, 1));
 
         Filling filling1 = new Filling("FILB", 0.12, "Bacon");
 
         //Add filling
-        Assertions.assertFalse(basket.add(filling1));
+        Assertions.assertFalse(basket.add(filling1, 1));
     }
 
     @Test
@@ -59,7 +59,7 @@ class BasketTest {
          Basket basket = new  Basket();
          Bagel bagel1 = new  Bagel("BGLO", 0.49, "Onion");
          Bagel bagel2 = new  Bagel("BGLO", 0.49, "Onion");
-        basket.add(bagel1);
+        basket.add(bagel1, 1);
 
         //Remove bagel not in basket
         Assertions.assertFalse(basket.remove(bagel2));
@@ -83,7 +83,7 @@ class BasketTest {
 
         ArrayList< Filling>  wrongfillings = new ArrayList< Filling>();
         wrongfillings.add(fillingWrong);
-        basket.add(bagel);
+        basket.add(bagel, 1);
 
         //Add multiple filling to bagel in basket
         Assertions.assertTrue(basket.addFillings(bagel, fillings));
@@ -165,9 +165,9 @@ class BasketTest {
 
          Basket basket = new Basket();
 
-        basket.add(bagelplain);
-        basket.add(bagelWithFilling);
-        basket.add(bagelOnion);
+        basket.add(bagelplain, 1);
+        basket.add(bagelWithFilling, 1);
+        basket.add(bagelOnion, 1);
 
         Assertions.assertEquals( 1.51,basket.getCostOfBasket());
     }
@@ -189,22 +189,12 @@ class BasketTest {
         bagelWithFilling.addFillings(fillings);
 
         //exactly 12-discount
-        basket.add(bagelplain);
-        basket.add(bagelplain);
-        basket.add(bagelplain);
-        basket.add(bagelplain);
-        basket.add(bagelplain);
-        basket.add(bagelplain);
-        basket.add(bagelplain);
-        basket.add(bagelplain);
-        basket.add(bagelplain);
-        basket.add(bagelplain);
-        basket.add(bagelplain);
-        basket.add(bagelWithFilling);
+        basket.add(bagelplain, 11);
+        basket.add(bagelWithFilling, 1);
 
         Assertions.assertEquals(3.99+0.24, basket.getCostOfBasket());
 
-        basket.add(bagelplain);
+        basket.add(bagelplain, 1);
 
         //more than 12-discount
         Assertions.assertEquals(3.99+0.24+0.39, basket.getCostOfBasket());
@@ -227,29 +217,13 @@ class BasketTest {
         bagelWithFilling.addFillings(fillings);
 
 
-        basket.add(bagelWithFilling);
-        basket.add(bagelplain);
-        basket.add(bagelplain);
-        basket.add(bagelplain);
-        basket.add(bagelplain);
-        basket.add(bagelplain);
-        basket.add(bagelplain);
-        basket.add(bagelplain);
-        basket.add(bagelplain);
-        basket.add(bagelplain);
-        basket.add(bagelplain);
-        basket.add(bagelplain);
-        basket.add(bagelplain);
-        basket.add(bagelplain);
-        basket.add(bagelplain);
-        basket.add(bagelplain);
-        basket.add(bagelplain);
-        basket.add(bagelplain);
+        basket.add(bagelWithFilling, 1);
+        basket.add(bagelplain, 17);
 
         //exactly 18-discount
         Assertions.assertEquals(6.72, basket.getCostOfBasket());
 
-        basket.add(bagelplain);
+        basket.add(bagelplain, 1);
 
         //more than 18-discount
         Assertions.assertEquals(3.99+2.49+0.24+0.39, basket.getCostOfBasket());
@@ -273,19 +247,10 @@ class BasketTest {
         bagelWithFilling.addFillings(fillings);
 
         //6 plain 6 onion, 1 with filling
-        basket.add(bagelWithFilling);
-        basket.add(bagelplain);
-        basket.add(bagelplain);
-        basket.add(bagelplain);
-        basket.add(bagelplain);
-        basket.add(bagelplain);
+        basket.add(bagelWithFilling, 1);
+        basket.add(bagelplain, 5);
 
-        basket.add(bagelOnion);
-        basket.add(bagelOnion);
-        basket.add(bagelOnion);
-        basket.add(bagelOnion);
-        basket.add(bagelOnion);
-        basket.add(bagelOnion);
+        basket.add(bagelOnion, 6);
 
         Assertions.assertEquals(5.22, basket.getCostOfBasket());
 
@@ -301,12 +266,10 @@ class BasketTest {
         Coffee coffeeBlack = new Coffee("COFB", 0.99, "Black");
 
         //2 Bagels and one Coffee
-        basket.add(bagelplain);
-        basket.add(bagelOnion);
-        basket.add(bagelplain);
-
-        basket.add(cofeewhite);
-        basket.add(coffeeBlack);
+        basket.add(bagelplain, 2);
+        basket.add(bagelOnion, 1);
+        basket.add(cofeewhite, 1);
+        basket.add(coffeeBlack, 1);
 
         Assertions.assertEquals(0.49+2.50, basket.getCostOfBasket());
 
