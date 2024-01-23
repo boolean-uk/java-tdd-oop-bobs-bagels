@@ -42,7 +42,7 @@ public class Receipt {
                     
                     ----------------------------
                     """);
-            sb.append("Total\t\t\t\t    ").append(totalCost);
+            sb.append("Total                   ").append(totalCost);
             sb.append("\n You saved a total of " + parsePrice(String.valueOf(allDiscounts)) + "\n");
             sb.append("""
                            on this shop
