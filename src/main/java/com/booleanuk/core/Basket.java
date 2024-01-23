@@ -65,7 +65,7 @@ public class Basket {
             for (Item item : this.basketContent.keySet()) {
                 totalPrice += (item.getPrice() * this.basketContent.get(item));
             }
-            return ((int) Math.round(totalPrice)*100)/100.0;
+            return ((int) Math.round(totalPrice*100))/100.0;
         }
     }
 
