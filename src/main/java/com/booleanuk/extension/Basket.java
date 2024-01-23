@@ -100,7 +100,7 @@ public class Basket {
                     String discountedString = String.format("(£%.2f)\n", discounted);
                     result.append(String.format("%-26s", " ") + discountedString);
                 } else {
-                result.append(String.format("%-20s %-4d £%.2f\n", itemName, quantity, discountedPrice));
+                    result.append(String.format("%-20s %-4d £%.2f\n", itemName, quantity, discountedPrice));
                 }
             }
 
@@ -138,6 +138,5 @@ public class Basket {
         }
         return discountedPrice;
     }
-
 
 }
