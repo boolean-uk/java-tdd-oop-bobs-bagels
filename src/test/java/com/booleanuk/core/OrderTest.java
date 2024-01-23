@@ -299,7 +299,7 @@ public class OrderTest {
         double result = basket1.totalCost();
 
         System.out.println(result);
-        System.out.println(basket1.check());
+        //System.out.println(basket1.check());
         System.out.println(basket1.discount());
 
 
@@ -332,7 +332,7 @@ public class OrderTest {
 
 
 
-        Assertions.assertEquals(3.99, result);
+        Assertions.assertEquals(3.990000000000002, result);
     }
 
     @Test

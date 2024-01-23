@@ -203,7 +203,7 @@ public class Order {
 
     public double discount() {
         double discount = 0;
-        if (itemCounts.size() > 1) {
+        if (!itemCounts.isEmpty()) {
 
 
                 int itemCountCoffee = getItemCount("Coffee");
@@ -287,7 +287,7 @@ public class Order {
         basket.add("BGLO", "Bagel", "Onion", 0.49);
 
 
-       // basket.add("COFW", "Coffee", "White", 1.19);
+        basket.add("COFW", "Coffee", "White", 1.19);
 
         System.out.println(basket.check("Bagel"));
         System.out.println(basket.discount());
