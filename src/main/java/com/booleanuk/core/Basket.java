@@ -41,6 +41,10 @@ public class Basket {
         return false;
     }
 
+    public void clearBasket() {
+        this.basketMap.clear();
+    }
+
     public int getNumberOfItems() {
         return this.basketMap.values().stream()
                 .mapToInt(Integer::valueOf)
@@ -110,4 +114,9 @@ public class Basket {
         return this.checkout.receiptDiscount(this.basketMap);
     }
 
+    public String orderSummary() {
+        String summary = this.checkout.orderSummary(this.basketMap);
+        this.clearBasket();
+        return summary;
+    }
 }
