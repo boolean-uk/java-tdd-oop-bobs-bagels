@@ -118,7 +118,7 @@ I'd like to know the cost of each filling before I add it to my bagel order.
 ```
 
 ```
-10. 
+10. x
 As the manager,
 So we don't get any weird requests,
 I want customers to only be able to order things that we stock in our inventory.

@@ -68,13 +68,18 @@ public class Basket implements Inventory {
         }
     }
 
-    public void removeProduct(String productName) {
+    public void removeProduct(String productVariant) {
         for(int i = 0; i < this.basketItems.size(); i++) {
-            if(basketItems.get(i).name.equals(productName)) {
+            if(basketItems.get(i).getVariant().equals(productVariant)) {
+
                 this.basketItems.remove(i);
+                return;
             }
         }
+        System.out.println(productVariant + " doesen't seem to be in your basket");
     }
+
+
 
     public int getCapacity() {
         return this.basketLimit;

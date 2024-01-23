@@ -86,11 +86,10 @@ public class BasketTest {
 
         ArrayList<Product> productsTest = new ArrayList<>();
         productsTest.add(new Product("Orange", 0.29));
-
         basket.removeProduct("Apple");
 
-        Assertions.assertEquals(1, basket.getInventory().size());
         Assertions.assertEquals(productsTest, basket.getInventory());
+        Assertions.assertEquals(1, basket.getInventory().size());
 
 
     }
