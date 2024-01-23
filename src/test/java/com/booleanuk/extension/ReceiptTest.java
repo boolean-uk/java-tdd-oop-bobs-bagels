@@ -164,4 +164,118 @@ public class ReceiptTest {
 
         Assertions.assertEquals(expectedReceipt, outContent.toString());
     }
+
+    @Test
+    public void testPrintReceiptManyItems() {
+        final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outContent));
+
+        Inventory inventory = new Inventory();
+        Basket basket = new Basket(inventory);
+        Receipt receipt = new Receipt();
+
+        basket.changeBasketCapacity(25);
+
+        String itemStringOnion = "Onion";
+        Assertions.assertTrue(inventory.canItemBeOrdered(itemStringOnion));
+        Bagel onion1 = new Bagel(itemStringOnion, inventory.getSKU(itemStringOnion));
+        basket.addItem(onion1);
+
+        String itemStringPlain = "Plain";
+        Assertions.assertTrue(inventory.canItemBeOrdered(itemStringPlain));
+        Bagel plain1 = new Bagel(itemStringPlain, inventory.getSKU(itemStringPlain));
+        basket.addItem(plain1);
+
+        Bagel plain2 = new Bagel(itemStringPlain, inventory.getSKU(itemStringPlain));
+        basket.addItem(plain2);
+
+        Bagel plain3 = new Bagel(itemStringPlain, inventory.getSKU(itemStringPlain));
+        basket.addItem(plain3);
+
+        Bagel onion2 = new Bagel(itemStringOnion, inventory.getSKU(itemStringOnion));
+        basket.addItem(onion2);
+
+        Bagel plain4 = new Bagel(itemStringPlain, inventory.getSKU(itemStringPlain));
+        basket.addItem(plain4);
+
+        Bagel plain5 = new Bagel(itemStringPlain, inventory.getSKU(itemStringPlain));
+        basket.addItem(plain5);
+
+        String itemStringEverything = "Everything";
+        Assertions.assertTrue(inventory.canItemBeOrdered(itemStringEverything));
+        Bagel everything1 = new Bagel(itemStringEverything, inventory.getSKU(itemStringEverything));
+        basket.addItem(everything1);
+
+        Bagel plain6 = new Bagel(itemStringPlain, inventory.getSKU(itemStringPlain));
+        basket.addItem(plain6);
+
+        Bagel plain7 = new Bagel(itemStringPlain, inventory.getSKU(itemStringPlain));
+        basket.addItem(plain7);
+
+        Bagel everything2 = new Bagel(itemStringEverything, inventory.getSKU(itemStringEverything));
+        basket.addItem(everything2);
+
+        String itemStringBlack = "Black";
+        Assertions.assertTrue(inventory.canItemBeOrdered(itemStringBlack));
+        Item black1 = new Coffee(itemStringBlack, inventory.getSKU(itemStringBlack));
+        basket.addItem(black1);
+
+        Bagel plain8 = new Bagel(itemStringPlain, inventory.getSKU(itemStringPlain));
+        basket.addItem(plain8);
+
+        Item black2 = new Coffee(itemStringBlack, inventory.getSKU(itemStringBlack));
+        basket.addItem(black2);
+
+        Bagel everything3 = new Bagel(itemStringEverything, inventory.getSKU(itemStringEverything));
+        basket.addItem(everything3);
+
+        Bagel everything4 = new Bagel(itemStringEverything, inventory.getSKU(itemStringEverything));
+        basket.addItem(everything4);
+
+        Bagel everything5 = new Bagel(itemStringEverything, inventory.getSKU(itemStringEverything));
+        basket.addItem(everything5);
+
+        Bagel everything6 = new Bagel(itemStringEverything, inventory.getSKU(itemStringEverything));
+        basket.addItem(everything6);
+
+        Bagel plain9 = new Bagel(itemStringPlain, inventory.getSKU(itemStringPlain));
+        basket.addItem(plain9);
+
+        Item black3 = new Coffee(itemStringBlack, inventory.getSKU(itemStringBlack));
+        basket.addItem(black3);
+
+        Bagel plain10 = new Bagel(itemStringPlain, inventory.getSKU(itemStringPlain));
+        basket.addItem(plain10);
+
+        Bagel plain11 = new Bagel(itemStringPlain, inventory.getSKU(itemStringPlain));
+        basket.addItem(plain11);
+
+        Bagel plain12 = new Bagel(itemStringPlain, inventory.getSKU(itemStringPlain));
+        basket.addItem(plain12);
+
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        LocalDateTime dateTime = LocalDateTime.now();
+
+        String expectedReceipt = "";
+        expectedReceipt += "       ~~~ Bob's Bagels ~~~       \n";
+        expectedReceipt += "\n";
+        expectedReceipt += "        " + dtf.format(dateTime) + "       \n";
+        expectedReceipt += "\n";
+        expectedReceipt += "-----------------------------------\n";
+        expectedReceipt += "\n";
+        expectedReceipt += "Onion Bagel               2  £0.98\n";
+        expectedReceipt += "Plain Bagel              12  £4.68\n";
+        expectedReceipt += "Everything Bagel          6  £2.94\n";
+        expectedReceipt += "Black Coffee              3  £2.97\n";
+        expectedReceipt += "\n";
+        expectedReceipt += "-----------------------------------\n";
+        expectedReceipt += "Total                        £10.43\n";
+        expectedReceipt += "\n";
+        expectedReceipt += "            Thank you             \n";
+        expectedReceipt += "         for your order!          \n";
+
+        Assertions.assertTrue(receipt.printReceipt(basket, inventory));
+
+        Assertions.assertEquals(expectedReceipt, outContent.toString());
+    }
 }
