@@ -90,35 +90,53 @@ public class Basket {
         }
     }
 
-    public HashMap<Item, double[]> discountPerItem() {
-        HashMap<Item, double[]> mapPriceAndSavings = new HashMap<>();
+    public HashMap<Item, int[]> discountPerItem() {
+        HashMap<Item, int[]> mapPriceAndSavings = new HashMap<>();
         if (this.basketContent.isEmpty()){
             return mapPriceAndSavings;
         }
         for (Item item: this.basketContent.keySet()) {
-            double[] priceAndSavings = new double[2];
+            int[] priceAndSavings = new int[2];
             int amount = this.basketContent.get(item);
             double fullPrice = item.getPrice() * amount;
             if (item.getName().equals("Bagel") && amount >= 12) {
-                priceAndSavings[0] = 3.99 + (amount - 12) * item.getPrice();
+                priceAndSavings[0] = (int) Math.round((3.99 + (amount - 12) * item.getPrice())*100);
             }
             else if (item.getName().equals("Bagel") && amount >= 6) {
-                priceAndSavings[0] = 2.29 + (amount - 6) * item.getPrice();
+                priceAndSavings[0] = (int) Math.round((2.29 + (amount - 6) * item.getPrice())*100);
+            }
+            else if (item.getName().equals("Bagel") && this.basketContent.keySet().stream().anyMatch(i -> i.getVariant().equals("Black"))) {
+                int coffeeAmount = this.basketContent.keySet().stream().filter(i -> i.getVariant().equals("Black")).mapToInt(i -> this.basketContent.get(i)).sum();
+                if (amount <= coffeeAmount) {
+                    priceAndSavings[0] = (int) Math.round((1.25*(1.0/3)*amount)*100);
+                }
+                else {
+                    priceAndSavings[0] = (int) Math.round((1.25*(1.0/3)*coffeeAmount + (amount-coffeeAmount) * item.getPrice())*100);
+                }
+            }
+            else if (item.getVariant().equals("Black") && this.basketContent.keySet().stream().anyMatch(i -> i.getName().equals("Bagel"))) {
+                int bagelAmount = this.basketContent.keySet().stream().filter(i -> i.getName().equals("Bagel")).mapToInt(i -> this.basketContent.get(i)).sum();
+                if (amount <= bagelAmount) {
+                    priceAndSavings[0] = (int) Math.round((1.25*(2.0/3)*amount)*100);
+                }
+                else {
+                    priceAndSavings[0] = (int) Math.round((1.25*(2.0/3)*bagelAmount + (amount-bagelAmount) * item.getPrice())*100);
+                }
             }
             else {
-                priceAndSavings[0] = amount * item.getPrice();
+                priceAndSavings[0] = (int) Math.round((amount * item.getPrice())*100);
             }
-            double savings = fullPrice - priceAndSavings[0];
-            priceAndSavings[1] = Math.ceil(savings * 100) / 100;
+            double savings = fullPrice - priceAndSavings[0]/100.0;
+            priceAndSavings[1] = (int) Math.round(savings*100);
             mapPriceAndSavings.put(item, priceAndSavings);
         }
         return mapPriceAndSavings;
     }
 
-    public double totalCostWithDiscount(HashMap<Item, double[]> mapPriceAndSavings) {
+    public double totalCostWithDiscount(HashMap<Item, int[]> mapPriceAndSavings) {
         double price = 0.0;
-        for (double[] priceAndSaving: mapPriceAndSavings.values()) {
-            price += priceAndSaving[0];
+        for (int[] priceAndSaving: mapPriceAndSavings.values()) {
+            price += (priceAndSaving[0])/100.0;
         }
         return price;
     }

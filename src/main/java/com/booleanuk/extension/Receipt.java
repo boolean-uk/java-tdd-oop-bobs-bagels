@@ -67,12 +67,12 @@ public class Receipt {
         StringBuilder receipt = new StringBuilder();
         receipt.append(createHeader());
 
-        HashMap<Item, double[]> mapPriceAndSavings = this.basket.discountPerItem();
+        HashMap<Item, int[]> mapPriceAndSavings = this.basket.discountPerItem();
         double totalSavings = 0.0;
         for (Item item : basket.getBasketContent().keySet()) {
             int amount = basket.getBasketContent().get(item);
-            String itemRow = item.getVariant() + " " + item.getName() + "\t\t" +  amount + "\t£" + mapPriceAndSavings.get(item)[0] + "\n";
-            double saving = mapPriceAndSavings.get(item)[1];
+            String itemRow = item.getVariant() + " " + item.getName() + "\t\t" +  amount + "\t£" + mapPriceAndSavings.get(item)[0]/100.0 + "\n";
+            double saving = mapPriceAndSavings.get(item)[1]/100.0;
             if (saving != 0.0){
                 itemRow += "                  (-£" + saving + ")\n";
                 totalSavings += saving;
