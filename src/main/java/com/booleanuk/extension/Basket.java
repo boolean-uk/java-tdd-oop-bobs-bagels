@@ -67,7 +67,7 @@ public class Basket {
         DateTimeFormatter timeNow = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
         result.append(String.format("%3s %-1s", "", LocalDateTime.now().format(timeNow)));
         result.append("\n--------------------------------\n");
-        getDiscount(result);
+        getProductPrice(result);
         result.append("--------------------------------\n");
         result.append(String.format("%-26s", "Total Price ") + getTotalCost());
         result.append("\n--------------------------------\n");
@@ -80,43 +80,49 @@ public class Basket {
         return String.format("£%.2f", this.totalPrice);
     }
 
-    private StringBuilder getDiscount(StringBuilder result) {
+    private StringBuilder getProductPrice(StringBuilder result) {
+        double discountedPrice;
+        this.totalPrice = 0;
         Set<Item> uniqueItems = new HashSet<>(items);
         for (Item uniqueItem : uniqueItems) {
             String itemName = uniqueItem.getType() + " " + uniqueItem.getVariant();
             int quantity = Collections.frequency(items, uniqueItem);
-            double discountedPrice = calculateDiscountedPrice(uniqueItem, quantity);
-            this.totalPrice += discountedPrice;
-
-            result.append(String.format("%-20s %-4d £%.2f\n", itemName, quantity, discountedPrice));
+            if (uniqueItem.getType().equals("Bagel")){
+                discountedPrice = calculateBagelOffer(uniqueItem, quantity);
+                this.totalPrice += discountedPrice;
+                result.append(String.format("%-20s %-4d £%.2f\n", itemName, quantity, discountedPrice));
+            } else {
+                discountedPrice = calculateCoffeeOffer(uniqueItem, quantity);
+                this.totalPrice += discountedPrice;
+                result.append(String.format("%-20s %-4d £%.2f\n", itemName, quantity, discountedPrice));
+            }
         }
-
         return result;
     }
-    private double calculateDiscountedPrice(Item item, int quantity) {
+    private double calculateBagelOffer(Item item, int quantity) {
+        double discountedPrice = 0.0;
+        int remainingBagels;
+
+        int deal12Quantity = quantity / 12;
+        discountedPrice += deal12Quantity * 3.99;
+        remainingBagels = quantity % 12;
+
+        int deal6Quantity = remainingBagels / 6;
+        discountedPrice += deal6Quantity * 2.49;
+        remainingBagels %= 6;
+
+        discountedPrice += remainingBagels * item.getPrice();
+        return discountedPrice;
+    }
+
+    private double calculateCoffeeOffer(Item item, int quantity){
         double discountedPrice = 0.0;
 
-        if (item.getType().equals("Bagel")) {
-            int remainingBagels;
-
-            // 12 deal
-            int deal12Quantity = quantity / 12;
-            discountedPrice += deal12Quantity * 3.99;
-            remainingBagels = quantity % 12;
-
-            // 6 bagel deal
-            int deal6Quantity = remainingBagels / 6;
-            discountedPrice += deal6Quantity * 2.49;
-            remainingBagels %= 6;
-
-            // normal price
-            discountedPrice += remainingBagels * item.getPrice();
-        } else if (item.getType().equals("Coffee")) {
-            discountedPrice = item.getPrice() * quantity;
+        if (item.getType().equals("Coffee")) {
+            discountedPrice += item.getPrice() * quantity;
         } else {
-            discountedPrice = item.getPrice() * quantity;
+            discountedPrice += item.getPrice() * quantity;
         }
-
         return discountedPrice;
     }
 

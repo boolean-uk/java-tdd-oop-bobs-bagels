@@ -88,7 +88,7 @@ public class Cashier {
 
     public static void main(String[] args) {
         Inventory inventory = new Inventory("src/main/java/com/booleanuk/core/inventory.csv");
-        Basket basket = new Basket(10);
+        Basket basket = new Basket(50);
         Cashier cashier = new Cashier(inventory, basket);
 
         boolean exit = false;
