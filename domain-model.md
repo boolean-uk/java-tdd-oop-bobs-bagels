@@ -135,13 +135,13 @@ Class Basket
 
 Class Bagel
 
-| Class vars                  | Methods      | Scenario                 | Return/Result |
-|-----------------------------|--------------|--------------------------|---------------|
-| String name                 | addFilling() | if filling was added     | true          |
-| String productID            |              | if filling was not added | false         |
-| String uniqueID             |              |                          |               |
-| double price                |              |                          |               |
-| ArrayList<Filling> fillings |              |                          |               |
+| Class vars                  | Methods      | Scenario             | Return/Result |
+|-----------------------------|--------------|----------------------|---------------|
+| String name                 | addFilling() | if filling was added | true          |
+| String productID            |              |                      |               |
+| String uniqueID             |              |                      |               |
+| double price                |              |                      |               |
+| ArrayList<Filling> fillings |              |                      |               |
 
 ```
 User story 9

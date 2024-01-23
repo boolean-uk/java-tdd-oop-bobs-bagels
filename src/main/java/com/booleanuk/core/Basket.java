@@ -50,12 +50,13 @@ public class Basket {
     }
 
     public boolean addFillingToBagel(Bagel bagel, Filling filling) {
+        boolean fillingAdded = false;
         for (Bagel b : basket) {
             if (bagel.equals(b)) {
-                b.addFilling(filling);
+                fillingAdded = b.addFilling(filling);
                 break;
             }
         }
-        return true;
+        return fillingAdded;
     }
 }

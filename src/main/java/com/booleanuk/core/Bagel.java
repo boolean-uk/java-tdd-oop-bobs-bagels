@@ -21,6 +21,7 @@ public class Bagel {
     }
 
     public boolean addFilling(Filling filling) {
+        this.fillings.add(filling);
         return true;
     }
 }
