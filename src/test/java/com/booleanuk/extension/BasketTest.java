@@ -131,14 +131,13 @@ public class BasketTest {
        Assertions.assertFalse(basket.addItem(new ComboDiscountProduct(new String[]{"COF", "BGLP"}, 1.25, "Test")));
    }
 
-   //Testing for extension1
    @Test
     public void addQuantityDiscountProduct(){
         Basket basket = new Basket(20);
-        Product quantity1 = new QuantityDiscountProduct("BGLO", 2.49, "Bagel", "Onion", 6);
-        Product quantity2 = new QuantityDiscountProduct("BGLO", 2.49, "Bagel", "Test", 6);
-        boolean result1 = basket.addItem(quantity1);
-        boolean result2 = basket.addItem(quantity2);
+        Product p1 = new QuantityDiscountProduct("BGLO", 2.49, "Bagel", "Onion", 6);
+        Product p2 = new QuantityDiscountProduct("BGLO", 2.49, "Bagel", "Test", 6);
+        boolean result1 = basket.addItem(p1);
+        boolean result2 = basket.addItem(p2);
         Assertions.assertTrue(result1);
         Assertions.assertFalse(result2);
    }
@@ -147,20 +146,16 @@ public class BasketTest {
     public void getTotalCostSpecialOffer(){
         Basket basket = new Basket(20);
         Product bagel = new Bagel("BGLO",0.49, "Bagel", "Onion" );
-        Product filling = new Filling("FILB",0.12, "Filling", "Bacon");
-        Product coffee = new Coffee("COFB",0.99, "Coffee", "Black");
         Product discountQuantity12 = new QuantityDiscountProduct("BGLP", 3.99, "Bagel","Plain", 12);
-        Product combo = new ComboDiscountProduct(new String[]{"COFB", "BGLO"}, 1.25, "Coffee & Bagel");
-
+        Product discountQuantity6 = new QuantityDiscountProduct("BGLE", 2.49, "Bagel", "Everything", 6);
+        Product coffee = new Coffee("COFB",0.99, "Coffee", "Black");
         basket.addItem(bagel);
-        basket.addItem(filling);
-        basket.addItem(coffee);
+        basket.addItem(bagel);
         basket.addItem(discountQuantity12);
-        basket.addItem(combo);
-        Assertions.assertEquals(6.84, basket.getTotalCost());
+        basket.addItem(discountQuantity6);
+        basket.addItem(coffee);
+        basket.addItem(coffee);
+        basket.addItem(coffee);
+        Assertions.assertEquals(10.43, basket.getTotalCost());
     }
-
-
-
-
 }
