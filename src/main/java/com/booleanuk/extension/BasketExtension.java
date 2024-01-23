@@ -7,7 +7,9 @@ import com.booleanuk.core.Coffee;
 import com.booleanuk.core.Filling;
 
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -85,18 +87,24 @@ public class BasketExtension {
 
     }
 
+
     public void printReceipt() {
-        System.out.println("Receipt:");
-        System.out.println("-----------------------------------------");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String dateStr = dateFormat.format(new Date());
+
+        System.out.println("~~~ Bob's Bagels ~~~");
+        System.out.println("\n" + dateStr + "\n");
+        System.out.println("---------------------------------");
+
         for (Product item : bagelBasket) {
-            System.out.printf("%-15s %-10s %-5d %10s\n",
-                    item.getName(), item.getVariant(), item.getQuantity(),
-                    item.getPrice());
+            System.out.printf("%-10s %-10s %-3d $%.2f\n",
+                    item.getName(), item.getVariant(), item.getQuantity(), item.getPrice());
         }
-        System.out.println("-----------------------------------------");
-        System.out.printf("%-15s %-10s %-5s %-10s %-10.2f\n",
-                "Total", "", "", "", calculateTotalCost());
-        System.out.println("-----------------------------------------");
+
+        System.out.println("---------------------------------");
+        System.out.printf("%-25s $%.2f\n", "Total", calculateTotalCost());
+        System.out.println("\n        Thank you");
+        System.out.println("      for your order!");
     }
 
 
