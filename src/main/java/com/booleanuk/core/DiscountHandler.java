@@ -33,7 +33,6 @@ public class DiscountHandler {
             int amount = bagelCount.get(bagelsku);
             double price = bagelSkuPrice.get(bagelsku);
 
-            // implement method line 40
             discountedPrice += calculateFinalDiscount(bagelsku, amount, price);
 
 
