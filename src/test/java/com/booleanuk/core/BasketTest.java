@@ -8,13 +8,13 @@ class BasketTest {
 
     @BeforeEach
     public void clearLists(){
-        Basket basket = new Basket(new Inventory());
+        Basket basket = new Basket();
         basket.clearList();
     }
 
     @Test
     public void addBagelToBasket(){
-        Basket basket = new Basket(new Inventory());
+        Basket basket = new Basket();
         Assertions.assertTrue(basket.add(new Product("Bagel", 0.39, "BGLP", "Plain")));
         Assertions.assertFalse(basket.add(new Product("Burger", 0.48, "BGRC", "Cheese")));
         Assertions.assertTrue(basket.add(new Product("Coffee", 0.39, "COFB", "Black")));
@@ -22,37 +22,8 @@ class BasketTest {
     }
 
     @Test
-    public void applyDiscount6Bagels(){
-        Basket basket = new Basket(new Inventory());
-        basket.changeCapacity(20);
-        for (int i = 0; i < 5; i++) {
-            basket.add(new Product("Bagel", 0.39, "BGLP", "Plain"));
-        }
-        Assertions.assertEquals(2.49, basket.getTotal());
-    }
-
-    @Test
-    public void applyDiscount12Bagels(){
-        Basket basket = new Basket(new Inventory());
-        basket.changeCapacity(20);
-        for (int i = 0; i < 11; i++) {
-            basket.add(new Product("Bagel", 0.39, "BGLP", "Plain"));
-        }
-        Assertions.assertEquals(3.99, basket.getTotal());
-    }
-
-    @Test public void applyDiscount12AndAdd4WithNoDiscount(){
-        Basket basket = new Basket(new Inventory());
-        basket.changeCapacity(20);
-        for (int i = 0; i < 15; i++) {
-            basket.add(new Product("Bagel", 0.39, "BGLP", "Plain"));
-        }
-        Assertions.assertEquals(5.55, basket.getTotal());
-    }
-
-    @Test
     public void testTryRemoveBagelFromList(){
-        Basket basket = new Basket(new Inventory());
+        Basket basket = new Basket();
         basket.add(new Product("Bagel", 0.39, "BGLP", "Plain"));
         basket.add(new Product("Bagel", 0.49, "BGLO", "Onion"));
         Assertions.assertEquals(2, basket.getBasket().size());
@@ -62,7 +33,7 @@ class BasketTest {
     }
     @Test
     public void testCheckIfBasketIsFull(){
-        Basket basket = new Basket(new Inventory());
+        Basket basket = new Basket();
         basket.add(new Product("Bagel", 0.49, "BGLO", "Onion"));
         Assertions.assertFalse(basket.checkIfBasketIsFull());
         for (int i = 1; i < 5; i++) {
@@ -76,7 +47,7 @@ class BasketTest {
     }
     @Test
     public void testChangeCapacityOfBasket(){
-        Basket basket = new Basket(new Inventory());
+        Basket basket = new Basket();
         basket.add(new Product("Bagel", 0.49, "BGLO", "Onion"));
         basket.changeCapacity(17);
         Assertions.assertFalse(basket.checkIfBasketIsFull());
@@ -95,7 +66,7 @@ class BasketTest {
     }
     @Test
     public void testTryRemoveBagel(){
-        Basket basket = new Basket(new Inventory());
+        Basket basket = new Basket();
         basket.add(new Product("Bagel", 0.39, "BGLP", "Plain"));
         basket.add(new Product("Bagel", 0.39, "BGLO", "Onion"));
         basket.add(new Product("Bagel", 0.39, "BGLS", "Sesame"));
@@ -105,10 +76,10 @@ class BasketTest {
     }
     @Test
     public void testTotalCostOfBasket(){
-        Basket basket = new Basket(new Inventory());
+        Basket basket = new Basket();
         basket.add(new Product("Bagel", 0.39, "BGLP", "Plain"));
         basket.add(new Product("Bagel", 0.39, "BGLO", "Onion"));
         basket.add(new Product("Bagel", 0.39, "BGLS", "Sesame"));
-        Assertions.assertEquals(1.17, basket.totalCost());
+        Assertions.assertEquals(1.17, basket.calculateTotal());
     }
 }

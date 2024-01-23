@@ -28,6 +28,8 @@ public class Bagel extends Product {
     public Filling setFilling(Filling filling) {
         return this.filling = filling;
     }
+
+
     public Filling setFilling() {
         return this.filling = null;
     }

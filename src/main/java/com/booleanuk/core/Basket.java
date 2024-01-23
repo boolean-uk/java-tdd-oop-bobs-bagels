@@ -7,61 +7,31 @@ import java.util.Objects;
 public class Basket {
 
     private List<Product> basket;
-    private final List<Product> inventory;
-    private final List<Product> fillings;
 
     private int capacity;
+    private double total;
+    Inventory inventory;
 
-
-    public void getFillings(){
-        Inventory inv = new Inventory();
-        for (int i = 0; i < inv.getProducts().size(); i++) {
-            if(Objects.equals(inv.getProducts().get(i).getItemName(), "Filling")){
-                //System.out.println("Added item!");
-                fillings.add(inv.getProducts().get(i));
-            }
-        }
+    public Basket(){
+        this.basket = setBasket();
+        this.total = setTotal();
+        this.inventory = new Inventory();
+        this.capacity = setCapacity();
     }
 
-
-    public Basket(Inventory inv){
-        this.inventory = inv.getProducts();
-        this.basket = setBasket();
-        this.capacity = setCapacity();
-        this.fillings = new ArrayList<>();
-        getFillings();
+    public void getFillings(Inventory inv){
+        for (int i = 0; i < inv.getProducts().size(); i++) {
+            if(Objects.equals(inv.getProducts().get(i).getItemName(), "Filling")){
+                System.out.println("Filling : "+ inv.getProducts().get(i).getVariant());
+            }
+        }
     }
 
     public boolean add(Product product){
-        if(checkIfBasketIsFull()){
-            return false;
-        }
-        for (Product value : inventory) {
-
-            // cant get this to work, skipping for now
-
-            // product is a filling
-//            if(product instanceof Filling){
-//                for (Product item : this.basket) {
-//                    //find bagel with empty filling
-//                    if (item instanceof Bagel) {
-//                        if (((Bagel) item).getFilling() == null) {
-//                            // add filling :D
-//                            ((Bagel) item).addFilling((Bagel) item, (Filling) product);
-//                            System.out.println("ADDED FILLING TO BAGEL");
-//                            return true;
-//                        }
-//                    }
-//                }
-//            }
-
-            if (Objects.equals(value.getSku(), product.getSku())) {
-                if(!checkIfBasketIsFull()){
-                    basket.add(product);
-                    System.out.println("Added " + product.getItemName() + " with the price of: $" + product.getPrice());
-                    return true;
-                }
-            }
+        if(inventory.ProductInList(product.getSku()) && !checkIfBasketIsFull()){
+            basket.add(product);
+            System.out.println("Added " + product.getItemName() + " with the price of: $" + product.getPrice());
+            return true;
         }
         System.out.println("Could not add product");
         return false;
@@ -87,22 +57,29 @@ public class Basket {
         System.out.println("Basket is not full");
         return false;
     }
-    public double totalCost(){
-        System.out.println("Total cost of basket: $" + this.getTotal());
-        return this.getTotal();
-    }
 
     public void changeCapacity(int capacity){
         this.capacity = capacity;
     }
 
-    public double getTotal(){
-        double total = 0;
+    public double calculateTotal(){
+        double cost = 0;
         for (Product product : this.basket) {
-            total += product.getPrice();
+            cost += product.getPrice();
         }
-        return total;
+        double discount;
+        discount = DiscountHandler.applyDiscount(this);
+        System.out.println("DISCOUNT IS : " + discount);
+        double total = cost - discount;
+        String formattedDoubleString = String.format("%.2f", total);
+        return Double.parseDouble(formattedDoubleString);
     }
+
+
+    public double setTotal(){
+        return this.total = 0;
+    }
+
     public List<Product> setBasket(){
         return new ArrayList<>();
     }
@@ -116,6 +93,4 @@ public class Basket {
     public void clearList(){
         this.basket.clear();
     }
-
-
 }

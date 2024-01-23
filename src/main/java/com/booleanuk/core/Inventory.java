@@ -18,7 +18,7 @@ public class Inventory {
         products.add(new Bagel(0.49, "BGLE", "Everything"));
         products.add(new Bagel(0.49, "BGLS", "Sesame"));
         products.add(new Coffee(0.99, "COFB", "Black"));
-        products.add(new Coffee(0.99, "COFW", "Black"));
+        products.add(new Coffee(0.99, "COFW", "White"));
         products.add(new Filling(0.12, "FILB", "Bacon"));
         products.add(new Filling(0.12, "FILE", "Egg"));
         products.add(new Filling(0.12, "FILC", "Cheese"));
