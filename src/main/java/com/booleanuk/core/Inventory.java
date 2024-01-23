@@ -1,51 +1,22 @@
 package com.booleanuk.core;
 
-public class Inventory {
-    private String sku;
-    private String itemType;
-    private String name;
-    private double price;
-
-    public Inventory(String sku, String itemType, String name, double price) {
-
-        this.setSku(sku);
-        this.setItemType(itemType);
-        this.setName(name);
-        this.setPrice(price);
+public interface Inventory {
 
 
 
-    }
+    String getSku();
 
-    public String getSku() {
-        return sku;
-    }
+    void setSku(String sku);
 
-    public void setSku(String sku) {
-        this.sku = sku;
-    }
+    String getItemType();
 
-    public String getItemType() {
-        return itemType;
-    }
+    void setItemType(String itemType);
 
-    public void setItemType(String itemType) {
-        this.itemType = itemType;
-    }
+    String getName();
 
-    public String getName() {
-        return name;
-    }
+    void setName(String name);
 
-    public void setName(String name) {
-        this.name = name;
-    }
+    double getPrice();
 
-    public double getPrice() {
-        return price;
-    }
-
-    public void setPrice(double price) {
-        this.price = price;
-    }
+    void setPrice(double price);
 }

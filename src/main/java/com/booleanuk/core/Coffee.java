@@ -1,7 +1,5 @@
 package com.booleanuk.core;
 
-import java.util.HashMap;
-
 /*SKU	Price	Name	Variant
 BGLO	0.49	Bagel	Onion
 BGLP	0.39	Bagel	Plain
@@ -17,59 +15,66 @@ FILC	0.12	Filling	Cheese
 FILX	0.12	Filling	Cream Cheese
 FILS	0.12	Filling	Smoked Salmon
 FILH	0.12	Filling	Ham */
-public class Coffee {
+public class Coffee implements Inventory{
 
-    String coffeeSku;
+    String sku;
     String itemType;
-    String coffeeName;
-    double coffeePrice;
+    String itemName;
+    double itemPrice;
 
 
 
 
-    public Coffee(String coffeeSku, String itemType, String coffeeName, double coffeePrice) {
+    public Coffee(String sku, String itemType, String itemName, double itemPrice) {
 
-        this.setCoffeeSku(coffeeSku);
+        this.setSku(sku);
         this.setItemType(itemType);
-        this.setCoffeeName(coffeeName);
-        this.setCoffeePrice(coffeePrice);
-
-
+        this.setName(itemName);
+        this.setPrice(itemPrice);
 
 
 
     }
 
 
-    public String getSku() {
-        return coffeeSku;
-    }
 
-    public String getItemTypeCoffee() {
-        return itemType;
-    }
-
-    public String getCoffeeName() {
-        return coffeeName;
-    }
-
-    public double getCoffeePrice() {
-        return coffeePrice;
-    }
-
-    public void setCoffeeSku(String coffeeSku) {
-        this.coffeeSku = coffeeSku;
+    public void setSku(String sku) {
+        this.sku = sku;
     }
 
     public void setItemType(String itemType) {
         this.itemType = itemType;
     }
 
-    public void setCoffeeName(String coffeeName) {
-        this.coffeeName = coffeeName;
+    public void setName(String itemName) {
+        this.itemName = itemName;
     }
 
-    public void setCoffeePrice(double coffeePrice) {
-        this.coffeePrice = coffeePrice;
+    public void setPrice(double itemPrice) {
+        this.itemPrice = itemPrice;
     }
+
+    public String getSku() {
+        return sku;
+    }
+
+    public String getItemType() {
+        return itemType;
+    }
+
+    public String getName() {
+        return itemName;
+    }
+
+    public double getPrice() {
+        return itemPrice;
+    }
+
+
+
+
+
+
+
+
 }

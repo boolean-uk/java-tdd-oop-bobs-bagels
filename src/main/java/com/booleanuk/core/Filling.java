@@ -1,7 +1,5 @@
 package com.booleanuk.core;
 
-import java.util.HashMap;
-
 /*SKU	Price	Name	Variant
 BGLO	0.49	Bagel	Onion
 BGLP	0.39	Bagel	Plain
@@ -17,57 +15,59 @@ FILC	0.12	Filling	Cheese
 FILX	0.12	Filling	Cream Cheese
 FILS	0.12	Filling	Smoked Salmon
 FILH	0.12	Filling	Ham */
-public class Filling {
+public class Filling implements Inventory{
 
-    String fillingSku;
+    String sku;
     String itemType;
-    String fillingName;
-    double fillingPrice;
+    String itemName;
+    double itemPrice;
 
 
 
 
-    public Filling(String fillingSku, String itemType, String fillingName, double fillingPrice) {
+    public Filling(String sku, String itemType, String itemName, double itemPrice) {
 
-        this.setFillingSku(fillingSku);
+        this.setSku(sku);
         this.setItemType(itemType);
-        this.setFillingName(fillingName);
-        this.setFillingPrice(fillingPrice);
+        this.setName(itemName);
+        this.setPrice(itemPrice);
 
 
 
     }
 
-    public void setFillingSku(String fillingSku) {
-        this.fillingSku = fillingSku;
+
+
+    public void setSku(String sku) {
+        this.sku = sku;
     }
 
     public void setItemType(String itemType) {
         this.itemType = itemType;
     }
 
-    public void setFillingName(String fillingName) {
-        this.fillingName = fillingName;
+    public void setName(String itemName) {
+        this.itemName = itemName;
     }
 
-    public void setFillingPrice(double fillingPrice) {
-        this.fillingPrice = fillingPrice;
+    public void setPrice(double itemPrice) {
+        this.itemPrice = itemPrice;
     }
 
     public String getSku() {
-        return fillingSku;
+        return sku;
     }
 
-    public String getItemTypeFilling() {
+    public String getItemType() {
         return itemType;
     }
 
-    public String getFillingName() {
-        return fillingName;
+    public String getName() {
+        return itemName;
     }
 
-    public double getFillingPrice() {
-        return fillingPrice;
+    public double getPrice() {
+        return itemPrice;
     }
 
 

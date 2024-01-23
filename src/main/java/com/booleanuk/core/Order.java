@@ -1,26 +1,23 @@
 package com.booleanuk.core;
 
-import java.text.SimpleDateFormat;
 import java.util.*;
-import java.util.function.Function;
-import java.util.stream.Collectors;
 
 public class Order {
     //Inventory from boolean
-    private Inventory bagel1 = new Inventory("BGLO", "Bagel", "Onion", 0.49);
-    private Inventory bagel2 = new Inventory("BGLP", "Bagel", "Plain", 0.39);
-    private Inventory bagel3 = new Inventory("BGLE", "Bagel", "Everything", 0.49);
-    private Inventory bagel4 = new Inventory("BGLS", "Bagel", "Sesame", 0.49);
-    private Inventory coffee1 = new Inventory("COFB", "Coffee", "Black", 0.99);
-    private Inventory coffee2 = new Inventory("COFW", "Coffee", "White", 1.19);
-    private Inventory coffee3 = new Inventory("COFC", "Coffee", "Cappuccino", 1.29);
-    private Inventory coffee4 = new Inventory("COFL", "Coffee", "Latte", 1.29);
-    private Inventory fill1 = new Inventory("FILB", "Filling", "Bacon", 0.12);
-    private Inventory fill2 = new Inventory("FILE", "Filling", "Egg", 0.12);
-    private Inventory fill3 = new Inventory("FILC", "Filling", "Cheese", 0.12);
-    private Inventory fill4 = new Inventory("FILX", "Filling", "Cream Cheese", 0.12);
-    private Inventory fill5 = new Inventory("FILS", "Filling", "Smoked Salmon", 0.12);
-    private Inventory fill6 = new Inventory("FILH", "Filling", "Ham", 0.12);
+    private Inventory bagel1 = new Bagel("BGLO", "Bagel", "Onion", 0.49);
+    private Inventory bagel2 = new Bagel("BGLP", "Bagel", "Plain", 0.39);
+    private Inventory bagel3 = new Bagel("BGLE", "Bagel", "Everything", 0.49);
+    private Inventory bagel4 = new Bagel("BGLS", "Bagel", "Sesame", 0.49);
+    private Inventory coffee1 = new Coffee("COFB", "Coffee", "Black", 0.99);
+    private Inventory coffee2 = new Coffee("COFW", "Coffee", "White", 1.19);
+    private Inventory coffee3 = new Coffee("COFC", "Coffee", "Cappuccino", 1.29);
+    private Inventory coffee4 = new Coffee("COFL", "Coffee", "Latte", 1.29);
+    private Inventory fill1 = new Filling("FILB", "Filling", "Bacon", 0.12);
+    private Inventory fill2 = new Filling("FILE", "Filling", "Egg", 0.12);
+    private Inventory fill3 = new Filling("FILC", "Filling", "Cheese", 0.12);
+    private Inventory fill4 = new Filling("FILX", "Filling", "Cream Cheese", 0.12);
+    private Inventory fill5 = new Filling("FILS", "Filling", "Smoked Salmon", 0.12);
+    private Inventory fill6 = new Filling("FILH", "Filling", "Ham", 0.12);
     ArrayList<Bagel> bagelList;
     ArrayList<Coffee> coffeeList;
     ArrayList<Filling> fillingList;
@@ -61,15 +58,15 @@ public class Order {
     }
 
 
-    public boolean add(String SKU, String itemType, String bagelName, double bagelPrice) {
+    public boolean add(String SKU, String itemType, String itemName, double bagelPrice) {
 
 
         for (Inventory inventory : inventoryList) {
-            if (inventory.getSku().equals(SKU) && inventory.getItemType().equals(itemType) && inventory.getName().equals(bagelName) && inventory.getPrice() == bagelPrice) {
-                Inventory bagel = new Inventory(SKU, itemType, bagelName, bagelPrice);
+            if (inventory.getSku().equals(SKU) && inventory.getItemType().equals(itemType) && inventory.getName().equals(itemName) && inventory.getPrice() == bagelPrice) {
+                Inventory bagel = new Bagel(SKU, itemType, itemName, bagelPrice);
                 basketList.add(bagel);
 
-                itemCounts.put(bagelName, itemCounts.getOrDefault(bagelName, 0) + 1);
+                itemCounts.put(itemName, itemCounts.getOrDefault(itemName, 0) + 1);
                 itemTypeCounts.put(itemType, itemTypeCounts.getOrDefault(itemType, 0) + 1);
 
                 return true;
@@ -78,13 +75,13 @@ public class Order {
         }
         return false;
     }
-	public boolean remove(String SKU, String itemType, String bagelName, double bagelPrice) {
+	public boolean remove(String SKU, String itemType, String itemName, double bagelPrice) {
 
         for (Inventory inventory : basketList) {
-            if (inventory.getSku().equals(SKU) && inventory.getItemType().equals(itemType) && inventory.getName().equals(bagelName) && inventory.getPrice() == bagelPrice) {
+            if (inventory.getSku().equals(SKU) && inventory.getItemType().equals(itemType) && inventory.getName().equals(itemName) && inventory.getPrice() == bagelPrice) {
                 basketList.remove(inventory);
 
-                itemCounts.put(bagelName, itemCounts.getOrDefault(bagelName, 0) - 1);
+                itemCounts.put(itemName, itemCounts.getOrDefault(itemName, 0) - 1);
                 itemTypeCounts.put(itemType, itemTypeCounts.getOrDefault(itemType, 0) - 1);
 
 
@@ -160,7 +157,7 @@ public class Order {
 
         for (Inventory inventory : inventoryList) {
             if (inventory.getSku().equals(SKU) && inventory.getItemType().equals(itemType) && inventory.getName().equals(fillingName) && inventory.getPrice() == fillingPrice) {
-                Inventory filling = new Inventory(SKU, itemType, fillingName, fillingPrice);
+                Inventory filling = new Filling(SKU, itemType, fillingName, fillingPrice);
                 basketList.add(filling);
                 return true;
 

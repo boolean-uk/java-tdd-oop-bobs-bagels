@@ -1,7 +1,5 @@
 package com.booleanuk.core;
 
-import java.util.HashMap;
-
 /*SKU	Price	Name	Variant
 BGLO	0.49	Bagel	Onion
 BGLP	0.39	Bagel	Plain
@@ -17,59 +15,66 @@ FILC	0.12	Filling	Cheese
 FILX	0.12	Filling	Cream Cheese
 FILS	0.12	Filling	Smoked Salmon
 FILH	0.12	Filling	Ham */
-public class Bagel {
+public class Bagel implements Inventory{
 
-    String bagelSku;
-    String bagelName;
-    String itemTypeBagel;
-    double bagelPrice;
-
-
-
-
-    public Bagel(String bagelSku, String itemTypeBagel, String bagelName, double bagelPrice) {
-
-        this.setBagelSku(bagelSku);
-        this.setItemTypeBagel(itemTypeBagel);
-        this.setBagelName(bagelName);
-        this.setBagelPrice(bagelPrice);
+    String sku;
+    String itemType;
+    String itemName;
+    double itemPrice;
 
 
 
 
+    public Bagel(String sku, String itemType, String itemName, double itemPrice) {
+
+        this.setSku(sku);
+        this.setItemType(itemType);
+        this.setName(itemName);
+        this.setPrice(itemPrice);
 
 
+
+    }
+
+
+
+    public void setSku(String sku) {
+        this.sku = sku;
+    }
+
+    public void setItemType(String itemType) {
+        this.itemType = itemType;
+    }
+
+    public void setName(String itemName) {
+        this.itemName = itemName;
+    }
+
+    public void setPrice(double itemPrice) {
+        this.itemPrice = itemPrice;
     }
 
     public String getSku() {
-        return bagelSku;
+        return sku;
     }
 
-    public String getItemTypeBagel() {
-        return itemTypeBagel;
+    public String getItemType() {
+        return itemType;
     }
 
-    public String getBagelName() {
-        return bagelName;
+    public String getName() {
+        return itemName;
     }
 
-    public double getBagelPrice() {
-        return bagelPrice;
+    public double getPrice() {
+        return itemPrice;
     }
 
-    public void setBagelSku(String bagelSku) {
-        this.bagelSku = bagelSku;
-    }
 
-    public void setBagelName(String bagelName) {
-        this.bagelName = bagelName;
-    }
 
-    public void setItemTypeBagel(String itemTypeBagel) {
-        this.itemTypeBagel = itemTypeBagel;
-    }
 
-    public void setBagelPrice(double bagelPrice) {
-        this.bagelPrice = bagelPrice;
-    }
+
+
+
+
 }
