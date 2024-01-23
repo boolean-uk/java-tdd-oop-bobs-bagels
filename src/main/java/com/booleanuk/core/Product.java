@@ -32,7 +32,7 @@ public class Product {
     }
 
     private void updateSku() {
-        this.sku = this.name.substring(0,2).toUpperCase() + this.variant.substring(0,1).toUpperCase();
+        this.sku = this.name.substring(0,3).toUpperCase() + this.variant.substring(0,1).toUpperCase();
     }
 
     public String getSku() {

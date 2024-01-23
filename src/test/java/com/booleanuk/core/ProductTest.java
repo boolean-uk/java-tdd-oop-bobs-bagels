@@ -39,7 +39,7 @@ public class ProductTest {
 
     @Test
     public void setVariantTest() {
-        Product product = new Product("apple", 0.39);
+        Product product = new Product("Fruit","apple", 0.39);
         product.setVariant("Granny Smith");
         Assertions.assertEquals("Granny Smith", product.getVariant());
         Assertions.assertEquals("FRUG", product.getSku());
