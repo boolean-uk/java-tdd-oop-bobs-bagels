@@ -57,9 +57,7 @@
 |              | String item                   |                          |                                  |            |
 |              | String[] fillings             | resetDiscount()          | reset all class discount members |            |
 |              | int numFillings               |                          | ready for new discount           |            |
-|              | int numDiscountItems          |                          | evaluation                       |            |
-|              | int num12Discount             |                          |                                  |            |
-|              | int num6Discount              |                          |                                  |            |
+|              |                               |                          | evaluation                       |            |
 |              | double discountPrice          |                          |                                  |            |
 |              | double saved                  |                          |                                  |            |
 |              |                               |                          |                                  |            |
