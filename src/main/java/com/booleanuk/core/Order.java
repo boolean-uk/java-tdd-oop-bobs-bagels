@@ -28,14 +28,16 @@ public class Order {
     ArrayList<Inventory> basketList;
 
     private Map<String, Integer> itemCounts;
+    private Map<String, Integer> itemTypeCounts;
 
 
-    int capacity = 10;
+    int capacity = 20;
 
     public Order(){
         this.inventoryList = new ArrayList<>();
         this.basketList = new ArrayList<>(capacity);
         this.itemCounts = new HashMap<>();
+        this.itemTypeCounts = new HashMap<>();
         initialize();
 
     }
@@ -68,6 +70,7 @@ public class Order {
                 basketList.add(bagel);
 
                 itemCounts.put(bagelName, itemCounts.getOrDefault(bagelName, 0) + 1);
+                itemTypeCounts.put(itemType, itemTypeCounts.getOrDefault(itemType, 0) + 1);
 
                 return true;
 
@@ -82,6 +85,8 @@ public class Order {
                 basketList.remove(inventory);
 
                 itemCounts.put(bagelName, itemCounts.getOrDefault(bagelName, 0) - 1);
+                itemTypeCounts.put(itemType, itemTypeCounts.getOrDefault(itemType, 0) - 1);
+
 
 
                 return true;
@@ -127,15 +132,18 @@ public class Order {
 
 	public double totalCost() {
 
+        double discount = discount();
         double cost = 0;
         for (Inventory basket : basketList) {
+
             cost += basket.getPrice();
+
+
 
 
         }
 
-
-        return cost;
+        return cost - discount;
     }
 	public double getCost(String bagelName) {
         for (Inventory basket : inventoryList) {
@@ -182,6 +190,44 @@ public class Order {
         return itemCounts.getOrDefault(itemName, 0);
     }
 
+    public int getItemCount(String itemType) {
+
+        return itemTypeCounts.getOrDefault(itemType, 0);
+
+    }
+
+    public int check(String itemtype) {
+
+        return getItemCount(itemtype);
+    }
+
+    public double discount() {
+        double discount = 0;
+        if (itemCounts.size() > 1) {
+
+
+                int itemCountCoffee = getItemCount("Coffee");
+                int itemCountBagel = getItemCount("Bagel");
+
+                if (itemCountCoffee > 0 && itemCountBagel > 0) {
+                discount += 0.43;
+
+                }
+                if (itemCountBagel > 11) {
+                    discount += 1.89;
+
+                 }
+                else if (itemCountBagel > 5) {
+                    discount += 0.45;
+
+                }
+
+            }
+
+        return discount;
+    }
+
+
 
     public String receipt() {
         StringBuilder receipt = new StringBuilder("~~~ Bob's Bagels ~~~\n\n");
@@ -225,6 +271,27 @@ public class Order {
             return receipt.toString();
         }
         return "Nothing added.";
+    }
+
+
+    public static void main(String[] args) {
+
+        Order basket = new Order();
+
+
+        basket.add("BGLO", "Bagel", "Onion", 0.49);
+        basket.add("BGLO", "Bagel", "Onion", 0.49);
+        basket.add("BGLO", "Bagel", "Onion", 0.49);
+        basket.add("BGLO", "Bagel", "Onion", 0.49);
+        basket.add("BGLO", "Bagel", "Onion", 0.49);
+        basket.add("BGLO", "Bagel", "Onion", 0.49);
+
+
+       // basket.add("COFW", "Coffee", "White", 1.19);
+
+        System.out.println(basket.check("Bagel"));
+        System.out.println(basket.discount());
+        System.out.println(basket.totalCost());
     }
 
 

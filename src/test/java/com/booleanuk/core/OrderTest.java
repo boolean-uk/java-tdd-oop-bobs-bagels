@@ -61,6 +61,16 @@ public class OrderTest {
         basket1.add("BGLO", "Bagel", "Onion", 0.49);
         basket1.add("BGLO", "Bagel", "Onion", 0.49);
         basket1.add("BGLO", "Bagel", "Onion", 0.49);
+        basket1.add("BGLO", "Bagel", "Onion", 0.49);
+        basket1.add("BGLO", "Bagel", "Onion", 0.49);
+        basket1.add("BGLO", "Bagel", "Onion", 0.49);
+        basket1.add("BGLO", "Bagel", "Onion", 0.49);
+        basket1.add("BGLO", "Bagel", "Onion", 0.49);
+        basket1.add("BGLO", "Bagel", "Onion", 0.49);
+        basket1.add("BGLO", "Bagel", "Onion", 0.49);
+        basket1.add("BGLO", "Bagel", "Onion", 0.49);
+        basket1.add("BGLO", "Bagel", "Onion", 0.49);
+        basket1.add("BGLO", "Bagel", "Onion", 0.49);
         boolean result = basket1.isBasketFull();
         Assertions.assertTrue(result);
 
@@ -190,7 +200,7 @@ public class OrderTest {
                 "Filling   Egg            1   £0.12\n" +
                 "Filling   Cream Cheese   1   £0.12\n" +
                 "----------------------------\n" +
-                "Total:              £2.31\n" +
+                "Total:              £1.88\n" +
                 "\n" +
                 "        Thank you\n" +
                 "      for your order!", result);
@@ -288,6 +298,9 @@ public class OrderTest {
 
         double result = basket1.totalCost();
 
+        System.out.println(result);
+        System.out.println(basket1.check());
+        System.out.println(basket1.discount());
 
 
         Assertions.assertEquals(2.49, result);
