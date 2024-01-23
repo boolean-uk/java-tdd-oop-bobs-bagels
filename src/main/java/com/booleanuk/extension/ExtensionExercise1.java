@@ -3,6 +3,8 @@ package com.booleanuk.extension;
 import com.booleanuk.core.Inventory;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class ExtensionExercise1 {
 
@@ -35,9 +37,7 @@ public class ExtensionExercise1 {
             else if (items.getSku().equals("BGLE")) {
                 countBGLE++;
             }
-            else if ((items.getSku().equals("COFB") && items.getSku().equals("BGLO")) ||
-                    ((items.getSku().equals("COFB") && items.getSku().equals("BGLP")) ||
-                    ((items.getSku().equals("COFB") && items.getSku().equals("BGLE"))))) {
+            else if (items.getSku().equals("COFB")) {
                 countCOFB++;
             }
         }
@@ -45,22 +45,46 @@ public class ExtensionExercise1 {
 
         double price = 0.0;
 
+        //Onion bagels pricing
         if (countBGLO >= 6) {
             price += ( (countBGLO / 6) * 2.49);
             //Divide by the bulk amount (6) to account for more than 1 discount
             // offer (in the case where there is multiples of 6 onion bagels being
             // bought, e.g. 12 onion bagels should make the discount price be
             // applied twice)
+
+
         }
+        else if(countBGLO % 6 != 0) {
+            price += countBGLO * 0.49;
+        }
+
+        //Plain bagels pricing
         if (countBGLP >= 12) {
             price += ( (countBGLP / 12) * 3.99);
+
         }
+        else if(countBGLP % 12 != 0) {
+            price += countBGLP * 0.39;
+        }
+
+        // Everything bagels pricing
         if(countBGLE >= 6) {
             price += ( (countBGLE / 6) * 2.49);
+
         }
-        if (countCOFB > 0 && (countBGLP > 0 || countBGLP > 0 || countBGLE > 0)) {
-            price += ( (countCOFB / 1) + (countBGLO / 1) + (countBGLP / 1) + (countBGLE / 1) * 1.25);
+        else if(countBGLE % 6 != 0) {
+            price += countBGLE * 0.49;
         }
+
+        //Black coffees pricing
+        if (countCOFB > 0) {
+            int countCombos = Math.min(countCOFB, countBGLE + countBGLO + countBGLP);
+            price += countCombos * 1.25;
+            int remainingCoffees = countCOFB - countCombos;
+            price += remainingCoffees * 0.99;
+        }
+
         return price;
     }
 
@@ -83,5 +107,21 @@ public class ExtensionExercise1 {
     public static void main(String[] args) {
         ExtensionExercise1 extensionExercise1 = new ExtensionExercise1();
         extensionExercise1.returnItemsWithDiscount();
+        extensionExercise1.basketList.add(new Inventory("BGLP", 0.39, "Bagel", "Plain"));
+        extensionExercise1.basketList.add(new Inventory("BGLP", 0.39, "Bagel", "Plain"));
+        extensionExercise1.basketList.add(new Inventory("BGLP", 0.39, "Bagel", "Plain"));
+        extensionExercise1.basketList.add(new Inventory("BGLP", 0.39, "Bagel", "Plain"));
+        extensionExercise1.basketList.add(new Inventory("BGLP", 0.39, "Bagel", "Plain"));
+        extensionExercise1.basketList.add(new Inventory("BGLP", 0.39, "Bagel", "Plain"));
+        extensionExercise1.basketList.add(new Inventory("BGLP", 0.39, "Bagel", "Plain"));
+        extensionExercise1.basketList.add(new Inventory("BGLP", 0.39, "Bagel", "Plain"));
+        extensionExercise1.basketList.add(new Inventory("BGLP", 0.39, "Bagel", "Plain"));
+        extensionExercise1.basketList.add(new Inventory("BGLP", 0.39, "Bagel", "Plain"));
+        extensionExercise1.basketList.add(new Inventory("BGLP", 0.39, "Bagel", "Plain"));
+        extensionExercise1.basketList.add(new Inventory("BGLP", 0.39, "Bagel", "Plain"));
+        extensionExercise1.basketList.add(new Inventory("BGLO", 0.49, "Bagel", "Onion"));
+        System.out.println(List.of(extensionExercise1.basketList));
+        System.out.println(extensionExercise1.returnItemsWithDiscount());
+
     }
 }
