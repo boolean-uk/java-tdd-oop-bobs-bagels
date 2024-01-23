@@ -48,7 +48,7 @@ public class Product {
     }
 
     public double getPrice() {
-        return price;
+        return this.price;
     }
 
     public void setSku(String sku) {
@@ -67,6 +67,19 @@ public class Product {
 
     public void setPrice(double price) {
         this.price = price;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if(o instanceof Product) {
+            Product product = (Product) o;
+            if(!this.sku.equals(product.getSku())) return false;
+            if(!this.name.equals(product.getName())) return false;
+            if(!this.variant.equals(product.getVariant())) return false;
+            if(this.price != product.getPrice()) return false;
+            return true;
+        }
+        return false;
     }
 
 }

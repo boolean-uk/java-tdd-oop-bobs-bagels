@@ -54,12 +54,22 @@ public class CheckoutTest {
         basket.addProduct(coffee);
 
         Assertions.assertTrue(checkout.order(basket));
+        Assertions.assertEquals(3.9, checkout.sumPrice(basket));
 
     }
 
     @Test
     public void orderInvalidTest() {
+        Bagel bagel = new Bagel("Poppy Seed", 1.39);
+        Filling filling = new Filling("Smoked Salmon", 0.19);
+        Coffee coffee = new Coffee("Cappucino", 2.20);
+        bagel.addFilling(filling);
+        basket.addProduct(bagel);
+        basket.addProduct(coffee);
+        basket.addProduct(new Product("Debris", "Twig",0.03));
 
+
+        Assertions.assertFalse(checkout.order(basket));
     }
 
 }

@@ -17,7 +17,10 @@ public class Bagel extends Product {
         for(Filling filling : fillings) {
                 newPrice += filling.getPrice();
         }
-        this.price = newPrice;
+        double twoDecimalPrice = newPrice; // Messy, wouldn't do this normally.
+        twoDecimalPrice = twoDecimalPrice * Math.pow(10, 2);
+        twoDecimalPrice = Math.round(twoDecimalPrice) / Math.pow(10, 2);
+        this.price = twoDecimalPrice;
     }
 
     public double getBasePrice() {
