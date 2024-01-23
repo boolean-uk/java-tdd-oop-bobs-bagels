@@ -4,6 +4,8 @@ import com.booleanuk.extension.Discounts;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.HashMap;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -95,5 +97,27 @@ class CheckoutTest {
         String receipt = checkout.receiptDiscount(basket);
         Assertions.assertFalse(receipt.contains("You saved a total of"));
         Assertions.assertFalse(receipt.contains("(-$"));
+    }
+
+    @Test
+    void orderSummary() {
+        Inventory inventory = new Inventory();
+        Discounts discounts = new Discounts(inventory);
+        Checkout checkout = new Checkout(inventory, discounts);
+        HashMap<String, Integer> basket = new HashMap<>();
+        basket.put("BGLO", 1);
+        basket.put("COFB",1);
+
+        String receipt = checkout.orderSummary(basket);
+        Assertions.assertTrue(receipt.contains("Onion Bagel x 1: $0.49"));
+        Assertions.assertTrue(receipt.contains("Black Coffee x 1: $0.76 (-$0.23)"));
+        Assertions.assertTrue(receipt.contains("Total: $1.25"));
+        Assertions.assertTrue(receipt.contains("You saved a total of $0.23"));
+        SimpleDateFormat DateFormat = new SimpleDateFormat("HH:mm");
+        Calendar c = Calendar.getInstance();
+        c.setTimeInMillis(c.getTimeInMillis()+((long) 2*60*1000));
+
+        String date = DateFormat.format(c.getTime());
+        Assertions.assertTrue(receipt.contains("Your order will arrive: "+date));
     }
 }
