@@ -3,7 +3,6 @@ package com.booleanuk.core;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
 
 public class BasketTest {
 
@@ -12,7 +11,7 @@ public class BasketTest {
     public void shouldReturnTrueIfBagelIsAddedToBasket() {
         Inventory inventory = new Inventory();
         Basket basket = new Basket(inventory);
-        Bagel bagel = new Bagel("Sesame", "1234", 10);
+        Bagel bagel = new Bagel("Onion", "BGLO", 0.49);
         boolean added = basket.addBagel(bagel);
         Assertions.assertTrue(added);
     }
@@ -21,12 +20,12 @@ public class BasketTest {
     public void shouldReturnFalseIfBagelIsNotAddedToBasket() {
         Inventory inventory = new Inventory();
         Basket basket = new Basket(inventory);
-        basket.addBagel(new Bagel("Sesame", "1234", 10));
-        basket.addBagel(new Bagel("Sesame", "1234", 10));
-        basket.addBagel(new Bagel("Sesame", "1234", 10));
-        basket.addBagel(new Bagel("Sesame", "1234", 10));
-        basket.addBagel(new Bagel("Sesame", "1234", 10));
-        boolean added = basket.addBagel(new Bagel("Sesame", "1234", 10));
+        basket.addBagel(new Bagel("Onion", "BGLO", 0.49));
+        basket.addBagel(new Bagel("Onion", "BGLO", 0.49));
+        basket.addBagel(new Bagel("Onion", "BGLO", 0.49));
+        basket.addBagel(new Bagel("Onion", "BGLO", 0.49));
+        basket.addBagel(new Bagel("Onion", "BGLO", 0.49));
+        boolean added = basket.addBagel(new Bagel("Onion", "BGLO", 0.49));
         Assertions.assertFalse(added);
     }
 
@@ -35,7 +34,7 @@ public class BasketTest {
     public void shouldReturnTrueIfBagelIsRemovedFromBasket() {
         Inventory inventory = new Inventory();
         Basket basket = new Basket(inventory);
-        Bagel bagel = new Bagel("Sesame", "1234", 10);
+        Bagel bagel = new Bagel("Onion", "BGLO", 0.49);
         basket.addBagel(bagel);
         boolean removed = basket.removeBagel(bagel);
         Assertions.assertTrue(removed);
@@ -45,7 +44,7 @@ public class BasketTest {
     public void shouldReturnFalseIfBagelIsNotRemovedFromBasket() {
         Inventory inventory = new Inventory();
         Basket basket = new Basket(inventory);
-        Bagel bagel = new Bagel("Sesame", "1234", 10);
+        Bagel bagel = new Bagel("Onion", "BGLO", 0.49);
         boolean removed = basket.removeBagel(bagel);
         Assertions.assertFalse(removed);
     }
@@ -69,11 +68,11 @@ public class BasketTest {
     public void shouldAssertTotalCostOfAllBagelsInBasket() {
         Inventory inventory = new Inventory();
         Basket basket = new Basket(inventory);
-        Bagel bagel = new Bagel("Sesame", "1234", 10.10);
+        Bagel bagel = new Bagel("Onion", "BGLO", 0.49);
         basket.addBagel(bagel);
-        Bagel bagel2 = new Bagel("Sesame", "1234", 20.20);
+        Bagel bagel2 = new Bagel("Onion", "BGLO", 0.49);
         basket.addBagel(bagel2);
-        double expectedCost = 30.30;
+        double expectedCost = 0.98;
         double actualCost = basket.getTotalCost();
         Assertions.assertEquals(expectedCost, actualCost);
     }
@@ -81,8 +80,8 @@ public class BasketTest {
     //User story 7
     @Test
     public void shouldAssertPriceOfOneBagel() {
-        Bagel bagel = new Bagel("Sesame", "1234", 10.10);
-        double expectedPrice = 10.10;
+        Bagel bagel = new Bagel("Onion", "BGLO", 0.49);
+        double expectedPrice = 0.49;
         double actualPrice = bagel.getPrice();
         Assertions.assertEquals(expectedPrice, actualPrice);
     }
@@ -92,9 +91,9 @@ public class BasketTest {
     public void shouldReturnTrueIfFillingWasAdded() {
         Inventory inventory = new Inventory();
         Basket basket = new Basket(inventory);
-        Bagel bagel = new Bagel("Sesame", "1234", 10.10);
+        Bagel bagel = new Bagel("Onion", "BGLO", 0.49);
         basket.addBagel(bagel);
-        Filling filling = new Filling("Cheese", "4321", 2.30);
+        Filling filling = new Filling("Bacon", "FILB");
         boolean addedFilling = basket.addFillingToBagel(bagel, filling);
         Assertions.assertTrue(addedFilling);
     }
@@ -103,8 +102,8 @@ public class BasketTest {
     public void shouldReturnFalseIfFillingWasNotAdded() {
         Inventory inventory = new Inventory();
         Basket basket = new Basket(inventory);
-        Bagel bagel = new Bagel("Sesame", "1234", 10.10);
-        Filling filling = new Filling("Cheese", "4321", 2.30);
+        Bagel bagel = new Bagel("Onion", "BGLO", 0.49);
+        Filling filling = new Filling("Bacon", "FILB");
         boolean addedFilling = basket.addFillingToBagel(bagel, filling);
         Assertions.assertFalse(addedFilling);
     }

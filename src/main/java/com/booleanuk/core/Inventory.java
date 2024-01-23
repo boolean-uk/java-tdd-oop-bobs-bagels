@@ -63,6 +63,11 @@ public class Inventory {
     }
 
     public boolean isCoffeeInInventory(String sku) {
-        return true;
+        for (Coffee coffee : allCoffees){
+            if (coffee.getSku().equalsIgnoreCase(sku)) {
+                return true;
+            }
+        }
+        return false;
     }
 }
