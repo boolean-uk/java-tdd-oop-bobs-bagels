@@ -1,6 +1,7 @@
 package com.booleanuk.core;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 
 public class Inventory {
@@ -92,7 +93,7 @@ public class Inventory {
 
 	public double getDiscountComboAmount(String[] pair) {
 		for (DiscountCombo combo : discountsCombo) {
-			if (combo.getComboItems() == pair) {
+			if (Arrays.equals(combo.getComboItems(),pair)) {
 				return combo.getNewPrice();
 			}
 		}
