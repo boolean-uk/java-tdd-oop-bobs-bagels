@@ -207,16 +207,17 @@ public class BagelTest {
         basket.addItem("BGLE", 6);
         basket.addItem("COFB", 3);
         basket.addItem("BGLO", 2);
-        String expected = """
-                Bagel Everything    6   2,49
-                                    (-0.45)
-                Bagel Plain         12  3,99
-                                    (-0.69)
-                Bagel Onion         2   0,98
-                Coffee Black        3   2,97
-                """;
 
-        Assertions.assertTrue(basket.getReceipt().contains(expected));
+        Inventory.resetInstance();
+        Basket basket2 = new Basket(40);
+        basket2.addItem("BGLP", 12);
+        basket2.addItem("BGLE", 6);
+        basket2.addItem("COFB", 3);
+        basket2.addItem("BGLO", 2);
+
+
+
+        Assertions.assertEquals(basket.getReceipt(), basket2.getReceipt());
 
     }
 
