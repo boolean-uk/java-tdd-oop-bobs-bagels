@@ -124,6 +124,10 @@ public class BasketTest {
         Filling filling = new Filling("Bacon", "FILB");
         boolean addedFillingThatIsInInventory = basket.addFillingToBagel(bagel, filling);
         Assertions.assertTrue(addedFillingThatIsInInventory);
+
+        Coffee coffee = new Coffee("Black", "COFB", 0.99);
+        boolean coffeeIsInInventory = inventory.isCoffeeInInventory(coffee);
+        Assertions.assertTrue(coffeeIsInInventory);
     }
 
     @Test
@@ -138,5 +142,9 @@ public class BasketTest {
         Filling filling = new Filling("Bacon", "BACON");
         boolean addedFillingThatIsInInventory = basket.addFillingToBagel(bagel, filling);
         Assertions.assertFalse(addedFillingThatIsInInventory);
+
+        Coffee coffee = new Coffee("Black", "COFFEE", 0.99);
+        boolean coffeeIsInInventory = inventory.isCoffeeInInventory(coffee);
+        Assertions.assertFalse(coffeeIsInInventory);
     }
 }

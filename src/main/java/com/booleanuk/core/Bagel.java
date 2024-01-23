@@ -12,7 +12,7 @@ public class Bagel {
     public Bagel(String name, String sku, double price) {
         this.name = name;
         this.sku = sku;
-        this.uniqueID = "abc";  //If there are more than one e.g. sesame bagel, this ID can be used to navigate to the right bagel
+        this.uniqueID = "abc";  //If there are more than one e.g. sesame bagel, this ID could be used to navigate to the right bagel. Currently not in use
         this.price = price;
         this.fillings = new ArrayList<>();
     }

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 public class Inventory {
     ArrayList<Filling> allFillings = new ArrayList<>();
     ArrayList<Bagel> allBagels = new ArrayList<>();
+    ArrayList<Coffee> allCoffees = new ArrayList<>();
 
     public Inventory() {
         Filling bacon = new Filling("Bacon", "FILB");
@@ -28,6 +29,15 @@ public class Inventory {
         allBagels.add(everything);
         Bagel sesame = new Bagel("Sesame", "BGLS", 0.49);
         allBagels.add(sesame);
+
+        Coffee black = new Coffee("Black", "COFB", 0.99);
+        allCoffees.add(black);
+        Coffee white = new Coffee("White", "COFW", 1.19);
+        allCoffees.add(white);
+        Coffee cappuccino = new Coffee("Capuccino", "COFC", 1.29);
+        allCoffees.add(cappuccino);
+        Coffee latte = new Coffee("Latte", "COFL", 1.29);
+        allCoffees.add(latte);
     }
 
     public ArrayList<Filling> getAllFillings() {
