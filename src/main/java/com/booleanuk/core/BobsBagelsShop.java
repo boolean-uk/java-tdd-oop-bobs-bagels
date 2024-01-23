@@ -32,20 +32,20 @@ public class BobsBagelsShop {
 
     public BobsBagelsShop() {
         HashMap<Item, Integer> fullInventory = new HashMap<>();
-        Item bglo = new Item("BGLO","Bagel", "Onion", 0.49);
-        Item bglp = new Item("BGLP","Bagel", "Plain", 0.39);
-        Item bgle = new Item("BGLE","Bagel", "Everything", 0.49);
-        Item bgls = new Item("BGLS","Bagel", "Sesame", 0.49);
-        Item cofb = new Item("COFB", "Coffee", "Black", 0.99);
-        Item cofw = new Item("COFW", "Coffee", "White", 1.19);
-        Item cofc = new Item("COFC", "Coffee", "Capuccino", 1.29);
-        Item cofl = new Item("COFL", "Coffee", "Latte", 1.29);
-        Item filb = new Item("FILB", "Filling", "Bacon", 0.12);
-        Item file = new Item("FILE", "Filling", "Egg", 0.12);
-        Item filc = new Item("FILC", "Filling", "Cheese", 0.12);
-        Item filx = new Item("FILX", "Filling", "Cream Cheese", 0.12);
-        Item fils = new Item("FILS", "Filling", "Smoked Salmon", 0.12);
-        Item filh = new Item("FILH", "Filling", "Ham", 0.12);
+        Item bglo = new Bagel("BGLO","Bagel", "Onion", 0.49);
+        Item bglp = new Bagel("BGLP","Bagel", "Plain", 0.39);
+        Item bgle = new Bagel("BGLE","Bagel", "Everything", 0.49);
+        Item bgls = new Bagel("BGLS","Bagel", "Sesame", 0.49);
+        Item cofb = new Coffee("COFB", "Coffee", "Black", 0.99);
+        Item cofw = new Coffee("COFW", "Coffee", "White", 1.19);
+        Item cofc = new Coffee("COFC", "Coffee", "Capuccino", 1.29);
+        Item cofl = new Coffee("COFL", "Coffee", "Latte", 1.29);
+        Item filb = new Filling("FILB", "Filling", "Bacon", 0.12);
+        Item file = new Filling("FILE", "Filling", "Egg", 0.12);
+        Item filc = new Filling("FILC", "Filling", "Cheese", 0.12);
+        Item filx = new Filling("FILX", "Filling", "Cream Cheese", 0.12);
+        Item fils = new Filling("FILS", "Filling", "Smoked Salmon", 0.12);
+        Item filh = new Filling("FILH", "Filling", "Ham", 0.12);
         fullInventory.put(bglo, 30);
         fullInventory.put(bglp, 30);
         fullInventory.put(bgle, 30);

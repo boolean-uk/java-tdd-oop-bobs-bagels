@@ -1,8 +1,9 @@
 package com.booleanuk.extension;
 
 import com.booleanuk.core.Basket;
-import com.booleanuk.core.Item;
+import com.booleanuk.core.Bagel;
 import com.booleanuk.core.BobsBagelsShop;
+import com.booleanuk.core.Item;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -13,7 +14,7 @@ public class BasketTest {
     @Test
     public void discountPerItem() {
         HashMap<Item, Integer> testInventory = new HashMap<>();
-        Item bglo = new Item("BGLO","Bagel", "Onion", 0.49);
+        Item bglo = new Bagel("BGLO","Bagel", "Onion", 0.49);
         testInventory.put(bglo, 50);
         BobsBagelsShop shop = new BobsBagelsShop(testInventory);
         Basket basket = new Basket(shop, 16);
@@ -32,7 +33,7 @@ public class BasketTest {
     @Test
     public void totalCostWithDiscount() {
         HashMap<Item, Integer> testInventory = new HashMap<>();
-        Item bglo = new Item("BGLO","Bagel", "Onion", 0.49);
+        Item bglo = new Bagel("BGLO","Bagel", "Onion", 0.49);
         testInventory.put(bglo, 50);
         BobsBagelsShop shop = new BobsBagelsShop(testInventory);
         Basket basket = new Basket(shop, 16);

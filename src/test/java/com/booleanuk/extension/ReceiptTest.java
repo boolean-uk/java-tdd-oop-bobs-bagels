@@ -1,5 +1,6 @@
 package com.booleanuk.extension;
 
+import com.booleanuk.core.Bagel;
 import com.booleanuk.core.Basket;
 import com.booleanuk.core.Item;
 import com.booleanuk.core.BobsBagelsShop;
@@ -13,8 +14,8 @@ public class ReceiptTest {
     @Test
     public void generateReceipt() {
         HashMap<Item, Integer> testInventory = new HashMap<>();
-        Item bglo = new Item("BGLO","Bagel", "Onion", 0.49);
-        Item bglp = new Item("BGLP","Bagel", "Plain", 0.39);
+        Item bglo = new Bagel("BGLO","Bagel", "Onion", 0.49);
+        Item bglp = new Bagel("BGLP","Bagel", "Plain", 0.39);
         testInventory.put(bglo, 10);
         testInventory.put(bglp, 10);
         BobsBagelsShop shop = new BobsBagelsShop(testInventory);
@@ -36,8 +37,8 @@ public class ReceiptTest {
     @Test
     public void createHeaderAndFooter() {
         HashMap<Item, Integer> testInventory = new HashMap<>();
-        Item bglo = new Item("BGLO","Bagel", "Onion", 0.49);
-        Item bglp = new Item("BGLP","Bagel", "Plain", 0.39);
+        Item bglo = new Bagel("BGLO","Bagel", "Onion", 0.49);
+        Item bglp = new Bagel("BGLP","Bagel", "Plain", 0.39);
         testInventory.put(bglo, 10);
         testInventory.put(bglp, 10);
         BobsBagelsShop shop = new BobsBagelsShop(testInventory);
@@ -53,8 +54,8 @@ public class ReceiptTest {
     @Test
     public void printReceipt() {
         HashMap<Item, Integer> testInventory = new HashMap<>();
-        Item bglo = new Item("BGLO","Bagel", "Onion", 0.49);
-        Item bglp = new Item("BGLP","Bagel", "Plain", 0.39);
+        Item bglo = new Bagel("BGLO","Bagel", "Onion", 0.49);
+        Item bglp = new Bagel("BGLP","Bagel", "Plain", 0.39);
         testInventory.put(bglo, 10);
         testInventory.put(bglp, 10);
         BobsBagelsShop shop = new BobsBagelsShop(testInventory);
@@ -73,8 +74,8 @@ public class ReceiptTest {
     @Test
     public void generateReceiptWithDiscount() {
         HashMap<Item, Integer> testInventory = new HashMap<>();
-        Item bglo = new Item("BGLO","Bagel", "Onion", 0.49);
-        Item bglp = new Item("BGLP","Bagel", "Plain", 0.39);
+        Item bglo = new Bagel("BGLO","Bagel", "Onion", 0.49);
+        Item bglp = new Bagel("BGLP","Bagel", "Plain", 0.39);
         testInventory.put(bglo, 50);
         testInventory.put(bglp, 50);
         BobsBagelsShop shop = new BobsBagelsShop(testInventory);
