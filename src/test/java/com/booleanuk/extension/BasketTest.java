@@ -315,4 +315,45 @@ class BasketTest {
         Assertions.assertEquals(16.55, basket.getCostOfBasket());
 
     }
+
+    @Test
+    public void testCreate (){
+        Basket basket = new Basket();
+        Basket.setMaxSize(100);
+        Bagel bagelplain = new  Bagel("BGLP", 0.39, "Plain");
+        Bagel bagelOnion = new  Bagel("BGLO", 0.49, "Onion");
+        Bagel bagelSesame = new  Bagel("BGLS", 0.49, "Sesame");
+        Coffee cofeewhite = new Coffee("COFW", 1.19, "White");
+        Coffee coffeeBlack = new Coffee("COFB", 0.99, "Black");
+        Coffee cappuccino = new Coffee("COFC", 1.29, "Cappuccino");
+
+        //add 14 plain bagels , 7 onion bagels and 7 sesame bagels
+        basket.add(bagelplain, 14);
+        basket.add(bagelOnion, 7);
+        basket.add(bagelSesame, 7);
+
+        //add 3 cappuccinos, 2 white coffees and 1 black coffee
+        basket.add(cappuccino, 3);
+        basket.add(cofeewhite, 2);
+        basket.add(coffeeBlack, 1);
+
+        System.out.println(basket.getProducts().size());
+        //Should apply the following bagel discounts
+        // 12* Plain = 3.99
+        // 6* Sesame = 2.49
+        // 6* Onion= 2.49
+        // Remaining in basket should be
+        // Bagels: 2* plain, 1* sesame, 1* onion
+        // Coffees: 3* cappuccino, 2* white, 1*black
+        // Cheapest coffees and bagels should be paired with each other accordingly
+        // plain - black = 1.25
+        // plain - white = 1.25
+        // onion - white = 1.25
+        // sesame - cappuccino = 1.25
+        // Remaining in basket should be 2* cappuccino = 1.29*2 = 2.58
+        // Total cost should be 3.99 + (2.49 * 2) + (1.25 * 4) + (1.29 * 2) = 16.55
+
+        Assertions.assertEquals(16.55, basket.getCostOfBasket());
+
+    }
 }

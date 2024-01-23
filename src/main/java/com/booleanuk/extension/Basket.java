@@ -67,12 +67,11 @@ public class Basket {
     }
 
     public double getCostOfBasket(){
-        double total = 0;
-        //Clone basket to be able to remove from copy
-        //ArrayList<Product> temporaryProducts = this.products;
 
+        double total = 0;
         //Add all fillings first where discounts does not apply.
         for (Product product: products){
+            total += product.getPrice();
             if (product.getName().equals("Bagel")){
                 for (Filling filling : product.getFillings()){
                     //total += roundDouble(getCostOfProduct(filling));
@@ -80,14 +79,6 @@ public class Basket {
                 }
             }
         }
-
-
-        for (Product product : products){
-            //total += roundDouble(getCostOfProduct(product));
-            System.out.println("id:" + product.getId() + "  price: " + product.getPrice());
-            total += product.getPrice();
-        }
-
 
         double discount = calculateDiscounts();
 
@@ -109,14 +100,12 @@ public class Basket {
 
             if (id.contains("BGL")){
                 while (quantity >= 12){
-                    //discountPrice += roundDouble((Inventory.getProductById(id).getPrice() * 12 ) - 3.99);
                     discountPrice += (Inventory.getProductById(id).getPrice() * 12 ) - 3.99;
                     quantityMap.put(id, quantityMap.get(id) - 12);
                     quantity -= 12;
 
                 }
                 while (quantity >= 6){
-                    //discountPrice += roundDouble((Inventory.getProductById(id).getPrice() * 6 ) - 2.49);
                     discountPrice += (Inventory.getProductById(id).getPrice() * 6 ) - 2.49;
                     quantityMap.put(id, quantityMap.get(id) - 6);
                     quantity -= 6;
@@ -200,12 +189,24 @@ public class Basket {
     private double roundDouble (double value){
         BigDecimal bigDecimalValue = new BigDecimal(value);
         bigDecimalValue = bigDecimalValue.setScale(2, RoundingMode.HALF_UP);
-        double formattedValue = bigDecimalValue.doubleValue();
-        return formattedValue;
+        return bigDecimalValue.doubleValue();
     }
 
     private void sortList(ArrayList<Product> list){
         list.sort((p1,p2)
                 ->  Double.compare(p1.getPrice(), p2.getPrice()));
+    }
+
+    public HashMap<Product, Integer> getQuantityMapWithProducts(){
+        HashMap<Product, Integer> quantityMap = new HashMap<>();
+        for (Product product : products) {
+            if (!quantityMap.containsKey(product)) {
+                quantityMap.put(product, 1);
+            } else {
+                int currentAmount = quantityMap.get(product);
+                quantityMap.put(product, currentAmount + 1);
+            }
+        }
+        return quantityMap;
     }
 }
