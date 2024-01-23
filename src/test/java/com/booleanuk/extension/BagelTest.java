@@ -216,13 +216,13 @@ public class BagelTest {
                 """
                 
                 ----------------------------
-                BGLE			   6	2.49
-                					(-0.45)
-                BGLP			   12	3.99
-                					(-0.69)
-                BGLO			   2	0.98
-                COFB			   3	2.97
-                                
+                Bagel Everything    6   2,49  \s
+                                    (-0.45)
+                Bagel Plain         12  3,99  \s
+                                    (-0.69)
+                Bagel Onion         2   0,98  \s
+                Coffee Black        3   2,97  \s
+                
                 ----------------------------
                 Total				    10.43
                  You saved a total of 1.14

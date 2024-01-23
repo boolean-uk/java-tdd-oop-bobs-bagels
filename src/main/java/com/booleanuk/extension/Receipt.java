@@ -15,8 +15,6 @@ public class Receipt {
     private ArrayList<String> receipt;
 
     private double allDiscounts;
-
-    private double totalCost;
     public Receipt(ArrayList<Item> itemList){
         this.itemList = itemList;
         this.receipt = new ArrayList<>();
@@ -37,6 +35,7 @@ public class Receipt {
                 ----------------------------
                 """);
             for(String s : receipt){
+
                 sb.append(s);
             }
             sb.append("""
@@ -82,6 +81,7 @@ public class Receipt {
         return pp.doubleValue();
     }
     private double applyDiscounts(){
+        Inventory i = Inventory.getInstance();
         receipt.clear();
         double totalDiscount = 0;
         Map<String, Long> itemQuantities = getItemQuantities();
@@ -94,18 +94,19 @@ public class Receipt {
                 itemPrice = Double.parseDouble(Inventory.getInstance().getPriceInfo(itemSKU));
                 totalDiscount += (itemPrice * 12) - 3.99;
 
-                receipt.add(entry.getKey() + "\t\t\t   " + itemQuantity + "\t" + parsePrice(String.valueOf((itemPrice * 12)
-                        + (itemPrice * (itemQuantity - 12)) - ((itemPrice * 12) - 3.99))) + "\n\t\t\t\t\t" +
-                        "(-" + parsePrice(String.valueOf((itemPrice * 12) - 3.99)) + ")\n");
+                receipt.add(String.format("%-20s%-4s%-7.2f\n%-7s",i.getItemNameType(entry.getKey()), itemQuantity, parsePrice(String.valueOf((itemPrice * 12)
+                        + (itemPrice * (itemQuantity - 12)) - ((itemPrice * 12) - 3.99))),  "                    (-" +parsePrice(String.valueOf((itemPrice * 12) - 3.99))) + ")\n");
+
 
             }
             else if(itemQuantity >= 6 && itemSKU.startsWith("B") && !itemSKU.endsWith("P")){
                 itemPrice = Double.parseDouble(Inventory.getInstance().getPriceInfo(itemSKU));
                 totalDiscount += (itemPrice * 6) - 2.49;
 
-                receipt.add(entry.getKey() + "\t\t\t   " + itemQuantity + "\t" + parsePrice(String.valueOf((((itemPrice * 6)
-                        + (itemPrice * (itemQuantity - 6)) - totalDiscount)))) + "\n\t\t\t\t\t" +
-                        "(-" + parsePrice(String.valueOf((itemPrice * 6 ) - 2.49)) + ")\n");
+                receipt.add(String.format("%-20s%-4s%-7.2f\n%-7s",i.getItemNameType(entry.getKey()), itemQuantity, parsePrice(String.valueOf((itemPrice * 6)
+                        + (itemPrice * (itemQuantity - 6)) - ((itemPrice * 6) - 2.49))),  "                    (-" +parsePrice(String.valueOf((itemPrice * 6) - 2.49))) + ")\n");
+
+
 
             }
             else if(itemQuantities.size() == 2 && (itemSKU.startsWith("C") || itemSKU.startsWith("B"))
@@ -115,9 +116,9 @@ public class Receipt {
             }
             else{
                 itemPrice = Double.parseDouble(Inventory.getInstance().getPriceInfo(itemSKU));
+                receipt.add(String.format("%-20s%-4s%-7.2f\n",i.getItemNameType(entry.getKey()), itemQuantity,
+                        parsePrice(String.valueOf(itemPrice * itemQuantity))));
 
-                receipt.add(entry.getKey() + "\t\t\t   " + itemQuantity + "\t"
-                        + parsePrice(String.valueOf(itemPrice * itemQuantity)) + "\n");
             }
         }
         allDiscounts = totalDiscount;

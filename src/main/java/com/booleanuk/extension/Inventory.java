@@ -127,6 +127,18 @@ public class Inventory {
 
         return "No item found";
     }
+    public String getItemNameType(String SKU){
+        ArrayList<Item> tempArray = new ArrayList<>();
+        tempArray.addAll(bagels);
+        tempArray.addAll(coffee);
+        tempArray.addAll(fillings);
+        for(Item i : tempArray){
+            if(i.getSKU().equals(SKU)){
+                return i.getName() + " " + i.getType();
+            }
+        }
+        return "No item found";
+    }
     public String listFillings(){
         ArrayList<Filling> fillings = new ArrayList<>();
         fillings.add(new Filling("FILB","Filling", "Bacon", 0.12));
