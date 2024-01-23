@@ -3,16 +3,19 @@ package com.booleanuk.extension;
 import com.booleanuk.core.Basket;
 import com.booleanuk.core.Discount;
 import com.booleanuk.core.Inventory;
+import com.booleanuk.core.Receipt;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+
+import java.util.ArrayList;
 
 class BasketTest {
 
     // Add functionality
     @Test
     public void addMultipleValidItems() {
-        Inventory inventory = new Inventory();
-        Basket basket = new Basket(inventory);
+        com.booleanuk.core.Inventory inventory = new com.booleanuk.core.Inventory();
+        com.booleanuk.core.Basket basket = new com.booleanuk.core.Basket(inventory);
         boolean result = basket.addItem("Bagel Onion", 1);
         Assertions.assertTrue(result);
 
@@ -34,8 +37,8 @@ class BasketTest {
 
     @Test
     public void addMultipleInValidItems() {
-        Inventory inventory = new Inventory();
-        Basket basket = new Basket(inventory);
+        com.booleanuk.core.Inventory inventory = new com.booleanuk.core.Inventory();
+        com.booleanuk.core.Basket basket = new com.booleanuk.core.Basket(inventory);
         boolean result = basket.addItem("Choclate", 1);
         Assertions.assertFalse(result);
 
@@ -51,8 +54,8 @@ class BasketTest {
     // Remove
     @Test
     public void removeItemsValid() {
-        Inventory inventory = new Inventory();
-        Basket basket = new Basket(inventory);
+        com.booleanuk.core.Inventory inventory = new com.booleanuk.core.Inventory();
+        com.booleanuk.core.Basket basket = new com.booleanuk.core.Basket(inventory);
         boolean result = basket.addItem("Bagel Onion", 1);
         Assertions.assertTrue(result);
 
@@ -67,8 +70,8 @@ class BasketTest {
     // 3.
     @Test
     public void removeItemsNotInBasket() {
-        Inventory inventory = new Inventory();
-        Basket basket = new Basket(inventory);
+        com.booleanuk.core.Inventory inventory = new com.booleanuk.core.Inventory();
+        com.booleanuk.core.Basket basket = new com.booleanuk.core.Basket(inventory);
         boolean result = basket.addItem("Bagel Onion", 1);
         Assertions.assertTrue(result);
 
@@ -82,8 +85,8 @@ class BasketTest {
 
     @Test
     public void removeOnlyOneValidItem() {
-        Inventory inventory = new Inventory();
-        Basket basket = new Basket(inventory);
+        com.booleanuk.core.Inventory inventory = new com.booleanuk.core.Inventory();
+        com.booleanuk.core.Basket basket = new com.booleanuk.core.Basket(inventory);
         boolean result = basket.addItem("Bagel Onion", 1);
         result = basket.addItem("Filling Bacon", 1);
         result = basket.addItem("Bagel Onion", 1);
@@ -100,8 +103,8 @@ class BasketTest {
     // Capacity
     @Test
     public void updateBasketCapacityTo5() {
-        Inventory inventory = new Inventory();
-        Basket basket = new Basket(inventory);
+        com.booleanuk.core.Inventory inventory = new com.booleanuk.core.Inventory();
+        com.booleanuk.core.Basket basket = new com.booleanuk.core.Basket(inventory);
         int newCapacity = 5;
         int result = basket.changeCapacity(newCapacity);
         Assertions.assertEquals(5, result);
@@ -109,8 +112,8 @@ class BasketTest {
 
     @Test
     public void updateBasketCapacityTo10() {
-        Inventory inventory = new Inventory();
-        Basket basket = new Basket(inventory);
+        com.booleanuk.core.Inventory inventory = new com.booleanuk.core.Inventory();
+        com.booleanuk.core.Basket basket = new com.booleanuk.core.Basket(inventory);
         int newCapacity = 10;
         int result = basket.changeCapacity(newCapacity);
         Assertions.assertEquals(10, result);
@@ -118,8 +121,8 @@ class BasketTest {
 
     @Test
     public void addBeyondCapacity() {
-        Inventory inventory = new Inventory();
-        Basket basket = new Basket(inventory);
+        com.booleanuk.core.Inventory inventory = new com.booleanuk.core.Inventory();
+        com.booleanuk.core.Basket basket = new com.booleanuk.core.Basket(inventory);
         int newCapacity = 2;
         int intResult = basket.changeCapacity(newCapacity);
         boolean result = basket.addItem("Bagel Onion", 1);
@@ -135,8 +138,8 @@ class BasketTest {
     // Overall Test after first five user stories
     @Test
     public void overallTest() {
-        Inventory inventory = new Inventory();
-        Basket basket = new Basket(inventory);
+        com.booleanuk.core.Inventory inventory = new com.booleanuk.core.Inventory();
+        com.booleanuk.core.Basket basket = new com.booleanuk.core.Basket(inventory);
         int intResult = basket.changeCapacity(3);
         // Add 4 items to a max 3 items basket. Fours add should return false, the rest true
         Assertions.assertTrue(basket.addItem("Bagel Plain", 1));
@@ -162,9 +165,9 @@ class BasketTest {
 
     @Test
     public void testTotalCost() {
-        Inventory inventory = new Inventory();
+        com.booleanuk.core.Inventory inventory = new com.booleanuk.core.Inventory();
         com.booleanuk.core.Discount discount = new com.booleanuk.core.Discount();
-        Basket basket = new Basket(inventory, discount);
+        com.booleanuk.core.Basket basket = new com.booleanuk.core.Basket(inventory, discount);
         Assertions.assertEquals(0.0, basket.getTotal());
 
         Assertions.assertTrue(basket.addItem("Bagel Plain", 1));
@@ -178,8 +181,8 @@ class BasketTest {
     // Get price of one item
     @Test
     public void testGetPrize() {
-        Inventory inventory = new Inventory();
-        Basket basket = new Basket(inventory);
+        com.booleanuk.core.Inventory inventory = new com.booleanuk.core.Inventory();
+        com.booleanuk.core.Basket basket = new com.booleanuk.core.Basket(inventory);
 
         Assertions.assertEquals(0.39, basket.getPrice("Bagel Plain"));
         Assertions.assertEquals(0.49, basket.getPrice("Bagel Sesame"));
@@ -192,8 +195,8 @@ class BasketTest {
     // Build bagel
     @Test
     public void testBuildBagelAllFillings() {
-        Inventory inventory = new Inventory();
-        Basket basket = new Basket(inventory);
+        com.booleanuk.core.Inventory inventory = new com.booleanuk.core.Inventory();
+        com.booleanuk.core.Basket basket = new com.booleanuk.core.Basket(inventory);
         String[] fillings = {"Bacon", "Egg", "Cheese", "Cream Cheese", "Smoked Salmon", "Ham"};
         boolean result = basket.buildBagel(2, fillings);
         Assertions.assertTrue(result);
@@ -221,9 +224,9 @@ class BasketTest {
 
     @Test
     public void testDiscountSixBagels() {
-        Inventory inventory = new Inventory();
+        com.booleanuk.core.Inventory inventory = new com.booleanuk.core.Inventory();
         com.booleanuk.core.Discount discount = new com.booleanuk.core.Discount();
-        Basket basket = new Basket(inventory, discount);
+        com.booleanuk.core.Basket basket = new com.booleanuk.core.Basket(inventory, discount);
         boolean result = basket.addItem("Bagel Onion", 6);
         Assertions.assertTrue(result);
 
@@ -232,9 +235,9 @@ class BasketTest {
 
     @Test
     public void testDiscountTwelveBagels() {
-        Inventory inventory = new Inventory();
+        com.booleanuk.core.Inventory inventory = new com.booleanuk.core.Inventory();
         com.booleanuk.core.Discount discount = new com.booleanuk.core.Discount();
-        Basket basket = new Basket(inventory, discount);
+        com.booleanuk.core.Basket basket = new com.booleanuk.core.Basket(inventory, discount);
         boolean result = basket.addItem("Bagel Everything", 12);
         Assertions.assertTrue(result);
 
@@ -243,9 +246,9 @@ class BasketTest {
 
     @Test
     public void testDiscountSixteenBagels() {
-        Inventory inventory = new Inventory();
+        com.booleanuk.core.Inventory inventory = new com.booleanuk.core.Inventory();
         com.booleanuk.core.Discount discount = new com.booleanuk.core.Discount();
-        Basket basket = new Basket(inventory, discount);
+        com.booleanuk.core.Basket basket = new com.booleanuk.core.Basket(inventory, discount);
         boolean result = basket.addItem("Bagel Plain", 16);
         Assertions.assertTrue(result);
 
@@ -254,9 +257,9 @@ class BasketTest {
 
     @Test
     public void testDiscountBagelAndCoffee() {
-        Inventory inventory = new Inventory();
+        com.booleanuk.core.Inventory inventory = new com.booleanuk.core.Inventory();
         com.booleanuk.core.Discount discount = new com.booleanuk.core.Discount();
-        Basket basket = new Basket(inventory, discount);
+        com.booleanuk.core.Basket basket = new com.booleanuk.core.Basket(inventory, discount);
         boolean result = basket.addItem("Coffee Black", 1);
         result = basket.addItem("Bagel Plain", 1);
         Assertions.assertTrue(result);
@@ -266,9 +269,9 @@ class BasketTest {
 
     @Test
     public void testDiscountExtensionBigOrder() {
-        Inventory inventory = new Inventory();
+        com.booleanuk.core.Inventory inventory = new com.booleanuk.core.Inventory();
         com.booleanuk.core.Discount discount = new Discount();
-        Basket basket = new Basket(inventory, discount);
+        com.booleanuk.core.Basket basket = new com.booleanuk.core.Basket(inventory, discount);
         boolean result = basket.addItem("Bagel Onion", 2);
         result = basket.addItem("Bagel Plain", 12);
         result = basket.addItem("Bagel Everything", 6);
@@ -278,6 +281,24 @@ class BasketTest {
         Assertions.assertEquals(9.97, basket.getTotal());
     }
 
+    @Test
+    public void restReceipt() {
+        com.booleanuk.core.Inventory inventory = new Inventory();
+        com.booleanuk.core.Basket basket = new Basket(inventory);
+        boolean result = basket.addItem("Bagel Onion", 2);
+        result = basket.addItem("Bagel Plain", 12);
+        result = basket.addItem("Bagel Everything", 6);
+        result = basket.addItem("Coffee Black", 3);
+        Assertions.assertTrue(result);
 
 
+        com.booleanuk.core.Receipt receipt = new Receipt(basket.getBasket());
+        receipt.createReceipt();
+        ArrayList<String> receiptList = receipt.getReceipt();
+        Assertions.assertEquals("    ~~~ Bob's Bagels ~~~    ", receiptList.get(1));
+        Assertions.assertEquals("Plain Bagel        12  $4.68", receiptList.get(6));
+        Assertions.assertEquals("Onion Bagel        2   $0.98", receiptList.get(7));
+        Assertions.assertEquals("Total                 $11.57", receiptList.get(11));
+        Assertions.assertEquals("      for your order!       ", receiptList.get(14));
+    }
 }

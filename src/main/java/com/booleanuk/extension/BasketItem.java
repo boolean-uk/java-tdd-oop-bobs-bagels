@@ -8,9 +8,6 @@ public class BasketItem implements Item {
     private double price;
     private String[] fillings;
     private int numFillings;
-    private int numDiscountItems = 0;
-    private int num12Discount = 0;
-    private int num6Discount = 0;
     private double discountPrice = 0.0;
     private double saved = 0.0;
 
@@ -79,30 +76,6 @@ public class BasketItem implements Item {
         this.type = type;
     }
 
-    public int getNumDiscountItems() {
-        return numDiscountItems;
-    }
-
-    public void setNumDiscountItems(int numDiscountItems) {
-        this.numDiscountItems = numDiscountItems;
-    }
-
-    public int getNum12Discount() {
-        return num12Discount;
-    }
-
-    public void setNum12Discount(int num12Discount) {
-        this.num12Discount = num12Discount;
-    }
-
-    public int getNum6Discount() {
-        return num6Discount;
-    }
-
-    public void setNum6Discount(int num6Discount) {
-        this.num6Discount = num6Discount;
-    }
-
     public double getDiscountPrice() {
         return discountPrice;
     }
@@ -120,9 +93,6 @@ public class BasketItem implements Item {
     }
 
     public void resetDiscount() {
-        this.numDiscountItems = 0;
-        this.num12Discount = 0;
-        this.num6Discount = 0;
         this.discountPrice = 0.0;
         this.saved = 0.0;
     }

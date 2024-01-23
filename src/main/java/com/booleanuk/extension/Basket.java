@@ -27,6 +27,10 @@ public class Basket {
         this.total = 0.0;
     }
 
+    public HashMap<String, BasketItem> getBasket() {
+        return this.basket;
+    }
+
     public BasketItem getBasketItem(String sku) {
         return this.basket.get(sku);
     }
@@ -102,14 +106,10 @@ public class Basket {
                 // Check remaining number of bagels
                 rest = quantity - 12 * num12 - 6 * num6;
                 if (num12 > 0) {
-                    basketItem.setNumDiscountItems(basketItem.getNumDiscountItems()+num12);
-                    basketItem.setNum12Discount(num12);
                     discountPrice += discount.discountMap.get("BGL12").getPrice();
                     priceSaved += (12*num12*basketItem.getPrice()) - discountPrice;
                 }
                 if (num6 > 0) {
-                    basketItem.setNumDiscountItems(basketItem.getNumDiscountItems()+num6);
-                    basketItem.setNum6Discount(num6);
                     discountPrice += discount.discountMap.get("BGL6").getPrice();
                     priceSaved += (6 * num6 * basketItem.getPrice()) - discountPrice;
                 }
@@ -145,7 +145,6 @@ public class Basket {
                 // Check quantity of fillings
                 quantity = basketItem.getQuantity();
                 priceTotal += quantity * basketItem.getPrice();
-
             }
 
             // Check is current basket item is a bagel
@@ -182,14 +181,14 @@ public class Basket {
 
                     i++;
                 }
+
+                // Add the actual priced of any coffees that are not discountedly paired with bagels
                 if (i < quantity){
                     int restCoffee = quantity - i;
                     priceTotal += restCoffee * basketItem.getPrice();
-
                 }
             }
         }
-
         this.total = Math.round(priceTotal*100.0) / 100.0;
     }
 
