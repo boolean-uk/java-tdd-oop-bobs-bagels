@@ -47,6 +47,10 @@ public class ExtensionExercise1 {
 
         if (countBGLO >= 6) {
             price += ( (countBGLO / 6) * 2.49);
+            //Divide by the bulk amount (6) to account for more than 1 discount
+            // offer (in the case where there is multiples of 6 onion bagels being
+            // bought, e.g. 12 onion bagels should make the discount price be
+            // applied twice)
         }
         if (countBGLP >= 12) {
             price += ( (countBGLP / 12) * 3.99);
@@ -57,7 +61,6 @@ public class ExtensionExercise1 {
         if (countCOFB > 0 && (countBGLP > 0 || countBGLP > 0 || countBGLE > 0)) {
             price += ( (countCOFB / 1) + (countBGLO / 1) + (countBGLP / 1) + (countBGLE / 1) * 1.25);
         }
-        System.out.println(price);
         return price;
     }
 

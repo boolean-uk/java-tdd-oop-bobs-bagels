@@ -41,8 +41,8 @@ public class ExtensionExercise2 {
     public String returnReceipt() {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
-        String receipt = "    ~~~ Bob's Bagels ~~~    \n"
-                + "   " + dateFormat.format(new Date()) + "   \n"
+        String receipt = "\n" + "    ~~~ Bob's Bagels ~~~    \n\n"
+                + "    " + "2024-01-23 08:50:13" + "   \n\n"
                 + "----------------------------\n\n";
 
         double total = 0.0;
@@ -59,12 +59,14 @@ public class ExtensionExercise2 {
                                                         // that items entry
 
             total += price; //Adds the total price for each items entry (price variable) to the total price for all items
-            receipt += item.getVariant() + " " + item.getName() + "     " + quantity + " £" + price + "     \n";
+            receipt += String.format("%-" + 30 + "s", String.format("%-19s", item.getVariant() + " " +item.getName()) + String.format("%3d £%.2f", quantity, price)) + "\n";
         }
+
+
 
         receipt += "                            \n"
                 + "----------------------------\n"
-                + "Total                 £" + total + "\n"
+                + "Total                  £" + String.format("%.2f", total) + "\n\n"
                 + "         Thank you\n"
                 + "      for your order!       \n\n";
 
@@ -88,5 +90,10 @@ public class ExtensionExercise2 {
 
     public Map<Inventory, Integer> getInventoryMap() {
         return inventoryMap;
+    }
+
+    public static void main(String[] args) {
+        ExtensionExercise2 extensionExercise2 = new ExtensionExercise2();
+        extensionExercise2.returnReceipt();
     }
 }
