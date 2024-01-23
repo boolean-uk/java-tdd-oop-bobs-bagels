@@ -26,10 +26,10 @@ public class BobsBagelsShopTest {
         Assertions.assertEquals(
                 """
                         Bob's Bagels
-                        SKU\t\tPrice\tName\tVariant\tAmount
+                        Amount\tSKU\t\tPrice\tName\tVariant
                         --------------------------------------
-                        BGLO\t0.49\tBagel\tOnion\t100
-                        BGLP\t0.39\tBagel\tPlain\t100
+                        100\t\tBGLO\t0.49\tBagel\tOnion
+                        100\t\tBGLP\t0.39\tBagel\tPlain
                         """, shop2.showInventory());
     }
 }
