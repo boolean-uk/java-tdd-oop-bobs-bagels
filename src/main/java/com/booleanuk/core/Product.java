@@ -5,4 +5,11 @@ public interface Product {
     String getName();
     String getType();
     double getPrice();
+    default boolean equals(Product otherProduct){
+        return otherProduct.getSKU().equals(getSKU());
+    }
+
+    default boolean equals(String SKU){
+        return SKU.equals(this.getSKU());
+    }
 }

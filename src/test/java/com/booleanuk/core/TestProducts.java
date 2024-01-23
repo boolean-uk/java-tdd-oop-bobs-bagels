@@ -20,6 +20,7 @@ public class TestProducts {
         Product p12 = new Filling("FILX");
         Product p13 = new Filling("FILS");
         Product p14 = new Filling("FILH");
+        Product p14_ = new Filling("FILH");
 
         Assertions.assertEquals(0.49, p1.getPrice());
         Assertions.assertEquals(0.39, p2.getPrice());
@@ -35,6 +36,7 @@ public class TestProducts {
         Assertions.assertEquals("Cream Cheese", p12.getName());
         Assertions.assertEquals("Filling", p13.getType());
         Assertions.assertEquals("Ham", p14.getName());
+        Assertions.assertTrue(p14.equals(p14_));
     }
 
     @Test
@@ -43,7 +45,7 @@ public class TestProducts {
 
         try {
             new Bagel("HEHE");
-        } catch (IllegalStateException e){
+        } catch (IllegalArgumentException e){
             errorThrown = true;
         }
 

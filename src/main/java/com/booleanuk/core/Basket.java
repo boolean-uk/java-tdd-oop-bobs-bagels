@@ -60,11 +60,11 @@ public class Basket {
                     } else if (SKU.startsWith("F")){
                         product = new Filling(SKU);
                     } else {
-                        throw new IllegalStateException();
+                        throw new IllegalArgumentException();
                     }
                     products.put(product, 1);
 
-                } catch (IllegalStateException e) {
+                } catch (IllegalArgumentException e) {
                     System.out.println("This item is not on the menu.");
                     return false;
                 }
@@ -120,7 +120,7 @@ public class Basket {
 
     private Product getProduct(String SKU){
         for (Product product : products.keySet()){
-            if (product.getSKU().equals(SKU)) {
+            if (product.equals(SKU)) {
                 return product;
             }
         }
