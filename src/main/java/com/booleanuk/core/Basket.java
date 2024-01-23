@@ -1,5 +1,6 @@
 package com.booleanuk.core;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -37,6 +38,14 @@ public class Basket {
     }
 
     public double getTotalCost() {
-        return 30.30;
+        double totalCost = 0.0;
+
+        for(Bagel bagel : basket.keySet()) {
+            totalCost += bagel.price;
+        }
+
+        DecimalFormat decimalFormat = new DecimalFormat("#.##");
+
+        return Double.valueOf(decimalFormat.format(totalCost));
     }
 }
