@@ -15,4 +15,12 @@ public class Filling {
         this.sku = sku;
         this.price = price;
     }
+
+    public String getName() {
+        return this.name;
+    }
+
+    public double getPrice() {
+        return this.price;
+    }
 }
