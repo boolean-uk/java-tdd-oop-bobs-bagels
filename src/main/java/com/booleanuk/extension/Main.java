@@ -10,11 +10,13 @@ public class Main {
         Store newStore = new Store(inventory);
         Basket basket = new Basket();
 
-        newStore.addToBasket(basket, "BGLO");
-        newStore.addToBasket(basket, "BGLO");
+        basket.modifyCapacity(30);
+
         newStore.addToBasket(basket, "BGLP");
         newStore.addToBasket(basket, "BGLP");
-        newStore.addToBasket(basket, "FILC");
+        newStore.addToBasket(basket, "BGLP");
+        newStore.addToBasket(basket, "COFB");
+        newStore.addToBasket(basket, "COFB");
 
         Receipt receipt = new Receipt(basket, newStore);
 

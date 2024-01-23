@@ -7,15 +7,17 @@ import java.util.*;
 
 public class Receipt {
     private final Basket basket;
-    private StringBuilder sb;
+    private final Store store;
 
     public Receipt(Basket basket, Store store) {
         this.basket = basket;
+        this.store = store;
     }
 
     public StringBuilder generateReceipt() {
         SimpleDateFormat dateAndTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         List<Item> items = basket.getItems();
+        Discount discounts = new Discount(basket, store);
 
         StringBuilder receipt = new StringBuilder();
         receipt.append("\t~~~ Bob's Bagels ~~~\n\n\t").
@@ -43,7 +45,8 @@ public class Receipt {
         }
 
         receipt.append("\n----------------------------\n");
-        receipt.append("Total\t").append(String.format("\t\t\t\t£%.2f", basket.totalCost()));
+        receipt.append("Total\t").append(String.format("\t\t\t\t£%.2f", basket.totalCost())).append("\n");
+        receipt.append("Total after discounts\t").append(String.format("£%.2f", discounts.discountTotalCost()));
         receipt.append("\n\n\t\tThank you\n").append("\t for your order!");
 
         return receipt;

@@ -19,32 +19,44 @@ public class DiscountTest {
         store.addToBasket(basket, "BGLO");
         store.addToBasket(basket, "BGLO");
         store.addToBasket(basket, "BGLO");
-        store.addToBasket(basket, "BGLO");
-        store.addToBasket(basket, "BGLO");
-        store.addToBasket(basket, "BGLO");
-        store.addToBasket(basket, "BGLO");
-        store.addToBasket(basket, "BGLO");
-        store.addToBasket(basket, "BGLO");
-        store.addToBasket(basket, "BGLO");
-        store.addToBasket(basket, "BGLO");
-        store.addToBasket(basket, "BGLO");
-        store.addToBasket(basket, "BGLP");
-        store.addToBasket(basket, "BGLP");
-        store.addToBasket(basket, "BGLP");
-        store.addToBasket(basket, "BGLP");
-        store.addToBasket(basket, "BGLP");
-        store.addToBasket(basket, "BGLP");
-        store.addToBasket(basket, "BGLP");
-        store.addToBasket(basket, "BGLP");
-        store.addToBasket(basket, "BGLP");
-        store.addToBasket(basket, "BGLP");
-        store.addToBasket(basket, "BGLP");
-        store.addToBasket(basket, "BGLP");
-        store.addToBasket(basket, "BGLP");
-        store.addToBasket(basket, "BGLP");
         store.addToBasket(basket, "COFB");
         store.addToBasket(basket, "COFB");
 
-        Assertions.assertEquals(10.48, discount.discountTotalCost());
+        Assertions.assertEquals(2.99, discount.discountTotalCost());
+    }
+
+    @Test
+    public void checkingIfDiscountedPriceIsCorrectForBigOrder() {
+        StoreInventory inventory = new StoreInventory();
+        Store store = new Store(inventory);
+        Basket basket = new Basket();
+        Discount discount = new Discount(basket, store);
+
+        basket.modifyCapacity(30);
+
+        store.addToBasket(basket, "BGLP");
+        store.addToBasket(basket, "BGLP");
+        store.addToBasket(basket, "BGLP");
+        store.addToBasket(basket, "BGLP");
+        store.addToBasket(basket, "BGLP");
+        store.addToBasket(basket, "BGLP");
+        store.addToBasket(basket, "BGLP");
+        store.addToBasket(basket, "BGLP");
+        store.addToBasket(basket, "BGLP");
+        store.addToBasket(basket, "BGLP");
+        store.addToBasket(basket, "BGLP");
+        store.addToBasket(basket, "BGLP");
+        store.addToBasket(basket, "BGLO");
+        store.addToBasket(basket, "BGLO");
+        store.addToBasket(basket, "BGLO");
+        store.addToBasket(basket, "BGLO");
+        store.addToBasket(basket, "BGLO");
+        store.addToBasket(basket, "BGLO");
+        store.addToBasket(basket, "BGLO");
+        store.addToBasket(basket, "BGLO");
+        store.addToBasket(basket, "COFB");
+        store.addToBasket(basket, "COFB");
+
+        Assertions.assertEquals(8.98, discount.discountTotalCost());
     }
 }
