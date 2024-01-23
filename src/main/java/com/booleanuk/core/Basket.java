@@ -49,7 +49,7 @@ public class Basket {
     public boolean addItem(String item) {
 
         if(!inventory.getInventoryPriceList().containsKey(item)) {
-            System.out.println("Item is not in inventory");
+            System.out.println("Item \"" + item + "\" is not in inventory");
             return false;
         } else if(itemList.size() == basketCapacity) {
             System.out.println("Basket is full");

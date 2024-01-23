@@ -178,12 +178,13 @@ class BobsBagelsTest {
         basket.addItem("BGLP");
         basket.addItem("BGLP");
         basket.addItem("BGLP");
+        basket.addItem("BGLO");
         basket.addItem("BGLP");
         basket.addItem("BGLP");
-        basket.addItem("BGLP");
-//        basket.addItem("COFB");
-//        basket.addItem("FILB");
-
+        basket.addItem("COFB");
+        basket.addItem("COFB");
+        basket.addItem("COFB");
+        basket.addItem("FILB");
 
         String receipt = order.generateReceipt(basket.getItemList());
         System.out.println(receipt);
@@ -199,7 +200,7 @@ class BobsBagelsTest {
         Order order = new Order(inventory);
 
         String receipt = order.generateReceipt(basket.getItemList());
-
+//        System.out.println(receipt);
         Assertions.assertNotNull(receipt);
         Assertions.assertFalse(receipt.length() < 150);
         Assertions.assertFalse(receipt.length() > 155);
