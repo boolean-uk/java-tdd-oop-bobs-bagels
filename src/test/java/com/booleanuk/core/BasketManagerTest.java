@@ -20,7 +20,7 @@ public class BasketManagerTest {
         Assertions.assertEquals(0, b.getBasket().size());
         b.add(item_a);
         Assertions.assertEquals(1, b.getBasket().size());
-        Assertions.assertSame(item_a, b.getBasket().get(0));
+        Assertions.assertNotSame(item_a, b.getBasket().get(0));
     }
 
     @Test

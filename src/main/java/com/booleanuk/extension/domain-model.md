@@ -19,3 +19,4 @@
 | Member Variables      | Methods        | Return | Output  |
 |-----------------------|----------------|--------|---------|
 | basket: BasketManager | printReceipt() | void   | Sys.out |
+| inv: InventoryManager |                |        |         |
