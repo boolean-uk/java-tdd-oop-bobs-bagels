@@ -58,11 +58,11 @@ public class ReceiptTest {
         expectedReceipt += "\n";
         expectedReceipt += "-----------------------------------\n";
         expectedReceipt += "\n";
-        expectedReceipt += "Plain Bagel               1\n";
-        expectedReceipt += "with Bacon filling        1  £0.51\n";
+        expectedReceipt += "Plain Bagel               1  £0.39\n";
+        expectedReceipt += "with Bacon filling        1  £0.12\n";
+        expectedReceipt += "Everything Bagel          1  £0.49\n";
+        expectedReceipt += "with Cream Cheese filling 1  £0.12\n";
         expectedReceipt += "White Coffee              1  £1.19\n";
-        expectedReceipt += "Everything Bagel          1\n";
-        expectedReceipt += "with Cream Cheese filling 1  £0.61\n";
         expectedReceipt += "Black Coffee              1  £0.99\n";
         expectedReceipt += "\n";
         expectedReceipt += "-----------------------------------\n";
@@ -132,6 +132,7 @@ public class ReceiptTest {
         String itemStringBacon = "Bacon";
         Assertions.assertTrue(inventory.canItemBeOrdered(itemStringBacon));
         basket.addBagelFilling(plain1, new Filling(itemStringBacon, inventory.getSKU(itemStringBacon)));
+        basket.addBagelFilling(plain1, new Filling(itemStringBacon, inventory.getSKU(itemStringBacon)));
 
         String itemStringCream = "Cream Cheese";
         Assertions.assertTrue(inventory.canItemBeOrdered(itemStringBacon));
@@ -147,10 +148,10 @@ public class ReceiptTest {
         expectedReceipt += "\n";
         expectedReceipt += "-----------------------------------\n";
         expectedReceipt += "\n";
-        expectedReceipt += "Plain Bagel               3\n";
-        expectedReceipt += "with Bacon filling        1  £1.29\n";
-        expectedReceipt += "Everything Bagel          2\n";
-        expectedReceipt += "with Cream Cheese filling 1  £1.1\n";
+        expectedReceipt += "Plain Bagel               3  £1.17\n";
+        expectedReceipt += "with Bacon filling        2  £0.24\n";
+        expectedReceipt += "Everything Bagel          2  £0.98\n";
+        expectedReceipt += "with Cream Cheese filling 1  £0.12\n";
         expectedReceipt += "Black Coffee              2  £1.98\n";
         expectedReceipt += "\n";
         expectedReceipt += "-----------------------------------\n";

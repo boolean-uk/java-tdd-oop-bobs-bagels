@@ -100,50 +100,63 @@ public class Receipt {
     private String getBagelsWithFillingsForReceipt(Basket basket, Inventory inventory) {
         String returnString = "";
         List<String> countedItems = new ArrayList<>();
+        int amountOfItem;
+        double bagelPrice = 0;
+        double fillingPrice = 0;
+
         String bagelString = " Bagel";
         String fillingString = " filling";
         String with = "with ";
 
         for (Item item : basket.getBasket()) {
             if (item instanceof Bagel) {
-                returnString += item.getName();
-                returnString += bagelString;
-                returnString += insertSpaces(placeForItemAmount -
-                        (bagelString.length() + item.getName().length()));
-                returnString += basket.getAmountOfItemInBasket(item.getName());
+                if (!countedItems.contains(item.getName())) {
+                    countedItems.add(item.getName());
+                    returnString += item.getName();
+                    returnString += bagelString;
+                    returnString += insertSpaces(placeForItemAmount -
+                            (bagelString.length() + item.getName().length()));
+                    amountOfItem = basket.getAmountOfItemInBasket(item.getName());
+                    returnString += amountOfItem;
+
+                    bagelPrice = inventory.getPrice(item.getName()) * amountOfItem;
+                    returnString += "  £" + bagelPrice;
+                }
 
                 if (!((Bagel) item).getFillings().isEmpty()) {
                     for (String filling : ((Bagel) item).getFillings()) {
                         returnString += "\n" + with + filling + fillingString;
                         returnString += insertSpaces(placeForItemAmount -
                                 (with.length() + filling.length() + fillingString.length()));
-                        returnString += ((Bagel) item).getFillingAmount(filling);
-                        returnString += "  £" +
-                                (inventory.getPrice(filling) + inventory.getPrice(item.getName()));
+                        amountOfItem = ((Bagel) item).getFillingAmount(filling);
+                        returnString += amountOfItem;
+                        fillingPrice = inventory.getPrice(filling) * amountOfItem;
+                        returnString += "  £" + fillingPrice;
+                        returnString += "\n";
                     }
-                } else {
-                    returnString += "  £" + inventory.getPrice(item.getName());
                 }
             }
-            returnString += "\n";
         }
         return returnString;
     }
 
     private String getCoffeesForReceipt(Basket basket, Inventory inventory) {
         String returnString = "";
+        List<String> countedItems = new ArrayList<>();
+        int coffeeAmount;
 
-        List<String> addedItems = new ArrayList<>();
         String coffeeItem = " Coffee";
 
         for (Item item : basket.getBasket()) {
-            if (item instanceof Coffee) {
+            if (item instanceof Coffee && !countedItems.contains(item.getName())) {
+                countedItems.add(item.getName());
                 returnString += item.getName();
                 returnString += coffeeItem;
                 returnString += insertSpaces(placeForItemAmount -
                         (coffeeItem.length() + item.getName().length()));
-                returnString += basket.getAmountOfItemInBasket(item.getName());
-                returnString += "  £" + inventory.getPrice(item.getName());
+                coffeeAmount = basket.getAmountOfItemInBasket(item.getName());
+                returnString += coffeeAmount;
+                returnString += "  £" + (inventory.getPrice(item.getName()) * coffeeAmount);
                 returnString += "\n";
             }
         }
