@@ -32,7 +32,7 @@ public class Product {
         return this.variant;
     }
 
-    public String toString() {
-        return "This " + getItemName() + " with SKU " + getSku() + " costs " + getPrice();
+    public String toString(){
+        return this.sku;
     }
 }

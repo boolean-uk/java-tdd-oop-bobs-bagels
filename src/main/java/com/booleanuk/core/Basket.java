@@ -1,6 +1,7 @@
 package com.booleanuk.core;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
 
@@ -74,7 +75,6 @@ public class Basket {
         String formattedDoubleString = String.format("%.2f", total);
         return Double.parseDouble(formattedDoubleString);
     }
-
 
     public double setTotal(){
         return this.total = 0;
