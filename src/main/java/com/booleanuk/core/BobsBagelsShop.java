@@ -26,8 +26,14 @@ public class BobsBagelsShop {
         return this.inventory;
     }
 
-    public void setInventory(HashMap<Item, Integer> newInventory) {
-        this.inventory = newInventory;
+    public void removeFromInventory(Item item) {
+        int newAmount = this.getInventory().get(item) - 1;
+        this.inventory.replace(item, newAmount);
+    }
+
+    public void addToInventory(Item item) {
+        int newAmount = this.getInventory().get(item) + 1;
+        this.inventory.replace(item, newAmount);
     }
 
     public BobsBagelsShop() {

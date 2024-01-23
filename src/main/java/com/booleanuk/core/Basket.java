@@ -35,9 +35,7 @@ public class Basket {
             else {
                 this.basketContent.put(item, 1);
             }
-            HashMap<Item, Integer> tempInventory = this.shop.getInventory();
-            tempInventory.replace(item, tempInventory.get(item) - 1);
-            this.shop.setInventory(tempInventory);
+            this.shop.removeFromInventory(item);
             return "Item " + item.getSku() + " added to basket.";
         }
     }
@@ -50,9 +48,7 @@ public class Basket {
             else {
                 this.basketContent.replace(item, this.basketContent.get(item) - 1);
             }
-            HashMap<Item, Integer> tempInventory = this.shop.getInventory();
-            tempInventory.replace(item, tempInventory.get(item) + 1);
-            this.shop.setInventory(tempInventory);
+            this.shop.addToInventory(item);
             return "Item " + item.getSku() + " removed from basket.";
         }
         else {
