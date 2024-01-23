@@ -23,4 +23,8 @@ public class Filling {
     public double getPrice() {
         return this.price;
     }
+
+    public String getSku() {
+        return this.sku;
+    }
 }

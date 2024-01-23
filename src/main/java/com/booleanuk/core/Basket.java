@@ -15,7 +15,7 @@ public class Basket {
     }
 
     public boolean addBagel(Bagel bagel) {
-        if(inventory.isBagelInInventory(bagel)) {
+        if(inventory.isBagelInInventory(bagel.getSku())) {
             if (currentIndex < maxCapacity) {
                 basket.add(bagel);
                 currentIndex++;
@@ -53,7 +53,7 @@ public class Basket {
     public boolean addFillingToBagel(Bagel bagel, Filling filling) {
         boolean fillingAdded = false;
 
-        if(inventory.isFillingInInventory(filling)) {
+        if(inventory.isFillingInInventory(filling.getSku())) {
             for (Bagel b : basket) {
                 if (bagel.equals(b)) {
                     fillingAdded = b.addFilling(filling);

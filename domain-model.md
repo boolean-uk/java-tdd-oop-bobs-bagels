@@ -183,3 +183,21 @@ Class Inventory
 | ArrayList<Coffee> allCoffees   |                        |                                |               |
 |                                | isFillingInInventory() | if filling is in inventory     | true          |
 |                                |                        | if filling is not in inventory | false         |
+
+Class Bagel
+
+| Class vars                  | Methods  | Scenario | Return/Result |
+|-----------------------------|----------|----------|---------------|
+| String name                 | getSku() |          |               |
+| String sku                  |          |          |               |
+| String uniqueID             |          |          |               |
+| double price                |          |          |               |
+| ArrayList<Filling> fillings |          |          |               |
+
+Class Filling
+
+| Class vars   | Methods  | Scenario | Return/Result |
+|--------------|----------|----------|---------------|
+| String name  | getSku() |          |               |
+| String sku   |          |          |               |
+| double price |          |          |               |

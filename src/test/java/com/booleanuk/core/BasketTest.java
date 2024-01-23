@@ -160,7 +160,7 @@ public class BasketTest {
         Inventory inventory = new Inventory();
         Basket basket = new Basket(inventory);
 
-        Bagel bagel = new Bagel("Sesame", "1234", 10.10);
+        Bagel bagel = new Bagel("Onion", "BGLO", 0.49);
         boolean addedBagelThatIsInInventory = basket.addBagel(bagel);
         Assertions.assertTrue(addedBagelThatIsInInventory);
 

@@ -24,11 +24,17 @@ public class Inventory {
         return this.allFillings;
     }
 
-    public boolean isBagelInInventory(Bagel bagel) {
+    public boolean isBagelInInventory(String sku) {
+        //if()
         return true;
     }
 
-    public boolean isFillingInInventory(Filling filling) {
-        return true;
+    public boolean isFillingInInventory(String sku) {
+        for(Filling filling : allFillings) {
+            if (filling.getSku().equals(sku)) {
+                return true;
+            }
+        }
+        return false;
     }
 }
