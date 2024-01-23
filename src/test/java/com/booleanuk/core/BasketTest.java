@@ -109,4 +109,37 @@ public class BasketTest {
         Assertions.assertFalse(addedFilling);
     }
 
+    //User story 9
+    @Test
+    public void assertPriceOfEveryFilling() {
+        Inventory inventory = new Inventory();
+
+        ArrayList<Filling> returnedFillings = inventory.getAllFillings();
+
+        for(Filling filling : returnedFillings) {
+            switch (filling.getName()) {
+                case "Bacon":
+                    Assertions.assertEquals(filling.getPrice(), 0.12);
+                    break;
+                case "Egg":
+                    Assertions.assertEquals(filling.getPrice(), 0.12);
+                    break;
+                case "Cheese":
+                    Assertions.assertEquals(filling.getPrice(), 0.12);
+                    break;
+                case "Cream Cheese":
+                    Assertions.assertEquals(filling.getPrice(), 0.12);
+                    break;
+                case "Smoked Salmon":
+                    Assertions.assertEquals(filling.getPrice(), 0.12);
+                    break;
+                case "Ham":
+                    Assertions.assertEquals(filling.getPrice(), 0.12);
+                    break;
+                default:
+                    Assertions.assertEquals(1, 2);
+                    break;
+            }
+        }
+    }
 }

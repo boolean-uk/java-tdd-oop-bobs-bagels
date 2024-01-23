@@ -17,21 +17,21 @@ Class Basket
 
 Class Bagel
 
-| Class vars                  | Methods                                            | Scenario | Return/Result |
-|-----------------------------|----------------------------------------------------|----------|---------------|
-| String name                 | Bagel(String name, String productID, double price) |          |               |
-| String productID            |                                                    |          |               |
-| String uniqueID             |                                                    |          |               |
-| double price                |                                                    |          |               |
-| ArrayList<Filling> fillings |                                                    |          |               |
+| Class vars                  | Methods                                      | Scenario | Return/Result |
+|-----------------------------|----------------------------------------------|----------|---------------|
+| String name                 | Bagel(String name, String sku, double price) |          |               |
+| String sku                  |                                              |          |               |
+| String uniqueID             |                                              |          |               |
+| double price                |                                              |          |               |
+| ArrayList<Filling> fillings |                                              |          |               |
 
 Class Filling
 
-| Class vars       | Methods                                              | Scenario | Return/Result |
-|------------------|------------------------------------------------------|----------|---------------|
-| String name      | Filling(String name, String productID, double price) |          |               |
-| String productID |                                                      |          |               |
-| double price     |                                                      |          |               |
+| Class vars   | Methods                                        | Scenario | Return/Result |
+|--------------|------------------------------------------------|----------|---------------|
+| String name  | Filling(String name, String sku)               |          |               |
+| String sku   | Filling(String name, String sku, double price) |          |               |
+| double price |                                                |          |               |
 
 
 ```
@@ -112,7 +112,7 @@ Class Bagel
 | Class vars                  | Methods    | Scenario | Return/Result |
 |-----------------------------|------------|----------|---------------|
 | String name                 | getPrice() |          | double        |
-| String productID            |            |          |               |
+| String sku                  |            |          |               |
 | String uniqueID             |            |          |               |
 | double price                |            |          |               |
 | ArrayList<Filling> fillings |            |          |               |
@@ -138,7 +138,7 @@ Class Bagel
 | Class vars                  | Methods      | Scenario             | Return/Result |
 |-----------------------------|--------------|----------------------|---------------|
 | String name                 | addFilling() | if filling was added | true          |
-| String productID            |              |                      |               |
+| String sku                  |              |                      |               |
 | String uniqueID             |              |                      |               |
 | double price                |              |                      |               |
 | ArrayList<Filling> fillings |              |                      |               |
@@ -151,29 +151,20 @@ I'd like to know the cost of each filling before I add it to my bagel order.
 ```
 Class Inventory
 
-| Class vars                            | Methods                    | Scenario | Return/Result |
-|---------------------------------------|----------------------------|----------|---------------|
-| HashMap<Bagel, Integer> allBagels     | getAvailableFillingsInfo() |          |               |
-| HashMap<Filling, Integer> allFillings |                            |          |               |
-| HashMap<Coffee, Integer> allCoffees   |                            |          |               |
+| Class vars                     | Methods          | Scenario                         | Return/Result |
+|--------------------------------|------------------|----------------------------------|---------------|
+| ArrayList<Bagel> allBagels     | getAllFillings() | get every filling name and price | ArrayList     |
+| ArrayList<Filling> allFillings |                  |                                  |               |
+| ArrayList<Coffee> allCoffees   |                  |                                  |               |
 
 
 Class Filling
 
-| Class vars       | Methods    | Scenario | Return/Result |
-|------------------|------------|----------|---------------|
-| String name      | getPrice() |          | double        |
-| String productID |            |          |               |
-| double price     |            |          |               |
-
-Class Basket
-
-| Class vars              | Methods                     | Scenario | Return/Result |
-|-------------------------|-----------------------------|----------|---------------|
-| ArrayList<Bagel> basket | Basket(Inventory inventory) |          |               |
-| int maxCapacity         |                             |          |               |
-| int currentIndex        |                             |          |               |
-| Inventory inventory     |                             |          |               |
+| Class vars   | Methods    | Scenario | Return/Result |
+|--------------|------------|----------|---------------|
+| String name  | getPrice() |          | double        |
+| String sku   | getName()  |          | String        |
+| double price |            |          |               |
 
 
 ```
@@ -184,8 +175,9 @@ I want customers to only be able to order things that we stock in our inventory.
 ```
 Class Inventory
 
-| Class vars                            | Methods             | Scenario | Return/Result |
-|---------------------------------------|---------------------|----------|---------------|
-| HashMap<Bagel, Integer> allBagels     | getAvailableItems() |          |               |
-| HashMap<Filling, Integer> allFillings |                     |          |               |
-| HashMap<Coffee, Integer> allCoffees   |                     |          |               |
+| Class vars                     | Methods                      | Scenario                    | Return/Result |
+|--------------------------------|------------------------------|-----------------------------|---------------|
+| ArrayList<Bagel> allBagels     | isItemInInventory(Item item) | if item is in inventory     | true          |
+| ArrayList<Filling> allFillings |                              | if item is not in inventory | false         |
+| ArrayList<Coffee> allCoffees   |                              |                             |               |
+| ArrayList<Item> allItems       |                              |                             |               |
