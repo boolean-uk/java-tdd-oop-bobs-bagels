@@ -55,4 +55,14 @@ public class ItemTest {
         Assertions.assertEquals(3, bglp.getFillings().size());
     }
 
+    @Test
+    public void testRemoveFillingFromBagel() {
+        Bagel bglp = new Bagel("BGLP","Plain", 0.39);
+        Filling filx = new Filling("FILX", "Cream Cheese", 0.12);
+        bglp.addFilling(filx);
+        bglp.removeFilling(filx);
+        Assertions.assertFalse(bglp.getFillings().contains(filx));
+        Assertions.assertEquals(0, bglp.getFillings().size());
+    }
+
 }
