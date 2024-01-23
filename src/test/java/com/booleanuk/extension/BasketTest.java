@@ -290,4 +290,22 @@ class BasketTest {
         Assertions.assertEquals(2.49+2.49+0.24, basket.getCostOfBasket());
 
     }
+
+    @Test
+    public void testCoffeeAndBagelDiscount (){
+        Basket basket = new Basket();
+        Basket.setMaxSize(100);
+        Bagel bagelplain = new  Bagel("BGLP", 0.39, "Plain");
+        Bagel bagelOnion = new  Bagel("BGLO", 0.49, "Onion");
+        Coffee coffee = new Coffee("COFB", 0.99, "Black");
+
+        //2 Bagels and one Coffee
+        basket.add(bagelplain);
+        basket.add(bagelOnion);
+
+        basket.add(coffee);
+
+        Assertions.assertEquals(0.49+1.25, basket.getCostOfBasket());
+
+    }
 }
