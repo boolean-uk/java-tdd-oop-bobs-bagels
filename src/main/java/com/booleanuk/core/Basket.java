@@ -30,4 +30,8 @@ public class Basket {
         }
         return false;
     }
+
+    public int extendCapacityOfBasket(int additionalIndices) {
+        return maxCapacity + additionalIndices;
+    }
 }
