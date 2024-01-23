@@ -25,4 +25,14 @@ public class ItemTest {
         Assertions.assertEquals(1.29, cofl.getPrice());
         Assertions.assertEquals(0.12, filx.getPrice());
     }
+
+    @Test
+    public void testAddFillingToBagel() {
+        Item bglp = new Bagel("BGLP","Plain", 0.39);
+        Item filx = new Filling("FILX", "Cream Cheese", 0.12);
+        bglp.addFilling(filx);
+        Assertions.assertTrue(bglp.getFillings().contains(filx));
+        Assertions.assertEquals(1, bglp.getFillings().size());
+    }
+
 }
