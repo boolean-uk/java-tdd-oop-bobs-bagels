@@ -11,6 +11,14 @@ public class Store {
     private int basketCapacity;
     private String name;
 
+    public Store(int basketCapacity, Inventory inventory, String name) {
+        baskets = new HashMap<>();
+        this.basketCapacity = basketCapacity;
+        this.inventory = inventory;
+        this.name = name;
+    }
+
+    //Specifically for Bob's Bagels
     public Store() {
         baskets = new HashMap<>();
         basketCapacity = 3;
@@ -91,6 +99,7 @@ public class Store {
 
         Basket basket = baskets.get(basketId);
 
+        //initialise product data maps
         for(Item item: basket.getItems()) {
             if (item.containsOtherItems()) {
                 for (Item containedItem : item.getContainedItems()) {
@@ -116,8 +125,9 @@ public class Store {
 
         }
 
-        ArrayList<Item> notInBundles = new ArrayList<>(basket.getItems());
+        ArrayList<Item> itemsWithNoDiscounts = new ArrayList<>(basket.getItems());
 
+        //add data for products with active bundle discounts and remove them from itemsWithNoDiscounts
         for(Map.Entry<Item, Integer> e: quantities.entrySet()) {
             Item item = e.getKey();
             int quantity = e.getValue();
@@ -126,9 +136,9 @@ public class Store {
                 if(bundleCost > 0) {
                     prices.put(item, prices.get(item) + bundleCost);
                     totalCost += bundleCost;
-                    int noOfItemsToRemove = quantity - inventory.getRemainderAfterBundle(item, quantity);
+                    int noOfItemsToRemove = quantity - inventory.getNoOfItemsRemaindingAfterBundleDiscounts(item, quantity);
                     for (int i = 0; i < noOfItemsToRemove; i++) {
-                        notInBundles.remove(item);
+                        itemsWithNoDiscounts.remove(item);
                     }
                     double discount = noOfItemsToRemove * getCostOfItem(item) - (discounts.get(item) + bundleCost);
                     discounts.put(item, discount);
@@ -137,15 +147,16 @@ public class Store {
             }
         }
 
+        //add data for products with active combo discounts and remove them from itemsWithNoDiscounts
         for(ArrayList<Item> comboItems: inventory.getComboDiscounts().keySet()) {
-            double comboPrice = 0;
+            double comboPrice;
 
-            while(notInBundles.containsAll(comboItems)) {
+            while(itemsWithNoDiscounts.containsAll(comboItems)) {
                 comboPrice = inventory.getComboDiscounts().get(comboItems);
                 double totalOriginalCost = 0;
                 Item lastItem = null;
                 for(Item comboItem: comboItems) {
-                    notInBundles.remove(comboItem);
+                    itemsWithNoDiscounts.remove(comboItem);
                     int quantity = quantities.remove(comboItem);
                     quantities.put(comboItem, quantity);
                     lastItem = comboItem;
@@ -161,10 +172,12 @@ public class Store {
             }
         }
 
-        for(Item item: notInBundles) {
+        //add price for all items that are not part of discount or contained in other items
+        for(Item item: itemsWithNoDiscounts) {
             prices.put(item, prices.get(item) + getCostOfItem(item));
             totalCost += getCostOfItem(item);
         }
+
         if(withDiscountData) {
             return new Receipt(prices, quantities, discounts, totalCost, totalDiscounts, this.name, 28);
         } else {

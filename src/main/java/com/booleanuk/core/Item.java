@@ -29,13 +29,10 @@ public class Item {
 
     @Override
     public boolean equals(Object obj) {
-        if(!(obj instanceof Item)) {
+        if(!(obj instanceof Item other)) {
             return false;
         }
-        Item other = (Item) obj;
-//        if(this.sku != null) {
-//            return this.sku.equals(other.sku);
-//        }
+
         return this.name.equals(other.name);
     }
 

@@ -7,11 +7,20 @@ public class Inventory {
     private HashMap<Item, String> skuCodes;
     private HashMap<String, ArrayList<Discount>> bundleDiscounts;
     private HashMap<ArrayList<Item>, Double> comboDiscounts;
+
+    public Inventory(HashMap<String, Double> prices, HashMap<Item, String> skuCodes, HashMap<String, ArrayList<Discount>> bundleDiscounts, HashMap<ArrayList<Item>, Double> comboDiscounts) {
+        this.prices = prices;
+        this.skuCodes = skuCodes;
+        this.bundleDiscounts = bundleDiscounts;
+        this.comboDiscounts = comboDiscounts;
+    }
+
+    //Specifically for Bob's Bagels
     public Inventory() {
-        initializePrices();
-        initializeCodes();
-        initializeBundleDiscounts();
-        initializeComboDiscounts();
+        initializeBobsBagelsPrices();
+        initializeBobsBagelsCodes();
+        initializeBobsBagelsBundleDiscounts();
+        initializeBobsBagelsComboDiscounts();
     }
 
     public double getCostOfItem(Item item) {
@@ -50,11 +59,11 @@ public class Inventory {
             }
         }
 
-        //See if discounts
+        //Check if any bundle discounts are present
         for(Map.Entry<Item, Integer> e: bundlesItems.entrySet()) {
             cost += getCostForBundle(e.getKey(), e.getValue());
 
-            int itemsLeft = getRemainderAfterBundle(e.getKey(), e.getValue());
+            int itemsLeft = getNoOfItemsRemaindingAfterBundleDiscounts(e.getKey(), e.getValue());
             for (int i = 0; i < itemsLeft; i++ ) {
                 notInBundlesItems.add(e.getKey());
             }
@@ -93,7 +102,7 @@ public class Inventory {
         return cost;
     }
 
-    public int getRemainderAfterBundle(Item item, int quantity) {
+    public int getNoOfItemsRemaindingAfterBundleDiscounts(Item item, int quantity) {
         String sku = skuCodes.get(item);
         for(Discount discount: bundleDiscounts.get(sku)) {
             while(quantity-discount.getQuantity() >= 0) {
@@ -104,7 +113,25 @@ public class Inventory {
         return quantity;
     }
 
-    private void initializePrices() {
+    public boolean hasBundleDiscountForItem(Item item) {
+        return bundleDiscounts.containsKey(skuCodes.get(item));
+    }
+
+    public boolean hasItem(Item item) {
+
+        return skuCodes.containsKey(item);
+    }
+
+    public HashMap<ArrayList<Item>, Double> getComboDiscounts() {
+        return new HashMap<>(comboDiscounts);
+    }
+
+
+/*
+    BOB'S BAGELS SPECIFIC CODE BELOW
+*/
+
+    private void initializeBobsBagelsPrices() {
         prices = new HashMap<>();
         prices.put("BGLO", 0.49);
         prices.put("BGLP", 0.39);
@@ -123,7 +150,7 @@ public class Inventory {
 
     }
 
-    private void initializeCodes() {
+    private void initializeBobsBagelsCodes() {
         skuCodes = new HashMap<>();
         skuCodes.put(new Bagel("ONION"), "BGLO");
         skuCodes.put(new Bagel("PLAIN"), "BGLP");
@@ -144,21 +171,20 @@ public class Inventory {
 
     }
 
-    private void initializeBundleDiscounts() {
+    private void initializeBobsBagelsBundleDiscounts() {
         bundleDiscounts = new HashMap<>();
 
         ArrayList<Discount> discountData = new ArrayList<>(Arrays.asList(new Discount(2.49, 6), new Discount(3.99, 12)));
-        // Sort descending in quantity
-        discountData.sort((b, a) -> { return Integer.compare(a.getQuantity(), b.getQuantity()); });
+        // Sort descending according to quantity
+        discountData.sort((b, a) -> Integer.compare(a.getQuantity(), b.getQuantity()));
 
         bundleDiscounts.put("BGLO", discountData);
         bundleDiscounts.put("BGLP", discountData);
         bundleDiscounts.put("BGLE", discountData);
         bundleDiscounts.put("BGLS", discountData);
-
     }
 
-    private void initializeComboDiscounts() {
+    private void initializeBobsBagelsComboDiscounts() {
         comboDiscounts = new HashMap<>();
         ArrayList<Item> discountData;
         Coffee coffee = new Coffee("Black");
@@ -170,18 +196,5 @@ public class Inventory {
             }
         }
 
-    }
-
-    public boolean hasBundleDiscountForItem(Item item) {
-        return bundleDiscounts.containsKey(skuCodes.get(item));
-    }
-
-    public boolean hasItem(Item item) {
-
-        return skuCodes.containsKey(item);
-    }
-
-    public HashMap<ArrayList<Item>, Double> getComboDiscounts() {
-        return new HashMap<>(comboDiscounts);
     }
 }
