@@ -99,4 +99,14 @@ public class BasketTest {
         Assertions.assertTrue(addedFilling);
     }
 
+    @Test
+    public void shouldReturnFalseIfFillingWasNotAdded() {
+        Inventory inventory = new Inventory();
+        Basket basket = new Basket(inventory);
+        Bagel bagel = new Bagel("Sesame", "1234", 10.10);
+        Filling filling = new Filling("Cheese", "4321", 2.30);
+        boolean addedFilling = basket.addFillingToBagel(bagel, filling);
+        Assertions.assertFalse(addedFilling);
+    }
+
 }
