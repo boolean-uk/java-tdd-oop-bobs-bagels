@@ -22,4 +22,8 @@ public class Basket {
         }
         return false;
     }
+
+    public boolean removeBagel(Bagel bagel) {
+        return true;
+    }
 }
