@@ -135,3 +135,7 @@ I want customers to only be able to order things that we stock in our inventory.
 ### Class diagram
 
 ![img.png](img.png)
+
+#### New class diagram
+
+![img_1.png](img_1.png)
