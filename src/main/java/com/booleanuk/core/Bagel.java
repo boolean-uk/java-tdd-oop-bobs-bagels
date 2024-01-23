@@ -52,6 +52,10 @@ public class Bagel implements Item {
         }
     }
 
+    public void removeFilling(Filling filling) {
+        this.fillings.remove(filling);
+    }
+
     public ArrayList<Filling> getFillings() {
         return this.fillings;
     }
