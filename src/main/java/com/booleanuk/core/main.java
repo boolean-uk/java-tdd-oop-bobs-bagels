@@ -5,32 +5,70 @@ import java.util.Scanner;
 
 public class main {
     public static void main(String[] args) {
-        Store store = new Store(5);
+        Store store = new Store(15);
         Customer customer = new Customer("Espen", store);
         Basket basket = new Basket(customer);
+        /*
+        customer.order("BGLE");
+        customer.order("BGLE");
+        customer.order("BGLE");
+        customer.order("BGLE");
+
+        customer.order("BGLS");
+        customer.order("BGLS");
+        customer.order("BGLS");
+
+        customer.order("COFL");
+        customer.order("COFW");
+
+        customer.finishedOrdering();
+        customer.calculateCostBeforeOrder();
+        customer.confirmFinished();
+*/
+        /*
         ArrayList<Item> items = basket.getItems();
-        items.add(new Filling("FILB", 0.12, "Filling", "Bacon"));
-        items.add(new Bagel("BGLS", 0.49, "Bagel", "Sesame"));
-        items.add(new Coffee("COFB", 0.99, "Coffee", "Black"));
-        items.add(new Bagel("BGLS", 0.49, "Bagel", "Sesame"));
-        items.add(new Bagel("BGLS", 0.49, "Bagel", "Sesame"));
-        items.add(new Coffee("COFC", 1.29, "Coffee", "Cappuccino"));
-        items.add(new Coffee("COFC", 1.29, "Coffee", "Cappuccino"));
-        items.add(new Bagel("BGLS", 0.49, "Bagel", "Sesame"));
         items.add(new Bagel("BGLE", 0.49, "Bagel", "Everything"));
+        items.add(new Bagel("BGLE", 0.49, "Bagel", "Everything"));
+        items.add(new Bagel("BGLE", 0.49, "Bagel", "Everything"));
+
         items.add(new Bagel("BGLS", 0.49, "Bagel", "Sesame"));
         items.add(new Bagel("BGLS", 0.49, "Bagel", "Sesame"));
+        items.add(new Bagel("BGLS", 0.49, "Bagel", "Sesame"));
+        items.add(new Bagel("BGLS", 0.49, "Bagel", "Sesame"));
+        items.add(new Bagel("BGLS", 0.49, "Bagel", "Sesame"));
+        items.add(new Bagel("BGLS", 0.49, "Bagel", "Sesame"));
+        items.add(new Bagel("BGLS", 0.49, "Bagel", "Sesame"));
+        items.add(new Bagel("BGLS", 0.49, "Bagel", "Sesame"));
+        items.add(new Bagel("BGLS", 0.49, "Bagel", "Sesame"));
+        items.add(new Bagel("BGLS", 0.49, "Bagel", "Sesame"));
+        items.add(new Bagel("BGLS", 0.49, "Bagel", "Sesame"));
+        items.add(new Bagel("BGLS", 0.49, "Bagel", "Sesame"));
+
+        items.add(new Coffee("COFB", 0.99, "Coffee", "Black"));
+
+        items.add(new Coffee("COFC", 1.29, "Coffee", "Cappuccino"));
+
         items.add(new Coffee("COFL", 1.29, "Coffee", "Latte"));
-        items.add(new Bagel("BGLS", 0.49, "Bagel", "Sesame"));
+        items.add(new Coffee("COFL", 1.29, "Coffee", "Latte"));
+
+        items.add(new Coffee("COFW", 1.19, "Coffee", "White"));
         items.add(new Coffee("COFW", 1.19, "Coffee", "White"));
 
-        System.out.println(basket.applyDiscounts());
-        //main main = new main();
-        //main.start();
+        items.add(new Filling("FILB", 0.12, "Filling", "Bacon"));
+        items.add(new Filling("FILB", 0.12, "Filling", "Bacon"));
+        items.add(new Filling("FILB", 0.12, "Filling", "Bacon"));
+*/
+
+
+    //    System.out.println(basket.applyDiscounts());
+        main main = new main();
+        main.start();
+
+
     }
 
     public void start() {
-        Store store = new Store(5);
+        Store store = new Store(15);
         System.out.println("Write name of customer and press enter:");
         Scanner scanner = new Scanner(System.in);
         String input = scanner.nextLine();
@@ -56,7 +94,6 @@ public class main {
                     break;
                 }
                 case "3": {
-                    customer.finishedOrdering();
                     customer.calculateCostBeforeOrder();
                     input = customer.confirmFinished();
                     break;
@@ -74,7 +111,7 @@ public class main {
                     break;
                 }
                 case "7": {
-                    customer.showInventory();
+                    System.out.println(customer.getInventory().showInventory());
                     break;
                 }
                 case "0": {
@@ -85,6 +122,5 @@ public class main {
                 }
             }
         }
-        System.out.println("Thank you for shopping with us in Bob's Bagels\nGoodbye");
     }
 }

@@ -39,8 +39,21 @@ public class Store {
     }
 
     private boolean addItemInStock(String sku, double cost, String name, String variant) {
-        itemsInStock.add(new Item(sku, cost, name, variant));
-        return true;
+        switch (name) {
+            case "Bagel" -> {
+                itemsInStock.add(new Bagel(sku, cost, name, variant));
+                return true;
+            }
+            case "Coffee" -> {
+                itemsInStock.add(new Coffee(sku, cost, name, variant));
+                return true;
+            }
+            case "Filling" -> {
+                itemsInStock.add(new Filling(sku, cost, name, variant));
+                return true;
+            }
+        }
+        return false;
     }
 
     private boolean deleteItemFromStock(String sku) {
@@ -146,7 +159,7 @@ public class Store {
                     }
                     System.out.println("Provide Variant");
                     variant = scanner.nextLine();
-                    itemsInStock.add(new Item(sku, cost, name, variant));
+                    addItemInStock(sku, cost, name, variant);
                     System.out.println("A new item was added to stock!");
                     break;
                 }

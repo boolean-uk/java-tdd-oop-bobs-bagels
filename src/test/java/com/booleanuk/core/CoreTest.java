@@ -152,21 +152,21 @@ class CoreTest {
     public void calculateTotalCostOfTwoItemsTest() {
         ArrayList<Item> fillItems = new ArrayList<Item>() {{
             add(new Bagel("BGLO", 0.49, "Bagel", "Onion"));
-            add(new Coffee("COFB", 0.99, "Coffee", "Black"));
+            add(new Coffee("FILX", 0.12, "Filling", "Cream Cheese"));
         }};
         customer.getInventory().getItems().addAll(fillItems);
-        Assertions.assertEquals(1.48, customer.getInventory().calculateTotalCost());
+        Assertions.assertEquals(0.61, customer.getInventory().calculateTotalCost());
     }
 
     @Test
     public void calculateCostOfThreeItemsFromCustomerTest() {
         ArrayList<Item> fillItems = new ArrayList<Item>() {{
-            add(new Bagel("BGLO", 0.49, "Bagel", "Onion"));
-            add(new Coffee("COFB", 0.99, "Coffee", "Black"));
+            add(new Bagel("COFW", 1.19, "Coffee", "White"));
+            add(new Coffee("COFC", 1.29, "Coffee", "Capuccino"));
             add(new Filling("FILB", 0.12, "Filling", "Bacon"));
         }};
         customer.getInventory().getItems().addAll(fillItems);
-        Assertions.assertEquals(1.60, customer.calculateCostBeforeOrder());
+        Assertions.assertEquals(2.60, customer.calculateCostBeforeOrder());
     }
 
     @Test

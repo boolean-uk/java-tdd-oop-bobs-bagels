@@ -42,16 +42,20 @@ public class Customer {
         return this.inventory.calculateTotalCost();
     }
 
+    // Runs if basket contains a bagel
+    // Asks if user wants to add filling
+    // if yes, prints list of all fillings
+    // user orders filling by writing SKU of filling
     public Basket chooseFilling(Scanner scanner) {
-        System.out.println("We detected a bagel in your inventory\nWould you like to order a filling?");
+        System.out.println("A bagel has been added to your inventory\nWould you like to order a filling?");
         System.out.println("SKU \t Cost \t Name \t Variant");
-        for(Item item : inventory.getItems()) {
-            if(item.getInstance().toString().equals("Filling")) {
+        for(Item item : store.getItemsInStock()) {
+            if(item.getClass() == Filling.class) {
                 System.out.println(item);
             }
         }
         Item filling = store.findItemInList(scanner.nextLine());
-        if(filling != null) {
+        if(filling != null && filling.getClass()==Filling.class) {
             inventory.getItems().add(filling);
             System.out.println("Filling has been added! Thank you!");
         } else {
@@ -60,36 +64,37 @@ public class Customer {
         return inventory;
     }
 
+
+    /*
+    Tries to match the given SKU to an item in stock
+    Checks if basket is full
+    Checks if there were a match with stock
+    If match:
+        add the item to basket
+        if the item were a bagel, run chooseFilling()
+    return: updatedBasket
+     */
     public Basket order(String input) {
         Item item = store.findItemInList(input);
         if(inventory.getItems().size() >= store.getCapacity()) {
             System.out.println("Your basket is full");
         } else if(item != null) {
-            this.inventory.addItem(item);
-            System.out.println("This item has been added to your basket \n" + item.toString());
+            this.inventory.getItems().add(item);
+            if(item.getClass() == Bagel.class) {
+                chooseFilling(scanner);
+            } else {
+                System.out.println("This item has been added to your basket \n" + item.toString());
+            }
         } else {
             System.out.println("The item was not found");
         }
         return inventory;
     }
 
-    public Basket finishedOrdering() {
-        if(inventory.getItems().isEmpty()) {
-            return inventory;
-        }
-        boolean basketContainsBagel = false;
-        for(Item item : inventory.getItems()) {
-            if (item.getClass().toString().equals("Bagel")) {
-                basketContainsBagel = true;
-                break;
-            }
-        }
-        if(basketContainsBagel) {
-            chooseFilling(scanner);
-        }
-        return inventory;
-    }
-
+    /*
+    Checks if the given sku matches a item in Basket
+    Deletes item from Basket if item was found
+    */
     public String deleteItems(String sku) {
         for(Item item : this.inventory.getItems()) {
             if(item.getSKU().matches(sku)) {
@@ -100,13 +105,18 @@ public class Customer {
         }
         return "The item was not found, and could not be deleted";
     }
-
+    /*
+    MADE FOR TESTING IN MAIN
+    If input from user is 'y', print the receipt and exit program
+    If input is not 'y' or 'n', rerun the check
+     */
     public String confirmFinished() {
         String confirmation= "";
         System.out.println("Are you done shopping? (y/n)");
         String input = scanner.nextLine();
         if(input.equals("y")) {
             confirmation = "quit";
+            this.inventory.showReceipt();
         } else if(input.equals("n")) {
             confirmation = "continue";
         } else {
@@ -115,14 +125,4 @@ public class Customer {
         return confirmation;
     }
 
-    public void showInventory() {
-        if(!this.inventory.getItems().isEmpty()) {
-            System.out.println("SKU \t Cost \t Name \t Variant");
-            for(Item item : this.inventory.getItems()) {
-                System.out.println(item);
-            }
-        } else {
-            System.out.println("There are none items in your basket!");
-        }
-    }
 }

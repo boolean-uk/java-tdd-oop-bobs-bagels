@@ -1,6 +1,6 @@
 package com.booleanuk.core;
 
-public class Item {
+public abstract class Item {
 
     private final String SKU;
     private String name;
@@ -57,6 +57,6 @@ public class Item {
 
     @Override
     public String toString() {
-        return this.SKU + "\t" + String.format("%.2f", this.cost) + "\t" + this.name + "\t" + this.variant + "\n";
+        return this.SKU + "\t" + String.format("%.2f", this.cost) + "\t" + this.name + "\t" + this.variant;
     }
 }
