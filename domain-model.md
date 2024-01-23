@@ -9,11 +9,11 @@ I'd like to add a specific type of bagel to my basket.
 
 Class Basket
 
-| Class vars                                | Methods                                            | Scenario                        | Return/Result |
-|-------------------------------------------|----------------------------------------------------|---------------------------------|---------------|
-| HashMap<Bagel, ArrayList<Filling>> basket | addBagel(Bagel bagel, ArrayList<Filling> fillings) | if bagel is added to basket     | true          |
-| int maxCapacity                           |                                                    | if bagel is not added to basket | false         |
-|                                           |                                                    |                                 |               |
+| Class vars                                | Methods               | Scenario                        | Return/Result |
+|-------------------------------------------|-----------------------|---------------------------------|---------------|
+| HashMap<Bagel, ArrayList<Filling>> basket | addBagel(Bagel bagel) | if bagel is added to basket     | true          |
+| int maxCapacity                           |                       | if bagel is not added to basket | false         |
+| int currentIndex                          |                       |                                 |               |
 
 Class Bagel
 
@@ -46,6 +46,7 @@ Class Basket
 |-------------------------------------------|--------------------------|---------------------------------|---------------|
 | HashMap<Bagel, ArrayList<Filling>> basket | removeBagel(Bagel bagel) | if bagel is removed from basket | true          |
 | int maxCapacity                           |                          | if bagel is not in basket       | false         |
+| int currentIndex                          |                          |                                 |               |
 
 
 ```
@@ -70,6 +71,7 @@ Class Basket
 |-------------------------------------------|-----------------------------------------------|------------------------------|---------------|
 | HashMap<Bagel, ArrayList<Filling>> basket | extendCapacityOfBasket(int additionalIndices) | what is the new basket size? | int           |
 | int maxCapacity                           |                                               |                              |               |
+| int currentIndex                          |                                               |                              |               |
 
 
 ```
@@ -85,9 +87,7 @@ Class Basket
 |-------------------------------------------|-----------------------------------------------|---------------------------|---------------|
 | HashMap<Bagel, ArrayList<Filling>> basket | removeNonExistentBagelFromBasket(Bagel bagel) | if bagel is not in basket | true          |
 | int maxCapacity                           |                                               | if bagel is in basket     | false         |
-|                                           |                                               |                           |               |
-|                                           |                                               |                           |               |
-
+| int currentIndex                          |                                               |                           |               |
 
 ```
 User story 6
@@ -102,6 +102,7 @@ Class Basket
 |-------------------------------------------|----------------|--------------------------------|---------------|
 | HashMap<Bagel, ArrayList<Filling>> basket | getTotalCost() | if basket has bagels           | true          |
 | int maxCapacity                           |                | if basket does not have bagels | false         |
+| int currentIndex                          |                |                                |               |
 
 
 ```
@@ -134,6 +135,7 @@ Class Basket
 |-------------------------------------------|-------------------------------------------------------------|----------------------------|---------------|
 | HashMap<Bagel, ArrayList<Filling>> basket | addFillingToBagel(Bagel bagel, ArrayList<Filling> fillings) | if filling/s was added     | true          |
 | int maxCapacity                           |                                                             | if filling/s was not added | false         |
+| int currentIndex                          |                                                             |                            |               |
 
 ```
 User story 9
@@ -164,6 +166,7 @@ Class Basket
 |-------------------------------------------|-----------------------------|----------|---------------|
 | HashMap<Bagel, ArrayList<Filling>> basket | Basket(Inventory inventory) |          |               |
 | int maxCapacity                           |                             |          |               |
+| int currentIndex                          |                             |          |               |
 | Inventory inventory                       |                             |          |               |
 
 
