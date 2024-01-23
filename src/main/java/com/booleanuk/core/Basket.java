@@ -48,4 +48,8 @@ public class Basket {
 
         return Double.valueOf(decimalFormat.format(totalCost));
     }
+
+    public boolean addFillingToBagel(Bagel bagel, Filling filling) {
+        return true;
+    }
 }
