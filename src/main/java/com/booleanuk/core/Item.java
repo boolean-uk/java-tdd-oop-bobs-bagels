@@ -6,10 +6,10 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class Item {
-    private final String SKU;
-    private double price;
-    private final String name;
-    private final String variant;
+    protected final String SKU;
+    protected double price;
+    protected final String name;
+    protected final String variant;
 
     // Copy constructor to differentiate between individual bagels/items
     public Item(Item another) {

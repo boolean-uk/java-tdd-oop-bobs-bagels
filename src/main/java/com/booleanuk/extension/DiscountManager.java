@@ -5,19 +5,26 @@ import com.booleanuk.core.Item;
 import com.booleanuk.core.items.Bagel;
 import com.booleanuk.core.items.Coffee;
 
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 
 import static com.booleanuk.core.util.Constants.*;
 
 public class DiscountManager {
     public static double calculateBasketBagelDiscounts(Basket basket) {
-        double totalDiscount = 0.0;
-        int countBlackCoffee = 0;
-        HashMap<String, Integer> bagelItemCount = new HashMap<>();
+        ArrayList<Item> sortedBasket = basket.getBasket();
+        LinkedHashMap<String, Integer> bagelItemCount = new LinkedHashMap<>();
         HashMap<String, Double> bagelSkuPrice = new HashMap<>();
+        int countBlackCoffee = 0;
+        double totalDiscount = 0.0;
 
+        // Make sure combo discount is applied to the cheapest bagel in basket by sorting the list by price
+        // To make the discount apply to the most expensive leftover bagel reverse the list
+        sortedBasket.sort(Comparator.comparing(Item::getPrice));
         // Get item count by type (sku) and not by item (with filling)
-        for (Item item : basket.getBasket()) {
+        for (Item item : sortedBasket) {
             if (item instanceof Bagel) {
                 if (!bagelItemCount.containsKey(item.getSKU())) {
                     bagelItemCount.put(item.getSKU(), 1);
@@ -40,7 +47,6 @@ public class DiscountManager {
             totalDiscount += calculateItemBulkDiscount(bagelSku, quantity, price);
 
             // Coffee discount if there are any black coffees and single bagels
-            // Does not take into account if the discount is being applied to the most expensive bagel variant
             while (quantity % 6 > 0 && countBlackCoffee > 0) {
                 totalDiscount += (price + COFFEE_BLACK_PRICE) - BAGEL_COFFEE;
                 countBlackCoffee--;

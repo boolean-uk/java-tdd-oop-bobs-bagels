@@ -122,4 +122,16 @@ public class DiscountManagerTest {
         Assertions.assertEquals(0.13, DiscountManager.calculateBasketBagelDiscounts(basket), 0.01);
         Assertions.assertEquals(3.23, basket.getTotalCost(),  0.01);
     }
+
+    @Test
+    public void comboDiscountPicksCheapestBagel() {
+        basket.addItem(store.getItemBySKU("BGLE"));
+        basket.addItem(store.getItemBySKU("BGLP"));
+        basket.addItem(store.getItemBySKU("BGLO"));
+        basket.addItem(store.getItemBySKU("COFB"));
+
+        // Make sure the discount is applied to the plain bagel while it is "surrounded" by more expensive bagels
+        Assertions.assertEquals(0.13, DiscountManager.calculateBasketBagelDiscounts(basket), 0.01);
+        Assertions.assertEquals(2.23, basket.getTotalCost(),  0.01);
+    }
 }

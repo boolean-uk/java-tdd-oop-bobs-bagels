@@ -7,8 +7,6 @@ import com.booleanuk.core.items.Bagel;
 import com.booleanuk.core.items.Filling;
 import lombok.Data;
 
-import java.io.FileNotFoundException;
-import java.net.URISyntaxException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
@@ -31,10 +29,11 @@ public class ReceiptPrinter {
         this.dateTime = LocalDateTime.now();
     }
 
-    public String print() throws FileNotFoundException, URISyntaxException {
+    public String print() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         String formattedDateTime = dateTime.format(formatter);
 
+        // Add header
         sb.append(HEADER).append("\n\n")
                 .append("   ").append(formattedDateTime).append("\n\n")
                 .append(SEPARATOR).append("\n");
@@ -46,6 +45,7 @@ public class ReceiptPrinter {
             // String name = item.getName();
             double price = item.getPrice();
 
+            // Add bagels (with filling) or just the items
             if (item instanceof Bagel && !((Bagel) item).getFilling().isEmpty()) {
                 double fillingTotal = 0;
                 for (Filling filling : ((Bagel) item).getFilling()) {
