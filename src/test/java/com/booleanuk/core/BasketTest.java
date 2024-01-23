@@ -71,4 +71,12 @@ public class BasketTest {
         Assertions.assertEquals(expectedCost, actualCost);
     }
 
+    //User story 7
+    @Test void shouldAssertPriceOfOneBagel() {
+        Bagel bagel = new Bagel("Sesame", "1234", 10.10);
+        double expectedPrice = 10.10;
+        double actualPrice = bagel.getPrice();
+        Assertions.assertEquals(expectedPrice, actualPrice);
+    }
+
 }
