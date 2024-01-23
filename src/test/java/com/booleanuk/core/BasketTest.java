@@ -56,5 +56,19 @@ public class BasketTest {
         Assertions.assertEquals(newSize, originalSize+3);
     }
 
+    //User story 5 is handled in user story 2 test cases
+
+    //User story 6
+    @Test void shouldAssertTotalCostOfAllBagelsInBasket() {
+        Inventory inventory = new Inventory();
+        Basket basket = new Basket(inventory);
+        Bagel bagel = new Bagel("Sesame", "1234", 10.10);
+        basket.addBagel(bagel);
+        Bagel bagel2 = new Bagel("Sesame", "1234", 20.20);
+        basket.addBagel(bagel2);
+        double expectedCost = 30.30;
+        double actualCost = basket.getTotalCost();
+        Assertions.assertEquals(expectedCost, actualCost);
+    }
 
 }

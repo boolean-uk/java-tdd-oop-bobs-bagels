@@ -56,7 +56,7 @@ So that I can not overfill my small bagel basket
 I'd like to know when my basket is full when I try adding an item beyond my basket capacity.
 ```
 
-When calling the Basket class's addBagel method and the basket is already full, it will return false.
+This is handled in user story 1
 
 ```
 User story 4
@@ -81,13 +81,7 @@ So that I can maintain my sanity
 I'd like to know if I try to remove an item that doesn't exist in my basket.
 ```
 
-Class Basket
-
-| Class vars                                | Methods                                       | Scenario                  | Return/Result |
-|-------------------------------------------|-----------------------------------------------|---------------------------|---------------|
-| HashMap<Bagel, ArrayList<Filling>> basket | removeNonExistentBagelFromBasket(Bagel bagel) | if bagel is not in basket | true          |
-| int maxCapacity                           |                                               | if bagel is in basket     | false         |
-| int currentIndex                          |                                               |                           |               |
+This is handled in user story 2
 
 ```
 User story 6
@@ -98,11 +92,11 @@ I'd like to know the total cost of items in my basket.
 
 Class Basket
 
-| Class vars                                | Methods        | Scenario                       | Return/Result |
-|-------------------------------------------|----------------|--------------------------------|---------------|
-| HashMap<Bagel, ArrayList<Filling>> basket | getTotalCost() | if basket has bagels           | true          |
-| int maxCapacity                           |                | if basket does not have bagels | false         |
-| int currentIndex                          |                |                                |               |
+| Class vars                                | Methods        | Scenario             | Return/Result |
+|-------------------------------------------|----------------|----------------------|---------------|
+| HashMap<Bagel, ArrayList<Filling>> basket | getTotalCost() | calculate the bagels | double        |
+| int maxCapacity                           |                |                      |               |
+| int currentIndex                          |                |                      |               |
 
 
 ```
