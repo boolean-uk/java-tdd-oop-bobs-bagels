@@ -97,7 +97,10 @@ public class ReceiptTest {
         Assertions.assertTrue(receipt.generateReceiptWithDiscount().contains("(-£1.89)"));
         Assertions.assertTrue(receipt.generateReceiptWithDiscount().contains("Plain Bagel\t\t2\t£0.78\n"));
         Assertions.assertFalse(receipt.generateReceiptWithDiscount().contains("(-£0.0)"));
-        Assertions.assertTrue(receipt.generateReceiptWithDiscount().contains("\n----------------------------\nTotal               £" + 6.73));
+        Assertions.assertTrue(receipt.generateReceiptWithDiscount().contains("""
+
+                ----------------------------
+                Total               £6.73"""));
         System.out.println(receipt.generateReceiptWithDiscount());
     }
 }
