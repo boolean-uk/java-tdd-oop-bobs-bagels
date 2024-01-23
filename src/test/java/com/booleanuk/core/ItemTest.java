@@ -28,11 +28,31 @@ public class ItemTest {
 
     @Test
     public void testAddFillingToBagel() {
-        Item bglp = new Bagel("BGLP","Plain", 0.39);
-        Item filx = new Filling("FILX", "Cream Cheese", 0.12);
+        Bagel bglp = new Bagel("BGLP","Plain", 0.39);
+        Filling filx = new Filling("FILX", "Cream Cheese", 0.12);
         bglp.addFilling(filx);
         Assertions.assertTrue(bglp.getFillings().contains(filx));
         Assertions.assertEquals(1, bglp.getFillings().size());
+    }
+
+    @Test
+    public void testAddMultipleFillingsToBagel() {
+        Bagel bglp = new Bagel("BGLP","Plain", 0.39);
+        Filling filx = new Filling("FILX", "Cream Cheese", 0.12);
+        Filling filb = new Filling("FILB", "Bacon", 0.12);
+        Filling filh = new Filling("FILH", "Ham", 0.12);
+        bglp.addFilling(filx);
+        bglp.addFilling(filb);
+
+        Assertions.assertTrue(bglp.getFillings().contains(filx));
+        Assertions.assertTrue(bglp.getFillings().contains(filb));
+        Assertions.assertEquals(2, bglp.getFillings().size());
+
+        bglp.addFilling(filh);
+        bglp.addFilling(filx);
+
+        Assertions.assertTrue(bglp.getFillings().contains(filh));
+        Assertions.assertEquals(3, bglp.getFillings().size());
     }
 
 }
