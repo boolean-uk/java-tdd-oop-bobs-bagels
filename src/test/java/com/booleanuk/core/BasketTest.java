@@ -45,4 +45,16 @@ public class BasketTest {
         Assertions.assertFalse(removed);
     }
 
+    //User story 3 is handled in user story 1 test cases
+
+    //User story 4
+    @Test void shouldAssertNewBasketSize() {
+        Inventory inventory = new Inventory();
+        Basket basket = new Basket(inventory);
+        int originalSize = basket.maxCapacity;
+        int newSize = basket.extendCapacityOfBasket(3);
+        Assertions.assertEquals(newSize, originalSize+3);
+    }
+
+
 }
