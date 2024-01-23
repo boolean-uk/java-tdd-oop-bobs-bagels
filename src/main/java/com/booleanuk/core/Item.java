@@ -2,59 +2,16 @@ package com.booleanuk.core;
 
 import java.util.ArrayList;
 
-public class Item {
+public interface Item {
 
-    private String sku;
-    private double price;
-    private String name;
-    private String variant;
+    String getSku();
 
-    public Item(String sku, double price, String name, String variant) {
-        this.sku = sku;
-        this.price = price;
-        this.name = name;
-        this.variant = variant;
-    }
+    public double getPrice();
 
-    public String getSku() {
-        return sku;
-    }
+    public String getName();
 
-    public void setSku(String sku) {
-        this.sku = sku;
-    }
+    public String getVariant();
 
-    public double getPrice() {
-        return price;
-    }
+    public String toString();
 
-    public void setPrice(double price) {
-        this.price = price;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getVariant() {
-        return variant;
-    }
-
-    public void setVariant(String variant) {
-        this.variant = variant;
-    }
-
-    @Override
-    public String toString() {
-        return "Item{" +
-                "sku='" + sku + '\'' +
-                ", price=" + price +
-                ", name='" + name + '\'' +
-                ", variant='" + variant + '\'' +
-                '}';
-    }
 }

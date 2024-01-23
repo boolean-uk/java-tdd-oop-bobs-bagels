@@ -8,7 +8,7 @@ public class BasketTestExtension2 {
     @Test
     public void test() {
         Basket basket = new Basket();
-        basket.changeCapacity(25);
+        basket.changeCapacity(100);
         basket.addItem("BGLO");
         basket.addItem("BGLO");
 
@@ -36,7 +36,7 @@ public class BasketTestExtension2 {
         basket.addItem("COFB");
         basket.addItem("COFB");
 
-        Assertions.assertEquals("", basket.receipt());
+        Assertions.assertEquals("test", basket.printReceipt());
 
     }
 }

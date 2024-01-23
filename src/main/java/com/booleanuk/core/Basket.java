@@ -12,20 +12,20 @@ public class Basket {
         this.inventoryList = new ArrayList<>();
         this.basketList = new ArrayList<>();
         this.capacity = 3;
-        inventoryList.add(new Item("BGLO", 0.49d, "Bagel", "Onion"));
-        inventoryList.add(new Item("BGLP", 0.39d, "Bagel", "Plain"));
-        inventoryList.add(new Item("BGLE", 0.49d, "Bagel", "Everything"));
-        inventoryList.add(new Item("BGLS", 0.49d, "Bagel", "Sesame"));
-        inventoryList.add(new Item("COFB", 0.99d, "Coffee", "Black"));
-        inventoryList.add(new Item("COFW", 1.19d, "Coffee", "White"));
-        inventoryList.add(new Item("COFC", 1.29d, "Coffee", "Cappuccino"));
-        inventoryList.add(new Item("COFL", 1.29d, "Coffee", "Latte"));
-        inventoryList.add(new Item("FILB", 0.12d, "Filling", "Bacon"));
-        inventoryList.add(new Item("FILE", 0.12d, "Filling", "Egg"));
-        inventoryList.add(new Item("FILC", 0.12d, "Filling", "Cheese"));
-        inventoryList.add(new Item("FILX", 0.12d, "Filling", "Cream Cheese"));
-        inventoryList.add(new Item("FILS", 0.12d, "Filling", "Smoked Salmon"));
-        inventoryList.add(new Item("FILH", 0.12d, "Filling", "Ham"));
+        inventoryList.add(new Bagel("BGLO", 0.49d, "Bagel", "Onion"));
+        inventoryList.add(new Bagel("BGLP", 0.39d, "Bagel", "Plain"));
+        inventoryList.add(new Bagel("BGLE", 0.49d, "Bagel", "Everything"));
+        inventoryList.add(new Bagel("BGLS", 0.49d, "Bagel", "Sesame"));
+        inventoryList.add(new Coffee("COFB", 0.99d, "Coffee", "Black"));
+        inventoryList.add(new Coffee("COFW", 1.19d, "Coffee", "White"));
+        inventoryList.add(new Coffee("COFC", 1.29d, "Coffee", "Cappuccino"));
+        inventoryList.add(new Coffee("COFL", 1.29d, "Coffee", "Latte"));
+        inventoryList.add(new Filling("FILB", 0.12d, "Filling", "Bacon"));
+        inventoryList.add(new Filling("FILE", 0.12d, "Filling", "Egg"));
+        inventoryList.add(new Filling("FILC", 0.12d, "Filling", "Cheese"));
+        inventoryList.add(new Filling("FILX", 0.12d, "Filling", "Cream Cheese"));
+        inventoryList.add(new Filling("FILS", 0.12d, "Filling", "Smoked Salmon"));
+        inventoryList.add(new Filling("FILH", 0.12d, "Filling", "Ham"));
     }
 
     public boolean addItem(String itemSKU){
@@ -133,9 +133,9 @@ public class Basket {
     public double discount() {
         double price = 0;
         ArrayList<String> discount = new ArrayList<>();
-        inventoryList.add(new Item("DIS6", 2.49d, "Discount", "6 bagels"));
-        inventoryList.add(new Item("DIS12", 3.99d, "Discount", "12 bagels"));
-        inventoryList.add(new Item("DISCB", 1.25d, "Discount", "Coffee + Bagel"));
+        inventoryList.add(new Bagel("DIS6", 2.49d, "Discount", "6 bagels"));
+        inventoryList.add(new Bagel("DIS12", 3.99d, "Discount", "12 bagels"));
+        inventoryList.add(new Bagel("DISCB", 1.25d, "Discount", "Coffee + Bagel"));
 
         Collections.sort(basketList);
         int counterBGL = 0;
@@ -209,5 +209,77 @@ public class Basket {
         return Double.parseDouble(String.format("%.2f",price));
     }
 
+    //--------------------------EXTENSION 2--------------------------//
+    public String printReceipt() {
+        ArrayList<String> receipt = new ArrayList<>();
+        StringBuilder builder = new StringBuilder();
+        String name = basketList.get(0);
+        System.out.println("~~~ Bob's Bagel ~~~");
+        System.out.println("ITEM\t\t\t\tQTY.\t\tTOTAL");
+        System.out.print("--------------------------------------------");
+        System.out.println();
 
+        for (int i = 0; i < inventoryList.size(); i++) {
+            for (int j = 0; j < basketList.size(); j++) {
+                if (inventoryList.get(i).getSku().equals(basketList.get(j))){
+                    name = basketList.get(j);
+                }
+
+                if (!receipt.contains(name)) {
+                    //if (basketList.get(j).equals(inventoryList.get(i).getSku())) {
+                    receipt.add(name);
+
+                    double price = inventoryList.get(i).getPrice() * Collections.frequency(basketList,name);
+                    String formatPrice = String.format("%.2f",price);
+
+                    builder
+                            .append("\r")
+                            .append(inventoryList.get(i).getVariant())
+                            .append(" ")
+                            .append(inventoryList.get(i).getName())
+                            .append("\t\t\t")
+                            .append(Collections.frequency(basketList,name))
+                            .append("\t\t")
+                            .append(formatPrice)
+                            .append("\n");
+
+
+                }
+            }
+        }
+        return builder.toString();
+    }
+
+    public static void main(String[] args) {
+        Basket basket = new Basket();
+        basket.changeCapacity(100);
+        basket.addItem("BGLO");
+        basket.addItem("BGLO");
+
+        basket.addItem("BGLP");
+        basket.addItem("BGLP");
+        basket.addItem("BGLP");
+        basket.addItem("BGLP");
+        basket.addItem("BGLP");
+        basket.addItem("BGLP");
+        basket.addItem("BGLP");
+        basket.addItem("BGLP");
+        basket.addItem("BGLP");
+        basket.addItem("BGLP");
+        basket.addItem("BGLP");
+        basket.addItem("BGLP");
+
+        basket.addItem("BGLE");
+        basket.addItem("BGLE");
+        basket.addItem("BGLE");
+        basket.addItem("BGLE");
+        basket.addItem("BGLE");
+        basket.addItem("BGLE");
+
+        basket.addItem("COFB");
+        basket.addItem("COFB");
+        basket.addItem("COFB");
+
+        System.out.println(basket.printReceipt());
+    }
 }
