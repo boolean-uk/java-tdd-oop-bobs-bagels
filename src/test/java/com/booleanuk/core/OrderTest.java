@@ -353,6 +353,59 @@ public class OrderTest {
 
         Assertions.assertEquals(1.25, result);
     }
+    @Test
+    public void testGetDiscountCoffeeBagelAndSixBagels() throws ParseException {
+
+
+
+
+
+        Order basket1 = new Order();
+
+        basket1.add("BGLO", "Bagel", "Onion", 0.49);
+        basket1.add("BGLO", "Bagel", "Onion", 0.49);
+        basket1.add("BGLO", "Bagel", "Onion", 0.49);
+        basket1.add("BGLO", "Bagel", "Onion", 0.49);
+        basket1.add("BGLO", "Bagel", "Onion", 0.49);
+        basket1.add("BGLO", "Bagel", "Onion", 0.49);
+        basket1.add("COFW", "Coffee", "White", 1.19);
+
+        double result = basket1.totalCost();
+
+
+
+        Assertions.assertEquals(3.250000000000001, result);
+    }
+
+    @Test
+    public void testGetDiscountCoffeeBagelAndTwelveBagels() throws ParseException {
+
+
+
+
+
+        Order basket1 = new Order();
+
+        basket1.add("BGLO", "Bagel", "Onion", 0.49);
+        basket1.add("BGLO", "Bagel", "Onion", 0.49);
+        basket1.add("BGLO", "Bagel", "Onion", 0.49);
+        basket1.add("BGLO", "Bagel", "Onion", 0.49);
+        basket1.add("BGLO", "Bagel", "Onion", 0.49);
+        basket1.add("BGLO", "Bagel", "Onion", 0.49);
+        basket1.add("BGLO", "Bagel", "Onion", 0.49);
+        basket1.add("BGLO", "Bagel", "Onion", 0.49);
+        basket1.add("BGLO", "Bagel", "Onion", 0.49);
+        basket1.add("BGLO", "Bagel", "Onion", 0.49);
+        basket1.add("BGLO", "Bagel", "Onion", 0.49);
+        basket1.add("BGLO", "Bagel", "Onion", 0.49);
+        basket1.add("COFW", "Coffee", "White", 1.19);
+
+        double result = basket1.totalCost();
+
+
+
+        Assertions.assertEquals(4.750000000000002, result);
+    }
 
 
     @Test
