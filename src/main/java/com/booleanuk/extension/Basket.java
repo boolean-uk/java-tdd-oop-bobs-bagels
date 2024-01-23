@@ -82,16 +82,29 @@ public class Basket {
 
     private StringBuilder getProductPrice(StringBuilder result) {
         double discountedPrice;
+        double discounted;
         this.totalPrice = 0;
         Set<Item> uniqueItems = new HashSet<>(items);
+
         for (Item uniqueItem : uniqueItems) {
             String itemName = uniqueItem.getType() + " " + uniqueItem.getVariant();
             int quantity = Collections.frequency(items, uniqueItem);
+
             if (uniqueItem.getType().equals("Bagel")){
                 discountedPrice = calculateBagelOffer(uniqueItem, quantity);
+                discounted = uniqueItem.getPrice() * quantity;
+                discounted = discounted - discountedPrice;
                 this.totalPrice += discountedPrice;
+                if (discounted > 0){
+                    result.append(String.format("%-20s %-4d £%.2f\n", itemName, quantity, discountedPrice));
+                    String discountedString = String.format("(£%.2f)\n", discounted);
+                    result.append(String.format("%-26s", " ") + discountedString);
+                } else {
                 result.append(String.format("%-20s %-4d £%.2f\n", itemName, quantity, discountedPrice));
-            } else {
+                }
+            }
+
+            else {
                 discountedPrice = calculateCoffeeOffer(uniqueItem, quantity);
                 this.totalPrice += discountedPrice;
                 result.append(String.format("%-20s %-4d £%.2f\n", itemName, quantity, discountedPrice));
