@@ -6,7 +6,7 @@ public class Filling implements Item{
     private String variant;
     private double price;
 
-    public Filling(String sku, String name, String variant, double price) {
+    public Filling(String sku, String variant, double price) {
         this.setSku(sku);
         this.name = "Filling";
         this.setVariant(variant);

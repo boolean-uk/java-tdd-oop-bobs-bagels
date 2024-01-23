@@ -6,7 +6,7 @@ public class Bagel implements Item {
     private String variant;
     private double price;
 
-    public Bagel(String sku, String name, String variant, double price) {
+    public Bagel(String sku, String variant, double price) {
         this.setSku(sku);
         this.name = "Bagel";
         this.setVariant(variant);

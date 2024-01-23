@@ -6,7 +6,7 @@ public class Coffee implements Item{
     private String variant;
     private double price;
 
-    public Coffee(String sku, String name, String variant, double price) {
+    public Coffee(String sku, String variant, double price) {
         this.setSku(sku);
         this.name = "Coffee";
         this.setVariant(variant);
