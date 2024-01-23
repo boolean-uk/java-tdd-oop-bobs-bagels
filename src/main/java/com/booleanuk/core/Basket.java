@@ -24,6 +24,10 @@ public class Basket {
     }
 
     public boolean removeBagel(Bagel bagel) {
-        return true;
+        if (basket.containsKey(bagel)) {
+            basket.remove(bagel);
+            return true;
+        }
+        return false;
     }
 }
