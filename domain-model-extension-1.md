@@ -13,7 +13,7 @@
 
 | Classes | Methods            | Scenario               | Returns                     |
 |---------|--------------------|------------------------|-----------------------------|
-| Basket  | double totalCost() | Discount is active     | double adjusted to discount |
+| Receipt | double totalCost() | Discount is active     | double adjusted to discount |
 |         |                    | Discount is not active | double no adjustments       |
 
 

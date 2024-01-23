@@ -6,5 +6,5 @@ I want to receive a receipt when I have checked out my basket
 
 | Classes | Methods             | Scenario                    | Returns                               |
 |---------|---------------------|-----------------------------|---------------------------------------|
-| Basket  | String getReceipt() | If receipt is generated     | String containing receipt information |
+| Receipt | String getReceipt() | If receipt is generated     | String containing receipt information |
 |         |                     | If receipt is not generated | Empty String                          |

@@ -109,7 +109,7 @@ public class Receipt {
 
 
             }
-            else if(itemQuantities.size() == 2 && (itemSKU.startsWith("C") || itemSKU.startsWith("B"))
+            else if(itemQuantities.size() == 2 && itemQuantity < 2 && (itemSKU.startsWith("C") || itemSKU.startsWith("B"))
                     && itemQuantities.keySet().stream().anyMatch(key -> key.startsWith("COF"))){
                 totalDiscount = 1.25;
 

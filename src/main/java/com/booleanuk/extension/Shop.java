@@ -24,6 +24,17 @@ public class Shop {
         }
         return true;
     }
+
+    public boolean checkoutBasket(int index){
+        try{
+            baskets.get(index).getReceipt();
+            baskets.remove(index);
+            return true;
+        }
+        catch (IndexOutOfBoundsException e){
+            return false;
+        }
+    }
     public ArrayList<Basket> getAllBaskets(){
         return this.baskets;
     }
