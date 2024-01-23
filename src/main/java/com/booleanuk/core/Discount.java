@@ -17,4 +17,8 @@ public class Discount {
         return quantity;
     }
 
+    @Override
+    public String toString() {
+        return getQuantity() + " " + getCost();
+    }
 }

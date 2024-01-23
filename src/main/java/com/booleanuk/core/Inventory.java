@@ -1,16 +1,10 @@
 package com.booleanuk.core;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class Inventory {
     private HashMap<String, Double> prices;
     private HashMap<Item, String> skuCodes;
-//    private final double TWELWE_BAGELS_DISCOUNT_PRICE = 3.99;
-//    private final double SIX_BAGELS_DISCOUNT_PRICE = 2.49;
-    private final double COFFEE_AND_BAGEL_DISCOUNT = 1.25;
     private HashMap<String, ArrayList<Discount>> bundleDiscounts;
     private HashMap<ArrayList<Item>, Double> comboDiscounts;
     public Inventory() {
@@ -31,13 +25,12 @@ public class Inventory {
         double cost = 0;
         HashMap<Item, Integer> bundlesItems = new HashMap<>();
         ArrayList<Item> items = basket.getItems();
-
         ArrayList<Item> notInBundlesItems = new ArrayList<>();
 
         String sku;
         for(Item item: items) {
 
-            //Check if the item has discounts
+            //Check if the item has bundle discounts
             sku = skuCodes.get(item);
             if(bundleDiscounts.containsKey(sku) ) {
                 if (bundlesItems.containsKey(item)) {
@@ -67,8 +60,9 @@ public class Inventory {
             }
         }
 
+        //Check if any combo discounts are present
         for(ArrayList<Item> comboItems: comboDiscounts.keySet()) {
-            while(containsComboItems(notInBundlesItems, comboItems)) {
+            while(notInBundlesItems.containsAll(comboItems)) {
                 cost += comboDiscounts.get(comboItems);
                 for(Item comboItem: comboItems) {
                     notInBundlesItems.remove(comboItem);
@@ -76,22 +70,12 @@ public class Inventory {
             }
         }
 
+        //Get cost for all items that are not part of discount or contained in other items
         for(Item item: notInBundlesItems) {
             cost += getCostOfItem(item);
         }
 
-
         return cost;
-    }
-
-    public boolean containsComboItems(ArrayList<Item> items, ArrayList<Item> comboItems) {
-        for(Item comboItem: comboItems) {
-            if(!items.contains(comboItem)) {
-                return false;
-            }
-        }
-        return true;
-
     }
 
 
@@ -163,10 +147,9 @@ public class Inventory {
     private void initializeBundleDiscounts() {
         bundleDiscounts = new HashMap<>();
 
-        //TODO: this is dependent on inserting highest quantity first, how can we assure this?
-        //sort with implemented compare method?
-
-        ArrayList<Discount> discountData = new ArrayList<>(Arrays.asList(new Discount(3.99, 12), new Discount(2.49, 6)));
+        ArrayList<Discount> discountData = new ArrayList<>(Arrays.asList(new Discount(2.49, 6), new Discount(3.99, 12)));
+        // Sort descending in quantity
+        discountData.sort((b, a) -> { return Integer.compare(a.getQuantity(), b.getQuantity()); });
 
         bundleDiscounts.put("BGLO", discountData);
         bundleDiscounts.put("BGLP", discountData);
@@ -192,10 +175,6 @@ public class Inventory {
     public boolean hasBundleDiscountForItem(Item item) {
         return bundleDiscounts.containsKey(skuCodes.get(item));
     }
-//
-//    public boolean hasComboDiscount(Item item) {
-//        return bundleDiscounts.containsKey(skuCodes.get(item));
-//    }
 
     public boolean hasItem(Item item) {
 

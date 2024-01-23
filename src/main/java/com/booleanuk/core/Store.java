@@ -24,6 +24,7 @@ public class Store {
         return basket.hashCode();
     }
 
+    //for the tests
     public HashMap<Integer,Basket> getBaskets() {
         return new HashMap<>(baskets);
     }
@@ -34,6 +35,7 @@ public class Store {
         if(basket.getNoOfItems() >= basketCapacity) {
             return "You're basket is full!";
         }
+
         if(item.containsOtherItems()) {
             for(Item containedItem : item.getContainedItems()) {
                 if(!inventory.hasItem(containedItem)) {
@@ -41,9 +43,11 @@ public class Store {
                 }
             }
         }
+
         if (!inventory.hasItem(item)) {
             return name + " doesn't have " + item.getName() + " " + item.getClass().getSimpleName() + ".";
         }
+
         baskets.get(basketId).addItem(item);
         return item.getName() + " " + item.getClass().getSimpleName() + " added.";
     }
@@ -83,20 +87,23 @@ public class Store {
         LinkedHashMap<Item, Integer> quantities = new LinkedHashMap<>();
         HashMap<Item, Double> discounts = new HashMap<>();
         double totalDiscounts = 0;
+        double totalCost = 0;
 
         Basket basket = baskets.get(basketId);
 
         for(Item item: basket.getItems()) {
             if (item.containsOtherItems()) {
                 for (Item containedItem : item.getContainedItems()) {
+                    double cost = getCostOfItem(containedItem);
                     if (!quantities.containsKey(containedItem)) {
                         quantities.put(containedItem, 1);
-                        prices.put(containedItem, getCostOfItem(containedItem));
+                        prices.put(containedItem, cost);
                         discounts.put(containedItem, 0.0);
                     } else {
                         quantities.put(containedItem, quantities.get(containedItem) + 1);
-                        prices.put(containedItem, prices.get(containedItem)+getCostOfItem(containedItem));
+                        prices.put(containedItem, prices.get(containedItem) + cost);
                     }
+                    totalCost += cost;
                 }
             }
             if (!quantities.containsKey(item)) {
@@ -114,11 +121,11 @@ public class Store {
         for(Map.Entry<Item, Integer> e: quantities.entrySet()) {
             Item item = e.getKey();
             int quantity = e.getValue();
-            double cost = 0;
             if (inventory.hasBundleDiscountForItem(item)) {
                 double bundleCost = inventory.getCostForBundle(item, quantity);
                 if(bundleCost > 0) {
                     prices.put(item, prices.get(item) + bundleCost);
+                    totalCost += bundleCost;
                     int noOfItemsToRemove = quantity - inventory.getRemainderAfterBundle(item, quantity);
                     for (int i = 0; i < noOfItemsToRemove; i++) {
                         notInBundles.remove(item);
@@ -133,7 +140,7 @@ public class Store {
         for(ArrayList<Item> comboItems: inventory.getComboDiscounts().keySet()) {
             double comboPrice = 0;
 
-            while(inventory.containsComboItems(notInBundles, comboItems)) {
+            while(notInBundles.containsAll(comboItems)) {
                 comboPrice = inventory.getComboDiscounts().get(comboItems);
                 double totalOriginalCost = 0;
                 Item lastItem = null;
@@ -149,17 +156,19 @@ public class Store {
                 discounts.put(lastItem, discounts.get(lastItem)+discount);
                 totalDiscounts += discount;
                 prices.put(comboItems.get(0), prices.get(comboItems.get(0)) + comboPrice);
+                totalCost += comboPrice;
 
             }
         }
 
         for(Item item: notInBundles) {
             prices.put(item, prices.get(item) + getCostOfItem(item));
+            totalCost += getCostOfItem(item);
         }
         if(withDiscountData) {
-            return new Receipt(prices, quantities, discounts, getCostOfBasket(basketId), totalDiscounts, this.name, 28);
+            return new Receipt(prices, quantities, discounts, totalCost, totalDiscounts, this.name, 28);
         } else {
-            return new Receipt(prices, quantities, getCostOfBasket(basketId), this.name, 28);
+            return new Receipt(prices, quantities, totalCost, this.name, 28);
         }
     }
 

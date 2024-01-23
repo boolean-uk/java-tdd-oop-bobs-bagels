@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 public class Item {
 
-    //TODO : make into interface??
     private String name;
 
     public Item(String name) {
