@@ -3,6 +3,8 @@ package com.booleanuk.core;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+
 class BasketTest {
 
     // Add functionality
@@ -275,6 +277,24 @@ class BasketTest {
         Assertions.assertEquals(9.97, basket.getTotal());
     }
 
+    @Test
+    public void restReceipt() {
+        Inventory inventory = new Inventory();
+        Basket basket = new Basket(inventory);
+        boolean result = basket.addItem("Bagel Onion", 2);
+        result = basket.addItem("Bagel Plain", 12);
+        result = basket.addItem("Bagel Everything", 6);
+        result = basket.addItem("Coffee Black", 3);
+        Assertions.assertTrue(result);
 
 
+        Receipt receipt = new Receipt(basket.getBasket());
+        receipt.createReceipt();
+        ArrayList<String> receiptList = receipt.getReceipt();
+        Assertions.assertEquals("    ~~~ Bob's Bagels ~~~    ", receiptList.get(1));
+        Assertions.assertEquals("Plain Bagel        12  $4.68", receiptList.get(6));
+        Assertions.assertEquals("Onion Bagel        2   $0.98", receiptList.get(7));
+        Assertions.assertEquals("Total                 $11.57", receiptList.get(11));
+        Assertions.assertEquals("      for your order!       ", receiptList.get(14));
+    }
 }

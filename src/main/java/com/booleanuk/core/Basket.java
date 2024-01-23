@@ -29,6 +29,10 @@ public class Basket {
         this.total = 0.0;
     }
 
+    public HashMap<String, BasketItem> getBasket() {
+        return this.basket;
+    }
+
     public BasketItem getBasketItem(String sku) {
         return this.basket.get(sku);
     }
