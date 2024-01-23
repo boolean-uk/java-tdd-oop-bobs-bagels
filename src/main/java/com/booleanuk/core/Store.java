@@ -56,7 +56,7 @@ public class Store {
             return name + " doesn't have " + item.getName() + " " + item.getClass().getSimpleName() + ".";
         }
 
-        baskets.get(basketId).addItem(item);
+        baskets.get(basketId).add(item);
         return item.getName() + " " + item.getClass().getSimpleName() + " added.";
     }
 
@@ -80,7 +80,7 @@ public class Store {
 
     //TODO: what do if nonexistent basketid
     public boolean removeItemFromBasket(Item item, int basketId) {
-        return baskets.get(basketId).removeItem(item);
+        return baskets.get(basketId).remove(item);
     }
 
     public Receipt createReceiptWithDiscountData(int basketId) {
@@ -132,11 +132,11 @@ public class Store {
             Item item = e.getKey();
             int quantity = e.getValue();
             if (inventory.hasBundleDiscountForItem(item)) {
-                double bundleCost = inventory.getCostForBundle(item, quantity);
+                double bundleCost = inventory.getCostOfBundle(item, quantity);
                 if(bundleCost > 0) {
                     prices.put(item, prices.get(item) + bundleCost);
                     totalCost += bundleCost;
-                    int noOfItemsToRemove = quantity - inventory.getNoOfItemsRemaindingAfterBundleDiscounts(item, quantity);
+                    int noOfItemsToRemove = quantity - inventory.getNoOfItemsRemainingAfterBundleDiscounts(item, quantity);
                     for (int i = 0; i < noOfItemsToRemove; i++) {
                         itemsWithNoDiscounts.remove(item);
                     }

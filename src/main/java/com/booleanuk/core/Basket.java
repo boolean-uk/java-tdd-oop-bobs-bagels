@@ -13,7 +13,7 @@ public class Basket {
         return new ArrayList<>(items);
     }
 
-    public void addItem(Item item) {
+    public void add(Item item) {
         items.add(item);
     }
 
@@ -21,7 +21,7 @@ public class Basket {
         return items.size();
     }
 
-    public boolean removeItem(Item item) {
+    public boolean remove(Item item) {
         if(item.containsOtherItems()) {
             for (int i = 0; i < items.size(); i++) {
                 if (item.getName().equals(items.get(i).getName()) && item.getContainedItems().equals(items.get(i).getContainedItems())) {

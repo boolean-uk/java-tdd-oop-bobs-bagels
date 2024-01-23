@@ -61,9 +61,9 @@ public class Inventory {
 
         //Check if any bundle discounts are present
         for(Map.Entry<Item, Integer> e: bundlesItems.entrySet()) {
-            cost += getCostForBundle(e.getKey(), e.getValue());
+            cost += getCostOfBundle(e.getKey(), e.getValue());
 
-            int itemsLeft = getNoOfItemsRemaindingAfterBundleDiscounts(e.getKey(), e.getValue());
+            int itemsLeft = getNoOfItemsRemainingAfterBundleDiscounts(e.getKey(), e.getValue());
             for (int i = 0; i < itemsLeft; i++ ) {
                 notInBundlesItems.add(e.getKey());
             }
@@ -88,7 +88,7 @@ public class Inventory {
     }
 
 
-    public double getCostForBundle(Item item, int quantity) {
+    public double getCostOfBundle(Item item, int quantity) {
         String sku = skuCodes.get(item);
         double cost = 0;
 
@@ -102,7 +102,7 @@ public class Inventory {
         return cost;
     }
 
-    public int getNoOfItemsRemaindingAfterBundleDiscounts(Item item, int quantity) {
+    public int getNoOfItemsRemainingAfterBundleDiscounts(Item item, int quantity) {
         String sku = skuCodes.get(item);
         for(Discount discount: bundleDiscounts.get(sku)) {
             while(quantity-discount.getQuantity() >= 0) {
