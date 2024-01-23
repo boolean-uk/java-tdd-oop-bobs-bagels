@@ -1,4 +1,4 @@
-package com.booleanuk.core;
+package com.booleanuk.extension;
 
 import java.util.ArrayList;
 
@@ -22,6 +22,13 @@ public class Inventory {
         this.inventory.add(new Filling("FILX",0.12, "Filling", "Cream Cheese"));
         this.inventory.add(new Filling("FILS",0.12, "Filling", "Smoked Salmon"));
         this.inventory.add(new Filling("FILH",0.12, "Filling", "Ham"));
+
+        this.inventory.add(new ComboDiscountProduct(new String[]{"COFB", "BGLO"}, 1.25, "Coffee & Bagel"));
+
+        this.inventory.add(new QuantityDiscountProduct("BGLO", 2.49, "Bagel", "Onion", 6));
+        this.inventory.add(new QuantityDiscountProduct("BGLE", 2.49, "Bagel", "Everything", 6));
+        this.inventory.add(new QuantityDiscountProduct("BGLP", 3.99, "Bagel", "Plain", 12));
+
 
     }
     public ArrayList<Product> getInventoryItem(){

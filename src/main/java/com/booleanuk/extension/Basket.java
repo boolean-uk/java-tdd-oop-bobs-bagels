@@ -1,4 +1,4 @@
-package com.booleanuk.core;
+package com.booleanuk.extension;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -15,12 +15,16 @@ public class Basket {
         this.inventoryProduct = new Inventory();
     }
 
-    public boolean addItem(Bagel item) {
-        if (isFull() || item.getQuantity() > this.capacity) {
+    public boolean addItem(Product item) {
+        if (isFull()) {
             return false;
         }
         else if(!isItemInInventory(item)){
             System.out.println("Product is not in our inventory!");
+            return false;
+        }
+        else if(item.getQuantity() > capacity){
+            System.out.println("The quantity of the product exceeds the basket's capacity. Please try adding fewer items!");
             return false;
         }
         this.basket.add(item);
@@ -39,9 +43,8 @@ public class Basket {
         return item +" removed from basket";
     }
 
-
     public boolean isFull(){
-        if( this.basket.size() >= this.capacity){
+        if( this.basket.size() >= capacity){
             System.out.println("Basket is full");
             return true;
         }
@@ -57,7 +60,6 @@ public class Basket {
 
     public double getTotalCost(){
         double total = 0.0;
-
         for(Product item : basket){
            total+= item.getPrice();
         }
@@ -65,11 +67,13 @@ public class Basket {
         return roundedTotal.doubleValue();
     }
 
+
     public double getItemCost(Bagel item){
         return item.getPrice();
     }
 
-    public String addingFillingWhenBagelInBasket( Product filling) {
+
+    public String addingFillingWhenBagelInBasket( Filling filling) {
         boolean bagelInBasket = false;
         for(Product item : this.basket){
             if(item instanceof Bagel){
@@ -85,6 +89,7 @@ public class Basket {
         }
     }
 
+
     public double getFillingCost(Filling item){
         return item.getPrice();
     }
@@ -93,5 +98,22 @@ public class Basket {
        return inventoryProduct.getInventoryItem().contains(item);
     }
 
+
+
+    public static void main(String[] arg){
+        Basket basket = new Basket(30);
+        Product bagel1 = new Bagel("BGLO",0.49, "Bagel", "Onion" );
+        Product bagel2 = new Bagel("BGLO",0.49, "Bagel", "Onion" );
+        Product comboProduct = new ComboDiscountProduct(new String[]{"COFB", "BGLO"}, 1.25, "Coffee & Bagel");
+        Product filling = new Filling("FILB",0.12, "Filling", "Bacon");
+        Product quantity = new QuantityDiscountProduct("BGLO", 2.49, "Bagel", "Onion", 6);
+        basket.addItem(bagel1);
+        basket.addItem(bagel2);
+        basket.addItem(comboProduct);
+        basket.addItem(filling);
+        basket.addItem(quantity);
+        System.out.println(basket.getTotalCost());
+
+    }
 
 }

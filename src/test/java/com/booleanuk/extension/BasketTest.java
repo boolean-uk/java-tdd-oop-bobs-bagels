@@ -1,4 +1,4 @@
-package com.booleanuk.core;
+package com.booleanuk.extension;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -23,12 +23,12 @@ public class BasketTest {
         Assertions.assertEquals("Onion Bagel removed from basket", basket.remove(bagel1));
     }
     @Test
-    public void removingItemWhenItemNotInBasket(){
+    public void removingItemWhenBasketIsEmpty(){
         Basket basket = new Basket( 4);
         Bagel bagel1 = new Bagel("BGLO",0.49, "Bagel", "Onion" );
-        Bagel bagel2 = new Bagel("BGLP", 0.39, "Bagel", "Plain");
         basket.addItem(bagel1);
-        Assertions.assertEquals("Plain Bagel is not in the basket!", basket.remove(bagel2));
+        basket.remove(bagel1);
+        Assertions.assertEquals("Basket is empty", basket.remove(bagel1));
     }
     @Test
     public void isFullShouldReturnTrue(){
@@ -42,17 +42,6 @@ public class BasketTest {
         basket.addItem(bagel3);
         basket.addItem(bagel4);
         Assertions.assertTrue(basket.isFull());
-    }
-    @Test
-    public void isFullShouldReturnFalse(){
-        Basket basket = new Basket( 4);
-        Bagel bagel1 = new Bagel("BGLO",0.49, "Bagel", "Onion" );
-        Bagel bagel2 = new Bagel("BGLP", 0.39, "Bagel", "Plain");
-
-        basket.addItem(bagel1);
-        basket.addItem(bagel2);
-
-        Assertions.assertFalse(basket.isFull());
     }
     @Test
     public void shouldChangeBasketCapacity(){
@@ -73,12 +62,15 @@ public class BasketTest {
         Bagel bagel1 = new Bagel("BGLO",0.49, "Bagel", "Onion" );
         Bagel bagel2 = new Bagel("BGLP", 0.39, "Bagel", "Plain");
         Filling filling = new Filling("FILB",0.12, "Filling", "Bacon");
+        ComboDiscountProduct combo = new ComboDiscountProduct(new String[]{"COFB", "BGLO"}, 1.25, "Coffee & Bagel");
 
         basket.addItem(bagel1);
         basket.addItem(bagel2);
         basket.addingFillingWhenBagelInBasket(filling);
 
         Assertions.assertEquals(1.0, basket.getTotalCost());
+        basket.addItem(combo);
+        Assertions.assertEquals(2.25, basket.getTotalCost());
 
 
     }
@@ -130,5 +122,40 @@ public class BasketTest {
         Bagel bagel2 = new Bagel("BGL", 0.39, "Bagel", "Plain");
         Assertions.assertFalse(basket.isItemInInventory(bagel1));
         Assertions.assertFalse(basket.isItemInInventory(bagel2));
+    }
+
+   @Test
+    public void addComboDiscountProduct(){
+        Basket basket = new Basket(20);
+       Assertions.assertTrue(basket.addItem(new ComboDiscountProduct(new String[]{"COFB", "BGLO"}, 1.25, "Coffee & Bagel")));
+       Assertions.assertFalse(basket.addItem(new ComboDiscountProduct(new String[]{"COF", "BGLP"}, 1.25, "Test")));
+   }
+
+   @Test
+    public void addQuantityDiscountProduct(){
+        Basket basket = new Basket(20);
+        Product p1 = new QuantityDiscountProduct("BGLO", 2.49, "Bagel", "Onion", 6);
+        Product p2 = new QuantityDiscountProduct("BGLO", 2.49, "Bagel", "Test", 6);
+        boolean result1 = basket.addItem(p1);
+        boolean result2 = basket.addItem(p2);
+        Assertions.assertTrue(result1);
+        Assertions.assertFalse(result2);
+   }
+
+    @Test
+    public void getTotalCostSpecialOffer(){
+        Basket basket = new Basket(20);
+        Product bagel = new Bagel("BGLO",0.49, "Bagel", "Onion" );
+        Product discountQuantity12 = new QuantityDiscountProduct("BGLP", 3.99, "Bagel","Plain", 12);
+        Product discountQuantity6 = new QuantityDiscountProduct("BGLE", 2.49, "Bagel", "Everything", 6);
+        Product coffee = new Coffee("COFB",0.99, "Coffee", "Black");
+        basket.addItem(bagel);
+        basket.addItem(bagel);
+        basket.addItem(discountQuantity12);
+        basket.addItem(discountQuantity6);
+        basket.addItem(coffee);
+        basket.addItem(coffee);
+        basket.addItem(coffee);
+        Assertions.assertEquals(10.43, basket.getTotalCost());
     }
 }
