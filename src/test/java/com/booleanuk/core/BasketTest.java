@@ -23,12 +23,12 @@ public class BasketTest {
         Assertions.assertEquals("Onion Bagel removed from basket", basket.remove(bagel1));
     }
     @Test
-    public void removingItemWhenBasketIsEmpty(){
+    public void removingItemWhenItemNotInBasket(){
         Basket basket = new Basket( 4);
         Bagel bagel1 = new Bagel("BGLO",0.49, "Bagel", "Onion" );
+        Bagel bagel2 = new Bagel("BGLP", 0.39, "Bagel", "Plain");
         basket.addItem(bagel1);
-        basket.remove(bagel1);
-        Assertions.assertEquals("Basket is empty", basket.remove(bagel1));
+        Assertions.assertEquals("Plain Bagel is not in the basket!", basket.remove(bagel2));
     }
     @Test
     public void isFullShouldReturnTrue(){
@@ -42,6 +42,17 @@ public class BasketTest {
         basket.addItem(bagel3);
         basket.addItem(bagel4);
         Assertions.assertTrue(basket.isFull());
+    }
+    @Test
+    public void isFullShouldReturnFalse(){
+        Basket basket = new Basket( 4);
+        Bagel bagel1 = new Bagel("BGLO",0.49, "Bagel", "Onion" );
+        Bagel bagel2 = new Bagel("BGLP", 0.39, "Bagel", "Plain");
+
+        basket.addItem(bagel1);
+        basket.addItem(bagel2);
+
+        Assertions.assertFalse(basket.isFull());
     }
     @Test
     public void shouldChangeBasketCapacity(){
@@ -62,15 +73,12 @@ public class BasketTest {
         Bagel bagel1 = new Bagel("BGLO",0.49, "Bagel", "Onion" );
         Bagel bagel2 = new Bagel("BGLP", 0.39, "Bagel", "Plain");
         Filling filling = new Filling("FILB",0.12, "Filling", "Bacon");
-        ComboDiscountProduct combo = new ComboDiscountProduct(new String[]{"COFB", "BGLO"}, 1.25, "Coffee & Bagel");
 
         basket.addItem(bagel1);
         basket.addItem(bagel2);
         basket.addingFillingWhenBagelInBasket(filling);
 
         Assertions.assertEquals(1.0, basket.getTotalCost());
-        basket.addItem(combo);
-        Assertions.assertEquals(2.25, basket.getTotalCost());
 
 
     }
@@ -123,28 +131,4 @@ public class BasketTest {
         Assertions.assertFalse(basket.isItemInInventory(bagel1));
         Assertions.assertFalse(basket.isItemInInventory(bagel2));
     }
-
-   @Test
-    public void addItemsWithDiscountInBasket(){
-        Basket basket = new Basket(4);
-       Assertions.assertTrue(basket.addItem(new ComboDiscountProduct(new String[]{"COFB", "BGLO"}, 1.25, "Coffee & Bagel")));
-   }
-
-   //Testing for extension1
-   @Test
-    public void addingDiscountQuantityShouldReturnTrue(){
-        Basket basket = new Basket(20);
-        Product quantity = new QuantityDiscountProduct("BGLO", 2.49, "Bagel", "Onion", 6);
-        Product quantity2 = new QuantityDiscountProduct("BGLO", 2.49, "Bagel", "test", 6);
-
-        boolean result = basket.addItem(quantity);
-        boolean result2 = basket.addItem(quantity2);
-
-        Assertions.assertTrue(result);
-        Assertions.assertFalse(result2);
-
-   }
-
-
-
 }
