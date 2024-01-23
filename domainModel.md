@@ -69,16 +69,16 @@ I want customers to only be able to order things that we stock in our inventory.
 ```
 
 
-| Class   | Variables       | Methods              |
-|---------|-----------------|----------------------|
-| Product | String: sku     | getSKU(): String     |
-| Bagel   | double: price   | setSKU(): void       |
-| Coffee  | String: name    | getPrice(): double   |
-| Filling | String: variant | setPrice(): void     |
-|         |                 | getName(): String    |
-|         |                 | setName(): void      |
-|         |                 | getVariant(): String |
-|         |                 | setVariant(): void   |
+| Class                   | Variables       | Methods              |
+|-------------------------|-----------------|----------------------|
+| Product                 | String: sku     | getSKU(): String     |
+| Bagel                   | double: price   | setSKU(): void       |
+| Coffee                  | String: name    | getPrice(): double   |
+| Filling                 | String: variant | setPrice(): void     |
+| ComboDiscountProduct    | int: quantity   | getName(): String    |
+| QuantityDiscountProduct | String[]: sku   | setName(): void      |
+|                         |                 | getVariant(): String |
+|                         |                 | setVariant(): void   |
 
 
 | Class     | Variables                    | Methods                                |
