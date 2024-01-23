@@ -54,43 +54,43 @@ So we don't get any weird requests,
 I want customers to only be able to order things that we stock in our inventory.
 ```
 
-| Classes         | Members            | Methods                 | Scenario                     | Result/output           |
-|-----------------|--------------------|-------------------------|------------------------------|-------------------------|
-| Product         | String sku         | getSku()                |                              | each method return the  |
-| Bagel extends   | String type        | getVariant()            |                              | value of the connected  |
-| Coffee extends  | String variant     | getPrice()              |                              | attribute               |
-| Filling extends | double price       | getType()               |                              |                         |
-|                 |                    |                         |                              |                         |
-|                 |                    |                         |                              |                         |
-|                 |                    |                         |                              |                         |
-| Inventory       | List<Product> menu | getInventory()          | Manager wants to see the     | returns current stock   |
-|                 |                    |                         | the current stock of an item | value of item           |
-|                 | HashMap<String,    | addToMenu()             | Manager can add items to     | returns nothing, adds   |
-|                 | Integer> inventory |                         | the menu                     | items to inventory      |
-|                 |                    | getMenu()               | User wants to see the        | returns the menu as a   |
-|                 |                    |                         | menu before adding items     | string                  |
-|                 |                    | isInStock()             | Checks if the wanted         | returns true if in stock |
-|                 |                    |                         | item is in stock             | else returns false      |
-|                 |                    | decreaseStock()         | When item is added the       | returns nothing, just   |
-|                 |                    |                         | stock decreases by 1         | updates inventory value |
-|                 |                    |                         |                              |                         |
-|                 |                    |                         |                              |                         |
-|                 |                    |                         |                              |                         |
-| Basket          | ArrayList<>        | addItem()               | User want to add item        | returns String telling  |
-|                 | basket             |                         | into basket                  | what has been added     |
-|                 |                    | addBagelWithFilling()   | User wants to add            | Adds both bagel and     |
-|                 |                    |                         | filling to the bagel         | filling to the basket   |
-|                 |                    |                         |                              |                         |
-|                 |                    | removeItem()            | User wants to remove         | returns String telling  |
-|                 |                    |                         | item from basket             | what has been removed   |
-|                 |                    | calculateTotalCost()    | Calculates the total         | returns total basket    |
-|                 |                    |                         | cost of the basket           | value after change      |
-|                 |                    | changeCapacity()        | Manager wants to update      | returns int with        |
-|                 |                    |                         | basket capacity              | the new capacity        |
-|                 |                    | basketIsFull()          | Checks if the basket has     | returns true if it's    |
-|                 |                    |                         | reached capacity             | full, else return false |
-|                 |                    | currentBasketToString() | User wants to see whats      | returns a string of     |
-|                 |                    |                         | currently inside the         | every item with every   |
-|                 |                    |                         | basket                       | attribute               |
-|                 |                    | getItemBasket()         |                              | returns basket as array |
-|                 |                    |                         |                              | list                    |
+| Classes            | Members            | Methods                 | Scenario                     | Result/output            |
+|--------------------|--------------------|-------------------------|------------------------------|--------------------------|
+| Product            | String sku         | getSku()                |                              | each method return the   |
+| Bagel implements   | String type        | getVariant()            |                              | value of the connected   |
+| Coffee implements  | String variant     | getPrice()              |                              | attribute                |
+| Filling implements | double price       | getType()               |                              |                          |
+|                    |                    |                         |                              |                          |
+|                    |                    |                         |                              |                          |
+|                    |                    |                         |                              |                          |
+| Inventory          | List<Product> menu | getInventory()          | Manager wants to see the     | returns current stock    |
+|                    |                    |                         | the current stock of an item | value of item            |
+|                    | HashMap<String,    | addToMenu()             | Manager can add items to     | returns nothing, adds    |
+|                    | Integer> inventory |                         | the menu                     | items to inventory       |
+|                    |                    | getMenu()               | User wants to see the        | returns the menu as a    |
+|                    |                    |                         | menu before adding items     | string                   |
+|                    |                    | isInStock()             | Checks if the wanted         | returns true if in stock |
+|                    |                    |                         | item is in stock             | else returns false       |
+|                    |                    | decreaseStock()         | When item is added the       | returns nothing, just    |
+|                    |                    |                         | stock decreases by 1         | updates inventory value  |
+|                    |                    |                         |                              |                          |
+|                    |                    |                         |                              |                          |
+|                    |                    |                         |                              |                          |
+| Basket             | ArrayList<>        | addItem()               | User want to add item        | returns String telling   |
+|                    | basket             |                         | into basket                  | what has been added      |
+|                    |                    | addBagelWithFilling()   | User wants to add            | Adds both bagel and      |
+|                    |                    |                         | filling to the bagel         | filling to the basket    |
+|                    |                    |                         |                              |                          |
+|                    |                    | removeItem()            | User wants to remove         | returns String telling   |
+|                    |                    |                         | item from basket             | what has been removed    |
+|                    |                    | calculateTotalCost()    | Calculates the total         | returns total basket     |
+|                    |                    |                         | cost of the basket           | value after change       |
+|                    |                    | changeCapacity()        | Manager wants to update      | returns int with         |
+|                    |                    |                         | basket capacity              | the new capacity         |
+|                    |                    | basketIsFull()          | Checks if the basket has     | returns true if it's     |
+|                    |                    |                         | reached capacity             | full, else return false  |
+|                    |                    | currentBasketToString() | User wants to see whats      | returns a string of      |
+|                    |                    |                         | currently inside the         | every item with every    |
+|                    |                    |                         | basket                       | attribute                |
+|                    |                    | getItemBasket()         |                              | returns basket as array  |
+|                    |                    |                         |                              | list                     |
