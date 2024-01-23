@@ -5,21 +5,21 @@ import org.junit.jupiter.api.Test;
 
 class BasketTest {
     Item[] Items = {
-            new Item("BGLO", 0.49, "Bagel", "Onion"),
-            new Item("BGLP", 0.39, "Bagel", "Plain"),
-            new Item("BGLE", 0.49, "Bagel", "Everything"),
-            new Item("BGLS", 0.49, "Bagel", "Sesame"),
-            new Item("COFB", 0.99, "Coffee", "Black"),
-            new Item("COFW", 1.19, "Coffee", "White"),
-            new Item("COFC", 1.29, "Coffee", "Cappuccino"),
-            new Item("COFL", 1.29, "Coffee", "Latte"),
-            new Item("FILB", 0.12, "Filling", "Bacon"),
-            new Item("FILE", 0.12, "Filling", "Egg"),
-            new Item("FILC", 0.12, "Filling", "Cheese"),
-            new Item("FILX", 0.12, "Filling", "Cream Cheese"),
-            new Item("FILS", 0.12, "Filling", "Smoked Salmon"),
-            new Item("FILH", 0.12, "Filling", "Ham"),
-            new Item("FILm", 0.12, "Filling", "bacon")
+            new Bagel("BGLO", 0.49, "Bagel", "Onion"),
+            new Bagel("BGLP", 0.39, "Bagel", "Plain"),
+            new Bagel("BGLE", 0.49, "Bagel", "Everything"),
+            new Bagel("BGLS", 0.49, "Bagel", "Sesame"),
+            new Coffee("COFB", 0.99, "Coffee", "Black"),
+            new Coffee("COFW", 1.19, "Coffee", "White"),
+            new Coffee("COFC", 1.29, "Coffee", "Cappuccino"),
+            new Coffee("COFL", 1.29, "Coffee", "Latte"),
+            new Filling("FILB", 0.12, "Filling", "Bacon"),
+            new Filling("FILE", 0.12, "Filling", "Egg"),
+            new Filling("FILC", 0.12, "Filling", "Cheese"),
+            new Filling("FILX", 0.12, "Filling", "Cream Cheese"),
+            new Filling("FILS", 0.12, "Filling", "Smoked Salmon"),
+            new Filling("FILH", 0.12, "Filling", "Ham"),
+            new Filling("FILm", 0.12, "Filling", "bacon")
     };
     @Test
     public void addingAnItemToBasketReturnTrue(){
