@@ -2,7 +2,6 @@ package com.booleanuk.core;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class Basket {
     Inventory inventory;
@@ -16,10 +15,12 @@ public class Basket {
     }
 
     public boolean addBagel(Bagel bagel) {
-        if(currentIndex < maxCapacity) {
-            basket.add(bagel);
-            currentIndex++;
-            return true;
+        if(inventory.isBagelInInventory(bagel)) {
+            if (currentIndex < maxCapacity) {
+                basket.add(bagel);
+                currentIndex++;
+                return true;
+            }
         }
         return false;
     }
@@ -51,10 +52,13 @@ public class Basket {
 
     public boolean addFillingToBagel(Bagel bagel, Filling filling) {
         boolean fillingAdded = false;
-        for (Bagel b : basket) {
-            if (bagel.equals(b)) {
-                fillingAdded = b.addFilling(filling);
-                break;
+
+        if(inventory.isFillingInInventory(filling)) {
+            for (Bagel b : basket) {
+                if (bagel.equals(b)) {
+                    fillingAdded = b.addFilling(filling);
+                    break;
+                }
             }
         }
         return fillingAdded;

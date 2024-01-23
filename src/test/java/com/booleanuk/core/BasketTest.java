@@ -164,7 +164,7 @@ public class BasketTest {
         boolean addedBagelThatIsInInventory = basket.addBagel(bagel);
         Assertions.assertTrue(addedBagelThatIsInInventory);
 
-        Filling filling = new Filling("Strawberry Jam", "FSTR");
+        Filling filling = new Filling("Bacon", "FILB");
         boolean addedFillingThatIsInInventory = basket.addFillingToBagel(bagel, filling);
         Assertions.assertTrue(addedFillingThatIsInInventory);
     }

@@ -151,12 +151,12 @@ I'd like to know the cost of each filling before I add it to my bagel order.
 ```
 Class Inventory
 
-| Class vars                     | Methods          | Scenario                         | Return/Result |
-|--------------------------------|------------------|----------------------------------|---------------|
-| ArrayList<Bagel> allBagels     | getAllFillings() | get every filling name and price | ArrayList     |
-| ArrayList<Filling> allFillings | Inventory()      |                                  |               |
-| ArrayList<Coffee> allCoffees   |                  |                                  |               |
-|                                |                  |                                  |               |
+| Class vars                     | Methods          | Scenario                         | Return/Result      |
+|--------------------------------|------------------|----------------------------------|--------------------|
+| ArrayList<Bagel> allBagels     | getAllFillings() | get every filling name and price | ArrayList<Filling> |
+| ArrayList<Filling> allFillings | Inventory()      |                                  |                    |
+| ArrayList<Coffee> allCoffees   |                  |                                  |                    |
+|                                |                  |                                  |                    |
 
 
 Class Filling
@@ -176,9 +176,10 @@ I want customers to only be able to order things that we stock in our inventory.
 ```
 Class Inventory
 
-| Class vars                     | Methods                      | Scenario                    | Return/Result |
-|--------------------------------|------------------------------|-----------------------------|---------------|
-| ArrayList<Bagel> allBagels     | isItemInInventory(Item item) | if item is in inventory     | true          |
-| ArrayList<Filling> allFillings |                              | if item is not in inventory | false         |
-| ArrayList<Coffee> allCoffees   |                              |                             |               |
-| ArrayList<Item> allItems       |                              |                             |               |
+| Class vars                     | Methods                | Scenario                       | Return/Result |
+|--------------------------------|------------------------|--------------------------------|---------------|
+| ArrayList<Bagel> allBagels     | isBagelInInventory()   | if bagel is in inventory       | true          |
+| ArrayList<Filling> allFillings |                        | if bagel is not in inventory   | false         |
+| ArrayList<Coffee> allCoffees   |                        |                                |               |
+|                                | isFillingInInventory() | if filling is in inventory     | true          |
+|                                |                        | if filling is not in inventory | false         |
