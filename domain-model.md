@@ -125,11 +125,11 @@ I'd like to be able to choose fillings for my bagel.
 
 Class Basket
 
-| Class vars                                | Methods                                                     | Scenario                   | Return/Result |
-|-------------------------------------------|-------------------------------------------------------------|----------------------------|---------------|
-| HashMap<Bagel, ArrayList<Filling>> basket | addFillingToBagel(Bagel bagel, ArrayList<Filling> fillings) | if filling/s was added     | true          |
-| int maxCapacity                           |                                                             | if filling/s was not added | false         |
-| int currentIndex                          |                                                             |                            |               |
+| Class vars                                | Methods                                         | Scenario                   | Return/Result |
+|-------------------------------------------|-------------------------------------------------|----------------------------|---------------|
+| HashMap<Bagel, ArrayList<Filling>> basket | addFillingToBagel(Bagel bagel, Filling filling) | if filling/s was added     | true          |
+| int maxCapacity                           |                                                 | if filling/s was not added | false         |
+| int currentIndex                          |                                                 |                            |               |
 
 ```
 User story 9

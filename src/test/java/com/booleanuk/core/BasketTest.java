@@ -3,6 +3,8 @@ package com.booleanuk.core;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+
 public class BasketTest {
 
     //User story 1
@@ -15,7 +17,8 @@ public class BasketTest {
         Assertions.assertTrue(added);
     }
 
-    @Test void shouldReturnFalseIfBagelIsNotAddedToBasket() {
+    @Test
+    public void shouldReturnFalseIfBagelIsNotAddedToBasket() {
         Inventory inventory = new Inventory();
         Basket basket = new Basket(inventory);
         basket.addBagel(new Bagel("Sesame", "1234", 10));
@@ -28,7 +31,8 @@ public class BasketTest {
     }
 
     //User story 2
-    @Test void shouldReturnTrueIfBagelIsRemovedFromBasket() {
+    @Test
+    public void shouldReturnTrueIfBagelIsRemovedFromBasket() {
         Inventory inventory = new Inventory();
         Basket basket = new Basket(inventory);
         Bagel bagel = new Bagel("Sesame", "1234", 10);
@@ -37,7 +41,8 @@ public class BasketTest {
         Assertions.assertTrue(removed);
     }
 
-    @Test void shouldReturnFalseIfBagelIsNotRemovedFromBasket() {
+    @Test
+    public void shouldReturnFalseIfBagelIsNotRemovedFromBasket() {
         Inventory inventory = new Inventory();
         Basket basket = new Basket(inventory);
         Bagel bagel = new Bagel("Sesame", "1234", 10);
@@ -48,7 +53,8 @@ public class BasketTest {
     //User story 3 is handled in user story 1 test cases
 
     //User story 4
-    @Test void shouldAssertNewBasketSize() {
+    @Test
+    public void shouldAssertNewBasketSize() {
         Inventory inventory = new Inventory();
         Basket basket = new Basket(inventory);
         int originalSize = basket.maxCapacity;
@@ -59,7 +65,8 @@ public class BasketTest {
     //User story 5 is handled in user story 2 test cases
 
     //User story 6
-    @Test void shouldAssertTotalCostOfAllBagelsInBasket() {
+    @Test
+    public void shouldAssertTotalCostOfAllBagelsInBasket() {
         Inventory inventory = new Inventory();
         Basket basket = new Basket(inventory);
         Bagel bagel = new Bagel("Sesame", "1234", 10.10);
@@ -72,11 +79,24 @@ public class BasketTest {
     }
 
     //User story 7
-    @Test void shouldAssertPriceOfOneBagel() {
+    @Test
+    public void shouldAssertPriceOfOneBagel() {
         Bagel bagel = new Bagel("Sesame", "1234", 10.10);
         double expectedPrice = 10.10;
         double actualPrice = bagel.getPrice();
         Assertions.assertEquals(expectedPrice, actualPrice);
+    }
+
+    //User story 8
+    @Test
+    public void shouldReturnTrueIfFillingWasAdded() {
+        Inventory inventory = new Inventory();
+        Basket basket = new Basket(inventory);
+        Bagel bagel = new Bagel("Sesame", "1234", 10.10);
+        basket.addBagel(bagel);
+        Filling filling = new Filling("Cheese", "4321", 2.30);
+        boolean addedFilling = basket.addFillingToBagel(bagel, filling);
+        Assertions.assertTrue(addedFilling);
     }
 
 }
