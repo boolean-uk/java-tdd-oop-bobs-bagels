@@ -1,9 +1,6 @@
 package com.booleanuk.extension;
 
-import com.booleanuk.core.Basket;
-import com.booleanuk.core.Bagel;
-import com.booleanuk.core.BobsBagelsShop;
-import com.booleanuk.core.Item;
+import com.booleanuk.core.*;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -28,6 +25,32 @@ public class BasketTest {
 
         Assertions.assertEquals(5.95, basket.discountPerItem().get(bglo)[0]);
         Assertions.assertEquals(1.89, basket.discountPerItem().get(bglo)[1]);
+    }
+
+    @Test
+    public void noDiscountForMultipleCoffees() {
+        HashMap<Item, Integer> testInventory = new HashMap<>();
+        Item cofl = new Coffee("COFL", "Latte", 1.29);
+        testInventory.put(cofl, 30);
+        BobsBagelsShop shop = new BobsBagelsShop(testInventory);
+        Basket basket = new Basket(shop, 16);
+        basket.add(cofl); basket.add(cofl); basket.add(cofl); basket.add(cofl); basket.add(cofl); basket.add(cofl);
+
+        Assertions.assertEquals(7.74, basket.discountPerItem().get(cofl)[0]);
+        Assertions.assertEquals(0.0, basket.discountPerItem().get(cofl)[1]);
+    }
+
+    @Test
+    public void noDiscountForMultipleFillings() {
+        HashMap<Item, Integer> testInventory = new HashMap<>();
+        Item filh = new Filling("FILH", "Ham", 0.12);
+        testInventory.put(filh, 30);
+        BobsBagelsShop shop = new BobsBagelsShop(testInventory);
+        Basket basket = new Basket(shop, 16);
+        basket.add(filh); basket.add(filh); basket.add(filh); basket.add(filh); basket.add(filh); basket.add(filh);
+
+        Assertions.assertEquals(0.72, basket.discountPerItem().get(filh)[0]);
+        Assertions.assertEquals(0.0, basket.discountPerItem().get(filh)[1]);
     }
 
     @Test
