@@ -58,4 +58,27 @@ public class Basket {
     public double seeCost(Item item) {
         return item.getPrice();
     }
+
+    public double discount() {
+        double disc = 0.0;
+        int counter1 = 0;
+        int counter2 = 0;
+        for (Item item : list) {
+            if (item.getName().equals("Bagel")) {
+                counter1 ++;
+            }
+            if (item.getName().equals("Coffee")){
+                counter2 ++;
+            }
+        }
+        if (counter1 > 12) {
+            disc = (counter1 / 12) * 1.89;
+            if (counter1 % 12 > 6) {
+                disc = disc + 0.45;
+            }
+        } else if (counter1 > 6) {
+            disc = 0.45;
+        }
+        return disc;
+    }
 }
