@@ -169,3 +169,17 @@ Basket class
 |              |                     | add a counter to know if it is bagel    |                  |
 |              |                     | with topping or plain, and for coffee   |                  |
 |              |                     | Make discounts according to counter     |                  |
+```
+12.
+As the customer,
+So I know what I bought and the costs,
+I want to see a simple receipt of the items with amount and their price, with a total cost.
+```
+Basket class
+
+| Methods             | Member variables    | Scenario                                  | Output/result |
+|---------------------|---------------------|-------------------------------------------|---------------|
+| makeSimpleReceipt() | String[] basketArr  | Make an output with receipt format        | return output |
+|                     |                     | Add the the contents of basket with their |               |
+|                     |                     | name and variant + filling + price        |               |
+|                     |                     | add total cost + receipt format           |               |
