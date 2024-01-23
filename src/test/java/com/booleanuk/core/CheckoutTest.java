@@ -120,4 +120,15 @@ class CheckoutTest {
         String date = DateFormat.format(c.getTime());
         Assertions.assertTrue(receipt.contains("Your order will arrive: "+date));
     }
+
+    @Test
+    void orderSummaryEmptyOrder() {
+        Inventory inventory = new Inventory();
+        Discounts discounts = new Discounts(inventory);
+        Checkout checkout = new Checkout(inventory, discounts);
+        HashMap<String, Integer> basket = new HashMap<>();
+
+        Assertions.assertEquals("Order is empty", checkout.orderSummary(basket));
+
+    }
 }
