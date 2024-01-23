@@ -128,16 +128,23 @@ I want customers to only be able to order things that we stock in our inventory.
 |           |                              |                             |                      | return false       |
 
 
-## Extension 2
-
+## Extension 1
 ```
 As a customer,
 So I can see if my order is correct,
 I want a receipt with all my items and prices.
 ```
-| Class  | Methods                                     | Member variables           | Scenario              | Outputs/Results |
-|--------|---------------------------------------------|----------------------------|-----------------------|-----------------|
-| Order  | generateReceipt(ArrayList<String> itemList) | ArrayList<String> itemList | If receipt has items  | return receipt  |
-|        |                                             | StringBuilder receipt      |                       |                 |
-|        |                                             | totalCost                  | if no items in basket | return receipt  |
-|        |                                             |                            |                       | without items   |
+
+
+## Extension 2
+
+```
+As a customer,
+So I can get a good deal,
+I want discounts when I choose certain item combinations.
+```
+| Class  | Methods                                     | Member variables | Scenario | Outputs/Results |
+|--------|---------------------------------------------|------------------|----------|-----------------|
+|        |                                             |                  |          |                 |
+|        |                                             |                  |          |                 |
+|        |                                             |                  |          |                 |

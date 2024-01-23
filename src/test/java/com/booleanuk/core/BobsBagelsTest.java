@@ -207,4 +207,14 @@ class BobsBagelsTest {
 
 
     }
+//    @Test
+//    public void testDiscounts() {
+//        Basket basket = new Basket();
+//        Inventory inventory = new Inventory();
+//        Order order = new Order(inventory);
+//
+//        basket.addItem("BGLP");
+//        basket.addItem("BGLP");
+//    }
+
 }
