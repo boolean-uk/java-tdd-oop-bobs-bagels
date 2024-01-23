@@ -94,7 +94,7 @@ public class Receipt {
                 itemPrice = Double.parseDouble(Inventory.getInstance().getPriceInfo(itemSKU));
                 totalDiscount += (itemPrice * 12) - 3.99;
 
-                receipt.add(String.format("%-20s%-4s%-7.2f\n%-7s",i.getItemNameType(entry.getKey()), itemQuantity, parsePrice(String.valueOf((itemPrice * 12)
+                receipt.add(String.format("%-20s%-4s%-3.2f\n%-7s",i.getItemNameType(entry.getKey()), itemQuantity, parsePrice(String.valueOf((itemPrice * 12)
                         + (itemPrice * (itemQuantity - 12)) - ((itemPrice * 12) - 3.99))),  "                    (-" +parsePrice(String.valueOf((itemPrice * 12) - 3.99))) + ")\n");
 
 
@@ -103,7 +103,7 @@ public class Receipt {
                 itemPrice = Double.parseDouble(Inventory.getInstance().getPriceInfo(itemSKU));
                 totalDiscount += (itemPrice * 6) - 2.49;
 
-                receipt.add(String.format("%-20s%-4s%-7.2f\n%-7s",i.getItemNameType(entry.getKey()), itemQuantity, parsePrice(String.valueOf((itemPrice * 6)
+                receipt.add(String.format("%-20s%-4s%-3.2f\n%-7s",i.getItemNameType(entry.getKey()), itemQuantity, parsePrice(String.valueOf((itemPrice * 6)
                         + (itemPrice * (itemQuantity - 6)) - ((itemPrice * 6) - 2.49))),  "                    (-" +parsePrice(String.valueOf((itemPrice * 6) - 2.49))) + ")\n");
 
 
@@ -116,7 +116,7 @@ public class Receipt {
             }
             else{
                 itemPrice = Double.parseDouble(Inventory.getInstance().getPriceInfo(itemSKU));
-                receipt.add(String.format("%-20s%-4s%-7.2f\n",i.getItemNameType(entry.getKey()), itemQuantity,
+                receipt.add(String.format("%-20s%-4s%-3.2f\n",i.getItemNameType(entry.getKey()), itemQuantity,
                         parsePrice(String.valueOf(itemPrice * itemQuantity))));
 
             }

@@ -216,12 +216,12 @@ public class BagelTest {
                 """
                 
                 ----------------------------
-                Bagel Everything    6   2,49  \s
+                Bagel Everything    6   2,49
                                     (-0.45)
-                Bagel Plain         12  3,99  \s
+                Bagel Plain         12  3,99
                                     (-0.69)
-                Bagel Onion         2   0,98  \s
-                Coffee Black        3   2,97  \s
+                Bagel Onion         2   0,98
+                Coffee Black        3   2,97
                 
                 ----------------------------
                 Total				    10.43
