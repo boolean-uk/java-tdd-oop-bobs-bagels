@@ -16,7 +16,7 @@ public class Inventory {
 	public boolean inInventory(String id) {
 		boolean inInventory = false;
 		for (Item item : inventory) {
-			if (item.id.equals(id)) {
+			if (item.getId().equals(id)) {
 				return true;
 			}
 		}
@@ -148,4 +148,20 @@ public class Inventory {
 	}
 
 
+	public String getType(String id) {
+		try {
+			return getItem(id).getType();
+		} catch (NotInInventoryException e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	private Item getItem(String id) throws NotInInventoryException {
+		for(Item item : inventory){
+			if (item.getId().equals(id)){
+				return item;
+			}
+		}
+		throw new NotInInventoryException(id);
+	}
 }

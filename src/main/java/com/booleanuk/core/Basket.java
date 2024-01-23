@@ -64,9 +64,9 @@ public class Basket {
 					itemsExtra.add(id);
 					extra.put(index, itemsExtra);
 				}
-			} else throw new NotInInventoryException(id);
+			}
 
-		}
+		}else throw new NotInInventoryException(id);
 	}
 
 	public void removeExtra(int index, String id) {
@@ -110,25 +110,24 @@ public class Basket {
 	public String printReceipt() {
 
 		StringBuilder sb = new StringBuilder();
-		recieptStart(sb);
-		recieptItems(sb);
-		recieptEnding(sb);
+		receiptStart(sb);
+		receiptItems(sb);
+		receiptEnding(sb);
 		System.out.println(sb);
 		return sb.toString();
 	}
 
-	private void recieptItems(StringBuilder sb) {
-		HashSet<String> uniqueItems = new HashSet<>(items.values());
-		HashMap<String, Integer> itemOcurrance = countOccurrences(new ArrayList<>(items.values()), uniqueItems.toArray(new String[0]));
+	private void receiptItemsRegular(StringBuilder sb, ArrayList<String> itemsLeft) {
+		HashSet<String> uniqueItems = new HashSet<>(itemsLeft);
+		HashMap<String, Integer> itemOcurrance = countOccurrences(itemsLeft, uniqueItems.toArray(new String[0]));
 		for (String item : uniqueItems) {
 			try {
-				sb.append(String.format("%-10s", inventory.getName(item)));
+				sb.append(String.format("%-26s", inventory.getType(item) + " " + inventory.getName(item)));
 			} catch (NotInInventoryException e) {
 				throw new RuntimeException(e);
 			}
-			sb.append("       ");
-			sb.append(itemOcurrance.get(item));
-			sb.append("\t\t\u00A3");
+			sb.append(String.format("%3s", itemOcurrance.get(item)));
+			sb.append(String.format("%4s", "\u00A3"));
 			sb.append(String.format("%.2f", inventory.getPrice(item)));
 			sb.append("\n");
 		}
@@ -137,33 +136,81 @@ public class Basket {
 			itemOcurrance = countOccurrences(new ArrayList<>(extras), uniqueItems.toArray(new String[0]));
 			for (String item : extras) {
 				try {
-					sb.append(String.format("%-15s", inventory.getName(item)));
+					sb.append(String.format("%-26s", inventory.getType(item) + " " + inventory.getName(item)));
+
 				} catch (NotInInventoryException e) {
 					throw new RuntimeException(e);
 				}
-				sb.append("  ");
-				sb.append(itemOcurrance.get(item));
-
-				sb.append("\t\t\u00A3");
+				sb.append(String.format("%3s", itemOcurrance.get(item)));
+				sb.append(String.format("%4s", "\u00A3"));
 				sb.append(String.format("%.2f", inventory.getPrice(item)));
 				sb.append("\n");
 			}
 		}
 	}
 
-	private void recieptEnding(StringBuilder sb) {
-		sb.append("----------------------------\n");
-		sb.append("Total\t\t\t\t\t\u00A3").append(String.format("%.2f", getTotalCost())).append("\n");
-		sb.append("\n        Thank you\n	 for your order !\n");
+	private void receiptItems(StringBuilder sb) {
+		ArrayList<String> itemsLeft = new ArrayList<>(items.values());
+		HashSet<String> uniqueItems = new HashSet<>(items.values());
+		ArrayList<String> hasDiscount = fillHasDisciunt(uniqueItems);
+		HashMap<String, Integer> bulkAmount = fillBulkAmount(hasDiscount);
+		ArrayList<String> discountItems = moveDiscountItems(itemsLeft, bulkAmount);
+		HashSet<String[]> discountPairs = fillDiscountPairs(itemsLeft);
+
+		receiptItemsBulk(sb, discountItems);
+		receiptItemsCombo(sb, discountPairs, itemsLeft);
+		receiptItemsRegular(sb, itemsLeft);
 	}
 
-	private void recieptStart(StringBuilder sb) {
-		sb.append("\n    ~~~ Bob's Bagels ~~~\n");
+	private void receiptItemsCombo(StringBuilder sb, HashSet<String[]> discountPairs, ArrayList<String> itemsLeft) {
+
+		for (String[] pair : discountPairs) {
+			int smallest = calcSmallest(itemsLeft, pair);
+			removeComboitems(itemsLeft, pair, smallest);
+			sb.append(String.format("%-26s", "Bagel + Coffee Combo"));
+			sb.append(String.format("%3s", smallest));
+			sb.append(String.format("%4s", "\u00A3"));
+			sb.append(String.format("%.2f", 1.25));
+			sb.append("\n");
+		}
+
+	}
+
+	private void receiptItemsBulk(StringBuilder sb, ArrayList<String> itemsLeft) {
+		HashSet<String> uniqueItems = new HashSet<>(itemsLeft);
+		HashMap<String, Integer> itemOccurrence = countOccurrences(itemsLeft, uniqueItems.toArray(new String[0]));
+		for (String item : uniqueItems) {
+			try {
+				sb.append(String.format("%-26s", inventory.getType(item) + " " + inventory.getName(item)));
+			} catch (NotInInventoryException e) {
+				throw new RuntimeException(e);
+			}
+			sb.append(String.format("%3s", itemOccurrence.get(item)));
+			sb.append(String.format("%4s", "\u00A3"));
+			sb.append(String.format("%.2f", inventory.getPrice(item)));
+			sb.append("\n");
+			sb.append(String.format("%33s", "(-\u00A3"));
+			sb.append(String.format("%.2f", (inventory.getPrice(item) - inventory.getBulkAmount(item)) * itemOccurrence.get(item)));
+			sb.append(")");
+			sb.append("\n");
+		}
+
+	}
+
+
+	private void receiptEnding(StringBuilder sb) {
+		sb.append("----------------------------------------\n");
+		sb.append("Total\t\t\t\t\t\t\t\u00A3").append(String.format("%.2f", getTotalCost())).append("\n");
+		sb.append("\n               Thank you\n	        for your order !\n");
+	}
+
+	private void receiptStart(StringBuilder sb) {
+		sb.append("\n          ~~~ Bob's Bagels ~~~\n");
 		LocalDateTime currentTime = LocalDateTime.now();
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 		String formattedTime = currentTime.format(formatter);
-		sb.append("    ").append(formattedTime).append("\n");
-		sb.append("----------------------------\n");
+		sb.append("           ").append(formattedTime).append("\n");
+		sb.append("----------------------------------------\n");
 	}
 
 	private double calcBulkTotal(ArrayList<String> discountItems) {
@@ -204,6 +251,7 @@ public class Basket {
 		}
 		return total;
 	}
+
 	private int calcSmallest(ArrayList<String> itemsLeft, String[] pair) {
 		HashMap<String, Integer> occurrences = countOccurrences(itemsLeft, pair);
 		int smallest = Integer.MAX_VALUE;
@@ -214,6 +262,7 @@ public class Basket {
 		}
 		return smallest;
 	}
+
 	private int calcClosestMultiple(HashMap<String, Integer> bulkAmount, String bulkItem) {
 		int input = bulkAmount.get(bulkItem);
 		int target = inventory.getBulkBulk(bulkItem);
@@ -326,7 +375,6 @@ public class Basket {
 			removed = 0;
 		}
 	}
-
 
 
 }
