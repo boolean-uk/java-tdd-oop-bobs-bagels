@@ -1,6 +1,7 @@
 package com.booleanuk.core;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class Basket {
     public int capacity;
@@ -139,6 +140,7 @@ public class Basket {
         inventoryList.add(new Item("DIS12", 3.99d, "Discount", "12 bagels"));
         inventoryList.add(new Item("DISCB", 1.25d, "Discount", "Coffee + Bagel"));
 
+        Collections.sort(basketList);
         int counterBGL = 0;
         int counterCOF = 0;
 
@@ -175,12 +177,12 @@ public class Basket {
             for (int i = 0; i < discountCB ; i++) {
                 discount.add("DISCB");
             }
-            int remainer = counterCOF - remainingAfter6;
+            int remainder = counterCOF - remainingAfter6;
             int counter = 0;
-            System.out.println(remainer);
-            for (int i = 0; i < remainer; i++) {
+            System.out.println(remainder);
+            for (int i = 0; i < remainder; i++) {
                 for (int j = 0; j < basketList.size(); j++) {
-                    if (basketList.get(j).startsWith("COF") & counter < remainer){
+                    if (basketList.get(j).startsWith("COF") & counter < remainder){
                         counter++;
                         discount.add(basketList.get(j));
                     }
@@ -216,7 +218,8 @@ public class Basket {
         return Double.parseDouble(String.format("%.2f",price));
     }
 
-    //problem -> discount only to the first item
+    //problem -> no proper way to choose which coffee and bagel gets discount, chooses first in basketlist
+    // Can get cheaper based on positioning of bagel and coffee
 
     public static void main(String[] args) {
         int num = 25/12;

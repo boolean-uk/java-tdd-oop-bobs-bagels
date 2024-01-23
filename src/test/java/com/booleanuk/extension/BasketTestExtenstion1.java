@@ -115,13 +115,13 @@ public class BasketTestExtenstion1 {
         basket.addItem("BGLP");
         basket.addItem("BGLP");
         basket.addItem("BGLP");
+        basket.addItem("BGLP"); // 12 pcs => 3.99
         basket.addItem("BGLP");
         basket.addItem("BGLP");
-        basket.addItem("BGLP");
-        basket.addItem("BGLP");
-        basket.addItem("BGLP");
-        basket.addItem("COFB"); //0.99 => 1.25
-        basket.addItem("COFC"); //1.29 => 1.25
+        basket.addItem("BGLP"); // 0.39 => 0.00 (COF + BGL)
+        basket.addItem("BGLP"); // 0.39 => 0.00 (COF + BGL)
+        basket.addItem("COFB"); // 0.99 => 1.25 (COF + BGL)
+        basket.addItem("COFC"); // 1.29 => 1.25 (COF + BGL)
         basket.addItem("FILE");
         basket.addItem("FILE");
         basket.addItem("FILE");
@@ -133,13 +133,26 @@ public class BasketTestExtenstion1 {
     public void testDiscountMix() {
         Basket basket = new Basket();
         basket.changeCapacity(12);
-        basket.addItem("BGLO");
-        basket.addItem("COFB");
+        basket.addItem("BGLO"); // 0.49 => 0.00
+        basket.addItem("COFB"); // 0.99 => 1.25
         basket.addItem("COFC");
         basket.addFilling("BGLO","FILC");
         basket.addFilling("BGLO","FILX");
-        basket.addFilling("BGLP","FILX");
 
-        Assertions.assertEquals(0,basket.discount());
+
+        Assertions.assertEquals(2.48,basket.discount());
+    }
+
+    @Test
+    public void testDiscountMixDifferentOrder() {
+        Basket basket = new Basket();
+        basket.changeCapacity(12);
+        basket.addItem("BGLO"); // 0.49 => 0.00
+        basket.addItem("COFC");
+        basket.addItem("COFB"); // 0.99 => 1.25
+        basket.addFilling("BGLO","FILC");
+        basket.addFilling("BGLO","FILX");
+
+        Assertions.assertEquals(2.48,basket.discount());
     }
 }
