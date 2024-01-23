@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 public class Inventory {
     ArrayList<Filling> allFillings = new ArrayList<>();
+    ArrayList<Bagel> allBagels = new ArrayList<>();
 
     public Inventory() {
         Filling bacon = new Filling("Bacon", "FILB");
@@ -18,6 +19,15 @@ public class Inventory {
         this.allFillings.add(smokedSalmon);
         Filling ham = new Filling("Ham", "FILH");
         this.allFillings.add(ham);
+
+        Bagel onion = new Bagel("Onion", "BGLO", 0.49);
+        allBagels.add(onion);
+        Bagel plain = new Bagel("Plain", "BGLP", 0.39);
+        allBagels.add(plain);
+        Bagel everything = new Bagel("Everything", "BGLE", 0.49);
+        allBagels.add(everything);
+        Bagel sesame = new Bagel("Sesame", "BGLS", 0.49);
+        allBagels.add(sesame);
     }
 
     public ArrayList<Filling> getAllFillings() {
@@ -25,13 +35,17 @@ public class Inventory {
     }
 
     public boolean isBagelInInventory(String sku) {
-        //if()
-        return true;
+        for (Bagel bagel : allBagels) {
+            if (bagel.getSku().equalsIgnoreCase(sku)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public boolean isFillingInInventory(String sku) {
-        for(Filling filling : allFillings) {
-            if (filling.getSku().equals(sku)) {
+        for (Filling filling : allFillings) {
+            if (filling.getSku().equalsIgnoreCase(sku)) {
                 return true;
             }
         }
