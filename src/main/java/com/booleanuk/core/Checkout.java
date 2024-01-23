@@ -86,4 +86,50 @@ public class Checkout {
 
         return stringBuilder.toString();
     }
+
+    public String orderSummary(HashMap<String, Integer> basketMap) {
+        if (basketMap.isEmpty()) return "Order is empty";
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append(" Bob's Bagels \n");
+
+
+        double discountVal = 0;
+        String variantAndName = "";
+        double saved = 0;
+        double costEntry = 0;
+        int numOfItems = 0;
+
+        for(Map.Entry<String, Integer> entry: basketMap.entrySet()) {
+            discountVal = this.discounts.calculateDiscount(entry.getKey(), basketMap);
+            saved += discountVal;
+            numOfItems += entry.getValue();
+            costEntry = Math.round(((this.inventory.getProductCost(entry.getKey()) * entry.getValue())-discountVal)*100.0)/100.0;
+            variantAndName = inventory.findProduct(entry.getKey()).getVariant()+" "+inventory.findProduct(entry.getKey()).getName();
+
+            stringBuilder.append("\n").append(variantAndName).append(" x ").append(entry.getValue()).append(": $").append(costEntry);
+            if (discountVal != 0.0) {
+                stringBuilder.append(" (-$").append(discountVal).append(")").append("\n");
+            } else {
+                stringBuilder.append("\n");
+            }
+        }
+
+        double totCost = this.totalCostDiscount(basketMap);
+        stringBuilder.append("\nTotal: $").append(totCost).append("\n");
+        if (saved != 0) {
+            stringBuilder.append("You saved a total of $").append(saved).append("\n\n");
+        } else {
+            stringBuilder.append("\n");
+        }
+
+        SimpleDateFormat DateFormat = new SimpleDateFormat("HH:mm");
+        Calendar c = Calendar.getInstance();
+        c.setTimeInMillis(c.getTimeInMillis()+((long) numOfItems *60*1000));
+
+        String date = DateFormat.format(c.getTime());
+
+        stringBuilder.append("Your order will arrive: ").append(date);
+
+        return stringBuilder.toString();
+    }
 }
