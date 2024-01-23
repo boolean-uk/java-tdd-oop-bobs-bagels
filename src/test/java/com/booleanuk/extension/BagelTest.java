@@ -207,30 +207,25 @@ public class BagelTest {
         basket.addItem("COFB", 3);
         basket.addItem("BGLO", 2);
         String expected =
-                """
-                ~~~ Bob's Bagels ~~~
-                                
-                                """ +
+                "~~~ Bob's Bagels ~~~\n\n" +
                         LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")) +
-
-                """
-                
-                ----------------------------
-                Bagel Everything    6   2,49
-                                    (-0.45)
-                Bagel Plain         12  3,99
-                                    (-0.69)
-                Bagel Onion         2   0,98
-                Coffee Black        3   2,97
-                
-                ----------------------------
-                Total				    10.43
-                 You saved a total of 1.14
-                       on this shop
-                                
-                        Thank you
-                     for your order!
-                """;
+                        "\n" +
+                        "----------------------------\n" +
+                        "Bagel Everything    6   2,49\n" +
+                        "                    (-0.45)\n" +
+                        "Bagel Plain         12  3,99\n" +
+                        "                    (-0.69)\n" +
+                        "Bagel Onion         2   0,98\n" +
+                        "Coffee Black        3   2,97\n" +
+                        "\n" +
+                        "----------------------------\n" +
+                        "Total                   10.43\n" +
+                        " You saved a total of 1.14\n" +
+                        "       on this shop\n" +
+                        "\n" +
+                        "        Thank you\n" +
+                        "     for your order!";
+        Assertions.assertEquals(expected, basket.getReceipt());
         Assertions.assertEquals(expected, basket.getReceipt());
 
     }
