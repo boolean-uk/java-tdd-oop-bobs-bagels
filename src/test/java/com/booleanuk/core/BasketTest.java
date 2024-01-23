@@ -168,4 +168,18 @@ public class BasketTest {
         boolean addedFillingThatIsInInventory = basket.addFillingToBagel(bagel, filling);
         Assertions.assertTrue(addedFillingThatIsInInventory);
     }
+
+    @Test
+    public void shouldReturnFalseIfItemIsNotInInventory() {
+        Inventory inventory = new Inventory();
+        Basket basket = new Basket(inventory);
+
+        Bagel bagel = new Bagel("Onion", "ONION", 0.49);
+        boolean addedBagelThatIsInInventory = basket.addBagel(bagel);
+        Assertions.assertFalse(addedBagelThatIsInInventory);
+
+        Filling filling = new Filling("Bacon", "BACON");
+        boolean addedFillingThatIsInInventory = basket.addFillingToBagel(bagel, filling);
+        Assertions.assertFalse(addedFillingThatIsInInventory);
+    }
 }
