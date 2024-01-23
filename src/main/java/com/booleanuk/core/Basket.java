@@ -1,6 +1,8 @@
 package com.booleanuk.core;
 
 import java.sql.SQLOutput;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
@@ -15,20 +17,20 @@ public class Basket {
         //This should have been arraylist, but yeah
         this.fillingArr = new String[50];
         this.inventoryList = new ArrayList<>();
-        inventoryList.add(new Inventory("BGLO",0.49d,"Bagel","Onion"));
-        inventoryList.add(new Inventory("BGLP",0.39d,"Bagel","Plain"));
-        inventoryList.add(new Inventory("BGLE",0.49d,"Bagel","Everything"));
-        inventoryList.add(new Inventory("BGLS",0.49d,"Bagel","Sesame"));
-        inventoryList.add(new Inventory("COFB",0.99d,"Coffee","Black"));
-        inventoryList.add(new Inventory("COFW",1.19d,"Coffee","White"));
-        inventoryList.add(new Inventory("COFC",1.29d,"Coffee","Cappuccino"));
-        inventoryList.add(new Inventory("COFL",1.29d,"Coffee","Latte"));
-        inventoryList.add(new Inventory("FILB",0.12d,"Filling","Bacon"));
-        inventoryList.add(new Inventory("FILE",0.12d,"Filling","Egg"));
-        inventoryList.add(new Inventory("FILC",0.12d,"Filling","Cheese"));
-        inventoryList.add(new Inventory("FILX",0.12d,"Filling","Cream Cheese"));
-        inventoryList.add(new Inventory("FILS",0.12d,"Filling","Smoked Salmon"));
-        inventoryList.add(new Inventory("FILH",0.12d,"Filling","Ham"));
+        inventoryList.add(new Bagel("BGLO",0.49d,"Bagel","Onion"));
+        inventoryList.add(new Bagel("BGLP",0.39d,"Bagel","Plain"));
+        inventoryList.add(new Bagel("BGLE",0.49d,"Bagel","Everything"));
+        inventoryList.add(new Bagel("BGLS",0.49d,"Bagel","Sesame"));
+        inventoryList.add(new Coffee("COFB",0.99d,"Coffee","Black"));
+        inventoryList.add(new Coffee("COFW",1.19d,"Coffee","White"));
+        inventoryList.add(new Coffee("COFC",1.29d,"Coffee","Cappuccino"));
+        inventoryList.add(new Coffee("COFL",1.29d,"Coffee","Latte"));
+        inventoryList.add(new Filling("FILB",0.12d,"Filling","Bacon"));
+        inventoryList.add(new Filling("FILE",0.12d,"Filling","Egg"));
+        inventoryList.add(new Filling("FILC",0.12d,"Filling","Cheese"));
+        inventoryList.add(new Filling("FILX",0.12d,"Filling","Cream Cheese"));
+        inventoryList.add(new Filling("FILS",0.12d,"Filling","Smoked Salmon"));
+        inventoryList.add(new Filling("FILH",0.12d,"Filling","Ham"));
     }
 
     public String addProductToBasket(String product,String variant,String yesOrNo){
@@ -346,16 +348,23 @@ public class Basket {
         return fillingCost;
     }
 
-    public String makeCleanBasket(){
-        String output = "";
+    public String makeSimpleReceipt(){
         ArrayList<String> outputList = new ArrayList<>();
+        ArrayList<String> priceList = new ArrayList<>();
+        //Receipt format and text
+        String output = "\t~~~ Bob's Bagels ~~~\n\n";
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        LocalDateTime now = LocalDateTime.now();
+        String dateTime = dtf.format(now);
+        output += "\t"+dateTime+"\n\n----------------------------\n\n";
         //Add products to output
         for (int i = 0; i < basketArr.length; i++) {
             //Check if it is empty
             if(basketArr[i]!=null){
                 for (Inventory item : inventoryList) {
                     if (basketArr[i].equals(item.getSKU())) {
-                        outputList.add(item.getName()+" "+item.getVariant());
+                        outputList.add(item.getName()+" "+item.getVariant()+"\t\t");
+                        priceList.add(Double.toString(item.getPrice()));
                     }
                 }
             }
@@ -366,16 +375,86 @@ public class Basket {
             if(fillingArr[i]!=null){
                 for (Inventory item : inventoryList) {
                     if (fillingArr[i].equals(item.getSKU())) {
+                        //Find the bagel it belongs to
                         int pos = Integer.parseInt(fillingArr[i+1]);
+                        //Get the content of the bagel in the list
                         String oldString = outputList.get(pos);
-                        String newString = oldString + " Filling: "+item.getVariant();
+                        //New content with added filling
+                        String newString = oldString + " \n\tFilling: "+item.getVariant();
                         outputList.set(pos,newString);
+                        //Get the old price and add the fillingprice
+                        double price = Double.parseDouble(priceList.get(pos));
+                        price = price + item.getPrice();
+                        priceList.set(pos,Double.toString(price));
                     }
                 }
             }
         }
-        output = outputList.toString();
+        outputList = updateListForReceipt(outputList);
+
+        //output += "Product\t\t\t\tAmount\t\tPrice\n";
+
+        //Add the price to the array
+        ArrayList<String> combined = new ArrayList<>();
+        for (int i = 0; i < outputList.size(); i+=2) {
+            combined.add(outputList.get(i));
+            double amount = Double.parseDouble(outputList.get(i+1));
+            combined.add(Double.toString(amount));
+
+            int priceIndex = i/2;
+            if (priceIndex<priceList.size()){
+                double newPrice = Double.parseDouble(priceList.get(i/2))*amount;
+                combined.add(Double.toString(newPrice));
+            }
+        }
+        //Make copy over the list
+        outputList = combined;
+
+
+        for (int i = 0; i < outputList.size(); i+=3) {
+            output += outputList.get(i)+"\t\t"+outputList.get(i+1)+"\t\t"+outputList.get(i+2)+"\n";
+        }
+
+        output += "\n\n----------------------------\nTotal: \t\t\t\t\t"+totalCost();
+        output += "\n\n\t\t Thank you\n \t\tfor your order!";
         return output;
+    }
+
+    public ArrayList<String> updateListForReceipt(ArrayList<String> originalList){
+        ArrayList<String> updatedList = new ArrayList<>();
+        ArrayList<Integer> removeItems = new ArrayList<>();
+        //Copy the content of the list and add a counter for each
+        //object in the list
+        for (int i = 0; i < originalList.size(); i++) {
+            updatedList.add(originalList.get(i));
+            updatedList.add("1");
+        }
+        //Count how many times the same object is inside the list
+        for (int i = 0; i < updatedList.size(); i+=2) {
+            for (int j = i+2; j < updatedList.size(); j+=2) {
+                if(updatedList.get(i).equals(updatedList.get(j))){
+                    int count = Integer.parseInt(updatedList.get(i+1));
+                    count += 1;
+                    updatedList.set(i+1,Integer.toString(count));
+                    removeItems.add(j);
+                }
+            }
+        }
+        //Remove the position in the updatedlist that is stored in the removeItems list
+        for (int i = removeItems.size()-1;i>=0; i--) {
+            int removeIndex = removeItems.get(i);
+
+            if(removeIndex+1 < updatedList.size()){
+                //Remove the counter
+                updatedList.remove(removeIndex+1);
+            }
+            if(removeIndex < updatedList.size()){
+                updatedList.remove(removeIndex);
+            }
+
+        }
+
+        return updatedList;
     }
     public static void main(String[] args) {
         Basket basket = new Basket();
@@ -384,10 +463,15 @@ public class Basket {
         basket.addFilling("Egg","Yes");
         basket.addFilling("Bacon","Yes");
         basket.addProductToBasket("Bagel","Plain","Yes");
-        basket.addProductToBasket("Coffee","Black","Yes");
+        basket.addProductToBasket("Bagel","Plain","Yes");
         basket.addFilling("Egg","Yes");
-        System.out.println(basket.makeCleanBasket());
-        System.out.println(basket.totalFillingCost());
+        basket.addProductToBasket("Bagel","Plain","Yes");
+        basket.addProductToBasket("Coffee","Black","Yes");
+        basket.addProductToBasket("Coffee","Cappuccino","Yes");
+        basket.addFilling("Egg","Yes");
+        System.out.println(basket.makeSimpleReceipt());
+
+
         /*
         Scanner scanner = new Scanner(System.in);
         String input = "";
