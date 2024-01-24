@@ -67,7 +67,7 @@ public class Basket {
             if (item.getName().equals("Bagel")) {
                 counter1 ++;
             }
-            if (item.getName().equals("Coffee")){
+            if (item.getSku().equals("COFB")){
                 counter2 ++;
             }
         }
@@ -78,6 +78,10 @@ public class Basket {
             }
         } else if (counter1 > 6) {
             disc = 0.45;
+        }
+        int times = Math.min(counter1, counter2);
+        for (int i = 0; i < times; i++) {
+            disc = disc + 0.23;
         }
         return disc;
     }
