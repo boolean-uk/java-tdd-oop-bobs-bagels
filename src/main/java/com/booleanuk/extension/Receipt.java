@@ -25,7 +25,7 @@ public class Receipt {
         StringBuilder receipt = new StringBuilder();
         receipt.append(createHeader());
         for (Item item : basket.getBasketContent().keySet()) {
-            String tabsAfterItem = "";
+            String tabsAfterItem;
             int variantLength = item.getVariant().length() + item.getName().length() + 1;
             if (variantLength < 12){tabsAfterItem = "\t\t\t\t";}
             else if (variantLength < 16){tabsAfterItem = "\t\t\t";}
@@ -77,7 +77,7 @@ public class Receipt {
         HashMap<Item, int[]> mapPriceAndSavings = this.basket.discountPerItem();
         double totalSavings = 0.0;
         for (Item item : basket.getBasketContent().keySet()) {
-            String tabsAfterItem = "";
+            String tabsAfterItem;
             int variantLength = item.getVariant().length() + item.getName().length() + 1;
             if (variantLength < 12){tabsAfterItem = "\t\t\t\t";}
             else if (variantLength < 16){tabsAfterItem = "\t\t\t";}
