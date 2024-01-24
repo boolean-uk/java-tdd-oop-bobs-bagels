@@ -88,18 +88,27 @@ Basket
 |                                  | getProducts()                   | getter for products variable. to see what is in basket.                   | products                                                                                     |                      |
 |                                  | getUser()                       | getter for user variable.                                                 | user                                                                                         |                      |
 |                                  | getCapacity()                   | getter for capacity variable.                                             | capacity                                                                                     |                      |
-|                                  | setCapacity(String)             | setter for capacity variable.                                             | Can set new value for capacity if user is manager and the new value is a positive number.    |                      |
+|                                  | setCapacity(int)                | setter for capacity variable.                                             | Can set new value for capacity if user is manager and the new value is a positive number.    |                      |
 |                                  | checkout()                      | for when the customer wants to pay.                                       | displays a receipt                                                                           |                      |
-|                                  |                                 |                                                                           |                                                                                              |                      |
+|                                  | applyDiscount()                 | applies discount. 12 bagels for 3.99 and 6 bagels for 2.49                | true if discount applied, false if not                                                       |                      |
+|                                  | printReceipt()                  | overview after checkout.                                             | a full print of receipt, displays discounts and total cost                                   |                      |
+
+Bagel ()
+
+| Methods         | Member Variables        | Scenario                                                                          |
+|-----------------|-------------------------|-----------------------------------------------------------------------------------|
+| getMoneySaved() | double moneySaved       | if discount is applied, holds difference between price before and after discount. |
+| setPrice()      |                         | new price.                                                                        |
 
 Product
 
-| Member Variables | Scenario                                                 |
-|------------------|----------------------------------------------------------|
-| String SKU       | Unique identifier, product code                          |
-| String type      | Every product is either of type bagel, coffee or filling |
-| double price     | Price of product                                         |
-| String name      | Name of product                                          |
+| Methods       | Member Variables        | Scenario                        |
+|---------------|-------------------------|---------------------------------|
+| getSKU()      | String SKU              | Unique identifier, product code |
+| getName()     | String name             | Name og product.                |
+| getPrice()    | double price            | Price of product                |
+| hasDiscount() | boolean appliedDiscount | Does not have discount.         |
+| getType()     |                         |                                 |
 
 
 

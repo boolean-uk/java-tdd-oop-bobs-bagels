@@ -1,5 +1,6 @@
 package com.booleanuk.extension;
 
+import com.booleanuk.core.Bagel;
 import com.booleanuk.core.Basket;
 import com.booleanuk.core.Product;
 import com.booleanuk.core.User;
@@ -19,6 +20,7 @@ public class BasketExtension extends Basket {
 
     public boolean checkout(){
         if (items > 0){
+            applyDiscount();
             printReceipt();
             emptyBasket();
             return true;
@@ -26,6 +28,21 @@ public class BasketExtension extends Basket {
             System.out.println("Your cart is empty.");
             return false;
         }
+    }
+
+    public boolean applyDiscount(){
+        boolean discount = false;
+
+        for (Product product : products.keySet()){
+            if (products.get(product) == 12 && product instanceof Bagel){
+                ((Bagel) product).setPrice(3.99/12);
+                discount = true;
+            } else if (products.get(product) == 6 && product instanceof Bagel){
+                ((Bagel) product).setPrice(2.49/6);
+                discount = true;
+            }
+        }
+        return discount;
     }
 
     private void printReceipt(){
@@ -39,7 +56,12 @@ public class BasketExtension extends Basket {
 
         for (Product product : products.keySet()){
             String item = product.getName() + " " + product.getType();
-            System.out.printf(" %-25s %-3s \u00A3%5.2f %n", item, products.get(product), product.getPrice()*products.get(product));
+            System.out.printf(" %-25s %-3s %2s\u00A3%.2f %n", item, products.get(product), "", product.getPrice()*products.get(product));
+
+            if (product.hasDiscount()){
+                double moneySaved = ((Bagel) product).getMoneySaved();
+                System.out.printf("%-31s(-\u00A3%.2f) %n", "", moneySaved * products.get(product));
+            }
         }
 
         System.out.printf("%n--------------------------------------%n");

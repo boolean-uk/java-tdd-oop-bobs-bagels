@@ -51,4 +51,19 @@ public class TestBasketExtension {
         basket.add("COFB");
         basket.checkout();
     }
+
+    @Test
+    public void testDiscount(){
+        BasketExtension basket = new BasketExtension(new Manager());
+        basket.updateCapacity(35);
+
+        for (int i = 0; i < 12; i++){
+            basket.add("BGLS");
+        }
+        for (int i = 0; i < 6; i++){
+            basket.add("BGLO");
+        }
+
+        Assertions.assertTrue(basket.applyDiscount());
+    }
 }

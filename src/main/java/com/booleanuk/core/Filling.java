@@ -32,4 +32,9 @@ public class Filling implements Product {
     public double getPrice(){
         return 0.12;
     }
+
+    @Override
+    public boolean hasDiscount() {
+        return false;
+    }
 }

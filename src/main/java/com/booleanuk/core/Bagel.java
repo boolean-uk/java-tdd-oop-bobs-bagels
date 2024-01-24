@@ -3,7 +3,9 @@ package com.booleanuk.core;
 public class Bagel implements Product{
     private final String SKU;
     private final String name;
-    private final double price;
+    private double price;
+    private boolean appliedDiscount = false;
+    private double moneySaved = 0;
 
     public Bagel(String SKU){
         switch (SKU) {
@@ -42,5 +44,18 @@ public class Bagel implements Product{
 
     public double getPrice(){
         return price;
+    }
+
+    public void setPrice(double price){
+        moneySaved = this.price - price;
+        this.price = price;
+        appliedDiscount = true;
+    }
+    public double getMoneySaved(){
+        return moneySaved;
+    }
+
+    public boolean hasDiscount(){
+        return appliedDiscount;
     }
 }

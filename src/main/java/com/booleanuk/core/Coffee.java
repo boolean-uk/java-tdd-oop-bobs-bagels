@@ -4,6 +4,7 @@ public class Coffee implements Product{
     private final String SKU;
     private final String name;
     private final double price;
+    boolean appliedDiscount = false;
 
     public Coffee(String SKU){
         switch (SKU){
@@ -42,5 +43,10 @@ public class Coffee implements Product{
 
     public double getPrice(){
         return price;
+    }
+
+    @Override
+    public boolean hasDiscount() {
+        return false;
     }
 }
