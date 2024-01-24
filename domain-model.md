@@ -141,31 +141,25 @@ Assumptions:
 
 | BulkDiscount  |
 |---------------|
-| sku: String   |
 | number: int   |
-| price: double |
 
 | ComboDiscount |
 |---------------|
-| sku: String   |
 | name: String  |
-| price: double |
 ```
 As a customer,
 So I know how much money I need,
 I'd like to know what the total cost of items in my basket will be after the discounts are added in.
 ```
-| Class     | Method                                                                          | Variables                | Scenario                                                                                               | Return value                                                      |
-|-----------|---------------------------------------------------------------------------------|--------------------------|--------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------|
-| Basket    | totalCostDiscount(HashMap<String, Integer> basketMap)                           | Inventory inventory      | Basket has multiple products in it, but no discounts                                                   | Return sum of all products (double)                               |
-|           |                                                                                 | Discount discount        | Basket has multiple products in it, with discounts.                                                    | Return sum of all products - saved amount from discounts (double) |
-|           |                                                                                 |                          | Basket is empty                                                                                        | Return 0                                                          |
-| Discounts | calculateDiscount(String sku, HashMap<String, Integer> basketMap)               | List<Discount> discounts | No discount found                                                                                      | Return 0                                                          |
-|           |                                                                                 |                          | Discount found, the type of discount is discerned and the appropriate discount method is called        | Return value returned from calculateCombo/BulkDiscount            |
-| Discounts | calculateBulkDiscount(String sku, int num, BulkDiscount discount)               | Inventory inventory      | There is a discount for the input element. The amount you save by utilizing the discount is calculated | Return saved amount (double)                                      |
-|           |                                                                                 |                          | The discount item is not found in inventory                                                            | Return 0                                                          |
-| Discounts | calculateComboDiscount(String sku, Set<String> skuList, ComboDiscount discount) | Inventory inventory      | There is a discount for the input element. The amount you save by utilizing the discount is calculated | Return saved amount (double)                                      |
-|           |                                                                                 |                          | The discount item is not found in inventory                                                            | Return 0                                                          |
+| Class         | Method                                                                           | Variables                | Scenario                                                                                        | Return value                                                      |
+|---------------|----------------------------------------------------------------------------------|--------------------------|-------------------------------------------------------------------------------------------------|-------------------------------------------------------------------|
+| Basket        | totalCostDiscount(HashMap<String, Integer> basketMap)                            | Inventory inventory      | Basket has multiple products in it, but no discounts                                            | Return sum of all products (double)                               |
+|               |                                                                                  | Discount discount        | Basket has multiple products in it, with discounts.                                             | Return sum of all products - saved amount from discounts (double) |
+|               |                                                                                  |                          | Basket is empty                                                                                 | Return 0                                                          |
+| Discounts     | calculateDiscounts(String sku, HashMap<String, Integer> basketMap)               | List<Discount> discounts | No discount found                                                                               | Return 0                                                          |
+|               |                                                                                  |                          | Discount found, the type of discount is discerned and the appropriate discount method is called | Return value returned from calculateCombo/BulkDiscount            |
+| BulkDiscount  | calculateDiscount(String sku, HashMap<String, Integer> map, Inventory inventory) |                          | The amount you save by utilizing the discount is calculated                                     | Return saved amount (double)                                      |
+| ComboDiscount | calculateDiscount(String sku, HashMap<String, Integer> map, Inventory inventory) |                          | The amount you save by utilizing the discount is calculated                                     | Return saved amount (double)                                      |
 
 ## Extension 3
 ```
