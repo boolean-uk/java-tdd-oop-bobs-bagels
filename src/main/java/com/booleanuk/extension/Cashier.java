@@ -31,8 +31,8 @@ public class Cashier {
                         System.out.print("Enter quantity of deal to add: ");
                         int quantityToAddCaB = userInput.nextInt();
                         basket.addItems(inventory, "COFD", quantityToAddCaB);
+                        break;
                     }
-                    break;
                 }
                 System.out.print("Enter quantity to add: ");
                 int quantityToAdd = userInput.nextInt();
