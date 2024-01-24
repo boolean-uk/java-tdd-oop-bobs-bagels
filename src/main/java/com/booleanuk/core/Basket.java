@@ -108,13 +108,4 @@ public class Basket {
         return this.basketCapacity;
     }
 
-    public static void main(String[] args) {
-        Inventory inventory = new Inventory();
-        //Basket test = new Basket(inventory);
-
-        String sKU = inventory.getSKU("Plain");
-        System.out.println(sKU);
-        //Bagel plain = new Bagel("Plain", sKU);
-
-    }
 }

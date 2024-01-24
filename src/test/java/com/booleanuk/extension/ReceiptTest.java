@@ -66,7 +66,7 @@ public class ReceiptTest {
         expectedReceipt += "Black Coffee              1  £0.99\n";
         expectedReceipt += "\n";
         expectedReceipt += "-----------------------------------\n";
-        expectedReceipt += "Total                         £3.3\n";
+        expectedReceipt += "Total                         £3.30\n";
         expectedReceipt += "\n";
         expectedReceipt += "            Thank you             \n";
         expectedReceipt += "         for your order!          \n";
@@ -269,7 +269,7 @@ public class ReceiptTest {
         expectedReceipt += "Black Coffee              3  £2.97\n";
         expectedReceipt += "\n";
         expectedReceipt += "-----------------------------------\n";
-        expectedReceipt += "Total                        £10.43\n";
+        expectedReceipt += "Total                        £11.57\n";
         expectedReceipt += "\n";
         expectedReceipt += "            Thank you             \n";
         expectedReceipt += "         for your order!          \n";

@@ -76,7 +76,7 @@ public class Receipt {
 
                     amountOfItem = basket.getAmountOfItemInBasket(item.getName());
                     bagelPrice = inventory.getPrice(item.getName()) * amountOfItem;
-                    extra = String.format("%.2f",bagelPrice).length() - 4;
+                    extra = String.valueOf(amountOfItem).length() - 1;
 
                     returnString += item.getName();
                     returnString += bagelString;
@@ -93,7 +93,7 @@ public class Receipt {
 
                         amountOfItem = ((Bagel) item).getFillingAmount(filling);
                         fillingPrice = inventory.getPrice(filling) * amountOfItem;
-                        extra = String.format("%.2f",fillingPrice).length() - 4;
+                        extra = String.valueOf(amountOfItem).length() - 1;
 
                         returnString +=  with + filling + fillingString;
                         returnString += insertSpaces(placeForItemAmount -
@@ -185,35 +185,5 @@ public class Receipt {
             returnString += " ";
         }
         return returnString;
-    }
-
-    public static void main(String[] args) {
-        Inventory inventory = new Inventory();
-        Basket basket = new Basket(inventory);
-        Receipt receipt = new Receipt();
-
-        String item1 = "Plain";
-        Bagel bagel1 = new Bagel(item1, inventory.getSKU(item1));
-        basket.addItem(bagel1);
-
-        String item2 = "White";
-        Item coffee1 = new Coffee(item2, inventory.getSKU(item2));
-        basket.addItem(coffee1);
-
-        String item3 = "Everything";
-        Bagel bagel2 = new Bagel(item3, inventory.getSKU(item3));
-        basket.addItem(bagel2);
-
-        String item4 = "Black";
-        Item coffee2 = new Coffee(item4, inventory.getSKU(item4));
-        basket.addItem(coffee2);
-
-        String item5 = "Bacon";
-        basket.addBagelFilling(bagel1, new Filling(item5, inventory.getSKU(item5)));
-
-        String item6 = "Cream Cheese";
-        basket.addBagelFilling(bagel2, new Filling(item6, inventory.getSKU(item6)));
-
-        receipt.printReceipt(basket, inventory);
     }
 }
