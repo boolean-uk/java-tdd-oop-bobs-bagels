@@ -106,25 +106,7 @@ public class BasketExtension {
 
         for (Product product : bagelBasket) {
                 totalCost=discount(totalCost,product);
-//            int quantity = product.getQuantity();
-//            double individualPrice = product.getPrice();
-//
-//
-//            if (quantity >= 12) {
-//
-//                int offerQuantity = 12;
-//                double offerPrice = 3.99;
-//                int remainingQuantity = quantity % offerQuantity;
-//
-//                totalCost +=  offerPrice + (remainingQuantity * individualPrice);
-//            } else if (quantity >= 6) {
-//                int offerQuantity = 12;
-//                double offerPrice = 2.49;
-//                int remainingQuantity = quantity % offerQuantity;
-//                totalCost += offerPrice + individualPrice * remainingQuantity;}
-//            else {
-//                totalCost += individualPrice * quantity;
-//            }
+
         }
 
         return totalCost;
