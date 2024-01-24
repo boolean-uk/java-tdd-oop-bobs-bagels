@@ -136,11 +136,11 @@ As a customer,
 So I can get a good deal,
 I want discounts when I choose certain item combinations.
 ```
-| Class  | Methods                                     | Member variables | Scenario | Outputs/Results |
-|--------|---------------------------------------------|------------------|----------|-----------------|
-|        |                                             |                  |          |                 |
-|        |                                             |                  |          |                 |
-|        |                                             |                  |          |                 |
+| Class | Methods            | Member variables | Scenario            | Outputs/Results   |
+|-------|--------------------|------------------|---------------------|-------------------|
+| Order | double getDiscount | double totalCost | 6 of the same bagel | subtract discount |
+|       |                    | double discount  |                     | from totalCost    |
+|       |                    |                  |                     |                   |
 
 
 ## Extension 2
