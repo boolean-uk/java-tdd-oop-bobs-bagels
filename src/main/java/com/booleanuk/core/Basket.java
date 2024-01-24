@@ -244,7 +244,7 @@ public class Basket {
                             //.append("\t")
                             .append(String.format("%-20s",Collections.frequency(basketList,name)))
                             //.append("\t\t")
-                            .append(String.format("%-20s",formatPrice))
+                            .append(String.format("%-20s",formatPrice+"£"))
                             .append("\n");
 
 
@@ -253,7 +253,7 @@ public class Basket {
         }
         builder
                 .append("---------------------------------------------------------------------\n")
-                .append(String.format("%60s" ,totalPrice));
+                .append(String.format("%62s" ,totalPrice+"£"));
         return builder.toString();
     }
 
