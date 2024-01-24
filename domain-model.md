@@ -227,8 +227,8 @@ Basket
 	+ getNumberOfItems() int
 	+ addFilling(bagelSku: String, fillingSku: String) String
 Checkout
-    + totalCost(HashMap<String, Integer> basketMap) double
-    + totalCostDiscount(HashMap<String, Integer> basketMap) double
+	+ totalCost(HashMap<String, Integer> basketMap) double
+	+ totalCostDiscount(HashMap<String, Integer> basketMap) double
 	+ receiptDiscount(HashMap<String, Integer> basketMap) String
 	+ orderSummary(HashMap<String, Integer> basketMap) String
 	
@@ -243,22 +243,27 @@ Product
 	- name: String
 	- Variant: String
 Bagel
-    - filling: Filling
+	- super(Product)
+	- filling: Filling
 Coffee
+	- super(Product)
 Filling
+	- super(Product)
 
 Discounts
 	- discounts: List<Discount>
 	- inventory: Inventory
 	+ calculateDiscounts(String sku, HashMap<String, Integer> basketMap) double
 Discount
-    - sku: String
-    - price: double
-    + calculateDiscount(String sku, HashMap<String, Integer> map, Inventory inventory) double
-BulkDiscount (extends Discount)
+	- sku: String
+	- price: double
+	+ calculateDiscount(String sku, HashMap<String, Integer> map, Inventory inventory) double
+BulkDiscount
+	- super(Product)
 	- number: int
 	+ calculateDiscount(String sku, HashMap<String, Integer> map, Inventory inventory) double
-ComboDiscount (extends Discount)
+ComboDiscount
+	- super(Product)
 	- name: String
 	+ calculateDiscount(String sku, HashMap<String, Integer> map, Inventory inventory) double
 ```
