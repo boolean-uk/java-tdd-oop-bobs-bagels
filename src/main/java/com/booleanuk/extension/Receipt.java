@@ -129,9 +129,9 @@ public class Receipt {
         }
         receipt.append("\n---------------------------------\nTotal                       £") ;
         receipt.append(basket.totalCostWithDiscount(mapPriceAndSavings));
-        receipt.append("\n\nYou saved a total of £");
+        receipt.append("\n\n   You saved a total of £");
         receipt.append(totalSavings);
-        receipt.append("\n      on this purchase.");
+        receipt.append("\n       on this purchase.");
         receipt.append(createFooter());
         this.receipt = receipt.toString();
         return receipt.toString();
