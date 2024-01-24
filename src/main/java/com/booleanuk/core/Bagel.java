@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Bagel {
+public class Bagel implements InventoryManagement{
     String bagel;
     public ArrayList<Inventory> basketList;
 
@@ -15,7 +15,7 @@ public class Bagel {
 
     int capacity = 0;
     public Bagel(){
-        this.capacity = 15;
+        this.capacity = 30;
         this.basketList = new ArrayList<>(capacity);
         this.inventoryList = new ArrayList<>();
         initializeArr();
@@ -52,16 +52,21 @@ public class Bagel {
     }
 
 
-    public String addBagel(String SKU){
-        for(Inventory item : inventoryList){
-            if(item.SKU.equals(SKU)){
-                basketList.add(item);
-                return SKU;
-            }
+    public String addBagel(String SKU) {
+        if (basketFull()) {
+            System.out.println("Basket is full. Cannot add more items.");
+            return null;
         }
-        System.out.println("Product not found in inventory: " + SKU);
-        return null;
+        Inventory item = findItemBySKU(SKU);
+        if (item != null) {
+            basketList.add(item);
+            return SKU;
+        } else {
+            System.out.println("Product not found in inventory: " + SKU);
+            return null;
+        }
     }
+
 
     public boolean removeBagel(String bagel){
         for (int i = 0; i<basketList.size(); i++){
@@ -201,7 +206,7 @@ public class Bagel {
         HashMap<String, Double> priceMap = new HashMap<>();
 
         for (int i = 0; i<basketList.size(); i++) {
-            String key = basketList.get(i).variant + " " + basketList.get(i).name;
+            String key = basketList.get(i).getVariant() + " " + basketList.get(i).name;
             countMap.put(key, countMap.getOrDefault(key, 0) + 1);
             priceMap.put(key, basketList.get(i).price);
         }
@@ -249,7 +254,7 @@ public class Bagel {
             inv += "SKU = " + inventoryList.get(i).SKU+ '\n' ;
             inv += "Price = " + inventoryList.get(i).price+ '\n' ;
             inv += "Name = " + inventoryList.get(i).name + '\n';
-            inv += "Variant = " + inventoryList.get(i).variant + '\n'+'\n'+'\n';
+            inv += "Variant = " + inventoryList.get(i).getVariant() + '\n'+'\n'+'\n';
         }
         System.out.println(inv);
         return true;
@@ -258,7 +263,7 @@ public class Bagel {
         String out="";
         initializeArr();
         for (int i = 0; i < inventoryList.size(); i++){
-            if (inventoryList.get(i).variant.equals(filling)){
+            if (inventoryList.get(i).getVariant().equals(filling)){
                 out = inventoryList.get(i).SKU;
             }
         }
@@ -271,7 +276,7 @@ public class Bagel {
         double out=0.0;
         initializeArr();
         for (int i = 0; i < inventoryList.size(); i++){
-            if (inventoryList.get(i).variant.equals(filling)){
+            if (inventoryList.get(i).getVariant().equals(filling)){
                 out = inventoryList.get(i).price;
             }
         }
@@ -290,5 +295,24 @@ public class Bagel {
         return value;
     }
 
+    @Override
+    public void addInventoryItem(Inventory item) {
+        inventoryList.add(item);
+    }
+
+    @Override
+    public boolean removeInventoryItem(String SKU) {
+        return inventoryList.removeIf(item -> item.getSKU().equals(SKU));
+    }
+
+    @Override
+    public Inventory findItemBySKU(String SKU) {
+        for (Inventory item : inventoryList) {
+            if (item.getSKU().equals(SKU)) {
+                return item;
+            }
+        }
+        return null;
+    }
 }
 

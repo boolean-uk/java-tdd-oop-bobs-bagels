@@ -20,6 +20,7 @@ public class BagelTest {
     @Test
     public void testBasketFull(){
         Bagel abagel = new Bagel();
+        abagel.changeCap(15);
         abagel.addBagel("BGLO");
         abagel.addBagel("BGLO");
         abagel.addBagel("BGLO");
@@ -37,6 +38,7 @@ public class BagelTest {
         abagel.addBagel("BGLO");
         abagel.addBagel("BGLO");
         abagel.addBagel("BGLO");
+
         System.setOut(new PrintStream(outContent));
         Assertions.assertTrue(abagel.basketFull());
         assertEquals("Basket Full", outContent.toString().trim());
