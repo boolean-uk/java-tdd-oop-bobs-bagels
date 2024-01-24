@@ -61,6 +61,9 @@ public class Basket {
         } else {
             for (Product product : inventory.getProducts()) {
                 if (sku.equals(product.getSku())) {
+                    if (product.getName().equals("Filling")) {
+                        return "Filling must be added to a bagel";
+                    }
                     this.basketMap.put(sku, 1);
                     return "Product added to basket";
                 }
