@@ -19,9 +19,9 @@ class ExtensionExercise2Test {
 
         ExtensionExercise2 extensionExercise2 = new ExtensionExercise2();
 
-        Inventory item3 = new Inventory("BGLO", 0.49, "Bagel", "Onion");
+        Inventory item1 = new Inventory("BGLO", 0.49, "Bagel", "Onion");
         Inventory item2 = new Inventory("BGLP", 0.39, "Bagel", "Plain");
-        Inventory item1 = new Inventory("BGLE", 0.49, "Bagel", "Everything");
+        Inventory item3 = new Inventory("BGLE", 0.49, "Bagel", "Everything");
 
         extensionExercise2.addItem(item3, 1);
         extensionExercise2.addItem(item2, 3);
