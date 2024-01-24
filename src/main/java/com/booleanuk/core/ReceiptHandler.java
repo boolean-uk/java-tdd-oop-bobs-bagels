@@ -51,7 +51,6 @@ public class ReceiptHandler {
             String itemName = entry.getKey();
             int quantity = productQuantity.get(itemName);
             double totalCost = entry.getValue();
-
             sb.append(String.format("%-20s %-2d £%.2f\n", itemName, quantity, totalCost));
         }
         sb.append(separator);
