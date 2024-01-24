@@ -24,9 +24,10 @@ public class Receipt {
         StringBuilder receipt = new StringBuilder();
         receipt.append(createHeader());
         for (Item item : basket.getBasketContent().keySet()) {
-            // Assumption, fillings can only be bought on a bagel.
+            // Assumption, fillings can only be bought on a bagel, and will be added to receipt further down.
             if (item.getClass() == Filling.class) {continue;}
 
+            // To make the printed receipt more clear.
             String tabsAfterItem;
             int variantLength = item.getVariant().length() + item.getName().length() + 1;
             if (variantLength < 12){tabsAfterItem = "\t\t\t\t";}

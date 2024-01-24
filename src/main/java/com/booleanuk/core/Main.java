@@ -42,7 +42,7 @@ public class Main {
         basket1.add(bglp); basket1.add(bglp); basket1.add(bglp); basket1.add(bglp); basket1.add(bglp); basket1.add(bglp);
         basket1.add(cofb); basket1.add(bgle);
 
-        // Try to add one plain bagel with bacon filling.
+        // Try to add one plain bagel with fillings.
         Bagel bglpf = new Bagel("BGLP","Plain", 0.39);
         bglpf.addFilling(filb);
         bglpf.addFilling(filx);

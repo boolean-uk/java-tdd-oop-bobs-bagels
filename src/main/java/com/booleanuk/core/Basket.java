@@ -114,12 +114,16 @@ public class Basket {
             int[] priceAndSavings = new int[2];
             int amount = this.basketContent.get(item);
             double fullPrice = item.getPrice() * amount;
+
+            // Assumption only one discount available per item variant with specific fillings.
             if (item.getName().equals("Bagel") && amount >= 12) {
                 priceAndSavings[0] = (int) Math.round((3.99 + (amount - 12) * item.getPrice())*100);
             }
             else if (item.getName().equals("Bagel") && amount >= 6) {
                 priceAndSavings[0] = (int) Math.round((2.29 + (amount - 6) * item.getPrice())*100);
             }
+            // Bagel & Black Coffee discount not working correctly yet.
+            // If more "single" bagels than black coffees, every "single" bagel gets discount.
             else if (item.getName().equals("Bagel") && this.basketContent.keySet().stream().anyMatch(i -> i.getVariant().equals("Black"))) {
                 int coffeeAmount = this.basketContent.keySet().stream().filter(i -> i.getVariant().equals("Black")).mapToInt(i -> this.basketContent.get(i)).sum();
                 if (amount <= coffeeAmount) {
