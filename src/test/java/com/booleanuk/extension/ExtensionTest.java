@@ -61,6 +61,23 @@ public class ExtensionTest {
     }
 
     @Test
+    public void twelveBagelsGivesDiscountTest() {
+        for(int i = 0; i < 12; i++) {
+            customer.getInventory().addItem(new Bagel("BGLP", 0.39, "Bagel", "Plain"));
+        }
+        Assertions.assertEquals(3.99, customer.calculateCostBeforeOrder());
+    }
+
+    @Test
+    public void thirteenBagelsOneCoffeeGivesDiscount() {
+        for(int i = 0; i < 13; i++) {
+            customer.getInventory().addItem(new Bagel("BGLP", 0.39, "Bagel", "Plain"));
+        }
+        customer.getInventory().addItem(new Coffee("COFC", 1.29, "Coffee", "Capuccino"));
+        Assertions.assertEquals(5.24, customer.calculateCostBeforeOrder());
+    }
+
+    @Test
     public void twoItemsOfSameSortGivesQuantityTwoInReceipt() {
         Bagel bagel = new Bagel("BGLP", 0.39, "Bagel", "Plain");
         customer.getInventory().addItem(bagel);
