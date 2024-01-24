@@ -6,30 +6,27 @@ import java.util.Iterator;
 public class Inventory {
 
     private static Inventory instance;
-    private ArrayList<Item> bagels;
-    private ArrayList<Item> coffee;
-    private ArrayList<Item> fillings;
+
+    private ArrayList<Item> items;
     private Inventory() {
-        bagels = new ArrayList<>();
-        coffee = new ArrayList<>();
-        fillings = new ArrayList<>();
+        items = new ArrayList<>();
         for(int i = 0; i < 20; i++){
-            bagels.add(new Bagel("BGLO","Bagel","Onion", 0.49));
-            bagels.add(new Bagel("BGLP","Bagel","Plain", 0.39));
-            bagels.add(new Bagel("BGLE","Bagel","Everything", 0.49));
-            bagels.add(new Bagel("BGLS","Bagel","Sesame", 0.49));
+            items.add(new Bagel("BGLO","Bagel","Onion", 0.49));
+            items.add(new Bagel("BGLP","Bagel","Plain", 0.39));
+            items.add(new Bagel("BGLE","Bagel","Everything", 0.49));
+            items.add(new Bagel("BGLS","Bagel","Sesame", 0.49));
 
-            coffee.add(new Coffee("COFB","Coffee","Black", 0.99));
-            coffee.add(new Coffee("COFW","Coffee", "White", 1.19));
-            coffee.add(new Coffee("COFC","Coffee", "Cappuccino", 1.29));
-            coffee.add(new Coffee("COFL","Coffee","Latte", 1.29));
+            items.add(new Coffee("COFB","Coffee","Black", 0.99));
+            items.add(new Coffee("COFW","Coffee", "White", 1.19));
+            items.add(new Coffee("COFC","Coffee", "Cappuccino", 1.29));
+            items.add(new Coffee("COFL","Coffee","Latte", 1.29));
 
-            fillings.add(new Filling("FILB","Filling", "Bacon", 0.12));
-            fillings.add(new Filling("FILE","Filling","Egg", 0.12));
-            fillings.add(new Filling("FILC","Filling","Cheese", 0.12));
-            fillings.add(new Filling("FILX","Filling","Cream Cheese", 0.12));
-            fillings.add(new Filling("FILS","Filling","Smoked Salmon", 0.12));
-            fillings.add(new Filling("FILH","Filling","Ham", 0.12));
+            items.add(new Filling("FILB","Filling", "Bacon", 0.12));
+            items.add(new Filling("FILE","Filling","Egg", 0.12));
+            items.add(new Filling("FILC","Filling","Cheese", 0.12));
+            items.add(new Filling("FILX","Filling","Cream Cheese", 0.12));
+            items.add(new Filling("FILS","Filling","Smoked Salmon", 0.12));
+            items.add(new Filling("FILH","Filling","Ham", 0.12));
 
 
         }
@@ -46,25 +43,10 @@ public class Inventory {
     }
     public boolean checkInventory(String SKU, int amount){
         int count = 0;
-        Iterator<Item> iterator;
-        switch (SKU.substring(0, 1)) {
-            case "B":
-                iterator = bagels.iterator();
-                break;
-            case "C":
-                iterator = coffee.iterator();
-                break;
-            case "F":
-                iterator = fillings.iterator();
-                break;
-            default:
-                return false;
-        }
-        while(iterator.hasNext()){
-            Item currentItem = iterator.next();
-            if(currentItem.getSKU().equals(SKU)){
+        for (Item currentItem : items) {
+            if (currentItem.getSKU().equals(SKU)) {
                 count++;
-                if(count == amount){
+                if (count == amount) {
                     return true;
                 }
 
@@ -73,53 +55,28 @@ public class Inventory {
         return false;
     }
     public ArrayList<Item> getItems(String SKU, int amount){
-        ArrayList<Item> items = new ArrayList<>();
+        ArrayList<Item> temp = new ArrayList<>();
         int count = 0;
-        Iterator<Item> iterator;
-        switch (SKU.substring(0, 1)) {
-            case "B":
-                iterator = bagels.iterator();
-                break;
-            case "C":
-                iterator = coffee.iterator();
-                break;
-            case "F":
-                iterator = fillings.iterator();
-                break;
-            default:
-                return null;
-        }
+        Iterator<Item> iterator = items.iterator();
         while(iterator.hasNext()){
             Item currentItem = iterator.next();
             if(currentItem.getSKU().equals(SKU)){
                 count++;
-                items.add(currentItem);
+                temp.add(currentItem);
                 iterator.remove();
                 if(count == amount){
-                    return items;
+                    return temp;
                 }
             }
         }
         return null;
     }
     public void addItems(Item item){
-        if(item instanceof Bagel){
-            bagels.add(item);
-        }
-        else if(item instanceof Coffee){
-            coffee.add(item);
-        }
-        else if(item instanceof Filling){
-            fillings.add(item);
-        }
+        items.add(item);
     }
 
     public String getPriceInfo(String SKU){
-        ArrayList<Item> tempArray = new ArrayList<>();
-        tempArray.addAll(bagels);
-        tempArray.addAll(coffee);
-        tempArray.addAll(fillings);
-        for(Item i : tempArray){
+        for(Item i : items){
             if(i.getSKU().equals(SKU)){
                 return String.valueOf(i.getPrice());
             }
@@ -127,12 +84,8 @@ public class Inventory {
 
         return "No item found";
     }
-    public String getItemNameType(String SKU){
-        ArrayList<Item> tempArray = new ArrayList<>();
-        tempArray.addAll(bagels);
-        tempArray.addAll(coffee);
-        tempArray.addAll(fillings);
-        for(Item i : tempArray){
+    public String getItemNameType(String SKU){;
+        for(Item i : items){
             if(i.getSKU().equals(SKU)){
                 return i.getName() + " " + i.getType();
             }
