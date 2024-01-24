@@ -36,6 +36,15 @@ public class Inventory {
 		}
 		return sb.toString();
 	}
+	public String getItems(){
+		StringBuilder sb = new StringBuilder();
+		for(Item item : inventory){
+			sb.append(item.getId()+": ");
+			sb.append(String.format("%-25s",item.getType()+" "+item.getName()));
+			sb.append(item.getPrice()+"\n");
+		}
+		return sb.toString();
+	}
 
 	public double getPrice(String id) {
 		double price = 0;

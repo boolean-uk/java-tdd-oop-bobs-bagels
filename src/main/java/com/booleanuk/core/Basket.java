@@ -301,6 +301,22 @@ public class Basket {
 		return occurrences;
 	}
 
+	public HashMap<Integer, String> getItems() {
+		return items;
+	}
+
+	public void setItems(HashMap<Integer, String> items) {
+		this.items = items;
+	}
+
+	public HashMap<Integer, ArrayList<String>> getExtra() {
+		return extra;
+	}
+
+	public void setExtra(HashMap<Integer, ArrayList<String>> extra) {
+		this.extra = extra;
+	}
+
 	private static boolean containsString(String[] array, String target) {
 		for (String str : array) {
 			if (target.contains(str)) {
@@ -377,4 +393,17 @@ public class Basket {
 	}
 
 
+	public String getInventory() {
+		StringBuilder sb = new StringBuilder();
+		sb.append(inventory.getItems());
+		return sb.toString();
+	}
+
+	public String getName(String value) throws NotInInventoryException {
+		return inventory.getName(value);
+	}
+
+	public String getType(String value) {
+		return inventory.getType(value);
+	}
 }
