@@ -50,7 +50,7 @@ public class Discounts {
         return lowest;
     }
 
-    public double calculateDiscount(String sku, HashMap<String, Integer> basketMap) {
+    public double calculateDiscounts(String sku, HashMap<String, Integer> basketMap) {
         if (this.discounts.stream().anyMatch(x->x.getSku().equals(sku))) {
             Discount discount = this.discounts.stream().filter(x -> x.getSku().equals(sku)).findFirst().get();
             if (discount.getClass().getSimpleName().equals("ComboDiscount")) {

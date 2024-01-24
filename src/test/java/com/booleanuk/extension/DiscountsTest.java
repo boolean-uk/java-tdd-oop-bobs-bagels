@@ -23,7 +23,7 @@ class DiscountsTest {
         Discounts discounts = new Discounts(inventory);
         HashMap<String, Integer> basketMap = new HashMap<>();
         basketMap.put("BGLP", 12);
-        Assertions.assertEquals(0.69, discounts.calculateDiscount("BGLP", basketMap));
+        Assertions.assertEquals(0.69, discounts.calculateDiscounts("BGLP", basketMap));
     }
 
     @Test
@@ -32,6 +32,6 @@ class DiscountsTest {
         Discounts discounts = new Discounts(inventory);
         HashMap<String, Integer> basketMap = new HashMap<>();
         basketMap.put("BGLP", 11);
-        Assertions.assertEquals(0.0, discounts.calculateDiscount("BGLP", basketMap));
+        Assertions.assertEquals(0.0, discounts.calculateDiscounts("BGLP", basketMap));
     }
 }

@@ -27,7 +27,7 @@ public class Checkout {
     public double totalCostDiscount(HashMap<String, Integer> basketMap) {
         double cost = 0;
         for(Map.Entry<String, Integer> entry: basketMap.entrySet()) {
-            cost += (this.inventory.getProductCost(entry.getKey()) * entry.getValue())-this.discounts.calculateDiscount(entry.getKey(), basketMap);
+            cost += (this.inventory.getProductCost(entry.getKey()) * entry.getValue())-this.discounts.calculateDiscounts(entry.getKey(), basketMap);
         }
         return Math.round(cost * 100)/100.0;
     }
@@ -58,7 +58,7 @@ public class Checkout {
         double costEntry = 0;
 
         for(Map.Entry<String, Integer> entry: basketMap.entrySet()) {
-            discountVal = this.discounts.calculateDiscount(entry.getKey(), basketMap);
+            discountVal = this.discounts.calculateDiscounts(entry.getKey(), basketMap);
             saved += discountVal;
             costEntry = Math.round(((this.inventory.getProductCost(entry.getKey()) * entry.getValue())-discountVal)*100.0)/100.0;
 
@@ -100,7 +100,7 @@ public class Checkout {
         int numOfItems = 0;
 
         for(Map.Entry<String, Integer> entry: basketMap.entrySet()) {
-            discountVal = this.discounts.calculateDiscount(entry.getKey(), basketMap);
+            discountVal = this.discounts.calculateDiscounts(entry.getKey(), basketMap);
             saved += discountVal;
             numOfItems += entry.getValue();
             costEntry = Math.round(((this.inventory.getProductCost(entry.getKey()) * entry.getValue())-discountVal)*100.0)/100.0;
