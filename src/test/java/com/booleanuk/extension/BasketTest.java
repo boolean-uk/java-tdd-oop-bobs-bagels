@@ -11,7 +11,7 @@ public class BasketTest {
     @Test
     public void discountPerItem() {
         HashMap<Item, Integer> testInventory = new HashMap<>();
-        Item bglo = new Bagel("BGLO", "Onion", 0.49);
+        Bagel bglo = new Bagel("BGLO", "Onion", 0.49);
         testInventory.put(bglo, 50);
         BobsBagelsShop shop = new BobsBagelsShop(testInventory);
         Basket basket = new Basket(shop, 16);
@@ -30,7 +30,7 @@ public class BasketTest {
     @Test
     public void noDiscountForMultipleCoffees() {
         HashMap<Item, Integer> testInventory = new HashMap<>();
-        Item cofl = new Coffee("COFL", "Latte", 1.29);
+        Coffee cofl = new Coffee("COFL", "Latte", 1.29);
         testInventory.put(cofl, 30);
         BobsBagelsShop shop = new BobsBagelsShop(testInventory);
         Basket basket = new Basket(shop, 16);
@@ -43,7 +43,7 @@ public class BasketTest {
     @Test
     public void noDiscountForMultipleFillings() {
         HashMap<Item, Integer> testInventory = new HashMap<>();
-        Item filh = new Filling("FILH", "Ham", 0.12);
+        Filling filh = new Filling("FILH", "Ham", 0.12);
         testInventory.put(filh, 30);
         BobsBagelsShop shop = new BobsBagelsShop(testInventory);
         Basket basket = new Basket(shop, 16);
@@ -56,8 +56,8 @@ public class BasketTest {
     @Test
     public void discountForBlackCoffeeAndBagel() {
         HashMap<Item, Integer> testInventory = new HashMap<>();
-        Item bglo = new Bagel("BGLO", "Onion", 0.49);
-        Item cofb = new Coffee("COFB", "Black", 0.99);
+        Bagel bglo = new Bagel("BGLO", "Onion", 0.49);
+        Coffee cofb = new Coffee("COFB", "Black", 0.99);
         testInventory.put(bglo, 30);
         testInventory.put(cofb, 30);
         BobsBagelsShop shop = new BobsBagelsShop(testInventory);
@@ -93,7 +93,7 @@ public class BasketTest {
     @Test
     public void totalCostWithDiscount() {
         HashMap<Item, Integer> testInventory = new HashMap<>();
-        Item bglo = new Bagel("BGLO", "Onion", 0.49);
+        Bagel bglo = new Bagel("BGLO", "Onion", 0.49);
         testInventory.put(bglo, 50);
         BobsBagelsShop shop = new BobsBagelsShop(testInventory);
         Basket basket = new Basket(shop, 16);

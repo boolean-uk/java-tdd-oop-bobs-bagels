@@ -9,8 +9,8 @@ public class BasketTest {
     @Test
     public void add() {
         HashMap<Item, Integer> testInventory = new HashMap<>();
-        Item bglo = new Bagel("BGLO", "Onion", 0.49);
-        Item bglp = new Bagel("BGLP", "Plain", 0.39);
+        Bagel bglo = new Bagel("BGLO", "Onion", 0.49);
+        Bagel bglp = new Bagel("BGLP", "Plain", 0.39);
         testInventory.put(bglo, 100);
         testInventory.put(bglp, 100);
         BobsBagelsShop shop = new BobsBagelsShop(testInventory);
@@ -18,7 +18,7 @@ public class BasketTest {
         Assertions.assertEquals("Item BGLO added to basket.", basket.add(bglo));
         Assertions.assertEquals("Item BGLP added to basket.", basket.add(bglp));
 
-        Item bgle = new Bagel("BGLE", "Everything", 0.49);
+        Bagel bgle = new Bagel("BGLE", "Everything", 0.49);
         Assertions.assertEquals("Chosen item not in stock.", basket.add(bgle));
 
         testInventory.put(bgle, 100);
@@ -29,8 +29,8 @@ public class BasketTest {
     @Test
     public void addDecreaseNumberOfItemsInStock() {
         HashMap<Item, Integer> testInventory = new HashMap<>();
-        Item bglo = new Bagel("BGLO", "Onion", 0.49);
-        Item bglp = new Bagel("BGLP", "Plain", 0.39);
+        Bagel bglo = new Bagel("BGLO", "Onion", 0.49);
+        Bagel bglp = new Bagel("BGLP", "Plain", 0.39);
         testInventory.put(bglo, 100);
         testInventory.put(bglp, 100);
         BobsBagelsShop shop = new BobsBagelsShop(testInventory);
@@ -49,9 +49,9 @@ public class BasketTest {
     @Test
     public void remove() {
         HashMap<Item, Integer> testInventory = new HashMap<>();
-        Item bglo = new Bagel("BGLO", "Onion", 0.49);
-        Item bglp = new Bagel("BGLP", "Plain", 0.39);
-        Item bgle = new Bagel("BGLE", "Everything", 0.49);
+        Bagel bglo = new Bagel("BGLO", "Onion", 0.49);
+        Bagel bglp = new Bagel("BGLP", "Plain", 0.39);
+        Bagel bgle = new Bagel("BGLE", "Everything", 0.49);
         testInventory.put(bglo, 100);
         testInventory.put(bglp, 100);
         BobsBagelsShop shop = new BobsBagelsShop(testInventory);
@@ -66,7 +66,7 @@ public class BasketTest {
     @Test
     public void removeIncreaseNumberOfItemsInStock() {
         HashMap<Item, Integer> testInventory = new HashMap<>();
-        Item bglo = new Bagel("BGLO", "Onion", 0.49);
+        Bagel bglo = new Bagel("BGLO", "Onion", 0.49);
         testInventory.put(bglo, 100);
         BobsBagelsShop shop = new BobsBagelsShop(testInventory);
         Assertions.assertEquals(100, shop.getInventory().get(bglo));
@@ -81,8 +81,8 @@ public class BasketTest {
     @Test
     public void totalCost() {
         HashMap<Item, Integer> testInventory = new HashMap<>();
-        Item bglo = new Bagel("BGLO", "Onion", 0.49);
-        Item bglp = new Bagel("BGLP", "Plain", 0.39);
+        Bagel bglo = new Bagel("BGLO", "Onion", 0.49);
+        Bagel bglp = new Bagel("BGLP", "Plain", 0.39);
         testInventory.put(bglo, 100);
         testInventory.put(bglp, 100);
         BobsBagelsShop shop = new BobsBagelsShop(testInventory);
@@ -100,8 +100,8 @@ public class BasketTest {
     @Test
     public void checkSize() {
         HashMap<Item, Integer> testInventory = new HashMap<>();
-        Item bglo = new Bagel("BGLO", "Onion", 0.49);
-        Item bglp = new Bagel("BGLP", "Plain", 0.39);
+        Bagel bglo = new Bagel("BGLO", "Onion", 0.49);
+        Bagel bglp = new Bagel("BGLP", "Plain", 0.39);
         testInventory.put(bglo, 100);
         testInventory.put(bglp, 100);
         BobsBagelsShop shop = new BobsBagelsShop(testInventory);
@@ -118,8 +118,8 @@ public class BasketTest {
     @Test
     public void changeCapacity() {
         HashMap<Item, Integer> testInventory = new HashMap<>();
-        Item bglo = new Bagel("BGLO", "Onion", 0.49);
-        Item bglp = new Bagel("BGLP", "Plain", 0.39);
+        Bagel bglo = new Bagel("BGLO", "Onion", 0.49);
+        Bagel bglp = new Bagel("BGLP", "Plain", 0.39);
         testInventory.put(bglo, 100);
         testInventory.put(bglp, 100);
         BobsBagelsShop shop = new BobsBagelsShop(testInventory);

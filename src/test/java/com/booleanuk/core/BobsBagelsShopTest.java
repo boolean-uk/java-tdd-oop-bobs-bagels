@@ -17,8 +17,8 @@ public class BobsBagelsShopTest {
         BobsBagelsShop shop = new BobsBagelsShop(new HashMap<>());
         Assertions.assertEquals("No items in stock.", shop.showInventory());
 
-        Item bglo = new Bagel("BGLO", "Onion", 0.49);
-        Item bglp = new Bagel("BGLP", "Plain", 0.39);
+        Bagel bglo = new Bagel("BGLO", "Onion", 0.49);
+        Bagel bglp = new Bagel("BGLP", "Plain", 0.39);
         HashMap<Item, Integer> testInventory = new HashMap<>();
         testInventory.put(bglo, 100);
         testInventory.put(bglp, 100);

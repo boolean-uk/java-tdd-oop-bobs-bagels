@@ -7,7 +7,7 @@ public class ItemTest {
 
     @Test
     public void testItemConstructor() {
-        Item bglo = new Bagel("BGLO", "Onion", 0.49);
+        Bagel bglo = new Bagel("BGLO", "Onion", 0.49);
         Assertions.assertEquals("BGLO", bglo.getSku());
         Assertions.assertEquals("Bagel", bglo.getName());
         Assertions.assertEquals("Onion", bglo.getVariant());
@@ -16,10 +16,10 @@ public class ItemTest {
 
     @Test
     public void testGetPrice() {
-        Item bglo = new Bagel("BGLO", "Onion", 0.49);
-        Item bglp = new Bagel("BGLP","Plain", 0.39);
-        Item cofl = new Coffee("COFL", "Latte", 1.29);
-        Item filx = new Filling("FILX", "Cream Cheese", 0.12);
+        Bagel bglo = new Bagel("BGLO", "Onion", 0.49);
+        Bagel bglp = new Bagel("BGLP","Plain", 0.39);
+        Coffee cofl = new Coffee("COFL", "Latte", 1.29);
+        Filling filx = new Filling("FILX", "Cream Cheese", 0.12);
         Assertions.assertEquals(0.49, bglo.getPrice());
         Assertions.assertEquals(0.39, bglp.getPrice());
         Assertions.assertEquals(1.29, cofl.getPrice());
