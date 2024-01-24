@@ -26,6 +26,11 @@ public class ReceiptHandler {
         return this.dt.format(formatter);
     }
 
+    public String getDate(){
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        return this.dt.format(formatter);
+    }
+
     public String print(){
         // Header
         this.sb.append(header).append("\n").append("\n\t");
