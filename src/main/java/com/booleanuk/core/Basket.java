@@ -213,11 +213,14 @@ public class Basket {
     public String printReceipt() {
         ArrayList<String> receipt = new ArrayList<>();
         StringBuilder builder = new StringBuilder();
+
         String name = basketList.get(0);
-        System.out.println("~~~ Bob's Bagel ~~~");
-        System.out.println("ITEM\t\t\t\tQTY.\t\tTOTAL");
-        System.out.print("--------------------------------------------");
-        System.out.println();
+        double totalPrice = 0;
+        builder
+                .append("~~ Bob's Bagel ~~~\n")
+                .append(String.format("%-20s%20s%20s\n","ITEM","QTY.","TOTAL"))
+                .append(String.format("---------------------------------------------------------------------\n"));
+
 
         for (int i = 0; i < inventoryList.size(); i++) {
             for (int j = 0; j < basketList.size(); j++) {
@@ -230,23 +233,27 @@ public class Basket {
                     receipt.add(name);
 
                     double price = inventoryList.get(i).getPrice() * Collections.frequency(basketList,name);
+                    totalPrice += price;
                     String formatPrice = String.format("%.2f",price);
 
                     builder
-                            .append("\r")
-                            .append(inventoryList.get(i).getVariant())
+
+                            .append(String.format("%-15s",inventoryList.get(i).getVariant()))
                             .append(" ")
-                            .append(inventoryList.get(i).getName())
-                            .append("\t\t\t")
-                            .append(Collections.frequency(basketList,name))
-                            .append("\t\t")
-                            .append(formatPrice)
+                            .append(String.format("%-20s",inventoryList.get(i).getName()))
+                            //.append("\t")
+                            .append(String.format("%-20s",Collections.frequency(basketList,name)))
+                            //.append("\t\t")
+                            .append(String.format("%-20s",formatPrice))
                             .append("\n");
 
 
                 }
             }
         }
+        builder
+                .append("---------------------------------------------------------------------\n")
+                .append(String.format("%60s" ,totalPrice));
         return builder.toString();
     }
 
