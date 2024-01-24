@@ -97,10 +97,12 @@ I want customers to only be able to order things that we stock in our inventory.
 
 ### Class BobsBagelsShop
 
-| Methods                              | Member variables               | Scenario                     | Output/Return                                         |
-|--------------------------------------|--------------------------------|------------------------------|-------------------------------------------------------|
-| {7,9}`showInventory()`               | HashMap<Item item, int amount> | Inventory not empty.         | String "Bob's Bagels\nSKU\tPrice\tName\tVariant\n..." |
-|                                      | inventory                      | Inventory empty.             | String "No items in stock."                           |
+| Methods                                    | Member variables                          | Scenario                  | Output/Return                                         |
+|--------------------------------------------|-------------------------------------------|---------------------------|-------------------------------------------------------|
+| {7,9}`showInventory()`                     | HashMap<Item item, int amount>            | Inventory not empty.      | String "Bob's Bagels\nSKU\tPrice\tName\tVariant\n..." |
+|                                            | inventory                                 | Inventory empty.          | String "No items in stock."                           |
+| {1,2,8,10}`addToInventory(Item item)`      | HashMap<Item item, int amount> inventory  | Item removed from basket. |                                                       |
+| {1,2,8,10}`removeFromInventory(Item item)` | HashMap<Item item, int amount> inventory  | Item added to basket.     |                                                       |
 
 
 ### Class Item
@@ -108,15 +110,34 @@ I want customers to only be able to order things that we stock in our inventory.
 | Methods                                                       | Member variables | Scenario | Output/Return |
 |---------------------------------------------------------------|------------------|----------|---------------|
 | {7,9}`getPrice()`                                             | double price     |          | double price  |
-|                                                               |                  |          |               |
 | `Item(String sku, String name, String variant, double price)` | double price     |          |               |
 |                                                               | String name      |          |               |
 |                                                               | String variant   |          |               |
 |                                                               | String sku       |          |               |
 
+### Class Filling
+Extends Item.
+
+### Class Coffee
+Extends Item.
+
+### Class Bagel
+Extends Item.
+
+| Methods                           | Member variables                    | Scenario                 | Output/Return    |
+|-----------------------------------|-------------------------------------|--------------------------|------------------|
+| {8}`addFilling(Filling filling)`  | ArrayList<Filling filling> fillings | Filling not in fillings. | Add to fillings. |
+|                                   |                                     | Filling in fillings.     |                  |
+| `removeFilling(Filling filling)`  | ArrayList<Filling filling> fillings | Filling in fillings.     | Remove filling.  |
+|                                   |                                     | Filling not in fillings. |                  |
+
 
 # Bob's Bagels Extension
+I have worked with extension 1, 2 and 3. 
+In extension 1 the Bagel and Coffee discount do not work as intended. 
+The customer gets discounts on more bagels than black coffees bought.
 
+It is possible to print receipts with and without discounts.
 
 ## User Stories
 ```
@@ -151,26 +172,26 @@ I'd like to get a receipt that includes the savings.
 
 ### Class Receipt
 
-| Methods                       | Member variables                                                | Scenario            | Output/Return                  |
-|-------------------------------|-----------------------------------------------------------------|---------------------|--------------------------------|
-| generateReceipt()             | String receipt                                                  | Empty basket.       | String "Basket is empty."      |
-|                               | Basket basket                                                   | Not empty basket.   | String receipt.                |
-| createHeader()                | DateTime dateAndTime                                            |                     | String header.                 |
-| createFooter()                |                                                                 |                     | String footer.                 |
-| printReceipt()                | String receipt                                                  | Receipt (non)empty. | boolean printed.               |
-|                               |                                                                 |                     | system.out.println of receipt. |
-| generateReceiptWithDiscount() | String receipt                                                  | Empty basket.       | String "Basket is empty."      |
-|                               | Basket basket                                                   | Not empty basket.   | String receipt.                |
-|                               | Hashmap<Item item, double[] priceAndSavings> mapPriceAndSavings |                     |                                |
+| Methods                       | Member variables                                             | Scenario            | Output/Return                  |
+|-------------------------------|--------------------------------------------------------------|---------------------|--------------------------------|
+| generateReceipt()             | String receipt                                               | Empty basket.       | String "Basket is empty."      |
+|                               | Basket basket                                                | Not empty basket.   | String receipt.                |
+| createHeader()                | DateTime dateAndTime                                         |                     | String header.                 |
+| createFooter()                |                                                              |                     | String footer.                 |
+| printReceipt()                | String receipt                                               | Receipt (non)empty. | boolean printed.               |
+|                               |                                                              |                     | system.out.println of receipt. |
+| generateReceiptWithDiscount() | String receipt                                               | Empty basket.       | String "Basket is empty."      |
+|                               | Basket basket                                                | Not empty basket.   | String receipt.                |
+|                               | Hashmap<Item item, int[] priceAndSavings> mapPriceAndSavings |                     |                                |
 
 
 ### Class Basket
 
-| Methods                     | Member variables                                                 | Scenario          | Output/Return                                |
-|-----------------------------|------------------------------------------------------------------|-------------------|----------------------------------------------|
-| {13}discountPerItem()       | HashMap<Item item, int amount> basketContent                     | Not empty basket. | Hashmap<Item item, double[] priceAndSavings> |
-|                             | double item.getPrice()                                           |                   | Sum of price and savings is original price.  |
-|                             |                                                                  |                   |                                              |
-| {13}totalCostWithDiscount() | Hashmap<Item item, double[] priceAndSavings> mapPriceAndSavings  | Not empty basket. | double price                                 |
-|                             |                                                                  | Empty basket.     | double price = 0.0.                          |
-|                             |                                                                  | No discounts.     | Returns same double price as totalCost().    |
+| Methods                     | Member variables                                             | Scenario          | Output/Return                               |
+|-----------------------------|--------------------------------------------------------------|-------------------|---------------------------------------------|
+| {13}discountPerItem()       | HashMap<Item item, int amount> basketContent                 | Not empty basket. | Hashmap<Item item, int[] priceAndSavings>   |
+|                             | double item.getPrice()                                       |                   | Sum of price and savings is original price. |
+|                             |                                                              |                   |                                             |
+| {13}totalCostWithDiscount() | Hashmap<Item item, int[] priceAndSavings> mapPriceAndSavings | Not empty basket. | double price                                |
+|                             |                                                              | Empty basket.     | double price = 0.0.                         |
+|                             |                                                              | No discounts.     | Returns same double price as totalCost().   |
