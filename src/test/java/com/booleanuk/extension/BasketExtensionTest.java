@@ -24,7 +24,7 @@ public class BasketExtensionTest {
     @Test
     public void TestDiscount(){
         BasketExtension basket =new BasketExtension();
-        basket.setSize(15);
+        basket.setSize(16);
         basket.addItem(basket.inventory.getProduct("BGLO"),15);
         basket.printReceipt();
         Assertions.assertEquals(5.46,basket.calculateTotalCost());
