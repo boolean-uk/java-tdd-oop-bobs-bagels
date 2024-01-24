@@ -12,6 +12,7 @@ public class Product {
     private int quantity;
 
 
+
     public Product(String sku, double price, String name, String variant){
         this.sku = sku;
         this.price = price;

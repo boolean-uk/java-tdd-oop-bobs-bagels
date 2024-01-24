@@ -2,12 +2,18 @@ package com.booleanuk.extension;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Basket {
     private ArrayList<Product> basket;
     private int capacity;
      Inventory inventoryProduct;
+     HashMap<String, Integer> productQuantities;
 
     public Basket( int capacity ){
         this.basket = new ArrayList<>();
@@ -99,20 +105,56 @@ public class Basket {
     }
 
 
+    public String printReceipt(){
+        // StringBuilder to construct the receipt
+        StringBuilder receipt = new StringBuilder();
+
+        // Static content for the receipt
+        String title =   "~~~ Bob's Bagels ~~~";
+        String line = "-----------------------------------";
+        String endOfReceipt ="Thank you for your order!";
+
+        // Get the current date and time
+        LocalDateTime localDate = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        String dateTime = localDate.format(formatter);
+
+        receipt.append(title);
+        receipt.append(System.lineSeparator());
+        receipt.append(dateTime);
+        receipt.append(System.lineSeparator());
+        receipt.append(line);
+        receipt.append(System.lineSeparator());
+
+        // Loop through the products in the basket, and format product info
+        // Todo: how to display total quantities and total prices of similar items
+        for (Product product : basket) {
+
+           String productInfo = String.format("%-18s %4s £%.2f", product.getVariant() + " " + product.getName(), product.getQuantity(), product.getPrice());
+           receipt.append(productInfo).append("\n");
+
+        }
+        receipt.append(line);
+        receipt.append(System.lineSeparator());
+        receipt.append(String.format("%-23s £%.2f","Total ",getTotalCost()));
+        receipt.append(System.lineSeparator());
+        receipt.append(endOfReceipt);
+        return receipt.toString();
+    }
+
 
     public static void main(String[] arg){
         Basket basket = new Basket(30);
-        Product bagel1 = new Bagel("BGLO",0.49, "Bagel", "Onion" );
-        Product bagel2 = new Bagel("BGLO",0.49, "Bagel", "Onion" );
-        Product comboProduct = new ComboDiscountProduct(new String[]{"COFB", "BGLO"}, 1.25, "Coffee & Bagel");
+        Product bagel1 = new Bagel("BGLP",0.39, "Bagel", "Plain" );
+        Product bagel2 = new Bagel("BGLP",0.39, "Bagel", "Plain" );
         Product filling = new Filling("FILB",0.12, "Filling", "Bacon");
         Product quantity = new QuantityDiscountProduct("BGLO", 2.49, "Bagel", "Onion", 6);
         basket.addItem(bagel1);
         basket.addItem(bagel2);
-        basket.addItem(comboProduct);
         basket.addItem(filling);
         basket.addItem(quantity);
         System.out.println(basket.getTotalCost());
+        System.out.println(basket.printReceipt());
 
     }
 
