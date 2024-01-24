@@ -31,6 +31,30 @@ public class Order {
         return totalCost;
     }
 
+//    public double getDiscount(ArrayList<String> itemList) {
+//        HashMap<String, Double> inventoryPriceList = inventory.getInventoryPriceList();
+//        HashMap<String, Integer> itemCounts = new HashMap<>();
+//
+//        double discount = 0.00d;
+//
+//        for (String item : itemList) {
+//            if (inventoryPriceList.containsKey(item)) {
+//                // Set to 1 if item is unique in itemCounts, increment if item is there
+//                itemCounts.put(item, itemCounts.getOrDefault(item, 0) + 1);
+//            }
+//        }
+//        for (String item : itemCounts.keySet()) {
+//            int count = itemCounts.get(item);
+//            double itemCost = inventoryPriceList.get(item);
+////            receipt.append(String.format("%s\t\t%d\t\t  £%.2f\n",item, count, itemCost));
+//
+//        }
+//
+//
+//        return discount;
+//    }
+
+
     public String generateReceipt(ArrayList<String> itemList){
 
         HashMap<String, Double> inventoryPriceList = inventory.getInventoryPriceList();
