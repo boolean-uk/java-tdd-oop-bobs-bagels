@@ -13,6 +13,10 @@ public class Discount {
         this.price = price;
     }
 
+    public double calculateDiscount(String sku, HashMap<String, Integer> map, Inventory inventory) {
+        return (double) Math.round(((double) map.get(sku) * (inventory.getProductCost(sku) - this.getPrice())) * 100) /100;
+    }
+
     public String getSku() {
         return sku;
     }
