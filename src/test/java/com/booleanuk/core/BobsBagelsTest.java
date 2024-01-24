@@ -48,6 +48,24 @@ class BobsBagelsTest {
         BobsBagels bb = new BobsBagels();
         bb.getBasket("1234");
         Assertions.assertEquals("Basket", bb.getBasket("1234").getClass().getSimpleName());
+    }
 
+    @Test
+    public void testGetNotYetExistingBasket() {
+        BobsBagels bb = new BobsBagels();
+        Assertions.assertEquals("Basket", bb.getBasket("1234").getClass().getSimpleName());
+    }
+
+    @Test
+    public void testGetUser() {
+        BobsBagels bb = new BobsBagels();
+        bb.getUser("1234");
+        Assertions.assertEquals("User", bb.getUser("1234").getClass().getSimpleName());
+    }
+
+    @Test
+    public void testGetNotYetExistingUser() {
+        BobsBagels bb = new BobsBagels();
+        Assertions.assertEquals("User", bb.getUser("1234").getClass().getSimpleName());
     }
 }
