@@ -16,13 +16,13 @@ class InventoryTest {
 
     @Test
     void setSku() {
-        Inventory inventory = new Inventory("Bagel");
+        Inventory inventory = new Inventory("BGLO", 0.49, "Bagel", "Onion");
 
-        inventory.setSku("BGLO");
+        inventory.setSku("BGLP");
 
         String result = inventory.getSku();
 
-        Assertions.assertEquals("BGLO", result);
+        Assertions.assertEquals("BGLP", result);
     }
 
     @Test
@@ -36,7 +36,7 @@ class InventoryTest {
 
     @Test
     void setPrice() {
-        Inventory inventory = new Inventory("Bagel");
+        Inventory inventory = new Inventory("BGLP", 0.39, "Bagel", "Plain");
 
         inventory.setPrice(0.49);
 
@@ -47,7 +47,7 @@ class InventoryTest {
 
     @Test
     void getName() {
-        Inventory inventory = new Inventory("Bagel");
+        Inventory inventory = new Inventory("BGLO", 0.49, "Bagel", "Onion");
 
         String result = inventory.getName();
 
@@ -56,7 +56,7 @@ class InventoryTest {
 
     @Test
     void setName() {
-        Inventory inventory = new Inventory("Bagel");
+        Inventory inventory = new Inventory("BGLO", 0.49, "Bagel", "Onion");
 
         inventory.setName("Coffee");
 
@@ -76,7 +76,7 @@ class InventoryTest {
 
     @Test
     void setVariant() {
-        Inventory inventory = new Inventory("Bagel");
+        Inventory inventory = new Inventory("BGLP", 0.39, "Bagel", "Plain");
 
         inventory.setVariant("Onion");
 

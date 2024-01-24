@@ -26,8 +26,11 @@ class ExtensionExercise1Test {
             extensionExercise1.getBasketList().add(new Inventory("COFB", 0.99, "Coffee", "Black"));
         }
 
-        //1 extra individual plain bagel = 0.49
+        //1 extra individual plain bagel = 0.39
         //extensionExercise1.getBasketList().add(new Inventory("BGLP", 0.39, "Bagel", "Plain"));
+
+        //1 extra individual everything bagel = 0.49
+        //extensionExercise1.getBasketList().add(new Inventory("BGLE", 0.49, "Bagel", "Everything"));
 
         double result = extensionExercise1.returnItemsWithDiscount();
 

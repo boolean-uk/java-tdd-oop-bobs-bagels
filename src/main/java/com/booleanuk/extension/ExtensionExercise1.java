@@ -84,7 +84,6 @@ public class ExtensionExercise1 {
             int remainingCoffees = countCOFB - countCombos;
             price += remainingCoffees * 0.99;
         }
-
         return price;
     }
 

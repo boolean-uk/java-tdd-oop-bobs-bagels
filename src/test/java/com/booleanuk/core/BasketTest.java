@@ -12,7 +12,7 @@ class BasketTest {
     public void testBagelIsNotInBasket() {
         Basket basket = new Basket();
 
-        Bagel bagel = new Bagel("Onion");
+        Bagel bagel = new Bagel("BGLO", 0.49, "Bagel", "Onion");
 
         boolean bagelAdded = basket.addBagelVariantToBasket(bagel);
 
@@ -24,7 +24,7 @@ class BasketTest {
     @Test
     public void testBagelIsInBasket() {
         Basket basket = new Basket();
-        Bagel bagel = new Bagel("Onion");
+        Bagel bagel = new Bagel("BGLO", 0.49, "Bagel", "Onion");
 
         basket.addBagelVariantToBasket(bagel);
 
@@ -38,7 +38,7 @@ class BasketTest {
     @Test
     public void removeBagelFromBasketReturnTrue() {
         Basket basket = new Basket();
-        Bagel bagel = new Bagel("Onion");
+        Bagel bagel = new Bagel("BGLO", 0.49, "Bagel", "Onion");
 
         basket.addBagelVariantToBasket(bagel);
 
@@ -163,7 +163,7 @@ class BasketTest {
     @Test
     public void returnCostOfBagel() {
         Basket basket = new Basket();
-        Bagel bagel = new Bagel("Onion");
+        Bagel bagel = new Bagel("BGLO", 0.49, "Bagel", "Onion");
 
         double cost = basket.returnCostOfBagel(bagel);
 
@@ -174,7 +174,7 @@ class BasketTest {
     @Test
     public void chooseBagelFilling() {
         Basket basket = new Basket();
-        Filling filling = new Filling("Egg");
+        Filling filling = new Filling("FILE", 0.12, "Filling", "Egg");
 
         String fillingVariant = basket.chooseBagelFilling(filling);
 
@@ -185,7 +185,7 @@ class BasketTest {
     @Test
     public void costOfEachFilling() {
         Basket basket = new Basket();
-        Filling filling = new Filling("Egg");
+        Filling filling = new Filling("FILE", 0.12, "Filling", "Egg");
 
         double fillingCost = basket.costOfEachFilling(filling);
 

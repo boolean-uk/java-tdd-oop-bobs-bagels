@@ -5,9 +5,30 @@ import org.junit.jupiter.api.Test;
 
 class BagelTest {
 
+
+    @Test
+    void getSku() {
+        Bagel bagel = new Bagel("BGLO", 0.49, "Bagel", "Onion");
+
+        String result = bagel.getSku();
+
+        Assertions.assertEquals("BGLO", result);
+    }
+
+    @Test
+    void setSku() {
+        Bagel bagel = new Bagel("BGLO", 0.49, "Bagel", "Onion");
+
+        bagel.setSku("BGLP");
+
+        String result = bagel.getSku();
+
+        Assertions.assertEquals("BGLP", result);
+    }
+
     @Test
     void getPrice() {
-        Bagel bagel = new Bagel("Onion");
+        Bagel bagel = new Bagel("BGLO", 0.49, "Bagel", "Onion");
 
         double result = bagel.getPrice();
 
@@ -16,7 +37,7 @@ class BagelTest {
 
     @Test
     void setPrice() {
-        Bagel bagel = new Bagel("Plain");
+        Bagel bagel = new Bagel("BGLO", 0.49, "Bagel", "Onion");
 
         bagel.setPrice(0.55);
 
@@ -27,40 +48,40 @@ class BagelTest {
 
     @Test
     void getVariant() {
-        Bagel bagel = new Bagel("Everything");
+        Bagel bagel = new Bagel("BGLO", 0.49, "Bagel", "Onion");
 
         String result = bagel.getVariant();
 
-        Assertions.assertEquals("Everything", result);
+        Assertions.assertEquals("Onion", result);
     }
 
     @Test
-    void getSku() {
-        Bagel bagel = new Bagel("Sesame");
+    void setVariant() {
+        Bagel bagel = new Bagel("BGLO", 0.49, "Bagel", "Onion");
 
-        String result = bagel.getSku();
+        bagel.setVariant("Plain");
 
-        Assertions.assertEquals("BGLS", result);
+        String result = bagel.getVariant();
+
+        Assertions.assertEquals("Plain", result);
     }
 
     @Test
-    void getBagel() {
-        Bagel bagel = new Bagel("Onion");
+    void getName() {
+        Bagel bagel = new Bagel("BGLO", 0.49, "Bagel", "Onion");
 
-        bagel.setBagel("Onion Bagel");
+        String result = bagel.getName();
 
-        String result = bagel.getBagel();
-
-        Assertions.assertEquals("Onion Bagel", result);
+        Assertions.assertEquals("Bagel", result);
     }
 
     @Test
-    void setBagel() {
-        Bagel bagel = new Bagel("Plain");
+    void setName() {
+        Bagel bagel = new Bagel("BGLO", 0.49, "Bagel", "Onion");
 
-        bagel.setBagel("Plain Bagel");
+        bagel.setName("Plain Bagel");
 
-        String result = bagel.getBagel();
+        String result = bagel.getName();
 
         Assertions.assertEquals("Plain Bagel", result);
     }

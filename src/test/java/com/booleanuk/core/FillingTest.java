@@ -7,7 +7,7 @@ class FillingTest {
 
     @Test
     void getPrice() {
-        Filling filling = new Filling("Bacon");
+        Filling filling = new Filling("FILE", 0.12, "Filling", "Egg");
 
         double result = filling.getPrice();
 
@@ -16,7 +16,7 @@ class FillingTest {
 
     @Test
     void setPrice() {
-        Filling filling = new Filling("Egg");
+        Filling filling = new Filling("FILE", 0.12, "Filling", "Egg");
 
         filling.setPrice(0.15);
 
@@ -27,16 +27,16 @@ class FillingTest {
 
     @Test
     void getVariant() {
-        Filling filling = new Filling("Cheese");
+        Filling filling = new Filling("FILE", 0.12, "Filling", "Egg");
 
         String result = filling.getVariant();
 
-        Assertions.assertEquals("Cheese", result);
+        Assertions.assertEquals("Egg", result);
     }
 
     @Test
     void setVariant() {
-        Filling filling = new Filling("Cream Cheese");
+        Filling filling = new Filling("FILE", 0.12, "Filling", "Egg");
 
         filling.setVariant("Ham");
 
@@ -47,16 +47,16 @@ class FillingTest {
 
     @Test
     void getSku() {
-        Filling filling = new Filling("Smoked Salmon");
+        Filling filling = new Filling("FILE", 0.12, "Filling", "Egg");
 
         String result = filling.getSku();
 
-        Assertions.assertEquals("FILS", result);
+        Assertions.assertEquals("FILE", result);
     }
 
     @Test
     void setSku() {
-        Filling filling = new Filling("Ham");
+        Filling filling = new Filling("FILC", 0.12, "Filling", "Cheese");
 
         filling.setSku("FILE");
 
@@ -66,23 +66,21 @@ class FillingTest {
     }
 
     @Test
-    void getFilling() {
-        Filling filling = new Filling("Bacon");
+    void getName() {
+        Filling filling = new Filling("FILC", 0.12, "Filling", "Cheese");
 
-        filling.setFilling("Egg");
+        String result = filling.getVariant();
 
-        String result = filling.getFilling();
-
-        Assertions.assertEquals("Egg", result);
+        Assertions.assertEquals("Cheese", result);
     }
 
     @Test
-    void setFilling() {
-        Filling filling = new Filling("Egg");
+    void setName() {
+        Filling filling = new Filling("FILC", 0.12, "Filling", "Cheese");
 
-        filling.setFilling("Cream Cheese");
+        filling.setVariant("Cream Cheese");
 
-        String result = filling.getFilling();
+        String result = filling.getVariant();
 
         Assertions.assertEquals("Cream Cheese", result);
     }
