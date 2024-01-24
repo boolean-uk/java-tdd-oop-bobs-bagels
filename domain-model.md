@@ -128,15 +128,8 @@ I want customers to only be able to order things that we stock in our inventory.
 |           |                              |                             |                      | return false       |
 
 
+
 ## Extension 1
-```
-As a customer,
-So I can see if my order is correct,
-I want a receipt with all my items and prices.
-```
-
-
-## Extension 2
 
 ```
 As a customer,
@@ -148,3 +141,18 @@ I want discounts when I choose certain item combinations.
 |        |                                             |                  |          |                 |
 |        |                                             |                  |          |                 |
 |        |                                             |                  |          |                 |
+
+
+## Extension 2
+
+```
+As a customer,
+So I can see if my order is correct,
+I want a receipt with all my items and prices.
+```
+| Class  | Methods                  | Member variables            | Scenario    | Outputs/Results |
+|--------|--------------------------|-----------------------------|-------------|-----------------|
+| Order  | String generateReceipt() | ArrayList<String> itemList  | If no items | Print receipt   |
+|        |                          |                             | is added    | without items   |
+|        |                          |                             | If items    | Print receipt   |
+|        |                          |                             | is added    | with all items  |
