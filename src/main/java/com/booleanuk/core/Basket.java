@@ -1,12 +1,7 @@
 package com.booleanuk.core;
 
-import com.booleanuk.extension.Discounts;
-
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.Map;
 
 public class Basket {
     private HashMap<String, Integer> basketMap;
@@ -61,9 +56,6 @@ public class Basket {
         } else {
             for (Product product : inventory.getProducts()) {
                 if (sku.equals(product.getSku())) {
-                    if (product.getName().equals("Filling")) {
-                        return "Filling must be added to a bagel";
-                    }
                     this.basketMap.put(sku, 1);
                     return "Product added to basket";
                 }
