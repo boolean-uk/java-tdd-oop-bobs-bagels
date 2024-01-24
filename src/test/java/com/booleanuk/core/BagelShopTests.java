@@ -25,6 +25,17 @@ public class BagelShopTests {
         // Test changing basket capacity
         assertTrue(basket.changeBasketCapacity(3));
     }
+    @Test
+    public void testBagelOrder() {
+        Bagel plainBagel = new Bagel("Plain", new ArrayList<>());
+        Fillings creamCheese = new Fillings("Cream Cheese", 1);
+        Product blackCoffee = new Product("COFB", 0.99, "Coffee", "Black");
 
+        // Test creating a bagel order with fillings and a product
+        BagelOrder order = new BagelOrder(List.of(plainBagel, creamCheese, blackCoffee));
+
+        // Test getting the total cost of the bagel order
+        assertEquals(plainBagel.getCost() + creamCheese.getCost() + blackCoffee.getCost(), order.getTotalCost());
+    }
 
 }
