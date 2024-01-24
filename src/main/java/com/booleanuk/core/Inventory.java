@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Inventory {
 
-    private ArrayList<Product> allProducts = new ArrayList<>();
+    private static ArrayList<Product> allProducts = new ArrayList<>();
 
     public Inventory() {
         Filling bacon = new Filling("Bacon", "FILB");
