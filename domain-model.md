@@ -231,6 +231,7 @@ Checkout
     + totalCostDiscount(HashMap<String, Integer> basketMap) double
 	+ receiptDiscount(HashMap<String, Integer> basketMap) String
 	+ orderSummary(HashMap<String, Integer> basketMap) String
+	
 Inventory
 	- products: List<products>
 	+ getProductCost(sku: String) double
@@ -241,6 +242,11 @@ Product
 	- price: double
 	- name: String
 	- Variant: String
+Bagel
+    - filling: Filling
+Coffee
+Filling
+
 Discounts
 	- discounts: List<Discount>
 	- inventory: Inventory
