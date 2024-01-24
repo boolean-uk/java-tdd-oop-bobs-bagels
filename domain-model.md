@@ -185,10 +185,9 @@ I'd like a text message with my order summary and time of delivery when I'm comp
 
 ```
 As a customer,
-So I can can conveniently order from my own home,
+So I can conveniently order from my own home,
 I'd like to be able to order via text message.
 ```
-
 | Class      | Method                          | Variables                   | Scenario                                                                                                                     | Return value                                      |
 |------------|---------------------------------|-----------------------------|------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------|
 | BobsBagels | getBasket(String phoneNumber)   | Map<String, Basket> baskets | Basket of user with input phonenumber is in Baskets                                                                          | Return Basket                                     |
@@ -201,7 +200,25 @@ I'd like to be able to order via text message.
 | BobsBagels                  |
 |-----------------------------|
 | Map<String, Basket> baskets |
+```
+As a customer,
+So I can reminisce about my Bagel orders,
+I'd like to be able to view my chatting history with Bobs Bagels.
+```
+| Class      | Method                                                                 | Variables         | Scenario                                       | Return value |
+|------------|------------------------------------------------------------------------|-------------------|------------------------------------------------|--------------|
+| BobsBagels | getUser(String phoneNumber)                                            | users: List<User> | User is found                                  | Return User  |
+|            |                                                                        |                   | User is not found, user is added to users list | Return User  |
 
+| User                        |
+|-----------------------------|
+| String phoneNumber          |
+| List<String> messageHistory |
+
+| Class | Method                                                | Variables                   | Scenario                                                                                               | Return value           |
+|-------|-------------------------------------------------------|-----------------------------|--------------------------------------------------------------------------------------------------------|------------------------|
+| User  | addToMessageHistory(String message, string messenger) | List<String> messageHistory | Messenger with message and timestamp added at end concatenated to a string and added to messageHistory | Void                   |
+|       | getMessageHistory()                                   | List<String> messageHistory | Message history is turned into a string with new line after each message                               | String message history |
 
 # Class diagram:
 ![](assets/cd.png)
@@ -210,9 +227,11 @@ I'd like to be able to order via text message.
 
 ```
 BobsBagels
-	- Baskets: Map<String, Basket>
+	- baskets: Map<String, Basket>
+	- users: List<User>
 	+ setBasketCapacity(capacity: int) String
 	+ getBasket(phonenumber: String) Basket
+	+ getUser(phonenumber: String) User
 Basket
 	- basketMap: HashMap<String, Integer>
 	- capacity: int
