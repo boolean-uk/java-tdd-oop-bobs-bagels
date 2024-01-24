@@ -29,12 +29,6 @@ public class Item {
     public int getQuantity(){
         return quantity;
     }
-    public void setQuantity(int quantity){
-        this.quantity = quantity;
-    }
-    public double getTotalCost(){
-        return price * quantity;
-    }
     @Override
     public String toString() {
         return getVariant() + " " + getType() + " " + getQuantity() + " " + getPrice();
