@@ -21,6 +21,7 @@ public class ReceiptHandler {
         this.sb = new StringBuilder();
         this.dt = LocalDateTime.now();
     }
+
     public String getDate(){
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         return this.dt.format(formatter);
