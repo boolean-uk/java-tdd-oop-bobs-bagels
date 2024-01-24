@@ -111,7 +111,7 @@ public class Basket {
                 result.append(String.format("%-26s", " ") + discountedString);
             }
             else {
-                discountedPrice = calculateCoffeeOffer(uniqueItem, quantity);
+                discountedPrice = calculateItemPrice(uniqueItem, quantity);
                 this.totalPrice += discountedPrice;
                 result.append(String.format("%-20s %-4d £%.2f\n", itemName, quantity, discountedPrice));
             }
@@ -134,14 +134,10 @@ public class Basket {
         return discountedPrice;
     }
 
-    private double calculateCoffeeOffer(Item item, int quantity){
+    private double calculateItemPrice(Item item, int quantity){
         double discountedPrice = 0.0;
 
-        if (item.getType().equals("Coffee")) {
-            discountedPrice += item.getPrice() * quantity;
-        } else {
-            discountedPrice += item.getPrice() * quantity;
-        }
+        discountedPrice += item.getPrice() * quantity;
         return discountedPrice;
     }
 }
