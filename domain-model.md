@@ -220,6 +220,11 @@ I'd like to be able to view my chatting history with Bobs Bagels.
 | User  | addToMessageHistory(String message, string messenger) | List<String> messageHistory | Messenger with message and timestamp added at end concatenated to a string and added to messageHistory | Void                   |
 |       | getMessageHistory()                                   | List<String> messageHistory | Message history is turned into a string with new line after each message                               | String message history |
 
+## Examples from twilio app in action
+![](assets/twilio-ex1.png)
+![](assets/twilio-ex2.png)
+
+
 # Class diagram:
 ![](assets/cd.png)
 ![](assets/cd-product.png)
