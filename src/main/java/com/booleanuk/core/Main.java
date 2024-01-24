@@ -41,13 +41,12 @@ public class Main {
         Basket basket1 = new Basket(shop, 16);
         basket1.add(bglp); basket1.add(bglp); basket1.add(bglp); basket1.add(bglp); basket1.add(bglp); basket1.add(bglp);
         basket1.add(cofb); basket1.add(bgle);
-        basket1.add(filx);
-        basket1.add(file);
-        basket1.add(fils);
 
         // Try to add one plain bagel with bacon filling.
-        bglp.addFilling(filb);
-        basket1.add(bglp);
+        Bagel bglpf = new Bagel("BGLP","Plain", 0.39);
+        bglpf.addFilling(filb);
+        System.out.println(basket1.add(bglpf));
+        basket1.add(bglpf);
 
         Receipt receipt = new Receipt(basket1);
         receipt.generateReceiptWithDiscount();

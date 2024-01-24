@@ -33,6 +33,22 @@ public class Receipt {
 
             int amount = basket.getBasketContent().get(item);
             String itemRow = item.getVariant() + " " + item.getName() + tabsAfterItem +  amount + "\t£" + item.getPrice() * amount + "\n";
+
+            // Check for fillings to bagel.
+            if(item.getClass() == Bagel.class) {
+                if (!((Bagel) item).getFillings().isEmpty()) {
+                    StringBuilder fillingsRows = new StringBuilder();
+                    for (Filling filling : ((Bagel) item).getFillings()) {
+                        fillingsRows.append("\tWith ");
+                        fillingsRows.append(filling.getVariant());
+                        fillingsRows.append(" Filling\t\t£");
+                        fillingsRows.append(filling.getPrice() * amount);
+                        fillingsRows.append("\n");
+                    }
+                    itemRow += fillingsRows.toString();
+                }
+            }
+
             receipt.append(itemRow);
         }
         receipt.append("\n---------------------------------\nTotal                        £") ;
@@ -85,11 +101,30 @@ public class Receipt {
 
             int amount = basket.getBasketContent().get(item);
             String itemRow = item.getVariant() + " " + item.getName() + tabsAfterItem +  amount + "\t£" + mapPriceAndSavings.get(item)[0]/100.0 + "\n";
+
+            // Check for fillings to bagel.
+            if(item.getClass() == Bagel.class) {
+                if (!((Bagel) item).getFillings().isEmpty()) {
+                    StringBuilder fillingsRows = new StringBuilder();
+                    for (Filling filling : ((Bagel) item).getFillings()) {
+                        fillingsRows.append("\tWith ");
+                        fillingsRows.append(filling.getVariant());
+                        fillingsRows.append(" Filling\t\t£");
+                        fillingsRows.append(filling.getPrice() * amount);
+                        fillingsRows.append("\n");
+                    }
+                    itemRow += fillingsRows.toString();
+                }
+            }
+
+            // Check if there are any savings.
             double saving = mapPriceAndSavings.get(item)[1]/100.0;
             if (saving != 0.0){
                 itemRow += "                          (-£" + saving + ")\n";
                 totalSavings += saving;
             }
+
+            // Add all information about item to the receipt.
             receipt.append(itemRow);
         }
         receipt.append("\n---------------------------------\nTotal                       £") ;
