@@ -12,6 +12,9 @@ public class TwilioApp {
     public static void main(String[] args) {
         BobsBagels bobsBagels = new BobsBagels();
 
+        // Api set up on localhost
+        // Ngrok set up on the 8080 port where it can receive and send requests from and to a URL
+        // Twilio webhook for sms connected to this URL
         port(8080);
         post("/sms", (req, res) -> {
             res.type("application/xml");
@@ -38,7 +41,7 @@ public class TwilioApp {
                     response = user.getMessageHistory();
                     break;
                 default:
-                    response = "Please input correct commands: \n 1. add [SKU]\n 2. remove [SKU]\n 3. order\n4. history";
+                    response = "Please input correct commands: \n 1. add [SKU]\n 2. remove [SKU]\n 3. order\n 4. history";
                     break;
             }
             user.addToMessageHistory(response, "BB");
