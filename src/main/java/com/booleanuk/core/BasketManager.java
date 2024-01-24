@@ -13,28 +13,57 @@ public class BasketManager {
 
     /**
      * Logic: check if available capacity is larger than 0, otherwise do not add to basket.
+     * Uses polymorphism compared to commented out version below.
      * @param item
      * @return item
      */
     public Item add(Item item) {
-        if (checkItemInInventory(item)) {
-            if ((checkCapacity() > 0)) {
-                if (item instanceof Bagel) {
-                    Bagel bagel = new Bagel(item.getSKU(), item.getPrice(), item.getName(), item.getVariant(), item.getFilling());
-                    getBasket().add(bagel);
-                    return bagel;
-                } else if (item instanceof Coffee) {
-                    Coffee coffee = new Coffee(item.getSKU(), item.getPrice(), item.getName(), item.getVariant(), item.getFilling());
-                    getBasket().add(coffee);
-                    return coffee;
-                } else if (item instanceof Filling) {
-                    Filling filling = new Filling(item.getSKU(), item.getPrice(), item.getName(), item.getVariant(), item.getFilling());
-                    getBasket().add(filling);
-                    return filling;
-                }
-            }
+        if (checkItemInInventory(item) && checkCapacity() > 0) {
+            Item itemCopy = item.copy();
+            getBasket().add(itemCopy);
+            return itemCopy;
         }
         return null;
+    }
+
+//    public Item add(Item item) {
+//        if (checkItemInInventory(item)) {
+//            if ((checkCapacity() > 0)) {
+//                if (item instanceof Bagel) {
+//                    Bagel bagel = new Bagel(item.getSKU(), item.getPrice(), item.getName(), item.getVariant(), item.getFilling());
+//                    getBasket().add(bagel);
+//                    return bagel;
+//                } else if (item instanceof Coffee) {
+//                    Coffee coffee = new Coffee(item.getSKU(), item.getPrice(), item.getName(), item.getVariant(), item.getFilling());
+//                    getBasket().add(coffee);
+//                    return coffee;
+//                } else if (item instanceof Filling) {
+//                    Filling filling = new Filling(item.getSKU(), item.getPrice(), item.getName(), item.getVariant(), item.getFilling());
+//                    getBasket().add(filling);
+//                    return filling;
+//                }
+//            }
+//        }
+//        return null;
+//    }
+
+    /**
+     * Logic: use polymorphism to allow customer to add multiple items as once,
+     * for example via a preorder ready to be picked up at the shop.
+     * @param preOrder
+     * @return
+     */
+    public boolean add(List<Item> preOrder) {
+        if (getCapacity() > preOrder.size()) {
+            for (Item item : preOrder) {
+                getBasket().add(item);
+            }
+        } else {
+            System.out.println("Preorder contains too many items!");
+            return false;
+        }
+        System.out.println("Preorder was able to fit in basket!");
+        return true;
     }
 
     /**
@@ -43,7 +72,7 @@ public class BasketManager {
      * @return item
      */
     public Item remove(Item item) {
-        if (!getBasket().stream().anyMatch(stock -> stock.getSKU().equals(item.getSKU()))) {
+        if (getBasket().stream().noneMatch(stock -> stock.getSKU().equals(item.getSKU()))) {
             return null;
         }
         for(Item i : getBasket()) {
@@ -123,6 +152,9 @@ public class BasketManager {
         return total;
     }
 
+    /**
+     * Logic: print the contents of any basket with its classes overridden toString method
+     */
     public void showContentsBasket() {
         for(Item item : getBasket()) {
             System.out.println(item.toString());

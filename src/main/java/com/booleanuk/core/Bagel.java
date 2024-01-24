@@ -8,6 +8,14 @@ public class Bagel implements Item {
     private Item.Variant variant;
     private Item filling;
 
+    /**
+     * Logic: constructor for instances of bagel's, having five member variables
+     * @param SKU
+     * @param price
+     * @param name
+     * @param variant
+     * @param filling
+     */
     public Bagel(String SKU, double price, Item.Name name, Item.Variant variant, Item filling) {
         this.setSKU(SKU);
         this.setPrice(price);
@@ -16,9 +24,8 @@ public class Bagel implements Item {
         this.setFilling(filling);
     }
 
-    // Overloaded constructor to represent a filling ONLY WHEN inside a Bagel Item
-    public Bagel(Item.Variant variant) {
-        this.setVariant(variant);
+    public Item copy() {
+        return new Bagel(getSKU(), getPrice(), getName(), getVariant(), getFilling());
     }
 
     /**

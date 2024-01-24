@@ -13,18 +13,16 @@ public class Filling implements Item {
         this.setVariant(variant);
     }
 
-    // Overloaded constructor to represent a filling ONLY WHEN inside a Bagel Item
-    public Filling(Item.Variant variant) {
-        this.setVariant(variant);
+    public Item copy() {
+        return new Filling(getSKU(), getPrice(), getName(), getVariant(), getFilling());
     }
 
     /**
-     * Logic: verify that 'this' is a bagel, and that argument is a filling
-     * @param filling
-     * @return true if filling was added, false if filling not added
+     * Logic: overloaded constructor to represent a filling ONLY WHEN inside a Bagel Item
+     * @param variant
      */
-    public boolean addFilling(Item filling) {
-        return false;
+    public Filling(Item.Variant variant) {
+        this.setVariant(variant);
     }
 
     /**

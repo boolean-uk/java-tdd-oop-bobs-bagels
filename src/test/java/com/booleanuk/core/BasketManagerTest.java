@@ -3,6 +3,8 @@ package com.booleanuk.core;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+
 public class BasketManagerTest {
 
     InventoryManager inv = new InventoryManager();
@@ -21,6 +23,22 @@ public class BasketManagerTest {
         b.add(item_a);
         Assertions.assertEquals(1, b.getBasket().size());
         Assertions.assertNotSame(item_a, b.getBasket().get(0));
+    }
+
+    @Test
+    public void testAddPreOrder() {
+        BasketManager b = new BasketManager();
+        ArrayList<Item> preOrder = new ArrayList<>();
+        preOrder.add(item_a);
+        preOrder.add(item_b);
+        preOrder.add(item_c);
+        Assertions.assertTrue(3 == preOrder.size());
+        Assertions.assertTrue(b.add(preOrder));
+
+        b.getBasket().clear();
+        b.changeCapacity(2);
+        Assertions.assertFalse(b.add(preOrder));
+
     }
 
     @Test

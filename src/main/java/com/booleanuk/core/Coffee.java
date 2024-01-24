@@ -13,19 +13,19 @@ public class Coffee implements Item {
         this.setVariant(variant);
     }
 
-    // Overloaded constructor to represent a filling ONLY WHEN inside a Bagel Item
-    public Coffee(Item.Variant variant) {
-        this.setVariant(variant);
+    public Item copy() {
+        return new Coffee(getSKU(), getPrice(), getName(), getVariant(), getFilling());
     }
 
-    /**
-     * Logic: verify that 'this' is a bagel, and that argument is a filling
-     * @param filling
-     * @return true if filling was added, false if filling not added
-     */
-    public boolean addFilling(Item filling) {
-        return false;
-    }
+//    /**
+//     * Logic: verify that 'this' is a bagel, and that argument is a filling
+//     * @param filling
+//     * @return true if filling was added, false if filling not added
+//     */
+//    public boolean addFilling(Item filling) {
+//        System.out.println("Can't add filling to Coffee you moron!");
+//        return false;
+//    }
 
     /**
      * Logic: override toString() with custom version.

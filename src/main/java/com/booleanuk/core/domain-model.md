@@ -56,26 +56,29 @@
 | filling: Item    |              |                                                     |        |         |
 |                  | addFilling() | If I want to associate a filling with an Item       | void   | void    |
 |                  | getPrice()   | If I want to know the price before adding to basket | int    | Sys.out |
+|                  | copy()       |                                                     |        |         |
 
 # Class Coffee
 
-| Member Variables | Methods      | Scenario                                            | Return | Output  |
-|-----------------|--------------|-----------------------------------------------------|--------|---------|
-| SKU: String     |              |                                                     |        |         |
-| price: double   |              |                                                     |        |         |
-| name: enum      |              |                                                     |        |         |
-| variant: enum   |              |                                                     |        |         |
-|                 | getPrice()   | If I want to know the price before adding to basket | int    | Sys.out |
+| Member Variables | Methods    | Scenario                                            | Return | Output  |
+|-----------------|------------|-----------------------------------------------------|--------|---------|
+| SKU: String     |            |                                                     |        |         |
+| price: double   |            |                                                     |        |         |
+| name: enum      |            |                                                     |        |         |
+| variant: enum   |            |                                                     |        |         |
+|                 | getPrice() | If I want to know the price before adding to basket | int    | Sys.out |
+|                 | copy()     |                                                     |        |         |
 
 # Class Filling
 
-| Member Variables | Methods      | Scenario                                            | Return | Output  |
-|------------------|--------------|-----------------------------------------------------|--------|---------|
-| SKU: String      |              |                                                     |        |         |
-| price: double    |              |                                                     |        |         |
-| name: enum       |              |                                                     |        |         |
-| variant: enum    |              |                                                     |        |         |
-|                  | getPrice()   | If I want to know the price before adding to basket | int    | Sys.out |
+| Member Variables | Methods    | Scenario                                            | Return | Output  |
+|------------------|------------|-----------------------------------------------------|--------|---------|
+| SKU: String      |            |                                                     |        |         |
+| price: double    |            |                                                     |        |         |
+| name: enum       |            |                                                     |        |         |
+| variant: enum    |            |                                                     |        |         |
+|                  | getPrice() | If I want to know the price before adding to basket | int    | Sys.out |
+|                  | copy()     |                                                     |        |         |
 
 ## Class Diagram
 

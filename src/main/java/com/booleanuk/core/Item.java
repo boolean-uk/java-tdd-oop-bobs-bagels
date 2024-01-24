@@ -8,7 +8,7 @@ public interface Item {
         ONION, PLAIN, EVERYTHING, SESAME, BLACK, WHITE, CAPUCCINO, LATTE, BACON, EGG, CHEESE, CREAM_CHEESE, SMOKED_SALMON, HAM
     }
 
-   boolean addFilling(Item filling);
+    Item copy();
 
     @Override
    String toString();
