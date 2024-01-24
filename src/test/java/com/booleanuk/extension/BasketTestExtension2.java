@@ -36,7 +36,7 @@ public class BasketTestExtension2 {
         basket.addItem("COFB");
         basket.addItem("COFB");
 
-        Assertions.assertEquals("test", basket.printReceipt());
+        Assertions.assertEquals("I don't know how to test a receipt", basket.printReceipt());
 
     }
 }

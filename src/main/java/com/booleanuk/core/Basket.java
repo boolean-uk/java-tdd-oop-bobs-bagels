@@ -217,7 +217,7 @@ public class Basket {
         String name = basketList.get(0);
         double totalPrice = 0;
         builder
-                .append("~~ Bob's Bagel ~~~\n")
+                .append("~~~ Bob's Bagel ~~~\n")
                 .append(String.format("%-20s%20s%20s\n","ITEM","QTY.","TOTAL"))
                 .append(String.format("---------------------------------------------------------------------\n"));
 
@@ -258,6 +258,7 @@ public class Basket {
     }
 
     public static void main(String[] args) {
+        //Testing receipt
         Basket basket = new Basket();
         basket.changeCapacity(100);
         basket.addItem("BGLO");
