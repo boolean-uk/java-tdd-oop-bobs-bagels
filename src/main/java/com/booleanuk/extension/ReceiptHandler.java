@@ -1,4 +1,7 @@
-package com.booleanuk.core;
+package com.booleanuk.extension;
+
+import com.booleanuk.core.Basket;
+import com.booleanuk.core.Product;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
