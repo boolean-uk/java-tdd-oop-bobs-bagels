@@ -27,13 +27,15 @@ public class BobsBagelsShop {
     }
 
     public void removeFromInventory(Item item) {
-        int newAmount = this.getInventory().get(item) - 1;
-        this.inventory.replace(item, newAmount);
+        Item itemWithoutFillings = this.getInventory().keySet().stream().filter(i -> i.getSku().equals(item.getSku())).toList().get(0);
+        int newAmount = this.getInventory().get(itemWithoutFillings) - 1;
+        this.inventory.replace(itemWithoutFillings, newAmount);
     }
 
     public void addToInventory(Item item) {
-        int newAmount = this.getInventory().get(item) + 1;
-        this.inventory.replace(item, newAmount);
+        Item itemWithoutFillings = this.getInventory().keySet().stream().filter(i -> i.getSku().equals(item.getSku())).toList().get(0);
+        int newAmount = this.getInventory().get(itemWithoutFillings) + 1;
+        this.inventory.replace(itemWithoutFillings, newAmount);
     }
 
     public BobsBagelsShop() {

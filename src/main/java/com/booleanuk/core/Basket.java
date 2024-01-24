@@ -22,10 +22,11 @@ public class Basket {
     }
 
     public String add(Item item) {
+        boolean skuNotInInventory = this.shop.getInventory().keySet().stream().noneMatch(i -> i.getSku().equals(item.getSku()));
         if (this.getBasketContent().size() >= this.getBasketCapacity()) {
             return "Basket is full.";
         }
-        else if (!this.shop.getInventory().containsKey(item)) {
+        else if (skuNotInInventory) {
             return "Chosen item not in stock.";
         }
         else {
