@@ -244,20 +244,15 @@ Product
 Discounts
 	- discounts: List<Discount>
 	- inventory: Inventory
-	+ calculateBulkDiscount(String sku, int num, BulkDiscount discount) double
-	+ calculateComboDiscount(String sku, Set<String> skuList, ComboDiscount discount) double
-	+ calculateDiscount(String sku, HashMap<String, Integer> basketMap) double
-Discount (Interface)
+	+ calculateDiscounts(String sku, HashMap<String, Integer> basketMap) double
+Discount
     - sku: String
     - price: double
-    + getSku() String
-    + getPrice() double
-BulkDiscount
-	- sku: String
+    + calculateDiscount(String sku, HashMap<String, Integer> map, Inventory inventory) double
+BulkDiscount (extends Discount)
 	- number: int
-	- price: double
-ComboDiscount
-	- sku: String
+	+ calculateDiscount(String sku, HashMap<String, Integer> map, Inventory inventory) double
+ComboDiscount (extends Discount)
 	- name: String
-	- price: double
+	+ calculateDiscount(String sku, HashMap<String, Integer> map, Inventory inventory) double
 ```
