@@ -13,7 +13,9 @@ class BasketTest {
     @Test
     public void testAddBagelToBasket() {
         Inventory inventory = new Inventory();
-        Basket basket = new Basket(inventory);
+        Discounts discounts = new Discounts(inventory);
+        Checkout checkout = new Checkout(inventory, discounts);
+        Basket basket = new Basket(inventory, checkout);
         Assertions.assertEquals("Product added to basket", basket.add("BGLO"));
         Assertions.assertTrue(basket.getBasketMap().containsKey("BGLO"));
     }
@@ -21,7 +23,9 @@ class BasketTest {
     @Test
     public void testAddMultipleBagelsToBasket() {
         Inventory inventory = new Inventory();
-        Basket basket = new Basket(inventory);
+        Discounts discounts = new Discounts(inventory);
+        Checkout checkout = new Checkout(inventory, discounts);
+        Basket basket = new Basket(inventory, checkout);
         basket.add("BGLO");
         basket.add("BGLP");
         basket.add("BGLE");
@@ -33,7 +37,9 @@ class BasketTest {
     @Test
     public void testAddMultipleOffSameBagelToBasket() {
         Inventory inventory = new Inventory();
-        Basket basket = new Basket(inventory);
+        Discounts discounts = new Discounts(inventory);
+        Checkout checkout = new Checkout(inventory, discounts);
+        Basket basket = new Basket(inventory, checkout);
         basket.add("BGLO");
         basket.add("BGLO");
         basket.add("BGLO");
@@ -44,7 +50,9 @@ class BasketTest {
     @Test
     public void testAddNoneExistingBagelToBasket() {
         Inventory inventory = new Inventory();
-        Basket basket = new Basket(inventory);
+        Discounts discounts = new Discounts(inventory);
+        Checkout checkout = new Checkout(inventory, discounts);
+        Basket basket = new Basket(inventory, checkout);
         basket.add("BGLO");
         basket.add("BGLO");
         basket.add("BGLO");
@@ -56,14 +64,18 @@ class BasketTest {
     @Test
     public void testAddBagelToFullBasket() {
         Inventory inventory = new Inventory();
-        Basket basket = new Basket(inventory);
+        Discounts discounts = new Discounts(inventory);
+        Checkout checkout = new Checkout(inventory, discounts);
+        Basket basket = new Basket(inventory, checkout);
         Assertions.assertEquals("Product not found", basket.add("AAAHHH"));
     }
 
     @Test
     public void testRemoveBagelFromBasket() {
         Inventory inventory = new Inventory();
-        Basket basket = new Basket(inventory);
+        Discounts discounts = new Discounts(inventory);
+        Checkout checkout = new Checkout(inventory, discounts);
+        Basket basket = new Basket(inventory, checkout);
         basket.add("BGLO");
         Assertions.assertEquals("Product removed from basket", basket.remove("BGLO"));
         Assertions.assertFalse(basket.getBasketMap().containsKey("BGLO"));
@@ -72,7 +84,9 @@ class BasketTest {
     @Test
     public void testRemoveMultipleBagelsFromBasket() {
         Inventory inventory = new Inventory();
-        Basket basket = new Basket(inventory);
+        Discounts discounts = new Discounts(inventory);
+        Checkout checkout = new Checkout(inventory, discounts);
+        Basket basket = new Basket(inventory, checkout);
         basket.add("BGLO");
         basket.add("BGLP");
         basket.add("BGLE");
@@ -84,7 +98,9 @@ class BasketTest {
     @Test
     public void testRemoveMultipleOffSameBagelFromBasket() {
         Inventory inventory = new Inventory();
-        Basket basket = new Basket(inventory);
+        Discounts discounts = new Discounts(inventory);
+        Checkout checkout = new Checkout(inventory, discounts);
+        Basket basket = new Basket(inventory, checkout);
         basket.add("BGLO");
         basket.add("BGLO");
         basket.add("BGLO");
@@ -95,28 +111,36 @@ class BasketTest {
     @Test
     public void testRemoveNoneExistingBagelFromBasket() {
         Inventory inventory = new Inventory();
-        Basket basket = new Basket(inventory);
+        Discounts discounts = new Discounts(inventory);
+        Checkout checkout = new Checkout(inventory, discounts);
+        Basket basket = new Basket(inventory, checkout);
         Assertions.assertEquals("Product is not in basket", basket.remove("AAAHHH"));
     }
 
     @Test
     public void testRemoveBagelNotInBasket() {
         Inventory inventory = new Inventory();
-        Basket basket = new Basket(inventory);
+        Discounts discounts = new Discounts(inventory);
+        Checkout checkout = new Checkout(inventory, discounts);
+        Basket basket = new Basket(inventory, checkout);
         Assertions.assertEquals("Product is not in basket", basket.remove("BGLO"));
     }
 
     @Test
     public void testSetBasketCapacity() {
         Inventory inventory = new Inventory();
-        Basket basket = new Basket(inventory);
+        Discounts discounts = new Discounts(inventory);
+        Checkout checkout = new Checkout(inventory, discounts);
+        Basket basket = new Basket(inventory, checkout);
         Assertions.assertTrue(basket.setCapacity(3));
     }
 
     @Test
     public void testSetBasketCapacityAndAddMoreThanLimit() {
         Inventory inventory = new Inventory();
-        Basket basket = new Basket(inventory);
+        Discounts discounts = new Discounts(inventory);
+        Checkout checkout = new Checkout(inventory, discounts);
+        Basket basket = new Basket(inventory, checkout);
         basket.add("BGLO");
         Assertions.assertTrue(basket.setCapacity(1));
         Assertions.assertEquals("Basket is full", basket.add("BGLO"));
@@ -125,7 +149,9 @@ class BasketTest {
     @Test
     public void testSetBasketCapacityBelowNumberOfProducts() {
         Inventory inventory = new Inventory();
-        Basket basket = new Basket(inventory);
+        Discounts discounts = new Discounts(inventory);
+        Checkout checkout = new Checkout(inventory, discounts);
+        Basket basket = new Basket(inventory, checkout);
         basket.add("BGLO");
         basket.add("BGLO");
         Assertions.assertTrue(basket.setCapacity(1));
@@ -134,7 +160,9 @@ class BasketTest {
     @Test
     public void testSetBasketCapacityBelowNumberOfProductsThenAdd() {
         Inventory inventory = new Inventory();
-        Basket basket = new Basket(inventory);
+        Discounts discounts = new Discounts(inventory);
+        Checkout checkout = new Checkout(inventory, discounts);
+        Basket basket = new Basket(inventory, checkout);
         basket.add("BGLO");
         basket.add("BGLO");
         Assertions.assertTrue(basket.setCapacity(1));
@@ -144,7 +172,9 @@ class BasketTest {
     @Test
     public void testGetTotalCostForBasket() {
         Inventory inventory = new Inventory();
-        Basket basket = new Basket(inventory);
+        Discounts discounts = new Discounts(inventory);
+        Checkout checkout = new Checkout(inventory, discounts);
+        Basket basket = new Basket(inventory, checkout);
         basket.add("BGLO");
         basket.add("BGLO");
         basket.add("BGLP");
@@ -154,14 +184,18 @@ class BasketTest {
     @Test
     public void testGetTotalCostForEmptyBasket() {
         Inventory inventory = new Inventory();
-        Basket basket = new Basket(inventory);
+        Discounts discounts = new Discounts(inventory);
+        Checkout checkout = new Checkout(inventory, discounts);
+        Basket basket = new Basket(inventory, checkout);
         Assertions.assertEquals(0, basket.totalCost());
     }
 
     @Test
     public void testAddFillingWithBagelInBasket() {
         Inventory inventory = new Inventory();
-        Basket basket = new Basket(inventory);
+        Discounts discounts = new Discounts(inventory);
+        Checkout checkout = new Checkout(inventory, discounts);
+        Basket basket = new Basket(inventory, checkout);
         basket.add("BGLO");
         Assertions.assertEquals("Filling added", basket.addFilling("FILB"));
     }
@@ -169,14 +203,18 @@ class BasketTest {
     @Test
     public void testAddFillingWithNoBagelInBasket() {
         Inventory inventory = new Inventory();
-        Basket basket = new Basket(inventory);
+        Discounts discounts = new Discounts(inventory);
+        Checkout checkout = new Checkout(inventory, discounts);
+        Basket basket = new Basket(inventory, checkout);
         Assertions.assertEquals("You need to add a bagel to your basket", basket.addFilling("FILB"));
     }
 
     @Test
     public void testAddNoneExistingFillingWithBagelInBasket() {
         Inventory inventory = new Inventory();
-        Basket basket = new Basket(inventory);
+        Discounts discounts = new Discounts(inventory);
+        Checkout checkout = new Checkout(inventory, discounts);
+        Basket basket = new Basket(inventory, checkout);
         basket.add("BGLO");
         Assertions.assertEquals("Filling was not found", basket.addFilling("AAHHHH"));
     }
@@ -184,7 +222,9 @@ class BasketTest {
     @Test
     public void testAddProductThatIsNotFillingWithBagelInBasket() {
         Inventory inventory = new Inventory();
-        Basket basket = new Basket(inventory);
+        Discounts discounts = new Discounts(inventory);
+        Checkout checkout = new Checkout(inventory, discounts);
+        Basket basket = new Basket(inventory, checkout);
         basket.add("BGLO");
         Assertions.assertEquals("Product needs to be a filling", basket.addFilling("COFB"));
     }
@@ -193,7 +233,8 @@ class BasketTest {
     public void testTotalCostDiscountsMultipleTypeProducts() {
         Inventory inventory = new Inventory();
         Discounts discounts = new Discounts(inventory);
-        Basket basket = new Basket(inventory, discounts);
+        Checkout checkout = new Checkout(inventory, discounts);
+        Basket basket = new Basket(inventory, checkout);
         basket.setCapacity(30);
         basket.add("BGLO"); basket.add("BGLO");
         for(int i = 0; i < 12; i++) {
@@ -203,14 +244,15 @@ class BasketTest {
             basket.add("BGLE");
         }
         basket.add("COFB"); basket.add("COFB"); basket.add("COFB");
-        Assertions.assertEquals(10.43, basket.totalCostDiscount());
+        Assertions.assertEquals(10.3, basket.totalCostDiscount());
     }
 
     @Test
     public void testTotalCostDiscountsOneTypeProduct() {
         Inventory inventory = new Inventory();
         Discounts discounts = new Discounts(inventory);
-        Basket basket = new Basket(inventory, discounts);
+        Checkout checkout = new Checkout(inventory, discounts);
+        Basket basket = new Basket(inventory, checkout);
         basket.setCapacity(30);
         for(int i = 0; i < 16; i++) {
             basket.add("BGLP");
@@ -222,7 +264,8 @@ class BasketTest {
     public void testTotalCostDiscountsNoDiscounts() {
         Inventory inventory = new Inventory();
         Discounts discounts = new Discounts(inventory);
-        Basket basket = new Basket(inventory, discounts);
+        Checkout checkout = new Checkout(inventory, discounts);
+        Basket basket = new Basket(inventory, checkout);
         basket.setCapacity(30);
         for(int i = 0; i < 16; i++) {
             basket.add("BGLS");
@@ -234,7 +277,8 @@ class BasketTest {
     public void testReceiptDiscountWithDiscounts() {
         Inventory inventory = new Inventory();
         Discounts discounts = new Discounts(inventory);
-        Basket basket = new Basket(inventory, discounts);
+        Checkout checkout = new Checkout(inventory, discounts);
+        Basket basket = new Basket(inventory, checkout);
         basket.setCapacity(30);
         basket.add("BGLO"); basket.add("BGLO");
         for(int i = 0; i < 12; i++) {
@@ -245,14 +289,14 @@ class BasketTest {
         }
         basket.add("COFB"); basket.add("COFB"); basket.add("COFB");
         String receipt = basket.receiptDiscount();
-        Assertions.assertTrue(receipt.contains("$10.43"));
+        Assertions.assertTrue(receipt.contains("$10.3"));
         Assertions.assertTrue(receipt.contains("(-$0.69)"));
         Assertions.assertTrue(receipt.contains("(-$0.45)"));
         Assertions.assertTrue(receipt.contains("Onion Bagel"));
         Assertions.assertTrue(receipt.contains("Plain Bagel"));
         Assertions.assertTrue(receipt.contains("Everything Bagel"));
         Assertions.assertTrue(receipt.contains("Coffee"));
-        Assertions.assertTrue(receipt.contains("You saved a total of $1.14"));
+        Assertions.assertTrue(receipt.contains("You saved a total of $1.27"));
 
     }
 
@@ -260,10 +304,10 @@ class BasketTest {
     public void testReceiptDiscountWithoutDiscounts() {
         Inventory inventory = new Inventory();
         Discounts discounts = new Discounts(inventory);
-        Basket basket = new Basket(inventory, discounts);
+        Checkout checkout = new Checkout(inventory, discounts);
+        Basket basket = new Basket(inventory, checkout);
         basket.setCapacity(30);
         basket.add("BGLO"); basket.add("BGLO");
-        basket.add("COFB"); basket.add("COFB"); basket.add("COFB");
 
         String receipt = basket.receiptDiscount();
         Assertions.assertFalse(receipt.contains("You saved a total of"));

@@ -1,23 +1,27 @@
 package com.booleanuk.extension;
 
-public class BulkDiscount {
-    private String sku;
+import com.booleanuk.core.Inventory;
+
+import java.util.HashMap;
+
+public class BulkDiscount extends Discount{
     private int number;
-    private double price;
 
     public BulkDiscount(String sku, int number, double price) {
-        this.sku = sku;
+        super(sku, price);
         this.number = number;
-        this.price = price;
     }
 
-    public String getSku() {
-        return sku;
-    }
     public int getNumber() {
         return number;
     }
-    public double getPrice() {
-        return price;
+
+    @Override
+    public double calculateDiscount(String sku, HashMap<String, Integer> map, Inventory inventory){
+        if (this.getNumber() <= map.get(sku)) {
+            return (double) Math.round((((double) this.getNumber() * inventory.getProductCost(sku))
+                    - this.getPrice()) * 100) /100;
+        }
+        return 0;
     }
 }
