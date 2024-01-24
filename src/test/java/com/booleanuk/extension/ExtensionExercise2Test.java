@@ -17,7 +17,6 @@ class ExtensionExercise2Test {
         //SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         //String expectedDate = dateFormat.format(new Date());
 
-
         ExtensionExercise2 extensionExercise2 = new ExtensionExercise2();
 
         Inventory item1 = new Inventory("BGLO", 0.49, "Bagel", "Onion");
@@ -42,8 +41,6 @@ class ExtensionExercise2Test {
                 + "Total                  £2.64" + "\n\n"
                 + "         Thank you\n"
                 + "      for your order!       \n\n";
-
-
 
         //Different way to check the receipt String having the correct values without
         // having to put in a whole new receipt string in the expected value.
