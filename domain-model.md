@@ -27,12 +27,13 @@ As a member of the public,
 So that I can not overfill my small bagel basket
 I'd like to know when my basket is full when I try adding an item beyond my basket capacity.
 ```
-| Class  | Method          | Variables                          | Scenario                                                                                  | Return value                     |
-|--------|-----------------|------------------------------------|-------------------------------------------------------------------------------------------|----------------------------------|
-| Basket | add(String sku) | HashMap<String, Integer> basketMap | Empty / Invalid SKU input                                                                 | Return "Product not found"       |
-|        |                 | int capacity                       | Valid SKU input, basket does not contain product, product added to basketMap with value 1 | Return "Product added to basket" |
-|        |                 |                                    | Valid SKU input, basket already contains product, value for product increased by 1        | Return "Product added to basket" |
-|        |                 |                                    | Basket already full, nothing added to basket                                              | Return "Basket is full"          |
+| Class  | Method          | Variables                          | Scenario                                                                                  | Return value                              |
+|--------|-----------------|------------------------------------|-------------------------------------------------------------------------------------------|-------------------------------------------|
+| Basket | add(String sku) | HashMap<String, Integer> basketMap | Empty / Invalid SKU input                                                                 | Return "Product not found"                |
+|        |                 | int capacity                       | Valid SKU input, basket does not contain product, product added to basketMap with value 1 | Return "Product added to basket"          |
+|        |                 |                                    | Valid SKU input, basket already contains product, value for product increased by 1        | Return "Product added to basket"          |
+|        |                 |                                    | Basket already full, nothing added to basket                                              | Return "Basket is full"                   |
+|        |                 |                                    | Filling is chosen to be added                                                             | Return "Filling must be added to a bagel" |
 ```
 4.
 As a Bob's Bagels manager,
@@ -84,14 +85,18 @@ I'd like to know the cost of a bagel before I add it to my basket.
 As a customer,
 So I can shake things up a bit,
 I'd like to be able to choose fillings for my bagel.
+
+Assumptions: 
+ - Filling is part of a bagel, does not count towards basket limit
+ - Each bagel can only have one filling
 ```
-| Class  | Method                 | Variables                          | Scenario                                                                                              | Return value                                    |
-|--------|------------------------|------------------------------------|-------------------------------------------------------------------------------------------------------|-------------------------------------------------|
-| Basket | addFilling(String sku) | HashMap<String, Integer> basketMap | Filling added to basketMap with bagel in it                                                           | Return "Filling added"                          |
-|        |                        |                                    | Filling added to basketMap without bagel in it, do not add                                            | Return "You need to add a bagel to your basket" |
-|        |                        |                                    | SKU not found                                                                                         | Return "Filling was not found"                  |
-|        |                        |                                    | SKU is found, but does not refer to a filling                                                         | Return "Product needs to be a filling"          |
-|        |                        |                                    | Filling added to full basket. addFilling uses add() method for adding, and therefore has same return. | Return "Basket is full"                         |
+| Class  | Method                                         | Variables                          | Scenario                                                                                              | Return value                                                   |
+|--------|------------------------------------------------|------------------------------------|-------------------------------------------------------------------------------------------------------|----------------------------------------------------------------|
+| Basket | addFilling(String bagelSku, String fillingSku) | HashMap<String, Integer> basketMap | Filling added to bagel in basketMap                                                                   | Return "Filling added"                                         |
+|        |                                                |                                    | Filling added to bagel not in basketMap, do not add                                                   | Return "You need to add the filling to a bagel in your basket" |
+|        |                                                |                                    | SKU not found                                                                                         | Return "Filling was not found"                                 |
+|        |                                                |                                    | SKU is found, but does not refer to a filling                                                         | Return "Product needs to be a filling"                         |
+
 ```
 9.
 As a customer,
