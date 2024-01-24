@@ -1,30 +1,13 @@
 package com.booleanuk.core;
 
-public class Filling {
-    private String name;
-    private String sku;
-    private double price;
+public class Filling extends Product{
 
     public Filling(String name, String sku) {
-        this.name = name;
-        this.sku = sku;
-        this.price = 0.12;
+        super(name, sku, 0.12);
     }
+
     public Filling(String name, String sku, double price) {
-        this.name = name;
-        this.sku = sku;
-        this.price = price;
+        super(name, sku, price);
     }
 
-    public String getName() {
-        return this.name;
-    }
-
-    public double getPrice() {
-        return this.price;
-    }
-
-    public String getSku() {
-        return this.sku;
-    }
 }

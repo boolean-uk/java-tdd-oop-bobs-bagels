@@ -2,23 +2,12 @@ package com.booleanuk.core;
 
 import java.util.ArrayList;
 
-public class Bagel {
-    private String name;
-    private String sku;
-    private String uniqueID;
-    private double price;
+public class Bagel extends Product{
     private ArrayList<Filling> fillings;
 
     public Bagel(String name, String sku, double price) {
-        this.name = name;
-        this.sku = sku;
-        this.uniqueID = "abc";  //If there are more than one e.g. sesame bagel, this ID could be used to navigate to the right bagel. Currently not in use
-        this.price = price;
+        super(name, sku, price);
         this.fillings = new ArrayList<>();
-    }
-
-    public double getPrice() {
-        return this.price;
     }
 
     public boolean addFilling(Filling filling) {
@@ -26,7 +15,4 @@ public class Bagel {
         return true;
     }
 
-    public String getSku() {
-        return this.sku;
-    }
 }
