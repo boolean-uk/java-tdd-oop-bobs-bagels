@@ -83,10 +83,11 @@ I don't want customers to be able to print out receipts if nothing has been purc
 
 ### Bagel Class (subclass to Item)
 
-| Methods                    | Member Variables            |
-|----------------------------|-----------------------------|
-| getFillings()              | ArrayList\<String> fillings |
-| addFilling(String filling) |                             |
+| Methods                          | Member Variables            |
+|----------------------------------|-----------------------------|
+| getFillings()                    | ArrayList\<String> fillings |
+| addFilling(String filling)       |                             |
+| getFillingAmount(String filling) |                             |
 
 ### Filling Class (subclass to Item)
 
@@ -104,14 +105,15 @@ I don't want customers to be able to print out receipts if nothing has been purc
 ### Inventory Class
 (everything that can be ordered)
 
-| Methods                   | Member Variables                            |
-|---------------------------|---------------------------------------------|
-| isInInventory(String sKU) | LinkedHashMap<String, double> bagelPrices   |
-| getPrice(String name)     | LinkedHashMap<String, double> coffeePrices  |
-| getBagelPrice()           | LinkedHashMap<String, double> fillingPrices |
-| getFillingPrices()        | HashMap<String, String> inventoryStock      |   
-| getCoffeePrices()         |                                             |
-| getSKU(String name)       |                                             |
+| Methods                       | Member Variables                            |
+|-------------------------------|---------------------------------------------|
+| isInInventory(String sKU)     | LinkedHashMap<String, Double> bagelPrices   |
+| getPrice(String name)         | LinkedHashMap<String, Double> coffeePrices  |
+| getBagelPrices()              | LinkedHashMap<String, Double> fillingPrices |
+| getFillingPrices()            | HashMap<String, String> inventoryStock      |   
+| getCoffeePrices()             |                                             |
+| canItemBeOrdered(String name) |                                             |
+| getSKU(String name)           |                                             |
 
 
 ### Basket Class
@@ -120,13 +122,14 @@ I don't want customers to be able to print out receipts if nothing has been purc
 |-----------------------------------------------|-------------------------|
 | addItem(Item item)                            | ArrayList\<Item> basket |
 | removeItem(Item item)                         | Inventory inventory     |
-| changeBasketCapacity(int newCapacity)         | int capacity            |
+| changeBasketCapacity(int newCapacity)         | int basketCapacity      |
 | showTotalCostInBasket()                       |                         |
 | costOfItem(String name)                       |                         |
 | getBagelPrices()                              |                         |
 | getCoffeePrices()                             |                         |
 | getFillingPrices()                            |                         |
 | addBagelFilling(Bagel bagel, Filling filling) |                         |
+| getAmountOfItemInBasket(String name)          |                         |
 | getBasket()                                   |                         |
 | getBasketCapacity()                           |                         |
 
@@ -158,10 +161,10 @@ I don't want customers to be able to print out receipts if nothing has been purc
 
 ### Receipt Class
 
-| Methods                     | Member Variables    |
-|-----------------------------|---------------------|
-| printReceipt(Basket basket) | Inventory inventory |
-|                             |                     |
+| Methods                                          | Member Variables       |
+|--------------------------------------------------|------------------------|
+| printReceipt(Basket basket, Inventory inventory) | int charactersOnOneRow |
+|                                                  | int placeForItemAmount |
 
 | Scenario                                                    | Return Value/Output/Result                                                                            |
 |-------------------------------------------------------------|-------------------------------------------------------------------------------------------------------|
