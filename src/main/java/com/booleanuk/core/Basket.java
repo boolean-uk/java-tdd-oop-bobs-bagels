@@ -1,10 +1,12 @@
 package com.booleanuk.core;
 
+import java.io.Console;
 import java.sql.SQLOutput;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Scanner;
 
 public class Basket {
@@ -288,28 +290,28 @@ public class Basket {
         int cofbDiscCounter = 0;
         if (cofbCounter!=0) {
             while (cofbCounter > 0) {
+                //Check bagel with topping
                 if (bglCounter > 0) {
                     //Remove the difference for every extra bagel that combines with a coffee
                     double differenceBgl = 0.23d;
-                    for (int i = 0; i < bglCounter; i++) {
-                        //Remove the coffee that has been discounted with a bagel
-                        cofbCounter = cofbCounter - 1;
-                        //Remove the bagel
-                        bglCounter = bglCounter-1;
-                        total = total - differenceBgl;
-                        cofbDiscCounter++;
-                    }
+
+                    //Remove the bagel
+                    bglCounter = bglCounter-1;
+                    total = total - differenceBgl;
+                    cofbDiscCounter++;
+                    //Remove the coffee that has been discounted with a bagel
+                    cofbCounter = cofbCounter - 1;
+
                     //Coffee discount detected
                     cofb = true;
                 } else if (bglpCounter > 0) {
                     //Difference for bagel plain
                     double differenceBglp = 0.13d;
-                    for (int i = 0; i < bglpCounter; i++) {
-                        cofbCounter = cofbCounter - 1;
-                        bglpCounter = bglpCounter-1;
-                        total = total - differenceBglp;
-                        cofbDiscCounter++;
-                    }
+                    bglpCounter = bglpCounter-1;
+                    total = total - differenceBglp;
+                    cofbDiscCounter++;
+                    cofbCounter = cofbCounter - 1;
+
                     cofb = true;
                 } else{
                     //Exit the loop if none of the conditions are met
@@ -348,22 +350,22 @@ public class Basket {
         return fillingCost;
     }
 
-    public String makeSimpleReceipt(){
+    public void makeSimpleReceipt(){
         ArrayList<String> outputList = new ArrayList<>();
         ArrayList<String> priceList = new ArrayList<>();
         //Receipt format and text
-        String output = "\t~~~ Bob's Bagels ~~~\n\n";
+        System.out.println("\t~~~ Bob's Bagels ~~~\n\n");
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         LocalDateTime now = LocalDateTime.now();
         String dateTime = dtf.format(now);
-        output += "\t"+dateTime+"\n\n----------------------------\n\n";
+        System.out.println("\t"+dateTime+"\n\n----------------------------\n\n");
         //Add products to output
         for (int i = 0; i < basketArr.length; i++) {
             //Check if it is empty
             if(basketArr[i]!=null){
                 for (Inventory item : inventoryList) {
                     if (basketArr[i].equals(item.getSKU())) {
-                        outputList.add(item.getName()+" "+item.getVariant()+"\t\t");
+                        outputList.add(item.getName()+" "+item.getVariant());
                         priceList.add(Double.toString(item.getPrice()));
                     }
                 }
@@ -380,7 +382,7 @@ public class Basket {
                         //Get the content of the bagel in the list
                         String oldString = outputList.get(pos);
                         //New content with added filling
-                        String newString = oldString + " \n\tFilling: "+item.getVariant();
+                        String newString = oldString + " \n\t\tFilling: "+item.getVariant();
                         outputList.set(pos,newString);
                         //Get the old price and add the fillingprice
                         double price = Double.parseDouble(priceList.get(pos));
@@ -390,37 +392,23 @@ public class Basket {
                 }
             }
         }
-        outputList = updateListForReceipt(outputList);
-
-        //output += "Product\t\t\t\tAmount\t\tPrice\n";
-
-        //Add the price to the array
-        ArrayList<String> combined = new ArrayList<>();
-        for (int i = 0; i < outputList.size(); i+=2) {
-            combined.add(outputList.get(i));
-            double amount = Double.parseDouble(outputList.get(i+1));
-            combined.add(Double.toString(amount));
-
-            int priceIndex = i/2;
-            if (priceIndex<priceList.size()){
-                double newPrice = Double.parseDouble(priceList.get(i/2))*amount;
-                combined.add(Double.toString(newPrice));
-            }
-        }
-        //Make copy over the list
-        outputList = combined;
-
-
+        //Add amount and price to the list
+        outputList = updateListForReceipt(outputList,priceList);
+        System.out.println("Product\t\t\t\t\tAmount\t\tPrice\n");
+        //Format the string so it aligns for every item
+        String formatString = "%-20s\t%-10s\t%s\n";
+        double totalWithoutDiscount = 0.0d;
         for (int i = 0; i < outputList.size(); i+=3) {
-            output += outputList.get(i)+"\t\t"+outputList.get(i+1)+"\t\t"+outputList.get(i+2)+"\n";
+            totalWithoutDiscount+= Double.parseDouble(outputList.get(i+2));
+            System.out.printf(formatString,outputList.get(i),outputList.get(i+1),outputList.get(i+2));
         }
-
-        output += "\n\n----------------------------\nTotal: \t\t\t\t\t"+totalCost();
-        output += "\n\n\t\t Thank you\n \t\tfor your order!";
-        return output;
+        System.out.println("\n\n----------------------------\nTotal: \t\t\t\t\t"+totalWithoutDiscount+"\n");
+        System.out.println("Total with discount: "+ totalCost());
+        System.out.println("\n\n\t\t Thank you\n \t\tfor your order!");
     }
 
-    public ArrayList<String> updateListForReceipt(ArrayList<String> originalList){
+
+    public ArrayList<String> updateListForReceipt(ArrayList<String> originalList,ArrayList<String> priceList){
         ArrayList<String> updatedList = new ArrayList<>();
         ArrayList<Integer> removeItems = new ArrayList<>();
         //Copy the content of the list and add a counter for each
@@ -428,30 +416,30 @@ public class Basket {
         for (int i = 0; i < originalList.size(); i++) {
             updatedList.add(originalList.get(i));
             updatedList.add("1");
+            updatedList.add(priceList.get(i));
         }
         //Count how many times the same object is inside the list
-        for (int i = 0; i < updatedList.size(); i+=2) {
-            for (int j = i+2; j < updatedList.size(); j+=2) {
+        for (int i = 0; i < updatedList.size(); i+=3) {
+            int count = 1;
+            for (int j = i+3; j < updatedList.size(); j+=2) {
                 if(updatedList.get(i).equals(updatedList.get(j))){
-                    int count = Integer.parseInt(updatedList.get(i+1));
-                    count += 1;
+                    count++;
+                    double price = Double.parseDouble(updatedList.get(j+2));
+                    price = price*count;
                     updatedList.set(i+1,Integer.toString(count));
+                    updatedList.set(i+2,Double.toString(price));
                     removeItems.add(j);
                 }
             }
+
         }
+        //Reverse the list, so we remove the last item inside the updatedlist
+        Collections.sort(removeItems,Collections.reverseOrder());
         //Remove the position in the updatedlist that is stored in the removeItems list
-        for (int i = removeItems.size()-1;i>=0; i--) {
-            int removeIndex = removeItems.get(i);
-
-            if(removeIndex+1 < updatedList.size()){
-                //Remove the counter
-                updatedList.remove(removeIndex+1);
-            }
-            if(removeIndex < updatedList.size()){
-                updatedList.remove(removeIndex);
-            }
-
+        for (int removeIndex : removeItems) {
+            updatedList.remove(removeIndex);
+            updatedList.remove(removeIndex);
+            updatedList.remove(removeIndex);
         }
 
         return updatedList;
@@ -463,15 +451,16 @@ public class Basket {
         basket.addFilling("Egg","Yes");
         basket.addFilling("Bacon","Yes");
         basket.addProductToBasket("Bagel","Plain","Yes");
+        basket.addFilling("Egg","Yes");
+        basket.addFilling("Bacon","Yes");
+        basket.addProductToBasket("Bagel","Plain","Yes");
         basket.addProductToBasket("Bagel","Plain","Yes");
         basket.addFilling("Egg","Yes");
         basket.addProductToBasket("Bagel","Plain","Yes");
         basket.addProductToBasket("Coffee","Black","Yes");
         basket.addProductToBasket("Coffee","Cappuccino","Yes");
         basket.addFilling("Egg","Yes");
-        System.out.println(basket.makeSimpleReceipt());
-
-
+        basket.makeSimpleReceipt();
         /*
         Scanner scanner = new Scanner(System.in);
         String input = "";
