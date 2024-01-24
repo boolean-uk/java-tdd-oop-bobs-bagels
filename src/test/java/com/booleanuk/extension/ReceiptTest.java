@@ -76,7 +76,7 @@ class ReceiptTest {
                 "Onion Bagel        2   £0.98\n" +
                 "Plain Bagel        12  £3.99\n" +
                 "Everything Bagel   6   £2.49\n" +
-                "Black Coffee             3   £2.97\n" +
+                "Black Coffee       3   £2.97\n" +
                 "----------------------------\n" +
                 "Total                 £10.43\n\n" +
                 "        Thank you\n" +
