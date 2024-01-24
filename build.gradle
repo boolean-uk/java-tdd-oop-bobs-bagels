@@ -1,6 +1,11 @@
 plugins {
     id 'java'
 }
+compileJava.options.encoding = 'UTF-8'
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+}
 
 group 'com.booleanuk'
 version '1.0-SNAPSHOT'
