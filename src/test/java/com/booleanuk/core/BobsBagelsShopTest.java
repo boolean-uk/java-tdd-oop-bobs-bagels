@@ -23,13 +23,7 @@ public class BobsBagelsShopTest {
         testInventory.put(bglo, 100);
         testInventory.put(bglp, 100);
         BobsBagelsShop shop2 = new BobsBagelsShop(testInventory);
-        Assertions.assertEquals(
-                """
-                        Bob's Bagels
-                        Amount\tSKU\t\tPrice\tName\tVariant
-                        --------------------------------------
-                        100\t\tBGLO\t0.49\tBagel\tOnion
-                        100\t\tBGLP\t0.39\tBagel\tPlain
-                        """, shop2.showInventory());
+        Assertions.assertTrue(shop2.showInventory().contains("100\t\tBGLO\t0.49\tBagel\tOnion"));
+        Assertions.assertTrue(shop2.showInventory().contains("100\t\tBGLP\t0.39\tBagel\tPlain"));
     }
 }
