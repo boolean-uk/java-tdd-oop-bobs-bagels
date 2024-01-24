@@ -18,7 +18,8 @@ public class BasketExtension {
     Inventory inventory = new Inventory();
 
 
-    private int size=2;
+    private int size = 2;
+
     public int getSize() {
         return size;
     }
@@ -33,7 +34,7 @@ public class BasketExtension {
     }
 
 
-    public int getItemsInBasket(){
+    public int getItemsInBasket() {
         int numberOfItems = 0;
 
         for (Product product : bagelBasket) {
@@ -44,28 +45,29 @@ public class BasketExtension {
         return numberOfItems;
 
     }
-    public void addItem(Product product) {
-        if (getItemsInBasket()>=size){
+
+    public void addItem(Product product, int numberOfItem) {
+        if (getItemsInBasket()+numberOfItem >= size) {
             System.out.println("Basket is full");
             return;
         }
-        if (!inventory.inventory.contains(product)){
+        if (!inventory.inventory.contains(product)) {
             System.out.println("Item not in inventory");
             return;
 
         }
-        if (bagelBasket.contains(product)){
-            bagelBasket.get(bagelBasket.indexOf(product)).quantity+=1;
+        if (bagelBasket.contains(product)) {
+            bagelBasket.get(bagelBasket.indexOf(product)).quantity += numberOfItem;
             return;
         }
 
         System.out.println(product.getPrice());
         bagelBasket.add(product);
-        bagelBasket.get(bagelBasket.indexOf(product)).quantity+=1;
+        bagelBasket.get(bagelBasket.indexOf(product)).quantity += numberOfItem;
     }
 
     public boolean removeItem(Product product) {
-        if (bagelBasket.contains(product)){
+        if (bagelBasket.contains(product)) {
             bagelBasket.remove(product);
             return true;
         }
@@ -74,13 +76,55 @@ public class BasketExtension {
 
     }
 
+    public double discount(double totalCost, Product product) {
+        int quantity = product.getQuantity();
+        double individualPrice = product.getPrice();
+
+
+        if (quantity >= 12) {
+
+            int offerQuantity = 12;
+            double offerPrice = 3.99;
+            int remainingQuantity = quantity % offerQuantity;
+
+            totalCost += offerPrice + (remainingQuantity * individualPrice);
+        } else if (quantity >= 6) {
+            int offerQuantity = 6;
+            double offerPrice = 2.49;
+            int remainingQuantity = quantity % offerQuantity;
+            totalCost += offerPrice + individualPrice * remainingQuantity;
+        } else {
+            totalCost += individualPrice * quantity;
+        }
+        return totalCost;
+    }
+
+
 
     public double calculateTotalCost() {
         double totalCost = 0.0;
 
         for (Product product : bagelBasket) {
-
-            totalCost += product.getPrice()*product.getQuantity();
+                totalCost=discount(totalCost,product);
+//            int quantity = product.getQuantity();
+//            double individualPrice = product.getPrice();
+//
+//
+//            if (quantity >= 12) {
+//
+//                int offerQuantity = 12;
+//                double offerPrice = 3.99;
+//                int remainingQuantity = quantity % offerQuantity;
+//
+//                totalCost +=  offerPrice + (remainingQuantity * individualPrice);
+//            } else if (quantity >= 6) {
+//                int offerQuantity = 12;
+//                double offerPrice = 2.49;
+//                int remainingQuantity = quantity % offerQuantity;
+//                totalCost += offerPrice + individualPrice * remainingQuantity;}
+//            else {
+//                totalCost += individualPrice * quantity;
+//            }
         }
 
         return totalCost;
@@ -98,7 +142,7 @@ public class BasketExtension {
 
         for (Product item : bagelBasket) {
             System.out.printf("%-10s %-10s %-3d $%.2f\n",
-                    item.getName(), item.getVariant(), item.getQuantity(), item.getPrice());
+                    item.getName(), item.getVariant(), item.getQuantity(), discount(0,item));
         }
 
         System.out.println("---------------------------------");

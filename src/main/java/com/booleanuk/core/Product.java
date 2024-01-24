@@ -14,6 +14,13 @@ public class Product {
         this.name = name;
         this.variant = variant;
     }
+    public Product(String sku, double price, String name, String variant, int quantity) {
+        this.sku = sku;
+        this.price = price;
+        this.name = name;
+        this.variant = variant;
+        this.quantity = quantity;
+    }
 
     public String getSku() {
         return sku;
