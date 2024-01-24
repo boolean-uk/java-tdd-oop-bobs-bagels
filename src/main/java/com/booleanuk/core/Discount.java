@@ -7,9 +7,9 @@ public class Discount {
 
     public Discount() {
         this.discountMap = new HashMap<>(){{
-            put("BGL6", new DiscountItem("Bagel", 2.49, 6));
-            put("BGL12", new DiscountItem("Bagel", 3.99, 12));
-            put("COF", new DiscountItem("Coffee", "Bagel", 1.25, 1));
+            put("BGL6", new DiscountItem("Bagel","", 2.49, 6));
+            put("BGL12", new DiscountItem("Bagel","",  3.99, 12));
+            put("COF", new DiscountItem("Coffee", "", 1.25, 1));
         }};
     }
 }

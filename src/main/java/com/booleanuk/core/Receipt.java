@@ -5,7 +5,7 @@ import java.util.HashMap;
 
 public class Receipt {
 
-    private HashMap<String, BasketItem> basket;
+    private HashMap<String, Item> basket;
 
     private ArrayList<String> receipt;
 
@@ -17,7 +17,7 @@ public class Receipt {
     private final String thanks = "         Thank you          ";
     private final String order  = "      for your order!       ";
 
-    public Receipt(HashMap<String, BasketItem> basket) {
+    public Receipt(HashMap<String, Item> basket) {
         this.basket = basket;
         this.receipt = new ArrayList<>();
     }
@@ -30,7 +30,7 @@ public class Receipt {
         this.receipt.add(this.dashes);
         this.receipt.add(this.blank);
         for (String sku: basket.keySet()) {
-            BasketItem basketItem = basket.get(sku);
+            Item basketItem = basket.get(sku);
             String name = basketItem.getName();
             String type = basketItem.getType();
             double quantity = (double) (basketItem.getQuantity());

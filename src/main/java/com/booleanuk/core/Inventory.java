@@ -31,7 +31,7 @@ public class Inventory {
         // Fill hash map
         for (String[] item: itemsArray) {
             // Fills ut items map with sku as key, the value is the object containing price, name, type, and nametype
-            items.put(item[0], new InventoryItem(Double.parseDouble(item[1]), item[2], item[3]));
+            items.put(item[0], new InventoryItem(item[2], item[3], Double.parseDouble(item[1]), 0));
             // Map go from typevariant to sku. Items can be used to go other way
             mapTypeVariantToSKU.put(items.get(item[0]).getNametype(), item[0]);
         }

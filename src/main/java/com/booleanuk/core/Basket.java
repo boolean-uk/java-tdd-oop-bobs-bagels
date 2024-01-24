@@ -6,7 +6,7 @@ import java.util.HashMap;
 import static java.lang.Math.round;
 
 public class Basket {
-    private HashMap<String, BasketItem> basket;
+    private HashMap<String, Item> basket;
     private HashMap<String, String> bglbMap = new HashMap<>();
     private int capacity;
     private double total;
@@ -29,17 +29,17 @@ public class Basket {
         this.total = 0.0;
     }
 
-    public HashMap<String, BasketItem> getBasket() {
+    public HashMap<String, Item> getBasket() {
         return this.basket;
     }
 
-    public BasketItem getBasketItem(String sku) {
+    public Item getBasketItem(String sku) {
         return this.basket.get(sku);
     }
 
     public int getBasketSize() {
         int basketSize = 0;
-        for (BasketItem basketItem: basket.values()) {
+        for (Item basketItem: basket.values()) {
             basketSize += basketItem.getQuantity();
         }
         return basketSize;
@@ -78,7 +78,7 @@ public class Basket {
         int num6 = 0;
         int rest = 0;
 
-        BasketItem basketItem;
+        Item basketItem;
 
         ArrayList<Double> bagelsNotBundled = new ArrayList<Double>();
         double priceTotal = 0.0;
@@ -93,8 +93,6 @@ public class Basket {
             // Extract value object
             basketItem = basket.get(sku);
 
-            // Reset all discount statuses
-            basketItem.resetDiscount();
 
             // Check is current basket item is a bagel
             if (sku.startsWith("BGL")){
@@ -123,8 +121,6 @@ public class Basket {
                 }
                 priceTotal += discountPrice;
                 priceSavedTotal += priceSaved;
-                basketItem.setDiscountPrice(Math.round((discountPrice*100.0)/100.0));
-                basketItem.setSaved(Math.round((priceSaved*100.0)/100.0));
 
                 priceTotalNoDiscount += quantity * basketItem.getPrice();
 
@@ -139,9 +135,6 @@ public class Basket {
         {
             // Extract value object
             basketItem = basket.get(sku);
-
-            // Reset all discount statuses
-            basketItem.resetDiscount();
 
             if (sku.startsWith("FIL")) {
                 // Check quantity of fillings
@@ -245,6 +238,7 @@ public class Basket {
         this.bglbIncrementor++;
         String sku = "BGLB" + Integer.toString(bglbIncrementor); // Bagel Build
         String item;
+        String type;
         double bagelCost;
         String fillingItem;
 
@@ -266,8 +260,9 @@ public class Basket {
         // Add to basket and build a bagel to sku map
         bagelCost = Math.round(bagelCost*100.0) / 100.0;
         String nametype = item.substring(0, item.length()-2);
+        type = nametype.substring(6);
         this.bglbMap.put(nametype, sku);
-        this.basket.put(sku, new BasketItem("Bagel", nametype, quantity, bagelCost, fillings));
+        this.basket.put(sku, new BasketItem("Bagel", type, quantity, bagelCost, fillings));
 
         // Update total
         updateTotal();

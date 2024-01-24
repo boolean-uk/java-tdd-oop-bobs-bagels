@@ -196,7 +196,8 @@ class BasketTest {
         String[] fillings = {"Bacon", "Egg", "Cheese", "Cream Cheese", "Smoked Salmon", "Ham"};
         boolean result = basket.buildBagel(2, fillings);
         Assertions.assertTrue(result);
-        Assertions.assertEquals("Bagel Bacon, Egg, Cheese, Cream Cheese, Smoked Salmon, Ham", basket.getBasketItem("BGLB1").getNametype());
+        String ans = basket.getBasketItem("BGLB1").getNametype();
+        Assertions.assertEquals("Bagel Bacon, Egg, Cheese, Cream Cheese, Smoked Salmon, Ham", ans);
         Assertions.assertEquals(2, basket.getBasketSize());
 
         String[] fillings1 = {"Egg", "Cheese", "Cream Cheese", "Ham"};
