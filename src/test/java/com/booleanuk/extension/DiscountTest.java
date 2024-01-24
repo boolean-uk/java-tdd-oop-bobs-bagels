@@ -15,7 +15,7 @@ public class DiscountTest {
 
     @BeforeEach
     void setUp(){
-        discount = new Discount();
+        discount = new Discount(basket);
         inventory = new Inventory();
         basket = new Basket(inventory, 8);
         this.plain = new Bagel("BGLP","Plain",0.39);
@@ -34,9 +34,8 @@ public class DiscountTest {
         basket.addItem(plain);
         basket.addItem(plain);
         basket.addItem(everything);
-        System.out.println(discount.countItemsInBasket(basket,plain));
+        Assertions.assertEquals(1.66, discount.calculateTotalCostWithDiscount(basket));
     }
-/*
     @Test
     public void testDiscountSixBagels(){
         basket.addItem(plain);
@@ -45,7 +44,49 @@ public class DiscountTest {
         basket.addItem(plain);
         basket.addItem(plain);
         basket.addItem(plain);
-        Assertions.assertEquals(2.49, discount.getDiscount(basket, plain));
+        Assertions.assertEquals(2.49, discount.calculateTotalCostWithDiscount(basket));
+    }
+
+    @Test
+    public void testDiscountTwelveBagels(){
+        basket.changeCapacity(12);
+        basket.addItem(plain);
+        basket.addItem(plain);
+        basket.addItem(plain);
+        basket.addItem(plain);
+        basket.addItem(plain);
+        basket.addItem(plain);
+        basket.addItem(plain);
+        basket.addItem(plain);
+        basket.addItem(plain);
+        basket.addItem(plain);
+        basket.addItem(plain);
+        basket.addItem(plain);
+        Assertions.assertEquals(3.99, discount.calculateTotalCostWithDiscount(basket));
+    }
+
+    @Test
+    public void testDiscountWithVariatyOfBagels(){
+        basket.addItem(plain);
+        basket.addItem(plain);
+        basket.addItem(plain);
+        basket.addItem(plain);
+        basket.addItem(plain);
+        basket.addItem(plain);
+        basket.addItem(everything);
+        basket.addItem(onion);
+        Assertions.assertEquals(3.47, discount.calculateTotalCostWithDiscount(basket));
+    }
+/*
+    @Test
+    public void testCostOfVariatyOfBagels(){
+        basket.addItem(plain);
+        basket.addItem(plain);
+        basket.addItem(plain);
+        basket.addItem(onion);
+        basket.addItem(everything);
+        basket.addItem(onion);
+        Assertions.assertEquals(2.64, discount.calculateTotalCostWithDiscount(basket));
     }
 
 
