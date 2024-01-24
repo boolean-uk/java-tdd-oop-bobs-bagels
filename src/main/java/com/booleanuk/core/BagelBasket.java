@@ -1,7 +1,6 @@
 package com.booleanuk.core;
 import java.util.ArrayList;
 import java.util.List;
-// Class representing BagelBasket
 class BagelBasket {
     private List<BasketItem> items;
     private int capacity;
@@ -39,7 +38,6 @@ class BagelBasket {
 
     public boolean changeBasketCapacity(int newCapacity) {
         if (newCapacity < items.size()) {
-            System.out.println("Cannot reduce capacity below current basket size.");
             return false;
         } else {
             this.capacity = newCapacity;

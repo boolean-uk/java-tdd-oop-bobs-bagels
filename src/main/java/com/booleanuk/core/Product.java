@@ -18,13 +18,11 @@ class Product implements BasketItem, StockItem {
     }
 
     public int getCost() {
-        // In this example, we return a rounded int value, but in a real scenario,
-        // you might want to handle the price as a double for more accuracy.
+
         return (int) Math.round(price * 100);
     }
 
     public boolean isInStock() {
-        // Placeholder logic, you might want to implement this based on your business rules
         return true;
     }
 }

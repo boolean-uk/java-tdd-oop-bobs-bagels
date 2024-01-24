@@ -15,7 +15,6 @@ class Fillings implements BasketItem, StockItem {
     }
 
     public boolean isInStock() {
-        // Logic to check if the filling is in stock
-        return true; // Placeholder logic
+        return true;
     }
 }

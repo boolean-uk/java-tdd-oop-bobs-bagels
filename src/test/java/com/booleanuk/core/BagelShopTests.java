@@ -37,5 +37,18 @@ public class BagelShopTests {
         // Test getting the total cost of the bagel order
         assertEquals(plainBagel.getCost() + creamCheese.getCost() + blackCoffee.getCost(), order.getTotalCost());
     }
+    @Test
+    public void testBagelInventory() {
+        Product onionBagel = new Product("BGLO", 0.49, "Bagel", "Onion");
+        Product baconFilling = new Product("FILB", 0.12, "Filling", "Bacon");
 
+        List<Product> availableProducts = List.of(onionBagel, baconFilling);
+        BagelInventory inventory = new BagelInventory(availableProducts);
+
+        // Test checking if products are in stock
+        assertTrue(inventory.isInStock(onionBagel));
+        assertTrue(inventory.isInStock(baconFilling));
+
+
+    }
 }
