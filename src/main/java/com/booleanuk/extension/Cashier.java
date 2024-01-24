@@ -24,6 +24,16 @@ public class Cashier {
             case 'a':
                 System.out.print("Enter SKU of the product to add: ");
                 String skuToAdd = userInput.next().trim().toUpperCase();
+                if (skuToAdd.equals("COFB")) {
+                    System.out.print("Do you want to add a bagel to your coffee? ");
+                    String CaB = userInput.next().trim().toUpperCase();
+                    if (CaB.equals("YES")) {
+                        System.out.print("Enter quantity of deal to add: ");
+                        int quantityToAddCaB = userInput.nextInt();
+                        basket.addItems(inventory, "COFD", quantityToAddCaB);
+                    }
+                    break;
+                }
                 System.out.print("Enter quantity to add: ");
                 int quantityToAdd = userInput.nextInt();
 

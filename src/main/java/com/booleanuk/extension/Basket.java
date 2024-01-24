@@ -76,7 +76,7 @@ public class Basket {
         return result.toString();
     }
 
-    private String getTotalCost() {
+    public String getTotalCost() {
         return String.format("£%.2f", this.totalPrice);
     }
 
@@ -103,7 +103,13 @@ public class Basket {
                     result.append(String.format("%-20s %-4d £%.2f\n", itemName, quantity, discountedPrice));
                 }
             }
-
+            else if (uniqueItem.getSku().equals("COFD")) {
+                discountedPrice = 1.25 * quantity;
+                discounted = 0.23 * quantity;
+                result.append(String.format("%-20s %-4d £%.2f\n", itemName, quantity, discountedPrice));
+                String discountedString = String.format("(£%.2f)\n", discounted);
+                result.append(String.format("%-26s", " ") + discountedString);
+            }
             else {
                 discountedPrice = calculateCoffeeOffer(uniqueItem, quantity);
                 this.totalPrice += discountedPrice;
@@ -138,5 +144,4 @@ public class Basket {
         }
         return discountedPrice;
     }
-
 }
