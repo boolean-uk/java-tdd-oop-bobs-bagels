@@ -27,7 +27,7 @@ public class ReceiptTest {
         basket.add(bglp);
         Assertions.assertTrue(receipt.generateReceipt().contains("Onion Bagel\t\t\t\t2\t£0.98\n"));
         Assertions.assertTrue(receipt.generateReceipt().contains("Plain Bagel\t\t\t\t1\t£0.39\n"));
-        Assertions.assertTrue(receipt.generateReceipt().contains("\n---------------------------------\nTotal                        £" + basket.totalCost()));
+        Assertions.assertTrue(receipt.generateReceipt().contains("\n---------------------------------\nTotal                       £" + basket.totalCost()));
         System.out.println(receipt.generateReceipt());
     }
 

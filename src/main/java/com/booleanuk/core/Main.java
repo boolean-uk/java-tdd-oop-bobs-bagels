@@ -45,8 +45,11 @@ public class Main {
         // Try to add one plain bagel with bacon filling.
         Bagel bglpf = new Bagel("BGLP","Plain", 0.39);
         bglpf.addFilling(filb);
+        bglpf.addFilling(filx);
+        bglpf.addFilling(filc);
         System.out.println(basket1.add(bglpf));
-        basket1.add(bglpf);
+
+        System.out.println(shop.showInventory());
 
         Receipt receipt = new Receipt(basket1);
         receipt.generateReceiptWithDiscount();

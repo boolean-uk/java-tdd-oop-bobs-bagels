@@ -24,6 +24,9 @@ public class Receipt {
         StringBuilder receipt = new StringBuilder();
         receipt.append(createHeader());
         for (Item item : basket.getBasketContent().keySet()) {
+            // Assumption, fillings can only be bought on a bagel.
+            if (item.getClass() == Filling.class) {continue;}
+
             String tabsAfterItem;
             int variantLength = item.getVariant().length() + item.getName().length() + 1;
             if (variantLength < 12){tabsAfterItem = "\t\t\t\t";}
@@ -39,11 +42,13 @@ public class Receipt {
                 if (!((Bagel) item).getFillings().isEmpty()) {
                     StringBuilder fillingsRows = new StringBuilder();
                     for (Filling filling : ((Bagel) item).getFillings()) {
-                        fillingsRows.append("\tWith ");
-                        fillingsRows.append(filling.getVariant());
-                        fillingsRows.append(" Filling\t\t£");
-                        fillingsRows.append(filling.getPrice() * amount);
-                        fillingsRows.append("\n");
+                        String tabs;
+                        int fillingLength = filling.getVariant().length();
+                        if (fillingLength < 6){tabs = "\t\t\t\t";}
+                        else if (fillingLength < 10) {tabs = "\t\t\t";}
+                        else {tabs = "\t\t";}
+                        String fillingRow = "+ " + filling.getVariant() + " Filling" + tabs + "£" + filling.getPrice() * amount + "\n";
+                        fillingsRows.append(fillingRow);
                     }
                     itemRow += fillingsRows.toString();
                 }
@@ -51,7 +56,7 @@ public class Receipt {
 
             receipt.append(itemRow);
         }
-        receipt.append("\n---------------------------------\nTotal                        £") ;
+        receipt.append("\n---------------------------------\nTotal                       £") ;
         receipt.append(basket.totalCost());
         receipt.append(createFooter());
         this.receipt = receipt.toString();
@@ -92,6 +97,9 @@ public class Receipt {
         HashMap<Item, int[]> mapPriceAndSavings = this.basket.discountPerItem();
         double totalSavings = 0.0;
         for (Item item : basket.getBasketContent().keySet()) {
+            // Assumption, fillings can only be bought on a bagel.
+            if (item.getClass() == Filling.class) {continue;}
+
             String tabsAfterItem;
             int variantLength = item.getVariant().length() + item.getName().length() + 1;
             if (variantLength < 12){tabsAfterItem = "\t\t\t\t";}
@@ -107,11 +115,13 @@ public class Receipt {
                 if (!((Bagel) item).getFillings().isEmpty()) {
                     StringBuilder fillingsRows = new StringBuilder();
                     for (Filling filling : ((Bagel) item).getFillings()) {
-                        fillingsRows.append("\tWith ");
-                        fillingsRows.append(filling.getVariant());
-                        fillingsRows.append(" Filling\t\t£");
-                        fillingsRows.append(filling.getPrice() * amount);
-                        fillingsRows.append("\n");
+                        String tabs;
+                        int fillingLength = filling.getVariant().length();
+                        if (fillingLength < 6){tabs = "\t\t\t\t";}
+                        else if (fillingLength < 10) {tabs = "\t\t\t";}
+                        else {tabs = "\t\t";}
+                        String fillingRow = "+ " + filling.getVariant() + " Filling" + tabs + "£" + filling.getPrice() * amount + "\n";
+                        fillingsRows.append(fillingRow);
                     }
                     itemRow += fillingsRows.toString();
                 }
