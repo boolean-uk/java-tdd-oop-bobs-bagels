@@ -11,7 +11,7 @@ public class Bagel extends Item {
     }
 
     public void addFilling(Filling filling) {
-        // Only possible to add 1 filling for each variant.
+        // Only possible to add 1 filling for each variant of fillings.
         if (!this.fillings.contains(filling)) {
             this.fillings.add(filling);
         }
