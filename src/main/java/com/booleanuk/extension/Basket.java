@@ -105,20 +105,28 @@ public class Basket {
             int quantity = entry.getValue();
 
             if (id.contains("BGL")){
+                double discountfor12 = 0;
                 while (quantity >= 12){
+                    discountfor12 += (Inventory.getProductById(id).getPrice() * 12 ) - 3.99;
                     discountPrice += (Inventory.getProductById(id).getPrice() * 12 ) - 3.99;
                     quantityMap.put(id, quantityMap.get(id) - 12);
-                    appliedDiscounts.add(new Discount(3.99, 12,
-                            (Inventory.getProductById(id).getVariant()) + " " + (Inventory.getProductById(id).getName())));
                     this.discountedProducts.put(id, 12);
+                    appliedDiscounts.add(new Discount(3.99, 12,
+                            (Inventory.getProductById(id).getVariant()) + " " + (Inventory.getProductById(id).getName()),
+                            discountfor12));
                     quantity -= 12;
                 }
+
+
+                double discountfor6 = 0;
                 while (quantity >= 6){
+                    discountfor6 = (Inventory.getProductById(id).getPrice() * 6 ) - 2.49;
                     discountPrice += (Inventory.getProductById(id).getPrice() * 6 ) - 2.49;
                     quantityMap.put(id, quantityMap.get(id) - 6);
-                    appliedDiscounts.add(new Discount(2.49, 6,
-                            (Inventory.getProductById(id).getVariant()) + " " +  (Inventory.getProductById(id).getName())));
                     this.discountedProducts.put(id, 6);
+                    appliedDiscounts.add(new Discount(2.49, 6,
+                            (Inventory.getProductById(id).getVariant()) + " " + (Inventory.getProductById(id).getName()),
+                            discountfor6));
                     quantity -= 6;
                 }
             }
@@ -147,6 +155,7 @@ public class Basket {
        sortList(bagelsLeft);
 
        int pairs = Math.min(coffeesLeft.size(), bagelsLeft.size());
+       double discountAmountForCoffeeAndBagel = 0;
 
        //System.out.println(pairs);
 
@@ -154,8 +163,9 @@ public class Basket {
 
            double coffeePrice = coffeesLeft.get(i).getPrice();
            double bagelPrice = bagelsLeft.get(i).getPrice();
-           discountPrice += ((coffeePrice + bagelPrice) - 1.25);
 
+           discountPrice += ((coffeePrice + bagelPrice) - 1.25);
+           discountAmountForCoffeeAndBagel += ((coffeePrice + bagelPrice) - 1.25);
 
 
            if (!discountedProducts.containsKey(coffeesLeft.get(i).getId())) {
@@ -173,7 +183,7 @@ public class Basket {
            }
        }
 
-       this.appliedDiscounts.add(new Discount(1.25 * pairs, pairs, "Bagel & Coffee"));
+       this.appliedDiscounts.add(new Discount(1.25 * pairs, pairs, "Bagel & Coffee", discountAmountForCoffeeAndBagel));
 
 
         return roundDouble(discountPrice);

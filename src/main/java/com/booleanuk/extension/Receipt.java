@@ -51,11 +51,11 @@ public class Receipt {
         result.append("----------------------------\n");
 
         for(Discount discount: listOfDiscounts) {
-            result.append(String.format("%-20s %2d   £%.2f\n", discount.getName(), discount.getAmount(), discount.getPrice()));
+            result.append(String.format("%-20s %2d  £%.2f\n", discount.getName(), discount.getAmount(), discount.getPrice()));
         }
 
         for(Map.Entry<Product, Integer> entry: printMap.entrySet()) {
-            result.append(String.format("%-20s %2d   £%.2f\n", (entry.getKey().getVariant() + " " + entry.getKey().getName()), entry.getValue(), (entry.getKey().getPrice()) * entry.getValue()));
+            result.append(String.format("%-20s %2d  £%.2f\n", (entry.getKey().getVariant() + " " + entry.getKey().getName()), entry.getValue(), (entry.getKey().getPrice()) * entry.getValue()));
         }
 
         result.append("----------------------------\n");
