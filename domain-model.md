@@ -207,8 +207,9 @@ I'd like to be able to order via text message.
 
 
 # Class diagram:
-![](assets/class-diagram1.png)
-![](assets/class-diagram2.png)
+![](assets/cd.png)
+![](assets/cd-product.png)
+![](assets/cd-discount.png)
 
 ```
 BobsBagels
@@ -224,7 +225,7 @@ Basket
 	+ remove(sku: String) String
 	+ setCapacity(capacity: int) boolean
 	+ getNumberOfItems() int
-	+ addFilling(sku: String) String
+	+ addFilling(bagelSku: String, fillingSku: String) String
 Checkout
     + totalCost(HashMap<String, Integer> basketMap) double
     + totalCostDiscount(HashMap<String, Integer> basketMap) double
