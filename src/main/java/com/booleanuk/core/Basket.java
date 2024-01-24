@@ -30,6 +30,13 @@ public class Basket {
             return "Chosen item not in stock.";
         }
         else {
+            if(item.getClass() == Bagel.class) {
+                if (!((Bagel) item).getFillings().isEmpty()) {
+                    for (Filling filling : ((Bagel) item).getFillings()) {
+                        this.add(filling);
+                    }
+                }
+            }
             if (this.basketContent.containsKey(item)){
                 this.basketContent.replace(item, this.basketContent.get(item) + 1);
             }
@@ -43,6 +50,13 @@ public class Basket {
 
     public String remove(Item item) {
         if (this.basketContent.containsKey(item)) {
+            if(item.getClass() == Bagel.class) {
+                if (!((Bagel) item).getFillings().isEmpty()) {
+                    for (Filling filling : ((Bagel) item).getFillings()) {
+                        this.remove(filling);
+                    }
+                }
+            }
             if (this.basketContent.get(item) == 1) {
                 this.basketContent.remove(item);
             }
