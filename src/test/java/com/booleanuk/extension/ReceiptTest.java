@@ -1,9 +1,6 @@
 package com.booleanuk.extension;
 
-import com.booleanuk.core.Bagel;
-import com.booleanuk.core.Basket;
-import com.booleanuk.core.Item;
-import com.booleanuk.core.BobsBagelsShop;
+import com.booleanuk.core.*;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
