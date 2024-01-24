@@ -12,7 +12,7 @@ public class BasketTest {
         Inventory inventory = new Inventory();
         Basket basket = new Basket(inventory);
         Bagel bagel = new Bagel("Onion", "BGLO", 0.49);
-        boolean added = basket.addBagel(bagel);
+        boolean added = basket.addProduct(bagel);
         Assertions.assertTrue(added);
     }
 
@@ -20,12 +20,12 @@ public class BasketTest {
     public void shouldReturnFalseIfBagelIsNotAddedToBasket() {
         Inventory inventory = new Inventory();
         Basket basket = new Basket(inventory);
-        basket.addBagel(new Bagel("Onion", "BGLO", 0.49));
-        basket.addBagel(new Bagel("Onion", "BGLO", 0.49));
-        basket.addBagel(new Bagel("Onion", "BGLO", 0.49));
-        basket.addBagel(new Bagel("Onion", "BGLO", 0.49));
-        basket.addBagel(new Bagel("Onion", "BGLO", 0.49));
-        boolean added = basket.addBagel(new Bagel("Onion", "BGLO", 0.49));
+        basket.addProduct(new Bagel("Onion", "BGLO", 0.49));
+        basket.addProduct(new Bagel("Onion", "BGLO", 0.49));
+        basket.addProduct(new Bagel("Onion", "BGLO", 0.49));
+        basket.addProduct(new Bagel("Onion", "BGLO", 0.49));
+        basket.addProduct(new Bagel("Onion", "BGLO", 0.49));
+        boolean added = basket.addProduct(new Bagel("Onion", "BGLO", 0.49));
         Assertions.assertFalse(added);
     }
 
@@ -35,7 +35,7 @@ public class BasketTest {
         Inventory inventory = new Inventory();
         Basket basket = new Basket(inventory);
         Bagel bagel = new Bagel("Onion", "BGLO", 0.49);
-        basket.addBagel(bagel);
+        basket.addProduct(bagel);
         boolean removed = basket.removeBagel(bagel);
         Assertions.assertTrue(removed);
     }
@@ -69,9 +69,9 @@ public class BasketTest {
         Inventory inventory = new Inventory();
         Basket basket = new Basket(inventory);
         Bagel bagel = new Bagel("Onion", "BGLO", 0.49);
-        basket.addBagel(bagel);
+        basket.addProduct(bagel);
         Bagel bagel2 = new Bagel("Onion", "BGLO", 0.49);
-        basket.addBagel(bagel2);
+        basket.addProduct(bagel2);
         double expectedCost = 0.98;
         double actualCost = basket.getTotalCost();
         Assertions.assertEquals(expectedCost, actualCost);
@@ -92,7 +92,7 @@ public class BasketTest {
         Inventory inventory = new Inventory();
         Basket basket = new Basket(inventory);
         Bagel bagel = new Bagel("Onion", "BGLO", 0.49);
-        basket.addBagel(bagel);
+        basket.addProduct(bagel);
         Filling filling = new Filling("Bacon", "FILB");
         boolean addedFilling = basket.addFillingToBagel(bagel, filling);
         Assertions.assertTrue(addedFilling);
@@ -117,7 +117,7 @@ public class BasketTest {
         Basket basket = new Basket(inventory);
 
         Bagel bagel = new Bagel("Onion", "BGLO", 0.49);
-        boolean addedBagelThatIsInInventory = basket.addBagel(bagel);
+        boolean addedBagelThatIsInInventory = basket.addProduct(bagel);
         Assertions.assertTrue(addedBagelThatIsInInventory);
 
         Filling filling = new Filling("Bacon", "FILB");
@@ -125,7 +125,7 @@ public class BasketTest {
         Assertions.assertTrue(addedFillingThatIsInInventory);
 
         Coffee coffee = new Coffee("Black", "COFB", 0.99);
-        boolean coffeeIsInInventory = inventory.isCoffeeInInventory(coffee.getSku());
+        boolean coffeeIsInInventory = inventory.isProductInInventory(coffee.getSku());
         Assertions.assertTrue(coffeeIsInInventory);
     }
 
@@ -135,7 +135,7 @@ public class BasketTest {
         Basket basket = new Basket(inventory);
 
         Bagel bagel = new Bagel("Onion", "ONION", 0.49);
-        boolean addedBagelThatIsInInventory = basket.addBagel(bagel);
+        boolean addedBagelThatIsInInventory = basket.addProduct(bagel);
         Assertions.assertFalse(addedBagelThatIsInInventory);
 
         Filling filling = new Filling("Bacon", "BACON");
@@ -143,7 +143,7 @@ public class BasketTest {
         Assertions.assertFalse(addedFillingThatIsInInventory);
 
         Coffee coffee = new Coffee("Black", "COFFEE", 0.99);
-        boolean coffeeIsInInventory = inventory.isCoffeeInInventory(coffee.getSku());
+        boolean coffeeIsInInventory = inventory.isProductInInventory(coffee.getSku());
         Assertions.assertFalse(coffeeIsInInventory);
     }
 }

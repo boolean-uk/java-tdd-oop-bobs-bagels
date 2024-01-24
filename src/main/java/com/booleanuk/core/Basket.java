@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 public class Basket {
     private Inventory inventory;
-    private ArrayList<Bagel> basket;
+    private ArrayList<Product> basket;
     private int maxCapacity = 5;
     private int currentIndex = 0;
 
@@ -14,10 +14,10 @@ public class Basket {
         this.basket = new ArrayList<>();
     }
 
-    public boolean addBagel(Bagel bagel) {
-        if(inventory.isBagelInInventory(bagel.getSku())) {
+    public boolean addProduct(Product product) {
+        if(inventory.isProductInInventory(product.getSku())) {
             if (currentIndex < maxCapacity) {
-                basket.add(bagel);
+                basket.add(product);
                 currentIndex++;
                 return true;
             }
@@ -41,8 +41,8 @@ public class Basket {
     public double getTotalCost() {
         double totalCost = 0.0;
 
-        for(Bagel bagel : basket) {
-            totalCost += bagel.getPrice();
+        for(Product product : basket) {
+            totalCost += product.getPrice();
         }
 
         DecimalFormat decimalFormat = new DecimalFormat("#.##");
@@ -53,10 +53,10 @@ public class Basket {
     public boolean addFillingToBagel(Bagel bagel, Filling filling) {
         boolean fillingAdded = false;
 
-        if(inventory.isFillingInInventory(filling.getSku())) {
-            for (Bagel b : basket) {
-                if (bagel.equals(b)) {
-                    fillingAdded = b.addFilling(filling);
+        if(inventory.isProductInInventory(filling.getSku())) {
+            for (Product product : basket) {
+                if (product.equals(bagel)) {
+                    fillingAdded = bagel.addFilling(filling);
                     break;
                 }
             }

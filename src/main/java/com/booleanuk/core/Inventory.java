@@ -3,68 +3,55 @@ package com.booleanuk.core;
 import java.util.ArrayList;
 
 public class Inventory {
-    private ArrayList<Filling> allFillings = new ArrayList<>();
-    private ArrayList<Bagel> allBagels = new ArrayList<>();
-    private ArrayList<Coffee> allCoffees = new ArrayList<>();
+
+    private ArrayList<Product> allProducts = new ArrayList<>();
 
     public Inventory() {
         Filling bacon = new Filling("Bacon", "FILB");
-        this.allFillings.add(bacon);
+        this.allProducts.add(bacon);
         Filling egg = new Filling("Egg", "FILE");
-        this.allFillings.add(egg);
+        this.allProducts.add(egg);
         Filling cheese = new Filling("Cheese", "FILC");
-        this.allFillings.add(cheese);
+        this.allProducts.add(cheese);
         Filling creamCheese = new Filling("Cream Cheese", "FILX");
-        this.allFillings.add(creamCheese);
+        this.allProducts.add(creamCheese);
         Filling smokedSalmon = new Filling("Smoked Salmon", "FILS");
-        this.allFillings.add(smokedSalmon);
+        this.allProducts.add(smokedSalmon);
         Filling ham = new Filling("Ham", "FILH");
-        this.allFillings.add(ham);
+        this.allProducts.add(ham);
 
         Bagel onion = new Bagel("Onion", "BGLO", 0.49);
-        allBagels.add(onion);
+        this.allProducts.add(onion);
         Bagel plain = new Bagel("Plain", "BGLP", 0.39);
-        allBagels.add(plain);
+        this.allProducts.add(plain);
         Bagel everything = new Bagel("Everything", "BGLE", 0.49);
-        allBagels.add(everything);
+        this.allProducts.add(everything);
         Bagel sesame = new Bagel("Sesame", "BGLS", 0.49);
-        allBagels.add(sesame);
+        this.allProducts.add(sesame);
 
         Coffee black = new Coffee("Black", "COFB", 0.99);
-        allCoffees.add(black);
+        this.allProducts.add(black);
         Coffee white = new Coffee("White", "COFW", 1.19);
-        allCoffees.add(white);
+        this.allProducts.add(white);
         Coffee cappuccino = new Coffee("Capuccino", "COFC", 1.29);
-        allCoffees.add(cappuccino);
+        this.allProducts.add(cappuccino);
         Coffee latte = new Coffee("Latte", "COFL", 1.29);
-        allCoffees.add(latte);
+        this.allProducts.add(latte);
     }
 
     public ArrayList<Filling> getAllFillings() {
-        return this.allFillings;
-    }
-
-    public boolean isBagelInInventory(String sku) {
-        for (Bagel bagel : allBagels) {
-            if (bagel.getSku().equalsIgnoreCase(sku)) {
-                return true;
+        ArrayList<Filling> allFillings =  new ArrayList<>();
+        for (Product product : allProducts) {
+            if (product instanceof Filling) {
+                allFillings.add((Filling) product);
             }
         }
-        return false;
+        return allFillings;
     }
 
-    public boolean isFillingInInventory(String sku) {
-        for (Filling filling : allFillings) {
-            if (filling.getSku().equalsIgnoreCase(sku)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public boolean isCoffeeInInventory(String sku) {
-        for (Coffee coffee : allCoffees){
-            if (coffee.getSku().equalsIgnoreCase(sku)) {
+    public boolean isProductInInventory(String sku) {
+        for (Product product : this.allProducts) {
+            if (product.getSku().equalsIgnoreCase(sku)) {
                 return true;
             }
         }
