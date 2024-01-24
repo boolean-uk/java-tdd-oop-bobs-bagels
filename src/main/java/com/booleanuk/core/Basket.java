@@ -9,6 +9,7 @@ public class Basket {
     private HashMap<String, Integer> itemCounterForDiscount;
     private HashMap<Item, Integer> itemCounterForReceipt;
     private double totalCost;
+    private double costBeforeDiscounts;
     private Customer customer;
 
     public Basket(Customer customer) {
@@ -22,9 +23,7 @@ public class Basket {
     public ArrayList<Item> getItems() {
         return items;
     }
-    public Customer getCustomer() {
-        return customer;
-    }
+
 
     /*
     Updates the prices for the items, according to the given discounts
@@ -32,17 +31,20 @@ public class Basket {
     return: (double) updatedCostOfAllItemsInBasket
      */
     public double calculateTotalCost() {
-        this.items = applyDiscounts();
+        this.costBeforeDiscounts = 0;
         for(Item item : items) {
-            System.out.println(item);
+            this.costBeforeDiscounts += item.getCost();
         }
-        this.totalCost = 0;
+
+        this.items = applyDiscounts();
+        double tempCost = 0;
         if(!this.items.isEmpty()) {
             for(Item item : items) {
-                this.totalCost += item.getCost();
+                tempCost += item.getCost();
             }
         }
-        System.out.println("Your total is: £" + String.format("%.2f", totalCost));
+        this.totalCost = tempCost;
+
         return this.totalCost;
     }
 
@@ -75,9 +77,9 @@ public class Basket {
     }
 
     public ArrayList<Item> applyDiscounts() {
+
         ArrayList<Item> tempArray = items;
         tempArray.sort(Comparator.comparing(Item::getSKU));
-        double savedMoney = 0;
 
         // make an HashMap that counts occurrences of items
         for(Item item : tempArray) {
@@ -196,7 +198,12 @@ public class Basket {
         System.out.println("\n----------------------------------------------\n");
         System.out.println(showInventory());
         System.out.println("\n----------------------------------------------");
-        calculateTotalCost();
+
+        System.out.println("Your total is £" + String.format("%.2f", totalCost));
+        if(totalCost != costBeforeDiscounts) {
+            System.out.println("You saved £" + String.format("%.2f", costBeforeDiscounts-totalCost) + " on this purchase!" );
+        }
+
         System.out.println("\nThank you for your order!");
     }
 
@@ -204,7 +211,7 @@ public class Basket {
     Returns a String made for printing all items in Basket to console
      */
     public String showInventory() {
-        String inventoryString = "";
+        StringBuilder inventoryString = new StringBuilder();
 
         for(Item item : items) {
             if(itemCounterForReceipt.containsKey(item)) {
@@ -215,14 +222,19 @@ public class Basket {
         }
 
         if(!this.itemCounterForReceipt.isEmpty()) {
-            System.out.println("Quantity\tSKU\t\tCost\tName\tVariant\t\tTotal");
+            System.out.println("Quantity\tSKU\t\tCost\tName\tVariant\t\t\tTotal");
             for(Map.Entry<Item, Integer> item : itemCounterForReceipt.entrySet()) {
-                inventoryString += "\t" + item.getValue() + "\t\t" + item.getKey().toString() + "\t\t" + String.format("%.2f", item.getValue()*item.getKey().getCost())+ "\n";
+                inventoryString.append(String.format(
+                        "\t%-7s %-32s £%.2f%n",
+                        item.getValue(),
+                        item.getKey().toString(),
+                        item.getValue() * item.getKey().getCost()
+                ));
             }
         }
-        if(inventoryString.isEmpty()) {
-            inventoryString = "There are no items in basket... ";
+        if(inventoryString.length() == 0) {
+            inventoryString = new StringBuilder("There are no items in basket... ");
         }
-        return inventoryString;
+        return inventoryString.toString();
     }
 }

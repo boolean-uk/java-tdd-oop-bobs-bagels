@@ -27,16 +27,13 @@ public class Store {
             add(new Filling("FILS", 0.12, "Filling", "Smoked Salmon"));
             add(new Filling("FILH", 0.12, "Filling", "Ham"));
         }};
-        this.customerList = new ArrayList<Customer>();
+        this.customerList = new ArrayList<>();
     }
 
     public ArrayList<Item> getItemsInStock() {
         return itemsInStock;
     }
 
-    public ArrayList<Customer> getCustomerList() {
-        return customerList;
-    }
 
     private boolean addItemInStock(String sku, double cost, String name, String variant) {
         switch (name) {

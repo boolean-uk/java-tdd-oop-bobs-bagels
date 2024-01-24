@@ -31,9 +31,6 @@ public class Customer {
         return inventory;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
     public Store getStore() {
         return store;
     }

@@ -148,8 +148,8 @@ I want the shop to automatically consider and apply the best discounts for me.
 
 
 
-| method                        | object variables                                        | context                                                                                                                                                   | output/return                               |
-|-------------------------------|---------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------|
-| applyDiscounts(Basket basket) | Basket inventory</br>HashMap<Item, Integer> itemCounter | Put every item in Basket to HashMap and count each item in Basket. Copy ArrayList<Item>, apply discounts and remove items until copied ArrayList is empty | (ArrayList<Item> basketWithAppliedDiscounts |
+| method                        | object variables                                        | context                                                                                                                                                   | output/return                                |
+|-------------------------------|---------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------|
+| applyDiscounts(Basket basket) | Basket inventory</br>HashMap<Item, Integer> itemCounter | Put every item in Basket to HashMap and count each item in Basket. Copy ArrayList<Item>, apply discounts and remove items until copied ArrayList is empty | (ArrayList<Item>) basketWithAppliedDiscounts |
 
 ---

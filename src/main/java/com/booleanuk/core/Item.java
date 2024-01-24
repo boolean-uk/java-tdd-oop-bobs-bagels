@@ -23,10 +23,6 @@ public abstract class Item {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public double getCost() {
         return cost;
     }
@@ -37,10 +33,6 @@ public abstract class Item {
 
     public String getVariant() {
         return variant;
-    }
-
-    public void setVariant(String variant) {
-        this.variant = variant;
     }
 
     public boolean isDiscounted() {

@@ -184,7 +184,6 @@ class CoreTest {
 
     @Test
     public void wrongInputInOrderGivesFalse() {
-        Basket basket = customer.getInventory();
         Assertions.assertEquals(customer.getInventory(), customer.order("Hello there"));
     }
 }
