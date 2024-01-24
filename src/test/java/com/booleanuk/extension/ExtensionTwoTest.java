@@ -8,7 +8,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
-import java.util.LinkedHashMap;
 
 public class ExtensionTwoTest {
 
@@ -168,6 +167,4 @@ public class ExtensionTwoTest {
         Assertions.assertEquals(expected, receipt.toString());
 
     }
-
-    //TODO: fix so filling is after the bagel its on?
 }

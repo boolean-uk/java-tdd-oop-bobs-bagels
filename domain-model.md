@@ -53,8 +53,7 @@ Store
 | createReceipt(int basketId)                                | String name                       | Customer wants to have a receipt of their purchase                                                               | Receipt object of the purchase                 |
 | createReceiptWithDiscountData(int basketId)                | String name                       | Customer wants to have a receipt of their purchase where they can also see how much they saved through discounts | Receipt object of the purchase                 |
 | sendOrderSummary(String customerPhoneNumber, int basketId) | SmsService smsService             | User has completed their order and gets their order summary via SMS                                              | void                                           |
-| makeOrder(String customerPhoneNumber, int basketId)        |                                   | User wants to make an order via SMS                                                                              | void                                           |
-| seeHistory(String customerPhoneNumber)                     |                                   | User wants to view their history of messages                                                                     | void                                           |
+| dealWithIncomingMessages()                                 |                                   | Store gets an order request or a request to see text history from a customer                                     | sends order confirmation or history            |
 
 Inventory
 
@@ -95,8 +94,8 @@ Discount
 SmsService
 
 
-| Methods                                                       | Members            | Scenario                                                            | Output                         |
-|---------------------------------------------------------------|--------------------|---------------------------------------------------------------------|--------------------------------|
-| sendOrderSummary(String customerPhoneNumber, Receipt receipt) | String phoneNumber | User has completed their order and gets their order summary via SMS | void                           |
-| makeOrder(String customerPhoneNumber, Basket basket)          |                    | User wants to make an order via SMS                                 | void                           |
-| seeHistory(String customerPhoneNumber)                        |                    | User wants to view their history of messages                        | void                           |
+| Methods                                                             | Members            | Scenario                                                            | Output                         |
+|---------------------------------------------------------------------|--------------------|---------------------------------------------------------------------|--------------------------------|
+| sendOrderSummary(String customerPhoneNumber, Receipt receipt)       | String phoneNumber | User has completed their order and gets their order summary via SMS | void                           |
+| makeOrder(String customerPhoneNumber, Basket basket)                |                    | User wants to make an order via SMS                                 | void                           |
+| seeHistory(String customerPhoneNumber, int noOfTexts, boolean sent) |                    | User wants to view their history of messages                        | void                           |

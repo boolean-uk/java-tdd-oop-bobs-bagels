@@ -8,32 +8,31 @@ import com.twilio.base.ResourceSet;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.StringReader;
-import java.time.ZonedDateTime;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 /**
  * THIS IS VERY MUCH NOT DONE.
  *
  * Sending order confirmation works and technically reading receiving messages work but it doesn't actually detect incoming messages via server :)
  */
+
 public class SmsService {
 
     private PhoneNumber servicePhoneNumber;
     public static final String ACCOUNT_SID = System.getenv("TWILIO_ACCOUNT_SID");
     public static final String AUTH_TOKEN = System.getenv("TWILIO_AUTH_TOKEN");
-    ArrayList<String> handledMessages;
+    private ArrayList<String> handledMessages;
     public SmsService(String servicePhoneNumber) {
         this.servicePhoneNumber = new PhoneNumber(servicePhoneNumber);
         Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
         handledMessages = new ArrayList<>();
     }
 
-    public void sendOrderSummary(PhoneNumber customerPhoneNumber, Receipt receipt) {
-        Message.creator(customerPhoneNumber, servicePhoneNumber, receipt.toString()).create();
+    public void sendOrderSummary(String customerPhoneNumber, Receipt receipt) {
+        Message.creator(new PhoneNumber(customerPhoneNumber), servicePhoneNumber, receipt.toString()).create();
     }
 
-    private void makeOrder(PhoneNumber customerPhoneNumber, String order) throws IOException {
+    private void makeOrder(String customerPhoneNumber, String order) throws IOException {
         BufferedReader bufReader = new BufferedReader(new StringReader(order));
 
         String line=null;
@@ -44,14 +43,14 @@ public class SmsService {
         sendOrderSummary(customerPhoneNumber, null);
     }
 
-    private void seeHistory(PhoneNumber customerPhoneNumber, int no, boolean sent) {
+    private void seeHistory(PhoneNumber customerPhoneNumber, int noOfTexts, boolean sent) {
         ResourceSet<Message> messages;
         String history;
         if(sent) {
-            messages = Message.reader().setTo(servicePhoneNumber).setFrom(customerPhoneNumber).limit(no).read();
+            messages = Message.reader().setTo(servicePhoneNumber).setFrom(customerPhoneNumber).limit(noOfTexts).read();
             history = "Latest received messages:\n";
         } else {
-            messages = Message.reader().setFrom(servicePhoneNumber).setTo(customerPhoneNumber).limit(no).read();
+            messages = Message.reader().setFrom(servicePhoneNumber).setTo(customerPhoneNumber).limit(noOfTexts).read();
             history = "Latest sent messages:\n";
         }
 
@@ -60,7 +59,7 @@ public class SmsService {
                     .fetch();
             String body = message.getBody().trim();
             String date = message.getDateCreated().toString();
-            history += date + " : " + body.substring(0, Math.min(body.length(), 1600 / (no + 1))) + "\n"; //only send part of long messages to stay under character limit
+            history += date + " : " + body.substring(0, Math.min(body.length(), 1600 / (noOfTexts + 1))) + "\n"; //only send part of long messages to stay under character limit
         }
 
         Message.creator(customerPhoneNumber, servicePhoneNumber, history).create();
@@ -81,7 +80,7 @@ public class SmsService {
                     } else if(body.equalsIgnoreCase("see received history")) {
                         seeHistory(from, 3, false);
                     } else if(body.substring(0,5).equalsIgnoreCase("order")) {
-                        makeOrder(from, body.substring(5));
+                        makeOrder(from.toString(), body.substring(5));
                     }
                     handledMessages.add(sid);
                 }

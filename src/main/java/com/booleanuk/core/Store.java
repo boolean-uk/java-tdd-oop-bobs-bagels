@@ -1,5 +1,6 @@
 package com.booleanuk.core;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -10,12 +11,21 @@ public class Store {
     private Inventory inventory;
     private int basketCapacity;
     private String name;
+    private SmsService smsService;
 
     public Store(int basketCapacity, Inventory inventory, String name) {
         baskets = new HashMap<>();
         this.basketCapacity = basketCapacity;
         this.inventory = inventory;
         this.name = name;
+    }
+
+    public Store(int basketCapacity, Inventory inventory, String name, String phoneNumberForSmsService) {
+        baskets = new HashMap<>();
+        this.basketCapacity = basketCapacity;
+        this.inventory = inventory;
+        this.name = name;
+        this.smsService = new SmsService(phoneNumberForSmsService);
     }
 
     //Specifically for Bob's Bagels
@@ -78,7 +88,7 @@ public class Store {
         return inventory.getCostOfBasket(baskets.get(basketId));
     }
 
-    //TODO: what do if nonexistent basketid
+    //TODO: deal with nonexistent basketid
     public boolean removeItemFromBasket(Item item, int basketId) {
         return baskets.get(basketId).remove(item);
     }
@@ -186,5 +196,12 @@ public class Store {
     }
 
 
+    public void sendOrderSummary(String customerPhoneNumber, Receipt receipt) {
+        smsService.sendOrderSummary(customerPhoneNumber, receipt);
+    }
+
+    public void dealWithIncomingMessages() throws IOException {
+        smsService.dealWithIncomingMessages();
+    }
 
 }
