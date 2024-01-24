@@ -70,7 +70,7 @@ public class Basket {
         }
         double discount;
         discount = DiscountHandler.applyDiscount(this);
-        System.out.println("DISCOUNT IS : " + discount);
+        // System.out.println("DISCOUNT IS : " + discount);
         double total = cost - discount;
         String formattedDoubleString = String.format("%.2f", total);
         return Double.parseDouble(formattedDoubleString);
