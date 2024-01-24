@@ -22,6 +22,11 @@ public class ReceiptHandler {
         this.dt = LocalDateTime.now();
     }
 
+    public String getDate(){
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        return this.dt.format(formatter);
+    }
+
     public String print(){
         // Header
         this.sb.append(header).append("\n").append("\n\t");
@@ -63,22 +68,4 @@ public class ReceiptHandler {
 
         return sb.toString();
     }
-    public String getDate(){
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-        return this.dt.format(formatter);
-    }
-
-    public static void main(String[] args) {
-        Basket basket = new Basket();
-        basket.changeCapacity(50);
-        for (int i = 0; i < 6; i++) {
-            basket.add(new Product("Bagel", 0.49, "BGLO", "Onion"));
-        }
-        for (int i = 0; i < 3; i++) {
-            basket.add(new Product("Filling", 0.12, "FILB", "Bacon"));
-        }
-        ReceiptHandler receiptHandler = new ReceiptHandler(basket);
-        System.out.println(receiptHandler.print());
-    }
-
 }
