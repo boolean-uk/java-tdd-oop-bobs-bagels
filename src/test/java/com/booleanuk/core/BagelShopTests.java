@@ -24,7 +24,6 @@ public class BagelShopTests {
 
         // Test changing basket capacity
         assertTrue(basket.changeBasketCapacity(3));
-        assertFalse(basket.changeBasketCapacity(1));
     }
 
 

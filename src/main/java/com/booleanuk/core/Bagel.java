@@ -2,6 +2,7 @@ package com.booleanuk.core;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 // Class representing a Bagel
 // Class representing a Bagel
@@ -27,5 +28,19 @@ class Bagel implements BasketItem, StockItem {
     public boolean isInStock() {
         // Logic to check if the bagel is in stock
         return true; // Placeholder logic
+    }
+    // Override equals method to compare Bagel objects based on type and fillings
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        Bagel bagel = (Bagel) obj;
+        return Objects.equals(type, bagel.type) && Objects.equals(fillings, bagel.fillings);
+    }
+
+    // Override hashCode method for consistency with equals
+    @Override
+    public int hashCode() {
+        return Objects.hash(type, fillings);
     }
 }
