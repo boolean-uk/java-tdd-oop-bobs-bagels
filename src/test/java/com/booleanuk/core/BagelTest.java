@@ -7,7 +7,7 @@ class BagelTest {
 
 
     @Test
-    void getSku() {
+    public void getSku() {
         Bagel bagel = new Bagel("BGLO", 0.49, "Bagel", "Onion");
 
         String result = bagel.getSku();
@@ -16,7 +16,7 @@ class BagelTest {
     }
 
     @Test
-    void setSku() {
+    public void setSku() {
         Bagel bagel = new Bagel("BGLO", 0.49, "Bagel", "Onion");
 
         bagel.setSku("BGLP");
@@ -27,7 +27,7 @@ class BagelTest {
     }
 
     @Test
-    void getPrice() {
+    public void getPrice() {
         Bagel bagel = new Bagel("BGLO", 0.49, "Bagel", "Onion");
 
         double result = bagel.getPrice();
@@ -36,7 +36,7 @@ class BagelTest {
     }
 
     @Test
-    void setPrice() {
+    public void setPrice() {
         Bagel bagel = new Bagel("BGLO", 0.49, "Bagel", "Onion");
 
         bagel.setPrice(0.55);
@@ -47,7 +47,7 @@ class BagelTest {
     }
 
     @Test
-    void getVariant() {
+    public void getVariant() {
         Bagel bagel = new Bagel("BGLO", 0.49, "Bagel", "Onion");
 
         String result = bagel.getVariant();
@@ -56,7 +56,7 @@ class BagelTest {
     }
 
     @Test
-    void setVariant() {
+    public void setVariant() {
         Bagel bagel = new Bagel("BGLO", 0.49, "Bagel", "Onion");
 
         bagel.setVariant("Plain");
@@ -67,7 +67,7 @@ class BagelTest {
     }
 
     @Test
-    void getName() {
+    public void getName() {
         Bagel bagel = new Bagel("BGLO", 0.49, "Bagel", "Onion");
 
         String result = bagel.getName();
@@ -76,7 +76,7 @@ class BagelTest {
     }
 
     @Test
-    void setName() {
+    public void setName() {
         Bagel bagel = new Bagel("BGLO", 0.49, "Bagel", "Onion");
 
         bagel.setName("Plain Bagel");

@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 class ExtensionExercise1Test {
 
     @Test
-    void returnItemsWithDiscount() {
+    public void returnItemsWithDiscount() {
         ExtensionExercise1 extensionExercise1 = new ExtensionExercise1();
 
         extensionExercise1.getBasketList().clear();

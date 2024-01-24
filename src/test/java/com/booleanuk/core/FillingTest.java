@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 class FillingTest {
 
     @Test
-    void getPrice() {
+    public void getPrice() {
         Filling filling = new Filling("FILE", 0.12, "Filling", "Egg");
 
         double result = filling.getPrice();
@@ -15,7 +15,7 @@ class FillingTest {
     }
 
     @Test
-    void setPrice() {
+    public void setPrice() {
         Filling filling = new Filling("FILE", 0.12, "Filling", "Egg");
 
         filling.setPrice(0.15);
@@ -26,7 +26,7 @@ class FillingTest {
     }
 
     @Test
-    void getVariant() {
+    public void getVariant() {
         Filling filling = new Filling("FILE", 0.12, "Filling", "Egg");
 
         String result = filling.getVariant();
@@ -35,7 +35,7 @@ class FillingTest {
     }
 
     @Test
-    void setVariant() {
+    public void setVariant() {
         Filling filling = new Filling("FILE", 0.12, "Filling", "Egg");
 
         filling.setVariant("Ham");
@@ -46,7 +46,7 @@ class FillingTest {
     }
 
     @Test
-    void getSku() {
+    public void getSku() {
         Filling filling = new Filling("FILE", 0.12, "Filling", "Egg");
 
         String result = filling.getSku();
@@ -55,7 +55,7 @@ class FillingTest {
     }
 
     @Test
-    void setSku() {
+    public void setSku() {
         Filling filling = new Filling("FILC", 0.12, "Filling", "Cheese");
 
         filling.setSku("FILE");
@@ -66,7 +66,7 @@ class FillingTest {
     }
 
     @Test
-    void getName() {
+    public void getName() {
         Filling filling = new Filling("FILC", 0.12, "Filling", "Cheese");
 
         String result = filling.getVariant();
@@ -75,7 +75,7 @@ class FillingTest {
     }
 
     @Test
-    void setName() {
+    public void setName() {
         Filling filling = new Filling("FILC", 0.12, "Filling", "Cheese");
 
         filling.setVariant("Cream Cheese");

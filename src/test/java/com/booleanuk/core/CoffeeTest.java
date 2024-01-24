@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 public class CoffeeTest {
 
     @Test
-    void getSku() {
+    public void getSku() {
         Coffee coffee = new Coffee("COFB", 0.99, "Coffee", "Black");
 
         String result = coffee.getSku();
@@ -15,7 +15,7 @@ public class CoffeeTest {
     }
 
     @Test
-    void setSku() {
+    public void setSku() {
         Coffee coffee = new Coffee("COFB", 0.99, "Coffee", "Black");
 
         coffee.setSku("COFW");
@@ -26,7 +26,7 @@ public class CoffeeTest {
     }
 
     @Test
-    void getPrice() {
+    public void getPrice() {
         Coffee coffee = new Coffee("COFB", 0.99, "Coffee", "Black");
 
         double result = coffee.getPrice();
@@ -35,7 +35,7 @@ public class CoffeeTest {
     }
 
     @Test
-    void setPrice() {
+    public void setPrice() {
         Coffee coffee = new Coffee("COFB", 0.99, "Coffee", "Black");
 
         coffee.setPrice(1.09);
@@ -46,7 +46,7 @@ public class CoffeeTest {
     }
 
     @Test
-    void getVariant() {
+    public void getVariant() {
         Coffee coffee = new Coffee("COFB", 0.99, "Coffee", "Black");
 
         String result = coffee.getVariant();
@@ -55,7 +55,7 @@ public class CoffeeTest {
     }
 
     @Test
-    void setVariant() {
+    public void setVariant() {
         Coffee coffee = new Coffee("COFB", 0.99, "Coffee", "Black");
 
         coffee.setVariant("White");
@@ -66,7 +66,7 @@ public class CoffeeTest {
     }
 
     @Test
-    void getName() {
+    public void getName() {
         Coffee coffee = new Coffee("COFB", 0.99, "Coffee", "Black");
 
         String result = coffee.getName();
@@ -75,7 +75,7 @@ public class CoffeeTest {
     }
 
     @Test
-    void setName() {
+    public void setName() {
         Coffee coffee = new Coffee("COFB", 0.99, "Coffee", "Black");
 
         coffee.setName("White Coffee");

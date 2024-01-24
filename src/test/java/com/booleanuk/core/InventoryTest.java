@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 class InventoryTest {
 
     @Test
-    void getSku() {
+    public void getSku() {
         Inventory inventory = new Inventory("BGLO", 0.49, "Bagel", "Onion");
 
         String result = inventory.getSku();
@@ -15,7 +15,7 @@ class InventoryTest {
     }
 
     @Test
-    void setSku() {
+    public void setSku() {
         Inventory inventory = new Inventory("BGLO", 0.49, "Bagel", "Onion");
 
         inventory.setSku("BGLP");
@@ -26,7 +26,7 @@ class InventoryTest {
     }
 
     @Test
-    void getPrice() {
+    public void getPrice() {
         Inventory inventory = new Inventory("BGLO", 0.49, "Bagel", "Onion");
 
         double result = inventory.getPrice();
@@ -35,7 +35,7 @@ class InventoryTest {
     }
 
     @Test
-    void setPrice() {
+    public void setPrice() {
         Inventory inventory = new Inventory("BGLP", 0.39, "Bagel", "Plain");
 
         inventory.setPrice(0.49);
@@ -46,7 +46,7 @@ class InventoryTest {
     }
 
     @Test
-    void getName() {
+    public void getName() {
         Inventory inventory = new Inventory("BGLO", 0.49, "Bagel", "Onion");
 
         String result = inventory.getName();
@@ -55,7 +55,7 @@ class InventoryTest {
     }
 
     @Test
-    void setName() {
+    public void setName() {
         Inventory inventory = new Inventory("BGLO", 0.49, "Bagel", "Onion");
 
         inventory.setName("Coffee");
@@ -66,7 +66,7 @@ class InventoryTest {
     }
 
     @Test
-    void getVariant() {
+    public void getVariant() {
         Inventory inventory = new Inventory("BGLO", 0.49, "Bagel", "Onion");
 
         String result = inventory.getVariant();
@@ -75,7 +75,7 @@ class InventoryTest {
     }
 
     @Test
-    void setVariant() {
+    public void setVariant() {
         Inventory inventory = new Inventory("BGLP", 0.39, "Bagel", "Plain");
 
         inventory.setVariant("Onion");

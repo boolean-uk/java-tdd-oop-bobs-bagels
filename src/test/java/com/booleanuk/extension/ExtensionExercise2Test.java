@@ -12,7 +12,7 @@ import java.util.Date;
 class ExtensionExercise2Test {
 
     @Test
-    void returnReceipt() {
+    public void returnReceipt() {
 
         //SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         //String expectedDate = dateFormat.format(new Date());
