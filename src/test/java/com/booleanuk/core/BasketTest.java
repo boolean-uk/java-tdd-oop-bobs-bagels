@@ -71,6 +71,16 @@ class BasketTest {
     }
 
     @Test
+    public void testAddFillingDirectlyToBasket() {
+        Inventory inventory = new Inventory();
+        Discounts discounts = new Discounts(inventory);
+        Checkout checkout = new Checkout(inventory, discounts);
+        Basket basket = new Basket(inventory, checkout);
+        Assertions.assertEquals("Filling must be added to a bagel", basket.add("FILE"));
+
+    }
+
+    @Test
     public void testRemoveBagelFromBasket() {
         Inventory inventory = new Inventory();
         Discounts discounts = new Discounts(inventory);
