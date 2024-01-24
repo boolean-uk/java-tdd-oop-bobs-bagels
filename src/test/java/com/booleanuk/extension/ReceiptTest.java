@@ -35,20 +35,20 @@ class ReceiptTest {
         String example = "~~~ Bob's Bagels ~~~\n\n" +
                 java.time.LocalDateTime.now().format(formatter) + "\n" +
                 "----------------------------\n" +
-                "Everything Bagel   6   £2.49\n" +
-                "Plain Bagel        12  £3.99\n" +
-                "Bagel & Coffee     2   £2.50\n" +
-                "Black Coffee       1   £0.99\n" +
+                "Everything Bagel       6   £2.49\n" +
+                "Plain Bagel            12  £3.99\n" +
+                "Bagel & Coffee         2   £2.50\n" +
+                "Black Coffee           1   £0.99\n" +
                 "----------------------------\n" +
-                "Total                 £10.43\n\n" +
+                "Total                 £9.97\n\n" +
                 "        Thank you\n" +
                 "      for your order!";
 
         double total = basket.getCostOfBasket();
         System.out.println( );
         Receipt receipt = new Receipt(
-                basket.getProducts(), basket.getAppliedDiscounts(),
-                basket.getDiscountedProducts(), total);
+                basket.getQuantityMap(), basket.getDiscountedProducts(),
+                basket.getAppliedDiscounts(), total);
         Assertions.assertEquals(example, receipt.toString());
     }
 

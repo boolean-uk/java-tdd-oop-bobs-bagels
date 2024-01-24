@@ -4,15 +4,20 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class Basket {
 
+    private ArrayList<Discount> appliedDiscounts;
+    private Map<String, Integer>discountedProducts;
     private ArrayList<Product> products;
     private static int maxSize;
 
 
     public Basket(){
+        this.appliedDiscounts = new ArrayList<>();
+        this.discountedProducts = new HashMap<>();
         this.products = new ArrayList<>();
         maxSize = 10;
     }
@@ -94,6 +99,7 @@ public class Basket {
         double discountPrice = 0;
         Map<String, Integer> quantityMap = getQuantityMap();
 
+
         for(Map.Entry<String, Integer> entry: quantityMap.entrySet()){
             String id = entry.getKey();
             int quantity = entry.getValue();
@@ -102,12 +108,17 @@ public class Basket {
                 while (quantity >= 12){
                     discountPrice += (Inventory.getProductById(id).getPrice() * 12 ) - 3.99;
                     quantityMap.put(id, quantityMap.get(id) - 12);
+                    appliedDiscounts.add(new Discount(3.99, 12,
+                            (Inventory.getProductById(id).getVariant()) + " " + (Inventory.getProductById(id).getName())));
+                    this.discountedProducts.put(id, 12);
                     quantity -= 12;
-
                 }
                 while (quantity >= 6){
                     discountPrice += (Inventory.getProductById(id).getPrice() * 6 ) - 2.49;
                     quantityMap.put(id, quantityMap.get(id) - 6);
+                    appliedDiscounts.add(new Discount(2.49, 6,
+                            (Inventory.getProductById(id).getVariant()) + " " +  (Inventory.getProductById(id).getName())));
+                    this.discountedProducts.put(id, 6);
                     quantity -= 6;
                 }
             }
@@ -143,12 +154,28 @@ public class Basket {
 
            double coffeePrice = coffeesLeft.get(i).getPrice();
            double bagelPrice = bagelsLeft.get(i).getPrice();
-           System.out.println(i + "st: Bagels price: " + bagelPrice);
-           System.out.println(i+ "st Coffees Price: " + coffeePrice);
            discountPrice += ((coffeePrice + bagelPrice) - 1.25);
 
+
+
+           if (!discountedProducts.containsKey(coffeesLeft.get(i).getId())) {
+               discountedProducts.put(coffeesLeft.get(i).getId(), 1);
+           } else {
+               int currentAmount = discountedProducts.get(coffeesLeft.get(i).getId());
+               discountedProducts.put(coffeesLeft.get(i).getId(), currentAmount + 1);
+           }
+
+           if (!discountedProducts.containsKey(bagelsLeft.get(i).getId())) {
+               discountedProducts.put(bagelsLeft.get(i).getId(), 1);
+           } else {
+               int currentAmount = discountedProducts.get(bagelsLeft.get(i).getId());
+               discountedProducts.put(bagelsLeft.get(i).getId(), currentAmount + 1);
+           }
        }
-        System.out.println(roundDouble(discountPrice));
+
+       this.appliedDiscounts.add(new Discount(1.25 * pairs, pairs, "Bagel & Coffee"));
+
+
         return roundDouble(discountPrice);
    }
 
@@ -173,7 +200,7 @@ public class Basket {
         return (this.products.size()) >= maxSize;
     }
 
-    private HashMap<String, Integer> getQuantityMap(){
+    public HashMap<String, Integer> getQuantityMap(){
         HashMap<String, Integer> quantityMap = new HashMap<>();
         for (Product product : products) {
             if (!quantityMap.containsKey(product.getId())) {
@@ -208,5 +235,13 @@ public class Basket {
             }
         }
         return quantityMap;
+    }
+
+    public ArrayList<Discount> getAppliedDiscounts() {
+        return appliedDiscounts;
+    }
+
+    public Map<String, Integer> getDiscountedProducts() {
+        return discountedProducts;
     }
 }
