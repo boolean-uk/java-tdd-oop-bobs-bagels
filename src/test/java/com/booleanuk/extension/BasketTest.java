@@ -66,26 +66,26 @@ public class BasketTest {
         basket.add(cofb);
 
         // One coffee and one bagel are discounted.
-        double expectedPrice = ((int) Math.round((0.49+0.49+1.25*(1.0/3))*100))/100.0;
-        double expectedDiscount = ((int) Math.round((0.49-1.25*(1.0/3))*100))/100.0;
+        double expectedPrice = ((int) Math.round((0.49+0.49+1.25*(1.0/4))*100))/100.0;
+        double expectedDiscount = ((int) Math.round((0.49-1.25*(1.0/4))*100))/100.0;
         Assertions.assertEquals(expectedPrice, basket.discountPerItem().get(bglo)[0]/100.0);
         Assertions.assertEquals(expectedDiscount, basket.discountPerItem().get(bglo)[1]/100.0);
 
-        expectedPrice = ((int) Math.round((1.25*(2.0/3))*100))/100.0;
-        expectedDiscount = ((int) Math.round((0.99-1.25*(2.0/3))*100))/100.0;
+        expectedPrice = ((int) Math.round((1.25*(3.0/4))*100))/100.0;
+        expectedDiscount = ((int) Math.round((0.99-1.25*(3.0/4))*100))/100.0;
         Assertions.assertEquals(expectedPrice, basket.discountPerItem().get(cofb)[0]/100.0);
         Assertions.assertEquals(expectedDiscount, basket.discountPerItem().get(cofb)[1]/100.0);
 
         basket.add(cofb);
 
         // Two coffees and two bagels are discounted.
-        expectedPrice = ((int) Math.round((0.49+2*(1.25*(1.0/3)))*100))/100.0;
-        expectedDiscount = ((int) Math.round((0.49*2-2*(1.25*(1.0/3)))*100))/100.0;
+        expectedPrice = ((int) Math.round((0.49+2*(1.25*(1.0/4)))*100))/100.0;
+        expectedDiscount = 0.49*2-((int) Math.round((2*(1.25*(1.0/4)))*100))/100.0;
         Assertions.assertEquals(expectedPrice, basket.discountPerItem().get(bglo)[0]/100.0);
         Assertions.assertEquals(expectedDiscount, basket.discountPerItem().get(bglo)[1]/100.0);
 
-        expectedPrice = ((int) Math.round(((1.25*(2.0/3))*2)*100))/100.0;
-        expectedDiscount = ((int) Math.round(((0.99-1.25*(2.0/3))*2)*100))/100.0;
+        expectedPrice = ((int) Math.round(((1.25*(3.0/4))*2)*100))/100.0;
+        expectedDiscount = ((int) Math.round(((0.99-1.25*(3.0/4))*2)*100))/100.0;
         Assertions.assertEquals(expectedPrice, basket.discountPerItem().get(cofb)[0]/100.0);
         Assertions.assertEquals(expectedDiscount, basket.discountPerItem().get(cofb)[1]/100.0);
     }

@@ -109,19 +109,19 @@ public class Basket {
             else if (item.getName().equals("Bagel") && this.basketContent.keySet().stream().anyMatch(i -> i.getVariant().equals("Black"))) {
                 int coffeeAmount = this.basketContent.keySet().stream().filter(i -> i.getVariant().equals("Black")).mapToInt(i -> this.basketContent.get(i)).sum();
                 if (amount <= coffeeAmount) {
-                    priceAndSavings[0] = (int) Math.round((1.25*(1.0/3)*amount)*100);
+                    priceAndSavings[0] = (int) Math.round((1.25*(1.0/4) * amount) * 100);
                 }
                 else {
-                    priceAndSavings[0] = (int) Math.round((1.25*(1.0/3)*coffeeAmount + (amount-coffeeAmount) * item.getPrice())*100);
+                    priceAndSavings[0] = (int) Math.round(((1.25*(1.0/4) * coffeeAmount) + ((amount-coffeeAmount) * item.getPrice())) * 100);
                 }
             }
             else if (item.getVariant().equals("Black") && this.basketContent.keySet().stream().anyMatch(i -> i.getName().equals("Bagel"))) {
                 int bagelAmount = this.basketContent.keySet().stream().filter(i -> i.getName().equals("Bagel")).mapToInt(i -> this.basketContent.get(i)).sum();
                 if (amount <= bagelAmount) {
-                    priceAndSavings[0] = (int) Math.round((1.25*(2.0/3)*amount)*100);
+                    priceAndSavings[0] = (int) Math.round((1.25*(3.0/4)*amount)*100);
                 }
                 else {
-                    priceAndSavings[0] = (int) Math.round((1.25*(2.0/3)*bagelAmount + (amount-bagelAmount) * item.getPrice())*100);
+                    priceAndSavings[0] = (int) Math.round((1.25*(3.0/4)*bagelAmount + (amount-bagelAmount) * item.getPrice())*100);
                 }
             }
             else {
