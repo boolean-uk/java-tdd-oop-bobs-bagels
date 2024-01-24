@@ -23,9 +23,9 @@ class ExtensionExercise2Test {
         Inventory item2 = new Inventory("BGLP", 0.39, "Bagel", "Plain");
         Inventory item3 = new Inventory("BGLE", 0.49, "Bagel", "Everything");
 
-        extensionExercise2.addItem(item3, 1);
-        extensionExercise2.addItem(item2, 3);
         extensionExercise2.addItem(item1, 2);
+        extensionExercise2.addItem(item2, 3);
+        extensionExercise2.addItem(item3, 1);
 
         String returnedReceipt = extensionExercise2.returnReceipt();
 
@@ -33,9 +33,9 @@ class ExtensionExercise2Test {
                 + "    ~~~ Bob's Bagels ~~~    \n\n"
                 + "    2024-01-23 08:50:13   \n\n"
                 + "----------------------------\n\n"
-                + String.format("%-" + 30 + "s", String.format("%-19s", item3.getVariant() + " " +item3.getName()) + String.format("%3d £%.2f", 1, 0.49)) + "\n"
-                + String.format("%-" + 30 + "s", String.format("%-19s", item2.getVariant() + " " +item2.getName()) + String.format("%3d £%.2f", 3, 1.17)) + "\n"
                 + String.format("%-" + 30 + "s", String.format("%-19s", item1.getVariant() + " " +item1.getName()) + String.format("%3d £%.2f", 2, 0.98)) + "\n"
+                + String.format("%-" + 30 + "s", String.format("%-19s", item2.getVariant() + " " +item2.getName()) + String.format("%3d £%.2f", 3, 1.17)) + "\n"
+                + String.format("%-" + 30 + "s", String.format("%-19s", item3.getVariant() + " " +item3.getName()) + String.format("%3d £%.2f", 1, 0.49)) + "\n"
                 + "                            \n"
                 + "----------------------------\n"
                 + "Total                  £2.64" + "\n\n"
