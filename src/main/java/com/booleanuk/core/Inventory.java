@@ -3,9 +3,9 @@ package com.booleanuk.core;
 import java.util.ArrayList;
 
 public class Inventory {
-    ArrayList<Filling> allFillings = new ArrayList<>();
-    ArrayList<Bagel> allBagels = new ArrayList<>();
-    ArrayList<Coffee> allCoffees = new ArrayList<>();
+    private ArrayList<Filling> allFillings = new ArrayList<>();
+    private ArrayList<Bagel> allBagels = new ArrayList<>();
+    private ArrayList<Coffee> allCoffees = new ArrayList<>();
 
     public Inventory() {
         Filling bacon = new Filling("Bacon", "FILB");

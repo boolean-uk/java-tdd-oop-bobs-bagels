@@ -4,10 +4,10 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 public class Basket {
-    Inventory inventory;
-    ArrayList<Bagel> basket;
-    int maxCapacity = 5;
-    int currentIndex = 0;
+    private Inventory inventory;
+    private ArrayList<Bagel> basket;
+    private int maxCapacity = 5;
+    private int currentIndex = 0;
 
     public Basket(Inventory inventory) {
         this.inventory = inventory;
@@ -42,7 +42,7 @@ public class Basket {
         double totalCost = 0.0;
 
         for(Bagel bagel : basket) {
-            totalCost += bagel.price;
+            totalCost += bagel.getPrice();
         }
 
         DecimalFormat decimalFormat = new DecimalFormat("#.##");
@@ -62,5 +62,9 @@ public class Basket {
             }
         }
         return fillingAdded;
+    }
+
+    public int getMaxCapacity() {
+        return this.maxCapacity;
     }
 }

@@ -56,7 +56,7 @@ public class BasketTest {
     public void shouldAssertNewBasketSize() {
         Inventory inventory = new Inventory();
         Basket basket = new Basket(inventory);
-        int originalSize = basket.maxCapacity;
+        int originalSize = basket.getMaxCapacity();
         int newSize = basket.extendCapacityOfBasket(3);
         Assertions.assertEquals(newSize, originalSize+3);
     }

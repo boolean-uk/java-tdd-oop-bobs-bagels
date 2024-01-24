@@ -3,11 +3,11 @@ package com.booleanuk.core;
 import java.util.ArrayList;
 
 public class Bagel {
-    String name;
-    String sku;
-    String uniqueID;
-    double price;
-    ArrayList<Filling> fillings;
+    private String name;
+    private String sku;
+    private String uniqueID;
+    private double price;
+    private ArrayList<Filling> fillings;
 
     public Bagel(String name, String sku, double price) {
         this.name = name;

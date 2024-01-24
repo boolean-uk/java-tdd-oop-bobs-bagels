@@ -1,9 +1,9 @@
 package com.booleanuk.core;
 
 public class Filling {
-    String name;
-    String sku;
-    double price;
+    private String name;
+    private String sku;
+    private double price;
 
     public Filling(String name, String sku) {
         this.name = name;
