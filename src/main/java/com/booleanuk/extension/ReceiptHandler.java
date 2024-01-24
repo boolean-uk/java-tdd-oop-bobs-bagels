@@ -7,17 +7,16 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 
 public class ReceiptHandler {
 
-    public static final String header =     "\t~~~ Bob's Bagels ~~~ ";
-    public static final String separator =  "---------------------------\n";
-    public static final String footer =     "\tThank you for ordering \n\t   at Bob's Bagels!";
+    private static final String header =     "\t~~~ Bob's Bagels ~~~ ";
+    private static final String separator =  "---------------------------\n";
+    private static final String footer =     "\tThank you for ordering \n\t   at Bob's Bagels!";
 
-    Basket basket;
-    StringBuilder sb;
-    LocalDateTime dt;
+    private final Basket basket;
+    private StringBuilder sb;
+    private LocalDateTime dt;
 
     public ReceiptHandler(Basket basket){
         this.basket = basket;

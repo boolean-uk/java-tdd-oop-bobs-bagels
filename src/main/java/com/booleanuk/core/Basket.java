@@ -9,14 +9,11 @@ import java.util.Objects;
 public class Basket {
 
     private List<Product> basket;
-
     private int capacity;
-    private double total;
     Inventory inventory;
 
     public Basket(){
         this.basket = setBasket();
-        this.total = setTotal();
         this.inventory = new Inventory();
         this.capacity = setCapacity();
     }
@@ -75,10 +72,6 @@ public class Basket {
         double total = cost - discount;
         String formattedDoubleString = String.format("%.2f", total);
         return Double.parseDouble(formattedDoubleString);
-    }
-
-    public double setTotal(){
-        return this.total = 0;
     }
 
     public List<Product> setBasket(){

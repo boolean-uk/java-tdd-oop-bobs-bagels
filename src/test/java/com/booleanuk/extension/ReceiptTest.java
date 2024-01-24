@@ -2,7 +2,6 @@ package com.booleanuk.extension;
 
 import com.booleanuk.core.Basket;
 import com.booleanuk.core.Product;
-import com.booleanuk.extension.ReceiptHandler;
 import org.junit.jupiter.api.Test;
 
 public class ReceiptTest {

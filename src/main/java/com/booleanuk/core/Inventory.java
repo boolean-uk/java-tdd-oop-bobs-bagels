@@ -7,11 +7,6 @@ import java.util.Objects;
 public class Inventory {
     private final List<Product> products;
 
-    public Inventory() {
-        this.products = new ArrayList<>();
-        initializeInventory();
-    }
-
     private void initializeInventory() {
         products.add(new Bagel(0.49, "BGLO", "Onion"));
         products.add(new Bagel(0.39, "BGLP", "Plain"));
@@ -26,11 +21,15 @@ public class Inventory {
         products.add(new Filling(0.12, "FILS", "Smoked Salmon"));
         products.add(new Filling(0.12, "FILH", "Ham"));
     }
+    public Inventory() {
+        this.products = new ArrayList<>();
+        initializeInventory();
+    }
+
 
     public List<Product> getProducts() {
         return products;
     }
-
     public Product getItemBySku(String sku) {
         for (Product product : products) {
             if (product.getSku().equals(sku)) {
