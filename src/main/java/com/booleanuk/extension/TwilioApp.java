@@ -15,10 +15,14 @@ public class TwilioApp {
         port(8080);
         post("/sms", (req, res) -> {
             res.type("application/xml");
-            String[] userMsg = req.queryParams("Body").split(" ");
-            String user = req.queryParams("From");
-            Basket basket = bobsBagels.getBasket(user);
+            String userMessage = req.queryParams("Body");
+            String[] userMsg = userMessage.split(" ");
+            String userNumber = req.queryParams("From");
+            Basket basket = bobsBagels.getBasket(userNumber);
+            User user = bobsBagels.getUser(userNumber);
             String response = "";
+
+            user.addToMessageHistory(userMessage, "Me");
 
             switch (userMsg[0].toLowerCase()) {
                 case "add":
@@ -30,9 +34,14 @@ public class TwilioApp {
                 case "order":
                     response = basket.orderSummary();
                     break;
+                case "history":
+                    response = user.getMessageHistory();
+                    break;
                 default:
-                    response = "Please input correct commands: \n 1. add [SKU]\n 2. remove [SKU]\n 3. order";
+                    response = "Please input correct commands: \n 1. add [SKU]\n 2. remove [SKU]\n 3. order\n4. history";
+                    break;
             }
+            user.addToMessageHistory(response, "BB");
 
             Body body = new Body
                     .Builder(response)
