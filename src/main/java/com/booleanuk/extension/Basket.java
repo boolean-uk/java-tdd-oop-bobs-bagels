@@ -119,20 +119,35 @@ public class Basket {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         String dateTime = localDate.format(formatter);
 
-        receipt.append(title);
-        receipt.append(System.lineSeparator());
-        receipt.append(dateTime);
-        receipt.append(System.lineSeparator());
-        receipt.append(line);
-        receipt.append(System.lineSeparator());
+        receipt.append(title).append(System.lineSeparator());
+        receipt.append(dateTime).append(System.lineSeparator());
+        receipt.append(line).append(System.lineSeparator());
 
-        // Loop through the products in the basket, and format product info
-        // Todo: how to display total quantities and total prices of similar items
+        // Todo: how to display total quantities and total prices of similar items in one line
+        // Todo: display name variant for discounted product
+        Map<Product, Integer> productCountMap = new HashMap<>();
+        Map<Product, Double> productTotalPriceMap = new HashMap<>();
+        // Loop through the products in the basket
         for (Product product : basket) {
+            if(productCountMap.containsKey(product)){
+                //Increment the count if the product is already in the map
+                productCountMap.put(product, productCountMap.get(product)+1);
+            }else {
+                //Otherwise add the product to the map with count 1
+                productCountMap.put(product,1);
+            }
+            //Update the total price map by multiplying the price of each product with quantity
+            double totalPrice = product.getPrice() * productCountMap.get(product);
+            productTotalPriceMap.put(product,totalPrice);
 
-           String productInfo = String.format("%-18s %4s £%.2f", product.getVariant() + " " + product.getName(), product.getQuantity(), product.getPrice());
-           receipt.append(productInfo).append("\n");
-
+        }
+        //Print the results
+        for(Map.Entry<Product, Integer> entry : productCountMap.entrySet()){
+            Product product = entry.getKey();
+            int quantity = entry.getValue();
+            double totalPrice = productTotalPriceMap.get(product);
+            String productInfo = String.format("%-18s %4s £%.2f", product , quantity, totalPrice);
+            receipt.append(productInfo).append(System.lineSeparator());
         }
         receipt.append(line);
         receipt.append(System.lineSeparator());
@@ -148,11 +163,11 @@ public class Basket {
         Product bagel1 = new Bagel("BGLP",0.39, "Bagel", "Plain" );
         Product bagel2 = new Bagel("BGLP",0.39, "Bagel", "Plain" );
         Product filling = new Filling("FILB",0.12, "Filling", "Bacon");
-        Product quantity = new QuantityDiscountProduct("BGLO", 2.49, "Bagel", "Onion", 6);
+      //  Product quantity = new QuantityDiscountProduct("BGLO", 2.49, "Bagel", "Onion", 6);
         basket.addItem(bagel1);
         basket.addItem(bagel2);
         basket.addItem(filling);
-        basket.addItem(quantity);
+       //basket.addItem(quantity);
         System.out.println(basket.getTotalCost());
         System.out.println(basket.printReceipt());
 
