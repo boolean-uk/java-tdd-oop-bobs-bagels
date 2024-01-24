@@ -25,11 +25,18 @@ public class Receipt {
         StringBuilder receipt = new StringBuilder();
         receipt.append(createHeader());
         for (Item item : basket.getBasketContent().keySet()) {
+            String tabsAfterItem = "";
+            int variantLength = item.getVariant().length() + item.getName().length() + 1;
+            if (variantLength < 12){tabsAfterItem = "\t\t\t\t";}
+            else if (variantLength < 16){tabsAfterItem = "\t\t\t";}
+            else if (variantLength < 20){tabsAfterItem = "\t\t";}
+            else {tabsAfterItem = "\t";}
+
             int amount = basket.getBasketContent().get(item);
-            String itemRow = item.getVariant() + " " + item.getName() + "\t\t" +  amount + "\t£" + item.getPrice() * amount + "\n";
+            String itemRow = item.getVariant() + " " + item.getName() + tabsAfterItem +  amount + "\t£" + item.getPrice() * amount + "\n";
             receipt.append(itemRow);
         }
-        receipt.append("\n----------------------------\nTotal                  £") ;
+        receipt.append("\n---------------------------------\nTotal                        £") ;
         receipt.append(basket.totalCost());
         receipt.append(createFooter());
         this.receipt = receipt.toString();
@@ -38,14 +45,14 @@ public class Receipt {
 
     public String createHeader() {
         String header = "";
-        header += "    ~~~ Bob's Bagels ~~~\n\n    ";
+        header += "      ~~~ Bob's Bagels ~~~\n\n       ";
         header += this.dateAndTime.toString().replace("T", " ");
-        header += "\n\n----------------------------\n\n";
+        header += "\n\n---------------------------------\n\n";
         return header;
     }
 
     public String createFooter() {
-        return "\n\n        Thank you\n      for your order!";
+        return "\n\n           Thank you\n        for your order!";
     }
 
     public boolean printReceipt() {
@@ -70,16 +77,23 @@ public class Receipt {
         HashMap<Item, int[]> mapPriceAndSavings = this.basket.discountPerItem();
         double totalSavings = 0.0;
         for (Item item : basket.getBasketContent().keySet()) {
+            String tabsAfterItem = "";
+            int variantLength = item.getVariant().length() + item.getName().length() + 1;
+            if (variantLength < 12){tabsAfterItem = "\t\t\t\t";}
+            else if (variantLength < 16){tabsAfterItem = "\t\t\t";}
+            else if (variantLength < 20){tabsAfterItem = "\t\t";}
+            else {tabsAfterItem = "\t";}
+
             int amount = basket.getBasketContent().get(item);
-            String itemRow = item.getVariant() + " " + item.getName() + "\t\t" +  amount + "\t£" + mapPriceAndSavings.get(item)[0]/100.0 + "\n";
+            String itemRow = item.getVariant() + " " + item.getName() + tabsAfterItem +  amount + "\t£" + mapPriceAndSavings.get(item)[0]/100.0 + "\n";
             double saving = mapPriceAndSavings.get(item)[1]/100.0;
             if (saving != 0.0){
-                itemRow += "                  (-£" + saving + ")\n";
+                itemRow += "                          (-£" + saving + ")\n";
                 totalSavings += saving;
             }
             receipt.append(itemRow);
         }
-        receipt.append("\n----------------------------\nTotal               £") ;
+        receipt.append("\n---------------------------------\nTotal                       £") ;
         receipt.append(basket.totalCostWithDiscount(mapPriceAndSavings));
         receipt.append("\n\nYou saved a total of £");
         receipt.append(totalSavings);
