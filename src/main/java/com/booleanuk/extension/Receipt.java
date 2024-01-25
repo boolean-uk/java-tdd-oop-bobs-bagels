@@ -25,24 +25,7 @@ public class Receipt {
 
     @Override
     public String toString() {
-        System.out.println("Printmap");
-        System.out.println(this.printMap.size());
-        for (Map.Entry<Product, Integer> entry : this.printMap.entrySet()){
-            System.out.println(entry.getKey().getId() + " " + entry.getValue());
-        }
-        System.out.println("__________");
-        System.out.println("Allproducts");
-        System.out.println(this.allProducts.size());
-        for (Map.Entry<String, Integer> entry : allProducts.entrySet()){
-            System.out.println(entry.getKey() + " " + entry.getValue());
-        }
 
-        System.out.println("__________");
-        System.out.println("Discounted products");
-        System.out.println(this.discountedProducts.size());
-        for (Map.Entry<String, Integer> entry : discountedProducts.entrySet()){
-            System.out.println(entry.getKey() + " " + entry.getValue());
-        }
         String formattedDateTime = timeCreated;
 
         StringBuilder result = new StringBuilder();
@@ -52,6 +35,31 @@ public class Receipt {
 
         for(Discount discount: listOfDiscounts) {
             result.append(String.format("%-20s %2d  £%.2f\n", discount.getName(), discount.getAmount(), discount.getPrice()));
+        }
+
+        for(Map.Entry<Product, Integer> entry: printMap.entrySet()) {
+            result.append(String.format("%-20s %2d  £%.2f\n", (entry.getKey().getVariant() + " " + entry.getKey().getName()), entry.getValue(), (entry.getKey().getPrice()) * entry.getValue()));
+        }
+
+        result.append("----------------------------\n");
+        result.append(String.format("Total                 £%.2f\n\n", total));
+        result.append("        Thank you\n");
+        result.append("      for your order!");
+
+        return result.toString();
+    }
+
+    public String receiptextension3() {
+
+        String formattedDateTime = timeCreated;
+
+        StringBuilder result = new StringBuilder();
+        result.append("~~~ Bob's Bagels ~~~\n\n");
+        result.append(formattedDateTime).append("\n");
+        result.append("----------------------------\n");
+
+        for(Discount discount: listOfDiscounts) {
+            result.append(String.format("%-20s %2d  £%.2f -(£%.2f)\n", discount.getName(), discount.getAmount(), discount.getPrice(), discount.getDiscountAmount()));
         }
 
         for(Map.Entry<Product, Integer> entry: printMap.entrySet()) {
