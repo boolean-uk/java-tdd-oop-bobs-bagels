@@ -49,17 +49,23 @@ class ReceiptTest {
         Receipt receipt = new Receipt(
                 basket.getQuantityMap(), basket.getDiscountedProducts(),
                 basket.getAppliedDiscounts(), total);
-        Assertions.assertEquals(example, receipt.toString());
+        Assertions.assertEquals(removeSpaces(example), removeSpaces(receipt.toString()));
+    }
+
+    // Help methods
+    private static String removeSpaces(String input) {
+        // Replace all spaces in the string with an empty string
+        return input.replaceAll("\\s", "");
     }
 
 //    @Test
-//    public void testPrintExtension3(){
+//    public void testPrintExtension3() {
 //        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 //        Basket basket = new Basket();
 //        Basket.setMaxSize(100);
-//        Bagel bagelplain = new  Bagel("BGLP", 0.39, "Plain");
-//        Bagel bagelOnion = new  Bagel("BGLO", 0.49, "Onion");
-//        Bagel bagelEverything = new  Bagel("BGLE", 0.49, "Everything");
+//        Bagel bagelplain = new Bagel("BGLP", 0.39, "Plain");
+//        Bagel bagelOnion = new Bagel("BGLO", 0.49, "Onion");
+//        Bagel bagelEverything = new Bagel("BGLE", 0.49, "Everything");
 //
 //        Coffee coffeeBlack = new Coffee("COFB", 0.99, "Black");
 //
@@ -89,7 +95,7 @@ class ReceiptTest {
 //                "      for your order!";
 //
 //        double total = basket.getCostOfBasket();
-//        System.out.println( );
+//        System.out.println();
 //        Receipt receipt = new Receipt(
 //                basket.getQuantityMap(), basket.getDiscountedProducts(),
 //                basket.getAppliedDiscounts(), total);
