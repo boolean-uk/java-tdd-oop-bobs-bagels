@@ -51,6 +51,7 @@ public class Receipt {
 
     public String receiptextension3() {
 
+        System.out.println(discountedProducts.size());
         String formattedDateTime = timeCreated;
 
         StringBuilder result = new StringBuilder();

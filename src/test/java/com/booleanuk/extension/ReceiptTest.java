@@ -119,8 +119,10 @@ class ReceiptTest {
                 java.time.LocalDateTime.now().format(formatter) + "\n" +
                 "----------------------------\n" +
                 "Plain Bagel         12   £3.99\n" +
+                "                           -(£0.69)\n" +
                 "Plain Bagel         12   £3.99\n" +
-                "Plain Bagel         12   £0.39\n" +
+                "                           -(£0.69)\n" +
+                "Plain Bagel         1   £0.39\n" +
                 "----------------------------\n" +
                 "Total                 £8.37\n\n" +
                 "        Thank you\n" +
@@ -131,6 +133,6 @@ class ReceiptTest {
         Receipt receipt = new Receipt(
                 basket.getQuantityMap(), basket.getDiscountedProducts(),
                 basket.getAppliedDiscounts(), total);
-        Assertions.assertEquals(removeSpaces(example), removeSpaces(receipt.toString()));
+        Assertions.assertEquals(removeSpaces(example), removeSpaces(receipt.receiptextension3()));
     }
 }

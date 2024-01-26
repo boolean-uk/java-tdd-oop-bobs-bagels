@@ -182,12 +182,13 @@ public class Basket {
             int quantity = entry.getValue();
 
             if (id.contains("BGL")){
-                double discountfor12 = 0;
+                int amountOfDiscountedProducts = 0;
                 while (quantity >= 12){
-                    discountfor12 += (Inventory.getProductById(id).getPrice() * 12 ) - 3.99;
+                    double discountfor12 = (Inventory.getProductById(id).getPrice() * 12 ) - 3.99;
                     discountPrice += (Inventory.getProductById(id).getPrice() * 12 ) - 3.99;
                     quantityMap.put(id, quantityMap.get(id) - 12);
-                    this.discountedProducts.put(id, 12);
+                    //this.discountedProducts.put(id, 12);
+                    amountOfDiscountedProducts += 12;
                     appliedDiscounts.add(new Discount(3.99, 12,
                             (Inventory.getProductById(id).getVariant()) + " " + (Inventory.getProductById(id).getName()),
                             discountfor12));
@@ -195,17 +196,20 @@ public class Basket {
                 }
 
 
-                double discountfor6 = 0;
+
                 while (quantity >= 6){
-                    discountfor6 = (Inventory.getProductById(id).getPrice() * 6 ) - 2.49;
+                    double discountfor6 = (Inventory.getProductById(id).getPrice() * 6 ) - 2.49;
                     discountPrice += (Inventory.getProductById(id).getPrice() * 6 ) - 2.49;
                     quantityMap.put(id, quantityMap.get(id) - 6);
-                    this.discountedProducts.put(id, 6);
+                    //this.discountedProducts.put(id, 6);
+                    amountOfDiscountedProducts += 6;
                     appliedDiscounts.add(new Discount(2.49, 6,
                             (Inventory.getProductById(id).getVariant()) + " " + (Inventory.getProductById(id).getName()),
                             discountfor6));
                     quantity -= 6;
                 }
+
+                this.discountedProducts.put(id, amountOfDiscountedProducts);
             }
         }
 
@@ -235,25 +239,31 @@ public class Basket {
 
         sortList(coffeesLeft);
         sortList(bagelsLeft);
+        int pairs = 0;
 
-        int pairs = Math.min(coffeesLeft.size(), bagelsLeft.size());
-        double discountAmountForCoffeeAndBagel = 0;
-
-
-        for (int i = 0; i<pairs; i++){
-
-            double coffeePrice = coffeesLeft.get(i).getPrice();
-            double bagelPrice = bagelsLeft.get(i).getPrice();
-
-            discountPrice += ((coffeePrice + bagelPrice) - 1.25);
-            discountAmountForCoffeeAndBagel += ((coffeePrice + bagelPrice) - 1.25);
-
-            addToDiscountedProducts(coffeesLeft, i);
-            addToDiscountedProducts(bagelsLeft, i);
-
+        if(!coffeesLeft.isEmpty() || !bagelsLeft.isEmpty()){
+            pairs = Math.min(coffeesLeft.size(), bagelsLeft.size());
         }
 
-        this.appliedDiscounts.add(new Discount(1.25 * pairs, pairs, "Bagel & Coffee", discountAmountForCoffeeAndBagel));
+        double discountAmountForCoffeeAndBagel = 0;
+
+        if (pairs > 0){
+            for (int i = 0; i<pairs; i++){
+
+                double coffeePrice = coffeesLeft.get(i).getPrice();
+                double bagelPrice = bagelsLeft.get(i).getPrice();
+
+                discountPrice += ((coffeePrice + bagelPrice) - 1.25);
+                discountAmountForCoffeeAndBagel += ((coffeePrice + bagelPrice) - 1.25);
+
+                addToDiscountedProducts(coffeesLeft, i);
+                addToDiscountedProducts(bagelsLeft, i);
+
+            }
+
+            this.appliedDiscounts.add(new Discount(1.25 * pairs, pairs, "Bagel & Coffee", discountAmountForCoffeeAndBagel));
+        }
+
         return discountPrice;
     }
 
