@@ -101,4 +101,36 @@ class ReceiptTest {
         // Replace all spaces in the string with an empty string
         return input.replaceAll("\\s", "");
     }
+
+    @Test
+    public void testPrintExtension3MoreThan1RoundOfbagelDiscounts(){
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        Basket basket = new Basket();
+        Basket.setMaxSize(100);
+        Bagel bagelplain = new  Bagel("BGLP", 0.39, "Plain");
+
+        //add 25 plain bagels
+
+        basket.add(bagelplain, 25);
+
+        //add 3 cappuccinos, 2 white coffees and 1 black coffee
+
+        String example = "~~~ Bob's Bagels ~~~\n\n" +
+                java.time.LocalDateTime.now().format(formatter) + "\n" +
+                "----------------------------\n" +
+                "Plain Bagel         12   £3.99\n" +
+                "Plain Bagel         12   £3.99\n" +
+                "Plain Bagel         12   £0.39\n" +
+                "----------------------------\n" +
+                "Total                 £8.37\n\n" +
+                "        Thank you\n" +
+                "      for your order!";
+
+        double total = basket.getCostOfBasket();
+        System.out.println( );
+        Receipt receipt = new Receipt(
+                basket.getQuantityMap(), basket.getDiscountedProducts(),
+                basket.getAppliedDiscounts(), total);
+        Assertions.assertEquals(removeSpaces(example), removeSpaces(receipt.toString()));
+    }
 }
