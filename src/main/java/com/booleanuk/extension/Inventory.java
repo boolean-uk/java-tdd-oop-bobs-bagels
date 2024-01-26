@@ -1,9 +1,12 @@
 package com.booleanuk.extension;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Vector;
 
 public class Inventory {
-    private ArrayList<Product> inventory;
+   // private HashMap<String, Product> inventory;
+   private ArrayList<Product> inventory;
     public Inventory(){
         this.inventory = new ArrayList<>();
         this.inventory.add(new Bagel("BGLO",0.49, "Bagel", "Onion"));
@@ -23,17 +26,21 @@ public class Inventory {
         this.inventory.add(new Filling("FILS",0.12, "Filling", "Smoked Salmon"));
         this.inventory.add(new Filling("FILH",0.12, "Filling", "Ham"));
 
-        this.inventory.add(new ComboDiscountProduct(new String[]{"COFB", "BGLO"}, 1.25, "Coffee & Bagel"));
+        this.inventory.add(new ComboDiscountProduct(new String[]{"COFB", "BGLO"}, 1.25, "Coffee & Bagel", "Combo"));
 
-        this.inventory.add(new QuantityDiscountProduct("BGLO", 2.49, "Bagel", "Onion", 6));
-        this.inventory.add(new QuantityDiscountProduct("BGLE", 2.49, "Bagel", "Everything", 6));
-        this.inventory.add(new QuantityDiscountProduct("BGLP", 3.99, "Bagel", "Plain", 12));
+        this.inventory.add(new QuantityDiscountProduct("BGLO", 2.49, "Bagel 6-p Offer", "Onion", 6));
+        this.inventory.add(new QuantityDiscountProduct("BGLE", 2.49, "Bagel 6-p Offer", "Everything", 6));
+        this.inventory.add(new QuantityDiscountProduct("BGLP", 3.99, "Bagel 12-p Offer", "Plain", 12));
 
 
     }
     public ArrayList<Product> getInventoryItem(){
         return inventory;
     }
+
+//    public Product getProductBySKU(String SKU){
+//        return
+//    }
 
     public static void main(String[] arg){
         Inventory object = new Inventory();

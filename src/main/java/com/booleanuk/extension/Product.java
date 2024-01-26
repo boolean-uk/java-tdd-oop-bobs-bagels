@@ -19,10 +19,11 @@ public class Product {
         this.name = name;
         this.variant = variant;
     }
-    public Product(String[] comboSku, double price, String name){
+    public Product(String[] comboSku, double price, String name, String variant){
         this.comboSku = comboSku;
         this.price = price;
         this.name = name;
+        this.variant = variant;
 
     }
     public Product(String sku, double price, String name, String variant, int quantity){
@@ -63,11 +64,6 @@ public class Product {
         if(comboSku != null){
             return getName() +" " + getPrice();
         }
-        if(quantity > 0){
-            return getName() +" " + getPrice()+ " "+ getQuantity();
-
-        }
-
         return getVariant() + " "+getName();
     }
 
