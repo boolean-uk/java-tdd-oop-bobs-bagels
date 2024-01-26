@@ -62,7 +62,7 @@ public class BasketTest {
         Bagel bagel1 = new Bagel("BGLO",0.49, "Bagel", "Onion" );
         Bagel bagel2 = new Bagel("BGLP", 0.39, "Bagel", "Plain");
         Filling filling = new Filling("FILB",0.12, "Filling", "Bacon");
-        ComboDiscountProduct combo = new ComboDiscountProduct(new String[]{"COFB", "BGLO"}, 1.25, "Coffee & Bagel");
+        ComboDiscountProduct combo = new ComboDiscountProduct(new String[]{"COFB", "BGLO"}, 1.25, "Coffee & Bagel","Combo");
 
         basket.addItem(bagel1);
         basket.addItem(bagel2);
@@ -85,7 +85,7 @@ public class BasketTest {
         Assertions.assertNotEquals(0.29, basket.getItemCost(bagel2));
     }
     @Test
-    public void shouldaddItemFillingToBasket(){
+    public void shouldAddItemFillingToBasket(){
         Basket basket = new Basket(4);
         Bagel bagel1 = new Bagel("BGLO",0.49, "Bagel", "Onion" );
         basket.addItem(bagel1);
@@ -127,14 +127,14 @@ public class BasketTest {
    @Test
     public void addComboDiscountProduct(){
         Basket basket = new Basket(20);
-       Assertions.assertTrue(basket.addItem(new ComboDiscountProduct(new String[]{"COFB", "BGLO"}, 1.25, "Coffee & Bagel")));
-       Assertions.assertFalse(basket.addItem(new ComboDiscountProduct(new String[]{"COF", "BGLP"}, 1.25, "Test")));
+       Assertions.assertTrue(basket.addItem(new ComboDiscountProduct(new String[]{"COFB", "BGLO"}, 1.25, "Coffee & Bagel", "Combo")));
+       Assertions.assertFalse(basket.addItem(new ComboDiscountProduct(new String[]{"COF", "BGLP"}, 1.25, "Test", "Combo")));
    }
 
    @Test
     public void addQuantityDiscountProduct(){
         Basket basket = new Basket(20);
-        Product p1 = new QuantityDiscountProduct("BGLO", 2.49, "Bagel", "Onion", 6);
+        Product p1 = new QuantityDiscountProduct("BGLO", 2.49, "Bagel 6-p Offer", "Onion", 6);
         Product p2 = new QuantityDiscountProduct("BGLO", 2.49, "Bagel", "Test", 6);
         boolean result1 = basket.addItem(p1);
         boolean result2 = basket.addItem(p2);
@@ -146,8 +146,8 @@ public class BasketTest {
     public void getTotalCostSpecialOffer(){
         Basket basket = new Basket(20);
         Product bagel = new Bagel("BGLO",0.49, "Bagel", "Onion" );
-        Product discountQuantity12 = new QuantityDiscountProduct("BGLP", 3.99, "Bagel","Plain", 12);
-        Product discountQuantity6 = new QuantityDiscountProduct("BGLE", 2.49, "Bagel", "Everything", 6);
+        Product discountQuantity12 = new QuantityDiscountProduct("BGLP", 3.99, "Bagel 12-p Offer","Plain", 12);
+        Product discountQuantity6 = new QuantityDiscountProduct("BGLE", 2.49, "Bagel 6-p Offer", "Everything", 6);
         Product coffee = new Coffee("COFB",0.99, "Coffee", "Black");
         basket.addItem(bagel);
         basket.addItem(bagel);

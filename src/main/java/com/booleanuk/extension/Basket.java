@@ -111,7 +111,7 @@ public class Basket {
 
         // Static content for the receipt
         String title =   "~~~ Bob's Bagels ~~~";
-        String line = "-----------------------------------";
+        String line = "-----------------------------------------------" ;
         String endOfReceipt ="Thank you for your order!";
 
         // Get the current date and time
@@ -123,22 +123,23 @@ public class Basket {
         receipt.append(dateTime).append(System.lineSeparator());
         receipt.append(line).append(System.lineSeparator());
 
-        // Todo: how to display total quantities and total prices of similar items in one line
-        // Todo: display name variant for discounted product
+
         Map<String, Integer> productCountMap = new HashMap<>();
         Map<String, Double> productTotalPriceMap = new HashMap<>();
         // Loop through the products in the basket
         for (Product product : basket) {
-            if(productCountMap.containsKey(product.getSKU())){
+            String key = product.getVariant() + " "  + product.getName();
+
+            if(productCountMap.containsKey(key)){
                 //Increment the count if the product is already in the map
-                productCountMap.put(product.getSKU(), productCountMap.get(product.getSKU()) +1 );
+                productCountMap.put(key, productCountMap.get(key) +1 );
             }else {
                 //Otherwise add the product to the map with count 1
-                productCountMap.put(product.getSKU(),1);
+                productCountMap.put(key,1);
             }
             //Update the total price map by multiplying the price of each product with quantity
-            double totalPrice = product.getPrice() * productCountMap.get(product.getSKU());
-            productTotalPriceMap.put(product.getSKU(),totalPrice);
+            double totalPrice = product.getPrice() * productCountMap.get(key);
+            productTotalPriceMap.put(key,totalPrice);
 
         }
         //Print the results
@@ -146,12 +147,12 @@ public class Basket {
             String product = entry.getKey();
             int quantity = entry.getValue();
             double totalPrice = productTotalPriceMap.get(product);
-            String productInfo = String.format("%-18s %4s £%.2f", product , quantity, totalPrice);
+            String productInfo = String.format("%-25s %4s £%.2f", product , quantity, totalPrice);
             receipt.append(productInfo).append(System.lineSeparator());
         }
         receipt.append(line);
         receipt.append(System.lineSeparator());
-        receipt.append(String.format("%-23s £%.2f","Total ",getTotalCost()));
+        receipt.append(String.format("%-30s £%.2f","Total ",getTotalCost()));
         receipt.append(System.lineSeparator());
         receipt.append(endOfReceipt);
         return receipt.toString();
@@ -167,15 +168,16 @@ public class Basket {
 
 
         Product filling = new Filling("FILB",0.12, "Filling", "Bacon");
-        Product quantity = new QuantityDiscountProduct("BGLO", 2.49, "Bagel", "Onion", 6);
+        Product quantity = new QuantityDiscountProduct("BGLO", 2.49, "Bagel 6-p Offer", "Onion", 6);
+
+        Product combo = new ComboDiscountProduct(new String[]{"COFB", "BGLO"}, 1.25, "Coffee & Bagel", "Combo");
         basket.addItem(bagel1);
         basket.addItem(bagel2);
         basket.addItem(bagel3);
         basket.addItem(bagel4);
-
-
         basket.addItem(filling);
         basket.addItem(quantity);
+        basket.addItem(combo);
         System.out.println(basket.getTotalCost());
         System.out.println(basket.printReceipt());
 
