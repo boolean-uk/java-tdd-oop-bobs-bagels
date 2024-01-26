@@ -110,19 +110,15 @@ public class Basket {
         StringBuilder receipt = new StringBuilder();
 
         // Static content for the receipt
-        String title =   "~~~ Bob's Bagels ~~~";
-        String line = "-----------------------------------------------" ;
-        String endOfReceipt ="Thank you for your order!";
+        String title =   "~~~ Bob's Bagels ~~~\n";
+        String endOfReceipt ="Thank you for your order!\n";
 
         // Get the current date and time
         LocalDateTime localDate = LocalDateTime.now();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss\n");
         String dateTime = localDate.format(formatter);
 
-        receipt.append(title).append(System.lineSeparator());
-        receipt.append(dateTime).append(System.lineSeparator());
-        receipt.append(line).append(System.lineSeparator());
-
+        receipt.append(title).append(dateTime);
 
         Map<String, Integer> productCountMap = new HashMap<>();
         Map<String, Double> productTotalPriceMap = new HashMap<>();
@@ -148,12 +144,10 @@ public class Basket {
             int quantity = entry.getValue();
             double totalPrice = productTotalPriceMap.get(product);
             String productInfo = String.format("%-25s %4s £%.2f", product , quantity, totalPrice);
-            receipt.append(productInfo).append(System.lineSeparator());
+            receipt.append(productInfo).append("\n");
         }
-        receipt.append(line);
-        receipt.append(System.lineSeparator());
-        receipt.append(String.format("%-30s £%.2f","Total ",getTotalCost()));
-        receipt.append(System.lineSeparator());
+        receipt.append(String.format("%-30s £%.2f","Total ",getTotalCost())).append("\n");
+
         receipt.append(endOfReceipt);
         return receipt.toString();
     }
