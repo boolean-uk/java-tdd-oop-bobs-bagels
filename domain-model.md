@@ -49,20 +49,20 @@ As a customer,
 So I know how much money I need,
 I'd like to know the total cost of items in my basket.
 
-| Class    | Variables                            | Method           | Scenario               | Return value     |
-|----------|--------------------------------------|------------------|------------------------|------------------|
-| Customer | HashMap<String, Integer> bagelBasket | costCalculator() | Has products           | Cost of products |
-|          |                                      |                  | Basket has no products | Return 0         |
+| Class    | Variables | Method                                               | Scenario               | Return value     |
+|----------|-----------|------------------------------------------------------|------------------------|------------------|
+| Customer |           | costCalculator(HashMap<String, Integer> bagelBasket) | Has products           | Cost of products |
+|          |           |                                                      | Basket has no products | Return 0         |
 
 As a customer,
 So I know what the damage will be,
 I'd like to know the cost of a bagel before I add it to my basket.
 
 
-| Class  | Variables          | Method             | Scenario    | Return value            |
-|--------|--------------------|--------------------|-------------|-------------------------|
-| Basket | ArrayList<> bagels | getCostOfProduct() | Has product | Return cost for product |
-|        |                    |                    | No product  | Return 0                |
+| Class  | Variables          | Method                           | Scenario    | Return value            |
+|--------|--------------------|----------------------------------|-------------|-------------------------|
+| Basket | ArrayList<> bagels | getCostOfProduct(String product) | Has product | Return cost for product |
+|        |                    |                                  | No product  | Return 0                |
 
 As a customer,
 So I can shake things up a bit,
@@ -90,3 +90,7 @@ I want customers to only be able to order things that we stock in our inventory.
 |----------|--------------------|-----------------|-----------------------------------|-------------------------|
 | Customer | ArrayList<> bagels | orderFromList() | Has chosen product in list        | Add order               |
 |          |                    |                 | Don't have chosen product in list | No such product in list |
+
+Class diagram:
+
+![img.png](img.png)
