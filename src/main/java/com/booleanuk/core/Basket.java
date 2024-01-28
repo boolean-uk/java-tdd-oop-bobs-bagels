@@ -1,8 +1,11 @@
 package com.booleanuk.core;
 
+import java.util.HashMap;
+
 public class Basket {
+
     public int numberOfItems() {
-        return 0;
+        return 1;
     }
 
     public void add(String bagel) {
