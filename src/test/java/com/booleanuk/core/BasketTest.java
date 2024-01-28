@@ -31,10 +31,10 @@ public class BasketTest {
 
     @Test
     public void showCapacity(){
-        int expectedCapacity = 10;
-        Basket basket = new Basket(expectedCapacity);
-        Assertions.assertEquals(expectedCapacity,basket.capacity());
-        Assertions.assertEquals(expectedCapacity, basket.spaceLeft());
+        int capacity = 10;
+        Basket basket = new Basket(capacity);
+        Assertions.assertEquals(capacity,basket.capacity());
+        Assertions.assertEquals(capacity, basket.spaceLeft());
     }
 
     @Test
