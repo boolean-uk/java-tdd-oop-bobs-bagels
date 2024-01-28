@@ -62,4 +62,12 @@ public class BasketTest {
         Assertions.assertEquals(2, basket.numberOfItems());
         Assertions.assertEquals("Basket full", message);
     }
+
+    @Test
+    public void removeBagelFromEmptyBasket(){
+        Basket basket = new Basket();
+        String message = basket.remove(new BaconBagel());
+        Assertions.assertEquals(0, basket.numberOfItems());
+        Assertions.assertEquals("cant remove non existing bagel", message);
+    }
 }

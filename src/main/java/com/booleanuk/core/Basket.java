@@ -30,8 +30,9 @@ public class Basket {
         return "";
     }
 
-    public void remove(Bagel item) {
+    public String remove(Bagel item) {
         items.remove(item);
+        return "";
     }
 
 
