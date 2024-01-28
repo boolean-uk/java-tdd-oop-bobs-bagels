@@ -7,8 +7,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.util.ArrayList;
-
 public class ExtensionTests {
 
     public Item BGLP;
@@ -50,7 +48,7 @@ public class ExtensionTests {
         FILS = new Item("FILS", 0.12);
         FILH = new Item("FILH", 0.12);
 
-        ExtendedBasket = new Extension().new ExtendedBasket(30);
+        ExtendedBasket = new Extension.ExtendedBasket(30);
 
         basket = new Basket(30);
 
@@ -68,14 +66,15 @@ public class ExtensionTests {
         ExtendedBasket.setDiscount(BGLP, 12, 3.99);
         ExtendedBasket.setDiscount(BGLE, 6, 2.49);
 
-        basket.add(BGLP, 12, inventory);
-        assertEquals(3.99, basket.getTotalPrice());
+        ExtendedBasket.add(BGLP, 12, inventory);
+        assertEquals(3.99, ExtendedBasket.getTotalPrice());
 
-        basket.add(BGLO, 2, inventory);
-        basket.add(BGLE, 6, inventory);
-        basket.add(COFB, 3, inventory);
 
-        assertEquals(10.43, basket.getTotalPrice());
+        ExtendedBasket.add(BGLO, 2, inventory);
+        ExtendedBasket.add(BGLE, 6, inventory);
+        ExtendedBasket.add(COF, 3, inventory);
+
+        assertEquals(10.43, ExtendedBasket.getTotalPrice());
 
     }
 }
