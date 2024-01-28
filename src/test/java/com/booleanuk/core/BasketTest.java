@@ -20,4 +20,12 @@ public class BasketTest {
         basket.add(new BaconBagel());
         Assertions.assertEquals(2, basket.numberOfItems());
     }
+
+    @Test
+    public void removeBagel(){
+        Basket basket = new Basket();
+        basket.add(new BaconBagel());
+        basket.remove(new BaconBagel());
+        Assertions.assertEquals(0, basket.numberOfItems());
+    }
 }
