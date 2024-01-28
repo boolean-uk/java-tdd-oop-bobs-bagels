@@ -17,7 +17,7 @@ public class BasketTest {
     public void basketCanContainTwoItems(){
         Basket basket = new Basket();
         basket.add(new OnionBagel());
-        basket.add(new OnionBagel());
+        basket.add(new BaconBagel());
         Assertions.assertEquals(2, basket.numberOfItems());
     }
 }
