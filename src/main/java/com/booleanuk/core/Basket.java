@@ -36,7 +36,7 @@ public class Basket {
             return "Item removed";
         }
 
-        return "cant remove non existing bagel";
+        return "Cant remove non existing bagel";
     }
 
 
@@ -49,6 +49,6 @@ public class Basket {
     }
 
     public String cost() {
-        return "";
+        return "0";
     }
 }
