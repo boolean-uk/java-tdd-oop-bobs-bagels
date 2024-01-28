@@ -6,7 +6,17 @@ import java.util.List;
 
 public class Basket {
 
+    private final int initCapacity;
     private List<Bagel> items = new ArrayList<>();
+
+    public Basket(){
+        this(5);
+    }
+
+    public Basket(int initCapacity) {
+
+        this.initCapacity = initCapacity;
+    }
 
 
     public int numberOfItems() {
@@ -21,10 +31,8 @@ public class Basket {
         items.remove(item);
     }
 
-    public void setCapacity(int i) {
-    }
 
-    public String controllSize() {
-        return "";
+    public int capacity() {
+        return 0;
     }
 }

@@ -30,11 +30,9 @@ public class BasketTest {
     }
 
     @Test
-    public void tryAddWhenFull(){
-        Basket basket = new Basket();
-        basket.setCapacity(1);
-        basket.add(new BaconBagel());
-        basket.add(new OnionBagel());
-        Assertions.assertEquals("Basket full", basket.controllSize());
+    public void showCapacity(){
+        int expectedCapacity = 10;
+        Basket basket = new Basket(expectedCapacity);
+        Assertions.assertEquals(expectedCapacity,basket.capacity());
     }
 }
