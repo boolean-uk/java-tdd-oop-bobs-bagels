@@ -36,6 +36,6 @@ public class Basket {
     }
 
     public int spaceLeft() {
-        return 10;
+        return capacity - numberOfItems();
     }
 }
