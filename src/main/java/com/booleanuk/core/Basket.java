@@ -23,6 +23,9 @@ public class Basket {
     }
 
     public void add(Bagel item) {
+        if(numberOfItems() >= capacity){
+            return;
+        }
         items.add(item);
     }
 
