@@ -78,29 +78,16 @@ As the manager,
 So we don't get any weird requests,
 I want customers to only be able to order things that we stock in our inventory.
 ```
+
+| Class                | Methods                                | Scenario                                | Output      |
+|----------------------|----------------------------------------|-----------------------------------------|-------------|
+| `ExtendedBasket`     | `Inherits methods from `Basket` class` | -                                       | -           |
+| `ExtendedInventory`  | `setDiscount`                          | Set bulk discounts for specific SKUs    | -           |
+|                      | `getTotalPrice()`                      | Return total price including discount   | Total price |
+
 ```
-11.
-As a manager,
-To keep track of things,
-I want to create a code for unique items in the inventory. 
-```
-```
-12.
-As a manager,
-To boost sales,
-I want to create special offers for bulk purchases or popular combinations of items. 
-```
-```
-13.
-As a manager,
-To keep track of things,
-I want to create categories of items and subcategorize products. 
-```
-```
-14.
+11. 
 As a customer,
-So I can maximize value,
-I want to have an itemized overview per item including bulk discounts.
+I want to take advantage of special offers on bagels,
+So that I can enjoy discounts while ordering.
 ```
-
-
