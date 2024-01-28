@@ -8,6 +8,7 @@ public class Basket {
 
     private List<Bagel> items = new ArrayList<>();
 
+
     public int numberOfItems() {
         return items.size();
     }
@@ -18,5 +19,12 @@ public class Basket {
 
     public void remove(Bagel item) {
         items.remove(item);
+    }
+
+    public void setCapacity(int i) {
+    }
+
+    public String controllSize() {
+        return "";
     }
 }

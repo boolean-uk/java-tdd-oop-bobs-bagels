@@ -28,4 +28,13 @@ public class BasketTest {
         basket.remove(new BaconBagel());
         Assertions.assertEquals(0, basket.numberOfItems());
     }
+
+    @Test
+    public void tryAddWhenFull(){
+        Basket basket = new Basket();
+        basket.setCapacity(1);
+        basket.add(new BaconBagel());
+        basket.add(new OnionBagel());
+        Assertions.assertEquals("Basket full", basket.controllSize());
+    }
 }
