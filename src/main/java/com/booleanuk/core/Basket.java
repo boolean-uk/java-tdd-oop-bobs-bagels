@@ -15,4 +15,8 @@ public class Basket {
     public void add(Bagel item) {
         items.add(item);
     }
+
+    public void remove(Bagel item) {
+        items.remove(item);
+    }
 }
