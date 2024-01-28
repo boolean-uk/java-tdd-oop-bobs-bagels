@@ -1,4 +1,4 @@
 package com.booleanuk.core;
 
-public class BaconBagel extends OnionBagel {
+public class BaconBagel implements Bagel {
 }
