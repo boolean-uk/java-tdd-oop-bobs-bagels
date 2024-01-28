@@ -6,13 +6,13 @@ import java.util.List;
 
 public class Basket {
 
-    private List<String> items = new ArrayList<>();
+    private List<OnionBagel> items = new ArrayList<>();
 
     public int numberOfItems() {
         return items.size();
     }
 
-    public void add(String item) {
+    public void add(OnionBagel item) {
         items.add(item);
     }
 }

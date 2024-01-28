@@ -9,15 +9,15 @@ public class BasketTest {
     @Test
     public void addBagelToBasket(){
        Basket basket = new Basket();
-       basket.add("Bagel");
+       basket.add(new OnionBagel());
         Assertions.assertEquals(1, basket.numberOfItems());
     }
 
     @Test
     public void basketCanContainTwoItems(){
         Basket basket = new Basket();
-        basket.add("Bagel");
-        basket.add("Bagel");
+        basket.add(new OnionBagel());
+        basket.add(new OnionBagel());
         Assertions.assertEquals(2, basket.numberOfItems());
     }
 }
