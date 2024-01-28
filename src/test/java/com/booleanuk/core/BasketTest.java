@@ -12,4 +12,12 @@ public class BasketTest {
        basket.add("Bagel");
         Assertions.assertEquals(1, basket.numberOfItems());
     }
+
+    @Test
+    public void basketCanContainTwoItems(){
+        Basket basket = new Basket();
+        basket.add("Bagel");
+        basket.add("Bagel");
+        Assertions.assertEquals(2, basket.numberOfItems());
+    }
 }
