@@ -31,8 +31,12 @@ public class Basket {
     }
 
     public String remove(Bagel item) {
-        items.remove(item);
-        return "";
+        if (items.contains(item)){
+            items.remove(item);
+            return "Item removed";
+        }
+
+        return "cant remove non existing bagel";
     }
 
 
