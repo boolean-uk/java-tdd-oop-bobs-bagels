@@ -43,4 +43,11 @@ public class BasketTest {
         Basket basket = new Basket(expectedCapacity);
         Assertions.assertEquals(2, basket.spaceLeft());
     }
+
+    @Test
+    public void addMoreItemsThanCapacity(){
+        Basket basket = new Basket(0);
+        basket.add(new OnionBagel());
+        Assertions.assertEquals(0, basket.numberOfItems());
+    }
 }
