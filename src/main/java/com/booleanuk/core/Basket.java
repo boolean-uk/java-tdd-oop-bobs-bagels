@@ -22,11 +22,12 @@ public class Basket {
         return items.size();
     }
 
-    public void add(Bagel item) {
+    public String add(Bagel item) {
         if(numberOfItems() >= capacity){
-            return;
+            return "";
         }
         items.add(item);
+        return "";
     }
 
     public void remove(Bagel item) {

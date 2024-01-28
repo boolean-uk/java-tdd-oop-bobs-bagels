@@ -50,4 +50,16 @@ public class BasketTest {
         basket.add(new OnionBagel());
         Assertions.assertEquals(0, basket.numberOfItems());
     }
+
+    @Test
+    public void canAddItemsUpToCapacity(){
+        Basket basket = new Basket(2);
+        basket.add(new OnionBagel());
+        Assertions.assertEquals(1, basket.numberOfItems());
+        basket.add(new OnionBagel());
+        Assertions.assertEquals(2, basket.numberOfItems());
+        String message = basket.add(new OnionBagel());
+        Assertions.assertEquals(2, basket.numberOfItems());
+        Assertions.assertEquals("Basket full", message);
+    }
 }
