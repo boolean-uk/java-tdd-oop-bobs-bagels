@@ -24,7 +24,7 @@ public class Basket {
 
     public String add(Bagel item) {
         if(numberOfItems() >= capacity){
-            return "";
+            return "Basket full";
         }
         items.add(item);
         return "";
