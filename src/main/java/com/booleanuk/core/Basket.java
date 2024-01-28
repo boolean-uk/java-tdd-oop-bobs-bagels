@@ -1,21 +1,20 @@
 package com.booleanuk.core;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 public class Basket {
 
-    private final int initCapacity;
+    private final int capacity;
     private List<Bagel> items = new ArrayList<>();
 
     public Basket(){
         this(5);
     }
 
-    public Basket(int initCapacity) {
+    public Basket(int capacity) {
 
-        this.initCapacity = initCapacity;
+        this.capacity = capacity;
     }
 
 
@@ -33,6 +32,10 @@ public class Basket {
 
 
     public int capacity() {
-        return 0;
+        return capacity;
+    }
+
+    public int spaceLeft() {
+        return 10;
     }
 }

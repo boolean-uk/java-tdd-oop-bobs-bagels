@@ -34,5 +34,6 @@ public class BasketTest {
         int expectedCapacity = 10;
         Basket basket = new Basket(expectedCapacity);
         Assertions.assertEquals(expectedCapacity,basket.capacity());
+        Assertions.assertEquals(expectedCapacity, basket.spaceLeft());
     }
 }
