@@ -8,7 +8,7 @@ public class Basket {
     private final int capacity;
     private List<Bagel> items = new ArrayList<>();
 
-    public Basket(){
+    public Basket() {
         this(5);
     }
 
@@ -23,7 +23,7 @@ public class Basket {
     }
 
     public String add(Bagel item) {
-        if(numberOfItems() >= capacity){
+        if (numberOfItems() >= capacity) {
             return "Basket full";
         }
         items.add(item);
@@ -31,7 +31,7 @@ public class Basket {
     }
 
     public String remove(Bagel item) {
-        if (items.contains(item)){
+        if (items.contains(item)) {
             items.remove(item);
             return "Item removed";
         }
