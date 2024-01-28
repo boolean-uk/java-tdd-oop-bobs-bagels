@@ -47,4 +47,8 @@ public class Basket {
     public int spaceLeft() {
         return capacity - numberOfItems();
     }
+
+    public String cost() {
+        return "";
+    }
 }

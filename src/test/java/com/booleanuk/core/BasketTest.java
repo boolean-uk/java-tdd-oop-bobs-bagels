@@ -70,4 +70,10 @@ public class BasketTest {
         Assertions.assertEquals(0, basket.numberOfItems());
         Assertions.assertEquals("cant remove non existing bagel", message);
     }
+
+    @Test
+    public void emptyBasketCostNothing(){
+        Basket basket = new Basket();
+        Assertions.assertEquals("0", basket.cost());
+    }
 }
