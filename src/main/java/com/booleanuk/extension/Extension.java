@@ -99,7 +99,7 @@ public class Extension {
                     double ItemTotalDiscount = discounts.get(item).price() + ((quantity - discounts.get(item).quantity()) * item.getPrice());
                     itemSavings = (itemTotal - ItemTotalDiscount);
                     itemTotal = ItemTotalDiscount;
-                    totalSavings =+ itemSavings;
+                    totalSavings += itemSavings;
                 }
                 System.out.printf("%-14s %3d    \u00A3%6.2f%n", item.getName(), quantity, itemTotal);
                 if (itemSavings > 0) {
