@@ -97,5 +97,25 @@ public class ExtensionTests {
 
 
     }
+
+    @Test
+    void Story13CreateReceiptwithDiscount() {
+
+        ExtendedBasket.setDiscount(BGLO, 6, 2.49);
+        ExtendedBasket.setDiscount(BGLP, 12, 3.99);
+        ExtendedBasket.setDiscount(BGLE, 6, 2.49);
+
+        ExtendedBasket.add(BGLP, 12, inventory);
+        assertEquals(3.99, ExtendedBasket.getTotalPrice());
+
+        ExtendedBasket.add(BGLO, 2, inventory);
+        ExtendedBasket.add(BGLE, 6, inventory);
+        ExtendedBasket.add(COF, 3, inventory);
+
+        assertEquals(10.43, ExtendedBasket.getTotalPrice());
+
+        ExtendedBasket.printReceiptDiscount(ExtendedBasket);
+
+    }
 }
 
