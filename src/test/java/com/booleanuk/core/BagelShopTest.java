@@ -24,9 +24,6 @@ class BagelShopTest {
         inventory.add(bagel, 5);
         inventory.add(sesameBagel, 4);
         inventory.add(creamCheese, 10);
-        System.out.println(inventory.getQuantity(sesameBagel));
-        System.out.println(inventory.getQuantity(bagel));
-        System.out.println(inventory.getQuantity(creamCheese));
     }
 
 
