@@ -69,7 +69,6 @@ public class ExtensionTests {
         ExtendedBasket.add(BGLP, 12, inventory);
         assertEquals(3.99, ExtendedBasket.getTotalPrice());
 
-
         ExtendedBasket.add(BGLO, 2, inventory);
         ExtendedBasket.add(BGLE, 6, inventory);
         ExtendedBasket.add(COF, 3, inventory);

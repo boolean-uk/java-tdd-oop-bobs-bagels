@@ -29,20 +29,20 @@ public class Extension {
                 Item item = entry.getKey();
                 int quantity = entry.getValue();
 
-                if (discounts.containsKey(item)) {
+                if (discounts.containsKey(item) &&  quantity >= discounts.get(item).quantity() && quantity <= discounts.get(item).quantity()*2 ) {
                     DiscountInfo discountInfo = discounts.get(item);
                     int discountedQuantity = Math.min(quantity, discountInfo.quantity());
                     int remainingQuantity = quantity - discountedQuantity;
                     double discountedPrice = discountInfo.price();
                     double regularPrice = item.getPrice();
-                    double discountedTotal = discountedPrice * discountedQuantity;
                     double regularTotal = regularPrice * remainingQuantity;
-                    totalPrice += discountedTotal + regularTotal;
+                    totalPrice += discountedPrice + regularTotal;
                 } else {
                     double regularTotal = item.getPrice() * quantity;
                     totalPrice += regularTotal;
                 }
             }
+
             return totalPrice;
         }
 
