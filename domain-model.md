@@ -101,5 +101,5 @@ So that I can enjoy discounts while ordering.
 12. 
 As a customer, 
 I want to receive a printed receipt for my purchase from Bob's Bagels, 
-so that I can have a record of my order details and total amount spent.
+so that I can have a record of my order details and total amount spent including discount.
 ```
