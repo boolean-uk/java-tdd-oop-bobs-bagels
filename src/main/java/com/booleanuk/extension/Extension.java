@@ -3,10 +3,13 @@ package com.booleanuk.extension;
 import com.booleanuk.core.Basket;
 import com.booleanuk.core.Item;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
 public class Extension {
+
     public static class ExtendedBasket extends Basket {
         private final Map<Item, DiscountInfo> discounts;
         public ExtendedBasket(int capacity) {
@@ -44,6 +47,34 @@ public class Extension {
             }
 
             return totalPrice;
+        }
+
+        public static void printReceipt(ExtendedBasket basket) {
+            System.out.println("    ~~~" + " Bob's Bagels " + "~~~    ");
+            System.out.println("");
+            System.out.println("    " + new SimpleDateFormat("yyyy-MM-dd  HH:mm:ss").format(new Date()));
+            System.out.println("");
+            System.out.println("------------------------------");
+            System.out.println("");
+
+            double total = 0;
+
+            for (Map.Entry<Item, Integer> entry : basket.items.entrySet()) {
+                Item item = entry.getKey();
+                int quantity = entry.getValue();
+                double itemTotal = item.getPrice() * quantity;
+
+                System.out.printf("     " + "%-5s %d    " + "\u00A3%.2f%n", item.getName(), quantity, itemTotal);
+                total += itemTotal;
+            }
+
+            System.out.println("");
+            System.out.println("");
+            System.out.println("----------------------------");
+            System.out.println("");
+            System.out.printf("Total                 £%.2f%n", total);
+            System.out.println("        Thank you");
+            System.out.println("      for your order!");
         }
 
 
