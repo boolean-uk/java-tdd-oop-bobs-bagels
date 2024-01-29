@@ -82,7 +82,7 @@ I want customers to only be able to order things that we stock in our inventory.
 | Class                | Methods                                | Scenario                                | Output      |
 |----------------------|----------------------------------------|-----------------------------------------|-------------|
 | `ExtendedBasket`     | `Inherits methods from `Basket` class` | -                                       | -           |
-| `ExtendedInventory`  | `setDiscount`                          | Set bulk discounts for specific SKUs    | -           |
+| `ExtendedInventory`  | `setDiscount()`                        | Set bulk discounts for specific SKUs    | -           |
 |                      | `getTotalPrice()`                      | Return total price including discount   | Total price |
 
 ```
@@ -90,4 +90,16 @@ I want customers to only be able to order things that we stock in our inventory.
 As a customer,
 I want to take advantage of special offers on bagels,
 So that I can enjoy discounts while ordering.
+```
+
+| Class     | Methods                                 | Scenario                                      | Output          |
+|-----------|-----------------------------------------|-----------------------------------------------|-----------------|
+| `Receipt` | `generateReceipt()`                     | Generate a printed receipt                    | Printed receipt |
+|           | `format(DateTime)`                      | Format the date and time                      | Formatted date  |
+
+```
+12. 
+As a customer, 
+I want to receive a printed receipt for my purchase from Bob's Bagels, 
+so that I can have a record of my order details and total amount spent.
 ```
