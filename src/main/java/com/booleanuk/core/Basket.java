@@ -2,48 +2,8 @@ package com.booleanuk.core;
 import java.util.HashMap;
 import java.util.Map;
 
-class Item {
-    private String name;
-    private double price;
-
-    public Item(String name, double price) {
-        this.name = name;
-        this.price = price;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public double getPrice() {
-        return price;
-    }
-
-    public Map<String, Object> getAttributes() {
-        Map<String, Object> attributes = new HashMap<>();
-        attributes.put("name", name);
-        attributes.put("price", price);
-        return attributes;
-    }
-}
-
-class Inventory {
-    public Map<Item, Integer> stock = new HashMap<>();
-
-    public void add(Item item, int quantity) {
-        int currentStock = stock.getOrDefault(item, 0);
-        stock.put(item, currentStock + quantity);
-    }
-    public boolean existsInStock(Item item) {
-        return stock.containsKey(item) && stock.get(item) > 0;
-    }
-    public int getQuantity(Item item) {
-        return stock.getOrDefault(item, 0);
-    }
-}
-
-class Basket {
-    private Map<Item, Integer> items = new HashMap<>();
+public class Basket {
+    public Map<Item, Integer> items = new HashMap<>();
     private int capacity;
 
     public Basket(int capacity) {
