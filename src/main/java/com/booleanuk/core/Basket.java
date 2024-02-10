@@ -18,6 +18,10 @@ public class Basket {
         return items;
     }
 
+    public void setItems(ArrayList<Bagel> items) {
+        this.items = items;
+    }
+
     public boolean isFull() {
         return getItemsSize() == capacity;
     }
@@ -57,6 +61,13 @@ public class Basket {
             cost += priceOfBagel;
         }
         return cost;
+    }
+
+    public void changeCapacity(int changeCapacity){
+        if(changeCapacity < getItemsSize()){
+            throw new IllegalArgumentException("Can't change capacity");
+        }
+        this.capacity = changeCapacity;
     }
 
     private double getSpecialPriceBagel(String sku, int count) {
