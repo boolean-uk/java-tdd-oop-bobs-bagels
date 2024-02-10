@@ -21,4 +21,11 @@ public class InventoryTest {
         inventory.removeFilling(filling);
         Assertions.assertFalse(inventory.isItemExisting("FILB"));
     }
+
+    @Test
+    public void getNonExistingBagelBySkuTest(){
+        Inventory inventory = new Inventory();
+        Bagel getBagel = inventory.getBagelBySku("BGLP");
+        Assertions.assertNull(getBagel);
+    }
 }
