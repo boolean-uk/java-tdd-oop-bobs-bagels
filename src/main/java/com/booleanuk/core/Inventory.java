@@ -31,4 +31,9 @@ public class Inventory {
         fillings.add(filling);
         System.out.println("Added filling");
     }
+
+    public void removeFilling(Filling filling){
+        fillings.remove(filling);
+        System.out.println("Removed filling");
+    }
 }
