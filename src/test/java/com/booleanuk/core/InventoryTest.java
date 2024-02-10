@@ -12,4 +12,13 @@ public class InventoryTest {
         inventory.addFilling(filling);
         Assertions.assertTrue(inventory.isItemExisting("FILB"));
     }
+
+    @Test
+    public void removeFillingTest(){
+        Inventory inventory = new Inventory();
+        Filling filling = new Filling("FILB", 0.12, "Bacon");
+        inventory.addFilling(filling);
+        inventory.removeFilling(filling);
+        Assertions.assertFalse(inventory.isItemExisting("FILB"));
+    }
 }
