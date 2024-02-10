@@ -36,4 +36,13 @@ public class Inventory {
         fillings.remove(filling);
         System.out.println("Removed filling");
     }
+
+    public Bagel getBagelBySku(String sku){
+        for (Bagel bagel : bagels){
+            if(bagel.getSku().equals(sku)){
+                return bagel;
+            }
+        }
+        return null;
+    }
 }
