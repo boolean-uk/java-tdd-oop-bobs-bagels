@@ -28,4 +28,13 @@ public class InventoryTest {
         Bagel getBagel = inventory.getBagelBySku("BGLP");
         Assertions.assertNull(getBagel);
     }
+
+    @Test
+    public void getFillingBySkuTest(){
+        Inventory inventory = new Inventory();
+        Filling filling = new Filling("FILB", 0.12, "Bacon");
+        inventory.addFilling(filling);
+        Filling getFilling = inventory.getFillingBySku("FILB");
+        Assertions.assertEquals(filling, getFilling);
+    }
 }
