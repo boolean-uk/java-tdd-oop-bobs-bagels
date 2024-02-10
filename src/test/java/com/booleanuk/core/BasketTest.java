@@ -3,6 +3,8 @@ package com.booleanuk.core;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+
 public class BasketTest {
 
     @Test
@@ -39,8 +41,10 @@ public class BasketTest {
         Bagel bagelBacon = new Bagel("BGLO", 0.49, "Bagel", "Bacon");
         basket.addItem(bagelOnion);
         basket.addItem(bagelBacon);
-
+        ArrayList<Bagel> items = new ArrayList<>();
+        items.add(bagelOnion);
+        items.add(bagelBacon);
         double expCost = bagelOnion.getPrice() + bagelBacon.getPrice();
-        Assertions.assertEquals(expCost, basket.getTotalCost(), 0.001);
+        Assertions.assertEquals(expCost, basket.getTotalCost(items), 0.001);
     }
 }
