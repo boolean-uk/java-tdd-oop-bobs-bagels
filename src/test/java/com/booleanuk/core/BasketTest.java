@@ -12,7 +12,7 @@ public class BasketTest {
         Basket basket = new Basket(3);
         Bagel bagel = new Bagel("BGLO", 0.49, "Bagel", "Onion");
         basket.addItem(bagel);
-        Assertions.assertTrue(basket.getProducts().contains(bagel));
+        Assertions.assertTrue(basket.getItems().contains(bagel));
     }
 
     @Test
@@ -45,6 +45,6 @@ public class BasketTest {
         items.add(bagelOnion);
         items.add(bagelBacon);
         double expCost = bagelOnion.getPrice() + bagelBacon.getPrice();
-        Assertions.assertEquals(expCost, basket.getTotalCost(items), 0.001);
+        Assertions.assertEquals(expCost, basket.getTotalCost(), 0.001);
     }
 }
