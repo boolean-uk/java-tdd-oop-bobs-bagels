@@ -45,4 +45,13 @@ public class Inventory {
         }
         return null;
     }
+
+    public Filling getFillingBySku(String sku) {
+        for (Filling filling : fillings){
+            if (filling.getSku().equals(sku)){
+                return filling;
+            }
+        }
+        return null;
+    }
 }
