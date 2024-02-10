@@ -37,4 +37,11 @@ public class InventoryTest {
         Filling getFilling = inventory.getFillingBySku("FILB");
         Assertions.assertEquals(filling, getFilling);
     }
+
+    @Test
+    public void getFillingBySkuNotExistsTest(){
+        Inventory inventory = new Inventory();
+        Filling filling = inventory.getFillingBySku("GJJY");
+        Assertions.assertNull(filling);
+    }
 }
