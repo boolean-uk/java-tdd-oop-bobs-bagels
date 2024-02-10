@@ -47,4 +47,15 @@ public class BasketTest {
         double expCost = bagelOnion.getPrice() + bagelBacon.getPrice();
         Assertions.assertEquals(expCost, basket.getTotalCost(), 0.001);
     }
+
+    @Test
+    public void testChangeCapacity(){
+       Basket basket = new Basket(2);
+       Bagel bagel = new Bagel("BGLO", 0.49, "Bagel", "Onion");
+       basket.addItem(bagel);
+       ArrayList<Bagel> items = new ArrayList<>();
+       items.add(bagel);
+       basket.changeCapacity(4);
+       Assertions.assertFalse(basket.isFull());
+    }
 }
