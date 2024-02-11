@@ -14,6 +14,14 @@ public class Basket {
         this.capacity = capacity;
     }
 
+    public int getCapacity() {
+        return capacity;
+    }
+
+    public void setCapacity(int capacity) {
+        this.capacity = capacity;
+    }
+
     public ArrayList<Bagel> getItems(){
         return items;
     }
@@ -61,6 +69,20 @@ public class Basket {
             cost += priceOfBagel;
         }
         return cost;
+    }
+
+    public double getTotalCostWithoutDisc(){
+        double cost = 0.0;
+        for (Bagel bagel : items){
+            double bagelCost = bagel.getPrice();
+            cost += bagelCost;
+        }
+
+        return cost;
+    }
+
+    public double getDiscountPrice(){
+        return getTotalCostWithoutDisc() - getTotalCost();
     }
 
     public void changeCapacity(int changeCapacity){
