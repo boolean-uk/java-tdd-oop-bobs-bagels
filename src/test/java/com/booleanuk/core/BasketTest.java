@@ -58,4 +58,19 @@ public class BasketTest {
        basket.changeCapacity(4);
        Assertions.assertFalse(basket.isFull());
     }
+
+    @Test
+    public void testGetTotalCostSpecialOffer(){
+        Basket basket = new Basket(10);
+        Bagel bagelE = new Bagel("BGLE", 0.49, "Bagel", "Everything");
+        Bagel bagelS = new Bagel("BGLS", 0.49, "Bagel", "Sesame");
+        basket.addItem(bagelE);
+        basket.addItem(bagelE);
+        basket.addItem(bagelE);
+        basket.addItem(bagelS);
+        basket.addItem(bagelS);
+        basket.addItem(bagelS);
+
+        Assertions.assertEquals(2.94, basket.getTotalCost(), 0.001);
+    }
 }
