@@ -13,10 +13,10 @@ import java.util.List;
 public class RecieptTest {
 
     @Test
-    public void receiptBagelAndCofeeTest(){
+    public void receiptBagelAndCoffeeTest(){
         List<RecieptItem> recieptItemList = new ArrayList<>();
         recieptItemList.add(new RecieptItem("BGLP", 0.39,"Bagel","Plain", 12));
-        recieptItemList.add(new RecieptItem("COFB", 0.99, "Cofee", "Black", 5));
+        recieptItemList.add(new RecieptItem("COFB", 0.99, "Coffee", "Black", 5));
 
         Reciept reciept = new Reciept(recieptItemList);
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
@@ -44,11 +44,13 @@ public class RecieptTest {
                 + "~~~ Bob's Bagels ~~~\n\n"
                 + date + "\n\n"
                 + "----------------------------\n"
-                + "You saved a total of £11 \n";
+                + "You saved a total of £0.69 \n";
 
         String[] expectedLines = expected.split("\\r?\\n");
         String[] actualLines = printed.split("\\r?\\n");
 
         Assertions.assertEquals(expectedLines.length, actualLines.length, "Receipt line count isn't the same");
     }
+
+
 }
