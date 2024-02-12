@@ -22,7 +22,7 @@ public class Basket {
         this.capacity = capacity;
     }
 
-    public ArrayList<Bagel> getItems(){
+    public ArrayList<Bagel> getItems() {
         return items;
     }
 
@@ -46,24 +46,24 @@ public class Basket {
         items.add(bagel);
     }
 
-    public void remove(Bagel bagel){
-        if(!items.contains(bagel)){
+    public void remove(Bagel bagel) {
+        if (!items.contains(bagel)) {
             throw new NoSuchElementException("Bagel don't exists");
         }
         items.remove(bagel);
     }
 
-    public double getTotalCost(){
+    public double getTotalCost() {
         double cost = 0.0;
         Map<String, Integer> bagels = getBagel();
-        for (Bagel bagel : items){
+        for (Bagel bagel : items) {
             double priceOfBagel = bagel.getPrice();
-            if (bagels.containsKey(bagel.getSku())){
+            if (bagels.containsKey(bagel.getSku())) {
                 int count = bagels.get(bagel.getSku());
                 double price = getSpecialPriceBagel(bagel.getSku(), count);
-                if(price != -1.0){
+                if (price != -1.0) {
                     priceOfBagel = price;
-                    bagels.put(bagel.getSku(), count -1);
+                    bagels.put(bagel.getSku(), count - 1);
                 }
             }
             cost += priceOfBagel;
@@ -71,9 +71,9 @@ public class Basket {
         return cost;
     }
 
-    public double getTotalCostWithoutDisc(){
+    public double getTotalCostWithoutDisc() {
         double cost = 0.0;
-        for (Bagel bagel : items){
+        for (Bagel bagel : items) {
             double bagelCost = bagel.getPrice();
             cost += bagelCost;
         }
@@ -81,12 +81,12 @@ public class Basket {
         return cost;
     }
 
-    public double getDiscountPrice(){
+    public double getDiscountPrice() {
         return getTotalCostWithoutDisc() - getTotalCost();
     }
 
-    public void changeCapacity(int changeCapacity){
-        if(changeCapacity < getItemsSize()){
+    public void changeCapacity(int changeCapacity) {
+        if (changeCapacity < getItemsSize()) {
             throw new IllegalArgumentException("Can't change capacity");
         }
         this.capacity = changeCapacity;
@@ -97,9 +97,9 @@ public class Basket {
         special.put("BGLO", 2.49);
         special.put("BGLP", 3.99);
         special.put("BGLE", 2.49);
-        if (special.containsKey(sku) && count > 0){
+        if (special.containsKey(sku) && count > 0) {
             int offer = getOffer(sku);
-            if (count % offer == 0){
+            if (count % offer == 0) {
                 return special.get(sku) * (count / offer);
             }
         }
@@ -117,7 +117,7 @@ public class Basket {
 
     private Map<String, Integer> getBagel() {
         Map<String, Integer> bagels = new HashMap<>();
-        for (Bagel bagel : items){
+        for (Bagel bagel : items) {
             bagels.put(bagel.getSku(), bagels.getOrDefault(bagel.getSku(), 0) + 1);
         }
         return bagels;
