@@ -1,5 +1,9 @@
-package com.booleanuk.core;
+package com.booleanuk.extension;
 
+import com.booleanuk.core.Bagel;
+import com.booleanuk.core.Basket;
+import com.booleanuk.core.Reciept;
+import com.booleanuk.core.RecieptItem;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -10,7 +14,21 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class RecieptTest {
+public class ExtensionTest {
+    @Test
+    public void testGetTotalCostSpecialOffer(){
+        Basket basket = new Basket(10);
+        Bagel bagelE = new Bagel("BGLE", 0.49, "Bagel", "Everything");
+        Bagel bagelS = new Bagel("BGLS", 0.49, "Bagel", "Sesame");
+        basket.addItem(bagelE);
+        basket.addItem(bagelE);
+        basket.addItem(bagelE);
+        basket.addItem(bagelS);
+        basket.addItem(bagelS);
+        basket.addItem(bagelS);
+
+        Assertions.assertEquals(2.94, basket.getTotalCost(), 0.001);
+    }
 
     @Test
     public void receiptBagelAndCoffeeTest(){
@@ -51,6 +69,4 @@ public class RecieptTest {
 
         Assertions.assertEquals(expectedLines.length, actualLines.length, "Receipt line count isn't the same");
     }
-
-
 }
