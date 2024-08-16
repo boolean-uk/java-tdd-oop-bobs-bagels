@@ -1,0 +1,79 @@
+@startuml
+Abstract class Item implements Iterable{
+    + price: Double
+    + id: String
+    + name: String
+    + getPrice(): Double
+    + getID(): String
+}
+
+class Bagel implements Item{
+    + variant: BagelVariant
+    - fillings: Filling[]
+    + addFilling(filling: Filling)
+    ' display cost of filling before adding
+    ' should confirm with customer before adding filling
+}
+
+enum BagelTypes{
+    Onion
+    Plain
+    Everything
+    Sesame
+}
+Bagel -- BagelTypes
+
+
+class Coffee implements Item{
+    - type: CoffeeType
+}
+enum CoffeeTypes {
+    Black
+    White
+    Cappuccino
+    Latte
+}
+
+Coffee -- CoffeeTypes
+
+class Filling implements Item{
+    + variant: FillingVariant
+}
+enum FillingVariant{
+    Bacon
+    Egg
+    Creme Cheese
+    Smoked Salmon
+    Ham
+}
+
+Filling -- FillingVariant
+Filling "n" -- "0..n" Bagel
+
+class RecieptManager {
+    + basketOfItems: HashMap<Item, Integer>
+    + __discounts__: HashMap<Pair<Item, Integer> Integer>
+    ' HashMap<Item, Quantity of Items> new Price>
+    + __inventory__: HashMap<Item, Integer>
+    - maxBasketSize: int
+    + price: double
+    + printReciept(): String
+        ' should print discount
+    + addItem(): Item
+    'addBagel should give user feedback when adding to full basket
+    'should confirm with customer before adding to basket
+    + removeItem(): String
+    'should give user feedback when attempting to remove an item that doesn't exist.
+    + setBasketSize(i: int): i
+
+}
+
+RecieptManager "n" .. "0..n" Item
+
+class utils {
+    + getUserResponse(msg: String): String
+}
+
+
+
+@enduml
