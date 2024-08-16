@@ -12,9 +12,8 @@ public class InventoryTest {
         Inventory inventory = new Inventory();
         InventoryItem item =  new InventoryItem("BGLO",0.49, "Bagel","Onion");
         inventory.addInventoryItem(item);
-        HashMap<String, InventoryItem> map = inventory.getInventory();
-        HashMap<String, InventoryItem> expectedMap = new HashMap<String, InventoryItem>("BGLO",item);
-        Assertions.assertEquals(map.get("BGLO"), expectedMap);
+        HashMap<String, InventoryItem> map = inventory.getInventoryItemHashMap();
+        Assertions.assertEquals(map.get("BGLO"), item);
 
     }
 }
