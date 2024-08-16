@@ -16,4 +16,16 @@ public class Item {
     public String getSKU() {
         return this.SKU;
     }
+
+    public double getPrice() {
+        return this.price;
+    }
+
+    public String getType() {
+        return this.type;
+    }
+
+    public String getName() {
+        return this.name;
+    }
 }
