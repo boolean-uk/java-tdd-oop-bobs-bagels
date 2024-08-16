@@ -25,15 +25,9 @@ public class Product {
         return variant;
     }
 
-    public void setVariant(String variant) {
-        this.variant = variant;
-    }
 
     public String getSKU() {
         return SKU;
     }
 
-    public void setSKU(String SKU) {
-        this.SKU = SKU;
-    }
 }

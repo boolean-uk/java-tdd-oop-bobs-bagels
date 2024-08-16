@@ -44,6 +44,11 @@ public class MainTest {
         Assertions.assertTrue(order.addProduct(store.fillings1));
     }
 
+    @Test
+    public void testShowPrice() {
+        Assertions.assertEquals(0.49, order.showPrice(store.coffee1));
+    }
+
     /*@Test
     public void testRemoveBagel() {
         order.addProduct(store.bagels1);
