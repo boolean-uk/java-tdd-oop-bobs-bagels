@@ -10,9 +10,9 @@ public class StoreTest {
         Store store = new Store("Bob's Bagels");
         Assertions.assertNotNull(store);
         Assertions.assertEquals("Bob's Bagels", store.getName());
-        Assertions.assertThrows(IllegalArgumentException.class, () -> {
-            new Store(null);
-        });
+        Assertions.assertThrows(IllegalArgumentException.class, () -> new Store(null));
     }
+
+
 
 }
