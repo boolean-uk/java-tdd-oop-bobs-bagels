@@ -14,7 +14,7 @@ public class BagelTest {
         fillings.add("Bacon");
         fillings.add("Cheese");
         Bagel bagel = new Bagel("Everything", fillings);
-
+        Assertions.assertEquals(bagel.getFillings(), fillings);
 
     }
 

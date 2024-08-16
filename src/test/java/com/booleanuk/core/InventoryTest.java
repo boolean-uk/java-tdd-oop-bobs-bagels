@@ -22,7 +22,7 @@ public class InventoryTest {
         Inventory inventory = new Inventory();
         InventoryItem item =  new InventoryItem("BGLO",0.49, "Bagel","Onion");
         inventory.addInventoryItem(item);
-        Assertions.assertEquals(inventory.getInventoryItem("BGLO"), item);
+        Assertions.assertEquals(inventory.getInventoryItemDetails("BGLO"), item);
 
     }
 }
