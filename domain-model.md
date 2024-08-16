@@ -14,9 +14,9 @@
 | `RuntimeException` |
 
 ## Domain model Product interface
-| Methods       | Scenario                                                | Output                   |
-|---------------|---------------------------------------------------------|--------------------------|
-| `int price()` | User wants to know the price of a product before buying | The price of the product |
+| Methods          | Scenario                                                | Output                   |
+|------------------|---------------------------------------------------------|--------------------------|
+| `double price()` | User wants to know the price of a product before buying | The price of the product |
 
 ## Domain model StandaloneProduct interface
 | Extends   |
@@ -78,7 +78,7 @@
 |                                    | `void remove(StandaloneProduct product) throws NonExistentProductException` | Product is in basket                                         |                            |
 |                                    |                                                                             | Product is not in basket                                     | Exception                  |
 |                                    | `void setCapacity(int newCapacity)`                                         | Manager wants to change the capacity of basket               | Basket capacity is changed |
-|                                    | `int price()`                                                               | User wants to know the price of all products in their basket | Sum of product prices      |
+|                                    | `double price()`                                                            | User wants to know the price of all products in their basket | Sum of product prices      |
 
 ## Domain model Inventory class
 | Variables                | Methods                                                 | Scenario                                | Output    |
