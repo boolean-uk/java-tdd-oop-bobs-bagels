@@ -24,4 +24,9 @@ public class Bagel extends Item{
         fillings.add(filling);
     }
 
+    @Override
+    public String toString(){
+        return "Bagel: " + variant + " with " + fillings.toString();
+    }
+
 }
