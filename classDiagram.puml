@@ -2,7 +2,7 @@
 
 Class Basket {
     - basketSize: Integer
-    - basket: List<Item, Integer>
+    - basket: HashMap<Item, Integer>
 
     + addItemToBasket(Item item): String
     + removeItemFromBasket(Item item): String

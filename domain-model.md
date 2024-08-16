@@ -96,10 +96,10 @@ I want customers to only be able to order things that we stock in our inventory.
 ## Classes
 
 ### Basket Class
-| Variables                                 | Description                                                          |
-|-------------------------------------------|----------------------------------------------------------------------|
-| ``List<Item item, Integer quantity> basket`` | Contains all the items in the user's basket.                         | 
-| ``Integer basketSize``                        | Contains the size of the basket.                                     |
+| Variables                                       | Description                                                          |
+|-------------------------------------------------|----------------------------------------------------------------------|
+| ``HashMap<Item item, Integer quantity> basket`` | Contains all the items in the user's basket.                         | 
+| ``Integer basketSize``                          | Contains the size of the basket.                                     |
 
 | Methods                                    | Scenario                                                   | Outputs                                                          |
 |--------------------------------------------|------------------------------------------------------------|------------------------------------------------------------------|
