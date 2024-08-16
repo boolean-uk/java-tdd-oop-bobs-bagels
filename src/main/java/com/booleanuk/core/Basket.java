@@ -1,9 +1,10 @@
 package com.booleanuk.core;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Basket {
-  private List<StandaloneProduct> products;
+  private List<StandaloneProduct> products = new ArrayList<>();
 
   public void add(StandaloneProduct product) {
     this.products.add(product);

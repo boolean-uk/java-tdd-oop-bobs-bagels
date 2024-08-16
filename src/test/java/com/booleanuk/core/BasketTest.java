@@ -11,6 +11,6 @@ class BasketTest {
     Assertions.assertEquals(0.49, basket.price());
 
     basket.add(new Coffee(CoffeeType.Black));
-    Assertions.assertEquals(0.49 + 1.19, basket.price());
+    Assertions.assertEquals(0.49 + 0.99, basket.price());
   }
 }
