@@ -21,9 +21,10 @@ public class BagelTest {
         ArrayList<String> fillings = new ArrayList<>();
         fillings.add("Bacon");
         fillings.add("Cheese");
-        Assertions.assertEquals(bagel.getFillings(), fillings);
+        Assertions.assertEquals(fillings, bagel.getFillings());
+        bagel.addFilling("Everything");
         bagel.addFilling("Truffle");
-        Assertions.assertEquals(bagel.getFillings(), fillings);
+        Assertions.assertEquals(fillings, bagel.getFillings());
     }
 
 }
