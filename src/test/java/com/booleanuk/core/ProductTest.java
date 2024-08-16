@@ -11,8 +11,9 @@ public class ProductTest {
 
     @Test
     public void testProductCreate() {
-        Product p = new Product("BGLO");
+        Product p = new Product("BGLO", 0.49);
 
+        Assertions.assertEquals(0.49, p.getPrice());
         Assertions.assertEquals("BGLO", p.getSKU());
     }
 
