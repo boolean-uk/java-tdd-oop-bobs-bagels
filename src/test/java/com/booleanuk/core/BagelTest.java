@@ -27,4 +27,18 @@ public class BagelTest {
         Assertions.assertEquals(fillings, bagel.getFillings());
     }
 
+    @Test
+    public void testRemoveFilling(){
+        Bagel bagel = new Bagel("Everything");
+        bagel.addFilling("Bacon");
+        bagel.addFilling("Cheese");
+        ArrayList<String> fillings = new ArrayList<>();
+        fillings.add("Bacon");
+        bagel.removeFilling("Cheese");
+
+        Assertions.assertEquals(fillings, bagel.getFillings());
+        bagel.removeFilling("Bacon");
+        Assertions.assertNull(bagel.getFillings());
+    }
+
 }
