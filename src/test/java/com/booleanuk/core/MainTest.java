@@ -25,4 +25,23 @@ public class MainTest {
         Assertions.assertNotEquals(order.basket.size(), 2);
 
     }
+
+    @Test
+    public void testMaxCapacity() {
+        order.addProduct(store.bagels1);
+        order.addProduct(store.bagels2);
+        order.addProduct(store.bagels3);
+        order.addProduct(store.bagels4);
+        order.addProduct(store.coffee1);
+        order.addProduct(store.coffee2);
+        Assertions.assertFalse(order.addProduct(store.coffee3));
+    }
+
+    /*@Test
+    public void testRemoveBagel() {
+        order.addProduct(store.bagels1);
+        order.addProduct(store.coffee1);
+        order.removeProduct(order.basket.size(), 1);
+
+    }*/
 }

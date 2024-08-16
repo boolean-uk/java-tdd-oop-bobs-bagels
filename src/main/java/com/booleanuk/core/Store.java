@@ -1,7 +1,5 @@
 package com.booleanuk.core;
 
-import java.util.UUID;
-
 public class Store {
     private int capacity = 10;
     Product[] inventory = new Product[14];
@@ -59,7 +57,7 @@ public class Store {
         return capacity;
     }
 
-    private String generateId(){
+   /* private String generateId(){
         return UUID.randomUUID().toString().replace("-", "");
-    }
+    }*/
 }
