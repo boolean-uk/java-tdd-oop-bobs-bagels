@@ -17,4 +17,12 @@ public class FillingTest {
         Assertions.assertEquals(0.12, bacon.getPrice());
     }
 
+    @Test
+    public void testCreateSmokedSalmonFilling() {
+        Filling salmon = new SmokedSalmonFilling();
+
+        Assertions.assertEquals("FILS", salmon.getSKU());
+        Assertions.assertEquals(0.12, salmon.getPrice());
+    }
+
 }
