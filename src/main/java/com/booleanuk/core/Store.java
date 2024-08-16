@@ -1,7 +1,7 @@
 package com.booleanuk.core;
 
 public class Store {
-    private int capacity = 10;
+    private int capacity = 6;
     Product[] inventory = new Product[14];
     public Bagels bagels1, bagels2, bagels3, bagels4;
     public Coffee coffee1, coffee2, coffee3, coffee4;
