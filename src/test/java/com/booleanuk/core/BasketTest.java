@@ -1,10 +1,30 @@
 package com.booleanuk.core;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 public class BasketTest {
     @Test
     public void AddBagelTest(){
+        /*
+        As a member of the public,
+        So I can order a bagel before work,
+        I'd like to add a specific type of bagel to my basket.
+         */
+        Basket basket = new Basket();
+        Bagel bagel = new Bagel("ABC123", 3.4, "Bagel", "Plain");
+
+        // Assert that the basket is empty
+        Assertions.assertEquals(0, basket.numberOfItemsInBasket());
+
+        String result = basket.addItemToBasket(bagel);
+        String expected = "Plain Bagel added to basket.";
+
+        // Assert that the number of items in the basket has increased to 1
+        Assertions.assertEquals(1, basket.numberOfItemsInBasket());
+
+        // Assert that the basket execution of addItemToBasket function returns the correct string
+        Assertions.assertEquals(expected, result);
     }
 
 }
