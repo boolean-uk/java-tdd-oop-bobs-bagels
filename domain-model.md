@@ -5,7 +5,7 @@ Product class so far
 
 | Class   | Members Variable                     | Methods                   | Scenario                                                                     | output                                                       |   |
 |---------|--------------------------------------|---------------------------|------------------------------------------------------------------------------|--------------------------------------------------------------|---|
-| Product | int productPrice                     | productAdd(String sku)    | Should add the related sku bagel or filling to the product                   | "Added to product"                                           |   |
+| Product | double productPrice                  | productAdd(String sku)    | Should add the related sku bagel or filling to the product                   | "Added to product"                                           |   |
 |         | ArrayList<String> productDescription |                           | If sku object not found                                                      | "Failed to add product, sku not found"                       |   |
 |         |                                      |                           |                                                                              |                                                              |   |
 |         |                                      | productRemove(String sku) | If found in Product it should remove the related sku object from the product | "Removed from product"                                       |   |

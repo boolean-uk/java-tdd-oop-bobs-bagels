@@ -2,11 +2,11 @@ package com.booleanuk.core;
 
 public class Coffee {
     private String sku;
-    private int price;
+    private double price;
     private String name;
     private String variant;
 
-    Coffee(String sku, int price, String name, String variant){
+    Coffee(String sku, double price, String name, String variant){
         this.sku = sku;
         this.price = price;
         this.name = name;
@@ -27,11 +27,8 @@ public class Coffee {
         return sku;
     }
 
-    public int getPrice(){
+    public double getPrice(){
         return this.price;
     }
-
-
-
 
 }
