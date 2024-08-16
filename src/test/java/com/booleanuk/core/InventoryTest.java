@@ -8,6 +8,6 @@ public class InventoryTest {
     @Test
     public void testCreateInventory() {
         Inventory inventory = new Inventory();
-        Assertions.assertEquals(0, inventory.getProduct("SKU"));
+        Assertions.assertNotNull(inventory.getProduct("BGLO"));
     }
 }
