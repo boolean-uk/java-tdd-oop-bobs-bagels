@@ -10,11 +10,14 @@ public class BasketTest {
     }
 
     @Test
-    public void testCreateBasketAndAddBagel() {
+    public void testCreateBasketAndAddProducts() {
         Basket b = new Basket();
-        b.addProduct(new OnionBagel());
+        Bagel onion = new OnionBagel();
+        Filling salmon = new SmokedSalmonFilling();
+        b.addProduct(onion);
+        b.addProduct(salmon);
 
-        Assertions.assertEquals("BGLO", b.getBasket().values().toArray()[0]);
+        Assertions.assertEquals("FILS", b.getBasket().keySet().toArray()[1]);
     }
 
 }
