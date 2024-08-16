@@ -8,7 +8,7 @@
 |--------------------|
 | `RuntimeException` |
 
-## Domain model NonExistentBagelException class
+## Domain model NotPresentInBasketException class
 | Parent class       |
 |--------------------|
 | `RuntimeException` |
@@ -70,15 +70,21 @@
 |            |                          | `void add(Filling filling)` | User wants to add a filling to their bagel | Filling gets added to bagel |
 
 ## Domain model Basket class
-| Variables                          | Methods                                                                     | Scenario                                                     | Output                     |
-|------------------------------------|-----------------------------------------------------------------------------|--------------------------------------------------------------|----------------------------|
-| `List<StandaloneProduct> products` |                                                                             |                                                              |                            |
-|                                    | `void add(StandaloneProduct product) throws AddToFullBasketException`       | Basket is full                                               | Exception                  |
-|                                    |                                                                             | Basket is not full                                           |                            |
-|                                    | `void remove(StandaloneProduct product) throws NonExistentProductException` | Product is in basket                                         |                            |
-|                                    |                                                                             | Product is not in basket                                     | Exception                  |
-|                                    | `void setCapacity(int newCapacity)`                                         | Manager wants to change the capacity of basket               | Basket capacity is changed |
-|                                    | `double price()`                                                            | User wants to know the price of all products in their basket | Sum of product prices      |
+| Variables                          | Methods                                                                        | Scenario                                                     | Output                     |
+|------------------------------------|--------------------------------------------------------------------------------|--------------------------------------------------------------|----------------------------|
+| `List<StandaloneProduct> products` |                                                                                |                                                              |                            |
+|                                    | `void add(StandaloneProduct product) throws AddToFullBasketException`          | Basket is full                                               | Exception                  |
+|                                    |                                                                                | Basket is not full                                           |                            |
+|                                    | `void remove(CoffeeType coffee) throws NotPresentInBasketException`            | Product is in basket                                         |                            |
+|                                    |                                                                                | Product is not in basket                                     | Exception                  |
+|                                    | `void remove(CoffeeType coffee, int count) throws NotPresentInBasketException` | Product is in basket                                         |                            |
+|                                    |                                                                                | Product is not in basket                                     | Exception                  |
+|                                    | `void remove(BagelType bagel) throws NotPresentInBasketException`              | Product is in basket                                         |                            |
+|                                    |                                                                                | Product is not in basket                                     | Exception                  |
+|                                    | `void remove(BagelType bagel) throws NotPresentInBasketException`              | Product is in basket                                         |                            |
+|                                    |                                                                                | Product is not in basket                                     | Exception                  |
+|                                    | `void setCapacity(int newCapacity)`                                            | Manager wants to change the capacity of basket               | Basket capacity is changed |
+|                                    | `double price()`                                                               | User wants to know the price of all products in their basket | Sum of product prices      |
 
 ## Domain model Inventory class
 | Variables                | Methods                                                 | Scenario                                | Output    |
