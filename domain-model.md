@@ -4,12 +4,12 @@ Assuming that
 
 - A bagel can only have 0 or 1 filling
 
-BobsBagel class:
+Inventory class:
 
-| Member variables | Methods                             | Scenario                            | Outputs |
-|------------------|-------------------------------------|-------------------------------------|---------|
-| `inventory`      | `productIsInStock(Product product)` | `The given product is in stock`     | `true`  |
-|                  |                                     | `The given product is not in stock` | `false` |
+| Member variables            | Methods                             | Scenario                            | Outputs |
+|-----------------------------|-------------------------------------|-------------------------------------|---------|
+| `HashMap<Product, Integer>` | `productIsInStock(Product product)` | `The given product is in stock`     | `true`  |
+|                             |                                     | `The given product is not in stock` | `false` |
 
 Basket class:
 
