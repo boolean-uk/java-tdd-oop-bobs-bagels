@@ -18,9 +18,9 @@ public class BagelTest {
         Bagel bagel = new Bagel("Everything");
         bagel.addFilling("Bacon");
         bagel.addFilling("Cheese");
-        ArrayList<String> fillings = new ArrayList<>();
-        fillings.add("Bacon");
-        fillings.add("Cheese");
+        HashMap<String, Integer> fillings = new HashMap<>();
+        fillings.put("Bacon",1);
+        fillings.put("Cheese",1);
         Assertions.assertEquals(fillings, bagel.getFillings());
         bagel.addFilling("Everything");
         bagel.addFilling("Truffle");
@@ -32,13 +32,13 @@ public class BagelTest {
         Bagel bagel = new Bagel("Everything");
         bagel.addFilling("Bacon");
         bagel.addFilling("Cheese");
-        ArrayList<String> fillings = new ArrayList<>();
-        fillings.add("Bacon");
+        HashMap<String, Integer> fillings = new HashMap<>();
+        fillings.put("Bacon",1);
         bagel.removeFilling("Cheese");
 
         Assertions.assertEquals(fillings, bagel.getFillings());
         bagel.removeFilling("Bacon");
-        Assertions.assertNull(bagel.getFillings());
+        Assertions.assertEquals(new HashMap<>(), bagel.getFillings());
     }
 
 }
