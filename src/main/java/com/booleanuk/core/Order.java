@@ -1,14 +1,12 @@
 package com.booleanuk.core;
 
 import java.util.HashMap;
-import java.util.Scanner;
 
 
 public class Order {
 
     HashMap<String, Integer> basket = new HashMap<>();
     Store store = new Store();
-    Scanner in = new Scanner(System.in);
 
     public boolean addProduct(Product product) {
         if (store.getCapacity() == basket.size()) {
