@@ -19,7 +19,7 @@ public class Inventory {
         this.inventoryItemHashMap = inventoryItemHashMap;
     }
 
-    public InventoryItem getInventoryItem(String sku){
+    public InventoryItem getInventoryItemDetails(String sku){
        return this.inventoryItemHashMap.get(sku);
     }
 }
