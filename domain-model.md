@@ -14,9 +14,14 @@
 | `RuntimeException` |
 
 ## Domain model Product interface
-| Variables | Methods       | Scenario                                                | Output                   |
-|-----------|---------------|---------------------------------------------------------|--------------------------|
-|           | `int price()` | User wants to know the price of a product before buying | The price of the product |
+| Methods       | Scenario                                                | Output                   |
+|---------------|---------------------------------------------------------|--------------------------|
+| `int price()` | User wants to know the price of a product before buying | The price of the product |
+
+## Domain model StandaloneProduct interface
+| Extends   |
+|-----------|
+| `Product` |
 
 ## Domain model FillingType enum
 | Variants      |
@@ -29,12 +34,24 @@
 | Ham           |
 
 ## Domain model Filling class
-- Could maybe extend product?
+| Implements | Variables           |
+|------------|---------------------|
+| `Product`  |                     |
+|            | `FillingType type`  |
 
-| Variables     | Methods       | Scenario                                                       | Output                   |
-|---------------|---------------|----------------------------------------------------------------|--------------------------|
-| `String name` |               |                                                                |                          |
-|               | `int price()` | User wants to know the price of a filling before purchasing it | The price of the filling |
+## Domain model CoffeeType enum
+| Variants      |
+|---------------|
+| Black         |
+| White         |
+| Capuccino     |
+| Latte         |
+
+## Domain model Coffee class
+| Implements | Variables         |
+|------------|-------------------|
+| `Product`  |                   |
+|            | `CoffeeType type` |
 
 ## Domain model BagelType enum
 | Variants   |
@@ -45,29 +62,23 @@
 | Sesame     |
 
 ## Domain model Bagel class
-| Implements | Variables                | Methods                     | Scenario                                                | Output                      |
-|------------|--------------------------|-----------------------------|---------------------------------------------------------|-----------------------------|
-| `Product`  |                          |                             |                                                         |                             |
-|            | `List<Filling> fillings` |                             |                                                         |                             |
-|            |                          | `void add(Filling filling)` | User wants to add a filling to their bagel              | Filling gets added to bagel |
-
-## Domain model Coffee class
-| Parent class | Variables                | Methods                     | Scenario                                                | Output                      |
-|--------------|--------------------------|-----------------------------|---------------------------------------------------------|-----------------------------|
-| `Product`    |                          |                             |                                                         |                             |
-|              | `List<Filling> fillings` |                             |                                                         |                             |
-|              |                          | `int price()`               | User wants to know the price of a product before buying | The price of the product    |
+| Implements | Variables                | Methods                     | Scenario                                   | Output                      |
+|------------|--------------------------|-----------------------------|--------------------------------------------|-----------------------------|
+| `Product`  |                          |                             |                                            |                             |
+|            | `BagelType type`         |                             |                                            |                             |
+|            | `List<Filling> fillings` |                             |                                            |                             |
+|            |                          | `void add(Filling filling)` | User wants to add a filling to their bagel | Filling gets added to bagel |
 
 ## Domain model Basket class
-| Variables                | Methods                                                           | Scenario                                                     | Output                     |
-|--------------------------|-------------------------------------------------------------------|--------------------------------------------------------------|----------------------------|
-| `List<Product> products` |                                                                   |                                                              |                            |
-|                          | `void add(Product product) throws AddToFullBasketException`       | Basket is full                                               | Exception                  |
-|                          |                                                                   | Basket is not full                                           |                            |
-|                          | `void remove(Product product) throws NonExistentProductException` | Product is in basket                                         |                            |
-|                          |                                                                   | Product is not in basket                                     | Exception                  |
-|                          | `void setCapacity(int newCapacity)`                               | Manager wants to change the capacity of basket               | Basket capacity is changed |
-|                          | `int price()`                                                     | User wants to know the price of all products in their basket | Sum of product prices      |
+| Variables                          | Methods                                                                     | Scenario                                                     | Output                     |
+|------------------------------------|-----------------------------------------------------------------------------|--------------------------------------------------------------|----------------------------|
+| `List<StandaloneProduct> products` |                                                                             |                                                              |                            |
+|                                    | `void add(StandaloneProduct product) throws AddToFullBasketException`       | Basket is full                                               | Exception                  |
+|                                    |                                                                             | Basket is not full                                           |                            |
+|                                    | `void remove(StandaloneProduct product) throws NonExistentProductException` | Product is in basket                                         |                            |
+|                                    |                                                                             | Product is not in basket                                     | Exception                  |
+|                                    | `void setCapacity(int newCapacity)`                                         | Manager wants to change the capacity of basket               | Basket capacity is changed |
+|                                    | `int price()`                                                               | User wants to know the price of all products in their basket | Sum of product prices      |
 
 ## Domain model Inventory class
 | Variables                | Methods                                                 | Scenario                                | Output    |
