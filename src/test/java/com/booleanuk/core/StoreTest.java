@@ -15,6 +15,14 @@ public class StoreTest {
         Assertions.assertNotNull(store.getInventory().getProduct("BGLO"));
     }
 
+    @Test
+    public void testAddOrder() {
+        Store store = new Store("Bob's Bagels");
+        Order order = new Order();
+        store.addOrder(order);
+
+        Assertions.assertEquals(1, store.getOrders().size());
+    }
 
 
 
