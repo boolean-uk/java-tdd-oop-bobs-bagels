@@ -8,6 +8,11 @@ public class Store {
     Product[] inventory = new Product[12];
     HashMap<String,Order> orders;
 
+    Store() {
+
+
+    }
+
     public void updateCapacity(int capacity) {
         this.capacity += capacity;
 
