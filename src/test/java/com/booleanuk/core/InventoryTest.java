@@ -16,4 +16,13 @@ public class InventoryTest {
         Assertions.assertEquals(map.get("BGLO"), item);
 
     }
+
+    @Test
+    public void testGetInventoryItem(){
+        Inventory inventory = new Inventory();
+        InventoryItem item =  new InventoryItem("BGLO",0.49, "Bagel","Onion");
+        inventory.addInventoryItem(item);
+        Assertions.assertEquals(inventory.getInventoryItem("BGLO"), item);
+
+    }
 }
