@@ -1,11 +1,24 @@
 package com.booleanuk.core;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+
+import java.util.ArrayList;
 
 public class TestBagel {
 
     @Test
     public void testBagelConstr(){
-        Bagel b = new Bagel(2.5, "TEST", "TestBagel", BagelType.Everything);
+        Bagel b = new Bagel( "TEST", "TestBagel", BagelType.Everything);
+    }
+
+
+    @Test
+    public void testAddFilling(){
+        Bagel b = new Bagel(BagelType.Everything);
+
+        Assertions.assertEquals(b.getFillings(), new ArrayList<>());
+
+        b.addFilling(new Filling(FillingType.Egg));
     }
 }

@@ -1,6 +1,5 @@
 @startuml
 Abstract class Item implements Iterable{
-    + price: Double
     + id: String
     + name: String
     + getPrice(): Double
@@ -25,7 +24,7 @@ Bagel -- BagelTypes
 
 
 class Coffee implements Item{
-    - type: CoffeeType
+    - variant: CoffeeType
 }
 enum CoffeeTypes {
     Black
@@ -39,7 +38,7 @@ Coffee -- CoffeeTypes
 class Filling implements Item{
     + variant: FillingVariant
 }
-enum FillingVariant{
+enum FillingVariant {
     Bacon
     Egg
     Creme Cheese
