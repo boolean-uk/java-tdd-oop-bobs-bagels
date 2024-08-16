@@ -23,7 +23,13 @@ public class TestBagel {
 
         Assertions.assertFalse(b.getFillings().isEmpty());
 
+        // check that the correct filling was added to list
+        Filling testFilling = new Filling("TESTSKA", "TestName", FillingType.CremeCheese);
+        ArrayList<Filling> testIterable = new ArrayList<>();
+        testIterable.add(testFilling);
 
+        String expectedString = testFilling.toString();
+        Assertions.assertEquals(expectedString, b.getFillings().get(0).toString());
 
     }
 }

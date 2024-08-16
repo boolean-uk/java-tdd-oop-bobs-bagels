@@ -1,5 +1,5 @@
 @startuml
-Abstract class Item implements Iterable{
+Abstract class Item{
     + id: String
     + name: String
     + getPrice(): Double
@@ -12,28 +12,31 @@ class Bagel implements Item{
     + addFilling(filling: Filling)
     ' display cost of filling before adding
     ' should confirm with customer before adding filling
+    + getFillings(): ArrayList<Filling>
+    + getBagelType(): BagelType
 }
 
-enum BagelTypes{
+enum BagelType{
     Onion
     Plain
     Everything
     Sesame
 }
-Bagel -- BagelTypes
+Bagel -- BagelType
 
 
 class Coffee implements Item{
     - variant: CoffeeType
+    + getCoffeeType(): CoffeeType
 }
-enum CoffeeTypes {
+enum CoffeeType {
     Black
     White
     Cappuccino
     Latte
 }
 
-Coffee -- CoffeeTypes
+Coffee -- CoffeeType
 
 class Filling implements Item{
     + variant: FillingVariant
@@ -49,7 +52,7 @@ enum FillingVariant {
 Filling -- FillingVariant
 Filling "n" -- "0..n" Bagel
 
-class RecieptManager {
+class OrderManager {
     + basketOfItems: HashMap<Item, Integer>
     + __discounts__: HashMap<Pair<Item, Integer> Integer>
     ' HashMap<Item, Quantity of Items> new Price>
@@ -67,11 +70,13 @@ class RecieptManager {
 
 }
 
-RecieptManager "n" .. "0..n" Item
+OrderManager "n" .. "0..n" Item
 
 class utils {
     + getUserResponse(msg: String): String
 }
+
+utils -> OrderManager
 
 
 
