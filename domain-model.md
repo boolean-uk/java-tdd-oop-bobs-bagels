@@ -12,7 +12,7 @@ Inventory class:
 |                             |                                     | `The given product is not in stock` | `false` |
 
 Basket class:
-
+    
 | Member variables            | Methods                                              | Scenario                                                    | Outputs |
 |-----------------------------|------------------------------------------------------|-------------------------------------------------------------|---------|
 | `HashMap<Product, Integer>` | `add(Product product)`                               | Successfully product added to basket                        | true    |
