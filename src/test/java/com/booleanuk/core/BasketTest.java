@@ -35,6 +35,17 @@ public class BasketTest {
 
     }
 
+    @Test
+    public void isFull() {
+        Basket basket = new Basket(2);
+        Bagel bagel1 = new Bagel("BGLO",0.49, "Bagel", Bagel.BagelVariant.ONION);
+        Bagel bagel2 = new Bagel("BGLO",0.49, "Bagel", Bagel.BagelVariant.EVERYTHING);
+        Bagel bagel3 = new Bagel("BGLO",0.49, "Bagel", Bagel.BagelVariant.EVERYTHING);
+        Assertions.assertEquals(2,basket.getListOfBasket().size());
+
+
+    }
+
 
 
 }
