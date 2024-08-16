@@ -9,7 +9,7 @@ public class CoffeeTest {
     public void ShouldReturnCoffeeGetters(){
         Coffee myCoffe = new Coffee("BGL0", 0.49, "Bagel", "Onion");
 
-        Assertions.assertNotEquals("BGL0", myCoffe.getSku());
+        Assertions.assertEquals("BGL0", myCoffe.getSku());
         Assertions.assertEquals(0.49, myCoffe.getPrice());
         Assertions.assertEquals("Bagel", myCoffe.getName());
         Assertions.assertEquals("Onion", myCoffe.getVariant());
