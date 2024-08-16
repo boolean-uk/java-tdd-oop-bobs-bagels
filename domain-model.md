@@ -13,25 +13,50 @@
 |--------------------|
 | `RuntimeException` |
 
-## Domain model Product class
-| Variables | Methods                | Scenario                                                | Output                   |
-|-----------|------------------------|---------------------------------------------------------|--------------------------|
-|           | `abstract int price()` | User wants to know the price of a product before buying | The price of the product |
+## Domain model Product interface
+| Variables | Methods       | Scenario                                                | Output                   |
+|-----------|---------------|---------------------------------------------------------|--------------------------|
+|           | `int price()` | User wants to know the price of a product before buying | The price of the product |
+
+## Domain model FillingType enum
+| Variants      |
+|---------------|
+| Bacon         |
+| Egg           |
+| Cheese        |
+| Cream cheese  |
+| Smoked salmon |
+| Ham           |
 
 ## Domain model Filling class
 - Could maybe extend product?
-| Variables     | Methods       | Scenario                                                                  | Output                   |
-|---------------|---------------|---------------------------------------------------------------------------|--------------------------|
-| `String name` |               |                                                                           |                          |
-|               | `int price()` | User wants to know the price of a filling before adding it to their bagel | The price of the filling |
+
+| Variables     | Methods       | Scenario                                                       | Output                   |
+|---------------|---------------|----------------------------------------------------------------|--------------------------|
+| `String name` |               |                                                                |                          |
+|               | `int price()` | User wants to know the price of a filling before purchasing it | The price of the filling |
+
+## Domain model BagelType enum
+| Variants   |
+|------------|
+| Onion      |
+| Plain      |
+| Everything |
+| Sesame     |
 
 ## Domain model Bagel class
+| Implements | Variables                | Methods                     | Scenario                                                | Output                      |
+|------------|--------------------------|-----------------------------|---------------------------------------------------------|-----------------------------|
+| `Product`  |                          |                             |                                                         |                             |
+|            | `List<Filling> fillings` |                             |                                                         |                             |
+|            |                          | `void add(Filling filling)` | User wants to add a filling to their bagel              | Filling gets added to bagel |
+
+## Domain model Coffee class
 | Parent class | Variables                | Methods                     | Scenario                                                | Output                      |
 |--------------|--------------------------|-----------------------------|---------------------------------------------------------|-----------------------------|
 | `Product`    |                          |                             |                                                         |                             |
 |              | `List<Filling> fillings` |                             |                                                         |                             |
 |              |                          | `int price()`               | User wants to know the price of a product before buying | The price of the product    |
-|              |                          | `void add(Filling filling)` | User wants to add a filling to their bagel              | Filling gets added to bagel |
 
 ## Domain model Basket class
 | Variables                | Methods                                                           | Scenario                                                     | Output                     |
