@@ -18,8 +18,8 @@ public class MainTest {
     }
 
     @Test
-    public void testAddOrder() {
-        store.addOrder(order);
+    public void testAddProduct() {
+        order.addProduct(store.bagels1);
+        Assertions.assertEquals(order.basket.size() + 1, 1);
     }
-
 }

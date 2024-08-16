@@ -4,16 +4,14 @@ public class Product {
     private double price;
     private String variant;
     private String SKU;
-    Bagels bagels = new Bagels();
-    Coffee coffe = new Coffee();
-    Fillings fillings = new Fillings();
 
-    Product(double price, String variant, String SKU) {
+    Product(String SKU, double price, String variant) {
         this.price = price;
         this.variant = variant;
         this.SKU = SKU;
 
     }
+
 
     public double getPrice() {
         return price;
