@@ -36,6 +36,5 @@ public class BasketTest {
        for (int i = 0; i < basket.countTotalItems(); i++ ){
            Assertions.assertEquals(1, basket.checkAllItems().get(itemList.get(i).getSKU()));
        }
-
    }
 }
