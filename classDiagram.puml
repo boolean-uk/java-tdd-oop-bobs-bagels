@@ -1,0 +1,50 @@
+@startuml
+
+Class Basket {
+    - basketSize: Integer
+    - basket: List<Item>
+
+    + addItemToBasket(Item item): String
+    + removeItemFromBasket(Item item): String
+
+    + basketIsFull(): Boolean
+    + itemInBasket(): Boolean
+
+    + calculateBasketCost(): Double
+    + changeBasketCapacity(newCapacity: Integer): String
+}
+
+Abstract Class Item {
+    - menu: List<Item>
+    - sku: String
+    - price: Double
+    - name: String
+    - variant: String
+
+    + getPrice(): Double
+    + getVariant(): String
+}
+
+Class Bagel Implements Item {
+    - menu: List<Bagel>
+    - fillings: List<Filling>
+
+    + addFilling(filling: Filling): String
+    + getFillings(): List<Filling>
+}
+
+Class Filling Implements Item {
+    - menu: List<Filling>
+}
+
+Class Coffee Implements Item {
+    - menu: List<Coffee>
+}
+
+Class Order {
+    - basket: Basket
+    + order(): String
+}
+
+@enduml
+
