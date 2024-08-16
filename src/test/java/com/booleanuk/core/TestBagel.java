@@ -6,6 +6,6 @@ public class TestBagel {
 
     @Test
     public void testBagelConstr(){
-        Bagel b = new Bagel(2.5, )
+        Bagel b = new Bagel(2.5, "TEST", "TestBagel", BagelType.Everything);
     }
 }
