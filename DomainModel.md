@@ -11,7 +11,7 @@ Basket holds Coffee, Filling and Bagel but to know what your filling your bagel 
 |                                              |                                  | If item does not exist in shop, give error/warning             | "Item does not exist"                |
 |                                              | removeItemFromBasket(String SKU) | Remove item from basket if it exist                            | "SKU has been removed"               |
 |                                              |                                  | If the item does not exist, give error/warning                 | "Item does not exist"                |
-|                                              | checkTotalItems()                | Return HashMap of all items, (E.g. with X quantity)            | HashMap<String SKU, Integer quantity |
+|                                              | checkAllItems()                  | Return HashMap of all items, (E.g. with X quantity)            | HashMap<String SKU, Integer quantity |
 |                                              |                                  |                                                                | "basket is empty"                    |
 |                                              | countTotalItems()                | Return a number of total items in basket                       | "X items in basket"                  |
 |                                              |                                  |                                                                | 0                                    |
