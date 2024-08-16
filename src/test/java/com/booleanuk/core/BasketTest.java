@@ -21,6 +21,20 @@ public class BasketTest {
 
     }
 
+    @Test
+    public void testRemoveBagel() {
+        Basket basket = new Basket(10);
+        Bagel bagel1 = new Bagel("BGLO",0.49, "Bagel", Bagel.BagelVariant.ONION);
+        Bagel bagel2 = new Bagel("BGLO",0.49, "Bagel", Bagel.BagelVariant.EVERYTHING);
+        Bagel bagel3 = new Bagel("BGLO",0.49, "Bagel", Bagel.BagelVariant.EVERYTHING);
+        basket.addBagel(bagel1);
+        basket.addBagel(bagel2);
+        basket.addBagel(bagel3);
+        basket.removeBagel(bagel1);
+        Assertions.assertEquals(2,basket.getListOfBasket().size());
+
+    }
+
 
 
 }
