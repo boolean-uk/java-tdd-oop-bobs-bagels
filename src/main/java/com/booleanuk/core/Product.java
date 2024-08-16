@@ -2,14 +2,20 @@ package com.booleanuk.core;
 
 public class Product {
 
-    private String SKU;
+    private final String SKU;
+    private double price;
 
-    public Product(String SKU) {
+    public Product(String SKU, double price) {
         this.SKU = SKU;
+        this.price = price;
     }
 
     public String getSKU() {
         return this.SKU;
+    }
+
+    public double getPrice() {
+        return this.price;
     }
 
 }
