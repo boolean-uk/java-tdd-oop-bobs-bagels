@@ -4,7 +4,9 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 public class MainTest {
+
     Store store = new Store();
+    Order order = new Order();
     MainTest() {
 
     }
@@ -15,6 +17,9 @@ public class MainTest {
         Assertions.assertEquals(11, store.getCapacity());
     }
 
-
+    @Test
+    public void testAddOrder() {
+        store.addOrder(order);
+    }
 
 }
