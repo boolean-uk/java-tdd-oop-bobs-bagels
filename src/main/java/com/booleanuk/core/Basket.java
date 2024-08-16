@@ -18,6 +18,10 @@ public class Basket {
 
     }
 
+    public void removeBagel(Bagel bagel){
+        listOfBasket.remove(bagel);
+    }
+
     public ArrayList<Bagel> getListOfBasket(){
         return listOfBasket;
 
