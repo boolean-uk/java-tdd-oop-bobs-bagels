@@ -18,4 +18,8 @@ public class Inventory {
     public void setInventoryItemHashMap(HashMap<String, InventoryItem> inventoryItemHashMap) {
         this.inventoryItemHashMap = inventoryItemHashMap;
     }
+
+    public InventoryItem getInventoryItem(String sku){
+       return this.inventoryItemHashMap.get(sku);
+    }
 }
