@@ -9,5 +9,6 @@ public class ProductTest {
     public void testCreateProduct() {
         Product product = new Product("SKU", 10, "Variant");
         Assertions.assertNotNull(product);
+        Assertions.assertEquals(10, product.getPrice());
     }
 }
