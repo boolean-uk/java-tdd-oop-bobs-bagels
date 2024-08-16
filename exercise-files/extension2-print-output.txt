@@ -1,0 +1,23 @@
+# Example Extension 2 Receipt Output #
+
+
+
+~~~ Bob's Bagels ~~~
+
+ 2024-01-19 10:42:26
+
+---------------------
+
+Latte		1	£1.29
+Sesame		1	£0.73
+- Egg
+- Bacon
+Plain		2	£1.02
+- Ham
+Plain		4	£1.56
+
+---------------------
+
+Total			£4.60
+
+	 Thank you !
