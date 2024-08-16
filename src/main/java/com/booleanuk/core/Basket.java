@@ -17,12 +17,12 @@ public class Basket {
         return this.basket;
     }
 
-    public void addItemToBasket(String itemSKU){
-        if(basket.containsKey(itemSKU)) {
-            int oldQuantity = basket.get(itemSKU);
-            basket.replace(itemSKU, oldQuantity, oldQuantity + 1);
+    public void addItemToBasket(Item item){
+        if(basket.containsKey(item.getSKU())) {
+            int oldQuantity = basket.get(item.getSKU());
+            basket.replace(item.getSKU(), oldQuantity, oldQuantity + 1);
         }else {
-            basket.put(itemSKU, 1);
+            basket.put(item.getSKU(), 1);
         }
 
     }

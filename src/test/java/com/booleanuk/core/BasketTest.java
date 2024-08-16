@@ -8,33 +8,54 @@ import java.util.HashMap;
 
 public class BasketTest {
 
-   @Test
-   public void createBasketTest() {
-       Basket basket = new Basket();
+    @Test
+    public void createBasketTest() {
+        Basket basket = new Basket();
 
-       Assertions.assertEquals(0, basket.countTotalItems());
-   }
+        Assertions.assertEquals(0, basket.countTotalItems());
+    }
 
-   @Test
+    @Test
     public void addBagelAndCoffeeAndFillingToBasketTest() {
-       Basket basket = new Basket();
-       Bagel bagel = new Bagel("BGLO", 0.49, "Onion");
-       Coffee coffee = new Coffee("COFB", 1.29, "Black");
-       Filling filling = new Filling("FILH", 0.12, "Ham");
-       basket.addItemToBasket(bagel.getSKU());
-       basket.addItemToBasket(coffee.getSKU());
-       basket.addItemToBasket(filling.getSKU());
+        Basket basket = new Basket();
+        Bagel bagel = new Bagel("BGLO", 0.49, "Onion");
+        Bagel bagel2 = new Bagel("BGLO", 0.49, "Onion");
+        Coffee coffee = new Coffee("COFB", 1.29, "Black");
+        Filling filling = new Filling("FILH", 0.12, "Ham");
+        basket.addItemToBasket(bagel);
+        basket.addItemToBasket(coffee);
+        basket.addItemToBasket(filling);
 
-       //Populate a reference list
-       ArrayList<Item> itemList = new ArrayList<>();
-       itemList.add(bagel);
-       itemList.add(coffee);
-       itemList.add(filling);
 
-       System.out.println(basket.checkAllItems());
+        //Populate a reference list
+        ArrayList<Item> itemList = new ArrayList<>();
+        itemList.add(bagel);
+        itemList.add(coffee);
+        itemList.add(filling);
 
-       for (int i = 0; i < basket.countTotalItems(); i++ ){
-           Assertions.assertEquals(1, basket.checkAllItems().get(itemList.get(i).getSKU()));
-       }
-   }
+        System.out.println(basket.checkAllItems());
+
+        for (int i = 0; i < basket.countTotalItems(); i++) {
+            Assertions.assertEquals(1, basket.checkAllItems().get(itemList.get(i).getSKU()));
+        }
+    }
+
+    @Test
+    public void addMultipleBagels() {
+        Basket basket = new Basket();
+        Bagel bagel = new Bagel("BGLO", 0.49, "Onion");
+        Bagel bagel2 = new Bagel("BGLO", 0.49, "Onion");
+        basket.addItemToBasket(bagel);
+        basket.addItemToBasket(bagel2);
+
+
+        //Populate a reference list
+        ArrayList<Item> itemList = new ArrayList<>();
+        itemList.add(bagel);
+        itemList.add(bagel2);
+
+        for (int i = 0; i < basket.countTotalItems(); i++) {
+            Assertions.assertEquals(2, basket.checkAllItems().get(itemList.get(i).getSKU()));
+        }
+    }
 }
