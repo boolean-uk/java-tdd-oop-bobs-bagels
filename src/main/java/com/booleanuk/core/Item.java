@@ -9,10 +9,6 @@ public abstract class Item {
         this.name = name;
     }
 
-    public double getPrice(){
-        return price;
-    }
-
     public String getSka(){
         return SKA;
     }
@@ -20,4 +16,6 @@ public abstract class Item {
     public String getName(){
         return name;
     }
+
+
 }
