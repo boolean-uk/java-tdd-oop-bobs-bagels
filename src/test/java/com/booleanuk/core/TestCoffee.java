@@ -6,6 +6,6 @@ public class TestCoffee {
 
     @Test
     public void testCoffee(){
-        Coffee testcoffee = new Coffee(3.14, "TEST", "TestCoffee", CoffeeType.Black );
+        Coffee testcoffee = new Coffee("TEST", "TestCoffee", CoffeeType.Black );
     }
 }

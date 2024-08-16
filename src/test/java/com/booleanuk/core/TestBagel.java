@@ -9,16 +9,21 @@ public class TestBagel {
 
     @Test
     public void testBagelConstr(){
-        Bagel b = new Bagel( "TEST", "TestBagel", BagelType.Everything);
+        Bagel b = new Bagel("TEST", "TestBagel", BagelType.Everything);
     }
 
 
     @Test
     public void testAddFilling(){
-        Bagel b = new Bagel(BagelType.Everything);
+        Bagel b = new Bagel("TEST", "TestBagel", BagelType.Everything);
 
         Assertions.assertEquals(b.getFillings(), new ArrayList<>());
 
-        b.addFilling(new Filling(FillingType.Egg));
+        b.addFilling(new Filling("TESTSKA", "TestName", FillingType.CremeCheese ));
+
+        Assertions.assertFalse(b.getFillings().isEmpty());
+
+
+
     }
 }
