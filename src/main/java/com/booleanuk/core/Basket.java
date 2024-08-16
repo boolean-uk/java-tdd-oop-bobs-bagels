@@ -12,4 +12,8 @@ public class Basket {
     public int countTotalItems() {
         return this.basket.size();
     }
+
+    public HashMap<String, Integer> checkAllItems() {
+        return this.basket;
+    }
 }

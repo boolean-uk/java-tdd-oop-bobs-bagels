@@ -15,7 +15,7 @@ Basket holds Coffee, Filling and Bagel but to know what your filling your bagel 
 |                                              |                                  |                                                                | "basket is empty"                    |
 |                                              | countTotalItems()                | Return a number of total items in basket                       | "X items in basket"                  |
 |                                              |                                  |                                                                | 0                                    |
-|                                              |                                  |                                                                |                                      |
+|                                              | getItemFromKey(String SKU)       | Get the key                                                    |                                      |
 
 
 ## Class Item
