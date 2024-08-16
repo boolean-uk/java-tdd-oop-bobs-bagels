@@ -4,6 +4,9 @@ public class Store {
     private final String name;
 
     public Store(String name) {
+        if (name == null) {
+            throw new IllegalArgumentException("Name cannot be null");
+        }
         this.name = name;
     }
 
