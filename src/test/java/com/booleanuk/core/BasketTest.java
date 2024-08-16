@@ -11,6 +11,6 @@ public class BasketTest {
    public void createBasketTest() {
        Basket basket = new Basket();
 
-       Assertions.assertTrue(basket.countTotalItems());
+       Assertions.assertEquals(0, basket.countTotalItems());
    }
 }
