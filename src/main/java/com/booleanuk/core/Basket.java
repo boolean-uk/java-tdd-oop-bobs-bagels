@@ -14,7 +14,11 @@ public class Basket {
     }
 
     public void addBagel(Bagel bagel){
-        listOfBasket.add(bagel);
+        if (getListOfBasket().size()<capacity) {
+            listOfBasket.add(bagel);
+        } else {
+            System.out.println("Basket is full! Cannot add more bagels.");
+        }
 
     }
 
