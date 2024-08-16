@@ -2,7 +2,7 @@
 
 Class Basket {
     - basketSize: Integer
-    - basket: List<Item>
+    - basket: List<Item, Integer>
 
     + addItemToBasket(Item item): String
     + removeItemFromBasket(Item item): String
@@ -11,7 +11,7 @@ Class Basket {
     + itemInBasket(): Boolean
 
     + calculateBasketCost(): Double
-    + changeBasketCapacity(newCapacity: Integer): String
+    + changeBasketSize(newSize: Integer): String
 }
 
 Abstract Class Item {
@@ -26,19 +26,16 @@ Abstract Class Item {
 }
 
 Class Bagel Implements Item {
-    - menu: List<Bagel>
     - fillings: List<Filling>
-
+    - totalPriceIncludingFillings: Double
     + addFilling(filling: Filling): String
     + getFillings(): List<Filling>
 }
 
 Class Filling Implements Item {
-    - menu: List<Filling>
 }
 
 Class Coffee Implements Item {
-    - menu: List<Coffee>
 }
 
 Class Order {
