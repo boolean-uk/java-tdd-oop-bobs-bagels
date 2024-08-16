@@ -12,8 +12,8 @@ public class Basket {
         this.capacity = MAX_CAPACITY;
     }
 
-    public Boolean addProduct(Product product) {
-        return false;
+    public void addProduct(Product product) {
+        products.add(product);
     }
 
 
