@@ -2,8 +2,8 @@ package com.booleanuk.core;
 
 public class Product {
     private double price;
-    private String variant;
-    private String SKU;
+    private final String variant;
+    private final String SKU;
 
     Product(String SKU, double price, String variant) {
         this.price = price;

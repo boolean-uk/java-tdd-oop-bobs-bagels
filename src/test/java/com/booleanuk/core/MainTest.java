@@ -45,8 +45,8 @@ public class MainTest {
     }
 
     @Test
-    public void testShowPrice() {
-        Assertions.assertEquals(0.49, order.showPrice(store.coffee1));
+    public void testGetPriceProduct() {
+        Assertions.assertEquals(0.99, order.getPriceProduct(store.coffee1));
     }
 
     /*@Test

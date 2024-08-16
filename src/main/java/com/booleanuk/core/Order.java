@@ -48,6 +48,10 @@ public class Order {
 
     }
 
+    public double getPriceProduct(Product product) {
+        return product.getPrice();
+    }
+
 
     public void removeProduct(Product product) {
 
