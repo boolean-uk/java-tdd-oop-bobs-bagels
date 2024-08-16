@@ -21,5 +21,8 @@ public class MainTest {
     public void testAddBagel() {
         order.addProduct(store.bagels1);
         Assertions.assertEquals(order.basket.size(), 1);
+        order.addProduct(store.fillings7);
+        Assertions.assertNotEquals(order.basket.size(), 2);
+
     }
 }

@@ -7,7 +7,7 @@ public class Store {
     Product[] inventory = new Product[14];
     public Bagels bagels1, bagels2, bagels3, bagels4;
     public Coffee coffee1, coffee2, coffee3, coffee4;
-    public Fillings fillings1, fillings2, fillings3, fillings4, fillings5, fillings6;
+    public Fillings fillings1, fillings2, fillings3, fillings4, fillings5, fillings6, fillings7;
 
 
     public Store() {
@@ -27,6 +27,8 @@ public class Store {
         fillings4 = new Fillings("FILX", 0.12, "Cream Cheese");
         fillings5 = new Fillings("FILS", 0.12, "Smoked Salmon");
         fillings6 = new Fillings("FILH", 0.12, "Ham");
+
+        fillings7 = new Fillings("FILP", 0.12, "Pepperoni"); // not in inventory
 
         inventory[0] = bagels1;
         inventory[1] = bagels2;
