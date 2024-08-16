@@ -1,20 +1,28 @@
 package com.booleanuk.core;
 
 import java.util.HashMap;
+import java.util.Scanner;
+
 
 public class Order {
 
     HashMap<String, Integer> basket = new HashMap<>();
     Store store = new Store();
+    Scanner in = new Scanner(System.in);
 
     public boolean addProduct(Product product) {
         if (store.getCapacity() == basket.size()) {
             System.out.println("You reached max capacity");
             return false;
         }
-        for (int i = 0; i < store.inventory.length; i++) {
-            if (store.inventory[i].getSKU().equals(product.getSKU())) {
-                if (basket.isEmpty() || !basket.containsKey(product.getSKU())) {
+            if (findProductInInventory(product.getSKU())) {
+                if(product.getSKU().startsWith("FIL")) {
+                    if(!addFilling()) {
+                        System.out.println("You have to choose a bagel first before you can add a filling");
+                        return false;
+                    }
+                }
+                if (!basket.containsKey(product.getSKU())) {
                     basket.put(product.getSKU(), 1);
                     return true;
                 } else {
@@ -22,13 +30,26 @@ public class Order {
                     return true;
                 }
             }
+
+        return false;
+    }
+
+    public boolean findProductInInventory(String SKU) {
+        for (int i = 0; i < store.inventory.length; i++) {
+            if (store.inventory[i].getSKU().equals(SKU)) {
+                return true;
+            }
         }
         return false;
     }
 
+    public boolean addFilling() {
+        return (basket.keySet().stream().anyMatch(key -> key.startsWith("BGL")));
+
+    }
+
 
     public void removeProduct(Product product) {
-
 
     }
 }

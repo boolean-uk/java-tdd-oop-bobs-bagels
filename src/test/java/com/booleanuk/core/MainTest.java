@@ -14,14 +14,14 @@ public class MainTest {
     @Test
     public void testUpdateCapacity() {
         store.updateCapacity(1);
-        Assertions.assertEquals(11, store.getCapacity());
+        Assertions.assertEquals(7, store.getCapacity());
     }
 
     @Test
     public void testAddBagel() {
         order.addProduct(store.bagels1);
         Assertions.assertEquals(order.basket.size(), 1);
-        order.addProduct(store.fillings7);
+        order.addProduct(store.fillings7); // not in inventory
         Assertions.assertNotEquals(order.basket.size(), 2);
 
     }
@@ -35,6 +35,13 @@ public class MainTest {
         order.addProduct(store.coffee1);
         order.addProduct(store.coffee2);
         Assertions.assertFalse(order.addProduct(store.coffee3));
+    }
+
+    @Test
+    public void testAddFilling() {
+        Assertions.assertFalse(order.addProduct(store.fillings1));
+        order.addProduct(store.bagels1);
+        Assertions.assertTrue(order.addProduct(store.fillings1));
     }
 
     /*@Test

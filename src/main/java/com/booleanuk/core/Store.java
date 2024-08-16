@@ -57,6 +57,8 @@ public class Store {
         return capacity;
     }
 
+
+
    /* private String generateId(){
         return UUID.randomUUID().toString().replace("-", "");
     }*/
