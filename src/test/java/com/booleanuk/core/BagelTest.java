@@ -17,4 +17,11 @@ public class BagelTest {
         Assertions.assertEquals(0.39, b.getPrice());
     }
 
+    @Test
+    public void testAddOnionBagel() {
+        Bagel b = new OnionBagel();
+
+        Assertions.assertEquals(0.49, b.getPrice());
+    }
+
 }
