@@ -8,10 +8,10 @@ public class BagelTest {
 
     @Test
     public void testBagel(){
-        Bagel bagel = new Bagel("BGLO",0.49, "Bagel", Bagel.BagelVariant.Onion);
+        Bagel bagel = new Bagel("BGLO",0.49, "Bagel", Bagel.BagelVariant.ONION);
         Assertions.assertEquals("BGLO", bagel.sku);
         Assertions.assertEquals("Bagel", bagel.name);
         Assertions.assertEquals(0.49, bagel.price);
-        Assertions.assertEquals("Onion", Bagel.BagelVariant.Onion);
+        Assertions.assertEquals(Bagel.BagelVariant.ONION, bagel.variant);
     }
 }
