@@ -3,13 +3,12 @@ package com.booleanuk.core;
 import java.util.ArrayList;
 
 public class Bagel {
-    private String variant;
-    private ArrayList<String> fillings;
+    private String variant = "";
+    private ArrayList<String> fillings = new ArrayList<String>();
 
 
-    public Bagel(String variant, ArrayList<String> fillings){
+    public Bagel(String variant){
         this.variant = variant;
-        this.fillings = fillings;
     }
 
     public String getVariant() {
