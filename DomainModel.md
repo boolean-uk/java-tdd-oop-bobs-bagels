@@ -4,18 +4,18 @@ When removing a filling, it also removes it from the bagel.
 Basket holds Coffee, Filling and Bagel but to know what your filling your bagel has, its bagel.getFilling().
 
 ## Class Basket
-| Variables                               | Method                           | Scenario                                                        | Outcome                         |
-|-----------------------------------------|----------------------------------|-----------------------------------------------------------------|---------------------------------|
-| HashList<Item SKU, int quantity> basket | addItemToBasket(String SKU)      | Add entry in HashList if item does not exist in HashList        | {"SKU", 1}                      |
-| double money                            |                                  | If Item already exist in HashList, increment the quantity value | {"SKU", 2}                      |
-|                                         |                                  | If item does not exist in shop, give error/warning              | "Item does not exist"           |
-|                                         | removeItemFromBasket(String SKU) | Remove item from basket if it exist                             | "SKU has been removed"          |
-|                                         |                                  | If the item does not exist, give error/warning                  | "Item does not exist"           |
-|                                         | checkTotalItems()                | Return hashList of all items, (E.g. with X quantity)            | HashList<Item SKU, int quantity |
-|                                         |                                  |                                                                 | "basket is empty"               |
-|                                         | countTotalItems()                | Return a number of total items in basket                        | "X items in basket"             |
-|                                         |                                  |                                                                 | 0                               |
-|                                         |                                  |                                                                 |                                 |
+| Variables                                    | Method                           | Scenario                                                       | Outcome                              |
+|----------------------------------------------|----------------------------------|----------------------------------------------------------------|--------------------------------------|
+| HashMap<String SKU, Integer quantity> basket | addItemToBasket(String SKU)      | Add entry in HashMap if item does not exist in HashMap         | {"SKU", 1}                           |
+| double money                                 |                                  | If Item already exist in HashMap, increment the quantity value | {"SKU", 2}                           |
+|                                              |                                  | If item does not exist in shop, give error/warning             | "Item does not exist"                |
+|                                              | removeItemFromBasket(String SKU) | Remove item from basket if it exist                            | "SKU has been removed"               |
+|                                              |                                  | If the item does not exist, give error/warning                 | "Item does not exist"                |
+|                                              | checkTotalItems()                | Return HashMap of all items, (E.g. with X quantity)            | HashMap<String SKU, Integer quantity |
+|                                              |                                  |                                                                | "basket is empty"                    |
+|                                              | countTotalItems()                | Return a number of total items in basket                       | "X items in basket"                  |
+|                                              |                                  |                                                                | 0                                    |
+|                                              |                                  |                                                                |                                      |
 
 
 ## Class Item
