@@ -13,7 +13,7 @@ public class BasketTest {
     }
 
     @Test
-    public void testaddBagel() {
+    public void testAddBagel() {
         Basket basket = new Basket(10);
         Bagel bagel = new Bagel("BGLO",0.49, "Bagel", Bagel.BagelVariant.ONION);
         basket.addBagel(bagel);
