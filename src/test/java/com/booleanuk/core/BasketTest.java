@@ -22,13 +22,13 @@ class BasketTest {
     basket.add(new Bagel(BagelType.Plain));
     basket.add(new Coffee(CoffeeType.Black));
 
-    Assertions.assertDoesNotThrow(() -> basket.remove(BagelType.Onion));
-    Assertions.assertDoesNotThrow(() -> basket.remove(BagelType.Onion));
-    Assertions.assertThrows(NotPresentInBasketException.class, () -> basket.remove(BagelType.Onion));
-    Assertions.assertDoesNotThrow(() -> basket.remove(BagelType.Plain));
-    Assertions.assertThrows(NotPresentInBasketException.class, () -> basket.remove(BagelType.Plain));
-    Assertions.assertDoesNotThrow(() -> basket.remove(CoffeeType.Black));
-    Assertions.assertThrows(NotPresentInBasketException.class, () -> basket.remove(CoffeeType.Black));
+    Assertions.assertDoesNotThrow(() -> basket.remove("BGLO"));
+    Assertions.assertDoesNotThrow(() -> basket.remove("BGLO"));
+    Assertions.assertThrows(NotPresentInBasketException.class, () -> basket.remove("BGLO"));
+    Assertions.assertDoesNotThrow(() -> basket.remove("BGLP"));
+    Assertions.assertThrows(NotPresentInBasketException.class, () -> basket.remove("BGLO"));
+    Assertions.assertDoesNotThrow(() -> basket.remove("COFB"));
+    Assertions.assertThrows(NotPresentInBasketException.class, () -> basket.remove("BGLO"));
   }
 
   @Test
@@ -39,8 +39,8 @@ class BasketTest {
     basket.add(new Bagel(BagelType.Plain));
     basket.add(new Coffee(CoffeeType.Black));
 
-    Assertions.assertDoesNotThrow(() -> basket.remove(BagelType.Onion, 2));
-    Assertions.assertThrows(NotPresentInBasketException.class, () -> basket.remove(BagelType.Onion, 1));
-    Assertions.assertThrows(NotPresentInBasketException.class, () -> basket.remove(CoffeeType.Black, 2));
+    Assertions.assertDoesNotThrow(() -> basket.remove("BGLO", 2));
+    Assertions.assertThrows(NotPresentInBasketException.class, () -> basket.remove("BGLO", 1));
+    Assertions.assertThrows(NotPresentInBasketException.class, () -> basket.remove("COFB", 2));
   }
 }

@@ -17,8 +17,11 @@
 | Methods          | Scenario                                                | Output                   |
 |------------------|---------------------------------------------------------|--------------------------|
 | `double price()` | User wants to know the price of a product before buying | The price of the product |
+| `String sku()`   | User wants to                                           | The price of the product |
 
 ## Domain model StandaloneProduct interface
+- This interface is separate from the `Product` interface because not all products can be purchased directly
+
 | Extends   |
 |-----------|
 | `Product` |
@@ -48,10 +51,10 @@
 | Latte         |
 
 ## Domain model Coffee class
-| Implements | Variables         |
-|------------|-------------------|
-| `Product`  |                   |
-|            | `CoffeeType type` |
+| Implements          | Variables         |
+|---------------------|-------------------|
+| `StandaloneProduct` |                   |
+|                     | `CoffeeType type` |
 
 ## Domain model BagelType enum
 | Variants   |
@@ -62,29 +65,25 @@
 | Sesame     |
 
 ## Domain model Bagel class
-| Implements | Variables                | Methods                     | Scenario                                   | Output                      |
-|------------|--------------------------|-----------------------------|--------------------------------------------|-----------------------------|
-| `Product`  |                          |                             |                                            |                             |
-|            | `BagelType type`         |                             |                                            |                             |
-|            | `List<Filling> fillings` |                             |                                            |                             |
-|            |                          | `void add(Filling filling)` | User wants to add a filling to their bagel | Filling gets added to bagel |
+| Implements          | Variables                | Methods                     | Scenario                                   | Output                      |
+|---------------------|--------------------------|-----------------------------|--------------------------------------------|-----------------------------|
+| `StandaloneProduct` |                          |                             |                                            |                             |
+|                     | `BagelType type`         |                             |                                            |                             |
+|                     | `List<Filling> fillings` |                             |                                            |                             |
+|                     |                          | `void add(Filling filling)` | User wants to add a filling to their bagel | Filling gets added to bagel |
 
 ## Domain model Basket class
-| Variables                          | Methods                                                                        | Scenario                                                     | Output                     |
-|------------------------------------|--------------------------------------------------------------------------------|--------------------------------------------------------------|----------------------------|
-| `List<StandaloneProduct> products` |                                                                                |                                                              |                            |
-|                                    | `void add(StandaloneProduct product) throws AddToFullBasketException`          | Basket is full                                               | Exception                  |
-|                                    |                                                                                | Basket is not full                                           |                            |
-|                                    | `void remove(CoffeeType coffee) throws NotPresentInBasketException`            | Product is in basket                                         |                            |
-|                                    |                                                                                | Product is not in basket                                     | Exception                  |
-|                                    | `void remove(CoffeeType coffee, int count) throws NotPresentInBasketException` | Product is in basket                                         |                            |
-|                                    |                                                                                | Product is not in basket                                     | Exception                  |
-|                                    | `void remove(BagelType bagel) throws NotPresentInBasketException`              | Product is in basket                                         |                            |
-|                                    |                                                                                | Product is not in basket                                     | Exception                  |
-|                                    | `void remove(BagelType bagel) throws NotPresentInBasketException`              | Product is in basket                                         |                            |
-|                                    |                                                                                | Product is not in basket                                     | Exception                  |
-|                                    | `void setCapacity(int newCapacity)`                                            | Manager wants to change the capacity of basket               | Basket capacity is changed |
-|                                    | `double price()`                                                               | User wants to know the price of all products in their basket | Sum of product prices      |
+| Variables                          | Methods                                                                 | Scenario                                                     | Output                     |
+|------------------------------------|-------------------------------------------------------------------------|--------------------------------------------------------------|----------------------------|
+| `List<StandaloneProduct> products` |                                                                         |                                                              |                            |
+|                                    | `void add(StandaloneProduct product) throws AddToFullBasketException`   | Basket is full                                               | Exception                  |
+|                                    |                                                                         | Basket is not full                                           |                            |
+|                                    | `void remove(String sku) throws NotPresentInBasketException`            | Product with given sku is in basket                          |                            |
+|                                    |                                                                         | Product with given sku is not in basket                      | Exception                  |
+|                                    | `void remove(String sku, int count) throws NotPresentInBasketException` | `count` many products with given sku is in basket            |                            |
+|                                    |                                                                         | `count` many product with given sku are not in basket        | Exception                  |
+|                                    | `void setCapacity(int newCapacity)`                                     | Manager wants to change the capacity of basket               | Basket capacity is changed |
+|                                    | `double price()`                                                        | User wants to know the price of all products in their basket | Sum of product prices      |
 
 ## Domain model Inventory class
 | Variables                | Methods                                                 | Scenario                                | Output    |
