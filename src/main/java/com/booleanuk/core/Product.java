@@ -32,6 +32,5 @@ public abstract class Product {
 
     public abstract String showProduct();
 
-    public abstract Product addProduct();
 
 }
