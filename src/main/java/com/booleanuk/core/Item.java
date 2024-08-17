@@ -1,6 +1,7 @@
 package com.booleanuk.core;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public abstract class Item {
     protected String sku;

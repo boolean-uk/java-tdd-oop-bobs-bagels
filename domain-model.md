@@ -103,7 +103,7 @@ I want customers to only be able to order things that we stock in our inventory.
 
 | Methods                                    | Scenario                                                   | Outputs                                                          |
 |--------------------------------------------|------------------------------------------------------------|------------------------------------------------------------------|
-| `String addItemToBasket(Item item)`        | Customer adds item to basket with available space          | Return ``Item <insert item> added to basket.``                   |
+| `String addItemToBasket(Item item)`        | Customer adds item to basket with available space          | Return ``<insert item> added to basket.``                        |
 |                                            | Customer attempts to add item to full basket               | Return ``Basket is full, <insert item> is not added to basket.`` |
 | `String removeItemFromBasket(Item item)`   | Customer removes item in basket from basket                | Return ``<Insert item> removed from basket.``                    |
 |                                            | Customer attempts to remove item not in basket from basket | Return ``<Insert item> does not exist in basket.``               |
@@ -116,16 +116,23 @@ I want customers to only be able to order things that we stock in our inventory.
 | `String changeBasketSize(Integer newSize)` | Manager changes to a new size, where newSize > -1          | Returns ``Basket size successfully changed.``                    |
 |                                            | Manager attempts to change size to a negative number       | Returns ``Basket size cannot be negative.``                      |
 
+### Menu Class
+| Variables                     | Description                          |
+|-------------------------------|--------------------------------------|
+| ``ArrayList<Item item> menu`` | Contains all available items on menu |
+
+| Methods                                             | Scenario                                                 | Outputs     |
+|-----------------------------------------------------|----------------------------------------------------------|-------------|
+| `Void initializeMenu()`                             | Menu is initialized with predefined items.               | -           |
+| `Item getItemFromMenu(String name, String variant)` | Customer gets an item from the menu to put in the basket | Return item |
+
 ### Abstract Item Class
 | Variables                | Description                          |
 |--------------------------|--------------------------------------|
-| ``List<Item item> menu`` | Contains all available items on menu | 
 | ``String sku``           | Contains item ID                     |
 | ``Double price``         | Contains item price                  |
 | ``String name``          | Contains item name                   |
 | ``String variant``       | Contains item variant                |
-
-
 
 | Methods               | Scenario                                         | Outputs             |
 |-----------------------|--------------------------------------------------|---------------------|

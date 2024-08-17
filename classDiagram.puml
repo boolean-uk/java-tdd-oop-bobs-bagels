@@ -1,5 +1,12 @@
 @startuml
 
+Class Menu {
+    - menu: List<Item>
+
+    - initializeMenu(): void
+    + getItemFromMenu(name: String, variant: String): Item
+}
+
 Class Basket {
     - basketSize: Integer
     - basket: HashMap<Item, Integer>
@@ -15,7 +22,6 @@ Class Basket {
 }
 
 Abstract Class Item {
-    - menu: List<Item>
     - sku: String
     - price: Double
     - name: String

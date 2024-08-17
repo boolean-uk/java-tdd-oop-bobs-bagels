@@ -12,12 +12,14 @@ public class BasketTest {
         I'd like to add a specific type of bagel to my basket.
          */
         Basket basket = new Basket();
-        Bagel bagel = new Bagel("ABC123", 3.4, "Bagel", "Plain");
 
         // Assert that the basket is empty
         Assertions.assertEquals(0, basket.numberOfItemsInBasket());
 
-        String result = basket.addItemToBasket(bagel);
+        String name = "Bagel";
+        String variant = "Plain";
+        String result = basket.addItemToBasket(Menu.getItemFromMenu(name, variant));
+
         String expected = "Plain Bagel added to basket.";
 
         // Assert that the number of items in the basket has increased to 1
@@ -31,11 +33,6 @@ public class BasketTest {
 
 
 /*
-``
-As a member of the public,
-So I can order a bagel before work,
-I'd like to add a specific type of bagel to my basket.
-``
 
 ### 2
 ``
