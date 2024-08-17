@@ -1,34 +1,18 @@
 package com.booleanuk.core;
 
-public class Coffee {
-    private String sku;
-    private double price;
-    private String name;
-    private String variant;
+public class Coffee extends Product{
 
-    Coffee(String sku, double price, String name, String variant){
-        this.sku = sku;
-        this.price = price;
-        this.name = name;
-        this.variant = variant;
-
+    Coffee(String sku, double price, String name, String variant) {
+        super(sku, price, name, variant);
     }
 
-    //Created getters for Coffee
-    public String getName(){
-        return this.name;
+    @Override
+    public String showProduct() {
+        return getSku() + " " + getPrice() + " " + getName() + " " + getVariant();
     }
 
-    public String getVariant(){
-        return this.variant;
+    @Override
+    public Product addProduct() {
+        return null;
     }
-
-    public String getSku() {
-        return sku;
-    }
-
-    public double getPrice(){
-        return this.price;
-    }
-
 }
