@@ -43,4 +43,19 @@ class BasketTest {
     Assertions.assertThrows(NotPresentInBasketException.class, () -> basket.remove("BGLO", 1));
     Assertions.assertThrows(NotPresentInBasketException.class, () -> basket.remove("COFB", 2));
   }
+
+  @Test
+  public void testBasketCapacity() {
+    Basket basket = new Basket(5);
+
+    Assertions.assertDoesNotThrow(() -> basket.add(new Bagel(BagelType.Onion)));
+    Assertions.assertDoesNotThrow(() -> basket.add(new Bagel(BagelType.Plain)));
+    Assertions.assertDoesNotThrow(() -> basket.add(new Coffee(CoffeeType.Black)));
+    Assertions.assertDoesNotThrow(() -> basket.add(new Coffee(CoffeeType.Capuccino)));
+    Assertions.assertDoesNotThrow(() -> basket.add(new Coffee(CoffeeType.White)));
+
+    Assertions.assertThrows(AddToFullBasketException.class, () -> basket.add(new Bagel(BagelType.Everything)));
+    basket.setCapacity(10);
+    Assertions.assertDoesNotThrow(() -> basket.add(new Bagel(BagelType.Everything)));
+  }
 }
