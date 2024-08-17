@@ -63,7 +63,7 @@ public class BasketTest {
             actualNames.add(i);
         }
 
-        Assertions.assertNotEquals(expectedNames, actualNames);
+        Assertions.assertEquals(expectedNames, actualNames);
     }
 
 }
