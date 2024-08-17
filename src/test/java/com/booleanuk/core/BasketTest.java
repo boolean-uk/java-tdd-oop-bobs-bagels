@@ -117,7 +117,7 @@ public class BasketTest {
         basket.changeCapacity(15);
 
         //Should fail due to basketCapacity being changed
-        Assertions.assertEquals(basket.getBasketCapacity(), basket.getProductCount());
+        Assertions.assertNotEquals(basket.getBasketCapacity(), basket.getProductCount());
   }
 
 
