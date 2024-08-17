@@ -11,8 +11,4 @@ public class Coffee extends Product{
         return getSku() + " " + getPrice() + " " + getName() + " " + getVariant();
     }
 
-    @Override
-    public Product addProduct() {
-        return null;
-    }
 }
