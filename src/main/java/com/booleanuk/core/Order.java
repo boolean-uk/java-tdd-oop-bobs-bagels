@@ -13,23 +13,17 @@ public class Order {
             System.out.println("You reached max capacity");
             return false;
         }
-            if (findProductInInventory(product.getSKU())) {
-                if(product.getSKU().startsWith("FIL")) {
-                    if(!addFilling()) {
-                        System.out.println("You have to choose a bagel first before you can add a filling");
-                        return false;
-                    }
-                }
-                if (!basket.containsKey(product.getSKU())) {
-                    basket.put(product.getSKU(), 1);
-                    return true;
-                } else {
-                    basket.put(product.getSKU(), basket.get(product.getSKU()) + 1);
-                    return true;
-                }
+        if (!findProductInInventory(product.getSKU())) {
+            return false;
+        }
+        if (product instanceof Fillings) {
+            if (!isBagelInBasket()) {
+                System.out.println("You have to choose a bagel first before you can add a filling");
+                return false;
             }
-
-        return false;
+        }
+        basket.put(product.getSKU(), basket.getOrDefault(product.getSKU(), 0) + 1);
+        return true;
     }
 
     public boolean findProductInInventory(String SKU) {
@@ -41,7 +35,7 @@ public class Order {
         return false;
     }
 
-    public boolean addFilling() {
+    public boolean isBagelInBasket() {
         return (basket.keySet().stream().anyMatch(key -> key.startsWith("BGL")));
 
     }

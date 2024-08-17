@@ -20,9 +20,11 @@ public class MainTest {
     @Test
     public void testAddBagel() {
         order.addProduct(store.bagels1);
-        Assertions.assertEquals(order.basket.size(), 1);
+        Assertions.assertEquals( 1,order.basket.size());
+        Assertions.assertTrue(order.basket.containsKey(store.bagels1.getSKU()));
         order.addProduct(store.fillings7); // not in inventory
-        Assertions.assertNotEquals(order.basket.size(), 2);
+        Assertions.assertNotEquals( 2,order.basket.size());
+        Assertions.assertFalse(order.basket.containsKey(store.fillings7.getSKU()));
 
     }
 
@@ -42,6 +44,7 @@ public class MainTest {
         Assertions.assertFalse(order.addProduct(store.fillings1));
         order.addProduct(store.bagels1);
         Assertions.assertTrue(order.addProduct(store.fillings1));
+        Assertions.assertTrue(order.basket.containsKey(store.fillings1.getSKU()));
     }
 
     @Test
