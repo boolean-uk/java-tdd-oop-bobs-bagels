@@ -42,6 +42,30 @@ public class BasketTest {
         Assertions.assertEquals(expectedNames, actualNames);
     }
 
+    @Test
+    public void ShouldIncreaseCurrentBasketValues(){
+        Basket basket = new Basket();
+
+        Bagel onionBagel = new Bagel("BGLO",	0.49, "Bagel",	"Onion");
+        Coffee blackCoffee = new Coffee("COFB",	0.99,	"Coffee",	"Black");
+
+        basket.addToCurrentBasket(onionBagel);
+        basket.addToCurrentBasket(blackCoffee);
+        basket.addToCurrentBasket(onionBagel);;
+
+        ArrayList<Integer> expectedNames = new ArrayList<>();
+        expectedNames.add(1);
+        expectedNames.add(2);
+
+        ArrayList<Integer> actualNames = new ArrayList<>();
+        for (Product product : basket.currentBasket.keySet()){
+            int i = basket.currentBasket.get(product);
+            actualNames.add(i);
+        }
+
+        Assertions.assertNotEquals(expectedNames, actualNames);
+    }
+
 }
 
 
