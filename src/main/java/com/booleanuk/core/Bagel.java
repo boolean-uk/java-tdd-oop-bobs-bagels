@@ -1,12 +1,6 @@
 package com.booleanuk.core;
 
-public class Bagel implements StandaloneProduct {
-  private BagelType type;
-
-  public Bagel(BagelType type) {
-    this.type = type;
-  }
-
+public record Bagel(BagelType type) implements StandaloneProduct {
   public double price() {
     switch (this.type) {
       case Onion:

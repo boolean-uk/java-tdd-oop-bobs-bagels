@@ -1,12 +1,6 @@
 package com.booleanuk.core;
 
-public class Coffee implements StandaloneProduct {
-  private CoffeeType type;
-
-  public Coffee(CoffeeType type) {
-    this.type = type;
-  }
-
+public record Coffee(CoffeeType type) implements StandaloneProduct {
   public double price() {
     switch (this.type) {
       case Black:
