@@ -85,9 +85,11 @@ public class BasketTest {
       basket.add(onionBagel);
 
       //Should fail due to the +1
-      Assertions.assertEquals(currentCapacity + 1, basket.getProductCount());
+      Assertions.assertNotEquals(currentCapacity + 1, basket.getProductCount());
 
   }
+
+
 
 }
 

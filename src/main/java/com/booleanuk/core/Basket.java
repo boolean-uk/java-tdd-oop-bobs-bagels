@@ -5,29 +5,45 @@ import java.util.Objects;
 
 public class Basket {
     HashMap<Product, Integer> currentBasket;
+
     private int basketCapacity = 10;
+    private int productCount = 0;
 
     public Basket(){
         currentBasket = new HashMap<>();
     }
 
-    public String addToCurrentBasket(Product chosenProduct) {
+    public String add(Product chosenProduct) {
         String chosenName = chosenProduct.getName();
 
-        for (Product product : currentBasket.keySet()) {
-            String name = product.getName();
+        //Check if basketCapacity is full
 
-            if (Objects.equals(name, chosenName)) {
-                int currentQuantity = currentBasket.get(product);
+        if (productCount < basketCapacity){
+            for (Product product : currentBasket.keySet()) {
+                String name = product.getName();
 
-                currentBasket.put(product, currentQuantity + 1);
+                if (Objects.equals(name, chosenName)) {
+                    int currentQuantity = currentBasket.get(product);
 
-                return "Existing product added to basket";
+                    currentBasket.put(product, currentQuantity + 1);
+                    productCount++;
+
+                    return "Existing product added to basket";
+                }
             }
+            currentBasket.put(chosenProduct, 1);
+            productCount++;
+
+            return "New product added to basket";
         }
+        return "Basket it full";
+    }
 
-        currentBasket.put(chosenProduct, 1);
+    public int getProductCount(){
+        return productCount;
+    }
 
-        return "New product added to basket";
+    public int getBasketCapacity(){
+        return basketCapacity;
     }
 }
