@@ -22,20 +22,16 @@ public class Coffee implements StandaloneProduct {
     return 0;
   }
 
-  public boolean is(CoffeeType type) {
-    return this.type == type;
-  }
-
-  public static String typeToString(CoffeeType type) {
-    switch (type) {
+  public String sku() {
+    switch (this.type) {
       case Black:
-        return "Black";
+        return "COFB";
       case White:
-        return "Black";
+        return "COFW";
       case Capuccino:
-        return "Capuccino";
+        return "COFC";
       case Latte:
-        return "Latte";
+        return "COFL";
     }
 
     return "";

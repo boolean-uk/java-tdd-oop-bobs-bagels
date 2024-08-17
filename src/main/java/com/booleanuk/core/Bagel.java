@@ -25,20 +25,16 @@ public class Bagel implements StandaloneProduct {
     return 0;
   }
 
-  public boolean is(BagelType type) {
-    return this.type == type;
-  }
-
-  public static String typeToString(BagelType type) {
-    switch (type) {
+  public String sku() {
+    switch (this.type) {
       case Onion:
-        return "Onion";
+        return "BGLO";
       case Plain:
-        return "Plain";
+        return "BGLP";
       case Everything:
-        return "Everything";
+        return "BGLE";
       case Sesame:
-        return "Sesame";
+        return "BGLS";
     }
 
     return "";
