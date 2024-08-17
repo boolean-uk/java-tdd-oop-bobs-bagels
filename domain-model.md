@@ -17,7 +17,7 @@
 | Methods          | Scenario                                                | Output                   |
 |------------------|---------------------------------------------------------|--------------------------|
 | `double price()` | User wants to know the price of a product before buying | The price of the product |
-| `String sku()`   | User wants to                                           | The price of the product |
+| `String sku()`   | User or admin wants to identify a product               | SKU of product           |
 
 ## Domain model StandaloneProduct interface
 - This interface is separate from the `Product` interface because not all products can be purchased directly
@@ -36,7 +36,7 @@
 | Smoked salmon |
 | Ham           |
 
-## Domain model Filling class
+## Domain model Filling record
 | Implements | Variables           |
 |------------|---------------------|
 | `Product`  |                     |
@@ -50,7 +50,7 @@
 | Capuccino     |
 | Latte         |
 
-## Domain model Coffee class
+## Domain model Coffee record
 | Implements          | Variables         |
 |---------------------|-------------------|
 | `StandaloneProduct` |                   |
@@ -64,7 +64,7 @@
 | Everything |
 | Sesame     |
 
-## Domain model Bagel class
+## Domain model Bagel record
 | Implements          | Variables                | Methods                     | Scenario                                   | Output                      |
 |---------------------|--------------------------|-----------------------------|--------------------------------------------|-----------------------------|
 | `StandaloneProduct` |                          |                             |                                            |                             |
