@@ -6,8 +6,13 @@ public class Basket {
     private Integer basketSize;
     private HashMap<Item, Integer> basket = new HashMap<>();
 
+    public Integer numberOfItemsInBasket(){
+        return this.basket.size();
+    }
+
     public String addItemToBasket(Item item){
-        return "";
+        this.basket.put(item, 1);
+        return item.variant + " " + item.name + " added to basket.";
     }
 
     public String removeItemFromBasket(Item item){

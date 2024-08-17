@@ -4,44 +4,42 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 public class Menu {
-    private static ArrayList<Item> menu = new ArrayList<>();
+    private static final ArrayList<Item> menu = new ArrayList<>();
 
     static {
         initializeMenu();
     }
 
     private static void initializeMenu(){
-        menu.add(new Bagel("bglo", 0.49, "bagel", "onion"));
-        menu.add(new Bagel("bglp", 0.39, "bagel", "plain"));
-        menu.add(new Bagel("bgle", 0.49, "bagel", "everything"));
-        menu.add(new Bagel("bgls", 0.49, "bagel", "sesame"));
-        menu.add(new Coffee("cofb", 0.99, "coffee", "black"));
-        menu.add(new Coffee("cofw", 1.19, "coffee", "white"));
-        menu.add(new Coffee("cofc", 1.20, "coffee", "capuccino"));
-        menu.add(new Coffee("cofl", 1.29, "coffee", "latte"));
-        menu.add(new Filling("filb", 0.12, "filling", "bacon"));
-        menu.add(new Filling("file", 0.12, "filling", "egg"));
-        menu.add(new Filling("filc", 0.12, "filling", "cheese"));
-        menu.add(new Filling("filx", 0.12, "filling", "cream cheese"));
-        menu.add(new Filling("fils", 0.12, "filling", "smoked salmon"));
-        menu.add(new Filling("filh", 0.12, "filling", "ham"));
+        menu.add(new Bagel("BGLO", 0.49, "Bagel", "Onion"));
+        menu.add(new Bagel("BGLP", 0.39, "Bagel", "Plain"));
+        menu.add(new Bagel("BGLE", 0.49, "Bagel", "Everything"));
+        menu.add(new Bagel("BGLS", 0.49, "Bagel", "Sesame"));
+        menu.add(new Coffee("COFB", 0.99, "Coffee", "Black"));
+        menu.add(new Coffee("COFW", 1.19, "Coffee", "White"));
+        menu.add(new Coffee("COFC", 1.20, "Coffee", "Capuccino"));
+        menu.add(new Coffee("COFL", 1.29, "Coffee", "Latte"));
+        menu.add(new Filling("FILB", 0.12, "Filling", "Bacon"));
+        menu.add(new Filling("FILE", 0.12, "Filling", "Egg"));
+        menu.add(new Filling("FILC", 0.12, "Filling", "Cheese"));
+        menu.add(new Filling("FILX", 0.12, "Filling", "Cream Cheese"));
+        menu.add(new Filling("FILS", 0.12, "Filling", "Smoked Salmon"));
+        menu.add(new Filling("FILH", 0.12, "Filling", "Ham"));
     }
 
     public static Item getItemFromMenu(String name, String variant){
-        name = name.toLowerCase();
-        variant = variant.toLowerCase();
 
         for (Item i : menu){
             if (Objects.equals(i.variant, variant) & Objects.equals(i.name, name))
             {
                 switch (name) {
-                    case "bagel" -> {
+                    case "Bagel" -> {
                         return new Bagel(i.sku, i.price, i.name, i.variant);
                     }
-                    case "coffee" -> {
+                    case "Coffee" -> {
                         return new Coffee(i.sku, i.price, i.name, i.variant);
                     }
-                    case "filling" -> {
+                    case "Filling" -> {
                         return new Filling(i.sku, i.price, i.name, i.variant);
                     }
                 }
