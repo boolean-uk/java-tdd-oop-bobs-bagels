@@ -93,7 +93,7 @@ public class BasketTest {
       basket.add(onionBagel);
 
       //Should fail: there are two same bagels meaning that the below message should be true.
-      Assertions.assertNotEquals("One product is removed", basket.remove(onionBagel));
+      Assertions.assertEquals("One product is removed", basket.remove(onionBagel));
 
       //Should have removed one bagel and decreased the productCount with one.
       Assertions.assertEquals(1, basket.getProductCount());
