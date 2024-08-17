@@ -15,6 +15,7 @@
     * [10](#10)
   * [Classes](#classes)
     * [Basket Class](#basket-class)
+    * [Menu Class](#menu-class)
     * [Abstract Item Class](#abstract-item-class)
     * [Class Bagel - Implements Item](#class-bagel---implements-item)
     * [Class Filling - Implements Item](#class-filling---implements-item)
