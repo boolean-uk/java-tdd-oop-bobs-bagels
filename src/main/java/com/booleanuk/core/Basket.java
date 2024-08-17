@@ -5,9 +5,21 @@ import java.util.List;
 
 public class Basket {
   private List<StandaloneProduct> products = new ArrayList<>();
+  private int capacity;
 
-  public void add(StandaloneProduct product) {
-    this.products.add(product);
+  public Basket() {
+    this.capacity = 10;
+  }
+
+  public Basket(int capacity) {
+    this.capacity = capacity;
+  }
+
+  public void add(StandaloneProduct product) throws AddToFullBasketException {
+    if (this.products.size() < this.capacity)
+      this.products.add(product);
+    else
+      throw new AddToFullBasketException(this.capacity);
   }
 
   public void remove(String sku) throws NotPresentInBasketException {
@@ -30,5 +42,9 @@ public class Basket {
 
   public double price() {
     return this.products.stream().mapToDouble(StandaloneProduct::price).sum();
+  }
+
+  public void setCapacity(int capacity) {
+    this.capacity = capacity;
   }
 }
