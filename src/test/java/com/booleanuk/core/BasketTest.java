@@ -26,8 +26,8 @@ public class BasketTest {
         Bagel onionBagel = new Bagel("BGLO",	0.49, "Bagel",	"Onion");
         Coffee blackCoffee = new Coffee("COFB",	0.99,	"Coffee",	"Black");
 
-        basket.addToCurrentBasket(onionBagel);
-        basket.addToCurrentBasket(blackCoffee);
+        basket.add(onionBagel);
+        basket.add(blackCoffee);
 
         ArrayList<String> expectedNames = new ArrayList<>();
         expectedNames.add("Coffee");
@@ -49,9 +49,10 @@ public class BasketTest {
         Bagel onionBagel = new Bagel("BGLO",	0.49, "Bagel",	"Onion");
         Coffee blackCoffee = new Coffee("COFB",	0.99,	"Coffee",	"Black");
 
-        basket.addToCurrentBasket(onionBagel);
-        basket.addToCurrentBasket(blackCoffee);
-        basket.addToCurrentBasket(onionBagel);;
+        basket.add(onionBagel);
+        basket.add(onionBagel);
+        basket.add(blackCoffee);
+
 
         ArrayList<Integer> expectedNames = new ArrayList<>();
         expectedNames.add(1);
@@ -64,7 +65,29 @@ public class BasketTest {
         }
 
         Assertions.assertEquals(expectedNames, actualNames);
+        Assertions.assertEquals(3, basket.getProductCount());
     }
+
+  @Test
+  public void ShouldNotExceedBasketCapacity(){
+      Basket basket = new Basket();
+      Bagel onionBagel = new Bagel("BGLO",	0.49, "Bagel",	"Onion");
+
+      int currentCapacity = basket.getBasketCapacity();
+
+      for(int i = 0; i < currentCapacity; i++){
+          basket.add(onionBagel);
+      }
+
+      Assertions.assertEquals(10, basket.getProductCount());
+
+      //Try adding one more exceeding the limit
+      basket.add(onionBagel);
+
+      //Should fail due to the +1
+      Assertions.assertEquals(currentCapacity + 1, basket.getProductCount());
+
+  }
 
 }
 
