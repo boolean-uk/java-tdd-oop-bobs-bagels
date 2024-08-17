@@ -75,4 +75,10 @@ public class Basket {
 
     }
 
+    public void changeCapacity(int newSize){
+        basketCapacity = newSize;
+    }
+
+
+
 }

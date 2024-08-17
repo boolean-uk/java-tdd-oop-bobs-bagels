@@ -101,11 +101,23 @@ public class BasketTest {
       //Should make the onion bagels only one and give the other message
       Assertions.assertEquals("This product is removed", basket.remove(onionBagel));
 
+  }
 
+  @Test
+    public void ShouldChangeBasketCapacity(){
+        Basket basket = new Basket();
 
+        for(int i = 0; i < basket.getBasketCapacity(); i++){
+            basket.add(blackCoffee);
+        }
 
+        Assertions.assertEquals(basket.getBasketCapacity(), basket.getProductCount());
 
+        //Changing it
+        basket.changeCapacity(15);
 
+        //Should fail due to basketCapacity being changed
+        Assertions.assertEquals(basket.getBasketCapacity(), basket.getProductCount());
   }
 
 
