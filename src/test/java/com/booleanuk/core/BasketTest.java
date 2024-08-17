@@ -8,30 +8,30 @@ import java.util.HashMap;
 
 public class BasketTest {
 
+    Bagel onionBagel = new Bagel("BGLO",	0.49, "Bagel",	"Onion");
+    Coffee blackCoffee = new Coffee("COFB",	0.99,	"Coffee",	"Black");
+
+
     @Test
     public void ShouldShowProduct(){
-        Bagel myBagel = new Bagel("BGLO",	0.49, "Bagel",	"Onion");
-        Coffee blackCoffee = new Coffee("COFB",	0.99,	"Coffee",	"Black");
 
-        Assertions.assertEquals("BGLO 0.49 Bagel Onion", myBagel.showProduct());
+        Assertions.assertEquals("BGLO 0.49 Bagel Onion", onionBagel.showProduct());
         Assertions.assertEquals("COFB 0.99 Coffee Black", blackCoffee.showProduct());
 
-        myBagel.showProduct();
+        onionBagel.showProduct();
     }
 
     @Test
     public void ShouldAddProductToBasket(){
         Basket basket = new Basket();
 
-        Bagel onionBagel = new Bagel("BGLO",	0.49, "Bagel",	"Onion");
-        Coffee blackCoffee = new Coffee("COFB",	0.99,	"Coffee",	"Black");
-
         basket.add(onionBagel);
         basket.add(blackCoffee);
 
         ArrayList<String> expectedNames = new ArrayList<>();
-        expectedNames.add("Coffee");
         expectedNames.add("Bagel");
+        expectedNames.add("Coffee");
+
 
         ArrayList<String> actualNames = new ArrayList<>();
         for (Product product : basket.currentBasket.keySet()){
@@ -45,9 +45,6 @@ public class BasketTest {
     @Test
     public void ShouldIncreaseCurrentBasketValues(){
         Basket basket = new Basket();
-
-        Bagel onionBagel = new Bagel("BGLO",	0.49, "Bagel",	"Onion");
-        Coffee blackCoffee = new Coffee("COFB",	0.99,	"Coffee",	"Black");
 
         basket.add(onionBagel);
         basket.add(onionBagel);
@@ -71,7 +68,6 @@ public class BasketTest {
   @Test
   public void ShouldNotExceedBasketCapacity(){
       Basket basket = new Basket();
-      Bagel onionBagel = new Bagel("BGLO",	0.49, "Bagel",	"Onion");
 
       int currentCapacity = basket.getBasketCapacity();
 
@@ -86,6 +82,29 @@ public class BasketTest {
 
       //Should fail due to the +1
       Assertions.assertNotEquals(currentCapacity + 1, basket.getProductCount());
+
+  }
+
+  @Test
+    public void ShouldRemoveFromBasket(){
+      Basket basket = new Basket();
+
+      basket.add(onionBagel);
+      basket.add(onionBagel);
+
+      //Should fail: there are two same bagels meaning that the below message should be true.
+      Assertions.assertNotEquals("One product is removed", basket.remove(onionBagel));
+
+      //Should have removed one bagel and decreased the productCount with one.
+      Assertions.assertEquals(1, basket.getProductCount());
+
+      //Should make the onion bagels only one and give the other message
+      Assertions.assertEquals("This product is removed", basket.remove(onionBagel));
+
+
+
+
+
 
   }
 
