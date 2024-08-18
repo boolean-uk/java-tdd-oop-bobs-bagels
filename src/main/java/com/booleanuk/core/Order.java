@@ -26,7 +26,7 @@ public class Order {
         return true;
     }
 
-    public boolean findProductInInventory(String SKU) {
+    private boolean findProductInInventory(String SKU) {
         for (int i = 0; i < store.inventory.length; i++) {
             if (store.inventory[i].getSKU().equals(SKU)) {
                 return true;
@@ -35,7 +35,7 @@ public class Order {
         return false;
     }
 
-    public boolean isBagelInBasket() {
+    private boolean isBagelInBasket() {
         return (basket.keySet().stream().anyMatch(key -> key.startsWith("BGL")));
 
     }
