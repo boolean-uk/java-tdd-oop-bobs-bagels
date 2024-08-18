@@ -6,7 +6,8 @@ import java.util.HashMap;
 public class Order {
 
     HashMap<String, Integer> basket = new HashMap<>();
-    Store store = new Store();
+   private final Store store = new Store();
+    private double totalPrice;
 
     public boolean addProduct(Product product) {
         if (store.getCapacity() == basket.size()) {
