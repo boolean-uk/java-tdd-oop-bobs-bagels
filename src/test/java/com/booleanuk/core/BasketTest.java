@@ -8,7 +8,7 @@ import java.io.InputStream;
 
 public class BasketTest {
     @Test
-    public void AddBagelTest(){
+    public void AddBagelTest() {
         /*
         As a member of the public,
         So I can order a bagel before work,
@@ -33,7 +33,7 @@ public class BasketTest {
     }
 
     @Test
-    public void removeBagelTest(){
+    public void removeBagelTest() {
         /*
         As a member of the public,
         So I can change my order,
@@ -62,29 +62,29 @@ public class BasketTest {
 
         System.setIn(backup);
     }
-}
 
-@Test
-public void AddBagelWhenBasketIsFullTest(){
-       /*
-        As a member of the public,
-        So that I can not overfill my small bagel basket
-        I'd like to know when my basket is full when I try adding an item beyond my basket capacity.
-        */
-    Basket basket = new Basket();
+    @Test
+    public void AddBagelWhenBasketIsFullTest() {
+           /*
+            As a member of the public,
+            So that I can not overfill my small bagel basket
+            I'd like to know when my basket is full when I try adding an item beyond my basket capacity.
+            */
+        Basket basket = new Basket();
 
-    basket.setBasketSize = 1;
+        basket.changeBasketSize(1);
 
-    String name = "Bagel";
-    String variant = "Plain";
-    basket.addItemToBasket(Menu.getItemFromMenu(name, variant));
+        String name = "Bagel";
+        String variant = "Plain";
+        basket.addItemToBasket(Menu.getItemFromMenu(name, variant));
 
-    String name_2 = "Coffee";
-    String variant_2 = "Black";
-    String result = basket.addItemToBasket(Menu.getItemFromMenu(name_2, variant_2))
+        String name_2 = "Coffee";
+        String variant_2 = "Black";
+        String result = basket.addItemToBasket(Menu.getItemFromMenu(name_2, variant_2));
 
-    String expected = "Basket is full";
+        String expected = "Basket is full";
 
-    // Assert that the basket execution of addItemToBasket function returns the correct string
-    Assertions.assertEquals(expected, result);
+        // Assert that the basket execution of addItemToBasket function returns the correct string
+        Assertions.assertEquals(expected, result);
+    }
 }
