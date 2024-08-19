@@ -9,4 +9,7 @@ public class Bagel extends Product {
         this.fillings = new Filling[2];
     }
 
+    public boolean addFilling(Filling filling) {
+       return true;
+    }
 }
