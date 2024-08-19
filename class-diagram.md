@@ -16,7 +16,7 @@
 | Item             |
 |------------------|
 | -SKU: String     |
-| -price: Float    |
+| -price: double   |
 | -variant: String |
 | -name: String    |
 | -id: int         |
