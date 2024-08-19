@@ -1,5 +1,6 @@
 package com.booleanuk.core;
 
+import java.util.Collections;
 import java.util.List;
 
 public class Inventory {
@@ -13,6 +14,8 @@ public class Inventory {
     for (StandaloneProduct product : basket.products())
       for (Product component : product.components())
         this.stock.remove(this.find(component.sku()));
+
+    return new Receipt(Collections.unmodifiableList(basket.products()));
   }
 
   private int find(Sku sku) throws NotInStockException {
