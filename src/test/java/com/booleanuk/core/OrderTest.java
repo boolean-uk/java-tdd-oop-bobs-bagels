@@ -23,7 +23,6 @@ public class OrderTest {
         Assertions.assertEquals(30, order.getTotalSum());
     }
 
-    // test get basket
     @Test
     public void testGetBasket() {
         Order order = new Order();
@@ -33,7 +32,6 @@ public class OrderTest {
         Assertions.assertEquals(1, order.getBasket().get(product.getSKU()));
     }
 
-    // test add same product twice and check if quantity is updated
     @Test
     public void testAddSameProductTwice() {
         Order order = new Order();
@@ -45,7 +43,6 @@ public class OrderTest {
         Assertions.assertEquals(2, order.getBasket().get(product.getSKU()));
     }
 
-    // test if basket is ful
     @Test
     public void testBasketIsFull() {
         Order order = new Order();
@@ -54,5 +51,15 @@ public class OrderTest {
             order.addProduct(product);
         }
        Assertions.assertFalse(order.addProduct(product));
+    }
+
+    @Test
+    public void testRemoveProduct() {
+        Order order = new Order();
+        Product product = new Product("SKU", 10, "Variant");
+        order.addProduct(product);
+        order.removeProduct(product);
+        Assertions.assertEquals(0, order.getTotalSum());
+        Assertions.assertEquals(0, order.getBasket().size());
     }
 }
