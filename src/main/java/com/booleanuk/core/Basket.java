@@ -1,6 +1,7 @@
 package com.booleanuk.core;
 
 import com.booleanuk.core.enums.BagelType;
+import com.booleanuk.core.exceptions.FullBasketException;
 import com.booleanuk.core.inherited.Bagel;
 import java.util.ArrayList;
 
@@ -15,7 +16,11 @@ public class Basket {
     }
 
     public void addProduct(Product product) {
-        products.add(product);
+        if (!isFull()) {
+            products.add(product);
+        } else {
+            throw new FullBasketException("You have reached max basket capacity!");
+        }
     }
 
     public void removeProduct(BagelType variant) {

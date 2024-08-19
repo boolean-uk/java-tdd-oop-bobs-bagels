@@ -37,6 +37,7 @@ public class BasketTest {
         basket.addProduct(new Bagel("Bagel", 0.59, SKU.BGLS, BagelType.SESAME));
         basket.addProduct(new Bagel("Bagel", 0.59, SKU.BGLE, BagelType.EVERYTHING));
         basket.addProduct(new Bagel("Bagel", 0.59, SKU.BGLP, BagelType.PLAIN));
+        basket.addProduct(new Bagel("Bagel", 0.59, SKU.BGLP, BagelType.PLAIN));
 
         Assertions.assertThrows(FullBasketException.class, () -> {
             basket.addProduct(new Bagel("Bagel", 0.59, SKU.BGLS, BagelType.SESAME));
