@@ -1,7 +1,6 @@
 package com.booleanuk.core;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class Order {
     private final Map<String, Integer> basket;
@@ -34,28 +33,6 @@ public class Order {
         return true;
     }
 
-    private void applyDiscount() {
-        int count = 0;
-        int totalPrice = 0;
-        Inventory inventory = new Inventory();
-        for (Map.Entry<String, Integer> entry : basket.entrySet()) {
-            if (entry.getKey().startsWith("BGL")) {
-                count += entry.getValue();
-                totalPrice += entry.getValue() * inventory.getProduct(entry.getKey()).getPrice();
-            }
-        }
-        System.out.println("Total price: " + totalPrice);
-        System.out.println("Count: " + count);
-            int x = 0;
-            if (count >= 6)
-                do {
-                    x++;
-                    count -= 6;
-                } while (count > 6);
-            int newSum = x * 249 + count * 49;
-            totalSum = newSum;
-    }
-
     public boolean removeProduct(Product product) {
         if (basket.containsKey(product.getSKU())) {
             int productCount = basket.get(product.getSKU());
@@ -66,6 +43,7 @@ public class Order {
             }
             totalSum -= product.getPrice();
             currentBasketCapacity--;
+            applyDiscount();
             return true;
         }
         System.out.println("Product not found in the basket");
@@ -87,5 +65,46 @@ public class Order {
 
     public Map<String, Integer> getBasket() {
         return basket;
+    }
+
+    private void applyDiscount() {
+        int count = 0;
+        int totalPrice = 0;
+        ArrayList<Integer> bagelsPrice = new ArrayList();
+        Inventory inventory = new Inventory();
+        for (Map.Entry<String, Integer> entry : basket.entrySet()) {
+            if (entry.getKey().startsWith("BGL")) {
+                count += entry.getValue();
+                int bagelPrice = inventory.getProduct(entry.getKey()).getPrice();
+                totalPrice += entry.getValue() * bagelPrice;
+                for (int i = 0; i < entry.getValue(); i++) {
+                    bagelsPrice.add(bagelPrice);
+                }
+            }
+        }
+        System.out.println("Total price: " + totalPrice);
+        System.out.println("Count: " + count);
+        int x = 0;
+        if (count >= 6)
+            do {
+                x++;
+                count -= 6;
+            } while (count > 6);
+        int sumToAdd = 0;
+        if (count >= 0) {
+            // Sort the list in descending order
+            Collections.sort(bagelsPrice, new Comparator<Integer>() {
+                @Override
+                public int compare(Integer o1, Integer o2) {
+                    return o2 - o1;
+                }
+            });
+            System.out.println("Bagels price: " + bagelsPrice);
+            for (int i = 0; i < count; i++) {
+                sumToAdd += bagelsPrice.get(i);
+            }
+        }
+        int newSum = x * 249 +  sumToAdd;
+        totalSum = newSum;
     }
 }
