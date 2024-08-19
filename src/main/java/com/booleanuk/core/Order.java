@@ -14,10 +14,6 @@ public class Order {
         return totalPrice;
     }
 
-    public void setTotalPrice(double totalPrice) {
-        this.totalPrice = totalPrice;
-    }
-
     public boolean addProduct(Product product) {
         if (store.getCapacity() == basket.size()) {
             System.out.println("You reached max capacity");
@@ -33,6 +29,7 @@ public class Order {
             }
         }
         basket.put(product.getSKU(), basket.getOrDefault(product.getSKU(), 0) + 1);
+        this.totalPrice += product.getPrice();
         return true;
     }
 
