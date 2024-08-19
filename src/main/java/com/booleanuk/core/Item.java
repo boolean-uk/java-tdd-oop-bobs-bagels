@@ -46,7 +46,4 @@ public class Item {
         HashMap<String, String> nameList = itemList.getNameList();
         this.name = nameList.get(this.SKU);
     }
-
-
-
 }

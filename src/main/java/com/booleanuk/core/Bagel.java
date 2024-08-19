@@ -6,8 +6,8 @@ public class Bagel extends Item {
         super(SKU);
     }
 
-    public void addFilling(String fillingSKU) {
-        this.filling = new Filling(fillingSKU);
+    public void addFilling(Filling filling) {
+        this.filling = filling;
     }
 
     public Item getFilling() {
