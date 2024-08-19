@@ -43,4 +43,11 @@ public class BasketTest {
             basket.addProduct(new Bagel("Bagel", 0.59, SKU.BGLS, BagelType.SESAME));
         });
     }
+
+    @Test
+    public void testChangeCapacity() {
+        Basket basket = this.order.getBasket();
+        basket.changeCapacity(10);
+        Assertions.assertEquals(10, basket.getCapacity());
+    }
 }

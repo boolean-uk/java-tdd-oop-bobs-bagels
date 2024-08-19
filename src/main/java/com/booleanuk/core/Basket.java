@@ -9,11 +9,11 @@ import java.util.ArrayList;
 public class Basket {
     private final ArrayList<Product> products;
     private Integer capacity;
-    private static final Integer MAX_CAPACITY = 5;
+    private static final Integer DEFAULT_CAPACITY = 5;
 
     public Basket() {
         this.products = new ArrayList<>();
-        this.capacity = MAX_CAPACITY;
+        this.capacity = DEFAULT_CAPACITY;
     }
 
     public void addProduct(Product product) throws FullBasketException {
@@ -35,11 +35,23 @@ public class Basket {
         }
     }
 
+    public void changeCapacity(int newCapacity) {
+
+    }
+
     private Boolean isFull() {
         return this.products.size() == capacity;
     }
 
     public ArrayList<Product> getProducts() {
         return products;
+    }
+
+    private void setCapacity(Integer capacity) {
+        this.capacity = capacity;
+    }
+
+    public Integer getCapacity() {
+        return capacity;
     }
 }
