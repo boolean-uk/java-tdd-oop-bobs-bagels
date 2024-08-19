@@ -20,6 +20,7 @@ public class Order {
             return false;
         }
         if (!store.findProductInInventory(product.getSKU())) {
+            System.out.println("Didn't find the product you're trying to add in our inventory!");
             return false;
         }
         if (product instanceof Fillings) {

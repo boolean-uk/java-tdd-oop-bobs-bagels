@@ -31,7 +31,6 @@ public class Store {
             }
 
         }
-        System.out.println("Didn't find item in invenrtoty");
         return false;
     }
 }
