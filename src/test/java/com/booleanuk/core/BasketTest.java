@@ -9,7 +9,7 @@ class BasketTest {
     public void addItemTest(){
 
         Basket basket = new Basket(2);
-        String bagel1 = "plain bagel1";
+        String bagel1 = "plain bagel";
 
         Assertions.assertTrue(basket.addItem(bagel1));
 
