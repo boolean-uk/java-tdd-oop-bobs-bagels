@@ -31,7 +31,17 @@ public class BasketTest {
 
 
         Assertions.assertEquals(12, basket.changeBasketSize(12));
-
     }
+
+    @Test
+    void checkPriceTest(){
+        Basket basket = new Basket();
+        basket.addItem("BGLO");
+
+
+        Assertions.assertEquals(0.49, basket.getTotalPrice());
+    }
+
+
 
 }

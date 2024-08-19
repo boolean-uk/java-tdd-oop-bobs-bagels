@@ -6,11 +6,13 @@ public class Basket {
     private ArrayList<Product> inventory;
     private ArrayList<Product> basketContent;
     private int basketSize;
+    private double totalPrice;
 
     public Basket(){
         this.inventory = new ArrayList<>();
         this.basketContent = new ArrayList<>();
         this.basketSize = 3;
+        this.totalPrice = 0;
         inventory.add(new Bagel("BGLO", 0.49d, "Bagel", "Onion"));
         inventory.add(new Bagel("BGLP", 0.39d, "Bagel", "Plain"));
         inventory.add(new Bagel("BGLE", 0.49d, "Bagel", "Everything"));
@@ -37,6 +39,8 @@ public class Basket {
             if (p.getSKU().equals(SKU)){ //Found product in inv, add to basket
                 if (!(p instanceof Filling)){
                     basketContent.add(p);
+                    totalPrice += p.getPrice();
+
                     return true;
                 }else{
                     System.out.println("Cannot buy filling on it's own, add it to a bagel dummy");
@@ -53,6 +57,7 @@ public class Basket {
         for (Product p: basketContent){
             if(p.getSKU().equals(SKU)){
                 basketContent.remove(p);
+                totalPrice -= p.getPrice();
                 return true;
             }
         }
@@ -72,5 +77,13 @@ public class Basket {
 
     private void setBasketSize(int newSize){
         this.basketSize = newSize;
+    }
+
+    public double getTotalPrice() {
+        return totalPrice;
+    }
+
+    public void setTotalPrice(double totalPrice) {
+        this.totalPrice = totalPrice;
     }
 }
