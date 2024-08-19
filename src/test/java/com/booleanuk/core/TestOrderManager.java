@@ -1,21 +1,22 @@
 package com.booleanuk.core;
 
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 
 public class TestOrderManager {
 
     @Test
     public void testOrderExists(){
-        TestOrderManager tom = new TestOrderManager();
+        OrderManager om = new OrderManager();
     }
 
     @Test
     public void testCreateItem(){
-        TestOrderManager tom = new TestOrderManager();
-        Assertions.assertTrue(tom.getItems().isEmpty());
-        tom.createItem();
-        Assertions.assertTrue(!tom.getItems().isEmpty());
+        OrderManager om = new OrderManager();
+        Assertions.assertTrue(om.getItems().isEmpty());
+        om.createItem();
+        Assertions.assertTrue(!oom.getItems().isEmpty());
     }
 
 }
