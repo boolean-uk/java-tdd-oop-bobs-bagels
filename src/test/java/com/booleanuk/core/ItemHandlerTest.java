@@ -68,6 +68,10 @@ public class ItemHandlerTest {
         Filling filling1 = itemHandler.addFilling("FILE", bagel1);
         double total4 = itemHandler.getTotal();
         assertEquals(0.73, total4);
+
+        itemHandler.removeItem(filling1.getId());
+        double total5 = itemHandler.getTotal();
+        assertEquals(0.61, total5);
     }
 
 
