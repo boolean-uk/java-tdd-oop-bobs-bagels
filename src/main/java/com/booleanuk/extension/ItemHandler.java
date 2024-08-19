@@ -122,6 +122,8 @@ public class ItemHandler {
             sixBagelDiscount();
         }
 
+        coffeeAndBagelDiscount();
+
         double total = 0;
         for (Item item : basket) {
             total += item.getTotal();
@@ -131,7 +133,17 @@ public class ItemHandler {
     }
 
     public void coffeeAndBagelDiscount() {
-
+        if (this.discountCounterMap.containsKey("Coffee") && this.discountCounterMap.containsKey("Bagel")) {
+            if (!this.discountCounterMap.get("Coffee").isEmpty() && !this.discountCounterMap.get("Bagel").isEmpty()) {
+                this.discountCounterMap.get("Coffee").getFirst().setDiscountPrice(900);
+                this.discountCounterMap.get("Coffee").removeFirst();
+                this.discountCounterMap.get("Bagel").getFirst().setDiscountPrice(350);
+                this.discountCounterMap.get("Bagel").removeFirst();
+                if (!this.discountCounterMap.get("Coffee").isEmpty() && !this.discountCounterMap.get("Bagel").isEmpty()) {
+                    coffeeAndBagelDiscount();
+                }
+            }
+        }
     }
 
     public void twelveBagelDiscount() {
@@ -150,6 +162,7 @@ public class ItemHandler {
         for (int i = 0; i < 6; i++) {
             this.discountCounterMap.get("Bagel").get(i).setDiscountPrice(415);
         }
+        this.discountCounterMap.put("Bagel", this.discountCounterMap.get("Bagel").subList(6, this.discountCounterMap.get("Bagel").size()));
     }
 
     public void calcDiscounts() {

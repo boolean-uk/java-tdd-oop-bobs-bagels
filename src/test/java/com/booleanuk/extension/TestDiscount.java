@@ -62,6 +62,6 @@ public class TestDiscount {
         assertEquals(8.43, itemHandler.getTotal());
 
         itemHandler.removeItem(bagel1.getId());
-        assertEquals(6.74, itemHandler.getTotal());
+        assertEquals(7.24, itemHandler.getTotal());
     }
 }
