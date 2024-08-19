@@ -22,7 +22,7 @@
 |             |                               | `-getAllCoffee()`                                   | Get a list of all coffee products.         | List       |
 |             |                               | `-getAllBagels()`                                   | Get a list of all bagel products.          | List       |
 |             |                               | `-getAllFillings()`                                 | Get a list of all filling products.        | List       |
-|             |                               | `+printMeny()`                                      | Print meny of all items in inventory.      | Print text |
+|             |                               | `+printMenu()`                                      | Print meny of all items in inventory.      | Print text |
 
 ## Basket
 | Classes  | Variables                    | Methods                                | Scenario                                                                                                      | Output          |
