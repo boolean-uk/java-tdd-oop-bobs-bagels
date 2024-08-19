@@ -44,6 +44,10 @@ public class ItemHandlerTest {
 
         Filling filling2 = itemHandler.addFilling("WRONGSKU", bagel1);
         assertEquals(1, bagel1.getFillings().size());
+
+        Bagel bagel = new Bagel("BGLS", 4);
+        Filling filling3 = itemHandler.addFilling("FILC", bagel);
+        assertNull(filling3);
     }
 
 
