@@ -41,6 +41,9 @@ public class ItemHandlerTest {
         assertEquals(0.12, filling1.getPrice());
 
         assertEquals(bagel1.getFillings().getFirst(), filling1);
+
+        Filling filling2 = itemHandler.addFilling("WRONGSKU", bagel1);
+        assertNull(bagel1.getFillings().get(1));
     }
 
 
