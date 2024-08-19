@@ -112,6 +112,25 @@ public class OrderTest {
 
         order.addProduct(bagelO);
         Assertions.assertEquals(399 + bagelO.getPrice(), order.getTotalSum());
+
+        order.removeProduct(bagelO);
+        Assertions.assertEquals(399, order.getTotalSum());
+    }
+
+    // test multi buy discount going from 12 bagels to 6 bagels discount
+    @Test
+    public void testMultiBuyDiscount12To6Bagels() {
+        Store store = new Store("Bob's Bagels");
+        Product bagelO = store.getInventory().getProduct("BGLO");
+        Product bagelP = store.getInventory().getProduct("BGLP");
+        Order order = new Order();
+        addProductsToOrder(order, bagelO, 6);
+        addProductsToOrder(order, bagelP, 6);
+        Assertions.assertEquals(399, order.getTotalSum());
+
+
+        order.removeProduct(bagelO);
+        Assertions.assertEquals(249 + 5 * bagelO.getPrice(), order.getTotalSum());
     }
 
     // Helper method to add products to an order
