@@ -60,6 +60,10 @@ public class Basket {
         return 0.0;
     }
 
+    public Integer getBasketSize(){
+        return this.basketSize;
+    }
+
     public Boolean basketIsFull(){
         return Objects.equals(basketSize, basket.size());
     }
@@ -68,12 +72,14 @@ public class Basket {
         return false;
     }
 
-    public String changeBasketSize(int newSize){
+    public boolean changeBasketSize(int newSize){
         if (0 < newSize){
             this.basketSize = newSize;
-            return "Basket size changed successfully";
+            System.out.println("Basket size changed successfully");
+            return true;
         }
-        return "Basket size can't be less than 1.";
+        System.out.println("Basket size can't be less than 1.");
+        return false;
     }
 }
 

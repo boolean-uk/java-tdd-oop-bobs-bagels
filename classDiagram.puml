@@ -20,7 +20,7 @@ Class Basket {
     + numberOfItemsInBasket(): int
     + printBasketContent(): Void
     + calculateBasketCost(): Double
-    + changeBasketSize(newSize: Integer): String
+    + changeBasketSize(newSize: Integer): Boolean
 }
 
 Abstract Class Item {
