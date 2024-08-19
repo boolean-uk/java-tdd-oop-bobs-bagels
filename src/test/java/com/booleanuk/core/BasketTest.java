@@ -12,7 +12,7 @@ public class BasketTest {
     private Order order;
 
     @BeforeEach
-    public void setUp() {
+    public void setUp() throws FullBasketException {
         this.order = new Order();
         Basket basket = this.order.getBasket();
         basket.addProduct(new Bagel("Bagel", 0.49, SKU.BGLP, BagelType.ONION));
@@ -32,7 +32,7 @@ public class BasketTest {
     }
 
     @Test
-    public void testIsFull() {
+    public void testIsFull() throws FullBasketException {
         Basket basket = this.order.getBasket();
         basket.addProduct(new Bagel("Bagel", 0.59, SKU.BGLS, BagelType.SESAME));
         basket.addProduct(new Bagel("Bagel", 0.59, SKU.BGLE, BagelType.EVERYTHING));
