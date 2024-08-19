@@ -10,7 +10,7 @@ public class BagelTest {
     @Test
     public void testBagel(){
         Bagel bagel = new Bagel("Everything");
-        Assertions.assertEquals(bagel.getVariant(), "Everything");
+        Assertions.assertEquals(bagel.getBagelVariant(), "Everything");
     }
 
     @Test

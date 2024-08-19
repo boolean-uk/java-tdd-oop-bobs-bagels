@@ -42,13 +42,14 @@ class BasketTest {
         Assertions.assertEquals(basket.basketItems.containsKey("Poppy Seed"), true);
         Assertions.assertEquals(basket.basketItems.get("Poppy Seed"), 2);
     }
-  /*  @Test
+    @Test
     public void testGetFillingCost(){
-        Basket basket = new Basket();
-        basket.addBagel("Poppy Seed", 1);
+        Basket basket = new Basket()
+        double fillingCost = basket.getFillingCost("FILB");
+       Assertions.assertEquals(0.12, fillingCost );
 
 
-    }*/
+    }
 
 
 

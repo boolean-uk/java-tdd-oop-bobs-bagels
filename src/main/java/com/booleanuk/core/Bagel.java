@@ -4,12 +4,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Bagel {
-    private String variant = "";
+    private String bagelVariant = "";
     private HashMap<String, Integer> fillingsMap = new HashMap<>();
 
 
     public Bagel(String variant){
-        this.variant = variant;
+        this.bagelVariant = variant;
     }
 
 
@@ -33,12 +33,12 @@ public class Bagel {
         }
     }
 
-    public String getVariant() {
-        return variant;
+    public String getBagelVariant() {
+        return bagelVariant;
     }
 
-    public void setVariant(String variant) {
-        this.variant = variant;
+    private void setBagelVariant(String variant) {
+        this.bagelVariant = variant;
     }
 
     public HashMap<String, Integer> getFillings() {
