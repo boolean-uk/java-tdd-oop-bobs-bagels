@@ -1,7 +1,6 @@
 package com.booleanuk.core;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Objects;
 import java.util.Scanner;
 
@@ -57,7 +56,11 @@ public class Basket {
     }
 
     public Float calculateBasketCost(){
-        return 0.00f;
+        int total = 0;
+        for (Item i : basket){
+            total += i.getPrice();
+        }
+        return (float) total/100;
     }
 
     public Integer getBasketSize(){

@@ -161,6 +161,5 @@ public class BasketTest {
         total += item2.getPrice();
 
         Assertions.assertEquals((float) total /100, basket.calculateBasketCost());
-
     }
 }

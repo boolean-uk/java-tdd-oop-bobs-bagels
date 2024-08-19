@@ -24,6 +24,6 @@ public abstract class Item {
     }
 
     public Integer getQuantity() { return this.quantity; }
-    public Double getPrice(){ return 0.0; }
+    public Integer getPrice(){ return this.price; }
     public String getVariant(){ return ""; }
 }
