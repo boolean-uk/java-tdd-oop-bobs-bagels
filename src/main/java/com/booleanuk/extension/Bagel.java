@@ -65,11 +65,11 @@ public class Bagel extends Item {
         }
         if (this.getDiscountPrice() != -1) {
             total += this.getDiscountPrice();
-            System.out.println(this.getName() + ", " + this.getVariant() + ", price: " + this.getDiscountPrice());
+            System.out.println(this.getName() + ", " + this.getVariant() + ", price: " + this.getDiscountPrice()/1000);
             return total;
         }
         total += this.getPrice();
-        System.out.println(this.getName() + ", " + this.getVariant() + ", price: " + this.getPrice());
+        System.out.println(this.getName() + ", " + this.getVariant() + ", price: " + this.getPrice()/1000);
         return total;
     }
 }

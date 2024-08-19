@@ -71,10 +71,10 @@ public class Item {
 
     public double getTotal() {
         if (this.getDiscountPrice() != -1) {
-            System.out.println(this.name + ", " + this.variant + ", price: " + this.discountPrice);
+            System.out.println(this.name + ", " + this.variant + ", price: " + this.discountPrice/1000);
             return this.discountPrice;
         }
-        System.out.println(this.name + ", " + this.variant + ", price: " + this.price);
+        System.out.println(this.name + ", " + this.variant + ", price: " + this.price/1000);
         return this.price;
     }
 }

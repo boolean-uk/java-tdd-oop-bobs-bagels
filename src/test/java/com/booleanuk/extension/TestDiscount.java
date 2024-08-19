@@ -8,17 +8,26 @@ public class TestDiscount {
     ItemHandler itemHandler;
     @Test
     public void testDiscountSixBagels() {
+        Bagel bagel1 = new Bagel("BGLE", 0);
         itemHandler = new ItemHandler();
-        itemHandler.setCapacity(7);
+        itemHandler.setCapacity(100);
         for (int i = 0; i < 6; i++) {
-            itemHandler.addBagel("BGLE");
+            bagel1 = itemHandler.addBagel("BGLE");
         }
         assertEquals(2.49, itemHandler.getTotal());
 
-        for (int i = 0; i < 6; i++) {
-            itemHandler.addBagel("BGLE");
-        }
+        Bagel bagel2 = itemHandler.addBagel("BGLP");
+        assertEquals(2.98, itemHandler.getTotal());
 
-        assertEquals(3.99, itemHandler.getTotal());
+        itemHandler.removeItem(bagel1.getId());
+        assertEquals(2.49, itemHandler.getTotal());
+
+        itemHandler.removeItem(bagel2.getId());
+        assertEquals(0.49*5, itemHandler.getTotal());
+    }
+
+    @Test
+    public void testDiscountTwelveBagels() {
+
     }
 }

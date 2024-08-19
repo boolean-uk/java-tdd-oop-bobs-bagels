@@ -2,6 +2,7 @@ package com.booleanuk.extension;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class ItemHandler {
 
@@ -9,7 +10,7 @@ public class ItemHandler {
     private int basketCapacity;
     private HashMap<String, String> allItems;
     private int idTracker;
-    private HashMap<String, ArrayList<Item>> discountCounterMap;
+    private HashMap<String, List<Item>> discountCounterMap;
 
     public ItemHandler() {
         this.idTracker = 0;
@@ -114,11 +115,13 @@ public class ItemHandler {
 
     public double getTotal() {
         calcDiscounts();
-        for (ArrayList<Item> itemArrayList : discountCounterMap.values()) {
-            if (itemArrayList.size() > 5) {
-                sixBagelDiscount(itemArrayList);
-            }
+
+        if (this.discountCounterMap.get("Bagel").size() > 11) {
+            twelveBagelDiscount();
+        } else if (this.discountCounterMap.get("Bagel").size() > 5) {
+            sixBagelDiscount();
         }
+
         double total = 0;
         for (Item item : basket) {
             total += item.getTotal();
@@ -127,21 +130,37 @@ public class ItemHandler {
         return total/1000;
     }
 
-    public void sixBagelDiscount(ArrayList<Item> listToDiscount) {
+    public void twelveBagelDiscount() {
+        for (int i = 0; i < 12; i++) {
+            this.discountCounterMap.get("Bagel").get(i).setDiscountPrice(332.5);
+        }
+        this.discountCounterMap.put("Bagel", this.discountCounterMap.get("Bagel").subList(12, this.discountCounterMap.get("Bagel").size()));
+        if (this.discountCounterMap.get("Bagel").size() > 11) {
+            twelveBagelDiscount();
+        } else if (this.discountCounterMap.get("Bagel").size() > 5) {
+            sixBagelDiscount();
+        }
+    }
+
+    public void sixBagelDiscount() {
         for (int i = 0; i < 6; i++) {
-            listToDiscount.get(i).setDiscountPrice(415);
+            this.discountCounterMap.get("Bagel").get(i).setDiscountPrice(415);
         }
     }
 
     public void calcDiscounts() {
         discountCounterMap = new HashMap<>();
         for (Item item : basket) {
-            if (discountCounterMap.containsKey(item.getSKU())) {
-                discountCounterMap.get(item.getSKU()).add(item);
+            if (discountCounterMap.containsKey(item.getName())) {
+                if (item.getSKU().equals("BGLP")) {
+                    discountCounterMap.get(item.getName()).addFirst(item);
+                } else {
+                    discountCounterMap.get(item.getName()).add(item);
+                }
             } else {
-                ArrayList<Item> itemArrayList = new ArrayList<>();
+                List<Item> itemArrayList = new ArrayList<>();
                 itemArrayList.add(item);
-                discountCounterMap.put(item.getSKU(), itemArrayList);
+                discountCounterMap.put(item.getName(), itemArrayList);
             }
         }
     }
