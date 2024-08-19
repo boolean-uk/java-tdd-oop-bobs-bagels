@@ -3,6 +3,7 @@ package com.booleanuk.core;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 class ReceiptTest {
@@ -18,10 +19,13 @@ class ReceiptTest {
     basket.add(new Bagel(BagelType.ONION));
     basket.add(new Coffee(CoffeeType.BLACK));
 
-    // Receipt receipt = inventory.purchase(basket);
+    Receipt receipt = inventory.purchase(basket);
     String expected = "~~~ Bob's Bagels ~~~" +
-        "---------------------------------" +
-        "Onion bagel | 1 | " +
-        "---------------------------------";
+        "----------------------" +
+        "1x Black coffee 0.99" +
+        "1x White coffee 1.19" +
+        "1x Onion bagel 0.49" +
+        "----------------------";
+    Assertions.assertEquals(expected, receipt.toString());
   }
 }
