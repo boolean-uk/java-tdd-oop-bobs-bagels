@@ -42,6 +42,16 @@ public class BasketTest {
         Assertions.assertEquals(0.49, basket.getTotalPrice());
     }
 
+    @Test
+    void addFilling(){
+        Basket basket = new Basket();
+        basket.addItem("BGLO");
+
+
+        Assertions.assertTrue(basket.addFilling("BGLO", "FILS"));
+
+    }
+
 
 
 }
