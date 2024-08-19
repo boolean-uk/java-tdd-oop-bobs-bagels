@@ -37,7 +37,13 @@ public class Basket {
     }
 
     public void removeProduct(Product product) throws NonExistingProductException {
-
+        boolean exists = this.getProducts().contains(product);
+        if (!exists) {
+            String message = "Product does not exist in the basket, cannot remove.";
+            throw new NonExistingProductException(message);
+        } else {
+            this.products.remove(product);
+        }
     }
 
     public void changeCapacity(int newCapacity) {
