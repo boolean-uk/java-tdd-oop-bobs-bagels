@@ -18,4 +18,16 @@ public class Bagel extends Product {
         }
         return false;
     }
+
+
+    @Override
+    public int getPrice() {
+        int price = super.getPrice();
+        for (Filling filling : fillings) {
+            if (filling != null) {
+                price += filling.getPrice();
+            }
+        }
+        return price;
+    }
 }
