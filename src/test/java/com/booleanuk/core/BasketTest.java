@@ -122,6 +122,47 @@ public class BasketTest {
 
     }
 
+    @Test
+    public void testIfInInventory() {
+        Inventory inventory = new Inventory(); // Ensure Inventory is properly initialized with items
+        Bagel bagel1 = new Bagel("BGLO", 0.49, "Bagel", Bagel.BagelVariant.ONION);
+        Filling filling = new Filling("FILE", 0.12, "Filling", "Egg");
+        Coffee coffee = new Coffee("COFC", 1.29, "Coffee", "Capuccino");
+
+        Assertions.assertTrue(inventory.isItemAvailable(bagel1.getSku()), "Bagel should be in the inventory");
+        Assertions.assertTrue(inventory.isItemAvailable(filling.getSku()), "Filling should be in the inventory");
+        Assertions.assertTrue(inventory.isItemAvailable(coffee.getSku()), "Coffee should be in the inventory");
+    }
+
+    @Test
+    public void testIfInInventoryNotExist() {
+        Inventory inventory = new Inventory(); // Ensure Inventory is properly initialized with items
+        Bagel bagel1 = new Bagel("Bol", 0.49, "Bagel", Bagel.BagelVariant.ONION);
+        Filling filling = new Filling("hj", 0.12, "Filling", "Egg");
+        Coffee coffee = new Coffee("lo", 1.29, "Coffee", "Capuccino");
+
+        Assertions.assertFalse(inventory.isItemAvailable(bagel1.getSku()), "Bagel should be in the inventory");
+        Assertions.assertFalse(inventory.isItemAvailable(filling.getSku()), "Filling should be in the inventory");
+        Assertions.assertFalse(inventory.isItemAvailable(coffee.getSku()), "Coffee should be in the inventory");
+    }
+
+    @Test
+    public void testTotalCostWithAllThreeItems(){
+        Basket basket = new Basket(2, new Inventory());
+        Bagel bagel1 = new Bagel("BGLO",0.49, "Bagel", Bagel.BagelVariant.ONION);
+        basket.addBagel(bagel1);
+
+        Filling filling = new Filling("FILE", 0.12, "Filling", "Egg");
+        bagel1.setFilling(filling);
+
+        Coffee coffee = new Coffee("COFC", 1.29, "Coffee", "Capuccino");
+
+        basket.addBagel(coffee);
+
+        Assertions.assertEquals(1.90, basket.getTotalCost(), 0.001);
+    }
+
+
 
 
 }

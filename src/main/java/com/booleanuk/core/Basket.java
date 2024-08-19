@@ -63,8 +63,10 @@ public class Basket {
                 if (filling != null) {
                     totalCost += filling.getPrice();
                 }
+
             }
         }
+        System.out.println("Total cost calculated: " + totalCost);
         return totalCost;
     }
 
