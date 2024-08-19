@@ -50,6 +50,14 @@ public class Order {
         return currentBasketCapacity >= maxBasketCapacity;
     }
 
+   public void incrementBasketCapacity() {
+       int sizeToIncrement = 5;
+       maxBasketCapacity += sizeToIncrement;
+    }
+
+    public int getMaxBasketCapacity() {
+        return maxBasketCapacity;
+    }
     public Map<String, Integer> getBasket() {
         return basket;
     }
