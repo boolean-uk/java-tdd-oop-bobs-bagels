@@ -142,11 +142,11 @@ public class MainTest {
         bagels1.removeFilling(fillings2);
         Assertions.assertEquals(1, bagels1.getFillings().size());
     }
-/*
+    /*
 
-Just for checking my basket
+    Just for checking my basket
 
- */
+    */
     @Test
     public void testPrintBasket() {
         order.addProduct(bagels1);

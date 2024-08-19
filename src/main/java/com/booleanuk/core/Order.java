@@ -15,7 +15,7 @@ public class Order {
         this.store = store;
     }
 
-    public Bagels getLastAddedBagel() {
+    private Bagels getLastAddedBagel() {
         return lastAddedBagel;
     }
 
@@ -81,8 +81,6 @@ public class Order {
     public double getTotalPrice() {
         return totalPrice / 100.0;
     }
-
-
 
     public void printBasket() {
         for (Map.Entry<String, Integer> entry : basket.entrySet()) {
