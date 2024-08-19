@@ -12,18 +12,18 @@ Inventory class:
 |                             |                                     | `The given product is not in stock` | `false` |
 
 Basket class:
-    
-| Member variables            | Methods                                              | Scenario                                                    | Outputs |
-|-----------------------------|------------------------------------------------------|-------------------------------------------------------------|---------|
-| `HashMap<Product, Integer>` | `add(Product product)`                               | Successfully product added to basket                        | true    |
-| `HashMap<Product, Integer>` | `remove(Product product)`                            | Successfully removed from basket                            | true    |
-|                             |                                                      | Failed to remove from basket                                | false   |
-|                             | `isFull()`                                           | Basket is full                                              | true    |
-|                             |                                                      | Basket is not full                                          | false   |
-| `maxCapacity`               | `changeCapacity(int newCapacity, boolean isManager)` | Successfully changed capacity of baskets                    | true    |
-|                             |                                                      | Failed to change capacity of baskets (e.g., is not manager) | false   |
-| `HashMap<Product, Integer>` | `getTotalCost()`                                     | there is atleast one product in the basket                  | double  |
-|                             |                                                      | there are no products in the basket                         | 0       |
+
+| Member variables     | Methods                                              | Scenario                                                    | Outputs |
+|----------------------|------------------------------------------------------|-------------------------------------------------------------|---------|
+| `ArrayList<Product>` | `add(Product product)`                               | Successfully product added to basket                        | true    |
+| `ArrayList<Product>` | `remove(Product product)`                            | Successfully removed from basket                            | true    |
+|                      |                                                      | Failed to remove from basket                                | false   |
+|                      | `isFull()`                                           | Basket is full                                              | true    |
+|                      |                                                      | Basket is not full                                          | false   |
+| `maxCapacity`        | `changeCapacity(int newCapacity, boolean isManager)` | Successfully changed capacity of baskets                    | true    |
+|                      |                                                      | Failed to change capacity of baskets (e.g., is not manager) | false   |
+| `ArrayList<Product>` | `getTotalCost()`                                     | there is atleast one product in the basket                  | double  |
+|                      |                                                      | there are no products in the basket                         | 0       |
 
 Product class:
 
