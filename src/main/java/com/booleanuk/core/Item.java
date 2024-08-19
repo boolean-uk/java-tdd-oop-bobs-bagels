@@ -1,8 +1,5 @@
 package com.booleanuk.core;
 
-import java.util.ArrayList;
-import java.util.Objects;
-
 public abstract class Item {
     protected String sku;
     protected Double price;
@@ -25,7 +22,6 @@ public abstract class Item {
         this.variant = variant;
         this.quantity = quantity;
     }
-
 
     public Integer getQuantity() { return this.quantity; }
     public Double getPrice(){ return 0.0; }
