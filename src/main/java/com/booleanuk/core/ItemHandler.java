@@ -110,6 +110,10 @@ public class ItemHandler {
         this.allItems.put("FILH", "Filling");
     }
 
+    public double getTotal() {
+        return 0;
+    }
+
     public ArrayList<Item> getBasket() {
         return basket;
     }
