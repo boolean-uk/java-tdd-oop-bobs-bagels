@@ -61,9 +61,9 @@ I'd like to know if I try to remove an item that doesn't exist in my basket.
 
 ### 6
 ``
-As a member of the public,
-So I can change my order,
-I'd like to remove a bagel from my basket.
+As a customer,
+So I know how much money I need,
+I'd like to know the total cost of items in my basket.
 ``
 
 ### 7
