@@ -81,4 +81,29 @@ public class BasketTest {
         Assertions.assertEquals(correctCost, basket.getTotalCost());
     }
 
+    @Test
+    public void testChangeCapacity() {
+        Basket basket = new Basket();
+
+        basket.addProduct(new OnionBagel());
+        basket.addProduct(new OnionBagel());
+        basket.addProduct(new OnionBagel());
+        basket.addProduct(new OnionBagel());
+        basket.addProduct(new OnionBagel()); // Full here
+
+        Assertions.assertTrue(basket.isFull());
+
+        Assertions.assertTrue(basket.changeCapacity(10, true)); // true means that I am a Bob Bagel's manager
+
+        Assertions.assertFalse(basket.isFull());
+
+        basket.addProduct(new OnionBagel());
+        basket.addProduct(new OnionBagel());
+        basket.addProduct(new OnionBagel());
+        basket.addProduct(new OnionBagel());
+        basket.addProduct(new OnionBagel()); // Full here again (10 products)
+
+        Assertions.assertTrue(basket.isFull());
+    }
+
 }
