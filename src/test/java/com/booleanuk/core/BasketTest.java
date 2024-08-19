@@ -64,12 +64,27 @@ public class BasketTest {
     }
 }
 
+@Test
+public void AddBagelWhenBasketIsFullTest(){
+       /*
+        As a member of the public,
+        So that I can not overfill my small bagel basket
+        I'd like to know when my basket is full when I try adding an item beyond my basket capacity.
+        */
+    Basket basket = new Basket();
 
-/*
-### 3
-``
-As a member of the public,
-So that I can not overfill my small bagel basket
-I'd like to know when my basket is full when I try adding an item beyond my basket capacity.
-``
- */
+    basket.setBasketSize = 1;
+
+    String name = "Bagel";
+    String variant = "Plain";
+    basket.addItemToBasket(Menu.getItemFromMenu(name, variant));
+
+    String name_2 = "Coffee";
+    String variant_2 = "Black";
+    String result = basket.addItemToBasket(Menu.getItemFromMenu(name_2, variant_2))
+
+    String expected = "Basket is full";
+
+    // Assert that the basket execution of addItemToBasket function returns the correct string
+    Assertions.assertEquals(expected, result);
+}
