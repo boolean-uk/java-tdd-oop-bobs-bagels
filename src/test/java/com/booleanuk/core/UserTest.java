@@ -117,7 +117,7 @@ public class UserTest {
         basket.add(order);
 
 
-        Assertions.assertEquals(4 * 0.49 + 4 * 0.12 + 0.99, basket.getTotal());
+        Assertions.assertEquals(0.39+3 * 0.49 + 4 * 0.12 + 0.99, basket.getTotal());
     }
 
     @Test
@@ -126,7 +126,7 @@ public class UserTest {
         bagel.addFilling(new Filling("Ham"));
         bagel.addFilling(new Filling("Cheese"));
 
-        Assertions.assertEquals(0.49 + 2 * 0.12, bagel.getPrice());
+        Assertions.assertEquals(0.39 + 2 * 0.12, bagel.getPrice());
 
 
     }

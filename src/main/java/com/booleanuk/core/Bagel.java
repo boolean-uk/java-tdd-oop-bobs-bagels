@@ -18,7 +18,7 @@ public class Bagel extends Item{
                 this.setSku("BGLP");
                 this.setName("Plain");
                 this.setPurchase(true);
-                this.setPrice(0.49);
+                this.setPrice(0.39);
                 break;
             case "Everything":
                 this.setSku("BGLE");
