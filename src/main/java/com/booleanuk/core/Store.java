@@ -2,10 +2,10 @@ package com.booleanuk.core;
 
 public class Store {
     private int capacity = 6;
-    Product[] inventory = new Product[14];
-    Product bagels1, bagels2, bagels3, bagels4;
-    Product coffee1, coffee2, coffee3, coffee4;
-    Product fillings1, fillings2, fillings3, fillings4, fillings5, fillings6, fillings7;
+    private final Product[] inventory = new Product[14];
+    private Product bagels1, bagels2, bagels3, bagels4;
+    private Product coffee1, coffee2, coffee3, coffee4;
+    private Product fillings1, fillings2, fillings3, fillings4, fillings5, fillings6, fillings7;
 
 
     public Store() {
@@ -57,7 +57,76 @@ public class Store {
         return capacity;
     }
 
+    public boolean findProductInInventory(String SKU) {
+        for (int i = 0; i < inventory.length; i++) {
+            if (inventory[i].getSKU().equals(SKU)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
    /* private String generateId(){
         return UUID.randomUUID().toString().replace("-", "");
     }*/
+
+    public Product getBagels1() {
+        return bagels1;
+    }
+
+    public Product getBagels2() {
+        return bagels2;
+    }
+
+    public Product getBagels3() {
+        return bagels3;
+    }
+
+    public Product getBagels4() {
+        return bagels4;
+    }
+
+    public Product getCoffee1() {
+        return coffee1;
+    }
+
+    public Product getCoffee2() {
+        return coffee2;
+    }
+
+    public Product getCoffee3() {
+        return coffee3;
+    }
+
+    public Product getCoffee4() {
+        return coffee4;
+    }
+
+    public Product getFillings1() {
+        return fillings1;
+    }
+
+    public Product getFillings2() {
+        return fillings2;
+    }
+
+    public Product getFillings3() {
+        return fillings3;
+    }
+
+    public Product getFillings4() {
+        return fillings4;
+    }
+
+    public Product getFillings5() {
+        return fillings5;
+    }
+
+    public Product getFillings6() {
+        return fillings6;
+    }
+
+    public Product getFillings7() {
+        return fillings7;
+    }
 }

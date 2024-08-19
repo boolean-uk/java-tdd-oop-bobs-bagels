@@ -22,53 +22,53 @@ public class MainTest {
 
     @Test
     public void testAddBagel() {
-        order.addProduct(store.bagels1);
-        Assertions.assertEquals(1, order.basket.size());
-        Assertions.assertTrue(order.basket.containsKey(store.bagels1.getSKU()));
-        order.addProduct(store.fillings7); // not in inventory
-        Assertions.assertNotEquals(2, order.basket.size());
-        Assertions.assertFalse(order.basket.containsKey(store.fillings7.getSKU()));
+        order.addProduct(store.getBagels1());
+        Assertions.assertEquals(1, order.sizeOfBasket());
+        Assertions.assertTrue(order.containsKeyBasket(store.getBagels1().getSKU()));
+        order.addProduct(store.getFillings7()); // not in inventory
+        Assertions.assertNotEquals(2, order.sizeOfBasket());
+        Assertions.assertFalse(order.containsKeyBasket(store.getFillings7().getSKU()));
 
     }
 
     @Test
     public void testMaxCapacity() {
-        order.addProduct(store.bagels1);
-        order.addProduct(store.bagels2);
-        order.addProduct(store.bagels3);
-        order.addProduct(store.bagels4);
-        order.addProduct(store.coffee1);
-        order.addProduct(store.coffee2);
-        Assertions.assertFalse(order.addProduct(store.coffee3));
+        order.addProduct(store.getBagels1());
+        order.addProduct(store.getBagels2());
+        order.addProduct(store.getBagels3());
+        order.addProduct(store.getBagels4());
+        order.addProduct(store.getCoffee1());
+        order.addProduct(store.getCoffee2());
+        Assertions.assertFalse(order.addProduct(store.getCoffee4()));
     }
 
     @Test
     public void testAddFilling() {
-        Assertions.assertFalse(order.addProduct(store.fillings1));
-        order.addProduct(store.bagels1);
-        Assertions.assertTrue(order.addProduct(store.fillings1));
-        Assertions.assertTrue(order.basket.containsKey(store.fillings1.getSKU()));
+        Assertions.assertFalse(order.addProduct(store.getFillings1()));
+        order.addProduct(store.getBagels1());
+        Assertions.assertTrue(order.addProduct(store.getFillings1()));
+        Assertions.assertTrue(order.containsKeyBasket(store.getFillings1().getSKU()));
     }
 
     @Test
     public void testGetPriceProduct() {
-        Assertions.assertEquals(0.99, order.getPriceProduct(store.coffee1));
+        Assertions.assertEquals(0.99, order.getPriceProduct(store.getCoffee1()));
     }
 
     @Test
     public void testRemoveBagel() {
-        order.addProduct(store.bagels1);
-        order.addProduct(store.coffee1);
-        order.removeProduct(store.bagels1);
-        Assertions.assertEquals(1, order.basket.size());
-        Assertions.assertThrows(NoSuchElementException.class, () -> order.removeProduct(store.bagels3));
+        order.addProduct(store.getBagels1());
+        order.addProduct(store.getCoffee1());
+        order.removeProduct(store.getBagels1());
+        Assertions.assertEquals(1, order.sizeOfBasket());
+        Assertions.assertThrows(NoSuchElementException.class, () -> order.removeProduct(store.getBagels1()));
     }
 
     @Test
     public void testTotalCost() {
-        order.addProduct(store.bagels1);
-        order.addProduct(store.fillings1);
-        order.addProduct(store.coffee1);
+        order.addProduct(store.getBagels1());
+        order.addProduct(store.getFillings1());
+        order.addProduct(store.getCoffee1());
         Assertions.assertEquals(1.6, order.getTotalPrice());
 
     }

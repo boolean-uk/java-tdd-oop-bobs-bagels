@@ -6,7 +6,7 @@ import java.util.NoSuchElementException;
 
 public class Order {
 
-    HashMap<String, Integer> basket = new HashMap<>();
+    private HashMap<String, Integer> basket = new HashMap<>();
     private final Store store = new Store();
     private int totalPrice;
 
@@ -15,7 +15,7 @@ public class Order {
             System.out.println("You reached max capacity");
             return false;
         }
-        if (!findProductInInventory(product.getSKU())) {
+        if (!store.findProductInInventory(product.getSKU())) {
             return false;
         }
         if (product instanceof Fillings) {
@@ -29,14 +29,14 @@ public class Order {
         return true;
     }
 
-    private boolean findProductInInventory(String SKU) {
-        for (int i = 0; i < store.inventory.length; i++) {
-            if (store.inventory[i].getSKU().equals(SKU)) {
-                return true;
-            }
-        }
-        return false;
+    public int sizeOfBasket() {
+        return basket.size();
     }
+
+    public boolean containsKeyBasket(String SKU) {
+        return basket.containsKey(SKU);
+    }
+
 
     private boolean isBagelInBasket() {
         return (basket.keySet().stream().anyMatch(key -> key.startsWith("BGL")));
