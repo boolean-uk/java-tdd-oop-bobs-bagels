@@ -14,7 +14,10 @@ public class Order {
         this.price = 0;
     }
 
-    public void addProduct(String newProduct, Store store){
+    public void addProduct(String newProduct, Store store) throws Exception{
+        /*if(!store.contains(newProduct)){
+            throw new Exception("No such product in inventory!");
+        }*/
         int value;
         if(basket.containsKey(newProduct)){
             value = basket.get(newProduct) + 1;

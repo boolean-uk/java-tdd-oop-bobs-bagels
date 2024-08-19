@@ -10,7 +10,7 @@ public class TestCore {
     Store store = new Store(10);
 
     @Test
-    public void testOrderAddProduct(){
+    public void testOrderAddProduct() throws Exception {
         Order order1 = new Order();
         Assertions.assertEquals(0, order1.basket.size());
         //Assertions.assertNull(order1.basket.get("BGLO"));
@@ -20,7 +20,7 @@ public class TestCore {
     }
 
     @Test
-    public void testOrderRemoveProduct(){
+    public void testOrderRemoveProduct() throws Exception {
         Order order1 = new Order();
         order1.addProduct("BGLO", store);
         order1.addProduct("BGLO", store);
@@ -34,7 +34,7 @@ public class TestCore {
     }
 
     @Test
-    public void testOrderRemoveProductThrow(){
+    public void testOrderRemoveProductThrow() throws Exception {
         Order order1 = new Order();
         order1.addProduct("BGLO", store);
         Exception thrown = assertThrows(Exception.class, () -> order1.removeProduct("BGLP"));
@@ -47,7 +47,7 @@ public class TestCore {
     }
 
     @Test
-    public void testOrderAddProductFromInventory(){
+    public void testOrderAddProductFromInventory() throws Exception {
         Order order1 = new Order();
         order1.addProduct("BGLO", store);
         Assertions.assertTrue(order1.basket.containsKey("BGLO"));
