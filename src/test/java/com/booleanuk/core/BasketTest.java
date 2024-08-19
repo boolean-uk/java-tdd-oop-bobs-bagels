@@ -12,6 +12,7 @@ public class BasketTest {
 
 
         Assertions.assertTrue(basket.addItem("BGLO"));
+
     }
 
     @Test
@@ -23,5 +24,14 @@ public class BasketTest {
         Assertions.assertTrue(basket.removeItem("BGLO"));
     }
 
+    @Test
+    void changeBasketSizeTest(){
+        Basket basket = new Basket();
+        basket.addItem("BGLO");
+
+
+        Assertions.assertEquals(basket.changeBasketSize(12));
+
+    }
 
 }
