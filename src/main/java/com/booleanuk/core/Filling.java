@@ -48,4 +48,8 @@ public class Filling extends Item{
             }
         }
     }
+
+    public Bagel getBagel() {
+        return bagel;
+    }
 }
