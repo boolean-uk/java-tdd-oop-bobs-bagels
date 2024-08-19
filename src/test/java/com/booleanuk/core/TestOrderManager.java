@@ -16,7 +16,7 @@ public class TestOrderManager {
         OrderManager om = new OrderManager();
         Assertions.assertTrue(om.getItems().isEmpty());
         om.createItem();
-        Assertions.assertTrue(!oom.getItems().isEmpty());
+        Assertions.assertTrue(!om.getItems().isEmpty());
     }
 
 }
