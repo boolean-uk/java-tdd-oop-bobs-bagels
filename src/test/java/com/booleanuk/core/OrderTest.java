@@ -59,7 +59,7 @@ public class OrderTest {
         Product product = new Product("SKU", 10, "Variant");
         Product product2 = new Product("SKU2", 20, "Variant2");
         order.addProduct(product);
-        order.removeProduct(product);
+        Assertions.assertTrue(order.removeProduct(product));
         Assertions.assertEquals(0, order.getTotalSum());
         Assertions.assertEquals(0, order.getBasket().size());
 
@@ -72,11 +72,12 @@ public class OrderTest {
         Assertions.assertEquals(1, order.getBasket().get(product.getSKU()));
     }
 
-    // test ìncrementBasketCapacity()
     @Test
     public void testIncrementBasketCapacity() {
         Order order = new Order();
         order.incrementBasketCapacity();
         Assertions.assertEquals(25, order.getMaxBasketCapacity());
     }
+
+
 }

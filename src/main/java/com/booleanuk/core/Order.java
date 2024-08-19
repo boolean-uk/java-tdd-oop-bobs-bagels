@@ -33,7 +33,7 @@ public class Order {
         return true;
     }
 
-    public void removeProduct(Product product) {
+    public boolean removeProduct(Product product) {
         if (basket.containsKey(product.getSKU())) {
             int productCount = basket.get(product.getSKU());
             if (productCount > 1) {
@@ -43,7 +43,10 @@ public class Order {
             }
             totalSum -= product.getPrice();
             currentBasketCapacity--;
+            return true;
         }
+        System.out.println("Product not found in the basket");
+        return false;
     }
 
     private boolean isBasketFull() {
