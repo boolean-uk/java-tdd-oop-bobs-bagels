@@ -7,8 +7,12 @@ import java.util.NoSuchElementException;
 public class Order {
 
     private HashMap<String, Integer> basket = new HashMap<>();
-    private final Store store = new Store();
+    private final Store store;
     private int totalPrice;
+
+    Order(Store store) {
+        this.store = store;
+    }
 
     public boolean addProduct(Product product) {
         if (store.getCapacity() == basket.size()) {
