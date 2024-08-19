@@ -47,7 +47,7 @@ public class Order {
 
 
     public void removeProduct(Product product) {
-
+        basket.remove(product.getSKU());
     }
 }
 
