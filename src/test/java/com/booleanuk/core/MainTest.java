@@ -52,11 +52,12 @@ public class MainTest {
         Assertions.assertEquals(0.99, order.getPriceProduct(store.coffee1));
     }
 
-    /*@Test
+    @Test
     public void testRemoveBagel() {
         order.addProduct(store.bagels1);
         order.addProduct(store.coffee1);
-        order.removeProduct(order.basket.size(), 1);
+        order.removeProduct(store.bagels1);
+        Assertions.assertEquals(1, order.basket.size());
 
-    }*/
+    }
 }
