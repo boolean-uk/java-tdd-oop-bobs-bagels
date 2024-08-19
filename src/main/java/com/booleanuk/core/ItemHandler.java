@@ -67,6 +67,10 @@ public class ItemHandler {
     }
 
     public boolean setCapacity(int newCapacity) {
+        if (this.basket.size() > newCapacity) {
+            System.out.println("Capacity cant be smaller than the current size of the basket");
+            return false;
+        }
         this.basketCapacity = newCapacity;
         return true;
     }
