@@ -69,6 +69,9 @@ public class ItemHandlerTest {
         assertTrue(removed);
         assertEquals(0, itemHandler.getBasket().size());
 
+        boolean removed4 = itemHandler.removeItem(bagel1.getId());
+        assertFalse(removed4);
+
         Bagel bagel2 = itemHandler.addBagel("BGLS");
         Filling filling1 = itemHandler.addFilling("FILC", bagel2);
         assertEquals(filling1, bagel2.getFillings().getFirst());
