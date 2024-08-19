@@ -19,4 +19,9 @@ public class InventoryTest {
         Assertions.assertTrue(inv.productIsInStock(bagel));
     }
 
+    @Test
+    public void testCheckIfProductIsNotInInventory() {
+        // TODO: implement
+    }
+
 }
