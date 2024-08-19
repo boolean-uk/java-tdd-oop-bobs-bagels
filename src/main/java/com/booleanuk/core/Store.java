@@ -8,23 +8,27 @@ public class Store {
     public HashMap<String, Order> orders;
     private int basketCapacity;
 
+    Product bagel1, bagel2, bagel3, bagel4,
+            coffee1, coffee2, coffee3, coffee4,
+            filling1, filling2, filling3, filling4, filling5, filling6;
+
     public Store(int basketCapacity) {
         this.basketCapacity = basketCapacity;
 
-        Bagel bagel1 = new Bagel("BGLO", "Onion", 0.49);
-        Bagel bagel2 = new Bagel("BGLP", "Plain", 0.39);
-        Bagel bagel3 = new Bagel("BGLE", "Everything", 0.49);
-        Bagel bagel4 = new Bagel("BGLS", "Sesame", 0.49);
-        Coffee coffee1 = new Coffee("COFB", "Black", 0.99);
-        Coffee coffee2 = new Coffee("COFW", "White", 1.19);
-        Coffee coffee3 = new Coffee("COFC", "Capuccino", 1.29);
-        Coffee coffee4 = new Coffee("COFL", "Latte", 1.29);
-        Filling filling1 = new Filling("FILB", "Bacon", 0.12);
-        Filling filling2 = new Filling("FILE", "Egg", 0.12);
-        Filling filling3 = new Filling("FILC", "Cheese", 0.12);
-        Filling filling4 = new Filling("FILX", "Cream Cheese", 0.12);
-        Filling filling5 = new Filling("FILS", "Smoked Salmon", 0.12);
-        Filling filling6 = new Filling("FILH", "Ham", 0.12);
+        bagel1 = new Bagel("BGLO", "Onion", 49);
+        bagel2 = new Bagel("BGLP", "Plain", 39);
+        bagel3 = new Bagel("BGLE", "Everything", 49);
+        bagel4 = new Bagel("BGLS", "Sesame", 49);
+        coffee1 = new Coffee("COFB", "Black", 99);
+        coffee2 = new Coffee("COFW", "White", 119);
+        coffee3 = new Coffee("COFC", "Capuccino", 129);
+        coffee4 = new Coffee("COFL", "Latte", 129);
+        filling1 = new Filling("FILB", "Bacon", 12);
+        filling2 = new Filling("FILE", "Egg", 12);
+        filling3 = new Filling("FILC", "Cheese", 12);
+        filling4 = new Filling("FILX", "Cream Cheese", 12);
+        filling5 = new Filling("FILS", "Smoked Salmon", 12);
+        filling6 = new Filling("FILH", "Ham", 12);
 
         inventory[0] = bagel1;
         inventory[1] = bagel2;
@@ -40,5 +44,13 @@ public class Store {
         inventory[11] = filling4;
         inventory[12] = filling5;
         inventory[13] = filling6;
+    }
+
+    public int getBasketCapacity(){
+        return this.basketCapacity;
+    }
+
+    public void setBasketCapacity(int newCapacity){
+        this.basketCapacity = newCapacity;
     }
 }
