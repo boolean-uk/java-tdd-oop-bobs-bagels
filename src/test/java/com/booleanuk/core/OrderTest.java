@@ -94,10 +94,14 @@ public class OrderTest {
         order.addProduct(bagelP);
         order.addProduct(bagelP);
 
-        Assertions.assertEquals(298, order.getTotalSum());
+        Assertions.assertEquals(249 + bagelO.getPrice(), order.getTotalSum());
 
         order.removeProduct(bagelP);
         Assertions.assertEquals(249, order.getTotalSum());
+
+        order.removeProduct(bagelO);
+        Assertions.assertEquals(bagelP.getPrice() * 5, order.getTotalSum());
+
     }
 
 }
