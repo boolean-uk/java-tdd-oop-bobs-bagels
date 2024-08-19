@@ -24,6 +24,10 @@ public class Product {
         return variant;
     }
 
+    public String getSKU() {
+        return sku;
+    }
+
     public int getPrice() {
         return price;
     }
