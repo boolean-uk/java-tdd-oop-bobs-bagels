@@ -44,4 +44,15 @@ public class OrderTest {
         Assertions.assertEquals(1, order.getBasket().size());
         Assertions.assertEquals(2, order.getBasket().get(product.getSKU()));
     }
+
+    // test if basket is ful
+    @Test
+    public void testBasketIsFull() {
+        Order order = new Order();
+        Product product = new Product("SKU", 10, "Variant");
+        for (int i = 0; i < 20; i++) {
+            order.addProduct(product);
+        }
+       Assertions.assertFalse(order.addProduct(product));
+    }
 }
