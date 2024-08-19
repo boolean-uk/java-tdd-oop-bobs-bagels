@@ -8,7 +8,7 @@ public class Order {
 
     HashMap<String, Integer> basket = new HashMap<>();
     private final Store store = new Store();
-    private double totalPrice;
+    private int totalPrice;
 
     public boolean addProduct(Product product) {
         if (store.getCapacity() == basket.size()) {
@@ -25,7 +25,7 @@ public class Order {
             }
         }
         basket.put(product.getSKU(), basket.getOrDefault(product.getSKU(), 0) + 1);
-        this.totalPrice += product.getPrice();
+        this.totalPrice += (int) (product.getPrice() * 100);
         return true;
     }
 
@@ -56,7 +56,7 @@ public class Order {
     }
 
     public double getTotalPrice() {
-        return totalPrice;
+        return totalPrice / 100.0;
     }
 }
 
