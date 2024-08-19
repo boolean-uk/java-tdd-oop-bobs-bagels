@@ -43,15 +43,15 @@ public class TestCore {
     @Test
     public void testStoreContains(){
         Assertions.assertTrue(store.contains("BGLO"));
+        Assertions.assertFalse(store.contains("BGLX"));
     }
 
-    /*
     @Test
     public void testOrderAddProductFromInventory(){
         Order order1 = new Order();
-        order1.addProduct("BGLO");
+        order1.addProduct("BGLO", store);
         Assertions.assertTrue(order1.basket.containsKey("BGLO"));
-        Exception thrown = assertThrows(Exception.class, () -> order1.addProduct("BGLX"));
+        Exception thrown = assertThrows(Exception.class, () -> order1.addProduct("BGLX", store));
     }
-    */
+
 }
