@@ -4,8 +4,8 @@ import java.util.HashMap;
 
 public class Store {
 
-    public Product[] inventory = new Product[14];
-    public HashMap<String, Order> orders;
+    private Product[] inventory = new Product[14];
+    private HashMap<String, Order> orders;
     private int basketCapacity;
 
     Product bagel1, bagel2, bagel3, bagel4,
@@ -44,6 +44,15 @@ public class Store {
         inventory[11] = filling4;
         inventory[12] = filling5;
         inventory[13] = filling6;
+    }
+
+    public boolean contains(String searchedProduct){
+        /*for(Product product : inventory){
+            if(product.getSku().equals(searchedProduct)){
+                return true;
+            }
+        }*/
+        return false;
     }
 
     public int getBasketCapacity(){

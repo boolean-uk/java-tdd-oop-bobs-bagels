@@ -14,7 +14,7 @@ public class Order {
         this.price = 0;
     }
 
-    public void addProduct(String newProduct){
+    public void addProduct(String newProduct, Store store){
         int value;
         if(basket.containsKey(newProduct)){
             value = basket.get(newProduct) + 1;
