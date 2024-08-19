@@ -63,4 +63,16 @@ public class MainTest {
         Assertions.assertEquals(1, order.basket.size());
         Assertions.assertThrows(NoSuchElementException.class, () -> order.removeProduct(store.bagels3));
     }
+
+    @Test
+    public void testTotalCost() {
+        order.addProduct(store.bagels1);
+        order.addProduct(store.fillings1);
+        order.addProduct(store.coffee1);
+
+        Assertions.assertEquals(1.6, order.getTotalPrice());
+
+    }
+
+
 }

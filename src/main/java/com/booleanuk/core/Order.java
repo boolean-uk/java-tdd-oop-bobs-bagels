@@ -8,7 +8,15 @@ public class Order {
 
     HashMap<String, Integer> basket = new HashMap<>();
    private final Store store = new Store();
-    private double totalPrice;
+   private double totalPrice;
+
+    public double getTotalPrice() {
+        return totalPrice;
+    }
+
+    public void setTotalPrice(double totalPrice) {
+        this.totalPrice = totalPrice;
+    }
 
     public boolean addProduct(Product product) {
         if (store.getCapacity() == basket.size()) {
