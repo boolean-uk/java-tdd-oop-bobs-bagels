@@ -3,7 +3,7 @@ package com.booleanuk.core;
 import java.util.ArrayList;
 
 public class Basket {
-    public ArrayList<Bagel> listOfBasket;
+    public ArrayList<Item> listOfBasket;
     public int capacity;
 
 
@@ -13,26 +13,26 @@ public class Basket {
 
     }
 
-    public void addBagel(Bagel bagel){
+    public void addBagel(Item item){
         if (getListOfBasket().size()<capacity) {
-            listOfBasket.add(bagel);
+            listOfBasket.add(item);
         } else {
             System.out.println("Basket is full! Cannot add more bagels.");
         }
 
     }
 
-    public String removeBagel(Bagel bagel){
-        if (listOfBasket.contains(bagel)) {
-                listOfBasket.remove(bagel);
+    public String removeBagel(Item item){
+        if (listOfBasket.contains(item)) {
+                listOfBasket.remove(item);
 
         } else {
             return "The bagel do not exist in the basket";
         }
-        return null;
+        return "The bagel was sucessfully removed";
     }
 
-    public ArrayList<Bagel> getListOfBasket(){
+    public ArrayList<Item> getListOfBasket(){
         return listOfBasket;
 
     }
