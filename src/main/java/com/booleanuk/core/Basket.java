@@ -32,6 +32,11 @@ public class Basket {
         }
     }
 
+    public void addItemToBasket(Bagel bagel, Filling filling) {
+        addItemToBasket(bagel);
+        addItemToBasket(filling);
+    }
+
     public int getItemQuantityFromSKU(String sku) {
         if(this.basket.containsKey(sku)) {
             return this.basket.get(sku);
