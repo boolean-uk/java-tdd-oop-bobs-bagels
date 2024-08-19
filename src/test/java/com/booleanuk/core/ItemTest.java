@@ -20,5 +20,13 @@ public class ItemTest {
     public void testCoffee() {
         Coffee coffee = new Coffee("COFB", 0);
         assertEquals(coffee.getPrice(), 0.99);
+
+        Coffee coffee1 = new Coffee("COFL", 0);
+        assertEquals(coffee1.getPrice(), 1.29);
+
+        Coffee coffee2 = new Coffee("COFBu", 0);
+        assertNull(coffee2.getVariant());
+
+
     }
 }
