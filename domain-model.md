@@ -88,8 +88,14 @@
 |                                    | `double price()`                                                                 | User wants to know the price of all products in their basket | Sum of product prices      |
 
 ## Domain model Inventory class
-| Variables                | Methods                                                 | Scenario                                | Output    |
-|--------------------------|---------------------------------------------------------|-----------------------------------------|-----------|
-| `List<Product> products` |                                                         |                                         |           |
-|                          | `void remove(Basket basket) throws NotInStockException` | All products in basket are in stock     |           |
-|                          |                                                         | Not all products in basket are in stock | Exception |
+| Variables                | Methods                                                      | Scenario                                | Output    |
+|--------------------------|--------------------------------------------------------------|-----------------------------------------|-----------|
+| `List<Product> products` |                                                              |                                         |           |
+|                          | `Receipt purchase(Basket basket) throws NotInStockException` | All products in basket are in stock     |           |
+|                          |                                                              | Not all products in basket are in stock | Exception |
+
+## Domain model Receipt class
+| Variables                | Methods             | Scenario                                                         | Output                                                |
+|--------------------------|---------------------|------------------------------------------------------------------|-------------------------------------------------------|
+| `List<Product> products` |                     |                                                                  |                                                       |
+|                          | `String toString()` | User want's to see a nicely formatted receipt for their purchase | A formatted string for the products in their purchase |

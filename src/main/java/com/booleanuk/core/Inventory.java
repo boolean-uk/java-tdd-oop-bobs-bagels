@@ -9,9 +9,7 @@ public class Inventory {
     this.stock = stock;
   }
 
-  // Not sure what to name - method removes all products in the basket from the
-  // inventory
-  void remove(Basket basket) throws NotInStockException {
+  Receipt purchase(Basket basket) throws NotInStockException {
     for (StandaloneProduct product : basket.products())
       for (Product component : product.components())
         this.stock.remove(this.find(component.sku()));

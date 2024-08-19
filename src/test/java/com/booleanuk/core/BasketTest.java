@@ -22,7 +22,7 @@ class BasketTest {
     Assertions.assertEquals(0.49 * 4, basket.price());
 
     basket.add(new Coffee(CoffeeType.BLACK), 2);
-    Assertions.assertEquals((1.25 * 2) + (0.49 * 2), basket.price());
+    Assertions.assertEquals((1.25 * 2) + (0.49 * 2), basket.price(), 0.0001);
   }
 
   @Test
@@ -90,5 +90,16 @@ class BasketTest {
     coffeeAndBagelBasket.add(new Bagel(BagelType.PLAIN));
     coffeeAndBagelBasket.add(new Coffee(CoffeeType.BLACK));
     Assertions.assertEquals(1.25, coffeeAndBagelBasket.price());
+  }
+
+  @Test
+  public void testManyDiscounts() {
+    Basket basket = new Basket(30);
+    basket.add(new Bagel(BagelType.ONION), 2);
+    basket.add(new Bagel(BagelType.PLAIN), 12);
+    basket.add(new Bagel(BagelType.EVERYTHING), 6);
+    basket.add(new Coffee(CoffeeType.BLACK), 3);
+
+    Assertions.assertEquals(9.97, basket.price());
   }
 }

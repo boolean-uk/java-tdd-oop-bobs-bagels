@@ -19,7 +19,7 @@ class InventoryTest {
     Basket basket = new Basket();
     basket.add(new Coffee(CoffeeType.BLACK));
     basket.add(new Bagel(BagelType.EVERYTHING));
-    Assertions.assertDoesNotThrow(() -> inventory.remove(basket));
+    Assertions.assertDoesNotThrow(() -> inventory.purchase(basket));
   }
 
   @Test
@@ -31,6 +31,6 @@ class InventoryTest {
 
     Basket basket = new Basket();
     basket.add(new Bagel(BagelType.EVERYTHING));
-    Assertions.assertThrows(NotInStockException.class, () -> inventory.remove(basket));
+    Assertions.assertThrows(NotInStockException.class, () -> inventory.purchase(basket));
   }
 }
