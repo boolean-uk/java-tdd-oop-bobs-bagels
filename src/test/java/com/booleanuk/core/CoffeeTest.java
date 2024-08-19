@@ -12,9 +12,9 @@ public class CoffeeTest {
     @Test
     public void testCreateAllCoffeeSorts() {
         Coffee black = new BlackCoffee();
-        Coffee white = new BlackCoffee();
-        Coffee capuccino = new BlackCoffee();
-        Coffee late = new BlackCoffee();
+        Coffee white = new WhiteCoffee();
+        Coffee capuccino = new CapuccinoCoffee();
+        Coffee late = new LatteCoffee();
 
         Assertions.assertEquals("COFB", black.getSKU());
         Assertions.assertEquals("COFW", white.getSKU());
