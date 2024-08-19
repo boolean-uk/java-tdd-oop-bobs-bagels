@@ -118,6 +118,25 @@ public class ItemHandler {
         return total;
     }
 
+    public double searchItem(String SKU) {
+        Item item;
+        if (this.allItems.containsKey(SKU)) {
+            if (this.allItems.get(SKU).equals("Coffee")) {
+                item = new Coffee(SKU, idTracker);
+                return item.getTotal();
+            } else if (this.allItems.get(SKU).equals("Bagel")) {
+                item = new Bagel(SKU, idTracker);
+                return item.getTotal();
+            } else if (this.allItems.get(SKU).equals("Filling")) {
+                Bagel bagel = new Bagel("BGLO", idTracker);
+                item = new Filling(SKU, idTracker, bagel);
+                return item.getTotal();
+            }
+        }
+        System.out.println("No such item exists.");
+        return -1;
+    }
+
     public ArrayList<Item> getBasket() {
         return basket;
     }

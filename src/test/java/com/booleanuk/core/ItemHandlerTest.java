@@ -133,7 +133,8 @@ public class ItemHandlerTest {
     @Test
     public void testSearchItem() {
         itemHandler = new ItemHandler();
-        boolean search1 = itemHandler.searchItem("BGLE");
+        double search1 = itemHandler.searchItem("BGLE");
+        assertEquals(0.49, search1);
     }
 
 
