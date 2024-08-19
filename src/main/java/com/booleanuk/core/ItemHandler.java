@@ -49,10 +49,10 @@ public class ItemHandler {
         return null;
     }
 
-    public Filling addFilling(String SKU, Item bagel) {
-        if (this.allItems.get(SKU).equals("Filling")) {
-            if (basket.contains(bagel) && bagel instanceof Bagel) {
-                Filling filling = new Filling(SKU, idTracker, (Bagel) bagel);
+    public Filling addFilling(String SKU, Bagel bagel) {
+        if (this.allItems.containsKey(SKU) && this.allItems.get(SKU).equals("Filling")) {
+            if (basket.contains(bagel)) {
+                Filling filling = new Filling(SKU, idTracker, bagel);
                 idTracker++;
                 System.out.println(filling.getName() + ", " + filling.getVariant() + ", price: " + filling.getPrice());
                 return filling;
