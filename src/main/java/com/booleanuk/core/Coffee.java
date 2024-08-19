@@ -3,31 +3,31 @@ package com.booleanuk.core;
 public record Coffee(CoffeeType type) implements StandaloneProduct {
   public double price() {
     switch (this.type) {
-      case Black:
+      case BLACK:
         return 0.99;
-      case White:
+      case WHITE:
         return 1.19;
-      case Capuccino:
+      case CAPUCCINO:
         return 1.29;
-      case Latte:
+      case LATTE:
         return 1.29;
     }
 
     return 0;
   }
 
-  public String sku() {
+  public Sku sku() {
     switch (this.type) {
-      case Black:
-        return "COFB";
-      case White:
-        return "COFW";
-      case Capuccino:
-        return "COFC";
-      case Latte:
-        return "COFL";
+      case BLACK:
+        return Sku.COFB;
+      case WHITE:
+        return Sku.COFW;
+      case CAPUCCINO:
+        return Sku.COFC;
+      case LATTE:
+        return Sku.COFL;
     }
 
-    return "";
+    return Sku.UNKNOWN;
   }
 }

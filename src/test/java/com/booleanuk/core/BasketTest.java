@@ -7,55 +7,55 @@ class BasketTest {
   @Test
   public void testAddProduct() {
     Basket basket = new Basket();
-    basket.add(new Bagel(BagelType.Onion));
+    basket.add(new Bagel(BagelType.ONION));
     Assertions.assertEquals(0.49, basket.price());
 
-    basket.add(new Coffee(CoffeeType.Black));
+    basket.add(new Coffee(CoffeeType.BLACK));
     Assertions.assertEquals(0.49 + 0.99, basket.price());
   }
 
   @Test
   public void testRemoveProduct() {
     Basket basket = new Basket();
-    basket.add(new Bagel(BagelType.Onion));
-    basket.add(new Bagel(BagelType.Onion));
-    basket.add(new Bagel(BagelType.Plain));
-    basket.add(new Coffee(CoffeeType.Black));
+    basket.add(new Bagel(BagelType.ONION));
+    basket.add(new Bagel(BagelType.ONION));
+    basket.add(new Bagel(BagelType.PLAIN));
+    basket.add(new Coffee(CoffeeType.BLACK));
 
-    Assertions.assertDoesNotThrow(() -> basket.remove("BGLO"));
-    Assertions.assertDoesNotThrow(() -> basket.remove("BGLO"));
-    Assertions.assertThrows(NotPresentInBasketException.class, () -> basket.remove("BGLO"));
-    Assertions.assertDoesNotThrow(() -> basket.remove("BGLP"));
-    Assertions.assertThrows(NotPresentInBasketException.class, () -> basket.remove("BGLO"));
-    Assertions.assertDoesNotThrow(() -> basket.remove("COFB"));
-    Assertions.assertThrows(NotPresentInBasketException.class, () -> basket.remove("BGLO"));
+    Assertions.assertDoesNotThrow(() -> basket.remove(Sku.BGLO));
+    Assertions.assertDoesNotThrow(() -> basket.remove(Sku.BGLO));
+    Assertions.assertThrows(NotPresentInBasketException.class, () -> basket.remove(Sku.BGLO));
+    Assertions.assertDoesNotThrow(() -> basket.remove(Sku.BGLP));
+    Assertions.assertThrows(NotPresentInBasketException.class, () -> basket.remove(Sku.BGLO));
+    Assertions.assertDoesNotThrow(() -> basket.remove(Sku.COFB));
+    Assertions.assertThrows(NotPresentInBasketException.class, () -> basket.remove(Sku.BGLO));
   }
 
   @Test
   public void testRemoveMultipleProducts() {
     Basket basket = new Basket();
-    basket.add(new Bagel(BagelType.Onion));
-    basket.add(new Bagel(BagelType.Onion));
-    basket.add(new Bagel(BagelType.Plain));
-    basket.add(new Coffee(CoffeeType.Black));
+    basket.add(new Bagel(BagelType.ONION));
+    basket.add(new Bagel(BagelType.ONION));
+    basket.add(new Bagel(BagelType.PLAIN));
+    basket.add(new Coffee(CoffeeType.BLACK));
 
-    Assertions.assertDoesNotThrow(() -> basket.remove("BGLO", 2));
-    Assertions.assertThrows(NotPresentInBasketException.class, () -> basket.remove("BGLO", 1));
-    Assertions.assertThrows(NotPresentInBasketException.class, () -> basket.remove("COFB", 2));
+    Assertions.assertDoesNotThrow(() -> basket.remove(Sku.BGLO, 2));
+    Assertions.assertThrows(NotPresentInBasketException.class, () -> basket.remove(Sku.BGLO, 1));
+    Assertions.assertThrows(NotPresentInBasketException.class, () -> basket.remove(Sku.COFB, 2));
   }
 
   @Test
   public void testBasketCapacity() {
     Basket basket = new Basket(5);
 
-    Assertions.assertDoesNotThrow(() -> basket.add(new Bagel(BagelType.Onion)));
-    Assertions.assertDoesNotThrow(() -> basket.add(new Bagel(BagelType.Plain)));
-    Assertions.assertDoesNotThrow(() -> basket.add(new Coffee(CoffeeType.Black)));
-    Assertions.assertDoesNotThrow(() -> basket.add(new Coffee(CoffeeType.Capuccino)));
-    Assertions.assertDoesNotThrow(() -> basket.add(new Coffee(CoffeeType.White)));
+    Assertions.assertDoesNotThrow(() -> basket.add(new Bagel(BagelType.ONION)));
+    Assertions.assertDoesNotThrow(() -> basket.add(new Bagel(BagelType.PLAIN)));
+    Assertions.assertDoesNotThrow(() -> basket.add(new Coffee(CoffeeType.BLACK)));
+    Assertions.assertDoesNotThrow(() -> basket.add(new Coffee(CoffeeType.CAPUCCINO)));
+    Assertions.assertDoesNotThrow(() -> basket.add(new Coffee(CoffeeType.WHITE)));
 
-    Assertions.assertThrows(AddToFullBasketException.class, () -> basket.add(new Bagel(BagelType.Everything)));
+    Assertions.assertThrows(AddToFullBasketException.class, () -> basket.add(new Bagel(BagelType.EVERYTHING)));
     basket.setCapacity(10);
-    Assertions.assertDoesNotThrow(() -> basket.add(new Bagel(BagelType.Everything)));
+    Assertions.assertDoesNotThrow(() -> basket.add(new Bagel(BagelType.EVERYTHING)));
   }
 }

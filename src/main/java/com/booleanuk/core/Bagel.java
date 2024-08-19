@@ -3,13 +3,13 @@ package com.booleanuk.core;
 public record Bagel(BagelType type) implements StandaloneProduct {
   public double price() {
     switch (this.type) {
-      case Onion:
+      case ONION:
         return 0.49;
-      case Plain:
+      case PLAIN:
         return 0.39;
-      case Everything:
+      case EVERYTHING:
         return 0.49;
-      case Sesame:
+      case SESAME:
         return 0.49;
     }
 
@@ -19,18 +19,18 @@ public record Bagel(BagelType type) implements StandaloneProduct {
     return 0;
   }
 
-  public String sku() {
+  public Sku sku() {
     switch (this.type) {
-      case Onion:
-        return "BGLO";
-      case Plain:
-        return "BGLP";
-      case Everything:
-        return "BGLE";
-      case Sesame:
-        return "BGLS";
+      case ONION:
+        return Sku.BGLO;
+      case PLAIN:
+        return Sku.BGLP;
+      case EVERYTHING:
+        return Sku.BGLE;
+      case SESAME:
+        return Sku.BGLS;
     }
 
-    return "";
+    return Sku.UNKNOWN;
   }
 }
