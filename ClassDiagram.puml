@@ -67,6 +67,7 @@ class OrderManager {
     + removeItem(): String
     'should give user feedback when attempting to remove an item that doesn't exist.
     + setBasketSize(i: int): i
+    - createItem(): void
 
 }
 
