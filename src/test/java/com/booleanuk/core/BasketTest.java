@@ -15,6 +15,16 @@ class BasketTest {
   }
 
   @Test
+  public void testAddMultipleProducts() {
+    Basket basket = new Basket();
+    basket.add(new Bagel(BagelType.ONION), 4);
+    Assertions.assertEquals(0.49 * 4, basket.price());
+
+    basket.add(new Coffee(CoffeeType.BLACK), 2);
+    Assertions.assertEquals((0.49 * 4) + (0.99 * 2), basket.price());
+  }
+
+  @Test
   public void testRemoveProduct() {
     Basket basket = new Basket();
     basket.add(new Bagel(BagelType.ONION));

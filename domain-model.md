@@ -73,17 +73,19 @@
 |                     |                          | `void add(Filling filling)` | User wants to add a filling to their bagel | Filling gets added to bagel |
 
 ## Domain model Basket class
-| Variables                          | Methods                                                                 | Scenario                                                     | Output                     |
-|------------------------------------|-------------------------------------------------------------------------|--------------------------------------------------------------|----------------------------|
-| `List<StandaloneProduct> products` |                                                                         |                                                              |                            |
-|                                    | `void add(StandaloneProduct product) throws AddToFullBasketException`   | Basket is full                                               | Exception                  |
-|                                    |                                                                         | Basket is not full                                           |                            |
-|                                    | `void remove(String sku) throws NotPresentInBasketException`            | Product with given sku is in basket                          |                            |
-|                                    |                                                                         | Product with given sku is not in basket                      | Exception                  |
-|                                    | `void remove(String sku, int count) throws NotPresentInBasketException` | `count` many products with given sku is in basket            |                            |
-|                                    |                                                                         | `count` many product with given sku are not in basket        | Exception                  |
-|                                    | `void setCapacity(int newCapacity)`                                     | Manager wants to change the capacity of basket               | Basket capacity is changed |
-|                                    | `double price()`                                                        | User wants to know the price of all products in their basket | Sum of product prices      |
+| Variables                          | Methods                                                                          | Scenario                                                     | Output                     |
+|------------------------------------|----------------------------------------------------------------------------------|--------------------------------------------------------------|----------------------------|
+| `List<StandaloneProduct> products` |                                                                                  |                                                              |                            |
+|                                    | `void add(StandaloneProduct product) throws AddToFullBasketException`            | Basket is full                                               | Exception                  |
+|                                    |                                                                                  | Basket is not full                                           |                            |
+|                                    | `void add(StandaloneProduct product, int count) throws AddToFullBasketException` | Basket is full after adding `count` products                 | Exception                  |
+|                                    |                                                                                  | Basket is not full                                           |                            |
+|                                    | `void remove(String sku) throws NotPresentInBasketException`                     | Product with given sku is in basket                          |                            |
+|                                    |                                                                                  | Product with given sku is not in basket                      | Exception                  |
+|                                    | `void remove(String sku, int count) throws NotPresentInBasketException`          | `count` many products with given sku is in basket            |                            |
+|                                    |                                                                                  | `count` many product with given sku are not in basket        | Exception                  |
+|                                    | `void setCapacity(int newCapacity)`                                              | Manager wants to change the capacity of basket               | Basket capacity is changed |
+|                                    | `double price()`                                                                 | User wants to know the price of all products in their basket | Sum of product prices      |
 
 ## Domain model Inventory class
 | Variables                | Methods                                                 | Scenario                                | Output    |
