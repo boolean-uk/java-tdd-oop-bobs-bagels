@@ -33,6 +33,19 @@ public class Order {
         return true;
     }
 
+    public void removeProduct(Product product) {
+        if (basket.containsKey(product.getSKU())) {
+            int productCount = basket.get(product.getSKU());
+            if (productCount > 1) {
+                basket.put(product.getSKU(), productCount - 1);
+            } else {
+                basket.remove(product.getSKU());
+            }
+            totalSum -= product.getPrice();
+            currentBasketCapacity--;
+        }
+    }
+
     private boolean isBasketFull() {
         return currentBasketCapacity >= maxBasketCapacity;
     }
