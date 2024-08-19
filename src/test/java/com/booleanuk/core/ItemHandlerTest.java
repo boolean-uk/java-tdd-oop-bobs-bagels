@@ -16,28 +16,31 @@ public class ItemHandlerTest {
     }
 
     @Test
-    public void testAddBasicItem() {
+    public void testAddBagelCoffee() {
         itemHandler = new ItemHandler();
-        Item coffee1 = itemHandler.addBasicItem("COFL");
+        Coffee coffee1 = itemHandler.addCoffee("COFL");
         assertEquals(1.29, coffee1.getPrice());
 
+        itemHandler = new ItemHandler();
+        Coffee coffee2 = itemHandler.addCoffee("WRONGSKU");
+        assertNull(coffee2);
+
+        Coffee coffee3 = itemHandler.addCoffee("COFL");
         assertEquals(1, itemHandler.getBasket().size());
-        Item bagel1 = itemHandler.addBasicItem("BGLS");
+        Bagel bagel1 = itemHandler.addBagel("BGLS");
         assertEquals(1, itemHandler.getBasket().size());
 
-        itemHandler = new ItemHandler();
-        Item filling1 = itemHandler.addBasicItem("FILC");
-        assertEquals(0, itemHandler.getBasket().size());
-        assertNull(filling1);
     }
 
 
     @Test
     public void testAddFilling() {
         itemHandler = new ItemHandler();
-        Item bagel1 = itemHandler.addBasicItem("BGLS");
-        Item filling1 = itemHandler.addFilling("FILC", bagel1);
+        Bagel bagel1 = itemHandler.addBagel("BGLS");
+        Filling filling1 = itemHandler.addFilling("FILC", bagel1);
         assertEquals(0.12, filling1.getPrice());
+
+        assertEquals(bagel1.getFillings().getFirst(), filling1);
     }
 
 

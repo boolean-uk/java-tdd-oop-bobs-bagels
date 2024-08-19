@@ -17,28 +17,37 @@ public class ItemHandler {
         setUpAllItems();
     }
 
-    public Item addBasicItem(String SKU) {
+    public Bagel addBagel(String SKU) {
         if (this.basket.size() >= this.basketCapacity) {
             System.out.println("Basket is full.");
             return null;
         }
-        if (this.allItems.get(SKU).equals("Bagel")) {
+        if (this.allItems.containsKey(SKU) && this.allItems.get(SKU).equals("Bagel")) {
             Bagel bagel = new Bagel(SKU, idTracker);
             this.idTracker++;
             this.basket.add(bagel);
             System.out.println(bagel.getName() + ", " + bagel.getVariant() + ", price: " + bagel.getPrice());
             return bagel;
-        } else if (this.allItems.get(SKU).equals("Coffee")) {
+        }
+        System.out.println("No such bagel exists.");
+        return null;
+    }
+
+    public Coffee addCoffee(String SKU) {
+        if (this.basket.size() >= this.basketCapacity) {
+            System.out.println("Basket is full.");
+            return null;
+        }
+        if (this.allItems.containsKey(SKU) && this.allItems.get(SKU).equals("Coffee")) {
             Coffee coffee = new Coffee(SKU, idTracker);
             this.idTracker++;
             this.basket.add(coffee);
             System.out.println(coffee.getName() + ", " + coffee.getVariant() + ", price: " + coffee.getPrice());
             return coffee;
         }
-        System.out.println("No such bagel or coffee exists.");
+        System.out.println("No such coffee exists.");
         return null;
     }
-
 
     public Filling addFilling(String SKU, Item bagel) {
         if (this.allItems.get(SKU).equals("Filling")) {
