@@ -54,6 +54,8 @@ public class ItemHandlerTest {
     @Test
     public void getTotal() {
         itemHandler = new ItemHandler();
+        double total1 = itemHandler.getTotal();
+        assertEquals(0, total1);
         Bagel bagel1 = itemHandler.addBagel("BGLS");
     }
 
