@@ -64,7 +64,7 @@
 | Everything |
 | Sesame     |
 
-## Domain model Bagel record
+## Domain model Bagel class
 | Implements          | Variables                | Methods                     | Scenario                                   | Output                      |
 |---------------------|--------------------------|-----------------------------|--------------------------------------------|-----------------------------|
 | `StandaloneProduct` |                          |                             |                                            |                             |

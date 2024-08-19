@@ -1,16 +1,29 @@
 package com.booleanuk.core;
 
-public record Bagel(BagelType type) implements StandaloneProduct {
+import java.util.ArrayList;
+import java.util.List;
+
+public class Bagel implements StandaloneProduct {
+  private BagelType type;
+  private List<Filling> fillings;
+
+  public Bagel(BagelType type) {
+    this.type = type;
+    this.fillings = new ArrayList<>();
+  }
+
   public double price() {
+    double fillingsPrice = fillings.stream().mapToDouble(Filling::price).sum();
+
     switch (this.type) {
       case ONION:
-        return 0.49;
+        return fillingsPrice + 0.49;
       case PLAIN:
-        return 0.39;
+        return fillingsPrice + 0.39;
       case EVERYTHING:
-        return 0.49;
+        return fillingsPrice + 0.49;
       case SESAME:
-        return 0.49;
+        return fillingsPrice + 0.49;
     }
 
     // Should be unreachable but we get a warning if we dont do this or add a
@@ -32,5 +45,9 @@ public record Bagel(BagelType type) implements StandaloneProduct {
     }
 
     return Sku.UNKNOWN;
+  }
+
+  public void add(Filling filling) {
+    this.fillings.add(filling);
   }
 }
