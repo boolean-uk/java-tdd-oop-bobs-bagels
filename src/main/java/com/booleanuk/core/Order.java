@@ -5,13 +5,29 @@ import java.util.UUID;
 
 public class Order {
 
-    public HashMap<String, Integer> basket = new HashMap<>();
+    private HashMap<String, Integer> basket = new HashMap<>();
     private UUID id;
-    int price;
+    private int price;
 
     public Order(){
         this.id = UUID.randomUUID();
         this.price = 0;
+    }
+
+    public int size(){
+        int result = 0;
+        for(Integer i : basket.values()){
+            result += i;
+        }
+        return result;
+    }
+
+    public boolean contains(String product){
+        return basket.containsKey(product);
+    }
+
+    public int get(String product){
+        return basket.get(product);
     }
 
     public void addProduct(String newProduct, Store store) throws Exception{
