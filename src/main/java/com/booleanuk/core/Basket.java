@@ -25,4 +25,11 @@ public class Basket {
             basket.put(item.getSKU(), 1);
         }
     }
+
+    public int getItemQuantityFromSKU(String sku) {
+        if(basket.containsKey(sku)) {
+            return basket.get(sku);
+        }
+        return 0;
+    }
 }

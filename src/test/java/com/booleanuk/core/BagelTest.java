@@ -30,7 +30,7 @@ public class BagelTest {
         Bagel bagel = new Bagel("BGLE");
         Filling filling = new Filling("FILX");
 
-        bagel.addFilling(filling.getSKU());
+        bagel.addFilling(filling);
 
         Assertions.assertEquals("FILX", bagel.getFilling().getSKU());
     }

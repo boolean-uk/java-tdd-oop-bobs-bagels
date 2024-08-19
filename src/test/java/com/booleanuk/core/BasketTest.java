@@ -72,5 +72,21 @@ public class BasketTest {
         Assertions.assertEquals(2, basket.countTotalItems());
 
         Assertions.assertEquals(1, basket.getItemQuantityFromSKU(bagel.getSKU()));
+
+    }
+
+    @Test
+    public void calculateTotalValueOfBasketTest() {
+        Basket basket = new Basket();
+        Bagel bagel = new Bagel("BGLO");
+        Filling filling = new Filling("FILX");
+
+        bagel.addFilling(filling);
+        basket.addItemToBasket(bagel);
+        basket.addItemToBasket(filling);
+
+        Assertions.assertEquals(2, basket.countTotalItems());
+
+        Assertions.assertEquals(0.61, basket.countTotalValueOfItems());
     }
 }
