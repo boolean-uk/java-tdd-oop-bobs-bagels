@@ -85,11 +85,17 @@ public class Order {
         System.out.println("Total price: " + totalPrice);
         System.out.println("Count: " + count);
         int x = 0;
-        if (count >= 6)
+        int y = 0;
+        if (count >= 12)
             do {
                 x++;
-                count -= 6;
-            } while (count > 6);
+                count -= 12;
+            } while (count > 12);
+        if (count >= 6) {
+            y ++;
+        }
+
+
         int sumToAdd = 0;
         if (count >= 0) {
             // Sort the list in descending order
@@ -104,7 +110,7 @@ public class Order {
                 sumToAdd += bagelsPrice.get(i);
             }
         }
-        int newSum = x * 249 +  sumToAdd;
+        int newSum = x * 399 + y * 249 +  sumToAdd;
         totalSum = newSum;
     }
 }
