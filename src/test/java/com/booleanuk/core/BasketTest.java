@@ -43,16 +43,10 @@ class BasketTest {
         Assertions.assertEquals(basket.basketItems.get("Poppy Seed"), 2);
     }
     @Test
-    public void testGetFillingCost(){
+    public void testUserRequestFillingCost(){
         Basket basket = new Basket();
-        double fillingCost = basket.getFillingCost("Bacon");
-       Assertions.assertEquals(0.12, fillingCost );
-    }
-    @Test
-    public void testIsFilling(){
-        Basket basket = new Basket();
-        boolean isFilling = basket.isFilling("Bacon");
-        Assertions.assertEquals(true, isFilling);
+        basket.userRequestFillingPrice("FILC");
+
     }
 
 

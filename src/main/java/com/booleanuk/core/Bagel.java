@@ -13,21 +13,21 @@ public class Bagel {
     }
 
 
-    public void addFilling(String fillingName){
+    public void addFilling(String fillingSku){
         Inventory inventory = new Inventory();
-        if(!(inventory.getInventoryItemDetails(fillingName) == null)){
-            if((inventory.getInventoryItemDetails(fillingName).getName() == "Filling")) {
-                this.fillingsMap.put(fillingName, 1);
+        if(!(inventory.getInventoryItemDetails(fillingSku) == null)){
+            if((inventory.getInventoryItemDetails(fillingSku).getName() == "Filling")) {
+                this.fillingsMap.put(fillingSku, 1);
             }
         }else{
             System.out.println("This filling is not offered by Bob's bagels.");
         }
     }
 
-    public void removeFilling(String fillingName){
+    public void removeFilling(String fillingSku){
         Inventory inventory = new Inventory();
-        if(!(inventory.getInventoryItemDetails(fillingName) == null)){
-                this.fillingsMap.remove(fillingName);
+        if(!(inventory.getInventoryItemDetails(fillingSku) == null)){
+                this.fillingsMap.remove(fillingSku);
         }else{
             System.out.println("This filling is not currently on this bagel.");
         }

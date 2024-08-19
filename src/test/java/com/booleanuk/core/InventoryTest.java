@@ -21,7 +21,7 @@ public class InventoryTest {
     public void testGetInventoryItem(){
         Inventory inventory = new Inventory();
         InventoryItem item =  new InventoryItem("FILB",0.12, "Filling","Bacon");
-        Assertions.assertEquals(item.getSku(), inventory.getInventoryItemDetails("Bacon").getSku());
+        Assertions.assertEquals(item.getSku(), inventory.getInventoryItemDetails("FILB").getSku());
         System.out.println(inventory.getInventoryItemHashMap().keySet());
 
 

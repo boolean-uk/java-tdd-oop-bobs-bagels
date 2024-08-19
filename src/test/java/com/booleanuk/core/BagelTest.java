@@ -16,13 +16,13 @@ public class BagelTest {
     @Test
     public void testAddFilling(){
         Bagel bagel = new Bagel("Everything");
-        bagel.addFilling("Bacon");
-        bagel.addFilling("Cheese");
+        bagel.addFilling("FILB");
+        bagel.addFilling("FILC");
         HashMap<String, Integer> fillings = new HashMap<>();
-        fillings.put("Bacon",1);
-        fillings.put("Cheese",1);
+        fillings.put("FILB",1);
+        fillings.put("FILC",1);
         Assertions.assertEquals(fillings, bagel.getFillings());
-        bagel.addFilling("Everything");
+        bagel.addFilling("BGLE");
         bagel.addFilling("Truffle");
         Assertions.assertEquals(fillings, bagel.getFillings());
     }
@@ -30,14 +30,14 @@ public class BagelTest {
     @Test
     public void testRemoveFilling(){
         Bagel bagel = new Bagel("Everything");
-        bagel.addFilling("Bacon");
-        bagel.addFilling("Cheese");
+        bagel.addFilling("FILB");
+        bagel.addFilling("FILC");
         HashMap<String, Integer> fillings = new HashMap<>();
-        fillings.put("Bacon",1);
-        bagel.removeFilling("Cheese");
+        fillings.put("FILB",1);
+        bagel.removeFilling("FILC");
 
         Assertions.assertEquals(fillings, bagel.getFillings());
-        bagel.removeFilling("Bacon");
+        bagel.removeFilling("FILB");
         Assertions.assertEquals(new HashMap<>(), bagel.getFillings());
     }
 

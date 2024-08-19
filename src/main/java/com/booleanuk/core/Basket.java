@@ -50,21 +50,51 @@ public class Basket {
     }
 
 
-    public double getFillingCost(String variant) {
+    private double getFillingCost(String sku) {
         Inventory inventory = new Inventory();
-        InventoryItem itemDetails = inventory.getInventoryItemDetails(variant);
-        System.out.println(variant);
+        InventoryItem itemDetails = inventory.getInventoryItemDetails(sku);
+        System.out.println(sku);
         return itemDetails.getPrice();
     }
 
-    public boolean isFilling(String variant) {
+    private boolean isFilling(String sku) {
         Inventory inventory = new Inventory();
-        InventoryItem itemDetails = inventory.getInventoryItemDetails(variant);
+        InventoryItem itemDetails = inventory.getInventoryItemDetails(sku);
 
         return itemDetails.getName().equals("Filling");
     }
 
+    public void userRequestFillingPrice(String sku){
+        Inventory inventory = new Inventory();
+        double price = 0.0;
+        boolean isInInventory = (inventory.getInventoryItemDetails(sku) != null);
+        if(isInInventory){
+            InventoryItem itemDetails = inventory.getInventoryItemDetails(sku);
+            if(this.isFilling(sku)){
+                price = itemDetails.getPrice();
+                System.out.println("The price of this filling is: "+ price);
+            }else{
+                System.out.println("This item is not a filling.");
+            }
+        }else{
+            System.out.println("We do not have this item in our inventory.");
+        }
+    }
 
+    /*public void userRequestFillingPrice(String sku){
+        Inventory inventory = new Inventory();
+
+        if(this.isFilling(sku)){
+            if(inventory.getInventoryItemDetails(sku ).getName() == "Filling"){
+                double price = itemDetails.getPrice();
+            }else{
+                System.out.println("This item is not a filling.");
+            }
+        }else{
+            System.out.println("We do not have this item in our inventory.");
+        }
+        inventory.getInventoryItemDetails(sku).getPrice();
+    }*/
     /*public void getFillingCost(String sku){
        Inventory inventory = new Inventory();
        InventoryItem itemDetails = inventory.getInventoryItemDetails(sku);
