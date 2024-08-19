@@ -34,6 +34,10 @@ public class Order {
         if(!store.contains(newProduct)){
             throw new Exception("No such product in inventory!");
         }
+        if(this.size() == 5){
+            System.out.println("Basket is full!");
+            return;
+        }
         int value;
         if(basket.containsKey(newProduct)){
             value = basket.get(newProduct) + 1;
