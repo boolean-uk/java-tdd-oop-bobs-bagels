@@ -37,4 +37,11 @@ public class Bagel extends Item{
             }
         }
     }
+    public ArrayList<Filling> getFillings() {
+        return fillings;
+    }
+
+    public void addFillings(Filling filling) {
+        this.fillings.add(filling);
+    }
 }
