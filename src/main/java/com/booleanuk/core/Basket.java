@@ -42,12 +42,22 @@ public class Basket {
                     System.out.println("Cannot buy filling on it's own, add it to a bagel dummy");
                     return false;
                 }
-
             }
         }
 
         System.out.println("Couldn't find item in inventory");
         return false;
+    }
 
+    public Boolean removeItem(String SKU){
+        for (Product p: basketContent){
+            if(p.getSKU().equals(SKU)){
+                basketContent.remove(p);
+                return true;
+            }
+        }
+
+        System.out.println("Couldn't find the item in the basket");
+        return false;
     }
 }
