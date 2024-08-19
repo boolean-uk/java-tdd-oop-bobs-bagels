@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class Basket {
     private ArrayList<Product> inventory;
     private ArrayList<Product> basketContent;
-    int basketSize;
+    private int basketSize;
 
     public Basket(){
         this.inventory = new ArrayList<>();
@@ -59,5 +59,18 @@ public class Basket {
 
         System.out.println("Couldn't find the item in the basket");
         return false;
+    }
+
+    public int changeBasketSize(int newSize){
+        setBasketSize(newSize);
+        return newSize;
+    }
+
+    private int getBasketSize(){
+        return this.basketSize;
+    }
+
+    private void setBasketSize(int newSize){
+        this.basketSize = newSize;
     }
 }

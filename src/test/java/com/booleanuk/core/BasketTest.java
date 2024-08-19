@@ -30,7 +30,7 @@ public class BasketTest {
         basket.addItem("BGLO");
 
 
-        Assertions.assertEquals(basket.changeBasketSize(12));
+        Assertions.assertEquals(12, basket.changeBasketSize(12));
 
     }
 
