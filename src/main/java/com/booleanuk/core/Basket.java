@@ -24,6 +24,5 @@ public class Basket {
         }else {
             basket.put(item.getSKU(), 1);
         }
-
     }
 }

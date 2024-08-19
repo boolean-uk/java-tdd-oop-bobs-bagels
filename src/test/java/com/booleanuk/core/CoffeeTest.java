@@ -7,8 +7,9 @@ public class CoffeeTest {
 
     @Test
     public void createCoffeeTest() {
-        Coffee coffee = new Coffee("COFB", 1.29, "Black");
+        Coffee coffee = new Coffee("COFB");
 
         Assertions.assertEquals("Black", coffee.getName());
+
     }
 }

@@ -18,10 +18,10 @@ public class BasketTest {
     @Test
     public void addBagelAndCoffeeAndFillingToBasketTest() {
         Basket basket = new Basket();
-        Bagel bagel = new Bagel("BGLO", 0.49, "Onion");
-        Bagel bagel2 = new Bagel("BGLO", 0.49, "Onion");
-        Coffee coffee = new Coffee("COFB", 1.29, "Black");
-        Filling filling = new Filling("FILH", 0.12, "Ham");
+        Bagel bagel = new Bagel("BGLO");
+        Bagel bagel2 = new Bagel("BGLO");
+        Coffee coffee = new Coffee("COFB");
+        Filling filling = new Filling("FILH");
         basket.addItemToBasket(bagel);
         basket.addItemToBasket(coffee);
         basket.addItemToBasket(filling);
@@ -43,8 +43,8 @@ public class BasketTest {
     @Test
     public void addMultipleBagels() {
         Basket basket = new Basket();
-        Bagel bagel = new Bagel("BGLO", 0.49, "Onion");
-        Bagel bagel2 = new Bagel("BGLO", 0.49, "Onion");
+        Bagel bagel = new Bagel("BGLO");
+        Bagel bagel2 = new Bagel("BGLO");
         basket.addItemToBasket(bagel);
         basket.addItemToBasket(bagel2);
 

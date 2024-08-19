@@ -7,7 +7,7 @@ public class FillingTest {
 
     @Test
     public void createFillingTest() {
-        Filling filling = new Filling("FILH", 0.12, "Ham");
+        Filling filling = new Filling("FILH");
 
         Assertions.assertEquals("FILH", filling.getSKU());
     }

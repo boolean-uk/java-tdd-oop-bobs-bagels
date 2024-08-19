@@ -1,16 +1,22 @@
 package com.booleanuk.core;
 
-public class Item {
-    String SKU;
-    double price;
-    String type;
-    String name;
+import java.util.HashMap;
 
-    public Item(String SKU, double price, String type, String name) {
+public class Item {
+    private final String SKU;
+    private double price;
+    private String type;
+    private String name;
+    private HashMap<String, Double> priceList = new HashMap<>();
+    private HashMap<String, String> typeList = new HashMap<>();
+    private HashMap<String, String> nameList = new HashMap<>();
+    private ItemList itemList;
+    public Item(String SKU) {
         this.SKU = SKU;
-        this.price = price;
-        this.type = type;
-        this.name = name;
+        itemList = new ItemList();
+        setPriceFromList();
+        setTypeFromList();
+        setNameFromList();
     }
 
     public String getSKU() {
@@ -28,4 +34,22 @@ public class Item {
     public String getName() {
         return this.name;
     }
+
+    private void setPriceFromList() {
+        this.priceList = itemList.getPriceList();
+        this.price = priceList.get(this.SKU);
+    }
+
+    private void setTypeFromList() {
+        this.typeList = itemList.getTypeList();
+        this.type = typeList.get(this.SKU);
+    }
+
+    private void setNameFromList() {
+        this.nameList = itemList.getNameList();
+        this.name = nameList.get(this.SKU);
+    }
+
+
+
 }
