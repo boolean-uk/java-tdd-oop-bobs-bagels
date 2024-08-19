@@ -10,4 +10,8 @@ public class Order {
     public int getTotalSum() {
         return totalSum;
     }
+
+    public void addProduct(Product product) {
+        totalSum += product.getPrice();
+    }
 }
