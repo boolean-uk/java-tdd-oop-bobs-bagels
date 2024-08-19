@@ -86,15 +86,17 @@ public class Order {
         System.out.println("Count: " + count);
         int x = 0;
         int y = 0;
-        if (count >= 12)
+        if (count >= 12) {
             do {
                 x++;
                 count -= 12;
             } while (count > 12);
+        } else {
         if (count >= 6) {
-            y ++;
+            y++;
+            count -= 6;
         }
-
+        }
 
         int sumToAdd = 0;
         if (count >= 0) {
