@@ -1,9 +1,10 @@
 package com.booleanuk.core;
 
-public class Bagel {
+public class Bagel extends Item {
     private BagelVariant variant;
 
     public Bagel(String sku, double price, String name, BagelVariant variant) {
+        super(sku, price, name);
         this.variant = variant;
     }
 
