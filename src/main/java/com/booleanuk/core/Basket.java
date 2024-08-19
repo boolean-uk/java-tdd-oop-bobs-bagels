@@ -39,4 +39,15 @@ public class Basket {
         return this.size == this.capacity;
     }
 
+    public boolean remove(Product p) {
+        if (!this.basket.containsKey(p.getSKU())) return false;
+
+        int currentQuantity = this.basket.get(p.getSKU());
+        if (currentQuantity == 1) this.basket.remove(p.getSKU());
+        else this.basket.replace(p.getSKU(), currentQuantity - 1);
+
+        --this.size;
+        return true;
+    }
+
 }
