@@ -3,6 +3,8 @@ package com.booleanuk.core;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import javax.swing.plaf.SliderUI;
+
 public class BagelTest {
 
     public BagelTest() {
@@ -29,6 +31,15 @@ public class BagelTest {
         Bagel b = new PlainBagel();
 
         Assertions.assertEquals(0.39, b.getPrice());
+    }
+
+    @Test
+    public void testCreateBagelAndAddFilling() {
+        Bagel bagel = new OnionBagel();
+        Bagel b = new OnionBagel();
+        bagel.setFilling(new SmokedSalmonFilling());
+
+        Assertions.assertEquals("FILS", bagel.getFilling().getSKU());
     }
 
 }
