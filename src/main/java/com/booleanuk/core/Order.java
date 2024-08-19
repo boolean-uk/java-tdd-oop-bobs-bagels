@@ -30,7 +30,30 @@ public class Order {
         }
         totalSum += product.getPrice();
         currentBasketCapacity++;
+        applyDiscount();
         return true;
+    }
+
+    private void applyDiscount() {
+        int count = 0;
+        int totalPrice = 0;
+        Inventory inventory = new Inventory();
+        for (Map.Entry<String, Integer> entry : basket.entrySet()) {
+            if (entry.getKey().startsWith("BGL")) {
+                count += entry.getValue();
+                totalPrice += entry.getValue() * inventory.getProduct(entry.getKey()).getPrice();
+            }
+        }
+        System.out.println("Total price: " + totalPrice);
+        System.out.println("Count: " + count);
+            int x = 0;
+            if (count >= 6)
+                do {
+                    x++;
+                    count -= 6;
+                } while (count > 6);
+            int newSum = x * 249 + count * 49;
+            totalSum = newSum;
     }
 
     public boolean removeProduct(Product product) {
@@ -53,14 +76,15 @@ public class Order {
         return currentBasketCapacity >= maxBasketCapacity;
     }
 
-   public void incrementBasketCapacity() {
-       int sizeToIncrement = 5;
-       maxBasketCapacity += sizeToIncrement;
+    public void incrementBasketCapacity() {
+        int sizeToIncrement = 5;
+        maxBasketCapacity += sizeToIncrement;
     }
 
     public int getMaxBasketCapacity() {
         return maxBasketCapacity;
     }
+
     public Map<String, Integer> getBasket() {
         return basket;
     }
