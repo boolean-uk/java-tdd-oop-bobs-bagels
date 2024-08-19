@@ -48,4 +48,29 @@ public class Basket {
             }
         }
     }
+
+
+    public double getFillingCost(String variant) {
+        Inventory inventory = new Inventory();
+        InventoryItem itemDetails = inventory.getInventoryItemDetails(variant);
+        System.out.println(variant);
+        return itemDetails.getPrice();
+    }
+    /*public void getFillingCost(String sku){
+       Inventory inventory = new Inventory();
+       InventoryItem itemDetails = inventory.getInventoryItemDetails(sku);
+       if(itemDetails){
+           if(inventory.getInventoryItemDetails(sku).getName() == "Filling"){
+              double price = itemDetails.getPrice();
+           }else{
+               System.out.println("This item is not a filling.");
+           }
+       }else{
+           System.out.println("We do not have this item in our inventory.");
+       }
+       inventory.getInventoryItemDetails(sku).getPrice();
+    }*/
+
+
+
 }

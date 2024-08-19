@@ -20,9 +20,10 @@ public class InventoryTest {
     @Test
     public void testGetInventoryItem(){
         Inventory inventory = new Inventory();
-        InventoryItem item =  new InventoryItem("BGLO",0.49, "Bagel","Onion");
-        inventory.addInventoryItem(item);
-        Assertions.assertEquals(inventory.getInventoryItemDetails("BGLO"), item);
+        InventoryItem item =  new InventoryItem("FILB",0.12, "Filling","Bacon");
+        Assertions.assertEquals(item.getSku(), inventory.getInventoryItemDetails("Bacon").getSku());
+        System.out.println(inventory.getInventoryItemHashMap().keySet());
+
 
     }
 }
