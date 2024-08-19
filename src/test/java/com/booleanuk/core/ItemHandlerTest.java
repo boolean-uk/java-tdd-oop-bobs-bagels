@@ -9,6 +9,6 @@ public class ItemHandlerTest {
     @Test
     public void testCreateItemHandler() {
         assertEquals(0, itemHandler.getIdTracker());
-
+        assertEquals(1, itemHandler.getBasketCapacity());
     }
 }
