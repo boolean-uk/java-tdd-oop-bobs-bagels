@@ -19,5 +19,9 @@ public class ItemHandlerTest {
     public void testAddBasicItem() {
         Item coffee1 = itemHandler.addBasicItem("COFL");
         assertEquals(1.29, coffee1.getPrice());
+
+        assertEquals(1, itemHandler.getBasket().size());
+
+
     }
 }
