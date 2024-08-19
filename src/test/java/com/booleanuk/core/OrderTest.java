@@ -50,7 +50,7 @@ public class OrderTest {
         for (int i = 0; i < 20; i++) {
             order.addProduct(product);
         }
-       Assertions.assertFalse(order.addProduct(product));
+        Assertions.assertFalse(order.addProduct(product));
     }
 
     @Test
@@ -86,13 +86,8 @@ public class OrderTest {
         Product bagelO = store.getInventory().getProduct("BGLO");
         Product bagelP = store.getInventory().getProduct("BGLP");
         Order order = new Order();
-        order.addProduct(bagelO);
-        order.addProduct(bagelP);
-        order.addProduct(bagelP);
-        order.addProduct(bagelP);
-        order.addProduct(bagelP);
-        order.addProduct(bagelP);
-        order.addProduct(bagelP);
+        addProductsToOrder(order, bagelO, 1);
+        addProductsToOrder(order, bagelP, 6);
 
         Assertions.assertEquals(249 + bagelO.getPrice(), order.getTotalSum());
 
@@ -104,4 +99,11 @@ public class OrderTest {
 
     }
 
+
+    // Helper method to add products to an order
+    private void addProductsToOrder(Order order, Product product, int quantity) {
+        for (int i = 0; i < quantity; i++) {
+            order.addProduct(product);
+        }
+    }
 }
