@@ -111,7 +111,11 @@ public class ItemHandler {
     }
 
     public double getTotal() {
-        return 0;
+        double total = 0;
+        for (Item item : basket) {
+            total += item.getPrice();
+        }
+        return total;
     }
 
     public ArrayList<Item> getBasket() {
