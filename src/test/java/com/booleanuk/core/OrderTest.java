@@ -14,20 +14,22 @@ public class OrderTest {
     @Test
     public void testAddProduct() {
         Order order = new Order();
-        Product product = new Product("SKU", 10, "Variant");
+        Store store = new Store("Bob's Bagels");
+        Product product = store.getInventory().getProduct("BGLO");
         order.addProduct(product);
-        Assertions.assertEquals(10, order.getTotalSum());
+        Assertions.assertEquals(product.getPrice(), order.getTotalSum());
 
-        Product product2 = new Product("SKU2", 20, "Variant2");
+        Product product2 = store.getInventory().getProduct("BGLP");
         order.addProduct(product2);
-        Assertions.assertEquals(30, order.getTotalSum());
+        Assertions.assertEquals(product2.getPrice() + product.getPrice(), order.getTotalSum());
     }
 
     @Test
     public void testGetBasket() {
         Order order = new Order();
-        Product product = new Product("SKU", 10, "Variant");
-        Assertions.assertTrue(order.addProduct(product));
+        Store store = new Store("Bob's Bagels");
+        Product product = store.getInventory().getProduct("BGLO");
+        order.addProduct(product);
         Assertions.assertEquals(1, order.getBasket().size());
         Assertions.assertEquals(1, order.getBasket().get(product.getSKU()));
     }
@@ -35,10 +37,11 @@ public class OrderTest {
     @Test
     public void testAddSameProductTwice() {
         Order order = new Order();
-        Product product = new Product("SKU", 10, "Variant");
+        Store store = new Store("Bob's Bagels");
+        Product product = store.getInventory().getProduct("BGLO");
         order.addProduct(product);
         order.addProduct(product);
-        Assertions.assertEquals(20, order.getTotalSum());
+        Assertions.assertEquals(product.getPrice() * 2, order.getTotalSum());
         Assertions.assertEquals(1, order.getBasket().size());
         Assertions.assertEquals(2, order.getBasket().get(product.getSKU()));
     }
@@ -46,18 +49,18 @@ public class OrderTest {
     @Test
     public void testBasketIsFull() {
         Order order = new Order();
-        Product product = new Product("SKU", 10, "Variant");
-        for (int i = 0; i < 20; i++) {
-            order.addProduct(product);
-        }
+        Store store = new Store("Bob's Bagels");
+        Product product = store.getInventory().getProduct("BGLO");
+        addProductsToOrder(order, product, 25);
         Assertions.assertFalse(order.addProduct(product));
     }
 
     @Test
     public void testRemoveProduct() {
         Order order = new Order();
-        Product product = new Product("SKU", 10, "Variant");
-        Product product2 = new Product("SKU2", 20, "Variant2");
+        Store store = new Store("Bob's Bagels");
+        Product product = store.getInventory().getProduct("BGLO");
+        Product product2 = store.getInventory().getProduct("BGLP");
         order.addProduct(product);
         Assertions.assertTrue(order.removeProduct(product));
         Assertions.assertEquals(0, order.getTotalSum());
@@ -67,7 +70,7 @@ public class OrderTest {
         order.addProduct(product);
         order.addProduct(product2);
         order.removeProduct(product);
-        Assertions.assertEquals(30, order.getTotalSum());
+        Assertions.assertEquals(product.getPrice() + product2.getPrice(), order.getTotalSum());
         Assertions.assertEquals(2, order.getBasket().size());
         Assertions.assertEquals(1, order.getBasket().get(product.getSKU()));
     }
