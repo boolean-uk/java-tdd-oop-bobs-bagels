@@ -25,20 +25,20 @@
 |             |                               | `+printMenu()`                                      | Print meny of all items in inventory.      | Print text |
 
 ## Basket
-| Classes  | Variables                    | Methods                                | Scenario                                                                                                      | Output          |
-|----------|------------------------------|----------------------------------------|---------------------------------------------------------------------------------------------------------------|-----------------|
-| `Basket` | `static int idCount`         |                                        | "Fake autoincrement id". Counter which will be increased everytime a new product is added to the basket.      |                 |
-|          | `HashMap<Products> products` | `addCoffee(enum variant)`              | Add coffee with specified variant. Then run printBasket().                                                    |                 |
-|          |                              |                                        | Can't add coffee.                                                                                             | throw exception |
-|          |                              | `addBagel(enum variant, enum filling)` | Add bagel with specified variant and filling. At the moment just one filling can be added. run printBasket(). |                 |
-|          |                              |                                        | Can't add bagel.                                                                                              | throw exception |
-|          |                              | `remove(int ProduktId)`                | Product is in basket and can be removed.                                                                      | Show message    |
-|          |                              |                                        | Product is not in basket and can not be removed.                                                              | throw exception |
-|          | `int maxCapacity`            | `changeCapacity(int newCapacity)`      | If newCapacity is more than 0.                                                                                | true            |
-|          |                              |                                        | If newCapacity is less than 1.                                                                                | false           |
-|          | `float totalCost`            |                                        |                                                                                                               |                 |
-|          |                              | `getTotalCost()`                       | Get total cost of all products.                                                                               | float           |
-|          |                              | `printBasket()`                        | Prints the content of the basket.                                                                             | Print text      |
+| Classes  | Variables                     | Methods                                | Scenario                                                                                                      | Output          |
+|----------|-------------------------------|----------------------------------------|---------------------------------------------------------------------------------------------------------------|-----------------|
+| `Basket` | `static int idCount`          |                                        | "Fake autoincrement id". Counter which will be increased everytime a new product is added to the basket.      |                 |
+|          | `ArrayList<Product> products` | `addCoffee(enum variant)`              | Add coffee with specified variant. Then run printBasket().                                                    |                 |
+|          |                               |                                        | Can't add coffee.                                                                                             | throw exception |
+|          |                               | `addBagel(enum variant, enum filling)` | Add bagel with specified variant and filling. At the moment just one filling can be added. run printBasket(). |                 |
+|          |                               |                                        | Can't add bagel.                                                                                              | throw exception |
+|          |                               | `remove(int ProduktId)`                | Product is in basket and can be removed.                                                                      | Show message    |
+|          |                               |                                        | Product is not in basket and can not be removed.                                                              | throw exception |
+|          | `int maxCapacity`             | `changeCapacity(int newCapacity)`      | If newCapacity is more than 0.                                                                                | true            |
+|          |                               |                                        | If newCapacity is less than 1.                                                                                | false           |
+|          | `float totalCost`             | `setTotalCost(float newTotalCost)`     |                                                                                                               |                 |
+|          |                               | `getTotalCost()`                       | Get total cost of all products.                                                                               | float           |
+|          |                               | `printBasket()`                        | Prints the content of the basket.                                                                             | Print text      |
 
 ## Product
 | Classes   | Variables      | Methods      | Scenario                           | Output |
