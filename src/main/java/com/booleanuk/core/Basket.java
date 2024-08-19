@@ -12,13 +12,23 @@ public class Basket {
         currentBasket = new HashMap<>();
     }
 
-    public int getProductCount(){
+    private int getProductCount(){
         return productCount;
     }
 
-    public int getBasketCapacity(){
+    public int retrieveProductCount(){
+        return getProductCount();
+    }
+
+    private int getBasketCapacity(){
         return basketCapacity;
     }
+
+    public int retrieveBasketCapacity(){
+        return getBasketCapacity();
+    }
+
+
 
     public String add(Product chosenProduct) {
 
@@ -78,7 +88,7 @@ public class Basket {
         basketCapacity = newSize;
     }
 
-    
+
 
 
 
