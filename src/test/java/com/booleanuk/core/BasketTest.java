@@ -8,13 +8,13 @@ public class BasketTest {
 
     @Test
     public void testBasket(){
-        Basket basket = new Basket(10);
+        Basket basket = new Basket(10, new Inventory());
         Assertions.assertEquals(10, basket.capacity);
     }
 
     @Test
     public void testAddBagel() {
-        Basket basket = new Basket(10);
+        Basket basket = new Basket(10, new Inventory());
         Item item1 = new Bagel("BGLO",0.49, "Bagel", Bagel.BagelVariant.SESAME);
         basket.addBagel(item1);
         Assertions.assertTrue(basket.getListOfBasket().contains(item1), "The bagel should be in the basket");
@@ -23,7 +23,7 @@ public class BasketTest {
 
     @Test
     public void testRemoveBagel() {
-        Basket basket = new Basket(10);
+        Basket basket = new Basket(10, new Inventory());
         Item item1 = new Bagel("BGLO",0.49, "Bagel", Bagel.BagelVariant.ONION);
         Item item2 = new Bagel("BGLO",0.49, "Bagel", Bagel.BagelVariant.EVERYTHING);
         Item item3 = new Bagel("BGLO",0.49, "Bagel", Bagel.BagelVariant.EVERYTHING);
@@ -37,7 +37,7 @@ public class BasketTest {
 
     @Test
     public void testRemoveBagelIfNotExist() {
-        Basket basket = new Basket(10);
+        Basket basket = new Basket(10, new Inventory());
         Item item1 = new Bagel("BGLO",0.49, "Bagel", Bagel.BagelVariant.ONION);
         Item item2 = new Bagel("BGLO",0.49, "Bagel", Bagel.BagelVariant.EVERYTHING);
         Item item3 = new Bagel("BGLO",0.49, "Bagel", Bagel.BagelVariant.EVERYTHING);
@@ -50,7 +50,7 @@ public class BasketTest {
 
     @Test
     public void isFull() {
-        Basket basket = new Basket(2);
+        Basket basket = new Basket(2, new Inventory());
         Item item1 = new Bagel("BGLO",0.49, "Bagel", Bagel.BagelVariant.ONION);
         Item item2 = new Bagel("BGLO",0.49, "Bagel", Bagel.BagelVariant.EVERYTHING);
         Item item3 = new Bagel("BGLO",0.49, "Bagel", Bagel.BagelVariant.PLAIN);
@@ -64,12 +64,23 @@ public class BasketTest {
 
     @Test
     public void testGetTotalCost() {
-        Basket basket = new Basket(2);
+        Basket basket = new Basket(2, new Inventory());
         Item item1 = new Bagel("BGLO",0.49, "Bagel", Bagel.BagelVariant.ONION);
         Item item2 = new Bagel("BGLO",0.49, "Bagel", Bagel.BagelVariant.EVERYTHING);
         basket.addBagel(item1);
         basket.addBagel(item2);
         Assertions.assertEquals(0.98, basket.getTotalCost(), 0.001);
+
+    }
+
+
+    @Test
+    public void testAddBagelThatDoesNotExist(){
+        Basket basket = new Basket(2, new Inventory());
+        Item item1 = new Bagel("lo",0.49, "Bagel", Bagel.BagelVariant.ONION);
+        Item item2 = new Bagel("lo",0.49, "Bagel", Bagel.BagelVariant.EVERYTHING);
+        basket.addBagel(item1);
+        basket.addBagel(item2);
 
     }
 
