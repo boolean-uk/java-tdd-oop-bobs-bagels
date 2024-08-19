@@ -1,53 +1,54 @@
 package com.booleanuk.core;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Basket {
 
     private final int DEFAULT_CAPACITY = 5;
 
-    private HashMap<String, Integer> basket; // String=SKU, Integer=quantity in the basket
+    private ArrayList<Product> basket; // String=SKU, Integer=quantity in the basket
     private int capacity;
-    private int size;
 
     public Basket() {
         this.capacity = DEFAULT_CAPACITY;
-        this.basket = new HashMap<>();
-        this.size = 0; // Number of products in the basket
+        this.basket = new ArrayList<>();
     }
 
     public boolean addProduct(Product p) {
-        if (isFull()) {
+        if (isFull() || this.basket.contains(p)) {
             return false;
         }
 
-        if (this.basket.containsKey(p.getSKU())) {
-            this.basket.replace(p.getSKU(), this.basket.get(p.getSKU()) + 1);
-        } else {
-            this.basket.put(p.getSKU(), 1);
-        }
-
-        ++this.size;
+        this.basket.add(p);
         return true;
     }
 
-    public HashMap<String, Integer> getBasket() {
+    public ArrayList<Product> getBasket() {
         return this.basket;
     }
 
     public boolean isFull() {
-        return this.size == this.capacity;
+        return this.basket.size() == this.capacity;
     }
 
     public boolean remove(Product p) {
-        if (!this.basket.containsKey(p.getSKU())) return false;
+        if (!this.basket.contains(p) || this.isFull()) return false;
 
-        int currentQuantity = this.basket.get(p.getSKU());
-        if (currentQuantity == 1) this.basket.remove(p.getSKU());
-        else this.basket.replace(p.getSKU(), currentQuantity - 1);
-
-        --this.size;
+        this.basket.remove(p);
         return true;
+    }
+
+    public double getTotalCost() {
+        double totalPrice = 0;
+        for (Product p : this.basket) {
+            if (p instanceof Bagel && ((Bagel) p).getFilling() != null) {
+                totalPrice += ((Bagel) p).getFilling().getPrice(); // If bagel has a filling, add to total price
+                continue;
+            }
+            totalPrice += p.getPrice();
+        }
+        return totalPrice;
     }
 
 }
