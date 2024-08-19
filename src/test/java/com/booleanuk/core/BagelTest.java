@@ -24,4 +24,14 @@ public class BagelTest {
 
         Assertions.assertEquals("Onion", bagel.getName());
     }
+
+    @Test
+    public void addFillingToBagel() {
+        Bagel bagel = new Bagel("BGLE");
+        Filling filling = new Filling("FILX");
+
+        bagel.addFilling(filling.getSKU());
+
+        Assertions.assertEquals("FILX", bagel.getFilling());
+    }
 }

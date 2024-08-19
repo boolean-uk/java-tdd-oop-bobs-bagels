@@ -7,10 +7,7 @@ public class Item {
     private double price;
     private String type;
     private String name;
-    private HashMap<String, Double> priceList = new HashMap<>();
-    private HashMap<String, String> typeList = new HashMap<>();
-    private HashMap<String, String> nameList = new HashMap<>();
-    private ItemList itemList;
+    private final ItemList itemList;
     public Item(String SKU) {
         this.SKU = SKU;
         itemList = new ItemList();
@@ -36,17 +33,17 @@ public class Item {
     }
 
     private void setPriceFromList() {
-        this.priceList = itemList.getPriceList();
+        HashMap<String, Double> priceList = itemList.getPriceList();
         this.price = priceList.get(this.SKU);
     }
 
     private void setTypeFromList() {
-        this.typeList = itemList.getTypeList();
+        HashMap<String, String> typeList = itemList.getTypeList();
         this.type = typeList.get(this.SKU);
     }
 
     private void setNameFromList() {
-        this.nameList = itemList.getNameList();
+        HashMap<String, String> nameList = itemList.getNameList();
         this.name = nameList.get(this.SKU);
     }
 
