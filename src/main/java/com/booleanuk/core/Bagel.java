@@ -10,6 +10,12 @@ public class Bagel extends Product {
     }
 
     public boolean addFilling(Filling filling) {
-       return true;
+        for (int i = 0; i < fillings.length; i++) {
+            if (fillings[i] == null) {
+                fillings[i] = filling;
+                return true;
+            }
+        }
+        return false;
     }
 }
