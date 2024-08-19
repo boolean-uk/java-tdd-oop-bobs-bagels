@@ -31,7 +31,7 @@ public class BasketTest {
         Basket basket = new Basket();
         Inventory inventory = new Inventory();
 
-        Assertions.assertNotEquals("You will need a bagel for that or it will be messy", basket.add(inventory.menu.get("BaconFilling")));
+        Assertions.assertEquals("You will need a bagel for that or it will be messy", basket.add(inventory.menu.get("BaconFilling")));
 
     }
 
