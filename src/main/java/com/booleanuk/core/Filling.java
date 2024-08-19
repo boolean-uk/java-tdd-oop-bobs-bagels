@@ -1,8 +1,8 @@
 package com.booleanuk.core;
 
 public record Filling(FillingType type) implements Product {
-  public double fullPrice() {
-    return this.basePrice();
+  public double extraPrice() {
+    return 0;
   }
 
   public double basePrice() {

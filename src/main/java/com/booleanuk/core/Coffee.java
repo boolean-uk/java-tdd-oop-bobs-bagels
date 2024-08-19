@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public record Coffee(CoffeeType type) implements StandaloneProduct {
-  public double fullPrice() {
-    return this.basePrice();
+  public double extraPrice() {
+    return 0;
   }
 
   public double basePrice() {

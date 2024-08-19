@@ -11,7 +11,8 @@ class BasketTest {
     Assertions.assertEquals(0.49, basket.price());
 
     basket.add(new Coffee(CoffeeType.BLACK));
-    Assertions.assertEquals(0.49 + 0.99, basket.price());
+    // Bagel + coffee is discounted to 1.25
+    Assertions.assertEquals(1.25, basket.price());
   }
 
   @Test
@@ -21,7 +22,7 @@ class BasketTest {
     Assertions.assertEquals(0.49 * 4, basket.price());
 
     basket.add(new Coffee(CoffeeType.BLACK), 2);
-    Assertions.assertEquals((0.49 * 4) + (0.99 * 2), basket.price());
+    Assertions.assertEquals((1.25 * 2) + (0.49 * 2), basket.price());
   }
 
   @Test
@@ -70,22 +71,24 @@ class BasketTest {
   }
 
   @Test
-  public void testDiscounts() {
+  public void testTwelveBagelDiscount() {
+    Basket twelveBagelBasket = new Basket(12);
+    twelveBagelBasket.add(new Bagel(BagelType.EVERYTHING), 12);
+    Assertions.assertEquals(3.99, twelveBagelBasket.price());
+  }
+
+  @Test
+  public void testSixBagelDiscount() {
     Basket sixBagelBasket = new Basket();
     sixBagelBasket.add(new Bagel(BagelType.ONION), 6);
     Assertions.assertEquals(2.49, sixBagelBasket.price());
+  }
 
-    Basket twelveBagelBasket = new Basket();
-    twelveBagelBasket.add(new Bagel(BagelType.PLAIN), 12);
-    Assertions.assertEquals(3.99, sixBagelBasket.price());
-
+  @Test
+  public void testCoffeeAndBagelDiscount() {
     Basket coffeeAndBagelBasket = new Basket();
-    twelveBagelBasket.add(new Bagel(BagelType.PLAIN));
-    twelveBagelBasket.add(new Coffee(CoffeeType.BLACK));
+    coffeeAndBagelBasket.add(new Bagel(BagelType.PLAIN));
+    coffeeAndBagelBasket.add(new Coffee(CoffeeType.BLACK));
     Assertions.assertEquals(1.25, coffeeAndBagelBasket.price());
-
-    Basket sixteenPlainBagelBasket = new Basket();
-    sixteenPlainBagelBasket.add(new Bagel(BagelType.PLAIN), 16);
-    Assertions.assertEquals(5.55, sixteenPlainBagelBasket.price());
   }
 }

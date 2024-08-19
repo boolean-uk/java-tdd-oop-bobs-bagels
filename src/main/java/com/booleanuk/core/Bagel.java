@@ -12,8 +12,8 @@ public class Bagel implements StandaloneProduct {
     this.fillings = new ArrayList<>();
   }
 
-  public double fullPrice() {
-    return this.basePrice() + fillings.stream().mapToDouble(Filling::fullPrice).sum();
+  public double extraPrice() {
+    return fillings.stream().mapToDouble(Filling::basePrice).sum();
   }
 
   public double basePrice() {

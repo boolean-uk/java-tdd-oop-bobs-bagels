@@ -45,8 +45,59 @@ public class Basket {
       this.remove(sku);
   }
 
+  private int numBagels() {
+    int n = 0;
+    for (Product product : this.products)
+      if (product instanceof Bagel)
+        ++n;
+    return n;
+  }
+
+  private int numCoffees() {
+    int n = 0;
+    for (Product product : this.products)
+      if (product instanceof Coffee)
+        ++n;
+    return n;
+  }
+
   public double price() {
-    return this.products.stream().mapToDouble(StandaloneProduct::fullPrice).sum();
+    // All fillings and extras cost money and cannot be discounted
+    double price = this.products
+        .stream()
+        .mapToDouble((product) -> product.extraPrice())
+        .sum();
+
+    int numBagels = this.numBagels();
+    int numCoffees = this.numCoffees();
+
+    while (numBagels >= 12) {
+      numBagels -= 12;
+      price += 3.99;
+    }
+
+    while (numBagels >= 6) {
+      numBagels -= 6;
+      price += 2.49;
+    }
+
+    while (numBagels >= 1 && numCoffees >= 1) {
+      --numCoffees;
+      --numBagels;
+      price += 1.25;
+    }
+
+    for (Product product : this.products) {
+      if (product instanceof Bagel && numBagels > 0) {
+        --numBagels;
+        price += product.basePrice();
+      } else if (product instanceof Coffee && numCoffees > 0) {
+        --numCoffees;
+        price += product.basePrice();
+      }
+    }
+
+    return price;
   }
 
   public void setCapacity(int capacity) {
