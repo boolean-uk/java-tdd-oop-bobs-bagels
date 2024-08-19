@@ -67,4 +67,18 @@ public class BasketTest {
 
     }
 
+    @Test
+    public void testGetTotalCostOfBasket() {
+        Basket basket = new Basket();
+
+        double correctCost = 0;
+        for (int i = 0; i < 5; ++i) {
+            Bagel b = new OnionBagel();
+            basket.addProduct(b);
+            correctCost += b.getPrice();
+        }
+
+        Assertions.assertEquals(correctCost, basket.getTotalCost());
+    }
+
 }
