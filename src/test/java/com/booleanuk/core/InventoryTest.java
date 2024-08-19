@@ -10,4 +10,31 @@ public class InventoryTest {
         Inventory inventory = new Inventory();
         Assertions.assertNotNull(inventory.getProduct("BGLO"));
     }
+
+    @Test
+    public void testInventoryContents() {
+        Inventory inventory = new Inventory();
+
+        assertProduct(inventory, "BGLO", 49, "Onion");
+        assertProduct(inventory, "BGLP", 39, "Plain");
+        assertProduct(inventory, "BGLE", 49, "Everything");
+        assertProduct(inventory, "BGLS", 49, "Sesame");
+        assertProduct(inventory, "COFB", 99, "Black");
+        assertProduct(inventory, "COFW", 119, "White");
+        assertProduct(inventory, "COFC", 129, "Cappuccino");
+        assertProduct(inventory, "COFL", 129, "Latte");
+        assertProduct(inventory, "FILB", 12, "Bacon");
+        assertProduct(inventory, "FILE", 12, "Egg");
+        assertProduct(inventory, "FILC", 12, "Cheese");
+        assertProduct(inventory, "FILX", 12, "Cream Cheese");
+        assertProduct(inventory, "FILS", 12, "Smoked Salmon");
+        assertProduct(inventory, "FILH", 12, "Ham");
+    }
+
+    private void assertProduct(Inventory inventory, String sku, int price, String variant) {
+        Product product = inventory.getProduct(sku);
+        Assertions.assertNotNull(product, "Product with SKU " + sku + " should not be null");
+        Assertions.assertEquals(price, product.getPrice(), "Price for SKU " + sku + " should be " + price);
+        Assertions.assertEquals(variant, product.getVariant(), "Variant for SKU " + sku + " should be " + variant);
+    }
 }
