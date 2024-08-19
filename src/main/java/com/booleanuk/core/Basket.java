@@ -51,4 +51,12 @@ public class Basket {
         return totalPrice;
     }
 
+    public boolean changeCapacity(int newCapacity, boolean isManager) {
+        if (isManager && newCapacity > 0) {
+            this.capacity = newCapacity;
+            return true;
+        }
+        return false;
+    }
+
 }
