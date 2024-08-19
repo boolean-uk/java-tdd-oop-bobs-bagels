@@ -47,11 +47,11 @@ public class Store {
     }
 
     public boolean contains(String searchedProduct){
-        /*for(Product product : inventory){
+        for(Product product : inventory){
             if(product.getSku().equals(searchedProduct)){
                 return true;
             }
-        }*/
+        }
         return false;
     }
 
