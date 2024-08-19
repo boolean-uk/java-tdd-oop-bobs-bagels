@@ -32,6 +32,7 @@ public class Order {
                 basket.remove(productToRemove);
             }
         }
+
     }
 
     public UUID getId(){

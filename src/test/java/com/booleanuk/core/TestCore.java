@@ -3,6 +3,8 @@ package com.booleanuk.core;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 public class TestCore {
 
     //Store store = new Store(10);
@@ -29,5 +31,12 @@ public class TestCore {
         order1.removeProduct("BGLP");
         Assertions.assertEquals(1, order1.basket.get("BGLO"));
         Assertions.assertFalse(order1.basket.containsKey("BGLP"));
+    }
+
+    @Test
+    public void testOrderRemoveProductThrow(){
+        Order order1 = new Order();
+        order1.addProduct("BGLO");
+        Exception thrown = assertThrows(Exception.class, () -> order1.removeProduct("BGLP"));
     }
 }
