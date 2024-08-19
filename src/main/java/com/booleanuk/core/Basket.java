@@ -90,4 +90,12 @@ public class Basket {
     public double getTotal() {
         return total;
     }
+
+    public HashMap<String, Integer> getItems() {
+        return Items;
+    }
+
+    public void adjustTotal(double change){
+        total+=change;
+    }
 }

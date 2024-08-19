@@ -7,6 +7,7 @@ public class Item {
     private Double Price;
     private Boolean Purchase;
     private String name;
+    private String type;
 
     public Double getPrice(){
         return Price;
@@ -38,5 +39,13 @@ public class Item {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public void setType(String type){
+        this.type=type;
+    }
+
+    public String getType() {
+        return type;
     }
 }
