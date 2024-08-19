@@ -69,7 +69,7 @@ public class Order {
     public int getPrice(Store store){
         int result = 0;
         for(HashMap.Entry<String, Integer> entry : basket.entrySet()){
-
+            result += store.getPrice(entry.getKey()) * entry.getValue();
         }
         return result;
     }

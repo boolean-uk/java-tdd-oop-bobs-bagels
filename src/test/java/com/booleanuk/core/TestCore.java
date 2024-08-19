@@ -120,7 +120,7 @@ public class TestCore {
         mainTest();
         Order order1 = new Order();
         order1.addProduct("BGLO", store);
-        order1.addProduct("BGLO", store);
+        order1.addProduct("BGLP", store);
         order1.addProduct("COFW", store);
         order1.addProduct("FILB", store);
         order1.addProduct("FILE", store);
