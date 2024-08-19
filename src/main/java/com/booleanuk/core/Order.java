@@ -70,9 +70,11 @@ public class Order {
     private void applyDiscount() {
         int count = 0;
         int totalPrice = 0;
+        int resetAmount = 0;
         ArrayList<Integer> bagelsPrice = new ArrayList();
         Inventory inventory = new Inventory();
         for (Map.Entry<String, Integer> entry : basket.entrySet()) {
+            resetAmount += entry.getValue() * inventory.getProduct(entry.getKey()).getPrice();
             if (entry.getKey().startsWith("BGL")) {
                 count += entry.getValue();
                 int bagelPrice = inventory.getProduct(entry.getKey()).getPrice();
@@ -91,28 +93,39 @@ public class Order {
                 x++;
                 count -= 12;
             } while (count > 12);
+            if (count >= 6) {
+                y++;
+                count -= 6;
+            }
         } else {
-        if (count >= 6) {
-            y++;
-            count -= 6;
-        }
-        }
-
-        int sumToAdd = 0;
-        if (count >= 0) {
-            // Sort the list in descending order
-            Collections.sort(bagelsPrice, new Comparator<Integer>() {
-                @Override
-                public int compare(Integer o1, Integer o2) {
-                    return o2 - o1;
-                }
-            });
-            System.out.println("Bagels price: " + bagelsPrice);
-            for (int i = 0; i < count; i++) {
-                sumToAdd += bagelsPrice.get(i);
+            if (count >= 6) {
+                y++;
+                count -= 6;
             }
         }
-        int newSum = x * 399 + y * 249 +  sumToAdd;
-        totalSum = newSum;
+
+        if (x == 0 && y == 0) {
+            totalSum = resetAmount;
+            System.out.println("No discount applied" + resetAmount + " " + totalSum);
+        } else {
+            int sumToAdd = 0;
+            if (count >= 0) {
+                // Sort the list in descending order
+                bagelsPrice.sort(new Comparator<Integer>() {
+                    @Override
+                    public int compare(Integer o1, Integer o2) {
+                        return o2 - o1;
+                    }
+                });
+                System.out.println("Bagels price: " + bagelsPrice);
+                for (int i = 0; i < count; i++) {
+                    sumToAdd += bagelsPrice.get(i);
+                }
+            }
+            System.out.println(count + " bagels left");
+            System.out.println("Sum to add: " + sumToAdd);
+            int newSum = x * 399 + y * 249 + sumToAdd;
+            totalSum = newSum;
+        }
     }
 }
