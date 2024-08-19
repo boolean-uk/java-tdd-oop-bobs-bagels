@@ -1,3 +1,5 @@
+
+
 package com.booleanuk.core;
 
 import org.junit.jupiter.api.Assertions;
@@ -19,4 +21,11 @@ public class TestOrderManager {
         Assertions.assertTrue(!om.getItems().isEmpty());
     }
 
+    @Test
+    public void testAddFillings(){
+        OrderManager om = new OrderManager();
+//        Item item = new Bagel("BGLO", "Bagel", BagelType.Onion);
+//        om.addFillings((Bagel)item);
+
+    }
 }
