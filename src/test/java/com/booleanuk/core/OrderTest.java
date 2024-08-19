@@ -57,9 +57,18 @@ public class OrderTest {
     public void testRemoveProduct() {
         Order order = new Order();
         Product product = new Product("SKU", 10, "Variant");
+        Product product2 = new Product("SKU2", 20, "Variant2");
         order.addProduct(product);
         order.removeProduct(product);
         Assertions.assertEquals(0, order.getTotalSum());
         Assertions.assertEquals(0, order.getBasket().size());
+
+        order.addProduct(product);
+        order.addProduct(product);
+        order.addProduct(product2);
+        order.removeProduct(product);
+        Assertions.assertEquals(30, order.getTotalSum());
+        Assertions.assertEquals(2, order.getBasket().size());
+        Assertions.assertEquals(1, order.getBasket().get(product.getSKU()));
     }
 }
