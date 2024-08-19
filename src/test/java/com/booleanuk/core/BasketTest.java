@@ -49,6 +49,14 @@ class BasketTest {
 
     }
 
+    @Test
+    public void testAddFilling(){
+        Basket basket = new Basket();
+        basket.addFilling("FILC");
+
+        Assertions.assertEquals(basket.basketItems.get("FILC", 1), basket.basketItems);
+    }
+
 
 
 }

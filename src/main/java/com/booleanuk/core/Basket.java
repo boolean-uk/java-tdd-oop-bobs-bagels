@@ -8,6 +8,8 @@ public class Basket {
    Map<String, Integer> basketItems = new HashMap<>();
    private int basketLimit = 20;
    int basketTotal = 0;
+
+
     public void addBagel (String bagelName, int quantity){
         if(!exceededBasketLimit(getBasketLimit(),basketTotal+quantity )){
             if(basketItems.containsKey(bagelName)){
@@ -81,34 +83,7 @@ public class Basket {
         }
     }
 
-    /*public void userRequestFillingPrice(String sku){
-        Inventory inventory = new Inventory();
 
-        if(this.isFilling(sku)){
-            if(inventory.getInventoryItemDetails(sku ).getName() == "Filling"){
-                double price = itemDetails.getPrice();
-            }else{
-                System.out.println("This item is not a filling.");
-            }
-        }else{
-            System.out.println("We do not have this item in our inventory.");
-        }
-        inventory.getInventoryItemDetails(sku).getPrice();
-    }*/
-    /*public void getFillingCost(String sku){
-       Inventory inventory = new Inventory();
-       InventoryItem itemDetails = inventory.getInventoryItemDetails(sku);
-       if(itemDetails){
-           if(inventory.getInventoryItemDetails(sku).getName() == "Filling"){
-              double price = itemDetails.getPrice();
-           }else{
-               System.out.println("This item is not a filling.");
-           }
-       }else{
-           System.out.println("We do not have this item in our inventory.");
-       }
-       inventory.getInventoryItemDetails(sku).getPrice();
-    }*/
 
 
 
