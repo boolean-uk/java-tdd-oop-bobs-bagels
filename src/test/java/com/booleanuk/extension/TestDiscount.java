@@ -60,5 +60,8 @@ public class TestDiscount {
             coffee1 = itemHandler.addCoffee("COFB");
         }
         assertEquals(8.43, itemHandler.getTotal());
+
+        itemHandler.removeItem(bagel1.getId());
+        assertEquals(6.74, itemHandler.getTotal());
     }
 }
