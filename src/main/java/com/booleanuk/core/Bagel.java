@@ -55,4 +55,15 @@ public class Bagel extends Item{
         }
         return false;
     }
+
+    @Override
+    public double getTotal() {
+        double total = 0;
+        for (Filling filling : this.fillings) {
+            total += filling.getTotal();
+        }
+        total += this.getPrice();
+        System.out.println(this.getName() + ", " + this.getVariant() + ", price: " + this.getPrice());
+        return total;
+    }
 }

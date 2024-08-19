@@ -113,7 +113,7 @@ public class ItemHandler {
     public double getTotal() {
         double total = 0;
         for (Item item : basket) {
-            total += item.getPrice();
+            total += item.getTotal();
         }
         return total;
     }

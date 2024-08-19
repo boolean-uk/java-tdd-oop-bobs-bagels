@@ -59,4 +59,9 @@ public class Item {
     public boolean removeFilling(int id){
         return false;
     }
+
+    public double getTotal() {
+        System.out.println(this.name + ", " + this.variant + ", price: " + this.price);
+        return this.price;
+    }
 }
