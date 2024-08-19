@@ -50,10 +50,13 @@ public class Basket {
         }else this.basket.remove(sku);
     }
 
-    //To remove filling and bagel
-    public void removeItemFromBasket(String sku1, String sku2) {
-        removeItemFromBasket(sku1);
-        removeItemFromBasket(sku2);
+    //To remove Bagel and checks if it has filling
+    public void removeItemFromBasket(Bagel bagel) {
+        removeItemFromBasket(bagel.getSKU());
+        if(bagel.getFilling() != null) {
+            removeItemFromBasket(bagel.getFilling().getSKU());
+        }
+        
     }
 
 

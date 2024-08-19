@@ -10,7 +10,7 @@ public class Bagel extends Item {
         this.filling = filling;
     }
 
-    public Item getFilling() {
+    public Filling getFilling() {
         return this.filling;
     }
 
