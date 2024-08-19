@@ -57,6 +57,9 @@ public class BasketTest {
 
         Assertions.assertEquals(expectedResult, removeResult);
 
+        System.out.println("Items in basket: basket.numberOfItemsInBasket()");
+        Assertions.assertEquals(0, basket.numberOfItemsInBasket());
+
         System.setIn(backup);
     }
 }
