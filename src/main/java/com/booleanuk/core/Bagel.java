@@ -21,9 +21,6 @@ public class Bagel extends Item {
         return variant;
     }
 
-    public void setVariant(BagelVariant variant) {
-        this.variant = variant;
-    }
 
     public enum BagelVariant {
         ONION, PLAIN, EVERYTHING, SESAME;

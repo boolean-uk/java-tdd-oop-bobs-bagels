@@ -1,6 +1,7 @@
 package com.booleanuk.core;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Basket {
     public ArrayList<Item> listOfBasket;
@@ -23,11 +24,19 @@ public class Basket {
         this.inventory = inventory;
     }
 
-    public void addBagel(Item item) {
+    public void addItem(Item item) {
         if (inventory.isItemAvailable(item.getSku())) {
             if (listOfBasket.size() < capacity) {
                 listOfBasket.add(item);
                 System.out.println("Added " + item.getName() + " to the basket. Price: " + item.getPrice());
+                if (item instanceof Bagel) {
+                    Bagel bagel = (Bagel) item;
+                    Filling filling = bagel.getFilling();
+                    if (filling != null) {
+                        System.out.println("Added filling: " + filling.getName() + " | Price: " + filling.getPrice());
+                    }
+                }
+
             } else {
                 System.out.println("Basket is full! Cannot add more items.");
             }
@@ -35,6 +44,7 @@ public class Basket {
             System.out.println("Item with SKU " + item.getSku() + " is not available in the inventory.");
         }
     }
+
 
 
     public String removeBagel(Item item) {
@@ -46,7 +56,7 @@ public class Basket {
         }
     }
 
-    public ArrayList<Item> getListOfBasket(){
+    public List<Item> getListOfBasket(){
         return listOfBasket;
 
     }
@@ -70,9 +80,15 @@ public class Basket {
         return totalCost;
     }
 
+    public void setCapacity(int capacity) {
+    this.capacity = capacity;
+    }
 
-
-
+    public int getCapacity() {
+        return capacity;
+    }
 }
+
+
 
 

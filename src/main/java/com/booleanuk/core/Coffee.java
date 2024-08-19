@@ -12,9 +12,6 @@ public class Coffee extends Item {
         return coffeeType;
     }
 
-    public void setCoffeeType(String coffeeType) {
-        this.coffeeType = coffeeType;
-    }
 
 
 }

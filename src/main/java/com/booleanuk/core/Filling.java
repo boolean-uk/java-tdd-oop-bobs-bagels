@@ -13,7 +13,4 @@ public class Filling extends Item {
         return fillingType;
     }
 
-    public void setFillingType(String fillingType) {
-        this.fillingType = fillingType;
-    }
 }
