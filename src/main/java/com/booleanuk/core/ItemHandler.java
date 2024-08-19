@@ -67,7 +67,14 @@ public class ItemHandler {
     }
 
     public boolean removeItem(int id) {
-        return true;
+        for (int i = 0; i < this.basket.size(); i++) {
+            if (this.basket.get(i).getId() == id) {
+                this.basket.remove(i);
+                return true;
+            }
+        }
+        System.out.println("No such item was found.");
+        return false;
     }
 
     public boolean setCapacity(int newCapacity) {
