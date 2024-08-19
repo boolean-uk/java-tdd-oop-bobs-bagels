@@ -97,25 +97,27 @@ I want customers to only be able to order things that we stock in our inventory.
 ## Classes
 
 ### Basket Class
-| Variables                                       | Description                                                          |
-|-------------------------------------------------|----------------------------------------------------------------------|
-| ``HashMap<Item item, Integer quantity> basket`` | Contains all the items in the user's basket.                         | 
-| ``Integer basketSize``                          | Contains the size of the basket.                                     |
+| Variables                                         | Description                                                          |
+|---------------------------------------------------|----------------------------------------------------------------------|
+| ``ArrayList<Item item> basket``                   | Contains all the items in the user's basket.                         | 
+| ``Integer basketSize``                            | Contains the size of the basket.                                     |
 
-| Methods                                    | Scenario                                                   | Outputs                                                          |
-|--------------------------------------------|------------------------------------------------------------|------------------------------------------------------------------|
-| `String addItemToBasket(Item item)`        | Customer adds item to basket with available space          | Return ``<insert item> added to basket.``                        |
-|                                            | Customer attempts to add item to full basket               | Return ``Basket is full, <insert item> is not added to basket.`` |
-| `String removeItemFromBasket(Item item)`   | Customer removes item in basket from basket                | Return ``<Insert item> removed from basket.``                    |
-|                                            | Customer attempts to remove item not in basket from basket | Return ``<Insert item> does not exist in basket.``               |
-| `Double calculateBasketCost()`             | If basket is empty                                         | Return 0                                                         | 
-|                                            | If basket is not empty                                     | Return sum                                                       |
-| `Boolean basketIsFull()`                   | Basket is full                                             | Return true                                                      |
-|                                            | Basket is not full                                         | Return false                                                     |
-| `Boolean itemInBasket()`                   | Item is in basket                                          | Return true                                                      |
-|                                            | Item is not in basket                                      | Return false                                                     |
-| `String changeBasketSize(Integer newSize)` | Manager changes to a new size, where newSize > -1          | Returns ``Basket size successfully changed.``                    |
-|                                            | Manager attempts to change size to a negative number       | Returns ``Basket size cannot be negative.``                      |
+| Methods                                    | Scenario                                                             | Outputs                                                          |
+|--------------------------------------------|----------------------------------------------------------------------|------------------------------------------------------------------|
+| `String addItemToBasket(Item item)`        | Customer adds item to basket with available space                    | Return ``<insert item> added to basket.``                        |
+|                                            | Customer attempts to add item to full basket                         | Return ``Basket is full, <insert item> is not added to basket.`` |
+| `String removeItemFromBasket()`            | Customer removes item in basket from basket                          | Return ``<Insert item> removed from basket.``                    |
+|                                            | Customer attempts to remove item not in basket from basket           | Return ``<Insert item> does not exist in basket.``               |
+| `Double calculateBasketCost()`             | If basket is empty                                                   | Return 0                                                         | 
+|                                            | If basket is not empty                                               | Return sum                                                       |
+| `Boolean basketIsFull()`                   | Basket is full                                                       | Return true                                                      |
+|                                            | Basket is not full                                                   | Return false                                                     |
+| `Boolean itemInBasket()`                   | Item is in basket                                                    | Return true                                                      |
+|                                            | Item is not in basket                                                | Return false                                                     |
+| `String changeBasketSize(Integer newSize)` | Manager changes to a new size, where newSize > -1                    | Returns ``Basket size successfully changed.``                    |
+|                                            | Manager attempts to change size to a negative number                 | Returns ``Basket size cannot be negative.``                      |
+| `Void printBasketContent()`                | Prints information about all the items in the basket.                | _                                                                |
+| `int numberOfItemsInBasket()`              | User wants to add an item to a finite basket. Compare size with max. | Returns items in basket                                          |
 
 ### Menu Class
 | Variables                     | Description                          |

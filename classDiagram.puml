@@ -9,14 +9,16 @@ Class Menu {
 
 Class Basket {
     - basketSize: Integer
-    - basket: HashMap<Item, Integer>
+    - basket: ArrayList<Item>
 
     + addItemToBasket(Item item): String
-    + removeItemFromBasket(Item item): String
+    + removeItemFromBasket(): String
 
     + basketIsFull(): Boolean
     + itemInBasket(): Boolean
 
+    + numberOfItemsInBasket(): int
+    + printBasketContent(): Void
     + calculateBasketCost(): Double
     + changeBasketSize(newSize: Integer): String
 }

@@ -28,7 +28,6 @@ public class Menu {
     }
 
     public static Item getItemFromMenu(String name, String variant){
-
         for (Item i : menu){
             if (Objects.equals(i.variant, variant) & Objects.equals(i.name, name))
             {
