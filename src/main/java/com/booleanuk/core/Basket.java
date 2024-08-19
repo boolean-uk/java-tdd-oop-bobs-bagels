@@ -2,6 +2,7 @@ package com.booleanuk.core;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Objects;
 import java.util.Scanner;
 
 public class Basket {
@@ -13,6 +14,10 @@ public class Basket {
     }
 
     public String addItemToBasket(Item item){
+        if (basketIsFull()){
+            return "Basket is full.";
+        }
+
         this.basket.add(item);
         return item.variant + " " + item.name + " added to basket.";
     }
@@ -51,14 +56,12 @@ public class Basket {
         }
     }
 
-
-
     public Double calculateBasketCost(){
         return 0.0;
     }
 
     public Boolean basketIsFull(){
-        return false;
+        return Objects.equals(basketSize, basket.size());
     }
 
     public boolean itemInBasket(){
@@ -66,7 +69,11 @@ public class Basket {
     }
 
     public String changeBasketSize(int newSize){
-        return "";
+        if (0 < newSize){
+            this.basketSize = newSize;
+            return "Basket size changed successfully";
+        }
+        return "Basket size can't be less than 1.";
     }
 }
 

@@ -115,7 +115,7 @@ I want customers to only be able to order things that we stock in our inventory.
 | `Boolean itemInBasket()`                   | Item is in basket                                                    | Return true                                                      |
 |                                            | Item is not in basket                                                | Return false                                                     |
 | `String changeBasketSize(Integer newSize)` | Manager changes to a new size, where newSize > -1                    | Returns ``Basket size successfully changed.``                    |
-|                                            | Manager attempts to change size to a negative number                 | Returns ``Basket size cannot be negative.``                      |
+|                                            | Manager attempts to change size to a negative number                 | Returns ``Basket size can't be less than 1.``                    |
 | `Void printBasketContent()`                | Prints information about all the items in the basket.                | _                                                                |
 | `int numberOfItemsInBasket()`              | User wants to add an item to a finite basket. Compare size with max. | Returns items in basket                                          |
 

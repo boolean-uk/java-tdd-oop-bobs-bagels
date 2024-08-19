@@ -64,7 +64,7 @@ public class BasketTest {
     }
 
     @Test
-    public void AddBagelWhenBasketIsFullTest() {
+    public void AddItemWhenBasketIsFullTest() {
            /*
             As a member of the public,
             So that I can not overfill my small bagel basket
@@ -82,7 +82,7 @@ public class BasketTest {
         String variant_2 = "Black";
         String result = basket.addItemToBasket(Menu.getItemFromMenu(name_2, variant_2));
 
-        String expected = "Basket is full";
+        String expected = "Basket is full.";
 
         // Assert that the basket execution of addItemToBasket function returns the correct string
         Assertions.assertEquals(expected, result);
