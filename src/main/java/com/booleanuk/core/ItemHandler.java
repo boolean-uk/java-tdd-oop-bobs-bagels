@@ -66,6 +66,10 @@ public class ItemHandler {
         }
     }
 
+    public boolean setCapacity(int newCapacity) {
+        return true;
+    }
+
     public void setUpAllItems() {
         this.allItems = new HashMap<>();
         this.allItems.put("BGLO", "Bagel");

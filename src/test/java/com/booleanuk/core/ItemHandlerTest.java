@@ -80,6 +80,13 @@ public class ItemHandlerTest {
         assertNull(bagel2);
 
         boolean setCapacity = itemHandler.setCapacity(3);
+        assertTrue(setCapacity);
+
+        Bagel bagel3 = itemHandler.addBagel("BGLS");
+        assertEquals(2, itemHandler.getBasket().size());
+        assertNotNull(bagel3);
+
+
     }
 
 
