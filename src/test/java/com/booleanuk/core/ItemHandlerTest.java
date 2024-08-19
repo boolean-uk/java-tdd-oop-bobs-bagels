@@ -135,6 +135,9 @@ public class ItemHandlerTest {
         itemHandler = new ItemHandler();
         double search1 = itemHandler.searchItem("BGLE");
         assertEquals(0.49, search1);
+
+        double search2 = itemHandler.searchItem("BGLEu");
+        assertEquals(-1, search2);
     }
 
 
