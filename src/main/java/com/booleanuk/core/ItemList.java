@@ -78,4 +78,8 @@ public class ItemList {
     public HashMap<String, String> getNameList() {
         return this.nameList;
     }
+
+    public double getPriceFromList(String sku) {
+        return this.priceList.get(sku);
+    }
 }

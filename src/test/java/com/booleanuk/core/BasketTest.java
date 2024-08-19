@@ -80,6 +80,7 @@ public class BasketTest {
         Basket basket = new Basket();
         Bagel bagel = new Bagel("BGLO");
         Filling filling = new Filling("FILX");
+        Bagel bagel2 = new Bagel("BGLP");
 
         bagel.addFilling(filling);
         basket.addItemToBasket(bagel);
@@ -88,5 +89,9 @@ public class BasketTest {
         Assertions.assertEquals(2, basket.countTotalItems());
 
         Assertions.assertEquals(0.61, basket.countTotalValueOfItems());
+
+        basket.addItemToBasket(bagel2);
+
+        Assertions.assertEquals(1.0, basket.countTotalValueOfItems());
     }
 }

@@ -1,9 +1,11 @@
 package com.booleanuk.core;
 
 import java.util.HashMap;
+import java.util.Map;
 
 public class Basket {
-    HashMap<String, Integer> basket;
+    private HashMap<String, Integer> basket;
+    private ItemList itemList = new ItemList();
 
     public Basket() {
         this.basket = new HashMap<>();
@@ -18,18 +20,26 @@ public class Basket {
     }
 
     public void addItemToBasket(Item item){
-        if(basket.containsKey(item.getSKU())) {
-            int oldQuantity = basket.get(item.getSKU());
-            basket.replace(item.getSKU(), oldQuantity, oldQuantity + 1);
+        if(this.basket.containsKey(item.getSKU())) {
+            int oldQuantity = this.basket.get(item.getSKU());
+            this.basket.replace(item.getSKU(), oldQuantity, oldQuantity + 1);
         }else {
-            basket.put(item.getSKU(), 1);
+            this.basket.put(item.getSKU(), 1);
         }
     }
 
     public int getItemQuantityFromSKU(String sku) {
-        if(basket.containsKey(sku)) {
-            return basket.get(sku);
+        if(this.basket.containsKey(sku)) {
+            return this.basket.get(sku);
         }
         return 0;
+    }
+
+    public double countTotalValueOfItems() {
+        double totalPrice = 0;
+       for (Map.Entry<String, Integer> kvp: this.basket.entrySet()) {
+           totalPrice += (itemList.getPriceFromList(kvp.getKey()) * kvp.getValue());
+       }
+       return  totalPrice;
     }
 }
