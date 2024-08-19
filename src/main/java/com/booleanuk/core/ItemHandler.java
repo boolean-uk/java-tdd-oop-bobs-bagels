@@ -1,10 +1,11 @@
 package com.booleanuk.core;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class ItemHandler {
 
-    private HashMap<String, Item> basket;
+    private ArrayList<Item> basket;
     private int basketCapacity;
     private HashMap<String, String> allItems;
     private int idTracker;
@@ -12,7 +13,7 @@ public class ItemHandler {
     public ItemHandler() {
         this.idTracker = 0;
         this.basketCapacity = 1;
-        this.basket = new HashMap<>();
+        this.basket = new ArrayList<>();
         setUpAllItems();
     }
 
@@ -20,11 +21,13 @@ public class ItemHandler {
         if (this.allItems.get(SKU).equals("Bagel")) {
             Bagel bagel = new Bagel(SKU, idTracker);
             idTracker++;
+            basket.add(bagel);
             System.out.println(bagel.getName() + ", " + bagel.getVariant() + ", price: " + bagel.getPrice());
             return bagel;
         } else if (this.allItems.get(SKU).equals("Coffee")) {
             Coffee coffee = new Coffee(SKU, idTracker);
             idTracker++;
+            basket.add(coffee);
             System.out.println(coffee.getName() + ", " + coffee.getVariant() + ", price: " + coffee.getPrice());
             return coffee;
         }
@@ -52,7 +55,7 @@ public class ItemHandler {
         this.allItems.put("FILH", "Filling");
     }
 
-    public HashMap<String, Item> getBasket() {
+    public ArrayList<Item> getBasket() {
         return basket;
     }
 

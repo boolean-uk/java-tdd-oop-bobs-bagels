@@ -47,4 +47,12 @@ public class Item {
     public void setSKU(String SKU) {
         this.SKU = SKU;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof Item itemObjekt){
+            return itemObjekt.getId() == this.getId();
+        }
+        return false;
+    }
 }
