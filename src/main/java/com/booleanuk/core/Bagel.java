@@ -6,6 +6,7 @@ public class Bagel extends Product {
 
     public Bagel(String SKU, double price) {
         super(SKU, price);
+        this.currentFilling = null;
     }
 
     public Filling getFilling() {
