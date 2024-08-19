@@ -86,7 +86,8 @@ public class ItemHandlerTest {
         assertEquals(2, itemHandler.getBasket().size());
         assertNotNull(bagel3);
 
-
+        boolean setCapacity2 = itemHandler.setCapacity(1);
+        assertFalse(setCapacity2);
     }
 
 
