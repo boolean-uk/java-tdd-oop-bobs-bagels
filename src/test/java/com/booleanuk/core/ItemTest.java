@@ -15,4 +15,10 @@ public class ItemTest {
         Bagel bagel1 = new Bagel("BGLOF", 0);
         assertNull(bagel1.getVariant());
     }
+
+    @Test
+    public void testCoffee() {
+        Coffee coffee = new Coffee("COFB", 0);
+        assertEquals(coffee.getPrice(), 0.99);
+    }
 }
