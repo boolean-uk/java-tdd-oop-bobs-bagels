@@ -26,13 +26,10 @@ public class Order {
     }
 
     public void removeProduct(String productToRemove){
-        if(basket.containsKey(productToRemove)){
-            basket.put(productToRemove, basket.get(productToRemove) - 1);
-            if(basket.get(productToRemove) == 0){
-                basket.remove(productToRemove);
-            }
+        basket.put(productToRemove, basket.get(productToRemove) - 1);
+        if(basket.get(productToRemove) == 0){
+            basket.remove(productToRemove);
         }
-
     }
 
     public UUID getId(){
