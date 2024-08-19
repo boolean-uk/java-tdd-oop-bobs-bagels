@@ -52,14 +52,34 @@ public class ItemHandlerTest {
 
 
     @Test
+    public void getTotal() {
+        itemHandler = new ItemHandler();
+        Bagel bagel1 = itemHandler.addBagel("BGLS");
+    }
+
+
+    @Test
     public void testRemoveItem() {
+        itemHandler = new ItemHandler();
+        Bagel bagel1 = itemHandler.addBagel("BGLS");
+        Filling filling1 = itemHandler.addFilling("FILC", bagel1);
+
 
     }
 
 
     @Test
     public void testSetCapacity() {
+        itemHandler = new ItemHandler();
+        Bagel bagel1 = itemHandler.addBagel("BGLS");
+        assertEquals(1, itemHandler.getBasket().size());
+        assertNotNull(bagel1);
 
+        Bagel bagel2 = itemHandler.addBagel("BGLS");
+        assertEquals(1, itemHandler.getBasket().size());
+        assertNull(bagel2);
+
+        boolean setCapacity = itemHandler.setCapacity(3);
     }
 
 
