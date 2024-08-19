@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
+import java.math.BigDecimal;
 
 public class BasketTest {
     @Test
@@ -14,6 +15,7 @@ public class BasketTest {
         So I can order a bagel before work,
         I'd like to add a specific type of bagel to my basket.
          */
+
         Basket basket = new Basket();
 
         // Assert that the basket is empty
@@ -131,5 +133,34 @@ public class BasketTest {
         Assertions.assertEquals(expectedResult, removeResult);
 
         System.setIn(backup);
+    }
+
+    @Test
+    public void getTotalCostOfItemsInBasket() {
+        /*
+        As a member of the public,
+        So I can change my order,
+        I'd like to remove a bagel from my basket.
+         */
+        int total = 0;
+
+        Basket basket = new Basket();
+        String name = "Bagel";
+        String variant = "Plain";
+        Item item = Menu.getItemFromMenu(name, variant);
+        basket.addItemToBasket(item);
+        assert item != null;
+        total += item.getPrice();
+
+        String name2 = "Coffee";
+        String variant2 = "Black";
+
+        Item item2 = Menu.getItemFromMenu(name2, variant2);
+        basket.addItemToBasket(item2);
+        assert item2 != null;
+        total += item2.getPrice();
+
+        Assertions.assertEquals((float) total /100, basket.calculateBasketCost());
+
     }
 }
