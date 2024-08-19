@@ -12,4 +12,8 @@ public abstract class Product {
         this.price = price;
         this.sku = sku;
     }
+
+    public Double getPrice() {
+        return price;
+    }
 }
