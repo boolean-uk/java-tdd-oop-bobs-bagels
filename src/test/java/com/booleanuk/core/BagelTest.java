@@ -13,4 +13,11 @@ public class BagelTest {
         Assertions.assertEquals("SKU", bagel.getSKU());
         Assertions.assertEquals("Variant", bagel.getVariant());
     }
+
+    @Test
+    public void TestAddFillings() {
+        Bagel bagel = new Bagel("SKU", 10, "Variant");
+        Filling filling = new Filling("SKU", 10, "Variant");
+        Assertions.assertTrue(bagel.addFilling(filling));
+    }
 }
