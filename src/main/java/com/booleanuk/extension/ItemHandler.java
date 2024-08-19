@@ -130,6 +130,10 @@ public class ItemHandler {
         return total/1000;
     }
 
+    public void coffeeAndBagelDiscount() {
+
+    }
+
     public void twelveBagelDiscount() {
         for (int i = 0; i < 12; i++) {
             this.discountCounterMap.get("Bagel").get(i).setDiscountPrice(332.5);

@@ -46,4 +46,19 @@ public class TestDiscount {
         itemHandler.removeItem(bagel1.getId());
         assertEquals(8.93, itemHandler.getTotal());
     }
+
+    @Test
+    public void testCoffeeAndBagelDiscount() {
+        Bagel bagel1 = new Bagel("BGLE", 0);
+        itemHandler = new ItemHandler();
+        itemHandler.setCapacity(100);
+        for (int i = 0; i < 6; i++) {
+            bagel1 = itemHandler.addBagel("BGLE");
+        }
+        Coffee coffee1 = new Coffee("COFB", 0);
+        for (int i = 0; i < 6; i++) {
+            coffee1 = itemHandler.addCoffee("COFB");
+        }
+        assertEquals(8.43, itemHandler.getTotal());
+    }
 }
