@@ -1,6 +1,12 @@
 package com.booleanuk.core;
 
+import com.booleanuk.core.enums.BagelType;
+import com.booleanuk.core.enums.CoffeeType;
+import com.booleanuk.core.inherited.Bagel;
+import com.booleanuk.core.inherited.Coffee;
+
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class Basket {
     private final ArrayList<Product> products;
@@ -16,10 +22,16 @@ public class Basket {
         products.add(product);
     }
 
-    public void removeProduct(Product product) {
-        products.remove(product);
+    public void removeProduct(BagelType variant) {
+        for (Product product : products) {
+            if (product instanceof Bagel bagel) {
+                if (bagel.getVariant() == variant) {
+                    products.remove(product);
+                    break;
+                }
+            }
+        }
     }
-
 
     public ArrayList<Product> getProducts() {
         return products;

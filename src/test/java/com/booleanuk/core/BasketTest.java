@@ -26,7 +26,7 @@ public class BasketTest {
     @Test
     public void testRemoveProduct() {
         Basket basket = this.order.getBasket();
-        basket.removeProduct(basket.getProducts().getFirst());
+        basket.removeProduct(BagelType.ONION);
         Assertions.assertTrue(basket.getProducts().isEmpty());
     }
 }

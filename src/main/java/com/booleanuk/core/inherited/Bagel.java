@@ -11,4 +11,8 @@ public class Bagel extends Product {
         super(name, price, sku);
         this.variant = variant;
     }
+
+    public BagelType getVariant() {
+        return variant;
+    }
 }
