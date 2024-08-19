@@ -29,23 +29,39 @@ public class Basket {
     }
 
 
-
     public String add(Product chosenProduct) {
 
-        //Should change to sku
+        if(productCount >= basketCapacity){
+            return "Basket is full!";
+        }
+
+        //Check i bagel exists in basket
+        if(Objects.equals("Filling", chosenProduct.retrieveName())){
+            boolean hasBagel = false;
+
+            for(Product product : currentBasket.keySet()){
+                if(Objects.equals("Bagel", product.retrieveName())){
+                    hasBagel = true;
+                    break;
+                }
+            }
+            if(Objects.equals(false, hasBagel)){
+                return "You will need a bagel for that or it will be messy";
+            }
+        }
+
         String chosenSku = chosenProduct.retrieveSku();
 
-        if (productCount < basketCapacity){
-            for (Product product : currentBasket.keySet()) {
-                String sku = product.retrieveSku();
+        for (Product product : currentBasket.keySet()) {
+            String sku = product.retrieveSku();
 
-                if (Objects.equals(sku, chosenSku)) {
-                    int currentQuantity = currentBasket.get(product);
+            if (Objects.equals(sku, chosenSku)) {
+                int currentQuantity = currentBasket.get(product);
 
-                    currentBasket.put(product, currentQuantity + 1);
-                    productCount++;
+                currentBasket.put(product, currentQuantity + 1);
+                productCount++;
 
-                    return "Existing product added to basket";
+                return "Existing product added to basket";
                 }
             }
             currentBasket.put(chosenProduct, 1);
@@ -53,8 +69,7 @@ public class Basket {
 
             return "New product added to basket";
         }
-        return "Basket it full";
-    }
+
 
     public String remove(Product chosenProduct){
 
@@ -87,6 +102,8 @@ public class Basket {
     public void changeCapacity(int newSize){
         basketCapacity = newSize;
     }
+
+
 
 
 
