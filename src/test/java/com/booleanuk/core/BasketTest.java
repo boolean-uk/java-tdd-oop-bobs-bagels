@@ -2,6 +2,7 @@ package com.booleanuk.core;
 
 import com.booleanuk.core.enums.BagelType;
 import com.booleanuk.core.enums.SKU;
+import com.booleanuk.core.exceptions.FullBasketException;
 import com.booleanuk.core.inherited.Bagel;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -28,5 +29,17 @@ public class BasketTest {
         Basket basket = this.order.getBasket();
         basket.removeProduct(BagelType.ONION);
         Assertions.assertTrue(basket.getProducts().isEmpty());
+    }
+
+    @Test
+    public void testIsFull() {
+        Basket basket = this.order.getBasket();
+        basket.addProduct(new Bagel("Bagel", 0.59, SKU.BGLS, BagelType.SESAME));
+        basket.addProduct(new Bagel("Bagel", 0.59, SKU.BGLE, BagelType.EVERYTHING));
+        basket.addProduct(new Bagel("Bagel", 0.59, SKU.BGLP, BagelType.PLAIN));
+
+        Assertions.assertThrows(FullBasketException.class, () -> {
+            basket.addProduct(new Bagel("Bagel", 0.59, SKU.BGLS, BagelType.SESAME));
+        });
     }
 }
