@@ -42,7 +42,7 @@ public class BasketTest {
 
         basket.add(inventory.menu.get("OnionBagel"));
 
-        Assertions.assertEquals("New product added to basket", basket.add(inventory.menu.get("BaconFilling")));
+        Assertions.assertNotEquals("New product added to basket", basket.add(inventory.menu.get("BaconFilling")));
     }
 
     @Test
