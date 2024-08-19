@@ -22,8 +22,14 @@ public class Basket {
 
     }
 
-    public void removeBagel(Bagel bagel){
-        listOfBasket.remove(bagel);
+    public String removeBagel(Bagel bagel){
+        if (listOfBasket.contains(bagel)) {
+                listOfBasket.remove(bagel);
+
+        } else {
+            return "The bagel do not exist in the basket";
+        }
+        return null;
     }
 
     public ArrayList<Bagel> getListOfBasket(){
