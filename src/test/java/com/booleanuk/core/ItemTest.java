@@ -33,7 +33,8 @@ public class ItemTest {
         Bagel bagel = new Bagel("BGLO", 0);
         Filling filling0 = new Filling("FILB", 0, bagel);
         assertEquals("Bacon", filling0.getVariant());
-        assertEquals(filling0.getBagel().getSKU(), "BGLO");
+        assertEquals("BGLO", filling0.getBagel().getSKU());
+        assertEquals("Bacon", bagel.getFillings().getFirst().getVariant());
 
     }
 }
