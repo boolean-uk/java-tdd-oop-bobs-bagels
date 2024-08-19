@@ -32,6 +32,8 @@ public class ItemTest {
     public void testFilling() {
         Bagel bagel = new Bagel("BGLO", 0);
         Filling filling0 = new Filling("FILB", 0, bagel);
-        assertEquals(0.12, filling0.getPrice());
+        assertEquals("Bacon", filling0.getVariant());
+        assertEquals(filling0.getBagel().getVariant(), "BGLO");
+
     }
 }
