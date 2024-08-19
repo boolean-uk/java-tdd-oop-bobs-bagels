@@ -12,5 +12,6 @@ public class ItemHandlerTest {
         assertEquals(0, itemHandler.getIdTracker());
         assertEquals(1, itemHandler.getBasketCapacity());
         assertEquals(0, itemHandler.getBasket().size());
+        assertEquals("Bagel", itemHandler.getAllItems().get("BGLO"));
     }
 }
