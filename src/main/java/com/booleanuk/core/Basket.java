@@ -47,4 +47,8 @@ public class Basket {
   public void setCapacity(int capacity) {
     this.capacity = capacity;
   }
+
+  public List<StandaloneProduct> products() {
+    return this.products;
+  }
 }

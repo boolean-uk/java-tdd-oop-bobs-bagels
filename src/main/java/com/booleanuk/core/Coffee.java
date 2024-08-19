@@ -1,5 +1,8 @@
 package com.booleanuk.core;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public record Coffee(CoffeeType type) implements StandaloneProduct {
   public double price() {
     switch (this.type) {
@@ -29,5 +32,11 @@ public record Coffee(CoffeeType type) implements StandaloneProduct {
     }
 
     return Sku.UNKNOWN;
+  }
+
+  public List<Product> components() {
+    List<Product> components = new ArrayList<>();
+    components.add(this);
+    return components;
   }
 }

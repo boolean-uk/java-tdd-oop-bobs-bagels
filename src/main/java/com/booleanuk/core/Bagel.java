@@ -47,6 +47,12 @@ public class Bagel implements StandaloneProduct {
     return Sku.UNKNOWN;
   }
 
+  public List<Product> components() {
+    List<Product> components = new ArrayList<>(this.fillings);
+    components.add(this);
+    return components;
+  }
+
   public void add(Filling filling) {
     this.fillings.add(filling);
   }
