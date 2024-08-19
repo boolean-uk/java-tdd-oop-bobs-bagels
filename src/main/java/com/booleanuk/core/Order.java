@@ -7,12 +7,8 @@ import java.util.NoSuchElementException;
 public class Order {
 
     HashMap<String, Integer> basket = new HashMap<>();
-   private final Store store = new Store();
-   private double totalPrice;
-
-    public double getTotalPrice() {
-        return totalPrice;
-    }
+    private final Store store = new Store();
+    private double totalPrice;
 
     public boolean addProduct(Product product) {
         if (store.getCapacity() == basket.size()) {
@@ -52,11 +48,15 @@ public class Order {
     }
 
 
-    public  void removeProduct(Product product) {
-        if(!basket.containsKey(product.getSKU())) {
+    public void removeProduct(Product product) {
+        if (!basket.containsKey(product.getSKU())) {
             throw new NoSuchElementException("Product not found in the basket");
         }
         basket.remove(product.getSKU());
+    }
+
+    public double getTotalPrice() {
+        return totalPrice;
     }
 }
 
