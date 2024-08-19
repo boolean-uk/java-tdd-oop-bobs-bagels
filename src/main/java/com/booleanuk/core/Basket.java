@@ -14,36 +14,56 @@ public class Basket {
 
     public String addItemToBasket(Item item){
         if (basketIsFull()){
-            return "Basket is full.";
+            return "Basket is full.\n\n";
         }
 
-        this.basket.add(item);
-        return item.variant + " " + item.name + " added to basket.";
+        if (itemInBasket(item) == -1){
+            this.basket.add(item);
+        }
+
+        else {
+            basket.get(itemInBasket(item)).quantity = basket.get(itemInBasket(item)).quantity + 1;
+        }
+
+        return item.variant + " " + item.name + " added to basket.\n\n";
     }
 
     public void printBasketContent(){
+        int counter = 1;
+
         for (Item i : basket){
-            System.out.println(i.name + " " + i.variant + " " + i.quantity);
+            System.out.println(counter+ ". " + i.name + " " + i.variant + " " + i.quantity);
+            counter++;
         }
     }
 
     public String removeItemFromBasket(){
-        String name = "";
-        String variant = "";
+        String name;
+        String variant;
+        int quantity;
 
         Scanner input = new Scanner(System.in);
         System.out.println("Your basket:");
         printBasketContent();
-        System.out.println("\nEnter Which item would you like to remove?");
+        System.out.println("\nChoose item to remove or press 0 to go back.");
 
         try {
-            int userInput = Integer.parseInt(input.next());
+            int userInput = input.nextInt();
 
             if (userInput <= basket.size() & 0 < userInput){
                 name = basket.get(userInput-1).name;
                 variant = basket.get(userInput-1).variant;
-                basket.remove(userInput-1);
-                return variant + " " + name + " removed from basket.";
+                quantity = basket.get(userInput-1).quantity;
+
+                if (1 < quantity){
+                    basket.get(userInput-1).quantity = basket.get(userInput-1).quantity -1;
+                }
+
+                else {
+                    basket.remove(userInput-1);
+                }
+
+                return variant + " " + name + " removed from basket.\n\n";
             }
 
             else {
@@ -71,14 +91,22 @@ public class Basket {
         return Objects.equals(basketSize, basket.size());
     }
 
-    public boolean itemInBasket(){
-        return false;
+    public Integer itemInBasket(Item item){
+        /*
+        If item is in basket, returns index. Else returns -1.
+         */
+        for (int i = 0; i < numberOfItemsInBasket(); i++){
+            if (Objects.equals(item, basket.get(i))){
+                return i;
+            }
+        }
+        return -1;
     }
 
     public boolean changeBasketSize(int newSize){
         if (0 < newSize){
             this.basketSize = newSize;
-            System.out.println("Basket size changed successfully");
+            System.out.println("Basket size changed successfully.");
             return true;
         }
         System.out.println("Basket size can't be less than 1.");
