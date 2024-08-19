@@ -56,4 +56,7 @@ public class Item {
         return false;
     }
 
+    public boolean removeFilling(int id){
+        return false;
+    }
 }

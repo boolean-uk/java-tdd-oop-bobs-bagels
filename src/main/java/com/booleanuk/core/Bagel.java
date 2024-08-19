@@ -45,6 +45,7 @@ public class Bagel extends Item{
         this.fillings.add(filling);
     }
 
+    @Override
     public boolean removeFilling(int id) {
         for (int i = 0; i < this.fillings.size(); i++) {
             if (this.fillings.get(i).getId() == id) {
