@@ -1,10 +1,8 @@
 
 package com.booleanuk.core;
 
-import java.util.ArrayList;
-
 public class Order {
-    private Basket basket;
+    private final Basket basket;
     private Integer total;
 
     public Order() {

@@ -13,13 +13,12 @@ public class BasketTest {
     @BeforeEach
     public void setUp() {
         this.order = new Order();
-        this.order.getBasket().addProduct(new Bagel("Bagel", 0.49, SKU.BGLP, BagelType.ONION));
     }
 
-
     @Test
-    public void testAddProductAddsAProductToTheBasket() {
+    public void testAddProductAddsABagelToTheBasket() {
         Basket basket = this.order.getBasket();
+        basket.addProduct(new Bagel("Bagel", 0.49, SKU.BGLP, BagelType.ONION));
         Assertions.assertFalse(basket.getProducts().isEmpty());
     }
 }
