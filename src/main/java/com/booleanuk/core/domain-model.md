@@ -68,7 +68,7 @@
 
 # Class Diagram
 ## Diagram
-![]()
+![Class Diagram](/assets/images/gleek_class-diagram.png)
 
 ## Code
 TODO: .....
