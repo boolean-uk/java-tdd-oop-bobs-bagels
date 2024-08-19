@@ -71,6 +71,10 @@ public class ItemHandler {
             if (this.basket.get(i).getId() == id) {
                 this.basket.remove(i);
                 return true;
+            } else if (this.basket.get(i) instanceof Bagel) {
+                if (((Bagel) this.basket.get(i)).removeFilling(id)) {
+                    return true;
+                }
             }
         }
         System.out.println("No such item was found.");

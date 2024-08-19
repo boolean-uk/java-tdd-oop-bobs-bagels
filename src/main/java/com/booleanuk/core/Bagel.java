@@ -44,4 +44,14 @@ public class Bagel extends Item{
     public void addFillings(Filling filling) {
         this.fillings.add(filling);
     }
+
+    public boolean removeFilling(int id) {
+        for (int i = 0; i < this.fillings.size(); i++) {
+            if (this.fillings.get(i).getId() == id) {
+                this.fillings.remove(i);
+                return true;
+            }
+        }
+        return false;
+    }
 }
