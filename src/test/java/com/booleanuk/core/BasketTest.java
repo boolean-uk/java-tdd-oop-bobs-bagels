@@ -107,10 +107,10 @@ public class BasketTest {
 
         Assertions.assertEquals(2, basket.countTotalItems());
 
-        basket.removeItem(filling);
-        bagel.remoevFilling();
+        basket.removeItemFromBasket(bagel.getSKU(), filling.getSKU());
+        bagel.removeFilling();
 
-        Assertions.assertEquals(1, basket.countTotalItems());
+        Assertions.assertEquals(0, basket.countTotalItems());
 
     }
 }

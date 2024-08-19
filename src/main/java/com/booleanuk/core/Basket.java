@@ -42,4 +42,19 @@ public class Basket {
        }
        return  totalPrice;
     }
+
+    public void removeItemFromBasket(String sku) {
+        if(this.basket.get(sku) > 1) {
+            int oldQuantity = this.basket.get(sku);
+            this.basket.replace(sku, oldQuantity, oldQuantity - 1);
+        }else this.basket.remove(sku);
+    }
+
+    //To remove filling and bagel
+    public void removeItemFromBasket(String sku1, String sku2) {
+        removeItemFromBasket(sku1);
+        removeItemFromBasket(sku2);
+    }
+
+
 }

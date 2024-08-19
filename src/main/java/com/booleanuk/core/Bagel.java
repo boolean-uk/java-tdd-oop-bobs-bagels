@@ -1,7 +1,7 @@
 package com.booleanuk.core;
 
 public class Bagel extends Item {
-    private Filling filling;
+    private Filling filling = null;
     public Bagel(String SKU) {
         super(SKU);
     }
@@ -12,6 +12,10 @@ public class Bagel extends Item {
 
     public Item getFilling() {
         return this.filling;
+    }
+
+    public void removeFilling() {
+        this.filling = null;
     }
 
 }
