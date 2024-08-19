@@ -96,7 +96,7 @@ public class BasketTest {
     }
 
     @Test
-    public void removeItemFromBasket() {
+    public void removeItemFromBasketTest() {
         Basket basket = new Basket();
         Bagel bagel = new Bagel("BGLO");
         Filling filling = new Filling("FILX");
@@ -112,6 +112,23 @@ public class BasketTest {
         basket.removeItemFromBasket(bagel2);
 
         Assertions.assertEquals(0, basket.countTotalItems());
+    }
+
+    @Test
+    public void removeOneOfTwoBagelsTest() {
+        Basket basket = new Basket();
+        Bagel bagel = new Bagel("BGLO");
+        Filling filling = new Filling("FILX");
+        Bagel bagel2 = new Bagel("BGLO");
+        Filling filling2 = new Filling("FILB");
+        basket.addItemToBasket(bagel, filling);
+        basket.addItemToBasket(bagel2, filling2);
+
+        Assertions.assertEquals(4, basket.countTotalItems());
+
+        basket.removeItemFromBasket(bagel);
+
+        Assertions.assertEquals(2, basket.countTotalItems());
 
     }
 }

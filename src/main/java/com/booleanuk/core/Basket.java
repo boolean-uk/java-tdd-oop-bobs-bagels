@@ -19,6 +19,10 @@ public class Basket {
         return this.basket;
     }
 
+    public void printOutHashMap() {
+        System.out.println(this.basket);
+    }
+
     public void addItemToBasket(Item item){
         if(this.basket.containsKey(item.getSKU())) {
             int oldQuantity = this.basket.get(item.getSKU());
@@ -56,7 +60,14 @@ public class Basket {
         if(bagel.getFilling() != null) {
             removeItemFromBasket(bagel.getFilling().getSKU());
         }
-        
+    }
+
+    //To remove a specific bagel with a specific filling
+    public void removeItemFromBasket(Bagel bagel, Filling filling) {
+        removeItemFromBasket(bagel.getSKU());
+        if(bagel.getFilling() != null) {
+            removeItemFromBasket(filling.getSKU());
+        }
     }
 
 
