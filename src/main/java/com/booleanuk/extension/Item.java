@@ -7,6 +7,15 @@ public class Item {
     private String variant;
     private String name;
     private int id;
+    private double discountPrice;
+
+    public double getDiscountPrice() {
+        return discountPrice;
+    }
+
+    public void setDiscountPrice(double discountPrice) {
+        this.discountPrice = discountPrice;
+    }
 
     public double getPrice() {
         return price;
@@ -61,6 +70,10 @@ public class Item {
     }
 
     public double getTotal() {
+        if (this.getDiscountPrice() != -1) {
+            System.out.println(this.name + ", " + this.variant + ", price: " + this.discountPrice);
+            return this.discountPrice;
+        }
         System.out.println(this.name + ", " + this.variant + ", price: " + this.price);
         return this.price;
     }

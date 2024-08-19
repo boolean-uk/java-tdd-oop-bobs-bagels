@@ -8,7 +8,8 @@ public class Filling extends Item {
         this.bagel = bagel;
         this.setId(id);
         this.setName("Filling");
-        this.setPrice(0.12);
+        this.setPrice(120);
+        this.setDiscountPrice(-1);
         switch (SKU) {
             case "FILB": {
                 this.setSKU(SKU);

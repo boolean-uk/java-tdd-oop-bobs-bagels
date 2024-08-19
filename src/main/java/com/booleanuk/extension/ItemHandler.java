@@ -9,12 +9,14 @@ public class ItemHandler {
     private int basketCapacity;
     private HashMap<String, String> allItems;
     private int idTracker;
+    private HashMap<String, ArrayList<Item>> discountCounterMap;
 
     public ItemHandler() {
         this.idTracker = 0;
         this.basketCapacity = 1;
         this.basket = new ArrayList<>();
         setUpAllItems();
+        discountCounterMap = new HashMap<>();
     }
 
     public Bagel addBagel(String SKU) {
@@ -111,11 +113,37 @@ public class ItemHandler {
     }
 
     public double getTotal() {
+        calcDiscounts();
+        for (ArrayList<Item> itemArrayList : discountCounterMap.values()) {
+            if (itemArrayList.size() > 5) {
+                sixBagelDiscount(itemArrayList);
+            }
+        }
         double total = 0;
         for (Item item : basket) {
             total += item.getTotal();
+            item.setDiscountPrice(-1);
         }
-        return total;
+        return total/1000;
+    }
+
+    public void sixBagelDiscount(ArrayList<Item> listToDiscount) {
+        for (int i = 0; i < 6; i++) {
+            listToDiscount.get(i).setDiscountPrice(415);
+        }
+    }
+
+    public void calcDiscounts() {
+        discountCounterMap = new HashMap<>();
+        for (Item item : basket) {
+            if (discountCounterMap.containsKey(item.getSKU())) {
+                discountCounterMap.get(item.getSKU()).add(item);
+            } else {
+                ArrayList<Item> itemArrayList = new ArrayList<>();
+                itemArrayList.add(item);
+                discountCounterMap.put(item.getSKU(), itemArrayList);
+            }
+        }
     }
 
     public double searchItem(String SKU) {

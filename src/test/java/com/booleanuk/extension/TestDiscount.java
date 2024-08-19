@@ -9,9 +9,16 @@ public class TestDiscount {
     @Test
     public void testDiscountSixBagels() {
         itemHandler = new ItemHandler();
+        itemHandler.setCapacity(7);
         for (int i = 0; i < 6; i++) {
             itemHandler.addBagel("BGLE");
         }
         assertEquals(2.49, itemHandler.getTotal());
+
+        for (int i = 0; i < 6; i++) {
+            itemHandler.addBagel("BGLE");
+        }
+
+        assertEquals(3.99, itemHandler.getTotal());
     }
 }
