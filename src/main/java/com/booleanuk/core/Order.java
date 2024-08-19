@@ -6,7 +6,7 @@ import java.util.Map;
 public class Order {
     private final Map<String, Integer> basket;
     private int totalSum;
-    private int maxBasketCapacity = 20;
+    private int maxBasketCapacity = 25;
     private int currentBasketCapacity;
 
     public Order() {

@@ -76,7 +76,7 @@ public class OrderTest {
     public void testIncrementBasketCapacity() {
         Order order = new Order();
         order.incrementBasketCapacity();
-        Assertions.assertEquals(25, order.getMaxBasketCapacity());
+        Assertions.assertEquals(30, order.getMaxBasketCapacity());
     }
 
 
