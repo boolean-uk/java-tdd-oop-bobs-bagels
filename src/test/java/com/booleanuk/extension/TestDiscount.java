@@ -28,6 +28,22 @@ public class TestDiscount {
 
     @Test
     public void testDiscountTwelveBagels() {
+        Bagel bagel1 = new Bagel("BGLE", 0);
+        itemHandler = new ItemHandler();
+        itemHandler.setCapacity(100);
+        for (int i = 0; i < 12; i++) {
+            bagel1 = itemHandler.addBagel("BGLE");
+        }
 
+        assertEquals(3.99, itemHandler.getTotal());
+
+        for (int i = 0; i < 12; i++) {
+            bagel1 = itemHandler.addBagel("BGLE");
+        }
+
+        assertEquals(3.99*2, itemHandler.getTotal());
+
+        itemHandler.removeItem(bagel1.getId());
+        assertEquals(8.93, itemHandler.getTotal());
     }
 }
