@@ -43,8 +43,8 @@ public class BasketTest {
         Bagel bagel3 = new Bagel("BGLO",0.49, "Bagel", Bagel.BagelVariant.EVERYTHING);
         basket.addBagel(bagel1);
         basket.addBagel(bagel2);
-        basket.removeBagel(bagel3);
-        Assertions.assertEquals(bagel3,"The bagel do not exist in the basket");
+        String result1= basket.removeBagel(bagel3);
+        Assertions.assertEquals(result1,"The bagel do not exist in the basket");
 
     }
 
