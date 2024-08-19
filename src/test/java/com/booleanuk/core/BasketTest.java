@@ -17,7 +17,7 @@ public class BasketTest {
         b.addProduct(onion);
         b.addProduct(salmon);
 
-        Assertions.assertEquals("FILS", b.getBasket().keySet().toArray()[1]);
+        Assertions.assertEquals("FILS", b.getBasket().get(1).getSKU());
     }
 
     @Test
