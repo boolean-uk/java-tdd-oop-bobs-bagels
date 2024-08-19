@@ -2,12 +2,12 @@ package com.booleanuk.core;
 
 public abstract class Item {
     protected String sku;
-    protected Double price;
+    protected Integer price;
     protected String name;
     protected String variant;
     protected Integer quantity;
 
-    public Item(String sku, Double price, String name, String variant) {
+    public Item(String sku, Integer price, String name, String variant) {
         this.sku = sku;
         this.price = price;
         this.name = name;
@@ -15,7 +15,7 @@ public abstract class Item {
         this.quantity = 1;
     }
 
-    public Item(String sku, Double price, String name, String variant, Integer quantity) {
+    public Item(String sku, Integer price, String name, String variant, Integer quantity) {
         this.sku = sku;
         this.price = price;
         this.name = name;

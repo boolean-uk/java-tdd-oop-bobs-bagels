@@ -4,9 +4,9 @@ import java.util.ArrayList;
 
 public class Bagel extends Item {
     ArrayList<Filling> fillings = new ArrayList<>();
-    Double totalPriceIncludingFillings;
+    Integer totalPriceIncludingFillings;
 
-    public Bagel(String sku, Double price, String name, String variant){
+    public Bagel(String sku, Integer price, String name, String variant){
         super(sku, price, name, variant);
         totalPriceIncludingFillings = price;
     }

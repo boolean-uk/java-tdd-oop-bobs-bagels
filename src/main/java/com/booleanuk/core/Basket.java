@@ -56,8 +56,8 @@ public class Basket {
         }
     }
 
-    public Double calculateBasketCost(){
-        return 0.0;
+    public Float calculateBasketCost(){
+        return 0.00f;
     }
 
     public Integer getBasketSize(){
