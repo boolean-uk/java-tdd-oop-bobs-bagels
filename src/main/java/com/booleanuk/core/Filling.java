@@ -2,7 +2,7 @@ package com.booleanuk.core;
 
 public class Filling extends Item{
 
-    private Bagel bagel;
+    private final Bagel bagel;
 
     public Filling(String SKU, int id, Bagel bagel) {
         this.bagel = bagel;

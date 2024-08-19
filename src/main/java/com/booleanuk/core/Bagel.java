@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Bagel extends Item{
 
-    private ArrayList<Filling> fillings;
+    private final ArrayList<Filling> fillings;
 
     public Bagel(String SKU, int id) {
         fillings = new ArrayList<>();

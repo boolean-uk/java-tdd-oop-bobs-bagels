@@ -5,7 +5,7 @@ import java.util.HashMap;
 
 public class ItemHandler {
 
-    private ArrayList<Item> basket;
+    private final ArrayList<Item> basket;
     private int basketCapacity;
     private HashMap<String, String> allItems;
     private int idTracker;

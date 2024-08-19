@@ -25,9 +25,9 @@ public class ItemHandlerTest {
         Coffee coffee2 = itemHandler.addCoffee("WRONGSKU");
         assertNull(coffee2);
 
-        Coffee coffee3 = itemHandler.addCoffee("COFL");
+        itemHandler.addCoffee("COFL");
         assertEquals(1, itemHandler.getBasket().size());
-        Bagel bagel1 = itemHandler.addBagel("BGLS");
+        itemHandler.addBagel("BGLS");
         assertEquals(1, itemHandler.getBasket().size());
 
     }
@@ -42,7 +42,7 @@ public class ItemHandlerTest {
 
         assertEquals(filling1, bagel1.getFillings().getFirst());
 
-        Filling filling2 = itemHandler.addFilling("WRONGSKU", bagel1);
+        itemHandler.addFilling("WRONGSKU", bagel1);
         assertEquals(1, bagel1.getFillings().size());
 
         Bagel bagel = new Bagel("BGLS", 4);
