@@ -32,6 +32,6 @@ public class BagelTest {
 
         bagel.addFilling(filling.getSKU());
 
-        Assertions.assertEquals("FILX", bagel.getFilling());
+        Assertions.assertEquals("FILX", bagel.getFilling().getSKU());
     }
 }
