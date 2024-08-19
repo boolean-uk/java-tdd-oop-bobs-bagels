@@ -20,10 +20,29 @@ public class BasketTest {
     @Test
     public void ShouldAddProductToBasket(){
         Basket basket = new Basket();
-        Bagel onionBagel = new Bagel("BGLO",	0.49, "Bagel",	"Onion");
+        Inventory inventory = new Inventory();
 
-        Assertions.assertEquals("New product added to basket", basket.add(onionBagel));
-        Assertions.assertEquals("Existing product added to basket", basket.add(onionBagel));
+        Assertions.assertEquals("New product added to basket", basket.add(inventory.menu.get("OnionBagel")));
+        Assertions.assertEquals("Existing product added to basket", basket.add(inventory.menu.get("OnionBagel")));
+    }
+
+    @Test
+    public void ShouldNotAddOnlyFillingWithoutBagel(){
+        Basket basket = new Basket();
+        Inventory inventory = new Inventory();
+
+        Assertions.assertNotEquals("You will need a bagel for that or it will be messy", basket.add(inventory.menu.get("BaconFilling")));
+
+    }
+
+    @Test
+    public void ShouldAddFillingIfBagelExist(){
+        Basket basket = new Basket();
+        Inventory inventory = new Inventory();
+
+        basket.add(inventory.menu.get("OnionBagel"));
+
+        Assertions.assertEquals("New product added to basket", basket.add(inventory.menu.get("BaconFilling")));
     }
 
     @Test
