@@ -106,4 +106,30 @@ public class BasketTest {
 
         Assertions.assertEquals(20, basket.getBasketSize());
     }
+
+    @Test
+    public void removeBagelNotInBasketTest() {
+        /*
+        As a member of the public,
+        So I can change my order,
+        I'd like to remove a bagel from my basket.
+        */
+
+        Basket basket = new Basket();
+        String name = "Bagel";
+        String variant = "Plain";
+        basket.addItemToBasket(Menu.getItemFromMenu(name, variant));
+
+        // Change input to predefined input.
+        InputStream backup = System.in;
+        ByteArrayInputStream in = new ByteArrayInputStream("2".getBytes());
+        System.setIn(in);
+
+        String expectedResult = "Invalid option.";
+        String removeResult = basket.removeItemFromBasket();
+
+        Assertions.assertEquals(expectedResult, removeResult);
+
+        System.setIn(backup);
+    }
 }
