@@ -41,4 +41,30 @@ public class BasketTest {
         Assertions.assertFalse(basket.addProduct(b6));
     }
 
+    @Test
+    public void testRemoveProductFromBasketTest() {
+        Basket basket = new Basket();
+
+        Bagel onionBagel = new OnionBagel();
+
+        basket.addProduct(onionBagel);
+
+        basket.remove(onionBagel);
+
+        Assertions.assertTrue(basket.getBasket().isEmpty());
+    }
+
+    @Test
+    public void testRemoveProductFromMBasketThatDoesNotExist() {
+        Basket basket = new Basket();
+
+        Bagel onionBagel = new OnionBagel();
+
+        // basket.addProduct(onionBagel); don't add
+
+        Assertions.assertFalse(basket.remove(onionBagel));
+        Assertions.assertTrue(basket.getBasket().isEmpty());
+
+    }
+
 }
