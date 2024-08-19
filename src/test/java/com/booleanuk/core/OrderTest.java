@@ -28,7 +28,7 @@ public class OrderTest {
     public void testGetBasket() {
         Order order = new Order();
         Product product = new Product("SKU", 10, "Variant");
-        order.addProduct(product);
+        Assertions.assertTrue(order.addProduct(product));
         Assertions.assertEquals(1, order.getBasket().size());
         Assertions.assertEquals(1, order.getBasket().get(product.getSKU()));
     }
