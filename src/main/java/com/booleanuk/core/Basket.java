@@ -56,6 +56,15 @@ public class Basket {
         System.out.println(variant);
         return itemDetails.getPrice();
     }
+
+    public boolean isFilling(String variant) {
+        Inventory inventory = new Inventory();
+        InventoryItem itemDetails = inventory.getInventoryItemDetails(variant);
+
+        return itemDetails.getName().equals("Filling");
+    }
+
+
     /*public void getFillingCost(String sku){
        Inventory inventory = new Inventory();
        InventoryItem itemDetails = inventory.getInventoryItemDetails(sku);

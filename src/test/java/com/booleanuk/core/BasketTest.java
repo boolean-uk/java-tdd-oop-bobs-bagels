@@ -48,7 +48,7 @@ class BasketTest {
         double fillingCost = basket.getFillingCost("Bacon");
        Assertions.assertEquals(0.12, fillingCost );
     }
-
+    @Test
     public void testIsFilling(){
         Basket basket = new Basket();
         boolean isFilling = basket.isFilling("Bacon");
