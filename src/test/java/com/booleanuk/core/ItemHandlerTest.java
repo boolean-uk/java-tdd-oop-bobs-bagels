@@ -76,6 +76,9 @@ public class ItemHandlerTest {
         assertTrue(removed2);
         assertEquals(0, bagel2.getFillings().size());
 
+        boolean removed3 = itemHandler.removeItem(filling1.getId());
+        assertFalse(removed3);
+
 
     }
 
