@@ -1,0 +1,13 @@
+| Classes      | Variables                           | Methods                           | Scenario                                         | Outcome                                    |
+|--------------|-------------------------------------|-----------------------------------|--------------------------------------------------|--------------------------------------------|
+| `Basket`     | `List<Bagel> bagels`                | `addBagel(Bagel bagel)`           | there is space in bagels                         | bagel is added                             |
+|              | `List<Bagel> bagels`                |                                   | there's no space in bagels                       | user notified that bagel not added         |
+| `Controller` | `Basket basket, View view`          | `basket.removeBagel(Bagel bagel)` | view.removeBagel(...) specifies a specific bagel | specified bagel is removed                 |
+|              |                                     |                                   | view.removeBagel(...) returns null (no bagel)    | user is notified that no bagel was removed |
+|              |                                     |                                   |                                                  |                                            |
+|              |                                     |                                   |                                                  |                                            |
+|              |                                     | `order()`                         | items in bagels                                  | order sent to store                        |
+|              |                                     |                                   | bagels list empty                                | warning given                              |
+|              |                                     | `removeBagel(String bagelType)`   | bagel of bagelType in bagels list                | one bagel of bagelType is removed          |
+|              |                                     |                                   | no bagel of bagelType in bagels list             | no bagel removed, user warned              |
+|              | `int basketSize, boolean userIsBob` | `setBasketSize(int newSize)`      | basketSize set to newSize                        |                                            |

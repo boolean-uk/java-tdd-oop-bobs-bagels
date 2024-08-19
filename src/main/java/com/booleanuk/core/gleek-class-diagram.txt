@@ -1,0 +1,44 @@
+Controller
+	- view: View
+	- prices: Hashmap<String, Tuple<String, float>>
+	- basket: Basket
+	- basketSize: int
+	+changeBasketSize(int size): void
+
+View
+	-scanner: Scanner
+	+validateManager():boolean
+	+mainMenu(): char
+	+addBagel(prices: Hashmap): void
+	+removeBagel(List<Bagel> bagels): Bagel
+	-listBagels(List<Bagel> bagels): void
+
+Bagel
+	- type: BagelVariant
+	- filling: FillingVariant
+	+calculateCost():float
+
+Basket
+	- bagels: List<Bagel>
+	- maxSize: int
+	+addBagel(Bagel bagel): void
+	+removeBagel(Bagel bagel): void
+	+calculateCost(): float
+
+BagelVariant:service
+	Onion
+	Plain
+	Everything
+	Sesame
+
+FillingVariant:service
+	Bacon
+	Egg
+	Cheese
+	CreamCheese
+
+Controller-->View
+Bagel-->BagelVariant
+Bagel-->FillingVariant
+Basket-->Bagel
+Controller-->Basket
