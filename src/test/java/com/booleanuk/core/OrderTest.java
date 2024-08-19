@@ -21,5 +21,16 @@ public class OrderTest {
         Product product2 = new Product("SKU2", 20, "Variant2");
         order.addProduct(product2);
         Assertions.assertEquals(30, order.getTotalSum());
+
+    }
+
+    // test get basket
+    @Test
+    public void testGetBasket() {
+        Order order = new Order();
+        Product product = new Product("SKU", 10, "Variant");
+        order.addProduct(product);
+        Assertions.assertEquals(1, order.getBasket().size());
+        Assertions.assertEquals(1, order.getBasket().get(product.getSKU()));
     }
 }
