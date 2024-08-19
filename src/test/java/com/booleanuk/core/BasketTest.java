@@ -12,6 +12,13 @@ public class BasketTest {
 
 
         Assertions.assertTrue(basket.addItem("BGLO"));
+    }
 
+    @Test removeItemTest(){
+        Basket basket = new Basket();
+        basket.addItem("BGLO");
+
+
+        Assertions.assertTrue(basket.removeItem("BGLO"));
     }
 }
