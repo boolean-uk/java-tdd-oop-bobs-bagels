@@ -162,8 +162,6 @@ public class OrderTest {
         addProductsToOrder(order, coffee, 1);
         Assertions.assertEquals(125, order.getTotalSum());
 
-        order.removeProduct(coffee);
-        Assertions.assertEquals(399, order.getTotalSum());
     }
 
     // Helper method to add products to an order

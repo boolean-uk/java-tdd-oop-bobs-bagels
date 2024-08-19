@@ -15,6 +15,7 @@ public class Order {
     }
 
     public int getTotalSum() {
+        applyBagelsDiscount();
         return totalSum;
     }
 
@@ -29,7 +30,6 @@ public class Order {
         }
         totalSum += product.getPrice();
         currentBasketCapacity++;
-        applyDiscount();
         return true;
     }
 
@@ -43,7 +43,6 @@ public class Order {
             }
             totalSum -= product.getPrice();
             currentBasketCapacity--;
-            applyDiscount();
             return true;
         }
         System.out.println("Product not found in the basket");
@@ -67,65 +66,103 @@ public class Order {
         return basket;
     }
 
-    private void applyDiscount() {
-        int count = 0;
-        int totalPrice = 0;
+    private void applyBagelsDiscount() {
+        int amountOfBagels = 0;
+
+        int amountOfCoffee = 0;
+
         int resetAmount = 0;
         ArrayList<Integer> bagelsPrice = new ArrayList();
+        ArrayList<Integer> coffeesPrice = new ArrayList();
+
         Inventory inventory = new Inventory();
         for (Map.Entry<String, Integer> entry : basket.entrySet()) {
             resetAmount += entry.getValue() * inventory.getProduct(entry.getKey()).getPrice();
+
+            if (entry.getKey().startsWith("COF")) {
+                amountOfCoffee += entry.getValue();
+                int coffeePrice = inventory.getProduct(entry.getKey()).getPrice();
+                for (int i = 0; i < entry.getValue(); i++) {
+                    coffeesPrice.add(coffeePrice);
+                }
+            }
             if (entry.getKey().startsWith("BGL")) {
-                count += entry.getValue();
+                amountOfBagels += entry.getValue();
                 int bagelPrice = inventory.getProduct(entry.getKey()).getPrice();
-                totalPrice += entry.getValue() * bagelPrice;
                 for (int i = 0; i < entry.getValue(); i++) {
                     bagelsPrice.add(bagelPrice);
                 }
             }
         }
-        System.out.println("Total price: " + totalPrice);
-        System.out.println("Count: " + count);
-        int x = 0;
-        int y = 0;
-        if (count >= 12) {
-            do {
-                x++;
-                count -= 12;
-            } while (count > 12);
-            if (count >= 6) {
-                y++;
-                count -= 6;
-            }
-        } else {
-            if (count >= 6) {
-                y++;
-                count -= 6;
-            }
-        }
+        System.out.println("Amount of bagels: " + amountOfBagels);
+        System.out.println("Amount of coffee: " + amountOfCoffee);
 
-        if (x == 0 && y == 0) {
+        int twelveBagelDiscounts = amountOfBagels / 12;
+        amountOfBagels %= 12;
+        int sixBagelDiscounts = amountOfBagels / 6;
+        amountOfBagels %= 6;
+
+        int bagelCoffeePairs = Math.min(amountOfBagels, amountOfCoffee);
+        if (twelveBagelDiscounts == 0 && sixBagelDiscounts == 0 && bagelCoffeePairs == 0) {
             totalSum = resetAmount;
             System.out.println("No discount applied" + resetAmount + " " + totalSum);
-        } else {
+        } else if (twelveBagelDiscounts == 0 && sixBagelDiscounts == 0 && bagelCoffeePairs > 0) {
+            amountOfBagels -= bagelCoffeePairs;
+            amountOfCoffee -= bagelCoffeePairs;
             int sumToAdd = 0;
-            if (count >= 0) {
+            if (amountOfBagels >= 0) {
                 // Sort the list in descending order
-                bagelsPrice.sort(new Comparator<Integer>() {
-                    @Override
-                    public int compare(Integer o1, Integer o2) {
-                        return o2 - o1;
-                    }
-                });
+                bagelsPrice.sort(Comparator.reverseOrder());
                 System.out.println("Bagels price: " + bagelsPrice);
-                for (int i = 0; i < count; i++) {
+                for (int i = 0; i < amountOfBagels; i++) {
                     sumToAdd += bagelsPrice.get(i);
                 }
             }
-            System.out.println(count + " bagels left");
+            if (amountOfCoffee >= 0) {
+                // Sort the list in descending order
+                coffeesPrice.sort(Comparator.reverseOrder());
+                System.out.println("Coffees price: " + coffeesPrice);
+                for (int i = 0; i < amountOfCoffee; i++) {
+                    sumToAdd += coffeesPrice.get(i);
+                }
+            }
+
+            System.out.println("Bagel coffee pairs: " + bagelCoffeePairs);
             System.out.println("Sum to add: " + sumToAdd);
-            int newSum = x * 399 + y * 249 + sumToAdd;
+            totalSum = bagelCoffeePairs * 125 + sumToAdd;
+
+        } else {
+            int sumToAdd = 0;
+            if (amountOfBagels >= 0) {
+                // Sort the list in descending order
+                bagelsPrice.sort(Comparator.reverseOrder());
+                System.out.println("Bagels price: " + bagelsPrice);
+                for (int i = 0; i < amountOfBagels; i++) {
+                    sumToAdd += bagelsPrice.get(i);
+                }
+            }
+            System.out.println(amountOfBagels + " bagels left");
+            System.out.println("Sum to add: " + sumToAdd);
+            int newSum = twelveBagelDiscounts * 399 + sixBagelDiscounts * 249 + sumToAdd;
             totalSum = newSum;
         }
     }
+
+
+    private void applyCoffeeDiscount() {
+        int coffeeCount = 0;
+        int totalPrice = 0;
+        Inventory inventory = new Inventory();
+
+        for (Map.Entry<String, Integer> entry : basket.entrySet()) {
+            if (entry.getKey().startsWith("COF")) {
+                coffeeCount += entry.getValue();
+                totalPrice += entry.getValue() * inventory.getProduct(entry.getKey()).getPrice();
+            }
+        }
+        if (coffeeCount != 0) {
+
+        }
+    }
+
 }
