@@ -109,6 +109,9 @@ public class OrderTest {
         addProductsToOrder(order, bagelO, 6);
         addProductsToOrder(order, bagelP, 6);
         Assertions.assertEquals(399, order.getTotalSum());
+
+        order.addProduct(bagelO);
+        Assertions.assertEquals(399 + bagelO.getPrice(), order.getTotalSum());
     }
 
     // Helper method to add products to an order
