@@ -67,6 +67,7 @@ public class ItemHandler {
     }
 
     public boolean setCapacity(int newCapacity) {
+        this.basketCapacity = newCapacity;
         return true;
     }
 
