@@ -20,4 +20,15 @@ public class BagelTest {
         Filling filling = new Filling("SKU", 10, "Variant");
         Assertions.assertTrue(bagel.addFilling(filling));
     }
+
+    @Test
+    public void TestAddFillingsFull() {
+        Bagel bagel = new Bagel("SKU", 10, "Variant");
+        Filling filling = new Filling("SKU", 10, "Variant");
+        Filling filling2 = new Filling("SKU2", 20, "Variant2");
+        Filling filling3 = new Filling("SKU3", 30, "Variant3");
+        Assertions.assertTrue(bagel.addFilling(filling));
+        Assertions.assertTrue(bagel.addFilling(filling2));
+        Assertions.assertFalse(bagel.addFilling(filling3));
+    }
 }
