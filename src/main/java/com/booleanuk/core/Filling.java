@@ -7,5 +7,8 @@ public class Filling extends Product{
         super(SKU, price, name, variant);
     }
 
-
+    @Override
+    public String toString() {
+        return getVariant();
+    }
 }

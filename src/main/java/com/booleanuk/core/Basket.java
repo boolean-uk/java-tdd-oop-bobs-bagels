@@ -74,26 +74,40 @@ public class Basket {
     public Boolean addFilling(String bagelSKU, String fillingSKU){
         for (Product p: basketContent){
             if(p.getSKU().equals(bagelSKU) && (p instanceof Bagel)){
-                if(((Bagel) p).getFilling() != null){
-                    System.out.println("This bagel already has filling");
-                    return false;
-                }
+
 
                 //found bagel, now see if filling is in inventory
                 for (Product filling: inventory){
-                    if(filling.getSKU().equals(fillingSKU)){
+                    if(filling.getSKU().equals(fillingSKU) && ((Bagel) p).getFilling() == null){
                         System.out.println("Adding filling " + filling.getVariant() + " to bagel at a cost of " + filling.getPrice());
                         ((Bagel) p).setFilling((Filling) filling);
                         totalPrice += filling.getPrice();
                         return true;
                     }
                 }
-                System.out.println("Couldn't find the desired filling in stock");
-                return false;
+                //System.out.println("Couldn't find the desired filling in stock");
+                //return false;
             }
         }
         System.out.println("Couldn't find the bagel in basket");
         return false;
+    }
+
+    //Sanity check
+    public static void main(String[] args) {
+        Basket basket = new Basket();
+        basket.changeBasketSize(20);
+        basket.addItem("BGLO");
+        basket.addItem("BGLP");
+        basket.addItem("BGLE");
+        basket.addItem("BGLE");
+
+
+        basket.addFilling("BGLE", "FILC");
+
+
+        System.out.println(basket.getTotalPrice());
+        System.out.println(basket.getBasketContent());
     }
 
 
@@ -111,5 +125,13 @@ public class Basket {
 
     public void setTotalPrice(double totalPrice) {
         this.totalPrice = totalPrice;
+    }
+
+    public ArrayList<Product> getBasketContent() {
+        return basketContent;
+    }
+
+    public void setBasketContent(ArrayList<Product> basketContent) {
+        this.basketContent = basketContent;
     }
 }
