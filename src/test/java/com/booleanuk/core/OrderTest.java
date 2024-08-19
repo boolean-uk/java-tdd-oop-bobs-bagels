@@ -71,4 +71,12 @@ public class OrderTest {
         Assertions.assertEquals(2, order.getBasket().size());
         Assertions.assertEquals(1, order.getBasket().get(product.getSKU()));
     }
+
+    // test ìncrementBasketCapacity()
+    @Test
+    public void testIncrementBasketCapacity() {
+        Order order = new Order();
+        order.incrementBasketCapacity();
+        Assertions.assertEquals(25, order.getMaxBasketCapacity());
+    }
 }
