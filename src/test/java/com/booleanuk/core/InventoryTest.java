@@ -21,7 +21,12 @@ public class InventoryTest {
 
     @Test
     public void testCheckIfProductIsNotInInventory() {
-        // TODO: implement
+        Inventory inv = new Inventory();
+
+        Bagel b = new OnionBagel();
+        inv.decreaseQuantity(b); // Assume customer puts this bagel in their basket
+
+        Assertions.assertFalse(inv.productIsInStock(b));
     }
 
 }
