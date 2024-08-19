@@ -23,4 +23,14 @@ public class Inventory {
         return false;
     }
 
+    public boolean decreaseQuantity(Product p) {
+        for (Map.Entry<Product, Integer> kvp : this.inventory.entrySet()) {
+            if (kvp.getKey().getSKU().equals(p.getSKU()) && kvp.getValue() > 0) {
+                this.inventory.replace(kvp.getKey(), kvp.getValue() - 1);
+                return true;
+            }
+        }
+        return false;
+    }
+
 }
