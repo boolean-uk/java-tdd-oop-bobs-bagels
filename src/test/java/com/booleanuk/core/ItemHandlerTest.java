@@ -132,7 +132,8 @@ public class ItemHandlerTest {
 
     @Test
     public void testSearchItem() {
-
+        itemHandler = new ItemHandler();
+        boolean search1 = itemHandler.searchItem("BGLE");
     }
 
 
