@@ -20,9 +20,7 @@ public class Product {
         this.price = (int) (price * 100); // number of cents as an int
     }
 
-
-    // not used, maybe not needed using SKU instead
-    private String getVariant() {
+    public String getVariant() {
         return variant;
     }
 

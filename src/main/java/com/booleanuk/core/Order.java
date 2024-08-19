@@ -1,17 +1,22 @@
 package com.booleanuk.core;
 
 import java.util.HashMap;
+import java.util.Map;
 import java.util.NoSuchElementException;
 
 
 public class Order {
-
     private HashMap<String, Integer> basket = new HashMap<>();
     private final Store store;
     private int totalPrice;
+    private Bagels lastAddedBagel;
 
     Order(Store store) {
         this.store = store;
+    }
+
+    public Bagels getLastAddedBagel() {
+        return lastAddedBagel;
     }
 
     public boolean addProduct(Product product) {
@@ -23,14 +28,27 @@ public class Order {
             System.out.println("Didn't find the product you're trying to add in our inventory!");
             return false;
         }
-        if (product instanceof Fillings) {
+        //bagels
+        if (product instanceof Bagels) {
+            basket.put(product.getSKU(), basket.getOrDefault(product.getSKU(), 0) + 1);
+            this.totalPrice += (int) (product.getPrice() * 100);
+
+        //fillings
+        } else if (product instanceof Fillings) {
             if (!isBagelInBasket()) {
                 System.out.println("You have to choose a bagel first before you can add a filling");
                 return false;
             }
+            this.totalPrice += (int) (product.getPrice() * 100);
+            Bagels lastBagel = getLastAddedBagel();
+            lastBagel.addFilling((Fillings) product);
+
+          //coffee
+        } else {
+            basket.put(product.getSKU(), basket.getOrDefault(product.getSKU(), 0) + 1);
+            this.totalPrice += (int) (product.getPrice() * 100);
         }
-        basket.put(product.getSKU(), basket.getOrDefault(product.getSKU(), 0) + 1);
-        this.totalPrice += (int) (product.getPrice() * 100);
+
         return true;
     }
 
@@ -62,6 +80,16 @@ public class Order {
 
     public double getTotalPrice() {
         return totalPrice / 100.0;
+    }
+
+
+
+    public void printBasket() {
+        for (Map.Entry<String, Integer> entry : basket.entrySet()) {
+            String sku = entry.getKey();
+            Integer quantity = entry.getValue();
+            System.out.println("Product SKU: " + sku + ", Quantity: " + quantity);
+        }
     }
 }
 

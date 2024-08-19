@@ -7,23 +7,23 @@ import java.util.NoSuchElementException;
 
 public class MainTest {
 
-    private Product bagels1;
-    private Product bagels2;
-    private Product bagels3;
-    private Product bagels4;
+    private Bagels bagels1;
+    private Bagels bagels2;
+    private Bagels bagels3;
+    private Bagels bagels4;
 
-    private Product coffee1;
-    private Product coffee2;
-    private Product coffee3;
-    private Product coffee4;
+    private Coffee coffee1;
+    private Coffee coffee2;
+    private Coffee coffee3;
+    private Coffee coffee4;
 
-    private Product fillings1;
-    private Product fillings2;
-    private Product fillings3;
-    private Product fillings4;
-    private Product fillings5;
-    private Product fillings6;
-    private Product fillings7;
+    private Fillings fillings1;
+    private Fillings fillings2;
+    private Fillings fillings3;
+    private Fillings fillings4;
+    private Fillings fillings5;
+    private Fillings fillings6;
+    private Fillings fillings7;
 
     private Store store;
     private Order order;
@@ -83,7 +83,6 @@ public class MainTest {
         order.addProduct(fillings7); // not in inventory
         Assertions.assertNotEquals(2, order.sizeOfBasket());
         Assertions.assertFalse(order.containsKeyBasket(fillings7.getSKU()));
-
     }
 
     @Test
@@ -95,14 +94,6 @@ public class MainTest {
         order.addProduct(coffee1);
         order.addProduct(coffee2);
         Assertions.assertFalse(order.addProduct(coffee3));
-    }
-
-    @Test
-    public void testAddFilling() {
-        Assertions.assertFalse(order.addProduct(fillings1));
-        order.addProduct(bagels1);
-        Assertions.assertTrue(order.addProduct(fillings1));
-        Assertions.assertTrue(order.containsKeyBasket(fillings1.getSKU()));
     }
 
     @Test
@@ -122,11 +113,53 @@ public class MainTest {
     @Test
     public void testTotalCost() {
         order.addProduct(bagels1);
-        order.addProduct(fillings1);
+        order.addProduct(bagels1);
+        bagels1.addFilling(fillings1);
         order.addProduct(coffee1);
-        Assertions.assertEquals(1.6, order.getTotalPrice());
+        Assertions.assertEquals(1.97, order.getTotalPrice());
 
     }
 
+    @Test
+    public void testAddFilling() {
+        bagels1.addFilling(fillings1);
+        Assertions.assertEquals(1, bagels1.getFillings().size());
+        Assertions.assertEquals(fillings1, bagels1.getFillings().getFirst());
 
+    }
+
+    @Test
+    public void testRemoveFilling() {
+        bagels1.addFilling(fillings1);
+        bagels1.addFilling(fillings2);
+
+
+        bagels1.removeFilling(fillings2);
+        Assertions.assertEquals(1, bagels1.getFillings().size());
+        Assertions.assertFalse(bagels1.getFillings().contains(fillings2));
+
+
+        bagels1.removeFilling(fillings2);
+        Assertions.assertEquals(1, bagels1.getFillings().size());
+    }
+/*
+
+Just for checking my basket
+
+ */
+    @Test
+    public void testPrintBasket() {
+        order.addProduct(bagels1);
+        order.addProduct(bagels1);
+        order.addProduct(bagels1);
+
+        order.addProduct(bagels2);
+        bagels2.addFilling(fillings1);
+        bagels2.addFilling(fillings1);
+        order.addProduct(bagels3);
+        bagels3.addFilling(fillings2);
+        order.printBasket();
+        bagels2.printFillings();
+    }
 }
+

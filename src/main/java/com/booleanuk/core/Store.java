@@ -10,7 +10,6 @@ public class Store {
         int maxSizeInventory = 15;
         if (inventory.size() < maxSizeInventory) {
             inventory.add(product);
-            System.out.println(inventory.contains(product));
         } else System.out.println("Inventory should not be able to consist of more then 15 items");
 
     }
@@ -34,9 +33,5 @@ public class Store {
         return false;
     }
 }
-
-   /* private String generateId(){
-        return UUID.randomUUID().toString().replace("-", "");
-    }*/
 
 
