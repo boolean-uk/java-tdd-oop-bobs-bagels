@@ -3,7 +3,9 @@ package com.booleanuk.core;
 import com.booleanuk.core.enums.BagelType;
 import com.booleanuk.core.enums.SKU;
 import com.booleanuk.core.exceptions.FullBasketException;
+import com.booleanuk.core.exceptions.NonExistingProductException;
 import com.booleanuk.core.inherited.Bagel;
+import com.booleanuk.core.inherited.Coffee;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -49,5 +51,15 @@ public class BasketTest {
         Basket basket = this.order.getBasket();
         basket.changeCapacity(10);
         Assertions.assertEquals(10, basket.getCapacity());
+    }
+
+    @Test
+    public void testRemoveProductThrowException() {
+        Basket basket = this.order.getBasket();
+
+        Assertions.assertThrows(NonExistingProductException.class, () -> {
+            basket.removeProduct(new Coffee("Coffee", 0.99, SKU.COFB));
+
+        });
     }
 }
