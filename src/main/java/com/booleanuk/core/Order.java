@@ -10,7 +10,6 @@ public class Order {
 
     public Order(){
         this.id = UUID.randomUUID();
-        this.price = 0;
     }
 
     public int size(){
@@ -67,9 +66,11 @@ public class Order {
         this.id = newId;
     }
 
-    public int getPrice(){
+    public int getPrice(Store store){
         int result = 0;
-        //for(Product product : basket.)
+        for(HashMap.Entry<String, Integer> entry : basket.entrySet()){
+
+        }
         return result;
     }
 }

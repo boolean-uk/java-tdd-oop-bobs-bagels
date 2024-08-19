@@ -124,7 +124,7 @@ public class TestCore {
         order1.addProduct("COFW", store);
         order1.addProduct("FILB", store);
         order1.addProduct("FILE", store);
-        Assertions.assertEquals(231, order1.getPrice());
+        Assertions.assertEquals(231, order1.getPrice(store));
     }
 
     /*@Test
