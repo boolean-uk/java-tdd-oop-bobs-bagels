@@ -115,6 +115,18 @@ public class TestCore {
         Assertions.assertFalse(order1.removeProduct("BGLX"));
     }
 
+    @Test
+    public void testOrderGetPrice() throws Exception {
+        mainTest();
+        Order order1 = new Order();
+        order1.addProduct("BGLO", store);
+        order1.addProduct("BGLO", store);
+        order1.addProduct("COFW", store);
+        order1.addProduct("FILB", store);
+        order1.addProduct("FILE", store);
+        Assertions.assertEquals(231, order1.getPrice());
+    }
+
     /*@Test
     public void testOrderAddProductFilling() throws Exception {
         Order order1 = new Order();

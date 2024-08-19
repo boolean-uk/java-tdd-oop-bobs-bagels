@@ -7,7 +7,6 @@ public class Order {
 
     private HashMap<String, Integer> basket = new HashMap<>();
     private UUID id;
-    private int price;
 
     public Order(){
         this.id = UUID.randomUUID();
@@ -69,6 +68,8 @@ public class Order {
     }
 
     public int getPrice(){
-        return this.price;
+        int result = 0;
+        //for(Product product : basket.)
+        return result;
     }
 }
