@@ -16,9 +16,16 @@ public class BasketTest {
     }
 
     @Test
-    public void testAddProductAddsABagelToTheBasket() {
+    public void testAddProduct() {
         Basket basket = this.order.getBasket();
         basket.addProduct(new Bagel("Bagel", 0.49, SKU.BGLP, BagelType.ONION));
         Assertions.assertFalse(basket.getProducts().isEmpty());
+    }
+
+    @Test
+    public void testRemoveProduct() {
+        Basket basket = this.order.getBasket();
+        basket.removeProduct(basket.getProducts().getFirst());
+        Assertions.assertTrue(basket.getProducts().isEmpty());
     }
 }

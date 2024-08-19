@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class Basket {
     private final ArrayList<Product> products;
     private Integer capacity;
-    private final Integer MAX_CAPACITY = 10;
+    private static final Integer MAX_CAPACITY = 10;
 
     public Basket() {
         this.products = new ArrayList<>();
@@ -14,6 +14,10 @@ public class Basket {
 
     public void addProduct(Product product) {
         products.add(product);
+    }
+
+    public void removeProduct(Product product) {
+
     }
 
 
