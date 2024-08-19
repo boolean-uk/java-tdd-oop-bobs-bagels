@@ -20,7 +20,7 @@ public class Order {
     }
 
     public boolean addProduct(Product product) {
-        if (currentBasketCapacity == maxBasketCapacity) {
+        if (isBasketFull()) {
             return false;
         }
         if (basket.containsKey(product.getSKU())) {
@@ -31,6 +31,10 @@ public class Order {
         totalSum += product.getPrice();
         currentBasketCapacity++;
         return true;
+    }
+
+    private boolean isBasketFull() {
+        return currentBasketCapacity >= maxBasketCapacity;
     }
 
     public Map<String, Integer> getBasket() {
