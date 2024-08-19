@@ -37,6 +37,7 @@ public class ItemHandlerTest {
         itemHandler = new ItemHandler();
         Item bagel1 = itemHandler.addBasicItem("BGLS");
         Item filling1 = itemHandler.addFilling("FILC", bagel1);
+        assertEquals(0.12, filling1.getPrice());
     }
 
 
