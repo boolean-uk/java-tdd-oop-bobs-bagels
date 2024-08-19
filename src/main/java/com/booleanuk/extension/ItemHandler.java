@@ -114,7 +114,7 @@ public class ItemHandler {
     }
 
     public double getTotal() {
-        calcDiscounts();
+        calcDiscountCounterMap();
 
         if (this.discountCounterMap.get("Bagel").size() > 11) {
             twelveBagelDiscount();
@@ -165,7 +165,7 @@ public class ItemHandler {
         this.discountCounterMap.put("Bagel", this.discountCounterMap.get("Bagel").subList(6, this.discountCounterMap.get("Bagel").size()));
     }
 
-    public void calcDiscounts() {
+    public void calcDiscountCounterMap() {
         discountCounterMap = new HashMap<>();
         for (Item item : basket) {
             if (discountCounterMap.containsKey(item.getName())) {
