@@ -99,6 +99,17 @@ public class OrderTest {
 
     }
 
+    // test multi buy discount 12 bagels for 399
+    @Test
+    public void testMultiBuyDiscount12Bagels() {
+        Store store = new Store("Bob's Bagels");
+        Product bagelO = store.getInventory().getProduct("BGLO");
+        Product bagelP = store.getInventory().getProduct("BGLP");
+        Order order = new Order();
+        addProductsToOrder(order, bagelO, 6);
+        addProductsToOrder(order, bagelP, 6);
+        Assertions.assertEquals(399, order.getTotalSum());
+    }
 
     // Helper method to add products to an order
     private void addProductsToOrder(Order order, Product product, int quantity) {
