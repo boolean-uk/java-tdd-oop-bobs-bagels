@@ -11,6 +11,7 @@ public class ItemHandler {
 
     public ItemHandler() {
         this.idTracker = 0;
+        this.basketCapacity = 1;
     }
 
     public HashMap<String, Item> getBasket() {
