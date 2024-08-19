@@ -94,4 +94,23 @@ public class BasketTest {
 
         Assertions.assertEquals(1.0, basket.countTotalValueOfItems());
     }
+
+    @Test
+    public void removeItemFromBasket() {
+        Basket basket = new Basket();
+        Bagel bagel = new Bagel("BGLO");
+        Filling filling = new Filling("FILX");
+        Bagel bagel2 = new Bagel("BGLP");
+        bagel.addFilling(filling);
+        basket.addItemToBasket(bagel);
+        basket.addItemToBasket(filling);
+
+        Assertions.assertEquals(2, basket.countTotalItems());
+
+        basket.removeItem(filling);
+        bagel.remoevFilling();
+
+        Assertions.assertEquals(1, basket.countTotalItems());
+
+    }
 }
