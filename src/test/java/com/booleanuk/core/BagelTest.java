@@ -31,4 +31,15 @@ public class BagelTest {
         Assertions.assertTrue(bagel.addFilling(filling2));
         Assertions.assertFalse(bagel.addFilling(filling3));
     }
+
+    // test get price with fillings
+    @Test
+    public void TestGetPriceWithFillings() {
+        Bagel bagel = new Bagel("SKU", 10, "Variant");
+        Filling filling = new Filling("SKU", 10, "Variant");
+        Filling filling2 = new Filling("SKU2", 20, "Variant2");
+        bagel.addFilling(filling);
+        bagel.addFilling(filling2);
+        Assertions.assertEquals(40, bagel.getPrice());
+    }
 }
