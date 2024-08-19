@@ -3,8 +3,6 @@ package com.booleanuk.core;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import java.lang.foreign.AddressLayout;
-
 public class TestCore {
 
     Store store = new Store(10);

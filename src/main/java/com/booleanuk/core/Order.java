@@ -15,6 +15,14 @@ public class Order {
     }
 
     public void addProduct(String newProduct){
+        int value;
+        if(basket.containsKey(newProduct)){
+            value = basket.get(newProduct) + 1;
+        }
+        else{
+            value = 1;
+        }
+        basket.put(newProduct, value);
     }
 
     public UUID getId(){
