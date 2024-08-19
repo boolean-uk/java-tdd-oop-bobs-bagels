@@ -25,7 +25,12 @@ public class Store {
         return false;
     }
 
-    public int getPrice(String id){
+    public int getPrice(String searchedProduct){
+        for(Product product : inventory){
+            if(product.getSku().equals(searchedProduct)){
+                return product.getPrice();
+            }
+        }
         return 0;
     }
 
