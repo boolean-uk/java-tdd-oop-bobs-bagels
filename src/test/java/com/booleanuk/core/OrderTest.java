@@ -95,6 +95,9 @@ public class OrderTest {
         order.addProduct(bagelP);
 
         Assertions.assertEquals(298, order.getTotalSum());
+
+        order.removeProduct(bagelP);
+        Assertions.assertEquals(249, order.getTotalSum());
     }
 
 }
