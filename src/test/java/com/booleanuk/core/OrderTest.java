@@ -17,5 +17,9 @@ public class OrderTest {
         Product product = new Product("SKU", 10, "Variant");
         order.addProduct(product);
         Assertions.assertEquals(10, order.getTotalSum());
+
+        Product product2 = new Product("SKU2", 20, "Variant2");
+        order.addProduct(product2);
+        Assertions.assertEquals(30, order.getTotalSum());
     }
 }
