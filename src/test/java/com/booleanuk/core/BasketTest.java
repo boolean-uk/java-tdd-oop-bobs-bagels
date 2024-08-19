@@ -87,4 +87,23 @@ public class BasketTest {
         // Assert that the basket execution of addItemToBasket function returns the correct string
         Assertions.assertEquals(expected, result);
     }
+
+    @Test
+    public void changeSizeOfBasketTest(){
+        /*
+        As a Bob's Bagels manager,
+        So that I can expand my business,
+        I’d like to change the capacity of baskets.
+        */
+
+        Basket basket = new Basket();
+
+        basket.changeBasketSize(10);
+
+        Assertions.assertEquals(10, basket.getBasketSize());
+
+        basket.changeBasketSize(20);
+
+        Assertions.assertEquals(20, basket.getBasketSize());
+    }
 }
