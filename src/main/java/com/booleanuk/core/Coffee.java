@@ -8,7 +8,7 @@ public class Coffee extends Product{
 
     @Override
     public String showProduct() {
-        return getSku() + " " + getPrice() + " " + getName() + " " + getVariant();
+        return retrieveSku() + " " + retrievePrice() + " " + retrieveName() + " " + retrieveVariant();
     }
 
 }

@@ -5,7 +5,6 @@ import java.util.Objects;
 
 public class Basket {
     HashMap<Product, Integer> currentBasket;
-
     private int basketCapacity = 10;
     private int productCount = 0;
 
@@ -24,13 +23,13 @@ public class Basket {
     public String add(Product chosenProduct) {
 
         //Should change to sku
-        String chosenName = chosenProduct.getName();
+        String chosenSku = chosenProduct.retrieveSku();
 
         if (productCount < basketCapacity){
             for (Product product : currentBasket.keySet()) {
-                String name = product.getName();
+                String sku = product.retrieveSku();
 
-                if (Objects.equals(name, chosenName)) {
+                if (Objects.equals(sku, chosenSku)) {
                     int currentQuantity = currentBasket.get(product);
 
                     currentBasket.put(product, currentQuantity + 1);
@@ -49,10 +48,10 @@ public class Basket {
 
     public String remove(Product chosenProduct){
 
-        String chosenSku = chosenProduct.getSku();
+        String chosenSku = chosenProduct.retrieveSku();
 
         for(Product product : currentBasket.keySet()){
-            String sku = product.getSku();
+            String sku = product.retrieveSku();
 
             if(Objects.equals(sku, chosenSku)){
                 if(currentBasket.get(product) <= 1){
@@ -78,6 +77,8 @@ public class Basket {
     public void changeCapacity(int newSize){
         basketCapacity = newSize;
     }
+
+    
 
 
 

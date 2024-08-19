@@ -4,70 +4,50 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+
 
 public class BasketTest {
-
-    Bagel onionBagel = new Bagel("BGLO",	0.49, "Bagel",	"Onion");
-    Coffee blackCoffee = new Coffee("COFB",	0.99,	"Coffee",	"Black");
 
 
     @Test
     public void ShouldShowProduct(){
+        Basket basket = new Basket();
+        Bagel onionBagel = new Bagel("BGLO",	0.49, "Bagel",	"Onion");
+        Coffee blackCoffee = new Coffee("COFB",	0.99,	"Coffee",	"Black");
 
         Assertions.assertEquals("BGLO 0.49 Bagel Onion", onionBagel.showProduct());
         Assertions.assertEquals("COFB 0.99 Coffee Black", blackCoffee.showProduct());
-
-        onionBagel.showProduct();
     }
 
     @Test
     public void ShouldAddProductToBasket(){
         Basket basket = new Basket();
+        Bagel onionBagel = new Bagel("BGLO",	0.49, "Bagel",	"Onion");
 
-        basket.add(onionBagel);
-        basket.add(blackCoffee);
-
-        ArrayList<String> expectedNames = new ArrayList<>();
-        expectedNames.add("Bagel");
-        expectedNames.add("Coffee");
-
-
-        ArrayList<String> actualNames = new ArrayList<>();
-        for (Product product : basket.currentBasket.keySet()){
-            String name = product.getName();
-            actualNames.add(name);
-        }
-
-        Assertions.assertEquals(expectedNames, actualNames);
+        Assertions.assertEquals("New product added to basket", basket.add(onionBagel));
+        Assertions.assertEquals("Existing product added to basket", basket.add(onionBagel));
     }
 
     @Test
     public void ShouldIncreaseCurrentBasketValues(){
         Basket basket = new Basket();
 
+        Bagel onionBagel = new Bagel("BGLO",	0.49, "Bagel",	"Onion");
+
         basket.add(onionBagel);
         basket.add(onionBagel);
-        basket.add(blackCoffee);
+        basket.add(onionBagel);
 
 
-        ArrayList<Integer> expectedNames = new ArrayList<>();
-        expectedNames.add(1);
-        expectedNames.add(2);
-
-        ArrayList<Integer> actualNames = new ArrayList<>();
-        for (Product product : basket.currentBasket.keySet()){
-            int i = basket.currentBasket.get(product);
-            actualNames.add(i);
-        }
-
-        Assertions.assertEquals(expectedNames, actualNames);
+        Assertions.assertEquals(3, basket.currentBasket.get(onionBagel));
         Assertions.assertEquals(3, basket.getProductCount());
     }
 
   @Test
   public void ShouldNotExceedBasketCapacity(){
       Basket basket = new Basket();
+
+      Bagel onionBagel = new Bagel("BGLO",	0.49, "Bagel",	"Onion");
 
       int currentCapacity = basket.getBasketCapacity();
 
@@ -88,6 +68,8 @@ public class BasketTest {
   @Test
     public void ShouldRemoveFromBasket(){
       Basket basket = new Basket();
+      Bagel onionBagel = new Bagel("BGLO",	0.49, "Bagel",	"Onion");
+      Coffee blackCoffee = new Coffee("COFB",	0.99,	"Coffee",	"Black");
 
       basket.add(onionBagel);
       basket.add(onionBagel);
@@ -106,6 +88,8 @@ public class BasketTest {
   @Test
     public void ShouldChangeBasketCapacity(){
         Basket basket = new Basket();
+        Bagel onionBagel = new Bagel("BGLO",	0.49, "Bagel",	"Onion");
+        Coffee blackCoffee = new Coffee("COFB",	0.99,	"Coffee",	"Black");
 
         for(int i = 0; i < basket.getBasketCapacity(); i++){
             basket.add(blackCoffee);
@@ -119,8 +103,6 @@ public class BasketTest {
         //Should fail due to basketCapacity being changed
         Assertions.assertNotEquals(basket.getBasketCapacity(), basket.getProductCount());
   }
-
-
 
 }
 

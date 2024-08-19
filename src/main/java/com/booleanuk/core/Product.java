@@ -14,23 +14,38 @@ public abstract class Product {
         this.variant = variant;
     }
 
-    public String getSku(){
+    private String getSku(){
         return this.sku;
     }
 
-    public double getPrice(){
+    public String retrieveSku(){
+        return this.getSku();
+    }
+
+    private double getPrice(){
         return this.price;
     }
 
-    public String getName(){
+    public double retrievePrice(){
+        return this.getPrice();
+    }
+
+    private String getName(){
         return this.name;
     }
 
-    public String getVariant(){
+    public String retrieveName(){
+     return getName();
+
+    }
+
+    private String getVariant(){
         return this.variant;
     }
 
+    public String retrieveVariant(){
+        return this.getVariant();
+    }
+
     public abstract String showProduct();
-
-
 }
