@@ -71,6 +71,32 @@ public class Basket {
         return newSize;
     }
 
+    public Boolean addFilling(String bagelSKU, String fillingSKU){
+        for (Product p: basketContent){
+            if(p.getSKU().equals(bagelSKU) && (p instanceof Bagel)){
+                if(((Bagel) p).getFilling() != null){
+                    System.out.println("This bagel already has filling");
+                    return false;
+                }
+
+                //found bagel, now see if filling is in inventory
+                for (Product filling: inventory){
+                    if(filling.getSKU().equals(fillingSKU)){
+                        System.out.println("Adding filling " + filling.getVariant() + " to bagel at a cost of " + filling.getPrice());
+                        ((Bagel) p).setFilling((Filling) filling);
+                        totalPrice += filling.getPrice();
+                        return true;
+                    }
+                }
+                System.out.println("Couldn't find the desired filling in stock");
+                return false;
+            }
+        }
+        System.out.println("Couldn't find the bagel in basket");
+        return false;
+    }
+
+
     private int getBasketSize(){
         return this.basketSize;
     }

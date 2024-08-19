@@ -46,6 +46,8 @@ public class BasketTest {
     void addFilling(){
         Basket basket = new Basket();
         basket.addItem("BGLO");
+        basket.addFilling("BGLO", "FILS");
+
 
 
         Assertions.assertTrue(basket.addFilling("BGLO", "FILS"));
