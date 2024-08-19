@@ -30,4 +30,32 @@ public class ItemHandlerTest {
         assertEquals(0, itemHandler.getBasket().size());
         assertNull(filling1);
     }
+
+
+    @Test
+    public void testAddFilling() {
+        itemHandler = new ItemHandler();
+        Item bagel1 = itemHandler.addBasicItem("BGLS");
+        Item filling1 = itemHandler.addFilling("FILC", bagel1);
+    }
+
+
+    @Test
+    public void testRemoveItem() {
+
+    }
+
+
+    @Test
+    public void testSetCapacity() {
+
+    }
+
+
+    @Test
+    public void testSearchItem() {
+
+    }
+
+
 }
