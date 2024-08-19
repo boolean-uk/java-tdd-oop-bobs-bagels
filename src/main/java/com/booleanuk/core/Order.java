@@ -1,6 +1,7 @@
 package com.booleanuk.core;
 
 import java.util.HashMap;
+import java.util.NoSuchElementException;
 
 
 public class Order {
@@ -46,7 +47,10 @@ public class Order {
     }
 
 
-    public void removeProduct(Product product) {
+    public  void removeProduct(Product product) {
+        if(!basket.containsKey(product.getSKU())) {
+            throw new NoSuchElementException("Product not found in the basket");
+        }
         basket.remove(product.getSKU());
     }
 }

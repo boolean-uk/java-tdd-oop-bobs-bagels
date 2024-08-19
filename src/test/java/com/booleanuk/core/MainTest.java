@@ -3,10 +3,13 @@ package com.booleanuk.core;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.util.NoSuchElementException;
+
 public class MainTest {
 
     Store store = new Store();
     Order order = new Order();
+
     MainTest() {
 
     }
@@ -20,10 +23,10 @@ public class MainTest {
     @Test
     public void testAddBagel() {
         order.addProduct(store.bagels1);
-        Assertions.assertEquals( 1,order.basket.size());
+        Assertions.assertEquals(1, order.basket.size());
         Assertions.assertTrue(order.basket.containsKey(store.bagels1.getSKU()));
         order.addProduct(store.fillings7); // not in inventory
-        Assertions.assertNotEquals( 2,order.basket.size());
+        Assertions.assertNotEquals(2, order.basket.size());
         Assertions.assertFalse(order.basket.containsKey(store.fillings7.getSKU()));
 
     }
@@ -58,6 +61,6 @@ public class MainTest {
         order.addProduct(store.coffee1);
         order.removeProduct(store.bagels1);
         Assertions.assertEquals(1, order.basket.size());
-
+        Assertions.assertThrows(NoSuchElementException.class, () -> order.removeProduct(store.bagels3));
     }
 }

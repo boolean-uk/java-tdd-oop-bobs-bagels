@@ -1,23 +1,23 @@
 package com.booleanuk.core;
 
 public class Product {
-    private double price;
+    private int price;
     private final String variant;
     private final String SKU;
 
     Product(String SKU, double price, String variant) {
-        this.price = price;
+        setPrice(price);
         this.variant = variant;
         this.SKU = SKU;
 
     }
 
     public double getPrice() {
-        return price;
+        return price / 100.0; // convert to double
     }
 
-    public void setPrice(double price) {
-        this.price = price;
+    private void setPrice(double price) {
+        this.price = (int) (price * 100); // number of cents as an int
     }
 
     public String getVariant() {
