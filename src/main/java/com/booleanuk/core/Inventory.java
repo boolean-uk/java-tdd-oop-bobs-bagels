@@ -20,7 +20,7 @@ public class Inventory {
         products.put("BGLS", new Product("BGLS", 49, "Sesame"));
         products.put("COFB", new Product("COFB", 99, "Black"));
         products.put("COFW", new Product("COFW", 119, "White"));
-        products.put("COFC", new Product("COFC", 129, "Capuccino"));
+        products.put("COFC", new Product("COFC", 129, "Cappuccino"));
         products.put("COFL", new Product("COFL", 129, "Latte"));
         products.put("FILB", new Product("FILB", 12, "Bacon"));
         products.put("FILE", new Product("FILE", 12, "Egg"));

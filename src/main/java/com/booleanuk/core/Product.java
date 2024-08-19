@@ -20,6 +20,10 @@ public class Product {
         this.variant = variant;
     }
 
+    public String getVariant() {
+        return variant;
+    }
+
     public int getPrice() {
         return price;
     }
