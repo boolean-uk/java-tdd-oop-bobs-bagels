@@ -1,17 +1,18 @@
 package com.booleanuk.core;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Basket {
     private Integer basketSize;
-    private HashMap<Item, Integer> basket = new HashMap<>();
+    private ArrayList<Item> basket = new ArrayList<>();
 
     public Integer numberOfItemsInBasket(){
         return this.basket.size();
     }
 
     public String addItemToBasket(Item item){
-        this.basket.put(item, 1);
+        this.basket.add(item);
         return item.variant + " " + item.name + " added to basket.";
     }
 

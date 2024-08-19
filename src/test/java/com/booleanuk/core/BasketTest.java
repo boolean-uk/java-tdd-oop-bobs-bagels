@@ -29,18 +29,35 @@ public class BasketTest {
         Assertions.assertEquals(expected, result);
     }
 
+    @Test
+    public void removeBagelTest(){
+        /*
+        As a member of the public,
+        So I can change my order,
+        I'd like to remove a bagel from my basket.
+        */
+
+        /*
+        Basket basket = new Basket();
+        String name = "Bagel";
+        String variant = "Plain";
+        basket.addItemToBasket(Menu.getItemFromMenu(name, variant));
+
+        Assertions.assertEquals(1, basket.numberOfItemsInBasket());
+
+        String removeResult = basket.removeItemFromBasket();
+        */
+
+
+
+
+
+    }
+
 }
 
 
 /*
-
-### 2
-``
-As a member of the public,
-So I can change my order,
-I'd like to remove a bagel from my basket.
-``
-
 ### 3
 ``
 As a member of the public,
