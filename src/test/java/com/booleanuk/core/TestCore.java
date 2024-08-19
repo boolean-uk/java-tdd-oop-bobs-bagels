@@ -104,6 +104,17 @@ public class TestCore {
         order1.addProduct("BGLS", store);
         Assertions.assertEquals(5, order1.size());
     }
+
+    @Test
+    public void testRemoveProductNotInBasket() throws Exception{
+        mainTest();
+        Order order1 = new Order();
+        order1.addProduct("BGLO", store);
+        Assertions.assertTrue(order1.contains("BGLO"));
+        Assertions.assertTrue(order1.removeProduct("BGLO"));
+        Assertions.assertFalse(order1.removeProduct("BGLX"));
+    }
+
     /*@Test
     public void testOrderAddProductFilling() throws Exception {
         Order order1 = new Order();

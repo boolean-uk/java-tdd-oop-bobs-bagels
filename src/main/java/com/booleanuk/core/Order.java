@@ -48,11 +48,15 @@ public class Order {
         basket.put(newProduct, value);
     }
 
-    public void removeProduct(String productToRemove){
+    public boolean removeProduct(String productToRemove){
+        if(!basket.containsKey(productToRemove)){
+            System.out.println("No such product in basket!");
+        }
         basket.put(productToRemove, basket.get(productToRemove) - 1);
         if(basket.get(productToRemove) == 0){
             basket.remove(productToRemove);
         }
+        return false;
     }
 
     public UUID getId(){
