@@ -72,6 +72,10 @@ public class ItemHandlerTest {
         itemHandler.removeItem(filling1.getId());
         double total5 = itemHandler.getTotal();
         assertEquals(0.61, total5);
+
+        itemHandler.removeItem(bagel1.getId());
+        double total6 = itemHandler.getTotal();
+        assertEquals(0, total6);
     }
 
 
