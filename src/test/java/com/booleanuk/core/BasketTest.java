@@ -129,6 +129,60 @@ public class BasketTest {
         basket.removeItemFromBasket(bagel);
 
         Assertions.assertEquals(2, basket.countTotalItems());
+    }
+
+    @Test
+    public void addMoreThanCapacity() {
+        Basket basket = new Basket();
+        Bagel b1 = new Bagel("BGLO");
+        Bagel b2 = new Bagel("BGLO");
+        Bagel b3 = new Bagel("BGLO");
+        Bagel b4 = new Bagel("BGLO");
+        Bagel b5 = new Bagel("BGLO");
+        Filling f1 = new Filling("FILX");
+        Filling f2 = new Filling("FILX");
+        Filling f3 = new Filling("FILX");
+        Filling f4 = new Filling("FILX");
+        Filling f5 = new Filling("FILX");
+
+        basket.addItemToBasket(b1, f1);
+        basket.addItemToBasket(b2, f2);
+        basket.addItemToBasket(b3, f3);
+        basket.addItemToBasket(b4, f4);
+        basket.addItemToBasket(b5, f5);
+
+        Assertions.assertEquals(10, basket.countTotalItems());
+
+        Assertions.assertEquals( "Basket is full.", basket.addItemToBasket(b1, f1));
+
+        Assertions.assertEquals(10, basket.countTotalItems());
+    }
+
+    @Test
+    public void addBagelWithFillingWithNineItemsInBasketTest() {
+        Basket basket = new Basket();
+        Bagel b1 = new Bagel("BGLO");
+        Bagel b2 = new Bagel("BGLO");
+        Bagel b3 = new Bagel("BGLO");
+        Bagel b4 = new Bagel("BGLO");
+        Bagel b5 = new Bagel("BGLO");
+        Filling f1 = new Filling("FILX");
+        Filling f2 = new Filling("FILX");
+        Filling f3 = new Filling("FILX");
+        Filling f4 = new Filling("FILX");
+
+
+        basket.addItemToBasket(b1, f1);
+        basket.addItemToBasket(b2, f2);
+        basket.addItemToBasket(b3, f3);
+        basket.addItemToBasket(b4, f4);
+        basket.addItemToBasket(b5);
+
+        Assertions.assertEquals(9, basket.countTotalItems());
+
+        basket.printOutHashMap();
+
+        Assertions.assertEquals( "Basket is full.", basket.addItemToBasket(b1, f1));
 
     }
 }

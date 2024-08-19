@@ -6,13 +6,18 @@ import java.util.Map;
 public class Basket {
     private HashMap<String, Integer> basket;
     private ItemList itemList = new ItemList();
+    private int capacity = 10;
 
     public Basket() {
         this.basket = new HashMap<>();
     }
 
     public int countTotalItems() {
-        return this.basket.size();
+        int totalItems = 0;
+        for (Map.Entry<String, Integer> kvp: this.basket.entrySet()) {
+            totalItems += kvp.getValue();
+        }
+        return  totalItems;
     }
 
     public HashMap<String, Integer> checkAllItems() {
@@ -23,18 +28,27 @@ public class Basket {
         System.out.println(this.basket);
     }
 
-    public void addItemToBasket(Item item){
-        if(this.basket.containsKey(item.getSKU())) {
-            int oldQuantity = this.basket.get(item.getSKU());
-            this.basket.replace(item.getSKU(), oldQuantity, oldQuantity + 1);
-        }else {
-            this.basket.put(item.getSKU(), 1);
+    public String addItemToBasket(Item item){
+        if(countTotalItems() < this.capacity) {
+            if(this.basket.containsKey(item.getSKU())) {
+                int oldQuantity = this.basket.get(item.getSKU());
+                this.basket.replace(item.getSKU(), oldQuantity, oldQuantity + 1);
+                return "Added another " + item.getName() + " to basket.";
+            }else {
+                this.basket.put(item.getSKU(), 1);
+                return "Added " + item.getName() + " to basket.";
+            }
         }
+        return "Basket is full.";
     }
 
-    public void addItemToBasket(Bagel bagel, Filling filling) {
-        addItemToBasket(bagel);
-        addItemToBasket(filling);
+    public String addItemToBasket(Bagel bagel, Filling filling) {
+        if(!addItemToBasket(filling).equals("Basket is full.") && !addItemToBasket(bagel).equals("Basket is full.")) {
+            bagel.addFilling(filling);
+            return "Added " + bagel.getName() + " with filling " + filling.getName() + " to basket.";
+        }else {
+            return "Basket is full.";
+        }
     }
 
     public int getItemQuantityFromSKU(String sku) {
@@ -46,9 +60,9 @@ public class Basket {
 
     public double countTotalValueOfItems() {
         double totalPrice = 0;
-       for (Map.Entry<String, Integer> kvp: this.basket.entrySet()) {
+        for (Map.Entry<String, Integer> kvp: this.basket.entrySet()) {
            totalPrice += (itemList.getPriceFromList(kvp.getKey()) * kvp.getValue());
-       }
+        }
        return  totalPrice;
     }
 
