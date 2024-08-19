@@ -16,6 +16,22 @@ public class ItemHandler {
         setUpAllItems();
     }
 
+    public Item addBasicItem(String SKU) {
+        if (this.allItems.get(SKU).equals("Bagel")) {
+            Bagel bagel = new Bagel(SKU, idTracker);
+            idTracker++;
+            System.out.println(bagel.getName() + ", " + bagel.getVariant() + ", price: " + bagel.getPrice());
+            return bagel;
+        } else if (this.allItems.get(SKU).equals("Coffee")) {
+            Coffee coffee = new Coffee(SKU, idTracker);
+            idTracker++;
+            System.out.println(coffee.getName() + ", " + coffee.getVariant() + ", price: " + coffee.getPrice());
+            return coffee;
+        }
+        System.out.println("No such bagel or coffee exists.");
+        return null;
+    }
+
     public void setUpAllItems() {
         this.allItems = new HashMap<>();
         this.allItems.put("BGLO", "Bagel");

@@ -17,7 +17,7 @@ public class ItemHandlerTest {
 
     @Test
     public void testAddBasicItem() {
-        Coffee coffee1 = itemHandler.addBasicItem("COFL");
+        Item coffee1 = itemHandler.addBasicItem("COFL");
         assertEquals(1.29, coffee1.getPrice());
     }
 }
