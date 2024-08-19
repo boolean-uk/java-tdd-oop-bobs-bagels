@@ -12,23 +12,22 @@ public class Bagel implements StandaloneProduct {
     this.fillings = new ArrayList<>();
   }
 
-  public double price() {
-    double fillingsPrice = fillings.stream().mapToDouble(Filling::price).sum();
+  public double fullPrice() {
+    return this.basePrice() + fillings.stream().mapToDouble(Filling::fullPrice).sum();
+  }
 
+  public double basePrice() {
     switch (this.type) {
       case ONION:
-        return fillingsPrice + 0.49;
+        return 0.49;
       case PLAIN:
-        return fillingsPrice + 0.39;
+        return 0.39;
       case EVERYTHING:
-        return fillingsPrice + 0.49;
+        return 0.49;
       case SESAME:
-        return fillingsPrice + 0.49;
+        return 0.49;
     }
 
-    // Should be unreachable but we get a warning if we dont do this or add a
-    // default in switch. Adding a default in switch could cause bugs if we add
-    // another bagel type so default return is better outside switch.
     return 0;
   }
 

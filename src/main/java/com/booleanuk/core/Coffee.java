@@ -4,7 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public record Coffee(CoffeeType type) implements StandaloneProduct {
-  public double price() {
+  public double fullPrice() {
+    return this.basePrice();
+  }
+
+  public double basePrice() {
     switch (this.type) {
       case BLACK:
         return 0.99;

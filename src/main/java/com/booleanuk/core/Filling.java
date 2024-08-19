@@ -1,7 +1,11 @@
 package com.booleanuk.core;
 
 public record Filling(FillingType type) implements Product {
-  public double price() {
+  public double fullPrice() {
+    return this.basePrice();
+  }
+
+  public double basePrice() {
     switch (this.type) {
       case BACON:
         return 0.12;

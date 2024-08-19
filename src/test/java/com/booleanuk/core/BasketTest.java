@@ -83,5 +83,9 @@ class BasketTest {
     twelveBagelBasket.add(new Bagel(BagelType.PLAIN));
     twelveBagelBasket.add(new Coffee(CoffeeType.BLACK));
     Assertions.assertEquals(1.25, coffeeAndBagelBasket.price());
+
+    Basket sixteenPlainBagelBasket = new Basket();
+    sixteenPlainBagelBasket.add(new Bagel(BagelType.PLAIN), 16);
+    Assertions.assertEquals(5.55, sixteenPlainBagelBasket.price());
   }
 }

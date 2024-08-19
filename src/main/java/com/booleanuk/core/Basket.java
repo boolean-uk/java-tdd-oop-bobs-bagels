@@ -46,7 +46,7 @@ public class Basket {
   }
 
   public double price() {
-    return this.products.stream().mapToDouble(StandaloneProduct::price).sum();
+    return this.products.stream().mapToDouble(StandaloneProduct::fullPrice).sum();
   }
 
   public void setCapacity(int capacity) {

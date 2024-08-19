@@ -1,7 +1,9 @@
 package com.booleanuk.core;
 
 public interface Product {
-  public double price();
+  public double fullPrice();
+
+  public double basePrice();
 
   public Sku sku();
 }

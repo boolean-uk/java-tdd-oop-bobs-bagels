@@ -9,7 +9,7 @@ class BagelTest {
     Bagel myBagel = new Bagel(BagelType.ONION);
     myBagel.add(new Filling(FillingType.EGG));
     myBagel.add(new Filling(FillingType.BACON));
-    Assertions.assertEquals(myBagel.price(), 0.49 + 0.12 + 0.12);
+    Assertions.assertEquals(myBagel.fullPrice(), 0.49 + 0.12 + 0.12);
   }
 
   @Test
