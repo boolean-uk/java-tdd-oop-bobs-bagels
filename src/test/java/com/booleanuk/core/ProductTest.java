@@ -16,4 +16,12 @@ public class ProductTest {
         Assertions.assertThrows(IllegalArgumentException.class, () -> new Product("SKU3", -20, "Variant3"));
         Assertions.assertThrows(IllegalArgumentException.class, () -> new Product("SKU4", 20, null));
     }
+
+    @Test
+    public void testGetters() {
+        Product product = new Product("SKU", 10, "Variant");
+        Assertions.assertEquals(10, product.getPrice());
+        Assertions.assertEquals("SKU", product.getSKU());
+        Assertions.assertEquals("Variant", product.getVariant());
+    }
 }
