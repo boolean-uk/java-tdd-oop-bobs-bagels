@@ -68,4 +68,20 @@ class BasketTest {
     basket.setCapacity(10);
     Assertions.assertDoesNotThrow(() -> basket.add(new Bagel(BagelType.EVERYTHING)));
   }
+
+  @Test
+  public void testDiscounts() {
+    Basket sixBagelBasket = new Basket();
+    sixBagelBasket.add(new Bagel(BagelType.ONION), 6);
+    Assertions.assertEquals(2.49, sixBagelBasket.price());
+
+    Basket twelveBagelBasket = new Basket();
+    twelveBagelBasket.add(new Bagel(BagelType.PLAIN), 12);
+    Assertions.assertEquals(3.99, sixBagelBasket.price());
+
+    Basket coffeeAndBagelBasket = new Basket();
+    twelveBagelBasket.add(new Bagel(BagelType.PLAIN));
+    twelveBagelBasket.add(new Coffee(CoffeeType.BLACK));
+    Assertions.assertEquals(1.25, coffeeAndBagelBasket.price());
+  }
 }
