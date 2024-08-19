@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Order {
-    private Map<String, Integer> basket;
+    private final Map<String, Integer> basket;
     private int totalSum;
     private int maxBasketCapacity = 20;
     private int currentBasketCapacity;
