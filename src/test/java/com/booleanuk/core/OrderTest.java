@@ -83,16 +83,18 @@ public class OrderTest {
     @Test
     public void testMultiBuyDiscount6Bagels() {
         Store store = new Store("Bob's Bagels");
-        Product bagel = store.getInventory().getProduct("BGLO");
+        Product bagelO = store.getInventory().getProduct("BGLO");
+        Product bagelP = store.getInventory().getProduct("BGLP");
         Order order = new Order();
-        order.addProduct(bagel);
-        order.addProduct(bagel);
-        order.addProduct(bagel);
-        order.addProduct(bagel);
-        order.addProduct(bagel);
-        order.addProduct(bagel);
+        order.addProduct(bagelO);
+        order.addProduct(bagelP);
+        order.addProduct(bagelP);
+        order.addProduct(bagelP);
+        order.addProduct(bagelP);
+        order.addProduct(bagelP);
+        order.addProduct(bagelP);
 
-        Assertions.assertEquals(249, order.getTotalSum());
+        Assertions.assertEquals(298, order.getTotalSum());
     }
 
 }
