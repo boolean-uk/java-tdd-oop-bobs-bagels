@@ -133,6 +133,18 @@ public class OrderTest {
         Assertions.assertEquals(249 + 5 * bagelO.getPrice(), order.getTotalSum());
     }
 
+    // Test for mixing multi buy discounts 12 and 6 bagels
+    @Test
+    public void testMixingMultiBuyDiscounts() {
+        Store store = new Store("Bob's Bagels");
+        Product bagelO = store.getInventory().getProduct("BGLO");
+        Product bagelP = store.getInventory().getProduct("BGLP");
+        Order order = new Order();
+        addProductsToOrder(order, bagelO, 12);
+        addProductsToOrder(order, bagelP, 6);
+        Assertions.assertEquals(399 + 249, order.getTotalSum());
+    }
+
     // Helper method to add products to an order
     private void addProductsToOrder(Order order, Product product, int quantity) {
         for (int i = 0; i < quantity; i++) {
