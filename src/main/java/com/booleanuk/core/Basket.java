@@ -22,6 +22,11 @@ public class Basket {
       throw new AddToFullBasketException(this.capacity);
   }
 
+  public void add(StandaloneProduct product, int count) throws AddToFullBasketException {
+    for (int i = 0; i < count; ++i)
+      this.add(product);
+  }
+
   public void remove(Sku sku) throws NotPresentInBasketException {
     int i = 0;
     for (StandaloneProduct product : this.products) {
