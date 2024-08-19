@@ -25,6 +25,10 @@ public class Order {
         basket.put(newProduct, value);
     }
 
+    public void removeProduct(String productToRemove){
+
+    }
+
     public UUID getId(){
         return this.id;
     }
