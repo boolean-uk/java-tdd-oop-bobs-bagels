@@ -186,5 +186,17 @@ public class MainTest {
         Assertions.assertEquals(6.48, order.getTotalPrice());
 
     }
+    @Test
+    public void testDiscountCoffeeAndSixBagels() {
+        order.addProduct(bagels1); // 6
+        order.addProduct(bagels1);
+        order.addProduct(bagels1);
+        order.addProduct(bagels1);
+        order.addProduct(bagels1);
+        order.addProduct(bagels1);
+
+        Assertions.assertEquals(3.74, order.getTotalPrice());
+
+    }
 }
 

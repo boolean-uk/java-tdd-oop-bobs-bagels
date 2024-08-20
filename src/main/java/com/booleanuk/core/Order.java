@@ -5,7 +5,7 @@ import java.util.*;
 
 public class Order {
     private HashMap<String, Integer> basket = new HashMap<>();
-    private ArrayList<Double> bagelPrice= new ArrayList<>();
+    private ArrayList<Product> prices = new ArrayList<>();
     private final Store store;
     private int totalPrice;
     private Bagels lastAddedBagel;
@@ -29,11 +29,11 @@ public class Order {
         }
         //bagels
         if (product instanceof Bagels) {
-            bagelPrice.add(product.getPrice());
+            prices.add(product);
             basket.put(product.getSKU(), basket.getOrDefault(product.getSKU(), 0) + 1);
             this.totalPrice += (int) (product.getPrice() * 100);
 
-        //fillings
+            //fillings
         } else if (product instanceof Fillings) {
             if (!isBagelInBasket()) {
                 System.out.println("You have to choose a bagel first before you can add a filling");
@@ -43,8 +43,9 @@ public class Order {
             Bagels lastBagel = getLastAddedBagel();
             lastBagel.addFilling((Fillings) product);
 
-          //coffee
+            //coffee
         } else {
+            prices.add(product);
             basket.put(product.getSKU(), basket.getOrDefault(product.getSKU(), 0) + 1);
             this.totalPrice += (int) (product.getPrice() * 100);
         }
@@ -75,7 +76,7 @@ public class Order {
         if (!basket.containsKey(product.getSKU())) {
             throw new NoSuchElementException("Product not found in the basket");
         }
-        bagelPrice.remove(product.getPrice());
+        prices.remove(product);
         basket.remove(product.getSKU());
     }
 
@@ -88,36 +89,43 @@ public class Order {
         int newAmountSmall = 0;
         boolean bigDiscount = false;
         boolean smallDiscout = false;
-        Collections.sort(bagelPrice);
-        for(int i = 0; i < bagelPrice.size(); i++) {
-            System.out.println(bagelPrice.get(i));
-        }
-        while(pointer < bagelPrice.size()){
-            count++; // 18
-            pointer++;//
-            if (count % 12 == 0 ) {
-                if(count == 12) {
-                    smallDiscountCount--;
-                    bigDiscount = true;
-                    bigDiscountCount ++;
-                    count -= count;
-                }
-            }
-            if(count % 6  == 0) {
-                if(count == 6) {
-                    smallDiscountCount++;
-                    smallDiscout = true;
+        boolean bagelFound = false;
+        System.out.println(prices.get(1).getSKU());
 
+        while (pointer < prices.size()) {
+            count++;
+            if (prices.get(pointer).getSKU().contains("BGL")) {
+                bagelFound = true;
+                if (count % 12 == 0) {
+                    if (count == 12) {
+                        smallDiscountCount--;
+                        bigDiscount = true;
+                        bigDiscountCount++;
+                        count -= count;
+                    }
                 }
+                if (count % 6 == 0) {
+                    if (count == 6) {
+                        smallDiscountCount++;
+                        smallDiscout = true;
+
+                    }
+                }
+
+            }
+            if(prices.get(pointer).getSKU().contains("COF") && bagelFound && count % 6 != 0) { {
             }
 
+            }
+
+            pointer++;
         }
         System.out.println(smallDiscountCount + " S");
         System.out.println(bigDiscountCount + " B");
 
-        if(bigDiscount) {
+        if (bigDiscount) {
             for (int i = 0; i < 12 * bigDiscountCount; i++) {
-                newAmountBig += (int) (bagelPrice.get(i) * 100);
+                newAmountBig += (int) (prices.get(i).getPrice() * 100);
             }
             System.out.println(newAmountBig + " Big amount"); // 588
             System.out.println("Total before any discount +" + totalPrice);
@@ -128,9 +136,9 @@ public class Order {
 
 
         }
-        if(smallDiscout) {
+        if (smallDiscout) {
             for (int i = 0; i < 6 * smallDiscountCount; i++) {
-                newAmountSmall += (int) (bagelPrice.get(i + bigDiscountCount * 12) * 100);
+                newAmountSmall += (int) (prices.get(i + bigDiscountCount * 12).getPrice() * 100);
             }
             System.out.println(newAmountSmall + " Small amount"); // 294
             totalPrice -= newAmountSmall;
@@ -151,17 +159,16 @@ public class Order {
         }
     }
 
-    public int isDiscount () {
+    public int isDiscount() {
         int count = 0;
         int smallDiscount = 0;
         int bigDiscount = 0;
 
-        while(count < bagelPrice.size()){
+        while (count < prices.size()) {
             count++; // 18
             if (count % 12 == 0) {
                 bigDiscount++;
-            }
-            else if(count % 6  == 0) {
+            } else if (count % 6 == 0) {
                 smallDiscount++;
             }
 
