@@ -58,7 +58,9 @@ public class Bagel extends Item{
             else{
                 Fillings[i]=filling;
                 this.setPrice(this.getPrice()+ filling.getPrice());
+                this.setName(this.getName()+","+filling.getName());
                 return true;
+
             }
 
         }

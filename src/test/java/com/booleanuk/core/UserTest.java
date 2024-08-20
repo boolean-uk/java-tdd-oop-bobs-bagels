@@ -82,12 +82,13 @@ public class UserTest {
         Bagel bagel1 = new Bagel("Onion");
         Bagel bagel2 = new Bagel("Everything");
         order.addItem(bagel);
-        order.addItem(bagel);
         order.addItem(bagel1);
         order.addItem(bagel2);
         Basket basket = new Basket(3);
         basket.incCapacity(1);
         basket.add(order);
+
+
 
 
         Assertions.assertFalse(basket.checkCapacity());
