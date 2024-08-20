@@ -44,5 +44,40 @@ public class UserTest {
 
     }
 
+    @Test
+    public void discountEverythingTest(){
+
+        Order order=new Order();
+        for (int i=0; i<6; i++){
+            Bagel bagel=new Bagel("Everything");
+            bagel.addFilling(new Filling("Cheese"));
+            order.addItem(bagel);
+        }
+        Discount discount=new Discount();
+        order.setTotal(order.getTotal()- discount.discPrice(order));
+        Assertions.assertEquals(2.49+6*0.12, order.getTotal(), 0.001);
+
+
+    }
+
+    @Test
+    public void discountCoffeeTest(){
+
+        Order order=new Order();
+        Bagel bagel1=new Bagel("Plain");
+        Bagel bagel2=new Bagel("Onion");
+        Coffee coffee1=new Coffee("Black");
+        Coffee coffee2=new Coffee("Black");
+        order.addItem(bagel1);
+        order.addItem(bagel2);
+        order.addItem(coffee1);
+        order.addItem(coffee2);
+        Discount discount=new Discount();
+        order.setTotal(order.getTotal()- discount.discPrice(order));
+        Assertions.assertEquals(2.50, order.getTotal(), 0.001);
+
+
+    }
+
 
 }
