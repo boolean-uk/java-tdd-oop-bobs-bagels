@@ -9,7 +9,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Inventory {
-    private Map<String, com.booleanuk.core.Item> items;
+    private Map<String,Item> items;
 
     public Inventory() {
         items = new HashMap<>();
