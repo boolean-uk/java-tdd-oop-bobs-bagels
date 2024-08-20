@@ -47,6 +47,19 @@ public class OrderTest {
         Assertions.assertEquals(2, order.getBasket().get(product.getSKU()));
     }
 
+    // test add bagel with filling to order
+    @Test
+    public void testAddBagelWithFilling() {
+        Store store = new Store("Bob's Bagels");
+        Order order = new Order(store);
+        Bagel bagel = (Bagel) store.getInventory().getProduct("BGLO");
+        Product filling = store.getInventory().getProduct("FILB");
+        bagel.addFilling((Filling) filling);
+        order.addProduct(bagel);
+        order.addProduct(filling);
+        Assertions.assertEquals(bagel.getPrice() + filling.getPrice(), order.getTotalSum());
+    }
+
     @Test
     public void testBasketIsFull() {
         Store store = new Store("Bob's Bagels");
