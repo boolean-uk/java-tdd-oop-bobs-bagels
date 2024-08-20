@@ -1,6 +1,7 @@
 package com.booleanuk.core;
 
 import java.io.File;
+import java.text.DecimalFormat;
 import java.util.HashMap;
 
 import java.util.Scanner;
@@ -193,23 +194,24 @@ public class OrderManager {
 
 				// any bagel
 				case BagelType.Everything, BagelType.Onion, BagelType.Plain, BagelType.Sesame:
-					while (amountInCart > 12){
+					while (amountInCart >= 12){
 						totalPrice += 3.99;
 						amountInCart -= 12;
 						reciept += item + ": 12 for 3.99\n";
 					}
 
-					while(amountInCart > 6){
+					while(amountInCart >= 6){
 						totalPrice += 2.49;
 						amountInCart -= 6;
 						reciept += item + ": 6 for 2.49\n";
 					}
-
-					while(amountInCart-->0){
+					// has to be checked after other discounts
+					while(amountInCart-- > 0){
 						double pricePer = getPriceOfItem(item);
 						totalPrice += pricePer;
 						reciept += item	+ ": 1 for " + pricePer + "\n";
 					}
+					break;
 
 
 					// or black coffee
@@ -225,6 +227,7 @@ public class OrderManager {
 							}
 						}
 					}
+					break;
 
 				default:
 					totalPrice += getPriceOfItem(item);
@@ -232,8 +235,25 @@ public class OrderManager {
 			}
 
 		}
+//
+//		// after coffee's are added, we can complete with the last bagels
+//		for (BagelType bagel: BagelType.values()){
+//			if (cartCopy.containsKey(bagel)){
+//				int stillInCart = cartCopy.get(bagel);
+//				double bagelPrice = getPriceOfItem(bagel);
+//				while (stillInCart-- > 0) {
+//					totalPrice += bagelPrice;
+//					reciept += bagel + " bagel for " + bagelPrice;
+//				}
+//			}
+//		}
 
 
+
+
+		DecimalFormat df = new DecimalFormat("#.##");
+		String strPrice = String.format("%.2f", totalPrice);
+		totalPrice = Double.valueOf(strPrice);
 		return totalPrice;
 	}
 
