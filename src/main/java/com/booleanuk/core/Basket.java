@@ -30,6 +30,6 @@ public class Basket {
     }
 
     public ArrayList<Bagel> getBagels() {
-        return (ArrayList<Bagel>) bagels.clone();
+        return new ArrayList<>(bagels);
     }
 }
