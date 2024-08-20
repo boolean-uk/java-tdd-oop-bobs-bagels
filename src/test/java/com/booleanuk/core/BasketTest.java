@@ -59,5 +59,27 @@ public class BasketTest {
 
     }
 
+    @Test
+    void addDiscountTest(){
+        Basket basket = new Basket();
+        basket.changeBasketSize(20);
+        basket.addItem("BGLO");
+        basket.addItem("BGLP");
+        basket.addItem("BGLE");
+        basket.addItem("BGLE");
+        basket.addItem("BGLO");
+        basket.addItem("BGLP");
+        basket.addItem("BGLE");
+        basket.addItem("COFB");
+
+        //basket.addFilling("BGLE", "FILC");
+        //basket.addFilling("BGLE", "FILC");
+
+
+        double newTotal = basket.addDiscount();
+
+
+    }
+
 
 }
