@@ -20,4 +20,10 @@ public abstract class Bagel extends Product {
         this.currentFilling = newFilling;
     }
 
+    @Override
+    public double getPrice() {
+        if (this.currentFilling == null) return super.getPrice();
+        else return super.getPrice() + this.currentFilling.getPrice();
+    }
+
 }

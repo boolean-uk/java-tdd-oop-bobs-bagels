@@ -54,10 +54,6 @@ public class Basket {
     public double getTotalCost() {
         double totalPrice = 0;
         for (Product p : this.basket) {
-            if (p instanceof Bagel && ((Bagel) p).getFilling() != null) {
-                totalPrice += ((Bagel) p).getFilling().getPrice(); // If bagel has a filling, add to total price
-                continue;
-            }
             totalPrice += p.getPrice();
         }
         return totalPrice;
