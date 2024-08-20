@@ -139,7 +139,7 @@ public class BasketTest {
       basket.add(inventory.menu.get("BaconFilling"));
 
       //Sum should be 2.99 if it is set up correctly. For red test i have set up 3.0 which should fail due to not being exact.
-      Assertions.assertEquals(3.00f, basket.totalCost(), 0.001);
+      Assertions.assertEquals(2.99f, basket.totalCost(), 0.001);
   }
 
 }
