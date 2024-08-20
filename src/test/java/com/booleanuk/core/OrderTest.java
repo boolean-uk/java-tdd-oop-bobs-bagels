@@ -32,7 +32,6 @@ public class OrderTest {
         Product product = store.getInventory().getProduct("BGLO");
         order.addProduct(product);
         Assertions.assertEquals(1, order.getBasket().size());
-        Assertions.assertEquals(1, order.getBasket().get(product.getSKU()));
     }
 
     @Test
@@ -43,21 +42,21 @@ public class OrderTest {
         order.addProduct(product);
         order.addProduct(product);
         Assertions.assertEquals(product.getPrice() * 2, order.getTotalSum());
-        Assertions.assertEquals(1, order.getBasket().size());
-        Assertions.assertEquals(2, order.getBasket().get(product.getSKU()));
+        Assertions.assertEquals(2, order.getBasket().size());
     }
 
-    // test add bagel with filling to order
     @Test
     public void testAddBagelWithFilling() {
         Store store = new Store("Bob's Bagels");
         Order order = new Order(store);
-        Bagel bagel = (Bagel) store.getInventory().getProduct("BGLO");
+        Product bagel = store.getInventory().getProduct("BGLO");
         Product filling = store.getInventory().getProduct("FILB");
+        int bagelPlusFillingPrice = bagel.getPrice() + filling.getPrice();
+
         bagel.addFilling((Filling) filling);
         order.addProduct(bagel);
-        order.addProduct(filling);
-        Assertions.assertEquals(bagel.getPrice() + filling.getPrice(), order.getTotalSum());
+
+        Assertions.assertEquals(bagelPlusFillingPrice, order.getTotalSum());
     }
 
     @Test
@@ -86,7 +85,6 @@ public class OrderTest {
         order.removeProduct(product);
         Assertions.assertEquals(product.getPrice() + product2.getPrice(), order.getTotalSum());
         Assertions.assertEquals(2, order.getBasket().size());
-        Assertions.assertEquals(1, order.getBasket().get(product.getSKU()));
     }
 
     @Test
@@ -111,7 +109,6 @@ public class OrderTest {
         Assertions.assertThrows(IllegalArgumentException.class, () -> order.getProductPrice(null));
     }
 
-    // test multi buy discount 6 bagels for 249
     @Test
     public void testMultiBuyDiscount6Bagels() {
         Store store = new Store("Bob's Bagels");
@@ -131,7 +128,6 @@ public class OrderTest {
 
     }
 
-    // test multi buy discount 12 bagels for 399
     @Test
     public void testMultiBuyDiscount12Bagels() {
         Store store = new Store("Bob's Bagels");
@@ -149,7 +145,6 @@ public class OrderTest {
         Assertions.assertEquals(399, order.getTotalSum());
     }
 
-    // test multi buy discount going from 12 bagels to 6 bagels discount
     @Test
     public void testMultiBuyDiscount12To6Bagels() {
         Store store = new Store("Bob's Bagels");
@@ -165,7 +160,6 @@ public class OrderTest {
         Assertions.assertEquals(249 + 5 * bagelO.getPrice(), order.getTotalSum());
     }
 
-    // Test for mixing multi buy discounts 12 and 6 bagels
     @Test
     public void testMixingMultiBuyDiscounts() {
         Store store = new Store("Bob's Bagels");
@@ -180,7 +174,6 @@ public class OrderTest {
         Assertions.assertEquals(399 + 5 * bagelO.getPrice() , order.getTotalSum());
     }
 
-    // test coffee + bagel discount
     @Test
     public void testCoffeeBagelDiscount() {
         Store store = new Store("Bob's Bagels");
@@ -198,7 +191,6 @@ public class OrderTest {
 
     }
 
-    // test coffee + bagel discount with six bagel discount
     @Test
     public void testCoffeeBagelDiscountWithSixBagelDiscount() {
         Store store = new Store("Bob's Bagels");
@@ -213,7 +205,6 @@ public class OrderTest {
         Assertions.assertEquals(249 + 125, order.getTotalSum());
     }
 
-    // test coffee + bagel discount with six bagel discount
     @Test
     public void testCoffeeBagelDiscountWithTwelveBagelDiscount() {
         Store store = new Store("Bob's Bagels");
@@ -228,7 +219,6 @@ public class OrderTest {
         Assertions.assertEquals(399 + 125, order.getTotalSum());
     }
 
-    // test coffee + bagel discount with twelve and six bagel discount
     @Test
     public void testCoffeeBagelDiscountWithTwelveAndSixBagelDiscount() {
         Store store = new Store("Bob's Bagels");
