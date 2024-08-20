@@ -25,6 +25,8 @@ public class OrderManager {
 	public static int getMaxCoffees(){
 		return defaultMaxCoffees;
 	}
+
+	// case: 4
 	public void setMaxCartSize(int i){
 		maxCartSize = i;
 	}
@@ -80,6 +82,7 @@ public class OrderManager {
 
 	}
 
+	// case: 1, 3, 8
 	public String addItem(ItemInterface item){
 		// check if in store
 		int stock = storeItemStock.get(item);
@@ -113,17 +116,19 @@ public class OrderManager {
 		return item + ": 1";
 	}
 
+	// case: 10
 	public int getStockOfItem(ItemInterface item){
 		return storeItemStock.get(item);
 
 	}
 
+	// case: 7, 9
 	public double getPriceOfItem(ItemInterface item){
 		String priceOfItemString = storeItemInfo.get(item)[1];
 		return Double.valueOf(priceOfItemString);
 	}
 
-
+	// case: 2, 5
 	public String removeItem(ItemInterface item){
 		String result;
 		// first check if exists in basket
@@ -154,7 +159,8 @@ public class OrderManager {
 
 	}
 
-	public double getPrice(){
+	// case: 6
+	public double getTotalCartPrice(){
 		double calculatedPrice = 0;
 		for(ItemInterface item: cart.keySet()){
 			int amountOfItemInCart = cart.get(item);
@@ -164,6 +170,16 @@ public class OrderManager {
 		}
 		return calculatedPrice;
 	}
+
+	public int getAmountOfItemInCart(ItemInterface item){
+		int amount = 0;
+		if (cart.containsKey(item)){
+			amount = cart.get(item);
+		}
+		return amount;
+	}
+
+
 
 
 }

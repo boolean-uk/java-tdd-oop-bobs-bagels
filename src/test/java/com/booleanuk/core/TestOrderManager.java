@@ -45,17 +45,17 @@ public class TestOrderManager {
 
         double pricePerOnion = 0.49;
         double expectedPrice = 3* pricePerOnion;
-        Assertions.assertEquals(expectedPrice, om.getPrice());
+        Assertions.assertEquals(expectedPrice, om.getTotalCartPrice());
 
         om.addItem(CoffeeType.Cappuccino);
         double pricePerCappuccino = 1.29;
         expectedPrice += pricePerCappuccino;
-        Assertions.assertEquals(expectedPrice, om.getPrice());
+        Assertions.assertEquals(expectedPrice, om.getTotalCartPrice());
 
         om.addItem(CoffeeType.Cappuccino);
         om.addItem(CoffeeType.Cappuccino);
         expectedPrice += pricePerCappuccino*2;
-        Assertions.assertEquals(expectedPrice, om.getPrice());
+        Assertions.assertEquals(expectedPrice, om.getTotalCartPrice());
     }
 
     @Test
@@ -104,9 +104,9 @@ public class TestOrderManager {
         Assertions.assertEquals(0.12, om.getPriceOfItem(FillingType.Cream_Cheese));
         Assertions.assertEquals(0.12, om.getPriceOfItem(FillingType.Smoked_Salmon));
         Assertions.assertEquals(0.12, om.getPriceOfItem(FillingType.Ham));
-
-
-
     }
+
+
+
 
 }
