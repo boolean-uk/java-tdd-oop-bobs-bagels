@@ -28,4 +28,14 @@ public class ReceiptTest {
         Receipt receipt = new Receipt(order);
         Assertions.assertEquals(product.getPrice(), receipt.getOrder().getTotalSum());
     }
+
+    @Test
+    public void testPrintReceipt() {
+        Order order = new Order();
+        Store store = new Store("Bob's Bagels");
+        Product product = store.getInventory().getProduct("BGLO");
+        order.addProduct(product);
+        Receipt receipt = new Receipt(order);
+        Assertions.assertTrue(receipt.printReceipt());
+    }
 }
