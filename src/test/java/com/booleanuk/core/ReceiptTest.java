@@ -23,10 +23,9 @@ class ReceiptTest {
     Receipt receipt = inventory.purchase(basket);
     String actual = receipt.toString();
     Assertions.assertTrue(actual.contains("1x Black coffee " + String.format("%.2f", Sku.COFB.price())));
-    Assertions.assertTrue(actual.contains("1x White coffee " + String.format("%.2f", Sku.COFW.price())));
-    Assertions.assertTrue(actual.contains("1x Onion bagel " + String.format("%.2f", Sku.BGLO.price())));
+    Assertions.assertTrue(actual.contains("1x Coffee + bagel deal " + 1.25));
     Assertions.assertTrue(
-        actual.contains("Total " + String.format("%.2f", Sku.COFB.price() + Sku.COFW.price() + Sku.BGLO.price())));
+        actual.contains("Total " + String.format("%.2f", Sku.COFB.price() + 1.25)));
   }
 
   @Test
@@ -60,6 +59,7 @@ class ReceiptTest {
     basket.add(new Bagel(BagelType.ONION), 12);
     Receipt receipt = inventory.purchase(basket);
     String actual = receipt.toString();
+    Assertions.assertTrue(actual.contains("Discount: -0.89"));
     Assertions.assertTrue(actual.contains("12x Onion bagel 4.99"));
     Assertions.assertTrue(actual.contains("Total 4.99"));
   }
@@ -75,6 +75,7 @@ class ReceiptTest {
     basket.add(new Bagel(BagelType.ONION), 6);
     Receipt receipt = inventory.purchase(basket);
     String actual = receipt.toString();
+    Assertions.assertTrue(actual.contains("Discount: -0.45"));
     Assertions.assertTrue(actual.contains("6x Onion bagel 2.49"));
     Assertions.assertTrue(actual.contains("Total 2.49"));
   }
@@ -91,9 +92,7 @@ class ReceiptTest {
     basket.add(new Coffee(CoffeeType.BLACK));
     Receipt receipt = inventory.purchase(basket);
     String actual = receipt.toString();
-    Assertions.assertEquals("", actual); // temporary to see full output
-    Assertions.assertTrue(actual.contains("1x Black coffee " + String.format("%.2f", Sku.COFB.price())));
-    Assertions.assertTrue(actual.contains("1x Onion bagel " + String.format("%.2f", Sku.BGLO.price())));
+    Assertions.assertTrue(actual.contains("1x Coffee + bagel deal 1.25"));
     Assertions.assertTrue(actual.contains("Total 1.25"));
   }
 }

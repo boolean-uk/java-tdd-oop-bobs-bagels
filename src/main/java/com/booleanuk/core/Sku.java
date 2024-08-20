@@ -34,4 +34,8 @@ public enum Sku {
   public double price() {
     return this.price;
   }
+
+  public boolean isBagel() {
+    return this == BGLO || this == BGLP || this == BGLE || this == BGLS;
+  }
 }
