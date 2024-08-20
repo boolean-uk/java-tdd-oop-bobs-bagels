@@ -55,26 +55,26 @@ public class Receipt {
         System.out.println();
         System.out.println("----------------------------");
 
-        Map<String, Integer> productQuantities = new HashMap<>();
-        Map<String, Double> productPrices = new HashMap<>();
+        Map<Product, Integer> productQuantities = new HashMap<>();
+        Map<String, Integer> productPrices = new HashMap<>();
 
         List<Product> basket = order.getBasket();
         for (Product product : basket) {
             String SKU = product.getSKU();
-            productQuantities.put(SKU, productQuantities.getOrDefault(SKU, 0) + 1);
-            productPrices.put(SKU, productPrices.getOrDefault(SKU, 0.0) + product.getPrice());
+            productQuantities.put(product, productQuantities.getOrDefault(product, 0) + 1);
+            productPrices.put(SKU, productPrices.getOrDefault(SKU, 0) + product.getPrice());
         }
 
-        for (Map.Entry<String, Integer> entry : productQuantities.entrySet()) {
-            String SKU = entry.getKey();
+        for (Map.Entry<Product, Integer> entry : productQuantities.entrySet()) {
+            String SKU = entry.getKey().getSKU();
             int quantity = entry.getValue();
-            double price = productPrices.get(SKU);
+            int price = productPrices.get(SKU);
             Product product = inventory.getProduct(SKU);
-            System.out.println(formatItem(product.getVariant(), quantity, price));
+
             if (product instanceof Bagel bagel && !bagel.getFillings().isEmpty()) {
-                for (Filling filling : bagel.getFillings()) {
-                    System.out.println(String.format("  - %s           (£%.2f)", filling.getVariant(), filling.getPrice() / 100.0));
-                }
+                printProductWithFillings(bagel, quantity, price);
+            } else {
+                System.out.println(formatItem(product.getVariant(), quantity, price));
             }
         }
 
@@ -86,5 +86,20 @@ public class Receipt {
         System.out.println();
 
         return true;
+    }
+
+    private void printProductWithFillings(Bagel bagel, int quantity, int price) {
+        System.out.println(formatItem(bagel.getVariant(), quantity, price));
+
+            Map<Filling, Integer> fillingQuantities = new HashMap<>();
+            for (Filling filling : bagel.getFillings()) {
+                fillingQuantities.put(filling, fillingQuantities.getOrDefault(filling, 0) + quantity);
+            }
+            for (Map.Entry<Filling, Integer> entry : fillingQuantities.entrySet()) {
+                String fillingName = entry.getKey().getVariant();
+                int fillingQuantity = entry.getValue();
+                System.out.printf("  - %s x%d       (£%.2f)%n", fillingName, fillingQuantity, entry.getKey().getPrice() / 100.0);
+
+        }
     }
 }

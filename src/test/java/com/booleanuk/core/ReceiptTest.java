@@ -39,7 +39,8 @@ public class ReceiptTest {
         Filling filling = (Filling) store.getInventory().getProduct("FILB");
 
         bagel.addFilling(filling);
-        Product bagel2 = store.getInventory().getProduct("BGLO");
+        bagel.addFilling(filling);
+        Product bagel2 = store.getInventory().getProduct("BGLP");
         addProductsToOrder(order, bagel2, 2);
         addProductsToOrder(order, bagel, 6);
         addProductsToOrder(order, filling, 3);
