@@ -11,7 +11,14 @@ public class Bagel extends Item {
         totalPriceIncludingFillings = price;
     }
 
-    public String addFilling(Filling filling){ return "";}
+    public String addFilling(Filling filling){
+        if (filling != null){
+            fillings.add(filling);
+            return filling.variant + " added to your bagel.";
+        }
+        else
+            return "Invalid filling. Please try again";
+    }
     public ArrayList<Filling> getFillings() { return new ArrayList<Filling>();}
 }
 

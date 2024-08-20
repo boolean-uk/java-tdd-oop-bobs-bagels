@@ -41,14 +41,21 @@ public class Menu {
                     case "Coffee" -> {
                         return new Coffee(i.sku, i.price, i.name, i.variant);
                     }
-                    case "Filling" -> {
-                        return new Filling(i.sku, i.price, i.name, i.variant);
-                    }
                 }
             }
         }
         return null;
     }
+
+    public static Filling getFillingFromMenu(String name, String variant){
+        for (Filling f : fillingMenu){
+            if (Objects.equals(f.name, name) & Objects.equals(f.variant, variant)){
+                return new Filling(f.sku, f.price, f.name, f.variant);
+            }
+        }
+        return null;
+    }
+
 
     public static Item selectItemFromMenu(){
         Scanner input = new Scanner(System.in);

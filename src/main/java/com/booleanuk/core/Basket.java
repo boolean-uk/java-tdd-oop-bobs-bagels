@@ -25,7 +25,7 @@ public class Basket {
             basket.get(itemInBasket(item)).quantity = basket.get(itemInBasket(item)).quantity + 1;
         }
 
-        return item.variant + " " + item.name + " added to basket.\n\n";
+        return item.variant + " " + item.name + " added to basket.";
     }
 
     public void printBasketContent(){
