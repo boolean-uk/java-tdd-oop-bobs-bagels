@@ -12,7 +12,6 @@ public class Bagel extends Product {
         this.fillings = new Filling[2];
     }
 
-    @Override
     public boolean addFilling(Filling filling) {
         for (int i = 0; i < fillings.length; i++) {
             if (fillings[i] == null) {
@@ -23,7 +22,6 @@ public class Bagel extends Product {
         return false;
     }
 
-    @Override
     public List<Filling> getFillings() {
         List<Filling> fillingList = new ArrayList<>();
         for (Filling filling : fillings) {

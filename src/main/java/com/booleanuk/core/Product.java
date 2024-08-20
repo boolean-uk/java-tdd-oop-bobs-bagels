@@ -26,14 +26,6 @@ public class Product {
         return variant;
     }
 
-    public boolean addFilling(Filling filling) {
-        return false;
-    }
-
-    public List<Filling> getFillings() {
-        return null;
-    }
-
     public String getSKU() {
         return sku;
     }
