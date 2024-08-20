@@ -38,9 +38,16 @@ public class Basket {
         for (Product p: inventory){
             if (p.getSKU().equals(SKU)){ //Found product in inv, add to basket
                 if (!(p instanceof Filling)){
-                    basketContent.add(p);
-                    totalPrice += p.getPrice();
-
+                    if(p instanceof Bagel){
+                        basketContent.add(new Bagel(p.getSKU(), p.getPrice(), p.getName(), p.getVariant()));
+                        totalPrice += p.getPrice();
+                        System.out.println("Bagel " + p.getVariant() + " added to basket at a cost of " + p.getPrice());
+                    }
+                    if(p instanceof Coffee){
+                        basketContent.add(new Coffee(p.getSKU(), p.getPrice(), p.getName(), p.getVariant()));
+                        totalPrice += p.getPrice();
+                        System.out.println("Coffee " + p.getVariant() + " added to basket at a cost of " + p.getPrice());
+                    }
                     return true;
                 }else{
                     System.out.println("Cannot buy filling on it's own, add it to a bagel dummy");
@@ -75,7 +82,6 @@ public class Basket {
         for (Product p: basketContent){
             if(p.getSKU().equals(bagelSKU) && (p instanceof Bagel)){
 
-
                 //found bagel, now see if filling is in inventory
                 for (Product filling: inventory){
                     if(filling.getSKU().equals(fillingSKU) && ((Bagel) p).getFilling() == null){
@@ -103,6 +109,7 @@ public class Basket {
         basket.addItem("BGLE");
 
 
+        basket.addFilling("BGLE", "FILC");
         basket.addFilling("BGLE", "FILC");
 
 

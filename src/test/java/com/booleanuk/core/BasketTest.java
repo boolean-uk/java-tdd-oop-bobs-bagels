@@ -45,15 +45,19 @@ public class BasketTest {
     @Test
     void addFilling(){
         Basket basket = new Basket();
-        basket.addItem("BGLO");
         basket.changeBasketSize(20);
+        basket.addItem("BGLO");
+        basket.addItem("BGLP");
+        basket.addItem("BGLE");
+        basket.addItem("BGLE");
 
-        //Assertions.assertTrue(basket.addFilling("BGLO", "FILS"));
+
+        basket.addFilling("BGLE", "FILC");
+        basket.addFilling("BGLE", "FILC");
+
+        Assertions.assertTrue(basket.addFilling("BGLO", "FILS"));
 
     }
-
-
-
 
 
 }
