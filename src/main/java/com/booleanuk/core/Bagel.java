@@ -12,6 +12,7 @@ public class Bagel extends Product {
         this.fillings = new Filling[2];
     }
 
+    @Override
     public boolean addFilling(Filling filling) {
         for (int i = 0; i < fillings.length; i++) {
             if (fillings[i] == null) {
@@ -23,11 +24,11 @@ public class Bagel extends Product {
     }
 
     @Override
-    public List<String> getFillings() {
-        List<String> fillingList = new ArrayList<>();
+    public List<Filling> getFillings() {
+        List<Filling> fillingList = new ArrayList<>();
         for (Filling filling : fillings) {
             if (filling != null) {
-                fillingList.add(filling.getVariant());
+                fillingList.add(filling);
             }
         }
         return fillingList;
