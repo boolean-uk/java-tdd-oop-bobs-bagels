@@ -7,7 +7,11 @@ public class InventoryTest {
 
     @Test
     public void checkInventoryInitialization() {
+
+        // TODO: How to test print statements
         this.inventory = new Inventory();
         inventory.printMenu();
     }
+
+    // TODO: Add more tests
 }
