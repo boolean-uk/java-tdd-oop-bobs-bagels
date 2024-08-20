@@ -3,29 +3,28 @@
 package com.booleanuk.core;
 
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 
 public class TestOrderManager {
 
     @Test
-    public void testOrderExists(){
+    public void testOrderManagerConstr(){
         OrderManager om = new OrderManager();
     }
 
     @Test
-    public void testCreateItem(){
+    public void testaddItem(){
         OrderManager om = new OrderManager();
-        Assertions.assertTrue(om.getItems().isEmpty());
-        om.createItem();
-        Assertions.assertTrue(!om.getItems().isEmpty());
+        String result = om.addItem(BagelType.Onion);
+        Assertions.assertEquals("Onion: 1", result);
+
+
+        result = om.addItem(CoffeeType.Cappuccino);
+        Assertions.assertEquals("Cappuccino: 1", result);
+
+
+        result = om.addItem(CoffeeType.Cappuccino);
+        Assertions.assertEquals("Cappuccino: 2", result);
     }
 
-    @Test
-    public void testAddFillings(){
-        OrderManager om = new OrderManager();
-//        Item item = new Bagel("BGLO", "Bagel", BagelType.Onion);
-//        om.addFillings((Bagel)item);
-
-    }
 }
