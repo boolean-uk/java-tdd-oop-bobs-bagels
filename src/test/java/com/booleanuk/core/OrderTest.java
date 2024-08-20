@@ -7,14 +7,15 @@ public class OrderTest {
 
     @Test
     public void testCreateOrder() {
-        Order order = new Order();
+        Store store = new Store("Bob's Bagels");
+        Order order = new Order(store);
         Assertions.assertEquals(0, order.getTotalSum());
     }
 
     @Test
     public void testAddProduct() {
-        Order order = new Order();
         Store store = new Store("Bob's Bagels");
+        Order order = new Order(store);
         Product product = store.getInventory().getProduct("BGLO");
         order.addProduct(product);
         Assertions.assertEquals(product.getPrice(), order.getTotalSum());
@@ -26,8 +27,8 @@ public class OrderTest {
 
     @Test
     public void testGetBasket() {
-        Order order = new Order();
         Store store = new Store("Bob's Bagels");
+        Order order = new Order(store);
         Product product = store.getInventory().getProduct("BGLO");
         order.addProduct(product);
         Assertions.assertEquals(1, order.getBasket().size());
@@ -36,8 +37,8 @@ public class OrderTest {
 
     @Test
     public void testAddSameProductTwice() {
-        Order order = new Order();
         Store store = new Store("Bob's Bagels");
+        Order order = new Order(store);
         Product product = store.getInventory().getProduct("BGLO");
         order.addProduct(product);
         order.addProduct(product);
@@ -48,8 +49,8 @@ public class OrderTest {
 
     @Test
     public void testBasketIsFull() {
-        Order order = new Order();
         Store store = new Store("Bob's Bagels");
+        Order order = new Order(store);
         Product product = store.getInventory().getProduct("BGLO");
         addProductsToOrder(order, product, 25);
         Assertions.assertFalse(order.addProduct(product));
@@ -57,8 +58,8 @@ public class OrderTest {
 
     @Test
     public void testRemoveProduct() {
-        Order order = new Order();
         Store store = new Store("Bob's Bagels");
+        Order order = new Order(store);
         Product product = store.getInventory().getProduct("BGLO");
         Product product2 = store.getInventory().getProduct("BGLP");
         order.addProduct(product);
@@ -77,7 +78,8 @@ public class OrderTest {
 
     @Test
     public void testIncrementBasketCapacity() {
-        Order order = new Order();
+        Store store = new Store("Bob's Bagels");
+        Order order = new Order(store);
         order.incrementBasketCapacity();
         Assertions.assertEquals(30, order.getMaxBasketCapacity());
     }
@@ -85,8 +87,8 @@ public class OrderTest {
     // test getProductPrice(String SKU)
     @Test
     public void testGetProductPrice() {
-        Order order = new Order();
         Store store = new Store("Bob's Bagels");
+        Order order = new Order(store);
         Product product = store.getInventory().getProduct("BGLO");
 
         Assertions.assertEquals(product.getPrice(), order.getProductPrice("BGLO"));
@@ -102,7 +104,7 @@ public class OrderTest {
         Store store = new Store("Bob's Bagels");
         Product bagelO = store.getInventory().getProduct("BGLO");
         Product bagelP = store.getInventory().getProduct("BGLP");
-        Order order = new Order();
+        Order order = new Order(store);
         addProductsToOrder(order, bagelO, 1);
         addProductsToOrder(order, bagelP, 6);
 
@@ -122,7 +124,7 @@ public class OrderTest {
         Store store = new Store("Bob's Bagels");
         Product bagelO = store.getInventory().getProduct("BGLO");
         Product bagelP = store.getInventory().getProduct("BGLP");
-        Order order = new Order();
+        Order order = new Order(store);
         addProductsToOrder(order, bagelO, 6);
         addProductsToOrder(order, bagelP, 6);
         Assertions.assertEquals(399, order.getTotalSum());
@@ -140,7 +142,7 @@ public class OrderTest {
         Store store = new Store("Bob's Bagels");
         Product bagelO = store.getInventory().getProduct("BGLO");
         Product bagelP = store.getInventory().getProduct("BGLP");
-        Order order = new Order();
+        Order order = new Order(store);
         addProductsToOrder(order, bagelO, 6);
         addProductsToOrder(order, bagelP, 6);
         Assertions.assertEquals(399, order.getTotalSum());
@@ -156,7 +158,7 @@ public class OrderTest {
         Store store = new Store("Bob's Bagels");
         Product bagelO = store.getInventory().getProduct("BGLO");
         Product bagelP = store.getInventory().getProduct("BGLP");
-        Order order = new Order();
+        Order order = new Order(store);
         addProductsToOrder(order, bagelO, 12);
         addProductsToOrder(order, bagelP, 6);
         Assertions.assertEquals(399 + 249, order.getTotalSum());
@@ -171,7 +173,7 @@ public class OrderTest {
         Store store = new Store("Bob's Bagels");
         Product bagelO = store.getInventory().getProduct("BGLO");
         Product coffee = store.getInventory().getProduct("COFB");
-        Order order = new Order();
+        Order order = new Order(store);
         addProductsToOrder(order, bagelO, 1);
         addProductsToOrder(order, coffee, 1);
         Assertions.assertEquals(125, order.getTotalSum());
@@ -189,7 +191,7 @@ public class OrderTest {
         Store store = new Store("Bob's Bagels");
         Product bagelO = store.getInventory().getProduct("BGLO");
         Product coffee = store.getInventory().getProduct("COFB");
-        Order order = new Order();
+        Order order = new Order(store);
         addProductsToOrder(order, bagelO, 6);
         addProductsToOrder(order, coffee, 1);
         Assertions.assertEquals(249 + coffee.getPrice(), order.getTotalSum());
@@ -204,7 +206,7 @@ public class OrderTest {
         Store store = new Store("Bob's Bagels");
         Product bagelO = store.getInventory().getProduct("BGLO");
         Product coffee = store.getInventory().getProduct("COFB");
-        Order order = new Order();
+        Order order = new Order(store);
         addProductsToOrder(order, bagelO, 12);
         addProductsToOrder(order, coffee, 1);
         Assertions.assertEquals(399 + coffee.getPrice(), order.getTotalSum());
@@ -219,7 +221,7 @@ public class OrderTest {
         Store store = new Store("Bob's Bagels");
         Product bagelO = store.getInventory().getProduct("BGLO");
         Product coffee = store.getInventory().getProduct("COFB");
-        Order order = new Order();
+        Order order = new Order(store);
         addProductsToOrder(order, bagelO, 12);
         addProductsToOrder(order, coffee, 1);
         Assertions.assertEquals(399 + coffee.getPrice(), order.getTotalSum());

@@ -18,7 +18,7 @@ public class StoreTest {
     @Test
     public void testAddOrder() {
         Store store = new Store("Bob's Bagels");
-        Order order = new Order();
+        Order order = new Order(store);
         store.addOrder(order);
 
         Assertions.assertEquals(1, store.getOrders().size());
