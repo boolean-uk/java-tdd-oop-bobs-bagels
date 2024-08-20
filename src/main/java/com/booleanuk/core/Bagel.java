@@ -1,5 +1,8 @@
 package com.booleanuk.core;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Bagel extends Product {
 
     private Filling[] fillings;
@@ -17,6 +20,16 @@ public class Bagel extends Product {
             }
         }
         return false;
+    }
+
+    public List<String> getFillings() {
+        List<String> fillingList = new ArrayList<>();
+        for (Filling filling : fillings) {
+            if (filling != null) {
+                fillingList.add(filling.getVariant());
+            }
+        }
+        return fillingList;
     }
 
 
