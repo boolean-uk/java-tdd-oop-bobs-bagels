@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
+import java.util.NoSuchElementException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -39,6 +40,15 @@ class BasketTest {
         Assertions.assertEquals(1, basket.size());
         basket.removeBagel(bagel);
         Assertions.assertEquals(0, basket.size());
+    }
+
+    @Test
+    public void testRemoveNonexistentBagel() {
+        Basket basket = new Basket(12);
+        Bagel bagel1 = new Bagel(Controller.prices.get("BGLO"), Controller.prices.get("FILB"));
+        Bagel bagel2 = new Bagel(Controller.prices.get("BGLO"), Controller.prices.get("FILB"));
+        basket.addBagel(bagel1);
+        Assertions.assertThrows(NoSuchElementException.class, () -> basket.removeBagel(bagel2));
     }
 
     @Test
