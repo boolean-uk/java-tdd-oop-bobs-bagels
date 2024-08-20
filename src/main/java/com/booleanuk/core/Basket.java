@@ -39,6 +39,20 @@ public class Basket {
             System.out.println("The quantity of bagels you are adding to your basket exceeds the basket limit by " + limitExceededBy +". Please reduce the quantity of bagels by this amount.");
         }
     }
+    /*public void addBagel (String bagelSku, int quantity){
+        if(!exceededBasketLimit(getBasketLimit(),this.basketTotal+quantity )){
+            if(this.basketItems.containsKey(bagelSku)){
+                this.basketItems.put(bagelSku, this.basketItems.get(bagelSku)+quantity);
+                this.basketTotal = this.basketItems.values().stream().reduce(0, Integer::sum);
+            }else{
+                this.basketItems.put(bagelSku, quantity);
+                this.basketTotal = this.basketItems.values().stream().reduce(0, Integer::sum);
+            }
+        }else {
+            int limitExceededBy = (this.basketTotal + quantity) - getBasketLimit();
+            System.out.println("The quantity of bagels you are adding to your basket exceeds the basket limit by " + limitExceededBy +". Please reduce the quantity of bagels by this amount.");
+        }
+    }*/
 
     public boolean exceededBasketLimit(int basketLimit, int basketTotalAfterAddBagel){
         return basketTotalAfterAddBagel > basketLimit;

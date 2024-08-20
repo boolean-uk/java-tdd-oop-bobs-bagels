@@ -6,10 +6,18 @@ import java.util.HashMap;
 public class Bagel {
     private String bagelVariant = "";
     private HashMap<String, Integer> fillingsMap = new HashMap<>();
-
+    private double cost;
 
     public Bagel(String variant){
         this.bagelVariant = variant;
+    }
+    public Bagel(String variant, HashMap<String, Integer> fillings){
+        this.bagelVariant = variant;
+        this.bagelVariant = fillingsMap;
+    }
+    public Bagel(String variant, HashMap<String, Integer> fillings){
+        this.bagelVariant = variant;
+        this.bagelVariant = fillingsMap;
     }
 
 
@@ -44,4 +52,10 @@ public class Bagel {
     public HashMap<String, Integer> getFillings() {
         return fillingsMap;
     }
+
+    public double getCost() {
+        return cost;
+    }
+
+
 }

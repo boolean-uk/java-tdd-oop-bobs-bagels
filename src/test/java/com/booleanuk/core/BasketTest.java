@@ -68,6 +68,11 @@ class BasketTest {
         basket.userRequestBagelCost("BGLE");
 
     }
+
+    public void testCreateBagel(){
+        Basket basket = new Basket();
+
+    }
 /*
     @Test
     public void testBasketFunction(){
