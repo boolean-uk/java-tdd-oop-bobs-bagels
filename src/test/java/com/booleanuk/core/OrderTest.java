@@ -90,6 +90,7 @@ public class OrderTest {
         Product product = store.getInventory().getProduct("BGLO");
 
         Assertions.assertEquals(product.getPrice(), order.getProductPrice("BGLO"));
+        Assertions.assertEquals(-1, order.getProductPrice(""));
     }
 
     // test multi buy discount 6 bagels for 249
