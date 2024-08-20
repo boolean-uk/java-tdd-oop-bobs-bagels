@@ -74,26 +74,46 @@ public class Basket {
        return  totalPrice;
     }
 
-    public void removeItemFromBasket(String sku) {
-        if(this.basket.get(sku) > 1) {
-            int oldQuantity = this.basket.get(sku);
-            this.basket.replace(sku, oldQuantity, oldQuantity - 1);
-        }else this.basket.remove(sku);
+    public boolean removeItemFromBasket(String sku) {
+        if(this.basket.containsKey(sku)) {
+            if(this.basket.get(sku) > 1) {
+                int oldQuantity = this.basket.get(sku);
+                this.basket.replace(sku, oldQuantity, oldQuantity - 1);
+                return true;
+            }else {
+                this.basket.remove(sku);
+                return true;
+            }
+        }else {
+            return false;
+        }
+
     }
 
     //To remove Bagel and checks if it has filling
-    public void removeItemFromBasket(Bagel bagel) {
-        removeItemFromBasket(bagel.getSKU());
-        if(bagel.getFilling() != null) {
-            removeItemFromBasket(bagel.getFilling().getSKU());
+    public String removeItemFromBasket(Bagel bagel) {
+        if(removeItemFromBasket(bagel.getSKU())){
+            if(bagel.getFilling() != null) {
+
+                removeItemFromBasket(bagel.getFilling().getSKU());
+                return "Bagel with filling " + bagel.getFilling().getName() + " is removed.";
+            } else {
+                return "Bagel is removed";
+            }
+        }else {
+            return "Bagel with the SKU: " + bagel.getSKU() + " Does not exist";
         }
+
     }
 
     //To remove a specific bagel with a specific filling
-    public void removeItemFromBasket(Bagel bagel, Filling filling) {
+    public String removeItemFromBasket(Bagel bagel, Filling filling) {
         removeItemFromBasket(bagel.getSKU());
         if(bagel.getFilling() == filling) {
             removeItemFromBasket(filling.getSKU());
+            return "Bagel with filling " + filling.getName() + " is removed.";
+        }else {
+            return "Bagel with filling " + filling.getName() + " does not exist.";
         }
     }
 

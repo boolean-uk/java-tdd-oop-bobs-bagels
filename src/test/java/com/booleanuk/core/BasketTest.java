@@ -8,6 +8,29 @@ import java.util.HashMap;
 
 public class BasketTest {
 
+    public void addTenItemsToBasket(Basket basket) {
+        Bagel b1 = ItemFactory.bagelFactory("BGLO");
+        Bagel b2 = ItemFactory.bagelFactory("BGLO");
+        Bagel b3 = ItemFactory.bagelFactory("BGLO");
+        Bagel b4 = ItemFactory.bagelFactory("BGLO");
+        Bagel b5 = ItemFactory.bagelFactory("BGLO");
+        Bagel b6 = ItemFactory.bagelFactory("BGLO");
+        Bagel b7 = ItemFactory.bagelFactory("BGLO");
+        Bagel b8 = ItemFactory.bagelFactory("BGLO");
+        Bagel b9 = ItemFactory.bagelFactory("BGLO");
+        Bagel b10 = ItemFactory.bagelFactory("BGLO");
+        basket.addItemToBasket(b1);
+        basket.addItemToBasket(b2);
+        basket.addItemToBasket(b3);
+        basket.addItemToBasket(b4);
+        basket.addItemToBasket(b5);
+        basket.addItemToBasket(b6);
+        basket.addItemToBasket(b7);
+        basket.addItemToBasket(b8);
+        basket.addItemToBasket(b9);
+        basket.addItemToBasket(b10);
+    }
+
     @Test
     public void createBasketTest() {
         Basket basket = new Basket();
@@ -126,7 +149,7 @@ public class BasketTest {
 
         Assertions.assertEquals(4, basket.countTotalItems());
 
-        basket.removeItemFromBasket(bagel);
+        Assertions.assertEquals("Bagel with filling " + bagel.getFilling().getName() + " is removed.", basket.removeItemFromBasket(bagel));
 
         Assertions.assertEquals(2, basket.countTotalItems());
     }
@@ -134,22 +157,10 @@ public class BasketTest {
     @Test
     public void addMoreThanCapacity() {
         Basket basket = new Basket();
+        addTenItemsToBasket(basket);
         Bagel b1 = ItemFactory.bagelFactory("BGLO");
-        Bagel b2 = ItemFactory.bagelFactory("BGLO");
-        Bagel b3 = ItemFactory.bagelFactory("BGLO");
-        Bagel b4 = ItemFactory.bagelFactory("BGLO");
-        Bagel b5 = ItemFactory.bagelFactory("BGLO");
         Filling f1 = ItemFactory.fillingFactory("FILX");
-        Filling f2 = ItemFactory.fillingFactory("FILX");
-        Filling f3 = ItemFactory.fillingFactory("FILX");
-        Filling f4 = ItemFactory.fillingFactory("FILX");
-        Filling f5 = ItemFactory.fillingFactory("FILX");
 
-        basket.addItemToBasket(b1, f1);
-        basket.addItemToBasket(b2, f2);
-        basket.addItemToBasket(b3, f3);
-        basket.addItemToBasket(b4, f4);
-        basket.addItemToBasket(b5, f5);
 
         Assertions.assertEquals(10, basket.countTotalItems());
 
@@ -187,28 +198,8 @@ public class BasketTest {
     @Test
     public void increaseTheBasketCapacityTest() {
         Basket basket = new Basket();
-        Bagel b1 = ItemFactory.bagelFactory("BGLO");
-        Bagel b2 = ItemFactory.bagelFactory("BGLO");
-        Bagel b3 = ItemFactory.bagelFactory("BGLO");
-        Bagel b4 = ItemFactory.bagelFactory("BGLO");
-        Bagel b5 = ItemFactory.bagelFactory("BGLO");
-        Bagel b6 = ItemFactory.bagelFactory("BGLO");
-        Bagel b7 = ItemFactory.bagelFactory("BGLO");
-        Bagel b8 = ItemFactory.bagelFactory("BGLO");
-        Bagel b9 = ItemFactory.bagelFactory("BGLO");
-        Bagel b10 = ItemFactory.bagelFactory("BGLO");
+        addTenItemsToBasket(basket);
         Bagel b11 = ItemFactory.bagelFactory("BGLE");
-        basket.addItemToBasket(b1);
-        basket.addItemToBasket(b2);
-        basket.addItemToBasket(b3);
-        basket.addItemToBasket(b4);
-        basket.addItemToBasket(b5);
-        basket.addItemToBasket(b6);
-        basket.addItemToBasket(b7);
-        basket.addItemToBasket(b8);
-        basket.addItemToBasket(b9);
-        basket.addItemToBasket(b10);
-
         Assertions.assertEquals("Basket is full.", basket.addItemToBasket(b11));
 
         basket.increaseBasketSize(2);
@@ -220,4 +211,14 @@ public class BasketTest {
 
         Assertions.assertEquals(12, basket.countTotalItems());
     }
+
+    @Test
+    public void tryToRemoveNonExistingItemFromBasket() {
+        Basket basket = new Basket();
+        addTenItemsToBasket(basket);
+
+        Assertions.assertFalse(basket.removeItemFromBasket("EEEE"));
+        Assertions.assertTrue(basket.removeItemFromBasket("BGLO"));
+    }
+
 }
