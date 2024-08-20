@@ -109,8 +109,8 @@ public class TestOrderManager {
     @Test
     public void testDiscountPrice(){
         OrderManager om = new OrderManager();
-        for (int i = 0; i < 16; i++) {
-            om.addItem(BagelType.Onion);
+        for (int i = 0; i < 16 ; i++) {
+            om.addItem(BagelType.Plain);
         }
         Assertions.assertEquals(5.55, om.getTotalDiscountedPrice());
 
