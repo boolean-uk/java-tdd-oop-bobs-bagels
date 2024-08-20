@@ -15,6 +15,7 @@ public class TestOrderManager {
     @Test
     public void testaddItem(){
         OrderManager om = new OrderManager();
+        om.setMaxCartSize(100);
         String result = om.addItem(BagelType.Onion);
         Assertions.assertEquals("Onion: 1", result);
 
@@ -64,10 +65,45 @@ public class TestOrderManager {
         result = om.removeItem(BagelType.Onion);
         Assertions.assertEquals("Onion is not in cart.", result);
 
-        Assertions.assertEquals(20, OrderManager.getMaxBagels());
+        Assertions.assertEquals(20, om.getStockOfItem(BagelType.Onion));
         om.addItem(BagelType.Onion);
+        Assertions.assertEquals(19, om.getStockOfItem(BagelType.Onion));
+
+
         result = om.removeItem(BagelType.Onion);
         Assertions.assertEquals("Removed Onion from cart.", result);
+        Assertions.assertEquals(20, om.getStockOfItem(BagelType.Onion));
+
+
+        result = om.removeItem(BagelType.Onion);
+        Assertions.assertEquals("Onion is not in cart.", result);
+        Assertions.assertEquals(20, om.getStockOfItem(BagelType.Onion));
+    }
+
+
+    @Test
+    public void testGetPriceOfItem(){
+        OrderManager om = new OrderManager();
+
+        // Bagel tests
+        Assertions.assertEquals(0.49, om.getPriceOfItem(BagelType.Onion));
+        Assertions.assertEquals(0.39, om.getPriceOfItem(BagelType.Plain));
+        Assertions.assertEquals(0.49, om.getPriceOfItem(BagelType.Everything));
+        Assertions.assertEquals(0.49, om.getPriceOfItem(BagelType.Sesame));
+
+        // Coffee tests
+        Assertions.assertEquals(0.99, om.getPriceOfItem(CoffeeType.Black));
+        Assertions.assertEquals(1.19, om.getPriceOfItem(CoffeeType.White));
+        Assertions.assertEquals(1.29, om.getPriceOfItem(CoffeeType.Cappuccino));
+        Assertions.assertEquals(1.29, om.getPriceOfItem(CoffeeType.Latte));
+
+        // Filling tests
+        Assertions.assertEquals(0.12, om.getPriceOfItem(FillingType.Bacon));
+        Assertions.assertEquals(0.12, om.getPriceOfItem(FillingType.Egg));
+        Assertions.assertEquals(0.12, om.getPriceOfItem(FillingType.Cheese));
+        Assertions.assertEquals(0.12, om.getPriceOfItem(FillingType.Cream_Cheese));
+        Assertions.assertEquals(0.12, om.getPriceOfItem(FillingType.Smoked_Salmon));
+        Assertions.assertEquals(0.12, om.getPriceOfItem(FillingType.Ham));
 
 
 
