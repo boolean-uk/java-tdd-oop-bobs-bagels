@@ -11,4 +11,9 @@ public class Receipt {
     public Order getOrder() {
         return order;
     }
+
+    public boolean printReceipt() {
+        System.out.println("Receipt for order: " + order);
+        return true;
+    }
 }
