@@ -18,33 +18,46 @@ public class Discount {
     public double discPrice(Order order){
         int onion=0;
         int plain=0;
-        int every=0;
+        int bag=0;
         int coff=0;
         HashMap<Item, Double> bagelPrices=new HashMap<>();
         double disc=0;
+        double price=order.getTotal();
+        double diff12=0;
+        double diff6=0;
+
+        double bagPrice=0;
+        double plainPrice=0;
+
         for(Item i:order.getItems()){
             if(i.getType()=="Bagel"){
                 bagelPrices.put(i, i.getPrice());
 
-                if(i.getName().contains("Onion")){
-                    onion++;
+                if(i.getName().contains("Plain")){
+                    plain++;
+                    plainPrice+=0.39;
 
                 }
-                else if (i.getName().contains("Plain")){
-                    plain++;
+                else {
+                    bag++;
+                    bagPrice+=0.49;
                 }
-                else if (i.getName().contains("Everything")){
-                    every++;
-                }
+
             }else if(i.getType()=="Coffee" & i.getName()=="Black"){
                 coff++;
             }
         }
-        disc+=onion/6*0.45;
-        disc+=plain/12*0.69;
-        disc+=every/6*0.45;
 
-        int remain=onion%6+plain%12+every%6;
+
+
+
+        if (bag>12){
+            diff12=3.99*bag/12;
+            disc+=bagPrice-diff12;
+        }
+
+
+        int remain=(bag%12)%6;
 
         if (coff<remain){
             remain=coff;
