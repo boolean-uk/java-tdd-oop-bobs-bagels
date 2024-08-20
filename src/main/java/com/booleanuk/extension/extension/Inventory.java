@@ -13,13 +13,13 @@ public class Inventory {
 
     public Inventory() {
         items = new HashMap<>();
-        addItem(new com.booleanuk.core.Bagel("BGLO", 0.49, "Bagel", com.booleanuk.core.Bagel.BagelVariant.ONION));
-        addItem(new com.booleanuk.core.Bagel("BGLP", 0.39, "Bagel", com.booleanuk.core.Bagel.BagelVariant.PLAIN));
-        addItem(new com.booleanuk.core.Bagel("BGLE", 0.49, "Bagel", com.booleanuk.core.Bagel.BagelVariant.EVERYTHING));
-        addItem(new com.booleanuk.core.Bagel("BGLS", 0.49, "Bagel", Bagel.BagelVariant.SESAME));
-        addItem(new com.booleanuk.core.Coffee("COFB", 0.99, "Coffee", "Black"));
-        addItem(new com.booleanuk.core.Coffee("COFW", 1.19, "Coffee", "White"));
-        addItem(new com.booleanuk.core.Coffee("COFC", 1.29, "Coffee", "Capuccino"));
+        addItem(new Bagel("BGLO", 0.49, "Bagel", com.booleanuk.core.Bagel.BagelVariant.ONION));
+        addItem(new Bagel("BGLP", 0.39, "Bagel", com.booleanuk.core.Bagel.BagelVariant.PLAIN));
+        addItem(new Bagel("BGLE", 0.49, "Bagel", com.booleanuk.core.Bagel.BagelVariant.EVERYTHING));
+        addItem(new Bagel("BGLS", 0.49, "Bagel", Bagel.BagelVariant.SESAME));
+        addItem(new Coffee("COFB", 0.99, "Coffee", "Black"));
+        addItem(new Coffee("COFW", 1.19, "Coffee", "White"));
+        addItem(new Coffee("COFC", 1.29, "Coffee", "Capuccino"));
         addItem(new Coffee("COFL", 1.29, "Coffee", "Latte"));
         addItem(new Filling("FILB", 0.12, "Filling", "Bacon"));
         addItem(new Filling("FILE", 0.12, "Filling", "Egg"));
