@@ -47,4 +47,14 @@ public class BagelTest {
         Bagel bagel = new Bagel("SKU", 10, "Variant");
         Assertions.assertEquals(10, bagel.getPrice());
     }
+
+    @Test
+    public void testGetFillings() {
+        Bagel bagel = new Bagel("SKU", 10, "Variant");
+        Filling filling = new Filling("SKU", 10, "Variant");
+        Filling filling2 = new Filling("SKU2", 20, "Variant2");
+        bagel.addFilling(filling);
+        bagel.addFilling(filling2);
+        Assertions.assertEquals(2, bagel.getFillings().size());
+    }
 }
