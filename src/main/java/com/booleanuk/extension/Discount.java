@@ -54,7 +54,7 @@ public class Discount {
         Arrays.sort(price);
 
         for (int i=0; i<remain; i++){
-            disc+=price[i]-1.25;
+            disc+=price[i]+0.99-1.25;
         }
 
 
