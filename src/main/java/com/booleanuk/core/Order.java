@@ -68,23 +68,29 @@ public class Order {
 
     private void applyDiscounts() {
         int amountOfBagels = 0;
-        int amountOfCoffee = 0;
+        int amountOfCoffees = 0;
         int resetAmount = 0;
 
+        // Lists to store individual prices of bagels and coffee
         ArrayList<Integer> bagelPrices = new ArrayList<>();
         ArrayList<Integer> coffeePrices = new ArrayList<>();
 
+        // Create an instance of Inventory to get product prices
         Inventory inventory = new Inventory();
+
+        // Iterate through the basket to calculate total reset amount and get number of bagels and coffees and there prices
         for (Map.Entry<String, Integer> entry : basket.entrySet()) {
             resetAmount += entry.getValue() * inventory.getProduct(entry.getKey()).getPrice();
 
+            // If the product is coffee, update coffee count and prices
             if (entry.getKey().startsWith("COF")) {
-                amountOfCoffee += entry.getValue();
+                amountOfCoffees += entry.getValue();
                 int coffeePrice = inventory.getProduct(entry.getKey()).getPrice();
                 for (int i = 0; i < entry.getValue(); i++) {
                     coffeePrices.add(coffeePrice);
                 }
             }
+            // If the product is a bagel, update bagel count and prices
             if (entry.getKey().startsWith("BGL")) {
                 amountOfBagels += entry.getValue();
                 int bagelPrice = inventory.getProduct(entry.getKey()).getPrice();
@@ -94,30 +100,37 @@ public class Order {
             }
         }
 
-        int twelveBagelDiscounts = amountOfBagels / 12;
+        // Calculate the number of 12-bagel and 6-bagel discounts and update the amount
+        // of bagels to only have the remaining bagels
+        int numberOfTwelveBagelDiscounts = amountOfBagels / 12;
         amountOfBagels %= 12;
-        int sixBagelDiscounts = amountOfBagels / 6;
+        int numberOfSixBagelDiscounts = amountOfBagels / 6;
         amountOfBagels %= 6;
-        System.out.println("Bagels: " + amountOfBagels + " Coffee: " + amountOfCoffee);
-        int bagelCoffeePairs = Math.min(amountOfBagels, amountOfCoffee);
 
-        if (twelveBagelDiscounts == 0 && sixBagelDiscounts == 0 && bagelCoffeePairs == 0) {
+        // Calculate the number of bagel and coffee pairs for discounts
+        int bagelCoffeePairs = Math.min(amountOfBagels, amountOfCoffees);
+        // Adjust the remaining bagels and coffees after applying pair discounts
+        amountOfBagels -= bagelCoffeePairs;
+        amountOfCoffees -= bagelCoffeePairs;
+
+        // If no discounts apply, set totalSum to resetAmount
+        if (numberOfTwelveBagelDiscounts == 0 && numberOfSixBagelDiscounts == 0 && bagelCoffeePairs == 0) {
             totalSum = resetAmount;
         } else {
-            amountOfBagels -= bagelCoffeePairs;
-            amountOfCoffee -= bagelCoffeePairs;
+            // Calculate the sum to add for remaining bagels and coffees (highest prices first)
             int sumToAdd = getSumToAdd(amountOfBagels, bagelPrices);
-            sumToAdd += getSumToAdd(amountOfCoffee, coffeePrices);
-            totalSum =  bagelCoffeePairs * 125 + twelveBagelDiscounts * 399 + sixBagelDiscounts * 249 + sumToAdd;
+            sumToAdd += getSumToAdd(amountOfCoffees, coffeePrices);
+
+            // Calculate the total sum with all applicable discounts
+            totalSum = bagelCoffeePairs * 125 + numberOfTwelveBagelDiscounts * 399 + numberOfSixBagelDiscounts * 249 + sumToAdd;
         }
     }
 
     private int getSumToAdd(int amountOfBagels, ArrayList<Integer> ProductPrices) {
         int sumToAdd = 0;
         if (amountOfBagels >= 0) {
-            // Sort the list in descending order
+            // Sort the list in descending order to get the highest prices first
             ProductPrices.sort(Comparator.reverseOrder());
-            System.out.println("Bagels price: " + ProductPrices);
             for (int i = 0; i < amountOfBagels; i++) {
                 sumToAdd += ProductPrices.get(i);
             }
