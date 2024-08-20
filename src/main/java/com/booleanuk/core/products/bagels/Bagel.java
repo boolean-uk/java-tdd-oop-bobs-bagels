@@ -3,7 +3,7 @@ package com.booleanuk.core.products.bagels;
 import com.booleanuk.core.products.fillings.Filling;
 import com.booleanuk.core.products.Product;
 
-public class Bagel extends Product {
+public abstract class Bagel extends Product {
 
     private Filling currentFilling;
 
