@@ -65,4 +65,19 @@ class BasketTest {
         Assertions.assertEquals(2, basket.size());
         Assertions.assertEquals(1, bagelsCopy.size());
     }
+
+    @Test
+    public void testChangeSize() {
+        Basket basket = new Basket(1);
+        Bagel bagel1 = new Bagel(Controller.prices.get("BGLO"), Controller.prices.get("FILB"));
+        Bagel bagel2 = new Bagel(Controller.prices.get("BGLO"), Controller.prices.get("FILB"));
+        Assertions.assertEquals(0, basket.size());
+        basket.addBagel(bagel1);
+        Assertions.assertEquals(1, basket.size());
+        basket.addBagel(bagel2);
+        Assertions.assertEquals(1, basket.size());
+        basket.setBasketSize(12);
+        basket.addBagel(bagel2);
+        Assertions.assertEquals(2, basket.size());
+    }
 }
