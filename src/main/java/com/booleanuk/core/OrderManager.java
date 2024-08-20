@@ -6,7 +6,7 @@ import java.util.HashMap;
 import java.util.Scanner;
 
 public class OrderManager {
-	private int maxCartSize = 16; // max default size of basket
+	private int maxCartSize = 24; // max default size of basket
 									// SKU, Price, Name, Variant
 	private static HashMap<ItemInterface, String[]> storeItemInfo = null; // may simulate a database of item pricing and information
 	private static HashMap<ItemInterface, Integer> storeItemStock = null;
@@ -178,7 +178,64 @@ public class OrderManager {
 		}
 		return amount;
 	}
+	// case: e1
+	public double getTotalDiscountedPrice(){
 
+		HashMap<ItemInterface, Integer> cartCopy = new HashMap<>(cart);
+
+		double totalPrice = 0;
+		String reciept = "";
+		for(ItemInterface item: cartCopy.keySet()){
+			int amountInCart = cartCopy.get(item);
+
+			// sort list -> take bagel special offers then coffees
+			switch (item){
+
+				// any bagel
+				case BagelType.Everything, BagelType.Onion, BagelType.Plain, BagelType.Sesame:
+					while (amountInCart > 12){
+						totalPrice += 3.99;
+						amountInCart -= 12;
+						reciept += item + ": 12 for 3.99\n";
+					}
+
+					while(amountInCart > 6){
+						totalPrice += 2.49;
+						amountInCart -= 6;
+						reciept += item + ": 6 for 2.49\n";
+					}
+
+					while(amountInCart-->0){
+						double pricePer = getPriceOfItem(item);
+						totalPrice += pricePer;
+						reciept += item	+ ": 1 for " + pricePer + "\n";
+					}
+
+
+					// or black coffee
+				case CoffeeType.Black:
+					for(int i = 0; i < amountInCart; i++){
+						// check if a bagel is in cart.
+						for (BagelType bagel: BagelType.values()){
+							if (getStockOfItem(bagel) > 0){
+								cart.compute(bagel, (k, amountOfBagelInCart) -> amountOfBagelInCart - 1);
+								totalPrice += 1.25;
+								reciept += "Black Coffee and " + bagel + " for 1.25\n";
+								break;
+							}
+						}
+					}
+
+				default:
+					totalPrice += getPriceOfItem(item);
+					reciept += item + " for " + getPriceOfItem(item);
+			}
+
+		}
+
+
+		return totalPrice;
+	}
 
 
 
