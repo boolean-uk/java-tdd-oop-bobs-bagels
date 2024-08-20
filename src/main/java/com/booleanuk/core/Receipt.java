@@ -1,8 +1,6 @@
 package com.booleanuk.core;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class Receipt {
   private List<Product> products;
@@ -13,16 +11,25 @@ public class Receipt {
 
   @Override
   public String toString() {
-    String out = "~~~ Bob's Bagels ~~~\n" +
-        "----------------------\n";
-    Map<Sku, Integer> productCounts = new HashMap<>();
-    for (Product product : this.products)
-      productCounts.merge(product.sku(), 1, Integer::sum);
+    String out = "~~~ Bob's Bagels ~~~\n" + "----------------------\n";
+    double totalPrice = 0;
 
-    for (Map.Entry<Sku, Integer> entry : productCounts.entrySet())
-      out += entry.getValue() + "x " + entry.getKey() + ' ' + "\n";
+    for (Sku sku : Sku.values()) {
+      long productCount = this.products
+          .stream()
+          .filter((product) -> product.sku() == sku)
+          .count();
+      if (productCount == 0)
+        continue;
 
-    out += "----------------------";
+      double productPrice = sku.price() * productCount;
+      totalPrice += productPrice;
+
+      out += String.format("%dx %s %.2f\n", productCount, sku, productPrice);
+    }
+
+    out += "----------------------\n";
+    out += String.format("Total %.2f", totalPrice);
 
     return out;
   }

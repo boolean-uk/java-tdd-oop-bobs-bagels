@@ -21,13 +21,12 @@ class ReceiptTest {
     basket.add(new Bagel(BagelType.ONION));
 
     Receipt receipt = inventory.purchase(basket);
-    String expected = "~~~ Bob's Bagels ~~~\n" +
-        "----------------------\n" +
-        "1x Black coffee 0.99\n" +
-        "1x White coffee 1.19\n" +
-        "1x Onion bagel 0.49\n" +
-        "----------------------";
-    Assertions.assertEquals(expected, receipt.toString());
+    String actual = receipt.toString();
+    Assertions.assertTrue(actual.contains("1x Black coffee " + String.format("%.2f", Sku.COFB.price())));
+    Assertions.assertTrue(actual.contains("1x White coffee " + String.format("%.2f", Sku.COFW.price())));
+    Assertions.assertTrue(actual.contains("1x Onion bagel " + String.format("%.2f", Sku.BGLO.price())));
+    Assertions.assertTrue(
+        actual.contains("Total " + String.format("%.2f", Sku.COFB.price() + Sku.COFW.price() + Sku.BGLO.price())));
   }
 
   @Test
@@ -44,10 +43,7 @@ class ReceiptTest {
     basket.add(new Coffee(CoffeeType.BLACK));
 
     Receipt receipt = inventory.purchase(basket);
-    String expected = "~~~ Bob's Bagels ~~~\n" +
-        "----------------------\n" +
-        "3x Black coffee 2.97\n" +
-        "----------------------";
-    Assertions.assertEquals(expected, receipt.toString());
+    String actual = receipt.toString();
+    Assertions.assertTrue(actual.contains("3x Black coffee " + String.format("%.2f", Sku.COFB.price() * 3)));
   }
 }

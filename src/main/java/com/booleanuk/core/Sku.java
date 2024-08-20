@@ -28,7 +28,7 @@ public enum Sku {
 
   @Override
   public String toString() {
-    return this.name + " " + price;
+    return this.name;
   }
 
   public double price() {
