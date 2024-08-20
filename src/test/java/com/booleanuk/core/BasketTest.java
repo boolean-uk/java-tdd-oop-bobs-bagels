@@ -18,10 +18,10 @@ public class BasketTest {
     @Test
     public void addBagelAndCoffeeAndFillingToBasketTest() {
         Basket basket = new Basket();
-        Bagel bagel = new Bagel("BGLO");
-        Bagel bagel2 = new Bagel("BGLO");
-        Coffee coffee = new Coffee("COFB");
-        Filling filling = new Filling("FILH");
+        Bagel bagel = ItemFactory.bagelFactory("BGLO");
+        Bagel bagel2 =ItemFactory.bagelFactory("BGLO");
+        Coffee coffee = ItemFactory.coffeeFactory("COFB");
+        Filling filling = ItemFactory.fillingFactory("FILH");
         basket.addItemToBasket(bagel);
         basket.addItemToBasket(coffee);
         basket.addItemToBasket(filling);
@@ -43,8 +43,8 @@ public class BasketTest {
     @Test
     public void addMultipleBagels() {
         Basket basket = new Basket();
-        Bagel bagel = new Bagel("BGLO");
-        Bagel bagel2 = new Bagel("BGLO");
+        Bagel bagel = ItemFactory.bagelFactory("BGLO");
+        Bagel bagel2 = ItemFactory.bagelFactory("BGLO");
         basket.addItemToBasket(bagel);
         basket.addItemToBasket(bagel2);
 
@@ -62,8 +62,8 @@ public class BasketTest {
     @Test
     public void addFillingToBagelTest() {
         Basket basket = new Basket();
-        Bagel bagel = new Bagel("BGLO");
-        Filling filling = new Filling("FILX");
+        Bagel bagel = ItemFactory.bagelFactory("BGLO");
+        Filling filling = ItemFactory.fillingFactory("FILX");
 
         bagel.addFilling(filling);
         basket.addItemToBasket(bagel);
@@ -78,9 +78,9 @@ public class BasketTest {
     @Test
     public void calculateTotalValueOfBasketTest() {
         Basket basket = new Basket();
-        Bagel bagel = new Bagel("BGLO");
-        Filling filling = new Filling("FILX");
-        Bagel bagel2 = new Bagel("BGLP");
+        Bagel bagel = ItemFactory.bagelFactory("BGLO");
+        Filling filling = ItemFactory.fillingFactory("FILX");
+        Bagel bagel2 = ItemFactory.bagelFactory("BGLP");
 
         bagel.addFilling(filling);
         basket.addItemToBasket(bagel);
@@ -98,9 +98,9 @@ public class BasketTest {
     @Test
     public void removeItemFromBasketTest() {
         Basket basket = new Basket();
-        Bagel bagel = new Bagel("BGLO");
-        Filling filling = new Filling("FILX");
-        Bagel bagel2 = new Bagel("BGLP");
+        Bagel bagel = ItemFactory.bagelFactory("BGLO");
+        Filling filling = ItemFactory.fillingFactory("FILX");
+        Bagel bagel2 = ItemFactory.bagelFactory("BGLP");
         bagel.addFilling(filling);
         basket.addItemToBasket(bagel);
         basket.addItemToBasket(filling);
@@ -117,10 +117,10 @@ public class BasketTest {
     @Test
     public void removeOneOfTwoBagelsTest() {
         Basket basket = new Basket();
-        Bagel bagel = new Bagel("BGLO");
-        Filling filling = new Filling("FILX");
-        Bagel bagel2 = new Bagel("BGLO");
-        Filling filling2 = new Filling("FILB");
+        Bagel bagel = ItemFactory.bagelFactory("BGLO");
+        Filling filling = ItemFactory.fillingFactory("FILX");
+        Bagel bagel2 = ItemFactory.bagelFactory("BGLO");
+        Filling filling2 = ItemFactory.fillingFactory("FILB");
         basket.addItemToBasket(bagel, filling);
         basket.addItemToBasket(bagel2, filling2);
 
@@ -134,16 +134,16 @@ public class BasketTest {
     @Test
     public void addMoreThanCapacity() {
         Basket basket = new Basket();
-        Bagel b1 = new Bagel("BGLO");
-        Bagel b2 = new Bagel("BGLO");
-        Bagel b3 = new Bagel("BGLO");
-        Bagel b4 = new Bagel("BGLO");
-        Bagel b5 = new Bagel("BGLO");
-        Filling f1 = new Filling("FILX");
-        Filling f2 = new Filling("FILX");
-        Filling f3 = new Filling("FILX");
-        Filling f4 = new Filling("FILX");
-        Filling f5 = new Filling("FILX");
+        Bagel b1 = ItemFactory.bagelFactory("BGLO");
+        Bagel b2 = ItemFactory.bagelFactory("BGLO");
+        Bagel b3 = ItemFactory.bagelFactory("BGLO");
+        Bagel b4 = ItemFactory.bagelFactory("BGLO");
+        Bagel b5 = ItemFactory.bagelFactory("BGLO");
+        Filling f1 = ItemFactory.fillingFactory("FILX");
+        Filling f2 = ItemFactory.fillingFactory("FILX");
+        Filling f3 = ItemFactory.fillingFactory("FILX");
+        Filling f4 = ItemFactory.fillingFactory("FILX");
+        Filling f5 = ItemFactory.fillingFactory("FILX");
 
         basket.addItemToBasket(b1, f1);
         basket.addItemToBasket(b2, f2);
@@ -161,17 +161,16 @@ public class BasketTest {
     @Test
     public void addBagelWithFillingWithNineItemsInBasketTest() {
         Basket basket = new Basket();
-        Bagel b1 = new Bagel("BGLO");
-        Bagel b2 = new Bagel("BGLO");
-        Bagel b3 = new Bagel("BGLO");
-        Bagel b4 = new Bagel("BGLO");
-        Bagel b5 = new Bagel("BGLO");
-        Filling f1 = new Filling("FILX");
-        Filling f2 = new Filling("FILX");
-        Filling f3 = new Filling("FILX");
-        Filling f4 = new Filling("FILX");
-
-
+        Bagel b1 = ItemFactory.bagelFactory("BGLO");
+        Bagel b2 = ItemFactory.bagelFactory("BGLO");
+        Bagel b3 = ItemFactory.bagelFactory("BGLO");
+        Bagel b4 = ItemFactory.bagelFactory("BGLO");
+        Bagel b5 = ItemFactory.bagelFactory("BGLO");
+        Filling f1 = ItemFactory.fillingFactory("FILX");
+        Filling f2 = ItemFactory.fillingFactory("FILX");
+        Filling f3 = ItemFactory.fillingFactory("FILX");
+        Filling f4 = ItemFactory.fillingFactory("FILX");
+        
         basket.addItemToBasket(b1, f1);
         basket.addItemToBasket(b2, f2);
         basket.addItemToBasket(b3, f3);
@@ -183,6 +182,5 @@ public class BasketTest {
         basket.printOutHashMap();
 
         Assertions.assertEquals( "Basket is full.", basket.addItemToBasket(b1, f1));
-
     }
 }

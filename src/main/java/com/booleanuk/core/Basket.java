@@ -84,7 +84,7 @@ public class Basket {
     //To remove a specific bagel with a specific filling
     public void removeItemFromBasket(Bagel bagel, Filling filling) {
         removeItemFromBasket(bagel.getSKU());
-        if(bagel.getFilling() != null) {
+        if(bagel.getFilling() == filling) {
             removeItemFromBasket(filling.getSKU());
         }
     }

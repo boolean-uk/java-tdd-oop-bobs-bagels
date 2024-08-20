@@ -6,6 +6,11 @@ public class Bagel extends Item {
         super(SKU);
     }
 
+    public Bagel(String sku, Filling filling) {
+        super(sku);
+        this.filling = filling;
+    }
+
     public void addFilling(Filling filling) {
         this.filling = filling;
     }

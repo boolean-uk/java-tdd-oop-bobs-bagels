@@ -30,6 +30,29 @@ Basket holds Coffee, Filling and Bagel but to know what your filling your bagel 
 |              | getItemType  | Get the type of item            | "Bagel"               |
 
 
+## Class ItemList
+
+| Variables                         | Method                       | Scenario                                                                                                                       | Outcome |
+|-----------------------------------|------------------------------|--------------------------------------------------------------------------------------------------------------------------------|---------|
+| HashMap<String, double> priceList | Constructor()                | Constructor populate all the HashMaps with the correct data. The data is corresponding from the SKU with price, type and name. |         |
+| HashMap<String, String> typeList  |                              |                                                                                                                                |         |
+| HashMap<String, String> nameList  |                              |                                                                                                                                |         |
+|                                   | get...List()                 | Get price, type and name list of all items                                                                                     |         |
+|                                   |                              |                                                                                                                                |         |
+|                                   | getPriceFromList(String sku) | Get the price of an item depending on the SKU.                                                                                 |         |
+
+
+## Class ItemFactory
+
+| Variables | Method                                                      | Scenario                                      | Outcome                    |
+|-----------|-------------------------------------------------------------|-----------------------------------------------|----------------------------|
+|           | coffeeFactory(String sku                                    | Return a new instance of coffee               | new Coffee(sku)            |
+|           | fillingFactory(String sku)                                  | Return a new instance of filling              | new Filling(sku)           |
+|           | bagelFactory(String sku)                                    | Return a new instance of bagel                | new Bagel(sku)             |
+|           | bagelWithFillingFactory(String bagelSKU, String fillingSKU) | Return a new instance of bagel with a filling | new Bagel(sku, fillingSKU) |
+|           |                                                             |                                               |                            |
+* Making the methods in ItemFactory to static so it's easier to reach the methods.
+
 ## Class Bagel extends Item
 | Variables       | Method                      | Scenario                         | Outcome                  |
 |-----------------|-----------------------------|----------------------------------|--------------------------|
