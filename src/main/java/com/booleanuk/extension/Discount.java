@@ -40,14 +40,17 @@ public class Discount {
         disc+=plain/12*0.69;
         disc+=every/6*0.45;
 
-        if(coff>bag){
-            disc+=bag*0.23;
+        int remainBag=onion%6;
+        int remainPlain=plain%12;
+
+        if(coff>remainBag){
+            disc+=remainBag*0.23;
         }else{
             disc+=coff*0.23;
         }
 
-        if(coff>onion){
-            disc+=onion*0.13;
+        if(coff>remainPlain){
+            disc+=remainPlain*0.13;
         }else{
             disc+=coff*0.13;
         }
