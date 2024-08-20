@@ -3,11 +3,10 @@ package com.booleanuk.core;
 import java.util.Objects;
 import java.util.Scanner;
 
-import static com.booleanuk.core.Menu.printFillingMenu;
 import static com.booleanuk.core.Menu.selectItemFromMenu;
 
 public class Order {
-    private Basket basket = new Basket();
+    private final Basket basket = new Basket();
 
     public void order() {
         Scanner input = new Scanner(System.in);
@@ -59,7 +58,7 @@ public class Order {
     private void customerMenu(Scanner input){
         System.out.println("Welcome to Bob's bagels. Please select one of the following options:");
         while (true){
-            System.out.println("1. Add item to your basket.");
+            System.out.println("\n1. Add item to your basket.");
             System.out.println("2. Remove item from your basket.");
             System.out.println("3. View your basket.");
             System.out.println("4. Proceed to checkout.\n");
@@ -102,21 +101,15 @@ public class Order {
         while (true){
             System.out.println("1. Change basket size.\n");
 
-            switch (input.nextInt()){
-                case 1: {
+            if (input.nextInt() == 1){
                     System.out.println("Enter new size of the basket.");
                     int newBasketSize = input.nextInt();
                     basket.changeBasketSize(newBasketSize);
                     break;
-                }
-                default: {
+            }
+            else {
                     System.out.println("That is not a viable option, is it?");
-                }
             }
         }
     }
-
-
-
-
 }
