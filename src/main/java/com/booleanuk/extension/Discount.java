@@ -21,14 +21,14 @@ public class Discount {
             if(i.getType()=="Bagel"){
 
 
-                if(i.getName()=="Onion"){
+                if(i.getName().contains("Onion")){
                     onion++;
                     bag++;
                 }
-                else if (i.getName()=="Plain"){
+                else if (i.getName().contains("Plain")){
                     plain++;
                 }
-                else if (i.getName()=="Everything"){
+                else if (i.getName().contains("Everything")){
                     every++;
                     bag++;
                 }
