@@ -20,12 +20,15 @@ public class Order {
     }
 
     public int getProductPrice(String SKU) {
-        Inventory inventory = new Inventory();
+        if (SKU == null) {
+            throw new IllegalArgumentException("SKU cannot be null");
+        }
+
         if (SKU.isEmpty()) {
             System.out.println("Product not found in the inventory");
             return -1;
         }
-
+        Inventory inventory = new Inventory();
         Product product = inventory.getProduct(SKU);
         if (product == null) {
             System.out.println("Product not found in the inventory");
