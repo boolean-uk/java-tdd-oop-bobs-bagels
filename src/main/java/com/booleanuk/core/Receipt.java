@@ -1,5 +1,6 @@
 package com.booleanuk.core;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 public class Receipt {
@@ -25,53 +26,11 @@ public class Receipt {
     return n;
   }
 
-  // @Override
-  // public String toString() {
-  // String out = "~~~ Bob's Bagels ~~~\n----------------------\n";
-  // // All fillings and extras cost money and cannot be discounted
-  // double price = this.products
-  // .stream()
-  // .mapToDouble((product) -> product.extraPrice())
-  // .sum();
-  //
-  // int numBagels = numBagels();
-  // int numCoffees = numCoffees();
-  //
-  // while (numBagels >= 12) {
-  // numBagels -= 12;
-  // price += 4.99;
-  // }
-  //
-  // while (numBagels >= 6) {
-  // numBagels -= 6;
-  // price += 2.49;
-  // }
-  //
-  // while (numBagels >= 1 && numCoffees >= 1) {
-  // --numCoffees;
-  // --numBagels;
-  // price += 1.25;
-  // }
-  //
-  // for (Product product : this.products) {
-  // if (product instanceof Bagel && numBagels > 0) {
-  // --numBagels;
-  // price += product.basePrice();
-  // } else if (product instanceof Coffee && numCoffees > 0) {
-  // --numCoffees;
-  // price += product.basePrice();
-  // }
-  // }
-  //
-  // out += "----------------------\n";
-  // out += String.format("Total %.2f", price);
-  //
-  // return out;
-  // }
-
   @Override
   public String toString() {
-    String out = "~~~ Bob's Bagels ~~~\n----------------------\n";
+    String out = "~~~ Bob's Bagels ~~~\n\n" +
+        LocalDateTime.now() +
+        "\n\n----------------------\n\n";
     double totalPrice = 0;
 
     int numBagels = this.numBagels();
@@ -124,7 +83,7 @@ public class Receipt {
       out += String.format("%dx %s %.2f\n", productCount, sku, productPrice);
     }
 
-    out += "----------------------\n";
+    out += "\n----------------------\n";
     out += String.format("Total %.2f", totalPrice);
 
     return out;
