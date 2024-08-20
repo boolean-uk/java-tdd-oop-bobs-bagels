@@ -106,6 +106,32 @@ public class TestOrderManager {
         Assertions.assertEquals(0.12, om.getPriceOfItem(FillingType.Ham));
     }
 
+    @Test
+    public void testDiscountPrice(){
+        OrderManager om = new OrderManager();
+        for (int i = 0; i < 16; i++) {
+            om.addItem(BagelType.Onion);
+        }
+        Assertions.assertEquals(5.55, om.getTotalDiscountedPrice());
+
+
+        om = new OrderManager();
+        for (int i = 0; i < 2; i++) {
+            om.addItem(BagelType.Onion);
+        }
+        for (int i = 0; i < 12; i++) {
+            om.addItem(BagelType.Plain);
+        }
+        for (int i = 0; i < 6; i++) {
+            om.addItem(BagelType.Everything);
+        }
+        for (int i = 0; i < 3; i++) {
+            om.addItem(CoffeeType.Black);
+        }
+
+        Assertions.assertEquals(10.43, om.getTotalDiscountedPrice());
+    }
+
 
 
 
