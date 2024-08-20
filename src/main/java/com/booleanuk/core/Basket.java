@@ -32,4 +32,8 @@ public class Basket {
     public ArrayList<Bagel> getBagels() {
         return new ArrayList<>(bagels);
     }
+
+    public void setBasketSize(int basketSize) {
+        this.basketSize = basketSize;
+    }
 }
