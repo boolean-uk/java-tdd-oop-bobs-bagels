@@ -83,7 +83,12 @@ public class Order {
         for(int i = 0; i < bagelList.size(); ++i){
             bagelPrice += bagelList.get(i);
             if((i+1) % 6 == 0){
-                bagelPrice = 249 * ((i+1) / 6);
+                if(i+1 == 6){
+                    bagelPrice = 249;
+                }
+                else{
+                    bagelPrice = 399 * ((i+1) / 12);
+                }
             }
         }
         result += bagelPrice;
