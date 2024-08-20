@@ -95,6 +95,7 @@ public class Order {
         int amountOfBagels = 0;
         int amountOfCoffees = 0;
         int resetAmount = 0;
+        int totalFillingPrice = 0;
 
         // Lists to store individual prices of bagels and coffee
         ArrayList<Integer> bagelPrices = new ArrayList<>();
@@ -103,21 +104,38 @@ public class Order {
         // Iterate through the basket to calculate total reset amount and get number of bagels and coffees and there prices
         for (Product product : basket) {
 
-            resetAmount +=  product.getPrice();
+            resetAmount += product.getPrice();
 
             // If the product is coffee, update coffee count and prices
             if (product instanceof Coffee coffee) {
-                amountOfCoffees ++;
+                amountOfCoffees++;
                 int coffeePrice = coffee.getPrice();
-                    coffeePrices.add(coffeePrice);
+                coffeePrices.add(coffeePrice);
             }
-            // If the product is a bagel, update bagel count and prices
+
+            // If the product is a bagel, update the bagel count and prices
             if (product instanceof Bagel bagel) {
-                amountOfBagels ++;
-                int bagelPrice = bagel.getPrice();
+                amountOfBagels++;
+                int fillingPrice = 0;
+
+                // Calculate the total price of all fillings in the bagel
+                if (bagel.getFillings() != null) {
+                    for (Filling filling : bagel.getFillings()) {
+                        fillingPrice += filling.getPrice();
+                    }
+                }
+
+                // Subtract the filling price from the bagel price to get the base bagel price
+                int bagelPrice = bagel.getPrice() - fillingPrice;
+
+                // Add the total filling price to the overall filling price
+                totalFillingPrice += fillingPrice;
+
+                // Add the base bagel price to the list of bagel prices
                 bagelPrices.add(bagelPrice);
             }
         }
+
         // Calculate the number of 12-bagel and 6-bagel discounts and update the amount
         // of bagels to only have the remaining bagels
         int numberOfTwelveBagelDiscounts = amountOfBagels / 12;
@@ -136,7 +154,7 @@ public class Order {
             totalSum = resetAmount;
         } else {
             // Calculate the sum to add for remaining bagels and coffees (highest prices first)
-            int sumToAdd = getSumToAdd(amountOfBagels, bagelPrices);
+            int sumToAdd = getSumToAdd(amountOfBagels, bagelPrices) + totalFillingPrice;
             sumToAdd += getSumToAdd(amountOfCoffees, coffeePrices);
 
             // Calculate the total sum with all applicable discounts
