@@ -6,31 +6,28 @@ import java.util.HashMap;
 import java.util.Scanner;
 
 public class OrderManager {
-	private static int maxCartSize = 16; // max default size of basket
-	private static HashMap<ItemInterface, String[]> storeItemInfo = null;
-									// SKU, Price, Name, Variant{
+	private int maxCartSize = 16; // max default size of basket
+									// SKU, Price, Name, Variant
+	private static HashMap<ItemInterface, String[]> storeItemInfo = null; // may simulate a database of item pricing and information
 	private static HashMap<ItemInterface, Integer> storeItemStock = null;
-
-	private HashMap<ItemInterface, Integer> cart;
 	static private int defaultMaxBagels;
 	static private int defaultMaxCoffees;
 	static private int defaultMaxFillings;
 
+	private HashMap<ItemInterface, Integer> cart;
 
 	public static int getMaxFillings(){
 		return defaultMaxFillings;
 	}
-
 	public static int getMaxBagels(){
 		return defaultMaxBagels;
 	}
-
 	public static int getMaxCoffees(){
 		return defaultMaxCoffees;
 	}
-
-
-
+	public void setMaxCartSize(int i){
+		maxCartSize = i;
+	}
 
 	public OrderManager(){
 		this.cart = new HashMap<>();
@@ -86,21 +83,34 @@ public class OrderManager {
 	public String addItem(ItemInterface item){
 		// check if in store
 		int stock = storeItemStock.get(item);
-		if (stock > 0){
-			// update stock
-			storeItemStock.put(item, stock - 1);
-
-			boolean inCart = cart.containsKey(item);
-			if (inCart) {
-				int amountInCart = cart.get(item);
-				amountInCart++; // add one more
-				cart.put(item, amountInCart);
-				return item + ": " + amountInCart;
-			}
-			cart.put(item, 1);
-			return item + ": 1";
+		if (stock < 1) {
+			return "Item not in stock.";
 		}
-		return "Item not in stock.";
+
+		// sum of all items in cart
+		int amountOfItemsInCart = cart
+				.values()
+				.stream()
+				.mapToInt(i -> i.intValue())
+				.sum();
+
+		if (amountOfItemsInCart >= maxCartSize){
+			return "Cart is full.";
+		}
+
+
+		// update stock
+		storeItemStock.put(item, stock - 1);
+
+		boolean inCart = cart.containsKey(item);
+		if (inCart) {
+			int amountInCart = cart.get(item);
+			amountInCart++; // add one more
+			cart.put(item, amountInCart);
+			return item + ": " + amountInCart;
+		}
+		cart.put(item, 1);
+		return item + ": 1";
 	}
 
 	public int getStockOfItem(ItemInterface item){
@@ -108,16 +118,26 @@ public class OrderManager {
 
 	}
 
+	public double getPriceOfItem(ItemInterface item){
+		String priceOfItemString = storeItemInfo.get(item)[1];
+		return Double.valueOf(priceOfItemString);
+	}
+
 
 	public String removeItem(ItemInterface item){
+		String result;
 		// first check if exists in basket
 		boolean isInCart = cart.containsKey(item);
 		if (!isInCart){
-			return item + " is not in cart.";
+			result = item + " is not in cart.";
+			System.out.println(result);
+			return result;
 		}
 		int amountInCart = cart.get(item);
 		if (amountInCart < 1){
-			return item + " is not in cart.";
+			result = item + " is not in cart.";
+			System.out.println(result);
+			return result;
 		}
 
 		// remove from cart
@@ -125,8 +145,9 @@ public class OrderManager {
 
 		// put back in stock
 		storeItemStock.compute(item, (k, stock) -> stock + 1);
-
-		return "Removed " + item + " from cart.";
+		result = "Removed " + item + " from cart.";
+		System.out.println(result);
+		return result;
 
 
 
