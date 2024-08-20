@@ -93,6 +93,7 @@ public class OrderTest {
 
         Assertions.assertEquals(-1, order.getProductPrice(""));
         Assertions.assertEquals(-1, order.getProductPrice("INVALID"));
+        Assertions.assertThrows(IllegalArgumentException.class, () -> order.getProductPrice(null));
     }
 
     // test multi buy discount 6 bagels for 249
