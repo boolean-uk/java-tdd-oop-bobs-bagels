@@ -1,5 +1,8 @@
 package com.booleanuk.core;
 
+import com.booleanuk.core.products.fillings.BaconFilling;
+import com.booleanuk.core.products.fillings.Filling;
+import com.booleanuk.core.products.fillings.SmokedSalmonFilling;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

@@ -1,5 +1,10 @@
 package com.booleanuk.core;
 
+import com.booleanuk.core.products.Product;
+import com.booleanuk.core.products.bagels.OnionBagel;
+import com.booleanuk.core.products.bagels.PlainBagel;
+import com.booleanuk.core.products.fillings.SmokedSalmonFilling;
+
 import java.util.HashMap;
 import java.util.Map;
 

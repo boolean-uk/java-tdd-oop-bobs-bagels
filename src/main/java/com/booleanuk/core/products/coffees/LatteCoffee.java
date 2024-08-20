@@ -1,4 +1,4 @@
-package com.booleanuk.core;
+package com.booleanuk.core.products.coffees;
 
 public class LatteCoffee extends Coffee {
     public LatteCoffee() {

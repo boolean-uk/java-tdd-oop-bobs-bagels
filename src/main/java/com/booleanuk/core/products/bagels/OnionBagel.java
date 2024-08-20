@@ -1,4 +1,4 @@
-package com.booleanuk.core;
+package com.booleanuk.core.products.bagels;
 
 public class OnionBagel extends Bagel {
 

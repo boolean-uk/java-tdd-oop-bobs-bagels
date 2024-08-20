@@ -1,5 +1,7 @@
 package com.booleanuk.core;
 
+import com.booleanuk.core.products.bagels.Bagel;
+import com.booleanuk.core.products.bagels.OnionBagel;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

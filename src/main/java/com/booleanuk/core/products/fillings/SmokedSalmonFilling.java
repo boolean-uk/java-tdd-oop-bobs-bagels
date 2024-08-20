@@ -1,4 +1,4 @@
-package com.booleanuk.core;
+package com.booleanuk.core.products.fillings;
 
 public class SmokedSalmonFilling extends Filling {
     public SmokedSalmonFilling() {
