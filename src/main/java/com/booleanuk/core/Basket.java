@@ -65,17 +65,53 @@ public class Basket {
     }
 
     public String addItemToBasket(Bagel bagel, Filling filling) {
-        if(
-                !addItemToBasket(filling).equals("Basket is full.") &&
-                !addItemToBasket(bagel).equals("Basket is full.") &&
-                !addItemToBasket(bagel).equals("This item does not exist.")
-        ){
+        System.out.println(filling.getName());
+        String addBagel = addItemToBasket(bagel);
+        String addFilling = addItemToBasket(filling);
 
+        System.out.println(addFilling);
+        if(
+                !addBagel.equals("Basket is full.") &&
+                !addFilling.equals("Basket is full.") &&
+                !addBagel.equals("This item does not exist.") &&
+                !addFilling.equals("This item does not exist.")
+        ){
+            System.out.println(filling);
             bagel.addFilling(filling);
             return "Added " + bagel.getName() + " with filling " + filling.getName() + " to basket.";
         }else {
             return "Basket is full.";
         }
+    }
+
+    public String addItemToBasket(Bagel bagel) {
+        if(bagel.getFilling() != null && bagel.getName() != null) {
+            Filling filling = bagel.getFilling();
+            if(countTotalItems() < this.maxCapacity) {
+                if(this.basket.containsKey(bagel.getSKU())) {
+                    int oldBagelQuantity = this.basket.get(bagel.getSKU());
+                    this.basket.replace(bagel.getSKU(), oldBagelQuantity, oldBagelQuantity + 1);
+                    if(this.basket.containsKey(filling.getSKU())) {
+                        int oldFillingQuantity = this.basket.get(filling.getSKU());
+                        this.basket.replace(filling.getSKU(), oldFillingQuantity, oldFillingQuantity + 1);
+                        return "Added another " + bagel.getName() + " with filling " + filling.getName();
+                    }else {
+                        this.basket.put(filling.getSKU(), 1);
+                        return "Added a " + bagel.getName() + " with filling " + filling.getName();
+                    }
+                }else {
+                    this.basket.put(bagel.getSKU(), 1);
+                    this.basket.put(filling.getSKU(), 1);
+                    return "Added " + bagel.getName() + " to basket.";
+                }
+            }
+            else {
+                return "Basket is full.";
+            }
+        }else {
+            return addItemToBasket((Item) bagel);
+        }
+
     }
 
     public int getItemQuantityFromSKU(String sku) {

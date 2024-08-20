@@ -91,7 +91,6 @@ public class BasketTest {
 
         bagel.addFilling(filling);
         basket.addItemToBasket(bagel);
-        basket.addItemToBasket(filling);
 
         Assertions.assertEquals(2, basket.countTotalItems());
 
@@ -108,7 +107,6 @@ public class BasketTest {
 
         bagel.addFilling(filling);
         basket.addItemToBasket(bagel);
-        basket.addItemToBasket(filling);
 
         Assertions.assertEquals(2, basket.countTotalItems());
 
@@ -127,7 +125,6 @@ public class BasketTest {
         Bagel bagel2 = ItemFactory.bagelFactory("BGLP");
         bagel.addFilling(filling);
         basket.addItemToBasket(bagel);
-        basket.addItemToBasket(filling);
         basket.addItemToBasket(bagel2);
 
         Assertions.assertEquals(3, basket.countTotalItems());
@@ -141,10 +138,12 @@ public class BasketTest {
     @Test
     public void removeOneOfTwoBagelsTest() {
         Basket basket = new Basket();
+
         Bagel bagel = ItemFactory.bagelFactory("BGLO");
         Filling filling = ItemFactory.fillingFactory("FILX");
         Bagel bagel2 = ItemFactory.bagelFactory("BGLO");
-        Filling filling2 = ItemFactory.fillingFactory("FILB");
+        Filling filling2 = ItemFactory.fillingFactory("FILH");
+
         basket.addItemToBasket(bagel, filling);
         basket.addItemToBasket(bagel2, filling2);
 
@@ -259,5 +258,22 @@ public class BasketTest {
         Bagel bagel1 = ItemFactory.bagelWithFillingFactory("EEEE", "KKKK");
 
         Assertions.assertEquals("This item does not exist.", basket.addItemToBasket(bagel1));
+    }
+
+    @Test
+    public void tryToAddBagelWithFilling() {
+        Basket basket = new Basket();
+
+        Bagel bagelWithFilling = ItemFactory.bagelWithFillingFactory("BGLE", "FILE");
+
+        basket.addItemToBasket(bagelWithFilling);
+
+        Assertions.assertEquals(2, basket.countTotalItems());
+
+        Bagel bagelWithFilling2 = ItemFactory.bagelWithFillingFactory("BGLP", "FILS");
+
+        basket.addItemToBasket(bagelWithFilling2);
+
+        Assertions.assertEquals(4, basket.countTotalItems());
     }
 }
