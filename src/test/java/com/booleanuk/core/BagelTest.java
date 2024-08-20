@@ -14,14 +14,6 @@ public class BagelTest {
     }
 
     @Test
-    public void testBagelCreate() {
-        Bagel b = new Bagel("BGLP", 0.39);
-
-        Assertions.assertEquals("BGLP", b.getSKU());
-        Assertions.assertEquals(0.39, b.getPrice());
-    }
-
-    @Test
     public void testCreateOnionBagel() {
         Bagel b = new OnionBagel();
 
@@ -42,6 +34,22 @@ public class BagelTest {
         bagel.setFilling(new SmokedSalmonFilling());
 
         Assertions.assertEquals("FILS", bagel.getFilling().getSKU());
+    }
+
+    @Test
+    public void testCreateSesameBagel() {
+        Bagel b = new SesameBagel();
+
+        Assertions.assertEquals(0.49, b.getPrice());
+        Assertions.assertEquals("BGLS", b.getSKU());
+    }
+
+    @Test
+    public void testCreateEverythingBagel() {
+        Bagel b = new EverythingBagel();
+
+        Assertions.assertEquals(0.49, b.getPrice());
+        Assertions.assertEquals("BGLE", b.getSKU());
     }
 
 }
