@@ -34,6 +34,9 @@ public class Basket {
     }
 
     public void setBasketSize(int basketSize) {
+        if (basketSize < bagels.size()) {
+            bagels.clear();
+        }
         this.basketSize = basketSize;
     }
 }
