@@ -16,6 +16,8 @@ public class Basket {
     }
 
     public void addBagel(Bagel bagel) {
-        bagels.add(bagel);
+        if (bagels.size() < basketSize) {
+            bagels.add(bagel);
+        }
     }
 }
