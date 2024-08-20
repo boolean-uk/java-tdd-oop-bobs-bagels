@@ -36,7 +36,6 @@ public abstract class Product {
 
     public String retrieveName() {
         return getName();
-
     }
 
     private String getVariant() {

@@ -6,6 +6,4 @@ public class Coffee extends Product{
         super(sku, price, name, variant);
     }
 
-
-
 }

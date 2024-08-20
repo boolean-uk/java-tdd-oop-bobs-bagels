@@ -35,7 +35,7 @@ public class Inventory {
         String[] isCoffee = coffees.get(referenceSku);
 
         if(isBagel != null){
-            return new Bagel(isBagel[0], Double.valueOf(isBagel[1]), isBagel[2], isBagel[3]);
+            return new Bagel(isBagel[0], Double.valueOf(isBagel[1]), isBagel[2], isBagel[3], null);
         }
 
         else if (isFilling != null){

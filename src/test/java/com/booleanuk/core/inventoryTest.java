@@ -7,7 +7,7 @@ public class inventoryTest {
 
     @Test
     public void ShouldShowProduct(){
-        Inventory inventory = new Inventory();
+
 
 
 

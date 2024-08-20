@@ -9,17 +9,17 @@ import java.util.ArrayList;
 public class BasketTest {
 
     @Test
-    public void ShouldAddProductToBasket(){
+    public void TestShouldAddProductToBasket(){
         Basket basket = new Basket();
 
         Assertions.assertEquals("New product added to basket", basket.add("BGLO"));
 
         Assertions.assertEquals(1, basket.retrieveProductCount());
-        Assertions.assertNotEquals("Product added to basket", basket.add("BGLO"));
+        Assertions.assertEquals("Product added to basket", basket.add("BGLO"));
     }
 
     @Test
-    public void ShouldIncreaseCurrentBasketValues(){
+    public void TestShouldIncreaseCurrentBasketValues(){
         Basket basket = new Basket();
 
         basket.add("BGLE");
@@ -30,7 +30,7 @@ public class BasketTest {
     }
 
     @Test
-    public void ShouldNotExceedBasketCapacity(){
+    public void TestShouldNotExceedBasketCapacity(){
         Basket basket = new Basket();
         Inventory inventory = new Inventory();
 
@@ -52,7 +52,7 @@ public class BasketTest {
     }
 
     @Test
-    public void ShouldRemoveFromBasket(){
+    public void TestShouldRemoveFromBasket(){
         Basket basket = new Basket();
 
         basket.add("BGLO");
@@ -69,7 +69,7 @@ public class BasketTest {
     }
 
     @Test
-    public void ShouldChangeBasketCapacity(){
+    public void TestShouldChangeBasketCapacity(){
         Basket basket = new Basket();
 
         for(int i = 0; i < basket.retrieveBasketCapacity(); i++){
@@ -86,23 +86,24 @@ public class BasketTest {
     }
 
     @Test
-    public void shouldGetCostOfProduct(){
+    public void TestShouldGetCostOfProduct(){
         Basket basket = new Basket();
 
         Assertions.assertEquals(0.49f, basket.costOfProduct("BGLS"), 0.001);
   }
 
     @Test
-    public void ShouldGetTheTotalCostOfBasket(){
+    public void TestShouldGetTheTotalCostOfBasket(){
         Basket basket = new Basket();
 
 
         basket.add("BGLP");
         basket.add("BGLP");
         basket.add("BGLS");
+        basket.add("COFC");
 
         //Sum should be 1.27 if it is set up correctly. For red test i have set up 1.3 which should fail due to not being exact.
-        Assertions.assertEquals(1.27f, basket.totalCost(), 0.001);
+        Assertions.assertEquals(2.56f, basket.totalCost(), 0.001);
     }
 
 
