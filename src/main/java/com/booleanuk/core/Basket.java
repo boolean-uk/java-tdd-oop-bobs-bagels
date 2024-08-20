@@ -6,8 +6,16 @@ public class Basket {
     private ArrayList<Bagel> bagels;
     private int basketSize;
 
-    public Basket() {
+    public Basket(int basketSize) {
         bagels = new ArrayList<>();
-        basketSize = 12;
+        this.basketSize = basketSize;
+    }
+
+    public int size() {
+        return bagels.size();
+    }
+
+    public void addBagel(Bagel bagel) {
+        bagels.add(bagel);
     }
 }
