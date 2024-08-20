@@ -35,6 +35,9 @@ public class Basket {
             return false;
         }
 
+
+        //TODO
+        //Replace instanceof with just .equals(p.getName())
         for (Product p: inventory){
             if (p.getSKU().equals(SKU)){ //Found product in inv, add to basket
                 if (!(p instanceof Filling)){
@@ -137,21 +140,21 @@ public class Basket {
 
             //remove the 12 discounted bagels
             for(int j = 0; j < 12; j++){
-                System.out.println("Removed bagel");
                 discountedBagelsList.removeFirst();
             }
 
-            totalPrice+= 2.49; // For each 12 stack discount, add this price to the total
+            totalPrice+= 3.99; // For each 12 stack discount, add this price to the total
         }
 
         System.out.println("After applying 12 stack discount, there are now " + bagelsAfterDiscount12 + " bagels left");
 
         if(bagelsAfterDiscount12 >= 6){
             //apply the 6 bagel discount
-            for(Bagel b: discountedBagelsList){
-                totalPrice -= b.getPrice();
-                discountedBagelsList.remove(b);
+            for(int j = 0; j < 6; j++){
+                totalPrice -= discountedBagelsList.get(j).getPrice();
+                System.out.println("price deducted from " + discountedBagelsList.get(j));
             }
+            totalPrice += 2.49;
         }
 
 
@@ -165,17 +168,25 @@ public class Basket {
     public static void main(String[] args) {
         Basket basket = new Basket();
         basket.changeBasketSize(20);
-        basket.addItem("BGLO");
-        basket.addItem("BGLP");
         basket.addItem("BGLE");
         basket.addItem("BGLE");
-
-
+        basket.addItem("BGLE");
+        basket.addItem("BGLE");
+        basket.addItem("BGLE");
+        basket.addItem("BGLE");
+        basket.addItem("BGLE");
+        basket.addItem("BGLE");
+        basket.addItem("BGLE");
+        basket.addItem("BGLE");
+        basket.addItem("BGLE");
+        basket.addItem("BGLE");
+        basket.addItem("BGLE");
         basket.addFilling("BGLE", "FILC");
         basket.addFilling("BGLE", "FILC");
 
 
-        System.out.println(basket.getTotalPrice());
+
+        //System.out.println(newPrice);
         System.out.println(basket.getBasketContent());
     }
 
