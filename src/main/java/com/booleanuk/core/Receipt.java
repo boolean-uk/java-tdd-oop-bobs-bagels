@@ -13,7 +13,7 @@ public class Receipt {
   private int numBagels() {
     int n = 0;
     for (Product product : this.products)
-      if (product instanceof Bagel)
+      if (product.sku().isBagel())
         ++n;
     return n;
   }
@@ -21,7 +21,7 @@ public class Receipt {
   private int numCoffees() {
     int n = 0;
     for (Product product : this.products)
-      if (product instanceof Coffee)
+      if (product.sku().isCoffee())
         ++n;
     return n;
   }

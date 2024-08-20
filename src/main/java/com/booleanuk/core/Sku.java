@@ -38,4 +38,8 @@ public enum Sku {
   public boolean isBagel() {
     return this == BGLO || this == BGLP || this == BGLE || this == BGLS;
   }
+
+  public boolean isCoffee() {
+    return this == COFB || this == COFW || this == COFC || this == COFL;
+  }
 }

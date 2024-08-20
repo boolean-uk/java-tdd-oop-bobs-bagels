@@ -52,7 +52,7 @@ public class Basket {
   private int numBagels() {
     int n = 0;
     for (Product product : this.products)
-      if (product instanceof Bagel)
+      if (product.sku().isBagel())
         ++n;
     return n;
   }
@@ -60,7 +60,7 @@ public class Basket {
   private int numCoffees() {
     int n = 0;
     for (Product product : this.products)
-      if (product instanceof Coffee)
+      if (product.sku().isCoffee())
         ++n;
     return n;
   }
@@ -92,10 +92,10 @@ public class Basket {
     }
 
     for (Product product : this.products) {
-      if (product instanceof Bagel && numBagels > 0) {
+      if (product.sku().isBagel() && numBagels > 0) {
         --numBagels;
         price += product.basePrice();
-      } else if (product instanceof Coffee && numCoffees > 0) {
+      } else if (product.sku().isCoffee() && numCoffees > 0) {
         --numCoffees;
         price += product.basePrice();
       }
