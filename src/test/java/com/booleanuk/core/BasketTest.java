@@ -2,6 +2,7 @@ package com.booleanuk.core;
 
 import com.booleanuk.core.enums.BagelType;
 import com.booleanuk.core.enums.CoffeeType;
+import com.booleanuk.core.enums.FillingType;
 import com.booleanuk.core.exceptions.FullBasketException;
 import com.booleanuk.core.exceptions.NonExistingProductException;
 import org.junit.jupiter.api.Assertions;

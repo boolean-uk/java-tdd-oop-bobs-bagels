@@ -38,16 +38,26 @@ There is also a **ProductFactory** class that is responsible for instantiation o
 
 ## Solution to the user stories
 
-| User Story                                                                       | Class     | Method                                                                | Note                              |
-|----------------------------------------------------------------------------------|-----------|-----------------------------------------------------------------------|-----------------------------------|
-| I'd like to add a specific<br/> type of bagel to my basket                       | `Basket`  | `addProduct(Product product)`                                         |                                   |
-| I'd like to remove a bagel<br/> from my basket                                   | `Basket`  | `removeProduct(BagelType variant)`                                    | Covers user story 2 and 5.        |
-| I'd like to know when my<br/> basket is full                                     | `Basket`  | `isFull()`                                                            | Returns true if full, else false. |
-| I'd like to change the <br/>capacity of baskets                                  | `Basket`  | `changeCapacity()`                                                    |                                   |
-| I'd like to know the total<br/> cost of items in my basket.                      | `Order`   | `getTotalCost()`                                                      | Returns a double value.           |
-| I'd like to know the cost of <br/>a bagel before I add it to my basket.          | `Product` | `getPrice()`                                                          | Returns a double value.           |
-| I'd like to be able to choose <br/>fillings for my bagel                         | `Bagel`   | `createBagelWithFilling(BagelType variant, FillingType... fillings)`  | Returns a Bagel object.           |
-| I'd like to know the cost of each<br/> filling before I add it to my bagel order | `Bagel`   | `createBagelWithFilling(BagelType variant, FillingType... fillings)`  | Returns a Bagel object.           |
+| User Story                                                                            | Class     | Method                                                               | Note                                                 |
+|---------------------------------------------------------------------------------------|-----------|----------------------------------------------------------------------|------------------------------------------------------|
+| I'd like to add a specific<br/> type of bagel to my basket                            | `Basket`  | `addProduct(Product product)`                                        |                                                      |
+| I'd like to remove a bagel<br/> from my basket                                        | `Basket`  | `removeProduct(BagelType variant)`                                   | Covers user story 2 and 5.                           |
+| I'd like to know when my<br/> basket is full                                          | `Basket`  | `isFull()`                                                           | Returns true if full, else false.                    |
+| I'd like to change the <br/>capacity of baskets                                       | `Basket`  | `changeCapacity()`                                                   |                                                      |
+| I'd like to know the total<br/> cost of items in my basket.                           | `Order`   | `getTotalCost()`                                                     | Returns a double value.                              |
+| I'd like to know the cost of <br/>a bagel before I add it to my basket.               | `Product` | `getPrice()`                                                         | Returns a double value.                              |
+| I'd like to be able to choose <br/>fillings for my bagel                              | `Bagel`   | `createBagelWithFilling(BagelType variant, FillingType... fillings)` | Returns a Bagel object.                              |
+| I'd like to know the cost of each<br/> filling before I add it to my bagel order      | `Bagel`   | `getFillingPrice(FillingType variant)`                               | Returns the price (double) for the specific variant. |
+
+**Note** The last user story '*I want customers to only be able to order things that we stock in our inventory*' is already covered<br/>
+since the use of enums and 'ProductFactory' makes sure it is not possible to add items that does not exist in
+the inventory.
+
+### Additional information
+The 'Bagel' class has an inner 'BagelBuilder' class that it uses to create
+specific bagels with fillings in the `createBagelWithFilling` method.
+
+
 
 
 
