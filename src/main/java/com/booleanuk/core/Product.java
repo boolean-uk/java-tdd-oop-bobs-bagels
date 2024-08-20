@@ -1,5 +1,7 @@
 package com.booleanuk.core;
 
+import java.util.List;
+
 public class Product {
     private final String sku;
     private final int price;
@@ -22,6 +24,10 @@ public class Product {
 
     public String getVariant() {
         return variant;
+    }
+
+    public List<String> getFillings() {
+        return null;
     }
 
     public String getSKU() {

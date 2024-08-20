@@ -22,6 +22,7 @@ public class Bagel extends Product {
         return false;
     }
 
+    @Override
     public List<String> getFillings() {
         List<String> fillingList = new ArrayList<>();
         for (Filling filling : fillings) {
