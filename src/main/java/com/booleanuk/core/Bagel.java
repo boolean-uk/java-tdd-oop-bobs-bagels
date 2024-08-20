@@ -1,11 +1,11 @@
 package com.booleanuk.core;
 
 public class Bagel {
-    private BagelVariant bagelType;
-    private FillingVariant fillingType;
+    private Triple<String, String, Float> bagelType;
+    private Triple<String, String, Float> fillingType;
 
-    public Bagel(BagelVariant bv, FillingVariant fv) {
-        this.bagelType = bv;
-        this.fillingType = fv;
+    public Bagel(Triple<String, String, Float> bagelType, Triple<String, String, Float> fillingType) {
+        this.bagelType = bagelType;
+        this.fillingType = fillingType;
     }
 }
