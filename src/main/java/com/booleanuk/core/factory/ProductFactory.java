@@ -9,13 +9,12 @@ import com.booleanuk.core.inherited.Bagel;
 import com.booleanuk.core.inherited.Coffee;
 import com.booleanuk.core.inherited.Filling;
 import com.booleanuk.core.interfaces.MenuCategory;
-import com.booleanuk.core.interfaces.ProductInterface;
 
 import static com.booleanuk.core.enums.BagelType.*;
 import static com.booleanuk.core.enums.CoffeeType.*;
 import static com.booleanuk.core.enums.FillingType.*;
 
-public class ProductFactory implements ProductInterface {
+public class ProductFactory {
 
     public Product getProduct(MenuCategory variant) {
         String bagelName = "Bagel";
@@ -25,16 +24,16 @@ public class ProductFactory implements ProductInterface {
 
         switch (variant) {
             case ONION -> {
-                return new Bagel(bagelName, 0.49, SKU.BGLO, (BagelType) variant);
+                return new Bagel(bagelName, 0.49, SKU.BGLO, (BagelType) variant, null);
             }
             case PLAIN -> {
-                return new Bagel(bagelName, 0.39, SKU.BGLP, (BagelType) variant);
+                return new Bagel(bagelName, 0.39, SKU.BGLP, (BagelType) variant, null);
             }
             case EVERYTHING -> {
-                return new Bagel(bagelName, 0.49, SKU.BGLE, (BagelType) variant);
+                return new Bagel(bagelName, 0.49, SKU.BGLE, (BagelType) variant, null);
             }
             case SESAME -> {
-                return new Bagel(bagelName, 0.49, SKU.BGLS, (BagelType) variant);
+                return new Bagel(bagelName, 0.49, SKU.BGLS, (BagelType) variant, null);
             }
             case BLACK -> {
                 return new Coffee(coffeeName, 0.99, SKU.COFB, (CoffeeType) variant);

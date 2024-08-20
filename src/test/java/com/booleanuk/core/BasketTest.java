@@ -75,7 +75,7 @@ public class BasketTest {
 
     @Test
     public void testGetPriceForBagel() {
-        Product bagel = new Bagel("Bagel", 0.49, SKU.BGLO, BagelType.ONION);
+        Product bagel = new Bagel("Bagel", 0.49, SKU.BGLO, BagelType.ONION, null);
         Assertions.assertEquals(0.49, bagel.getPrice());
     }
 }

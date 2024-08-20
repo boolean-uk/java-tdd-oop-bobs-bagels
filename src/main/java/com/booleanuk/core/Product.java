@@ -3,7 +3,7 @@ package com.booleanuk.core;
 import com.booleanuk.core.enums.SKU;
 import com.booleanuk.core.interfaces.MenuCategory;
 
-public abstract class Product implements MenuCategory {
+public abstract class Product {
     private String name;
     private Double price;
     private SKU sku;
@@ -22,5 +22,13 @@ public abstract class Product implements MenuCategory {
 
     public MenuCategory getVariant() {
         return variant;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public SKU getSku() {
+        return sku;
     }
 }
