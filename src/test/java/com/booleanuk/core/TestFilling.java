@@ -6,6 +6,6 @@ public class TestFilling {
 
     @Test
     public void testFilling(){
-        Filling f = new Filling( "TEST", "Testfilling", FillingType.Bacon );
+        Filling f = new Filling(FillingType.Bacon );
     }
 }

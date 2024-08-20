@@ -9,22 +9,22 @@ public class TestBagel {
 
     @Test
     public void testBagelConstr(){
-        Bagel b = new Bagel("TEST", "TestBagel", BagelType.Everything);
+        Bagel b = new Bagel(BagelType.Everything);
     }
 
 
     @Test
     public void testAddFilling(){
-        Bagel b = new Bagel("TEST", "TestBagel", BagelType.Everything);
+        Bagel b = new Bagel(BagelType.Everything);
 
         Assertions.assertEquals(b.getFillings(), new ArrayList<>());
 
-        b.addFilling(new Filling("TESTSKA", "TestName", FillingType.CremeCheese ));
+        b.addFilling(FillingType.Cream_Cheese);
 
         Assertions.assertFalse(b.getFillings().isEmpty());
 
         // check that the correct filling was added to list
-        Filling testFilling = new Filling("TESTSKA", "TestName", FillingType.CremeCheese);
+        Filling testFilling = new Filling(FillingType.Cream_Cheese);
         ArrayList<Filling> testIterable = new ArrayList<>();
         testIterable.add(testFilling);
 

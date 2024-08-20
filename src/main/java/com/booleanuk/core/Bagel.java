@@ -3,24 +3,27 @@ package com.booleanuk.core;
 import java.util.ArrayList;
 
 public class Bagel extends Item{
-    private ArrayList<Filling> fillings;
+    public static void main(String[] args) {
+        System.out.println("hei fra bagel main");
+    }
+    private ArrayList<FillingType> fillings;
     private BagelType variant;
 
-    public Bagel(String SKA, String name, BagelType variant) {
-        super(SKA, name);
+    public Bagel(BagelType variant) {
+        super();
         this.variant = variant;
-        fillings = new ArrayList<Filling>();
+        fillings = new ArrayList<>();
     }
 
     public BagelType getType(){
         return variant;
     }
 
-    public ArrayList<Filling> getFillings(){
+    public ArrayList<FillingType> getFillings(){
         return fillings;
     }
 
-    public void addFilling(Filling filling){
+    public void addFilling(FillingType filling){
         fillings.add(filling);
     }
 
