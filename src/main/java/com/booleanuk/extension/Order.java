@@ -8,9 +8,11 @@ public class Order {
 
     private HashMap<String, Integer> basket = new HashMap<>();
     private UUID id;
+    private Store store;
 
-    public Order(){
+    public Order(Store store){
         this.id = UUID.randomUUID();
+        this.store = store;
     }
 
     public int size(){
@@ -29,7 +31,7 @@ public class Order {
         return basket.get(product);
     }
 
-    public void addProduct(String newProduct, Store store) throws Exception{
+    public void addProduct(String newProduct) throws Exception{
         if(!store.contains(newProduct)){
             throw new Exception("No such product in inventory!");
         }
@@ -67,31 +69,52 @@ public class Order {
         this.id = newId;
     }
 
-    public int getPrice(Store store){
+    public int getPrice(){
         int result = 0;
-        int bagelPrice = 0;
+        int singularBagels = 0;
         ArrayList<Integer> bagelList = new ArrayList<>();
+        ArrayList<Integer> coffeeList = new ArrayList<>();
+
         for(HashMap.Entry<String, Integer> entry : basket.entrySet()){
             String sku = entry.getKey();
+            int amount = entry.getValue();
             if(sku.startsWith("BGL")){
-                for(int i = 0; i < entry.getValue(); ++i){
+                for(int i = 0; i < amount; ++i){
                     bagelList.add(store.getPrice(sku));
+                }
+            }
+            else if(sku.startsWith("COF")){
+                for(int i = 0; i < amount; ++i){
+                    coffeeList.add(store.getPrice(sku));
                 }
             }
         }
         bagelList.sort(null);
+        coffeeList.sort(null);
+
         for(int i = 0; i < bagelList.size(); ++i){
-            bagelPrice += bagelList.get(i);
+            result += bagelList.get(i);
+            singularBagels++;
             if((i+1) % 6 == 0){
                 if(i+1 == 6){
-                    bagelPrice = 249;
+                    result = 249;
                 }
                 else{
-                    bagelPrice = 399 * ((i+1) / 12);
+                    result = 399 * ((i+1) / 12);
                 }
+                singularBagels = 0;
             }
         }
-        result += bagelPrice;
+
+        for(int i = 0; i < coffeeList.size(); ++i){
+            if(singularBagels > 0){
+                for(int j = bagelList.size() - singularBagels; j < bagelList.size(); ++j){
+                    result -= bagelList.get(j);
+                }
+                result += 125;
+            }
+        }
+
         return result;
     }
 }

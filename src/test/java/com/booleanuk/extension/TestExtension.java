@@ -44,32 +44,41 @@ public class TestExtension {
     @Test
     public void testDiscountSix() throws Exception {
         mainTest();
-        Order order1 = new Order();
-        order1.addProduct("BGLO", store);
-        order1.addProduct("BGLO", store);
-        order1.addProduct("BGLO", store);
-        order1.addProduct("BGLO", store);
-        order1.addProduct("BGLO", store);
-        order1.addProduct("BGLO", store);
-        Assertions.assertEquals(249, order1.getPrice(store));
+        Order order1 = new Order(store);
+        order1.addProduct("BGLO");
+        order1.addProduct("BGLO");
+        order1.addProduct("BGLO");
+        order1.addProduct("BGLO");
+        order1.addProduct("BGLO");
+        order1.addProduct("BGLO");
+        Assertions.assertEquals(249, order1.getPrice());
     }
 
     @Test
     public void testDiscountTwelve() throws Exception {
         mainTest();
-        Order order1 = new Order();
-        order1.addProduct("BGLO", store);
-        order1.addProduct("BGLO", store);
-        order1.addProduct("BGLO", store);
-        order1.addProduct("BGLO", store);
-        order1.addProduct("BGLO", store);
-        order1.addProduct("BGLO", store);
-        order1.addProduct("BGLO", store);
-        order1.addProduct("BGLO", store);
-        order1.addProduct("BGLO", store);
-        order1.addProduct("BGLO", store);
-        order1.addProduct("BGLO", store);
-        order1.addProduct("BGLO", store);
-        Assertions.assertEquals(399, order1.getPrice(store));
+        Order order1 = new Order(store);
+        order1.addProduct("BGLO");
+        order1.addProduct("BGLO");
+        order1.addProduct("BGLO");
+        order1.addProduct("BGLO");
+        order1.addProduct("BGLO");
+        order1.addProduct("BGLO");
+        order1.addProduct("BGLO");
+        order1.addProduct("BGLO");
+        order1.addProduct("BGLO");
+        order1.addProduct("BGLO");
+        order1.addProduct("BGLO");
+        order1.addProduct("BGLO");
+        Assertions.assertEquals(399, order1.getPrice());
+    }
+
+    @Test
+    public void testDiscountBagelCoffee() throws Exception {
+        mainTest();
+        Order order1 = new Order(store);
+        order1.addProduct("BGLO");
+        order1.addProduct("COFB");
+        Assertions.assertEquals(125, order1.getPrice());
     }
 }
