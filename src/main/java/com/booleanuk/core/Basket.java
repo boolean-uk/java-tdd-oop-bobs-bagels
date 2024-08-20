@@ -85,6 +85,11 @@ public class Basket {
         return itemDetails.getName().equals("Filling");
     }
 
+    private boolean isBagel(String sku) {
+        InventoryItem itemDetails = this.inventory.getInventoryItemDetails(sku);
+        return itemDetails.getName().equals("Bagel");
+    }
+
     public void userRequestFillingPrice(String sku){
         double price = 0.0;
         boolean isInInventory = (this.inventory.getInventoryItemDetails(sku) != null);
@@ -109,6 +114,21 @@ public class Basket {
             }
     }
 
+    public void userRequestBagelCost(String sku){
+        double price = 0.0;
+        boolean isInInventory = (this.inventory.getInventoryItemDetails(sku) != null);
+        if(isInInventory){
+            InventoryItem itemDetails = this.inventory.getInventoryItemDetails(sku);
+            if(this.isBagel(sku)){
+                price = itemDetails.getPrice();
+                System.out.println("The price of this bagel is: "+ price);
+            }else{
+                System.out.println("This item is not a Bagel.");
+            }
+        }else{
+            System.out.println("We do not have this item in our inventory.");
+        }
+    }
 
 
 

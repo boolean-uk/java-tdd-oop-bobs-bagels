@@ -65,7 +65,7 @@ class BasketTest {
     @Test
     public void testUserRequestBagelCost(){
         Basket basket = new Basket();
-        basket.userRequestBagelPrice("BGLE");
+        basket.userRequestBagelCost("BGLE");
 
     }
 
