@@ -211,7 +211,7 @@ public class BasketTest {
 
         Assertions.assertEquals("Basket is full.", basket.addItemToBasket(b11));
 
-        basket.expandBasketSize(2);
+        basket.increaseBasketSize(2);
 
         Assertions.assertEquals(12, basket.getMaxCapacity());
 

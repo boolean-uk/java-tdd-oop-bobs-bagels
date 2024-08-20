@@ -6,7 +6,7 @@ import java.util.Map;
 public class Basket {
     private HashMap<String, Integer> basket;
     private ItemList itemList = new ItemList();
-    private int capacity = 10;
+    private int maxCapacity = 10;
 
     public Basket() {
         this.basket = new HashMap<>();
@@ -20,6 +20,14 @@ public class Basket {
         return  totalItems;
     }
 
+    public int getMaxCapacity() {
+        return this.maxCapacity;
+    }
+
+    public void increaseBasketSize(int increasedSize) {
+        this.maxCapacity += increasedSize;
+    }
+
     public HashMap<String, Integer> checkAllItems() {
         return this.basket;
     }
@@ -29,7 +37,7 @@ public class Basket {
     }
 
     public String addItemToBasket(Item item){
-        if(countTotalItems() < this.capacity) {
+        if(countTotalItems() < this.maxCapacity) {
             if(this.basket.containsKey(item.getSKU())) {
                 int oldQuantity = this.basket.get(item.getSKU());
                 this.basket.replace(item.getSKU(), oldQuantity, oldQuantity + 1);
