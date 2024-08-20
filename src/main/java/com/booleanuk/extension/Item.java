@@ -5,25 +5,25 @@ import java.util.ArrayList;
 public class Item {
 
     private String SKU;
-    private double price;
+    private int price;
     private String variant;
     private String name;
     private int id;
-    private double discountPrice;
+    private int discountPrice;
 
-    public double getDiscountPrice() {
+    public int getDiscountPrice() {
         return discountPrice;
     }
 
-    public void setDiscountPrice(double discountPrice) {
+    public void setDiscountPrice(int discountPrice) {
         this.discountPrice = discountPrice;
     }
 
-    public double getPrice() {
+    public int getPrice() {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(int price) {
         this.price = price;
     }
 
@@ -75,12 +75,10 @@ public class Item {
         return false;
     }
 
-    public double getTotal() {
+    public int getTotal() {
         if (this.getDiscountPrice() != -1) {
-            System.out.println(this.name + ", " + this.variant + ", price: " + this.discountPrice/1000);
             return this.discountPrice;
         }
-        System.out.println(this.name + ", " + this.variant + ", price: " + this.price/1000);
         return this.price;
     }
 }

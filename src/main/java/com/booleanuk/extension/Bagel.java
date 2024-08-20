@@ -15,25 +15,25 @@ public class Bagel extends Item {
             case "BGLO": {
                 this.setSKU(SKU);
                 this.setVariant("Onion");
-                this.setPrice(490);
+                this.setPrice(4900);
                 break;
             }
             case "BGLP": {
                 this.setSKU(SKU);
                 this.setVariant("Plain");
-                this.setPrice(390);
+                this.setPrice(3900);
                 break;
             }
             case "BGLE": {
                 this.setSKU(SKU);
                 this.setVariant("Everything");
-                this.setPrice(490);
+                this.setPrice(4900);
                 break;
             }
             case "BGLS": {
                 this.setSKU(SKU);
                 this.setVariant("Sesame");
-                this.setPrice(490);
+                this.setPrice(4900);
                 break;
             }
         }
@@ -60,18 +60,16 @@ public class Bagel extends Item {
     }
 
     @Override
-    public double getTotal() {
-        double total = 0;
+    public int getTotal() {
+        int total = 0;
         for (Filling filling : this.fillings) {
             total += filling.getTotal();
         }
         if (this.getDiscountPrice() != -1) {
             total += this.getDiscountPrice();
-            System.out.println(this.getName() + ", " + this.getVariant() + ", price: " + this.getDiscountPrice()/1000);
             return total;
         }
         total += this.getPrice();
-        System.out.println(this.getName() + ", " + this.getVariant() + ", price: " + this.getPrice()/1000);
         return total;
     }
 }

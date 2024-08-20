@@ -10,25 +10,25 @@ public class Coffee extends Item {
             case "COFB": {
                 this.setSKU(SKU);
                 this.setVariant("Black");
-                this.setPrice(990);
+                this.setPrice(9900);
                 break;
             }
             case "COFW": {
                 this.setSKU(SKU);
                 this.setVariant("White");
-                this.setPrice(1190);
+                this.setPrice(11900);
                 break;
             }
             case "COFC": {
                 this.setSKU(SKU);
                 this.setVariant("Capuccino");
-                this.setPrice(1290);
+                this.setPrice(12900);
                 break;
             }
             case "COFL": {
                 this.setSKU(SKU);
                 this.setVariant("Latte");
-                this.setPrice(1290);
+                this.setPrice(12900);
                 break;
             }
         }

@@ -5,6 +5,7 @@
 | -allItems: HashMap<String, String>               |
 | -idTracker: int                                  |
 | -discountCounterMap: HashMap<String, List<Item>> |
+| -receipt: Receipt                                |
 |                                                  |
 | +addItem(SKU: String): Item                      |
 | +addItem(SKU: String, bagel: Bagel): Filling     |
@@ -44,5 +45,5 @@
 | -orderedItemsList: HashMap<String, List<Item>> |
 |                                                |
 | +printReceipt(): void                          |
-|                                                |
+| +resetReceipt(): void                          |
 

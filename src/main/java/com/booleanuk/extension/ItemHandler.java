@@ -11,13 +11,15 @@ public class ItemHandler {
     private HashMap<String, String> allItems;
     private int idTracker;
     private HashMap<String, List<Item>> discountCounterMap;
+    private final Receipt receipt;
 
     public ItemHandler() {
         this.idTracker = 0;
         this.basketCapacity = 1;
         this.basket = new ArrayList<>();
         setUpAllItems();
-        discountCounterMap = new HashMap<>();
+        this.discountCounterMap = new HashMap<>();
+        this.receipt = new Receipt();
     }
 
     public Item addItem(String SKU) {
@@ -112,20 +114,22 @@ public class ItemHandler {
 
         coffeeAndBagelDiscount();
 
+        receipt.printReceipt();
+        receipt.resetReceipt();
         double total = 0;
         for (Item item : basket) {
             total += item.getTotal();
             item.setDiscountPrice(-1);
         }
-        return total/1000;
+        return total/10000;
     }
 
     public void coffeeAndBagelDiscount() {
         if (this.discountCounterMap.containsKey("Coffee") && this.discountCounterMap.containsKey("Bagel")) {
             if (!this.discountCounterMap.get("Coffee").isEmpty() && !this.discountCounterMap.get("Bagel").isEmpty()) {
-                this.discountCounterMap.get("Coffee").getFirst().setDiscountPrice(900);
+                this.discountCounterMap.get("Coffee").getFirst().setDiscountPrice(9000);
                 this.discountCounterMap.get("Coffee").removeFirst();
-                this.discountCounterMap.get("Bagel").getFirst().setDiscountPrice(350);
+                this.discountCounterMap.get("Bagel").getFirst().setDiscountPrice(3500);
                 this.discountCounterMap.get("Bagel").removeFirst();
                 if (!this.discountCounterMap.get("Coffee").isEmpty() && !this.discountCounterMap.get("Bagel").isEmpty()) {
                     coffeeAndBagelDiscount();
@@ -136,7 +140,7 @@ public class ItemHandler {
 
     public void twelveBagelDiscount() {
         for (int i = 0; i < 12; i++) {
-            this.discountCounterMap.get("Bagel").get(i).setDiscountPrice(332.5);
+            this.discountCounterMap.get("Bagel").get(i).setDiscountPrice(3325);
         }
         this.discountCounterMap.put("Bagel", this.discountCounterMap.get("Bagel").subList(12, this.discountCounterMap.get("Bagel").size()));
         if (this.discountCounterMap.get("Bagel").size() > 11) {
@@ -148,7 +152,7 @@ public class ItemHandler {
 
     public void sixBagelDiscount() {
         for (int i = 0; i < 6; i++) {
-            this.discountCounterMap.get("Bagel").get(i).setDiscountPrice(415);
+            this.discountCounterMap.get("Bagel").get(i).setDiscountPrice(4150);
         }
         this.discountCounterMap.put("Bagel", this.discountCounterMap.get("Bagel").subList(6, this.discountCounterMap.get("Bagel").size()));
     }
@@ -156,6 +160,7 @@ public class ItemHandler {
     public void calcDiscountCounterMap() {
         discountCounterMap = new HashMap<>();
         for (Item item : basket) {
+            receipt.addToOrderedItemsList(item);
             if (discountCounterMap.containsKey(item.getName())) {
                 if (item.getSKU().equals("BGLP")) {
                     discountCounterMap.get(item.getName()).addFirst(item);
@@ -173,17 +178,23 @@ public class ItemHandler {
     public double searchItem(String SKU) {
         Item item;
         if (this.allItems.containsKey(SKU)) {
-            if (this.allItems.get(SKU).equals("Coffee")) {
-                item = new Coffee(SKU, idTracker);
-                return item.getTotal()/1000;
-            } else if (this.allItems.get(SKU).equals("Bagel")) {
-                item = new Bagel(SKU, idTracker);
-                return item.getTotal()/1000;
-            } else if (this.allItems.get(SKU).equals("Filling")) {
-                Bagel bagel = new Bagel("BGLO", idTracker);
-                item = new Filling(SKU, idTracker, bagel);
-                return item.getTotal()/1000;
+            switch (this.allItems.get(SKU)) {
+                case "Coffee": {
+                    item = new Coffee(SKU, idTracker);
+                    break;
+                }
+                case "Bagel": {
+                    item = new Bagel(SKU, idTracker);
+                    break;
+                }
+                default: {
+                    Bagel bagel = new Bagel("BGLO", idTracker);
+                    item = new Filling(SKU, idTracker, bagel);
+                    break;
+                }
             }
+            double total = item.getTotal();
+            return total/10000;
         }
         System.out.println("No such item exists.");
         return -1;
