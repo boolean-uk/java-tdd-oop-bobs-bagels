@@ -4,14 +4,17 @@ import java.util.*;
 
 public class Order {
     private final Map<String, Integer> basket;
+    private final Store store;
     private int totalSum;
-    private int maxBasketCapacity = 25;
+    private int maxBasketCapacity;
     private int currentBasketCapacity;
 
-    public Order() {
+    public Order(Store store) {
+        this.store = store;
         this.totalSum = 0;
         this.basket = new HashMap<>();
         this.currentBasketCapacity = 0;
+        this.maxBasketCapacity = 25;
     }
 
     public int getTotalSum() {
@@ -83,6 +86,10 @@ public class Order {
 
     public Map<String, Integer> getBasket() {
         return basket;
+    }
+
+    public Store getStore() {
+        return store;
     }
 
     private void applyDiscounts() {
