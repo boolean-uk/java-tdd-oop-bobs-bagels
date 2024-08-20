@@ -199,6 +199,24 @@ public class OrderTest {
         Assertions.assertEquals(399 + 125, order.getTotalSum());
     }
 
+    // test coffee + bagel discount with twelve and six bagel discount
+    @Test
+    public void testCoffeeBagelDiscountWithTwelveAndSixBagelDiscount() {
+        Store store = new Store("Bob's Bagels");
+        Product bagelO = store.getInventory().getProduct("BGLO");
+        Product coffee = store.getInventory().getProduct("COFB");
+        Order order = new Order();
+        addProductsToOrder(order, bagelO, 12);
+        addProductsToOrder(order, coffee, 1);
+        Assertions.assertEquals(399 + coffee.getPrice(), order.getTotalSum());
+
+        addProductsToOrder(order, bagelO, 6);
+        Assertions.assertEquals(399 + 249 + coffee.getPrice(), order.getTotalSum());
+
+        addProductsToOrder(order, bagelO, 1);
+        Assertions.assertEquals(399 + 249 + 125, order.getTotalSum());
+    }
+
     // Helper method to add products to an order
     private void addProductsToOrder(Order order, Product product, int quantity) {
         for (int i = 0; i < quantity; i++) {
