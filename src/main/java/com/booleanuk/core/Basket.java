@@ -1,6 +1,7 @@
 package com.booleanuk.core;
 
 import java.util.ArrayList;
+import java.util.NoSuchElementException;
 
 public class Basket {
     private ArrayList<Bagel> bagels;
@@ -22,6 +23,9 @@ public class Basket {
     }
 
     public void removeBagel(Bagel bagel) {
+        if (!bagels.contains(bagel)) {
+            throw new NoSuchElementException("No such bagel exists");
+        }
         bagels.remove(bagel);
     }
 
