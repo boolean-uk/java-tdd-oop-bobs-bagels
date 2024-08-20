@@ -134,6 +134,11 @@ public class Order {
                 // Add the base bagel price to the list of bagel prices
                 bagelPrices.add(bagelPrice);
             }
+
+            // If the product is a filling, add the price to the total filling price
+            if (product instanceof Filling filling) {
+                totalFillingPrice += filling.getPrice();
+            }
         }
 
         // Calculate the number of 12-bagel and 6-bagel discounts and update the amount
