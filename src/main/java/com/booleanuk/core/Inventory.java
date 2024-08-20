@@ -1,6 +1,5 @@
 package com.booleanuk.core;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Inventory {
@@ -18,7 +17,7 @@ public class Inventory {
         //Coffees
         this.menu.put("BlackCoffee", new Coffee("COFB",	0.99,	"Coffee",	"Black"));
         this.menu.put("WhiteCoffee", new Coffee("COFW",	1.19,	"Coffee",	"White"));
-        this.menu.put("CapuccinoCoffee", new Coffee("COFC",	1.29,	"Coffee",	"Capuccino"));
+        this.menu.put("CappuccinoCoffee", new Coffee("COFC",	1.29,	"Coffee",	"Cappuccino"));
         this.menu.put("LatteCoffee", new Coffee("COFL",	1.29,	"Coffee",	"Latte"));
 
         //Fillings

@@ -6,7 +6,6 @@ import org.junit.jupiter.api.Test;
 
 public class BasketTest {
 
-
     @Test
     public void ShouldShowProduct(){
         Basket basket = new Basket();
@@ -59,8 +58,8 @@ public class BasketTest {
         Assertions.assertEquals(3, basket.retrieveProductCount());
     }
 
-  @Test
-  public void ShouldNotExceedBasketCapacity(){
+    @Test
+    public void ShouldNotExceedBasketCapacity(){
       Basket basket = new Basket();
       Inventory inventory = new Inventory();
 
@@ -82,7 +81,7 @@ public class BasketTest {
 
   }
 
-  @Test
+    @Test
     public void ShouldRemoveFromBasket(){
       Basket basket = new Basket();
       Inventory inventory = new Inventory();
@@ -101,7 +100,27 @@ public class BasketTest {
 
   }
 
-  @Test
+    @Test
+    public void ShouldNotLetToppingExistWithoutBagel(){
+        Basket basket = new Basket();
+        Inventory inventory = new Inventory();
+
+        basket.add(inventory.menu.get("OnionBagel"));
+        basket.add(inventory.menu.get("EverythingBagel"));
+        basket.add(inventory.menu.get("BaconFilling"));
+
+        //Should be three items in the basket
+        Assertions.assertEquals(3, basket.retrieveProductCount());
+
+        //Should be able to remove this because we have 2 bagels one filling
+        Assertions.assertEquals("This product is removed", basket.remove(inventory.menu.get("OnionBagel")));
+
+        //Should not be able to remove this due to it only being on bagel left == assert not equals will result in fail
+        Assertions.assertNotEquals("You cant have filling without bagel", basket.remove(inventory.menu.get("OnionBagel")));
+
+    }
+
+    @Test
     public void ShouldChangeBasketCapacity(){
         Basket basket = new Basket();
         Inventory inventory = new Inventory();
@@ -119,7 +138,7 @@ public class BasketTest {
         Assertions.assertNotEquals(basket.retrieveBasketCapacity(), basket.retrieveProductCount());
   }
 
-  @Test
+    @Test
     public void shouldGetCostOfProduct(){
       Basket basket = new Basket();
       Inventory inventory = new Inventory();
@@ -127,7 +146,7 @@ public class BasketTest {
       Assertions.assertEquals(1.19f, basket.costOfProduct(inventory.menu.get("WhiteCoffee")), 0.001);
   }
 
-  @Test
+    @Test
     public void ShouldGetTheTotalCostOfBasket(){
       Basket basket = new Basket();
       Inventory inventory = new Inventory();
