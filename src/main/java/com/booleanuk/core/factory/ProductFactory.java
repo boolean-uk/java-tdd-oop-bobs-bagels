@@ -8,74 +8,65 @@ import com.booleanuk.core.enums.SKU;
 import com.booleanuk.core.inherited.Bagel;
 import com.booleanuk.core.inherited.Coffee;
 import com.booleanuk.core.inherited.Filling;
+import com.booleanuk.core.interfaces.MenuCategory;
 import com.booleanuk.core.interfaces.ProductInterface;
+
+import static com.booleanuk.core.enums.BagelType.*;
+import static com.booleanuk.core.enums.CoffeeType.*;
+import static com.booleanuk.core.enums.FillingType.*;
 
 public class ProductFactory implements ProductInterface {
 
-    public Product addBagel(BagelType variant) {
-        String name = "Bagel";
+    public Product getProduct(MenuCategory variant) {
+        String bagelName = "Bagel";
+        String coffeeName = "Coffee";
+        String fillingName = "Filling";
+        double fillingPrice = 0.12;
 
         switch (variant) {
             case ONION -> {
-                return new Bagel(name, 0.49, SKU.BGLO, variant);
+                return new Bagel(bagelName, 0.49, SKU.BGLO, (BagelType) variant);
             }
             case PLAIN -> {
-                return new Bagel(name, 0.39, SKU.BGLP, variant);
+                return new Bagel(bagelName, 0.39, SKU.BGLP, (BagelType) variant);
             }
             case EVERYTHING -> {
-                return new Bagel(name, 0.49, SKU.BGLE, variant);
+                return new Bagel(bagelName, 0.49, SKU.BGLE, (BagelType) variant);
             }
             case SESAME -> {
-                return new Bagel(name, 0.49, SKU.BGLS, variant);
+                return new Bagel(bagelName, 0.49, SKU.BGLS, (BagelType) variant);
             }
-            default -> throw new IllegalArgumentException("Invalid bagel type!");
-        }
-    }
-
-    public Product addCoffee(CoffeeType variant) {
-        String name = "Coffee";
-
-        switch (variant) {
             case BLACK -> {
-                return new Coffee(name, 0.99, SKU.COFB, variant);
+                return new Coffee(coffeeName, 0.99, SKU.COFB, (CoffeeType) variant);
             }
             case WHITE -> {
-                return new Coffee(name, 1.19, SKU.COFW, variant);
+                return new Coffee(coffeeName, 1.19, SKU.COFW, (CoffeeType) variant);
             }
             case CAPUCCINO -> {
-                return new Coffee(name, 1.29, SKU.COFC, variant);
+                return new Coffee(coffeeName, 1.29, SKU.COFC, (CoffeeType) variant);
             }
             case LATTE -> {
-                return new Coffee(name, 1.29, SKU.COFL, variant);
+                return new Coffee(coffeeName, 1.29, SKU.COFL, (CoffeeType) variant);
             }
-            default -> throw new IllegalArgumentException("Invalid coffee type!");
-        }
-    }
-
-    public Product addFilling(FillingType variant) {
-        String name = "Filling";
-        double price = 0.12f;
-
-        switch (variant) {
             case BACON -> {
-                return new Filling(name, price, SKU.FILB, variant);
+                return new Filling(fillingName, fillingPrice, SKU.FILB, (FillingType) variant);
             }
             case EGG -> {
-                return new Filling(name, price, SKU.FILE, variant);
+                return new Filling(fillingName, fillingPrice, SKU.FILE, (FillingType) variant);
             }
             case CHEESE -> {
-                return new Filling(name, price, SKU.FILC, variant);
+                return new Filling(fillingName, fillingPrice, SKU.FILC, (FillingType) variant);
             }
             case CREAM_CHEESE -> {
-                return new Filling(name, price, SKU.FILX, variant);
+                return new Filling(fillingName, fillingPrice, SKU.FILX, (FillingType) variant);
             }
             case SMOKED_SALMON -> {
-                return new Filling(name, price, SKU.FILS, variant);
+                return new Filling(fillingName, fillingPrice, SKU.FILS, (FillingType) variant);
             }
             case HAM -> {
-                return new Filling(name, price, SKU.FILH, variant);
+                return new Filling(fillingName, fillingPrice, SKU.FILH, (FillingType) variant);
             }
-            default -> throw new IllegalArgumentException("Invalid filling type");
+            default -> throw new IllegalArgumentException("Invalid product type!");
         }
     }
 }

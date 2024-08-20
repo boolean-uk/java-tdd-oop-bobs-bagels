@@ -4,7 +4,9 @@ import com.booleanuk.core.enums.BagelType;
 import com.booleanuk.core.enums.SKU;
 import com.booleanuk.core.exceptions.FullBasketException;
 import com.booleanuk.core.exceptions.NonExistingProductException;
+import com.booleanuk.core.factory.ProductFactory;
 import com.booleanuk.core.inherited.Bagel;
+import com.booleanuk.core.interfaces.MenuCategory;
 
 import java.util.ArrayList;
 
@@ -12,21 +14,23 @@ public class Basket {
     private final ArrayList<Product> products;
     private Integer capacity;
     private static final Integer DEFAULT_CAPACITY = 5;
+    private final ProductFactory factory;
 
     public Basket() {
         this.products = new ArrayList<>();
         this.capacity = DEFAULT_CAPACITY;
+        this.factory = new ProductFactory();
     }
 
-    public void addProduct(Product product) throws FullBasketException {
+    public void addProduct(MenuCategory variant) throws FullBasketException {
         if (!isFull()) {
-            products.add(product);
+            products.add(factory.getProduct(variant));
         } else {
             throw new FullBasketException("Your basket is full, cannot add product!");
         }
     }
 
-    public void removeProduct(BagelType variant) {
+    public void removeProduct(MenuCategory variant) {
         for (Product product : products) {
             if (product instanceof Bagel bagel) {
                 if (bagel.getVariant() == variant) {

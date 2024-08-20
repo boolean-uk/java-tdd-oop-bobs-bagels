@@ -1,6 +1,8 @@
 package com.booleanuk.core.enums;
 
-public enum BagelType {
+import com.booleanuk.core.interfaces.MenuCategory;
+
+public enum BagelType implements MenuCategory {
     ONION,
     PLAIN,
     EVERYTHING,

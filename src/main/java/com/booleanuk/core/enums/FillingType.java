@@ -1,6 +1,8 @@
 package com.booleanuk.core.enums;
 
-public enum FillingType {
+import com.booleanuk.core.interfaces.MenuCategory;
+
+public enum FillingType implements MenuCategory {
     BACON,
     EGG,
     CHEESE,

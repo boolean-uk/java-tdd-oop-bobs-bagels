@@ -1,6 +1,8 @@
 package com.booleanuk.core.enums;
 
-public enum CoffeeType {
+import com.booleanuk.core.interfaces.MenuCategory;
+
+public enum CoffeeType implements MenuCategory {
     BLACK,
     WHITE,
     CAPUCCINO,

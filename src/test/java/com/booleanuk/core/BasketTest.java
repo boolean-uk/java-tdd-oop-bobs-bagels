@@ -18,7 +18,7 @@ public class BasketTest {
     public void setUp() throws FullBasketException {
         this.order = new Order();
         Basket basket = this.order.getBasket();
-        basket.addProduct(new Bagel("Bagel", 0.49, SKU.BGLO, BagelType.ONION));
+        basket.addProduct(BagelType.ONION);
     }
 
     @Test
@@ -37,13 +37,13 @@ public class BasketTest {
     @Test
     public void testIsFull() throws FullBasketException {
         Basket basket = this.order.getBasket();
-        basket.addProduct(new Bagel("Bagel", 0.59, SKU.BGLS, BagelType.SESAME));
-        basket.addProduct(new Bagel("Bagel", 0.59, SKU.BGLE, BagelType.EVERYTHING));
-        basket.addProduct(new Bagel("Bagel", 0.59, SKU.BGLP, BagelType.PLAIN));
-        basket.addProduct(new Bagel("Bagel", 0.59, SKU.BGLP, BagelType.PLAIN));
+        basket.addProduct(BagelType.SESAME);
+        basket.addProduct(BagelType.EVERYTHING);
+        basket.addProduct(BagelType.PLAIN);
+        basket.addProduct(BagelType.PLAIN);
 
         Assertions.assertThrows(FullBasketException.class, () -> {
-            basket.addProduct(new Bagel("Bagel", 0.59, SKU.BGLS, BagelType.SESAME));
+            basket.addProduct(BagelType.SESAME);
         });
     }
 
@@ -66,10 +66,12 @@ public class BasketTest {
     @Test
     public void testGetTotalCost() throws FullBasketException {
         Basket basket = this.order.getBasket();
-        basket.addProduct(new Bagel("Bagel", 0.51, SKU.BGLP, BagelType.PLAIN));
+        basket.addProduct(BagelType.PLAIN);
 
-        int totalCostInBasket = this.order.getTotalCost();
-        Assertions.assertEquals(totalCostInBasket, 1);
+        System.out.println("Products: " + basket.getProducts());
+
+        double totalCostInBasket = this.order.getTotalCost();
+        Assertions.assertEquals(totalCostInBasket, 0.88);
     }
 
     @Test

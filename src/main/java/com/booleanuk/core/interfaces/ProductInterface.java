@@ -7,8 +7,6 @@ import com.booleanuk.core.enums.FillingType;
 
 public interface ProductInterface {
 
-    Product addBagel(BagelType variant);
-    Product addCoffee(CoffeeType variant);
-    Product addFilling(FillingType variant);
+    Product getProduct(MenuCategory variant);
 
 }

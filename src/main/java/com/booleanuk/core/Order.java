@@ -15,13 +15,11 @@ public class Order {
         return basket;
     }
 
-    public Integer getTotalCost() {
+    public double getTotalCost() {
         for (Product product : this.basket.getProducts()) {
             this.totalCost += product.getPrice();
 
         }
-        return totalCost.intValue();
+        return totalCost;
     }
-
-
 }
