@@ -21,7 +21,11 @@ public class Bagel extends Product {
     }
 
     public Bagel createBagelWithFilling(BagelType variant, FillingType... fillings) {
-       return new Bagel();
+        Bagel.BagelBuilder builder = new Bagel.BagelBuilder(variant);
+        for (FillingType filling : fillings) {
+            builder.addFilling(filling);
+        }
+        return builder.build();
     }
 
     public static class BagelBuilder {
