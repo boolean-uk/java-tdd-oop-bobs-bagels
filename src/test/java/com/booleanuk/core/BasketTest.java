@@ -124,8 +124,8 @@ public class BasketTest {
       Basket basket = new Basket();
       Inventory inventory = new Inventory();
 
-      //Should fail due to price being wrong should be 1.19
-      Assertions.assertEquals(2.00f, basket.costOfProduct(inventory.menu.get("WhiteCoffee")), 0.001);
+      //Should not pass due to the correct price
+      Assertions.assertEquals(1.19f, basket.costOfProduct(inventory.menu.get("WhiteCoffee")), 0.001);
   }
 
 
