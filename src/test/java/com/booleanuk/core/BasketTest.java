@@ -54,7 +54,6 @@ public class BasketTest {
     @Test
     public void ShouldRemoveFromBasket(){
         Basket basket = new Basket();
-        Inventory inventory = new Inventory();
 
         basket.add("BGLO");
         basket.add("BGLO");
@@ -70,14 +69,21 @@ public class BasketTest {
     }
 
     @Test
-    public void ShouldNotLetToppingExistWithoutBagel(){
-
-    }
-
-    @Test
     public void ShouldChangeBasketCapacity(){
+        Basket basket = new Basket();
 
-  }
+        for(int i = 0; i < basket.retrieveBasketCapacity(); i++){
+            basket.add("BGLS");
+        }
+
+        Assertions.assertEquals(basket.retrieveBasketCapacity(), basket.retrieveProductCount());
+
+        //Changing it
+        basket.changeCapacity(15);
+
+        //Should fail due to basketCapacity being changed
+        Assertions.assertEquals(basket.retrieveBasketCapacity(), basket.retrieveProductCount());
+    }
 
     @Test
     public void shouldGetCostOfProduct(){
