@@ -1,14 +1,13 @@
 | ItemHandler                                      |
 |--------------------------------------------------|
-| -basket: ArrayList<Item>                         |
+| -basket: HashMap<String, Item>                   |
 | -basketCapacity: int                             |
 | -allItems: HashMap<String, String>               |
 | -idTracker: int                                  |
 | -discountCounterMap: HashMap<String, List<Item>> |
 |                                                  |
-| +addBagel(SKU: String): Bagel                    |
-| +addCoffee(SKU: String): Coffee                  |
-| +addFilling(SKU: String, bagel: Bagel): Filling  |
+| +addItem(SKU: String): Item                      |
+| +addItem(SKU: String, bagel: Bagel): Filling     |
 | +removeItem(id: int): boolean                    |
 | +setCapacity(newCapacity: int): boolean          |
 | +searchItem(SKU: string): Item                   |

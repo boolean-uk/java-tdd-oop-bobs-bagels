@@ -20,7 +20,7 @@ public class ItemHandler {
         discountCounterMap = new HashMap<>();
     }
 
-    public Bagel addBagel(String SKU) {
+    public Item addItem(String SKU) {
         if (this.basket.size() >= this.basketCapacity) {
             System.out.println("Basket is full.");
             return null;
@@ -29,35 +29,23 @@ public class ItemHandler {
             Bagel bagel = new Bagel(SKU, idTracker);
             this.idTracker++;
             this.basket.add(bagel);
-            System.out.println(bagel.getName() + ", " + bagel.getVariant() + ", price: " + bagel.getPrice());
             return bagel;
-        }
-        System.out.println("No such bagel exists.");
-        return null;
-    }
-
-    public Coffee addCoffee(String SKU) {
-        if (this.basket.size() >= this.basketCapacity) {
-            System.out.println("Basket is full.");
-            return null;
         }
         if (this.allItems.containsKey(SKU) && this.allItems.get(SKU).equals("Coffee")) {
             Coffee coffee = new Coffee(SKU, idTracker);
             this.idTracker++;
             this.basket.add(coffee);
-            System.out.println(coffee.getName() + ", " + coffee.getVariant() + ", price: " + coffee.getPrice());
             return coffee;
         }
-        System.out.println("No such coffee exists.");
+        System.out.println("No such bagel exists.");
         return null;
     }
 
-    public Filling addFilling(String SKU, Bagel bagel) {
+    public Filling addItem(String SKU, Item bagel) {
         if (this.allItems.containsKey(SKU) && this.allItems.get(SKU).equals("Filling")) {
-            if (basket.contains(bagel)) {
-                Filling filling = new Filling(SKU, idTracker, bagel);
+            if (basket.contains(bagel) && bagel instanceof Bagel) {
+                Filling filling = new Filling(SKU, idTracker, (Bagel) bagel);
                 idTracker++;
-                System.out.println(filling.getName() + ", " + filling.getVariant() + ", price: " + filling.getPrice());
                 return filling;
             } else {
                 System.out.println("No such bagel exists in the basket.");
@@ -116,10 +104,12 @@ public class ItemHandler {
     public double getTotal() {
         calcDiscountCounterMap();
 
-        if (this.discountCounterMap.get("Bagel").size() > 11) {
-            twelveBagelDiscount();
-        } else if (this.discountCounterMap.get("Bagel").size() > 5) {
-            sixBagelDiscount();
+        if (this.discountCounterMap.containsKey("Bagel")) {
+            if (this.discountCounterMap.get("Bagel").size() > 11) {
+                twelveBagelDiscount();
+            } else if (this.discountCounterMap.get("Bagel").size() > 5) {
+                sixBagelDiscount();
+            }
         }
 
         coffeeAndBagelDiscount();
@@ -187,14 +177,14 @@ public class ItemHandler {
         if (this.allItems.containsKey(SKU)) {
             if (this.allItems.get(SKU).equals("Coffee")) {
                 item = new Coffee(SKU, idTracker);
-                return item.getTotal();
+                return item.getTotal()/1000;
             } else if (this.allItems.get(SKU).equals("Bagel")) {
                 item = new Bagel(SKU, idTracker);
-                return item.getTotal();
+                return item.getTotal()/1000;
             } else if (this.allItems.get(SKU).equals("Filling")) {
                 Bagel bagel = new Bagel("BGLO", idTracker);
                 item = new Filling(SKU, idTracker, bagel);
-                return item.getTotal();
+                return item.getTotal()/1000;
             }
         }
         System.out.println("No such item exists.");

@@ -1,5 +1,7 @@
 package com.booleanuk.extension;
 
+import java.util.ArrayList;
+
 public class Item {
 
     private String SKU;
@@ -63,6 +65,10 @@ public class Item {
             return itemObjekt.getId() == this.getId();
         }
         return false;
+    }
+
+    public ArrayList<Filling> getFillings() {
+        return null;
     }
 
     public boolean removeFilling(int id){

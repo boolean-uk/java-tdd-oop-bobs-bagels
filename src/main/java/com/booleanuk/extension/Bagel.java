@@ -38,6 +38,8 @@ public class Bagel extends Item {
             }
         }
     }
+
+    @Override
     public ArrayList<Filling> getFillings() {
         return fillings;
     }

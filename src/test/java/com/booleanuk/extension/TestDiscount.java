@@ -8,15 +8,15 @@ public class TestDiscount {
     ItemHandler itemHandler;
     @Test
     public void testDiscountSixBagels() {
-        Bagel bagel1 = new Bagel("BGLE", 0);
+        Item bagel1 = new Bagel("BGLE", 0);
         itemHandler = new ItemHandler();
         itemHandler.setCapacity(100);
         for (int i = 0; i < 6; i++) {
-            bagel1 = itemHandler.addBagel("BGLE");
+            bagel1 = itemHandler.addItem("BGLE");
         }
         assertEquals(2.49, itemHandler.getTotal());
 
-        Bagel bagel2 = itemHandler.addBagel("BGLP");
+        Item bagel2 = itemHandler.addItem("BGLP");
         assertEquals(2.98, itemHandler.getTotal());
 
         itemHandler.removeItem(bagel1.getId());
@@ -28,17 +28,17 @@ public class TestDiscount {
 
     @Test
     public void testDiscountTwelveBagels() {
-        Bagel bagel1 = new Bagel("BGLE", 0);
+        Item bagel1 = new Bagel("BGLE", 0);
         itemHandler = new ItemHandler();
         itemHandler.setCapacity(100);
         for (int i = 0; i < 12; i++) {
-            bagel1 = itemHandler.addBagel("BGLE");
+            bagel1 = itemHandler.addItem("BGLE");
         }
 
         assertEquals(3.99, itemHandler.getTotal());
 
         for (int i = 0; i < 12; i++) {
-            bagel1 = itemHandler.addBagel("BGLE");
+            bagel1 = itemHandler.addItem("BGLE");
         }
 
         assertEquals(3.99*2, itemHandler.getTotal());
@@ -49,15 +49,15 @@ public class TestDiscount {
 
     @Test
     public void testCoffeeAndBagelDiscount() {
-        Bagel bagel1 = new Bagel("BGLE", 0);
+        Item bagel1 = new Bagel("BGLE", 0);
         itemHandler = new ItemHandler();
         itemHandler.setCapacity(100);
         for (int i = 0; i < 6; i++) {
-            bagel1 = itemHandler.addBagel("BGLE");
+            bagel1 = itemHandler.addItem("BGLE");
         }
-        Coffee coffee1 = new Coffee("COFB", 0);
+        Item coffee1 = new Coffee("COFB", 0);
         for (int i = 0; i < 6; i++) {
-            coffee1 = itemHandler.addCoffee("COFB");
+            coffee1 = itemHandler.addItem("COFB");
         }
         assertEquals(8.43, itemHandler.getTotal());
 
