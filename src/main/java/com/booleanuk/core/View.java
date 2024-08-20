@@ -63,7 +63,7 @@ public class View {
         return temp.get(output);
     }
 
-    public void basektFull() {
+    public void basketFull() {
         System.out.println("Basket is full. You cannot add more bagels.");
     }
 }
