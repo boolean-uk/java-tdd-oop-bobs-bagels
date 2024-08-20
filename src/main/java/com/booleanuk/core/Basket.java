@@ -1,7 +1,9 @@
 package com.booleanuk.core;
 
+import com.booleanuk.core.products.Product;
+import com.booleanuk.core.products.bagels.Bagel;
+
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class Basket {
 
@@ -18,6 +20,16 @@ public class Basket {
     public boolean addProduct(Product p) {
         if (isFull() || this.basket.contains(p)) {
             return false;
+        }
+
+        // Bagel with filling needs two spots in basket.
+        if (p instanceof Bagel && ((Bagel) p).getFilling() != null && (this.basket.size() + 2) > this.capacity) {
+            return false;
+        }
+
+        // If product is a bagel and it has filling, adding its filling to basket also
+        if (p instanceof Bagel && ((Bagel) p).getFilling() != null) {
+            this.basket.add(((Bagel) p).getFilling());
         }
 
         this.basket.add(p);
