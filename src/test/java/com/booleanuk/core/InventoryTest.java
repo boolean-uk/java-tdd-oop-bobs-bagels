@@ -31,4 +31,12 @@ public class InventoryTest {
         Assertions.assertFalse(inv.productIsInStock(b));
     }
 
+    @Test
+    public void testCheckIfAllProductsAreInInventory() {
+        int numberOfProducts = 14; // From the inventory table in Github, there should be 14 products in total
+        Inventory inv = new Inventory();
+
+        Assertions.assertEquals(14, inv.getInventory().size());
+    }
+
 }
