@@ -138,9 +138,9 @@ public class BasketTest {
     @Test
     public void getTotalCostOfItemsInBasket() {
         /*
-        As a member of the public,
-        So I can change my order,
-        I'd like to remove a bagel from my basket.
+        As a customer,
+        So I know how much money I need,
+        I'd like to know the total cost of items in my basket.
          */
         int total = 0;
 
@@ -162,4 +162,29 @@ public class BasketTest {
 
         Assertions.assertEquals((float) total /100, basket.calculateBasketCost());
     }
+
+    @Test
+    public void getCostOfBagel(){
+        /*
+        As a customer,
+        So I know what the damage will be,
+        I'd like to know the cost of a bagel before I add it to my basket.
+         */
+
+        String name = "Bagel";
+        String variant = "Plain";
+        Item item = Menu.getItemFromMenu(name, variant);
+
+        /*
+        Assert that price of bagel can be found before adding to basket.
+        Expected price fetched from menu.
+        */
+        assert item != null;
+        int itemPrice = item.price;
+        int expectedPrice = 39;
+        Assertions.assertEquals((float) expectedPrice/100, (float) itemPrice /100);
+    }
+
+
+
 }
