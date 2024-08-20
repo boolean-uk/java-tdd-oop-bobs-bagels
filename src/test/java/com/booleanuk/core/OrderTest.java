@@ -169,6 +169,19 @@ public class OrderTest {
 
     }
 
+    // test coffee + bagel discount with bagel discount
+    @Test
+    public void testCoffeeBagelDiscountWithBagelDiscount() {
+        Store store = new Store("Bob's Bagels");
+        Product bagelO = store.getInventory().getProduct("BGLO");
+        Product coffee = store.getInventory().getProduct("COFB");
+        Order order = new Order();
+        addProductsToOrder(order, bagelO, 6);
+        addProductsToOrder(order, coffee, 1);
+        Assertions.assertEquals(249 + coffee.getPrice(), order.getTotalSum());
+
+    }
+
     // Helper method to add products to an order
     private void addProductsToOrder(Order order, Product product, int quantity) {
         for (int i = 0; i < quantity; i++) {
