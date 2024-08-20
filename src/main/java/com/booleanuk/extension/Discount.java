@@ -1,8 +1,12 @@
 package com.booleanuk.extension;
 
+import com.booleanuk.core.Bagel;
 import com.booleanuk.core.Basket;
 import com.booleanuk.core.Item;
 import com.booleanuk.core.Order;
+
+import java.util.Arrays;
+import java.util.HashMap;
 
 public class Discount {
 
@@ -15,22 +19,21 @@ public class Discount {
         int plain=0;
         int every=0;
         int coff=0;
-        int bag=0;
+        HashMap<Item, Double> bagelPrices=new HashMap<>();
         double disc=0;
         for(Item i:order.getItems()){
             if(i.getType()=="Bagel"){
-
+                bagelPrices.put(i, i.getPrice());
 
                 if(i.getName().contains("Onion")){
                     onion++;
-                    bag++;
+
                 }
                 else if (i.getName().contains("Plain")){
                     plain++;
                 }
                 else if (i.getName().contains("Everything")){
                     every++;
-                    bag++;
                 }
             }else if(i.getType()=="Coffee" & i.getName()=="Black"){
                 coff++;
@@ -40,20 +43,20 @@ public class Discount {
         disc+=plain/12*0.69;
         disc+=every/6*0.45;
 
-        int remainBag=onion%6;
-        int remainPlain=plain%12;
+        int remain=onion%6+plain%12+every%6;
 
-        if(coff>remainBag){
-            disc+=remainBag*0.23;
-        }else{
-            disc+=coff*0.23;
+        if (coff<remain){
+            remain=coff;
         }
 
-        if(coff>remainPlain){
-            disc+=remainPlain*0.13;
-        }else{
-            disc+=coff*0.13;
+        Double[] discBagels=new Double[remain];
+        Double [] price= bagelPrices.values().toArray(new Double[0]);
+        Arrays.sort(price);
+
+        for (int i=0; i<remain; i++){
+            disc+=price[i]-1.25;
         }
+
 
     return disc;
     }

@@ -79,5 +79,25 @@ public class UserTest {
 
     }
 
+    @Test
+    public void discountManyTest(){
+        Order order=new Order();
+        for (int i=0; i<13; i++){
+            Bagel bagel=new Bagel("Plain");
+            bagel.addFilling(new Filling("Cheese"));
+            order.addItem(bagel);
+            order.addItem(new Bagel("Onion"));
+        }
+
+        order.addItem(new Coffee("Black"));
+        order.addItem(new Coffee("Black"));
+
+        Discount discount=new Discount();
+        order.setTotal(order.getTotal()- discount.discPrice(order));
+
+        Assertions.assertEquals(2*2.49+3.99+1.25, order.getTotal(), 0.001);
+
+    }
+
 
 }
