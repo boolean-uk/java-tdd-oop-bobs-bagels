@@ -27,6 +27,16 @@ public class BagelTest {
 
         Assertions.assertEquals(bacon.getVariant(), FillingType.BACON);
         Assertions.assertEquals(cheese.getVariant(), FillingType.CHEESE);
+    }
 
+
+    @Test
+    public void testPriceOfFilling() {
+        Bagel testBagel = new Bagel();
+        Double priceForEgg = testBagel.getFillingPrice(FillingType.EGG);
+        Double priceForCheese = testBagel.getFillingPrice(FillingType.CHEESE);
+
+        Assertions.assertEquals(priceForEgg, 0.12);
+        Assertions.assertEquals(priceForCheese, 0.12);
     }
 }

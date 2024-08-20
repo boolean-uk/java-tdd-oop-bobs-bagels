@@ -4,7 +4,6 @@ import com.booleanuk.core.enums.BagelType;
 import com.booleanuk.core.enums.CoffeeType;
 import com.booleanuk.core.exceptions.FullBasketException;
 import com.booleanuk.core.exceptions.NonExistingProductException;
-import com.booleanuk.core.inherited.Bagel;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
