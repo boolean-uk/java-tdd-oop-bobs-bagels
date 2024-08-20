@@ -248,4 +248,16 @@ public class BasketTest {
         }
     }
 
+    @Test
+    public void tryToAddItemThatDoesNotExistTest() {
+        Basket basket = new Basket();
+
+        Bagel bagel = ItemFactory.bagelFactory("EEEE");
+
+        Assertions.assertEquals("This item does not exist.", basket.addItemToBasket(bagel));
+
+        Bagel bagel1 = ItemFactory.bagelWithFillingFactory("EEEE", "KKKK");
+
+        Assertions.assertEquals("This item does not exist.", basket.addItemToBasket(bagel1));
+    }
 }

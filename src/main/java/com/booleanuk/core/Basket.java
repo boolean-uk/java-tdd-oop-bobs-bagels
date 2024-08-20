@@ -48,6 +48,9 @@ public class Basket {
     }
 
     public String addItemToBasket(Item item){
+        if(item.getName() == null) {
+            return "This item does not exist.";
+        }
         if(countTotalItems() < this.maxCapacity) {
             if(this.basket.containsKey(item.getSKU())) {
                 int oldQuantity = this.basket.get(item.getSKU());
@@ -62,7 +65,12 @@ public class Basket {
     }
 
     public String addItemToBasket(Bagel bagel, Filling filling) {
-        if(!addItemToBasket(filling).equals("Basket is full.") && !addItemToBasket(bagel).equals("Basket is full.")) {
+        if(
+                !addItemToBasket(filling).equals("Basket is full.") &&
+                !addItemToBasket(bagel).equals("Basket is full.") &&
+                !addItemToBasket(bagel).equals("This item does not exist.")
+        ){
+
             bagel.addFilling(filling);
             return "Added " + bagel.getName() + " with filling " + filling.getName() + " to basket.";
         }else {

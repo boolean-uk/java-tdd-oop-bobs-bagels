@@ -34,16 +34,28 @@ public class Item {
 
     private void setPriceFromList() {
         HashMap<String, Double> priceList = itemList.getPriceList();
-        this.price = priceList.get(this.SKU);
+        if(priceList.get(this.SKU) != null) {
+            this.price = priceList.get(this.SKU);
+        } else {
+            this.type = null;
+        }
     }
 
     private void setTypeFromList() {
         HashMap<String, String> typeList = itemList.getTypeList();
-        this.type = typeList.get(this.SKU);
+        if(typeList.get(this.SKU) != null) {
+            this.type = typeList.get(this.SKU);
+        } else {
+            this.type = null;
+        }
     }
 
     private void setNameFromList() {
         HashMap<String, String> nameList = itemList.getNameList();
-        this.name = nameList.get(this.SKU);
+        if(nameList.get(this.SKU) != null) {
+            this.name = nameList.get(this.SKU);
+        } else {
+            this.name = null;
+        }
     }
 }
