@@ -98,6 +98,7 @@ public class Order {
         amountOfBagels %= 12;
         int sixBagelDiscounts = amountOfBagels / 6;
         amountOfBagels %= 6;
+        System.out.println("Bagels: " + amountOfBagels + " Coffee: " + amountOfCoffee);
         int bagelCoffeePairs = Math.min(amountOfBagels, amountOfCoffee);
 
         if (twelveBagelDiscounts == 0 && sixBagelDiscounts == 0 && bagelCoffeePairs == 0) {
@@ -112,6 +113,7 @@ public class Order {
             totalSum = bagelCoffeePairs * 125 + sumToAdd;
         } else {
             int sumToAdd = getSumToAdd(amountOfBagels, bagelPrices);
+            sumToAdd += getSumToAdd(amountOfCoffee, coffeePrices);
             totalSum = twelveBagelDiscounts * 399 + sixBagelDiscounts * 249 + sumToAdd;
         }
     }
