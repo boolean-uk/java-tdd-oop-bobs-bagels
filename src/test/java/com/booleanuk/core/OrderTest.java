@@ -246,14 +246,15 @@ public class OrderTest {
     public void testBagelDiscountWithFilling() {
         Store store = new Store("Bob's Bagels");
         Bagel bagelO = (Bagel) store.getInventory().getProduct("BGLO");
+        Order order = new Order(store);
         Product filling = store.getInventory().getProduct("FILB");
 
-        Order order = new Order(store);
         bagelO.addFilling((Filling) filling);
-
         addProductsToOrder(order, bagelO, 6);
-
         Assertions.assertEquals(249 + filling.getPrice() * 6, order.getTotalSum());
+
+        addProductsToOrder(order, filling, 1);
+        Assertions.assertEquals(249 + filling.getPrice() * 7, order.getTotalSum());
     }
 
     // Helper method to add products to an order
