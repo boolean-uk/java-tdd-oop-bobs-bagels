@@ -20,4 +20,8 @@ public class Basket {
             bagels.add(bagel);
         }
     }
+
+    public void removeBagel(Bagel bagel) {
+        bagels.remove(bagel);
+    }
 }
