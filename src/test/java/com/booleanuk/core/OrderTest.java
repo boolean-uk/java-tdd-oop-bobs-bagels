@@ -242,6 +242,20 @@ public class OrderTest {
         Assertions.assertEquals(399 + 249 + 125, order.getTotalSum());
     }
 
+    @Test
+    public void testBagelDiscountWithFilling() {
+        Store store = new Store("Bob's Bagels");
+        Bagel bagelO = (Bagel) store.getInventory().getProduct("BGLO");
+        Product filling = store.getInventory().getProduct("FILB");
+
+        Order order = new Order(store);
+        bagelO.addFilling((Filling) filling);
+
+        addProductsToOrder(order, bagelO, 6);
+
+        Assertions.assertEquals(249 + filling.getPrice() * 6, order.getTotalSum());
+    }
+
     // Helper method to add products to an order
     private void addProductsToOrder(Order order, Product product, int quantity) {
         for (int i = 0; i < quantity; i++) {
