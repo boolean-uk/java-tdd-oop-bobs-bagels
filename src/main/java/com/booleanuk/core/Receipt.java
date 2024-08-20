@@ -7,4 +7,8 @@ public class Receipt {
     public Receipt(Order order) {
         this.order = order;
     }
+
+    public Order getOrder() {
+        return order;
+    }
 }
