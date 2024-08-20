@@ -1,6 +1,8 @@
-package com.booleanuk.core;
+package com.booleanuk.extension;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.NoSuchElementException;
 
 
 public class Order {
@@ -83,14 +85,11 @@ public class Order {
         basket.remove(product.getSKU());
     }
 
-
-    public void printBasket() {
-        for (Map.Entry<String, Integer> entry : basket.entrySet()) {
-            String sku = entry.getKey();
-            Integer quantity = entry.getValue();
-            System.out.println("Product SKU: " + sku + ", Quantity: " + quantity);
-        }
+    public HashMap<String, Integer> getBasket() {
+        return this.basket;
     }
+
+
 
     public double getTotalPrice() {
         int count = 0;
@@ -144,7 +143,6 @@ public class Order {
             totalPrice += 125;
         }
         return totalPrice / 100.0;
-
     }
 
 
