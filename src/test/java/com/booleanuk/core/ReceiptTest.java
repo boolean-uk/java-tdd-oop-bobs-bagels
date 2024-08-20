@@ -37,5 +37,8 @@ public class ReceiptTest {
         order.addProduct(product);
         Receipt receipt = new Receipt(order);
         Assertions.assertTrue(receipt.printReceipt());
+
+        order.removeProduct(product);
+        Assertions.assertFalse(receipt.printReceipt());
     }
 }
