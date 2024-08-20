@@ -1,5 +1,6 @@
 package com.booleanuk.extension;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.UUID;
 
@@ -68,9 +69,24 @@ public class Order {
 
     public int getPrice(Store store){
         int result = 0;
+        int bagelPrice = 0;
+        ArrayList<Integer> bagelList = new ArrayList<>();
         for(HashMap.Entry<String, Integer> entry : basket.entrySet()){
-            result += store.getPrice(entry.getKey()) * entry.getValue();
+            String sku = entry.getKey();
+            if(sku.startsWith("BGL")){
+                for(int i = 0; i < entry.getValue(); ++i){
+                    bagelList.add(store.getPrice(sku));
+                }
+            }
         }
+        bagelList.sort(null);
+        for(int i = 0; i < bagelList.size(); ++i){
+            bagelPrice += bagelList.get(i);
+            if((i+1) % 6 == 0){
+                bagelPrice = 249 * ((i+1) / 6);
+            }
+        }
+        result += bagelPrice;
         return result;
     }
 }

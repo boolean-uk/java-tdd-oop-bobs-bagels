@@ -1,11 +1,5 @@
 package com.booleanuk.extension;
 
-import com.booleanuk.core.Bagel;
-import com.booleanuk.core.Coffee;
-import com.booleanuk.core.Filling;
-import com.booleanuk.core.Order;
-import com.booleanuk.core.Product;
-import com.booleanuk.core.Store;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -13,21 +7,21 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class TestExtension {
 
-    com.booleanuk.core.Store store = new Store(20);
+    Store store = new Store(20);
 
-    com.booleanuk.core.Product bagel1 = new com.booleanuk.core.Bagel("BGLO", "Onion", 49);
-    com.booleanuk.core.Product bagel2 = new com.booleanuk.core.Bagel("BGLP", "Plain", 39);
-    com.booleanuk.core.Product bagel3 = new com.booleanuk.core.Bagel("BGLE", "Everything", 49);
-    com.booleanuk.core.Product bagel4 = new Bagel("BGLS", "Sesame", 49);
-    com.booleanuk.core.Product coffee1 = new com.booleanuk.core.Coffee("COFB", "Black", 99);
-    com.booleanuk.core.Product coffee2 = new com.booleanuk.core.Coffee("COFW", "White", 119);
-    com.booleanuk.core.Product coffee3 = new com.booleanuk.core.Coffee("COFC", "Capuccino", 129);
-    com.booleanuk.core.Product coffee4 = new Coffee("COFL", "Latte", 129);
-    com.booleanuk.core.Product filling1 = new com.booleanuk.core.Filling("FILB", "Bacon", 12);
-    com.booleanuk.core.Product filling2 = new com.booleanuk.core.Filling("FILE", "Egg", 12);
-    com.booleanuk.core.Product filling3 = new com.booleanuk.core.Filling("FILC", "Cheese", 12);
-    com.booleanuk.core.Product filling4 = new com.booleanuk.core.Filling("FILX", "Cream Cheese", 12);
-    com.booleanuk.core.Product filling5 = new com.booleanuk.core.Filling("FILS", "Smoked Salmon", 12);
+    Product bagel1 = new Bagel("BGLO", "Onion", 49);
+    Product bagel2 = new Bagel("BGLP", "Plain", 39);
+    Product bagel3 = new Bagel("BGLE", "Everything", 49);
+    Product bagel4 = new Bagel("BGLS", "Sesame", 49);
+    Product coffee1 = new Coffee("COFB", "Black", 99);
+    Product coffee2 = new Coffee("COFW", "White", 119);
+    Product coffee3 = new Coffee("COFC", "Capuccino", 129);
+    Product coffee4 = new Coffee("COFL", "Latte", 129);
+    Product filling1 = new Filling("FILB", "Bacon", 12);
+    Product filling2 = new Filling("FILE", "Egg", 12);
+    Product filling3 = new Filling("FILC", "Cheese", 12);
+    Product filling4 = new Filling("FILX", "Cream Cheese", 12);
+    Product filling5 = new Filling("FILS", "Smoked Salmon", 12);
     Product filling6 = new Filling("FILH", "Ham", 12);
 
     void mainTest(){
@@ -50,7 +44,7 @@ public class TestExtension {
     @Test
     public void testDiscountSix() throws Exception {
         mainTest();
-        com.booleanuk.core.Order order1 = new Order();
+        Order order1 = new Order();
         order1.addProduct("BGLO", store);
         order1.addProduct("BGLO", store);
         order1.addProduct("BGLO", store);
