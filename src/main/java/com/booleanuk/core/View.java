@@ -13,6 +13,7 @@ public class View {
     public int mainMenu() {
         System.out.println("What do you want to do?");
         System.out.println("1. Add Bagel");
+        System.out.println("2. Remove Bagel");
 
         return getInt();
     }
@@ -65,5 +66,22 @@ public class View {
 
     public void basketFull() {
         System.out.println("Basket is full. You cannot add more bagels.");
+    }
+
+    public Bagel chooseBagel(ArrayList<Bagel> bagels) {
+        if (bagels.isEmpty()) {
+            System.out.println("No options available");
+            return null;
+        }
+        System.out.println("Choose a bagel");
+        for (int i = 0; i < bagels.size(); i++) {
+            System.out.printf("%h. %s%n", i + 1, bagels.get(i).toString());
+        }
+        System.out.println("Please write what you want");
+        int output = getInt() - 1;
+        if (output == bagels.size()) {
+            return null;
+        }
+        return bagels.get(output);
     }
 }

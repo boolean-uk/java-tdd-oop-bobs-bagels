@@ -45,6 +45,9 @@ public class Controller {
                         view.basketFull();
                     }
                     break;
+                case 2:
+                    basket.removeBagel(view.chooseBagel(basket.getBagels()));
+                    break;
                 default:
                     keepRunning = false;
                     view.printExit();
