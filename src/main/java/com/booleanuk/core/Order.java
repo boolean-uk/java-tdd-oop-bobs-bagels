@@ -126,12 +126,12 @@ public class Order {
         }
     }
 
-    private int getSumToAdd(int amountOfBagels, ArrayList<Integer> ProductPrices) {
+    private int getSumToAdd(int amountOfProducts, ArrayList<Integer> ProductPrices) {
         int sumToAdd = 0;
-        if (amountOfBagels >= 0) {
+        if (amountOfProducts > 0) {
             // Sort the list in descending order to get the highest prices first
             ProductPrices.sort(Comparator.reverseOrder());
-            for (int i = 0; i < amountOfBagels; i++) {
+            for (int i = 0; i < amountOfProducts; i++) {
                 sumToAdd += ProductPrices.get(i);
             }
         }
