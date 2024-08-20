@@ -26,7 +26,11 @@ public class Product {
         return variant;
     }
 
-    public List<String> getFillings() {
+    public boolean addFilling(Filling filling) {
+        return false;
+    }
+
+    public List<Filling> getFillings() {
         return null;
     }
 
