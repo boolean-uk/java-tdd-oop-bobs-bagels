@@ -2,6 +2,7 @@ package com.booleanuk.core;
 
 import java.io.File;
 import java.text.DecimalFormat;
+import java.util.Arrays;
 import java.util.HashMap;
 
 import java.util.Scanner;
@@ -186,6 +187,14 @@ public class OrderManager {
 
 		double totalPrice = 0;
 		String reciept = "";
+
+		// first check for bagel types
+
+
+		// check for coffee discount
+
+
+		// the rest
 		for(ItemInterface item: cartCopy.keySet()){
 			int amountInCart = cartCopy.get(item);
 
@@ -205,13 +214,14 @@ public class OrderManager {
 						amountInCart -= 6;
 						reciept += item + ": 6 for 2.49\n";
 					}
-					// has to be checked after other discounts
-					while(amountInCart-- > 0){
-						double pricePer = getPriceOfItem(item);
-						totalPrice += pricePer;
-						reciept += item	+ ": 1 for " + pricePer + "\n";
-					}
-					break;
+					cartCopy.put(item, amountInCart);
+//					// has to be checked after other discounts
+//					while(amountInCart-- > 0){
+//						double pricePer = getPriceOfItem(item);
+//						totalPrice += pricePer;
+//						reciept += item	+ ": 1 for " + pricePer + "\n";
+//					}
+//					break;
 
 
 					// or black coffee
@@ -219,37 +229,47 @@ public class OrderManager {
 					for(int i = 0; i < amountInCart; i++){
 						// check if a bagel is in cart.
 						for (BagelType bagel: BagelType.values()){
-							if (getStockOfItem(bagel) > 0){
-								cart.compute(bagel, (k, amountOfBagelInCart) -> amountOfBagelInCart - 1);
-								totalPrice += 1.25;
-								reciept += "Black Coffee and " + bagel + " for 1.25\n";
-								break;
+							if (cartCopy.containsKey(item)){
+								int amountOfBagelsInCart = 0;
+								try {
+									amountOfBagelsInCart = cartCopy.get(bagel);
+								} catch (NullPointerException e){
+									// pass
+									break;
+								}
+								if (amountOfBagelsInCart > 0){
+									cartCopy.put(bagel, amountOfBagelsInCart - 1);
+									totalPrice += 1.25;
+									reciept += "Black Coffee and " + bagel + " for 1.25\n";
+									break;
+								}
 							}
 						}
 					}
 					break;
-
 				default:
 					totalPrice += getPriceOfItem(item);
 					reciept += item + " for " + getPriceOfItem(item);
 			}
-
 		}
-//
-//		// after coffee's are added, we can complete with the last bagels
-//		for (BagelType bagel: BagelType.values()){
-//			if (cartCopy.containsKey(bagel)){
-//				int stillInCart = cartCopy.get(bagel);
-//				double bagelPrice = getPriceOfItem(bagel);
-//				while (stillInCart-- > 0) {
-//					totalPrice += bagelPrice;
-//					reciept += bagel + " bagel for " + bagelPrice;
-//				}
-//			}
-//		}
+
+		// remaining bagels
+		for (ItemInterface item : cartCopy.keySet()){
+			switch (item){
+				case BagelType.Everything, BagelType.Onion, BagelType.Plain, BagelType.Sesame:
+					int amountLeft = cartCopy.get(item);
+					double bagelPricePer = getPriceOfItem(item);
+					while(amountLeft-- > 0){
+						totalPrice += bagelPricePer;
+						reciept += item + " for " + getPriceOfItem(item) + "\n";
+					}
+				default:
+					continue;
+			}
+		}
 
 
-
+		System.out.println(reciept);
 
 		DecimalFormat df = new DecimalFormat("#.##");
 		String strPrice = String.format("%.2f", totalPrice);

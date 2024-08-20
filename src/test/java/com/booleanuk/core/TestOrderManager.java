@@ -114,19 +114,18 @@ public class TestOrderManager {
         }
         Assertions.assertEquals(5.55, om.getTotalDiscountedPrice());
 
-
         om = new OrderManager();
         for (int i = 0; i < 2; i++) {
-            om.addItem(BagelType.Onion);
+            om.addItem(BagelType.Onion); // 0.49*3
         }
         for (int i = 0; i < 12; i++) {
-            om.addItem(BagelType.Plain);
+            om.addItem(BagelType.Plain); // 3.99
         }
         for (int i = 0; i < 6; i++) {
-            om.addItem(BagelType.Everything);
+            om.addItem(BagelType.Everything); // 2.49
         }
         for (int i = 0; i < 3; i++) {
-            om.addItem(CoffeeType.Black);
+            om.addItem(CoffeeType.Black); // 1.29*3
         }
 
         Assertions.assertEquals(10.43, om.getTotalDiscountedPrice());
