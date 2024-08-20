@@ -103,7 +103,6 @@ public class Order {
 
         // Iterate through the basket to calculate total reset amount and get number of bagels and coffees and there prices
         for (Product product : basket) {
-
             resetAmount += product.getPrice();
 
             // If the product is coffee, update coffee count and prices
@@ -159,8 +158,7 @@ public class Order {
             totalSum = resetAmount;
         } else {
             // Calculate the sum to add for remaining bagels and coffees (highest prices first)
-            int sumToAdd = getSumToAdd(amountOfBagels, bagelPrices) + totalFillingPrice;
-            sumToAdd += getSumToAdd(amountOfCoffees, coffeePrices);
+            int sumToAdd = getSumToAdd(amountOfBagels, bagelPrices) + getSumToAdd(amountOfCoffees, coffeePrices) + totalFillingPrice;
 
             // Calculate the total sum with all applicable discounts
             totalSum = bagelCoffeePairs * 125 + numberOfTwelveBagelDiscounts * 399 + numberOfSixBagelDiscounts * 249 + sumToAdd;
