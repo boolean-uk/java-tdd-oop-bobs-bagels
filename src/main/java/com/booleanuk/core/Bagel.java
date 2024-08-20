@@ -8,7 +8,7 @@ import static com.booleanuk.core.Menu.fillingMenu;
 import static com.booleanuk.core.Menu.printFillingMenu;
 
 public class Bagel extends Item {
-    ArrayList<Filling> fillings = new ArrayList<>();
+    private ArrayList<Filling> fillings = new ArrayList<>();
 
     public Bagel(String sku, Integer price, String name, String variant){
         super(sku, price, name, variant);
@@ -52,13 +52,6 @@ public class Bagel extends Item {
         return this.fillings;
     }
 
-    public boolean fillingsAreIdentical(Bagel b1, Bagel b2){
-        ArrayList<Filling> temp = b2.fillings;
 
-        for (Filling f : b1.fillings){
-            temp.removeIf(g -> f.variant.equals(g.variant));
-        }
-        return temp.isEmpty();
-    }
 }
 

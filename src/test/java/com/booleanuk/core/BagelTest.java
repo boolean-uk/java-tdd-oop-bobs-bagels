@@ -17,7 +17,7 @@ public class BagelTest {
         String fillingVariant = "Bacon";
         Filling filling = Menu.getFillingFromMenu(fillingName, fillingVariant);
         bagel.addFilling(filling);
-        assert(bagel.fillings.contains(filling));
+        assert(bagel.getFillings().contains(filling));
 
         String expectedResult = "Bacon added to your bagel.";
         String result = bagel.addFilling(filling);

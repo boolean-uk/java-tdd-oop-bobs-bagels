@@ -75,7 +75,15 @@ public class Menu {
             return null;
         }
 
-        return menu.get(choice-1);
+        Item selectedItem = menu.get(choice-1);
+
+        if (selectedItem instanceof Bagel){
+            return new Bagel (selectedItem.sku, selectedItem.price, selectedItem.name, selectedItem.variant);
+        }
+
+        else {
+            return new Coffee (selectedItem.sku, selectedItem.price, selectedItem.name, selectedItem.variant);
+        }
     }
 
     public static void printMenu(){

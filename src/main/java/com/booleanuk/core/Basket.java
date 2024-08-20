@@ -1,9 +1,6 @@
 package com.booleanuk.core;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Objects;
-import java.util.Scanner;
+import java.util.*;
 
 public class Basket {
     private Integer basketSize;
@@ -23,7 +20,7 @@ public class Basket {
             return "This item is not on the menu.";
         }
 
-        if (itemInBasket(item) == -1){
+        if (itemInBasket(item).equals(-1)){
             this.basket.add(item);
         }
 
@@ -39,12 +36,14 @@ public class Basket {
 
         for (Item i : basket){
             if (i instanceof Bagel){
-                System.out.println(counter+ ". " + i.name + " " + i.variant + " " + i.quantity + " " + (float) i.price/100 +"$");
+                String price = String.format("%.2f", (((float)i.price * i.quantity) /100));
+                System.out.println(counter+ ". " + i.name + " " + i.variant + " " + i.quantity + " " + price +"$");
                 formatFillingPrint((Bagel) i);
             }
 
             else {
-                System.out.println(counter+ " " + i.name + " " + i.variant + " " + i.quantity + " " + (float) i.price/100 +"$");
+                String price = String.format("%.2f", (((float)i.price * i.quantity) /100));
+                System.out.println(counter+ " " + i.name + " " + i.variant + " " + i.quantity + " " + price +"$");
             }
             counter++;
         }
@@ -110,7 +109,7 @@ public class Basket {
     public Float calculateBasketCost(){
         int total = 0;
         for (Item i : basket){
-            total += i.getPrice();
+            total += i.getPrice() * i.getQuantity();
         }
         return (float) total/100;
     }
@@ -128,13 +127,12 @@ public class Basket {
         If item is in basket, returns index. Else returns -1.
          */
         for (int i = 0; i < numberOfItemsInBasket(); i++){
-            if (Objects.equals(item, basket.get(i))){
+            if (Objects.equals(item.name, basket.get(i).name) && Objects.equals(item.variant, basket.get(i).variant)){
                 if (basket.get(i) instanceof Bagel & item instanceof Bagel){
                     Bagel basketBagel = (Bagel) basket.get(i);
                     Bagel newBagel = (Bagel) item;
 
-
-                    if (basketBagel.fillings.equals(newBagel.fillings)){
+                    if (fillingIsIdentical(basketBagel, newBagel)){
                         return i;
                     } else {
                         return -1;
@@ -147,6 +145,34 @@ public class Basket {
             }
         }
         return -1;
+    }
+
+    public boolean fillingIsIdentical(Bagel b1, Bagel b2){
+        ArrayList<String> sortedB1 = new ArrayList<>();
+        ArrayList<String> sortedB2 = new ArrayList<>();
+
+        if (b1.getFillings().size() != b2.getFillings().size())
+        {
+            return false;
+        }
+
+        for (Filling f : b1.getFillings()){
+            sortedB1.add(f.getVariant());
+        }
+
+        for (Filling f : b2.getFillings()){
+            sortedB2.add(f.getVariant());
+        }
+
+        Collections.sort(sortedB1);
+        Collections.sort(sortedB2);
+
+        for (int i = 0; i < sortedB1.size(); i++){
+            if (!sortedB1.get(i).equals(sortedB2.get(i))){
+                return false;
+            }
+        }
+        return true;
     }
 
     public boolean changeBasketSize(int newSize){
