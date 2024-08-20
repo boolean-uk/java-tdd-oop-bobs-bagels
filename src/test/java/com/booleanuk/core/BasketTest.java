@@ -3,6 +3,8 @@ package com.booleanuk.core;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class BasketTest {
@@ -37,5 +39,20 @@ class BasketTest {
         Assertions.assertEquals(1, basket.size());
         basket.removeBagel(bagel);
         Assertions.assertEquals(0, basket.size());
+    }
+
+    @Test
+    public void testGetBagelsIsClone() {
+        Basket basket = new Basket(12);
+        Bagel bagel1 = new Bagel(Controller.prices.get("BGLO"), Controller.prices.get("FILB"));
+        Bagel bagel2 = new Bagel(Controller.prices.get("BGLO"), Controller.prices.get("FILB"));
+        Assertions.assertEquals(0, basket.size());
+        basket.addBagel(bagel1);
+        basket.addBagel(bagel2);
+        Assertions.assertEquals(2, basket.size());
+        ArrayList<Bagel> bagelsCopy = basket.getBagels();
+        bagelsCopy.remove(bagel1);
+        Assertions.assertEquals(2, basket.size());
+        Assertions.assertEquals(1, bagelsCopy.size());
     }
 }
