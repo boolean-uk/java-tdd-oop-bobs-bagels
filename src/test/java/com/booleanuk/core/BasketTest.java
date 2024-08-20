@@ -190,7 +190,8 @@ public class BasketTest {
         String name = "Bagel";
         String variant = "Plain";
         Item item = Menu.getItemFromMenu(name, variant);
-        Bagel bagel = new Bagel(item);
+        assert item != null;
+        Bagel bagel = new Bagel(item.sku, item.price, item.name, item.variant);
 
         Filling filling = Menu.getFillingFromMenu();
         bagel.addFilling(filling);
