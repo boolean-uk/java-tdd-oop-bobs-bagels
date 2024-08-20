@@ -15,10 +15,6 @@ public class Bagels extends Product{
         return fillings;
     }
 
-    public void setFillings(List<Fillings> fillings) {
-        this.fillings = fillings;
-    }
-
     public void addFilling(Fillings filling) {
         fillings.add(filling);
     }
@@ -37,5 +33,6 @@ public class Bagels extends Product{
             }
         }
     }
+
 
 }

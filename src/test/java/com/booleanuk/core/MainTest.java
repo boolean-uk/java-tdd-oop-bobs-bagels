@@ -11,6 +11,7 @@ public class MainTest {
     private Bagels bagels2;
     private Bagels bagels3;
     private Bagels bagels4;
+    private Bagels bagels5;
 
     private Coffee coffee1;
     private Coffee coffee2;
@@ -23,7 +24,6 @@ public class MainTest {
     private Fillings fillings4;
     private Fillings fillings5;
     private Fillings fillings6;
-    private Fillings fillings7;
 
     private Store store;
     private Order order;
@@ -48,7 +48,7 @@ public class MainTest {
         fillings5 = new Fillings("FILS", 0.12, "Smoked Salmon");
         fillings6 = new Fillings("FILH", 0.12, "Ham");
 
-        fillings7 = new Fillings("FILP", 0.12, "Pepperoni");
+        bagels5 = new Bagels("BGLQ", 0.39, "Cheese"); // not in inventory
 
         store.addToInventory(bagels1);
         store.addToInventory(bagels2);
@@ -80,9 +80,9 @@ public class MainTest {
         order.addProduct(bagels1);
         Assertions.assertEquals(1, order.sizeOfBasket());
         Assertions.assertTrue(order.containsKeyBasket(bagels1.getSKU()));
-        order.addProduct(fillings7); // not in inventory
+        order.addProduct(bagels5); // not in inventory
         Assertions.assertNotEquals(2, order.sizeOfBasket());
-        Assertions.assertFalse(order.containsKeyBasket(fillings7.getSKU()));
+        Assertions.assertFalse(order.containsKeyBasket(bagels5.getSKU()));
     }
 
     @Test
@@ -114,9 +114,10 @@ public class MainTest {
     public void testTotalCost() {
         order.addProduct(bagels1);
         order.addProduct(bagels1);
-        bagels1.addFilling(fillings1);
+        order.addProduct(fillings1);
+        order.addProduct(fillings1);
         order.addProduct(coffee1);
-        Assertions.assertEquals(1.97, order.getTotalPrice());
+        Assertions.assertEquals(1.98, order.getTotalPrice());
 
     }
 
@@ -153,9 +154,7 @@ public class MainTest {
         order.addProduct(bagels1);
         order.addProduct(bagels1);
         order.addProduct(bagels1);
-
         order.addProduct(bagels2);
-        bagels2.addFilling(fillings1);
         bagels2.addFilling(fillings1);
         order.addProduct(bagels3);
         bagels3.addFilling(fillings2);
@@ -187,16 +186,35 @@ public class MainTest {
 
     }
     @Test
-    public void testDiscountCoffeeAndSixBagels() {
-        order.addProduct(bagels1); // 6
+    public void testDiscountCoffeeAndBagels() {
+        order.addProduct(bagels1);
+        order.addProduct(bagels2);
+        order.addProduct(bagels1);
+        order.addProduct(bagels1);
+        order.addProduct(bagels4);
+        order.addProduct(bagels1);
+
+        order.addProduct(bagels2);
+        order.addProduct(bagels3);
+        order.addProduct(bagels4);
+        order.addProduct(bagels1);
+        order.addProduct(bagels2);
+        order.addProduct(bagels3);
+
+        order.addProduct(bagels1);
         order.addProduct(bagels1);
         order.addProduct(bagels1);
         order.addProduct(bagels1);
         order.addProduct(bagels1);
         order.addProduct(bagels1);
 
-        Assertions.assertEquals(3.74, order.getTotalPrice());
+        order.addProduct(fillings1);
 
+        order.addProduct(bagels2);
+        order.addProduct(coffee1);
+
+        Assertions.assertEquals(7.85, order.getTotalPrice());
     }
+
 }
 
