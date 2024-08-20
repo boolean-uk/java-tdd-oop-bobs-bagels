@@ -6,10 +6,5 @@ public class Bagel extends Product {
         super(sku, price, name, variant);
     }
 
-    @Override
-    public String showProduct() {
-        return retrieveSku() + " " + retrievePrice() + " " + retrieveName() + " " + retrieveVariant();
-    }
-
 
 }
