@@ -57,6 +57,12 @@ public class OrderTest {
         order.addProduct(bagel);
 
         Assertions.assertEquals(bagelPlusFillingPrice, order.getTotalSum());
+
+        order.addProduct(filling);
+        Assertions.assertEquals(bagelPlusFillingPrice + filling.getPrice(), order.getTotalSum());
+
+        order.removeProduct(bagel);
+        Assertions.assertEquals(filling.getPrice(), order.getTotalSum());
     }
 
     @Test
