@@ -102,7 +102,7 @@ public class BasketTest {
         basket.add("BGLS");
 
         //Sum should be 1.27 if it is set up correctly. For red test i have set up 1.3 which should fail due to not being exact.
-        Assertions.assertEquals(1.3f, basket.totalCost(), 0.001);
+        Assertions.assertEquals(1.27f, basket.totalCost(), 0.001);
     }
 
 
