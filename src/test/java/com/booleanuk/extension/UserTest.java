@@ -65,16 +65,16 @@ public class UserTest {
 
         Order order=new Order();
         Bagel bagel1=new Bagel("Plain");
+        //bagel1.addFilling(new Filling("Cheese"));
         Bagel bagel2=new Bagel("Onion");
         Coffee coffee1=new Coffee("Black");
-        Coffee coffee2=new Coffee("Black");
         order.addItem(bagel1);
         order.addItem(bagel2);
         order.addItem(coffee1);
-        order.addItem(coffee2);
+        //order.addItem(coffee2);
         Discount discount=new Discount();
         order.setTotal(order.getTotal()- discount.discPrice(order));
-        Assertions.assertEquals(2.50, order.getTotal(), 0.001);
+        Assertions.assertEquals(1.25+0.39, order.getTotal(), 0.001);
 
 
     }

@@ -6,6 +6,7 @@ import com.booleanuk.core.Item;
 import com.booleanuk.core.Order;
 
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.HashMap;
 
 public class Discount {
@@ -51,7 +52,8 @@ public class Discount {
 
         Double[] discBagels=new Double[remain];
         Double [] price= bagelPrices.values().toArray(new Double[0]);
-        Arrays.sort(price);
+        Arrays.sort(price, Comparator.reverseOrder());
+
 
         for (int i=0; i<remain; i++){
             disc+=price[i]+0.99-1.25;
