@@ -53,4 +53,23 @@ public class TestExtension {
         order1.addProduct("BGLO", store);
         Assertions.assertEquals(249, order1.getPrice(store));
     }
+
+    @Test
+    public void testDiscountTwelve() throws Exception {
+        mainTest();
+        Order order1 = new Order();
+        order1.addProduct("BGLO", store);
+        order1.addProduct("BGLO", store);
+        order1.addProduct("BGLO", store);
+        order1.addProduct("BGLO", store);
+        order1.addProduct("BGLO", store);
+        order1.addProduct("BGLO", store);
+        order1.addProduct("BGLO", store);
+        order1.addProduct("BGLO", store);
+        order1.addProduct("BGLO", store);
+        order1.addProduct("BGLO", store);
+        order1.addProduct("BGLO", store);
+        order1.addProduct("BGLO", store);
+        Assertions.assertEquals(399, order1.getPrice(store));
+    }
 }
