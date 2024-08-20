@@ -25,7 +25,7 @@ public class Basket {
         return basketItems;
     }
 
-    public void addBagel (String bagelSku, int quantity){
+    public void addBasketItem (BasketItem item){
         if(!exceededBasketLimit(getBasketLimit(),this.basketTotal+quantity )){
             if(this.basketItems.containsKey(bagelSku)){
                 this.basketItems.put(bagelSku, this.basketItems.get(bagelSku)+quantity);
