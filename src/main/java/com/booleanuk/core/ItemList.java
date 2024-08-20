@@ -3,9 +3,9 @@ package com.booleanuk.core;
 import java.util.HashMap;
 
 public class ItemList {
-    HashMap<String, Double> priceList;
-    HashMap<String, String> typeList;
-    HashMap<String, String> nameList;
+    private HashMap<String, Double> priceList;
+    private HashMap<String, String> typeList;
+    private HashMap<String, String> nameList;
     public ItemList() {
         this.priceList = new HashMap<>();
         populatePriceList();

@@ -12,6 +12,17 @@ public class Basket {
         this.basket = new HashMap<>();
     }
 
+    public HashMap<String, Double> getFillingPriceList() {
+        HashMap<String, Double> price = new HashMap<>();
+        for (Map.Entry<String, Double> kvp: this.itemList.getPriceList().entrySet()) {
+            if(kvp.getKey().contains("FIL")) {
+                //.equals("FIL")
+                price.put(kvp.getKey(), kvp.getValue());
+            }
+        }
+        return price;
+    }
+
     public int countTotalItems() {
         int totalItems = 0;
         for (Map.Entry<String, Integer> kvp: this.basket.entrySet()) {

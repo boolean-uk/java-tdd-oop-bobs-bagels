@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 public class BasketTest {
 
@@ -227,6 +228,24 @@ public class BasketTest {
         Bagel bagel = ItemFactory.bagelFactory("BGLO");
 
         Assertions.assertEquals(0.49, bagel.getPrice());
+    }
+
+    @Test
+    public void checkEveryFillingPrice() {
+        Basket basket = new Basket();
+        HashMap<String, Double> referenceList = new HashMap<>();
+        referenceList.put("FILB", 0.12);
+        referenceList.put("FILE", 0.12);
+        referenceList.put("FILC", 0.12);
+        referenceList.put("FILX", 0.12);
+        referenceList.put("FILS", 0.12);
+        referenceList.put("FILH", 0.12);
+
+        Assertions.assertEquals(referenceList, basket.getFillingPriceList());
+
+        for (Map.Entry<String, Double> entry : basket.getFillingPriceList().entrySet()) {
+            Assertions.assertEquals(referenceList.get(entry.getKey()), entry.getValue());
+        }
     }
 
 }
