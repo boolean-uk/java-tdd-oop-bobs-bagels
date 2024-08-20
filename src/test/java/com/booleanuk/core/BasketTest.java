@@ -185,6 +185,47 @@ public class BasketTest {
         Assertions.assertEquals((float) expectedPrice/100, (float) itemPrice /100);
     }
 
+    @Test
+    public void onlyAllowMenuOrderingTest(){
+        Basket basket = new Basket();
+
+        // Asserting that adding items from the menu to the basket works.
+        String bagelName = "Bagel";
+        String bagelVariant = "Plain";
+
+        String coffeeName = "Coffee";
+        String coffeeVariant = "Black";
+
+        Item bagel = Menu.getItemFromMenu(bagelName, bagelVariant);
+        Item coffee = Menu.getItemFromMenu(coffeeName, coffeeVariant);
+
+        basket.addItemToBasket(bagel);
+        basket.addItemToBasket(coffee);
+
+        // Note that if the item is not in the basket, the function returns -1
+        Assertions.assertFalse(basket.itemInBasket(bagel) == -1);
+        Assertions.assertFalse(basket.itemInBasket(coffee) == -1);
+
+        Bagel wrongBagel = new Bagel("ABCD", 99, "Bagel", "Chocolate");
+        Coffee wrongCoffee = new Coffee("EFGH", 129, "Coffee", "Vanilla");
+
+        String wrongBagelResult = basket.addItemToBasket(wrongBagel);
+        String wrongCoffeeResult = basket.addItemToBasket(wrongCoffee);
+
+        Assertions.assertEquals(-1, basket.itemInBasket(bagel));
+        Assertions.assertEquals(-1, basket.itemInBasket(coffee));
+
+        Assertions.assertEquals(wrongBagelResult, wrongCoffeeResult);
+        Assertions.assertEquals("This item is not on the menu.", wrongBagelResult);
+
+
+
+
+
+
+
+    }
+
 
 
 
