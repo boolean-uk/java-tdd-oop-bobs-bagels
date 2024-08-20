@@ -1,7 +1,7 @@
 package com.booleanuk.core;
 
 import com.booleanuk.core.products.bagels.*;
-import com.booleanuk.core.products.fillings.SmokedSalmonFilling;
+import com.booleanuk.core.products.fillings.*;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -48,6 +48,15 @@ public class BagelTest {
 
         Assertions.assertEquals(0.49, b.getPrice());
         Assertions.assertEquals("BGLE", b.getSKU());
+    }
+
+    @Test
+    public void testBagelWithFillingGetPrice() {
+        Bagel b = new OnionBagel();
+        Filling f = new BaconFilling();
+        b.setFilling(f);
+
+        Assertions.assertEquals(0.61, b.getPrice());
     }
 
 }
