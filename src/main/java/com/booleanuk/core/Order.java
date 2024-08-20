@@ -1,6 +1,5 @@
 package com.booleanuk.core;
 
-import java.util.Objects;
 import java.util.Scanner;
 
 import static com.booleanuk.core.Menu.selectItemFromMenu;
