@@ -11,6 +11,7 @@ public class InventoryTest {
         Assertions.assertTrue(inventory.isItemAvailable("BGLO"));
         Assertions.assertFalse(inventory.isItemAvailable("Random_SKU"));
     }
+
     @Test
     public void testGetItem() {
         Inventory inventory = new Inventory();
