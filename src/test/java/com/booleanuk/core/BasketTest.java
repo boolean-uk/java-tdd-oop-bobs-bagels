@@ -124,10 +124,23 @@ public class BasketTest {
       Basket basket = new Basket();
       Inventory inventory = new Inventory();
 
-      //Should not pass due to the correct price
       Assertions.assertEquals(1.19f, basket.costOfProduct(inventory.menu.get("WhiteCoffee")), 0.001);
   }
 
+  @Test
+    public void ShouldGetTheTotalCostOfBasket(){
+      Basket basket = new Basket();
+      Inventory inventory = new Inventory();
+
+      basket.add(inventory.menu.get("WhiteCoffee"));
+      basket.add(inventory.menu.get("WhiteCoffee"));
+
+      basket.add(inventory.menu.get("SesameBagel"));
+      basket.add(inventory.menu.get("BaconFilling"));
+
+      //Sum should be 2.99 if it is set up correctly. For red test i have set up 3.0 which should fail due to not being exact.
+      Assertions.assertEquals(3.00f, basket.totalCost(), 0.001);
+  }
 
 }
 
