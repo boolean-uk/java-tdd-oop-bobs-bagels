@@ -49,6 +49,7 @@ class BasketTest {
 
     }
 
+
     @Test
     public void testAddFillingToBasket(){
         Basket basket = new Basket();
@@ -61,7 +62,11 @@ class BasketTest {
         basket.addFillingToBasket("FILC", 5);
         Assertions.assertEquals(0.60, basket.getBasketPrice());
     }
+    @Test
+    public void testUserRequestBagelCost(){
+        Basket basket = new Basket();
+        basket.userRequestBagelPrice("BGLE");
 
-
+    }
 
 }
