@@ -8,6 +8,7 @@ public class Basket {
    private  Map<String, Integer> basketItems;
    private int basketLimit;
    private int basketTotal;
+   private double basketPrice;
    Inventory inventory;
 
 
@@ -17,20 +18,20 @@ public class Basket {
         this.setBasketLimit(20);
         this.basketTotal = 0;
         this.basketItems = new HashMap<>();
-
+        this.basketPrice = 0.0;
     }
 
     public Map<String, Integer> getBasketItems() {
         return basketItems;
     }
 
-    public void addBagel (String bagelName, int quantity){
+    public void addBagel (String bagelSku, int quantity){
         if(!exceededBasketLimit(getBasketLimit(),this.basketTotal+quantity )){
-            if(this.basketItems.containsKey(bagelName)){
-                this.basketItems.put(bagelName, this.basketItems.get(bagelName)+quantity);
+            if(this.basketItems.containsKey(bagelSku)){
+                this.basketItems.put(bagelSku, this.basketItems.get(bagelSku)+quantity);
                 this.basketTotal = this.basketItems.values().stream().reduce(0, Integer::sum);
             }else{
-                this.basketItems.put(bagelName, quantity);
+                this.basketItems.put(bagelSku, quantity);
                 this.basketTotal = this.basketItems.values().stream().reduce(0, Integer::sum);
             }
         }else {
@@ -45,6 +46,14 @@ public class Basket {
 
     public int getBasketLimit() {
         return this.basketLimit;
+    }
+    public double getBasketPrice() {
+        double price = 0.0;
+        for(String key : this.basketItems.keySet()) {
+            int quantity = this.basketItems.get(key);
+            price += (this.inventory.getInventoryItemDetails(key).getPrice() * quantity);
+        }
+        return price;
     }
 
     public void setBasketLimit(int basketLimit) {

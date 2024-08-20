@@ -55,6 +55,12 @@ class BasketTest {
         basket.addFillingToBasket("FILC", 5);
         Assertions.assertEquals(5, basket.getBasketItems().get("FILC"));
     }
+    @Test
+    public void testGetBasketPrice(){
+        Basket basket = new Basket();
+        basket.addFillingToBasket("FILC", 5);
+        Assertions.assertEquals(0.60, basket.getBasketPrice());
+    }
 
 
 
