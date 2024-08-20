@@ -1,13 +1,13 @@
-| Classes      | Variables                           | Methods                           | Scenario                                         | Outcome                                    |
-|--------------|-------------------------------------|-----------------------------------|--------------------------------------------------|--------------------------------------------|
-| `Basket`     | `List<Bagel> bagels`                | `addBagel(Bagel bagel)`           | there is space in bagels                         | bagel is added                             |
-|              | `List<Bagel> bagels`                |                                   | there's no space in bagels                       | user notified that bagel not added         |
-| `Controller` | `Basket basket, View view`          | `basket.removeBagel(Bagel bagel)` | view.removeBagel(...) specifies a specific bagel | specified bagel is removed                 |
-|              |                                     |                                   | view.removeBagel(...) returns null (no bagel)    | user is notified that no bagel was removed |
-|              |                                     |                                   |                                                  |                                            |
-|              |                                     |                                   |                                                  |                                            |
-|              |                                     | `order()`                         | items in bagels                                  | order sent to store                        |
-|              |                                     |                                   | bagels list empty                                | warning given                              |
-|              |                                     | `removeBagel(String bagelType)`   | bagel of bagelType in bagels list                | one bagel of bagelType is removed          |
-|              |                                     |                                   | no bagel of bagelType in bagels list             | no bagel removed, user warned              |
-|              | `int basketSize, boolean userIsBob` | `setBasketSize(int newSize)`      | basketSize set to newSize                        |                                            |
+| Classes      | Variables                  | Methods                                   | Scenario                                         | Outcome                                         |
+|--------------|----------------------------|-------------------------------------------|--------------------------------------------------|-------------------------------------------------|
+| `Basket`     | `List<Bagel> bagels`       | `addBagel(Bagel bagel)`                   | there is space in bagels                         | bagel is added                                  |
+|              | `List<Bagel> bagels`       |                                           | there's no space in bagels                       | user notified that bagels has no space          |
+| `Controller` | `Basket basket, View view` | `basket.removeBagel(Bagel bagel)`         | view.removeBagel(...) specifies a specific bagel | specified bagel is removed                      |
+|              |                            |                                           | basket has no bagels                             | user is notified: no bagel to remove            |
+|              | `int basketSize`           | `changeBasketSize(int size)`              | basket has fewer bagels than size                | size is changed                                 |
+|              |                            |                                           | basket has more bagels thn size                  | basket is emptied, then size is changed         |
+| `Basket`     |                            | `calculateCost()`                         | items in bagels                                  | cost is calculated and returned                 |
+|              |                            |                                           | bagels list empty                                | 0 is returned                                   |
+| `View`       |                            | `AddBagel(Hashmap<String, float> prices)` | user agrees to price                             | requested bagel is returned to controller       |
+|              |                            |                                           | user disagrees to price                          | no bagel is returned or added                   |
+|              |                            |                                           | user wants to add a bagel                        | all options+costs are displayed to choose from  |

@@ -9,7 +9,7 @@ View
 	-scanner: Scanner
 	+validateManager():boolean
 	+mainMenu(): char
-	+addBagel(prices: Hashmap): void
+	+addBagel(Hashmap<String, float> prices): Bagel
 	+removeBagel(List<Bagel> bagels): Bagel
 	-listBagels(List<Bagel> bagels): void
 
