@@ -12,6 +12,15 @@ public class OrderManager {
 	private static HashMap<ItemEnumInterface, Integer> storeItemStock = null;
 
 	private HashMap<ItemEnumInterface, Integer> cart;
+	static private int defaultMaxBagels;
+	static private int defaultMaxCoffees;
+	static private int defaultMaxFillings;
+
+
+	public static int getMaxFillings(){
+		return defaultMaxFillings;
+	}
+
 
 	public OrderManager(){
 		this.cart = new HashMap<>();
@@ -22,6 +31,9 @@ public class OrderManager {
 	public static void openUpShopAndSetInventory(){
 		storeItemInfo = new HashMap<>();
 		storeItemStock = new HashMap<>();
+		defaultMaxBagels = 20;
+		defaultMaxCoffees = 15;
+		defaultMaxFillings = 25;
 		try{
 			File f = new File("src/main/java/com/booleanuk/core/menu.csv");
 			Scanner sc = new Scanner(f);
@@ -38,21 +50,18 @@ public class OrderManager {
 				switch(name){
 					case "Bagel":
 						BagelType bagel = BagelType.valueOf(variant);
-						int defaultBagelAmount = 20;
 						storeItemInfo.put(bagel, line);
-						storeItemStock.put(bagel, defaultBagelAmount);
+						storeItemStock.put(bagel, defaultMaxBagels);
 						break;
 					case "Coffee":
 						CoffeeType coffee = CoffeeType.valueOf(variant);
-						int defaultCoffeeAmount = 30;
 						storeItemInfo.put(coffee, line);
-						storeItemStock.put(coffee, defaultCoffeeAmount);
+						storeItemStock.put(coffee, defaultMaxCoffees);
 						break;
 					case "Filling":
 						FillingType filling = FillingType.valueOf(variant);
-						int defaultFillingAmount = 25;
 						storeItemInfo.put(filling, line);
-						storeItemStock.put(filling, defaultFillingAmount);
+						storeItemStock.put(filling, defaultMaxFillings);
 						break;
 				}
 			}
@@ -68,6 +77,9 @@ public class OrderManager {
 		// check if in store
 		int stock = storeItemStock.get(item);
 		if (stock > 0){
+			// update stock
+			storeItemStock.put(item, stock - 1);
+
 			boolean inCart = cart.containsKey(item);
 			if (inCart) {
 				int amountInCart = cart.get(item);
