@@ -34,7 +34,7 @@ public class Bagel extends Product {
     }
 
     public Double getFillingPrice(FillingType variant) {
-        return 0.0;
+        return this.fillingsPrices.get(variant);
     }
 
     public static class BagelBuilder {
