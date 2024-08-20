@@ -25,20 +25,18 @@ public class ItemHandler {
             System.out.println("Basket is full.");
             return null;
         }
+        Item item;
         if (this.allItems.containsKey(SKU) && this.allItems.get(SKU).equals("Bagel")) {
-            Bagel bagel = new Bagel(SKU, idTracker);
-            this.idTracker++;
-            this.basket.add(bagel);
-            return bagel;
+            item = new Bagel(SKU, idTracker);
+        } else if (this.allItems.containsKey(SKU) && this.allItems.get(SKU).equals("Coffee")) {
+            item = new Coffee(SKU, idTracker);
+        } else {
+            System.out.println("Not a correct Coffee or Bagel SKU.");
+            return null;
         }
-        if (this.allItems.containsKey(SKU) && this.allItems.get(SKU).equals("Coffee")) {
-            Coffee coffee = new Coffee(SKU, idTracker);
-            this.idTracker++;
-            this.basket.add(coffee);
-            return coffee;
-        }
-        System.out.println("No such bagel exists.");
-        return null;
+        this.idTracker++;
+        this.basket.add(item);
+        return item;
     }
 
     public Filling addItem(String SKU, Item bagel) {
