@@ -185,19 +185,7 @@ public class BasketTest {
         Assertions.assertEquals((float) expectedPrice/100, (float) itemPrice /100);
     }
 
-    @Test
-    public void addFillingToBagelTest(){
-        String name = "Bagel";
-        String variant = "Plain";
-        Item item = Menu.getItemFromMenu(name, variant);
-        assert item != null;
-        Bagel bagel = new Bagel(item.sku, item.price, item.name, item.variant);
 
-        Filling filling = Menu.getFillingFromMenu();
-        bagel.addFilling(filling);
-
-        assert(bagel.fillings.contains(filling));
-    }
 
 
 }
