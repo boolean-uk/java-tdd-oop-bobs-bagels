@@ -32,6 +32,6 @@
 | 'Coffee extends Item'  |                                                  |                                    |                                                                         |                                                                                         |
 |                        |                                                  |                                    |                                                                         |                                                                                         |
 | 'Receipt'              | 'HashMap<String, List<Item>> orderedItemsList'   | 'printReceipt()'                   | orderedItemsList is not empty.                                          | Print a receipt to terminal.                                                            |
-|                        |                                                  |                                    | orderedItemsList is empty.                                              |                                                                                         |
+|                        |                                                  |                                    | orderedItemsList is empty.                                              | Print that HashMap is empty                                                             |
 
 Also basic getters and setters

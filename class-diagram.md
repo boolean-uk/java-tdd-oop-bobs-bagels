@@ -20,7 +20,7 @@
             /\ 1
             |
             | 0...n
-| Item                   |
+| Item                   |  
 |------------------------|
 | -SKU: String           |
 | -price: double         |
@@ -37,3 +37,12 @@
 |                                  |               |        |
 | +removeFilling(id: int): boolean |               |        |
 | +getTotal(): double              |               |        |
+
+
+| Receipt                                        |
+|------------------------------------------------|
+| -orderedItemsList: HashMap<String, List<Item>> |
+|                                                |
+| +printReceipt(): void                          |
+|                                                |
+
