@@ -55,10 +55,20 @@ public class TestOrderManager {
         om.addItem(CoffeeType.Cappuccino);
         expectedPrice += pricePerCappuccino*2;
         Assertions.assertEquals(expectedPrice, om.getPrice());
+    }
+
+    @Test
+    public void testRemoveItem(){
+        OrderManager om = new OrderManager();
+        String result;
+        result = om.removeItem(BagelType.Onion);
+        Assertions.assertEquals("Onion is not in cart.", result);
+
+        om.addItem(BagelType.Onion);
+        result = om.removeItem(BagelType.Onion);
+        Assertions.assertEquals("Removed Onion from cart.", result);
 
 
     }
-
-
 
 }
