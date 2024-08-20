@@ -32,7 +32,7 @@ public class Basket {
         int counter = 1;
 
         for (Item i : basket){
-            System.out.println(counter+ ". " + i.name + " " + i.variant + " " + i.quantity);
+            System.out.println(counter+ " " + i.name + " " + i.variant + " " + i.quantity + " " + (float) i.price/100 +"$");
             counter++;
         }
     }

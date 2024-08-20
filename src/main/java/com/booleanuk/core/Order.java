@@ -3,6 +3,7 @@ package com.booleanuk.core;
 import java.util.Objects;
 import java.util.Scanner;
 
+import static com.booleanuk.core.Menu.printFillingMenu;
 import static com.booleanuk.core.Menu.selectItemFromMenu;
 
 public class Order {
@@ -69,6 +70,13 @@ public class Order {
 
                     if (chosenItem == null)
                         break;
+
+                    if (Objects.equals(chosenItem.name, "Bagel")){
+                        Bagel bagel = new Bagel(chosenItem.sku, chosenItem.price, chosenItem.name, chosenItem.variant);
+                        bagel.addFillingsToBagel(input);
+                        basket.addItemToBasket(bagel);
+                        break;
+                    }
 
                     basket.addItemToBasket(chosenItem);
                     break;

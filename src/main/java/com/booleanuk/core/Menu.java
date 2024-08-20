@@ -5,8 +5,8 @@ import java.util.Objects;
 import java.util.Scanner;
 
 public class Menu {
-    private static final ArrayList<Item> menu = new ArrayList<>();
-    private static final ArrayList<Filling> fillingMenu = new ArrayList<>();
+    public static final ArrayList<Item> menu = new ArrayList<>();
+    public static final ArrayList<Filling> fillingMenu = new ArrayList<>();
 
     static {
         initializeMenu();
@@ -70,20 +70,6 @@ public class Menu {
         return menu.get(choice-1);
     }
 
-    public static Filling selectFillingFromMenu(){
-        Scanner input = new Scanner(System.in);
-        printMenu();
-        System.out.println("Select item to add to your basket, or 0 to go back.");
-        int choice = input.nextInt();
-
-        if (Objects.equals(1, choice))
-        {
-            return null;
-        }
-
-        return fillingMenu.get(choice-1);
-    }
-
     public static void printMenu(){
         System.out.println("\t\t~Menu~");
         int number = 1;
@@ -92,4 +78,15 @@ public class Menu {
             number++;
         }
     }
+
+    public static void printFillingMenu(){
+        System.out.println("\t\t~Fillings~");
+        int number = 1;
+        for (Item i : fillingMenu){
+            System.out.println(number + ". " + i.variant + " " + (float) i.price/100);
+            number++;
+        }
+    }
+
+
 }
