@@ -14,6 +14,7 @@ public class View {
         System.out.println("What do you want to do?");
         System.out.println("1. Add Bagel");
         System.out.println("2. Remove Bagel");
+        System.out.println("3. Change basket size");
 
         return getInt();
     }
@@ -83,5 +84,11 @@ public class View {
             return null;
         }
         return bagels.get(output);
+    }
+
+    public int getNewBasketSize() {
+        System.out.println("What should the new basket size be?");
+        System.out.println("WARNING: Changing basket size to a number smaller than the current number of bagels will empty the current basket!");
+        return getInt();
     }
 }

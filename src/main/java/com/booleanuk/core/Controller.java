@@ -48,6 +48,9 @@ public class Controller {
                 case 2:
                     basket.removeBagel(view.chooseBagel(basket.getBagels()));
                     break;
+                case 3:
+                    basket.setBasketSize(view.getNewBasketSize());
+                    break;
                 default:
                     keepRunning = false;
                     view.printExit();
