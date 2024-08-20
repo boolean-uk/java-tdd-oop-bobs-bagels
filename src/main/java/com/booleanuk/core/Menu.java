@@ -47,6 +47,15 @@ public class Menu {
         return null;
     }
 
+    public static Boolean itemIsOnTheMenu(Item item){
+        for (Item i : menu){
+            if (Objects.equals(i.sku, item.sku) & Objects.equals(i.price, item.price)
+                    & Objects.equals(i.name, item.name) & Objects.equals(i.variant, item.variant))
+                return true;
+        }
+        return false;
+    }
+
     public static Filling getFillingFromMenu(String name, String variant){
         for (Filling f : fillingMenu){
             if (Objects.equals(f.name, name) & Objects.equals(f.variant, variant)){

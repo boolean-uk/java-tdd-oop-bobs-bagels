@@ -14,10 +14,16 @@ public class Basket {
 
     public String addItemToBasket(Item item){
         if (basketIsFull()){
-            return "Basket is full.\n\n";
+            return "Basket is full.";
         }
 
-        if (itemInBasket(item) == -1){
+        //else if (!Menu.itemIsOnTheMenu(item))
+        else if (!Menu.itemIsOnTheMenu(item))
+        {
+            return "This item is not on the menu.";
+        }
+
+        else if (itemInBasket(item) == -1){
             this.basket.add(item);
         }
 
@@ -43,7 +49,7 @@ public class Basket {
         int quantity;
 
         Scanner input = new Scanner(System.in);
-        System.out.println("Your basket:");
+        System.out.println("\nYour basket:");
         printBasketContent();
         System.out.println("\nChoose item to remove or press 0 to go back.");
 
@@ -63,7 +69,7 @@ public class Basket {
                     basket.remove(userInput-1);
                 }
 
-                return variant + " " + name + " removed from basket.\n\n";
+                return variant + " " + name + " removed from basket.";
             }
 
             else {

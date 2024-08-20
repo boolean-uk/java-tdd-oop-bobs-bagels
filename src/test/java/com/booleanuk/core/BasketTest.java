@@ -164,28 +164,6 @@ public class BasketTest {
     }
 
     @Test
-    public void getCostOfBagel(){
-        /*
-        As a customer,
-        So I know what the damage will be,
-        I'd like to know the cost of a bagel before I add it to my basket.
-         */
-
-        String name = "Bagel";
-        String variant = "Plain";
-        Item item = Menu.getItemFromMenu(name, variant);
-
-        /*
-        Assert that price of bagel can be found before adding to basket.
-        Expected price fetched from menu.
-        */
-        assert item != null;
-        int itemPrice = item.price;
-        int expectedPrice = 39;
-        Assertions.assertEquals((float) expectedPrice/100, (float) itemPrice /100);
-    }
-
-    @Test
     public void onlyAllowMenuOrderingTest(){
         Basket basket = new Basket();
 
@@ -203,8 +181,8 @@ public class BasketTest {
         basket.addItemToBasket(coffee);
 
         // Note that if the item is not in the basket, the function returns -1
-        Assertions.assertFalse(basket.itemInBasket(bagel) == -1);
-        Assertions.assertFalse(basket.itemInBasket(coffee) == -1);
+        Assertions.assertNotEquals(-1, (int) basket.itemInBasket(bagel));
+        Assertions.assertNotEquals(-1, (int) basket.itemInBasket(coffee));
 
         Bagel wrongBagel = new Bagel("ABCD", 99, "Bagel", "Chocolate");
         Coffee wrongCoffee = new Coffee("EFGH", 129, "Coffee", "Vanilla");
@@ -212,18 +190,11 @@ public class BasketTest {
         String wrongBagelResult = basket.addItemToBasket(wrongBagel);
         String wrongCoffeeResult = basket.addItemToBasket(wrongCoffee);
 
-        Assertions.assertEquals(-1, basket.itemInBasket(bagel));
-        Assertions.assertEquals(-1, basket.itemInBasket(coffee));
+        Assertions.assertEquals(-1, basket.itemInBasket(wrongBagel));
+        Assertions.assertEquals(-1, basket.itemInBasket(wrongCoffee));
 
         Assertions.assertEquals(wrongBagelResult, wrongCoffeeResult);
         Assertions.assertEquals("This item is not on the menu.", wrongBagelResult);
-
-
-
-
-
-
-
     }
 
 

@@ -15,14 +15,6 @@ public abstract class Item {
         this.quantity = 1;
     }
 
-    public Item(String sku, Integer price, String name, String variant, Integer quantity) {
-        this.sku = sku;
-        this.price = price;
-        this.name = name;
-        this.variant = variant;
-        this.quantity = quantity;
-    }
-
     public Integer getQuantity() { return this.quantity; }
     public Integer getPrice(){ return this.price; }
     public String getVariant(){ return ""; }
