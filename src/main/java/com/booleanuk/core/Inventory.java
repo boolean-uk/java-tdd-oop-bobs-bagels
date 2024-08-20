@@ -1,24 +1,46 @@
 package com.booleanuk.core;
 
 import com.booleanuk.core.products.Product;
+import com.booleanuk.core.products.bagels.EverythingBagel;
 import com.booleanuk.core.products.bagels.OnionBagel;
 import com.booleanuk.core.products.bagels.PlainBagel;
-import com.booleanuk.core.products.fillings.SmokedSalmonFilling;
+import com.booleanuk.core.products.bagels.SesameBagel;
+import com.booleanuk.core.products.coffees.BlackCoffee;
+import com.booleanuk.core.products.coffees.CapuccinoCoffee;
+import com.booleanuk.core.products.coffees.LatteCoffee;
+import com.booleanuk.core.products.coffees.WhiteCoffee;
+import com.booleanuk.core.products.fillings.*;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class Inventory {
 
-    HashMap<Product, Integer> inventory; // <Product, the quantity of this product in stock>
+    private HashMap<Product, Integer> inventory; // <Product, the quantity of this product in stock>
 
     public Inventory() {
         this.inventory = new HashMap<>();
 
-        // Some hardcoded products just for testing (will expand over time)
+        // Some hardcoded products just for testing
+        // Bagels
         this.inventory.put(new OnionBagel(), 1);
         this.inventory.put(new PlainBagel(), 1);
+        this.inventory.put(new EverythingBagel(), 1);
+        this.inventory.put(new SesameBagel(), 1);
+
+        // Fillings
         this.inventory.put(new SmokedSalmonFilling(), 1);
+        this.inventory.put(new BaconFilling(), 1);
+        this.inventory.put(new CheeseFilling(), 1);
+        this.inventory.put(new CreamCheeseFilling(), 1);
+        this.inventory.put(new EggFilling(), 1);
+        this.inventory.put(new HamFilling(), 1);
+
+        // Coffee
+        this.inventory.put(new WhiteCoffee(), 1);
+        this.inventory.put(new BlackCoffee(), 1);
+        this.inventory.put(new CapuccinoCoffee(), 1);
+        this.inventory.put(new LatteCoffee(), 1);
     }
 
     public boolean productIsInStock(Product p) {
@@ -36,6 +58,11 @@ public class Inventory {
             }
         }
         return false;
+    }
+
+
+    public HashMap<Product, Integer> getInventory() {
+        return this.inventory;
     }
 
 }
