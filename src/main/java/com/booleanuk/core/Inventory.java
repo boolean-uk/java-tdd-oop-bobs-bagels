@@ -30,7 +30,7 @@ public class Inventory {
         products.put("FILH", new Product("FILH", 12, "Ham"));
 
     }
-    public Product getProduct(String sku) {
-        return products.get(sku);
+    public Product getProduct(String SKU) {
+        return products.get(SKU);
     }
 }
