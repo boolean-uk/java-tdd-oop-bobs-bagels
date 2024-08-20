@@ -82,6 +82,16 @@ public class OrderTest {
         Assertions.assertEquals(30, order.getMaxBasketCapacity());
     }
 
+    // test getProductPrice(String SKU)
+    @Test
+    public void testGetProductPrice() {
+        Order order = new Order();
+        Store store = new Store("Bob's Bagels");
+        Product product = store.getInventory().getProduct("BGLO");
+
+        Assertions.assertEquals(product.getPrice(), order.getProductPrice("BGLO"));
+    }
+
     // test multi buy discount 6 bagels for 249
     @Test
     public void testMultiBuyDiscount6Bagels() {
