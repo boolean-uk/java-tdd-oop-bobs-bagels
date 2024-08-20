@@ -142,6 +142,7 @@ public class MainTest {
         bagels1.removeFilling(fillings2);
         Assertions.assertEquals(1, bagels1.getFillings().size());
     }
+
     /*
 
     Just for checking my basket
@@ -160,6 +161,30 @@ public class MainTest {
         bagels3.addFilling(fillings2);
         order.printBasket();
         bagels2.printFillings();
+    }
+
+    @Test
+    public void testDiscountEighteenBagels() {
+        order.addProduct(bagels1); // 6
+        order.addProduct(bagels1);
+        order.addProduct(bagels1);
+        order.addProduct(bagels1);
+        order.addProduct(bagels1);
+        order.addProduct(bagels1);
+        order.addProduct(bagels2); //6
+        order.addProduct(bagels2);
+        order.addProduct(bagels2);
+        order.addProduct(bagels2);
+        order.addProduct(bagels2);
+        order.addProduct(bagels2);
+        order.addProduct(bagels3); // 6
+        order.addProduct(bagels3);
+        order.addProduct(bagels3);
+        order.addProduct(bagels3);
+        order.addProduct(bagels3);
+        order.addProduct(bagels3);
+        Assertions.assertEquals(6.48, order.getTotalPrice());
+
     }
 }
 
