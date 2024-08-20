@@ -67,63 +67,37 @@
 |             |                                           |                                                                     |                                                                 |                                                                                                                               |
 |             |                                           |                                                                     |                                                                 |                                                                                                                               |
 
-Extension
 
-| Classes     | Variables                                  | Methods                          | Scenario                                                        | Outcomes                                                                                                                      |
-|-------------|--------------------------------------------|----------------------------------|-----------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------|
-| `Store`     | `private Inventory inventory`              | `addOrder(Order order)`          | Argument is valid type                                          | Add order to order history and return true                                                                                    |
-|             | `private Map<String, Order> orderHistory`  |                                  | Argument is not of type Order                                   | Return false                                                                                                                  |
-|             | `private String name`                      |                                  |                                                                 |                                                                                                                               |
-|             |                                            | `getInventory()`                 |                                                                 | Return inventory                                                                                                              |
-|             | `private List<MultiBuyDiscount> discounts` |                                  |                                                                 |                                                                                                                               |
-|             |                                            | `getName()`                      |                                                                 | Return name                                                                                                                   |
-|             |                                            |                                  |                                                                 |                                                                                                                               |
-| `Inventory` | `private Map<String, Product> inventory;`  | `getProduct(String SKU)`         | SKU is in the map                                               | Return product                                                                                                                |
-|             |                                            |                                  | Sku is not in the map                                           | Return null                                                                                                                   |
-|             |                                            |                                  |                                                                 |                                                                                                                               |
-|             |                                            | `setInventory()`                 |                                                                 | Sets inventory                                                                                                                |
-|             |                                            |                                  |                                                                 |                                                                                                                               |
-| `Order`     | `private Map<Product, Integer> basket`     | `addProduct(Product product)`    | Argument is valid type and is not in the basket                 | Add Product to basket, set value (quantity) to 1, add price to total sum, increment the currentBasketCapacity and return true |
-|             |                                            |                                  | Argument is valid type and is already in the basket             | Increment quantity, add price to total sum, increment the currentBasketCapacity and return true                               |
-|             |                                            |                                  | Argument is not of type Product                                 | Return false                                                                                                                  |
-|             | `private totalSum`                         |                                  | Basket is ful                                                   | Return false                                                                                                                  |
-|             | `private int currentBasketCapacity`        |                                  |                                                                 |                                                                                                                               |
-|             | `private int maxBasketCapacity`            | `removeProduct(Product product)` | Argument is valid type, product is in the basket and value == 1 | Remove Product from basket, subtract price from total sum, decrement currentBasketCapacity and return true                    |
-|             |                                            |                                  | Argument is valid type, product is in the basket and value > 1  | Increment quantity, subtract price from total sum, increment the currentBasketCapacity and return true                        |
-|             |                                            |                                  | Argument is valid type, product is not in the basket            | Return false and write message                                                                                                |
-|             |                                            |                                  | Argument is not of type Product                                 | Return false                                                                                                                  |
-|             |                                            |                                  |                                                                 |                                                                                                                               |
-|             |                                            | `getTotalSum()`                  |                                                                 | Return total sum                                                                                                              |
-|             |                                            |                                  |                                                                 |                                                                                                                               |
-|             |                                            | `isBasketFull()`                 | Basket is ful                                                   | Write message to console and return true                                                                                      |
-|             |                                            |                                  | Basket is not ful                                               | Return false                                                                                                                  |
-|             |                                            |                                  |                                                                 |                                                                                                                               |
-|             |                                            |                                  |                                                                 |                                                                                                                               |
-|             |                                            | `ìncrementBasketCapacity()`      |                                                                 | Capacity is incremented                                                                                                       |
-|             |                                            |                                  |                                                                 |                                                                                                                               |
-|             |                                            | `getProductsInBasket()`          | There are products in basket                                    | Return products as a list                                                                                                     |
-|             |                                            |                                  | There are not any products in basket                            | Return empty list                                                                                                             |
-|             |                                            |                                  |                                                                 |                                                                                                                               |
-| `Product`   | `private String SKU`                       | `getSKU()`                       |                                                                 | Return the SKU                                                                                                                |
-|             | `private int price`                        | `getPrice()`                     |                                                                 | Return the price                                                                                                              |
-|             | `private String variant`                   | `getVariant()`                   |                                                                 | Return the variant                                                                                                            |
-|             |                                            |                                  |                                                                 |                                                                                                                               |
-| `Bagel`     | `private Filling[] fillings`               | `addFilling(Filling filling)`    | Argument is valid type                                          | Add filling to array and return true                                                                                          |
-|             | Inherit from product                       |                                  | Argument is not of type Filling                                 | Return false                                                                                                                  |
-|             |                                            |                                  |                                                                 |                                                                                                                               |
-| `Filling`   | Inherit from product                       |                                  |                                                                 |                                                                                                                               |
-|             |                                            |                                  |                                                                 |                                                                                                                               |
-| `Coffee`    | Inherit from product                       |                                  |                                                                 |                                                                                                                               |
-|             |                                            |                                  |                                                                 |                                                                                                                               |
-|             |                                            |                                  |                                                                 |                                                                                                                               |
-|             |                                            |                                  |                                                                 |                                                                                                                               |
-|             |                                            |                                  |                                                                 |                                                                                                                               |
-|             |                                            |                                  |                                                                 |                                                                                                                               |
-|             |                                            |                                  |                                                                 |                                                                                                                               |
-|             |                                            |                                  |                                                                 |                                                                                                                               |
-|             |                                            |                                  |                                                                 |                                                                                                                               |
-|             |                                            |                                  |                                                                 |                                                                                                                               |
-|             |                                            |                                  |                                                                 |                                                                                                                               |
-|             |                                            |                                  |                                                                 |                                                                                                                               |
-|             |                                            |                                  |                                                                 |                                                                                                                               |
-|             |                                            |                                  |                                                                 |                                                                                                                               |
+User Stories for extension 1:
+As a Bob's Bagels manager,
+So that I can offer better deals to customers, 
+I’d like to apply a discount when a customer buys 6 bagels of any variant. 
+
+As a Bob's Bagels manager,
+So that I can attract more customers,
+I’d like to apply a discount when a customer buys 12 bagels of any variant.  
+
+As a Bob's Bagels manager,
+So that I can increase sales of coffee and bagels,
+I’d like to offer a discount when a customer buys a coffee and a bagel together.
+
+As a Bob's Bagels manager,
+So that I can maximize revenue,
+I’d like the system to automatically apply the least possible discount to customer orders.
+
+As a Bob's Bagels manager,
+So that I can maximize revenue,
+I do not want to apply a coffee and bagels discounts if the bagels already is in a discount.
+
+User Stories for extension 2:
+As a customer,
+So that I have a record of my purchase,
+I’d like to receive a printed receipt for my order.
+
+As a customer,
+So that I can see the details of my purchase,
+I’d like the receipt to include a list of items purchased with their quantities and prices.
+
+As a customer,
+So that I can see the total amount I need to pay,
+I’d like the receipt to display the total sum of the order.
