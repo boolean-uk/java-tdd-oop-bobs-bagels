@@ -9,6 +9,9 @@ public class Order {
     private HashMap<String, Integer> basket = new HashMap<>();
     private UUID id;
     private Store store;
+    private ArrayList<Integer> bagelList = new ArrayList<>();
+    private ArrayList<Integer> coffeeList = new ArrayList<>();
+    private ArrayList<Integer> fillingList = new ArrayList<>();
 
     public Order(Store store){
         this.id = UUID.randomUUID();
@@ -72,25 +75,8 @@ public class Order {
     public int getPrice(){
         int result = 0;
         int singularBagels = 0;
-        ArrayList<Integer> bagelList = new ArrayList<>();
-        ArrayList<Integer> coffeeList = new ArrayList<>();
 
-        for(HashMap.Entry<String, Integer> entry : basket.entrySet()){
-            String sku = entry.getKey();
-            int amount = entry.getValue();
-            if(sku.startsWith("BGL")){
-                for(int i = 0; i < amount; ++i){
-                    bagelList.add(store.getPrice(sku));
-                }
-            }
-            else if(sku.startsWith("COF")){
-                for(int i = 0; i < amount; ++i){
-                    coffeeList.add(store.getPrice(sku));
-                }
-            }
-        }
-        bagelList.sort(null);
-        coffeeList.sort(null);
+        addPricesToLists();
 
         for(int i = 0; i < bagelList.size(); ++i){
             result += bagelList.get(i);
@@ -108,22 +94,50 @@ public class Order {
                 singularBagels = 0;
             }
         }
-        System.out.println(result);
 
         for(Integer coffeePrice : coffeeList){
             if(singularBagels > 0) {
                 result -= bagelList.get(bagelList.size() - singularBagels);
                 result += 125;
                 singularBagels--;
-                System.out.println("1");
             }
             else{
                 result += coffeePrice;
-                System.out.println("2");
             }
-            System.out.println(result);
+        }
+
+        for(Integer fillingPrice : fillingList){
+            result += fillingPrice;
         }
 
         return result;
     }
+
+    private void addPricesToLists(){
+        for(HashMap.Entry<String, Integer> entry : basket.entrySet()){
+            String sku = entry.getKey();
+            int amount = entry.getValue();
+            if(sku.startsWith("BGL")){
+                for(int i = 0; i < amount; ++i){
+                    bagelList.add(store.getPrice(sku));
+                }
+            }
+            else if(sku.startsWith("COF")){
+                for(int i = 0; i < amount; ++i){
+                    coffeeList.add(store.getPrice(sku));
+                }
+            }
+            else{
+                for(int i = 0; i < amount; ++i){
+                    fillingList.add(store.getPrice(sku));
+                }
+            }
+        }
+        bagelList.sort(null);
+        coffeeList.sort(null);
+        fillingList.sort(null);
+    }
+
 }
+
+

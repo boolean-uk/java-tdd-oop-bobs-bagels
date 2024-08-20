@@ -118,4 +118,47 @@ public class TestExtension {
 
         Assertions.assertEquals(997, order1.getPrice());
     }
+
+    @Test
+    public void testDiscountCombinedPlus() throws Exception {
+        mainTest();
+        store.setBasketCapacity(30);
+        Order order1 = new Order(store);
+
+        order1.addProduct("BGLO");
+        order1.addProduct("BGLO");
+        order1.addProduct("BGLO");
+        order1.addProduct("BGLP");
+        order1.addProduct("BGLP");
+        order1.addProduct("BGLP");
+        order1.addProduct("BGLE");
+        order1.addProduct("BGLE");
+        order1.addProduct("BGLE");
+        order1.addProduct("BGLS");
+        order1.addProduct("BGLS");
+        order1.addProduct("BGLS");
+
+        order1.addProduct("FILB");
+        order1.addProduct("FILC");
+        order1.addProduct("FILB");
+
+        order1.addProduct("BGLE");
+        order1.addProduct("BGLO");
+        order1.addProduct("BGLP");
+        order1.addProduct("BGLS");
+        order1.addProduct("BGLO");
+        order1.addProduct("BGLO");
+
+        order1.addProduct("BGLO");
+        order1.addProduct("COFB");
+
+        order1.addProduct("BGLO");
+        order1.addProduct("COFW");
+
+        order1.addProduct("COFC");
+
+        Assertions.assertEquals(1063, order1.getPrice());
+    }
+
+
 }
