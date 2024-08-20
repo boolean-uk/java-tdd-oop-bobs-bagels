@@ -53,10 +53,21 @@ public class BasketTest {
 
     @Test
     public void ShouldRemoveFromBasket(){
+        Basket basket = new Basket();
+        Inventory inventory = new Inventory();
 
+        basket.add("BGLO");
+        basket.add("BGLO");
 
+        //there are two same bagels meaning that the below message should be true.
+        Assertions.assertEquals("One product is removed", basket.remove("BGLO"));
 
-  }
+        //Should have removed one bagel and decreased the productCount with one.
+        Assertions.assertEquals(1, basket.retrieveProductCount());
+
+        //Should fail due to different return types for the last item
+        Assertions.assertEquals("One product is removed", basket.remove("BGLO"));
+    }
 
     @Test
     public void ShouldNotLetToppingExistWithoutBagel(){
