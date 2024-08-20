@@ -87,6 +87,9 @@ public class BasketTest {
 
     @Test
     public void shouldGetCostOfProduct(){
+        Basket basket = new Basket();
+
+        Assertions.assertEquals(0.50f, basket.costOfProduct("BGLS"), 0.001);
 
   }
 

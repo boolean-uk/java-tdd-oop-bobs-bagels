@@ -80,13 +80,13 @@ public class Basket {
         return "This product does not exist in basket!";
     }
 
-
     public void changeCapacity(int newSize){
         basketCapacity = newSize;
     }
 
-    public double costOfProduct(Product chosenProduct){
-        return chosenProduct.retrievePrice();
+    public double costOfProduct(String sku){
+        Product newItem =  inventory.getItem(sku);
+        return newItem.retrievePrice();
     }
 
     public double totalCost(){
