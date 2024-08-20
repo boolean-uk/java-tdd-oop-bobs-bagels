@@ -160,7 +160,7 @@ public class ItemHandler {
     public void calcDiscountCounterMap() {
         discountCounterMap = new HashMap<>();
         for (Item item : basket) {
-            receipt.addToOrderedItemsList(item);
+            receipt.addToOrderedItemsListsMap(item);
             if (discountCounterMap.containsKey(item.getName())) {
                 if (item.getSKU().equals("BGLP")) {
                     discountCounterMap.get(item.getName()).addFirst(item);

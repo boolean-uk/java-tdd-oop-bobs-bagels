@@ -6,18 +6,22 @@ import java.util.HashMap;
 import java.util.List;
 
 public class Receipt {
-    private HashMap<String, List<Item>> orderedItemsList;
+    private HashMap<String, List<Item>> orderedItemsListsMap;
     private ArrayList<String> orderStrings;
+    private double totalDiscount;
 
     public Receipt() {
-        this.orderedItemsList = new HashMap<>();
+        this.orderedItemsListsMap = new HashMap<>();
+        this.totalDiscount = 0;
     }
 
     public void resetReceipt() {
-        this.orderedItemsList = new HashMap<>();
+        this.orderedItemsListsMap = new HashMap<>();
+        this.totalDiscount = 0;
     }
 
     public void printReceipt() {
+        // Format receipt
         this.createOrderStrings();
         System.out.println();
         System.out.println("    ~~~ Bob's Bagels ~~~");
@@ -33,6 +37,11 @@ public class Receipt {
         System.out.println("----------------------------");
         System.out.println(this.orderStrings.getLast());
         System.out.println();
+        if (this.totalDiscount > 0) {
+            System.out.println(" You saved a total of £" + this.totalDiscount/10000);
+            System.out.println("       on this shop");
+            System.out.println();
+        }
         System.out.println("        Thank you");
         System.out.println("      for your order!");
         System.out.println();
@@ -40,71 +49,107 @@ public class Receipt {
     }
 
     public void createOrderStrings() {
+        //Create Strings to print
         orderStrings = new ArrayList<>();
         double totalSum = 0;
+        double totalOriginalSum = 0;
         double sum;
-        HashMap<String, List<Filling>> fillings;
-        int stringLength = 29;
-        String currentCostString;
+        double originalSum;
+        HashMap<String, List<Item>> fillings;
         String currentString;
 
-        for (String SKU : this.orderedItemsList.keySet()) {
-
+        // Loop through every variant
+        for (String SKU : this.orderedItemsListsMap.keySet()) {
             fillings = new HashMap<>();
             sum = 0;
-            for (Item item : this.orderedItemsList.get(SKU)) {
+            originalSum = 0;
+
+            // Pick out and save cost and filling for every item
+            for (Item item : this.orderedItemsListsMap.get(SKU)) {
                 totalSum += item.getTotal();
+                totalOriginalSum += item.getPrice();
                 sum += item.getTotal();
+                originalSum += item.getPrice();
                 if (item.getFillings() != null) {
-                    for (Filling filling : item.getFillings()) {
+                    for (Item filling : item.getFillings()) {
                         if (!fillings.containsKey(filling.getVariant())) {
-                            List<Filling> fillingList = new ArrayList<>();
+                            List<Item> fillingList = new ArrayList<>();
                             fillings.put(filling.getVariant(), fillingList);
                         }
                         fillings.get(filling.getVariant()).add(filling);
+                        totalOriginalSum += filling.getPrice();
+                        originalSum += filling.getPrice();
                     }
                 }
             }
-            currentString = this.orderedItemsList.get(SKU).getFirst().getVariant() + " " + this.orderedItemsList.get(SKU).getFirst().getName();
+
+            currentString = formatString(sum, this.orderedItemsListsMap.get(SKU));
+            this.orderStrings.add(currentString);
+
+            if (!fillings.isEmpty()) {
+                for (List<Item> list : fillings.values()) {
+                    currentString = formatString(-1, list);
+                    this.orderStrings.add(currentString);
+                }
+            }
+            if (sum < originalSum) {
+                currentString = formatDiscountString(originalSum, sum);
+                this.orderStrings.add(currentString);
+            }
+        }
+        currentString = formatString(totalSum, null);
+        this.totalDiscount = totalOriginalSum - totalSum;
+        this.orderStrings.add(currentString);
+    }
+
+    public String formatString(double sum, List<Item> itemList) {
+        int stringLength = 29;
+        String currentString;
+
+        if (itemList == null) {
+            currentString = "Total";
+        } else {
+            if (!(itemList.getFirst() instanceof Filling)) {
+                currentString = itemList.getFirst().getVariant() + " " + itemList.getFirst().getName();
+            } else {
+                currentString = " +" + itemList.getFirst().getVariant() + " " + itemList.getFirst().getName();
+            }
+
             for (int i = currentString.length(); i < 20; i++) {
                 currentString = currentString.concat(" ");
             }
 
-            currentString += this.orderedItemsList.get(SKU).size();
-            currentCostString = "£" + (sum/10000);
+            currentString += itemList.size();
+        }
 
-            for (int i = currentString.length(); i < stringLength-currentCostString.length(); i++) {
+        if (sum != -1) {
+            String currentCostString = "£" + (sum / 10000);
+
+            for (int i = currentString.length(); i < stringLength - currentCostString.length(); i++) {
                 currentString = currentString.concat(" ");
             }
             currentString += currentCostString;
-            this.orderStrings.add(currentString);
-
-            if (!fillings.isEmpty()) {
-                for (List<Filling> list : fillings.values()) {
-                    currentString = " +" + list.getFirst().getVariant() + " " + list.getFirst().getName();
-                    for (int i = currentString.length(); i < 20; i++) {
-                        currentString = currentString.concat(" ");
-                    }
-                    currentString += list.size();
-                    this.orderStrings.add(currentString);
-                }
-            }
         }
-        currentString = "Total";
-        currentCostString = "£" + (totalSum/10000);
-        for (int i = currentString.length(); i < stringLength-currentCostString.length(); i++) {
-            currentString = currentString.concat(" ");
-        }
-        currentString += currentCostString;
-        this.orderStrings.add(currentString);
 
+        return currentString;
     }
 
-    public void addToOrderedItemsList(Item item) {
-        if (!this.orderedItemsList.containsKey(item.getSKU())) {
-            List<Item> itemList = new ArrayList<>();
-            this.orderedItemsList.put(item.getSKU(), itemList);
+    public String formatDiscountString(double originalSum, double sum) {
+        int stringLength = 30;
+        String discount = "(-£" + (originalSum-sum)/10000 + ")";
+        String currentString = " ";
+        for (int i = currentString.length(); i < stringLength - discount.length(); i++) {
+            currentString = currentString.concat(" ");
         }
-        this.orderedItemsList.get(item.getSKU()).add(item);
+        currentString += discount;
+        return currentString;
+    }
+
+    public void addToOrderedItemsListsMap(Item item) {
+        if (!this.orderedItemsListsMap.containsKey(item.getSKU())) {
+            List<Item> itemList = new ArrayList<>();
+            this.orderedItemsListsMap.put(item.getSKU(), itemList);
+        }
+        this.orderedItemsListsMap.get(item.getSKU()).add(item);
     }
 }

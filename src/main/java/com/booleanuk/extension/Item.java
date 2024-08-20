@@ -61,13 +61,13 @@ public class Item {
 
     @Override
     public boolean equals(Object obj) {
-        if (obj instanceof Item itemObjekt){
-            return itemObjekt.getId() == this.getId();
+        if (obj instanceof Item itemObject){
+            return itemObject.getId() == this.getId();
         }
         return false;
     }
 
-    public ArrayList<Filling> getFillings() {
+    public ArrayList<Item> getFillings() {
         return null;
     }
 

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Bagel extends Item {
 
-    private final ArrayList<Filling> fillings;
+    private final ArrayList<Item> fillings;
 
     public Bagel(String SKU, int id) {
         fillings = new ArrayList<>();
@@ -40,7 +40,7 @@ public class Bagel extends Item {
     }
 
     @Override
-    public ArrayList<Filling> getFillings() {
+    public ArrayList<Item> getFillings() {
         return fillings;
     }
 
@@ -62,7 +62,7 @@ public class Bagel extends Item {
     @Override
     public int getTotal() {
         int total = 0;
-        for (Filling filling : this.fillings) {
+        for (Item filling : this.fillings) {
             total += filling.getTotal();
         }
         if (this.getDiscountPrice() != -1) {
