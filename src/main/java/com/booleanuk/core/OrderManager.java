@@ -189,86 +189,68 @@ public class OrderManager {
 		String reciept = "";
 
 		// first check for bagel types
-
-
-		// check for coffee discount
-
-
-		// the rest
-		for(ItemInterface item: cartCopy.keySet()){
-			int amountInCart = cartCopy.get(item);
-
-			// sort list -> take bagel special offers then coffees
+		for (ItemInterface item: cartCopy.keySet()){
 			switch (item){
-
-				// any bagel
 				case BagelType.Everything, BagelType.Onion, BagelType.Plain, BagelType.Sesame:
-					while (amountInCart >= 12){
+					int amountOfBagels = 0;
+					try{
+						amountOfBagels = cartCopy.get(item);
+					} catch (NullPointerException e){}
+
+					while (amountOfBagels >= 12){
 						totalPrice += 3.99;
-						amountInCart -= 12;
-						reciept += item + ": 12 for 3.99\n";
+						reciept += "Discount: 12 " + item + " for 3.99\n";
+						amountOfBagels -= 12;
 					}
 
-					while(amountInCart >= 6){
+					while (amountOfBagels >= 6) {
 						totalPrice += 2.49;
-						amountInCart -= 6;
-						reciept += item + ": 6 for 2.49\n";
+						reciept += "Discount: 6 " + item + " for 2.49\n";
+						amountOfBagels -= 6;
 					}
-					cartCopy.put(item, amountInCart);
-//					// has to be checked after other discounts
-//					while(amountInCart-- > 0){
-//						double pricePer = getPriceOfItem(item);
-//						totalPrice += pricePer;
-//						reciept += item	+ ": 1 for " + pricePer + "\n";
-//					}
-//					break;
 
+					// update if used
+					cartCopy.put(item, amountOfBagels);
 
-					// or black coffee
-				case CoffeeType.Black:
-					for(int i = 0; i < amountInCart; i++){
-						// check if a bagel is in cart.
-						for (BagelType bagel: BagelType.values()){
-							if (cartCopy.containsKey(item)){
-								int amountOfBagelsInCart = 0;
-								try {
-									amountOfBagelsInCart = cartCopy.get(bagel);
-								} catch (NullPointerException e){
-									// pass
-									break;
-								}
-								if (amountOfBagelsInCart > 0){
-									cartCopy.put(bagel, amountOfBagelsInCart - 1);
-									totalPrice += 1.25;
-									reciept += "Black Coffee and " + bagel + " for 1.25\n";
-									break;
-								}
-							}
-						}
-					}
 					break;
 				default:
-					totalPrice += getPriceOfItem(item);
-					reciept += item + " for " + getPriceOfItem(item);
+					break;
 			}
 		}
 
-		// remaining bagels
-		for (ItemInterface item : cartCopy.keySet()){
+		// check for coffee discount
+		for (ItemInterface item: cartCopy.keySet()){
 			switch (item){
-				case BagelType.Everything, BagelType.Onion, BagelType.Plain, BagelType.Sesame:
-					int amountLeft = cartCopy.get(item);
-					double bagelPricePer = getPriceOfItem(item);
-					while(amountLeft-- > 0){
-						totalPrice += bagelPricePer;
-						reciept += item + " for " + getPriceOfItem(item) + "\n";
+				case CoffeeType.Black:
+					try{
+					int amountOfBlackCoffee = cartCopy.get(item);
+					for(int i = 0; i < amountOfBlackCoffee; i++){
+						int amountOfPlainBagel = cartCopy.get(BagelType.Plain);
+						if(amountOfPlainBagel > 0){
+							cartCopy.put(BagelType.Plain, amountOfPlainBagel -1);
+						}
 					}
+					}catch (NullPointerException e){}
+					break;
 				default:
-					continue;
+					break;
 			}
 		}
 
 
+		for (ItemInterface item: cartCopy.keySet()){
+			try{
+				int amountOfItemsLeftInCart = cartCopy.get(item);
+				if (amountOfItemsLeftInCart > 0){
+					double itemPricePer = getPriceOfItem(item);
+					double sumItemsPriceLeftInCart= itemPricePer * amountOfItemsLeftInCart;
+					totalPrice += sumItemsPriceLeftInCart;
+					reciept += item + "x" + amountOfItemsLeftInCart + "for " + sumItemsPriceLeftInCart;
+				}
+			} catch (NullPointerException e){}
+		}
+
+		// the rest
 		System.out.println(reciept);
 
 		DecimalFormat df = new DecimalFormat("#.##");
