@@ -50,13 +50,15 @@ public class Discount {
             remain=coff;
         }
 
-        Double[] discBagels=new Double[remain];
+
         Double [] price= bagelPrices.values().toArray(new Double[0]);
         Arrays.sort(price, Comparator.reverseOrder());
 
 
         for (int i=0; i<remain; i++){
             disc+=price[i]+0.99-1.25;
+            System.out.println(price[i]);
+            System.out.println(disc);
         }
 
 

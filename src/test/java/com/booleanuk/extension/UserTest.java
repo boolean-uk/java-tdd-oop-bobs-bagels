@@ -79,7 +79,7 @@ public class UserTest {
 
 
     }
-    /*
+
     @Test
     public void discountManyTest(){
         Order order=new Order();
@@ -96,11 +96,11 @@ public class UserTest {
         Discount discount=new Discount();
         order.setTotal(order.getTotal()- discount.discPrice(order));
 
-        Assertions.assertEquals(2*2.49+3.99+1.25, order.getTotal(), 0.001);
+        Assertions.assertEquals(2*2.49+3.99+2*1.25+12*0.12, order.getTotal(), 0.001);
 
     }
 
-     */
+
 
 
 }
