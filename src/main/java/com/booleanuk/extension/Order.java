@@ -99,20 +99,29 @@ public class Order {
                 if(i+1 == 6){
                     result = 249;
                 }
-                else{
+                else if((i+1) % 12 == 0){
                     result = 399 * ((i+1) / 12);
+                }
+                else{
+                    result = (399 * ((i+1) / 12)) + 249;
                 }
                 singularBagels = 0;
             }
         }
+        System.out.println(result);
 
-        for(int i = 0; i < coffeeList.size(); ++i){
-            if(singularBagels > 0){
-                for(int j = bagelList.size() - singularBagels; j < bagelList.size(); ++j){
-                    result -= bagelList.get(j);
-                }
+        for(Integer coffeePrice : coffeeList){
+            if(singularBagels > 0) {
+                result -= bagelList.get(bagelList.size() - singularBagels);
                 result += 125;
+                singularBagels--;
+                System.out.println("1");
             }
+            else{
+                result += coffeePrice;
+                System.out.println("2");
+            }
+            System.out.println(result);
         }
 
         return result;

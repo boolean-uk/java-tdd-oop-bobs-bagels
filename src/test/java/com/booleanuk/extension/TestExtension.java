@@ -81,4 +81,41 @@ public class TestExtension {
         order1.addProduct("COFB");
         Assertions.assertEquals(125, order1.getPrice());
     }
+
+    @Test
+    public void testDiscountCombined() throws Exception {
+        mainTest();
+        store.setBasketCapacity(30);
+        Order order1 = new Order(store);
+
+        order1.addProduct("BGLO");
+        order1.addProduct("BGLO");
+        order1.addProduct("BGLO");
+        order1.addProduct("BGLO");
+        order1.addProduct("BGLO");
+        order1.addProduct("BGLO");
+        order1.addProduct("BGLO");
+        order1.addProduct("BGLO");
+        order1.addProduct("BGLO");
+        order1.addProduct("BGLO");
+        order1.addProduct("BGLO");
+        order1.addProduct("BGLO");
+
+        order1.addProduct("BGLO");
+        order1.addProduct("BGLO");
+        order1.addProduct("BGLO");
+        order1.addProduct("BGLO");
+        order1.addProduct("BGLO");
+        order1.addProduct("BGLO");
+
+        order1.addProduct("BGLO");
+        order1.addProduct("COFB");
+
+        order1.addProduct("BGLO");
+        order1.addProduct("COFB");
+
+        order1.addProduct("COFB");
+
+        Assertions.assertEquals(997, order1.getPrice());
+    }
 }
