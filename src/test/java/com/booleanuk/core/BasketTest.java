@@ -116,7 +116,7 @@ public class BasketTest {
         Assertions.assertEquals("This product is removed", basket.remove(inventory.menu.get("OnionBagel")));
 
         //Should not be able to remove this due to it only being on bagel left == assert not equals will result in fail
-        Assertions.assertNotEquals("You cant have filling without bagel", basket.remove(inventory.menu.get("OnionBagel")));
+        Assertions.assertEquals("You cant have filling without bagel", basket.remove(inventory.menu.get("OnionBagel")));
 
     }
 
