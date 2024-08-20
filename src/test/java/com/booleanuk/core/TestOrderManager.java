@@ -64,9 +64,11 @@ public class TestOrderManager {
         result = om.removeItem(BagelType.Onion);
         Assertions.assertEquals("Onion is not in cart.", result);
 
+        Assertions.assertEquals(20, OrderManager.getMaxBagels());
         om.addItem(BagelType.Onion);
         result = om.removeItem(BagelType.Onion);
         Assertions.assertEquals("Removed Onion from cart.", result);
+
 
 
     }

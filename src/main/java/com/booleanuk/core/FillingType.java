@@ -1,6 +1,6 @@
 package com.booleanuk.core;
 
-public enum FillingType implements ItemEnumInterface {
+public enum FillingType implements ItemInterface {
     Bacon,
     Egg,
     Cheese,

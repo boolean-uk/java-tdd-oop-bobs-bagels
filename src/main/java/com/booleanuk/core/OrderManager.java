@@ -7,11 +7,11 @@ import java.util.Scanner;
 
 public class OrderManager {
 	private static int maxCartSize = 16; // max default size of basket
-	private static HashMap<ItemEnumInterface, String[]> storeItemInfo = null;
+	private static HashMap<ItemInterface, String[]> storeItemInfo = null;
 									// SKU, Price, Name, Variant{
-	private static HashMap<ItemEnumInterface, Integer> storeItemStock = null;
+	private static HashMap<ItemInterface, Integer> storeItemStock = null;
 
-	private HashMap<ItemEnumInterface, Integer> cart;
+	private HashMap<ItemInterface, Integer> cart;
 	static private int defaultMaxBagels;
 	static private int defaultMaxCoffees;
 	static private int defaultMaxFillings;
@@ -20,6 +20,16 @@ public class OrderManager {
 	public static int getMaxFillings(){
 		return defaultMaxFillings;
 	}
+
+	public static int getMaxBagels(){
+		return defaultMaxBagels;
+	}
+
+	public static int getMaxCoffees(){
+		return defaultMaxCoffees;
+	}
+
+
 
 
 	public OrderManager(){
@@ -73,7 +83,7 @@ public class OrderManager {
 
 	}
 
-	public String addItem(ItemEnumInterface item){
+	public String addItem(ItemInterface item){
 		// check if in store
 		int stock = storeItemStock.get(item);
 		if (stock > 0){
@@ -93,8 +103,13 @@ public class OrderManager {
 		return "Item not in stock.";
 	}
 
+	public int getStockOfItem(ItemInterface item){
+		return storeItemStock.get(item);
 
-	public String removeItem(ItemEnumInterface item){
+	}
+
+
+	public String removeItem(ItemInterface item){
 		// first check if exists in basket
 		boolean isInCart = cart.containsKey(item);
 		if (!isInCart){
@@ -120,7 +135,7 @@ public class OrderManager {
 
 	public double getPrice(){
 		double calculatedPrice = 0;
-		for(ItemEnumInterface item: cart.keySet()){
+		for(ItemInterface item: cart.keySet()){
 			int amountOfItemInCart = cart.get(item);
 			String priceOfItemString = storeItemInfo.get(item)[1];
 			double itemPrice = Double.valueOf(priceOfItemString);
