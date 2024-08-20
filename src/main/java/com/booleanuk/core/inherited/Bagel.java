@@ -5,14 +5,8 @@ import com.booleanuk.core.enums.BagelType;
 import com.booleanuk.core.enums.SKU;
 
 public class Bagel extends Product {
-    private final BagelType variant;
 
     public Bagel(String name, Double price, SKU sku, BagelType variant) {
-        super(name, price, sku);
-        this.variant = variant;
-    }
-
-    public BagelType getVariant() {
-        return variant;
+        super(name, price, sku, variant);
     }
 }

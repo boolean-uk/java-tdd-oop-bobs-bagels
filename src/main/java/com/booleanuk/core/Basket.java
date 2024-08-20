@@ -1,11 +1,10 @@
 package com.booleanuk.core;
-
-import com.booleanuk.core.enums.BagelType;
-import com.booleanuk.core.enums.SKU;
 import com.booleanuk.core.exceptions.FullBasketException;
 import com.booleanuk.core.exceptions.NonExistingProductException;
 import com.booleanuk.core.factory.ProductFactory;
 import com.booleanuk.core.inherited.Bagel;
+import com.booleanuk.core.inherited.Coffee;
+import com.booleanuk.core.inherited.Filling;
 import com.booleanuk.core.interfaces.MenuCategory;
 
 import java.util.ArrayList;
@@ -24,30 +23,25 @@ public class Basket {
 
     public void addProduct(MenuCategory variant) throws FullBasketException {
         if (!isFull()) {
-            products.add(factory.getProduct(variant));
+            this.getProducts().add(factory.getProduct(variant));
         } else {
             throw new FullBasketException("Your basket is full, cannot add product!");
         }
     }
 
-    public void removeProduct(MenuCategory variant) {
-        for (Product product : products) {
-            if (product instanceof Bagel bagel) {
-                if (bagel.getVariant() == variant) {
-                    products.remove(product);
-                    break;
-                }
-            }
-        }
-    }
+    public void removeProduct(MenuCategory variant) throws NonExistingProductException {
+        for (Product product : this.getProducts()) {
+            Product specificProduct = checkAndGetProduct(product);
 
-    public void removeProduct(Product product) throws NonExistingProductException {
-        boolean exists = this.getProducts().contains(product);
-        if (!exists) {
-            String message = "Product does not exist in the basket, cannot remove.";
-            throw new NonExistingProductException(message);
-        } else {
-            this.products.remove(product);
+            if (!specificProduct.getVariant().equals(variant)) {
+                String message = "Product does not exist in the basket, cannot remove.";
+                throw new NonExistingProductException(message);
+            }
+
+            if (specificProduct.getVariant() == variant) {
+                this.getProducts().remove(product);
+                break;
+            }
         }
     }
 
@@ -56,7 +50,20 @@ public class Basket {
     }
 
     private Boolean isFull() {
-        return this.products.size() == capacity;
+        return this.getProducts().size() == capacity;
+    }
+
+    private Product checkAndGetProduct(Product product) {
+        if (product instanceof Bagel bagel) {
+            return bagel;
+        }
+        if (product instanceof Coffee coffee) {
+            return coffee;
+        }
+        if (product instanceof Filling filling) {
+            return filling;
+        }
+        return null;
     }
 
     public ArrayList<Product> getProducts() {

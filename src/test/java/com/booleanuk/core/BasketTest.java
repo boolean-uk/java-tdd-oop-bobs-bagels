@@ -6,7 +6,6 @@ import com.booleanuk.core.enums.SKU;
 import com.booleanuk.core.exceptions.FullBasketException;
 import com.booleanuk.core.exceptions.NonExistingProductException;
 import com.booleanuk.core.inherited.Bagel;
-import com.booleanuk.core.inherited.Coffee;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -28,7 +27,7 @@ public class BasketTest {
     }
 
     @Test
-    public void testRemoveProduct() {
+    public void testRemoveProduct() throws NonExistingProductException {
         Basket basket = this.order.getBasket();
         basket.removeProduct(BagelType.ONION);
         Assertions.assertTrue(basket.getProducts().isEmpty());
@@ -59,7 +58,7 @@ public class BasketTest {
         Basket basket = this.order.getBasket();
 
         Assertions.assertThrows(NonExistingProductException.class, () -> {
-            basket.removeProduct(new Coffee("Coffee", 0.99, SKU.COFB, CoffeeType.BLACK));
+            basket.removeProduct(CoffeeType.BLACK);
         });
     }
 
