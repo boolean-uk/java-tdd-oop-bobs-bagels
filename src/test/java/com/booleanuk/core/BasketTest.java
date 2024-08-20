@@ -183,4 +183,41 @@ public class BasketTest {
 
         Assertions.assertEquals( "Basket is full.", basket.addItemToBasket(b1, f1));
     }
+
+    @Test
+    public void increaseTheBasketCapacityTest() {
+        Basket basket = new Basket();
+        Bagel b1 = ItemFactory.bagelFactory("BGLO");
+        Bagel b2 = ItemFactory.bagelFactory("BGLO");
+        Bagel b3 = ItemFactory.bagelFactory("BGLO");
+        Bagel b4 = ItemFactory.bagelFactory("BGLO");
+        Bagel b5 = ItemFactory.bagelFactory("BGLO");
+        Bagel b6 = ItemFactory.bagelFactory("BGLO");
+        Bagel b7 = ItemFactory.bagelFactory("BGLO");
+        Bagel b8 = ItemFactory.bagelFactory("BGLO");
+        Bagel b9 = ItemFactory.bagelFactory("BGLO");
+        Bagel b10 = ItemFactory.bagelFactory("BGLO");
+        Bagel b11 = ItemFactory.bagelFactory("BGLE");
+        basket.addItemToBasket(b1);
+        basket.addItemToBasket(b2);
+        basket.addItemToBasket(b3);
+        basket.addItemToBasket(b4);
+        basket.addItemToBasket(b5);
+        basket.addItemToBasket(b6);
+        basket.addItemToBasket(b7);
+        basket.addItemToBasket(b8);
+        basket.addItemToBasket(b9);
+        basket.addItemToBasket(b10);
+
+        Assertions.assertEquals("Basket is full.", basket.addItemToBasket(b11));
+
+        basket.expandBasketSize(2);
+
+        Assertions.assertEquals(12, basket.getMaxCapacity());
+
+        basket.addItemToBasket(ItemFactory.bagelFactory("BGLE"));
+        basket.addItemToBasket(ItemFactory.bagelFactory("BGLE"));
+
+        Assertions.assertEquals(12, basket.countTotalItems());
+    }
 }
