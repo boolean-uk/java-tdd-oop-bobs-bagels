@@ -71,7 +71,8 @@ public class OrderManager {
 			boolean inCart = cart.containsKey(item);
 			if (inCart) {
 				int amountInCart = cart.get(item);
-				cart.put(item, amountInCart + 1);
+				amountInCart++; // add one more
+				cart.put(item, amountInCart);
 				return item + ": " + amountInCart;
 			}
 			cart.put(item, 1);
