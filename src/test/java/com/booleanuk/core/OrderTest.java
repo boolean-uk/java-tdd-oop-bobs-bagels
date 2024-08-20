@@ -49,7 +49,7 @@ public class OrderTest {
     public void testAddBagelWithFilling() {
         Store store = new Store("Bob's Bagels");
         Order order = new Order(store);
-        Product bagel = store.getInventory().getProduct("BGLO");
+        Bagel bagel = (Bagel) store.getInventory().getProduct("BGLO");
         Product filling = store.getInventory().getProduct("FILB");
         int bagelPlusFillingPrice = bagel.getPrice() + filling.getPrice();
 

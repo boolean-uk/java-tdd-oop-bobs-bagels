@@ -5,21 +5,18 @@ import java.util.*;
 public class Order {
     private final ArrayList<Product> basket;
     private final Store store;
-    private int totalSum;
     private int maxBasketCapacity;
     private int currentBasketCapacity;
 
     public Order(Store store) {
         this.store = store;
-        this.totalSum = 0;
         this.basket = new ArrayList<>();
         this.currentBasketCapacity = 0;
         this.maxBasketCapacity = 25;
     }
 
     public int getTotalSum() {
-        applyDiscounts();
-        return totalSum;
+        return basket.isEmpty() ? 0 :  calculateTotalSum();
     }
 
     public int getProductPrice(String SKU) {
@@ -45,24 +42,14 @@ public class Order {
         if (isBasketFull()) {
             return false;
         }
-
         basket.add(product);
-
-        if (product instanceof Bagel bagel) {
-            totalSum += bagel.getPrice();
-            currentBasketCapacity++;
-            return true;
-        } else {
-            totalSum += product.getPrice();
-            currentBasketCapacity++;
-            return true;
-        }
+        currentBasketCapacity++;
+        return true;
     }
 
     public boolean removeProduct(Product product) {
         if (basket.contains(product)) {
             basket.remove(product);
-            totalSum -= product.getPrice();
             currentBasketCapacity--;
             return true;
         }
@@ -91,7 +78,7 @@ public class Order {
         return store;
     }
 
-    private void applyDiscounts() {
+    private int calculateTotalSum() {
         int amountOfBagels = 0;
         int amountOfCoffees = 0;
         int resetAmount = 0;
@@ -155,13 +142,13 @@ public class Order {
 
         // If no discounts apply, set totalSum to resetAmount
         if (numberOfTwelveBagelDiscounts == 0 && numberOfSixBagelDiscounts == 0 && bagelCoffeePairs == 0) {
-            totalSum = resetAmount;
+            return resetAmount;
         } else {
             // Calculate the sum to add for remaining bagels and coffees (highest prices first)
             int sumToAdd = getSumToAdd(amountOfBagels, bagelPrices) + getSumToAdd(amountOfCoffees, coffeePrices) + totalFillingPrice;
 
             // Calculate the total sum with all applicable discounts
-            totalSum = bagelCoffeePairs * 125 + numberOfTwelveBagelDiscounts * 399 + numberOfSixBagelDiscounts * 249 + sumToAdd;
+            return bagelCoffeePairs * 125 + numberOfTwelveBagelDiscounts * 399 + numberOfSixBagelDiscounts * 249 + sumToAdd;
         }
     }
 
