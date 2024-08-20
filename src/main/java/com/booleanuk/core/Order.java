@@ -20,6 +20,10 @@ public class Order {
     }
 
     public int getProductPrice(String SKU) {
+        if (SKU.isEmpty()) {
+            System.out.println("Product is not in the inventory");
+            return -1;
+        }
         Inventory inventory = new Inventory();
         return inventory.getProduct(SKU).getPrice();
     }
