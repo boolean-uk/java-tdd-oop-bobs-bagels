@@ -221,4 +221,12 @@ public class BasketTest {
         Assertions.assertTrue(basket.removeItemFromBasket("BGLO"));
     }
 
+    @Test
+    public void checkThePriceOfABagelTest() {
+        Basket basket = new Basket();
+        Bagel bagel = ItemFactory.bagelFactory("BGLO");
+
+        Assertions.assertEquals(0.49, bagel.getPrice());
+    }
+
 }
