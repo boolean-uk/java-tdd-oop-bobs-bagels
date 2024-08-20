@@ -162,6 +162,9 @@ public class OrderTest {
         addProductsToOrder(order, coffee, 1);
         Assertions.assertEquals(125, order.getTotalSum());
 
+        addProductsToOrder(order, bagelO, 1);
+        Assertions.assertEquals(125 + bagelO.getPrice(), order.getTotalSum());
+
     }
 
     // Helper method to add products to an order
