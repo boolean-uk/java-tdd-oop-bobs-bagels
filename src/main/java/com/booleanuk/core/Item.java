@@ -17,5 +17,5 @@ public abstract class Item {
 
     public Integer getQuantity() { return this.quantity; }
     public Integer getPrice(){ return this.price; }
-    public String getVariant(){ return ""; }
+    public String getVariant(){ return this.variant; }
 }

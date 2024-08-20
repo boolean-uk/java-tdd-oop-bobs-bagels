@@ -70,8 +70,7 @@ public class Order {
                     if (chosenItem == null)
                         break;
 
-                    if (Objects.equals(chosenItem.name, "Bagel")){
-                        Bagel bagel = new Bagel(chosenItem.sku, chosenItem.price, chosenItem.name, chosenItem.variant);
+                    if (chosenItem instanceof Bagel bagel){
                         bagel.addFillingsToBagel(input);
                         basket.addItemToBasket(bagel);
                         break;

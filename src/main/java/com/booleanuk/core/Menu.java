@@ -49,8 +49,7 @@ public class Menu {
 
     public static Boolean itemIsOnTheMenu(Item item){
         for (Item i : menu){
-            if (Objects.equals(i.sku, item.sku) & Objects.equals(i.price, item.price)
-                    & Objects.equals(i.name, item.name) & Objects.equals(i.variant, item.variant))
+            if (Objects.equals(i.sku, item.sku) & Objects.equals(i.name, item.name) & Objects.equals(i.variant, item.variant))
                 return true;
         }
         return false;

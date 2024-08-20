@@ -18,7 +18,6 @@ public class Bagel extends Item {
         if (filling != null){
             fillings.add(filling);
             this.price += filling.price;
-            System.out.println("Filling costs " + (float) filling.price/100 + ". New price = " + (float) this.price/100);
             return filling.variant + " added to your bagel.";
         }
         else
@@ -29,7 +28,7 @@ public class Bagel extends Item {
         printFillingMenu();
         System.out.println("Select fillings to add to your bagel, or press 0 to continue.");
 
-        int selectedFilling = -1;
+        int selectedFilling;
         while (true){
             selectedFilling = input.nextInt();
 
@@ -37,7 +36,7 @@ public class Bagel extends Item {
                 break;
             }
 
-            else if (selectedFilling < fillingMenu.size()){
+            else if (selectedFilling < fillingMenu.size()+1){
                 Filling filling = fillingMenu.get(selectedFilling-1);
                 addFilling(filling);
                 System.out.println(filling.variant + " added to the bagel.");
@@ -49,9 +48,17 @@ public class Bagel extends Item {
         }
     }
 
-
     public ArrayList<Filling> getFillings() {
         return this.fillings;
+    }
+
+    public boolean fillingsAreIdentical(Bagel b1, Bagel b2){
+        ArrayList<Filling> temp = b2.fillings;
+
+        for (Filling f : b1.fillings){
+            temp.removeIf(g -> f.variant.equals(g.variant));
+        }
+        return temp.isEmpty();
     }
 }
 

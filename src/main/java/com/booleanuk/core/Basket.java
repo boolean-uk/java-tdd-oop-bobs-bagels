@@ -1,6 +1,7 @@
 package com.booleanuk.core;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Objects;
 import java.util.Scanner;
 
@@ -17,13 +18,12 @@ public class Basket {
             return "Basket is full.";
         }
 
-        //else if (!Menu.itemIsOnTheMenu(item))
-        else if (!Menu.itemIsOnTheMenu(item))
+        if (!Menu.itemIsOnTheMenu(item))
         {
             return "This item is not on the menu.";
         }
 
-        else if (itemInBasket(item) == -1){
+        if (itemInBasket(item) == -1){
             this.basket.add(item);
         }
 
@@ -38,9 +38,35 @@ public class Basket {
         int counter = 1;
 
         for (Item i : basket){
-            System.out.println(counter+ " " + i.name + " " + i.variant + " " + i.quantity + " " + (float) i.price/100 +"$");
+            if (i instanceof Bagel){
+                System.out.println(counter+ ". " + i.name + " " + i.variant + " " + i.quantity + " " + (float) i.price/100 +"$");
+                formatFillingPrint((Bagel) i);
+            }
+
+            else {
+                System.out.println(counter+ " " + i.name + " " + i.variant + " " + i.quantity + " " + (float) i.price/100 +"$");
+            }
             counter++;
         }
+    }
+
+    public void formatFillingPrint(Bagel bagel) {
+        HashMap<String, Integer> listOfFillings = getListOfFillings(bagel);
+        System.out.println("Fillings:");
+        listOfFillings.forEach((key, value) -> System.out.println("- " + key + " x" + value));
+    }
+
+    public HashMap<String, Integer> getListOfFillings(Bagel bagel){
+        HashMap<String, Integer> quantityOfFillings = new HashMap<>();
+
+        for (Filling f : bagel.getFillings()){
+            if (quantityOfFillings.containsKey(f.getVariant())) {
+                quantityOfFillings.computeIfPresent(f.getVariant(), (k,v) -> v + 1);
+            } else {
+                quantityOfFillings.put(f.getVariant(), 1);
+            }
+        }
+        return quantityOfFillings;
     }
 
     public String removeItemFromBasket(){
@@ -103,7 +129,21 @@ public class Basket {
          */
         for (int i = 0; i < numberOfItemsInBasket(); i++){
             if (Objects.equals(item, basket.get(i))){
-                return i;
+                if (basket.get(i) instanceof Bagel & item instanceof Bagel){
+                    Bagel basketBagel = (Bagel) basket.get(i);
+                    Bagel newBagel = (Bagel) item;
+
+
+                    if (basketBagel.fillings.equals(newBagel.fillings)){
+                        return i;
+                    } else {
+                        return -1;
+                    }
+                }
+
+                else {
+                    return i;
+                }
             }
         }
         return -1;
