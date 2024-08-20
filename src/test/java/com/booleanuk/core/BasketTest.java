@@ -21,7 +21,7 @@ class BasketTest {
         expectedMap.put("Honey",  4);
         expectedMap.put("Cheese",  5);
         expectedMap.put("Garlic",  6);
-        Assertions.assertEquals(expectedMap, basket.basketItems);
+        Assertions.assertEquals(expectedMap, basket.getBasketItems());
     }
     @Test
     public void testExceededBasketLimit(){
@@ -36,11 +36,11 @@ class BasketTest {
         Basket basket = new Basket();
         basket.addBagel("Poppy Seed", 5);
         basket.removeBagel("Poppy Seed", 5);
-        Assertions.assertEquals(basket.basketItems.containsKey("Poppy Seed"), false);
+        Assertions.assertEquals(basket.getBasketItems().containsKey("Poppy Seed"), false);
         basket.addBagel("Poppy Seed", 5);
         basket.removeBagel("Poppy Seed", 3);
-        Assertions.assertEquals(basket.basketItems.containsKey("Poppy Seed"), true);
-        Assertions.assertEquals(basket.basketItems.get("Poppy Seed"), 2);
+        Assertions.assertEquals(basket.getBasketItems().containsKey("Poppy Seed"), true);
+        Assertions.assertEquals(basket.getBasketItems().get("Poppy Seed"), 2);
     }
     @Test
     public void testUserRequestFillingCost(){
@@ -50,11 +50,10 @@ class BasketTest {
     }
 
     @Test
-    public void testAddFilling(){
+    public void testAddFillingToBasket(){
         Basket basket = new Basket();
-        basket.addFilling("FILC");
-
-        Assertions.assertEquals(basket.basketItems.get("FILC", 1), basket.basketItems);
+        basket.addFillingToBasket("FILC", 5);
+        Assertions.assertEquals(5, basket.getBasketItems().get("FILC"));
     }
 
 

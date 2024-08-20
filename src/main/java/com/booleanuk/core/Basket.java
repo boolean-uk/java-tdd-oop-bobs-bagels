@@ -5,22 +5,36 @@ import java.util.Map;
 
 public class Basket {
 
-   Map<String, Integer> basketItems = new HashMap<>();
-   private int basketLimit = 20;
-   int basketTotal = 0;
+   private  Map<String, Integer> basketItems;
+   private int basketLimit;
+   private int basketTotal;
+   Inventory inventory;
 
+
+
+    public Basket(){
+        this.inventory = new Inventory();
+        this.setBasketLimit(20);
+        this.basketTotal = 0;
+        this.basketItems = new HashMap<>();
+
+    }
+
+    public Map<String, Integer> getBasketItems() {
+        return basketItems;
+    }
 
     public void addBagel (String bagelName, int quantity){
-        if(!exceededBasketLimit(getBasketLimit(),basketTotal+quantity )){
-            if(basketItems.containsKey(bagelName)){
-                basketItems.put(bagelName, basketItems.get(bagelName)+quantity);
-                basketTotal = basketItems.values().stream().reduce(0, Integer::sum);
+        if(!exceededBasketLimit(getBasketLimit(),this.basketTotal+quantity )){
+            if(this.basketItems.containsKey(bagelName)){
+                this.basketItems.put(bagelName, this.basketItems.get(bagelName)+quantity);
+                this.basketTotal = this.basketItems.values().stream().reduce(0, Integer::sum);
             }else{
-                basketItems.put(bagelName, quantity);
-                basketTotal = basketItems.values().stream().reduce(0, Integer::sum);
+                this.basketItems.put(bagelName, quantity);
+                this.basketTotal = this.basketItems.values().stream().reduce(0, Integer::sum);
             }
         }else {
-            int limitExceededBy = (basketTotal + quantity) - getBasketLimit();
+            int limitExceededBy = (this.basketTotal + quantity) - getBasketLimit();
             System.out.println("The quantity of bagels you are adding to your basket exceeds the basket limit by " + limitExceededBy +". Please reduce the quantity of bagels by this amount.");
         }
     }
@@ -30,7 +44,7 @@ public class Basket {
     }
 
     public int getBasketLimit() {
-        return basketLimit;
+        return this.basketLimit;
     }
 
     public void setBasketLimit(int basketLimit) {
@@ -38,40 +52,35 @@ public class Basket {
     }
 
     public void removeBagel(String bagelName, int quantity){
-        if(!basketItems.containsKey(bagelName)){
+        if(!this.basketItems.containsKey(bagelName)){
             System.out.println("This bagel isn't in your basket.");
         }
         else{
-            if(basketItems.get(bagelName) <= quantity){
-                basketItems.remove(bagelName);
+            if(this.basketItems.get(bagelName) <= quantity){
+                this.basketItems.remove(bagelName);
             }else{
                 int newQuantity = basketItems.get(bagelName) - quantity;
-                basketItems.put(bagelName, newQuantity );
+                this.basketItems.put(bagelName, newQuantity );
             }
         }
     }
 
 
     private double getFillingCost(String sku) {
-        Inventory inventory = new Inventory();
-        InventoryItem itemDetails = inventory.getInventoryItemDetails(sku);
-        System.out.println(sku);
+        InventoryItem itemDetails = this.inventory.getInventoryItemDetails(sku);
         return itemDetails.getPrice();
     }
 
     private boolean isFilling(String sku) {
-        Inventory inventory = new Inventory();
-        InventoryItem itemDetails = inventory.getInventoryItemDetails(sku);
-
+        InventoryItem itemDetails = this.inventory.getInventoryItemDetails(sku);
         return itemDetails.getName().equals("Filling");
     }
 
     public void userRequestFillingPrice(String sku){
-        Inventory inventory = new Inventory();
         double price = 0.0;
-        boolean isInInventory = (inventory.getInventoryItemDetails(sku) != null);
+        boolean isInInventory = (this.inventory.getInventoryItemDetails(sku) != null);
         if(isInInventory){
-            InventoryItem itemDetails = inventory.getInventoryItemDetails(sku);
+            InventoryItem itemDetails = this.inventory.getInventoryItemDetails(sku);
             if(this.isFilling(sku)){
                 price = itemDetails.getPrice();
                 System.out.println("The price of this filling is: "+ price);
@@ -81,6 +90,14 @@ public class Basket {
         }else{
             System.out.println("We do not have this item in our inventory.");
         }
+    }
+
+    public void addFillingToBasket(String fillingSku, int quantity){
+            if(this.basketItems.containsKey(fillingSku)){
+                this.basketItems.put(fillingSku, this.basketItems.get(fillingSku)+quantity);
+            }else{
+                this.basketItems.put(fillingSku, quantity);
+            }
     }
 
 
