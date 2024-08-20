@@ -5,11 +5,17 @@ import org.junit.jupiter.api.Test;
 
 public class ReceiptTest {
 
-    // test to make sure that the receipt is created
     @Test
     public void testCreateReceipt() {
         Order order = new Order();
         Receipt receipt = new Receipt(order);
         Assertions.assertNotNull(receipt);
+    }
+
+    @Test
+    public void testReceiptOrder() {
+        Order order = new Order();
+        Receipt receipt = new Receipt(order);
+        Assertions.assertEquals(order, receipt.getOrder());
     }
 }
