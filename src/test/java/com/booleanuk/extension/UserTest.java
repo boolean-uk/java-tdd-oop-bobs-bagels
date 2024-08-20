@@ -8,6 +8,23 @@ import com.booleanuk.core.Order;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+
 public class UserTest {
+
+    @Test
+    public void discountPlainTest(){
+
+        Order order=new Order();
+        for (int i=0; i<12; i++){
+            order.addItem(new Bagel("Plain"));
+        }
+        Discount discount=new Discount();
+        order.setTotal(order.getTotal()- discount.discPrice(order));
+        Assertions.assertEquals(3.99, order.getTotal(), 0.001);
+
+
+    }
+
 
 }

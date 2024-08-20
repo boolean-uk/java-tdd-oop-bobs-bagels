@@ -8,12 +8,12 @@ public class Order {
     private int num;
     private double total;
 
-    Order(){
+    public Order(){
         Items=new ArrayList<>();
         num=0;
     }
 
-    boolean addItem(Item item){
+    public boolean addItem(Item item){
         if (!item.canPurchase()){
             return false;
         }
@@ -35,5 +35,7 @@ public class Order {
         return Items;
     }
 
-
+    public void setTotal(double total) {
+        this.total = total;
+    }
 }

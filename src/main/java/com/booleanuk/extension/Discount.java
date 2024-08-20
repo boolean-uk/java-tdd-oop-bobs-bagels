@@ -10,7 +10,7 @@ public class Discount {
 
     }
 
-    public void discPrice(Order order){
+    public double discPrice(Order order){
         int onion=0;
         int plain=0;
         int every=0;
@@ -19,22 +19,41 @@ public class Discount {
         double disc=0;
         for(Item i:order.getItems()){
             if(i.getType()=="Bagel"){
-                bag++;
+
 
                 if(i.getName()=="Onion"){
                     onion++;
+                    bag++;
                 }
                 else if (i.getName()=="Plain"){
                     plain++;
                 }
                 else if (i.getName()=="Everything"){
                     every++;
+                    bag++;
                 }
-            }else if(i.getType()=="Coffee"){
+            }else if(i.getType()=="Coffee" & i.getName()=="Black"){
                 coff++;
             }
         }
+        disc+=onion/6*0.45;
+        disc+=plain/12*0.69;
+        disc+=every/6*0.45;
 
+        if(coff>bag){
+            disc+=bag*0.23;
+        }else{
+            disc+=coff*0.23;
+        }
 
+        if(coff>onion){
+            disc+=onion*0.13;
+        }else{
+            disc+=coff*0.13;
+        }
+
+    return disc;
     }
+
+
 }

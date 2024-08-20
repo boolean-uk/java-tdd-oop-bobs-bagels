@@ -1,7 +1,7 @@
 package com.booleanuk.core;
 
 public class Coffee extends Item{
-    Coffee(String type){
+    public Coffee(String type){
         this.setPurchase(false);
 
         switch (type) {

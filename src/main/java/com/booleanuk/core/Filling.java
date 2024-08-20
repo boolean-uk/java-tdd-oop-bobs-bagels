@@ -4,7 +4,7 @@ import java.util.HashMap;
 
 public class Filling extends Item{
 
-    Filling(String type){
+    public Filling(String type){
 
         this.setPurchase(false);
         switch (type){
