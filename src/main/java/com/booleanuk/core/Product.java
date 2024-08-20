@@ -16,6 +16,8 @@ public abstract class Product {
         this.variant = variant;
     }
 
+    public Product() {}
+
     public Double getPrice() {
         return this.price;
     }

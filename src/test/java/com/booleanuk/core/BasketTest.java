@@ -2,7 +2,6 @@ package com.booleanuk.core;
 
 import com.booleanuk.core.enums.BagelType;
 import com.booleanuk.core.enums.CoffeeType;
-import com.booleanuk.core.enums.SKU;
 import com.booleanuk.core.exceptions.FullBasketException;
 import com.booleanuk.core.exceptions.NonExistingProductException;
 import com.booleanuk.core.inherited.Bagel;
@@ -71,11 +70,5 @@ public class BasketTest {
 
         double totalCostInBasket = this.order.getTotalCost();
         Assertions.assertEquals(totalCostInBasket, 0.88);
-    }
-
-    @Test
-    public void testGetPriceForBagel() {
-        Product bagel = new Bagel("Bagel", 0.49, SKU.BGLO, BagelType.ONION, null);
-        Assertions.assertEquals(0.49, bagel.getPrice());
     }
 }

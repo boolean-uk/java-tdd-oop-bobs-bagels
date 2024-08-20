@@ -16,6 +16,14 @@ public class Bagel extends Product {
         this.fillings = fillings != null ? fillings : new ArrayList<>();
     }
 
+    public Bagel() {
+        super();
+    }
+
+    public Bagel createBagelWithFilling(BagelType variant, FillingType... fillings) {
+       return new Bagel();
+    }
+
     public static class BagelBuilder {
         private BagelType variant;
         private ArrayList<Filling> fillings = new ArrayList<>();
