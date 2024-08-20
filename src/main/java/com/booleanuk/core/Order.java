@@ -19,6 +19,11 @@ public class Order {
         return totalSum;
     }
 
+    public int getProductPrice(String SKU) {
+        Inventory inventory = new Inventory();
+        return inventory.getProduct(SKU).getPrice();
+    }
+
     public boolean addProduct(Product product) {
         if (isBasketFull()) {
             return false;
