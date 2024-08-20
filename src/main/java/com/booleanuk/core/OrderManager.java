@@ -93,6 +93,31 @@ public class OrderManager {
 		return "Item not in stock.";
 	}
 
+
+	public String removeItem(ItemEnumInterface item){
+		// first check if exists in basket
+		boolean isInCart = cart.containsKey(item);
+		if (!isInCart){
+			return item + " is not in cart.";
+		}
+		int amountInCart = cart.get(item);
+		if (amountInCart < 1){
+			return item + " is not in cart.";
+		}
+
+		// remove from cart
+		cart.put(item, amountInCart - 1);
+
+		// put back in stock
+		storeItemStock.compute(item, (k, stock) -> stock + 1);
+
+		return "Removed " + item + " from cart.";
+
+
+
+
+	}
+
 	public double getPrice(){
 		double calculatedPrice = 0;
 		for(ItemEnumInterface item: cart.keySet()){
@@ -104,15 +129,5 @@ public class OrderManager {
 		return calculatedPrice;
 	}
 
-
-
-	public void printFillingsMenu(){
-		StringBuilder fillingsMenu = new StringBuilder();
-		int itemCounter = 1;
-		for (FillingType t: FillingType.values()){
-			fillingsMenu.append(itemCounter++ + ": " + t + "\n");
-		}
-		System.out.println(fillingsMenu);
-	}
 
 }
