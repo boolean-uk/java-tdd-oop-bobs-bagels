@@ -9,18 +9,7 @@ public record Coffee(CoffeeType type) implements StandaloneProduct {
   }
 
   public double basePrice() {
-    switch (this.type) {
-      case BLACK:
-        return 0.99;
-      case WHITE:
-        return 1.19;
-      case CAPUCCINO:
-        return 1.29;
-      case LATTE:
-        return 1.29;
-    }
-
-    return 0;
+    return this.sku().price();
   }
 
   public Sku sku() {

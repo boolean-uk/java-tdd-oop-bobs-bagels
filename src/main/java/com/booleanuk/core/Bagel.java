@@ -17,18 +17,7 @@ public class Bagel implements StandaloneProduct {
   }
 
   public double basePrice() {
-    switch (this.type) {
-      case ONION:
-        return 0.49;
-      case PLAIN:
-        return 0.39;
-      case EVERYTHING:
-        return 0.49;
-      case SESAME:
-        return 0.49;
-    }
-
-    return 0;
+    return this.sku().price();
   }
 
   public Sku sku() {
