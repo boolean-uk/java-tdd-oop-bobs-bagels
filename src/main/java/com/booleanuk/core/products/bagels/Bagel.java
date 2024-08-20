@@ -1,5 +1,7 @@
 package com.booleanuk.core;
 
+import com.booleanuk.core.products.Product;
+
 public class Bagel extends Product {
 
     private Filling currentFilling;

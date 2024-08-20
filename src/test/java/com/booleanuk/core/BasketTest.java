@@ -1,5 +1,9 @@
 package com.booleanuk.core;
 
+import com.booleanuk.core.products.bagels.Bagel;
+import com.booleanuk.core.products.bagels.OnionBagel;
+import com.booleanuk.core.products.fillings.Filling;
+import com.booleanuk.core.products.fillings.SmokedSalmonFilling;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -104,6 +108,28 @@ public class BasketTest {
         basket.addProduct(new OnionBagel()); // Full here again (10 products)
 
         Assertions.assertTrue(basket.isFull());
+    }
+
+    @Test
+    public void testBagelWithFillingCannotBeAddedWithOnlyOneSpotInBasketLeft() {
+        Basket basket = new Basket();
+
+        Bagel b = new OnionBagel();
+        Filling f = new SmokedSalmonFilling();
+        Bagel b2 = new OnionBagel();
+        Bagel b3 = new OnionBagel();
+        Bagel b4 = new OnionBagel();
+        Bagel b5 = new OnionBagel();
+        b.setFilling(f);
+
+        basket.addProduct(b2);
+        basket.addProduct(b3);
+        basket.addProduct(b4);
+        basket.addProduct(b5);
+
+        // One spot left in basket so b cannot be added since it has filling
+        Assertions.assertFalse(basket.addProduct(b));
+
     }
 
 }
