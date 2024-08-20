@@ -14,6 +14,6 @@ public abstract class Product {
     }
 
     public Double getPrice() {
-        return price;
+        return this.price;
     }
 }

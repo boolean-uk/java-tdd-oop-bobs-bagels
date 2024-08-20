@@ -1,6 +1,7 @@
 package com.booleanuk.core;
 
 import com.booleanuk.core.enums.BagelType;
+import com.booleanuk.core.enums.SKU;
 import com.booleanuk.core.exceptions.FullBasketException;
 import com.booleanuk.core.exceptions.NonExistingProductException;
 import com.booleanuk.core.inherited.Bagel;

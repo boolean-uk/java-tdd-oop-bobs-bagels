@@ -1,6 +1,7 @@
 
 package com.booleanuk.core;
 
+
 public class Order {
     private final Basket basket;
     private Double totalCost;

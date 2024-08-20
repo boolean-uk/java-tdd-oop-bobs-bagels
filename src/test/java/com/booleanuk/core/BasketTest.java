@@ -1,6 +1,7 @@
 package com.booleanuk.core;
 
 import com.booleanuk.core.enums.BagelType;
+import com.booleanuk.core.enums.CoffeeType;
 import com.booleanuk.core.enums.SKU;
 import com.booleanuk.core.exceptions.FullBasketException;
 import com.booleanuk.core.exceptions.NonExistingProductException;
@@ -58,17 +59,22 @@ public class BasketTest {
         Basket basket = this.order.getBasket();
 
         Assertions.assertThrows(NonExistingProductException.class, () -> {
-            basket.removeProduct(new Coffee("Coffee", 0.99, SKU.COFB));
-
+            basket.removeProduct(new Coffee("Coffee", 0.99, SKU.COFB, CoffeeType.BLACK));
         });
     }
 
     @Test
     public void testGetTotalCost() throws FullBasketException {
         Basket basket = this.order.getBasket();
-        basket.addProduct(new Bagel("Bagel", 0.51, SKU.BGLP, BagelType.ONION));
+        basket.addProduct(new Bagel("Bagel", 0.51, SKU.BGLP, BagelType.PLAIN));
 
         int totalCostInBasket = this.order.getTotalCost();
         Assertions.assertEquals(totalCostInBasket, 1);
+    }
+
+    @Test
+    public void testGetPriceForBagel() {
+        Product bagel = new Bagel("Bagel", 0.49, SKU.BGLO, BagelType.ONION);
+        Assertions.assertEquals(0.49, bagel.getPrice());
     }
 }
