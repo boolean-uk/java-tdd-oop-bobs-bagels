@@ -171,7 +171,7 @@ public class OrderTest {
 
     // test coffee + bagel discount with bagel discount
     @Test
-    public void testCoffeeBagelDiscountWithBagelDiscount() {
+    public void testCoffeeBagelDiscountWithSixBagelDiscount() {
         Store store = new Store("Bob's Bagels");
         Product bagelO = store.getInventory().getProduct("BGLO");
         Product coffee = store.getInventory().getProduct("COFB");
@@ -182,6 +182,7 @@ public class OrderTest {
 
         addProductsToOrder(order, bagelO, 1);
         Assertions.assertEquals(249 + 125, order.getTotalSum());
+
 
 
     }
