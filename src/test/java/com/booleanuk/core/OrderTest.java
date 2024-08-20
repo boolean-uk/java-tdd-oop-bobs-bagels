@@ -164,6 +164,8 @@ public class OrderTest {
 
         addProductsToOrder(order, bagelO, 1);
         Assertions.assertEquals(125 + bagelO.getPrice(), order.getTotalSum());
+        addProductsToOrder(order, coffee, 1);
+        Assertions.assertEquals(250, order.getTotalSum());
 
     }
 
