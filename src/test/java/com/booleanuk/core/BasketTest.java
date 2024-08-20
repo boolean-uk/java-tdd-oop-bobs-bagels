@@ -65,8 +65,8 @@ public class BasketTest {
         //Should have removed one bagel and decreased the productCount with one.
         Assertions.assertEquals(1, basket.retrieveProductCount());
 
-        //Should fail due to different return types for the last item
-        Assertions.assertEquals("One product is removed", basket.remove("BGLO"));
+        //Should make the onion bagels only one and give the other message.
+        Assertions.assertEquals("This product is removed", basket.remove("BGLO"));
     }
 
     @Test
