@@ -69,11 +69,22 @@ public class BasketTest {
         basket.addItem("BGLE");
         basket.addItem("BGLO");
         basket.addItem("BGLP");
+        basket.addItem("BGLP");
+        basket.addItem("BGLE");
+        basket.addItem("BGLE");
+        basket.addItem("BGLO");
+        basket.addItem("BGLP");
         basket.addItem("BGLE");
         basket.addItem("COFB");
+        basket.addItem("BGLE");
+        basket.addItem("BGLO");
+        basket.addItem("BGLP");
+        basket.addItem("BGLE");
+        basket.addItem("COFB");
+        basket.addItem("BGLE");
 
-        //basket.addFilling("BGLE", "FILC");
-        //basket.addFilling("BGLE", "FILC");
+        basket.addFilling("BGLE", "FILC");
+        basket.addFilling("BGLE", "FILC");
 
 
         double newTotal = basket.addDiscount();

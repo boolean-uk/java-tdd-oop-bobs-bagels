@@ -99,6 +99,68 @@ public class Basket {
         return false;
     }
 
+    public double addDiscount() {
+        System.out.println("Total price before discount " + totalPrice);
+        int bagelCounter = 0;
+        int coffeeCounter = 0;
+        ArrayList<Bagel> discountedBagelsList = new ArrayList<>();
+
+        //Count bagels
+        for (Product p : basketContent) {
+            if (p.getName().equals("Bagel")) {
+                bagelCounter += 1;
+                discountedBagelsList.add((Bagel) p);
+            }
+            if (p.getName().equals("Coffee")) {
+                coffeeCounter += 1;
+            }
+
+
+        }
+
+        //Figure out how many discounts and remaining items after discounts
+        int bagelDiscounts12 = 0;
+        int bagelsAfterDiscount12 = 0;
+
+        if (bagelCounter >= 12) {
+            bagelDiscounts12 = bagelCounter / 12;
+            bagelsAfterDiscount12 = bagelCounter % 12;
+        }
+
+
+        for (int i = 0; i < bagelDiscounts12; i++){
+            //remove the cost of the 12 individual bagels,
+            for(int j = 0; j < 12; j++){
+                totalPrice -= discountedBagelsList.get(j).getPrice();
+                System.out.println("price deducted from " + discountedBagelsList.get(j));
+            }
+
+            //remove the 12 discounted bagels
+            for(int j = 0; j < 12; j++){
+                System.out.println("Removed bagel");
+                discountedBagelsList.removeFirst();
+            }
+
+            totalPrice+= 2.49; // For each 12 stack discount, add this price to the total
+        }
+
+        System.out.println("After applying 12 stack discount, there are now " + bagelsAfterDiscount12 + " bagels left");
+
+        if(bagelsAfterDiscount12 >= 6){
+            //apply the 6 bagel discount
+            for(Bagel b: discountedBagelsList){
+                totalPrice -= b.getPrice();
+                discountedBagelsList.remove(b);
+            }
+        }
+
+
+
+        System.out.println("Total price after discounts " + totalPrice);
+
+        return totalPrice;
+    }
+
     //Sanity check
     public static void main(String[] args) {
         Basket basket = new Basket();
