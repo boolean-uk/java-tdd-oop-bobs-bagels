@@ -39,7 +39,11 @@ public class Controller {
             int chosenOption = view.mainMenu();
             switch (chosenOption) {
                 case 1:
-                    basket.addBagel(view.addBagel());
+                    if (basket.size() < basketSize) {
+                        basket.addBagel(view.addBagel());
+                    } else {
+                        view.basketFull();
+                    }
                     break;
                 default:
                     keepRunning = false;
