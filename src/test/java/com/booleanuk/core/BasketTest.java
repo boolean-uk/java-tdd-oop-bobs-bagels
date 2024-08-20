@@ -17,7 +17,7 @@ public class BasketTest {
     public void setUp() throws FullBasketException {
         this.order = new Order();
         Basket basket = this.order.getBasket();
-        basket.addProduct(new Bagel("Bagel", 0.49, SKU.BGLP, BagelType.ONION));
+        basket.addProduct(new Bagel("Bagel", 0.49, SKU.BGLO, BagelType.ONION));
     }
 
     @Test
@@ -61,5 +61,14 @@ public class BasketTest {
             basket.removeProduct(new Coffee("Coffee", 0.99, SKU.COFB));
 
         });
+    }
+
+    @Test
+    public void testGetTotalCost() throws FullBasketException {
+        Basket basket = this.order.getBasket();
+        basket.addProduct(new Bagel("Bagel", 0.51, SKU.BGLP, BagelType.ONION));
+
+        int totalCostInBasket = this.order.getTotalCost();
+        Assertions.assertEquals(totalCostInBasket, 1);
     }
 }
