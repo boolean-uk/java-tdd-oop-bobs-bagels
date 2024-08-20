@@ -11,7 +11,7 @@ public class Receipt {
 
   @Override
   public String toString() {
-    String out = "~~~ Bob's Bagels ~~~\n" + "----------------------\n";
+    String out = "~~~ Bob's Bagels ~~~\n----------------------\n";
     double totalPrice = 0;
 
     for (Sku sku : Sku.values()) {

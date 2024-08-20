@@ -50,7 +50,37 @@ class ReceiptTest {
   }
 
   @Test
-  public void testReceiptWithDiscount() {
+  public void testReceiptTwelveBagelDiscount() {
+    List<Product> inventoryStock = new ArrayList<>();
+    for (int i = 0; i < 12; ++i)
+      inventoryStock.add(new Bagel(BagelType.ONION));
+    Inventory inventory = new Inventory(inventoryStock);
+
+    Basket basket = new Basket(12);
+    basket.add(new Bagel(BagelType.ONION), 12);
+    Receipt receipt = inventory.purchase(basket);
+    String actual = receipt.toString();
+    Assertions.assertTrue(actual.contains("12x Onion bagel 4.99"));
+    Assertions.assertTrue(actual.contains("Total 4.99"));
+  }
+
+  @Test
+  public void testReceiptSixBagelDiscount() {
+    List<Product> inventoryStock = new ArrayList<>();
+    for (int i = 0; i < 6; ++i)
+      inventoryStock.add(new Bagel(BagelType.ONION));
+    Inventory inventory = new Inventory(inventoryStock);
+
+    Basket basket = new Basket();
+    basket.add(new Bagel(BagelType.ONION), 6);
+    Receipt receipt = inventory.purchase(basket);
+    String actual = receipt.toString();
+    Assertions.assertTrue(actual.contains("6x Onion bagel 2.49"));
+    Assertions.assertTrue(actual.contains("Total 2.49"));
+  }
+
+  @Test
+  public void testReceiptCoffeeAndBagelDiscount() {
     List<Product> inventoryStock = new ArrayList<>();
     inventoryStock.add(new Coffee(CoffeeType.BLACK));
     inventoryStock.add(new Bagel(BagelType.ONION));
@@ -65,6 +95,5 @@ class ReceiptTest {
     Assertions.assertTrue(actual.contains("1x Black coffee " + String.format("%.2f", Sku.COFB.price())));
     Assertions.assertTrue(actual.contains("1x Onion bagel " + String.format("%.2f", Sku.BGLO.price())));
     Assertions.assertTrue(actual.contains("Total 1.25"));
-
   }
 }

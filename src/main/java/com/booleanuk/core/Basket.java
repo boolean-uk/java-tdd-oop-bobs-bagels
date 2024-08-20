@@ -4,6 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Basket {
+  private final double twelveBagelsPrice = 3.99;
+  private final double sixBagelsPrice = 2.49;
+  private final double coffeeAndBagelPrice = 1.25;
+
   private List<StandaloneProduct> products = new ArrayList<>();
   private int capacity;
 
@@ -73,18 +77,18 @@ public class Basket {
 
     while (numBagels >= 12) {
       numBagels -= 12;
-      price += 3.99;
+      price += twelveBagelsPrice;
     }
 
     while (numBagels >= 6) {
       numBagels -= 6;
-      price += 2.49;
+      price += sixBagelsPrice;
     }
 
     while (numBagels >= 1 && numCoffees >= 1) {
       --numCoffees;
       --numBagels;
-      price += 1.25;
+      price += coffeeAndBagelPrice;
     }
 
     for (Product product : this.products) {
