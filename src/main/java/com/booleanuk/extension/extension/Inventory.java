@@ -1,4 +1,4 @@
-package com.booleanuk.extension;
+package com.booleanuk.extension.extension;
 
 
 import java.util.HashMap;

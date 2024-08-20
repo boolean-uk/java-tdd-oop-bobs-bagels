@@ -1,4 +1,4 @@
-package com.booleanuk.extension;
+package com.booleanuk.extension.extension;
 
 public abstract class Item {
     private String sku;

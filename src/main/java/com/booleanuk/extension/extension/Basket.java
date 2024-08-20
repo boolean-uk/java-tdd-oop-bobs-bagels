@@ -1,10 +1,5 @@
 package com.booleanuk.extension.extension;
 
-import com.booleanuk.extension.Bagel;
-import com.booleanuk.extension.Filling;
-import com.booleanuk.extension.Inventory;
-import com.booleanuk.extension.Item;
-
 import java.util.ArrayList;
 import java.util.List;
 
