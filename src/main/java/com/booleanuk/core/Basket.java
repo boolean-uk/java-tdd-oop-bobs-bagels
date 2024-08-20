@@ -51,7 +51,6 @@ public class Basket {
         }
 
         String chosenSku = chosenProduct.retrieveSku();
-
         for (Product product : currentBasket.keySet()) {
             String sku = product.retrieveSku();
 
@@ -73,6 +72,7 @@ public class Basket {
 
     public String remove(Product chosenProduct){
 
+        //Check if bagel count is over one
         String chosenSku = chosenProduct.retrieveSku();
 
         for(Product product : currentBasket.keySet()){
@@ -103,10 +103,23 @@ public class Basket {
         basketCapacity = newSize;
     }
 
+    public double costOfProduct(Product chosenProduct){
+        return chosenProduct.retrievePrice();
+    }
 
+    public double totalCost(){
+        double sum = 0;
 
+        for(Product product: currentBasket.keySet()){
 
+            double price = product.retrievePrice();
+            double quantity = currentBasket.get(product);
 
+            sum += price * quantity;
+        }
+
+        return sum;
+    }
 
 
 }

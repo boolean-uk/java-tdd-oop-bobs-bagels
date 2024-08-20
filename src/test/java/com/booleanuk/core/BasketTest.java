@@ -48,34 +48,34 @@ public class BasketTest {
     @Test
     public void ShouldIncreaseCurrentBasketValues(){
         Basket basket = new Basket();
+        Inventory inventory = new Inventory();
 
-        Bagel onionBagel = new Bagel("BGLO",	0.49, "Bagel",	"Onion");
-
-        basket.add(onionBagel);
-        basket.add(onionBagel);
-        basket.add(onionBagel);
+        basket.add(inventory.menu.get("OnionBagel"));
+        basket.add(inventory.menu.get("OnionBagel"));
+        basket.add(inventory.menu.get("OnionBagel"));
 
 
-        Assertions.assertEquals(3, basket.currentBasket.get(onionBagel));
+        Assertions.assertEquals(3, basket.currentBasket.get(inventory.menu.get("OnionBagel")));
         Assertions.assertEquals(3, basket.retrieveProductCount());
     }
 
   @Test
   public void ShouldNotExceedBasketCapacity(){
       Basket basket = new Basket();
+      Inventory inventory = new Inventory();
 
-      Bagel onionBagel = new Bagel("BGLO",	0.49, "Bagel",	"Onion");
+      basket.add(inventory.menu.get("OnionBagel"));
 
       int currentCapacity = basket.retrieveBasketCapacity();
 
       for(int i = 0; i < currentCapacity; i++){
-          basket.add(onionBagel);
+          basket.add(inventory.menu.get("OnionBagel"));
       }
 
       Assertions.assertEquals(10, basket.retrieveProductCount());
 
       //Try adding one more exceeding the limit
-      basket.add(onionBagel);
+      basket.add(inventory.menu.get("OnionBagel"));
 
       //Should fail due to the +1
       Assertions.assertNotEquals(currentCapacity + 1, basket.retrieveProductCount());
@@ -85,31 +85,29 @@ public class BasketTest {
   @Test
     public void ShouldRemoveFromBasket(){
       Basket basket = new Basket();
-      Bagel onionBagel = new Bagel("BGLO",	0.49, "Bagel",	"Onion");
-      Coffee blackCoffee = new Coffee("COFB",	0.99,	"Coffee",	"Black");
+      Inventory inventory = new Inventory();
 
-      basket.add(onionBagel);
-      basket.add(onionBagel);
+      basket.add(inventory.menu.get("OnionBagel"));
+      basket.add(inventory.menu.get("OnionBagel"));
 
       //there are two same bagels meaning that the below message should be true.
-      Assertions.assertEquals("One product is removed", basket.remove(onionBagel));
+      Assertions.assertEquals("One product is removed", basket.remove(inventory.menu.get("OnionBagel")));
 
       //Should have removed one bagel and decreased the productCount with one.
       Assertions.assertEquals(1, basket.retrieveProductCount());
 
       //Should make the onion bagels only one and give the other message
-      Assertions.assertEquals("This product is removed", basket.remove(onionBagel));
+      Assertions.assertEquals("This product is removed", basket.remove(inventory.menu.get("OnionBagel")));
 
   }
 
   @Test
     public void ShouldChangeBasketCapacity(){
         Basket basket = new Basket();
-        Bagel onionBagel = new Bagel("BGLO",	0.49, "Bagel",	"Onion");
-        Coffee blackCoffee = new Coffee("COFB",	0.99,	"Coffee",	"Black");
+        Inventory inventory = new Inventory();
 
         for(int i = 0; i < basket.retrieveBasketCapacity(); i++){
-            basket.add(blackCoffee);
+            basket.add(inventory.menu.get("BlackCoffee"));
         }
 
         Assertions.assertEquals(basket.retrieveBasketCapacity(), basket.retrieveProductCount());
@@ -120,6 +118,16 @@ public class BasketTest {
         //Should fail due to basketCapacity being changed
         Assertions.assertNotEquals(basket.retrieveBasketCapacity(), basket.retrieveProductCount());
   }
+
+  @Test
+    public void shouldGetCostOfProduct(){
+      Basket basket = new Basket();
+      Inventory inventory = new Inventory();
+
+      //Should fail due to price being wrong should be 1.19
+      Assertions.assertEquals(2.00f, basket.costOfProduct(inventory.menu.get("WhiteCoffee")), 0.001);
+  }
+
 
 }
 
