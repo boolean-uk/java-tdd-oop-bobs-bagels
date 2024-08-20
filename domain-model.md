@@ -13,11 +13,29 @@
 |--------------------|
 | `RuntimeException` |
 
+## Domain model Sku enum
+| Variants |
+|----------|
+| BGLO     |
+| BGLP     |
+| BGLE     |
+| BGLS     |
+| COFB     |
+| COFW     |
+| COFC     |
+| COFL     |
+| FILB     |
+| FILE     |
+| FILC     |
+| FILX     |
+| FILS     |
+| FILH     |
+
 ## Domain model Product interface
 | Methods          | Scenario                                                | Output                   |
 |------------------|---------------------------------------------------------|--------------------------|
 | `double price()` | User wants to know the price of a product before buying | The price of the product |
-| `String sku()`   | User or admin wants to identify a product               | SKU of product           |
+| `Sku sku()`      | User or admin wants to identify a product               | SKU of product           |
 
 ## Domain model StandaloneProduct interface
 - This interface is separate from the `Product` interface because not all products can be purchased directly
@@ -65,12 +83,13 @@
 | Sesame     |
 
 ## Domain model Bagel class
-| Implements          | Variables                | Methods                     | Scenario                                   | Output                      |
-|---------------------|--------------------------|-----------------------------|--------------------------------------------|-----------------------------|
-| `StandaloneProduct` |                          |                             |                                            |                             |
-|                     | `BagelType type`         |                             |                                            |                             |
-|                     | `List<Filling> fillings` |                             |                                            |                             |
-|                     |                          | `void add(Filling filling)` | User wants to add a filling to their bagel | Filling gets added to bagel |
+| Implements          | Variables                | Methods                     | Scenario                                        | Output                      |
+|---------------------|--------------------------|-----------------------------|-------------------------------------------------|-----------------------------|
+| `StandaloneProduct` |                          |                             |                                                 |                             |
+|                     | `BagelType type`         |                             |                                                 |                             |
+|                     | `List<Filling> fillings` |                             |                                                 |                             |
+|                     |                          | `void add(Filling filling)` | User wants to add a filling to their bagel      | Filling gets added to bagel |
+|                     |                          | `Sku sku()`                 | User wants to know what type of bagel they have | The type of their bagel     |
 
 ## Domain model Basket class
 | Variables                          | Methods                                                                          | Scenario                                                     | Output                     |
@@ -80,9 +99,9 @@
 |                                    |                                                                                  | Basket is not full                                           |                            |
 |                                    | `void add(StandaloneProduct product, int count) throws AddToFullBasketException` | Basket is full after adding `count` products                 | Exception                  |
 |                                    |                                                                                  | Basket is not full                                           |                            |
-|                                    | `void remove(String sku) throws NotPresentInBasketException`                     | Product with given sku is in basket                          |                            |
+|                                    | `void remove(Sku sku) throws NotPresentInBasketException`                        | Product with given sku is in basket                          |                            |
 |                                    |                                                                                  | Product with given sku is not in basket                      | Exception                  |
-|                                    | `void remove(String sku, int count) throws NotPresentInBasketException`          | `count` many products with given sku is in basket            |                            |
+|                                    | `void remove(Sku sku, int count) throws NotPresentInBasketException`             | `count` many products with given sku is in basket            |                            |
 |                                    |                                                                                  | `count` many product with given sku are not in basket        | Exception                  |
 |                                    | `void setCapacity(int newCapacity)`                                              | Manager wants to change the capacity of basket               | Basket capacity is changed |
 |                                    | `double price()`                                                                 | User wants to know the price of all products in their basket | Sum of product prices      |
