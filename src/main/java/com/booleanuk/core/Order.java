@@ -103,18 +103,12 @@ public class Order {
 
         if (twelveBagelDiscounts == 0 && sixBagelDiscounts == 0 && bagelCoffeePairs == 0) {
             totalSum = resetAmount;
-
-        } else if (twelveBagelDiscounts == 0 && sixBagelDiscounts == 0 && bagelCoffeePairs > 0) {
+        } else {
             amountOfBagels -= bagelCoffeePairs;
             amountOfCoffee -= bagelCoffeePairs;
             int sumToAdd = getSumToAdd(amountOfBagels, bagelPrices);
             sumToAdd += getSumToAdd(amountOfCoffee, coffeePrices);
-
-            totalSum = bagelCoffeePairs * 125 + sumToAdd;
-        } else {
-            int sumToAdd = getSumToAdd(amountOfBagels, bagelPrices);
-            sumToAdd += getSumToAdd(amountOfCoffee, coffeePrices);
-            totalSum = twelveBagelDiscounts * 399 + sixBagelDiscounts * 249 + sumToAdd;
+            totalSum =  bagelCoffeePairs * 125 + twelveBagelDiscounts * 399 + sixBagelDiscounts * 249 + sumToAdd;
         }
     }
 
