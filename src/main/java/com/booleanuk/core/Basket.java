@@ -24,4 +24,8 @@ public class Basket {
     public void removeBagel(Bagel bagel) {
         bagels.remove(bagel);
     }
+
+    public ArrayList<Bagel> getBagels() {
+        return (ArrayList<Bagel>) bagels.clone();
+    }
 }
