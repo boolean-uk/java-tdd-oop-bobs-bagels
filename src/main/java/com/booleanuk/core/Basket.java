@@ -4,10 +4,22 @@ import java.util.*;
 
 public class Basket {
     private Integer basketSize;
-    private ArrayList<Item> basket = new ArrayList<>();
+    private ArrayList<Item> basket;
+    private int discount;
+
+    public Basket(){
+        this.basket = new ArrayList<>();
+        this.discount = 0;
+        this.basketSize = 20;
+    }
+
+    public int getDiscount(){
+        return this.discount;
+    }
 
     public Integer numberOfItemsInBasket(){
         return this.basket.size();
+
     }
 
     public String addItemToBasket(Item item){
@@ -111,6 +123,8 @@ public class Basket {
         for (Item i : basket){
             total += i.getPrice() * i.getQuantity();
         }
+
+        total = total - this.discount;
         return (float) total/100;
     }
 
@@ -184,5 +198,123 @@ public class Basket {
         System.out.println("Basket size can't be less than 1.");
         return false;
     }
+
+    public void quantifyItemsInBasket(Map<String, Integer> basketOverview){
+
+
+    }
+
+    public void calculateDiscount(){
+        int blackCoffee = 0;
+        int onionBagel = 0;
+        int plainBagel = 0;
+        int everythingBagel = 0;
+        int sesameBagel = 0;
+        int discount = 0;
+
+        for (Item i : this.basket){
+            switch (i.variant){
+                case "Black":{
+                    blackCoffee = blackCoffee + i.getQuantity();
+                    break;
+                }
+
+                case "Onion":{
+                    onionBagel = onionBagel + i.getQuantity();
+                    break;
+                }
+
+                case "Plain":{
+                    plainBagel = plainBagel + i.getQuantity();
+                    break;
+                }
+
+                case "Everything":{
+                    everythingBagel = everythingBagel + i.getQuantity();
+                    break;
+                }
+
+                case "Sesame":{
+                    sesameBagel = sesameBagel + i.getQuantity();
+                    break;
+                }
+            }
+        }
+
+        if (6 <= onionBagel | 6 <= plainBagel | 6 <= everythingBagel | 6 <= sesameBagel){
+            while(true) {
+                if (6 <= onionBagel) {
+                    if (12 <= onionBagel) {
+                        onionBagel = onionBagel - 12;
+                        discount = discount + 189;
+                        continue;
+                    }
+                    onionBagel = onionBagel - 6;
+                    discount = discount + 45;
+
+                } else if (6 <= plainBagel) {
+                    if (12 <= plainBagel) {
+                        plainBagel = plainBagel - 12;
+                        discount = discount + 69;
+                        continue;
+                    }
+                    plainBagel = plainBagel - 6;
+                    discount = discount - 15;
+
+                } else if (6 <= everythingBagel) {
+                    if (12 <= everythingBagel) {
+                        everythingBagel = everythingBagel - 12;
+                        discount = discount + 189;
+                        continue;
+                    }
+                    everythingBagel = everythingBagel - 6;
+                    discount = discount + 45;
+
+                } else if (6 <= sesameBagel) {
+                    if (12 <= sesameBagel) {
+                        sesameBagel = sesameBagel - 12;
+                        discount = discount + 189;
+                        continue;
+                    }
+                    sesameBagel = sesameBagel - 6;
+                    discount = discount + 45;
+                } else {
+                    break;
+                }
+            }
+        }
+
+        while (blackCoffee != 0 && (onionBagel != 0 | plainBagel != 0 | everythingBagel != 0 | sesameBagel != 0)){
+            if (onionBagel != 0){
+                blackCoffee--;
+                onionBagel--;
+                discount = discount + 23;
+                continue;
+            }
+
+            else if (everythingBagel != 0){
+                blackCoffee--;
+                everythingBagel--;
+                discount = discount + 23;
+                continue;
+            }
+
+            else if (sesameBagel != 0){
+                blackCoffee--;
+                sesameBagel--;
+                discount = discount + 23;
+                continue;
+            }
+
+            blackCoffee--;
+            plainBagel--;
+            discount = discount + 13;
+        }
+
+        this.discount = discount;
+    }
+
 }
+
+
 
