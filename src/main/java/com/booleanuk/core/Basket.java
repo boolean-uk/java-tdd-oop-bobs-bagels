@@ -1,6 +1,4 @@
 package com.booleanuk.core;
-import com.booleanuk.core.enums.BagelType;
-import com.booleanuk.core.enums.FillingType;
 import com.booleanuk.core.exceptions.FullBasketException;
 import com.booleanuk.core.exceptions.NonExistingProductException;
 import com.booleanuk.core.factory.ProductFactory;
@@ -26,6 +24,13 @@ public class Basket {
     public void addProduct(MenuCategory variant) throws FullBasketException {
         if (!isFull()) {
             this.getProducts().add(factory.getProduct(variant));
+        } else {
+            throw new FullBasketException("Your basket is full, cannot add product!");
+        }
+    }
+    public void addProduct(Product product) throws FullBasketException {
+        if (!isFull()) {
+            this.getProducts().add(product);
         } else {
             throw new FullBasketException("Your basket is full, cannot add product!");
         }

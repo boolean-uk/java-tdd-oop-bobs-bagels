@@ -57,6 +57,51 @@ the inventory.
 The 'Bagel' class has an inner 'BagelBuilder' class that it uses to create
 specific bagels with fillings in the `createBagelWithFilling` method.
 
+--------------------------------------------------------------------------------------
+
+# Extension 1: Discounts
+
+## User Stories
+
+```
+1. As a member of the public,
+So I can recieve the special offer,
+I like to order 6 bagels for 2.49.
+```
+
+```
+2. As a member of the public,
+So I can recieve the special offer,
+I like to order 12 bagels for 3.99.
+```
+
+```
+3. As a member of the public,
+So I can recieve the special coffee and bagel offer,
+I like to order a coffee and a bagel for 1.25.
+```
+
+### Domain Model - Extension 1
+
+All the 3 user stories will be implemented in the following class:
+
+| Class   |
+|---------|
+| `Order` |
+
+And here are the methods that will be used:
+
+| Method                            | Return  |
+|-----------------------------------|---------|
+| `getNumberOfItems(Basket basket)` | `int[]` |
+|                                   |         |
+|                                   |         |
+
+To make things simple, I just add the values of the discounts as final members in the 'Order' class.
+These will be named 'discount1' and 'discount2' and have the Double discount values hardcoded in them.
+
+
+
 
 
 
