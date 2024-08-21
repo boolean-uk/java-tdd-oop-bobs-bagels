@@ -32,18 +32,19 @@ public class ReceiptTest {
     }
 
     @Test
-    public void testPrintReceipt() {
+    public void testPrintReceiptWithoutDiscounts() {
         Store store = new Store("Bob's Bagels");
         Order order = new Order(store);
-        Bagel bagel = (Bagel) store.getInventory().getProduct("BGLO");
-        Filling filling = (Filling) store.getInventory().getProduct("FILB");
+        Bagel bagel1 = (Bagel) store.getInventory().getProduct("BGLO");
+        Bagel bagel2 = (Bagel) store.getInventory().getProduct("BGLO");
+        Filling filling1 = (Filling) store.getInventory().getProduct("FILB");
+        Filling filling2 = (Filling) store.getInventory().getProduct("FILE");
 
-        bagel.addFilling(filling);
-        bagel.addFilling(filling);
-        Product bagel2 = store.getInventory().getProduct("BGLP");
-        addProductsToOrder(order, bagel2, 2);
-        addProductsToOrder(order, bagel, 6);
-        addProductsToOrder(order, filling, 3);
+        bagel1.addFilling(filling1);
+        bagel1.addFilling(filling2);
+
+        addProductsToOrder(order, bagel1, 2);
+        addProductsToOrder(order, bagel2, 3);
 
         Receipt receipt = new Receipt(order);
         Assertions.assertTrue(receipt.printReceipt());
