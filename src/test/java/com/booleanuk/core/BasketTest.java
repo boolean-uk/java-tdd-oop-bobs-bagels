@@ -19,6 +19,15 @@ public class BasketTest {
     }
 
     @Test
+    public void TestShouldAddBagelWithFilling(){
+        Basket basket = new Basket();
+
+        //this is going to fail because the filling sku is not valid.
+        Assertions.assertEquals("New product added to basket", basket.add("BGLO", "COFB"));
+
+    }
+
+    @Test
     public void TestShouldIncreaseCurrentBasketValues(){
         Basket basket = new Basket();
 
