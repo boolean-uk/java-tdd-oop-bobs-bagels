@@ -26,6 +26,18 @@ public class Order {
         return store;
     }
 
+    public ArrayList<Integer> getBagelList(){
+        return bagelList;
+    }
+
+    public ArrayList<Integer> getCoffeeList() {
+        return coffeeList;
+    }
+
+    public ArrayList<Integer> getFillingList() {
+        return fillingList;
+    }
+
     public int size(){
         int result = 0;
         for(Integer i : basket.values()){

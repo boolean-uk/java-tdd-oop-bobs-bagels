@@ -4,6 +4,8 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 
+import static java.lang.Math.*;
+
 public class Receipt {
 
     private Order order;
@@ -47,6 +49,11 @@ public class Receipt {
             totalPriceNoDiscounts += price * amount / 100.0;
         }
 
+        result += "---------------------------- \n" +
+                "Discounts\n" +
+                bagelDiscount() +
+                coffeeDiscount() + "\n";
+
         result += "----------------------------\n" +
                 "Total £" + totalPrice + "\n" +
                 "Total w/o discounts £" + totalPriceNoDiscounts + "\n" +
@@ -56,4 +63,30 @@ public class Receipt {
         System.out.println(result);
         return result;
     }
+
+    private String bagelDiscount(){
+        String result = "";
+        int bagelCount = order.getBagelList().size();
+        if(bagelCount / 12 > 0){
+            result += "12 Bagels £3.99 " + bagelCount / 12 + "x";
+            if(bagelCount % 12 > 5){
+               result += "\n6 Bagels £2.49 1x\n";
+            }
+        }
+        else if(bagelCount / 6 > 0){
+            result += "6 Bagels £2.49 1x\n";
+        }
+        return result;
+    }
+
+    private String coffeeDiscount(){
+        String result = "";
+        int coffeeAmount = order.getCoffeeList().size();
+        int singularBagels = order.getBagelList().size() % 6;
+        if(coffeeAmount > 0 && singularBagels > 0){
+            result += "Coffee & Bagel £1.25 x" + min(coffeeAmount, singularBagels);
+        }
+        return result;
+    }
+
 }

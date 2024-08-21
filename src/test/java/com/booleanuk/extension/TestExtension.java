@@ -164,12 +164,51 @@ public class TestExtension {
     public void testPrintReceipt() throws Exception {
         mainTest();
         Order order1 = new Order(store);
+        store.setBasketCapacity(40);
         Receipt receipt1 = new Receipt(order1);
         order1.addProduct("BGLO");
         order1.addProduct("BGLP");
         order1.addProduct("BGLO");
+        order1.addProduct("BGLO");
+        order1.addProduct("BGLP");
+        order1.addProduct("BGLO");
+        order1.addProduct("BGLO");
+        order1.addProduct("BGLP");
+        order1.addProduct("BGLO");
+        order1.addProduct("BGLO");
+        order1.addProduct("BGLP");
+        order1.addProduct("BGLO");
+
+        order1.addProduct("BGLO");
+        order1.addProduct("BGLP");
+        order1.addProduct("BGLO");
+        order1.addProduct("BGLO");
+        order1.addProduct("BGLP");
+        order1.addProduct("BGLO");
+
+        order1.addProduct("BGLO");
+        order1.addProduct("BGLO");
+
         order1.addProduct("FILB");
         order1.addProduct("COFW");
+        order1.addProduct("BGLO");
+
+        order1.addProduct("FILB");
+        order1.addProduct("COFW");
+
+        order1.addProduct("FILB");
+        order1.addProduct("FILB");
+        order1.addProduct("FILB");
+        order1.addProduct("FILB");
+        order1.addProduct("FILB");
+        order1.addProduct("FILB");
+        order1.addProduct("FILB");
+        order1.addProduct("FILB");
+        order1.addProduct("FILB");
+        order1.addProduct("FILB");
+        order1.addProduct("FILB");
+        order1.addProduct("FILB");
+
         receipt1.printReceipt();
     }
 
