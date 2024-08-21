@@ -2,22 +2,18 @@ package com.booleanuk.core;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
-public class Bagel implements StandaloneProduct {
-  private BagelType type;
-  private List<Filling> fillings;
-
-  public Bagel(BagelType type) {
-    this.type = type;
-    this.fillings = new ArrayList<>();
-  }
-
+public record Bagel(BagelType type, Optional<List<Filling>> fillings) implements StandaloneProduct {
   public double extraPrice() {
-    return fillings.stream().mapToDouble(Filling::basePrice).sum();
+    if (this.fillings.isPresent())
+      return fillings.get().stream().mapToDouble(Filling::basePrice).sum();
+    else
+      return 0;
   }
 
   public double basePrice() {
-    return this.sku().price();
+    return this.type.sku().price();
   }
 
   public Sku sku() {
@@ -25,12 +21,10 @@ public class Bagel implements StandaloneProduct {
   }
 
   public List<Product> components() {
-    List<Product> components = new ArrayList<>(this.fillings);
+    List<Product> components = new ArrayList<>();
     components.add(this);
+    if (this.fillings.isPresent())
+      components.addAll(this.fillings.get());
     return components;
-  }
-
-  public void add(Filling filling) {
-    this.fillings.add(filling);
   }
 }

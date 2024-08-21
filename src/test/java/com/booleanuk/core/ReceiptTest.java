@@ -2,6 +2,7 @@ package com.booleanuk.core;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -12,13 +13,13 @@ class ReceiptTest {
     List<Product> inventoryStock = new ArrayList<>();
     inventoryStock.add(new Coffee(CoffeeType.BLACK));
     inventoryStock.add(new Coffee(CoffeeType.WHITE));
-    inventoryStock.add(new Bagel(BagelType.ONION));
+    inventoryStock.add(new Bagel(BagelType.ONION, Optional.empty()));
     Inventory inventory = new Inventory(inventoryStock);
 
     Basket basket = new Basket();
     basket.add(new Coffee(CoffeeType.BLACK));
     basket.add(new Coffee(CoffeeType.WHITE));
-    basket.add(new Bagel(BagelType.ONION));
+    basket.add(new Bagel(BagelType.ONION, Optional.empty()));
 
     Receipt receipt = inventory.purchase(basket);
     String actual = receipt.toString();
@@ -52,11 +53,11 @@ class ReceiptTest {
   public void testReceiptTwelveBagelDiscount() {
     List<Product> inventoryStock = new ArrayList<>();
     for (int i = 0; i < 12; ++i)
-      inventoryStock.add(new Bagel(BagelType.ONION));
+      inventoryStock.add(new Bagel(BagelType.ONION, Optional.empty()));
     Inventory inventory = new Inventory(inventoryStock);
 
     Basket basket = new Basket(12);
-    basket.add(new Bagel(BagelType.ONION), 12);
+    basket.add(new Bagel(BagelType.ONION, Optional.empty()), 12);
     Receipt receipt = inventory.purchase(basket);
     String actual = receipt.toString();
     Assertions.assertTrue(actual.contains("Discount: -0.89"));
@@ -68,11 +69,11 @@ class ReceiptTest {
   public void testReceiptSixBagelDiscount() {
     List<Product> inventoryStock = new ArrayList<>();
     for (int i = 0; i < 6; ++i)
-      inventoryStock.add(new Bagel(BagelType.ONION));
+      inventoryStock.add(new Bagel(BagelType.ONION, Optional.empty()));
     Inventory inventory = new Inventory(inventoryStock);
 
     Basket basket = new Basket();
-    basket.add(new Bagel(BagelType.ONION), 6);
+    basket.add(new Bagel(BagelType.ONION, Optional.empty()), 6);
     Receipt receipt = inventory.purchase(basket);
     String actual = receipt.toString();
     Assertions.assertTrue(actual.contains("Discount: -0.45"));
@@ -84,11 +85,11 @@ class ReceiptTest {
   public void testReceiptCoffeeAndBagelDiscount() {
     List<Product> inventoryStock = new ArrayList<>();
     inventoryStock.add(new Coffee(CoffeeType.BLACK));
-    inventoryStock.add(new Bagel(BagelType.ONION));
+    inventoryStock.add(new Bagel(BagelType.ONION, Optional.empty()));
     Inventory inventory = new Inventory(inventoryStock);
 
     Basket basket = new Basket();
-    basket.add(new Bagel(BagelType.ONION));
+    basket.add(new Bagel(BagelType.ONION, Optional.empty()));
     basket.add(new Coffee(CoffeeType.BLACK));
     Receipt receipt = inventory.purchase(basket);
     String actual = receipt.toString();
