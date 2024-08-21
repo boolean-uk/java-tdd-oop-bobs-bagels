@@ -32,6 +32,10 @@ public class Inventory {
     }
 
     public Product getProduct(String SKU) {
+        if (SKU == null) {
+            throw new IllegalArgumentException("SKU cannot be null");
+        }
+
         if (SKU.startsWith("BGL")) {
             return new Bagel(products.get(SKU).getSKU(), products.get(SKU).getPrice(), products.get(SKU).getVariant());
         }
