@@ -9,11 +9,11 @@ public class Receipt {
   private static final double twelveBagelsPrice = 3.99;
   private static final double sixBagelsPrice = 2.49;
   private static final double coffeeAndBagelPrice = 1.25;
-  private List<Product> products;
+  private List<StandaloneProduct> products;
   private String asString;
   private double price;
 
-  public Receipt(List<Product> products) {
+  public Receipt(List<StandaloneProduct> products) {
     this.products = products;
   }
 
@@ -33,7 +33,7 @@ public class Receipt {
     return n;
   }
 
-  public static Receipt makeReceipt(List<Product> products) {
+  public static Receipt makeReceipt(List<StandaloneProduct> products) {
     Receipt receipt = new Receipt(products);
     receipt.asString = "~~~ Bob's Bagels ~~~\n\n" +
         LocalDateTime.now() +
@@ -77,16 +77,29 @@ public class Receipt {
 
     Map<Sku, Integer> productCounts = new HashMap<>();
 
-    for (Product product : receipt.products) {
-      if (product.sku().isBagel() && numBagels > 0) {
-        --numBagels;
-        receipt.price += product.sku().price();
-        // Increment productCount by 1
-        productCounts.merge(product.sku(), 1, Integer::sum);
-      } else if (product.sku().isCoffee() && numCoffees > 0) {
+    for (StandaloneProduct product : receipt.products) {
+      Sku sku = product.sku();
+      if (sku.isBagel()) {
+        if (numBagels > 0) {
+          --numBagels;
+          receipt.price += sku.price();
+          // Increment product count by 1
+          productCounts.merge(sku, 1, Integer::sum);
+        }
+
+        List<Product> components = product.components();
+        // Add all extras (fillings) even if we've already payed for the bagel itself, i
+        // = 1 since first part of components is the product itself
+        for (int i = 1, size = components.size(); i < size; ++i) {
+          Sku componentSku = components.get(i).sku();
+          receipt.price += componentSku.price();
+          receipt.asString += String.format("1x %s %.2f\n", componentSku.toString(),
+              componentSku.price());
+        }
+      } else if (sku.isCoffee() && numCoffees > 0) {
         --numCoffees;
-        receipt.price += product.sku().price();
-        productCounts.merge(product.sku(), 1, Integer::sum);
+        receipt.price += sku.price();
+        productCounts.merge(sku, 1, Integer::sum);
       }
     }
 
