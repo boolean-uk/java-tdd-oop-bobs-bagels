@@ -36,6 +36,10 @@ public class Inventory {
             throw new IllegalArgumentException("SKU cannot be null");
         }
 
+        if (SKU.isEmpty()) {
+            throw new IllegalArgumentException("SKU cannot be empty");
+        }
+
         if (SKU.startsWith("BGL")) {
             return new Bagel(products.get(SKU).getSKU(), products.get(SKU).getPrice(), products.get(SKU).getVariant());
         }
