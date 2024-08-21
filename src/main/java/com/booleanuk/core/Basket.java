@@ -1,13 +1,10 @@
 package com.booleanuk.core;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Basket {
-  private final double twelveBagelsPrice = 3.99;
-  private final double sixBagelsPrice = 2.49;
-  private final double coffeeAndBagelPrice = 1.25;
-
   private List<StandaloneProduct> products = new ArrayList<>();
   private int capacity;
 
@@ -49,59 +46,8 @@ public class Basket {
       this.remove(sku);
   }
 
-  private int numBagels() {
-    int n = 0;
-    for (Product product : this.products)
-      if (product.sku().isBagel())
-        ++n;
-    return n;
-  }
-
-  private int numCoffees() {
-    int n = 0;
-    for (Product product : this.products)
-      if (product.sku().isCoffee())
-        ++n;
-    return n;
-  }
-
   public double price() {
-    // All fillings and extras cost money and cannot be discounted
-    double price = this.products
-        .stream()
-        .mapToDouble((product) -> product.extraPrice())
-        .sum();
-
-    int numBagels = this.numBagels();
-    int numCoffees = this.numCoffees();
-
-    while (numBagels >= 12) {
-      numBagels -= 12;
-      price += twelveBagelsPrice;
-    }
-
-    while (numBagels >= 6) {
-      numBagels -= 6;
-      price += sixBagelsPrice;
-    }
-
-    while (numBagels >= 1 && numCoffees >= 1) {
-      --numCoffees;
-      --numBagels;
-      price += coffeeAndBagelPrice;
-    }
-
-    for (Product product : this.products) {
-      if (product.sku().isBagel() && numBagels > 0) {
-        --numBagels;
-        price += product.sku().price();
-      } else if (product.sku().isCoffee() && numCoffees > 0) {
-        --numCoffees;
-        price += product.sku().price();
-      }
-    }
-
-    return price;
+    return Receipt.makeReceipt(Collections.unmodifiableList(this.products)).price();
   }
 
   public void setCapacity(int capacity) {

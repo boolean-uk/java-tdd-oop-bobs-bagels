@@ -24,9 +24,9 @@ class ReceiptTest {
     Receipt receipt = inventory.purchase(basket);
     String actual = receipt.toString();
     Assertions.assertTrue(actual.contains("1x Black coffee " + String.format("%.2f", Sku.COFB.price())));
-    Assertions.assertTrue(actual.contains("1x Coffee + bagel deal " + 1.25));
+    Assertions.assertTrue(actual.contains("1x Coffee & bagel deal " + 1.25));
     Assertions.assertTrue(
-        actual.contains("Total " + String.format("%.2f", Sku.COFB.price() + 1.25)));
+        actual.contains("Total: " + String.format("%.2f", Sku.COFB.price() + 1.25)));
   }
 
   @Test
@@ -46,7 +46,7 @@ class ReceiptTest {
     String actual = receipt.toString();
     Assertions.assertTrue(actual.contains("3x Black coffee " + String.format("%.2f", Sku.COFB.price() * 3)));
     Assertions.assertTrue(
-        actual.contains("Total " + String.format("%.2f", Sku.COFB.price() * 3)));
+        actual.contains("Total: " + String.format("%.2f", Sku.COFB.price() * 3)));
   }
 
   @Test
@@ -60,9 +60,8 @@ class ReceiptTest {
     basket.add(new Bagel(BagelType.ONION, Optional.empty()), 12);
     Receipt receipt = inventory.purchase(basket);
     String actual = receipt.toString();
-    Assertions.assertTrue(actual.contains("Discount: -0.89"));
-    Assertions.assertTrue(actual.contains("12x Onion bagel 4.99"));
-    Assertions.assertTrue(actual.contains("Total 4.99"));
+    Assertions.assertTrue(actual.contains("1x Twelve bagel deal 3.99"));
+    Assertions.assertTrue(actual.contains("Total: 3.99"));
   }
 
   @Test
@@ -76,9 +75,8 @@ class ReceiptTest {
     basket.add(new Bagel(BagelType.ONION, Optional.empty()), 6);
     Receipt receipt = inventory.purchase(basket);
     String actual = receipt.toString();
-    Assertions.assertTrue(actual.contains("Discount: -0.45"));
-    Assertions.assertTrue(actual.contains("6x Onion bagel 2.49"));
-    Assertions.assertTrue(actual.contains("Total 2.49"));
+    Assertions.assertTrue(actual.contains("1x Six bagel deal 2.49"));
+    Assertions.assertTrue(actual.contains("Total: 2.49"));
   }
 
   @Test
@@ -93,7 +91,7 @@ class ReceiptTest {
     basket.add(new Coffee(CoffeeType.BLACK));
     Receipt receipt = inventory.purchase(basket);
     String actual = receipt.toString();
-    Assertions.assertTrue(actual.contains("1x Coffee + bagel deal 1.25"));
-    Assertions.assertTrue(actual.contains("Total 1.25"));
+    Assertions.assertTrue(actual.contains("1x Coffee & bagel deal 1.25"));
+    Assertions.assertTrue(actual.contains("Total: 1.25"));
   }
 }

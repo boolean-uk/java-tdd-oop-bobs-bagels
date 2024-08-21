@@ -1,10 +1,17 @@
 package com.booleanuk.core;
 
 import java.time.LocalDateTime;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Receipt {
+  private static final double twelveBagelsPrice = 3.99;
+  private static final double sixBagelsPrice = 2.49;
+  private static final double coffeeAndBagelPrice = 1.25;
   private List<Product> products;
+  private String asString;
+  private double price;
 
   public Receipt(List<Product> products) {
     this.products = products;
@@ -26,66 +33,81 @@ public class Receipt {
     return n;
   }
 
-  @Override
-  public String toString() {
-    String out = "~~~ Bob's Bagels ~~~\n\n" +
+  public static Receipt makeReceipt(List<Product> products) {
+    Receipt receipt = new Receipt(products);
+    receipt.asString = "~~~ Bob's Bagels ~~~\n\n" +
         LocalDateTime.now() +
         "\n\n----------------------\n\n";
-    double totalPrice = 0;
+    // All fillings and extras cost money and cannot be discounted
+    receipt.price = 0;
 
-    int numBagels = this.numBagels();
-    int numCoffees = this.numCoffees();
+    int numBagels = receipt.numBagels();
+    int numCoffees = receipt.numCoffees();
 
-    for (Sku sku : Sku.values()) {
-      long productCount = this.products
-          .stream()
-          .filter((product) -> product.sku() == sku)
-          .count();
-      if (productCount == 0)
-        continue;
-
-      double productPrice = 0;
-      if (sku.isBagel()) {
-        if (productCount >= 12) {
-          // Twelve bagel discount
-          productPrice = 4.99;
-          out += String.format("Discount: %.2f\n", productPrice - (sku.price() * productCount));
-        } else if (productCount >= 6) {
-          // Six bagel discount
-          productPrice = 2.49;
-          out += String.format("Discount: %.2f\n", productPrice - (sku.price() * productCount));
-        } else {
-          if (numCoffees > 0) {
-            // Coffee and bagel discount
-            while (Math.min(numBagels, numCoffees) > 0) {
-              productPrice += 1.25;
-              --numBagels;
-              --numCoffees;
-            }
-            totalPrice += productPrice;
-            out += String.format("%dx Coffee + bagel deal %.2f\n", productCount, productPrice);
-            continue;
-          } else {
-            productPrice = sku.price() * productCount;
-          }
-        }
-        numBagels -= productCount;
-      } else {
-        // Already applied as bagel + coffee discount
-        if (numCoffees <= 0)
-          continue;
-        // No discount
-        productPrice = sku.price() * productCount;
-        numCoffees -= productCount;
+    if (numBagels >= 12) {
+      int nDiscounts = 0;
+      while (numBagels >= 12) {
+        numBagels -= 12;
+        receipt.price += twelveBagelsPrice;
+        ++nDiscounts;
       }
-      totalPrice += productPrice;
-
-      out += String.format("%dx %s %.2f\n", productCount, sku, productPrice);
+      receipt.asString += nDiscounts + "x Twelve bagel deal " + twelveBagelsPrice * nDiscounts;
     }
 
-    out += "\n----------------------\n";
-    out += String.format("Total %.2f", totalPrice);
+    if (numBagels >= 6) {
+      int nDiscounts = 0;
+      while (numBagels >= 6) {
+        numBagels -= 6;
+        receipt.price += sixBagelsPrice;
+        ++nDiscounts;
+      }
+      receipt.asString += nDiscounts + "x Six bagel deal " + sixBagelsPrice * nDiscounts;
+    }
 
-    return out;
+    if (numBagels >= 1 && numCoffees >= 1) {
+      int nDiscounts = 0;
+      while (numBagels >= 1 && numCoffees >= 1) {
+        --numCoffees;
+        --numBagels;
+        receipt.price += coffeeAndBagelPrice;
+        ++nDiscounts;
+      }
+      receipt.asString += nDiscounts + "x Coffee & bagel deal " + coffeeAndBagelPrice * nDiscounts;
+    }
+
+    Map<Sku, Integer> productCounts = new HashMap<>();
+
+    for (Product product : receipt.products) {
+      if (product.sku().isBagel() && numBagels > 0) {
+        --numBagels;
+        receipt.price += product.sku().price();
+        // Increment productCount by 1
+        productCounts.merge(product.sku(), 1, Integer::sum);
+      } else if (product.sku().isCoffee() && numCoffees > 0) {
+        --numCoffees;
+        receipt.price += product.sku().price();
+        productCounts.merge(product.sku(), 1, Integer::sum);
+      }
+    }
+
+    for (Map.Entry<Sku, Integer> entry : productCounts.entrySet()) {
+      Sku sku = entry.getKey();
+      int count = entry.getValue();
+      receipt.asString += String.format("%dx %s %.2f", count, sku.toString(), sku.price() * count);
+    }
+
+    receipt.asString += "\n\n----------------------\n\n";
+    receipt.asString += String.format("Total: %.2f", receipt.price);
+
+    return receipt;
+  }
+
+  @Override
+  public String toString() {
+    return this.asString;
+  }
+
+  public double price() {
+    return this.price;
   }
 }
