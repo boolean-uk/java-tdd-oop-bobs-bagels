@@ -47,7 +47,7 @@ public class Basket {
 
 
 
-    public String removeBagel(Item item) {
+    public String removeItem(Item item) {
         if (listOfBasket.contains(item)) {
             listOfBasket.remove(item);
             return "The bagel was successfully removed";

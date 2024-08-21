@@ -1,5 +1,7 @@
 package com.booleanuk.core;
 
+// A bagel can only have one filling.
+
 public class Bagel extends Item {
     private BagelVariant variant;
     private Filling filling;

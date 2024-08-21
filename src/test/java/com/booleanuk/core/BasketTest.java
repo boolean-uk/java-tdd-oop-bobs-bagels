@@ -31,7 +31,7 @@ public class BasketTest {
     }
 
     @Test
-    public void testRemoveBagel() {
+    public void testRemoveItem() {
         Basket basket = new Basket(10, new Inventory());
         Item item1 = new Bagel("BGLO", 0.49, "Bagel", Bagel.BagelVariant.ONION);
         Item item2 = new Bagel("BGLO", 0.49, "Bagel", Bagel.BagelVariant.EVERYTHING);
@@ -41,20 +41,20 @@ public class BasketTest {
         basket.addItem(item2);
         basket.addItem(item3);
 
-        basket.removeBagel(item1);
+        basket.removeItem(item1);
 
         Assertions.assertEquals(2, basket.getListOfBasket().size());
     }
 
     @Test
-    public void testRemoveBagelIfNotExist() {
+    public void testRemoveItemIfNotExist() {
         Basket basket = new Basket(10, new Inventory());
         Item item1 = new Bagel("BGLO",0.49, "Bagel", Bagel.BagelVariant.ONION);
         Item item2 = new Bagel("BGLO",0.49, "Bagel", Bagel.BagelVariant.EVERYTHING);
         Item item3 = new Bagel("BGLO",0.49, "Bagel", Bagel.BagelVariant.EVERYTHING);
         basket.addItem(item1);
         basket.addItem(item2);
-        String result1= basket.removeBagel(item3);
+        String result1= basket.removeItem(item3);
         Assertions.assertEquals(result1,"The bagel does not exist in the basket");
 
     }
