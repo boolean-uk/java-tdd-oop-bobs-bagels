@@ -14,12 +14,12 @@ public class Inventory {
     }
 
     public void setInventory() {
-        products.put("BGLO", new Bagel("BGLO", 49, "Onion"));
-        products.put("BGLP", new Bagel("BGLP", 39, "Plain"));
-        products.put("BGLE", new Bagel("BGLE", 49, "Everything"));
-        products.put("BGLS", new Bagel("BGLS", 49, "Sesame"));
-        products.put("COFB", new Coffee("COFB", 99, "Black"));
-        products.put("COFW", new Coffee("COFW", 119, "White"));
+        products.put("BGLO", new Bagel("BGLO", 49, "Onion Bagel"));
+        products.put("BGLP", new Bagel("BGLP", 39, "Plain Bagel"));
+        products.put("BGLE", new Bagel("BGLE", 49, "Everything Bagel"));
+        products.put("BGLS", new Bagel("BGLS", 49, "Sesame Bagel"));
+        products.put("COFB", new Coffee("COFB", 99, "Black Coffee"));
+        products.put("COFW", new Coffee("COFW", 119, "White Coffee"));
         products.put("COFC", new Coffee("COFC", 129, "Cappuccino"));
         products.put("COFL", new Coffee("COFL", 129, "Latte"));
         products.put("FILB", new Filling("FILB", 12, "Bacon"));
@@ -30,7 +30,14 @@ public class Inventory {
         products.put("FILH", new Filling("FILH", 12, "Ham"));
 
     }
+
     public Product getProduct(String SKU) {
-        return products.get(SKU);
+        if (SKU.startsWith("BGL")) {
+            return new Bagel(products.get(SKU).getSKU(), products.get(SKU).getPrice(), products.get(SKU).getVariant());
+        }
+        if (SKU.startsWith("COF")) {
+            return new Coffee(products.get(SKU).getSKU(), products.get(SKU).getPrice(), products.get(SKU).getVariant());
+        }
+        return new Filling(products.get(SKU).getSKU(), products.get(SKU).getPrice(), products.get(SKU).getVariant());
     }
 }
