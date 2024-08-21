@@ -31,4 +31,30 @@ public class CheckoutAndReceiptTest {
         Assertions.assertEquals(1.1, receipt.getTotalCost());
     }
 
+    @Test
+    public void testGetReceiptAndDiscount() {
+        Checkout checkout = new Checkout();
+
+        Basket basket = new Basket();
+        basket.changeCapacity(100, true);
+
+        basket.addProduct(new PlainBagel());
+        basket.addProduct(new PlainBagel());
+        basket.addProduct(new PlainBagel());
+        basket.addProduct(new PlainBagel());
+        basket.addProduct(new PlainBagel());
+        basket.addProduct(new PlainBagel());
+        basket.addProduct(new PlainBagel());
+        basket.addProduct(new PlainBagel());
+        basket.addProduct(new PlainBagel());
+        basket.addProduct(new PlainBagel());
+        basket.addProduct(new PlainBagel());
+        basket.addProduct(new PlainBagel()); // 3.99 discount
+
+        Receipt r = checkout.makeCheckout(basket);
+
+        Assertions.assertEquals(3.99, r.getTotalCost());
+
+    }
+
 }
