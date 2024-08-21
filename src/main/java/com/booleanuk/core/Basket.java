@@ -1,5 +1,7 @@
 package com.booleanuk.core;
 
+import com.booleanuk.extension.DiscountManager;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -7,9 +9,10 @@ public class Basket {
     private HashMap<String, Integer> basket;
     private ItemList itemList = new ItemList();
     private int maxCapacity = 10;
-
+    private DiscountManager discountManager;
     public Basket() {
         this.basket = new HashMap<>();
+        this.discountManager = new DiscountManager();
     }
 
     public HashMap<String, Double> getFillingPriceList() {
@@ -29,6 +32,17 @@ public class Basket {
             totalItems += kvp.getValue();
         }
         return  totalItems;
+    }
+
+    public double countTotalValueOfItems() {
+        System.out.println(basket);
+        checkDiscountInBasket();
+        System.out.println(basket);
+        double totalPrice = 0;
+        for (Map.Entry<String, Integer> kvp: this.basket.entrySet()) {
+            totalPrice += (itemList.getPriceFromList(kvp.getKey()) * kvp.getValue());
+        }
+        return  totalPrice + discountManager.totalValueOfDiscount();
     }
 
     public int getMaxCapacity() {
@@ -65,18 +79,14 @@ public class Basket {
     }
 
     public String addItemToBasket(Bagel bagel, Filling filling) {
-        System.out.println(filling.getName());
         String addBagel = addItemToBasket(bagel);
         String addFilling = addItemToBasket(filling);
-
-        System.out.println(addFilling);
         if(
                 !addBagel.equals("Basket is full.") &&
                 !addFilling.equals("Basket is full.") &&
                 !addBagel.equals("This item does not exist.") &&
                 !addFilling.equals("This item does not exist.")
         ){
-            System.out.println(filling);
             bagel.addFilling(filling);
             return "Added " + bagel.getName() + " with filling " + filling.getName() + " to basket.";
         }else {
@@ -124,13 +134,6 @@ public class Basket {
         return 0;
     }
 
-    public double countTotalValueOfItems() {
-        double totalPrice = 0;
-        for (Map.Entry<String, Integer> kvp: this.basket.entrySet()) {
-           totalPrice += (itemList.getPriceFromList(kvp.getKey()) * kvp.getValue());
-        }
-       return  totalPrice;
-    }
 
     public boolean removeItemFromBasket(String sku) {
         if(this.basket.containsKey(sku)) {
@@ -175,5 +178,14 @@ public class Basket {
         }
     }
 
+    public void checkDiscountInBasket() {
+        for(Map.Entry <String, Integer> kvp: this.basket.entrySet()) {
+            //Checks for bagel discount
+            while (kvp.getValue()  - 6 >= 0 && itemList.getTypeFromList(kvp.getKey()).equals("Bagel")) {
+                //Loops if the bagels are bigger than 6 as 6 is the smallest discount you can get.
+                this.basket.replace(kvp.getKey(), kvp.getValue() - discountManager.checkBagelDiscount(this.basket));
+            }
+        }
+    }
 
 }

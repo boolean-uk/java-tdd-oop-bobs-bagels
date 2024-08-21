@@ -57,8 +57,6 @@ public class BasketTest {
         itemList.add(coffee);
         itemList.add(filling);
 
-        System.out.println(basket.checkAllItems());
-
         for (int i = 0; i < basket.countTotalItems(); i++) {
             Assertions.assertEquals(1, basket.checkAllItems().get(itemList.get(i).getSKU()));
         }
