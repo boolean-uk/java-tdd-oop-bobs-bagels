@@ -91,8 +91,9 @@ public class Order {
                     break;
                 }
                 case 4: {
+                    basket.calculateDiscount();
                     Receipt receipt = new Receipt(this.basket);
-                    receipt.printReceipt(this.basket);
+                    receipt.printReceipt();
                     return;
                 }
             }
