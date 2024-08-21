@@ -13,18 +13,7 @@ public record Coffee(CoffeeType type) implements StandaloneProduct {
   }
 
   public Sku sku() {
-    switch (this.type) {
-      case BLACK:
-        return Sku.COFB;
-      case WHITE:
-        return Sku.COFW;
-      case CAPUCCINO:
-        return Sku.COFC;
-      case LATTE:
-        return Sku.COFL;
-    }
-
-    return Sku.UNKNOWN;
+    return this.type.sku();
   }
 
   public List<Product> components() {

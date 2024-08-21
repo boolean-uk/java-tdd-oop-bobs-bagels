@@ -14,35 +14,39 @@
 | `RuntimeException` |
 
 ## Domain model Sku enum
-| Variants |
-|----------|
-| BGLO     |
-| BGLP     |
-| BGLE     |
-| BGLS     |
-| COFB     |
-| COFW     |
-| COFC     |
-| COFL     |
-| FILB     |
-| FILE     |
-| FILC     |
-| FILX     |
-| FILS     |
-| FILH     |
+| Variants | Variables      |
+|----------|----------------|
+| BGLO     |                |
+| BGLP     |                |
+| BGLE     |                |
+| BGLS     |                |
+| COFB     |                |
+| COFW     |                |
+| COFC     |                |
+| COFL     |                |
+| FILB     |                |
+| FILE     |                |
+| FILC     |                |
+| FILX     |                |
+| FILS     |                |
+| FILH     |                |
+|          | `String name`  |
+|          | `double price` |
 
 ## Domain model Product interface
-| Methods          | Scenario                                                | Output                   |
-|------------------|---------------------------------------------------------|--------------------------|
-| `double price()` | User wants to know the price of a product before buying | The price of the product |
-| `Sku sku()`      | User or admin wants to identify a product               | SKU of product           |
+| Methods               | Scenario                                                                                        | Output                                            |
+|-----------------------|-------------------------------------------------------------------------------------------------|---------------------------------------------------|
+| `double basePrice()`  | User wants to know the price of a product without any related products before buying            | The base price of the product                     |
+| `double extraPrice()` | User wants to know the price of all products attached to the product (e.g. fillings on a bagel) | The price of all products attached to the product |
+| `Sku sku()`           | User or admin wants to identify a product                                                       | SKU of product                                    |
 
 ## Domain model StandaloneProduct interface
 - This interface is separate from the `Product` interface because not all products can be purchased directly
 
-| Extends   |
-|-----------|
-| `Product` |
+| Extends   | Methods                      | Scenario                                                                                                | Output                              |
+|-----------|------------------------------|---------------------------------------------------------------------------------------------------------|-------------------------------------|
+| `Product` |                              |                                                                                                         |                                     |
+|           | `List<Product> components()` | Admin wants to see any additional products related to some StandAloneproduct (e.g. fillings on a bagel) | All products related to the product |
 
 ## Domain model FillingType enum
 | Variants      |

@@ -21,18 +21,7 @@ public class Bagel implements StandaloneProduct {
   }
 
   public Sku sku() {
-    switch (this.type) {
-      case ONION:
-        return Sku.BGLO;
-      case PLAIN:
-        return Sku.BGLP;
-      case EVERYTHING:
-        return Sku.BGLE;
-      case SESAME:
-        return Sku.BGLS;
-    }
-
-    return Sku.UNKNOWN;
+    return this.type.sku();
   }
 
   public List<Product> components() {
