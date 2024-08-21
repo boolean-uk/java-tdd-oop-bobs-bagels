@@ -23,7 +23,6 @@ public class Bagel extends Item {
         return variant;
     }
 
-
     public enum BagelVariant {
         ONION, PLAIN, EVERYTHING, SESAME;
     }
