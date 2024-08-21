@@ -1,22 +1,22 @@
 package com.booleanuk.core;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
 
-public class Bagels extends Product{
-    private List<Fillings> fillings;
+
+public class Bagels extends Product {
+    private HashMap<Fillings, Integer> fillings;
 
     Bagels(String SKU, double price, String variant) {
         super(SKU, price, variant);
-        fillings = new ArrayList<>();
+        fillings = new HashMap<>();
     }
 
-    public List<Fillings> getFillings() {
+    public HashMap<Fillings, Integer> getFillings() {
         return fillings;
     }
 
     public void addFilling(Fillings filling) {
-        fillings.add(filling);
+        fillings.put(filling, fillings.getOrDefault(filling, 0) + 1);
     }
 
     public void removeFilling(Fillings filling) {
@@ -24,15 +24,19 @@ public class Bagels extends Product{
     }
 
     public void printFillings() {
-        if (fillings.isEmpty()) {
-            System.out.println("This bagel has no fillings.");
-        } else {
-            System.out.println("Fillings in this bagel:");
-            for (Fillings filling : fillings) {
-                System.out.println("Filling SKU: " + filling.getSKU() + ", Variant: " + filling.getVariant() + ", Price: $" + filling.getPrice());
+            if(!fillings.isEmpty()) {
+                for (HashMap.Entry<Fillings, Integer> entry : fillings.entrySet()) {
+                    int quantity = entry.getValue();
+                    Fillings filling = entry.getKey();
+                    System.out.printf(" -"+ "%-14s %5d %15s %n",
+                            filling.getVariant() + " Filling",
+                            quantity,
+                            "$" + String.format("%.2f", filling.getPrice() * quantity));
+                }
             }
         }
+
+
     }
 
 
-}
