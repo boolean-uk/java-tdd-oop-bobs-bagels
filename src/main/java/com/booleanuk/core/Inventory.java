@@ -51,6 +51,7 @@ public class Inventory {
 
         // TODO: Unnecassary looping
         // TODO: Duplicate code
+        // Simplify, doesn't have to have multiple center
         System.out.println();
         System.out.printf(centerSmall + centerSmall + centerSmall + newLine,"", "=== Bob's Bagels ===", "");
         System.out.printf(center + center + center + newLine,"", "   ~ Menu ~   ", "");
@@ -108,6 +109,11 @@ public class Inventory {
     public Filling getFillingProduct(String SKU) {
         Product fillingProduct = inventoryItems.get(SKU);
         return (Filling) fillingProduct;
+    }
+
+    // TODO:Refactor or good to have the above methods for the Basket class?
+    public Product getProduct(String SKU) {
+        return inventoryItems.get(SKU);
     }
 
 
