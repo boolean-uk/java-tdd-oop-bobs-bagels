@@ -4,7 +4,9 @@ import java.util.*;
 
 public class Order {
     private final ArrayList<Product> basket;
-    private Map<ArrayList<Product>, Integer> discountedProductsMap;
+    private Map<Integer, Integer> twelveBagelDiscounts;
+    private Map<Integer, Integer> sixBagelDiscounts;
+    private Map<Integer, Integer> coffeeBagelPairsDiscount;
     private Map<Product, Integer> nonDiscountedProductsMap;
     private final Store store;
     private int maxBasketCapacity;
@@ -42,6 +44,7 @@ public class Order {
 
     public boolean addProduct(Product product) {
         if (isBasketFull()) {
+            System.out.println("Basket is full");
             return false;
         }
         basket.add(product);
@@ -76,8 +79,16 @@ public class Order {
         return basket;
     }
 
-    public Map<ArrayList<Product>, Integer> getDiscountedProductsMap() {
-        return discountedProductsMap;
+    public Map<Integer, Integer> getTwelveBagelDiscounts() {
+        return twelveBagelDiscounts;
+    }
+
+    public Map<Integer, Integer> getSixBagelDiscounts() {
+        return sixBagelDiscounts;
+    }
+
+    public Map<Integer, Integer> getCoffeeBagelPairsDiscount() {
+        return coffeeBagelPairsDiscount;
     }
 
     public Map<Product, Integer> getNonDiscountedProductsMap() {
@@ -119,6 +130,7 @@ public class Order {
 
                 // Add the total filling price to the overall filling price
                 totalBagelFillingPrice += fillingPrice;
+                resetAmount += fillingPrice;
             }
 
             // If the product is a filling, add the price to the total filling price
@@ -143,26 +155,39 @@ public class Order {
         int numberOfSixBagelDiscounts = numberOfBagels / 6;
 
         // Create a new map to store the discounted products
-        discountedProductsMap = new HashMap<>();
+        twelveBagelDiscounts = new HashMap<>();
+        sixBagelDiscounts = new HashMap<>();
+        coffeeBagelPairsDiscount = new HashMap<>();
 
 
-        applyDiscounts(numberOfTwelveBagelDiscounts, 12, 399, bagels);
-        applyDiscounts(numberOfSixBagelDiscounts, 6, 249, bagels);
+        applyDiscounts(numberOfTwelveBagelDiscounts, 12, bagels);
+        applyDiscounts(numberOfSixBagelDiscounts, 6, bagels);
+        int bagelCoffeePairs = applyCoffeeBagelPairsDiscount(bagels, coffees);
+
         nonDiscountedProductsMap = new HashMap<>();
 
+
+        fillNonDiscountedProducts(fillings);
         fillNonDiscountedProducts(bagels);
         fillNonDiscountedProducts(coffees);
-        fillNonDiscountedProducts(fillings);
-
-        int bagelCoffeePairs = applyCoffeeBagelPairsDiscount(bagels, coffees);
+        // Calculate the sum to add for remaining bagels and coffees (highest prices first)
+        int sumToAdd = getSumToAdd(bagels) + getSumToAdd(coffees) + totalBagelFillingPrice;
+        for (Product bagel : bagels) {
+            if (bagel instanceof Bagel b && b.getFillings() != null) {
+                for (Filling filling : b.getFillings()) {
+                    if (nonDiscountedProductsMap.containsKey(filling) && nonDiscountedProductsMap.get(filling) == 1) {
+                        nonDiscountedProductsMap.remove(filling);
+                    } else if (nonDiscountedProductsMap.containsKey(filling) && nonDiscountedProductsMap.get(filling) > 1) {
+                        nonDiscountedProductsMap.put(filling, nonDiscountedProductsMap.get(filling) - 1);
+                    }
+                }
+            }
+        }
 
         // If no discounts apply, set totalSum to resetAmount
         if (numberOfTwelveBagelDiscounts == 0 && numberOfSixBagelDiscounts == 0 && bagelCoffeePairs == 0) {
             return resetAmount;
         } else {
-            // Calculate the sum to add for remaining bagels and coffees (highest prices first)
-            int sumToAdd = getSumToAdd(bagels) + getSumToAdd(coffees) + totalBagelFillingPrice;
-
             // Calculate the total sum with all applicable discounts
             return bagelCoffeePairs * 125 + numberOfTwelveBagelDiscounts * 399 + numberOfSixBagelDiscounts * 249 + sumToAdd;
         }
@@ -184,13 +209,19 @@ public class Order {
         return sumToAdd;
     }
 
-    private void applyDiscounts(int numberOfDiscounts, int discountSize, int discountPrice, ArrayList<Product> amountOfBagels) {
+    private void applyDiscounts(int numberOfDiscounts, int discountSize, ArrayList<Product> amountOfBagels) {
         for (int i = 0; i < numberOfDiscounts; i++) {
-            ArrayList<Product> discountedBagels = new ArrayList<>();
+            int totalCost = 0;
             for (int j = 0; j < discountSize && !amountOfBagels.isEmpty(); j++) {
-                discountedBagels.add(amountOfBagels.removeFirst());
+                Product product = amountOfBagels.removeFirst();
+                totalCost += getProductPrice(product.getSKU());
             }
-            discountedProductsMap.put(discountedBagels, discountPrice);
+
+            if (discountSize == 12) {
+                twelveBagelDiscounts.put(numberOfDiscounts, totalCost);
+            } else {
+                sixBagelDiscounts.put(numberOfDiscounts, totalCost);
+            }
         }
     }
 
@@ -198,10 +229,10 @@ public class Order {
         // Calculate the number of bagel and coffee pairs for discounts
         int pairs = Math.min(amountOfBagels.size(), amountOfCoffees.size());
         for (int i = 0; i < pairs; i++) {
-            ArrayList<Product> coffeeBagelPair = new ArrayList<>();
-            coffeeBagelPair.add(amountOfCoffees.removeFirst());
-            coffeeBagelPair.add(amountOfBagels.removeFirst());
-            discountedProductsMap.put(coffeeBagelPair, 125);
+            int totalCost = 0;
+            totalCost += amountOfCoffees.removeFirst().getPrice();
+            totalCost += amountOfBagels.removeFirst().getPrice();
+            coffeeBagelPairsDiscount.put(pairs, totalCost);
         }
         return pairs;
     }
