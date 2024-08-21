@@ -34,4 +34,16 @@ public class BasketTest {
         Assertions.assertEquals("BAGE", basket.getAll().get(1).getSKU());
         Assertions.assertEquals("FILS", basket.getAll().get(101).getSKU());
     }
+
+    @Test
+    public void removeBagel() {
+        this.inventory = new Inventory();
+        this.basket = new Basket(new Inventory());
+        basket.addBagel("BAGE", Arrays.asList("FILS","FILB"));
+        basket.addBagel("BAGE", Arrays.asList("FILS","FILB"));
+        basket.printBasket();
+
+        basket.remove(1);
+        basket.printBasket();
+    }
 }
