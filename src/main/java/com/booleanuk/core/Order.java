@@ -33,7 +33,12 @@ public class Order {
             return -1;
         }
         Inventory inventory = new Inventory();
-        Product product = inventory.getProduct(SKU);
+        Product product;
+        try {
+            product = inventory.getProduct(SKU);
+        } catch (IllegalArgumentException e) {
+            return -1;
+        }
         if (product == null) {
             System.out.println("Product not found in the inventory");
             return -1;
