@@ -19,6 +19,18 @@ public class BasketTest {
         this.inventory = new Inventory();
         this.basket = new Basket(new Inventory());
         basket.addCoffee("COFW");
+        basket.printBasket();
         Assertions.assertEquals("COFW", basket.getAll().get(1).getSKU());
+    }
+
+    @Test
+    public void addBagelAndFilling() {
+        this.inventory = new Inventory();
+        this.basket = new Basket(new Inventory());
+        basket.addBagel("BAGE");
+        basket.addFilling("FILS");
+        basket.printBasket();
+        Assertions.assertEquals("BAGE", basket.getAll().get(1).getSKU());
+        Assertions.assertEquals("FILS", basket.getAll().get(2).getSKU());
     }
 }
