@@ -101,7 +101,6 @@ public class OrderTest {
         Assertions.assertEquals(30, order.getMaxBasketCapacity());
     }
 
-    // test getProductPrice(String SKU)
     @Test
     public void testGetProductPrice() {
         Store store = new Store("Bob's Bagels");
