@@ -2,10 +2,7 @@
 package com.booleanuk.core;
 
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class Receipt {
 
@@ -55,21 +52,24 @@ public class Receipt {
         System.out.println();
         System.out.println("----------------------------");
 
-        Map<Product, Integer> productQuantities = new HashMap<>();
-        Map<String, Integer> productPrices = new HashMap<>();
+        Map<ArrayList<Product>, Integer> discountedProductsMap = order.getDiscountedProductsMap();
+        Map<Product, Integer> nonDiscountedProductsMap = order.getNonDiscountedProductsMap();
 
-        List<Product> basket = order.getBasket();
-        for (Product product : basket) {
-            String SKU = product.getSKU();
-            productQuantities.put(product, productQuantities.getOrDefault(product, 0) + 1);
-            productPrices.put(SKU, productPrices.getOrDefault(SKU, 0) + product.getPrice());
+        // Print discounted products
+        for (Map.Entry<ArrayList<Product>, Integer> entry : discountedProductsMap.entrySet()) {
+            ArrayList<Product> products = entry.getKey();
+            int discountPrice = entry.getValue();
+            int quantity = products.size();
+            String productName = "Bagels";
+
+            System.out.println(formatItem(productName, quantity, discountPrice));
         }
 
-        for (Map.Entry<Product, Integer> entry : productQuantities.entrySet()) {
-            String SKU = entry.getKey().getSKU();
+        // Print non-discounted products
+        for (Map.Entry<Product, Integer> entry : nonDiscountedProductsMap.entrySet()) {
+            Product product = entry.getKey();
             int quantity = entry.getValue();
-            int price = productPrices.get(SKU);
-            Product product = inventory.getProduct(SKU);
+            int price = product.getPrice() * quantity;
 
             if (product instanceof Bagel bagel && !bagel.getFillings().isEmpty()) {
                 printProductWithFillings(bagel, quantity, price);
