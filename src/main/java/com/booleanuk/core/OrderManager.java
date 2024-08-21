@@ -1,9 +1,12 @@
 package com.booleanuk.core;
 
 import java.io.File;
-import java.text.DecimalFormat;
-import java.util.Arrays;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
+import java.util.ArrayList;
 import java.util.HashMap;
+//import java.time.format.DateTimeFormatter.
+
 
 import java.util.Scanner;
 
@@ -17,6 +20,7 @@ public class OrderManager {
 	static private int defaultMaxFillings;
 
 	private HashMap<ItemInterface, Integer> cart;
+	private ArrayList<ItemInterface> cartOrder;
 
 	public static int getMaxFillings(){
 		return defaultMaxFillings;
@@ -35,6 +39,7 @@ public class OrderManager {
 
 	public OrderManager(){
 		this.cart = new HashMap<>();
+		this.cartOrder = new ArrayList<>();
 		openUpShopAndSetInventory(); // ensure the store always opens with stock
 	}
 
@@ -180,13 +185,70 @@ public class OrderManager {
 		}
 		return amount;
 	}
-	// case: e1
+
 	public double getTotalDiscountedPrice(){
+		return getTotalDiscountReciept().price;
+	}
+
+	public String getTotalDiscountRecieptString(){
+		Receipt r =  getTotalDiscountReciept();
+		ArrayList<String> recieptRaw = r.receipt;
+		String prettyReciept = "";
+
+
+		// do some
+		int itemLengthWithPadding = 18;
+		int quantityWithPadding = 6;
+		int priceWithPadding = 6;
+		int totalWidth = itemLengthWithPadding+quantityWithPadding+priceWithPadding;
+		String bobsString = "~~~Bob's Bagels~~~\n";
+		prettyReciept += String.format("%" + ((totalWidth + bobsString.length())/2) + "s", bobsString);
+		String dateString = r.date.toLocalDate().toString() + "\n";
+		prettyReciept += String.format("%" + ((totalWidth + dateString.length())/2) + "s", dateString);
+		String dateTime = r.date.format(DateTimeFormatter.ISO_TIME);
+		int a = dateTime.lastIndexOf('.');
+		dateTime = dateTime.substring(0, a);
+		prettyReciept += String.format("%" + ((totalWidth + dateTime.length())/2) + "s", dateTime);
+
+		prettyReciept += "\n";
+
+
+		String receiptBreak = "=".repeat(totalWidth);
+		prettyReciept += receiptBreak + "\n";
+
+		System.out.println(prettyReciept);
+		for(String str: recieptRaw){
+			String[] items = str.split(",");
+			String type = items[0];
+			String amount = items[1];
+			String price = "£ " + items[2];
+			String curLine = "";
+			String formattedType = String.format("%-" +itemLengthWithPadding + "s", type); int lenT = formattedType.length();
+			String formattedAmount = String.format("%-" + quantityWithPadding + "s", amount); int lenA  = formattedAmount.length();
+			String fomrattedPrice = String.format("%" + priceWithPadding + "s", price); int lenP = fomrattedPrice.length();
+
+
+			curLine += formattedType + formattedAmount + fomrattedPrice;
+			prettyReciept += "\n" + curLine;
+		}
+		prettyReciept += "\n" + receiptBreak + "\n";
+
+
+
+		// some more work
+
+		return prettyReciept;
+	}
+
+
+
+	// case: e1
+	public Receipt getTotalDiscountReciept(){
 
 		HashMap<ItemInterface, Integer> cartCopy = new HashMap<>(cart);
 
 		double totalPrice = 0;
-		String reciept = "";
+		ArrayList<String> reciept = new ArrayList<>();
 
 		// first check for bagel types
 		for (ItemInterface item: cartCopy.keySet()){
@@ -199,13 +261,15 @@ public class OrderManager {
 
 					while (amountOfBagels >= 12){
 						totalPrice += 3.99;
-						reciept += "Discount: 12 " + item + " for 3.99\n";
+//						reciept.add( "12 " + item + " for 3.99");
+						reciept.add(item + " Bagel,12,3.99");
 						amountOfBagels -= 12;
 					}
 
 					while (amountOfBagels >= 6) {
 						totalPrice += 2.49;
-						reciept += "Discount: 6 " + item + " for 2.49\n";
+//						reciept.add("6 " + item + " for 2.49");
+						reciept.add(item + " Bagel,6,2.49");
 						amountOfBagels -= 6;
 					}
 
@@ -238,25 +302,34 @@ public class OrderManager {
 		}
 
 
+		// the rest
 		for (ItemInterface item: cartCopy.keySet()){
 			try{
 				int amountOfItemsLeftInCart = cartCopy.get(item);
 				if (amountOfItemsLeftInCart > 0){
 					double itemPricePer = getPriceOfItem(item);
 					double sumItemsPriceLeftInCart= itemPricePer * amountOfItemsLeftInCart;
+					String doublePriceStr = String.format("%.2f", sumItemsPriceLeftInCart);
 					totalPrice += sumItemsPriceLeftInCart;
-					reciept += item + "x" + amountOfItemsLeftInCart + "for " + sumItemsPriceLeftInCart;
+//					reciept.add( item + " x " + amountOfItemsLeftInCart + " for " + String.format("%.2f", sumItemsPriceLeftInCart) + "\t");
+					String type = "";
+
+					if (item instanceof BagelType) type = "Bagel";
+					if (item instanceof CoffeeType) type = "Coffee";
+					if (item instanceof FillingType) type = "Filling";
+					String currItemRecieptString =  type +": " + item + ","+ amountOfItemsLeftInCart + "," + String.format("%.2f", sumItemsPriceLeftInCart);
+
+					reciept.add(currItemRecieptString);
 				}
 			} catch (NullPointerException e){}
 		}
 
-		// the rest
 		System.out.println(reciept);
 
-		DecimalFormat df = new DecimalFormat("#.##");
 		String strPrice = String.format("%.2f", totalPrice);
 		totalPrice = Double.valueOf(strPrice);
-		return totalPrice;
+
+		return new Receipt(reciept, totalPrice);
 	}
 
 

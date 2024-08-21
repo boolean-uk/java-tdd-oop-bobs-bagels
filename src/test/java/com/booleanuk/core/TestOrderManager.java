@@ -5,6 +5,8 @@ package com.booleanuk.core;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.util.Scanner;
+
 public class TestOrderManager {
 
     @Test
@@ -113,6 +115,7 @@ public class TestOrderManager {
             om.addItem(BagelType.Plain);
         }
         Assertions.assertEquals(5.55, om.getTotalDiscountedPrice());
+        System.out.println(om.getTotalDiscountRecieptString());
 
         om = new OrderManager();
         for (int i = 0; i < 2; i++) {
@@ -129,9 +132,9 @@ public class TestOrderManager {
         }
 
         Assertions.assertEquals(10.43, om.getTotalDiscountedPrice());
+
+        String res = om.getTotalDiscountRecieptString();
+        System.out.println("res\n" + res);
+
     }
-
-
-
-
 }
