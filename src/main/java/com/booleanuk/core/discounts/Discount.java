@@ -13,9 +13,7 @@ public abstract class Discount {
 
     public Discount(double newCost) {
         this.productsInDiscount = new ArrayList<>();
-        this.setPriceBeforeDiscount();
         this.priceAfterDiscount = newCost;
-        this.setSavedMoney();
     }
 
     private void setSavedMoney() {
@@ -35,6 +33,7 @@ public abstract class Discount {
     protected void setProductsInDiscount(ArrayList<Product> products) {
         this.productsInDiscount.addAll(products);
         this.setPriceBeforeDiscount();
+        this.setSavedMoney();
     }
 
     public boolean checkIfApplies(ArrayList<Product> products) {

@@ -57,4 +57,31 @@ public class CheckoutAndReceiptTest {
 
     }
 
+    @Test
+    public void testGetReceiptAndDiscountTotalSaved() {
+        Checkout checkout = new Checkout();
+
+        Basket basket = new Basket();
+        basket.changeCapacity(100, true);
+
+        basket.addProduct(new PlainBagel());
+        basket.addProduct(new PlainBagel());
+        basket.addProduct(new PlainBagel());
+        basket.addProduct(new PlainBagel());
+        basket.addProduct(new PlainBagel());
+        basket.addProduct(new PlainBagel());
+        basket.addProduct(new PlainBagel());
+        basket.addProduct(new PlainBagel());
+        basket.addProduct(new PlainBagel());
+        basket.addProduct(new PlainBagel());
+        basket.addProduct(new PlainBagel());
+        basket.addProduct(new PlainBagel());
+
+        Receipt r = checkout.makeCheckout(basket);
+
+        // 3.99 discount total cost. So before discount it is 0.39 * 12 = 4.68 so total saved is 0.69.
+        Assertions.assertEquals(3.99, r.getTotalCost(), 0.001);
+        Assertions.assertEquals(0.69, r.getTotalSaved(), 0.001);
+    }
+
 }
