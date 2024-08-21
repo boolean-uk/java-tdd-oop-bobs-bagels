@@ -53,7 +53,11 @@ public class Basket {
     }
 
     public ArrayList<Product> getBasket() {
-        return this.basket;
+        ArrayList<Product> toReturn = new ArrayList<>();
+        toReturn.addAll(this.basket);
+        for (Discount d : this.discounts) toReturn.addAll(d.getProductsInDiscount());
+
+        return toReturn;
     }
 
     public boolean isFull() {
@@ -63,8 +67,8 @@ public class Basket {
             currentCapacity += 1;
         }
 
-        for (Discount d : this.discounts){
-            for (Product p : d.getProductsInDiscount()){
+        for (Discount d : this.discounts) {
+            for (Product p : d.getProductsInDiscount()) {
                 currentCapacity += 1;
             }
         }
@@ -98,6 +102,14 @@ public class Basket {
             return true;
         }
         return false;
+    }
+
+    protected ArrayList<Discount> getDiscounts() {
+        return this.discounts;
+    }
+
+    public ArrayList<Product> getProductsNotInDiscount() {
+        return this.basket;
     }
 
 }
