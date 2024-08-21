@@ -19,8 +19,8 @@ public class Product {
     }
 
     public String setSKU(ProductName name, Enum variant) {
-        String productCode = name.toString().substring(0,2);
-        String variantCode = variant.toString().substring(0,2);
+        String productCode = name.toString().substring(0,3);
+        String variantCode = variant.toString().substring(0,1);
         String hashCode = productCode + variantCode;
 
         return hashCode.toUpperCase();
