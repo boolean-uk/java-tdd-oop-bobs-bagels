@@ -7,14 +7,14 @@ public class Coffee extends Item{
         switch (type) {
             case "Black":
                 this.setSku("COFB");
-                this.setName("Black");
+                this.setName("Black Coffee");
                 this.setPrice(0.99);
                 this.setPurchase(true);
                 this.setType("Coffee");
                 break;
             case "White":
                 this.setSku("COFW");
-                this.setName("White");
+                this.setName("White Coffee");
                 this.setPrice(1.19);
                 this.setPurchase(true);
                 this.setType("Coffee");

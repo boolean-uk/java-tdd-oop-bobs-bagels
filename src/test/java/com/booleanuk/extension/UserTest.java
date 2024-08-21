@@ -114,6 +114,32 @@ public class UserTest {
 
     }
 
+    @Test
+    public void receiptTest(){
+        Order order=new Order();
+        for (int i=0; i<13; i++){
+            Bagel bagel=new Bagel("Plain");
+            bagel.addFilling(new Filling("Cheese"));
+            order.addItem(bagel);
+            if(i%2==0){
+                order.addItem(new Bagel("Onion"));
+            }
+
+        }
+        order.addItem(new Coffee("Black"));
+        Basket basket=new Basket(26);
+        basket.add(order);
+
+        Receipt receipt=new Receipt();
+
+        receipt.printReceipt(basket);
+
+
+
+    }
+
+
+
 
 
 

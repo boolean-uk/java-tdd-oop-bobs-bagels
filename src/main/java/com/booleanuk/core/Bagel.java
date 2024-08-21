@@ -10,28 +10,28 @@ public class Bagel extends Item{
         switch (type){
             case "Onion":
                 this.setSku("BGLO");
-                this.setName("Onion");
+                this.setName("Onion Bagel");
                 this.setPurchase(true);
                 this.setPrice(0.49);
                 this.setType("Bagel");
                 break;
             case "Plain":
                 this.setSku("BGLP");
-                this.setName("Plain");
+                this.setName("Plain Bagel");
                 this.setPurchase(true);
                 this.setPrice(0.39);
                 this.setType("Bagel");
                 break;
             case "Everything":
                 this.setSku("BGLE");
-                this.setName("Everything");
+                this.setName("Everything Bagel");
                 this.setPurchase(true);
                 this.setPrice(0.49);
                 this.setType("Bagel");
                 break;
             case "Sesame":
                 this.setSku("BGLS");
-                this.setName("Sesame");
+                this.setName("Sesame Bagel");
                 this.setPurchase(true);
                 this.setPrice(0.49);
                 this.setType("Bagel");

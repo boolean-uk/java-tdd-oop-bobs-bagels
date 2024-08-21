@@ -4,6 +4,7 @@ import java.util.HashMap;
 
 public class Basket {
     private HashMap<String, Integer> Items;
+    private HashMap<String, Double> Prices;
     private int capacity;
     private int numItems;
     private double total;
@@ -13,6 +14,7 @@ public class Basket {
         numItems=0;
         Items = new HashMap<String, Integer>();
         total=0;
+        Prices=new HashMap<String, Double>();
     }
 
     public boolean add(Order order){
@@ -23,6 +25,7 @@ public class Basket {
                 Items.put(i.getName(), 1);
                 total+=i.getPrice();
                 this.numItems+=1;
+                Prices.put(i.getName(), i.getPrice());
             } else if (Items.containsKey(i.getName()) & checkCapacity()) {
                 Items.replace(i.getName(), Items.get(i.getName())+1);
                 total+=i.getPrice();
@@ -93,6 +96,10 @@ public class Basket {
 
     public HashMap<String, Integer> getItems() {
         return Items;
+    }
+
+    public HashMap<String, Double> getPrices() {
+        return Prices;
     }
 
     public void adjustTotal(double change){

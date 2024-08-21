@@ -84,6 +84,7 @@ public class UserTest {
         order.addItem(bagel);
         order.addItem(bagel1);
         order.addItem(bagel2);
+        order.addItem(bagel2);
         Basket basket = new Basket(3);
         basket.incCapacity(1);
         basket.add(order);
