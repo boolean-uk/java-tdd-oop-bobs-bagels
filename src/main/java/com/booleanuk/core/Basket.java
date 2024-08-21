@@ -39,4 +39,12 @@ public class Basket {
         }
         this.basketSize = basketSize;
     }
+
+    public float calculateCost() {
+        float sum = 0.0f;
+        for (Bagel b: bagels) {
+            sum += b.calculateCost();
+        }
+        return sum;
+    }
 }
