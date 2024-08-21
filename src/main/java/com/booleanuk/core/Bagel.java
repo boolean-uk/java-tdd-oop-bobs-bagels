@@ -6,7 +6,7 @@ import java.util.List;
 
 public class Bagel extends Product{
 
-    private List<Filling> fillings;
+    private List<Integer> fillings;
 
     public Bagel(float price, Enum variant) {
         super(price, variant);
@@ -18,7 +18,11 @@ public class Bagel extends Product{
         return ProductName.BAGEL;
     }
 
-    public void addFilling(Filling filling) {
+    public void addFilling(int filling) {
         this.fillings.add(filling);
+    }
+
+    public List<Integer> getFillings() {
+        return fillings;
     }
 }

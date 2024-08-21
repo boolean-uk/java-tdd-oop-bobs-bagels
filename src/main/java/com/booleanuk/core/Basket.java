@@ -4,7 +4,7 @@ import java.util.*;
 
 public class Basket {
     private Inventory inventory;
-    private LinkedHashMap<Integer, Product> basketItems;
+    private LinkedHashMap<Integer, BasketItem> basketItems;
     private int idCount;
 
     public Basket(Inventory inventory) {
@@ -41,23 +41,53 @@ public class Basket {
         return Integer.parseInt(tmp);
     }
 
+    // TODO: Refactor and remove this and add generic function nsad
     public void addCoffee(String SKU) {
-        Coffee coffee = inventory.getCoffeeProduct(SKU);
-        this.basketItems.put(createID(), coffee);
+        BasketItem item = new BasketItem(SKU);
+        this.basketItems.put(createID(), item);
         printBasket();
     }
 
+
+    public void addBagel(String SKU) {
+        BasketItem item = new BasketItem(SKU);
+        this.basketItems.put(createID(), item);
+    }
+
+
     public void addBagel(String SKU, List<String> SKUfillings) {
-        Bagel bagel = inventory.getBagelProduct(SKU);
-        this.basketItems.put(createID(), bagel);
+        BasketItem item = new BasketItem(SKU);
+        this.basketItems.put(createID(), item);
 
         int count = 1;
-        for (String SKUf : SKUfillings) {
-            Filling filling = this.inventory.getFillingProduct(SKUf);
-            bagel.addFilling(filling);
-            this.basketItems.put(createFillingId(String.valueOf(count)), filling);
+        for (String SKU_f : SKUfillings) {
+
+            // Store the created id for the filling
+            int fillingId = createFillingId(String.valueOf(count));
+
+            // Add filling to this basket
+            this.basketItems.put(fillingId, new BasketItem(SKU_f));
+
+            // Store filling id in bagel basketIem so it is possible to delete later
+            item.addFillingId(fillingId);
+
             count++;
         }
+    }
+
+    public void remove(int productId) {
+        BasketItem item = this.basketItems.get(productId);
+        Product product = this.inventory.getProduct(item.getSKU());
+
+        if (product.getName() == ProductName.BAGEL && item.getLinkedIds() != null) {
+            // Get filling for this basketItem
+            List<Integer> fillingsIds = item.getLinkedIds();
+            // Remove the bagel fillings from the basket
+            for (Integer fillingId : fillingsIds) {
+                this.basketItems.remove(fillingId);
+            }
+        }
+        this.basketItems.remove(productId);
     }
 
 //    private void addFilling(String SKU) {
@@ -65,7 +95,7 @@ public class Basket {
 //        this.basketItems.put(createID(), filling);
 //    }
 
-    public LinkedHashMap<Integer, Product> getAll() {
+    public LinkedHashMap<Integer, BasketItem> getAll() {
         return basketItems;
     }
 
@@ -94,9 +124,10 @@ public class Basket {
                     "SKU   | ", "ID", "Product", "Variant", "Price"
             );
             System.out.println(divider);
-            for (Map.Entry<Integer, Product> item : basketItems.entrySet()) {
+            for (Map.Entry<Integer, BasketItem> item : basketItems.entrySet()) {
                 int key = item.getKey();
-                Product product = item.getValue();
+                BasketItem basketItem = item.getValue();
+                Product product = this.inventory.getProduct(basketItem.getSKU());
                 System.out.printf(
                         leftAlignSmall + leftAlignSmall + leftAlignSmall + leftAlign + leftAlign + newLine,
                         product.getSKU()+"  | ", key,  product.getName(), product.getVariant().toString(), "$" + product.getPrice()
