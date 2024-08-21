@@ -1,6 +1,7 @@
 package com.booleanuk.core;
 
 import java.util.HashMap;
+import java.util.Map;
 
 public class Basket {
     private Inventory inventory;
@@ -26,9 +27,18 @@ public class Basket {
 
     public void addCoffee(String SKU) {
         Coffee coffee = inventory.getCoffeeProduct(SKU);
-        basketItems.put(createID(), coffee);
-
+        this.basketItems.put(createID(), coffee);
         printBasket();
+    }
+
+    public void addBagel(String SKU) {
+        Bagel bagel = inventory.getBagelProduct(SKU);
+        this.basketItems.put(createID(), bagel);
+    }
+
+    public void addFilling(String SKU) {
+        Filling filling = inventory.getFillingProduct(SKU);
+        this.basketItems.put(createID(), filling);
     }
 
     public HashMap<Integer, Product> getAll() {
@@ -37,35 +47,40 @@ public class Basket {
 
     public void printBasket() {
         // Variables for e.g. "%-15s %-15s %n", keep blank space
-        String centerSmall = "%27s ";
-        String center = "%22s ";
+        String centerSmall = "%34s ";
+        String center = "%29s ";
         String leftAlignSmall = "%-7s ";
-        String leftAlign = "%-10s ";
+        String leftAlign = "%-15s ";
         String newLine = "%n";
-        String divider = "----------------------------------";
+        String divider = "-----------------------------------------------";
 
         // TODO: Unnecassary looping
         // TODO: Duplicate code
         System.out.println();
         System.out.printf(centerSmall + newLine, "=== Bob's Bagels ===");
         System.out.printf(center + newLine, "~ Basket ~");
-        System.out.println(divider);
+        System.out.println();
 
         // Print items in basket
         if (basketItems.isEmpty()) {
             System.out.println("\tBasket is empty.");
         } else {
-            for (Product item : basketItems.values()) {
-                if (item.getName() == ProductName.COFFEE) {
-                    System.out.printf(
-                            leftAlignSmall + leftAlignSmall + leftAlign + leftAlign + newLine,
-                            item.getSKU()+"  | ", item.getName(), item.getVariant().toString(), "$" + item.getPrice()
-                    );
-                }
+            System.out.printf(
+                    leftAlignSmall + leftAlignSmall + leftAlignSmall + leftAlign + leftAlign + newLine,
+                    "SKU   | ", "ID", "Product", "Variant", "Price"
+            );
+            System.out.println(divider);
+            for (Map.Entry<Integer, Product> item : basketItems.entrySet()) {
+                int key = item.getKey();
+                Product product = item.getValue();
+                System.out.printf(
+                        leftAlignSmall + leftAlignSmall + leftAlignSmall + leftAlign + leftAlign + newLine,
+                        product.getSKU()+"  | ", key,  product.getName(), product.getVariant().toString(), "$" + product.getPrice()
+                );
             }
             System.out.println(divider);
             System.out.printf(
-                    "%s %20s" + newLine,
+                    "%s %33s" + newLine,
                     "Total cost: ", "$?.??"
             );
         }
