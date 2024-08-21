@@ -3,6 +3,7 @@ package com.booleanuk.core.discounts;
 import com.booleanuk.core.products.Product;
 
 import java.util.ArrayList;
+import java.text.DecimalFormat;
 
 public abstract class Discount {
 
@@ -18,6 +19,8 @@ public abstract class Discount {
 
     private void setSavedMoney() {
         this.savedMoney = this.priceBeforeDiscount - this.priceAfterDiscount;
+        DecimalFormat df = new DecimalFormat("0.00");
+        this.savedMoney = Double.parseDouble(df.format(this.savedMoney));
     }
 
     private void setPriceBeforeDiscount() {
