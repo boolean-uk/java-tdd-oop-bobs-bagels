@@ -49,14 +49,15 @@
 |           | `List<Product> components()` | Admin wants to see any additional products related to some StandAloneproduct (e.g. fillings on a bagel) | All products related to the product |
 
 ## Domain model FillingType enum
-| Variants      |
-|---------------|
-| Bacon         |
-| Egg           |
-| Cheese        |
-| Cream cheese  |
-| Smoked salmon |
-| Ham           |
+| Variants      | Variables |
+|---------------|-----------|
+| Bacon         |           |
+| Egg           |           |
+| Cheese        |           |
+| Cream cheese  |           |
+| Smoked salmon |           |
+| Ham           |           |
+|               | `Sku sku` |
 
 ## Domain model Filling record
 | Implements | Variables           |
@@ -65,12 +66,14 @@
 |            | `FillingType type`  |
 
 ## Domain model CoffeeType enum
-| Variants      |
-|---------------|
-| Black         |
-| White         |
-| Capuccino     |
-| Latte         |
+| Variants  | Variables |
+|-----------|-----------|
+| Black     |           |
+| White     |           |
+| Capuccino |           |
+| Latte     |           |
+|           | `Sku sku` |
+
 
 ## Domain model Coffee record
 | Implements          | Variables         |
@@ -79,21 +82,21 @@
 |                     | `CoffeeType type` |
 
 ## Domain model BagelType enum
-| Variants   |
-|------------|
-| Onion      |
-| Plain      |
-| Everything |
-| Sesame     |
+| Variants   | Variables |
+|------------|-----------|
+| Onion      |           |
+| Plain      |           |
+| Everything |           |
+| Sesame     |           |
+|            | `Sku sku` |
 
 ## Domain model Bagel class
-| Implements          | Variables                | Methods                     | Scenario                                        | Output                      |
-|---------------------|--------------------------|-----------------------------|-------------------------------------------------|-----------------------------|
-| `StandaloneProduct` |                          |                             |                                                 |                             |
-|                     | `BagelType type`         |                             |                                                 |                             |
-|                     | `List<Filling> fillings` |                             |                                                 |                             |
-|                     |                          | `void add(Filling filling)` | User wants to add a filling to their bagel      | Filling gets added to bagel |
-|                     |                          | `Sku sku()`                 | User wants to know what type of bagel they have | The type of their bagel     |
+| Implements          | Variables                          | Methods                     | Scenario                                        | Output                      |
+|---------------------|------------------------------------|-----------------------------|-------------------------------------------------|-----------------------------|
+| `StandaloneProduct` |                                    |                             |                                                 |                             |
+|                     | `BagelType type`                   |                             |                                                 |                             |
+|                     | `Optional<List<Filling>> fillings` |                             |                                                 |                             |
+|                     |                                    | `Sku sku()`                 | User wants to know what type of bagel they have | The type of their bagel     |
 
 ## Domain model Basket class
 | Variables                          | Methods                                                                          | Scenario                                                     | Output                     |
@@ -118,7 +121,17 @@
 |                          |                                                              | Not all products in basket are in stock | Exception |
 
 ## Domain model Receipt class
-| Variables                | Methods             | Scenario                                                         | Output                                                |
-|--------------------------|---------------------|------------------------------------------------------------------|-------------------------------------------------------|
-| `List<Product> products` |                     |                                                                  |                                                       |
-|                          | `String toString()` | User want's to see a nicely formatted receipt for their purchase | A formatted string for the products in their purchase |
+| Variables                | Methods                 | Scenario                                                         | Output                                                |
+|--------------------------|-------------------------|------------------------------------------------------------------|-------------------------------------------------------|
+| `List<Product> products` |                         |                                                                  |                                                       |
+|                          | `Receipt makeReceipt()` | User wants to get a receipt of all the items they have purchased | A receipt                                             |
+|                          | `String toString()`     | User wants to see a nicely formatted receipt for their purchase  | A formatted string for the products in their purchase |
+
+## Domain model MessageController class
+| Variables                    | Methods                                                   | Scenario                                          | Output                            |
+|------------------------------|-----------------------------------------------------------|---------------------------------------------------|-----------------------------------|
+| `String TWILIO_ACCOUNT_SID`  |                                                           |                                                   |                                   |
+| `String TWILIO_AUTH_TOKEN`   |                                                           |                                                   |                                   |
+| `String TWILIO_PHONE_NUMBER` |                                                           |                                                   |                                   |
+| `String TWILIO_PHONE_NUMBER` |                                                           |                                                   |                                   |
+|                              | `void notifyUser(String messageContent, String toNumber)` | User wants to get a text message of their receipt | A text message with their receipt |
