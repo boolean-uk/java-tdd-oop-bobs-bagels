@@ -197,6 +197,103 @@ public class BasketTest {
         Assertions.assertEquals("This item is not on the menu.", wrongBagelResult);
     }
 
+    @Test
+    public void discountTest(){
+        // Assert that 12 plain bagels provide 0.69 in discount.
+        Basket basketOne = new Basket();
+
+        for (int i = 0; i < 12; i++) {
+            Item item = Menu.getItemFromMenu("Bagel", "Plain");
+            basketOne.addItemToBasket(item);
+        }
+
+        int discount = basketOne.getDiscount();
+        Assertions.assertEquals(69, discount);
+
+        // Assert that 12 everything bagels provide 1.89 in discount.
+        Basket basketTwo = new Basket();
+
+        for (int i = 0; i < 12; i++) {
+            Item item = Menu.getItemFromMenu("Bagel", "Everything");
+            basketTwo.addItemToBasket(item);
+        }
+
+        discount = basketTwo.getDiscount();
+        Assertions.assertEquals(189, discount);
+
+        // Assert that 6 plain bagels adds 0.15 to the customers bill as instructed by the task.
+        Basket basketThree = new Basket();
+
+        for (int i = 0; i < 6; i++) {
+            Item item = Menu.getItemFromMenu("Bagel", "Plain");
+            basketThree.addItemToBasket(item);
+        }
+
+        discount = basketThree.getDiscount();
+        Assertions.assertEquals(-15, discount);
+
+        // Assert that 6 everything bagels bagels provide 0.45 to discount
+        Basket basketFour = new Basket();
+
+        for (int i = 0; i < 6; i++) {
+            Item item = Menu.getItemFromMenu("Bagel", "Everything");
+            basketFour.addItemToBasket(item);
+        }
+
+        discount = basketFour.getDiscount();
+        Assertions.assertEquals(45, discount);
+
+        // Assert that 6 coffees and 5 plain bagels adds 0.65 to discount
+        Basket basketFive = new Basket();
+
+        for (int i = 0; i < 5; i++) {
+            Item item = Menu.getItemFromMenu("Bagel", "Plain");
+            basketFive.addItemToBasket(item);
+        }
+
+        for (int i = 0; i < 6; i++) {
+            Item item = Menu.getItemFromMenu("Coffee", "Black");
+            basketFive.addItemToBasket(item);
+        }
+
+        discount = basketFive.getDiscount();
+        Assertions.assertEquals(65, discount);
+
+        // Assert that 6 coffees and 5 everything bagels adds 1.15 to discount
+        Basket basketSix = new Basket();
+
+        for (int i = 0; i < 5; i++) {
+            Item item = Menu.getItemFromMenu("Bagel", "Everything");
+            basketSix.addItemToBasket(item);
+        }
+
+        for (int i = 0; i < 6; i++) {
+            Item item = Menu.getItemFromMenu("Coffee", "Black");
+            basketSix.addItemToBasket(item);
+        }
+
+        discount = basketSix.getDiscount();
+        Assertions.assertEquals(115, discount);
+
+        // Assert that 8 everything bagels and 2 coffees returns discount for both coffee deal and bagel deal
+        Basket basketSeven = new Basket();
+
+        for (int i = 0; i < 8; i++) {
+            Item item = Menu.getItemFromMenu("Bagel", "Everything");
+            basketSeven.addItemToBasket(item);
+        }
+
+        for (int i = 0; i < 2; i++) {
+            Item item = Menu.getItemFromMenu("Coffee", "Black");
+            basketSeven.addItemToBasket(item);
+        }
+
+        int expectedDiscount = 45 + 23 * 2;
+
+        discount = basketSeven.getDiscount();
+        Assertions.assertEquals(expectedDiscount, discount);
+    }
+
 
 
 
