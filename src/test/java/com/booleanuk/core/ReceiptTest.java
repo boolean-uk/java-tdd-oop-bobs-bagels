@@ -76,6 +76,7 @@ class ReceiptTest {
     basket.add(new Bagel(BagelType.ONION, Optional.empty()), 6);
     Receipt receipt = inventory.purchase(basket);
     String actual = receipt.toString();
+
     Assertions.assertTrue(actual.contains("1x Six bagel deal 2.49"));
     Assertions.assertTrue(actual.contains("(-0.45)"));
     Assertions.assertTrue(actual.contains("Total: 2.49"));
@@ -93,7 +94,9 @@ class ReceiptTest {
     basket.add(new Coffee(CoffeeType.BLACK));
     Receipt receipt = inventory.purchase(basket);
     String actual = receipt.toString();
+
     Assertions.assertTrue(actual.contains("1x Coffee & bagel deal 1.25"));
+    Assertions.assertTrue(actual.contains("(-0.23)"));
     Assertions.assertTrue(actual.contains("Total: 1.25"));
   }
 
@@ -117,5 +120,35 @@ class ReceiptTest {
     Assertions.assertTrue(actual.contains("1x Onion bagel " + Sku.BGLO.price()));
     Assertions.assertTrue(actual.contains("1x Egg filling " + Sku.FILE.price()));
     Assertions.assertTrue(actual.contains("Total: " + String.format("%.2f", Sku.BGLO.price() + Sku.FILE.price())));
+  }
+
+  @Test
+  public void testReceiptWithManyDiscountsAndFillings() {
+    List<Product> inventoryStock = new ArrayList<>();
+    for (int i = 0; i < 16; ++i)
+      inventoryStock.add(new Bagel(BagelType.ONION, Optional.empty()));
+    inventoryStock.add(new Filling(FillingType.EGG));
+    inventoryStock.add(new Coffee(CoffeeType.BLACK));
+    Inventory inventory = new Inventory(inventoryStock);
+
+    Basket basket = new Basket(20);
+    List<Filling> fillings = new ArrayList<Filling>() {
+      {
+        add(new Filling(FillingType.EGG));
+      }
+    };
+    basket.add(new Bagel(BagelType.ONION, Optional.of(fillings)));
+    basket.add(new Bagel(BagelType.ONION, Optional.empty()), 15);
+    basket.add(new Coffee(CoffeeType.BLACK));
+    Receipt receipt = inventory.purchase(basket);
+    String actual = receipt.toString();
+
+    Assertions.assertTrue(actual.contains("1x Egg filling 0.12"));
+    Assertions.assertTrue(actual.contains("1x Twelve bagel deal 3.99"));
+    Assertions.assertTrue(actual.contains("(-1.89)"));
+    Assertions.assertTrue(actual.contains("3x Onion bagel " + Sku.BGLO.price() * 3));
+    Assertions.assertTrue(actual.contains("1x Coffee & bagel deal 1.25"));
+    Assertions.assertTrue(actual.contains("(-0.23)"));
+    Assertions.assertTrue(actual.contains("Total: 6.71"));
   }
 }
