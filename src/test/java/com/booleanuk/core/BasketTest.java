@@ -3,6 +3,8 @@ package com.booleanuk.core;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
+
 public class BasketTest {
     Inventory inventory;
     Basket basket;
@@ -27,10 +29,9 @@ public class BasketTest {
     public void addBagelAndFilling() {
         this.inventory = new Inventory();
         this.basket = new Basket(new Inventory());
-        basket.addBagel("BAGE");
-        basket.addFilling("FILS");
+        basket.addBagel("BAGE", Arrays.asList("FILS","FILB"));
         basket.printBasket();
         Assertions.assertEquals("BAGE", basket.getAll().get(1).getSKU());
-        Assertions.assertEquals("FILS", basket.getAll().get(2).getSKU());
+        Assertions.assertEquals("FILS", basket.getAll().get(101).getSKU());
     }
 }
