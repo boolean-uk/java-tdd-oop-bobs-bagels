@@ -20,6 +20,9 @@ public class CheckoutAndReceiptTest {
         Bagel sb = new SesameBagel(); // 0.49
         ob.setFilling(new HamFilling()); // Ham = 0.12, total=1.1
 
+        b.addProduct(ob);
+        b.addProduct(sb);
+
         Assertions.assertEquals(1.1, b.getTotalCost());
 
         Receipt receipt = checkout.makeCheckout(b);
