@@ -94,10 +94,10 @@ public class Basket {
     for (Product product : this.products) {
       if (product.sku().isBagel() && numBagels > 0) {
         --numBagels;
-        price += product.basePrice();
+        price += product.sku().price();
       } else if (product.sku().isCoffee() && numCoffees > 0) {
         --numCoffees;
-        price += product.basePrice();
+        price += product.sku().price();
       }
     }
 
