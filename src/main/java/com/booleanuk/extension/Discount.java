@@ -142,23 +142,25 @@ public class Discount {
         double discPrice=0;
 
         if (bag>=12){
-            bagPrice=0.49*bag;
-            discPrice=3.99*bag/12;
+            bagPrice=bag/12*12*0.49;
+            discPrice=bag/12*3.99;
             disc+=bagPrice-discPrice;
             bag=bag%12;
+
         }
 
 
         if (bag>=6){
-            bagPrice=0.49*bag;
-            discPrice=2.49*bag/6;
-            disc+=bagPrice-discPrice;
+            bagPrice=0.49*6;
+            discPrice=2.49;
+            disc+=6*0.49-2.49;
             bag=bag%6;
+
         }
 
         if (plain>=12){
-            plainPrice=0.39*bag;
-            diff12=3.99*bag/12;
+            plainPrice=plain/12*12*0.39;
+            diff12=plain/12*3.99;
             disc+=plainPrice-diff12;
             plain=plain%12;
         }

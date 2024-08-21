@@ -16,14 +16,14 @@ public class UserTest {
     public void discountPlainTest(){
 
         Order order=new Order();
-        for (int i=0; i<12; i++){
+        for (int i=0; i<13; i++){
             Bagel bagel=new Bagel("Plain");
             bagel.addFilling(new Filling("Cheese"));
             order.addItem(bagel);
         }
         Discount discount=new Discount();
-        order.setTotal(order.getTotal()- discount.discPrice(order));
-        Assertions.assertEquals(3.99+12*0.12, order.getTotal(), 0.001);
+        order.setTotal(order.getTotal()- discount.discPriceAlt(order));
+        Assertions.assertEquals(3.99+0.39+13*0.12, order.getTotal(), 0.001);
 
 
 
@@ -38,8 +38,22 @@ public class UserTest {
             order.addItem(new Bagel("Onion"));
         }
         Discount discount=new Discount();
-        order.setTotal(order.getTotal()- discount.discPrice(order));
+        order.setTotal(order.getTotal()- discount.discPriceAlt(order));
         Assertions.assertEquals(2.49, order.getTotal(), 0.001);
+
+
+    }
+
+    @Test
+    public void discountMoreOnionTest(){
+
+        Order order=new Order();
+        for (int i=0; i<7; i++){
+            order.addItem(new Bagel("Onion"));
+        }
+        Discount discount=new Discount();
+        order.setTotal(order.getTotal()- discount.discPriceAlt(order));
+        Assertions.assertEquals(2.49+0.49, order.getTotal(), 0.001);
 
 
     }
@@ -48,14 +62,15 @@ public class UserTest {
     public void discountEverythingTest(){
 
         Order order=new Order();
-        for (int i=0; i<6; i++){
+        for (int i=0; i<7; i++){
             Bagel bagel=new Bagel("Everything");
             bagel.addFilling(new Filling("Cheese"));
             order.addItem(bagel);
         }
+        order.addItem(new Coffee("Black"));
         Discount discount=new Discount();
-        order.setTotal(order.getTotal()- discount.discPrice(order));
-        Assertions.assertEquals(2.49+6*0.12, order.getTotal(), 0.001);
+        order.setTotal(order.getTotal()- discount.discPriceAlt(order));
+        Assertions.assertEquals(2.49+7*0.12+1.25, order.getTotal(), 0.001);
 
 
     }
@@ -74,8 +89,8 @@ public class UserTest {
         order.addItem(coffee1);
         //order.addItem(coffee2);
         Discount discount=new Discount();
-        order.setTotal(order.getTotal()- discount.discPrice(order));
-        Assertions.assertEquals(1.25+0.39+0.12, order.getTotal(), 0.001);
+        order.setTotal(order.getTotal()- discount.discPriceAlt(order));
+        Assertions.assertEquals(1.25+0.39+0.12*2, order.getTotal(), 0.001);
 
 
     }
@@ -85,18 +100,17 @@ public class UserTest {
         Order order=new Order();
         for (int i=0; i<13; i++){
             Bagel bagel=new Bagel("Plain");
-            bagel.addFilling(new Filling("Cheese"));
             order.addItem(bagel);
-            order.addItem(new Bagel("Onion"));
+            if(i%2==0){
+                order.addItem(new Bagel("Onion"));
+            }
+
         }
-
         order.addItem(new Coffee("Black"));
-        order.addItem(new Coffee("Black"));
-
         Discount discount=new Discount();
-        order.setTotal(order.getTotal()- discount.discPrice(order));
+        order.setTotal(order.getTotal()- discount.discPriceAlt(order));
 
-        Assertions.assertEquals(2*2.49+3.99+2*1.25+12*0.12, order.getTotal(), 0.001);
+        Assertions.assertEquals(3.99+2.49+0.39+1.25, order.getTotal(), 0.001);
 
     }
 
