@@ -33,7 +33,7 @@ public class Bagel extends Product {
     }
 
 
-    @Override
+/*    @Override
     public int getPrice() {
         int price = super.getPrice();
         for (Filling filling : fillings) {
@@ -42,5 +42,5 @@ public class Bagel extends Product {
             }
         }
         return price;
-    }
+    }*/
 }
