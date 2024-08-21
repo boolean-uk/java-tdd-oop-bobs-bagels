@@ -1,5 +1,6 @@
-package com.booleanuk.core;
+package com.booleanuk.extension;
 
+import com.booleanuk.core.Basket;
 import com.booleanuk.core.products.bagels.EverythingBagel;
 import com.booleanuk.core.products.bagels.OnionBagel;
 import com.booleanuk.core.products.bagels.PlainBagel;
@@ -7,7 +8,6 @@ import com.booleanuk.core.products.bagels.SesameBagel;
 import com.booleanuk.core.products.coffees.BlackCoffee;
 import com.booleanuk.core.products.coffees.WhiteCoffee;
 import com.booleanuk.core.products.fillings.BaconFilling;
-import com.booleanuk.core.products.fillings.HamFilling;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

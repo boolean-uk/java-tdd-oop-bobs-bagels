@@ -1,5 +1,8 @@
-package com.booleanuk.core;
+package com.booleanuk.extension;
 
+import com.booleanuk.core.Basket;
+import com.booleanuk.core.Checkout;
+import com.booleanuk.core.Receipt;
 import com.booleanuk.core.products.bagels.*;
 import com.booleanuk.core.products.fillings.HamFilling;
 import org.junit.jupiter.api.Assertions;
