@@ -1,28 +1,44 @@
 package com.booleanuk.core;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class Basket {
     private Inventory inventory;
-    private HashMap<Integer, Product> basketItems;
+    private LinkedHashMap<Integer, Product> basketItems;
     private int idCount;
 
     public Basket(Inventory inventory) {
         this.inventory = inventory;
-        this.basketItems = new HashMap();
+        this.basketItems = new LinkedHashMap <>();
         this.idCount = 1;
     }
 
     /**
      * Create new Id for item in basket.
      * Updates idCount afterward.
+     * @param String idExtension - Add this for fillings, one unique extension for each filling
      * @return int itemId
      */
     private int createID() {
+        // Store variable
         int itemId = this.idCount;
         this.idCount += 1;
         return itemId;
+    }
+
+    private int createFillingId(String idExtension) {
+        //TODO: How to make default variable like in python
+
+        // TODO: Should check if idExtension is valid
+
+        // TODO: Could use int input instead of String
+
+        // Store variable id for previous bagel
+        int itemId = this.idCount - 1;
+
+        // Add id extension for filling
+        String tmp = String.valueOf(itemId) + "0" + idExtension;
+        return Integer.parseInt(tmp);
     }
 
     public void addCoffee(String SKU) {
@@ -31,17 +47,25 @@ public class Basket {
         printBasket();
     }
 
-    public void addBagel(String SKU) {
+    public void addBagel(String SKU, List<String> SKUfillings) {
         Bagel bagel = inventory.getBagelProduct(SKU);
         this.basketItems.put(createID(), bagel);
+
+        int count = 1;
+        for (String SKUf : SKUfillings) {
+            Filling filling = this.inventory.getFillingProduct(SKUf);
+            bagel.addFilling(filling);
+            this.basketItems.put(createFillingId(String.valueOf(count)), filling);
+            count++;
+        }
     }
 
-    public void addFilling(String SKU) {
-        Filling filling = inventory.getFillingProduct(SKU);
-        this.basketItems.put(createID(), filling);
-    }
+//    private void addFilling(String SKU) {
+//        Filling filling = inventory.getFillingProduct(SKU);
+//        this.basketItems.put(createID(), filling);
+//    }
 
-    public HashMap<Integer, Product> getAll() {
+    public LinkedHashMap<Integer, Product> getAll() {
         return basketItems;
     }
 
