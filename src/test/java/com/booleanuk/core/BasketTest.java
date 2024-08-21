@@ -5,7 +5,6 @@ import org.junit.jupiter.api.Test;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
-import java.math.BigDecimal;
 
 public class BasketTest {
     @Test
@@ -207,6 +206,7 @@ public class BasketTest {
             basketOne.addItemToBasket(item);
         }
 
+        basketOne.calculateDiscount();
         int discount = basketOne.getDiscount();
         Assertions.assertEquals(69, discount);
 
@@ -218,6 +218,7 @@ public class BasketTest {
             basketTwo.addItemToBasket(item);
         }
 
+        basketTwo.calculateDiscount();
         discount = basketTwo.getDiscount();
         Assertions.assertEquals(189, discount);
 
@@ -229,6 +230,7 @@ public class BasketTest {
             basketThree.addItemToBasket(item);
         }
 
+        basketThree.calculateDiscount();
         discount = basketThree.getDiscount();
         Assertions.assertEquals(-15, discount);
 
@@ -240,6 +242,7 @@ public class BasketTest {
             basketFour.addItemToBasket(item);
         }
 
+        basketFour.calculateDiscount();
         discount = basketFour.getDiscount();
         Assertions.assertEquals(45, discount);
 
@@ -256,6 +259,7 @@ public class BasketTest {
             basketFive.addItemToBasket(item);
         }
 
+        basketFive.calculateDiscount();
         discount = basketFive.getDiscount();
         Assertions.assertEquals(65, discount);
 
@@ -272,6 +276,7 @@ public class BasketTest {
             basketSix.addItemToBasket(item);
         }
 
+        basketSix.calculateDiscount();
         discount = basketSix.getDiscount();
         Assertions.assertEquals(115, discount);
 
@@ -290,11 +295,8 @@ public class BasketTest {
 
         int expectedDiscount = 45 + 23 * 2;
 
+        basketSeven.calculateDiscount();
         discount = basketSeven.getDiscount();
         Assertions.assertEquals(expectedDiscount, discount);
     }
-
-
-
-
 }
