@@ -65,12 +65,6 @@ public class Receipt {
         printDiscounts(coffeeBagelPairsDiscount, "Bagel + Coffee", 125);
     }
 
-    private void printDiscountedHeader() {
-            System.out.println();
-            System.out.println("Discounted Products:");
-
-    }
-
     private void printNonDiscountedProducts(Map<Product, Integer> nonDiscountedProductsMap) {
         for (Map.Entry<Product, Integer> entry : nonDiscountedProductsMap.entrySet()) {
             Product product = entry.getKey();
