@@ -40,6 +40,10 @@ public class Inventory {
             throw new IllegalArgumentException("SKU cannot be empty");
         }
 
+        if (!products.containsKey(SKU)) {
+            throw new IllegalArgumentException("Product not found in the inventory");
+        }
+
         if (SKU.startsWith("BGL")) {
             return new Bagel(products.get(SKU).getSKU(), products.get(SKU).getPrice(), products.get(SKU).getVariant());
         }
