@@ -234,7 +234,7 @@ public class BasketTest {
         discount = basketThree.getDiscount();
         Assertions.assertEquals(-15, discount);
 
-        // Assert that 6 everything bagels bagels provide 0.45 to discount
+        // Assert that 6 everything bagels provide 0.45 to discount
         Basket basketFour = new Basket();
 
         for (int i = 0; i < 6; i++) {
