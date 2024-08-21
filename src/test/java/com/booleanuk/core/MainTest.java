@@ -265,6 +265,30 @@ public class MainTest {
     @Test
     public void testPrintReceiptDiscount() {
         order.addProduct(bagels1);
+        order.addProduct(bagels1);
+        order.addProduct(bagels1);
+        order.addProduct(bagels1);
+        order.addProduct(bagels1);
+        order.addProduct(bagels1);
+        order.addProduct(bagels1);
+        order.addProduct(bagels1);
+        order.addProduct(bagels1);
+        order.addProduct(bagels1);
+        order.addProduct(bagels1);
+        order.addProduct(bagels1);
+        order.addProduct(bagels1);
+        order.addProduct(bagels1);
+
+        order.addProduct(bagels1);
+        order.addProduct(bagels1);
+        order.addProduct(bagels1);
+        order.addProduct(bagels1);
+
+
+        order.addProduct(bagels1);
+        order.addProduct(coffee1);
+
+
 
 
         receipt.printReceipt();
