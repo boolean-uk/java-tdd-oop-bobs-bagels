@@ -82,7 +82,7 @@ public class Receipt {
         if (!this.discounts.isEmpty()) {
             for (Discount d : this.discounts) {
                 toReturn.add(d.toString() + "\t\t" + "$" + Double.toString(d.getPriceAfterDiscount()));
-                toReturn.add("(-$" + Double.toString(d.getSavedMoney()) + ")");
+                toReturn.add("\t\t\t\t(-$" + Double.toString(d.getSavedMoney()) + ")");
             }
         }
 
