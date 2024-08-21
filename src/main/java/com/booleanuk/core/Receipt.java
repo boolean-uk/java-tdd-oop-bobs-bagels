@@ -43,16 +43,17 @@ public class Receipt {
 
     private void setProductsAndQuantity(ArrayList<Product> products) {
         for (Product p : products) {
-            if (this.isProductInReceipt(p)) this.products.replace(p, this.products.get(p) + 1);
+            Product currentP = this.getProduct(p);
+            if (currentP != null) this.products.replace(currentP, this.products.get(currentP) + 1);
             else this.products.put(p, 1);
         }
     }
 
-    private boolean isProductInReceipt(Product p) {
+    private Product getProduct(Product p) {
         for (Product product : this.products.keySet()) {
-            if (product.getSKU().equals(p.getSKU())) return true;
+            if (product.getSKU().equals(p.getSKU())) return product;
         }
-        return false;
+        return null;
     }
 
     public double getTotalCost() {
@@ -61,6 +62,38 @@ public class Receipt {
 
     public double getTotalSaved() {
         return this.totalSaved;
+    }
+
+    public ArrayList<String> getReceiptPrintout() {
+        ArrayList<String> toReturn = new ArrayList<>();
+
+        toReturn.add("\n");
+        toReturn.add("\t~~~ Bob's Bagels ~~~");
+        toReturn.add("");
+        toReturn.add(this.date.toString());
+        toReturn.add("");
+        toReturn.add("----------------------------");
+        toReturn.add("");
+
+        for (Map.Entry<Product, Integer> kvp : this.products.entrySet()) {
+            toReturn.add(kvp.getKey().toString() + "\t x" + kvp.getValue() + " $" + kvp.getKey().getPrice());
+        }
+
+        if (!this.discounts.isEmpty()) {
+            for (Discount d : this.discounts) {
+                toReturn.add(d.toString() + "\t\t" + "$" + Double.toString(d.getPriceAfterDiscount()));
+                toReturn.add("(-$" + Double.toString(d.getSavedMoney()) + ")");
+            }
+        }
+
+        toReturn.add("----------------------------");
+        toReturn.add("Total \t$" + this.getTotalCost());
+        toReturn.add("");
+        toReturn.add("You saved a total of $" + this.getTotalSaved() + " on this shop.");
+        toReturn.add("");
+        toReturn.add("Thank you for your order!");
+
+        return toReturn;
     }
 
 }
