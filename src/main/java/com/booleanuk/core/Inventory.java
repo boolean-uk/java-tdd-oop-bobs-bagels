@@ -94,6 +94,22 @@ public class Inventory {
 //       System.out.printf(leftAlign + leftAlign + newLine, "hello", "world");
     }
 
+    // TODO: Duplication code, abstraction, but not good otherwise, Factory pattern?
+    public Coffee getCoffeeProduct(String SKU) {
+        Product coffeeProduct = inventoryItems.get(SKU);
+        return (Coffee) coffeeProduct;
+    }
+
+    public Bagel getBagelProduct(String SKU) {
+        Product bagelProduct = inventoryItems.get(SKU);
+        return (Bagel) bagelProduct;
+    }
+
+    public Filling getFillingProduct(String SKU) {
+        Product fillingProduct = inventoryItems.get(SKU);
+        return (Filling) fillingProduct;
+    }
+
 
     /**
      * Return a String that can be used as key for the HashMap inventoryIten
