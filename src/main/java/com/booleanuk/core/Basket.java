@@ -1,13 +1,14 @@
 package com.booleanuk.core;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 public class Basket {
 
-   private  Map<String, Integer> basketItems;
+   private  Map<Integer, BasketItem> basketItems;
    private int basketLimit;
-   private int basketTotal;
+   private int basketQuantity;
    private double basketPrice;
    Inventory inventory;
 
@@ -16,29 +17,80 @@ public class Basket {
     public Basket(){
         this.inventory = new Inventory();
         this.setBasketLimit(20);
-        this.basketTotal = 0;
+        this.basketQuantity = 0;
         this.basketItems = new HashMap<>();
         this.basketPrice = 0.0;
     }
 
-    public Map<String, Integer> getBasketItems() {
+    public Map<Integer, BasketItem> getBasketItems() {
         return basketItems;
     }
 
-    public void addBasketItem (BasketItem item){
-        if(!exceededBasketLimit(getBasketLimit(),this.basketTotal+quantity )){
-            if(this.basketItems.containsKey(bagelSku)){
-                this.basketItems.put(bagelSku, this.basketItems.get(bagelSku)+quantity);
-                this.basketTotal = this.basketItems.values().stream().reduce(0, Integer::sum);
-            }else{
-                this.basketItems.put(bagelSku, quantity);
-                this.basketTotal = this.basketItems.values().stream().reduce(0, Integer::sum);
+    public BasketItem createBasketItem(String itemSku, ArrayList<String> addOnsSku){
+
+        InventoryItem mainItem =  inventory.getInventoryItemDetails(itemSku);
+        if(mainItem!=null){
+            ArrayList<InventoryItem> addOns = new ArrayList<>();
+            for (String addOn : addOnsSku){
+                if(this.isFilling(addOn)){
+                    addOns.add(inventory.getInventoryItemDetails(addOn));
+                }else{
+                    System.out.println("The requested item is not a filling.");
+                }
             }
-        }else {
-            int limitExceededBy = (this.basketTotal + quantity) - getBasketLimit();
-            System.out.println("The quantity of bagels you are adding to your basket exceeds the basket limit by " + limitExceededBy +". Please reduce the quantity of bagels by this amount.");
+           BasketItem basketItem = new BasketItem(mainItem, addOns);
+           return basketItem;
+        }else{
+            System.out.println("We do not stock the requested item.");
+            return null;
         }
     }
+
+
+
+    public BasketItem createBasketItem(String itemSku){
+        InventoryItem mainItem =  inventory.getInventoryItemDetails(itemSku);
+        if(mainItem!=null){
+            ArrayList<InventoryItem> addOns = new ArrayList<>();
+            BasketItem basketItem = new BasketItem(mainItem);
+            return basketItem;
+        }else{
+            System.out.println("We do not stock the requested item.");
+            return null;
+        }
+
+    }
+
+
+    public void addBasketItem (BasketItem item){
+        if((this.basketQuantity+1) <= this.basketLimit){
+            int itemNumber = basketItems.size()+1;
+            basketItems.put(itemNumber, item);
+            this.basketQuantity += 1;
+        }else{
+            System.out.println("Your basket is full.");
+        }
+    }
+
+    public void removeBasketItem (int itemNum){
+        if(this.basketItems.get(itemNum) != null){
+            this.basketPrice = this.basketPrice - this.basketItems.get(itemNum).getPrice();
+            this.basketItems.remove(itemNum);
+            this.basketQuantity -= 1;
+        }else{
+            System.out.println("This item doesn't exist in your basket.");
+        }
+    }
+
+    public double getInventoryItemCost(String sku){
+       return this.inventory.getInventoryItemDetails(sku).getPrice();
+    }
+
+    public double getBasketItemCost(BasketItem item){
+        return item.getPrice();
+    }
+
+
     /*public void addBagel (String bagelSku, int quantity){
         if(!exceededBasketLimit(getBasketLimit(),this.basketTotal+quantity )){
             if(this.basketItems.containsKey(bagelSku)){
@@ -54,18 +106,14 @@ public class Basket {
         }
     }*/
 
-    public boolean exceededBasketLimit(int basketLimit, int basketTotalAfterAddBagel){
-        return basketTotalAfterAddBagel > basketLimit;
-    }
 
     public int getBasketLimit() {
         return this.basketLimit;
     }
     public double getBasketPrice() {
         double price = 0.0;
-        for(String key : this.basketItems.keySet()) {
-            int quantity = this.basketItems.get(key);
-            price += (this.inventory.getInventoryItemDetails(key).getPrice() * quantity);
+        for(int key : this.basketItems.keySet()) {
+            price += this.basketItems.get(key).getPrice() ;
         }
         return price;
     }
@@ -74,7 +122,7 @@ public class Basket {
         this.basketLimit = basketLimit;
     }
 
-    public void removeBagel(String bagelName, int quantity){
+    /*public void removeBasketItem(String sku, int quantity){
         if(!this.basketItems.containsKey(bagelName)){
             System.out.println("This bagel isn't in your basket.");
         }
@@ -86,7 +134,7 @@ public class Basket {
                 this.basketItems.put(bagelName, newQuantity );
             }
         }
-    }
+    }*/
 
 
     private double getFillingCost(String sku) {
@@ -120,15 +168,15 @@ public class Basket {
         }
     }
 
-    public void addFillingToBasket(String fillingSku, int quantity){
+    /*public void addFillingToBasket(String fillingSku, int quantity){
             if(this.basketItems.containsKey(fillingSku)){
                 this.basketItems.put(fillingSku, this.basketItems.get(fillingSku)+quantity);
             }else{
                 this.basketItems.put(fillingSku, quantity);
             }
-    }
+    }*/
 
-    public void userRequestBagelCost(String sku){
+    /*public void userRequestBagelCost(String sku){
         double price = 0.0;
         boolean isInInventory = (this.inventory.getInventoryItemDetails(sku) != null);
         if(isInInventory){
@@ -142,7 +190,7 @@ public class Basket {
         }else{
             System.out.println("We do not have this item in our inventory.");
         }
-    }
+    }*/
 
 
 

@@ -11,15 +11,10 @@ public class Bagel {
     public Bagel(String variant){
         this.bagelVariant = variant;
     }
-    public Bagel(String variant, HashMap<String, Integer> fillings){
+    /*public Bagel(String variant, HashMap<String, Integer> fillings){
         this.bagelVariant = variant;
         this.bagelVariant = fillingsMap;
-    }
-    public Bagel(String variant, HashMap<String, Integer> fillings){
-        this.bagelVariant = variant;
-        this.bagelVariant = fillingsMap;
-    }
-
+    }*/
 
     public void addFilling(String fillingSku){
         Inventory inventory = new Inventory();
