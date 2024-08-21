@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 public class BasketTest {
+    // Core requirements tests
     @Test
     public void addBagelToBasket(){
         Basket basket = new Basket();
@@ -11,8 +12,8 @@ public class BasketTest {
         Assertions.assertEquals("2 Onion Bagel added to basket.", basket.addItem("BGLO", 2));
         Assertions.assertEquals("1 Plain Bagel added to basket.", basket.addItem("BGLP", 1));
 
-        Assertions.assertEquals(2, basket.getBasketItems().get(basket.menu.getMenuItem("BGLO")));
-        Assertions.assertEquals(1, basket.getBasketItems().get(basket.menu.getMenuItem("BGLP")));
+        Assertions.assertEquals(2, basket.getBasketItems().get("BGLO"));
+        Assertions.assertEquals(1, basket.getBasketItems().get("BGLP"));
         Assertions.assertEquals(3, basket.getBasketSize());
     }
 
@@ -65,6 +66,9 @@ public class BasketTest {
 
 
         Assertions.assertEquals("The sum of your order is: 2.78", basket.sumOrder());
+        basket.addItem("COFC", 1);
+        Assertions.assertEquals("The sum of your order is: 4.07", basket.sumOrder());
+
     }
 
     @Test
@@ -73,4 +77,59 @@ public class BasketTest {
         Assertions.assertEquals("0.49", menu.getItemCost("BGLS"));
     }
 
+    // Extension 1 requirements tests
+
+    @Test
+    public void bagelDiscount(){
+        Basket basket = new Basket();
+        basket.setMaxBasketSize(25);
+
+        basket.addItem("BGLO", 5);
+        basket.addItem("FILB", 1);
+        Assertions.assertEquals("The sum of your order is: 2.57", basket.sumOrderDiscount());
+
+        basket.addItem("BGLO", 1);
+        Assertions.assertEquals("The sum of your order is: 2.61", basket.sumOrderDiscount());
+
+        basket.addItem("BGLP", 3);
+        Assertions.assertEquals("The sum of your order is: 3.78", basket.sumOrderDiscount());
+
+        basket.addItem("BGLS", 3);
+        Assertions.assertEquals("The sum of your order is: 4.11", basket.sumOrderDiscount());
+
+        basket.addItem("BGLE", 1);
+        Assertions.assertEquals("The sum of your order is: 4.60", basket.sumOrderDiscount());
+
+        basket.addItem("BGLE", 11);
+        Assertions.assertEquals("The sum of your order is: 8.10", basket.sumOrderDiscount());
+
+    }
+
+    @Test
+    public void bagelCoffeeDiscount(){
+        Basket basket = new Basket();
+
+        basket.addItem("BGLO", 2);
+        basket.addItem("COFW", 1);
+
+        Assertions.assertEquals("The sum of your order is: 1.74", basket.sumOrderDiscount());
+        basket.removeItem("BGLO", false);
+
+        Assertions.assertEquals("The sum of your order is: 1.25", basket.sumOrderDiscount());
+
+
+    }
+
+    @Test
+    public void allDiscounts(){
+        Basket basket = new Basket();
+        basket.setMaxBasketSize(25);
+
+        basket.addItem("BGLS", 6);
+        basket.addItem("BGLO", 13);
+        basket.addItem("FILC", 1);
+        basket.addItem("COFL", 1);
+
+        Assertions.assertEquals("The sum of your order is: 7.85", basket.sumOrderDiscount());
+    }
 }

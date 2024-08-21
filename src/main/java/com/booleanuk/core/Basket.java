@@ -5,7 +5,7 @@ import java.util.HashMap;
 public class Basket {
     private int maxBasketSize;
     private int basketSize;
-    private HashMap<Item, Integer> basketItems;
+    private HashMap<String, Integer> basketItems;
     Menu menu = new Menu();
 
 
@@ -31,14 +31,19 @@ public class Basket {
         return this.basketSize;
     }
 
-    public HashMap<Item, Integer> getBasketItems(){
+    public HashMap<String, Integer> getBasketItems(){
         return this.basketItems;
     }
 
     public String addItem(String itemId, int quantity){
         if (menu.itemExistsMenu(itemId)){
             if (basketSize < maxBasketSize){
-                basketItems.put(menu.getMenuItem(itemId), quantity);
+                if (basketItems.containsKey(itemId)){
+                    basketItems.put(itemId, quantity += basketItems.get(itemId));
+                    basketSize+=quantity;
+                    return quantity + " " + menu.getMenuItem(itemId).getItemVariant() + " " + menu.getMenuItem(itemId).getItemName() + " added to basket.";
+                }
+                basketItems.put(itemId, quantity);
                 basketSize+=quantity;
                 return quantity + " " + menu.getMenuItem(itemId).getItemVariant() + " " + menu.getMenuItem(itemId).getItemName() + " added to basket.";
             }
@@ -49,17 +54,17 @@ public class Basket {
 
     public String removeItem(String itemId, Boolean removeDuplicates){
         Item item = menu.getMenuItem(itemId);
-        if (basketItems.containsKey(item)){
+        if (basketItems.containsKey(itemId)){
             if (removeDuplicates){
-                int quantity = basketItems.get(item);
-                basketItems.remove(item);
+                int quantity = basketItems.get(itemId);
+                basketItems.remove(itemId);
                 basketSize -= quantity;
                 return quantity + " " + item.getItemVariant() + " " + item.getItemName() + "s removed from basket.";
             }else {
-                basketItems.put(item, basketItems.get(item)-1);
+                basketItems.put(itemId, basketItems.get(itemId)-1);
                 basketSize -= 1;
-                if (basketItems.get(item) == 0){
-                    basketItems.remove(item);
+                if (basketItems.get(itemId) == 0){
+                    basketItems.remove(itemId);
                 }
                 return item.getItemVariant() + " " + item.getItemName() + " removed from basket.";
             }
@@ -74,14 +79,18 @@ public class Basket {
         }
 
         float totalSum = 0;
-        for (HashMap.Entry<Item, Integer> entry : basketItems.entrySet()){
+        for (HashMap.Entry<String, Integer> entry : basketItems.entrySet()){
             int quantity = entry.getValue();
-            float price = entry.getKey().getItemPrice();
+            float price = menu.getMenuItem(entry.getKey()).getItemPrice();
 
             float sum = price * quantity;
             totalSum += sum;
         }
         return "The sum of your order is: " + String.format("%.2f", totalSum);
+    }
+
+    public String sumOrderDiscount(){
+        return "SUM";
     }
 
 }
