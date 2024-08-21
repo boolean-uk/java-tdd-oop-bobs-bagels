@@ -1,5 +1,8 @@
 package com.booleanuk.extension;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
@@ -9,17 +12,19 @@ import static java.lang.Math.*;
 public class Receipt {
 
     private Order order;
+    private double totalPriceNoDiscounts;
 
     Receipt(Order order){
         this.order = order;
+        totalPriceNoDiscounts = 0;
     }
 
     public String printReceipt(){
         LocalDateTime date = LocalDateTime.now();
         DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
         String formattedDate = date.format(dateFormat);
-        double totalPriceNoDiscounts = 0;
         double totalPrice = order.getPrice() / 100.0;
+        boolean discounts = false;
 
         String result = "```\n" +
                 "    ~~~ Bob's Bagels ~~~\n" +
@@ -49,32 +54,45 @@ public class Receipt {
             totalPriceNoDiscounts += price * amount / 100.0;
         }
 
-        result += "---------------------------- \n" +
-                "Discounts\n" +
-                bagelDiscount() +
+        if(!bagelDiscount().isEmpty() || !coffeeDiscount().isEmpty()){
+            discounts = true;
+            result += "---------------------------- \n" +
+                    "          Discounts";
+        }
+
+        result += bagelDiscount() +
                 coffeeDiscount() + "\n";
 
         result += "----------------------------\n" +
-                "Total £" + totalPrice + "\n" +
-                "Total w/o discounts £" + totalPriceNoDiscounts + "\n" +
-                "Thank you for your order!\n" +
+                "Total £" + totalPrice + "\n";
+
+        if(discounts){
+            result += "Total w/o discounts £" + totalPriceNoDiscounts + "\n" +
+            "You saved £" + round(totalPriceNoDiscounts - totalPrice, 2) + "!\n";
+        }
+
+        result += "Thank you for your order!\n" +
                 "```";
 
         System.out.println(result);
         return result;
     }
 
+    public double getTotalPriceNoDiscounts(){
+        return totalPriceNoDiscounts;
+    }
+
     private String bagelDiscount(){
         String result = "";
         int bagelCount = order.getBagelList().size();
         if(bagelCount / 12 > 0){
-            result += "12 Bagels £3.99 " + bagelCount / 12 + "x";
+            result += "\n12 Bagels " + bagelCount / 12 + " £3.99";
             if(bagelCount % 12 > 5){
-               result += "\n6 Bagels £2.49 1x\n";
+               result += "\n6 Bagels 1 £2.49";
             }
         }
         else if(bagelCount / 6 > 0){
-            result += "6 Bagels £2.49 1x\n";
+            result += "\n6 Bagels 1 £2.49";
         }
         return result;
     }
@@ -84,9 +102,18 @@ public class Receipt {
         int coffeeAmount = order.getCoffeeList().size();
         int singularBagels = order.getBagelList().size() % 6;
         if(coffeeAmount > 0 && singularBagels > 0){
-            result += "Coffee & Bagel £1.25 x" + min(coffeeAmount, singularBagels);
+            result += "\nCoffee & Bagel " + min(coffeeAmount, singularBagels) + " £1.25";
         }
         return result;
+    }
+
+    //Stolen from stackoverflow
+    private static double round(double value, int places) {
+        if (places < 0) throw new IllegalArgumentException();
+
+        BigDecimal bd = BigDecimal.valueOf(value);
+        bd = bd.setScale(places, RoundingMode.HALF_UP);
+        return bd.doubleValue();
     }
 
 }

@@ -161,6 +161,14 @@ public class TestExtension {
     }
 
     @Test
+    public void testPrintReceiptDiscount() throws Exception {
+        mainTest();
+        Order order1 = new Order(store);
+        Receipt receipt1 = new Receipt(order1);
+        Assertions.assertNotNull(receipt1.printReceipt());
+    }
+
+    @Test
     public void testPrintReceipt() throws Exception {
         mainTest();
         Order order1 = new Order(store);
@@ -211,5 +219,23 @@ public class TestExtension {
 
         receipt1.printReceipt();
     }
+
+    @Test
+    public void testPrintReceiptDiscountExtension() throws Exception {
+        mainTest();
+        Order order1 = new Order(store);
+        Receipt receipt1 = new Receipt(order1);
+        Assertions.assertEquals(0, receipt1.getTotalPriceNoDiscounts());
+        Assertions.assertNotNull(receipt1.printReceipt());
+
+        order1.addProduct("BGLO");
+        order1.addProduct("BGLE");
+        order1.addProduct("COFW");
+        order1.addProduct("FILC");
+
+        receipt1.printReceipt();
+        Assertions.assertEquals(2.29, receipt1.getTotalPriceNoDiscounts());
+    }
+
 
 }
