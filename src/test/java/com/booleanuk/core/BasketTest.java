@@ -22,8 +22,8 @@ public class BasketTest {
     public void TestShouldAddBagelWithFilling(){
         Basket basket = new Basket();
 
-        //this is going to fail because the filling sku is not valid.
-        Assertions.assertEquals("New product added to basket", basket.add("BGLO", "COFB"));
+        //this should not pass test because the filings is valid, adding a bagel with a filling inside.
+        Assertions.assertEquals("New product added to basket", basket.add("BGLO", "FILX"));
 
     }
 

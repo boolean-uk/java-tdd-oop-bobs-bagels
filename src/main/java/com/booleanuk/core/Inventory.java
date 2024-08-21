@@ -19,6 +19,7 @@ public class Inventory {
         this.fillings.put("FILB", new String[]{"FILB",	"0.12",	"Filling",	"Bacon"});
         this.fillings.put("FILE", new String[]{"FILE",	"0.12",	"Filling",	"Egg"});
         this.fillings.put("FILC", new String[]{"FILC",	"0.12",	"Filling",	"Cheese"});
+        this.fillings.put("FILX", new String[]{"FILX", "0.12", "Filling",	"Cream Cheese"});
         this.fillings.put("FILS", new String[]{"FILS",	"0.12",	"Filling",	"Smoked Salmon"});
         this.fillings.put("FILH", new String[]{"FILH",	"0.12",	"Filling",	"Ham"});
 
@@ -31,24 +32,37 @@ public class Inventory {
 
     public Product getItem(String referenceSku){
         String[] isBagel = bagels.get(referenceSku);
-        String[] isFilling = fillings.get(referenceSku);
         String[] isCoffee = coffees.get(referenceSku);
 
         if(isBagel != null){
             return new Bagel(isBagel[0], Double.valueOf(isBagel[1]), isBagel[2], isBagel[3], null);
         }
+        else if (isCoffee != null){
+            return new Coffee(isCoffee[0], Double.valueOf(isCoffee[1]), isCoffee[2], isCoffee[3]);
+        }
+        else {
 
-        else if (isFilling != null){
-            return new Filling(isFilling[0], Double.valueOf(isFilling[1]), isFilling[2], isFilling[3]);
+            //Just adding filling sku will return null;
+            return null;
+        }
+    }
+                            //BGLO                             FILX
+    public Product getItem(String referenceSku, String referenceFillingSku){
+        String[] isBagel = bagels.get(referenceSku);
+        String[] isCoffee = coffees.get(referenceSku);
+
+        String[] isFilling = fillings.get(referenceFillingSku);
+
+
+        if(isBagel != null){
+            return new Bagel(isBagel[0], Double.valueOf(isBagel[1]), isBagel[2], isBagel[3], new Filling(isFilling[0], Double.valueOf(isFilling[1]), isFilling[2], isFilling[3]));
         }
 
         else if (isCoffee != null){
             return new Coffee(isCoffee[0], Double.valueOf(isCoffee[1]), isCoffee[2], isCoffee[3]);
         }
-
         else {
             return null;
         }
     }
-
 }

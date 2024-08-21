@@ -60,10 +60,10 @@ public class Basket {
         }
 
     public String add(String sku, String fillingSku) {
-        String[] validFillings = {"FILB", "FILE", "FILC", "FILX", "FILS", "FILH"};
 
         for(Product product : currentBasket.keySet()){
             if(Objects.equals(sku, product.retrieveSku())){
+
                 currentBasket.put(product, currentBasket.get(product) + 1);
                 productCount++;
 
@@ -72,7 +72,7 @@ public class Basket {
             }
         }
 
-        currentBasket.put(inventory.getItem(sku), 1);
+        currentBasket.put(inventory.getItem(sku, fillingSku), 1);
         productCount++;
 
         return "New product added to basket";
