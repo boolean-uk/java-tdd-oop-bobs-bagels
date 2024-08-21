@@ -5,7 +5,11 @@ import java.util.Scanner;
 import static com.booleanuk.core.Menu.selectItemFromMenu;
 
 public class Order {
-    private final Basket basket = new Basket();
+    private final Basket basket;
+
+    public Order (Basket basket){
+        this.basket = basket;
+    }
 
     public void order() {
         Scanner input = new Scanner(System.in);
