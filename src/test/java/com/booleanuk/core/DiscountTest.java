@@ -81,4 +81,20 @@ public class DiscountTest {
         Assertions.assertEquals(5.3, basket.getTotalCost(), 0.001);
     }
 
+    @Test
+    public void testCoffeeAndBagelDiscount() {
+        Basket basket = new Basket();
+
+        basket.addProduct(new WhiteCoffee());
+        basket.addProduct(new SesameBagel());
+
+        Assertions.assertEquals(1.25, basket.getTotalCost(), 0.001);
+
+        basket.addProduct(new BlackCoffee()); // 0.99 cost
+        Assertions.assertEquals(2.24, basket.getTotalCost(), 0.001);
+
+        basket.addProduct(new OnionBagel()); // Discount added when this gets added
+        Assertions.assertEquals(2.5, basket.getTotalCost(), 0.001);
+    }
+
 }
