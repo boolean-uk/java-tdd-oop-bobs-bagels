@@ -14,7 +14,10 @@ public class inventoryTest {
         Filling fillingValue = bagel.getFillingSku();
 
         //This should fail because the filling is not the right one
-        Assertions.assertEquals(fillingValue.retrieveSku(), "FILB");
+        Assertions.assertNotEquals(fillingValue.retrieveSku(), "FILB");
+
+        //This should however work.
+        Assertions.assertEquals(fillingValue.retrieveSku(), "FILS");
 
         //
 
