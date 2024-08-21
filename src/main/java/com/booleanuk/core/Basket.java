@@ -63,12 +63,13 @@ public class Basket {
 
         for(Product product : currentBasket.keySet()){
 
-            if(Objects.equals(sku, product.retrieveSku())){
+            // Check for matching sku adn filling sku, if it is a match the +1 that product
+            if(Objects.equals(sku, product.retrieveSku() && Objects.equals(fillingSku, ))){
 
                 currentBasket.put(product, currentBasket.get(product) + 1);
                 productCount++;
 
-                return "Product added to basket";
+                return "Existing Product added to basket";
             }
         }
 

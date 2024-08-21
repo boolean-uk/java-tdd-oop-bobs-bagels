@@ -49,7 +49,6 @@ public class Inventory {
 
     public Product getItem(String referenceSku, String referenceFillingSku){
         String[] isBagel = bagels.get(referenceSku);
-
         String[] isFilling = fillings.get(referenceFillingSku);
 
 
