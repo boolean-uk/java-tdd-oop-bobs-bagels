@@ -132,7 +132,7 @@ public class UserTest {
 
         Receipt receipt=new Receipt();
 
-        receipt.printReceipt(order);
+        receipt.printReceipt(order, true);
 
 
 

@@ -39,16 +39,23 @@ public class Receipt {
         }
 
         if(receipt){
+            double fullDiscount=0;
             if (discountPrices[0]>0) {
                 System.out.println("Discount due to buying flavored Bagels in bulk: "+-discountPrices[0]);
+                fullDiscount+=discountPrices[0];
 
             }
             if(discountPrices[1]>0){
                 System.out.println("Discount due to buying Plain Bagels in bulk: "+-discountPrices[1]);
+                fullDiscount+=discountPrices[1];
             }
             if(discountPrices[2]>0){
                 System.out.println("Discount due to buying Bagel/Coffee in bulk: "+-discountPrices[2]);
+                fullDiscount+=discountPrices[2];
             }
+
+            System.out.println("You saved a total of: £"+fullDiscount+" on this trip.");
+
         }
 
         System.out.println("");
