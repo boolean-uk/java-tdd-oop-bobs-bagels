@@ -1,7 +1,13 @@
 package com.booleanuk.core;
 
 public class Filling extends Product {
-    public Filling(int id, String SKU, float price, Enum name, Enum variant) {
-        super(id, SKU, price, name, variant);
+
+    public Filling(float price, Enum variant) {
+        super(price, variant);
+    }
+
+    @Override
+    public ProductName setName() {
+        return ProductName.FILLING;
     }
 }

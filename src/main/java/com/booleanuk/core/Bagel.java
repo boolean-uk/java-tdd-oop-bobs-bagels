@@ -2,7 +2,13 @@ package com.booleanuk.core;
 
 public class Bagel extends Product{
 
-    public Bagel(int id, String SKU, float price, Enum name, Enum variant) {
-        super(id, SKU, price, name, variant);
+
+    public Bagel(float price, Enum variant) {
+        super(price, variant);
+    }
+
+    @Override
+    public ProductName setName() {
+        return ProductName.BAGEL;
     }
 }

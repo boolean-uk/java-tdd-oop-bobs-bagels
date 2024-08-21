@@ -1,30 +1,29 @@
 package com.booleanuk.core;
 
 public class Product {
-    private int id;
     private String SKU;
     private float price;
-    private Enum name;
+    private ProductName name;
     private Enum variant;
 
-    public Product(int id, String SKU, float price, Enum name, Enum variant) {
-        this.id = id;
-        this.SKU = SKU;
+    public Product(float price, Enum variant) {
         this.price = price;
-        this.name = name;
+        this.name = setName();
         this.variant = variant;
+        this.SKU = setSKU(name, variant);
     }
 
-    public int getId() {
-        return this.id;
-    }
 
     public String getSKU() {
         return this.SKU;
     }
 
-    public void setSKU(String SKU) {
-        this.SKU = SKU;
+    public String setSKU(ProductName name, Enum variant) {
+        String productCode = name.toString().substring(0,2);
+        String variantCode = variant.toString().substring(0,2);
+        String hashCode = productCode + variantCode;
+
+        return hashCode.toUpperCase();
     }
 
     public float getPrice() {
@@ -39,8 +38,8 @@ public class Product {
         return this.name;
     }
 
-    public void setName(Enum name) {
-        this.name = name;
+    public ProductName setName() {
+        return ProductName.DEFAULT;
     }
 
     public Enum getVariant() {
