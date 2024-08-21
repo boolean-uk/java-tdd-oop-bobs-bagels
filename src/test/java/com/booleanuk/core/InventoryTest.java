@@ -46,4 +46,10 @@ public class InventoryTest {
 
         Assertions.assertNotSame(product1, product2);
     }
+
+    @Test
+    public void testGetProductInvalidValues() {
+        Inventory inventory = new Inventory();
+        Assertions.assertThrows(IllegalArgumentException.class, () -> inventory.getProduct(null));
+    }
 }
