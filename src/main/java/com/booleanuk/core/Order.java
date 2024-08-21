@@ -91,7 +91,8 @@ public class Order {
                     break;
                 }
                 case 4: {
-                    System.out.println("That will be " + basket.calculateBasketCost() + "$.\nThank you for shopping at Bob's bagels\n");
+                    Receipt receipt = new Receipt(this.basket);
+                    receipt.printReceipt(this.basket);
                     return;
                 }
             }

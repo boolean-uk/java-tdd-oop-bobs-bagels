@@ -13,6 +13,10 @@ public class Basket {
         this.basketSize = 20;
     }
 
+    public ArrayList<Item> getBasket(){
+        return this.basket;
+    }
+
     public int getDiscount(){
         return this.discount;
     }
@@ -62,7 +66,7 @@ public class Basket {
     }
 
     public void formatFillingPrint(Bagel bagel) {
-        HashMap<String, Integer> listOfFillings = getListOfFillings(bagel);
+        HashMap<String, Integer> listOfFillings = this.getListOfFillings(bagel);
         System.out.println("Fillings:");
         listOfFillings.forEach((key, value) -> System.out.println("- " + key + " x" + value));
     }
