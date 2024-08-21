@@ -276,7 +276,8 @@ public class BasketTest {
 
         Assertions.assertEquals(4, basket.countTotalItems());
     }
-    
+
+
     @Test
     public void tryToAddCoffeeAsFillingForBagelTest() {
         Basket basket = new Basket();

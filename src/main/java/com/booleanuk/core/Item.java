@@ -2,7 +2,7 @@ package com.booleanuk.core;
 
 import java.util.HashMap;
 
-public class Item {
+public abstract class Item {
     private final String SKU;
     private double price;
     private String type;
