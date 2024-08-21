@@ -50,6 +50,28 @@ public class ReceiptTest {
         Assertions.assertTrue(receipt.printReceipt());
     }
 
+    @Test
+    public void testPrintReceiptWithDiscounts() {
+        Store store = new Store("Bob's Bagels");
+        Order order = new Order(store);
+        Bagel bagel1 = (Bagel) store.getInventory().getProduct("BGLO");
+        Bagel bagel2 = (Bagel) store.getInventory().getProduct("BGLO");
+        Product coffee = store.getInventory().getProduct("COFB");
+        Filling filling1 = (Filling) store.getInventory().getProduct("FILB");
+        Filling filling2 = (Filling) store.getInventory().getProduct("FILE");
+
+        bagel1.addFilling(filling1);
+        bagel1.addFilling(filling2);
+
+        addProductsToOrder(order, bagel1, 12);
+        addProductsToOrder(order, bagel2, 7);
+        addProductsToOrder(order, coffee, 2);
+
+
+        Receipt receipt = new Receipt(order);
+        Assertions.assertTrue(receipt.printReceipt());
+    }
+
     // Helper method to add products to an order
     private void addProductsToOrder(Order order, Product product, int quantity) {
         for (int i = 0; i < quantity; i++) {
