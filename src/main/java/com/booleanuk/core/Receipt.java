@@ -37,8 +37,7 @@ public class Receipt {
     Receipt receipt = new Receipt(products);
     receipt.asString = "~~~ Bob's Bagels ~~~\n\n" +
         LocalDateTime.now() +
-        "\n\n----------------------\n\n";
-    // All fillings and extras cost money and cannot be discounted
+        "\n\n-------------------------\n\n";
     receipt.price = 0;
 
     int numBagels = receipt.numBagels();
@@ -51,7 +50,7 @@ public class Receipt {
         receipt.price += twelveBagelsPrice;
         ++nDiscounts;
       }
-      receipt.asString += nDiscounts + "x Twelve bagel deal " + twelveBagelsPrice * nDiscounts;
+      receipt.asString += String.format("%dx Twelve bagel deal %.2f\n", nDiscounts, twelveBagelsPrice * nDiscounts);
     }
 
     if (numBagels >= 6) {
@@ -61,7 +60,7 @@ public class Receipt {
         receipt.price += sixBagelsPrice;
         ++nDiscounts;
       }
-      receipt.asString += nDiscounts + "x Six bagel deal " + sixBagelsPrice * nDiscounts;
+      receipt.asString += String.format("%dx Six bagel deal %.2f\n", nDiscounts, sixBagelsPrice * nDiscounts);
     }
 
     if (numBagels >= 1 && numCoffees >= 1) {
@@ -72,7 +71,7 @@ public class Receipt {
         receipt.price += coffeeAndBagelPrice;
         ++nDiscounts;
       }
-      receipt.asString += nDiscounts + "x Coffee & bagel deal " + coffeeAndBagelPrice * nDiscounts;
+      receipt.asString += String.format("%dx Coffee & bagel deal %.2f\n", nDiscounts, coffeeAndBagelPrice * nDiscounts);
     }
 
     Map<Sku, Integer> productCounts = new HashMap<>();
@@ -109,7 +108,7 @@ public class Receipt {
       receipt.asString += String.format("%dx %s %.2f", count, sku.toString(), sku.price() * count);
     }
 
-    receipt.asString += "\n\n----------------------\n\n";
+    receipt.asString += "\n\n-------------------------\n\n";
     receipt.asString += String.format("Total: %.2f", receipt.price);
 
     return receipt;
