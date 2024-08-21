@@ -1,4 +1,3 @@
-// src/main/java/com/booleanuk/core/Receipt.java
 package com.booleanuk.core;
 
 import java.text.SimpleDateFormat;
@@ -18,6 +17,30 @@ public class Receipt {
         return order;
     }
 
+    public boolean printReceipt() {
+        if (order.getTotalSum() == 0) {
+            return false;
+        }
+
+        int receiptWidth = 30;
+        printHeader(receiptWidth);
+
+        Map<Integer, Integer> twelveBagelDiscounts = order.getTwelveBagelDiscounts();
+        Map<Integer, Integer> sixBagelDiscounts = order.getSixBagelDiscounts();
+        Map<Integer, Integer> coffeeBagelPairsDiscount = order.getCoffeeBagelPairsDiscount();
+        Map<Product, Integer> nonDiscountedProducts = order.getNonDiscountedProductsMap();
+
+        if (!twelveBagelDiscounts.isEmpty() || !sixBagelDiscounts.isEmpty() || !coffeeBagelPairsDiscount.isEmpty()) {
+            printDiscountedProducts(twelveBagelDiscounts, "12 Bagels", 399);
+            printDiscountedProducts(sixBagelDiscounts, "6 Bagels", 249);
+            printDiscountedProducts(coffeeBagelPairsDiscount, "Bagel + Coffee", 125);
+        }
+        printNonDiscountedProducts(nonDiscountedProducts);
+        printFooter(receiptWidth);
+
+        return true;
+    }
+
     private String centerText(String text, int width) {
         int padding = (width - text.length()) / 2;
         StringBuilder sb = new StringBuilder();
@@ -26,28 +49,6 @@ public class Receipt {
         }
         sb.append(text);
         return sb.toString();
-    }
-
-    public boolean printReceipt() {
-        if (order.getTotalSum() == 0) {
-            return false;
-        }
-
-        int receiptWidth = 30;
-        createHeader(receiptWidth);
-
-        Map<Integer, Integer> twelveBagelDiscounts = order.getTwelveBagelDiscounts();
-        Map<Integer, Integer> sixBagelDiscounts = order.getSixBagelDiscounts();
-        Map<Integer, Integer> coffeeBagelPairsDiscount = order.getCoffeeBagelPairsDiscount();
-        Map<Product, Integer> nonDiscountedProductsMap = order.getNonDiscountedProductsMap();
-
-        if (!twelveBagelDiscounts.isEmpty() || !sixBagelDiscounts.isEmpty() || !coffeeBagelPairsDiscount.isEmpty()) {
-            printDiscountSection(twelveBagelDiscounts, sixBagelDiscounts, coffeeBagelPairsDiscount);
-        }
-        printNonDiscountedProducts(nonDiscountedProductsMap);
-        printFooter(receiptWidth);
-
-        return true;
     }
 
     private void printFooter(int receiptWidth) {
@@ -59,28 +60,7 @@ public class Receipt {
         System.out.println();
     }
 
-    private void printDiscountSection(Map<Integer, Integer> twelveBagelDiscounts, Map<Integer, Integer> sixBagelDiscounts, Map<Integer, Integer> coffeeBagelPairsDiscount) {
-        printDiscounts(twelveBagelDiscounts, "12 Bagels", 399);
-        printDiscounts(sixBagelDiscounts, "6 Bagels", 249);
-        printDiscounts(coffeeBagelPairsDiscount, "Bagel + Coffee", 125);
-    }
-
-    private void printNonDiscountedProducts(Map<Product, Integer> nonDiscountedProductsMap) {
-        for (Map.Entry<Product, Integer> entry : nonDiscountedProductsMap.entrySet()) {
-            Product product = entry.getKey();
-            int quantity = entry.getValue();
-            int price = product.getPrice() * quantity;
-
-            if (product instanceof Bagel bagel) {
-                printProductWithFillings(bagel, quantity, price);
-            } else {
-
-            System.out.println(formatItem(product.getVariant(), quantity, price, 0));
-        }
-    }
-}
-
-    private void createHeader(int receiptWidth) {
+    private void printHeader(int receiptWidth) {
         System.out.println();
         System.out.println(centerText("~~~ " + order.getStore().getName() + " ~~~", receiptWidth));
         System.out.println();
@@ -89,20 +69,35 @@ public class Receipt {
         System.out.println("----------------------------");
     }
 
-    private void printDiscounts(Map<Integer, Integer> discounts, String itemName, int discountPrice) {
+    private void printNonDiscountedProducts(Map<Product, Integer> nonDiscountedProducts) {
+        for (Map.Entry<Product, Integer> entry : nonDiscountedProducts.entrySet()) {
+            Product product = entry.getKey();
+            int quantity = entry.getValue();
+            int price = product.getPrice() * quantity;
+
+            if (product instanceof Bagel bagel && !bagel.getFillings().isEmpty()) {
+                printBagelWithFillings(bagel, quantity, price);
+            } else {
+
+            System.out.println(formatString(product.getVariant(), quantity, price, 0));
+        }
+    }
+}
+
+    private void printDiscountedProducts(Map<Integer, Integer> discounts, String itemName, int discountPrice) {
         for (Map.Entry<Integer, Integer> entry : discounts.entrySet()) {
             int quantity = entry.getKey();
             int totalCost = entry.getValue();
             int savings = totalCost - discountPrice * quantity;
 
             for (int i = 0; i < quantity; i++) {
-                System.out.println(formatItem(itemName, 1, discountPrice, savings));
+                System.out.println(formatString(itemName, 1, discountPrice, savings));
             }
         }
     }
 
-    private void printProductWithFillings(Bagel bagel, int quantity, int price) {
-        System.out.println(formatItem(bagel.getVariant(), quantity, price, 0));
+    private void printBagelWithFillings(Bagel bagel, int quantity, int price) {
+        System.out.println(formatString(bagel.getVariant(), quantity, price, 0));
 
         Map<Filling, Integer> fillingQuantities = new HashMap<>();
         for (Filling filling : bagel.getFillings()) {
@@ -115,13 +110,13 @@ public class Receipt {
         }
     }
 
-    private String formatItem(String name, int quantity, int price, int savings) {
+    private String formatString(String name, int quantity, int price, int savings) {
         String itemLine = String.format("%-16s %2d   £%.2f", name, quantity, price / 100.0);
         String savingsLine = savings > 0 ? String.format("%19s(-£%.2f)", "", savings / 100.0) : "";
         return savingsLine.isEmpty() ? itemLine : itemLine + "\n" + savingsLine;
     }
 
-    private String formatTotal(double total) {
-        return String.format("Total                £%.2f", total / 100);
+    private String formatTotal(int total) {
+        return String.format("Total                £%.2f", total / 100.0);
     }
 }
