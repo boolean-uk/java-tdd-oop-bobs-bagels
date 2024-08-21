@@ -1,7 +1,6 @@
 package com.booleanuk.core;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class Basket {
@@ -47,7 +46,7 @@ public class Basket {
   }
 
   public double price() {
-    return Receipt.makeReceipt(Collections.unmodifiableList(this.products)).price();
+    return Receipt.makeReceipt(this.products).price();
   }
 
   public void setCapacity(int capacity) {
