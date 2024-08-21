@@ -5,7 +5,7 @@
 | `Controller` | `Basket basket, View view` | `basket.removeBagel(Bagel bagel)`         | view.removeBagel(...) specifies a specific bagel | specified bagel is removed                      |
 |              |                            |                                           | basket has no bagels                             | user is notified: no bagel to remove            |
 |              | `int basketSize`           | `changeBasketSize(int size)`              | basket has fewer bagels than size                | size is changed                                 |
-|              |                            |                                           | basket has more bagels thn size                  | basket is emptied, then size is changed         |
+|              |                            |                                           | basket has more bagels than size                 | basket is emptied, then size is changed         |
 | `Basket`     |                            | `calculateCost()`                         | items in bagels                                  | cost is calculated and returned                 |
 |              |                            |                                           | bagels list empty                                | 0 is returned                                   |
 | `View`       |                            | `AddBagel(Hashmap<String, float> prices)` | user agrees to price                             | requested bagel is returned to controller       |
