@@ -18,7 +18,7 @@ public class Receipt {
 
     public Receipt(ArrayList<Product> products, ArrayList<Discount> discounts) {
         this.products = new HashMap<Product, Integer>();
-        this.discounts = new ArrayList<>();
+        this.discounts = discounts;
         this.date = new Date(); // TODO: format date?
 
         this.setProductsAndQuantity(products);
@@ -28,8 +28,11 @@ public class Receipt {
 
     private void setTotalCost() {
         for (Map.Entry<Product, Integer> kvp : this.products.entrySet()) {
+            System.out.println("Adding " + kvp.getKey());
             this.totalCost += (kvp.getKey().getPrice() * kvp.getValue());
         }
+
+        for (Discount d : this.discounts) this.totalCost += d.getPriceAfterDiscount();
     }
 
     private void setTotalSaved() {
