@@ -1,5 +1,6 @@
 package com.booleanuk.core;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -8,6 +9,7 @@ import java.util.Optional;
 
 class TwilioTest {
   @Test
+  @Disabled
   public void testSendMessage() {
     List<Product> inventoryStock = new ArrayList<>();
     inventoryStock.add(new Coffee(CoffeeType.BLACK));
@@ -18,6 +20,9 @@ class TwilioTest {
     Basket basket = new Basket();
     basket.add(new Coffee(CoffeeType.BLACK));
     basket.add(new Bagel(BagelType.EVERYTHING, Optional.empty()));
-    inventory.purchase(basket);
+    Receipt receipt = inventory.purchase(basket);
+
+    // INSERT SOME PHONE NUMBER HERE:
+    MessageController.notifyUser(receipt.toString(), "<some phone number>");
   }
 }
