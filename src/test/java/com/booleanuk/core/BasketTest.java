@@ -104,4 +104,10 @@ class BasketTest {
         basket.addBagel(bagel2);
         Assertions.assertEquals(1.12f, basket.calculateCost(), 0.001);
     }
+
+    @Test
+    public void testCalculateCostOnEmptyBasket() {
+        Basket basket = new Basket(2);
+        Assertions.assertEquals(0.0f, basket.calculateCost(), 0.001);
+    }
 }
