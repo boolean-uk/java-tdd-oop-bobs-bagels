@@ -57,7 +57,19 @@ public class Basket {
     }
 
     public boolean isFull() {
-        return this.basket.size() == this.capacity;
+        int currentCapacity = 0;
+
+        for (Product p : this.basket) {
+            currentCapacity += 1;
+        }
+
+        for (Discount d : this.discounts){
+            for (Product p : d.getProductsInDiscount()){
+                currentCapacity += 1;
+            }
+        }
+
+        return currentCapacity == this.capacity;
     }
 
     public boolean remove(Product p) {
