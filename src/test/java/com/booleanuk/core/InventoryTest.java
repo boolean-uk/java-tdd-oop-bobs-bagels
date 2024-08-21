@@ -15,12 +15,12 @@ public class InventoryTest {
     public void testInventoryContents() {
         Inventory inventory = new Inventory();
 
-        assertProduct(inventory, "BGLO", 49, "Onion");
-        assertProduct(inventory, "BGLP", 39, "Plain");
-        assertProduct(inventory, "BGLE", 49, "Everything");
-        assertProduct(inventory, "BGLS", 49, "Sesame");
-        assertProduct(inventory, "COFB", 99, "Black");
-        assertProduct(inventory, "COFW", 119, "White");
+        assertProduct(inventory, "BGLO", 49, "Onion Bagel");
+        assertProduct(inventory, "BGLP", 39, "Plain Bagel");
+        assertProduct(inventory, "BGLE", 49, "Everything Bagel");
+        assertProduct(inventory, "BGLS", 49, "Sesame Bagel");
+        assertProduct(inventory, "COFB", 99, "Black Coffee");
+        assertProduct(inventory, "COFW", 119, "White Coffee");
         assertProduct(inventory, "COFC", 129, "Cappuccino");
         assertProduct(inventory, "COFL", 129, "Latte");
         assertProduct(inventory, "FILB", 12, "Bacon");
@@ -36,5 +36,14 @@ public class InventoryTest {
         Assertions.assertNotNull(product, "Product with SKU " + sku + " should not be null");
         Assertions.assertEquals(price, product.getPrice(), "Price for SKU " + sku + " should be " + price);
         Assertions.assertEquals(variant, product.getVariant(), "Variant for SKU " + sku + " should be " + variant);
+    }
+
+    @Test
+    public void testGetProductNotObject() {
+        Inventory inventory = new Inventory();
+        Product product1 = inventory.getProduct("BGLO");
+        Product product2 = inventory.getProduct("BGLO");
+
+        Assertions.assertNotSame(product1, product2);
     }
 }
