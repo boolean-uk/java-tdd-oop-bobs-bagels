@@ -6,8 +6,8 @@ public class Checkout {
 
     }
 
-    public Receipt makeCheckout() {
-
+    public Receipt makeCheckout(Basket b) {
+        return new Receipt(b.getProductsNotInDiscount(), b.getDiscounts());
     }
 
 }
