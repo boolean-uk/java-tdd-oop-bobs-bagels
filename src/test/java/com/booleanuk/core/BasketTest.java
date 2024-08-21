@@ -4,7 +4,10 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
+import java.io.PrintStream;
+import java.util.ArrayList;
 
 public class BasketTest {
     @Test
@@ -58,7 +61,6 @@ public class BasketTest {
 
         Assertions.assertEquals(expectedResult, removeResult);
 
-        System.out.println("Items in basket: basket.numberOfItemsInBasket()");
         Assertions.assertEquals(0, basket.numberOfItemsInBasket());
 
         System.setIn(backup);
@@ -299,4 +301,6 @@ public class BasketTest {
         discount = basketSeven.getDiscount();
         Assertions.assertEquals(expectedDiscount, discount);
     }
+
+
 }
