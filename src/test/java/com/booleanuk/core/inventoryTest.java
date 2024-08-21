@@ -10,7 +10,6 @@ public class inventoryTest {
         Inventory inventory = new Inventory();
 
         Bagel bagel = (Bagel) inventory.getItem("BGLP", "FILS");
-
         Filling fillingValue = bagel.getFillingSku();
 
         //This should fail because the filling is not the right one
@@ -18,8 +17,6 @@ public class inventoryTest {
 
         //This should however work.
         Assertions.assertEquals(fillingValue.retrieveSku(), "FILS");
-
-        //
 
     }
 

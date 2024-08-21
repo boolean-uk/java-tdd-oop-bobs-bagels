@@ -62,13 +62,13 @@ public class Basket {
     public String add(String sku, String fillingSku) {
 
         for(Product product : currentBasket.keySet()){
+
             if(Objects.equals(sku, product.retrieveSku())){
 
                 currentBasket.put(product, currentBasket.get(product) + 1);
                 productCount++;
 
                 return "Product added to basket";
-
             }
         }
 

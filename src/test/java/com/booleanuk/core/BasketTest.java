@@ -3,8 +3,6 @@ package com.booleanuk.core;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-
 
 public class BasketTest {
 
@@ -22,10 +20,11 @@ public class BasketTest {
     public void TestShouldAddBagelWithFilling(){
         Basket basket = new Basket();
 
-        //this should not pass test because the filings is valid, adding a bagel with a filling inside.
-        Assertions.assertEquals("New product added to basket", basket.add("BGLO", "FILX"));
+        Assertions.assertEquals("New product added to basket", basket.add("BGLE", "FILX"));
 
     }
+
+
 
     @Test
     public void TestShouldIncreaseCurrentBasketValues(){
@@ -58,6 +57,21 @@ public class BasketTest {
 
         //Should fail due to the +1
         Assertions.assertNotEquals(currentCapacity + 1, basket.retrieveProductCount());
+    }
+
+    @Test
+    public void TestShouldIncrementProductIfBagelAndToppingIsSame(){
+        Basket basket = new Basket();
+
+        //Adding a bagel with bacon filling
+        basket.add("BGLE", "FILB");
+        Assertions.assertEquals("New product added to basket", basket.add("BGLE"));
+        Assertions.assertEquals("New product added to basket", basket.add("BGLO", "FILX"));
+
+        //If I now add the same bagel but different filling don't want the message indicating an increment of an existing product
+        //This should fail because "Product added to basket" indicates that the object exists in the basket already incrementing the count.
+        //Assertions.assertEquals("Product added to basket", basket.add("BGLE", "FILX"));
+
     }
 
     @Test

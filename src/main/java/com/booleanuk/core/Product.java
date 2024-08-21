@@ -22,8 +22,6 @@ public abstract class Product {
         return this.getSku();
     }
 
-
-
     private double getPrice() {
         return this.price;
     }
@@ -48,4 +46,3 @@ public abstract class Product {
         return this.getVariant();
     }
 }
-

@@ -46,20 +46,16 @@ public class Inventory {
             return null;
         }
     }
-                            //BGLO                             FILX
+
     public Product getItem(String referenceSku, String referenceFillingSku){
         String[] isBagel = bagels.get(referenceSku);
-        String[] isCoffee = coffees.get(referenceSku);
 
         String[] isFilling = fillings.get(referenceFillingSku);
 
 
-        if(isBagel != null){
+        if(isBagel != null && isFilling != null){
             return new Bagel(isBagel[0], Double.valueOf(isBagel[1]), isBagel[2], isBagel[3], new Filling(isFilling[0], Double.valueOf(isFilling[1]), isFilling[2], isFilling[3]));
-        }
 
-        else if (isCoffee != null){
-            return new Coffee(isCoffee[0], Double.valueOf(isCoffee[1]), isCoffee[2], isCoffee[3]);
         }
         else {
             return null;
