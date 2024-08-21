@@ -9,17 +9,17 @@ public class Receipt {
   private static final double twelveBagelsPrice = 3.99;
   private static final double sixBagelsPrice = 2.49;
   private static final double coffeeAndBagelPrice = 1.25;
-  private List<StandaloneProduct> products;
+  private Basket basket;
   private String asString;
   private double price;
 
-  public Receipt(List<StandaloneProduct> products) {
-    this.products = products;
+  public Receipt(Basket basket) {
+    this.basket = basket;
   }
 
   private int numBagels() {
     int n = 0;
-    for (Product product : this.products)
+    for (Product product : this.basket.products())
       if (product.sku().isBagel())
         ++n;
     return n;
@@ -27,14 +27,14 @@ public class Receipt {
 
   private int numCoffees() {
     int n = 0;
-    for (Product product : this.products)
+    for (Product product : this.basket.products())
       if (product.sku().isCoffee())
         ++n;
     return n;
   }
 
-  public static Receipt makeReceipt(List<StandaloneProduct> products) {
-    Receipt receipt = new Receipt(products);
+  public static Receipt makeReceipt(Basket basket) {
+    Receipt receipt = new Receipt(basket);
     receipt.asString = "~~~ Bob's Bagels ~~~\n\n" +
         LocalDateTime.now() +
         "\n\n-------------------------\n\n";
@@ -45,38 +45,81 @@ public class Receipt {
 
     if (numBagels >= 12) {
       int nDiscounts = 0;
+      double fullPrice = 0;
       while (numBagels >= 12) {
+        for (int i = 0; i < 12; ++i) {
+          StandaloneProduct bagel = receipt.basket.removeBagel();
+          fullPrice += bagel.sku().price();
+          List<Product> components = bagel.components();
+          // Calculate any fillings for that bagel
+          for (int j = 1, size = components.size(); j < size; ++j) {
+            Sku componentSku = components.get(j).sku();
+            double componentPrice = componentSku.price();
+            receipt.asString += String.format("1x %s %.2f\n", componentSku.toString(), componentPrice);
+          }
+        }
         numBagels -= 12;
         receipt.price += twelveBagelsPrice;
         ++nDiscounts;
       }
-      receipt.asString += String.format("%dx Twelve bagel deal %.2f\n", nDiscounts, twelveBagelsPrice * nDiscounts);
+
+      double discountedPrice = twelveBagelsPrice * nDiscounts;
+      receipt.asString += String.format("%dx Twelve bagel deal %.2f\n", nDiscounts, discountedPrice);
+      receipt.asString += String.format("                   (-%.2f)\n", fullPrice - discountedPrice);
     }
 
     if (numBagels >= 6) {
       int nDiscounts = 0;
+      double fullPrice = 0;
       while (numBagels >= 6) {
+        for (int i = 0; i < 6; ++i) {
+          StandaloneProduct bagel = receipt.basket.removeBagel();
+          fullPrice += bagel.sku().price();
+          List<Product> components = bagel.components();
+          // Calculate any fillings for that bagel
+          for (int j = 1, size = components.size(); j < size; ++j) {
+            Sku componentSku = components.get(j).sku();
+            double componentPrice = componentSku.price();
+            receipt.asString += String.format("1x %s %.2f\n", componentSku.toString(), componentPrice);
+          }
+        }
         numBagels -= 6;
         receipt.price += sixBagelsPrice;
         ++nDiscounts;
       }
-      receipt.asString += String.format("%dx Six bagel deal %.2f\n", nDiscounts, sixBagelsPrice * nDiscounts);
+
+      double discountedPrice = sixBagelsPrice * nDiscounts;
+      receipt.asString += String.format("%dx Six bagel deal %.2f\n", nDiscounts, discountedPrice);
+      receipt.asString += String.format("                (-%.2f)\n", fullPrice - discountedPrice);
     }
 
     if (numBagels >= 1 && numCoffees >= 1) {
       int nDiscounts = 0;
+      double fullPrice = 0;
       while (numBagels >= 1 && numCoffees >= 1) {
         --numCoffees;
         --numBagels;
         receipt.price += coffeeAndBagelPrice;
+        StandaloneProduct bagel = receipt.basket.removeBagel();
+        StandaloneProduct coffee = receipt.basket.removeCoffee();
+        fullPrice += bagel.sku().price();
+        fullPrice += coffee.sku().price();
+        List<Product> components = bagel.components();
+        for (int j = 1, size = components.size(); j < size; ++j) {
+          Sku componentSku = components.get(j).sku();
+          double componentPrice = componentSku.price();
+          receipt.asString += String.format("1x %s %.2f\n", componentSku.toString(), componentPrice);
+        }
         ++nDiscounts;
       }
+      double discountedPrice = coffeeAndBagelPrice * nDiscounts;
       receipt.asString += String.format("%dx Coffee & bagel deal %.2f\n", nDiscounts, coffeeAndBagelPrice * nDiscounts);
+      receipt.asString += String.format("                     (-%.2f)\n", fullPrice - discountedPrice);
     }
 
     Map<Sku, Integer> productCounts = new HashMap<>();
 
-    for (StandaloneProduct product : receipt.products) {
+    for (StandaloneProduct product : receipt.basket.products()) {
       Sku sku = product.sku();
       if (sku.isBagel()) {
         if (numBagels > 0) {

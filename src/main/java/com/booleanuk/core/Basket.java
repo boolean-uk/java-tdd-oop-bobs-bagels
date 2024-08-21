@@ -45,8 +45,28 @@ public class Basket {
       this.remove(sku);
   }
 
+  public StandaloneProduct removeBagel() {
+    for (StandaloneProduct product : this.products)
+      if (product.sku().isBagel()) {
+        this.remove(product.sku());
+        return product;
+      }
+
+    return null;
+  }
+
+  public StandaloneProduct removeCoffee() {
+    for (StandaloneProduct product : this.products)
+      if (product.sku().isCoffee()) {
+        this.remove(product.sku());
+        return product;
+      }
+
+    return null;
+  }
+
   public double price() {
-    return Receipt.makeReceipt(this.products).price();
+    return Receipt.makeReceipt(this).price();
   }
 
   public void setCapacity(int capacity) {

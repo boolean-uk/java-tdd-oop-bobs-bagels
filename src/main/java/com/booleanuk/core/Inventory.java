@@ -14,7 +14,7 @@ public class Inventory {
       for (Product component : product.components())
         this.stock.remove(this.find(component.sku()));
 
-    return Receipt.makeReceipt(basket.products());
+    return Receipt.makeReceipt(basket);
   }
 
   private Product find(Sku sku) throws NotInStockException {

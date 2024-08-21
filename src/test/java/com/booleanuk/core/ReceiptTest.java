@@ -23,10 +23,10 @@ class ReceiptTest {
 
     Receipt receipt = inventory.purchase(basket);
     String actual = receipt.toString();
-    Assertions.assertTrue(actual.contains("1x Black coffee " + String.format("%.2f", Sku.COFB.price())));
-    Assertions.assertTrue(actual.contains("1x Coffee & bagel deal " + 1.25));
+    Assertions.assertTrue(actual.contains("1x White coffee " + String.format("%.2f", Sku.COFW.price())));
+    Assertions.assertTrue(actual.contains("1x Coffee & bagel deal 1.25"));
     Assertions.assertTrue(
-        actual.contains("Total: " + String.format("%.2f", Sku.COFB.price() + 1.25)));
+        actual.contains("Total: " + String.format("%.2f", Sku.COFW.price() + 1.25)));
   }
 
   @Test
@@ -61,6 +61,7 @@ class ReceiptTest {
     Receipt receipt = inventory.purchase(basket);
     String actual = receipt.toString();
     Assertions.assertTrue(actual.contains("1x Twelve bagel deal 3.99"));
+    Assertions.assertTrue(actual.contains("(-1.89)"));
     Assertions.assertTrue(actual.contains("Total: 3.99"));
   }
 
@@ -76,6 +77,7 @@ class ReceiptTest {
     Receipt receipt = inventory.purchase(basket);
     String actual = receipt.toString();
     Assertions.assertTrue(actual.contains("1x Six bagel deal 2.49"));
+    Assertions.assertTrue(actual.contains("(-0.45)"));
     Assertions.assertTrue(actual.contains("Total: 2.49"));
   }
 
