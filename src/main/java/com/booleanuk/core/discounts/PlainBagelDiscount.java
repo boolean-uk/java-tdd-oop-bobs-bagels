@@ -25,6 +25,6 @@ public class PlainBagelDiscount extends Discount {
 
     @Override
     public String toString() {
-        return "12 for " + this.getPriceAfterDiscount();
+        return "12 Plain Bagel for " + this.getPriceAfterDiscount();
     }
 }

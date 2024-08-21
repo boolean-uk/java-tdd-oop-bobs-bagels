@@ -25,6 +25,6 @@ public class OnionBagelDiscount extends Discount {
 
     @Override
     public String toString() {
-        return "6 for " + this.getPriceAfterDiscount();
+        return "6 Onion Bagel for " + this.getPriceAfterDiscount();
     }
 }
