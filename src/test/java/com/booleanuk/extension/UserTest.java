@@ -22,7 +22,7 @@ public class UserTest {
             order.addItem(bagel);
         }
         Discount discount=new Discount();
-        order.setTotal(order.getTotal()- discount.discPriceAlt(order));
+        order.setTotal(order.getTotal()- discount.discPriceAlt(order)[3]);
         Assertions.assertEquals(3.99+0.39+13*0.12, order.getTotal(), 0.001);
 
 
@@ -38,7 +38,7 @@ public class UserTest {
             order.addItem(new Bagel("Onion"));
         }
         Discount discount=new Discount();
-        order.setTotal(order.getTotal()- discount.discPriceAlt(order));
+        order.setTotal(order.getTotal()- discount.discPriceAlt(order)[3]);
         Assertions.assertEquals(2.49, order.getTotal(), 0.001);
 
 
@@ -52,7 +52,7 @@ public class UserTest {
             order.addItem(new Bagel("Onion"));
         }
         Discount discount=new Discount();
-        order.setTotal(order.getTotal()- discount.discPriceAlt(order));
+        order.setTotal(order.getTotal()- discount.discPriceAlt(order)[3]);
         Assertions.assertEquals(2.49+0.49, order.getTotal(), 0.001);
 
 
@@ -69,7 +69,7 @@ public class UserTest {
         }
         order.addItem(new Coffee("Black"));
         Discount discount=new Discount();
-        order.setTotal(order.getTotal()- discount.discPriceAlt(order));
+        order.setTotal(order.getTotal()- discount.discPriceAlt(order)[3]);
         Assertions.assertEquals(2.49+7*0.12+1.25, order.getTotal(), 0.001);
 
 
@@ -89,7 +89,7 @@ public class UserTest {
         order.addItem(coffee1);
         //order.addItem(coffee2);
         Discount discount=new Discount();
-        order.setTotal(order.getTotal()- discount.discPriceAlt(order));
+        order.setTotal(order.getTotal()- discount.discPriceAlt(order)[3]);
         Assertions.assertEquals(1.25+0.39+0.12*2, order.getTotal(), 0.001);
 
 
@@ -108,7 +108,7 @@ public class UserTest {
         }
         order.addItem(new Coffee("Black"));
         Discount discount=new Discount();
-        order.setTotal(order.getTotal()- discount.discPriceAlt(order));
+        order.setTotal(order.getTotal()- discount.discPriceAlt(order)[3]);
 
         Assertions.assertEquals(3.99+2.49+0.39+1.25, order.getTotal(), 0.001);
 
@@ -132,7 +132,7 @@ public class UserTest {
 
         Receipt receipt=new Receipt();
 
-        receipt.printReceipt(basket);
+        receipt.printReceipt(order);
 
 
 

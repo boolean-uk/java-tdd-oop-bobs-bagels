@@ -103,6 +103,6 @@ public class Basket {
     }
 
     public void adjustTotal(double change){
-        total+=change;
+        total=change;
     }
 }

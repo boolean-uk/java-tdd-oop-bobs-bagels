@@ -12,8 +12,17 @@ public class Receipt {
 
     }
 
-    public void printReceipt(Basket basket){
+    public void printReceipt(Order order, boolean receipt){
 
+        Basket basket=new Basket(26);
+        double[] discountPrices=new double[4];
+        basket.add(order);
+        if(receipt){
+            Discount discount= new Discount();
+            discountPrices=discount.discPriceAlt(order);
+            order.setTotal(order.getTotal()- discountPrices[3]);
+            basket.adjustTotal(order.getTotal());
+        }
 
         System.out.println("~~~ Bob's Bagels ~~~");
         System.out.println("");
@@ -28,6 +37,20 @@ public class Receipt {
         for (String item: number.keySet()){
             System.out.println(item+"  "+number.get(item)+ " £"+prices.get(item)*number.get(item));
         }
+
+        if(receipt){
+            if (discountPrices[0]>0) {
+                System.out.println("Discount due to buying flavored Bagels in bulk: "+-discountPrices[0]);
+
+            }
+            if(discountPrices[1]>0){
+                System.out.println("Discount due to buying Plain Bagels in bulk: "+-discountPrices[1]);
+            }
+            if(discountPrices[2]>0){
+                System.out.println("Discount due to buying Bagel/Coffee in bulk: "+-discountPrices[2]);
+            }
+        }
+
         System.out.println("");
         System.out.println("----------------------------");
         System.out.println("Total"+ " £"+ basket.getTotal());

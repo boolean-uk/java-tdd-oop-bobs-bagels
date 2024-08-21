@@ -111,7 +111,7 @@ public class Discount {
     return disc;
     }
 
-    public double discPriceAlt(Order order){
+    public double[] discPriceAlt(Order order){
 
         int plain=0;
         int bag=0;
@@ -122,6 +122,13 @@ public class Discount {
 
         double bagPrice=0;
         double plainPrice=0;
+
+        double discounts[]=new double[4];
+        discounts[0]=0;
+        discounts[1]=0;
+        discounts[2]=0;
+        discounts[3]=0;
+
 
         for(Item i:order.getItems()){
             if(i.getType()=="Bagel"){
@@ -134,7 +141,7 @@ public class Discount {
                     bag++;
                 }
 
-            }else if(i.getType()=="Coffee" & i.getName()=="Black"){
+            }else if(i.getType()=="Coffee" & i.getName()=="Black Coffee"){
                 coff++;
             }
         }
@@ -146,8 +153,10 @@ public class Discount {
             discPrice=bag/12*3.99;
             disc+=bagPrice-discPrice;
             bag=bag%12;
+            discounts[0]+=bagPrice-discPrice;
 
         }
+
 
 
         if (bag>=6){
@@ -155,14 +164,16 @@ public class Discount {
             discPrice=2.49;
             disc+=6*0.49-2.49;
             bag=bag%6;
+            discounts[0]+=6*0.49-2.49;
 
         }
 
         if (plain>=12){
             plainPrice=plain/12*12*0.39;
-            diff12=plain/12*3.99;
-            disc+=plainPrice-diff12;
+            discPrice=plain/12*3.99;
+            disc+=plainPrice-discPrice;
             plain=plain%12;
+            discounts[1]+=plainPrice-discPrice;
         }
 
 
@@ -176,19 +187,22 @@ public class Discount {
             disc+=0.23;
             bag--;
             coff--;
+            discounts[2]+=0.23;
+
         }
+
 
         while (plain > 0 & coff>0) {
             disc+=0.13;
+            discounts[2]+=0.13;
             plain--;
             coff--;
         }
 
 
+        discounts[3]=disc;
 
-
-
-        return disc;
+        return discounts;
     }
 
 
