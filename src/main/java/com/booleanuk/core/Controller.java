@@ -40,16 +40,26 @@ public class Controller {
             switch (chosenOption) {
                 case 1:
                     if (basket.size() < basketSize) {
-                        basket.addBagel(view.addBagel());
+                        Bagel b = view.addBagel();
+                        if (b != null) {
+                            basket.addBagel(b);
+                        }
                     } else {
                         view.basketFull();
                     }
                     break;
                 case 2:
-                    basket.removeBagel(view.chooseBagel(basket.getBagels()));
+                    if(basket.size() > 0) {
+                        basket.removeBagel(view.chooseBagel(basket.getBagels()));
+                    } else {
+                        view.emptyBasket();
+                    }
                     break;
                 case 3:
                     basket.setBasketSize(view.getNewBasketSize());
+                    break;
+                case 4:
+                    view.printPrice(basket.calculateCost());
                     break;
                 default:
                     keepRunning = false;

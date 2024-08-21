@@ -15,6 +15,7 @@ public class View {
         System.out.println("1. Add Bagel");
         System.out.println("2. Remove Bagel");
         System.out.println("3. Change basket size");
+        System.out.println("4. See total cost");
 
         return getInt();
     }
@@ -39,8 +40,16 @@ public class View {
         Triple<String, String, Float> bagelType = displayPrices("Bagel");
         System.out.println("Choose a filling");
         Triple<String, String, Float> fillingType = displayPrices("Filling");
-
-        return new Bagel(bagelType, fillingType);
+        Bagel b = new Bagel(bagelType, fillingType);
+        System.out.printf("It will cost $%.2f, is this ok?%n", b.calculateCost());
+        System.out.println("1. Yes");
+        System.out.println("2. No");
+        int ans = getInt();
+        if (ans == 1) {
+            return b;
+        } else {
+            return null;
+        }
     }
 
     private Triple<String, String, Float> displayPrices(String filter) {
@@ -90,5 +99,13 @@ public class View {
         System.out.println("What should the new basket size be?");
         System.out.println("WARNING: Changing basket size to a number smaller than the current number of bagels will empty the current basket!");
         return getInt();
+    }
+
+    public void printPrice(float price) {
+        System.out.printf("The total cost is $%.2f.%n", price);
+    }
+
+    public void emptyBasket() {
+        System.out.println("Your basket is empty.");
     }
 }
