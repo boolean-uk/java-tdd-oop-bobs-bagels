@@ -62,17 +62,7 @@ public class Basket {
     }
 
     public boolean checkCapacity(){
-        //int num=0;
-        /*
-        for (String key: bagels.keySet()){
-            num+=bagels.get(key);
 
-            if (num>=capacity){
-                return false;
-            }
-        }
-
-         */
 
         if (numItems>=capacity){
             return false;

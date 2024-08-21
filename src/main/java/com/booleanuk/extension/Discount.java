@@ -131,7 +131,7 @@ public class Discount {
 
 
         for(Item i:order.getItems()){
-            if(i.getType()=="Bagel"){
+            if(i.getSKU().contains("BGL")){
 
                 if(i.getName().contains("Plain")){
                     plain++;
@@ -141,7 +141,7 @@ public class Discount {
                     bag++;
                 }
 
-            }else if(i.getType()=="Coffee" & i.getName()=="Black Coffee"){
+            }else if(i.getSKU().contains("COF") & i.getName()=="Black Coffee"){
                 coff++;
             }
         }
