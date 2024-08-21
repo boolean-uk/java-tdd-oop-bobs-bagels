@@ -1,5 +1,7 @@
 package com.booleanuk.core;
 
+import com.booleanuk.core.discounts.Discount;
+import com.booleanuk.core.discounts.DiscountManager;
 import com.booleanuk.core.products.Product;
 import com.booleanuk.core.products.bagels.Bagel;
 
@@ -9,12 +11,16 @@ public class Basket {
 
     private final int DEFAULT_CAPACITY = 5;
 
-    private ArrayList<Product> basket; // String=SKU, Integer=quantity in the basket
+    private ArrayList<Product> basket; // String=SKU
+    private ArrayList<Discount> discounts; // Current discounts in this basket
     private int capacity;
+    private DiscountManager discountManager;
 
     public Basket() {
         this.capacity = DEFAULT_CAPACITY;
         this.basket = new ArrayList<>();
+        this.discounts = new ArrayList<>();
+        this.discountManager = new DiscountManager();
     }
 
     public boolean addProduct(Product p) {
@@ -27,13 +33,23 @@ public class Basket {
             return false;
         }
 
-        // If product is a bagel and it has filling, adding its filling to basket also
+        // If product is a bagel, and it has filling, adding its filling to basket also
         if (p instanceof Bagel && ((Bagel) p).getFilling() != null) {
             this.basket.add(((Bagel) p).getFilling());
         }
 
         this.basket.add(p);
+        this.checkDiscounts(p);
+
         return true;
+    }
+
+    private void checkDiscounts(Product p) {
+        this.discounts.addAll(this.discountManager.checkDiscount(p));
+        for (Discount c : this.discounts) {
+            // this.discounts keeps track of the discounted products in basket, so remove them from here
+            this.basket.removeAll(c.getProductsInDiscount());
+        }
     }
 
     public ArrayList<Product> getBasket() {
@@ -56,6 +72,11 @@ public class Basket {
         for (Product p : this.basket) {
             totalPrice += p.getPrice();
         }
+
+        for (Discount c : this.discounts) {
+            totalPrice += c.getPriceAfterDiscount();
+        }
+
         return totalPrice;
     }
 
