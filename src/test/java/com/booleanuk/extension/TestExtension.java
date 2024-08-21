@@ -160,5 +160,17 @@ public class TestExtension {
         Assertions.assertEquals(1063, order1.getPrice());
     }
 
+    @Test
+    public void testPrintReceipt() throws Exception {
+        mainTest();
+        Order order1 = new Order(store);
+        Receipt receipt1 = new Receipt(order1);
+        order1.addProduct("BGLO");
+        order1.addProduct("BGLP");
+        order1.addProduct("BGLO");
+        order1.addProduct("FILB");
+        order1.addProduct("COFW");
+        receipt1.printReceipt();
+    }
 
 }

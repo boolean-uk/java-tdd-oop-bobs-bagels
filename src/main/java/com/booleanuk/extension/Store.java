@@ -34,6 +34,15 @@ public class Store {
         return 0;
     }
 
+    public Product getProduct(String searchedProduct){
+        for(Product product : inventory){
+            if(product.getSku().equals(searchedProduct)){
+                return product;
+            }
+        }
+        return null;
+    }
+
     public int getBasketCapacity(){
         return this.basketCapacity;
     }

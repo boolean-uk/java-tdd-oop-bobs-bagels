@@ -18,6 +18,14 @@ public class Order {
         this.store = store;
     }
 
+    public HashMap<String, Integer> getBasket(){
+        return basket;
+    }
+
+    public Store getStore(){
+        return store;
+    }
+
     public int size(){
         int result = 0;
         for(Integer i : basket.values()){

@@ -26,3 +26,4 @@
 |           |                                   | `void setId(UUID)`           |                                                                                              |                                                               |
 |           |                                   | `int getPrice(Store)`        | I'd like to know the total cost of items in my basket.                                       | Return total price of all products in basket with discounts   |
 |           |                                   | `void addPricesToLists()`    | I would like for the getPrice() code to be more readable.                                    | Adds the price of all ordered products into categorized lists |
+| `Receipt` | `Order order`                     | `String prinReceipt()`       | I want to print a receipt of my order.                                                       | Prints a receipt in the terminal                              |
