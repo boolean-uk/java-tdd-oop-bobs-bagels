@@ -20,6 +20,26 @@ So I can know how much money to spend,
 I'd like to know the price of my basket, including potential discounts.
 ```
 
+```
+13.
+As a member of the public,
+So I can bookkeep my purchases,
+I'd like to be able to get receipts for my purchases from Bob's Bagels.
+```
+
+Receipt class:
+
+| Member variables                           | Methods                                            | Scenario                                          | Outputs                         |
+|--------------------------------------------|----------------------------------------------------|---------------------------------------------------|---------------------------------|
+| `ArrayList<Discount>`, `ArrayList<Prodct>` | `Receipt(ArrayList<Discount>, ArrayList<Product>)` | `When checout is successful a receipt is created` | `a new receipt`                 |
+| `-`                                        | `getReceipt()`                                     | `wants to print out receipt in console`           | `this receipt object as string` |
+
+Checkout class:
+
+| Member variables | Methods                              | Scenario                                                        | Outputs                                        |
+|------------------|--------------------------------------|-----------------------------------------------------------------|------------------------------------------------|
+| `currentBasket`  | `checkIfApplies(ArrayList<Product>)` | `After a product has been added to basket, check for discounts` | `A new receipt object for this purchase/order` |
+
 Discount class:
 
 | Member variables | Methods                              | Scenario                                                        | Outputs                            |
