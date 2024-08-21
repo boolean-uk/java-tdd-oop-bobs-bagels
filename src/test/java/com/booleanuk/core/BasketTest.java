@@ -3,6 +3,8 @@ package com.booleanuk.core;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import static java.lang.Math.round;
+
 public class BasketTest {
 
     @Test
@@ -63,35 +65,56 @@ public class BasketTest {
     void addDiscountTest(){
         Basket basket = new Basket();
         basket.changeBasketSize(20);
-        basket.addItem("BGLO");
-        basket.addItem("BGLP");
-        basket.addItem("BGLE");
-        basket.addItem("BGLE");
-        basket.addItem("BGLO");
-        basket.addItem("BGLP");
-        basket.addItem("BGLP");
-        basket.addItem("BGLE");
-        basket.addItem("BGLE");
-        basket.addItem("BGLO");
-        basket.addItem("BGLP");
-        basket.addItem("BGLE");
-        basket.addItem("COFB");
-        basket.addItem("BGLE");
-        basket.addItem("BGLO");
-        basket.addItem("BGLP");
-        basket.addItem("BGLE");
-        basket.addItem("COFB");
-        basket.addItem("BGLE");
-        basket.addItem("BGLP");
-        basket.addItem("BGLE");
 
-        basket.addFilling("BGLE", "FILC");
-        basket.addFilling("BGLE", "FILC");
-
+        basket.addItem("BGLP");
+        basket.addItem("BGLP");
+        basket.addItem("BGLP");
+        basket.addItem("BGLP");
+        basket.addItem("BGLP");
+        basket.addItem("BGLP");
+        basket.addItem("BGLP");
+        basket.addItem("BGLP");
+        basket.addItem("BGLP");
+        basket.addItem("BGLP");
+        basket.addItem("BGLP");
+        basket.addItem("BGLP");
+        basket.addItem("BGLP");
+        basket.addItem("BGLP");
+        basket.addItem("BGLP");
+        basket.addItem("BGLP");
 
         double newTotal = basket.addDiscount();
 
+        Assertions.assertEquals(5.55, newTotal, 0.005d);
+    }
 
+
+    @Test
+    void addDiscountWithFilling(){
+        Basket basket = new Basket();
+        basket.changeBasketSize(20);
+        basket.addItem("BGLP");
+        basket.addItem("BGLP");
+        basket.addItem("BGLP");
+        basket.addItem("BGLP");
+        basket.addItem("BGLP");
+        basket.addItem("BGLP");
+        basket.addItem("BGLP");
+        basket.addItem("BGLP");
+        basket.addItem("BGLP");
+        basket.addItem("BGLP");
+        basket.addItem("BGLP");
+        basket.addItem("BGLP");
+        basket.addItem("BGLP");
+        basket.addItem("BGLP");
+        basket.addItem("BGLP");
+        basket.addItem("BGLP");
+        basket.addFilling("BGLP", "FILC");
+        basket.addFilling("BGLP", "FILB");
+
+        double newTotal = basket.addDiscount();
+
+        Assertions.assertEquals(5.79, newTotal, 0.005d);
     }
 
 
