@@ -48,7 +48,7 @@ public class Basket {
     }
 
     public String addItemToBasket(Item item){
-        if(item.getName() == null) {
+        if(item == null) {
             return "This item does not exist.";
         }
         if(countTotalItems() < this.maxCapacity) {
@@ -85,6 +85,9 @@ public class Basket {
     }
 
     public String addItemToBasket(Bagel bagel) {
+        if(bagel == null){
+            return "This item does not exist.";
+        }
         if(bagel.getFilling() != null && bagel.getName() != null) {
             Filling filling = bagel.getFilling();
             if(countTotalItems() < this.maxCapacity) {

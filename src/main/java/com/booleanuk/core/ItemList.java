@@ -82,4 +82,8 @@ public class ItemList {
     public double getPriceFromList(String sku) {
         return this.priceList.get(sku);
     }
+
+    public String getTypeFromList(String sku) {
+        return this.typeList.get(sku);
+    }
 }

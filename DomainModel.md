@@ -1,7 +1,7 @@
 ## Assumption
 When adding a filling, it has to add to a bagel which then adds it to the basket. A bagel can only have 1 filling.
 When removing a filling, it also removes it from the bagel.
-Basket holds Coffee, Filling and Bagel but to know what your filling your bagel has, its bagel.getFilling().
+Basket holds Coffee, Filling and Bagel but to know what filling your bagel has, it's bagel.getFilling().
 
 ## Class Basket
 | Variables                                    | Method                           | Scenario                                                       | Outcome                              |
@@ -46,7 +46,7 @@ Basket holds Coffee, Filling and Bagel but to know what your filling your bagel 
 
 | Variables | Method                                                      | Scenario                                      | Outcome                    |
 |-----------|-------------------------------------------------------------|-----------------------------------------------|----------------------------|
-|           | coffeeFactory(String sku                                    | Return a new instance of coffee               | new Coffee(sku)            |
+|           | coffeeFactory(String sku)                                   | Return a new instance of coffee               | new Coffee(sku)            |
 |           | fillingFactory(String sku)                                  | Return a new instance of filling              | new Filling(sku)           |
 |           | bagelFactory(String sku)                                    | Return a new instance of bagel                | new Bagel(sku)             |
 |           | bagelWithFillingFactory(String bagelSKU, String fillingSKU) | Return a new instance of bagel with a filling | new Bagel(sku, fillingSKU) |
@@ -84,4 +84,4 @@ Basket holds Coffee, Filling and Bagel but to know what your filling your bagel 
 
 ## Class diagram
 
-![Class diagram of BoBs bagel](classDiagram.drawio.png)
+![Class diagram of BoBs bagel](BobsBagelDiagram.drawio.png)

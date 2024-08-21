@@ -65,7 +65,7 @@ public class BasketTest {
     }
 
     @Test
-    public void addMultipleBagels() {
+    public void addMultipleBagelsTest() {
         Basket basket = new Basket();
         Bagel bagel = ItemFactory.bagelFactory("BGLO");
         Bagel bagel2 = ItemFactory.bagelFactory("BGLO");
@@ -275,5 +275,16 @@ public class BasketTest {
         basket.addItemToBasket(bagelWithFilling2);
 
         Assertions.assertEquals(4, basket.countTotalItems());
+    }
+    
+    @Test
+    public void tryToAddCoffeeAsFillingForBagelTest() {
+        Basket basket = new Basket();
+
+        Bagel bagelWithFilling = ItemFactory.bagelWithFillingFactory("BGLE", "COFB");
+
+        basket.addItemToBasket(bagelWithFilling);
+
+        Assertions.assertEquals(0, basket.countTotalItems());
     }
 }
