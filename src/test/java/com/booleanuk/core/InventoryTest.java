@@ -52,5 +52,6 @@ public class InventoryTest {
         Inventory inventory = new Inventory();
         Assertions.assertThrows(IllegalArgumentException.class, () -> inventory.getProduct(null));
         Assertions.assertThrows(IllegalArgumentException.class, () -> inventory.getProduct(""));
+        Assertions.assertThrows(IllegalArgumentException.class, () -> inventory.getProduct("INVALID"));
     }
 }
