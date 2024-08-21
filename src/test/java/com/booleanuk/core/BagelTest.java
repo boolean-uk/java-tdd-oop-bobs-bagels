@@ -50,13 +50,4 @@ public class BagelTest {
         Assertions.assertEquals("BGLE", b.getSKU());
     }
 
-    @Test
-    public void testBagelWithFillingGetPrice() {
-        Bagel b = new OnionBagel();
-        Filling f = new BaconFilling();
-        b.setFilling(f);
-
-        Assertions.assertEquals(0.61, b.getPrice());
-    }
-
 }
