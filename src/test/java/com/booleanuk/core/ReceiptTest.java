@@ -94,4 +94,27 @@ class ReceiptTest {
     Assertions.assertTrue(actual.contains("1x Coffee & bagel deal 1.25"));
     Assertions.assertTrue(actual.contains("Total: 1.25"));
   }
+
+  @Test
+  public void testReceiptWithFillings() {
+    List<Product> inventoryStock = new ArrayList<>();
+    inventoryStock.add(new Bagel(BagelType.ONION, Optional.empty()));
+    inventoryStock.add(new Filling(FillingType.EGG));
+    Inventory inventory = new Inventory(inventoryStock);
+
+    Basket basket = new Basket();
+    List<Filling> fillings = new ArrayList<Filling>() {
+      {
+        add(new Filling(FillingType.EGG));
+      }
+    };
+    basket.add(new Bagel(BagelType.ONION, Optional.of(fillings)));
+    Receipt receipt = inventory.purchase(basket);
+    String actual = receipt.toString();
+
+    Assertions.assertEquals("", actual);
+    Assertions.assertTrue(actual.contains("1x Onion bagel " + Sku.BGLO.price()));
+    Assertions.assertTrue(actual.contains("1x Egg filling " + Sku.FILE.price()));
+    Assertions.assertTrue(actual.contains("Total: " + Sku.BGLO.price() + Sku.FILE.price()));
+  }
 }
