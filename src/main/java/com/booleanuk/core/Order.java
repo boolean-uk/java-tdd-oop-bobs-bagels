@@ -1,7 +1,6 @@
 package com.booleanuk.core;
 
 import com.booleanuk.core.enums.BagelType;
-import com.booleanuk.core.enums.CoffeeType;
 import com.booleanuk.core.exceptions.FullBasketException;
 import com.booleanuk.core.inherited.Bagel;
 import com.booleanuk.core.inherited.Coffee;
@@ -67,13 +66,9 @@ public class Order {
     public double getTotalCost() {
         int[] items = getNumberOfItems(this.getBasket());
         int numBagels = items[0];
-        int numCoffee = items[1];
-
-        System.out.println("Number of bagels: " + numBagels);
 
         Double discount = getCorrectDiscount(numBagels);
         if (discount != null) {
-            System.out.println("adding discount " + discount);
             this.totalCost += discount;
         }
 
