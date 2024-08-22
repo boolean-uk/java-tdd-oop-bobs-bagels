@@ -78,7 +78,7 @@ public class View {
         System.out.println("Basket is full. You cannot add more bagels.");
     }
 
-    public Bagel chooseBagel(ArrayList<Bagel> bagels) {
+    public Product chooseBagel(ArrayList<Product> bagels) {
         if (bagels.isEmpty()) {
             System.out.println("No options available");
             return null;

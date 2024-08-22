@@ -4,46 +4,46 @@ import java.util.ArrayList;
 import java.util.NoSuchElementException;
 
 public class Basket {
-    private ArrayList<Bagel> bagels;
+    private final ArrayList<Product> products;
     private int basketSize;
 
     public Basket(int basketSize) {
-        bagels = new ArrayList<>();
+        products = new ArrayList<>();
         this.basketSize = basketSize;
     }
 
     public int size() {
-        return bagels.size();
+        return products.size();
     }
 
-    public void addBagel(Bagel bagel) {
-        if (bagels.size() < basketSize) {
-            bagels.add(bagel);
+    public void addProduct(Product product) {
+        if (products.size() < basketSize) {
+            products.add(product);
         }
     }
 
-    public void removeBagel(Bagel bagel) {
-        if (!bagels.contains(bagel)) {
-            throw new NoSuchElementException("No such bagel exists");
+    public void removeProduct(Product product) {
+        if (!products.contains(product)) {
+            throw new NoSuchElementException("No such product exists");
         }
-        bagels.remove(bagel);
+        products.remove(product);
     }
 
-    public ArrayList<Bagel> getBagels() {
-        return new ArrayList<>(bagels);
+    public ArrayList<Product> getProducts() {
+        return new ArrayList<>(products);
     }
 
     public void setBasketSize(int basketSize) {
-        if (basketSize < bagels.size()) {
-            bagels.clear();
+        if (basketSize < products.size()) {
+            products.clear();
         }
         this.basketSize = basketSize;
     }
 
     public float calculateCost() {
         float sum = 0.0f;
-        for (Bagel b: bagels) {
-            sum += b.calculateCost();
+        for (Product p: products) {
+            sum += p.calculateCost();
         }
         return sum;
     }

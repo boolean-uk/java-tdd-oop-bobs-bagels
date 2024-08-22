@@ -1,6 +1,6 @@
 package com.booleanuk.core;
 
-public class Bagel {
+public class Bagel implements Product {
     private final Triple<String, String, Float> bagelType;
     private final Triple<String, String, Float> fillingType;
 

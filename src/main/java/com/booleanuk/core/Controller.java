@@ -42,7 +42,7 @@ public class Controller {
                     if (basket.size() < basketSize) {
                         Bagel b = view.addBagel();
                         if (b != null) {
-                            basket.addBagel(b);
+                            basket.addProduct(b);
                         }
                     } else {
                         view.basketFull();
@@ -50,7 +50,7 @@ public class Controller {
                     break;
                 case 2:
                     if(basket.size() > 0) {
-                        basket.removeBagel(view.chooseBagel(basket.getBagels()));
+                        basket.removeProduct(view.chooseBagel(basket.getProducts()));
                     } else {
                         view.emptyBasket();
                     }
