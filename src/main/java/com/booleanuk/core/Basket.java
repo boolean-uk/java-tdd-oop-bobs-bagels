@@ -214,16 +214,14 @@ public class Basket {
         System.out.println("Original price: $" + String.format("%.02f", originalPrice));
         System.out.println("Price after discounts: $" + String.format("%.02f", totalPrice) + "(-" + String.format("%.02f",savings) + ")") ; // assuming totalPrice is computed elsewhere
     }*/
+
+
     public void printReceipt() {
         // Maps to store the count and price for each bagel variant
         Map<String, Integer> bagelVariantCount = new HashMap<>();
         Map<String, Double> bagelVariantPrice = new HashMap<>();
-
-        // Maps to store the count and price for each coffee variant
         Map<String, Integer> coffeeVariantCount = new HashMap<>();
         Map<String, Double> coffeeVariantPrice = new HashMap<>();
-
-        // Maps to store the count and price for each filling variant
         Map<String, Integer> fillingVariantCount = new HashMap<>();
         Map<String, Double> fillingVariantPrice = new HashMap<>();
 
@@ -233,7 +231,8 @@ public class Basket {
         // Loop through basket items and count the products
         for (Product p : basketContent) {
             if (p.getName().equals("Bagel")) {
-                String bagelVariant = p.getVariant();  // Get the variant of the bagel
+                //String bagelVariant = p.getVariant();  // Get the variant of the bagel
+
 
                 // Update the count and price for the specific bagel variant
                 bagelVariantCount.put(bagelVariant, bagelVariantCount.getOrDefault(bagelVariant, 0) + 1);
@@ -303,6 +302,34 @@ public class Basket {
         System.out.println("Original price: $" + String.format("%.02f", originalPrice));
         System.out.println("Price after discounts: $" + String.format("%.02f", totalPrice)); // assuming totalPrice is computed elsewhere
     }
+
+    private void addToMaps(Product p, Map<String, Integer> countMap, Map<String, Double> priceMap){
+        String variant = p.getVariant();
+        countMap.put(variant, countMap.getOrDefault(variant, 0) +1);
+        priceMap.put(variant, priceMap.getOrDefault(variant, 0.0) + p.getPrice());
+
+    }
+
+    private void printReceiptLines(String productType, Map<String, Integer> countMap, Map<String, Double> priceMap){
+        for (String variant: countMap.keySet()){
+            int count = countMap.get(variant); //Amount of products in the order
+            double price = priceMap.get(variant);
+            if(count > 0){
+                System.out.println(count + "X " + variant + " " + productType + " = $" + String.format("%.02f", price));
+            }
+        }
+    }
+
+    private double calculateTotal(Map<String, Double> priceMap){
+        double total = 0;
+        for (double price : priceMap.values()){
+            total += price;
+        }
+        return total;
+    }
+
+
+
 
     //Sanity check
     public static void main(String[] args) {
