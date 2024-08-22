@@ -45,16 +45,6 @@ public class Order {
             markAsDiscounted(12);
         }
 
-        ArrayList<Product> unmarked = this.basket.getProducts().stream()
-                .filter(item -> !item.getHasDiscount())
-                .collect(Collectors.toCollection(ArrayList::new));
-
-        int start = this.basket.getProducts().size() - unmarked.size();
-        int end = start % unmarked.size() + 1;
-        if ((bagelCounter > 12) && (unmarked.size() > 6)) {
-            markAsDiscounted(start, end);
-        }
-
         return bagelCounter;
     }
 
