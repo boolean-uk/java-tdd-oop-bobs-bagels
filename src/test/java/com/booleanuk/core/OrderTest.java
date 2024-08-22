@@ -58,10 +58,42 @@ public class OrderTest {
     public void testGetTotalReturnsDiscountOnCoffeeAndBagel() throws FullBasketException {
         Basket basket = this.order.getBasket();
 
+
         basket.addProduct(CoffeeType.BLACK);
         basket.addProduct(BagelType.SESAME);
 
         double total = this.order.getTotalCost();
         Assertions.assertEquals(total, 1.25);
+    }
+
+    @Test
+    public void testGetTotalWorksProperly() throws FullBasketException {
+        Basket basket = this.order.getBasket();
+        basket.changeCapacity(20);
+
+        basket.addProduct(BagelType.PLAIN);
+        basket.addProduct(BagelType.PLAIN);
+        Assertions.assertEquals(0.78, order.getTotalCost());
+
+        basket.addProduct(CoffeeType.BLACK);
+        String total = String.format("%.02f", order.getTotalCost());
+        Assertions.assertEquals("1.64", total);
+    }
+
+    @Test
+    public void testForFun() throws FullBasketException {
+        Basket basket = this.order.getBasket();
+        basket.changeCapacity(20);
+
+        basket.addProduct(BagelType.PLAIN);
+        basket.addProduct(BagelType.PLAIN);
+        basket.addProduct(BagelType.PLAIN);
+        basket.addProduct(BagelType.PLAIN);
+        basket.addProduct(BagelType.PLAIN);
+        basket.addProduct(BagelType.PLAIN);
+        basket.addProduct(CoffeeType.BLACK);
+
+        String total = String.format("%.02f", this.order.getTotalCost());
+        Assertions.assertEquals("3.48", total);
     }
 }

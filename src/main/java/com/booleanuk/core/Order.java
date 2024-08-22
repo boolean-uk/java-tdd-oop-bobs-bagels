@@ -1,6 +1,7 @@
 package com.booleanuk.core;
 
 import com.booleanuk.core.enums.BagelType;
+import com.booleanuk.core.enums.CoffeeType;
 import com.booleanuk.core.exceptions.FullBasketException;
 import com.booleanuk.core.inherited.Bagel;
 import com.booleanuk.core.inherited.Coffee;
@@ -94,7 +95,7 @@ public class Order {
             }
         }
 
-        return totalCost;
+        return deliverAndResetTotalCost(this.totalCost);
     }
 
 
@@ -125,6 +126,12 @@ public class Order {
         }
     }
 
+    public Double deliverAndResetTotalCost(Double total) {
+        double cost = total;
+        this.totalCost = 0.0;
+        return cost;
+    }
+
     public static void main(String[] args) throws FullBasketException {
 
         Order order = new Order();
@@ -137,6 +144,7 @@ public class Order {
         basket1.addProduct(BagelType.PLAIN);
         basket1.addProduct(BagelType.PLAIN);
         basket1.addProduct(BagelType.PLAIN);
+        basket1.addProduct(CoffeeType.BLACK);
 
 
         Double price = order.getTotalCost();
