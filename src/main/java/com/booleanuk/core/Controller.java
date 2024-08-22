@@ -27,7 +27,7 @@ public class Controller {
     }
 
     public static void main(String[] args) {
-        int bSize = 12;
+        int bSize = 24;
         Controller controller = new Controller(new View(), new Basket(bSize), bSize);
 
         controller.start();
