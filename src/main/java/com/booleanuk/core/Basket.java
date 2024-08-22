@@ -1,7 +1,6 @@
 package com.booleanuk.core;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.NoSuchElementException;
 
 public class Basket {
@@ -50,15 +49,13 @@ public class Basket {
             return calculateDiscount(bagels, 6, 2.49f) + findDiscount();
         } else if (bagels.size() < unDiscountedProducts.size()) {
             // Sort so Bagels are first, after that, sort by cost.
-            unDiscountedProducts.sort((o1, o2) -> {
-                return switch (o1) {
-                    case Bagel bagel when o2 instanceof Bagel ->
-                            (int) (1000 * (((Bagel) o2).calculateBreadCost() - bagel.calculateBreadCost()));
-                    case Coffee coffee when o2 instanceof Coffee ->
-                            (int) (1000 * (o2.calculateCost() - o1.calculateCost()));
-                    case Bagel bagel -> -1;
-                    case null, default -> 1;
-                };
+            unDiscountedProducts.sort((o1, o2) -> switch (o1) {
+                case Bagel bagel when o2 instanceof Bagel ->
+                        (int) (1000 * (((Bagel) o2).calculateBreadCost() - bagel.calculateBreadCost()));
+                case Coffee ignored when o2 instanceof Coffee ->
+                        (int) (1000 * (o2.calculateCost() - o1.calculateCost()));
+                case Bagel ignored -> -1;
+                case null, default -> 1;
             });
 
 
