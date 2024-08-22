@@ -7,18 +7,18 @@ import java.util.NoSuchElementException;
 
 public class Order {
     private HashMap<String, Integer> basket = new HashMap<>();
-    private ArrayList<Product> pricesBagels = new ArrayList<>();
-    private ArrayList<Product> pricesCoffees = new ArrayList<>();
+    private ArrayList<Product> bagelsList = new ArrayList<>();
+    private ArrayList<Product> coffeeList = new ArrayList<>();
     private final Store store;
     private int totalPrice;
     private Bagels lastAddedBagel;
 
     public int getPricesBagelsSize() {
-        return pricesBagels.size();
+        return bagelsList.size();
     }
 
     public int getPricesCoffeesSize() {
-        return pricesCoffees.size();
+        return coffeeList.size();
     }
 
     Order(Store store) {
@@ -38,13 +38,13 @@ public class Order {
             System.out.println("Didn't find the product you're trying to add in our inventory!");
             return false;
         }
+
         //bagels
         if (product instanceof Bagels) {
             basket.put(product.getSKU(), basket.getOrDefault(product.getSKU(), 0) + 1);
             this.totalPrice += (int) (product.getPrice() * 100);
-            pricesBagels.add(product);
+            bagelsList.add(product);
             lastAddedBagel = (Bagels) product;
-
 
             //fillings
         } else if (product instanceof Fillings) {
@@ -60,15 +60,12 @@ public class Order {
         } else {
             basket.put(product.getSKU(), basket.getOrDefault(product.getSKU(), 0) + 1);
             this.totalPrice += (int) (product.getPrice() * 100);
-            pricesCoffees.add(product);
+            coffeeList.add(product);
 
         }
 
         return true;
     }
-
-
-
 
     public boolean containsKeyBasket(String SKU) {
         return basket.containsKey(SKU);
@@ -89,7 +86,7 @@ public class Order {
         if (!basket.containsKey(product.getSKU())) {
             throw new NoSuchElementException("Product not found in the basket");
         }
-        pricesBagels.remove(product);
+        bagelsList.remove(product);
         basket.remove(product.getSKU());
     }
 
@@ -98,7 +95,7 @@ public class Order {
     }
 
     public double getTotalPrice() {
-        int countBagels = pricesBagels.size();
+        int countBagels = bagelsList.size();
         int smallDiscountCount = 0;
         int bigDiscountCount = 0;
         int newAmountBig = 0;
@@ -119,7 +116,7 @@ public class Order {
 
         if (bigDiscountCount != 0) {
             for (int i = 0; i < bigDiscountCount * 12; i++) {
-                newAmountBig += (int) (pricesBagels.get(i).getPrice() * 100);
+                newAmountBig += (int) (bagelsList.get(i).getPrice() * 100);
             }
             totalPriceClone -= newAmountBig;
             totalPriceClone += 399;
@@ -127,16 +124,16 @@ public class Order {
 
         if (smallDiscountCount != 0) {
             for (int i = 0; i < smallDiscountCount * 6; i++) {
-                newAmountSmall += (int) (pricesBagels.get(i + (bigDiscountCount * 12) ).getPrice() * 100);
+                newAmountSmall += (int) (bagelsList.get(i + (bigDiscountCount * 12) ).getPrice() * 100);
             }
             totalPriceClone -= newAmountSmall;
             totalPriceClone += 249;
         }
 
         for(int i = 0; i < countBagels; i++) {
-            if (i < pricesCoffees.size() ) {
-                getBagelPrice = pricesBagels.get(i + bigDiscountCount * 12 + smallDiscountCount * 6).getPrice();
-                getCoffeePrice = pricesCoffees.get(i).getPrice();
+            if (i < coffeeList.size() ) {
+                getBagelPrice = bagelsList.get(i + bigDiscountCount * 12 + smallDiscountCount * 6).getPrice();
+                getCoffeePrice = coffeeList.get(i).getPrice();
                 totalPriceClone -= (int) ((getCoffeePrice + getBagelPrice) * 100);
                 totalPriceClone += 125;
             }
@@ -153,7 +150,7 @@ public class Order {
     }
 
     public double  bigDiscount() {
-        int countBagels = pricesBagels.size();
+        int countBagels = bagelsList.size();
         int bigDiscountCount = 0;
         int newAmountBig = 0;
 
@@ -162,7 +159,7 @@ public class Order {
 
         if (bigDiscountCount != 0) {
             for (int i = 0; i < bigDiscountCount * 12; i++) {
-                newAmountBig += (int) (pricesBagels.get(i).getPrice() * 100);
+                newAmountBig += (int) (bagelsList.get(i).getPrice() * 100);
             }
             return (newAmountBig - 399) /100.0;
 
@@ -171,7 +168,7 @@ public class Order {
     }
 
     public double smallDiscount() {
-        int countBagels = pricesBagels.size();
+        int countBagels = bagelsList.size();
         int smallDiscountCount = 0;
         int bigDiscountCount = 0;
         int newAmountSmall = 0;
@@ -186,7 +183,7 @@ public class Order {
 
         if (smallDiscountCount != 0) {
             for (int i = 0; i < smallDiscountCount * 6; i++) {
-                newAmountSmall += (int) (pricesBagels.get(i + (bigDiscountCount * 12) ).getPrice() * 100);
+                newAmountSmall += (int) (bagelsList.get(i + (bigDiscountCount * 12) ).getPrice() * 100);
             }
             return (newAmountSmall - 249 )/ 100.0;
 
@@ -195,7 +192,7 @@ public class Order {
     }
 
     public double coffeeAndBagelDiscount() {
-        int countBagels = pricesBagels.size();
+        int countBagels = bagelsList.size();
         int smallDiscountCount = 0;
         int bigDiscountCount = 0;
         int newAmount = 0;
@@ -214,9 +211,9 @@ public class Order {
         }
 
         for(int i = 0; i < countBagels; i++) {
-            if (i < pricesCoffees.size() ) {
-                getBagelPrice = pricesBagels.get(i + bigDiscountCount * 12 + smallDiscountCount * 6).getPrice();
-                getCoffeePrice = pricesCoffees.get(i).getPrice();
+            if (i < coffeeList.size() ) {
+                getBagelPrice = bagelsList.get(i + bigDiscountCount * 12 + smallDiscountCount * 6).getPrice();
+                getCoffeePrice = coffeeList.get(i).getPrice();
                 newAmount += (int) ((getCoffeePrice + getBagelPrice) * 100);
             }
         }

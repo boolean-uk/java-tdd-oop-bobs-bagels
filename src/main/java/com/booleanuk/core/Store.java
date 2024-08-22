@@ -3,8 +3,12 @@ package com.booleanuk.core;
 import java.util.HashMap;
 
 public class Store {
-    private int capacity = 20;
+    private int capacity;
     private HashMap<String, Product> inventory = new HashMap<>();
+
+    Store(int capacity) {
+        this.capacity = capacity;
+    }
 
     public void addToInventory(Product product) {
         int maxSizeInventory = 15;

@@ -28,10 +28,10 @@ public class MainTest {
     private Store store;
     private Order order;
     private Receipt receipt;
-
+    private int capacity = 20;
 
     MainTest() {
-        store = new Store();
+        store = new Store(capacity);
         order = new Order(store);
         receipt = new Receipt(order, store);
         bagels1 = new Bagels("BGLO", 0.49, "Onion");
@@ -276,9 +276,9 @@ public class MainTest {
         order.addProduct(bagels1);
         order.addProduct(bagels1);
         order.addProduct(bagels1);
-        order.addProduct(bagels1);
-        order.addProduct(bagels1);
 
+        order.addProduct(bagels1);
+        order.addProduct(bagels1);
         order.addProduct(bagels1);
         order.addProduct(bagels1);
         order.addProduct(bagels1);
@@ -292,6 +292,41 @@ public class MainTest {
 
 
         receipt.printReceipt();
+    }
+
+    @Test
+    public void testBigDiscount() {
+        order.addProduct(bagels1);
+        order.addProduct(bagels1);
+        order.addProduct(bagels1);
+        order.addProduct(bagels1);
+        order.addProduct(bagels1);
+        order.addProduct(bagels1);
+        order.addProduct(bagels1);
+        order.addProduct(bagels1);
+        order.addProduct(bagels1);
+        order.addProduct(bagels1);
+        order.addProduct(bagels1);
+        order.addProduct(bagels1);
+        Assertions.assertEquals(1.89,order.bigDiscount());
+    }
+
+    @Test
+    public void testSmallDiscount() {
+        order.addProduct(bagels1);
+        order.addProduct(bagels1);
+        order.addProduct(bagels1);
+        order.addProduct(bagels1);
+        order.addProduct(bagels1);
+        order.addProduct(bagels1);
+        Assertions.assertEquals(0.45,order.smallDiscount());
+    }
+
+    @Test
+    public void testCoffeAndBagel() {
+        order.addProduct(bagels1);
+        order.addProduct(coffee1);
+        Assertions.assertEquals(0.23,order.smallDiscount());
     }
 }
 
