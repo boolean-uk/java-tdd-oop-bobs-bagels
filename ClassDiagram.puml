@@ -1,47 +1,23 @@
 @startuml
-Abstract class Item{
-    + id: String
-    + name: String
-    + getPrice(): Double
-    + getID(): String
-}
 
-class Bagel implements Item{
-    + variant: BagelVariant
-    - fillings: Filling[]
-    + addFilling(filling: Filling)
-    ' display cost of filling before adding
-    ' should confirm with customer before adding filling
-    + getFillings(): ArrayList<Filling>
-    + getBagelType(): BagelType
-}
 
-enum BagelType{
+interface Item{}
+
+enum BagelType implements Item{
     Onion
     Plain
     Everything
     Sesame
 }
-Bagel -- BagelType
 
-
-class Coffee implements Item{
-    - variant: CoffeeType
-    + getCoffeeType(): CoffeeType
-}
-enum CoffeeType {
+enum CoffeeType implements Item {
     Black
     White
     Cappuccino
     Latte
 }
 
-Coffee -- CoffeeType
-
-class Filling implements Item{
-    + variant: FillingVariant
-}
-enum FillingVariant {
+enum FillingType implements Item {
     Bacon
     Egg
     Creme Cheese
@@ -49,36 +25,35 @@ enum FillingVariant {
     Ham
 }
 
-Filling -- FillingVariant
-Filling "n" -- "0..n" Bagel
-
 class OrderManager {
-    + basketOfItems: HashMap<Item, Integer>
-    + __discounts__: HashMap<Pair<Item, Integer> Integer>
-    ' HashMap<Item, Quantity of Items> new Price>
-    + __inventory__: HashMap<Item, Integer>
-    - maxBasketSize: int
-    + price: double
-    + printReciept(): String
-        ' should print discount
-    + addItem(): Item
-    'addBagel should give user feedback when adding to full basket
-    'should confirm with customer before adding to basket
-    + removeItem(): String
-    'should give user feedback when attempting to remove an item that doesn't exist.
-    + setBasketSize(i: int): i
-    - createItem(): void
+   -__storeItemInfo__: HashMap<Item, String[]>
+   -__storeItemStock__: HashMap<Item, Integer>
+   -__defaultMaxBagesl__:int
+   -__defaultMaxFillings__:int
+   -__defaultMaxCoffees__:int
+
+   - cart: HashMap<Item, Integer>
+   - maxCartSize: int
+
+   + getMaxFillings() : int
+   + getMaxBagels() : int
+   + getMaxCoffees() : int
+   + setMaxCartSize(i : int) : void
+   + OrderManager()
+   + openUpShopAndSetInventory() : void
+   + addItem(item : Item) : String
+   + getStockOfItem(item : Item) : int
+   + getPriceOfItem(item : Item) : double
+   + removeItem(item : Item) : String
+   + getTotalCartPrice() : double
+   + getTotalDiscountedPrice() : double
+   + getTotalDiscountRecieptString() : String
+   + getTotalDiscountReciept() : Receipt
+
 
 }
 
-OrderManager "n" .. "0..n" Item
+OrderManager -- Item
 
-class utils {
-    + getUserResponse(msg: String): String
-}
-
-utils -> OrderManager
-
-
-
+OrderManager -- Receipt
 @enduml
