@@ -65,6 +65,23 @@ public class Controller {
                 case 4:
                     view.printPrice(basket.calculateCost());
                     break;
+                case 5:
+                    if (basket.size() < basketSize) {
+                        Coffee c = view.addCoffee();
+                        if (c != null) {
+                            basket.addProduct(c);
+                        }
+                    } else {
+                        view.basketFull();
+                    }
+                    break;
+                case 12: // Testing case
+                    basket.addProduct(new Coffee(Controller.prices.get("COFB")));
+                    basket.addProduct(new Bagel(Controller.prices.get("BGLP"), Controller.prices.get("FILB")));
+                    for (int i = 0; i < 18; i++) {
+                        basket.addProduct(new Bagel(Controller.prices.get("BGLO"), Controller.prices.get("FILB")));
+                    }
+                    break;
                 default:
                     keepRunning = false;
                     view.printExit();

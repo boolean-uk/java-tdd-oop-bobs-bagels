@@ -16,6 +16,7 @@ public class View {
         System.out.println("2. Remove Bagel");
         System.out.println("3. Change basket size");
         System.out.println("4. See total cost");
+        System.out.println("5. Add Coffee");
 
         return getInt();
     }
@@ -58,6 +59,22 @@ public class View {
         int ans = getInt();
         if (ans == 1) {
             return b;
+        } else {
+            return null;
+        }
+    }
+
+    public Coffee addCoffee() {
+        System.out.println("Choose a coffee type");
+        Triple<String, String, Float> coffeeType = displayPrices("Coffee");
+        if (coffeeType == null) return null;
+        Coffee c = new Coffee(coffeeType);
+        System.out.printf("It will cost $%.2f, is this ok?%n", c.calculateCost());
+        System.out.println("1. Yes");
+        System.out.println("2. No");
+        int ans = getInt();
+        if (ans == 1) {
+            return c;
         } else {
             return null;
         }

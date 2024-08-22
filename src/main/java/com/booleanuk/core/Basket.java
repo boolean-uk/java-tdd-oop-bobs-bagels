@@ -6,7 +6,7 @@ import java.util.NoSuchElementException;
 
 public class Basket {
     private final ArrayList<Product> products;
-    private final ArrayList<Product> unDiscountedProducts;
+    private ArrayList<Product> unDiscountedProducts;
     private int basketSize;
 
     public Basket(int basketSize) {
@@ -113,6 +113,8 @@ public class Basket {
         for (Product p: products) {
             sum += p.calculateCost();
         }
+        sum -= findDiscount();
+        unDiscountedProducts = new ArrayList<>(products);
         return sum;
     }
 }

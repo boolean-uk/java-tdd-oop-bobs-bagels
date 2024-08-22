@@ -110,7 +110,7 @@ class BasketTest {
     }
 
     @Test
-    public void testFindDiscountOn12Bagels() {
+    public void testFindDiscountOn13Bagels() {
         Basket b = new Basket(24);
         b.addProduct(new Bagel(Controller.prices.get("BGLP"), Controller.prices.get("FILB")));
         for (int i = 0; i < 12; i++) {
