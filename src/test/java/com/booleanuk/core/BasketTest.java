@@ -151,7 +151,7 @@ public class BasketTest {
         basket.add("BGLP", "FILX");
 
         //Sum should be 1.9 if it is set up correctly. For red test I have set up 2.0 which should fail due to not being exact.
-        Assertions.assertEquals(2.00f, basket.totalCost(), 0.0001);
+        Assertions.assertEquals(1.9f, basket.totalCost(), 0.0001);
     }
 
 
