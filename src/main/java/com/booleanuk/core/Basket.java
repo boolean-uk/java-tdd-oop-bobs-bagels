@@ -104,6 +104,8 @@ public class Basket {
         return false;
     }
 
+    //TODO
+    //REfactor addDiscount() to use helper methods and reduce code repetition
     public double addDiscount() {
         System.out.println("Total price before discount " + totalPrice);
         int bagelCounter = 0;
@@ -161,60 +163,12 @@ public class Basket {
                 totalPrice += 1.25d;
             }
         }
+
         System.out.println("Total price after discounts " + String.format("%.02f",totalPrice));
+        System.out.println("You saved a total of " + String.format("%.02f",totalPrice));
+
         return totalPrice;
     }
-
-    /*
-    public void printReceipt() {
-        int bagelCount = 0;
-        double bagelPrice = 0;
-        int coffeeCount = 0;
-        double coffeePrice = 0;
-        int fillingCount = 0;
-        double fillingPrice = 0;
-
-        System.out.println("  ~~~ Bob's Bagels ~~~   ");
-        System.out.println("----------------------------");
-
-        // Loop through basket items and count the products
-        for (Product p : basketContent) {
-            if (p.getName().equals("Bagel")) {
-                bagelCount++;
-                bagelPrice += p.getPrice();
-
-                // Check for fillings within the bagel
-                if (((Bagel) p).getFilling() != null) {
-                    fillingCount++;
-                    fillingPrice += ((Bagel) p).getFilling().getPrice();
-                }
-
-            } else if (p.getName().equals("Coffee")) {
-                coffeeCount++;
-                coffeePrice += p.getPrice();
-            }
-        }
-
-        // Only print the line for each item if its count is greater than 0
-        if (bagelCount > 0) {
-            System.out.println(bagelCount + "X Bagels = £" + String.format("%.02f", bagelPrice));
-        }
-        if (coffeeCount > 0) {
-            System.out.println(coffeeCount + "X Coffee = £" + String.format("%.02f", coffeePrice));
-        }
-        if (fillingCount > 0) {
-            System.out.println(fillingCount + "X Fillings = £" + String.format("%.02f", fillingPrice));
-        }
-
-        // Calculate total prices
-        double originalPrice = bagelPrice + coffeePrice + fillingPrice;
-        double savings = originalPrice - totalPrice;
-
-        System.out.println("----------------------------");
-        System.out.println("Original price: $" + String.format("%.02f", originalPrice));
-        System.out.println("Price after discounts: $" + String.format("%.02f", totalPrice) + "(-" + String.format("%.02f",savings) + ")") ; // assuming totalPrice is computed elsewhere
-    }*/
-
 
     public void printReceipt() {
         // Maps to store the count and price for each bagel variant
@@ -228,79 +182,35 @@ public class Basket {
         System.out.println("  ~~~ Bob's Bagels ~~~   ");
         System.out.println("----------------------------");
 
-        // Loop through basket items and count the products
+        // Loop through basket items and count the products, add it to count maps
         for (Product p : basketContent) {
             if (p.getName().equals("Bagel")) {
-                //String bagelVariant = p.getVariant();  // Get the variant of the bagel
+                addToMaps(p, bagelVariantCount, bagelVariantPrice);
 
-
-                // Update the count and price for the specific bagel variant
-                bagelVariantCount.put(bagelVariant, bagelVariantCount.getOrDefault(bagelVariant, 0) + 1);
-                bagelVariantPrice.put(bagelVariant, bagelVariantPrice.getOrDefault(bagelVariant, 0.0) + p.getPrice());
-
-                // Check for fillings within the bagel
+                // if bagel doesn't hava filling
                 if (((Bagel) p).getFilling() != null) {
-                    Filling filling = ((Bagel) p).getFilling();
-                    String fillingVariant = filling.getVariant(); // Get the variant of the filling
-
-                    // Update the count and price for the specific filling variant
-                    fillingVariantCount.put(fillingVariant, fillingVariantCount.getOrDefault(fillingVariant, 0) + 1);
-                    fillingVariantPrice.put(fillingVariant, fillingVariantPrice.getOrDefault(fillingVariant, 0.0) + filling.getPrice());
+                    addToMaps(p, fillingVariantCount, fillingVariantPrice);
                 }
 
             } else if (p.getName().equals("Coffee")) {
-                String coffeeVariant = p.getVariant();  // Get the variant of the coffee
-
-                // Update the count and price for the specific coffee variant
-                coffeeVariantCount.put(coffeeVariant, coffeeVariantCount.getOrDefault(coffeeVariant, 0) + 1);
-                coffeeVariantPrice.put(coffeeVariant, coffeeVariantPrice.getOrDefault(coffeeVariant, 0.0) + p.getPrice());
+                addToMaps(p, coffeeVariantCount, coffeeVariantPrice);
             }
         }
 
-        // Print the bagels, separated by variant
-        for (String variant : bagelVariantCount.keySet()) {
-            int count = bagelVariantCount.get(variant);
-            double price = bagelVariantPrice.get(variant);
-            if (count > 0) {
-                System.out.println(count + "X " + variant + " Bagels = $" + String.format("%.02f", price));
-            }
-        }
+        printReceiptLines("Bagels", bagelVariantCount, bagelVariantPrice);
+        printReceiptLines("Fillings", fillingVariantCount, fillingVariantPrice);
+        printReceiptLines("Coffees", fillingVariantCount, fillingVariantPrice);
 
-        // Print the coffee, separated by variant
-        for (String variant : coffeeVariantCount.keySet()) {
-            int count = coffeeVariantCount.get(variant);
-            double price = coffeeVariantPrice.get(variant);
-            if (count > 0) {
-                System.out.println(count + "X " + variant + " Coffee = $" + String.format("%.02f", price));
-            }
-        }
-
-        // Print the fillings, separated by variant
-        for (String variant : fillingVariantCount.keySet()) {
-            int count = fillingVariantCount.get(variant);
-            double price = fillingVariantPrice.get(variant);
-            if (count > 0) {
-                System.out.println(count + "X " + variant + " Fillings = $" + String.format("%.02f", price));
-            }
-        }
-
-        // Calculate and print total prices
-        double originalPrice = 0;
-
-        // Add up all the bagel, coffee, and filling prices
-        for (double price : bagelVariantPrice.values()) {
-            originalPrice += price;
-        }
-        for (double price : coffeeVariantPrice.values()) {
-            originalPrice += price;
-        }
-        for (double price : fillingVariantPrice.values()) {
-            originalPrice += price;
-        }
-
+        double originalPrice = calculateTotal(bagelVariantPrice) + calculateTotal(fillingVariantPrice) + calculateTotal(coffeeVariantPrice); //Recalculate undiscounted price (Not ideal solution)
+        double savings = originalPrice - totalPrice;
         System.out.println("----------------------------");
         System.out.println("Original price: $" + String.format("%.02f", originalPrice));
-        System.out.println("Price after discounts: $" + String.format("%.02f", totalPrice)); // assuming totalPrice is computed elsewhere
+        System.out.println("Price after discounts: $" + String.format("%.02f", totalPrice)); // Totalprice calculated in Discount
+
+        if(savings > 0){
+            System.out.println("You saved a total of: $" + String.format("%.02f", savings) + " on this shop :)");
+        }
+
     }
 
     private void addToMaps(Product p, Map<String, Integer> countMap, Map<String, Double> priceMap){
