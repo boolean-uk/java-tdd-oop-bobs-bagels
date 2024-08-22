@@ -17,7 +17,9 @@ class BagelTest {
       }
     };
     Bagel myBagel = new Bagel(BagelType.ONION, Optional.of(fillings));
-    Assertions.assertEquals(0.49 + 0.12 + 0.12, myBagel.basePrice() + myBagel.extraPrice());
+    List<Product> extras = myBagel.extras();
+    Assertions.assertEquals(0.49 + 0.12 + 0.12,
+        myBagel.sku().price() + extras.get(0).sku().price() + extras.get(1).sku().price());
   }
 
   @Test
