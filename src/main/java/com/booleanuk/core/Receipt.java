@@ -2,8 +2,9 @@ package com.booleanuk.core;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
-public class Receipt implements ReceiptInterface {
+public class Receipt {
     Basket basket;
     ArrayList<String> receiptLines;
 
@@ -24,22 +25,25 @@ public class Receipt implements ReceiptInterface {
         this.receiptLines.add(String.format("%-15s %5s %10s", "Item", "Quantity", "Price"));
         this.receiptLines.add("-----------------------------------");
 
-        for (Item i : basket.getBasket()){
-            String price = String.format("%.2f", (((float)i.price * i.quantity) /100));
-            if (i instanceof Bagel){
-                this.receiptLines.add(String.format("%-15s %5s %13s", i.name + " " + i.variant, i.quantity, price + "$"));
-                addFillingToReceipt((Bagel) i);
+        Item item;
+        int quantity;
+        String price = String.format("%.2f", (float)basket.getDiscount() /100);
+
+        for (Map.Entry<Item, Integer> entry : basket.getBasket().entrySet()){
+            item = entry.getKey();
+            quantity = entry.getValue();
+
+            if (item instanceof Bagel){
+                this.receiptLines.add(String.format("%-15s %5s %13s", item.getName(), quantity, price + "$"));
+                addFillingToReceipt((Bagel) item);
             }
 
             else {
-                this.receiptLines.add(String.format("%-15s %5s %13s", i.name + " " + i.variant, i.quantity, price + "$"));
+                this.receiptLines.add(String.format("%-15s %5s %13s", item.getName(), quantity, price + "$"));
             }
         }
+
         this.receiptLines.add("-----------------------------------");
-
-        int discount = basket.getDiscount();
-        String price = String.format("%.2f", (float)discount /100);
-
         this.receiptLines.add(String.format("%-15s %5s %12s", "Discount", " ", "-" + price + "$"));
         this.receiptLines.add(String.format("%-15s %5s %12s", "Total", " ", basket.calculateBasketCost()+"$"));
         this.receiptLines.add("\n");

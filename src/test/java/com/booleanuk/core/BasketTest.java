@@ -20,9 +20,8 @@ public class BasketTest {
         // Assert that the basket is empty
         Assertions.assertEquals(0, basket.numberOfItemsInBasket());
 
-        String name = "Bagel";
-        String variant = "Plain";
-        String result = basket.addItemToBasket(Menu.getItemFromMenu(name, variant));
+        String name = "Plain Bagel";
+        String result = basket.addItemToBasket(Menu.getItemFromMenu(name));
 
         String expected = "Plain Bagel added to basket.";
 
@@ -42,9 +41,8 @@ public class BasketTest {
         */
 
         Basket basket = new Basket();
-        String name = "Bagel";
-        String variant = "Plain";
-        basket.addItemToBasket(Menu.getItemFromMenu(name, variant));
+        String name = "Plain Bagel";
+        basket.addItemToBasket(Menu.getItemFromMenu(name));
 
         Assertions.assertEquals(1, basket.numberOfItemsInBasket());
 
@@ -74,13 +72,11 @@ public class BasketTest {
 
         basket.changeBasketSize(1);
 
-        String name = "Bagel";
-        String variant = "Plain";
-        basket.addItemToBasket(Menu.getItemFromMenu(name, variant));
+        String name = "Plain Bagel";
+        basket.addItemToBasket(Menu.getItemFromMenu(name));
 
-        String name_2 = "Coffee";
-        String variant_2 = "Black";
-        String result = basket.addItemToBasket(Menu.getItemFromMenu(name_2, variant_2));
+        String name_2 = "Black Coffee";
+        String result = basket.addItemToBasket(Menu.getItemFromMenu(name_2));
 
         String expected = "Basket is full.";
 
@@ -100,11 +96,11 @@ public class BasketTest {
 
         basket.changeBasketSize(10);
 
-        Assertions.assertEquals(10, basket.getBasketSize());
+        Assertions.assertEquals(10, basket.getMaxBasketSize());
 
         basket.changeBasketSize(20);
 
-        Assertions.assertEquals(20, basket.getBasketSize());
+        Assertions.assertEquals(20, basket.getMaxBasketSize());
     }
 
     @Test
@@ -116,9 +112,8 @@ public class BasketTest {
         */
 
         Basket basket = new Basket();
-        String name = "Bagel";
-        String variant = "Plain";
-        basket.addItemToBasket(Menu.getItemFromMenu(name, variant));
+        String name = "Plain Bagel";
+        basket.addItemToBasket(Menu.getItemFromMenu(name));
 
         // Change input to predefined input.
         InputStream backup = System.in;
@@ -143,17 +138,15 @@ public class BasketTest {
         int total = 0;
 
         Basket basket = new Basket();
-        String name = "Bagel";
-        String variant = "Plain";
-        Item item = Menu.getItemFromMenu(name, variant);
+        String name = "Plain Bagel";
+        Item item = Menu.getItemFromMenu(name);
         basket.addItemToBasket(item);
         assert item != null;
         total += item.getPrice();
 
-        String name2 = "Coffee";
-        String variant2 = "Black";
+        String name2 = "Black Coffee";
 
-        Item item2 = Menu.getItemFromMenu(name2, variant2);
+        Item item2 = Menu.getItemFromMenu(name2);
         basket.addItemToBasket(item2);
         assert item2 != null;
         total += item2.getPrice();
@@ -166,30 +159,27 @@ public class BasketTest {
         Basket basket = new Basket();
 
         // Asserting that adding items from the menu to the basket works.
-        String bagelName = "Bagel";
-        String bagelVariant = "Plain";
+        String bagelName = "Plain Bagel";
+        String coffeeName = "Black Coffee";
 
-        String coffeeName = "Coffee";
-        String coffeeVariant = "Black";
-
-        Item bagel = Menu.getItemFromMenu(bagelName, bagelVariant);
-        Item coffee = Menu.getItemFromMenu(coffeeName, coffeeVariant);
+        Item bagel = Menu.getItemFromMenu(bagelName);
+        Item coffee = Menu.getItemFromMenu(coffeeName);
 
         basket.addItemToBasket(bagel);
         basket.addItemToBasket(coffee);
 
         // Note that if the item is not in the basket, the function returns -1
-        Assertions.assertNotEquals(-1, (int) basket.itemInBasket(bagel));
-        Assertions.assertNotEquals(-1, (int) basket.itemInBasket(coffee));
+        Assertions.assertTrue(basket.itemInBasket(bagel));
+        Assertions.assertTrue(basket.itemInBasket(coffee));
 
-        Bagel wrongBagel = new Bagel("ABCD", 99, "Bagel", "Chocolate");
-        Coffee wrongCoffee = new Coffee("EFGH", 129, "Coffee", "Vanilla");
+        Bagel wrongBagel = new Bagel("ABCD", "Chocolate", 99);
+        Coffee wrongCoffee = new Coffee("EFGH", "Vanilla", 129);
 
         String wrongBagelResult = basket.addItemToBasket(wrongBagel);
         String wrongCoffeeResult = basket.addItemToBasket(wrongCoffee);
 
-        Assertions.assertEquals(-1, basket.itemInBasket(wrongBagel));
-        Assertions.assertEquals(-1, basket.itemInBasket(wrongCoffee));
+        Assertions.assertFalse(basket.itemInBasket(wrongBagel));
+        Assertions.assertFalse(basket.itemInBasket(wrongCoffee));
 
         Assertions.assertEquals(wrongBagelResult, wrongCoffeeResult);
         Assertions.assertEquals("This item is not on the menu.", wrongBagelResult);
@@ -201,7 +191,7 @@ public class BasketTest {
         Basket basketOne = new Basket();
 
         for (int i = 0; i < 12; i++) {
-            Item item = Menu.getItemFromMenu("Bagel", "Plain");
+            Item item = Menu.getItemFromMenu("Plain Bagel");
             basketOne.addItemToBasket(item);
         }
 
@@ -213,7 +203,7 @@ public class BasketTest {
         Basket basketTwo = new Basket();
 
         for (int i = 0; i < 12; i++) {
-            Item item = Menu.getItemFromMenu("Bagel", "Everything");
+            Item item = Menu.getItemFromMenu("Everything Bagel");
             basketTwo.addItemToBasket(item);
         }
 
@@ -225,7 +215,7 @@ public class BasketTest {
         Basket basketThree = new Basket();
 
         for (int i = 0; i < 6; i++) {
-            Item item = Menu.getItemFromMenu("Bagel", "Plain");
+            Item item = Menu.getItemFromMenu("Plain Bagel");
             basketThree.addItemToBasket(item);
         }
 
@@ -237,7 +227,7 @@ public class BasketTest {
         Basket basketFour = new Basket();
 
         for (int i = 0; i < 6; i++) {
-            Item item = Menu.getItemFromMenu("Bagel", "Everything");
+            Item item = Menu.getItemFromMenu("Everything Bagel");
             basketFour.addItemToBasket(item);
         }
 
@@ -249,12 +239,12 @@ public class BasketTest {
         Basket basketFive = new Basket();
 
         for (int i = 0; i < 5; i++) {
-            Item item = Menu.getItemFromMenu("Bagel", "Plain");
+            Item item = Menu.getItemFromMenu("Plain Bagel");
             basketFive.addItemToBasket(item);
         }
 
         for (int i = 0; i < 6; i++) {
-            Item item = Menu.getItemFromMenu("Coffee", "Black");
+            Item item = Menu.getItemFromMenu("Black Coffee");
             basketFive.addItemToBasket(item);
         }
 
@@ -266,12 +256,12 @@ public class BasketTest {
         Basket basketSix = new Basket();
 
         for (int i = 0; i < 5; i++) {
-            Item item = Menu.getItemFromMenu("Bagel", "Everything");
+            Item item = Menu.getItemFromMenu("Everything Bagel");
             basketSix.addItemToBasket(item);
         }
 
         for (int i = 0; i < 6; i++) {
-            Item item = Menu.getItemFromMenu("Coffee", "Black");
+            Item item = Menu.getItemFromMenu("Black Coffee");
             basketSix.addItemToBasket(item);
         }
 
@@ -283,12 +273,12 @@ public class BasketTest {
         Basket basketSeven = new Basket();
 
         for (int i = 0; i < 8; i++) {
-            Item item = Menu.getItemFromMenu("Bagel", "Everything");
+            Item item = Menu.getItemFromMenu("Everything Bagel");
             basketSeven.addItemToBasket(item);
         }
 
         for (int i = 0; i < 2; i++) {
-            Item item = Menu.getItemFromMenu("Coffee", "Black");
+            Item item = Menu.getItemFromMenu("Black Coffee");
             basketSeven.addItemToBasket(item);
         }
 

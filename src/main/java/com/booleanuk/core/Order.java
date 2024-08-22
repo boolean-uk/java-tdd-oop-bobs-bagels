@@ -87,12 +87,12 @@ public class Order {
                     break;
                 }
                 case 3: {
-                    this.basket.printBasketContent();
+                    this.basket.printItemsInBasket();
                     break;
                 }
                 case 4: {
                     this.basket.calculateDiscount();
-                    ReceiptInterface receipt = new Receipt(this.basket);
+                    Receipt receipt = new Receipt(this.basket);
                     receipt.printReceipt();
                     return;
                 }

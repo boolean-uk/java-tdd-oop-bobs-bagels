@@ -13,35 +13,31 @@ public class Menu {
     }
 
     private static void initializeMenu(){
-        menu.add(new Bagel("BGLO", 49, "Bagel", "Onion"));
-        menu.add(new Bagel("BGLP", 39, "Bagel", "Plain"));
-        menu.add(new Bagel("BGLE", 49, "Bagel", "Everything"));
-        menu.add(new Bagel("BGLS", 49, "Bagel", "Sesame"));
-        menu.add(new Coffee("COFB", 99, "Coffee", "Black"));
-        menu.add(new Coffee("COFW", 119, "Coffee", "White"));
-        menu.add(new Coffee("COFC", 120, "Coffee", "Capuccino"));
-        menu.add(new Coffee("COFL", 129, "Coffee", "Latte"));
+        menu.add(new Bagel("BGLO", "Onion Bagel", 49));
+        menu.add(new Bagel("BGLP", "Plain Bagel", 39));
+        menu.add(new Bagel("BGLE", "Everything Bagel", 49));
+        menu.add(new Bagel("BGLS",  "Sesame Bagel", 49));
+        menu.add(new Coffee("COFB",  "Black Coffee", 99));
+        menu.add(new Coffee("COFW",  "White Coffee", 119));
+        menu.add(new Coffee("COFC",  "Capuccino", 120));
+        menu.add(new Coffee("COFL",  "Latte", 129));
 
-        fillingMenu.add(new Filling("FILB", 12, "Filling", "Bacon"));
-        fillingMenu.add(new Filling("FILE", 12, "Filling", "Egg"));
-        fillingMenu.add(new Filling("FILC", 12, "Filling", "Cheese"));
-        fillingMenu.add(new Filling("FILX", 12, "Filling", "Cream Cheese"));
-        fillingMenu.add(new Filling("FILS", 12, "Filling", "Smoked Salmon"));
-        fillingMenu.add(new Filling("FILH", 12, "Filling", "Ham"));
+        fillingMenu.add(new Filling("FILB", "Bacon", 12));
+        fillingMenu.add(new Filling("FILE", "Egg", 12));
+        fillingMenu.add(new Filling("FILC", "Cheese", 12));
+        fillingMenu.add(new Filling("FILX", "Cream Cheese", 12));
+        fillingMenu.add(new Filling("FILS", "Smoked Salmon", 12));
+        fillingMenu.add(new Filling("FILH", "Ham", 12));
     }
 
-    public static Item getItemFromMenu(String name, String variant){
+    public static Item getItemFromMenu(String name){
         for (Item i : menu){
-            if (Objects.equals(i.variant, variant) & Objects.equals(i.name, name))
+            if (Objects.equals(i.getName(), name))
             {
-                switch (name) {
-                    case "Bagel" -> {
-                        return new Bagel(i.sku, i.price, i.name, i.variant);
-                    }
-                    case "Coffee" -> {
-                        return new Coffee(i.sku, i.price, i.name, i.variant);
-                    }
+                if (name.contains("Bagel")){
+                    return new Bagel(i.getSKU(), i.getName(), i.getPrice());
                 }
+                return new Coffee(i.getSKU(), i.getName(), i.getPrice());
             }
         }
         return null;
@@ -49,29 +45,30 @@ public class Menu {
 
     public static Boolean itemIsOnTheMenu(Item item){
         for (Item i : menu){
-            if (itemsAreSimilar(i, item))
+            if (itemsAreEqual(i, item))
                 return true;
         }
         return false;
     }
 
-    private static boolean itemsAreSimilar(Item i, Item item){
-        return Objects.equals(i.sku, item.sku) & Objects.equals(i.name, item.name) & Objects.equals(i.variant, item.variant);
+    private static boolean itemsAreEqual(Item i, Item item){
+        return Objects.equals(i.getSKU(), item.getSKU()) & Objects.equals(i.getName(), item.getName());
     }
 
-    public static Filling getFillingFromMenu(String name, String variant){
+    public static Filling getFillingFromMenu(String name){
         for (Filling f : fillingMenu){
-            if (Objects.equals(f.name, name) & Objects.equals(f.variant, variant)){
-                return new Filling(f.sku, f.price, f.name, f.variant);
+            if (Objects.equals(f.getName(), name)){
+                return new Filling(f.getSKU(), f.getName(), f.getPrice());
             }
         }
         return null;
     }
 
+    // TODO: Move at least part of this the order class
     public static Item selectItemFromMenu() {
         Scanner input = new Scanner(System.in);
         printMenu();
-        System.out.println("Select item to add to your basket, or press 0 to go back.\n\n");
+        System.out.println("Select item to add to your basket, or press 0 to go back.\n");
         int choice = input.nextInt();
 
         if (Objects.equals(0, choice)){
@@ -81,11 +78,11 @@ public class Menu {
         Item selectedItem = menu.get(choice-1);
 
         if (selectedItem instanceof Bagel){
-            return new Bagel (selectedItem.sku, selectedItem.price, selectedItem.name, selectedItem.variant);
+            return new Bagel(selectedItem.getSKU(), selectedItem.getName(), selectedItem.getPrice());
         }
 
         else {
-            return new Coffee (selectedItem.sku, selectedItem.price, selectedItem.name, selectedItem.variant);
+            return new Coffee(selectedItem.getSKU(), selectedItem.getName(), selectedItem.getPrice());
         }
     }
 
@@ -93,7 +90,7 @@ public class Menu {
         System.out.println("\t\t~Menu~");
         int number = 1;
         for (Item i : menu){
-            System.out.println(number + ". " + i.name + " " + i.variant + " " + (float) i.price/100);
+            System.out.println(number + ". " + i.getName() + " " + (float) i.getPrice()/100);
             number++;
         }
     }
@@ -102,7 +99,7 @@ public class Menu {
         System.out.println("\t\t~Fillings~");
         int number = 1;
         for (Item i : fillingMenu){
-            System.out.println(number + ". " + i.variant + " " + (float) i.price/100);
+            System.out.println(number + ". " + i.getName() + " " + (float) i.getPrice()/100);
             number++;
         }
     }

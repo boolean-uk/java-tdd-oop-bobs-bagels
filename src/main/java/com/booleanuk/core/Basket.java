@@ -5,28 +5,24 @@ import java.util.*;
 import static com.booleanuk.core.Menu.itemIsOnTheMenu;
 
 public class Basket {
-    private Integer basketSize;
-    private final ArrayList<Item> basket;
+    private final HashMap<Item, Integer> basket;
+    private int maxBasketSize;
     private int discount;
 
     public Basket(){
-        this.basket = new ArrayList<>();
+        this.basket = new HashMap<>();
         this.discount = 0;
-        this.basketSize = 20;
+        this.maxBasketSize = 20;
     }
 
-    public ArrayList<Item> getBasket(){
-        return this.basket;
-    }
+    public HashMap<Item, Integer> getBasket() { return this.basket; }
 
-    public int getDiscount(){
-        return this.discount;
-    }
+    public int getDiscount() { return this.discount; }
 
-    public Integer numberOfItemsInBasket(){
-        return this.basket.size();
+    public int numberOfItemsInBasket() { return this.basket.size(); }
 
-    }
+    public int getMaxBasketSize() { return this.maxBasketSize; }
+
 
     public String addItemToBasket(Item item){
         if (basketIsFull()){
@@ -38,34 +34,12 @@ public class Basket {
             return "This item is not on the menu.";
         }
 
-        if (itemInBasket(item).equals(-1)){
-            this.basket.add(item);
-        }
+        this.basket.merge(item, 1, Integer::sum);
 
-        else {
-            this.basket.get(itemInBasket(item)).quantity = this.basket.get(itemInBasket(item)).quantity + 1;
-        }
-
-        return item.variant + " " + item.name + " added to basket.";
+        return item.getName() + " added to basket.";
     }
 
-    public void printBasketContent(){
-        int counter = 1;
-
-        for (Item i : basket){
-            String price = String.format("%.2f", (((float)i.price * i.quantity) /100));
-            if (i instanceof Bagel){
-                System.out.println(counter+ ". " + i.name + " " + i.variant + " " + i.quantity + " " + price +"$");
-                formatFillingPrint((Bagel) i);
-            }
-
-            else {
-                System.out.println(counter+ " " + i.name + " " + i.variant + " " + i.quantity + " " + price +"$");
-            }
-            counter++;
-        }
-    }
-
+    // TODO: Move this to order, receipt or somewhere else?
     public void formatFillingPrint(Bagel bagel) {
         HashMap<String, Integer> listOfFillings = this.getQuantityOfFillings(bagel);
         System.out.println("Fillings:");
@@ -76,215 +50,178 @@ public class Basket {
         HashMap<String, Integer> quantityOfFillings = new HashMap<>();
 
         for (Filling f : bagel.getFillings()){
-            quantityOfFillings.merge(f.getVariant(), 1, Integer::sum);
+            quantityOfFillings.merge(f.getName(), 1, Integer::sum);
         }
 
         return quantityOfFillings;
     }
 
+    // TODO: Move some of this to order
     public String removeItemFromBasket(){
-        String itemName;
-        String itemVariant;
-        int itemQuantity;
+        Map<Integer, Item> indexedBasket = new HashMap<>();
+
+        // Print the contents of the basket, and indexes each item in indexesBasket.
+        printItemsInBasketWithIndex(indexedBasket);
 
         Scanner input = new Scanner(System.in);
-        System.out.println("\nYour basket:");
-        printBasketContent();
-        System.out.println("\nChoose item to remove or press 0 to go back.");
-
         int userInput = input.nextInt();
 
-        if (userInput <= basket.size() & 0 < userInput){
-            Item item = basket.get(userInput-1);
+        Item item = indexedBasket.get(userInput);
 
-            itemName = item.name;
-            itemVariant = item.variant;
-            itemQuantity = item.quantity;
+        if (item == null){
+            return "Invalid option.";
+        }
 
-            if (1 < itemQuantity){
-                basket.get(userInput-1).quantity = itemQuantity -1;
+        int itemQuantity = this.basket.get(item);
+
+        if (1 < itemQuantity){
+            this.basket.put(item, this.basket.get(item) - 1);
+        } else {
+            this.basket.remove(item);
+        }
+
+        return item.getName() + " removed from basket.";
+    }
+
+    public void printItemsInBasketWithIndex(Map<Integer, Item> indexedBasket){
+        int index = 1;
+
+        System.out.println("\nYour basket:");
+
+        for (Map.Entry<Item, Integer> entry : basket.entrySet())
+        {
+            Item item = entry.getKey();
+            int quantity = entry.getValue();
+
+            // Format the output to float with two decimal places.
+            String price = String.format("%.2f", (((float) item.getPrice() * quantity) /100));
+
+            if (item instanceof Bagel){
+                System.out.println(index + ". " + item.getName() + " " + quantity + " " + price +"$");
+                formatFillingPrint((Bagel) item);
             }
 
             else {
-                basket.remove(userInput-1);
+                System.out.println(index + " " + item.getName() + " " + quantity + " " + price +"$");
             }
 
-            return itemVariant + " " + itemName + " removed from basket.";
+            // Add item with index to indexed list, to keep track of the chosen item.
+            indexedBasket.put(index, item);
+            index++;
         }
-
-        else {
-            return "Invalid option.";
-        }
+        System.out.println("\nChoose item to remove or press 0 to go back.");
     }
 
-    public Float calculateBasketCost(){
-        int total = 0;
-        for (Item i : basket){
-            total += i.getPrice() * i.getQuantity();
+    public float calculateBasketCost(){
+        int sum = 0;
+
+        for (Map.Entry<Item, Integer> entry : basket.entrySet()){
+            sum += entry.getKey().getPrice() * entry.getValue();
         }
 
-        total = total - this.discount;
-        return (float) total/100;
+        sum = sum - this.discount;
+        return (float) sum/100;
     }
 
-    public Integer getBasketSize(){
-        return this.basketSize;
+    public boolean basketIsFull(){
+        return maxBasketSize == basket.size();
     }
 
-    public Boolean basketIsFull(){
-        return Objects.equals(basketSize, basket.size());
-    }
-
-    public Integer itemInBasket(Item item){
-        /*
-        If item is in basket, returns index. Else returns -1.
-         */
-        for (int i = 0; i < numberOfItemsInBasket(); i++){
-            if (Objects.equals(item.name, basket.get(i).name) && Objects.equals(item.variant, basket.get(i).variant)){
-                if (basket.get(i) instanceof Bagel & item instanceof Bagel){
-                    Bagel basketBagel = (Bagel) basket.get(i);
-                    Bagel newBagel = (Bagel) item;
-
-                    if (fillingIsIdentical(basketBagel, newBagel)){
-                        return i;
-                    } else {
-                        return -1;
-                    }
-                }
-
-                else {
-                    return i;
-                }
-            }
-        }
-        return -1;
-    }
-
-    public boolean fillingIsIdentical(Bagel b1, Bagel b2){
-        /*
-        Checks if the filling of two bagels are identical.
-        This helps in presenting a better organized receipt.
-         */
-
-        if (b1.getFillings().size() != b2.getFillings().size())
-        {
-            return false;
-        }
-
-        ArrayList<String> sortedB1 = new ArrayList<>();
-        ArrayList<String> sortedB2 = new ArrayList<>();
-
-        for (Filling f : b1.getFillings()){
-            sortedB1.add(f.getVariant());
-        }
-
-        for (Filling f : b2.getFillings()){
-            sortedB2.add(f.getVariant());
-        }
-
-        Collections.sort(sortedB1);
-        Collections.sort(sortedB2);
-
-        for (int i = 0; i < sortedB1.size(); i++){
-            if (!sortedB1.get(i).equals(sortedB2.get(i))){
-                return false;
-            }
-        }
-        return true;
+    public boolean itemInBasket(Item item){
+        return basket.containsKey(item);
     }
 
     public void changeBasketSize(int newSize){
         if (0 < newSize){
-            this.basketSize = newSize;
-            System.out.println("Basket size changed successfully.");
+            this.maxBasketSize = newSize;
         }
-        System.out.println("Basket size can't be less than 1.");
     }
 
-
+    // TODO: Possibly simplify if the bagels do not have to be the same variant.
     public void calculateDiscount(){
         Map<String, Integer> basketOverview = new HashMap<>();
 
         quantifyItemsInBasket(basketOverview);
 
-        if (6 <= basketOverview.getOrDefault("Onion", 0) | 6 <= basketOverview.getOrDefault("Plain", 0) | 6 <= basketOverview.getOrDefault("Everything", 0) | 6 <= basketOverview.getOrDefault("Sesame", 0)){
+        if (6 <= basketOverview.getOrDefault("Onion Bagel", 0) | 6 <= basketOverview.getOrDefault("Plain Bagel", 0) | 6 <= basketOverview.getOrDefault("Everything Bagel", 0) | 6 <= basketOverview.getOrDefault("Sesame Bagel", 0)){
             addBagelDiscount(basketOverview);
         }
 
-        if (basketOverview.getOrDefault("Black", 0) != 0 && (basketOverview.getOrDefault("Onion", 0) != 0 | basketOverview.getOrDefault("Plain", 0) != 0 | basketOverview.getOrDefault("Everything", 0) != 0 | basketOverview.getOrDefault("Sesame", 0) != 0)){
+        if (basketOverview.getOrDefault("Black Coffee", 0) != 0 && (basketOverview.getOrDefault("Onion Bagel", 0) != 0 | basketOverview.getOrDefault("Plain Bagel", 0) != 0 | basketOverview.getOrDefault("Everything Bagel", 0) != 0 | basketOverview.getOrDefault("Sesame Bagel", 0) != 0)){
             addCoffeeDiscount(basketOverview);
         }
     }
 
     public void quantifyItemsInBasket(Map<String, Integer> basketOverview){
-        for (Item i : this.basket){
-            switch (i.variant){
-                case "Black":{
-                    basketOverview.merge("Black", i.getQuantity(), Integer::sum);
+        for (Map.Entry<Item, Integer> entry : basket.entrySet()){
+            Item item = entry.getKey();
+            int quantity = entry.getValue();
+            switch (item.getName()) {
+                case "Black Coffee": {
+                    basketOverview.merge("Black Coffee", quantity, Integer::sum);
                     break;
                 }
 
-                case "Onion":{
-                    basketOverview.merge("Onion", i.getQuantity(), Integer::sum);
+                case "Onion Bagel": {
+                    basketOverview.merge("Onion Bagel", quantity, Integer::sum);
                     break;
                 }
 
-                case "Plain":{
-                    basketOverview.merge("Plain", i.getQuantity(), Integer::sum);
+                case "Plain Bagel": {
+                    basketOverview.merge("Plain Bagel", quantity, Integer::sum);
                     break;
                 }
 
-                case "Everything":{
-                    basketOverview.merge("Everything", i.getQuantity(), Integer::sum);
+                case "Everything Bagel": {
+                    basketOverview.merge("Everything Bagel", quantity, Integer::sum);
                     break;
                 }
 
-                case "Sesame":{
-                    basketOverview.merge("Sesame", i.getQuantity(), Integer::sum);
+                case "Sesame Bagel": {
+                    basketOverview.merge("Sesame Bagel", quantity, Integer::sum);
                     break;
                 }
             }
         }
-
     }
 
     public void addBagelDiscount(Map<String, Integer> basketOverview){
         int discount = 0;
         while(true) {
-            if (6 <= basketOverview.getOrDefault("Onion", 0)) {
-                if (12 <= basketOverview.get("Onion")) {
-                    basketOverview.merge("Onion", -12, Integer::sum);
+            if (6 <= basketOverview.getOrDefault("Onion Bagel", 0)) {
+                if (12 <= basketOverview.get("Onion Bagel")) {
+                    basketOverview.merge("Onion Bagel", -12, Integer::sum);
                     discount = discount + 189;
                     continue;
                 }
-                basketOverview.merge("Onion", -6, Integer::sum);
+                basketOverview.merge("Onion Bagel", -6, Integer::sum);
                 discount = discount + 45;
 
-            } else if (6 <= basketOverview.getOrDefault("Plain", 0)) {
-                if (12 <= basketOverview.get("Plain")) {
-                    basketOverview.merge("Plain", -12, Integer::sum);
+            } else if (6 <= basketOverview.getOrDefault("Plain Bagel", 0)) {
+                if (12 <= basketOverview.get("Plain Bagel")) {
+                    basketOverview.merge("Plain Bagel", -12, Integer::sum);
                     discount = discount + 69;
                     continue;
                 }
-                basketOverview.merge("Plain", -6, Integer::sum);
+                basketOverview.merge("Plain Bagel", -6, Integer::sum);
                 discount = discount - 15;
 
-            } else if (6 <= basketOverview.getOrDefault("Everything", 0)) {
-                if (12 <= basketOverview.get("Everything")) {
-                    basketOverview.merge("Everything", -12, Integer::sum);
+            } else if (6 <= basketOverview.getOrDefault("Everything Bagel", 0)) {
+                if (12 <= basketOverview.get("Everything Bagel")) {
+                    basketOverview.merge("Everything Bagel", -12, Integer::sum);
                     discount = discount + 189;
                     continue;
                 }
-                basketOverview.merge("Everything", -6, Integer::sum);
+                basketOverview.merge("Everything Bagel", -6, Integer::sum);
                 discount = discount + 45;
 
-            } else if (6 <= basketOverview.getOrDefault("Sesame", 0)) {
-                if (12 <= basketOverview.get("Sesame")) {
-                    basketOverview.merge("Sesame", -12, Integer::sum);
+            } else if (6 <= basketOverview.getOrDefault("Sesame Bagel", 0)) {
+                if (12 <= basketOverview.get("Sesame Bagel")) {
+                    basketOverview.merge("Sesame Bagel", -12, Integer::sum);
                     discount = discount + 189;
                     continue;
                 }
-                basketOverview.merge("Sesame", -12, Integer::sum);
+                basketOverview.merge("Sesame Bagel", -12, Integer::sum);
                 discount = discount + 45;
             } else {
                 break;
@@ -295,32 +232,57 @@ public class Basket {
 
     public void addCoffeeDiscount(Map<String, Integer> basketOverview){
         int discount = 0;
-        while (basketOverview.getOrDefault("Black", 0) != 0 && (basketOverview.getOrDefault("Onion",0) != 0 | basketOverview.getOrDefault("Plain", 0) != 0 | basketOverview.getOrDefault("Everything",0) != 0 | basketOverview.getOrDefault("Sesame",0) != 0)){
-            basketOverview.merge("Black", -1, Integer::sum);
+        while (basketOverview.getOrDefault("Black Coffee", 0) != 0 && (basketOverview.getOrDefault("Onion Bagel",0) != 0 | basketOverview.getOrDefault("Plain Bagel", 0) != 0 | basketOverview.getOrDefault("Everything Bagel",0) != 0 | basketOverview.getOrDefault("Sesame Bagel",0) != 0)){
+            basketOverview.merge("Black Coffee", -1, Integer::sum);
 
-            if (basketOverview.getOrDefault("Onion",0) != 0){
+            if (basketOverview.getOrDefault("Onion Bagel",0) != 0){
 
-                basketOverview.merge("Onion", -1, Integer::sum);
+                basketOverview.merge("Onion Bagel", -1, Integer::sum);
                 discount = discount + 23;
                 continue;
             }
 
-            else if (basketOverview.getOrDefault("Everything", 0) != 0){
-                basketOverview.merge("Everything", -1, Integer::sum);
+            else if (basketOverview.getOrDefault("Everything Bagel", 0) != 0){
+                basketOverview.merge("Everything Bagel", -1, Integer::sum);
                 discount = discount + 23;
                 continue;
             }
 
-            else if (basketOverview.getOrDefault("Sesame",0) != 0){
-                basketOverview.merge("Sesame", -1, Integer::sum);
+            else if (basketOverview.getOrDefault("Sesame Bagel",0) != 0){
+                basketOverview.merge("Sesame Bagel", -1, Integer::sum);
                 discount = discount + 23;
                 continue;
             }
 
-            basketOverview.merge("Plain", -1, Integer::sum);
+            basketOverview.merge("Plain Bagel", -1, Integer::sum);
             discount = discount + 13;
         }
         this.discount = this.discount + discount;
+    }
+
+    public void printItemsInBasket(){
+        Item item;
+        int quantity;
+
+        for (Map.Entry<Item, Integer> entry : basket.entrySet()){
+            item = entry.getKey();
+            quantity = entry.getValue();
+
+            String price = String.format("%.2f", (((float) item.getPrice() * quantity) /100));
+            if (item instanceof Bagel){
+                System.out.printf("%-15s %5s %13s%n", item.getName(), quantity, price + "$");
+                printFilling((Bagel) item);
+            }
+
+            else {
+                System.out.printf("%-15s %5s %13s%n", item.getName(), quantity, price + "$");
+            }
+        }
+    }
+
+    public void printFilling(Bagel bagel) {
+        HashMap<String, Integer> listOfFillings = getQuantityOfFillings(bagel);
+        listOfFillings.forEach((key, value) -> System.out.printf("%-15s %5s%n", "- " + key, value));
     }
 }
 

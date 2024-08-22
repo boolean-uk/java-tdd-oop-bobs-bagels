@@ -7,27 +7,58 @@ import java.util.Scanner;
 import static com.booleanuk.core.Menu.fillingMenu;
 import static com.booleanuk.core.Menu.printFillingMenu;
 
-public class Bagel extends Item {
+public class Bagel implements Item {
     private final ArrayList<Filling> fillings = new ArrayList<>();
+    private final String sku;
+    private final String name;
+    private int price;
 
-    public Bagel(String sku, Integer price, String name, String variant){
-        super(sku, price, name, variant);
+    public Bagel(String sku, String name, int price){
+        this.sku = sku;
+        this.name = name;
+        this.price = price;
     }
 
-    public Bagel(Item item){
-        super(item.sku, item.price, item.name, item.variant);
+    public String getSKU() { return this.sku; }
+
+    public int getPrice() { return this.price; }
+
+    public String getName(){ return this.name; }
+
+    public ArrayList<Filling> getFillings() { return this.fillings; }
+
+    @Override
+    public boolean equals(Object o){
+        if (this == o)
+            return true;
+
+        if (o == null || o.getClass() != this.getClass())
+            return false;
+
+        Bagel bagel = (Bagel) o;
+        return (bagel.sku.equals(this.sku)
+                && bagel.price == this.price
+                && bagel.name.equals(this.name)
+                && bagel.fillings.equals(this.fillings));
     }
+
+    @Override
+    public int hashCode(){
+        return Objects.hash(this.sku, this.price, this.name, this.fillings);
+    }
+
 
     public String addFilling(Filling filling){
         if (filling != null){
             this.fillings.add(filling);
-            this.price += filling.price;
-            return filling.variant + " added to your bagel.";
+            this.price += filling.getPrice();
+            return filling.getName() + " added to your bagel.";
         }
         else
             return "Invalid filling. Please try again";
     }
 
+    // TODO: Move some of this over to order
     public void addFillingsToBagel(Scanner input){
         printFillingMenu();
         System.out.println("Select fillings to add to your bagel, or press 0 to continue.");
@@ -43,17 +74,13 @@ public class Bagel extends Item {
             else if (selectedFilling < fillingMenu.size()+1){
                 Filling filling = fillingMenu.get(selectedFilling-1);
                 addFilling(filling);
-                System.out.println(filling.variant + " added to the bagel.");
+                System.out.println(filling.getName() + " added to the bagel.");
             }
 
             else {
                 System.out.println("Invalid option. Try again.");
             }
         }
-    }
-
-    public ArrayList<Filling> getFillings() {
-        return this.fillings;
     }
 }
 

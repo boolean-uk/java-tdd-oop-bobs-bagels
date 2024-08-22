@@ -17,16 +17,16 @@ public class ReceiptTest {
         ArrayList<String> receiptContent = new ArrayList<>();
 
         for (int i = 0; i < 6; i++) {
-            Item item = Menu.getItemFromMenu("Bagel", "Plain");
+            Item item = Menu.getItemFromMenu("Plain Bagel");
             basketOne.addItemToBasket(item);
             assert item != null;
-            receiptContent.add(item.name + " " + item.variant);
+            receiptContent.add(item.getName());
         }
 
-        Item item = Menu.getItemFromMenu("Coffee", "Black");
+        Item item = Menu.getItemFromMenu("Black Coffee");
         assert item != null;
         basketOne.addItemToBasket(item);
-        receiptContent.add(item.name + " " + item.variant);
+        receiptContent.add(item.getName());
 
         Receipt receipt = new Receipt(basketOne);
         receipt.printReceipt();
