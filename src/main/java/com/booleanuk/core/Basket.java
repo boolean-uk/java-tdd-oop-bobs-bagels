@@ -35,7 +35,7 @@ public class Basket {
     }
 
     public Float countTotalValueOfItems() {
-        checkDiscountInBasket();
+        checkBagelDiscountInBasket();
         float totalPrice = 0;
         for (Map.Entry<String, Integer> kvp: this.basket.entrySet()) {
             totalPrice += (itemList.getPriceFromList(kvp.getKey()) * kvp.getValue());
@@ -176,14 +176,24 @@ public class Basket {
         }
     }
 
-    public void checkDiscountInBasket() {
+    private void checkBagelDiscountInBasket() {
         for(Map.Entry <String, Integer> kvp: this.basket.entrySet()) {
             //Checks for bagel discount
             while (kvp.getValue()  - 6 >= 0 && itemList.getTypeFromList(kvp.getKey()).equals("Bagel")) {
                 //Loops if the bagels are bigger than 6 as 6 is the smallest discount you can get.
                 this.basket.replace(kvp.getKey(), kvp.getValue() - discountManager.checkBagelDiscount(this.basket));
             }
+
+
+            for (Map.Entry<String, Integer> kvp2: this.basket.entrySet()) {
+                    if(kvp.getValue() > 0 && itemList.getTypeFromList(kvp.getKey()).equals("Bagel") && (kvp2.getValue() > 0 && itemList.getTypeFromList(kvp2.getKey()).equals("Coffee"))) {
+
+                        //For every bagel that is more than 1 and less than 6 check if there is a coffee in the list still and add it to discountManager. This is O(n^n)...
+                        this.basket.replace(kvp.getKey(), kvp.getValue() - 1);
+                        this.basket.replace(kvp2.getKey(), kvp2.getValue() - 1);
+                        discountManager.bagelAndCoffeeDiscount(kvp.getKey(), kvp2.getKey());
+                    }
+            }
         }
     }
-
 }
