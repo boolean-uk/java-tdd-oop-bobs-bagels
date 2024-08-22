@@ -5,10 +5,7 @@ package com.booleanuk.core;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import java.util.Scanner;
-
 public class TestOrderManager {
-
     @Test
     public void testOrderManagerConstr(){
         OrderManager om = new OrderManager();
@@ -155,12 +152,11 @@ public class TestOrderManager {
         OrderManager om = new OrderManager();
         om.setMaxCartSize(100);
 
-        // Add 3 plain bagels
-        om.addItem(BagelType.Plain);
-        om.addItem(BagelType.Plain);
-        om.addItem(BagelType.Plain);
 
-        // Add 2 of each bagel type
+
+        // 2 of each bagel type
+        om.addItem(BagelType.Plain);
+        om.addItem(BagelType.Plain);
         om.addItem(BagelType.Onion);
         om.addItem(BagelType.Onion);
         om.addItem(BagelType.Everything);
@@ -168,7 +164,7 @@ public class TestOrderManager {
         om.addItem(BagelType.Sesame);
         om.addItem(BagelType.Sesame);
 
-        // Add 2 of each coffee type
+        // 2 of each coffee type
         om.addItem(CoffeeType.Black);
         om.addItem(CoffeeType.Black);
         om.addItem(CoffeeType.White);
@@ -178,7 +174,7 @@ public class TestOrderManager {
         om.addItem(CoffeeType.Latte);
         om.addItem(CoffeeType.Latte);
 
-        // Add 2 of each filling type
+        // 2 of each filling type
         om.addItem(FillingType.Bacon);
         om.addItem(FillingType.Bacon);
         om.addItem(FillingType.Egg);
@@ -192,9 +188,13 @@ public class TestOrderManager {
         om.addItem(FillingType.Ham);
         om.addItem(FillingType.Ham);
 
-        // Generate and print the receipt
+        Double expectedPrice = 14.81-0.39;
         String receipt = om.getTotalDiscountRecieptString();
         System.out.println("Receipt:\n" + receipt);
+        Assertions.assertEquals(expectedPrice, om.getTotalDiscountReciept().price);
+
+        Double expectedPriceWithoutDiscount = 14.68;
+        Assertions.assertEquals(expectedPriceWithoutDiscount, om.getTotalCartPrice());
 
     }
 }
