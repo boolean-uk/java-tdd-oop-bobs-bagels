@@ -134,10 +134,10 @@ public class BasketTest {
         Basket basket = new Basket();
         Inventory inventory = new Inventory();
 
-        Assertions.assertEquals(0.49f, basket.costOfProduct(inventory.getItem("BGLO")), 0.001);
+        Assertions.assertEquals(0.49f, basket.costOfProduct(inventory.getItem("BGLO")), 0.0001);
 
         //Should fail because bagel has filling meaning the cost of product should be (0.49) + (0.12) = 0.61
-        Assertions.assertEquals(0.61f, basket.costOfProduct(inventory.getItem("BGLO", "FILX")), 0.001);
+        Assertions.assertEquals(0.61f, basket.costOfProduct(inventory.getItem("BGLO", "FILX")), 0.0001);
 
   }
 
@@ -145,14 +145,13 @@ public class BasketTest {
     public void TestShouldGetTheTotalCostOfBasket(){
         Basket basket = new Basket();
 
-
+        basket.add("BGLO", "FILS");
         basket.add("BGLP");
         basket.add("BGLP");
-        basket.add("BGLS");
-        basket.add("COFC");
+        basket.add("BGLP", "FILX");
 
-        //Sum should be 1.27 if it is set up correctly. For red test i have set up 1.3 which should fail due to not being exact.
-        Assertions.assertEquals(2.56f, basket.totalCost(), 0.001);
+        //Sum should be 1.9 if it is set up correctly. For red test I have set up 2.0 which should fail due to not being exact.
+        Assertions.assertEquals(2.00f, basket.totalCost(), 0.0001);
     }
 
 

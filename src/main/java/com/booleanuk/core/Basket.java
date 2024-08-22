@@ -150,12 +150,12 @@ public class Basket {
 
         for(Product product: currentBasket.keySet()){
 
-            double price = product.retrievePrice();
+            double price = costOfProduct(product);
             double quantity = currentBasket.get(product);
 
             sum += price * quantity;
-        }
 
+        }
         return sum;
     }
 }
