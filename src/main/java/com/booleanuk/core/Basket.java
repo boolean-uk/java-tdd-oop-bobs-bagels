@@ -7,57 +7,87 @@ import java.util.HashMap;
 // It contaisn two HashMaps, giving oversight over the number of certain items and their prices
 
 public class Basket {
-    private HashMap<String, Integer> Items;
-    private HashMap<String, Double> Prices;
+    private HashMap<Item, Integer> Items;
     private int capacity;
     private int numItems;
     private double total;
-    private ArrayList<Item> allItems;
+
+
+
+
 
     public Basket(int num){
         capacity=num;
         numItems=0;
-        Items = new HashMap<String, Integer>();
+        Items = new HashMap<Item, Integer>();
         total=0;
-        Prices=new HashMap<String, Double>();
+
     }
 
     public boolean add(Order order){
 
-        for (Item i: order.getItems()) {
+        Item item= order.getItems();
+        int num= order.getNum();
 
-            if (!Items.containsKey(i.getName()) & checkCapacity()) {
-                Items.put(i.getName(), 1);
-                total+=i.getPrice();
-                this.numItems+=1;
-                Prices.put(i.getName(), i.getPrice());
-            } else if (Items.containsKey(i.getName()) & checkCapacity()) {
-                Items.replace(i.getName(), Items.get(i.getName())+1);
-                total+=i.getPrice();
-                this.numItems+=1;
-            }
-            else{
-                System.out.println("Basket is full");
-                return false;
-
-            }
-
+        if (!Items.containsKey(item) & checkCapacity()) {
+            Items.put(item, num);
+            total+=item.getPrice()*num;
+            this.numItems+=num;
+        } else if (Items.containsKey(item) & checkCapacity()) {
+            Items.replace(item, Items.get(item)+num);
+            total+=item.getPrice()*num;
+            this.numItems+=1;
+        }
+        else{
+            System.out.println("Basket is full");
+            return false;
 
         }
+
+
+
         return true;
 
     }
 
+    public boolean add(Item item, int num){
+
+
+
+
+        if (!Items.containsKey(item) & checkCapacity()) {
+            Items.put(item, num);
+            total+=item.getPrice()*num;
+            this.numItems+=num;
+        } else if (Items.containsKey(item) & checkCapacity()) {
+            Items.replace(item, Items.get(item)+num);
+            total+=item.getPrice()*num;
+            this.numItems+=1;
+        }
+        else{
+            System.out.println("Basket is full");
+            return false;
+
+        }
+
+
+
+        return true;
+
+    }
+
+
+
     public boolean remove(Item item, int num){
-        if (Items.containsKey(item.getName())){
-            if (Items.get(item.getName())==0){
+        if (Items.containsKey(item)){
+            if (Items.get(item)==0){
                 System.out.println("The basket does not contain this item");
                 return false;
             }
 
-            Items.replace(item.getName(), Items.get(item.getName())-num);
-            this.numItems--;
-            total-=item.getPrice();
+            Items.replace(item, Items.get(item)-num);
+            this.numItems-=num;
+            total-=item.getPrice()*num;
             return true;
         }
         else{
@@ -89,15 +119,12 @@ public class Basket {
         return total;
     }
 
-    public HashMap<String, Integer> getItems() {
+    public HashMap<Item, Integer> getItems() {
         return Items;
     }
 
-    public HashMap<String, Double> getPrices() {
-        return Prices;
-    }
 
-    public void adjustTotal(double change){
+    public void setTotal(double change){
         total=change;
     }
 }

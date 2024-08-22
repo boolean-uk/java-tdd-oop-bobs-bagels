@@ -8,7 +8,7 @@ public class OrderTest {
     OrderTest(){
 
     }
-
+    /*
     @Test
     public void getOrderTotal(){
         Order order=new Order();
@@ -20,6 +20,7 @@ public class OrderTest {
 
         Assertions.assertEquals(0.49+0.12+0.99, order.getTotal());
     }
+    */
 
 
 }

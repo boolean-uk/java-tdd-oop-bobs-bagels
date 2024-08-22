@@ -29,7 +29,7 @@ public class Discount {
     }
 
 
-    public double[] discPrice(Order order){
+    public double[] discPrice(Basket basket){
 
         int plain=0;
         int bag=0;
@@ -46,23 +46,24 @@ public class Discount {
         discounts[1]=0;
         discounts[2]=0;
         discounts[3]=0;
+        HashMap<Item,Integer> items=basket.getItems();
 
-
-        for(Item i:order.getItems()){
+        for(Item i:items.keySet()){
             if(i.getSKU().contains("BGL")){
 
                 if(i.getName().contains("Plain")){
-                    plain++;
+                    plain+=items.get(i);
 
                 }
                 else {
-                    bag++;
+                    bag+=items.get(i);
                 }
 
             }else if(i.getSKU().contains("COF") & i.getName()=="Black Coffee"){
-                coff++;
+                coff+=items.get(i);
             }
         }
+
 
         double discPrice=0;
 
@@ -119,6 +120,7 @@ public class Discount {
 
 
         discounts[3]=disc;
+
 
         return discounts;
     }

@@ -15,16 +15,14 @@ public class UserTest {
     // This test is to see if we can get discounts on plain bagels
     @Test
     public void discountPlainTest(){
+        Bagel bagel=new Bagel("Plain");
+        bagel.addFilling(new Filling("Cheese"));
+        Basket basket=new Basket(15);
+        basket.add(bagel,13);
 
-        Order order=new Order();
-        for (int i=0; i<13; i++){
-            Bagel bagel=new Bagel("Plain");
-            bagel.addFilling(new Filling("Cheese"));
-            order.addItem(bagel);
-        }
         Discount discount=new Discount();
-        order.setTotal(order.getTotal()- discount.discPrice(order)[3]);
-        Assertions.assertEquals(3.99+0.39+13*0.12, order.getTotal(), 0.001);
+        basket.setTotal(basket.getTotal()- discount.discPrice(basket)[3]);
+        Assertions.assertEquals(3.99+0.39+13*0.12, basket.getTotal(), 0.001);
 
 
 
@@ -35,13 +33,13 @@ public class UserTest {
     @Test
     public void discountOnionTest(){
 
-        Order order=new Order();
-        for (int i=0; i<6; i++){
-            order.addItem(new Bagel("Onion"));
-        }
+        Bagel bagel=new Bagel("Onion");
+        Basket basket=new Basket(15);
+        basket.add(bagel, 6);
+
         Discount discount=new Discount();
-        order.setTotal(order.getTotal()- discount.discPrice(order)[3]);
-        Assertions.assertEquals(2.49, order.getTotal(), 0.001);
+        basket.setTotal(basket.getTotal()- discount.discPrice(basket)[3]);
+        Assertions.assertEquals(2.49, basket.getTotal(), 0.001);
 
 
     }
@@ -49,30 +47,30 @@ public class UserTest {
     @Test
     public void discountMoreOnionTest(){
 
-        Order order=new Order();
-        for (int i=0; i<7; i++){
-            order.addItem(new Bagel("Onion"));
-        }
+        Bagel bagel=new Bagel("Onion");
+        Basket basket=new Basket(15);
+        basket.add(bagel, 7);
+
         Discount discount=new Discount();
-        order.setTotal(order.getTotal()- discount.discPrice(order)[3]);
-        Assertions.assertEquals(2.49+0.49, order.getTotal(), 0.001);
+        basket.setTotal(basket.getTotal()- discount.discPrice(basket)[3]);
+        Assertions.assertEquals(2.49+0.49, basket.getTotal(), 0.001);
 
 
     }
     // The next two tests see if we can get a coffee/bagel discount
     @Test
     public void discountEverythingTest(){
+        Bagel bagel=new Bagel("Everything");
+        bagel.addFilling(new Filling("Cheese"));
+        Basket basket=new Basket(15);
+        basket.add(bagel, 7);
 
-        Order order=new Order();
-        for (int i=0; i<7; i++){
-            Bagel bagel=new Bagel("Everything");
-            bagel.addFilling(new Filling("Cheese"));
-            order.addItem(bagel);
-        }
-        order.addItem(new Coffee("Black"));
+
+        Order order0=new Order(new Coffee("Black"),1);
+        basket.add(order0);
         Discount discount=new Discount();
-        order.setTotal(order.getTotal()- discount.discPrice(order)[3]);
-        Assertions.assertEquals(2.49+7*0.12+1.25, order.getTotal(), 0.001);
+        basket.setTotal(basket.getTotal()- discount.discPrice(basket)[3]);
+        Assertions.assertEquals(2.49+7*0.12+1.25, basket.getTotal(), 0.001);
 
 
     }
@@ -80,66 +78,59 @@ public class UserTest {
     @Test
     public void discountCoffeeTest(){
 
-        Order order=new Order();
+
         Bagel bagel1=new Bagel("Plain");
         bagel1.addFilling(new Filling("Cheese"));
         Bagel bagel2=new Bagel("Onion");
         bagel2.addFilling(new Filling("Cheese"));
         Coffee coffee1=new Coffee("Black");
-        order.addItem(bagel1);
-        order.addItem(bagel2);
-        order.addItem(coffee1);
-        //order.addItem(coffee2);
+
+        Basket basket=new Basket(16);
+
+        basket.add(bagel1,1);
+        basket.add(bagel2,1);
+        basket.add(coffee1, 1);
         Discount discount=new Discount();
-        order.setTotal(order.getTotal()- discount.discPrice(order)[3]);
-        Assertions.assertEquals(1.25+0.39+0.12*2, order.getTotal(), 0.001);
+        basket.setTotal(basket.getTotal()- discount.discPrice(basket)[3]);
+        Assertions.assertEquals(1.25+0.39+0.12*2, basket.getTotal(), 0.001);
 
 
     }
     // This test is to see if we can get discounts with multiple types of bagels and coffee
     @Test
     public void discountManyTest(){
-        Order order=new Order();
-        for (int i=0; i<13; i++){
-            Bagel bagel=new Bagel("Plain");
-            order.addItem(bagel);
-            if(i%2==0){
-                order.addItem(new Bagel("Onion"));
-            }
 
-        }
-        order.addItem(new Coffee("Black"));
+
+
+        Basket basket=new Basket(30);
+        basket.add(new Bagel("Plain"),13);
+        basket.add(new Bagel("Onion"),7);
+        basket.add(new Coffee("Black"),1);
+
         Discount discount=new Discount();
-        order.setTotal(order.getTotal()- discount.discPrice(order)[3]);
+        basket.setTotal(basket.getTotal()- discount.discPrice(basket)[3]);
 
-        Assertions.assertEquals(3.99+2.49+0.39+1.25, order.getTotal(), 0.001);
+        Assertions.assertEquals(3.99+2.49+0.39+1.25, basket.getTotal(), 0.001);
 
     }
 
     // This test is to see if we can get a receipt
     @Test
     public void receiptTest(){
-        Order order=new Order();
-        for (int i=0; i<13; i++){
-            Bagel bagel=new Bagel("Plain");
-            bagel.addFilling(new Filling("Cheese"));
-            order.addItem(bagel);
-            if(i%2==0){
-                order.addItem(new Bagel("Onion"));
-            }
-
-        }
-        order.addItem(new Coffee("Black"));
-        Basket basket=new Basket(26);
-        basket.add(order);
+        Basket basket=new Basket(30);
+        basket.add(new Bagel("Plain"),13);
+        basket.add(new Bagel("Onion"),7);
+        basket.add(new Coffee("Black"),1);
 
         Receipt receipt=new Receipt();
 
-        receipt.printReceipt(order, true);
+        receipt.printReceipt(basket, true);
 
 
 
     }
+
+
 
 
 

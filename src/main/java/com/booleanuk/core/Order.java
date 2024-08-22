@@ -5,24 +5,23 @@ import java.util.ArrayList;
 // , and keeps track of how many there are
 public class Order {
 
-    private ArrayList<Item> Items;
+    private Item item;
     private int num;
     private double total;
 
-    public Order(){
-        Items=new ArrayList<>();
-        num=0;
+    public Order(Item item, int num){
+        this.item=item;
+        this.num=num;
+        if (item.getPrice()!=null){
+            this.total= item.getPrice()*num;
+        }
+        else{
+            total=0;
+        }
+
+
     }
     // the addItem() method refuses any item which cannot be purchased
-    public boolean addItem(Item item){
-        if (!item.canPurchase()){
-            return false;
-        }
-        Items.add(item);
-        total+=item.getPrice();
-        num++;
-        return true;
-    }
 
     public int getNum(){
         return num;
@@ -32,8 +31,8 @@ public class Order {
         return total;
     }
 
-    public ArrayList<Item> getItems(){
-        return Items;
+    public Item getItems(){
+        return item;
     }
 
     public void setTotal(double total) {

@@ -7,12 +7,11 @@ public class UserTest {
     // User story 1
     @Test
     public void addBagelTest() {
-        Order order = new Order();
+
         Bagel bagel = new Bagel("Plain");
-        Assertions.assertTrue(order.addItem(bagel));
 
         Basket basket = new Basket(10);
-        Assertions.assertTrue(basket.add(order));
+        Assertions.assertTrue(basket.add(bagel, 1));
         Assertions.assertTrue(basket.getNumItems() == 1);
 
 
@@ -20,14 +19,13 @@ public class UserTest {
     // User story 2
     @Test
     public void removeBagelTest() {
-        Order order = new Order();
+
         Bagel bagel = new Bagel("Plain");
-        Assertions.assertTrue(order.addItem(bagel));
 
         Basket basket = new Basket(10);
-        basket.add(order);
+        basket.add(bagel, 2);
 
-        Assertions.assertTrue(basket.remove(bagel, 1));
+        Assertions.assertTrue(basket.remove(bagel, 2));
         Assertions.assertTrue(basket.getNumItems() == 0);
 
 
@@ -35,21 +33,18 @@ public class UserTest {
     // User story 3
     @Test
     public void checkCapacityTest() {
-        Order order = new Order();
+
         Bagel bagel = new Bagel("Plain");
         Bagel bagel0 = new Bagel("Sesame");
         Bagel bagel1 = new Bagel("Onion");
         Bagel bagel2 = new Bagel("Everything");
-        order.addItem(bagel);
-        order.addItem(bagel1);
-        order.addItem(bagel2);
 
-
-        Assertions.assertTrue(order.addItem(bagel0));
         Basket basket = new Basket(3);
+        Assertions.assertTrue(basket.add(bagel,1));
+        Assertions.assertTrue(basket.add(bagel0,1));
+        Assertions.assertTrue(basket.add(bagel1,1));
 
-
-        Assertions.assertFalse(basket.add(order));
+        Assertions.assertFalse(basket.add(bagel2,1));
 
 
     }
@@ -58,39 +53,37 @@ public class UserTest {
     //User story 4
     @Test
     public void increaseCapacityTest() {
-        Order order = new Order();
+
         Bagel bagel = new Bagel("Plain");
         Bagel bagel0 = new Bagel("Sesame");
         Bagel bagel1 = new Bagel("Onion");
         Bagel bagel2 = new Bagel("Everything");
-        order.addItem(bagel);
-        order.addItem(bagel1);
-        order.addItem(bagel2);
 
-
-        Assertions.assertTrue(order.addItem(bagel0));
         Basket basket = new Basket(3);
+        Assertions.assertTrue(basket.add(bagel,1));
+        Assertions.assertTrue(basket.add(bagel0,1));
+        Assertions.assertTrue(basket.add(bagel1,1));
+
+        Assertions.assertFalse(basket.add(bagel2,1));
         basket.incCapacity(1);
 
 
-        Assertions.assertTrue(basket.add(order));
+        Assertions.assertTrue(basket.add(bagel2,1));
     }
 
     // User story 5
     @Test
     public void removeNothingTest() {
-        Order order = new Order();
         Bagel bagel = new Bagel("Plain");
         Bagel bagel0 = new Bagel("Sesame");
         Bagel bagel1 = new Bagel("Onion");
         Bagel bagel2 = new Bagel("Everything");
-        order.addItem(bagel);
-        order.addItem(bagel1);
-        order.addItem(bagel2);
-        order.addItem(bagel2);
+
         Basket basket = new Basket(3);
-        basket.incCapacity(1);
-        basket.add(order);
+        Assertions.assertTrue(basket.add(bagel,2));
+        Assertions.assertTrue(basket.add(bagel1,1));
+
+        Assertions.assertFalse(basket.add(bagel2,1));
 
 
 
@@ -104,7 +97,6 @@ public class UserTest {
     // User story 6
     @Test
     public void totalTest() {
-        Order order = new Order();
         Bagel bagel = new Bagel("Plain");
         bagel.addFilling(new Filling("Ham"));
         bagel.addFilling(new Filling("Cheese"));
@@ -114,13 +106,13 @@ public class UserTest {
         bagel1.addFilling(new Filling("Cream cheese"));
         Bagel bagel2 = new Bagel("Everything");
         Coffee coffee = new Coffee("Black");
-        order.addItem(bagel);
-        order.addItem(bagel0);
-        order.addItem(bagel1);
-        order.addItem(bagel2);
-        order.addItem(coffee);
+
         Basket basket = new Basket(5);
-        basket.add(order);
+        basket.add(bagel,1);
+        basket.add(bagel1,1);
+        basket.add(bagel2,1);
+        basket.add(coffee,1);
+        basket.add(bagel0,1);
 
 
         Assertions.assertEquals(0.39+3 * 0.49 + 4 * 0.12 + 0.99, basket.getTotal());
@@ -159,13 +151,17 @@ public class UserTest {
         Filling filling = new Filling("Jam");
         Assertions.assertNull(filling.getPrice());
 
-        Order order = new Order();
+        Order order = new Order(filling, 1);
         Filling filling0 = new Filling("Cheese");
 
-        order.addItem(filling0);
+        Order order0=new Order(filling0,1);
         Assertions.assertEquals(0.0, order.getTotal());
 
 
+
+
     }
+
+
 }
 

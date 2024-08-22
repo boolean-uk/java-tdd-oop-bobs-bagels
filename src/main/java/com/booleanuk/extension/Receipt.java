@@ -12,16 +12,15 @@ public class Receipt {
 
     }
 
-    public void printReceipt(Order order, boolean discountShow){
+    public void printReceipt(Basket basket, boolean discountShow){
 
-        Basket basket=new Basket(26);
+
         double[] discountPrices=new double[4];
-        basket.add(order);
+
         if(discountShow){
             Discount discount= new Discount();
-            discountPrices=discount.discPrice(order);
-            order.setTotal(order.getTotal()- discountPrices[3]);
-            basket.adjustTotal(order.getTotal());
+            discountPrices=discount.discPrice(basket);
+            basket.setTotal(basket.getTotal()- discountPrices[3]);
         }
 
         System.out.println("~~~ Bob's Bagels ~~~");
@@ -31,12 +30,13 @@ public class Receipt {
         System.out.println("----------------------------");
         System.out.println("");
 
-        HashMap<String, Integer> number=basket.getItems();
-        HashMap<String, Double> prices=basket.getPrices();
-        int L=6;
-        for (String item: number.keySet()){
-            String str=item+"  "+number.get(item)+ " £"+String.format("%.2f",prices.get(item)*number.get(item));
-            System.out.println(item+"  "+number.get(item)+ " £"+String.format("%.2f",prices.get(item)*number.get(item)));
+
+
+        HashMap<Item, Integer> number=basket.getItems();
+        for (Item item: number.keySet()){
+
+
+            System.out.println(item.getName()+"  "+number.get(item)+ " £"+String.format("%.2f",item.getPrice()*number.get(item)));
         }
 
         if(discountShow){
@@ -61,7 +61,7 @@ public class Receipt {
 
         System.out.println("");
         System.out.println("----------------------------");
-        System.out.println("Total"+ " £"+ basket.getTotal());
+        System.out.println("Total"+ " £"+ String.format("%.2f",basket.getTotal()));
         System.out.println("");
         System.out.println("Thank you for your order!");
 
