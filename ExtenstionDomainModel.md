@@ -4,6 +4,8 @@ I'm using all the functionality from core assignment into my extension but addin
 
 Bagel discount is priority over bagel + coffee discount. So if we have 5 bagels in basket and the user adds a bagel and coffee, the user will get 6 bagel discount rather than coffee and bagel discount.
 
+If basket has 6 bagels and 3 of them has filling, it will give a discount on the bagels and not the filling. The price will be bagel with discount + the filling.
+
 ## DiscountManager
 | Variable                                | Method                                                | Scenario                                                                                                                          | Outcome                                                                                                                                                                                                                           |
 |-----------------------------------------|-------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|

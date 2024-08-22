@@ -37,7 +37,6 @@ public class DiscountManager {
         for (String sku : bagelSKU) {
             if(basket.containsKey(sku)) {
                 int bagelQuantity = basket.get(sku);
-                System.out.println(bagelQuantity);
                 if (bagelQuantity >= 6 && bagelQuantity < 12) {
                     if(this.discountBasket.containsKey(sku)) {
                         float val = discountBasket.get(sku);
