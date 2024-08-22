@@ -1,6 +1,7 @@
 package com.booleanuk.core;
 
 import com.booleanuk.core.enums.BagelType;
+import com.booleanuk.core.enums.CoffeeType;
 import com.booleanuk.core.exceptions.FullBasketException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -26,7 +27,7 @@ public class OrderTest {
         basket.addProduct(BagelType.ONION);
         basket.addProduct(BagelType.ONION);
 
-        Double total = this.order.getTotalCost();
+        double total = this.order.getTotalCost();
         Assertions.assertEquals(total, 2.49);
     }
 
@@ -49,8 +50,18 @@ public class OrderTest {
         basket.addProduct(BagelType.PLAIN);
         basket.addProduct(BagelType.PLAIN);
 
-        Double total = this.order.getTotalCost();
+        double total = this.order.getTotalCost();
         Assertions.assertEquals(total, 3.99);
+    }
 
+    @Test
+    public void testGetTotalReturnsDiscountOnCoffeeAndBagel() throws FullBasketException {
+        Basket basket = this.order.getBasket();
+
+        basket.addProduct(CoffeeType.BLACK);
+        basket.addProduct(BagelType.SESAME);
+
+        double total = this.order.getTotalCost();
+        Assertions.assertEquals(total, 1.25);
     }
 }
