@@ -8,7 +8,7 @@ public class Bagel extends Product {
         this.filling = filling;
     }
 
-    public Filling getFillingSku(){
+    public Filling getFilling(){
         return this.filling;
     }
 

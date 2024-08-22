@@ -1,5 +1,6 @@
 package com.booleanuk.core;
 
+import javax.swing.plaf.synth.SynthOptionPaneUI;
 import java.util.HashMap;
 import java.util.Objects;
 
@@ -31,73 +32,100 @@ public class Basket {
     }
 
     public int getQuantity(String sku){
-        for(Product product : currentBasket.keySet()){
-            if(Objects.equals(sku, product.retrieveSku())){
-                return currentBasket.get(product);
-            }
+        Product product = inventory.getItem(sku);
+
+        if (currentBasket.containsKey(product)){
+            return currentBasket.get(product);
         }
 
-        return -1;
+        return 0;
+    }
+
+    public int getQuantity(String sku, String fillingSKu){
+        Product product = inventory.getItem(sku, fillingSKu);
+
+        if (currentBasket.containsKey(product)){
+            return currentBasket.get(product);
+        }
+
+        return 0;
     }
 
     public String add(String sku) {
 
-        for(Product product : currentBasket.keySet()){
-            if(Objects.equals(sku, product.retrieveSku())){
-                currentBasket.put(product, currentBasket.get(product) + 1);
-                productCount++;
+        if (productCount >= basketCapacity){
+            return "Basket is full";
+        }
 
-                return "Product added to basket";
+        Product product = inventory.getItem(sku);
 
-            }
+        if(currentBasket.containsKey(product)){
+            currentBasket.put(product, currentBasket.get(product) + 1);
+            productCount++;
+
+            return "Existing product added to basket";
         }
 
         currentBasket.put(inventory.getItem(sku), 1);
         productCount++;
 
         return "New product added to basket";
-
         }
 
     public String add(String sku, String fillingSku) {
+        if (productCount >= basketCapacity){
+            return "Basket is full";
+        }
 
-        for(Product product : currentBasket.keySet()){
+        Product newProduct = inventory.getItem(sku, fillingSku);
 
-            // Check for matching sku adn filling sku, if it is a match the +1 that product
-            if(Objects.equals(sku, product.retrieveSku() && Objects.equals(fillingSku, ))){
+        if(currentBasket.containsKey(newProduct)){
+            currentBasket.put(newProduct, currentBasket.get(newProduct) + 1);
+            productCount++;
 
-                currentBasket.put(product, currentBasket.get(product) + 1);
-                productCount++;
-
-                return "Existing Product added to basket";
-            }
+            return "Existing product added to basket";
         }
 
         currentBasket.put(inventory.getItem(sku, fillingSku), 1);
         productCount++;
 
         return "New product added to basket";
-
     }
 
-
     public String remove(String sku){
+        Product product = inventory.getItem(sku);
 
-        for(Product product : currentBasket.keySet()){
-            if(Objects.equals(sku, product.retrieveSku())){
-                if(currentBasket.get(product) <= 1){
-                    currentBasket.remove(product);
-                    productCount--;
+        if(currentBasket.containsKey(product)){
+            if (Objects.equals(currentBasket.get(product), 1)){
+                currentBasket.remove(product);
+                productCount--;
 
-                    return "This product is removed";
-                }
-                else {
-                    currentBasket.put(product, currentBasket.get(product)- 1);
-                    productCount--;
-
-                    return "One product is removed";
-                }
+                return "This product is removed";
             }
+
+            currentBasket.put(product, currentBasket.get(product) - 1);
+            productCount--;
+
+            return "One product is removed";
+        }
+        return "This product does not exist in basket!";
+    }
+
+    public String remove(String sku, String fillingSku){
+        Product product = inventory.getItem(sku, fillingSku);
+
+        if(currentBasket.containsKey(product)){
+            if (Objects.equals(currentBasket.get(product), 1)){
+                currentBasket.remove(product);
+                productCount--;
+
+                return "This product is removed";
+            }
+
+            currentBasket.put(product, currentBasket.get(product) - 1);
+            productCount--;
+
+            return "One product is removed";
         }
         return "This product does not exist in basket!";
     }
@@ -106,9 +134,15 @@ public class Basket {
         basketCapacity = newSize;
     }
 
-    public double costOfProduct(String sku){
-        Product newItem =  inventory.getItem(sku);
-        return newItem.retrievePrice();
+    public double costOfProduct(Product product){
+        if (product instanceof Bagel){
+            Bagel bagel = (Bagel) product;
+
+            if(bagel.getFilling() != null){
+                return product.retrievePrice() + bagel.getFilling().retrievePrice();
+            }
+        }
+        return product.retrievePrice();
     }
 
     public double totalCost(){

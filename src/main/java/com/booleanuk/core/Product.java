@@ -19,6 +19,10 @@ public abstract class Product {
     }
 
     public String retrieveSku() {
+        if (this.getSku() == null){
+            return "";
+        };
+
         return this.getSku();
     }
 

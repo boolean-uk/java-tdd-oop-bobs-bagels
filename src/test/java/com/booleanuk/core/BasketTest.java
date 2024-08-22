@@ -13,19 +13,25 @@ public class BasketTest {
         Assertions.assertEquals("New product added to basket", basket.add("BGLO"));
 
         Assertions.assertEquals(1, basket.retrieveProductCount());
-        Assertions.assertEquals("Product added to basket", basket.add("BGLO"));
+        Assertions.assertEquals("Existing product added to basket", basket.add("BGLO"));
+        Assertions.assertEquals(2, basket.retrieveProductCount());
+
+        //Assertions.assertEquals("New product added to basket", basket.add("BGLO", "FILX"));
     }
 
     @Test
     public void TestShouldAddBagelWithFilling(){
         Basket basket = new Basket();
 
+        basket.add("BGLE");
+
         Assertions.assertEquals("New product added to basket", basket.add("BGLE", "FILX"));
+
+        Assertions.assertEquals("Existing product added to basket", basket.add("BGLE", "FILX"));
 
     }
 
-
-
+    //changed
     @Test
     public void TestShouldIncreaseCurrentBasketValues(){
         Basket basket = new Basket();
@@ -35,14 +41,20 @@ public class BasketTest {
         basket.add("BGLE");
 
         Assertions.assertEquals(3, basket.getQuantity("BGLE"));
+
+        basket.add("BGLE", "FILX");
+        basket.add("BGLE", "FILX");
+
+        Assertions.assertEquals(2, basket.getQuantity("BGLE", "FILX"));
+
+        basket.add("BGLE", "FILX");
+        Assertions.assertEquals(3, basket.getQuantity("BGLE", "FILX"));
+
     }
 
     @Test
     public void TestShouldNotExceedBasketCapacity(){
         Basket basket = new Basket();
-        Inventory inventory = new Inventory();
-
-        basket.add("BGLE");
 
         int currentCapacity = basket.retrieveBasketCapacity();
 
@@ -50,46 +62,55 @@ public class BasketTest {
             basket.add("BGLE");
         }
 
-        Assertions.assertEquals(11, basket.retrieveProductCount());
+        ///Basket is now full
+        Assertions.assertEquals(10, basket.retrieveProductCount());
 
-        //Try adding one more exceeding the limit
-        basket.add("BGLE");
-
-        //Should fail due to the +1
-        Assertions.assertNotEquals(currentCapacity + 1, basket.retrieveProductCount());
+        //Try adding one more exceeding the limit getting the filed to add message
+        Assertions.assertEquals("Basket is full", basket.add("BGLS"));
     }
 
     @Test
     public void TestShouldIncrementProductIfBagelAndToppingIsSame(){
         Basket basket = new Basket();
 
-        //Adding a bagel with bacon filling
-        basket.add("BGLE", "FILB");
         Assertions.assertEquals("New product added to basket", basket.add("BGLE"));
-        Assertions.assertEquals("New product added to basket", basket.add("BGLO", "FILX"));
 
-        //If I now add the same bagel but different filling don't want the message indicating an increment of an existing product
-        //This should fail because "Product added to basket" indicates that the object exists in the basket already incrementing the count.
-        //Assertions.assertEquals("Product added to basket", basket.add("BGLE", "FILX"));
+        Assertions.assertEquals("New product added to basket", basket.add("BGLE", "FILX"));
+        Assertions.assertEquals("Existing product added to basket", basket.add("BGLE", "FILX"));
 
     }
 
     @Test
-    public void TestShouldRemoveFromBasket(){
+    public void TestShouldRemoveFromBasket() {
         Basket basket = new Basket();
 
-        basket.add("BGLO");
-        basket.add("BGLO");
 
-        //there are two same bagels meaning that the below message should be true.
-        Assertions.assertEquals("One product is removed", basket.remove("BGLO"));
+        basket.add("BGLE");
+        basket.add("BGLE");
 
-        //Should have removed one bagel and decreased the productCount with one.
-        Assertions.assertEquals(1, basket.retrieveProductCount());
+        //basket.add("BGLO", "FILX");
 
-        //Should make the onion bagels only one and give the other message.
-        Assertions.assertEquals("This product is removed", basket.remove("BGLO"));
+        Assertions.assertEquals(2, basket.retrieveProductCount());
+        Assertions.assertEquals("One product is removed", basket.remove("BGLE"));
+        Assertions.assertEquals("This product does not exist in basket!", basket.remove("BGLS"));
+        Assertions.assertEquals("This product is removed", basket.remove("BGLE"));
     }
+
+    @Test
+    public void TestShouldRemoveBagelWithFillingFromBasket(){
+        Basket basket = new Basket();
+
+
+        basket.add("BGLE", "FILX");
+        basket.add("BGLE", "FILS");
+        basket.add("BGLE", "FILX");
+
+        Assertions.assertEquals(3, basket.retrieveProductCount());
+        Assertions.assertEquals("One product is removed", basket.remove("BGLE", "FILX"));
+        Assertions.assertEquals("This product is removed", basket.remove("BGLE", "FILX"));
+
+
+            }
 
     @Test
     public void TestShouldChangeBasketCapacity(){
@@ -111,9 +132,16 @@ public class BasketTest {
     @Test
     public void TestShouldGetCostOfProduct(){
         Basket basket = new Basket();
+        Inventory inventory = new Inventory();
 
-        Assertions.assertEquals(0.49f, basket.costOfProduct("BGLS"), 0.001);
+        Assertions.assertEquals(0.49f, basket.costOfProduct(inventory.getItem("BGLO")), 0.001);
+
+        //Should fail because bagel has filling meaning the cost of product should be (0.49) + (0.12) = 0.61
+        Assertions.assertEquals(0.49f, basket.costOfProduct(inventory.getItem("BGLO", "FILX")), 0.001);
+
   }
+
+
 
     @Test
     public void TestShouldGetTheTotalCostOfBasket(){
