@@ -108,4 +108,14 @@ class BasketTest {
         Basket basket = new Basket(2);
         Assertions.assertEquals(0.0f, basket.calculateCost(), 0.001);
     }
+
+    @Test
+    public void testFindDiscountOn12Bagels() {
+        Basket b = new Basket(24);
+        b.addProduct(new Bagel(Controller.prices.get("BGLP"), Controller.prices.get("FILB")));
+        for (int i = 0; i < 12; i++) {
+            b.addProduct(new Bagel(Controller.prices.get("BGLO"), Controller.prices.get("FILB")));
+        }
+        Assertions.assertEquals(1.89f, b.findDiscount(), 0.001);
+    }
 }
