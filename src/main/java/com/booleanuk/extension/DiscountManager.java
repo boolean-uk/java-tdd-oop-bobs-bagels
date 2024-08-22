@@ -12,6 +12,7 @@ public class DiscountManager {
     HashMap<String, Integer> basket;
     HashMap<String, Float> discountBasket;
     HashMap<String, String> typeList;
+    HashMap<String, Integer> numberOfItems;
     ArrayList<String> bagelSKU;
     ArrayList<String> coffeeSKU;
     float totalPrice = 0;
@@ -21,6 +22,7 @@ public class DiscountManager {
         this.discountBasket = new HashMap<>();
         bagelSKU = new ArrayList<>();
         coffeeSKU = new ArrayList<>();
+        numberOfItems = new HashMap<>();
         populateSKUList();
     }
 
@@ -41,17 +43,38 @@ public class DiscountManager {
                     if(this.discountBasket.containsKey(sku)) {
                         float val = discountBasket.get(sku);
                         discountBasket.replace(sku, val, val+2.49f);
+                        if(numberOfItems.containsKey(sku)) {
+                            numberOfItems.compute(sku, (k, quantity) -> quantity + 6);
+                        }else {
+                            numberOfItems.put(sku, 6);
+                        }
                     }else {
                         discountBasket.put(sku, 2.49f);
+                        if(numberOfItems.containsKey(sku)) {
+                            numberOfItems.compute(sku, (k, quantity) -> quantity + 6);
+                        }else {
+                            numberOfItems.put(sku, 6);
+                        }
                     }
+
                     return 6;
 
                 } else if (bagelQuantity >= 12) {
                     if(discountBasket.containsKey(sku)) {
                         float val = discountBasket.get(sku);
                         discountBasket.replace(sku, val, val + 3.99f);
+                        if(numberOfItems.containsKey(sku)) {
+                            numberOfItems.compute(sku, (k, quantity) -> quantity + 12);
+                        }else {
+                            numberOfItems.put(sku, 12);
+                        }
                     }else {
                         discountBasket.put(sku, 3.99f);
+                        if(numberOfItems.containsKey(sku)) {
+                            numberOfItems.compute(sku, (k, quantity) -> quantity + 12);
+                        }else {
+                            numberOfItems.put(sku, 12);
+                        }
                     }
                     return 12;
                 }
@@ -73,15 +96,32 @@ public class DiscountManager {
         }
     }
 
-    public void bagelAndCoffeeDiscount(String bagelSKU, String coffeeSKU) {
-        String bagelCoffeeSku = bagelSKU+coffeeSKU;
+    public void bagelAndCoffeeDiscount(String bagelSKU, String coffeeSKU, int amountOfDiscountedItem) {
+        String bagelCoffeeSku = bagelSKU + ":" + coffeeSKU;
         if(!discountBasket.containsKey(bagelCoffeeSku)) {
-            discountBasket.put(bagelSKU+coffeeSKU, 1.25f);
+            if(numberOfItems.containsKey(bagelCoffeeSku)) {
+                discountBasket.put(bagelCoffeeSku, 1.25f);
+                numberOfItems.replace(bagelCoffeeSku, amountOfDiscountedItem);
+            }else {
+                numberOfItems.put(bagelCoffeeSku, amountOfDiscountedItem);
+                discountBasket.put(bagelCoffeeSku, 1.25f);
+            }
         }else {
             float val = discountBasket.get(bagelCoffeeSku);
             discountBasket.replace(bagelCoffeeSku, val, val + 1.25f);
+            if(numberOfItems.containsKey(bagelCoffeeSku)) {
+                numberOfItems.put(bagelCoffeeSku, amountOfDiscountedItem);
+            }else {
+                numberOfItems.put(bagelCoffeeSku, amountOfDiscountedItem);
+            }
         }
-
     }
 
+    public HashMap<String, Integer> getNumberOfItems() {
+        return this.numberOfItems;
+    }
+
+    public float getDiscountPrice(String sku) {
+        return this.discountBasket.get(sku);
+    }
 }

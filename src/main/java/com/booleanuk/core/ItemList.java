@@ -86,4 +86,8 @@ public class ItemList {
     public String getTypeFromList(String sku) {
         return this.typeList.get(sku);
     }
+
+    public String getNameFromList(String sku) {
+        return this.nameList.get(sku);
+    }
 }
