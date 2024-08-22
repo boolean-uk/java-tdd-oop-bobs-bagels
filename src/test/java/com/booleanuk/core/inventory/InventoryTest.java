@@ -48,4 +48,10 @@ public class InventoryTest {
         Assertions.assertEquals("SKU 'HELLO' does not exist.", e.getMessage());
         printExceptionMessageToConsole(e);
     }
+
+    @Test
+    public void printInventoryMenu() {
+        inventory = new Inventory();
+        inventory.printMenu();
+    }
 }
