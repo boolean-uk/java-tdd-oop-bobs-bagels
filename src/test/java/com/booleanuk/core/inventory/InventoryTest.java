@@ -9,6 +9,12 @@ import java.util.Map;
 public class InventoryTest {
     Inventory inventory;
 
+    // Print exception method function
+    public void printExceptionMessageToConsole(Exception e) {
+        System.out.println("\nException message:");
+        System.out.println("\t" + e.getMessage() + "\n");
+    }
+
     @Test
     public void checkInventoryInitialization() {
         inventory = new Inventory();
@@ -28,5 +34,18 @@ public class InventoryTest {
     public void getItemBasedOnSKU() {
         inventory = new Inventory();
         Assertions.assertEquals("BAGE", inventory.getItem("BAGE").getSKU());
+    }
+
+    @Test
+    public void throwExceptionWhenItemIsNotInInventory() {
+        inventory = new Inventory();
+
+        // Try to invoke exception
+        InventoryItemException e = Assertions.assertThrows(
+                InventoryItemException.class,
+                () -> { inventory.getItem("HELLO"); }
+        );
+        Assertions.assertEquals("SKU 'HELLO' does not exist.", e.getMessage());
+        printExceptionMessageToConsole(e);
     }
 }
