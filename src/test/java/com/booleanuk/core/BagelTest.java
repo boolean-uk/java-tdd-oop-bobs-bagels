@@ -9,7 +9,7 @@ public class BagelTest {
     public void createBagel() {
         Bagel bagel = new Bagel("BGLO");
 
-        Assertions.assertEquals(0.49, bagel.getPrice());
+        Assertions.assertEquals(0.49f, bagel.getPrice(), 0.001);
     }
 
     @Test
