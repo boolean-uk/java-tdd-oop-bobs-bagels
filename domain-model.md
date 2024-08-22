@@ -4,16 +4,17 @@
 
 ## Overview of the classes
 
-| Class     | Members    | Types                |
-|-----------|------------|----------------------|
-| `Order`   | `basket`   | `Basket`             |
-|           | `total`    | `Integer`            |
-| `Basket`  | `bagels`   | `ArrayList<Product>` |
-|           | `capacity` | `Integer`            |
-| `Product` | `sku`      | `SKU`                |
-|           | `name`     | `String`             |
-|           | `price`    | `Double`             |
-|           | `variant`  | `MenuCategory`       |
+| Class     | Members       | Types                |
+|-----------|---------------|----------------------|
+| `Order`   | `basket`      | `Basket`             |
+|           | `total`       | `Integer`            |
+| `Basket`  | `bagels`      | `ArrayList<Product>` |
+|           | `capacity`    | `Integer`            |
+| `Product` | `sku`         | `SKU`                |
+|           | `name`        | `String`             |
+|           | `price`       | `Double`             |
+|           | `variant`     | `MenuCategory`       |
+|           | `hasDiscount` | `Boolean`            |
 
 These are the classes that will inherit from the **Product** class.
 
@@ -91,14 +92,19 @@ All the 3 user stories will be implemented in the following class:
 
 And here are the methods that will be used:
 
-| Method                            | Return  |
-|-----------------------------------|---------|
-| `getNumberOfItems(Basket basket)` | `int[]` |
-|                                   |         |
-|                                   |         |
+| Method                                                   | Return    | Note                                                                                  |
+|----------------------------------------------------------|-----------|---------------------------------------------------------------------------------------|
+| `getNumberOfItems(Basket basket)`                        | `Integer` | Returns the number of bagels and sets the 'hasDiscount' state on the correct items.   |
+| `getTotalCost()`                                         | `Double`  | Done lots of refactoring in this method.                                              |
+| `addFillingPriceToTotalCost(Bagel bagel)`                | `void`    | Iterate over a bagels fillings list and adds it to the total cost.                    |
+| `getCorrectDiscount(int num)`                            | `Double`  | Finds and returns the correct discount as a double.                                   |
+| `checkCoffeeAndBagelPair(Product product, Product next)` | `void`    | Checks prev and next product and adds a discount if there is a coffee and bagel pair. |
+| `markAsDiscounted(int limit)`                            | `void`    | Changes the 'hasDiscount' state on bagels that will have a discount.                  |
+| `isBagel(Product product)`                               | `Boolean` | Checks if a product is an instance of Bagel.                                          |
+| `deliverAndResetTotalCost(Double total)`                 | `Double`  | Deliver and resets the total cost value.                                              |
 
 To make things simple, I just add the values of the discounts as final members in the 'Order' class.
-These will be named 'discount1' and 'discount2' and have the Double discount values hardcoded in them.
+These will be named 'discount1', 'discount2' and  have the Double discount values hardcoded in them.
 
 
 
