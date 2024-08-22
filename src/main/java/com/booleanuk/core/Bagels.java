@@ -2,7 +2,7 @@ package com.booleanuk.core;
 
 import java.util.HashMap;
 
-public class Bagels extends Product {
+public class Bagels extends Product implements Helper {
     private HashMap<Fillings, Integer> fillings;
 
     Bagels(String SKU, double price, String variant) {
@@ -34,6 +34,15 @@ public class Bagels extends Product {
                 }
             }
         }
+
+    public boolean addProduct(Order order) {
+        order.getBasket().put(this.getSKU(), order.getBasket().getOrDefault(this.getSKU(), 0) + 1);
+        order.addToTotalPrice(this.getPrice());
+        order.getBagelsList().add(this);
+        order.setLastAddedBagel(this);
+        System.out.println(order.sizeOfBasket());
+        return true;
+    }
 
     }
 

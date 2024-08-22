@@ -3,15 +3,20 @@ package com.booleanuk.core;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.NoSuchElementException;
+import java.util.Optional;
 
 
 public class Order {
     private HashMap<String, Integer> basket = new HashMap<>();
-    private ArrayList<Product> bagelsList = new ArrayList<>();
-    private ArrayList<Product> coffeeList = new ArrayList<>();
+    private ArrayList<Bagels> bagelsList = new ArrayList<>();
+    private ArrayList<Coffee> coffeeList = new ArrayList<>();
     private final Store store;
     private int totalPrice;
     private Bagels lastAddedBagel;
+
+    Order(Store store) {
+        this.store = store;
+    }
 
     public int getPricesBagelsSize() {
         return bagelsList.size();
@@ -21,12 +26,25 @@ public class Order {
         return coffeeList.size();
     }
 
-    Order(Store store) {
-        this.store = store;
+
+    public Bagels getLastAddedBagel() {
+        return lastAddedBagel;
     }
 
-    private Bagels getLastAddedBagel() {
-        return lastAddedBagel;
+    public void setLastAddedBagel(Bagels lastAddedBagel) {
+        this.lastAddedBagel = lastAddedBagel;
+    }
+
+    public ArrayList<Bagels> getBagelsList() {
+        return bagelsList;
+    }
+
+    public ArrayList<Coffee> getCoffeeList() {
+        return coffeeList;
+    }
+
+    public void addToTotalPrice(double price) {
+        this.totalPrice += (int) (price * 100);
     }
 
     public boolean addProduct(Product product) {
@@ -38,33 +56,11 @@ public class Order {
             System.out.println("Didn't find the product you're trying to add in our inventory!");
             return false;
         }
-
-        //bagels
-        if (product instanceof Bagels) {
-            basket.put(product.getSKU(), basket.getOrDefault(product.getSKU(), 0) + 1);
-            this.totalPrice += (int) (product.getPrice() * 100);
-            bagelsList.add(product);
-            lastAddedBagel = (Bagels) product;
-
-            //fillings
-        } else if (product instanceof Fillings) {
-            if (!isBagelInBasket()) {
-                System.out.println("You have to choose a bagel first before you can add a filling");
-                return false;
-            }
-            this.totalPrice += (int) (product.getPrice() * 100);
-            Bagels lastBagel = getLastAddedBagel();
-            lastBagel.addFilling((Fillings) product);
-
-            //coffee
-        } else {
-            basket.put(product.getSKU(), basket.getOrDefault(product.getSKU(), 0) + 1);
-            this.totalPrice += (int) (product.getPrice() * 100);
-            coffeeList.add(product);
-
+        if (product instanceof Helper) {
+            return ((Helper) product).addProduct(this);
         }
 
-        return true;
+        return false;
     }
 
     public boolean containsKeyBasket(String SKU) {
@@ -72,7 +68,7 @@ public class Order {
     }
 
 
-    private boolean isBagelInBasket() {
+    public boolean isBagelInBasket() {
         return (basket.keySet().stream().anyMatch(key -> key.startsWith("BGL")));
 
     }
@@ -86,6 +82,7 @@ public class Order {
         if (!basket.containsKey(product.getSKU())) {
             throw new NoSuchElementException("Product not found in the basket");
         }
+        coffeeList.remove(product);
         bagelsList.remove(product);
         basket.remove(product.getSKU());
     }
