@@ -4,30 +4,32 @@ import java.util.ArrayList;
 
 public class Menu {
 
-    private final ArrayList<Item> menu= new ArrayList<>(){
+    public final static ArrayList<Item> menu = new ArrayList<>();
+
+    static {
+        populateMenu();
+    }
+
+    private static void populateMenu() {
         {
-            add(new Item("BGLO", 0.49f, "Bagel", "Onion"));
-            add(new Item("BGLP", 0.39f, "Bagel", "Plain"));
-            add(new Item("BGLE", 0.49f, "Bagel", "Everything"));
-            add(new Item("BGLS", 0.49f, "Bagel", "Sesame"));
-            add(new Item("COFB", 0.99f, "Bagel", "Black"));
-            add(new Item("COFW", 1.19f, "Bagel", "White"));
-            add(new Item("COFC", 1.29f, "Bagel", "Cappuccino"));
-            add(new Item("COFL", 1.29f, "Bagel", "Latte"));
-            add(new Item("FILB", 0.12f, "Bagel", "Bacon"));
-            add(new Item("FILE", 0.12f, "Bagel", "Egg"));
-            add(new Item("FILC", 0.12f, "Bagel", "Cheese"));
-            add(new Item("FILX", 0.12f, "Bagel", "Cream cheese"));
-            add(new Item("FILS", 0.12f, "Bagel", "Smoked salmon"));
-            add(new Item("FILH", 0.12f, "Bagel", "Ham"));
+            menu.add(new Item("BGLO", 0.49f, "Bagel", "Onion"));
+            menu.add(new Item("BGLP", 0.39f, "Bagel", "Plain"));
+            menu.add(new Item("BGLE", 0.49f, "Bagel", "Everything"));
+            menu.add(new Item("BGLS", 0.49f, "Bagel", "Sesame"));
+            menu.add(new Item("COFB", 0.99f, "Coffee", "Black"));
+            menu.add(new Item("COFW", 1.19f, "Coffee", "White"));
+            menu.add(new Item("COFC", 1.29f, "Coffee", "Cappuccino"));
+            menu.add(new Item("COFL", 1.29f, "Coffee", "Latte"));
+            menu.add(new Item("FILB", 0.12f, "Filling", "Bacon"));
+            menu.add(new Item("FILE", 0.12f, "Filling", "Egg"));
+            menu.add(new Item("FILC", 0.12f, "Filling", "Cheese"));
+            menu.add(new Item("FILX", 0.12f, "Filling", "Cream cheese"));
+            menu.add(new Item("FILS", 0.12f, "Filling", "Smoked salmon"));
+            menu.add(new Item("FILH", 0.12f, "Filling", "Ham"));
         }
     };
 
-    public ArrayList<Item> getMenu(){
-        return this.menu;
-    }
-
-    public boolean itemExistsMenu(String itemSKU){
+    public static boolean itemExistsMenu(String itemSKU){
         for (Item item : menu){
             if (item.getItemSKU().equals(itemSKU)){
                 return true;
@@ -36,7 +38,7 @@ public class Menu {
         return false;
     }
 
-    public Item getMenuItem(String itemSKU){
+    public static Item getMenuItem(String itemSKU){
         if (itemExistsMenu(itemSKU)){
             for (Item item : menu){
                 if (item.getItemSKU().equals(itemSKU)){
@@ -47,7 +49,7 @@ public class Menu {
         return null;
     }
 
-    public String getItemCost(String itemSKU){
+    public static String getItemCost(String itemSKU){
         if (itemExistsMenu(itemSKU)){
             for (Item item : menu){
                 if (item.getItemSKU().equals(itemSKU)){
