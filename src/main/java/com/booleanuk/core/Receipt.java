@@ -2,7 +2,7 @@ package com.booleanuk.core;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Date;
+
 
 public class Receipt {
 	public ArrayList<String> receipt;
@@ -13,6 +13,5 @@ public class Receipt {
 		this.receipt = receipt;
 		this.price = price;
 		this.date = LocalDateTime.now();
-		System.out.println(receipt);
 	}
 }

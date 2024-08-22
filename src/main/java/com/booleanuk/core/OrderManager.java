@@ -2,10 +2,29 @@ package com.booleanuk.core;
 
 import java.io.File;
 import java.time.format.DateTimeFormatter;
-import java.time.format.FormatStyle;
 import java.util.*;
-//import java.time.format.DateTimeFormatter.
 
+
+/** My assumptions
+ *  Discounts are applied by the following rules:
+ *  12 of the same bagel -> 3.99
+ *  6 of the same bagel -> 2.49
+ *  if there is a black coffee AND a plain bagel in the cart:
+ *      convert them to a bagel-coffee combo.
+ *
+ *  Filling does noe change the price of any bagel and is calculated separately.
+ *
+ *  Changes made:
+ *  Started off with a class hierarchy of Item <-- {coffee, bagel, filling} bagel has a list of fillings
+ *  Created a way to create a bagel and add fillings to the bagel-object
+ *  Created a func to take user input and build the order through interaction with terminal
+ *  --> that was very difficult to test
+ *  --> Scrapped the Item classes for an interface and created an enum for each item, and a hashmap of
+ *   values connected to the enum.
+ *   --> this is the current implementation.
+ *
+ *
+ */
 
 public class OrderManager {
 	private int maxCartSize = 24; // max default size of basket
@@ -52,9 +71,9 @@ public class OrderManager {
 			Scanner sc = new Scanner(f);
 			String csvOrder = sc.nextLine();
 			while(sc.hasNext()){
-				String fullLine = sc.nextLine();
-				String filtedLine = fullLine.replace(' ', '_');
-				String[] line = filtedLine.split(",");
+				String fullUnfilteredLine = sc.nextLine();
+				String filteredLine = fullUnfilteredLine.replace(' ', '_');
+				String[] line = filteredLine.split(",");
 
 				// SKU, Price, Name, Variant
 				String name = line[2];
@@ -178,19 +197,15 @@ public class OrderManager {
 		return Double.valueOf(adjustedPrice);
 	}
 
-	
 	public double getTotalDiscountedPrice(){
 		return getTotalDiscountReciept().price;
 	}
-
 
 	public String getTotalDiscountRecieptString(){
 		Receipt r =  getTotalDiscountReciept();
 		ArrayList<String> recieptRaw = r.receipt;
 		String prettyReciept = "";
 
-
-		// do some
 		int itemLengthWithPadding = 23;
 		int quantityWithPadding = 2;
 		int priceWithPadding = 8;
@@ -226,7 +241,7 @@ public class OrderManager {
 			String fomrattedPrice = String.format("%" + priceWithPadding + "s", price);
 			String formattedDiscount = "";
 
-			// eg (-0.13)
+			// eg: (-0.13)
 			if (discounted != ""){
 				formattedDiscount = String.format("%" + totalWidth + "s", discounted);
 				formattedDiscount = "\n" + formattedDiscount;
@@ -246,8 +261,9 @@ public class OrderManager {
 		prettyReciept += "\n" + sumStart + " ".repeat(quantityWithPadding) + sumSavedAmountPadded;
 
 		// total sum
+		String totalSumPrice = String.format("%.2f", r.price);
 		String totalStart = String.format("%-" + itemLengthWithPadding + "s", "Total");
-		String totalSum = String.format("%" + priceWithPadding + "s", "£ " + r.price);
+		String totalSum = String.format("%" + priceWithPadding + "s", "£ " + totalSumPrice);
 		prettyReciept += "\n" + totalStart + " ".repeat(quantityWithPadding) + totalSum;
 
 
@@ -255,6 +271,8 @@ public class OrderManager {
 
 		return prettyReciept;
 	}
+
+
 
 	// case: e1
 	public Receipt getTotalDiscountReciept(){
@@ -285,8 +303,8 @@ public class OrderManager {
 						totalPrice += 3.99*iters;
 						String discountString = String.format("%.2f", (actualPrice*12-3.99));
 						reciept.add(item + " Bagel x 12," + iters + ",3.99,(-"+ discountString + ")");
-
 					}
+
 					iters = 0;
 					while (amountOfBagels >= 6) {
 						amountOfBagels -= 6;
@@ -295,7 +313,7 @@ public class OrderManager {
 					if(iters > 0){
 						totalPrice += 2.49*iters;
 						String discountString = String.format("%.2f", (actualPrice*6-2.49));
-						reciept.add(item + " Bagel x 12," + iters + ",2.49,(-" + discountString + ")");
+						reciept.add(item + " Bagel x 6," + iters + ",2.49,(-" + discountString + ")");
 					}
 
 					// update if used
@@ -313,19 +331,25 @@ public class OrderManager {
 				case CoffeeType.Black:
 					try{
 						int amountOfBlackCoffee = cartCopy.get(item);
-						for(int i = 0; i < amountOfBlackCoffee; i++){
-							int amountOfPlainBagel = cartCopy.get(BagelType.Plain);
-							int iter = 0;
-							if(amountOfPlainBagel > 0){
-								cartCopy.put(BagelType.Plain, amountOfPlainBagel -1);
-								cartCopy.put(CoffeeType.Black, amountOfBlackCoffee-1-i);
-								iter++;
-							}
-							double actualPrice = getPriceOfItem(BagelType.Plain) + getPriceOfItem(CoffeeType.Black);
-							String discountString = String.format("%.2f", (actualPrice-1.25));
-							totalPrice+=1.25;
-							reciept.add("Coffee and Bagel,1,1.25,(-"+ discountString+ ")");
-						}
+						int amountOfPlainBagels = cartCopy.get(BagelType.Plain);
+						int amountOfCoffeeBagelCombos= 0;
+						while(amountOfBlackCoffee-- > 0 && amountOfPlainBagels-- > 0)
+							amountOfCoffeeBagelCombos++;
+
+						if (amountOfCoffeeBagelCombos == 0) break;
+
+						cartCopy.put(BagelType.Plain, amountOfPlainBagels);
+						cartCopy.put(CoffeeType.Black, amountOfBlackCoffee);
+
+						double actualDiscountPrice = amountOfCoffeeBagelCombos * 1.25;
+						totalPrice += actualDiscountPrice;
+						String discountString = String.format("%.2f", actualDiscountPrice);
+						double saved = (getPriceOfItem(CoffeeType.Black) + getPriceOfItem(BagelType.Plain)) * amountOfCoffeeBagelCombos - 1.25*amountOfCoffeeBagelCombos;
+						String savedString = String.format("%.2f", saved);
+						saved = Double.valueOf(savedString);
+						String discountReceiptString = "Coffee and Bagel," + amountOfCoffeeBagelCombos + "," + discountString + ",(-" + saved + ")";
+
+						reciept.add(discountReceiptString);
 					}catch (NullPointerException e){}
 					break;
 				default:
@@ -338,27 +362,21 @@ public class OrderManager {
 		for (ItemInterface item: cartCopy.keySet()){
 			try{
 				int amountOfItemsLeftInCart = cartCopy.get(item);
-				int amounfOfCoffeesAdded = 0;
-				int amountOfPlainBagels = 0;
 				if (amountOfItemsLeftInCart > 0){
 					double itemPricePer = getPriceOfItem(item);
-					double sumItemsPriceLeftInCart= itemPricePer * amountOfItemsLeftInCart;
-					String doublePriceStr = String.format("%.2f", sumItemsPriceLeftInCart);
+					double sumItemsPriceLeftInCart = itemPricePer * amountOfItemsLeftInCart;
 					totalPrice += sumItemsPriceLeftInCart;
-//					reciept.add( item + " x " + amountOfItemsLeftInCart + " for " + String.format("%.2f", sumItemsPriceLeftInCart) + "\t");
-					String type = "";
 
+					String type = "";
 					if (item instanceof BagelType) type = "Bagel";
 					if (item instanceof CoffeeType) type = "Coffee";
 					if (item instanceof FillingType) type = "Filling";
-					String currItemRecieptString =  type +": " + item + ","+ amountOfItemsLeftInCart + "," + String.format("%.2f", sumItemsPriceLeftInCart);
 
+					String currItemRecieptString =  type +": " + item + ","+ amountOfItemsLeftInCart + "," + String.format("%.2f", sumItemsPriceLeftInCart);
 					reciept.add(currItemRecieptString);
 				}
 			} catch (NullPointerException e){}
 		}
-
-		System.out.println(reciept);
 
 		String strPrice = String.format("%.2f", totalPrice);
 		totalPrice = Double.valueOf(strPrice);

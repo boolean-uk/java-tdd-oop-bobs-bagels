@@ -146,6 +146,25 @@ public class TestOrderManager {
         System.out.println("res\n" + res);
     }
 
+
+    /** My sample receipt:
+     *
+     *        ~~~Bob's Bagels~~~
+     *             2024-08-22
+     *             14:54:47
+     * =================================
+     *
+     * Bagel: Onion           2   £ 0.98
+     * Coffee: Black          3   £ 2.97
+     * Everything Bagel x 12  1   £ 2.49
+     *                           (-0.45)
+     * Plain Bagel x 12       1   £ 3.99
+     *                           (-0.69)
+     * ――――――――――――――――――――
+     * Saved                      £ 1.14
+     * Total                     £ 10.43
+     * =================================
+     */
     @Test
     public void testReceipt(){
         OrderManager om = new OrderManager();
@@ -215,6 +234,52 @@ public class TestOrderManager {
                 "=================================";
 
         String resultString = om.getTotalDiscountRecieptString();
+        System.out.println(resultString);
         Assertions.assertTrue(resultString.contains(expectedSubString));
+    }
+
+    @Test
+    public void testTestDiscountValues(){
+        OrderManager om = new OrderManager();
+        for (int i = 0; i < 12; i++)
+            om.addItem(BagelType.Plain);
+
+        double priceOfTwelvePlain = 0.39*12;
+        Assertions.assertEquals(3.99, om.getTotalDiscountReciept().price);
+        Assertions.assertEquals(priceOfTwelvePlain, om.getTotalCartPrice());
+
+
+        om = new OrderManager();
+        for (int i = 0; i < 12; i++)
+            om.addItem(BagelType.Onion);
+
+        double priceOfTwelveOnion = 0.49*12;
+        Assertions.assertEquals(3.99, om.getTotalDiscountReciept().price);
+        Assertions.assertEquals(priceOfTwelveOnion, om.getTotalCartPrice());
+
+        om = new OrderManager();
+        for (int i = 0; i < 12; i++)
+            om.addItem(BagelType.Everything);
+
+        double priceOfTwelveEverything = 0.49*12;
+        Assertions.assertEquals(3.99, om.getTotalDiscountReciept().price);
+        Assertions.assertEquals(priceOfTwelveEverything, om.getTotalCartPrice());
+
+        om = new OrderManager();
+        for (int i = 0; i < 12; i++)
+            om.addItem(BagelType.Sesame);
+
+
+        double priceOfTwelveSesame = 0.49*12;
+        Assertions.assertEquals(3.99, om.getTotalDiscountReciept().price);
+        Assertions.assertEquals(priceOfTwelveSesame, om.getTotalCartPrice());
+
+
+
+
+
+
+
+
     }
 }
