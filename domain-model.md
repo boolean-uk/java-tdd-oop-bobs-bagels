@@ -63,7 +63,7 @@
 |             |                                                           |                                                                                                       |                                                      |                                                                                                     |
 |             |                                                           | `centerText(String text, int width)`                                                                  |                                                      | Center header and footer text on the receipt                                                        |
 |             |                                                           |                                                                                                       |                                                      |                                                                                                     |
-|             |                                                           | `printFooter(int receiptWidth)`                                                                       |                                                      | Print footer to receipt                                                                             |
+|             |                                                           | `printFooter(int receiptWidth, int totalAmountOfSavings)`                                             |                                                      | Print footer to receipt                                                                             |
 |             |                                                           |                                                                                                       |                                                      |                                                                                                     |
 |             |                                                           | `printHeader(int receiptWidth)`                                                                       |                                                      | Print header to receipt                                                                             |
 |             |                                                           |                                                                                                       |                                                      |                                                                                                     |
@@ -112,3 +112,12 @@ I’d like the receipt to include a list of items purchased with their quantitie
 As a customer,
 So that I can see the total amount I need to pay,
 I’d like the receipt to display the total sum of the order.
+
+User Stories for extension 3:
+As a customer,
+So that I can understand the discounts applied,
+I’d like the receipt to show the savings for each bundle of discounted products.
+
+As a customer,
+So that I can see how much I saved,
+I’d like the receipt to display the total savings from discounts.
