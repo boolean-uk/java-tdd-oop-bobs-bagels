@@ -10,9 +10,13 @@ public class Inventory {
   }
 
   public Receipt purchase(Basket basket) throws NotInStockException {
-    for (StandaloneProduct product : basket.products())
-      for (Product component : product.components())
+    for (StandaloneProduct product : basket.products()) {
+      // Remove any extras such as fillings
+      for (Product component : product.extras())
         this.stock.remove(this.find(component.sku()));
+      // Remove the product itself
+      this.stock.remove(this.find(product.sku()));
+    }
 
     return Receipt.makeReceipt(basket);
   }

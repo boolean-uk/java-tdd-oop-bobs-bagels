@@ -20,11 +20,10 @@ public record Bagel(BagelType type, Optional<List<Filling>> fillings) implements
     return this.type.sku();
   }
 
-  public List<Product> components() {
-    List<Product> components = new ArrayList<>();
-    components.add(this);
+  public List<Product> extras() {
     if (this.fillings.isPresent())
-      components.addAll(this.fillings.get());
-    return components;
+      return new ArrayList<>(this.fillings.get());
+
+    return new ArrayList<>();
   }
 }

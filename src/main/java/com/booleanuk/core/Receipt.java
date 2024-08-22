@@ -2,7 +2,6 @@ package com.booleanuk.core;
 
 import java.time.LocalDateTime;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class Receipt {
@@ -46,12 +45,10 @@ public class Receipt {
         for (int i = 0; i < 12; ++i) {
           StandaloneProduct bagel = this.basket.removeBagel();
           fullPrice += bagel.sku().price();
-          List<Product> components = bagel.components();
-          // Calculate any fillings for that bagel
-          for (int j = 1, size = components.size(); j < size; ++j) {
-            Sku componentSku = components.get(j).sku();
-            double componentPrice = componentSku.price();
-            this.stringBuilder.append(String.format("1x %s %.2f\n", componentSku.toString(), componentPrice));
+
+          for (Product extra : bagel.extras()) {
+            Sku extraSku = extra.sku();
+            this.stringBuilder.append(String.format("1x %s %.2f\n", extraSku.toString(), extraSku.price()));
           }
         }
         numBagels -= 12;
@@ -75,12 +72,10 @@ public class Receipt {
         for (int i = 0; i < 6; ++i) {
           StandaloneProduct bagel = this.basket.removeBagel();
           fullPrice += bagel.sku().price();
-          List<Product> components = bagel.components();
-          // Calculate any fillings for that bagel
-          for (int j = 1, size = components.size(); j < size; ++j) {
-            Sku componentSku = components.get(j).sku();
-            double componentPrice = componentSku.price();
-            this.stringBuilder.append(String.format("1x %s %.2f\n", componentSku.toString(), componentPrice));
+
+          for (Product extra : bagel.extras()) {
+            Sku extraSku = extra.sku();
+            this.stringBuilder.append(String.format("1x %s %.2f\n", extraSku.toString(), extraSku.price()));
           }
         }
         numBagels -= 6;
@@ -109,11 +104,10 @@ public class Receipt {
         StandaloneProduct coffee = this.basket.removeCoffee();
         fullPrice += bagel.sku().price();
         fullPrice += coffee.sku().price();
-        List<Product> components = bagel.components();
-        for (int j = 1, size = components.size(); j < size; ++j) {
-          Sku componentSku = components.get(j).sku();
-          double componentPrice = componentSku.price();
-          this.stringBuilder.append(String.format("1x%s%.2f\n", componentSku.toString(), componentPrice));
+
+        for (Product extra : bagel.extras()) {
+          Sku extraSku = extra.sku();
+          this.stringBuilder.append(String.format("1x%s%.2f\n", extraSku.toString(), extraSku.price()));
         }
         ++nDiscounts;
       }
@@ -140,11 +134,8 @@ public class Receipt {
           productCounts.merge(sku, 1, Integer::sum);
         }
 
-        List<Product> components = product.components();
-        // Add all extras (fillings) even if we've already payed for the bagel itself, i
-        // = 1 since first part of components is the product itself
-        for (int i = 1, size = components.size(); i < size; ++i) {
-          Sku componentSku = components.get(i).sku();
+        for (Product extra : product.extras()) {
+          Sku componentSku = extra.sku();
           this.price += componentSku.price();
           this.stringBuilder.append(String.format("1x %s %.2f\n", componentSku.toString(),
               componentSku.price()));

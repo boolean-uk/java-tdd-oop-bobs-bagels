@@ -16,9 +16,7 @@ public record Coffee(CoffeeType type) implements StandaloneProduct {
     return this.type.sku();
   }
 
-  public List<Product> components() {
-    List<Product> components = new ArrayList<>();
-    components.add(this);
-    return components;
+  public List<Product> extras() {
+    return new ArrayList<>();
   }
 }
