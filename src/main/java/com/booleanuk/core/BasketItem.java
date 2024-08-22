@@ -8,11 +8,11 @@ public class BasketItem {
     private InventoryItem item;
     private ArrayList<InventoryItem> addOns;
     private double price;
-
+    private Inventory inventory = new Inventory();
 
 
     public BasketItem(InventoryItem item,  ArrayList<InventoryItem> addOns){
-        System.out.println(addOns);
+        //System.out.println(addOns);
         this.item = item;
         this.addOns = addOns;
         double sum = 0.0;
@@ -28,8 +28,22 @@ public class BasketItem {
         this.price = item.getPrice();
     }
 
+    public void addAddon(String itemSku) {
+        InventoryItem item = inventory.getInventoryItemDetails(itemSku);
+        if (this.item.getName() == "Bagel") {
+            if (item != null) {
+                if (item.getName() == "Filling") {
+                    this.addOns.add(item);
+                } else {
+                    System.out.println("This item is not a filling.");
+                }
 
+            } else {
+                System.out.println("We do not stock this item.");
+            }
 
+        }
+    }
     public double getPrice() {
         return price;
     }

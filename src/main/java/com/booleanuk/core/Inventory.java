@@ -63,9 +63,6 @@ public class Inventory {
         return inventoryItemHashMap;
     }
 
-    public void setInventoryItemHashMap(HashMap<String, InventoryItem> inventoryItemHashMap) {
-        this.inventoryItemHashMap = inventoryItemHashMap;
-    }
 
     public InventoryItem getInventoryItemDetails(String sku){
        return this.inventoryItemHashMap.get(sku);
