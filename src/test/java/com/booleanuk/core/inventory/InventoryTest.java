@@ -1,5 +1,7 @@
 package com.booleanuk.core.inventory;
 
+import com.booleanuk.core.Coffee;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.Map;
@@ -20,5 +22,11 @@ public class InventoryTest {
                     + i.getVariant()+", "
             );
         }
+    }
+
+    @Test
+    public void getItemBasedOnSKU() {
+        inventory = new Inventory();
+        Assertions.assertEquals("BAGE", inventory.getItem("BAGE").getSKU());
     }
 }
