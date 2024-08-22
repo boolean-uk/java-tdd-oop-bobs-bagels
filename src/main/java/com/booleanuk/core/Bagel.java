@@ -21,4 +21,8 @@ public class Bagel implements Product {
     public float calculateCost() {
         return bagelType.c() + (float) fillings.stream().mapToDouble(Triple::c).sum();
     }
+
+    public float calculateBreadCost() {
+        return bagelType.c();
+    }
 }
