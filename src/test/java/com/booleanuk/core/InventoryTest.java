@@ -29,4 +29,5 @@ public class InventoryTest {
         Assertions.assertEquals(ProductName.FILLING, filling.getName());
     }
     // TODO: Add test for exception returned when SKU is invalid / Does npt exist
+    //TODO: Add test for only product no specific version
 }
