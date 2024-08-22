@@ -326,7 +326,7 @@ public class MainTest {
     public void testCoffeAndBagel() {
         order.addProduct(bagels1);
         order.addProduct(coffee1);
-        Assertions.assertEquals(0.23,order.smallDiscount());
+        Assertions.assertEquals(0.23,order.coffeeAndBagelDiscount());
     }
 }
 
