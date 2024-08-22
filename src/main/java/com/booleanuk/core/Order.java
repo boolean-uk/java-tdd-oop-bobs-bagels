@@ -1,18 +1,10 @@
 package com.booleanuk.core;
-import com.booleanuk.core.enums.BagelType;
-import com.booleanuk.core.exceptions.FullBasketException;
 import com.booleanuk.core.inherited.Bagel;
 import com.booleanuk.core.inherited.Coffee;
-
-import java.util.ArrayList;
-import java.util.stream.Collectors;
 
 public class Order {
     private final Basket basket;
     private Double totalCost;
-    private final Double discount1 = 2.49;
-    private final Double discount2 = 3.99;
-    private final Double discount3 = 1.25;
 
     public Order() {
         this.basket = new Basket();
@@ -29,21 +21,7 @@ public class Order {
         for (Product product : basket.getProducts()) {
             if (isBagel(product)) bagelCounter++;
         }
-
-        int test = bagelCounter % 12;
-        if (bagelCounter == 12) {
-            for (Product product : basket.getProducts()) {
-                if (isBagel(product)) {
-                    product.setHasDiscount(true);
-                }
-            }
-        }
-        else if (bagelCounter < 12 && bagelCounter >= 6) {
-            markAsDiscounted(6);
-        }
-        else if (bagelCounter > 12) {
-            markAsDiscounted(12);
-        }
+        applyDiscount(basket, bagelCounter);
 
         return bagelCounter;
     }
@@ -51,44 +29,16 @@ public class Order {
     public double getTotalCost() {
         int numBagels = getNumberOfItems(this.getBasket());
 
-        int num = 0;
-        for (Product product : this.basket.getProducts()) {
-            if (product instanceof Bagel bagel) {
-
-                if (bagel.getHasDiscount()) {
-                    num += 1;
-                }
-            }
-        }
-
-        System.out.println("Number of bagels marked as discounted: " + num);
-
-        // This checks for 6 and 12 bagel discounts.
-        while (numBagels >= 6) {
-            Double discount = getCorrectDiscount(numBagels);
-            if (discount != null) {
-                if (discount.equals(discount2)) {
-                    numBagels -= 12;
-                }
-                else if (discount.equals(discount1)) {
-                    numBagels -= 6;
-                }
-                this.totalCost += discount;
-            }
-        }
-
+        // Add discount for 12 and 6 bagel sets.
+        numBagels = addDiscount(numBagels, 12, 3.99);
+        addDiscount(numBagels, 6, 2.49);
 
         for (int i = 0; i < this.basket.getProducts().size(); i++) {
             Product product = this.basket.getProducts().get(i);
 
-            // Skip to next iteration.
-            if (product.getHasDiscount()) {
-                continue;
-            }
-
             // Add filling price to the total.
-            if (product instanceof Bagel bagel) {
-                addFillingPriceToTotalCost(bagel);
+            if (isBagel(product)) {
+                addFillingPriceToTotalCost((Bagel) product);
             }
 
             // Check for coffee and bagel pairs and give discount.
@@ -96,16 +46,35 @@ public class Order {
             while (j < this.basket.getProducts().size()) {
                 Product nextProduct = this.basket.getProducts().get(j);
                 checkCoffeeAndBagelPair(product, nextProduct);
+                checkCoffeeAndBagelPair(nextProduct, product);
                 j++;
             }
 
-            // If the item does not have a discount, just get the normal price.
+            // Give normal price if product does not have a discount.
             if (!product.getHasDiscount()) {
                 this.totalCost += product.getPrice();
             }
         }
 
         return deliverAndResetTotalCost(this.totalCost);
+    }
+
+    private int addDiscount(int numBagels, int limit, double discount) {
+        while (numBagels >= limit) {
+            this.totalCost += discount;
+            numBagels -= limit;
+        }
+        return numBagels;
+    }
+
+    // Used to find numbers of sets for 12 and 6 bagels.
+    private void applyDiscount(Basket basket, Integer bagelCounter) {
+        int twelveSet = bagelCounter / 12;
+        int remainingAfterTwelve = bagelCounter % 12;
+        int sixSet = remainingAfterTwelve / 6;
+
+        markAsDiscounted(basket, (twelveSet * 12));
+        markAsDiscounted(basket, (sixSet * 6));
     }
 
     // Internal helper method.
@@ -116,22 +85,10 @@ public class Order {
     }
 
     // Internal helper method.
-    private Double getCorrectDiscount(int num) {
-        return num >= 6 && num < 12 ? discount1 : num < 6 ? null : discount2;
-    }
-
-    // Internal helper method.
     private void checkCoffeeAndBagelPair(Product product, Product next) {
         if (next instanceof Bagel && product instanceof Coffee) {
             if (!next.getHasDiscount() && !product.getHasDiscount()) {
-                this.totalCost += discount3;
-                next.setHasDiscount(true);
-                product.setHasDiscount(true);
-            }
-        }
-        else if (next instanceof Coffee && product instanceof Bagel) {
-            if (!next.getHasDiscount() && !product.getHasDiscount()) {
-                this.totalCost += discount3;
+                this.totalCost += 1.25;
                 next.setHasDiscount(true);
                 product.setHasDiscount(true);
             }
@@ -139,21 +96,12 @@ public class Order {
     }
 
     // Internal helper method.
-    private void markAsDiscounted(int limit) {
-        int discountBagels = 0;
+    private void markAsDiscounted(Basket basket, int bagelsToMark) {
         for (Product product : basket.getProducts()) {
-            if (product instanceof Bagel && discountBagels < limit) {
+            if (isBagel(product) && bagelsToMark > 0) {
+                if (product.getHasDiscount()) continue;
                 product.setHasDiscount(true);
-                discountBagels++;
-            }
-        }
-    }
-
-    private void markAsDiscounted(int start, int limit) {
-        for (int i = start; i < (start + limit); i++) {
-            Product product = this.basket.getProducts().get(i);
-            if (product instanceof Bagel) {
-                product.setHasDiscount(true);
+                bagelsToMark--;
             }
         }
     }
@@ -168,23 +116,5 @@ public class Order {
         double cost = total;
         this.totalCost = 0.0;
         return cost;
-    }
-
-    public static void main(String[] args) throws FullBasketException {
-
-        Order order = new Order();
-        Basket basket1 = order.getBasket();
-        basket1.changeCapacity(30);
-
-        for (int i = 0; i < 12; i++) {
-            basket1.addProduct(BagelType.PLAIN);
-        }
-
-        for (int i = 0; i < 7; i++) {
-            basket1.addProduct(BagelType.EVERYTHING);
-        }
-
-        String total = String.format("%.02f", order.getTotalCost());
-        System.out.println(total);
     }
 }

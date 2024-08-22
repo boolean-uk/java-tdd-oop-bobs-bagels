@@ -96,4 +96,23 @@ public class OrderTest {
         String total = String.format("%.02f", this.order.getTotalCost());
         Assertions.assertEquals("3.48", total);
     }
+
+    @Test
+    public void testMultipleSets() throws FullBasketException {
+        Basket basket = this.order.getBasket();
+        basket.changeCapacity(50);
+
+        // 3 sets of 12 bagels.
+        for (int i = 0; i < 36; i++) {
+            basket.addProduct(BagelType.ONION);
+        }
+
+        // 1 set of 6 bagels.
+        for (int i = 0; i < 6; i++) {
+            basket.addProduct(BagelType.PLAIN);
+        }
+
+        double total = this.order.getTotalCost();
+        Assertions.assertEquals(14.46, total);
+    }
 }
