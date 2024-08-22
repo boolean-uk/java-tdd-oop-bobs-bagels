@@ -239,8 +239,6 @@ public class Basket {
     }
 
 
-
-
     //Sanity check
     public static void main(String[] args) {
         Basket basket = new Basket();
