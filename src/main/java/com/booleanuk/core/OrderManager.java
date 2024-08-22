@@ -27,16 +27,19 @@ import java.util.*;
  */
 
 public class OrderManager {
-	private int maxCartSize = 24; // max default size of basket
+	// created static in case we want to extend the OrderManager to use multiple cashiers at one
 	// SKU, Price, Name, Variant
-	private static HashMap<ItemInterface, String[]> storeItemInfo = null; // may simulate a database of item pricing and information
-	private static HashMap<ItemInterface, Integer> storeItemStock = null;
+	private static HashMap<Item, String[]> storeItemInfo = null; // may simulate a database of item pricing and information
+	private static HashMap<Item, Integer> storeItemStock = null;
 	static private int defaultMaxBagels;
 	static private int defaultMaxCoffees;
 	static private int defaultMaxFillings;
 
-	private HashMap<ItemInterface, Integer> cart;
-	private ArrayList<ItemInterface> cartOrder;
+
+	// private variables
+	private HashMap<Item, Integer> cart;
+	private ArrayList<Item> cartOrder;
+	private int maxCartSize = 24; // max default size of basket
 
 	public static int getMaxFillings(){
 		return defaultMaxFillings;
@@ -48,14 +51,9 @@ public class OrderManager {
 		return defaultMaxCoffees;
 	}
 
-	// case: 4
-	public void setMaxCartSize(int i){
-		maxCartSize = i;
-	}
 
 	public OrderManager(){
 		this.cart = new HashMap<>();
-		this.cartOrder = new ArrayList<>();
 		openUpShopAndSetInventory(); // ensure the store always opens with stock
 	}
 
@@ -106,7 +104,7 @@ public class OrderManager {
 	}
 
 	// case: 1, 3, 8
-	public String addItem(ItemInterface item){
+	public String addItem(Item item){
 		// check if in store
 		int stock = storeItemStock.get(item);
 		if (stock < 1) {
@@ -141,20 +139,8 @@ public class OrderManager {
 		return item + ": 1";
 	}
 
-	// case: 10
-	public int getStockOfItem(ItemInterface item){
-		return storeItemStock.get(item);
-
-	}
-
-	// case: 7, 9
-	public double getPriceOfItem(ItemInterface item){
-		String priceOfItemString = storeItemInfo.get(item)[1];
-		return Double.valueOf(priceOfItemString);
-	}
-
 	// case: 2, 5
-	public String removeItem(ItemInterface item){
+	public String removeItem(Item item){
 		String result;
 		// first check if exists in basket
 		boolean isInCart = cart.containsKey(item);
@@ -183,11 +169,15 @@ public class OrderManager {
 
 
 	}
+	// case: 4
+	public void setMaxCartSize(int i){
+		maxCartSize = i;
+	}
 
 	// case: 6
 	public double getTotalCartPrice(){
 		double calculatedPrice = 0;
-		for(ItemInterface item: cart.keySet()){
+		for(Item item: cart.keySet()){
 			int amountOfItemInCart = cart.get(item);
 			String priceOfItemString = storeItemInfo.get(item)[1];
 			double itemPrice = Double.valueOf(priceOfItemString);
@@ -197,9 +187,25 @@ public class OrderManager {
 		return Double.valueOf(adjustedPrice);
 	}
 
+
+	// case: 7, 9
+	public double getPriceOfItem(Item item){
+		String priceOfItemString = storeItemInfo.get(item)[1];
+		return Double.valueOf(priceOfItemString);
+	}
+
+
+	// case: 10
+	public int getStockOfItem(Item item){
+		return storeItemStock.get(item);
+
+	}
+
+
 	public double getTotalDiscountedPrice(){
 		return getTotalDiscountReciept().price;
 	}
+
 
 	public String getTotalDiscountRecieptString(){
 		Receipt r =  getTotalDiscountReciept();
@@ -277,13 +283,13 @@ public class OrderManager {
 	// case: e1
 	public Receipt getTotalDiscountReciept(){
 
-		HashMap<ItemInterface, Integer> cartCopy = new HashMap<>(cart);
+		HashMap<Item, Integer> cartCopy = new HashMap<>(cart);
 
 		double totalPrice = 0;
 		ArrayList<String> reciept = new ArrayList<>();
 
 		// first check for bagel types
-		for (ItemInterface item: cartCopy.keySet()){
+		for (Item item: cartCopy.keySet()){
 			switch (item){
 				case BagelType.Everything, BagelType.Onion, BagelType.Plain, BagelType.Sesame:
 					int amountOfBagels = 0;
@@ -326,7 +332,7 @@ public class OrderManager {
 		}
 
 		// check for coffee discount
-		for (ItemInterface item: cartCopy.keySet()){
+		for (Item item: cartCopy.keySet()){
 			switch (item){
 				case CoffeeType.Black:
 					try{
@@ -359,7 +365,7 @@ public class OrderManager {
 
 
 		// the rest
-		for (ItemInterface item: cartCopy.keySet()){
+		for (Item item: cartCopy.keySet()){
 			try{
 				int amountOfItemsLeftInCart = cartCopy.get(item);
 				if (amountOfItemsLeftInCart > 0){
