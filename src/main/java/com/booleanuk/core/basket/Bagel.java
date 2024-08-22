@@ -5,28 +5,39 @@ import java.util.List;
 
 public class Bagel extends BasketItem {
 
-    private List<Integer> linkedIds;    // Id's for the fillings to this Bagel
+    private List<String> linkedFillingSKUs;
+    private List<Integer> linkedFillingIds;    // Id's for the fillings to this Bagel
 
     public Bagel(String SKU) {
         super(SKU);
-        linkedIds = new ArrayList<>();
+        linkedFillingSKUs = new ArrayList<>();
+        linkedFillingIds = new ArrayList<>();
     }
 
     // TODO: Does it work to overlode this?
-//    public Bagel(String SKU, List<Integer> linkedIds) {
-//        super(SKU);
-//        this.linkedIds = linkedIds;
-//    }
-
-    public void addFillings(int id) {
-        linkedIds.add(id);
+    public Bagel(String SKU, List<String> linkedFillingsSKUs) {
+        super(SKU);
+        this.linkedFillingSKUs = linkedFillingsSKUs;
+        linkedFillingIds = new ArrayList<>();
     }
 
-    public void addFillings(List<Integer> linkedIds) {
+//    public void addFilling(String SKU) {
+//        linkedFillingSKUs.add(SKU);
+//    }
+//
+//    public void addFillings(List<String> linkedIds) {
+//
+////        for (int id : linkedIds) {
+////            linkedIds.add(id);
+////        }
+//        linkedFillingSKUs.addAll(linkedIds);
+//    }
 
-//        for (int id : linkedIds) {
-//            linkedIds.add(id);
-//        }
-        linkedIds.addAll(linkedIds);
+    public List<String> getLinkedFillingSKUs() {
+        return linkedFillingSKUs;
+    }
+
+    public List<Integer> getLinkedFillingIds() {
+        return linkedFillingIds;
     }
 }
