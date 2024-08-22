@@ -76,7 +76,8 @@ public class Receipt {
         toReturn.add("");
 
         for (Map.Entry<Product, Integer> kvp : this.products.entrySet()) {
-            toReturn.add(kvp.getKey().toString() + "\t x" + kvp.getValue() + " $" + kvp.getKey().getPrice());
+            double totalPrice = kvp.getKey().getPrice() * kvp.getValue();
+            toReturn.add(kvp.getKey().toString() +" ($" + kvp.getKey().getPrice() + ")" + "\t x" + kvp.getValue() + " $" + totalPrice);
         }
 
         if (!this.discounts.isEmpty()) {
