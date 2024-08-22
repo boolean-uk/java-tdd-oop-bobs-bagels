@@ -48,7 +48,7 @@ public class BasketTest {
         basket.addItemToBasket(b6);
         basket.checkDiscountInBasket();
 
-        Assertions.assertEquals(2.49, basket.countTotalValueOfItems());
+        Assertions.assertEquals(2.49f, basket.countTotalValueOfItems());
     }
 
     @Test
@@ -56,7 +56,7 @@ public class BasketTest {
         Basket basket = new Basket();
         addTenItemsToBasket(basket);
 
-        Assertions.assertEquals(4.45, basket.countTotalValueOfItems());
+        Assertions.assertEquals(4.45f, basket.countTotalValueOfItems());
     }
 
     @Test
@@ -69,7 +69,7 @@ public class BasketTest {
         basket.addItemToBasket(new Bagel("BGLO"));
         basket.addItemToBasket(new Bagel("BGLO"));
 
-        Assertions.assertEquals(3.99, basket.countTotalValueOfItems());
+        Assertions.assertEquals(3.99f, basket.countTotalValueOfItems());
     }
 
     @Test
@@ -87,6 +87,6 @@ public class BasketTest {
         basket.addItemToBasket(new Bagel("BGLO"));
         basket.addItemToBasket(new Bagel("BGLO"));
 
-        Assertions.assertEquals(6.48, basket.countTotalValueOfItems());
+        Assertions.assertEquals(6.48f, basket.countTotalValueOfItems());
     }
 }

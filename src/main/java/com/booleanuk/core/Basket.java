@@ -15,9 +15,9 @@ public class Basket {
         this.discountManager = new DiscountManager();
     }
 
-    public HashMap<String, Double> getFillingPriceList() {
-        HashMap<String, Double> price = new HashMap<>();
-        for (Map.Entry<String, Double> kvp: this.itemList.getPriceList().entrySet()) {
+    public HashMap<String, Float> getFillingPriceList() {
+        HashMap<String, Float> price = new HashMap<>();
+        for (Map.Entry<String, Float> kvp: this.itemList.getPriceList().entrySet()) {
             if(kvp.getKey().contains("FIL")) {
                 //.equals("FIL")
                 price.put(kvp.getKey(), kvp.getValue());
@@ -34,11 +34,9 @@ public class Basket {
         return  totalItems;
     }
 
-    public double countTotalValueOfItems() {
-        System.out.println(basket);
+    public Float countTotalValueOfItems() {
         checkDiscountInBasket();
-        System.out.println(basket);
-        double totalPrice = 0;
+        float totalPrice = 0;
         for (Map.Entry<String, Integer> kvp: this.basket.entrySet()) {
             totalPrice += (itemList.getPriceFromList(kvp.getKey()) * kvp.getValue());
         }

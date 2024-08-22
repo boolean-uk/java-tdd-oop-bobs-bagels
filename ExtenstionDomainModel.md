@@ -14,3 +14,17 @@ Bagel discount is priority over bagel + coffee discount. So if we have 5 bagels 
 | ArrayList<String> bagelSKU;             | checkBagelDiscount(HashMap<String, Integer>): Integer | Check if there is enough bagels for a discount. If it is, add to discountBasket and return  the new quantity of item to basket    | So if there are 6 bagels of the same type in basket, return 6 so it can remove from original basket so it cannot discount again.                                                                                                  |
 | ArrayList<String> coffeeSKU;            |                                                       |                                                                                                                                   | Return 0 if there are no discounts                                                                                                                                                                                                |
 | double totalPrice = 0;                  | populateSKUList()                                     | A method to populate an arrayList with all SKU from coffee and Bagel. Makes it easier to check if the item is a bagel or a coffee | Populates the arrayList                                                                                                                                                                                                           |
+
+
+
+## ReceiptManager
+
+| Variable | Method                                   | Scenario                          | Outcome |
+|----------|------------------------------------------|-----------------------------------|---------|
+|          | countTotalReceipt(Basket basket): double | Count the while receipt of basket |         |
+|          |                                          |                                   |         |
+|          |                                          |                                   |         |
+|          |                                          |                                   |         |
+|          |                                          |                                   |         |
+|          |                                          |                                   |         |
+

@@ -14,7 +14,7 @@ public class DiscountManager {
     HashMap<String, String> typeList;
     ArrayList<String> bagelSKU;
     ArrayList<String> coffeeSKU;
-    double totalPrice = 0;
+    float totalPrice = 0;
 
     public DiscountManager() {
         this.typeList = new ItemList().getTypeList();
@@ -24,7 +24,7 @@ public class DiscountManager {
         populateSKUList();
     }
 
-    public double totalValueOfDiscount() {
+    public float totalValueOfDiscount() {
         if(discountBasket == null) return 0;
         for (Map.Entry<String, Double> kvp : discountBasket.entrySet()) {
             this.totalPrice += kvp.getValue();

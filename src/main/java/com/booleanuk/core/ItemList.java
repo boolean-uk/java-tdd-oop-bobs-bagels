@@ -3,7 +3,7 @@ package com.booleanuk.core;
 import java.util.HashMap;
 
 public class ItemList {
-    private HashMap<String, Double> priceList;
+    private HashMap<String, Float> priceList;
     private HashMap<String, String> typeList;
     private HashMap<String, String> nameList;
     public ItemList() {
@@ -51,23 +51,23 @@ public class ItemList {
 
 
     private void populatePriceList() {
-        this.priceList.put("BGLO", 0.49);
-        this.priceList.put("BGLP", 0.39);
-        this.priceList.put("BGLE", 0.49);
-        this.priceList.put("BGLS", 0.49);
-        this.priceList.put("COFB", 0.99);
-        this.priceList.put("COFW", 1.19);
-        this.priceList.put("COFC", 1.29);
-        this.priceList.put("COFL", 1.29);
-        this.priceList.put("FILB", 0.12);
-        this.priceList.put("FILE", 0.12);
-        this.priceList.put("FILC", 0.12);
-        this.priceList.put("FILX", 0.12);
-        this.priceList.put("FILS", 0.12);
-        this.priceList.put("FILH", 0.12);
+        this.priceList.put("BGLO", 0.49f);
+        this.priceList.put("BGLP", 0.39f);
+        this.priceList.put("BGLE", 0.49f);
+        this.priceList.put("BGLS", 0.49f);
+        this.priceList.put("COFB", 0.99f);
+        this.priceList.put("COFW", 1.19f);
+        this.priceList.put("COFC", 1.29f);
+        this.priceList.put("COFL", 1.29f);
+        this.priceList.put("FILB", 0.12f);
+        this.priceList.put("FILE", 0.12f);
+        this.priceList.put("FILC", 0.12f);
+        this.priceList.put("FILX", 0.12f);
+        this.priceList.put("FILS", 0.12f);
+        this.priceList.put("FILH", 0.12f);
     }
 
-    public HashMap<String, Double> getPriceList() {
+    public HashMap<String, Float> getPriceList() {
         return this.priceList;
     }
 
@@ -79,7 +79,7 @@ public class ItemList {
         return this.nameList;
     }
 
-    public double getPriceFromList(String sku) {
+    public float getPriceFromList(String sku) {
         return this.priceList.get(sku);
     }
 

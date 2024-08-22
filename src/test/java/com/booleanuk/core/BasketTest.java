@@ -108,11 +108,11 @@ public class BasketTest {
 
         Assertions.assertEquals(2, basket.countTotalItems());
 
-        Assertions.assertEquals(0.61, basket.countTotalValueOfItems());
+        Assertions.assertEquals(0.61f, basket.countTotalValueOfItems());
 
         basket.addItemToBasket(bagel2);
 
-        Assertions.assertEquals(1.0, basket.countTotalValueOfItems());
+        Assertions.assertEquals(1.0f, basket.countTotalValueOfItems());
     }
 
     @Test
@@ -224,23 +224,23 @@ public class BasketTest {
         Basket basket = new Basket();
         Bagel bagel = ItemFactory.bagelFactory("BGLO");
 
-        Assertions.assertEquals(0.49, bagel.getPrice());
+        Assertions.assertEquals(0.49f, bagel.getPrice());
     }
 
     @Test
     public void checkEveryFillingPrice() {
         Basket basket = new Basket();
-        HashMap<String, Double> referenceList = new HashMap<>();
-        referenceList.put("FILB", 0.12);
-        referenceList.put("FILE", 0.12);
-        referenceList.put("FILC", 0.12);
-        referenceList.put("FILX", 0.12);
-        referenceList.put("FILS", 0.12);
-        referenceList.put("FILH", 0.12);
+        HashMap<String, Float> referenceList = new HashMap<>();
+        referenceList.put("FILB", 0.12f);
+        referenceList.put("FILE", 0.12f);
+        referenceList.put("FILC", 0.12f);
+        referenceList.put("FILX", 0.12f);
+        referenceList.put("FILS", 0.12f);
+        referenceList.put("FILH", 0.12f);
 
         Assertions.assertEquals(referenceList, basket.getFillingPriceList());
 
-        for (Map.Entry<String, Double> entry : basket.getFillingPriceList().entrySet()) {
+        for (Map.Entry<String, Float> entry : basket.getFillingPriceList().entrySet()) {
             Assertions.assertEquals(referenceList.get(entry.getKey()), entry.getValue());
         }
     }

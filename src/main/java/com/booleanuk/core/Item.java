@@ -4,7 +4,7 @@ import java.util.HashMap;
 
 public abstract class Item {
     private final String SKU;
-    private double price;
+    private float price;
     private String type;
     private String name;
     private final ItemList itemList;
@@ -20,7 +20,7 @@ public abstract class Item {
         return this.SKU;
     }
 
-    public double getPrice() {
+    public float getPrice() {
         return this.price;
     }
 
@@ -33,7 +33,7 @@ public abstract class Item {
     }
 
     private void setPriceFromList() {
-        HashMap<String, Double> priceList = itemList.getPriceList();
+        HashMap<String, Float> priceList = itemList.getPriceList();
         if(priceList.get(this.SKU) != null) {
             this.price = priceList.get(this.SKU);
         } else {
