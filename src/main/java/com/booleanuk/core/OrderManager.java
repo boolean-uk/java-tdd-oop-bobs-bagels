@@ -197,9 +197,9 @@ public class OrderManager {
 
 
 		// do some
-		int itemLengthWithPadding = 18;
-		int quantityWithPadding = 6;
-		int priceWithPadding = 6;
+		int itemLengthWithPadding = 22;
+		int quantityWithPadding = 8;
+		int priceWithPadding = 8;
 		int totalWidth = itemLengthWithPadding+quantityWithPadding+priceWithPadding;
 		String bobsString = "~~~Bob's Bagels~~~\n";
 		prettyReciept += String.format("%" + ((totalWidth + bobsString.length())/2) + "s", bobsString);
@@ -217,20 +217,40 @@ public class OrderManager {
 		prettyReciept += receiptBreak + "\n";
 
 		System.out.println(prettyReciept);
+
+
+
+
 		for(String str: recieptRaw){
 			String[] items = str.split(",");
 			String type = items[0];
 			String amount = items[1];
 			String price = "£ " + items[2];
+			String discounted = items.length==4 ? items[3] : "";
+
+
 			String curLine = "";
 			String formattedType = String.format("%-" +itemLengthWithPadding + "s", type); int lenT = formattedType.length();
 			String formattedAmount = String.format("%-" + quantityWithPadding + "s", amount); int lenA  = formattedAmount.length();
 			String fomrattedPrice = String.format("%" + priceWithPadding + "s", price); int lenP = fomrattedPrice.length();
+			String formattedDiscount = "";
+
+			if (discounted != ""){
+				formattedDiscount = String.format("%" + totalWidth + "s", discounted);
+				formattedDiscount = "\n" + formattedDiscount;
+			}
 
 
-			curLine += formattedType + formattedAmount + fomrattedPrice;
+			curLine += formattedType + formattedAmount + fomrattedPrice + formattedDiscount;
 			prettyReciept += "\n" + curLine;
 		}
+		String bars = "―".repeat(totalWidth-bobsString.length() + 5);
+		prettyReciept += "\n" + bars;
+		String totalStart = String.format("%-" + itemLengthWithPadding + "s", "Total");
+		String totalSum = String.format("%" + priceWithPadding + "s", "£ " + r.price);
+		prettyReciept += "\n" + totalStart + " ".repeat(quantityWithPadding) + totalSum;
+
+
 		prettyReciept += "\n" + receiptBreak + "\n";
 
 
@@ -255,22 +275,33 @@ public class OrderManager {
 			switch (item){
 				case BagelType.Everything, BagelType.Onion, BagelType.Plain, BagelType.Sesame:
 					int amountOfBagels = 0;
+					double actualPrice = getPriceOfItem(item);
 					try{
 						amountOfBagels = cartCopy.get(item);
 					} catch (NullPointerException e){}
 
-					while (amountOfBagels >= 12){
-						totalPrice += 3.99;
-//						reciept.add( "12 " + item + " for 3.99");
-						reciept.add(item + " Bagel,12,3.99");
-						amountOfBagels -= 12;
-					}
 
+					int iters = 0;
+					while (amountOfBagels >= 12){
+						amountOfBagels -= 12;
+						iters++;
+
+					}
+					if (iters > 0){
+						totalPrice += 3.99*iters;
+						String discountString = String.format("%.2f", (actualPrice*12-3.99));
+						reciept.add(item + " Bagel," + iters + ",3.99,("+ discountString + ")");
+
+					}
+					iters = 0;
 					while (amountOfBagels >= 6) {
-						totalPrice += 2.49;
-//						reciept.add("6 " + item + " for 2.49");
-						reciept.add(item + " Bagel,6,2.49");
 						amountOfBagels -= 6;
+						iters++;
+					}
+					if(iters > 0){
+						totalPrice += 2.49*iters;
+						String discountString = String.format("%.2f", (actualPrice*6-2.49));
+						reciept.add(item + " Bagel," + iters + ",2.49,(" + discountString + ")");
 					}
 
 					// update if used
@@ -291,7 +322,13 @@ public class OrderManager {
 					for(int i = 0; i < amountOfBlackCoffee; i++){
 						int amountOfPlainBagel = cartCopy.get(BagelType.Plain);
 						if(amountOfPlainBagel > 0){
+							double actualPrice = getPriceOfItem(item) + getPriceOfItem(CoffeeType.Black);
 							cartCopy.put(BagelType.Plain, amountOfPlainBagel -1);
+							cartCopy.put(CoffeeType.Black, amountOfBlackCoffee-1);
+							totalPrice+=1.25;
+							String discountString = String.format("%.2f", (actualPrice-1.25));
+							reciept.add("Coffee and Bagel,1,1.25,(-"+ discountString+ ")");
+
 						}
 					}
 					}catch (NullPointerException e){}
