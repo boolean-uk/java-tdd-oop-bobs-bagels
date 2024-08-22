@@ -8,15 +8,19 @@ import static com.booleanuk.core.Menu.fillingMenu;
 import static com.booleanuk.core.Menu.printFillingMenu;
 
 public class Bagel extends Item {
-    private ArrayList<Filling> fillings = new ArrayList<>();
+    private final ArrayList<Filling> fillings = new ArrayList<>();
 
     public Bagel(String sku, Integer price, String name, String variant){
         super(sku, price, name, variant);
     }
 
+    public Bagel(Item item){
+        super(item.sku, item.price, item.name, item.variant);
+    }
+
     public String addFilling(Filling filling){
         if (filling != null){
-            fillings.add(filling);
+            this.fillings.add(filling);
             this.price += filling.price;
             return filling.variant + " added to your bagel.";
         }
@@ -51,7 +55,5 @@ public class Bagel extends Item {
     public ArrayList<Filling> getFillings() {
         return this.fillings;
     }
-
-
 }
 

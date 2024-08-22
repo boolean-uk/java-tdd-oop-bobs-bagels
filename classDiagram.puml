@@ -2,7 +2,6 @@
 
 Class Menu {
     - menu: List<Item>
-
     - initializeMenu(): void
     + getItemFromMenu(name: String, variant: String): Item
 }
@@ -50,6 +49,8 @@ Class Order {
     - basket: Basket
     + order(): String
 }
+
+
 
 @enduml
 

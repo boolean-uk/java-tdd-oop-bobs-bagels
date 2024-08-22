@@ -2,6 +2,8 @@ package com.booleanuk.core;
 
 import java.util.*;
 
+import static com.booleanuk.core.Menu.itemIsOnTheMenu;
+
 public class Basket {
     private Integer basketSize;
     private final ArrayList<Item> basket;
@@ -31,7 +33,7 @@ public class Basket {
             return "Basket is full.";
         }
 
-        if (!Menu.itemIsOnTheMenu(item))
+        if (!itemIsOnTheMenu(item))
         {
             return "This item is not on the menu.";
         }
@@ -41,7 +43,7 @@ public class Basket {
         }
 
         else {
-            basket.get(itemInBasket(item)).quantity = basket.get(itemInBasket(item)).quantity + 1;
+            this.basket.get(itemInBasket(item)).quantity = this.basket.get(itemInBasket(item)).quantity + 1;
         }
 
         return item.variant + " " + item.name + " added to basket.";
@@ -51,14 +53,13 @@ public class Basket {
         int counter = 1;
 
         for (Item i : basket){
+            String price = String.format("%.2f", (((float)i.price * i.quantity) /100));
             if (i instanceof Bagel){
-                String price = String.format("%.2f", (((float)i.price * i.quantity) /100));
                 System.out.println(counter+ ". " + i.name + " " + i.variant + " " + i.quantity + " " + price +"$");
                 formatFillingPrint((Bagel) i);
             }
 
             else {
-                String price = String.format("%.2f", (((float)i.price * i.quantity) /100));
                 System.out.println(counter+ " " + i.name + " " + i.variant + " " + i.quantity + " " + price +"$");
             }
             counter++;
@@ -66,59 +67,53 @@ public class Basket {
     }
 
     public void formatFillingPrint(Bagel bagel) {
-        HashMap<String, Integer> listOfFillings = this.getListOfFillings(bagel);
+        HashMap<String, Integer> listOfFillings = this.getQuantityOfFillings(bagel);
         System.out.println("Fillings:");
         listOfFillings.forEach((key, value) -> System.out.println("- " + key + " x" + value));
     }
 
-    public HashMap<String, Integer> getListOfFillings(Bagel bagel){
+    public HashMap<String, Integer> getQuantityOfFillings(Bagel bagel){
         HashMap<String, Integer> quantityOfFillings = new HashMap<>();
 
         for (Filling f : bagel.getFillings()){
-            if (quantityOfFillings.containsKey(f.getVariant())) {
-                quantityOfFillings.computeIfPresent(f.getVariant(), (k,v) -> v + 1);
-            } else {
-                quantityOfFillings.put(f.getVariant(), 1);
-            }
+            quantityOfFillings.merge(f.getVariant(), 1, Integer::sum);
         }
+
         return quantityOfFillings;
     }
 
     public String removeItemFromBasket(){
-        String name;
-        String variant;
-        int quantity;
+        String itemName;
+        String itemVariant;
+        int itemQuantity;
 
         Scanner input = new Scanner(System.in);
         System.out.println("\nYour basket:");
         printBasketContent();
         System.out.println("\nChoose item to remove or press 0 to go back.");
 
-        try {
-            int userInput = input.nextInt();
+        int userInput = input.nextInt();
 
-            if (userInput <= basket.size() & 0 < userInput){
-                name = basket.get(userInput-1).name;
-                variant = basket.get(userInput-1).variant;
-                quantity = basket.get(userInput-1).quantity;
+        if (userInput <= basket.size() & 0 < userInput){
+            Item item = basket.get(userInput-1);
 
-                if (1 < quantity){
-                    basket.get(userInput-1).quantity = basket.get(userInput-1).quantity -1;
-                }
+            itemName = item.name;
+            itemVariant = item.variant;
+            itemQuantity = item.quantity;
 
-                else {
-                    basket.remove(userInput-1);
-                }
-
-                return variant + " " + name + " removed from basket.";
+            if (1 < itemQuantity){
+                basket.get(userInput-1).quantity = itemQuantity -1;
             }
 
             else {
-                return "Invalid option.";
+                basket.remove(userInput-1);
             }
 
-        } catch (NumberFormatException e) {
-            throw new RuntimeException(e);
+            return itemVariant + " " + itemName + " removed from basket.";
+        }
+
+        else {
+            return "Invalid option.";
         }
     }
 
@@ -166,13 +161,18 @@ public class Basket {
     }
 
     public boolean fillingIsIdentical(Bagel b1, Bagel b2){
-        ArrayList<String> sortedB1 = new ArrayList<>();
-        ArrayList<String> sortedB2 = new ArrayList<>();
+        /*
+        Checks if the filling of two bagels are identical.
+        This helps in presenting a better organized receipt.
+         */
 
         if (b1.getFillings().size() != b2.getFillings().size())
         {
             return false;
         }
+
+        ArrayList<String> sortedB1 = new ArrayList<>();
+        ArrayList<String> sortedB2 = new ArrayList<>();
 
         for (Filling f : b1.getFillings()){
             sortedB1.add(f.getVariant());

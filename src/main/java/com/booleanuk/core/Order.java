@@ -75,24 +75,24 @@ public class Order {
 
                     if (chosenItem instanceof Bagel bagel){
                         bagel.addFillingsToBagel(input);
-                        basket.addItemToBasket(bagel);
+                        this.basket.addItemToBasket(bagel);
                         break;
                     }
 
-                    basket.addItemToBasket(chosenItem);
+                    this.basket.addItemToBasket(chosenItem);
                     break;
                 }
                 case 2: {
-                    basket.removeItemFromBasket();
+                    this.basket.removeItemFromBasket();
                     break;
                 }
                 case 3: {
-                    basket.printBasketContent();
+                    this.basket.printBasketContent();
                     break;
                 }
                 case 4: {
-                    basket.calculateDiscount();
-                    Receipt receipt = new Receipt(this.basket);
+                    this.basket.calculateDiscount();
+                    ReceiptInterface receipt = new Receipt(this.basket);
                     receipt.printReceipt();
                     return;
                 }
@@ -108,7 +108,7 @@ public class Order {
             if (input.nextInt() == 1){
                     System.out.println("Enter new size of the basket.");
                     int newBasketSize = input.nextInt();
-                    basket.changeBasketSize(newBasketSize);
+                    this.basket.changeBasketSize(newBasketSize);
                     break;
             }
             else {

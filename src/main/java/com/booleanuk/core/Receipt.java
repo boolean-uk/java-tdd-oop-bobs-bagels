@@ -48,7 +48,7 @@ public class Receipt implements ReceiptInterface {
     }
 
     public void addFillingToReceipt(Bagel bagel) {
-        HashMap<String, Integer> listOfFillings = basket.getListOfFillings(bagel);
+        HashMap<String, Integer> listOfFillings = basket.getQuantityOfFillings(bagel);
         listOfFillings.forEach((key, value) -> receiptLines.add(String.format("%-15s %5s", "- " + key, value)));
     }
 }

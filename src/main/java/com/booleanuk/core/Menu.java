@@ -49,10 +49,14 @@ public class Menu {
 
     public static Boolean itemIsOnTheMenu(Item item){
         for (Item i : menu){
-            if (Objects.equals(i.sku, item.sku) & Objects.equals(i.name, item.name) & Objects.equals(i.variant, item.variant))
+            if (itemsAreSimilar(i, item))
                 return true;
         }
         return false;
+    }
+
+    private static boolean itemsAreSimilar(Item i, Item item){
+        return Objects.equals(i.sku, item.sku) & Objects.equals(i.name, item.name) & Objects.equals(i.variant, item.variant);
     }
 
     public static Filling getFillingFromMenu(String name, String variant){
@@ -64,8 +68,7 @@ public class Menu {
         return null;
     }
 
-
-    public static Item selectItemFromMenu(){
+    public static Item selectItemFromMenu() {
         Scanner input = new Scanner(System.in);
         printMenu();
         System.out.println("Select item to add to your basket, or press 0 to go back.\n\n");
@@ -103,6 +106,4 @@ public class Menu {
             number++;
         }
     }
-
-
 }
