@@ -82,4 +82,17 @@ public class BasketTest {
         // Public method that should print out the error
 //        basket.addBagel("BAGE");
     }
+
+    // User story #4: Change max capacity of basket
+    @Test
+    public void checkChangeMaxCapacity() {
+        this.inventory = new Inventory();
+        this.basket = new Basket(new Inventory());
+
+        basket.changeMaxCapacity(3);
+        Assertions.assertEquals(3, basket.getMaxCapacity());
+
+        basket.changeMaxCapacity(12);
+        Assertions.assertEquals(12, basket.getMaxCapacity());
+    }
 }
