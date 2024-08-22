@@ -20,7 +20,7 @@ public class InventoryTest {
         Product testItem = inventory.getItem("BGLE", "FILB");
         Bagel bagel = (Bagel) testItem;
 
-        //Assertions.assertEquals("FILB", bagel.getFillingSku().retrieveSku());
+        Assertions.assertEquals("FILB", bagel.getFilling().retrieveSku());
     }
 
 }

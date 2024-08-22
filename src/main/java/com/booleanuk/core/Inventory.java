@@ -65,5 +65,13 @@ public class Inventory {
         return inventory.get(sku + "-" + fillingSku);
     }
 
+    public double getFilling(String sku){
+        Product item = getItem("BGLO-" + sku);
+        System.out.println(item);
+
+        Bagel bagel = (Bagel) item;
+
+        return bagel.getFilling().retrievePrice();
+    }
 
 }
