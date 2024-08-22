@@ -50,7 +50,7 @@ public class Basket {
     // See test exceedMaxCapacityShouldThrowError
     protected void addToBasket(int id, BasketItem item) {
         if (this.basketItems.size() == maxCapacity) {
-            throw new MaxCapacityException("Basket is full, can't add more items");
+            throw new MaxCapacityException("Basket is full, can't add more items.");
         }
         this.basketItems.put(id, item);
     }
@@ -137,6 +137,11 @@ public class Basket {
 
     public void changeMaxCapacity(int newMaxCapacity) {
         this.maxCapacity = newMaxCapacity;
+    }
+
+    // TODO: I only use this for the test. Should I redo the test?
+    public int getMaxCapacity() {
+        return this.maxCapacity;
     }
 
     public void printBasket() {
