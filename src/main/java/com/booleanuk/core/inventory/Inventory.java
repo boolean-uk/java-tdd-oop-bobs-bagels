@@ -7,7 +7,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Inventory {
-    Map<String, InventoryItem> inventoryItems;
+
+    private Map<String, InventoryItem> inventoryItems;
 
     public Inventory() {
         this.inventoryItems = new HashMap<>();
@@ -47,5 +48,9 @@ public class Inventory {
         for (InventoryItem item : items) {
             inventoryItems.put(item.getSKU(), item);
         }
+    }
+
+    public Map<String, InventoryItem> getAllItems() {
+        return inventoryItems;
     }
 }
