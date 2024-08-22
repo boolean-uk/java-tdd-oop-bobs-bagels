@@ -1,5 +1,6 @@
 package com.booleanuk.core;
 
+// The Coffee Class is used to create Coffee items
 public class Coffee extends Item{
     public Coffee(String type){
         this.setPurchase(false);

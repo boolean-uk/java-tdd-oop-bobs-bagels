@@ -1,7 +1,10 @@
 package com.booleanuk.core;
 
 import java.util.HashMap;
-
+// Item is an abstract class serving as a blueprint for bagels, fillings and coffee
+// It contains, SKU, name, Price and functions to access and set these values
+// it also contains a boolean "Purchase" which determines if the item can be bought
+// This can be used to prevent a customer from buying a filling without a bagel, or buying something out of stock
 public class Item {
     private String SKU;
     private Double Price;

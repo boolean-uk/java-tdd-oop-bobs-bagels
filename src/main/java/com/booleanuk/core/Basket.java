@@ -1,6 +1,10 @@
 package com.booleanuk.core;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+
+// The Basket class is used to create baskets to hold items
+// It contaisn two HashMaps, giving oversight over the number of certain items and their prices
 
 public class Basket {
     private HashMap<String, Integer> Items;
@@ -8,6 +12,7 @@ public class Basket {
     private int capacity;
     private int numItems;
     private double total;
+    private ArrayList<Item> allItems;
 
     public Basket(int num){
         capacity=num;

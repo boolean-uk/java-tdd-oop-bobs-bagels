@@ -9,9 +9,10 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
-
+// This class contains tests for the extensions
 public class UserTest {
 
+    // This test is to see if we can get discounts on plain bagels
     @Test
     public void discountPlainTest(){
 
@@ -22,7 +23,7 @@ public class UserTest {
             order.addItem(bagel);
         }
         Discount discount=new Discount();
-        order.setTotal(order.getTotal()- discount.discPriceAlt(order)[3]);
+        order.setTotal(order.getTotal()- discount.discPrice(order)[3]);
         Assertions.assertEquals(3.99+0.39+13*0.12, order.getTotal(), 0.001);
 
 
@@ -30,6 +31,7 @@ public class UserTest {
 
     }
 
+    // This test is to see if we can get discounts on flavoured bagels
     @Test
     public void discountOnionTest(){
 
@@ -38,12 +40,12 @@ public class UserTest {
             order.addItem(new Bagel("Onion"));
         }
         Discount discount=new Discount();
-        order.setTotal(order.getTotal()- discount.discPriceAlt(order)[3]);
+        order.setTotal(order.getTotal()- discount.discPrice(order)[3]);
         Assertions.assertEquals(2.49, order.getTotal(), 0.001);
 
 
     }
-
+    // This test is to see if we can get discounts on siz flavoured bagels, while a seventh does not
     @Test
     public void discountMoreOnionTest(){
 
@@ -52,12 +54,12 @@ public class UserTest {
             order.addItem(new Bagel("Onion"));
         }
         Discount discount=new Discount();
-        order.setTotal(order.getTotal()- discount.discPriceAlt(order)[3]);
+        order.setTotal(order.getTotal()- discount.discPrice(order)[3]);
         Assertions.assertEquals(2.49+0.49, order.getTotal(), 0.001);
 
 
     }
-
+    // The next two tests see if we can get a coffee/bagel discount
     @Test
     public void discountEverythingTest(){
 
@@ -69,7 +71,7 @@ public class UserTest {
         }
         order.addItem(new Coffee("Black"));
         Discount discount=new Discount();
-        order.setTotal(order.getTotal()- discount.discPriceAlt(order)[3]);
+        order.setTotal(order.getTotal()- discount.discPrice(order)[3]);
         Assertions.assertEquals(2.49+7*0.12+1.25, order.getTotal(), 0.001);
 
 
@@ -89,12 +91,12 @@ public class UserTest {
         order.addItem(coffee1);
         //order.addItem(coffee2);
         Discount discount=new Discount();
-        order.setTotal(order.getTotal()- discount.discPriceAlt(order)[3]);
+        order.setTotal(order.getTotal()- discount.discPrice(order)[3]);
         Assertions.assertEquals(1.25+0.39+0.12*2, order.getTotal(), 0.001);
 
 
     }
-
+    // This test is to see if we can get discounts with multiple types of bagels and coffee
     @Test
     public void discountManyTest(){
         Order order=new Order();
@@ -108,12 +110,13 @@ public class UserTest {
         }
         order.addItem(new Coffee("Black"));
         Discount discount=new Discount();
-        order.setTotal(order.getTotal()- discount.discPriceAlt(order)[3]);
+        order.setTotal(order.getTotal()- discount.discPrice(order)[3]);
 
         Assertions.assertEquals(3.99+2.49+0.39+1.25, order.getTotal(), 0.001);
 
     }
 
+    // This test is to see if we can get a receipt
     @Test
     public void receiptTest(){
         Order order=new Order();

@@ -1,10 +1,12 @@
 package com.booleanuk.core;
-
+// The Bagel class allows for the creation of bagels
+// It has a member variable Filling, which can contain up to three fillings
 public class Bagel extends Item{
     private Filling[] Fillings;
 
     public Bagel(String type){
-
+        // Here I create vector which contains no filling and set the purchasability of the bagel to false
+        // to ensure it cannot be bought before getting an identity, the Switch determines type and price
         Fillings=new Filling[3];
         this.setPurchase(false);
         switch (type){
@@ -45,6 +47,9 @@ public class Bagel extends Item{
         }
 
     }
+
+    // the following functions determine fillings and access them. One cannot add the same filling multiple times
+    // the price of the fillings are added to the bagel
 
     public boolean addFilling(Filling filling){
         for (int i=0; i<3; i++){

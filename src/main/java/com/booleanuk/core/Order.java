@@ -1,7 +1,8 @@
 package com.booleanuk.core;
 
 import java.util.ArrayList;
-
+// The Order class is used to create orders for items and store them in an ArrayList
+// , and keeps track of how many there are
 public class Order {
 
     private ArrayList<Item> Items;
@@ -12,7 +13,7 @@ public class Order {
         Items=new ArrayList<>();
         num=0;
     }
-
+    // the addItem() method refuses any item which cannot be purchased
     public boolean addItem(Item item){
         if (!item.canPurchase()){
             return false;

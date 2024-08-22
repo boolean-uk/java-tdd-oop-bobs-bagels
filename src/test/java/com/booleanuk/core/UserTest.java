@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 public class UserTest {
-
+    // User story 1
     @Test
     public void addBagelTest() {
         Order order = new Order();
@@ -17,7 +17,7 @@ public class UserTest {
 
 
     }
-
+    // User story 2
     @Test
     public void removeBagelTest() {
         Order order = new Order();
@@ -32,7 +32,7 @@ public class UserTest {
 
 
     }
-
+    // User story 3
     @Test
     public void checkCapacityTest() {
         Order order = new Order();
@@ -54,6 +54,8 @@ public class UserTest {
 
     }
 
+
+    //User story 4
     @Test
     public void increaseCapacityTest() {
         Order order = new Order();
@@ -74,6 +76,7 @@ public class UserTest {
         Assertions.assertTrue(basket.add(order));
     }
 
+    // User story 5
     @Test
     public void removeNothingTest() {
         Order order = new Order();
@@ -98,6 +101,7 @@ public class UserTest {
 
     }
 
+    // User story 6
     @Test
     public void totalTest() {
         Order order = new Order();
@@ -122,6 +126,7 @@ public class UserTest {
         Assertions.assertEquals(0.39+3 * 0.49 + 4 * 0.12 + 0.99, basket.getTotal());
     }
 
+    // User story 7+8
     @Test
     public void bagelPriceTest() {
         Bagel bagel = new Bagel("Plain");
@@ -133,6 +138,7 @@ public class UserTest {
 
     }
 
+    // User story 9
     @Test
     public void fillingPriceTest() {
         Filling filling = new Filling("Cheese");
@@ -142,6 +148,7 @@ public class UserTest {
 
     }
 
+    //User story 10
     @Test
     public void existenceTest() {
 

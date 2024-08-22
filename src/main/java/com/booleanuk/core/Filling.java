@@ -1,6 +1,7 @@
 package com.booleanuk.core;
 
 import java.util.HashMap;
+// The Filling Class is used to create fillings.
 
 public class Filling extends Item{
 
