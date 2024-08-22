@@ -79,13 +79,12 @@ public class BasketTest {
         basket.addItem("BGLP");
         basket.addItem("BGLP");
         basket.addItem("BGLP");
-        basket.addItem("BGLP");
-        basket.addItem("BGLP");
-        basket.addItem("BGLP");
+        basket.addItem("COFB");
+        basket.addFilling("BGLP", "FILC");
 
         double newTotal = basket.addDiscount();
 
-        Assertions.assertEquals(5.55, newTotal, 0.005d);
+        Assertions.assertEquals(5.36, newTotal, 0.005d);
     }
 
 
@@ -115,6 +114,40 @@ public class BasketTest {
         double newTotal = basket.addDiscount();
 
         Assertions.assertEquals(5.79, newTotal, 0.005d);
+    }
+
+    @Test
+    void addDiscountVariedBasket(){
+        Basket basket = new Basket();
+        basket.changeBasketSize(30);
+        basket.addItem("BGLP");
+        basket.addItem("BGLP");
+        basket.addItem("BGLP");
+        basket.addItem("BGLP");
+        basket.addItem("BGLP");
+        basket.addItem("BGLP");
+        basket.addItem("BGLP");
+        basket.addItem("BGLP");
+        basket.addItem("BGLP");
+        basket.addItem("BGLP");
+        basket.addItem("BGLP");
+        basket.addItem("BGLP");
+        basket.addItem("BGLE");
+        basket.addItem("BGLE");
+        basket.addItem("BGLE");
+        basket.addItem("BGLE");
+        basket.addItem("BGLE");
+        basket.addItem("BGLE");
+        basket.addItem("BGLO");
+        basket.addItem("BGLO");
+        basket.addItem("COFB");
+        basket.addItem("COFB");
+        basket.addItem("COFB");
+
+
+        double newTotal = basket.addDiscount();
+
+        //Assertions.assertEquals(5.79, newTotal, 0.005d);
     }
 
 

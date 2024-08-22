@@ -27,6 +27,9 @@ public class Basket {
         inventory.add(new Filling("FILX", 0.12d, "Filling", "Cream Cheese"));
         inventory.add(new Filling("FILS", 0.12d, "Filling", "Smoked Salmon"));
         inventory.add(new Filling("FILH", 0.12d, "Filling", "Ham"));
+        inventory.add(new Product("DIS1", 0.39d, "12 Bagels", "Ham"));
+        inventory.add(new Product("DIS2", 0.49d, "6 Bagels", "Ham"));
+        inventory.add(new Product("DIS3", 0.99d, "COffee - Bagel", "Ham"));
     }
 
     public Boolean addItem(String SKU){
@@ -84,7 +87,6 @@ public class Basket {
     public Boolean addFilling(String bagelSKU, String fillingSKU){
         for (Product p: basketContent){
             if(p.getSKU().equals(bagelSKU) && (p instanceof Bagel)){
-
                 //found bagel, now see if filling is in inventory
                 for (Product filling: inventory){
                     if(filling.getSKU().equals(fillingSKU) && ((Bagel) p).getFilling() == null){
@@ -92,10 +94,8 @@ public class Basket {
                         ((Bagel) p).setFilling((Filling) filling);
                         totalPrice += filling.getPrice();
                         return true;
-                    }
+                        }
                 }
-                //System.out.println("Couldn't find the desired filling in stock");
-                //return false;
             }
         }
         System.out.println("Couldn't find the bagel in basket");
@@ -107,6 +107,7 @@ public class Basket {
         int bagelCounter = 0;
         int coffeeCounter = 0;
         ArrayList<Bagel> discountedBagelsList = new ArrayList<>();
+        ArrayList<Product> coffeeList = new ArrayList<>();
 
         //Count bagels
         for (Product p : basketContent) {
@@ -116,33 +117,24 @@ public class Basket {
             }
             if (p.getName().equals("Coffee")) {
                 coffeeCounter += 1;
+                coffeeList.add(p);
             }
-
-
         }
 
         //Figure out how many discounts and remaining items after discounts
-        int bagelDiscounts12 = 0;
-        int bagelsAfterDiscount12 = 0;
-
-        if (bagelCounter >= 12) {
-            bagelDiscounts12 = bagelCounter / 12;
-            bagelsAfterDiscount12 = bagelCounter % 12;
-        }
+        int bagelDiscounts12 = bagelCounter / 12; // 20 / 12 = 1
+        int bagelsAfterDiscount12 = bagelCounter % 12; // 20 % 12 = 8
 
 
         for (int i = 0; i < bagelDiscounts12; i++){
             //remove the cost of the 12 individual bagels,
             for(int j = 0; j < 12; j++){
-                totalPrice -= discountedBagelsList.get(j).getPrice();
-                System.out.println("price deducted from " + discountedBagelsList.get(j));
+                totalPrice -= discountedBagelsList.get(j).getPrice(); // Deducting the price of the bagel from the total
             }
-
             //remove the 12 discounted bagels
             for(int j = 0; j < 12; j++){
                 discountedBagelsList.removeFirst();
             }
-
             totalPrice+= 3.99; // For each 12 stack discount, add this price to the total
         }
 
@@ -155,39 +147,133 @@ public class Basket {
                 System.out.println("price deducted from " + discountedBagelsList.get(j));
             }
             totalPrice += 2.49;
+            bagelsAfterDiscount12 -= 6;
+        }
+        System.out.println("Bagels remaining " + bagelsAfterDiscount12);
+
+        //Calculate coffee + bagel pairs for the remaining discounts
+        for(int i = 0; i < bagelsAfterDiscount12; i++){
+            if(!coffeeList.isEmpty()){
+                totalPrice -= discountedBagelsList.get(i).getPrice();
+                totalPrice -= coffeeList.get(i).getPrice();
+                totalPrice += 1.25d;
+            }
+        }
+        System.out.println("Total price after discounts " + String.format("%.02f",totalPrice));
+        return totalPrice;
+    }
+
+    /*
+    public void printReceipt(){
+        int bagelCount = 0;
+        double bagelPrice = 0;
+        int coffeeCount = 0;
+        double coffeePrice = 0;
+        int fillingCount = 0;
+        double fillingPrice = 0;
+
+
+        System.out.println("  ~~~ Bob's Bagels ~~~   ");
+        System.out.println("----------------------------");
+
+        for (Product p: basketContent){
+            if(p.getName().equals("Bagel")){
+                bagelCount+= 1;
+                bagelPrice += p.getPrice();
+
+                //check for fillings as well
+                if (((Bagel) p).getFilling() != null){
+                    fillingCount+= 1;
+                    fillingPrice+= ((Bagel) p).getFilling().getPrice();
+                }
+
+            }else if (p.getName().equals("Coffee")) {
+                coffeeCount += 1;
+                coffeePrice += p.getPrice();
+            }
+
+        }
+        System.out.println(bagelCount + "X Bagels = " + String.format("%.02f",bagelPrice));
+        System.out.println(coffeeCount + "X Coffee = " + String.format("%.02f",coffeePrice));
+        System.out.println(fillingCount + "X Fillings = " + String.format("%.02f",fillingPrice));
+        System.out.println("Original price:" + String.format("%.02f",(bagelPrice + coffeePrice + fillingPrice)));
+        System.out.println("price after discounts: " + String.format("%.02f",totalPrice));
+    }
+
+     */
+
+    public void printReceipt() {
+        int bagelCount = 0;
+        double bagelPrice = 0;
+        int coffeeCount = 0;
+        double coffeePrice = 0;
+        int fillingCount = 0;
+        double fillingPrice = 0;
+
+        System.out.println("  ~~~ Bob's Bagels ~~~   ");
+        System.out.println("----------------------------");
+
+        // Loop through basket items and count the products
+        for (Product p : basketContent) {
+            if (p.getName().equals("Bagel")) {
+                bagelCount++;
+                bagelPrice += p.getPrice();
+
+                // Check for fillings within the bagel
+                if (((Bagel) p).getFilling() != null) {
+                    fillingCount++;
+                    fillingPrice += ((Bagel) p).getFilling().getPrice();
+                }
+
+            } else if (p.getName().equals("Coffee")) {
+                coffeeCount++;
+                coffeePrice += p.getPrice();
+            }
         }
 
+        // Only print the line for each item if its count is greater than 0
+        if (bagelCount > 0) {
+            System.out.println(bagelCount + "X Bagels = $" + String.format("%.02f", bagelPrice));
+        }
+        if (coffeeCount > 0) {
+            System.out.println(coffeeCount + "X Coffee = $" + String.format("%.02f", coffeePrice));
+        }
+        if (fillingCount > 0) {
+            System.out.println(fillingCount + "X Fillings = $" + String.format("%.02f", fillingPrice));
+        }
 
-
-        System.out.println("Total price after discounts " + totalPrice);
-
-        return totalPrice;
+        // Calculate total prices
+        double originalPrice = bagelPrice + coffeePrice + fillingPrice;
+        System.out.println("----------------------------");
+        System.out.println("Original price: $" + String.format("%.02f", originalPrice));
+        System.out.println("Price after discounts: $" + String.format("%.02f", totalPrice)); // assuming totalPrice is computed elsewhere
     }
 
     //Sanity check
     public static void main(String[] args) {
         Basket basket = new Basket();
         basket.changeBasketSize(20);
-        basket.addItem("BGLE");
-        basket.addItem("BGLE");
-        basket.addItem("BGLE");
-        basket.addItem("BGLE");
-        basket.addItem("BGLE");
-        basket.addItem("BGLE");
-        basket.addItem("BGLE");
-        basket.addItem("BGLE");
-        basket.addItem("BGLE");
-        basket.addItem("BGLE");
-        basket.addItem("BGLE");
-        basket.addItem("BGLE");
-        basket.addItem("BGLE");
-        basket.addFilling("BGLE", "FILC");
-        basket.addFilling("BGLE", "FILC");
+        basket.addItem("BGLP");
+        basket.addItem("BGLP");
+        basket.addItem("BGLP");
+        basket.addItem("BGLP");
+        basket.addItem("BGLP");
+        basket.addItem("BGLP");
+        basket.addItem("BGLP");
+        basket.addItem("BGLP");
+        basket.addItem("BGLP");
+        basket.addItem("BGLP");
+        basket.addItem("BGLP");
+        basket.addItem("BGLP");
+        basket.addItem("BGLP");
+        basket.addItem("BGLP");
+        basket.addItem("BGLP");
+        basket.addItem("BGLP");
+        basket.addFilling("BGLP", "FILC");
 
+        double newPrice = basket.addDiscount();
+        basket.printReceipt();
 
-
-        //System.out.println(newPrice);
-        System.out.println(basket.getBasketContent());
     }
 
 
