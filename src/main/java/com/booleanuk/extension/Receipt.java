@@ -85,25 +85,53 @@ public class Receipt {
     private String bagelDiscount(){
         String result = "";
         int bagelCount = order.getBagelList().size();
+        int priceFirstBagels = 0;
+        int diff = 0;
         if(bagelCount / 12 > 0){
-            result += "\n12 Bagels " + bagelCount / 12 + " £3.99";
+            for(int i = 0; i < bagelCount - bagelCount % 12; ++i){
+                priceFirstBagels += order.getBagelList().get(i);
+            }
+            diff = priceFirstBagels - 399;
+            result += "\n12 Bagels " + bagelCount / 12 + " £3.99\n" +
+                "           -£" + diff / 100.0;
             if(bagelCount % 12 > 5){
-               result += "\n6 Bagels 1 £2.49";
+                priceFirstBagels = 0;
+                for(int i = bagelCount - bagelCount % 12; i < bagelCount - bagelCount % 6; ++i){
+                    priceFirstBagels += order.getBagelList().get(i);
+                }
+                diff = priceFirstBagels - 249;
+                result += "\n6 Bagels 1 £2.49\n" +
+                        "           -£" + diff / 100.0;
             }
         }
         else if(bagelCount / 6 > 0){
-            result += "\n6 Bagels 1 £2.49";
+            for(int i = 0; i < bagelCount - bagelCount % 6; ++i){
+                priceFirstBagels += order.getBagelList().get(i);
+            }
+            diff = priceFirstBagels - 249;
+            result += "\n6 Bagels 1 £2.49\n" +
+                    "           -£" + diff / 100.0;
         }
         return result;
     }
 
     private String coffeeDiscount(){
         String result = "";
+        int diff = 0;
+        int coffeePrice = 0;
+        int bagelPrice = 0;
         int coffeeAmount = order.getCoffeeList().size();
         int singularBagels = order.getBagelList().size() % 6;
-        if(coffeeAmount > 0 && singularBagels > 0){
-            result += "\nCoffee & Bagel " + min(coffeeAmount, singularBagels) + " £1.25";
+        int pairs = min(coffeeAmount, singularBagels);
+
+        for(int i = 0; i < pairs; i++){
+            coffeePrice += order.getCoffeeList().get(i);
+            bagelPrice += order.getBagelList().get(order.getBagelList().size() - singularBagels + i);
+            diff = bagelPrice + coffeePrice - 125 * pairs;
         }
+
+        result += "\nCoffee & Bagel " + pairs + " £1.25\n" +
+                "           -£" + diff / 100.0;
         return result;
     }
 

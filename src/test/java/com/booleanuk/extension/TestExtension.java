@@ -237,5 +237,4 @@ public class TestExtension {
         Assertions.assertEquals(2.29, receipt1.getTotalPriceNoDiscounts());
     }
 
-
 }
