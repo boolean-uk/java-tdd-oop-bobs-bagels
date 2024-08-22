@@ -95,6 +95,7 @@ class ReceiptTest {
     Receipt receipt = inventory.purchase(basket);
     String actual = receipt.toString();
 
+    // Assertions.assertEquals("", actual);
     Assertions.assertTrue(actual.contains("1x Coffee & bagel deal 1.25"));
     Assertions.assertTrue(actual.contains("(-0.23)"));
     Assertions.assertTrue(actual.contains("Total: 1.25"));
