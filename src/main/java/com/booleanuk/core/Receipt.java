@@ -5,8 +5,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Receipt {
-    Basket basket;
-    ArrayList<String> receiptLines;
+    private final Basket basket;
+    private final ArrayList<String> receiptLines;
 
     public Receipt(Basket basket){
         this.basket = basket;

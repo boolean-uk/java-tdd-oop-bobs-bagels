@@ -19,10 +19,7 @@ public class Basket {
 
     public int getDiscount() { return this.discount; }
 
-    public int numberOfItemsInBasket() { return this.basket.size(); }
-
     public int getMaxBasketSize() { return this.maxBasketSize; }
-
 
     public String addItemToBasket(Item item){
         if (basketIsFull()){
@@ -37,23 +34,6 @@ public class Basket {
         this.basket.merge(item, 1, Integer::sum);
 
         return item.getName() + " added to basket.";
-    }
-
-    // TODO: Move this to order, receipt or somewhere else?
-    public void formatFillingPrint(Bagel bagel) {
-        HashMap<String, Integer> listOfFillings = this.getQuantityOfFillings(bagel);
-        System.out.println("Fillings:");
-        listOfFillings.forEach((key, value) -> System.out.println("- " + key + " x" + value));
-    }
-
-    public HashMap<String, Integer> getQuantityOfFillings(Bagel bagel){
-        HashMap<String, Integer> quantityOfFillings = new HashMap<>();
-
-        for (Filling f : bagel.getFillings()){
-            quantityOfFillings.merge(f.getName(), 1, Integer::sum);
-        }
-
-        return quantityOfFillings;
     }
 
     // TODO: Move some of this to order
@@ -83,7 +63,55 @@ public class Basket {
         return item.getName() + " removed from basket.";
     }
 
-    public void printItemsInBasketWithIndex(Map<Integer, Item> indexedBasket){
+    public float calculateBasketCost(){
+        int sum = 0;
+
+        for (Map.Entry<Item, Integer> entry : basket.entrySet()){
+            sum += entry.getKey().getPrice() * entry.getValue();
+        }
+
+        sum = sum - this.discount;
+        return (float) sum/100;
+    }
+
+    public boolean basketIsFull(){
+        return maxBasketSize == basket.size();
+    }
+
+    public boolean itemInBasket(Item item){
+        return basket.containsKey(item);
+    }
+
+    public void changeBasketSize(int newSize){
+        if (0 < newSize){
+            this.maxBasketSize = newSize;
+        }
+    }
+
+    public int numberOfItemsInBasket() { return this.basket.size(); }
+
+
+
+    // TODO: Move this to order, receipt or somewhere else?
+    private void formatFillingPrint(Bagel bagel) {
+        HashMap<String, Integer> listOfFillings = this.getQuantityOfFillings(bagel);
+        System.out.println("Fillings:");
+        listOfFillings.forEach((key, value) -> System.out.println("- " + key + " x" + value));
+    }
+
+    public HashMap<String, Integer> getQuantityOfFillings(Bagel bagel){
+        HashMap<String, Integer> quantityOfFillings = new HashMap<>();
+
+        for (Filling f : bagel.getFillings()){
+            quantityOfFillings.merge(f.getName(), 1, Integer::sum);
+        }
+
+        return quantityOfFillings;
+    }
+
+
+
+    private void printItemsInBasketWithIndex(Map<Integer, Item> indexedBasket){
         int index = 1;
 
         System.out.println("\nYour basket:");
@@ -112,30 +140,7 @@ public class Basket {
         System.out.println("\nChoose item to remove or press 0 to go back.");
     }
 
-    public float calculateBasketCost(){
-        int sum = 0;
 
-        for (Map.Entry<Item, Integer> entry : basket.entrySet()){
-            sum += entry.getKey().getPrice() * entry.getValue();
-        }
-
-        sum = sum - this.discount;
-        return (float) sum/100;
-    }
-
-    public boolean basketIsFull(){
-        return maxBasketSize == basket.size();
-    }
-
-    public boolean itemInBasket(Item item){
-        return basket.containsKey(item);
-    }
-
-    public void changeBasketSize(int newSize){
-        if (0 < newSize){
-            this.maxBasketSize = newSize;
-        }
-    }
 
     // TODO: Possibly simplify if the bagels do not have to be the same variant.
     public void calculateDiscount(){
@@ -152,6 +157,7 @@ public class Basket {
         }
     }
 
+    // TODO: Possibly superfluous if I refactor the above function to use the basket after changing to hashmap.
     public void quantifyItemsInBasket(Map<String, Integer> basketOverview){
         for (Map.Entry<Item, Integer> entry : basket.entrySet()){
             Item item = entry.getKey();
@@ -185,7 +191,7 @@ public class Basket {
         }
     }
 
-    public void addBagelDiscount(Map<String, Integer> basketOverview){
+    private void addBagelDiscount(Map<String, Integer> basketOverview){
         int discount = 0;
         while(true) {
             if (6 <= basketOverview.getOrDefault("Onion Bagel", 0)) {
@@ -230,7 +236,7 @@ public class Basket {
         this.discount = this.discount + discount;
     }
 
-    public void addCoffeeDiscount(Map<String, Integer> basketOverview){
+    private void addCoffeeDiscount(Map<String, Integer> basketOverview){
         int discount = 0;
         while (basketOverview.getOrDefault("Black Coffee", 0) != 0 && (basketOverview.getOrDefault("Onion Bagel",0) != 0 | basketOverview.getOrDefault("Plain Bagel", 0) != 0 | basketOverview.getOrDefault("Everything Bagel",0) != 0 | basketOverview.getOrDefault("Sesame Bagel",0) != 0)){
             basketOverview.merge("Black Coffee", -1, Integer::sum);
@@ -280,7 +286,7 @@ public class Basket {
         }
     }
 
-    public void printFilling(Bagel bagel) {
+    private void printFilling(Bagel bagel) {
         HashMap<String, Integer> listOfFillings = getQuantityOfFillings(bagel);
         listOfFillings.forEach((key, value) -> System.out.printf("%-15s %5s%n", "- " + key, value));
     }

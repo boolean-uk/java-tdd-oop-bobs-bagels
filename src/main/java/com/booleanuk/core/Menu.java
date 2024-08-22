@@ -51,8 +51,8 @@ public class Menu {
         return false;
     }
 
-    private static boolean itemsAreEqual(Item i, Item item){
-        return Objects.equals(i.getSKU(), item.getSKU()) & Objects.equals(i.getName(), item.getName());
+    private static boolean itemsAreEqual(Item item1, Item item2){
+        return Objects.equals(item1.getSKU(), item2.getSKU()) & Objects.equals(item1.getName(), item2.getName());
     }
 
     public static Filling getFillingFromMenu(String name){
