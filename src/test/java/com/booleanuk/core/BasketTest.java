@@ -25,6 +25,7 @@ public class BasketTest {
         Assertions.assertEquals("COFW", basket.getAll().get(1).getSKU());
     }
 
+    // User story #1 Add a specific type of bagel
     @Test
     public void addBagelAndFilling() {
         this.inventory = new Inventory();
@@ -35,6 +36,7 @@ public class BasketTest {
         Assertions.assertEquals("FILS", basket.getAll().get(101).getSKU());
     }
 
+    // User story #1 Add a specific type of bagel
     @Test
     public void removeBagel() {
         this.inventory = new Inventory();
@@ -43,7 +45,34 @@ public class BasketTest {
         basket.addBagel("BAGE", Arrays.asList("FILS","FILB"));
         basket.printBasket();
 
+        // TODO: Add test
         basket.remove(1);
         basket.printBasket();
+    }
+
+//    @Test
+//    public void tryToAddProductThatIsNotInInventory() {
+//        this.inventory = new Inventory();
+//        this.basket = new Basket(new Inventory());
+//        basket.addBagel("HELLO", Arrays.asList("FILS","FILB"));
+//        basket.printBasket();
+//    }
+
+    // User story #3 Notify when max capacity of basket is reached
+    @Test
+    public void exceedMaxCapacityShouldThrowError() {
+        this.inventory = new Inventory();
+        this.basket = new Basket(new Inventory());
+
+        basket.changeMaxCapacity(2);
+        basket.addBagel("BAGE");
+        basket.addBagel("BAGE");
+
+        // TODO: I need to set addToBasket() to protected instead of private and
+        // test it because I can't test addBgel()/addCoffe() because they includes a try/catch
+        MaxCapacityException exception = Assertions.assertThrows(MaxCapacityException.class, () -> {
+            basket.addToBasket(11,new BasketItem("BAGE"));
+        });
+        Assertions.assertEquals("Basket is full, can't add more items", exception.getLocalizedMessage());
     }
 }
