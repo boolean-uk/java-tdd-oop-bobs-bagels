@@ -10,7 +10,6 @@ public class Item {
     private Double Price;
     private Boolean Purchase;
     private String name;
-    //private String type;
 
     public Double getPrice(){
         return Price;

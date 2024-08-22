@@ -35,8 +35,6 @@ public class Discount {
         int bag=0;
         int coff=0;
         double disc=0;
-        double diff12=0;
-        double diff6=0;
 
         double bagPrice=0;
         double plainPrice=0;
@@ -79,8 +77,6 @@ public class Discount {
 
 
         if (bag>=6){
-            bagPrice=0.49*6;
-            discPrice=2.49;
             disc+=6*0.49-2.49;
             bag=bag%6;
             discounts[0]+=6*0.49-2.49;

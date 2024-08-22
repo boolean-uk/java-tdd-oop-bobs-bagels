@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 // The Basket class is used to create baskets to hold items
-// It contaisn two HashMaps, giving oversight over the number of certain items and their prices
+// It contains a Hashmap of Item-keys leading to integer, representing the items in the basket and their number
 
 public class Basket {
     private HashMap<Item, Integer> Items;
@@ -24,34 +24,9 @@ public class Basket {
 
     }
 
-    public boolean add(Order order){
 
-        Item item= order.getItems();
-        int num= order.getNum();
-
-        if (!Items.containsKey(item) & checkCapacity()) {
-            Items.put(item, num);
-            total+=item.getPrice()*num;
-            this.numItems+=num;
-        } else if (Items.containsKey(item) & checkCapacity()) {
-            Items.replace(item, Items.get(item)+num);
-            total+=item.getPrice()*num;
-            this.numItems+=1;
-        }
-        else{
-            System.out.println("Basket is full");
-            return false;
-
-        }
-
-
-
-        return true;
-
-    }
 
     public boolean add(Item item, int num){
-
 
 
 

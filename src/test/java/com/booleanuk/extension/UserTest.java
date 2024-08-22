@@ -66,8 +66,7 @@ public class UserTest {
         basket.add(bagel, 7);
 
 
-        Order order0=new Order(new Coffee("Black"),1);
-        basket.add(order0);
+        basket.add(new Coffee("Black"),1);
         Discount discount=new Discount();
         basket.setTotal(basket.getTotal()- discount.discPrice(basket)[3]);
         Assertions.assertEquals(2.49+7*0.12+1.25, basket.getTotal(), 0.001);
