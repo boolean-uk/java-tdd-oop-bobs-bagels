@@ -13,5 +13,6 @@ public class Receipt {
 		this.receipt = receipt;
 		this.price = price;
 		this.date = LocalDateTime.now();
+		System.out.println(receipt);
 	}
 }
