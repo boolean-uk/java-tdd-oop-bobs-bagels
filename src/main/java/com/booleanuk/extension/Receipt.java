@@ -33,28 +33,29 @@ public class Receipt {
 
         HashMap<String, Integer> number=basket.getItems();
         HashMap<String, Double> prices=basket.getPrices();
-
+        int L=6;
         for (String item: number.keySet()){
-            System.out.println(item+"  "+number.get(item)+ " £"+prices.get(item)*number.get(item));
+            String str=item+"  "+number.get(item)+ " £"+String.format("%.2f",prices.get(item)*number.get(item));
+            System.out.println(item+"  "+number.get(item)+ " £"+String.format("%.2f",prices.get(item)*number.get(item)));
         }
 
         if(receipt){
             double fullDiscount=0;
             if (discountPrices[0]>0) {
-                System.out.println("Discount due to buying flavored Bagels in bulk: "+-discountPrices[0]);
+                System.out.println("Discount due to buying flavored Bagels in bulk: -£"+String.format("%.2f",discountPrices[0]));
                 fullDiscount+=discountPrices[0];
 
             }
             if(discountPrices[1]>0){
-                System.out.println("Discount due to buying Plain Bagels in bulk: "+-discountPrices[1]);
+                System.out.println("Discount due to buying Plain Bagels in bulk: -£"+String.format("%.2f",discountPrices[1]));
                 fullDiscount+=discountPrices[1];
             }
             if(discountPrices[2]>0){
-                System.out.println("Discount due to buying Bagel/Coffee in bulk: "+-discountPrices[2]);
+                System.out.println("Discount due to buying Bagel/Coffee in bulk: -£"+String.format("%.2f",discountPrices[2]));
                 fullDiscount+=discountPrices[2];
             }
 
-            System.out.println("You saved a total of: £"+fullDiscount+" on this trip.");
+            System.out.println("You saved a total of: £"+String.format("%.2f",fullDiscount)+" on this trip.");
 
         }
 

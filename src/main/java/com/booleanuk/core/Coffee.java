@@ -10,28 +10,28 @@ public class Coffee extends Item{
                 this.setName("Black Coffee");
                 this.setPrice(0.99);
                 this.setPurchase(true);
-                this.setType("Coffee");
+                //this.setType("Coffee");
                 break;
             case "White":
                 this.setSku("COFW");
                 this.setName("White Coffee");
                 this.setPrice(1.19);
                 this.setPurchase(true);
-                this.setType("Coffee");
+                //this.setType("Coffee");
                 break;
             case "Capuccino":
                 this.setSku("COFC");
                 this.setName("Capuccino");
                 this.setPrice(1.29);
                 this.setPurchase(true);
-                this.setType("Coffee");
+                //this.setType("Coffee");
                 break;
             case "Latte":
                 this.setSku("COFL");
                 this.setName("Latte");
                 this.setPrice(1.29);
                 this.setPurchase(true);
-                this.setType("Coffee");
+                //this.setType("Coffee");
                 break;
             default:
                 System.out.println("Not available");

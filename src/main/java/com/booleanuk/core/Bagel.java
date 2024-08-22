@@ -13,28 +13,28 @@ public class Bagel extends Item{
                 this.setName("Onion Bagel");
                 this.setPurchase(true);
                 this.setPrice(0.49);
-                this.setType("Bagel");
+                //this.setType("Bagel");
                 break;
             case "Plain":
                 this.setSku("BGLP");
                 this.setName("Plain Bagel");
                 this.setPurchase(true);
                 this.setPrice(0.39);
-                this.setType("Bagel");
+                //this.setType("Bagel");
                 break;
             case "Everything":
                 this.setSku("BGLE");
                 this.setName("Everything Bagel");
                 this.setPurchase(true);
                 this.setPrice(0.49);
-                this.setType("Bagel");
+                //this.setType("Bagel");
                 break;
             case "Sesame":
                 this.setSku("BGLS");
                 this.setName("Sesame Bagel");
                 this.setPurchase(true);
                 this.setPrice(0.49);
-                this.setType("Bagel");
+                //this.setType("Bagel");
                 break;
             default:
                 System.out.println("Not available");
