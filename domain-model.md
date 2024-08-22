@@ -3,6 +3,8 @@
 Assuming that
 
 - A bagel can only have 0 or 1 filling
+- Maximum of one discount type per basket/order. E.g. if basket has 2 bagel and 2 coffees, then there 
+will only be one "Coffee & Bagel for 1.25" discount.
 
 ## User Stories for extension
 
@@ -56,18 +58,18 @@ Inventory class:
 
 Basket class:
 
-| Member variables                           | Methods                                              | Scenario                                                                           | Outputs |
-|--------------------------------------------|------------------------------------------------------|------------------------------------------------------------------------------------|---------|
-| `ArrayList<Product>`                       | `add(Product product)`                               | Successfully product added to basket                                               | true    |
-| `ArrayList<Product>`                       | `remove(Product product)`                            | Successfully removed from basket                                                   | true    |
-|                                            |                                                      | Failed to remove from basket                                                       | false   |
-|                                            | `isFull()`                                           | Basket is full                                                                     | true    |
-|                                            |                                                      | Basket is not full                                                                 | false   |
-| `maxCapacity`                              | `changeCapacity(int newCapacity, boolean isManager)` | Successfully changed capacity of baskets                                           | true    |
-|                                            |                                                      | Failed to change capacity of baskets (e.g., is not manager)                        | false   |
-| `ArrayList<Product>`                       | `getTotalCost()`                                     | there is atleast one product in the basket                                         | double  |
-|                                            |                                                      | there are no products in the basket                                                | 0       |
-| `ArrayList<Product>`, `ArrayList<Product>` | `checkDiscounts(Product p)`                          | a product was added to the basket and it should be checked for potential discounts | -       |
+| Member variables                            | Methods                                              | Scenario                                                                           | Outputs |
+|---------------------------------------------|------------------------------------------------------|------------------------------------------------------------------------------------|---------|
+| `ArrayList<Product>`                        | `add(Product product)`                               | Successfully product added to basket                                               | true    |
+| `ArrayList<Product>`                        | `remove(Product product)`                            | Successfully removed from basket                                                   | true    |
+|                                             |                                                      | Failed to remove from basket                                                       | false   |
+|                                             | `isFull()`                                           | Basket is full                                                                     | true    |
+|                                             |                                                      | Basket is not full                                                                 | false   |
+| `maxCapacity`                               | `changeCapacity(int newCapacity, boolean isManager)` | Successfully changed capacity of baskets                                           | true    |
+|                                             |                                                      | Failed to change capacity of baskets (e.g., is not manager)                        | false   |
+| `ArrayList<Product>`                        | `getTotalCost()`                                     | there is atleast one product in the basket                                         | double  |
+|                                             |                                                      | there are no products in the basket                                                | 0       |
+| `ArrayList<Product>`, `ArrayList<Discount>` | `checkDiscounts(Product p)`                          | a product was added to the basket and it should be checked for potential discounts | -       |
 
 Product class:
 
