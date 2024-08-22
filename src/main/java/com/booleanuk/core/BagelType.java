@@ -1,6 +1,6 @@
 package com.booleanuk.core;
 
-public enum BagelType implements ItemInterface {
+public enum BagelType implements Item {
     Onion,
     Plain,
     Everything,
