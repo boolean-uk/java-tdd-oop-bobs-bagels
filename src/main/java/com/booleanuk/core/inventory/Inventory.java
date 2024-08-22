@@ -55,6 +55,13 @@ public class Inventory {
     }
 
     public InventoryItem getItem(String SKU) {
-        return inventoryItems.get(SKU);
+
+        // TODO: Should SKU be converted to uppercase here?
+
+        InventoryItem item = inventoryItems.get(SKU);
+        if (item == null) {
+            throw new InventoryItemException("SKU '" + SKU + "' does not exist.");
+        }
+        return item;
     }
 }
