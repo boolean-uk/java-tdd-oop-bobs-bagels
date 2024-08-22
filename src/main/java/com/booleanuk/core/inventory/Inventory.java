@@ -53,4 +53,8 @@ public class Inventory {
     public Map<String, InventoryItem> getAllItems() {
         return inventoryItems;
     }
+
+    public InventoryItem getItem(String SKU) {
+        return inventoryItems.get(SKU);
+    }
 }
