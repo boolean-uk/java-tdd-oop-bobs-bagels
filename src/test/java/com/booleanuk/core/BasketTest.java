@@ -118,4 +118,90 @@ class BasketTest {
         }
         Assertions.assertEquals(1.89f, b.findDiscount(), 0.001);
     }
+
+    @Test
+    public void testFindDiscountOn12BagelsWithPlainBagels() {
+        Basket b = new Basket(24);
+        b.addProduct(new Bagel(Controller.prices.get("BGLP"), Controller.prices.get("FILB")));
+        for (int i = 0; i < 6; i++) {
+            b.addProduct(new Bagel(Controller.prices.get("BGLO"), Controller.prices.get("FILB")));
+            b.addProduct(new Bagel(Controller.prices.get("BGLP"), Controller.prices.get("FILB")));
+        }
+        Assertions.assertEquals(1.29f, b.findDiscount(), 0.001);
+    }
+
+    @Test
+    public void testFindDiscountOn18Bagels() {
+        Basket b = new Basket(24);
+        b.addProduct(new Bagel(Controller.prices.get("BGLP"), Controller.prices.get("FILB")));
+        for (int i = 0; i < 18; i++) {
+            b.addProduct(new Bagel(Controller.prices.get("BGLO"), Controller.prices.get("FILB")));
+        }
+        Assertions.assertEquals(2.34f, b.findDiscount(), 0.001);
+    }
+
+
+
+    @Test
+    public void testFindDiscountOn18BagelsWithPlainBagels() {
+        Basket b = new Basket(24);
+        b.addProduct(new Bagel(Controller.prices.get("BGLP"), Controller.prices.get("FILB")));
+        for (int i = 0; i < 9; i++) {
+            b.addProduct(new Bagel(Controller.prices.get("BGLO"), Controller.prices.get("FILB")));
+            b.addProduct(new Bagel(Controller.prices.get("BGLP"), Controller.prices.get("FILB")));
+        }
+        Assertions.assertEquals(1.44f, b.findDiscount(), 0.001);
+    }
+
+    @Test
+    public void testFindDiscountOn19Bagels() {
+        Basket b = new Basket(24);
+        b.addProduct(new Bagel(Controller.prices.get("BGLP"), Controller.prices.get("FILB")));
+        for (int i = 0; i < 19; i++) {
+            b.addProduct(new Bagel(Controller.prices.get("BGLO"), Controller.prices.get("FILB")));
+        }
+        Assertions.assertEquals(2.34f, b.findDiscount(), 0.001);
+    }
+
+
+
+    @Test
+    public void testFindDiscountOn20BagelsWithPlainBagels() {
+        Basket b = new Basket(24);
+        b.addProduct(new Bagel(Controller.prices.get("BGLP"), Controller.prices.get("FILB")));
+        for (int i = 0; i < 10; i++) {
+            b.addProduct(new Bagel(Controller.prices.get("BGLO"), Controller.prices.get("FILB")));
+            b.addProduct(new Bagel(Controller.prices.get("BGLP"), Controller.prices.get("FILB")));
+        }
+        Assertions.assertEquals(1.54f, b.findDiscount(), 0.001);
+    }
+
+    @Test
+    public void testFindDiscountOnOneBagelAndOneCoffee() {
+        Basket b = new Basket(24);
+        b.addProduct(new Bagel(Controller.prices.get("BGLO"), Controller.prices.get("FILB")));
+        b.addProduct(new Coffee(Controller.prices.get("COFB")));
+        Assertions.assertEquals(0.23f, b.findDiscount(), 0.001);
+    }
+
+    @Test
+    public void testFindDiscountOnTwoBagelsAndTwoCoffees() {
+        Basket b = new Basket(24);
+        b.addProduct(new Bagel(Controller.prices.get("BGLO"), Controller.prices.get("FILB")));
+        b.addProduct(new Coffee(Controller.prices.get("COFB")));
+        b.addProduct(new Bagel(Controller.prices.get("BGLP"), Controller.prices.get("FILB")));
+        b.addProduct(new Coffee(Controller.prices.get("COFC")));
+        Assertions.assertEquals(0.66f, b.findDiscount(), 0.001);
+    }
+
+    @Test
+    public void testFindDiscountOn19BagelsAndOneCoffee() {
+        Basket b = new Basket(24);
+        b.addProduct(new Coffee(Controller.prices.get("COFB")));
+        b.addProduct(new Bagel(Controller.prices.get("BGLP"), Controller.prices.get("FILB")));
+        for (int i = 0; i < 18; i++) {
+            b.addProduct(new Bagel(Controller.prices.get("BGLO"), Controller.prices.get("FILB")));
+        }
+        Assertions.assertEquals(2.47f, b.findDiscount(), 0.001);
+    }
 }
