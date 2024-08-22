@@ -33,13 +33,14 @@ public class Receipt {
         Map<Integer, Integer> coffeeBagelPairsDiscount = order.getCoffeeBagelPairsDiscount();
         Map<Product, Integer> nonDiscountedProducts = order.getNonDiscountedProductsMap();
 
+        int totalAmountOfSavings = 0;
         if (!twelveBagelDiscounts.isEmpty() || !sixBagelDiscounts.isEmpty() || !coffeeBagelPairsDiscount.isEmpty()) {
-            printDiscountedProducts(twelveBagelDiscounts, "12 Bagels", TWELVE_BAGEL_DISCOUNT_PRICE);
-            printDiscountedProducts(sixBagelDiscounts, "6 Bagels", SIX_BAGEL_DISCOUNT_PRICE);
-            printDiscountedProducts(coffeeBagelPairsDiscount, "Bagel + Coffee", BAGEL_COFFEE_PAIR_DISCOUNT_PRICE);
+            totalAmountOfSavings += printDiscountedProducts(twelveBagelDiscounts, "12 Bagels", TWELVE_BAGEL_DISCOUNT_PRICE);
+            totalAmountOfSavings += printDiscountedProducts(sixBagelDiscounts, "6 Bagels", SIX_BAGEL_DISCOUNT_PRICE);
+            totalAmountOfSavings += printDiscountedProducts(coffeeBagelPairsDiscount, "Bagel + Coffee", BAGEL_COFFEE_PAIR_DISCOUNT_PRICE);
         }
         printNonDiscountedProducts(nonDiscountedProducts);
-        printFooter(receiptWidth);
+        printFooter(receiptWidth, totalAmountOfSavings);
 
         return true;
     }
@@ -51,9 +52,12 @@ public class Receipt {
         return " ".repeat(Math.max(0, padding - 1)) + text;
     }
 
-    private void printFooter(int receiptWidth) {
+    private void printFooter(int receiptWidth, int totalAmountOfSavings) {
         System.out.println("----------------------------");
         System.out.println(formatTotal(order.getTotalSum()));
+        System.out.println();
+        System.out.println(centerText("You saved a total of £" + String.format("%.2f", totalAmountOfSavings / 100.0), receiptWidth));
+        System.out.println(centerText("on this shop", receiptWidth));
         System.out.println();
         System.out.println(centerText("Thank you", receiptWidth));
         System.out.println(centerText("for your order!", receiptWidth));
@@ -84,16 +88,18 @@ public class Receipt {
     }
 }
 
-    private void printDiscountedProducts(Map<Integer, Integer> discounts, String itemName, int discountPrice) {
+    private int printDiscountedProducts(Map<Integer, Integer> discounts, String itemName, int discountPrice) {
+        int savings = 0;
         for (Map.Entry<Integer, Integer> entry : discounts.entrySet()) {
             int quantity = entry.getKey();
             int totalCost = entry.getValue();
-            int savings = totalCost - discountPrice * quantity;
+            savings = totalCost - discountPrice * quantity;
 
             for (int i = 0; i < quantity; i++) {
                 System.out.println(formatString(itemName, 1, discountPrice, savings));
             }
         }
+        return savings;
     }
 
     private void printBagelWithFillings(Bagel bagel, int quantity, int price) {
