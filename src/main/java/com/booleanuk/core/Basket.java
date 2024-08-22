@@ -46,10 +46,10 @@ public class Basket {
         return receipt.calculateBasket();
     }
 
-    public void printOutReceiptOfBasket() {
+    public float printOutReceiptOfBasket() {
         Receipt receipt = new Receipt(basket, discountManager.getDiscountBasket());
 
-        receipt.printOutReceipt();
+        return receipt.printOutReceipt();
     }
 
     public int getMaxCapacity() {

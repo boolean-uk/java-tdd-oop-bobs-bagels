@@ -48,13 +48,10 @@ public class Receipt {
                 this.basket.replace(bagel.getKey(), bagel.getValue() - discountManager.checkBagelDiscount(this.basket));
             }
 
-
             for (Map.Entry<String, Integer> coffee: this.basket.entrySet()) {
                 if(bagel.getValue() > 0 && itemList.getTypeFromList(bagel.getKey()).equals("Bagel") && (coffee.getValue() > 0 && itemList.getTypeFromList(coffee.getKey()).equals("Coffee"))) {
 
                     //For every bagel that is more than 1 and less than 6 check if there is a coffee in the list still and add it to discountManager. This is O(n^n)...
-                    System.out.println(coffee);
-                    System.out.println(bagel);
                     //Checks if there are 1 more of bagel, then add bagelAndCoffeeDiscount the getValue of coffee
                     if(bagel.getValue() - coffee.getValue() >= 0) {
                         discountManager.bagelAndCoffeeDiscount(bagel.getKey(), coffee.getKey(), coffee.getValue());
@@ -65,10 +62,6 @@ public class Receipt {
                         this.basket.replace(coffee.getKey(), coffee.getValue() - bagel.getValue());
                         this.basket.replace(bagel.getKey(), 0);
                     }
-
-
-
-
                 }
             }
         }
@@ -76,15 +69,14 @@ public class Receipt {
     }
 
 
-    public void printOutReceipt() {
+    public float printOutReceipt() {
         float originalPrice = calculateOriginalBasket();
         float totalPrice = calculateBasket();
 
         LocalDateTime today = LocalDateTime.now();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("YYYY-mm-DD HH:mm:ss");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("YYYY-MM-dd HH:mm:SS");
 
         System.out.println(" \t ~~~ Bob's Bagels ~~~ \n");
-        //System.out.println(basket);
         System.out.println(" \t" + today.format(formatter) + "\n");
         System.out.println("----------------------------");
         for (Map.Entry<String, Integer> kvp : basket.entrySet()) {
@@ -117,6 +109,7 @@ public class Receipt {
         System.out.println(" Total: \t\t\t $" + df.format(totalPrice));
         System.out.println(" Total money saved:\t $" + df.format(originalPrice - totalPrice) );
 
+        return totalPrice;
 
     }
 }

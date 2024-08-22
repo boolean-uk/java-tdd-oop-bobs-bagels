@@ -30,3 +30,5 @@ If basket has 6 bagels and 3 of them has filling, it will give a discount on the
 |          |                                         |                                                |                                  |
 |          |                                         |                                                |                                  |
 
+
+![Picture of a receipt example](ReceiptImage.png)

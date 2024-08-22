@@ -130,4 +130,21 @@ public class BasketTest {
 
         Assertions.assertEquals(2.85f, basket.countTotalValueOfItems());
     }
+
+    @Test
+    public void add6bagelsWith3FillingAnd3CoffeeTest() {
+        Basket basket = new Basket();
+        basket.addItemToBasket(ItemFactory.bagelFactory("BGLO"));
+        basket.addItemToBasket(ItemFactory.bagelFactory("BGLO"));
+        basket.addItemToBasket(ItemFactory.bagelFactory("BGLO"));
+        basket.addItemToBasket(ItemFactory.bagelWithFillingFactory("BGLO", "FILX"));
+        basket.addItemToBasket(ItemFactory.bagelWithFillingFactory("BGLO", "FILS"));
+        basket.addItemToBasket(ItemFactory.bagelWithFillingFactory("BGLO", "FILB"));
+        basket.increaseBasketSize(10);
+        basket.addItemToBasket(ItemFactory.coffeeFactory("COFW"));
+        basket.addItemToBasket(ItemFactory.coffeeFactory("COFC"));
+        basket.addItemToBasket(ItemFactory.coffeeFactory("COFB"));
+        Assertions.assertEquals(6.32, basket.printOutReceiptOfBasket(), 0.001);
+
+    }
 }

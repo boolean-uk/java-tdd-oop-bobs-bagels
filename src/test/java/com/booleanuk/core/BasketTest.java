@@ -221,7 +221,6 @@ public class BasketTest {
 
     @Test
     public void checkThePriceOfABagelTest() {
-        Basket basket = new Basket();
         Bagel bagel = ItemFactory.bagelFactory("BGLO");
 
         Assertions.assertEquals(0.49f, bagel.getPrice());
@@ -285,5 +284,15 @@ public class BasketTest {
         basket.addItemToBasket(bagelWithFilling);
 
         Assertions.assertEquals(0, basket.countTotalItems());
+    }
+
+    @Test
+    public void addBagelAndCoffeeToBasketTest() {
+        Basket basket = new Basket();
+
+        basket.addItemToBasket(ItemFactory.coffeeFactory("COFW"));
+        basket.addItemToBasket(ItemFactory.bagelFactory("BGLO"));
+        System.out.println(basket.checkAllItems());
+        Assertions.assertEquals(2, basket.countTotalItems());
     }
 }
