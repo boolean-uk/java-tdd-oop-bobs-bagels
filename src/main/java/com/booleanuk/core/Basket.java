@@ -1,6 +1,5 @@
 package com.booleanuk.core;
 
-import javax.swing.plaf.synth.SynthOptionPaneUI;
 import java.util.HashMap;
 import java.util.Objects;
 
@@ -15,6 +14,7 @@ public class Basket {
         inventory = new Inventory();
     }
 
+    //Getters
     private int getProductCount(){
         return productCount;
     }
@@ -51,6 +51,7 @@ public class Basket {
         return 0;
     }
 
+    //Basket Methods
     public String add(String sku) {
 
         if (productCount >= basketCapacity){
@@ -58,6 +59,9 @@ public class Basket {
         }
 
         Product product = inventory.getItem(sku);
+        if (Objects.equals(null, product)){
+            return "Failed to add order";
+        }
 
         if(currentBasket.containsKey(product)){
             currentBasket.put(product, currentBasket.get(product) + 1);
@@ -77,10 +81,14 @@ public class Basket {
             return "Basket is full";
         }
 
-        Product newProduct = inventory.getItem(sku, fillingSku);
+        Product product = inventory.getItem(sku, fillingSku);
 
-        if(currentBasket.containsKey(newProduct)){
-            currentBasket.put(newProduct, currentBasket.get(newProduct) + 1);
+        if (Objects.equals(null, product)){
+            return "Failed to add order";
+        }
+
+        if(currentBasket.containsKey(product)){
+            currentBasket.put(product, currentBasket.get(product) + 1);
             productCount++;
 
             return "Existing product added to basket";
@@ -134,9 +142,8 @@ public class Basket {
         basketCapacity = newSize;
     }
 
-    public double costOfProduct(Product product){
-        if (product instanceof Bagel){
-            Bagel bagel = (Bagel) product;
+    public double costOf(Product product){
+        if (product instanceof Bagel bagel){
 
             if(bagel.getFilling() != null){
                 return product.retrievePrice() + bagel.getFilling().retrievePrice();
@@ -150,7 +157,7 @@ public class Basket {
 
         for(Product product: currentBasket.keySet()){
 
-            double price = costOfProduct(product);
+            double price = costOf(product);
             double quantity = currentBasket.get(product);
 
             sum += price * quantity;

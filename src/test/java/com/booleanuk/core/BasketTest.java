@@ -35,9 +35,10 @@ public class BasketTest {
         Basket basket = new Basket();
 
 
-        //These should fail because the wrong expected string is faulty. If we try to add product not in the inventory then we want to return error message.
-        Assertions.assertEquals("New product added to basket", basket.add("BGLO", "RILX"));
-        Assertions.assertEquals("New product added to basket", basket.add("ReTs", "RED"));
+        //This should now work due to some input being invalid. EX FILP does not exist
+        Assertions.assertEquals("Failed to add order", basket.add("DELO"));
+        Assertions.assertEquals("Failed to add order", basket.add("BGLO", "FILP"));
+        Assertions.assertEquals("Failed to add order", basket.add("ReTs", "RED"));
 
     }
 
