@@ -5,11 +5,13 @@ import java.util.*;
 public class Basket {
     private Inventory inventory;
     private LinkedHashMap<Integer, BasketItem> basketItems;
+    private int maxCapacity;
     private int idCount;
 
     public Basket(Inventory inventory) {
         this.inventory = inventory;
         this.basketItems = new LinkedHashMap <>();
+        this.maxCapacity = 20;
         this.idCount = 1;
     }
 
@@ -41,37 +43,71 @@ public class Basket {
         return Integer.parseInt(tmp);
     }
 
-    // TODO: Refactor and remove this and add generic function nsad
+    // TODO: I need to have this because otherwise I can't make a unit test on it,
+    // but I don't want the inventory or other classes to have aceess to this.
+    // should I put basket in an own package?
+    // Oterwise change back to private
+    // See test exceedMaxCapacityShouldThrowError
+    protected void addToBasket(int id, BasketItem item) {
+        if (this.basketItems.size() == maxCapacity) {
+            throw new MaxCapacityException("Basket is full, can't add more items");
+        }
+        this.basketItems.put(id, item);
+    }
+
+    // TODO: Refactor and remove this and add generic function nsad??
     public void addCoffee(String SKU) {
-        BasketItem item = new BasketItem(SKU);
-        this.basketItems.put(createID(), item);
-        printBasket();
+        try {
+//            BasketItem item = new BasketItem(SKU);
+//            this.basketItems.put(createID(), item);
+
+            this.addToBasket(createID(), new BasketItem(SKU));
+            printBasket();
+        } catch (MaxCapacityException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
 
     public void addBagel(String SKU) {
-        BasketItem item = new BasketItem(SKU);
-        this.basketItems.put(createID(), item);
+        try {
+//            BasketItem item = new BasketItem(SKU);
+//            this.basketItems.put(createID(), item);
+
+            this.addToBasket(createID(), new BasketItem(SKU));
+        } catch (MaxCapacityException e) {
+            System.out.println(e.getMessage());
+        }
+//        // TODO: Can't check throw exception in Test if I handle the exception with try/catch
+//        this.addToBasket(createID(), new BasketItem(SKU));
+
+
     }
 
 
     public void addBagel(String SKU, List<String> SKUfillings) {
-        BasketItem item = new BasketItem(SKU);
-        this.basketItems.put(createID(), item);
+        try {
+            BasketItem item = new BasketItem(SKU);
+//            this.basketItems.put(createID(), item);
+            this.addToBasket(createID(), item);
 
-        int count = 1;
-        for (String SKU_f : SKUfillings) {
+            int count = 1;
+            for (String SKU_f : SKUfillings) {
 
-            // Store the created id for the filling
-            int fillingId = createFillingId(String.valueOf(count));
+                // Store the created id for the filling
+                int fillingId = createFillingId(String.valueOf(count));
 
-            // Add filling to this basket
-            this.basketItems.put(fillingId, new BasketItem(SKU_f));
+                // Add filling to this basket
+//                this.basketItems.put(fillingId, new BasketItem(SKU_f));
+                this.addToBasket(fillingId, new BasketItem(SKU_f));
 
-            // Store filling id in bagel basketIem so it is possible to delete later
-            item.addFillingId(fillingId);
+                // Store filling id in bagel basketIem so it is possible to delete later
+                item.addFillingId(fillingId);
 
-            count++;
+                count++;
+            }
+        } catch (MaxCapacityException e) {
+            System.out.println(e.getMessage());
         }
     }
 
@@ -97,6 +133,10 @@ public class Basket {
 
     public LinkedHashMap<Integer, BasketItem> getAll() {
         return basketItems;
+    }
+
+    public void changeMaxCapacity(int newMaxCapacity) {
+        this.maxCapacity = newMaxCapacity;
     }
 
     public void printBasket() {
