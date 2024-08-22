@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Bagel extends Product {
 
-    private Filling[] fillings;
+    private final Filling[] fillings;
 
     public Bagel(String sku, int price, String variant) {
         super(sku, price, variant);
