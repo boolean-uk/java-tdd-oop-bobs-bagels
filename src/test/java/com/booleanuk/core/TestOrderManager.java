@@ -1,5 +1,4 @@
 
-
 package com.booleanuk.core;
 
 import org.junit.jupiter.api.Assertions;
@@ -125,7 +124,7 @@ public class TestOrderManager {
             om.addItem(BagelType.Everything); // 2.49
         }
         for (int i = 0; i < 3; i++) {
-            om.addItem(CoffeeType.Black); // 1.29*3
+            om.addItem(CoffeeType.Black); // 0.99*3
         }
 
 
@@ -195,6 +194,27 @@ public class TestOrderManager {
 
         Double expectedPriceWithoutDiscount = 14.68;
         Assertions.assertEquals(expectedPriceWithoutDiscount, om.getTotalCartPrice());
+    }
 
+    @Test
+    public void testCoffeeAndBagel(){
+        OrderManager om = new OrderManager();
+        for (int i = 0; i < 2; i++) {
+            om.addItem(CoffeeType.Black);
+            om.addItem(BagelType.Plain);
+        }
+
+        String expectedSubString =
+                "=================================\n" +
+                "\n" +
+                "Coffee and Bagel       2   £ 2.50\n" +
+                "                          (-0.26)\n" +
+                "――――――――――――――――――――\n" +
+                "Saved                      £ 0.26\n" +
+                "Total                      £ 2.50\n" +
+                "=================================";
+
+        String resultString = om.getTotalDiscountRecieptString();
+        Assertions.assertTrue(resultString.contains(expectedSubString));
     }
 }
