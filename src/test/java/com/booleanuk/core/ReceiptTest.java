@@ -23,6 +23,7 @@ class ReceiptTest {
 
     Receipt receipt = inventory.purchase(basket);
     String actual = receipt.toString();
+
     Assertions.assertTrue(actual.contains("1x White coffee " + String.format("%.2f", Sku.COFW.price())));
     Assertions.assertTrue(actual.contains("1x Coffee & bagel deal 1.25"));
     Assertions.assertTrue(
@@ -44,6 +45,7 @@ class ReceiptTest {
 
     Receipt receipt = inventory.purchase(basket);
     String actual = receipt.toString();
+
     Assertions.assertTrue(actual.contains("3x Black coffee " + String.format("%.2f", Sku.COFB.price() * 3)));
     Assertions.assertTrue(
         actual.contains("Total: " + String.format("%.2f", Sku.COFB.price() * 3)));
@@ -58,8 +60,10 @@ class ReceiptTest {
 
     Basket basket = new Basket(12);
     basket.add(new Bagel(BagelType.ONION, Optional.empty()), 12);
+
     Receipt receipt = inventory.purchase(basket);
     String actual = receipt.toString();
+
     Assertions.assertTrue(actual.contains("1x Twelve bagel deal 3.99"));
     Assertions.assertTrue(actual.contains("(-1.89)"));
     Assertions.assertTrue(actual.contains("Total: 3.99"));
@@ -74,6 +78,7 @@ class ReceiptTest {
 
     Basket basket = new Basket();
     basket.add(new Bagel(BagelType.ONION, Optional.empty()), 6);
+
     Receipt receipt = inventory.purchase(basket);
     String actual = receipt.toString();
 
@@ -92,10 +97,10 @@ class ReceiptTest {
     Basket basket = new Basket();
     basket.add(new Bagel(BagelType.ONION, Optional.empty()));
     basket.add(new Coffee(CoffeeType.BLACK));
+
     Receipt receipt = inventory.purchase(basket);
     String actual = receipt.toString();
 
-    // Assertions.assertEquals("", actual);
     Assertions.assertTrue(actual.contains("1x Coffee & bagel deal 1.25"));
     Assertions.assertTrue(actual.contains("(-0.23)"));
     Assertions.assertTrue(actual.contains("Total: 1.25"));
@@ -115,6 +120,7 @@ class ReceiptTest {
       }
     };
     basket.add(new Bagel(BagelType.ONION, Optional.of(fillings)));
+
     Receipt receipt = inventory.purchase(basket);
     String actual = receipt.toString();
 
@@ -141,6 +147,7 @@ class ReceiptTest {
     basket.add(new Bagel(BagelType.ONION, Optional.of(fillings)));
     basket.add(new Bagel(BagelType.ONION, Optional.empty()), 15);
     basket.add(new Coffee(CoffeeType.BLACK));
+
     Receipt receipt = inventory.purchase(basket);
     String actual = receipt.toString();
 

@@ -35,87 +35,62 @@ public class Receipt {
     return n;
   }
 
-  private void calculateTwelveBagelDiscounts() {
+  private void calculateBagelDiscounts(int neededForDiscount, double discountedPrice, String dealMessage) {
     int numBagels = this.numBagels();
 
-    if (numBagels >= 12) {
-      int nDiscounts = 0;
-      double fullPrice = 0;
-      while (numBagels >= 12) {
-        for (int i = 0; i < 12; ++i) {
-          StandaloneProduct bagel = this.basket.removeBagel();
-          fullPrice += bagel.sku().price();
+    if (numBagels < neededForDiscount)
+      return;
 
-          for (Product extra : bagel.extras()) {
-            Sku extraSku = extra.sku();
-            this.stringBuilder.append(String.format("1x %s %.2f\n", extraSku.toString(), extraSku.price()));
-          }
+    int nDiscounts = 0;
+    double fullPrice = 0;
+    while (numBagels >= neededForDiscount) {
+      for (int i = 0; i < neededForDiscount; ++i) {
+        StandaloneProduct bagel = this.basket.removeBagel();
+        fullPrice += bagel.sku().price();
+
+        for (Product extra : bagel.extras()) {
+          Sku extraSku = extra.sku();
+          this.stringBuilder.append(String.format("1x %s %.2f\n", extraSku.toString(), extraSku.price()));
         }
-        numBagels -= 12;
-        this.price += twelveBagelsPrice;
-        ++nDiscounts;
       }
-
-      double discountedPrice = twelveBagelsPrice * nDiscounts;
-      this.stringBuilder.append(String.format("%dx Twelve bagel deal %.2f\n", nDiscounts, discountedPrice));
-      this.stringBuilder.append(String.format("(-%.2f)\n", fullPrice - discountedPrice));
+      numBagels -= neededForDiscount;
+      this.price += discountedPrice;
+      ++nDiscounts;
     }
-  }
 
-  private void calculateSixBagelDiscounts() {
-    int numBagels = this.numBagels();
-
-    if (numBagels >= 6) {
-      int nDiscounts = 0;
-      double fullPrice = 0;
-      while (numBagels >= 6) {
-        for (int i = 0; i < 6; ++i) {
-          StandaloneProduct bagel = this.basket.removeBagel();
-          fullPrice += bagel.sku().price();
-
-          for (Product extra : bagel.extras()) {
-            Sku extraSku = extra.sku();
-            this.stringBuilder.append(String.format("1x %s %.2f\n", extraSku.toString(), extraSku.price()));
-          }
-        }
-        numBagels -= 6;
-        this.price += sixBagelsPrice;
-        ++nDiscounts;
-      }
-
-      double discountedPrice = sixBagelsPrice * nDiscounts;
-      this.stringBuilder.append(String.format("%dx Six bagel deal %.2f\n", nDiscounts, discountedPrice));
-      this.stringBuilder.append(String.format("(-%.2f)\n", fullPrice - discountedPrice));
-    }
+    double discountedPriceFull = discountedPrice * nDiscounts;
+    this.stringBuilder.append(String.format("%dx %s %.2f\n", nDiscounts, dealMessage, discountedPriceFull));
+    this.stringBuilder.append(String.format("(-%.2f)\n", fullPrice - discountedPriceFull));
   }
 
   private void calculateCoffeeAndBagelDiscounts() {
     int numBagels = this.numBagels();
     int numCoffees = this.numCoffees();
 
-    if (numBagels >= 1 && numCoffees >= 1) {
-      int nDiscounts = 0;
-      double fullPrice = 0;
-      while (numBagels >= 1 && numCoffees >= 1) {
-        --numCoffees;
-        --numBagels;
-        this.price += coffeeAndBagelPrice;
-        StandaloneProduct bagel = this.basket.removeBagel();
-        StandaloneProduct coffee = this.basket.removeCoffee();
-        fullPrice += bagel.sku().price();
-        fullPrice += coffee.sku().price();
+    if (numBagels < 1 && numCoffees < 1)
+      return;
 
-        for (Product extra : bagel.extras()) {
-          Sku extraSku = extra.sku();
-          this.stringBuilder.append(String.format("1x%s%.2f\n", extraSku.toString(), extraSku.price()));
-        }
-        ++nDiscounts;
+    int nDiscounts = 0;
+    double fullPrice = 0;
+    while (numBagels >= 1 && numCoffees >= 1) {
+      --numCoffees;
+      --numBagels;
+      this.price += coffeeAndBagelPrice;
+      StandaloneProduct bagel = this.basket.removeBagel();
+      StandaloneProduct coffee = this.basket.removeCoffee();
+      fullPrice += bagel.sku().price();
+      fullPrice += coffee.sku().price();
+
+      for (Product extra : bagel.extras()) {
+        Sku extraSku = extra.sku();
+        this.stringBuilder.append(String.format("1x%s%.2f\n", extraSku.toString(), extraSku.price()));
       }
-
-      double discountedPrice = coffeeAndBagelPrice * nDiscounts;
-      this.stringBuilder.append(String.format("%dx Coffee & bagel deal %.2f\n", nDiscounts, discountedPrice));
-      this.stringBuilder.append(String.format("(-%.2f)\n", fullPrice - discountedPrice));
+      ++nDiscounts;
     }
+
+    double discountedPrice = coffeeAndBagelPrice * nDiscounts;
+    this.stringBuilder.append(String.format("%dx Coffee & bagel deal %.2f\n", nDiscounts, discountedPrice));
+    this.stringBuilder.append(String.format("(-%.2f)\n", fullPrice - discountedPrice));
   }
 
   private void calculateRemainingProducts() {
@@ -159,8 +134,8 @@ public class Receipt {
     receipt.stringBuilder.append(String.format("~~~ Bob's Bagels ~~~\n\n%s\n\n-----------------------------\n\n",
         LocalDateTime.now().toString()));
 
-    receipt.calculateTwelveBagelDiscounts();
-    receipt.calculateSixBagelDiscounts();
+    receipt.calculateBagelDiscounts(12, twelveBagelsPrice, "Twelve bagel deal");
+    receipt.calculateBagelDiscounts(6, sixBagelsPrice, "Six bagel deal");
     receipt.calculateCoffeeAndBagelDiscounts();
     receipt.calculateRemainingProducts();
 
