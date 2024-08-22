@@ -19,6 +19,7 @@ public class Bagel extends Product {
         this.fillings = fillings != null ? fillings : new ArrayList<>();
     }
 
+    // Only used to get an overview of the filling prices.
     public Bagel() {
         super();
         this.fillingsPrices = new HashMap<>();

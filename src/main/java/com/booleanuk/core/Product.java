@@ -8,14 +8,14 @@ public abstract class Product {
     private Double price;
     private SKU sku;
     private MenuCategory variant;
-    private Boolean isDiscounted;
+    private Boolean hasDiscount;
 
     public Product(String name, Double price, SKU sku, MenuCategory variant) {
         this.name = name;
         this.price = price;
         this.sku = sku;
         this.variant = variant;
-        this.isDiscounted = false;
+        this.hasDiscount = false;
     }
 
     public Product() {}
@@ -36,11 +36,11 @@ public abstract class Product {
         return sku;
     }
 
-    public Boolean getDiscounted() {
-        return isDiscounted;
+    public Boolean getHasDiscount() {
+        return hasDiscount;
     }
 
-    public void setDiscounted(Boolean discounted) {
-        isDiscounted = discounted;
+    public void setHasDiscount(Boolean discounted) {
+        hasDiscount = discounted;
     }
 }
