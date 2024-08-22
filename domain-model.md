@@ -61,7 +61,6 @@ As a customer,
 So I know how much money I need,
 I'd like to know the total cost of items in my basket.
 ```
-ADD TEST
 ```
 7.
 As a customer,
@@ -75,7 +74,6 @@ As a customer,
 So I can shake things up a bit,
 I'd like to be able to choose fillings for my bagel.
 ```
-Not done
 ```
 9.
 As a customer,
