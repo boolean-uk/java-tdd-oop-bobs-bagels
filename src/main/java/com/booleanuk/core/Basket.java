@@ -50,19 +50,15 @@ public class Basket {
             return calculateDiscount(bagels, 6, 2.49f) + findDiscount();
         } else if (bagels.size() < unDiscountedProducts.size()) {
             // Sort so Bagels are first, after that, sort by cost.
-            unDiscountedProducts.sort(new Comparator<Product>() {
-                @Override
-                public int compare(Product o1, Product o2) {
-                    if (o1 instanceof Bagel && o2 instanceof Bagel) {
-                        return (int) (1000 * (((Bagel) o2).calculateBreadCost() - ((Bagel) o1).calculateBreadCost()));
-                    } else if (o1 instanceof Coffee && o2 instanceof Coffee) {
-                        return (int) (1000 * (o2.calculateCost() - o1.calculateCost()));
-                    } else if (o1 instanceof Bagel) {
-                        return -1;
-                    } else {
-                        return 1;
-                    }
-                }
+            unDiscountedProducts.sort((o1, o2) -> {
+                return switch (o1) {
+                    case Bagel bagel when o2 instanceof Bagel ->
+                            (int) (1000 * (((Bagel) o2).calculateBreadCost() - bagel.calculateBreadCost()));
+                    case Coffee coffee when o2 instanceof Coffee ->
+                            (int) (1000 * (o2.calculateCost() - o1.calculateCost()));
+                    case Bagel bagel -> -1;
+                    case null, default -> 1;
+                };
             });
 
 
@@ -80,10 +76,8 @@ public class Basket {
     }
 
     private float calculateDiscount(ArrayList<Product> items, int num, float dis) {
-        float sumCost = 0.0f;
         float sumBreadCost = 0.0f;
         for (int i = 0; i < num; i++) {
-            sumCost += items.get(i).calculateCost();
             sumBreadCost += ((Bagel)items.get(i)).calculateBreadCost();
             unDiscountedProducts.remove(items.get(i));
         }

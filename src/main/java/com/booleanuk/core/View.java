@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class View {
-    private Scanner scanner;
+    private final Scanner scanner;
 
     public View() {
         scanner = new Scanner(System.in);
