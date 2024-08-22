@@ -30,4 +30,9 @@ public class InventoryTest {
     }
     // TODO: Add test for exception returned when SKU is invalid / Does npt exist
     //TODO: Add test for only product no specific version
+
+//    @Test
+//    public void getProductPrice() {
+//        this.inventory.getItemPrice();
+//    }
 }
