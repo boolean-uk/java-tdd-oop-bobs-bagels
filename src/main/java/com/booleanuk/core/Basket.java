@@ -170,5 +170,9 @@ public class Basket {
         return inventory.getFilling(sku);
 
     }
+
+    public void getReciept(){
+
+    }
 }
 

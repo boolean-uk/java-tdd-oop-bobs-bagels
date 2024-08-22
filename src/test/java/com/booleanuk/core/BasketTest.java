@@ -168,7 +168,6 @@ public class BasketTest {
     public void TestShouldGetFillingPrice(){
         Basket basket = new Basket();
 
-        //Should fail due to wrong expected value. It should be 0.12
         Assertions.assertEquals(0.12f, basket.costOfFilling("FILB"), 0.0001);
         Assertions.assertEquals(0.12f, basket.costOfFilling("FILX"), 0.0001);
         Assertions.assertEquals(0.12f, basket.costOfFilling("FILS"), 0.0001);
