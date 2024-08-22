@@ -49,11 +49,32 @@ public class Basket {
         } else if (bagels.size() >= 6) {
             return calculateDiscount(bagels, 6, 2.49f) + findDiscount();
         } else if (bagels.size() < unDiscountedProducts.size()) {
+            // Sort so Bagels are first, after that, sort by cost.
+            unDiscountedProducts.sort(new Comparator<Product>() {
+                @Override
+                public int compare(Product o1, Product o2) {
+                    if (o1 instanceof Bagel && o2 instanceof Bagel) {
+                        return (int) (1000 * (((Bagel) o2).calculateBreadCost() - ((Bagel) o1).calculateBreadCost()));
+                    } else if (o1 instanceof Coffee && o2 instanceof Coffee) {
+                        return (int) (1000 * (o2.calculateCost() - o1.calculateCost()));
+                    } else if (o1 instanceof Bagel) {
+                        return -1;
+                    } else {
+                        return 1;
+                    }
+                }
+            });
+
+
             int coffeeBagelDeals = (unDiscountedProducts.size() - Math.abs(unDiscountedProducts.size() - bagels.size()));
+            float sumCost = 0.0f;
             for (int i = 0; i < coffeeBagelDeals; i++) {
                 unDiscountedProducts.removeFirst();
             }
-            return 1.25f * coffeeBagelDeals;
+            for (int i = 0; i < coffeeBagelDeals; i++) {
+                sumCost += unDiscountedProducts.get(i).calculateCost() + ((Bagel) bagels.get(i)).calculateBreadCost();
+            }
+            return sumCost - 1.25f * coffeeBagelDeals;
         }
         return 0;
     }

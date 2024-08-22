@@ -15,6 +15,10 @@ public class Controller {
         put("FILX", new Triple<>("Filling", "Cream Cheese", 0.12f));
         put("FILS", new Triple<>("Filling", "Smoked Salmon", 0.12f));
         put("FILH", new Triple<>("Filling", "Ham", 0.12f));
+        put("COFB", new Triple<>("Coffee", "Black", 0.99f));
+        put("COFW", new Triple<>("Coffee", "White", 1.19f));
+        put("COFC", new Triple<>("Coffee", "Cappuccino", 1.29f));
+        put("COFL", new Triple<>("Coffee", "Latte", 1.29f));
     }};
     public static final Map<String, Triple<String, String, Float>> prices = Collections.unmodifiableMap(privatePrices);
     private Basket basket;
