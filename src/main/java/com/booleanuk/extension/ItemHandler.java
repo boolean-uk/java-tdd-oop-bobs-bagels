@@ -43,7 +43,7 @@ public class ItemHandler {
 
     public Filling addItem(String SKU, Item bagel) {
         if (this.allItems.containsKey(SKU) && this.allItems.get(SKU).equals("Filling")) {
-            if (basket.contains(bagel) && bagel instanceof Bagel) {
+            if (basket.contains(bagel) && bagel.getFillings() != null) {
                 Filling filling = new Filling(SKU, idTracker, (Bagel) bagel);
                 idTracker++;
                 return filling;
@@ -62,7 +62,7 @@ public class ItemHandler {
             if (this.basket.get(i).getId() == id) {
                 this.basket.remove(i);
                 return true;
-            } else if (this.basket.get(i) instanceof Bagel) {
+            } else if (this.basket.get(i).getFillings() != null) {
                 if (this.basket.get(i).removeFilling(id)) {
                     return true;
                 }
@@ -107,11 +107,11 @@ public class ItemHandler {
         if (this.discountCounterMap.containsKey("Bagel")) {
             if (this.discountCounterMap.get("Bagel").size() > 11) {
                 twelveBagelDiscount();
-            } else if (this.discountCounterMap.get("Bagel").size() > 5) {
+            }
+            if (this.discountCounterMap.get("Bagel").size() > 5) {
                 sixBagelDiscount();
             }
         }
-
         coffeeAndBagelDiscount();
 
         receipt.printReceipt();
@@ -145,8 +145,6 @@ public class ItemHandler {
         this.discountCounterMap.put("Bagel", this.discountCounterMap.get("Bagel").subList(12, this.discountCounterMap.get("Bagel").size()));
         if (this.discountCounterMap.get("Bagel").size() > 11) {
             twelveBagelDiscount();
-        } else if (this.discountCounterMap.get("Bagel").size() > 5) {
-            sixBagelDiscount();
         }
     }
 
