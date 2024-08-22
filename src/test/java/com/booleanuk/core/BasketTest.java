@@ -42,7 +42,6 @@ public class BasketTest {
 
     }
 
-    //changed
     @Test
     public void TestShouldIncreaseCurrentBasketValues(){
         Basket basket = new Basket();
@@ -163,6 +162,16 @@ public class BasketTest {
 
         //Sum should be 1.9 if it is set up correctly. For red test I have set up 2.0 which should fail due to not being exact.
         Assertions.assertEquals(1.9f, basket.totalCost(), 0.0001);
+    }
+
+    @Test
+    public void TestShouldGetFillingPrice(){
+        Basket basket = new Basket();
+
+        //Should fail due to wrong expected value. It should be 0.12
+        Assertions.assertEquals(2.0f, basket.costOfFilling("FILB"), 0.0001);
+        Assertions.assertEquals(2.0f, basket.costOfFilling("FILX"), 0.0001);
+        Assertions.assertEquals(2.0f, basket.costOfFilling("FILS"), 0.0001);
     }
 
 }
