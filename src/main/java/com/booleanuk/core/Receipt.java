@@ -7,6 +7,9 @@ public class Receipt {
 
     private final Order order;
     private final String dateTime;
+    private static final int BAGEL_COFFEE_PAIR_DISCOUNT_PRICE = 125;
+    private static final int TWELVE_BAGEL_DISCOUNT_PRICE = 399;
+    private static final int SIX_BAGEL_DISCOUNT_PRICE = 249;
 
     public Receipt(Order order) {
         this.order = order;
@@ -31,9 +34,9 @@ public class Receipt {
         Map<Product, Integer> nonDiscountedProducts = order.getNonDiscountedProductsMap();
 
         if (!twelveBagelDiscounts.isEmpty() || !sixBagelDiscounts.isEmpty() || !coffeeBagelPairsDiscount.isEmpty()) {
-            printDiscountedProducts(twelveBagelDiscounts, "12 Bagels", 399);
-            printDiscountedProducts(sixBagelDiscounts, "6 Bagels", 249);
-            printDiscountedProducts(coffeeBagelPairsDiscount, "Bagel + Coffee", 125);
+            printDiscountedProducts(twelveBagelDiscounts, "12 Bagels", TWELVE_BAGEL_DISCOUNT_PRICE);
+            printDiscountedProducts(sixBagelDiscounts, "6 Bagels", SIX_BAGEL_DISCOUNT_PRICE);
+            printDiscountedProducts(coffeeBagelPairsDiscount, "Bagel + Coffee", BAGEL_COFFEE_PAIR_DISCOUNT_PRICE);
         }
         printNonDiscountedProducts(nonDiscountedProducts);
         printFooter(receiptWidth);
@@ -42,13 +45,10 @@ public class Receipt {
     }
 
     private String centerText(String text, int width) {
+        // Calculate the padding needed to center the text within the given width.
+        // Divided by 2 to get the padding for one side.
         int padding = (width - text.length()) / 2;
-        StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < padding; i++) {
-            sb.append(" ");
-        }
-        sb.append(text);
-        return sb.toString();
+        return " ".repeat(Math.max(0, padding - 1)) + text;
     }
 
     private void printFooter(int receiptWidth) {
