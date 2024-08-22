@@ -153,6 +153,7 @@ public class TestOrderManager {
     @Test
     public void testReceipt(){
         OrderManager om = new OrderManager();
+        om.setMaxCartSize(100);
 
         // Add 3 plain bagels
         om.addItem(BagelType.Plain);

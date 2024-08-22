@@ -94,6 +94,7 @@ public class OrderManager {
 		// check if in store
 		int stock = storeItemStock.get(item);
 		if (stock < 1) {
+			System.out.println("Item not in stock");
 			return "Item not in stock.";
 		}
 
@@ -105,6 +106,7 @@ public class OrderManager {
 				.sum();
 
 		if (amountOfItemsInCart >= maxCartSize){
+			System.out.println("Cart is full");
 			return "Cart is full.";
 		}
 
@@ -208,7 +210,7 @@ public class OrderManager {
 		String dateTime = r.date.format(DateTimeFormatter.ISO_TIME);
 		int a = dateTime.lastIndexOf('.');
 		dateTime = dateTime.substring(0, a);
-		prettyReciept += String.format("%" + ((totalWidth + dateTime.length())/2) + "s", dateTime);
+		prettyReciept += String.format("%" + (((totalWidth + dateTime.length())/2) - 1)  + "s", dateTime);
 
 		prettyReciept += "\n";
 
@@ -216,11 +218,8 @@ public class OrderManager {
 		String receiptBreak = "=".repeat(totalWidth);
 		prettyReciept += receiptBreak + "\n";
 
-		System.out.println(prettyReciept);
-
-
-
-
+//		padd each item and pretty-print
+//  eg: Bagel: Onion          2         £ 0.98
 		for(String str: recieptRaw){
 			String[] items = str.split(",");
 			String type = items[0];
@@ -233,13 +232,13 @@ public class OrderManager {
 			String formattedType = String.format("%-" +itemLengthWithPadding + "s", type); int lenT = formattedType.length();
 			String formattedAmount = String.format("%-" + quantityWithPadding + "s", amount); int lenA  = formattedAmount.length();
 			String fomrattedPrice = String.format("%" + priceWithPadding + "s", price); int lenP = fomrattedPrice.length();
+
 			String formattedDiscount = "";
 
 			if (discounted != ""){
 				formattedDiscount = String.format("%" + totalWidth + "s", discounted);
 				formattedDiscount = "\n" + formattedDiscount;
 			}
-
 
 			curLine += formattedType + formattedAmount + fomrattedPrice + formattedDiscount;
 			prettyReciept += "\n" + curLine;
@@ -324,11 +323,10 @@ public class OrderManager {
 						if(amountOfPlainBagel > 0){
 							double actualPrice = getPriceOfItem(item) + getPriceOfItem(CoffeeType.Black);
 							cartCopy.put(BagelType.Plain, amountOfPlainBagel -1);
-							cartCopy.put(CoffeeType.Black, amountOfBlackCoffee-1);
+							cartCopy.put(CoffeeType.Black, amountOfBlackCoffee-1-i);
 							totalPrice+=1.25;
 							String discountString = String.format("%.2f", (actualPrice-1.25));
 							reciept.add("Coffee and Bagel,1,1.25,(-"+ discountString+ ")");
-
 						}
 					}
 					}catch (NullPointerException e){}
@@ -343,6 +341,8 @@ public class OrderManager {
 		for (ItemInterface item: cartCopy.keySet()){
 			try{
 				int amountOfItemsLeftInCart = cartCopy.get(item);
+				int amounfOfCoffeesAdded = 0;
+				int amountOfPlainBagels = 0;
 				if (amountOfItemsLeftInCart > 0){
 					double itemPricePer = getPriceOfItem(item);
 					double sumItemsPriceLeftInCart= itemPricePer * amountOfItemsLeftInCart;
