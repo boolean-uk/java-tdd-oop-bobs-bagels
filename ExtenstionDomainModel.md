@@ -19,12 +19,12 @@ Bagel discount is priority over bagel + coffee discount. So if we have 5 bagels 
 
 ## ReceiptManager
 
-| Variable | Method                                   | Scenario                          | Outcome |
-|----------|------------------------------------------|-----------------------------------|---------|
-|          | countTotalReceipt(Basket basket): double | Count the while receipt of basket |         |
-|          |                                          |                                   |         |
-|          |                                          |                                   |         |
-|          |                                          |                                   |         |
-|          |                                          |                                   |         |
-|          |                                          |                                   |         |
+| Variable | Method                                  | Scenario                                       | Outcome                          |
+|----------|-----------------------------------------|------------------------------------------------|----------------------------------|
+|          | countTotalReceipt(Basket basket): float | Count the price receipt of all items in basket | a float value of the total price |
+|          |                                         |                                                |                                  |
+|          | finePrintReceipt(Basket basket):        |                                                |                                  |
+|          |                                         |                                                |                                  |
+|          |                                         |                                                |                                  |
+|          |                                         |                                                |                                  |
 

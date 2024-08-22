@@ -2,6 +2,7 @@ package com.booleanuk.extension;
 
 import com.booleanuk.core.Bagel;
 import com.booleanuk.core.Basket;
+import com.booleanuk.core.Coffee;
 import com.booleanuk.core.ItemFactory;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -46,7 +47,6 @@ public class BasketTest {
         basket.addItemToBasket(b4);
         basket.addItemToBasket(b5);
         basket.addItemToBasket(b6);
-        basket.checkDiscountInBasket();
 
         Assertions.assertEquals(2.49f, basket.countTotalValueOfItems());
     }
@@ -88,5 +88,19 @@ public class BasketTest {
         basket.addItemToBasket(new Bagel("BGLO"));
 
         Assertions.assertEquals(6.48f, basket.countTotalValueOfItems());
+    }
+
+    @Test
+    public void addBagelAndCoffeeDiscountTest() {
+        Basket basket = new Basket();
+        Bagel bagel = ItemFactory.bagelFactory("BGLO");
+        Coffee coffee = ItemFactory.coffeeFactory("COFB");
+
+        basket.addItemToBasket(bagel);
+        basket.addItemToBasket(coffee);
+
+        Assertions.assertEquals(1.25f, basket.countTotalValueOfItems());
+
+
     }
 }
