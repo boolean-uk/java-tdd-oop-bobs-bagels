@@ -109,7 +109,7 @@ public class TestOrderManager {
     }
 
     @Test
-    public void testDiscountPrice(){
+     public void testDiscountPrice(){
         OrderManager om = new OrderManager();
         for (int i = 0; i < 16 ; i++) {
             om.addItem(BagelType.Plain);
@@ -131,10 +131,69 @@ public class TestOrderManager {
             om.addItem(CoffeeType.Black); // 1.29*3
         }
 
+
         Assertions.assertEquals(10.43, om.getTotalDiscountedPrice());
 
         String res = om.getTotalDiscountRecieptString();
         System.out.println("res\n" + res);
+
+    }
+
+    @Test
+    public void testDiscountCoffee(){
+        OrderManager om = new OrderManager();
+        om.addItem(CoffeeType.Black);
+        om.addItem(BagelType.Plain);
+        Assertions.assertEquals(1.25, om.getTotalDiscountedPrice());
+
+        String res = om.getTotalDiscountRecieptString();
+        System.out.println("res\n" + res);
+    }
+
+    @Test
+    public void testReceipt(){
+        OrderManager om = new OrderManager();
+
+        // Add 3 plain bagels
+        om.addItem(BagelType.Plain);
+        om.addItem(BagelType.Plain);
+        om.addItem(BagelType.Plain);
+
+        // Add 2 of each bagel type
+        om.addItem(BagelType.Onion);
+        om.addItem(BagelType.Onion);
+        om.addItem(BagelType.Everything);
+        om.addItem(BagelType.Everything);
+        om.addItem(BagelType.Sesame);
+        om.addItem(BagelType.Sesame);
+
+        // Add 2 of each coffee type
+        om.addItem(CoffeeType.Black);
+        om.addItem(CoffeeType.Black);
+        om.addItem(CoffeeType.White);
+        om.addItem(CoffeeType.White);
+        om.addItem(CoffeeType.Cappuccino);
+        om.addItem(CoffeeType.Cappuccino);
+        om.addItem(CoffeeType.Latte);
+        om.addItem(CoffeeType.Latte);
+
+        // Add 2 of each filling type
+        om.addItem(FillingType.Bacon);
+        om.addItem(FillingType.Bacon);
+        om.addItem(FillingType.Egg);
+        om.addItem(FillingType.Egg);
+        om.addItem(FillingType.Cheese);
+        om.addItem(FillingType.Cheese);
+        om.addItem(FillingType.Cream_Cheese);
+        om.addItem(FillingType.Cream_Cheese);
+        om.addItem(FillingType.Smoked_Salmon);
+        om.addItem(FillingType.Smoked_Salmon);
+        om.addItem(FillingType.Ham);
+        om.addItem(FillingType.Ham);
+
+        // Generate and print the receipt
+        String receipt = om.getTotalDiscountRecieptString();
+        System.out.println("Receipt:\n" + receipt);
 
     }
 }
