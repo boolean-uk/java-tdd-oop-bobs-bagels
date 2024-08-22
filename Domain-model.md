@@ -30,3 +30,13 @@
 |           |                                    |                                             |                                                                                  |                                                                                   |
 
 Getters and setter will exist for Product
+
+# UserStories
+Extension 1.
+As a manager i would like to give out discounts to customers who buy a certain amount of bagels e.g 6, 12 and coffee and bagel.
+
+Extension 2.
+As a customer i would like to be able to get a printed out message regarding the prices for each item i bought and the total cost.
+
+Extension 3.
+As a costumer i would like to see how much i save by receiving a discount such as 6 bagels, 12 bagels or a coffee and a bagel.

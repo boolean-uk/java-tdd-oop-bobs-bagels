@@ -2,7 +2,6 @@ package com.booleanuk.core;
 
 import java.util.HashMap;
 
-
 public class Bagels extends Product {
     private HashMap<Fillings, Integer> fillings;
 
@@ -35,7 +34,6 @@ public class Bagels extends Product {
                 }
             }
         }
-
 
     }
 
