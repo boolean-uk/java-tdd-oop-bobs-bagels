@@ -1,6 +1,8 @@
 package com.booleanuk.core.inventory;
 
 import com.booleanuk.core.*;
+import com.booleanuk.core.printgenerator.PrintGenerator;
+import com.booleanuk.core.printgenerator.PrintInventoryMenu;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -63,5 +65,14 @@ public class Inventory {
             throw new InventoryItemException("SKU '" + SKU + "' does not exist.");
         }
         return item;
+    }
+
+    public void printMenu() {
+
+        // TODO: Should this be refactored, not initalize it here
+        // Problem if so is that I need the inventoryItems
+
+        PrintGenerator menu = new PrintInventoryMenu(this.inventoryItems);
+        menu.print();
     }
 }
