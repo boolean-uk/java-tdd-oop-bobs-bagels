@@ -50,6 +50,27 @@ public class BasketTest {
         basket.printBasket();
     }
 
+    // User story #5
+    @Test
+    public void removeItemFromBasketThatDoNotExist() {
+        this.inventory = new Inventory();
+        this.basket = new Basket(new Inventory());
+        int productId = 5;
+
+        // Check that exception function throws error
+        BasketItemExistException exception = Assertions.assertThrows(BasketItemExistException.class, () -> {
+            basket.getItemFromBasketOrThrowException(productId);
+        });
+        // Print out message from exception instead of checking if its assertEqual
+        System.out.println("\nException message:");
+        System.out.println("\t" + exception.getMessage() + "\n");
+
+        // TODO: Split into two tests
+
+        // Check if basket.remove() handles error correct (no exception)
+        Assertions.assertDoesNotThrow(() -> basket.remove(productId));
+    }
+
 //    @Test
 //    public void tryToAddProductThatIsNotInInventory() {
 //        this.inventory = new Inventory();

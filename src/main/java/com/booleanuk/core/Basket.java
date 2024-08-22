@@ -55,6 +55,16 @@ public class Basket {
         this.basketItems.put(id, item);
     }
 
+    // TODO: Same as above, is it good practice to do this?
+    // it's easier to test Exceptions
+    protected BasketItem getItemFromBasketOrThrowException(int productId) {
+        BasketItem item = this.basketItems.get(productId);
+        if (item == null) {
+            throw new BasketItemExistException("This item doesn't exist. Can't remove ID #" + productId);
+        }
+        return item;
+    }
+
     // TODO: Refactor and remove this and add generic function nsad??
     public void addCoffee(String SKU) {
         try {
@@ -80,7 +90,6 @@ public class Basket {
         }
 //        // TODO: Can't check throw exception in Test if I handle the exception with try/catch
 //        this.addToBasket(createID(), new BasketItem(SKU));
-
 
     }
 
@@ -112,18 +121,23 @@ public class Basket {
     }
 
     public void remove(int productId) {
-        BasketItem item = this.basketItems.get(productId);
-        Product product = this.inventory.getProduct(item.getSKU());
+        try {
+//        BasketItem item = this.basketItems.get(productId);
+            BasketItem item = this.getItemFromBasketOrThrowException(productId);
+            Product product = this.inventory.getProduct(item.getSKU());
 
-        if (product.getName() == ProductName.BAGEL && item.getLinkedIds() != null) {
-            // Get filling for this basketItem
-            List<Integer> fillingsIds = item.getLinkedIds();
-            // Remove the bagel fillings from the basket
-            for (Integer fillingId : fillingsIds) {
-                this.basketItems.remove(fillingId);
+            if (product.getName() == ProductName.BAGEL && item.getLinkedIds() != null) {
+                // Get filling for this basketItem
+                List<Integer> fillingsIds = item.getLinkedIds();
+                // Remove the bagel fillings from the basket
+                for (Integer fillingId : fillingsIds) {
+                    this.basketItems.remove(fillingId);
+                }
             }
+            this.basketItems.remove(productId);
+        } catch (BasketItemExistException e) {
+            System.out.println(e.getMessage());
         }
-        this.basketItems.remove(productId);
     }
 
 //    private void addFilling(String SKU) {
