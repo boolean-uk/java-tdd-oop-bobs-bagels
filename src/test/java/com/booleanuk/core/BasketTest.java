@@ -30,6 +30,16 @@ public class BasketTest {
         Assertions.assertEquals("Existing product added to basket", basket.add("BGLE", "FILX"));
 
     }
+    @Test
+    public void TestShouldGiveErrorMessageIfProductIsNull(){
+        Basket basket = new Basket();
+
+
+        //These should fail because the wrong expected string is faulty. If we try to add product not in the inventory then we want to return error message.
+        Assertions.assertEquals("New product added to basket", basket.add("BGLO", "RILX"));
+        Assertions.assertEquals("New product added to basket", basket.add("ReTs", "RED"));
+
+    }
 
     //changed
     @Test
@@ -134,10 +144,10 @@ public class BasketTest {
         Basket basket = new Basket();
         Inventory inventory = new Inventory();
 
-        Assertions.assertEquals(0.49f, basket.costOfProduct(inventory.getItem("BGLO")), 0.0001);
+        Assertions.assertEquals(0.49f, basket.costOf(inventory.getItem("BGLO")), 0.0001);
 
         //Should fail because bagel has filling meaning the cost of product should be (0.49) + (0.12) = 0.61
-        Assertions.assertEquals(0.61f, basket.costOfProduct(inventory.getItem("BGLO", "FILX")), 0.0001);
+        Assertions.assertEquals(0.61f, basket.costOf(inventory.getItem("BGLO", "FILX")), 0.0001);
 
   }
 
@@ -153,7 +163,6 @@ public class BasketTest {
         //Sum should be 1.9 if it is set up correctly. For red test I have set up 2.0 which should fail due to not being exact.
         Assertions.assertEquals(1.9f, basket.totalCost(), 0.0001);
     }
-
 
 }
 
