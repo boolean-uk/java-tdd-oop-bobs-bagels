@@ -72,7 +72,7 @@ public class Basket {
         Item item = getMenuItem(itemId);
         int quantity = basketItems.get(itemId);
 
-        if (removeDuplicates | quantity == 1 ){
+        if (removeDuplicates){
             basketItems.remove(itemId);
             return quantity + " " + item.getItemVariant() + " " + item.getItemName() + " removed from basket.";
         }
