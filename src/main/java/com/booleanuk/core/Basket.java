@@ -165,4 +165,10 @@ public class Basket {
         }
         return sum;
     }
+
+    public double costOfFilling(String sku){
+        return inventory.getFilling(sku);
+
+    }
 }
+

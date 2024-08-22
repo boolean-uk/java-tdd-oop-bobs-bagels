@@ -6,8 +6,4 @@ public class Filling extends Product {
         super(sku, price, name, variant);
         this.name = name;
     }
-
-    public String getName() {
-        return this.name;
-    }
 }
