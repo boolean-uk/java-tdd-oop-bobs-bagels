@@ -1,3 +1,6 @@
+# Domain models for bob's bagels
+Note that all classes/records that implements interfaces don't restate the methods required by the interface. e.g. Bagel will for example have to implement `sku()` and `extras()` since it implements `StandaloneProduct`.
+
 ## Domain model AddToFullBasketException class
 | Parent class       |
 |--------------------|
@@ -34,19 +37,17 @@
 |          | `double price` |
 
 ## Domain model Product interface
-| Methods               | Scenario                                                                                        | Output                                            |
-|-----------------------|-------------------------------------------------------------------------------------------------|---------------------------------------------------|
-| `double basePrice()`  | User wants to know the price of a product without any related products before buying            | The base price of the product                     |
-| `double extraPrice()` | User wants to know the price of all products attached to the product (e.g. fillings on a bagel) | The price of all products attached to the product |
-| `Sku sku()`           | User or admin wants to identify a product                                                       | SKU of product                                    |
+| Methods               | Scenario                                  | Output                                            |
+|-----------------------|-------------------------------------------|---------------------------------------------------|
+| `Sku sku()`           | User or admin wants to identify a product | SKU of product                                    |
 
 ## Domain model StandaloneProduct interface
 - This interface is separate from the `Product` interface because not all products can be purchased directly
 
-| Extends   | Methods                      | Scenario                                                                                                | Output                              |
-|-----------|------------------------------|---------------------------------------------------------------------------------------------------------|-------------------------------------|
-| `Product` |                              |                                                                                                         |                                     |
-|           | `List<Product> components()` | Admin wants to see any additional products related to some StandAloneproduct (e.g. fillings on a bagel) | All products related to the product |
+| Extends   | Methods                  | Scenario                                                                                                | Output                              |
+|-----------|--------------------------|---------------------------------------------------------------------------------------------------------|-------------------------------------|
+| `Product` |                          |                                                                                                         |                                     |
+|           | `List<Product> extras()` | Admin wants to see any additional products related to some StandaloneProduct (e.g. fillings on a bagel) | All products related to the product |
 
 ## Domain model FillingType enum
 | Variants      | Variables |
@@ -110,8 +111,19 @@
 |                                    |                                                                                  | Product with given sku is not in basket                      | Exception                  |
 |                                    | `void remove(Sku sku, int count) throws NotPresentInBasketException`             | `count` many products with given sku is in basket            |                            |
 |                                    |                                                                                  | `count` many product with given sku are not in basket        | Exception                  |
+|                                    | `void removeBagel() throws NotPresentInBasketException`                          | User removes some bagel from their basket                    |                            |
+|                                    |                                                                                  | User does not have a bagel in their basket                   | Exception                  |
+|                                    | `void removeCoffee() throws NotPresentInBasketException`                         | User removes some coffee from their basket                   |                            |
+|                                    |                                                                                  | User does not have a coffee in their basket                  | Exception                  |
 |                                    | `void setCapacity(int newCapacity)`                                              | Manager wants to change the capacity of basket               | Basket capacity is changed |
 |                                    | `double price()`                                                                 | User wants to know the price of all products in their basket | Sum of product prices      |
+
+## Domain model Receipt class
+| Variables                | Methods                              | Scenario                                                         | Output                                                |
+|--------------------------|--------------------------------------|------------------------------------------------------------------|-------------------------------------------------------|
+| `List<Product> products` |                                      |                                                                  |                                                       |
+|                          | `Receipt makeReceipt(Basket basket)` | User wants to get a receipt of all the items they have purchased | A receipt                                             |
+|                          | `String toString()`                  | User wants to see a nicely formatted receipt for their purchase  | A formatted string for the products in their purchase |
 
 ## Domain model Inventory class
 | Variables                | Methods                                                      | Scenario                                | Output    |
@@ -120,18 +132,10 @@
 |                          | `Receipt purchase(Basket basket) throws NotInStockException` | All products in basket are in stock     |           |
 |                          |                                                              | Not all products in basket are in stock | Exception |
 
-## Domain model Receipt class
-| Variables                | Methods                 | Scenario                                                         | Output                                                |
-|--------------------------|-------------------------|------------------------------------------------------------------|-------------------------------------------------------|
-| `List<Product> products` |                         |                                                                  |                                                       |
-|                          | `Receipt makeReceipt()` | User wants to get a receipt of all the items they have purchased | A receipt                                             |
-|                          | `String toString()`     | User wants to see a nicely formatted receipt for their purchase  | A formatted string for the products in their purchase |
-
 ## Domain model MessageController class
 | Variables                    | Methods                                                   | Scenario                                          | Output                            |
 |------------------------------|-----------------------------------------------------------|---------------------------------------------------|-----------------------------------|
 | `String TWILIO_ACCOUNT_SID`  |                                                           |                                                   |                                   |
 | `String TWILIO_AUTH_TOKEN`   |                                                           |                                                   |                                   |
-| `String TWILIO_PHONE_NUMBER` |                                                           |                                                   |                                   |
 | `String TWILIO_PHONE_NUMBER` |                                                           |                                                   |                                   |
 |                              | `void notifyUser(String messageContent, String toNumber)` | User wants to get a text message of their receipt | A text message with their receipt |

@@ -45,14 +45,14 @@ public class Basket {
       this.remove(sku);
   }
 
-  public StandaloneProduct removeBagel() {
+  public StandaloneProduct removeBagel() throws NotPresentInBasketException {
     for (StandaloneProduct product : this.products)
       if (product.sku().isBagel()) {
         this.remove(product.sku());
         return product;
       }
 
-    return null;
+    throw new NotPresentInBasketException("No bagel in the basket");
   }
 
   public StandaloneProduct removeCoffee() {
@@ -62,7 +62,7 @@ public class Basket {
         return product;
       }
 
-    return null;
+    throw new NotPresentInBasketException("No coffee in the basket");
   }
 
   public double price() {
