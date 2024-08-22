@@ -7,7 +7,7 @@ public class InventoryTest {
 
     @Test
     public void ShouldGetProductFromInventory(){
-        NewInventoryTest inventory = new NewInventoryTest();
+        Inventory inventory = new Inventory();
 
         Assertions.assertNotNull(inventory.getItem("BGLE"));
         Assertions.assertNotNull(inventory.getItem("BGLE", "FILB"));
@@ -15,7 +15,7 @@ public class InventoryTest {
 
     @Test
     public void CheckIfCorrectFilingIsGetted(){
-        NewInventoryTest inventory = new NewInventoryTest();
+        Inventory inventory = new Inventory();
 
         Product testItem = inventory.getItem("BGLE", "FILB");
         Bagel bagel = (Bagel) testItem;

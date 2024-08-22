@@ -137,11 +137,9 @@ public class BasketTest {
         Assertions.assertEquals(0.49f, basket.costOfProduct(inventory.getItem("BGLO")), 0.001);
 
         //Should fail because bagel has filling meaning the cost of product should be (0.49) + (0.12) = 0.61
-        Assertions.assertEquals(0.49f, basket.costOfProduct(inventory.getItem("BGLO", "FILX")), 0.001);
+        Assertions.assertEquals(0.61f, basket.costOfProduct(inventory.getItem("BGLO", "FILX")), 0.001);
 
   }
-
-
 
     @Test
     public void TestShouldGetTheTotalCostOfBasket(){
