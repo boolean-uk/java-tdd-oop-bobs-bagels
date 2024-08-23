@@ -201,17 +201,6 @@ public class Basket {
         this.maxCapacity = newMaxCapacity;
     }
 
-    private void updateTotalCost(BasketItem item, PriceCalculationVariant option) {
-
-        double itemPrice = inventory.getItem(item.getSKU()).getPrice();
-
-        if (option == PriceCalculationVariant.ADDITION) {
-            this.totalCost += itemPrice;
-        } else if (option == PriceCalculationVariant.SUBTRACTION){
-            this.totalCost -= itemPrice;
-        }
-    }
-
     public double getTotalCost() {
         // TODO Changed to double, this may be unnecessary now
 
