@@ -1,10 +1,7 @@
 package com.booleanuk.core;
 
 import java.io.File;
-import java.time.format.DateTimeFormatter;
 import java.util.*;
-
-import static com.booleanuk.core.StringUtils.*;
 
 
 /** My assumptions
@@ -40,7 +37,7 @@ public class OrderManager {
 
 	// private variables
 	private HashMap<Item, Integer> cart;
-	private ArrayList<Item> cartOrder;
+	//	private ArrayList<Item> cartOrder; // could be used to track fillings on bagels
 	private int maxCartSize = 24; // max default size of basket
 
 	public static int getMaxFillings(){
@@ -177,7 +174,7 @@ public class OrderManager {
 	}
 
 	// case: 6
-	public double getTotalCartPrice(){
+	public double getTotalCartPriceWithoutDiscount(){
 		double calculatedPrice = 0;
 		for(Item item: cart.keySet()){
 			int amountOfItemInCart = cart.get(item);
@@ -192,8 +189,10 @@ public class OrderManager {
 
 	// case: 7, 9
 	public double getPriceOfItem(Item item){
-		String priceOfItemString = storeItemInfo.get(item)[1];
-		return Double.valueOf(priceOfItemString);
+		try{
+			String priceOfItemString = storeItemInfo.get(item)[1];
+			return Double.valueOf(priceOfItemString);
+		} catch (NullPointerException e){ return 0;}
 	}
 
 	// case: 10
@@ -204,17 +203,18 @@ public class OrderManager {
 
 
 	public double getTotalDiscountedPrice(){
-		return getTotalDiscountReciept().price;
+		return getTotalDiscountReceipt().discountedPrice;
 	}
 
 
-	public String getTotalDiscountRecieptString(){
-		Receipt r =  getTotalDiscountReciept();
-		return r.getTotalDiscountRecieptString();
+	public String getTotalDiscountReceptString(){
+		Receipt r =  getTotalDiscountReceipt();
+		return r.getTotalDiscountReceiptString();
 	}
 
 	// case: e1
-	public Receipt getTotalDiscountReciept(){
+	public Receipt getTotalDiscountReceipt(){
+
 
 		HashMap<Item, Integer> cartCopy = new HashMap<>(cart);
 
@@ -320,7 +320,7 @@ public class OrderManager {
 		totalPrice = Double.valueOf(strPrice);
 		Collections.sort(reciept);
 
-		double totalPriceNoDiscount = getTotalCartPrice();
+		double totalPriceNoDiscount = getTotalCartPriceWithoutDiscount();
 
 		return new Receipt(reciept, totalPrice, totalPriceNoDiscount);
 	}

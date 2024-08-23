@@ -43,17 +43,17 @@ public class TestOrderManager {
 
         double pricePerOnion = 0.49;
         double expectedPrice = 3* pricePerOnion;
-        Assertions.assertEquals(expectedPrice, om.getTotalCartPrice());
+        Assertions.assertEquals(expectedPrice, om.getTotalCartPriceWithoutDiscount());
 
         om.addItem(Coffee.Cappuccino);
         double pricePerCappuccino = 1.29;
         expectedPrice += pricePerCappuccino;
-        Assertions.assertEquals(expectedPrice, om.getTotalCartPrice());
+        Assertions.assertEquals(expectedPrice, om.getTotalCartPriceWithoutDiscount());
 
         om.addItem(Coffee.Cappuccino);
         om.addItem(Coffee.Cappuccino);
         expectedPrice += pricePerCappuccino*2;
-        Assertions.assertEquals(expectedPrice, om.getTotalCartPrice());
+        Assertions.assertEquals(expectedPrice, om.getTotalCartPriceWithoutDiscount());
     }
 
     @Test
@@ -111,7 +111,7 @@ public class TestOrderManager {
             om.addItem(Bagel.Plain);
         }
         Assertions.assertEquals(5.55, om.getTotalDiscountedPrice());
-        System.out.println(om.getTotalDiscountRecieptString());
+        System.out.println(om.getTotalDiscountReceptString());
 
         om = new OrderManager();
         for (int i = 0; i < 2; i++) {
@@ -130,7 +130,7 @@ public class TestOrderManager {
 
         Assertions.assertEquals(10.43, om.getTotalDiscountedPrice());
 
-        String res = om.getTotalDiscountRecieptString();
+        String res = om.getTotalDiscountReceptString();
         System.out.println("res\n" + res);
 
     }
@@ -142,7 +142,7 @@ public class TestOrderManager {
         om.addItem(Bagel.Plain);
         Assertions.assertEquals(1.25, om.getTotalDiscountedPrice());
 
-        String res = om.getTotalDiscountRecieptString();
+        String res = om.getTotalDiscountReceptString();
         System.out.println("res\n" + res);
     }
 
@@ -207,12 +207,12 @@ public class TestOrderManager {
         om.addItem(Filling.Ham);
 
         Double expectedPrice = 14.81-0.39;
-        String receipt = om.getTotalDiscountRecieptString();
+        String receipt = om.getTotalDiscountReceptString();
         System.out.println("Receipt:\n" + receipt);
-        Assertions.assertEquals(expectedPrice, om.getTotalDiscountReciept().price);
+        Assertions.assertEquals(expectedPrice, om.getTotalDiscountReceipt().discountedPrice);
 
         Double expectedPriceWithoutDiscount = 14.68;
-        Assertions.assertEquals(expectedPriceWithoutDiscount, om.getTotalCartPrice());
+        Assertions.assertEquals(expectedPriceWithoutDiscount, om.getTotalCartPriceWithoutDiscount());
     }
 
     @Test
@@ -233,7 +233,7 @@ public class TestOrderManager {
                 "Total                      £ 2.50\n" +
                 "=================================";
 
-        String resultString = om.getTotalDiscountRecieptString();
+        String resultString = om.getTotalDiscountReceptString();
         System.out.println(resultString);
         Assertions.assertTrue(resultString.contains(expectedSubString));
     }
@@ -245,8 +245,8 @@ public class TestOrderManager {
             om.addItem(Bagel.Plain);
 
         double priceOfTwelvePlain = 0.39*12;
-        Assertions.assertEquals(3.99, om.getTotalDiscountReciept().price);
-        Assertions.assertEquals(priceOfTwelvePlain, om.getTotalCartPrice());
+        Assertions.assertEquals(3.99, om.getTotalDiscountReceipt().discountedPrice);
+        Assertions.assertEquals(priceOfTwelvePlain, om.getTotalCartPriceWithoutDiscount());
 
 
         om = new OrderManager();
@@ -254,16 +254,16 @@ public class TestOrderManager {
             om.addItem(Bagel.Onion);
 
         double priceOfTwelveOnion = 0.49*12;
-        Assertions.assertEquals(3.99, om.getTotalDiscountReciept().price);
-        Assertions.assertEquals(priceOfTwelveOnion, om.getTotalCartPrice());
+        Assertions.assertEquals(3.99, om.getTotalDiscountReceipt().discountedPrice);
+        Assertions.assertEquals(priceOfTwelveOnion, om.getTotalCartPriceWithoutDiscount());
 
         om = new OrderManager();
         for (int i = 0; i < 12; i++)
             om.addItem(Bagel.Everything);
 
         double priceOfTwelveEverything = 0.49*12;
-        Assertions.assertEquals(3.99, om.getTotalDiscountReciept().price);
-        Assertions.assertEquals(priceOfTwelveEverything, om.getTotalCartPrice());
+        Assertions.assertEquals(3.99, om.getTotalDiscountReceipt().discountedPrice);
+        Assertions.assertEquals(priceOfTwelveEverything, om.getTotalCartPriceWithoutDiscount());
 
         om = new OrderManager();
         for (int i = 0; i < 12; i++)
@@ -271,19 +271,19 @@ public class TestOrderManager {
 
 
         double priceOfTwelveSesame = 0.49*12;
-        Assertions.assertEquals(3.99, om.getTotalDiscountReciept().price);
-        Assertions.assertEquals(priceOfTwelveSesame, om.getTotalCartPrice());
+        Assertions.assertEquals(3.99, om.getTotalDiscountReceipt().discountedPrice);
+        Assertions.assertEquals(priceOfTwelveSesame, om.getTotalCartPriceWithoutDiscount());
 
 
-        Receipt r = om.getTotalDiscountReciept();
-        String res = r.getTotalDiscountRecieptString();
+        Receipt r = om.getTotalDiscountReceipt();
+        String res = r.getTotalDiscountReceiptString();
         System.out.println(res);
 
 
-        for (int i = 0; i < 200; i++) {
-            r = om.getTotalDiscountReciept();
-        }
-
+        om = new OrderManager();
+        om.getPriceOfItem(null);
 
     }
+
+
 }

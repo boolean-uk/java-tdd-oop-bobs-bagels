@@ -10,15 +10,15 @@ import static com.booleanuk.core.StringUtils.leftAlignStringWithPadding;
 
 public class Receipt {
 	public final ArrayList<String> receiptOrder;
-	public final double price;
+	public final double discountedPrice;
 	public final LocalDateTime date;
-	public final double totalCartPrice;
+	public final double nonDiscountedPrice;
 
 	public Receipt(ArrayList<String> receipt, double price, double fullPriceNoDiscount){
 		this.receiptOrder = receipt;
-		this.price = price;
+		this.discountedPrice = price;
 		this.date = LocalDateTime.now();
-		this.totalCartPrice = fullPriceNoDiscount;
+		this.nonDiscountedPrice = fullPriceNoDiscount;
 	}
 
 	public String getYYYYMMDD(){
@@ -30,7 +30,7 @@ public class Receipt {
 	}
 
 
-	public String getTotalDiscountRecieptString(){
+	public String getTotalDiscountReceiptString(){
 		String prettyReceipt = "";
 
 		int itemLengthWithPadding = 23;
@@ -43,7 +43,7 @@ public class Receipt {
 		prettyReceipt += centerAlignStringWithPadding(dateString, totalWidth);
 		String dateTime = getISOTime();
 		int a = dateTime.lastIndexOf('.');
-		dateTime = dateTime.substring(0, a);
+		dateTime = dateTime.substring(0, a); // remove milliseconds
 		prettyReceipt += centerAlignStringWithPadding(dateTime, totalWidth);
 
 		prettyReceipt += "\n";
@@ -82,13 +82,13 @@ public class Receipt {
 		// sum saved
 		String sumStart =  rightAlignStringWithPadding("Saved", itemLengthWithPadding);
 
-		double sumSaved = totalCartPrice-price;
+		double sumSaved = nonDiscountedPrice - discountedPrice;
 		String sumSavedStr = String.format("%.2f", sumSaved);
 		String sumSavedAmountPadded = leftAlignStringWithPadding("£ " + sumSavedStr, priceWithPadding);
 		prettyReceipt += "\n" + sumStart + " ".repeat(quantityWithPadding) + sumSavedAmountPadded;
 
 		// total sum
-		String totalSumPrice = String.format("%.2f", price);
+		String totalSumPrice = String.format("%.2f", discountedPrice);
 		String totalStart = String.format("%-" + itemLengthWithPadding + "s", "Total");
 		String totalSum = String.format("%" + priceWithPadding + "s", "£ " + totalSumPrice);
 		prettyReceipt += "\n" + totalStart + " ".repeat(quantityWithPadding) + totalSum;
