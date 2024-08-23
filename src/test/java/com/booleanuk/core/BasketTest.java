@@ -53,25 +53,6 @@ public class BasketTest {
         Assertions.assertEquals("This item does not exist in your basket.", basket.removeItem("COFB", false));
     }
 
-    /*@Test
-    public void totalCostItemsInBasket(){
-        Basket basket = new Basket();
-        CashRegister register = new CashRegister(basket);
-
-        Assertions.assertEquals("Your basket is empty.", register.sumOrder());
-
-        basket.addItem("BGLO", 2);
-        basket.addItem("BGLP", 1);
-        basket.addItem("FILE", 1);
-        basket.addItem("COFC", 1);
-
-
-        Assertions.assertEquals("The sum of your order is: 2.78", register.sumOrder());
-        basket.addItem("COFC", 1);
-        Assertions.assertEquals("The sum of your order is: 4.07", register.sumOrder());
-
-    }*/
-
     @Test
     public void getItemCost(){
         Menu menu = new Menu();

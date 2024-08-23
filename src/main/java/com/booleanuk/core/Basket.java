@@ -27,7 +27,7 @@ public class Basket {
     }
 
     public int getBasketSize(){
-        if (isEmpty()){
+        if (basketItems.isEmpty()){
             return 0;
         }
 
@@ -39,7 +39,10 @@ public class Basket {
     }
 
     public boolean isEmpty(){
-        return this.basketItems.isEmpty();
+        if (this.basketItems.isEmpty()){
+            return true;
+        }
+        return getBasketSize() == 0;
     }
 
     public HashMap<String, Integer> getBasketItems(){
@@ -71,6 +74,11 @@ public class Basket {
 
         Item item = getMenuItem(itemId);
         int quantity = basketItems.get(itemId);
+
+        if (quantity==0){
+            basketItems.remove(itemId);
+            return "This item does not exist in your basket.";
+        }
 
         if (removeDuplicates){
             basketItems.remove(itemId);
