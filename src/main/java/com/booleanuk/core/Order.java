@@ -2,8 +2,7 @@ package com.booleanuk.core;
 
 import java.util.Scanner;
 
-import static com.booleanuk.core.Menu.printFillingMenu;
-import static com.booleanuk.core.Menu.selectItemFromMenu;
+import static com.booleanuk.core.Menu.*;
 
 public class Order {
     private final Basket basket;
@@ -69,6 +68,9 @@ public class Order {
 
             switch (input.nextInt()){
                 case 1: {
+                    printMenu();
+                    System.out.println("Select item to add to your basket, or press 0 to go back.\n");
+
                     Item chosenItem = selectItemFromMenu();
 
                     if (chosenItem == null)

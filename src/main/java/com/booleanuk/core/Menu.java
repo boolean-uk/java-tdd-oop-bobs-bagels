@@ -64,11 +64,8 @@ public class Menu {
         return null;
     }
 
-    // TODO: Move at least part of this the order class
     public static Item selectItemFromMenu() {
         Scanner input = new Scanner(System.in);
-        printMenu();
-        System.out.println("Select item to add to your basket, or press 0 to go back.\n");
         int choice = input.nextInt();
 
         if (Objects.equals(0, choice)){
