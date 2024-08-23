@@ -173,6 +173,36 @@ public class BasketTest {
         Assertions.assertEquals(0.12f, basket.costOfFilling("FILS"), 0.0001);
     }
 
+    @Test
+    public void Test6For2Point49Discount(){
+        Basket basket = new Basket();
+        basket.changeCapacity(20);
+
+        for(int i = 0; i < 6; i++){
+            basket.add("BGLO");
+        }
+
+        basket.calculateDiscount();
+
+        Assertions.assertEquals(2.94, basket.totalCost(), 0.001f);
+    }
+
+    @Test
+    public void Test12For3Point99Discount(){
+        Basket basket = new Basket();
+        basket.changeCapacity(20);
+
+        for(int i = 0; i < 12; i++){
+            basket.add("BGLO");
+        }
+
+        basket.calculateDiscount();
+
+        Assertions.assertEquals(5.88, basket.totalCost());
+    }
+
+
+
 }
 
 
