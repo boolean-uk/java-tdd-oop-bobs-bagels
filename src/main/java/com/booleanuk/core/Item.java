@@ -5,11 +5,11 @@ import java.util.HashMap;
 // It contains, SKU, name, Price and functions to access and set these values
 // it also contains a boolean "Purchase" which determines if the item can be bought
 // This can be used to prevent a customer from buying a filling without a bagel, or buying something out of stock
-public class Item {
-    private String SKU;
-    private Double Price;
-    private Boolean Purchase;
-    private String name;
+public abstract class Item {
+    protected String SKU;
+    protected Double Price;
+    protected Boolean Purchase=false;
+    protected String name;
 
     public Double getPrice(){
         return Price;
@@ -43,14 +43,5 @@ public class Item {
         this.name = name;
     }
 
-    /*
-    public void setType(String type){
-        this.type=type;
-    }
 
-    public String getType() {
-        return type;
-    }
-
-     */
 }

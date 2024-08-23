@@ -3,32 +3,31 @@ package com.booleanuk.core;
 // The Coffee Class is used to create Coffee items
 public class Coffee extends Item{
     public Coffee(String type){
-        this.setPurchase(false);
 
         switch (type) {
             case "Black":
-                this.setSku("COFB");
-                this.setName("Black Coffee");
-                this.setPrice(0.99);
-                this.setPurchase(true);
+                SKU="COFB";
+                name="Black Coffee";
+                Purchase=true;
+                Price=0.99;
                 break;
             case "White":
-                this.setSku("COFW");
-                this.setName("White Coffee");
-                this.setPrice(1.19);
-                this.setPurchase(true);
+                SKU="COFW";
+                name="White Coffee";
+                Purchase=true;
+                Price=1.19;
                 break;
             case "Capuccino":
-                this.setSku("COFC");
-                this.setName("Capuccino");
-                this.setPrice(1.29);
-                this.setPurchase(true);
+                SKU="COFC";
+                name="Capuccino";
+                Purchase=true;
+                Price=1.29;
                 break;
             case "Latte":
-                this.setSku("COFL");
-                this.setName("Latte");
-                this.setPrice(1.29);
-                this.setPurchase(true);
+                SKU="COFL";
+                name="Latte";
+                Purchase=true;
+                Price=1.29;
                 break;
             default:
                 System.out.println("Not available");

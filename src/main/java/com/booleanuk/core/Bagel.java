@@ -8,31 +8,30 @@ public class Bagel extends Item{
         // Here I create vector which contains no filling and set the purchaseability of the bagel to false
         // to ensure it cannot be bought before getting an identity, the Switch determines type and price
         Fillings=new Filling[3];
-        this.setPurchase(false);
         switch (type){
             case "Onion":
-                this.setSku("BGLO");
-                this.setName("Onion Bagel");
-                this.setPurchase(true);
-                this.setPrice(0.49);
+                SKU="BGLO";
+                name="Onion Bagel";
+                Purchase=true;
+                Price=0.49;
                 break;
             case "Plain":
-                this.setSku("BGLP");
-                this.setName("Plain Bagel");
-                this.setPurchase(true);
-                this.setPrice(0.39);
+                SKU="BGLP";
+                name="Plain Bagel";
+                Purchase=true;
+                Price=0.39;
                 break;
             case "Everything":
-                this.setSku("BGLE");
-                this.setName("Everything Bagel");
-                this.setPurchase(true);
-                this.setPrice(0.49);
+                SKU="BGLE";
+                name="Everything Bagel";
+                Purchase=true;
+                Price=0.49;
                 break;
             case "Sesame":
-                this.setSku("BGLS");
-                this.setName("Sesame Bagel");
-                this.setPurchase(true);
-                this.setPrice(0.49);
+                SKU="BGLS";
+                name="Sesame Bagel";
+                Purchase=true;
+                Price=0.49;
                 break;
             default:
                 System.out.println("Not available");

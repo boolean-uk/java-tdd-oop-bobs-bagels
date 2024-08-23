@@ -14,8 +14,6 @@ public class Basket {
 
 
 
-
-
     public Basket(int num){
         capacity=num;
         numItems=0;
@@ -32,12 +30,12 @@ public class Basket {
 
         if (!Items.containsKey(item) & checkCapacity()) {
             Items.put(item, num);
-            total+=item.getPrice()*num;
+            this.total+=item.getPrice()*num;
             this.numItems+=num;
         } else if (Items.containsKey(item) & checkCapacity()) {
             Items.replace(item, Items.get(item)+num);
-            total+=item.getPrice()*num;
-            this.numItems+=1;
+            this.total+=item.getPrice()*num;
+            this.numItems+=num;
         }
         else{
             System.out.println("Basket is full");
@@ -62,7 +60,7 @@ public class Basket {
 
             Items.replace(item, Items.get(item)-num);
             this.numItems-=num;
-            total-=item.getPrice()*num;
+            this.total-=item.getPrice()*num;
             return true;
         }
         else{
@@ -97,7 +95,6 @@ public class Basket {
     public HashMap<Item, Integer> getItems() {
         return Items;
     }
-
 
     public void setTotal(double change){
         total=change;
