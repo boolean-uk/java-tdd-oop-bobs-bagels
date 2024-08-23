@@ -1,6 +1,7 @@
 package com.booleanuk.core.basket;
 
 
+import com.booleanuk.core.BasketItem;
 import com.booleanuk.core.BasketItemExistException;
 import com.booleanuk.core.inventory.Inventory;
 import org.junit.jupiter.api.Assertions;
@@ -155,5 +156,23 @@ public class BasketTest {
 
         // Check if basket.add() handles error correct (no exception)
         Assertions.assertDoesNotThrow(() -> basket.remove(12));
+    }
+
+    // User story #6: Get total cost of basket
+    @Test
+    public void getTotalCostOfBasket() {
+        inventory = new Inventory();
+        basket = new Basket(new Inventory());
+        Assertions.assertEquals(0, basket.getTotalCost());
+
+        basket.add(new Coffee("COFW"));
+        basket.add(new Bagel("BAGE", Arrays.asList("FILS","FILB")));
+
+        // COFW, 1.19
+        // BAGE, 0.49
+        // FILS, 0.12
+        // FILB, 0.12
+        // = 1.92
+        Assertions.assertEquals(1.92, basket.getTotalCost());
     }
 }
