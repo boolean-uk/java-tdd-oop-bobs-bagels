@@ -1,5 +1,6 @@
 package com.booleanuk.core.inventory;
 
+import com.booleanuk.core.PriceCalculator;
 import com.booleanuk.core.ProductName;
 import com.booleanuk.core.SKUCalculator;
 
@@ -14,6 +15,7 @@ public class InventoryItem {
     private Enum variant;
 
     private SKUCalculator skuCalculator;
+    private PriceCalculator priceCalculator;
 
     public InventoryItem(float price, Enum variant) {
 
@@ -23,6 +25,9 @@ public class InventoryItem {
 
         this.skuCalculator = new SKUCalculator();
         this.SKU = setSKU();
+
+        this.priceCalculator = new PriceCalculator();
+
     }
 
     public String getSKU() {
@@ -33,8 +38,8 @@ public class InventoryItem {
         return skuCalculator.getSKU(name, variant);
     }
 
-    public float getPrice() {
-        return price;
+    public double getPrice() {
+        return priceCalculator.round(price, 2);
     }
 
     public void setPrice(float price) {

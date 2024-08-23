@@ -1,6 +1,7 @@
 package com.booleanuk.core.basket;
 
 import com.booleanuk.core.BasketItemExistException;
+import com.booleanuk.core.PriceCalculator;
 import com.booleanuk.core.inventory.Inventory;
 import com.booleanuk.core.printgenerator.PrintBasketItems;
 import com.booleanuk.core.printgenerator.PrintGenerator;
@@ -16,7 +17,8 @@ public class Basket {
     private int maxCapacity;
     private int size;
     private int idCount;
-    private double totalCost;
+    private float totalCost;
+    private PriceCalculator priceCalculator;
 
     public Basket(Inventory inventory) {
         this.inventory = inventory;
@@ -24,7 +26,8 @@ public class Basket {
         this.maxCapacity = 20;
         this.size = 0;
         this.idCount = 1;
-        this.totalCost = 0.0d;
+        this.totalCost = 0.0f;
+        this.priceCalculator = new PriceCalculator();   // Should maybe have dependency injection instead.
     }
 
     // Auto create ID
@@ -200,22 +203,13 @@ public class Basket {
 
     private void updateTotalCost(BasketItem item) {
 
-        // TODO: Should I use float or double?
-        // change here or change on objects
-        // Now the object has float on price, and totalCost has double
-
-        float itemPrice = inventory.getItem(item.getSKU()).getPrice();
-        double newTotalCost = this.totalCost + itemPrice;
-
-        // Resource: https://www.baeldung.com/java-round-decimal-number
-        int numOfDecimals = 2;
-        double scale = Math.pow(10, numOfDecimals);
-        double rounded = Math.round(newTotalCost * scale) / scale;
-
-        this.totalCost = rounded;
+//        float itemPrice = inventory.getItem(item.getSKU()).getPrice();
+        double itemPrice = inventory.getItem(item.getSKU()).getPrice();
+        this.totalCost+= itemPrice;
     }
 
     public double getTotalCost() {
-        return this.totalCost;
+        // TODO Changed to double, this may be unnecessary now
+        return priceCalculator.round(this.totalCost, 2);
     }
 }
