@@ -6,6 +6,5 @@ public class TestExtention {
 	@Test
 	public void noTest(){
 		Extention e = new Extention();
-
 	}
 }
