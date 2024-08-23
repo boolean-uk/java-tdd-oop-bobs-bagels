@@ -102,18 +102,17 @@ public class Basket {
      */
     public void add(BasketItem item) {
 
-        // Try catch maxCapacity
-        // If item is bagel, check if we can add more basket items
-        // OR doesn't filling counts as items maybe hmmm
-
-        // TODO: Duplication code for updating id and totalCost
-
         try {
 
-            // TODO: Change to switch statement and create Coffe, Bagel, Filling Objects instead of BasketItems
+            // TODO: Duplication of id with different variables? Simplify?
+            //  Could I use some inheritance/polymorphism?
 
-            // If item is a Bagel, add all it's fillings to basket if they exist
-            if (item.getClass().getName().equals(Bagel.class.getName())) {
+            // Class names
+            String thisItemClass = item.getClass().getName();
+            String BagelClass = Bagel.class.getName();
+
+            // Add fillings if it is a Bagel
+            if (thisItemClass.equals(BagelClass)) {
                 Bagel bagel = (Bagel) item;
                 List<String> fillingSKUs = bagel.getLinkedFillingSKUs();
 
@@ -121,9 +120,7 @@ public class Basket {
                 this.addToBasket(bagelId, item);
                 item.setId(bagelId);
 
-                // Update totalCost for thi Basket
-                this.updateTotalCost(item, PriceCalculationVariant.ADDITION);
-
+                // Add fillings and save the filling ids' to the bagel
                 if (!fillingSKUs.isEmpty()) {
                     List<Integer> fillingIds = bagel.getLinkedFillingIds();
 
@@ -131,24 +128,18 @@ public class Basket {
                     for (String f_SKU : fillingSKUs) {
                         int fillingId = createFillingId(String.valueOf(count));
 
-                        BasketItem filling = new Filling(f_SKU); // TODO: Will not work if I change to filling
+                        BasketItem filling = new Filling(f_SKU);
                         filling.setId(fillingId);
 
                         this.addToBasket(fillingId, filling);
                         fillingIds.add(fillingId);
 
                         count++;
-
-                        // Update totalCost for thi Basket
-                        this.updateTotalCost(filling, PriceCalculationVariant.ADDITION);
                     }
                 }
             } else {
                 int generalId = createId();
                 this.addToBasket(generalId, item);
-
-                // Update totalCost for thi Basket
-                this.updateTotalCost(item, PriceCalculationVariant.ADDITION);
             }
 
         } catch (Exception e) {
