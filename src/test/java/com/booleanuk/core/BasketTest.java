@@ -120,6 +120,15 @@ class BasketTest {
     }
 
     @Test
+    public void testFindDiscountOn12PlainBagels() {
+        Basket b = new Basket(24);
+        for (int i = 0; i < 12; i++) {
+            b.addProduct(new Bagel(Controller.prices.get("BGLP"), Controller.prices.get("FILB")));
+        }
+        Assertions.assertEquals(0.69f, b.findDiscount(), 0.001);
+    }
+
+    @Test
     public void testFindDiscountOn12BagelsWithPlainBagels() {
         Basket b = new Basket(24);
         b.addProduct(new Bagel(Controller.prices.get("BGLP"), Controller.prices.get("FILB")));
@@ -203,5 +212,17 @@ class BasketTest {
             b.addProduct(new Bagel(Controller.prices.get("BGLO"), Controller.prices.get("FILB")));
         }
         Assertions.assertEquals(2.47f, b.findDiscount(), 0.001);
+    }
+
+    @Test
+    public void testReceiptInfo() {
+        Basket b = new Basket(24);
+        for (int i = 0; i < 12; i++) {
+            b.addProduct(new Bagel(Controller.prices.get("BGLP"), Controller.prices.get("FILB")));
+        }
+        Basket.ReceiptInfo i = b.receiptInformation();
+        Assertions.assertEquals(12, i.fillings().get("Bacon"));
+        Assertions.assertEquals(0, i.remaining().size());
+        Assertions.assertEquals(1, i.deals().size());
     }
 }
