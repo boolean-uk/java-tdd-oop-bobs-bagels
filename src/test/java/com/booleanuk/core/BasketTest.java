@@ -205,13 +205,8 @@ public class BasketTest {
         for(int i = 0; i < 12; i++){
             basket.add("BGLO", "FILS");
         }
-
-        //Should fail because the filling don't get discounted
         Assertions.assertEquals(5.43, basket.totalCost(), 0.001f);
     }
-
-
-
 }
 
 
