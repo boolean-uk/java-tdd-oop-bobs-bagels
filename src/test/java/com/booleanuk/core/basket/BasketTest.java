@@ -49,7 +49,7 @@ public class BasketTest {
     // TODO: Add test for maxcapacity error
     // User story #3: Throw exception when trying to add items and maxCapacity of basket is reached
     @Test
-    public void exceedMaxCapacityShouldThrowError() {
+    public void exceedMaxCapacityShouldThrowException() {
         inventory = new Inventory();
         basket = new Basket(new Inventory());
 
@@ -72,7 +72,7 @@ public class BasketTest {
     }
 
     @Test
-    public void exceedMaxCapacityShouldNotThrowError() {
+    public void exceedMaxCapacityShouldHandleException() {
 
         // TODO: Check format on this exception
 
