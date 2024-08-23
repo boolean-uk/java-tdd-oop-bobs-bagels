@@ -14,24 +14,11 @@ public class Bagel extends BasketItem {
         linkedFillingIds = new ArrayList<>();
     }
 
-    // TODO: Does it work to overlode this?
     public Bagel(String SKU, List<String> linkedFillingsSKUs) {
         super(SKU);
         this.linkedFillingSKUs = linkedFillingsSKUs;
         linkedFillingIds = new ArrayList<>();
     }
-
-//    public void addFilling(String SKU) {
-//        linkedFillingSKUs.add(SKU);
-//    }
-//
-//    public void addFillings(List<String> linkedIds) {
-//
-////        for (int id : linkedIds) {
-////            linkedIds.add(id);
-////        }
-//        linkedFillingSKUs.addAll(linkedIds);
-//    }
 
     public List<String> getLinkedFillingSKUs() {
         return linkedFillingSKUs;

@@ -48,7 +48,7 @@ public class Basket {
         int itemId = this.idCount - 1;
 
         // Add id extension for filling
-        String tmp = String.valueOf(itemId) + "0" + idExtension;
+        String tmp = itemId + "0" + idExtension;
         return Integer.parseInt(tmp);
     }
 
@@ -110,7 +110,7 @@ public class Basket {
             // TODO: Change to switch statement and create Coffe, Bagel, Filling Objects instead of BasketItems
 
             // If item is a Bagel, add all it's fillings to basket if they exist
-            if (item.getClass().getName() == Bagel.class.getName()) {
+            if (item.getClass().getName().equals(Bagel.class.getName())) {
                 Bagel bagel = (Bagel) item;
                 List<String> fillingSKUs = bagel.getLinkedFillingSKUs();
 

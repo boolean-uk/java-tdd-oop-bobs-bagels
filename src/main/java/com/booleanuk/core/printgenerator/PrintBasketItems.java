@@ -22,8 +22,6 @@ public class PrintBasketItems extends PrintGenerator {
         int outputWidth = 47;
 
         // Variables for e.g. "%-15s %-15s %n", keep blank space
-        String centerSmall = "%34s ";
-        String center = "%29s ";
         String leftAlignSmall = "%-7s ";
         String leftAlign = "%-15s ";
         String newLine = "%n";
