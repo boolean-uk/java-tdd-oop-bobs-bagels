@@ -5,6 +5,9 @@ import com.booleanuk.core.SKUCalculator;
 
 public class InventoryItem {
 
+    // TODO: should I change this to protected?
+    // TODO should I change this to abstract? Check if possible.
+
     private String SKU;
     private float price;
     private ProductName name;

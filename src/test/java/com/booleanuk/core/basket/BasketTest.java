@@ -1,6 +1,7 @@
 package com.booleanuk.core.basket;
 
 
+import com.booleanuk.core.BasketItemExistException;
 import com.booleanuk.core.inventory.Inventory;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -14,6 +15,7 @@ public class BasketTest {
 
     // Print exception method function
     // TODO: Duplication from InventoryTest
+    // TODO: Make this code to own class and use for output in exceptions, maybe color it red, or maybe make an interface to the Exception class
     public void printExceptionMessageToConsole(Exception e) {
         System.out.println("\nException message:");
         System.out.println("\t" + e.getMessage() + "\n");
@@ -29,7 +31,7 @@ public class BasketTest {
     // User story #1: Add specific bagel
     // Specific type is here to select SKU for specific bagel variant
     @Test
-    public void addProductsToBasket() {
+    public void addItemaToBasket() {
         inventory = new Inventory();
         basket = new Basket(new Inventory());
 
@@ -44,9 +46,10 @@ public class BasketTest {
         basket.printBasket();
     }
 
+
     // TODO: Add test for adding something that do not exist
 
-    // TODO: Add test for maxcapacity error
+
     // User story #3: Throw exception when trying to add items and maxCapacity of basket is reached
     @Test
     public void exceedMaxCapacityShouldThrowException() {
@@ -57,12 +60,6 @@ public class BasketTest {
         basket.add(new Coffee("COFC"));
         basket.add(new Bagel("BAGE"));
 
-        // TODO: I need to set addToBasket() to 'protected' instead of 'private', is it ok?
-        // It's because I can't test private methods.
-        // And I want to test this exception
-        // If I just test the "parent method" add() it will not throw an exception
-        // because I handle the exception with try/catch in add()
-        // add() then calls addToBasket() which is the function that can throw exceptions
         MaxCapacityException e = Assertions.assertThrows(
                 MaxCapacityException.class,
                 () -> { basket.addToBasket(11, new Bagel("BAGE")); }
@@ -128,11 +125,35 @@ public class BasketTest {
         basket.printBasket();
     }
 
-    // TODO: add method for remove and chekc exception
-    // TODO: I need to set removeFromBasket() to 'protected' instead of 'private', is it ok?
-    // It's because I can't test private methods.
-    // And I want to test this exception
-    // If I just test the "parent method" remove() it will not throw an exception
-    // because I handle the exception with try/catch in remove()
-    // remove() then calls removeFromBasket() which is the function that can throw exceptions
+    // User story #5: Throw exception when trying to remove item that doesn't exist.
+    @Test
+    public void removeItemThatDoesNotExistShouldThrowException() {
+        inventory = new Inventory();
+        basket = new Basket(new Inventory());
+
+        // TODO: I need to set removeFromBasket() to 'protected' instead of 'private', is it ok?
+        // It's because I can't test private methods.
+        // And I want to test this exception
+        // If I just test the "parent method" remove() it will not throw an exception
+        // because I handle the exception with try/catch in remove()
+        // remove() then calls removeFromBasket() which is the function that can throw exceptions
+        InvalidBasketItemException e = Assertions.assertThrows(
+                InvalidBasketItemException.class,
+                () -> { basket.removeFromBasket(11); }
+        );
+        Assertions.assertEquals("Basket item with ID #11, doesn't exist. Can't remove from basket.", e.getMessage());
+        printExceptionMessageToConsole(e);
+    }
+
+    @Test
+    public void removeItemThatDoesNotExistShouldHandleException() {
+
+        // TODO: Check format on this exception
+
+        inventory = new Inventory();
+        basket = new Basket(new Inventory());
+
+        // Check if basket.add() handles error correct (no exception)
+        Assertions.assertDoesNotThrow(() -> basket.remove(12));
+    }
 }

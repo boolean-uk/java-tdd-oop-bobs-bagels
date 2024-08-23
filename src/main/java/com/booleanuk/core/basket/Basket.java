@@ -1,5 +1,6 @@
 package com.booleanuk.core.basket;
 
+import com.booleanuk.core.BasketItemExistException;
 import com.booleanuk.core.inventory.Inventory;
 import com.booleanuk.core.printgenerator.PrintBasketItems;
 import com.booleanuk.core.printgenerator.PrintGenerator;
@@ -50,7 +51,6 @@ public class Basket {
 
 
     protected void addToBasket(int itemId, BasketItem item) {
-
         // Validate input
         if (this.getSize() == maxCapacity) {
             throw new MaxCapacityException("Basket is full, can't add more items.");
@@ -73,10 +73,20 @@ public class Basket {
     }
 
     protected void removeFromBasket(int itemId) {
-        if (basketItems.get(1) == null) {
-            throw new InvalidBasketItemException("Basket item with ID #" + itemId + ", doesn't exist.\nCan't remove from basket.");
+        if (basketItems.get(itemId) == null) {
+            throw new InvalidBasketItemException("Basket item with ID #" + itemId + ", doesn't exist. Can't remove from basket.");
         }
         this.basketItems.remove(itemId);
+    }
+
+    // TODO: Check where get item functionality is used and replace with this function
+    // This exception is trown both here and in the above method, how to reduce duplication in best way?
+    protected BasketItem getBasketItem(int itemId) {
+        BasketItem item = this.basketItems.get(itemId);
+        if (item == null) {
+            throw new InvalidBasketItemException("Basket item with ID #" + itemId + ", doesn't exist. Can't remove from basket.");
+        }
+        return item;
     }
 
     /**
@@ -120,18 +130,22 @@ public class Basket {
 
     public void remove(int itemId) {
 
-        // TODO: Could this be simplified?
-        // TODO: should throw exception if not exist, seperate intro function, just like with add
-        BasketItem item = this.basketItems.get(itemId);
-        if (item.getClass().getName() == Bagel.class.getName()) {
-            Bagel bagel = (Bagel) item;
-            List<Integer> fillingIds = bagel.getLinkedFillingIds();
+        try {
+            // TODO: Could this be simplified?
+            // TODO: should throw exception if not exist, seperate intro function, just like with add
+            BasketItem item = this.getBasketItem(itemId);
+            if (item.getClass().getName() == Bagel.class.getName()) {
+                Bagel bagel = (Bagel) item;
+                List<Integer> fillingIds = bagel.getLinkedFillingIds();
 
-            for (int f_id : fillingIds) {
-                this.removeFromBasket(f_id);
+                for (int f_id : fillingIds) {
+                    this.removeFromBasket(f_id);
+                }
             }
+            this.removeFromBasket(1);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
         }
-        this.removeFromBasket(1);
     }
 
     public Map<Integer, BasketItem> getAll() {
