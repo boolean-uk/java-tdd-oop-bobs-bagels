@@ -1,8 +1,6 @@
 package com.booleanuk.core.basket;
 
-import com.booleanuk.core.MaxCapacityException;
 import com.booleanuk.core.inventory.Inventory;
-import com.booleanuk.core.inventory.InventoryItemException;
 import com.booleanuk.core.printgenerator.PrintBasketItems;
 import com.booleanuk.core.printgenerator.PrintGenerator;
 
@@ -92,6 +90,7 @@ public class Basket {
         // OR doesn't filling counts as items maybe hmmm
 
         try {
+
             // If item is a Bagel, add all it's fillings to basket if they exist
             if (item.getClass().getName() == Bagel.class.getName()) {
                 Bagel bagel = (Bagel) item;
@@ -150,5 +149,10 @@ public class Basket {
 
         PrintGenerator basket = new PrintBasketItems(this.inventory, this.basketItems);
         basket.print();
+    }
+
+    // TODO: Should I do a get/setfunctions on maxCapacity or is this ok?
+    public void changeMaxCapacity(int newMaxCapacity) {
+        this.maxCapacity = newMaxCapacity;
     }
 }

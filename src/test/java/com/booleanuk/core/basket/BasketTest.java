@@ -12,6 +12,13 @@ public class BasketTest {
     Inventory inventory;
     Basket basket;
 
+    // Print exception method function
+    // TODO: Duplication from InventoryTest
+    public void printExceptionMessageToConsole(Exception e) {
+        System.out.println("\nException message:");
+        System.out.println("\t" + e.getMessage() + "\n");
+    }
+
     @Test
     public void printBasket() {
         inventory = new Inventory();
@@ -40,6 +47,64 @@ public class BasketTest {
     // TODO: Add test for adding something that do not exist
 
     // TODO: Add test for maxcapacity error
+    // User story #3: Throw exception when trying to add items and maxCapacity of basket is reached
+    @Test
+    public void exceedMaxCapacityShouldThrowError() {
+        inventory = new Inventory();
+        basket = new Basket(new Inventory());
+
+        basket.changeMaxCapacity(2);
+        basket.add(new Coffee("COFC"));
+        basket.add(new Bagel("BAGE"));
+
+        // TODO: I need to set addToBasket() to 'protected' instead of 'private', is it ok?
+        // It's because I can't test private methods.
+        // And I want to test this exception
+        // If I just test the "parent method" add() it will not throw an exception
+        // because I handle the exception with try/catch in add()
+        // add() then calls addToBasket() which is the function that can throw exceptions
+        MaxCapacityException e = Assertions.assertThrows(
+                MaxCapacityException.class,
+                () -> { basket.addToBasket(11, new Bagel("BAGE")); }
+        );
+        Assertions.assertEquals("Basket is full, can't add more items.", e.getMessage());
+        printExceptionMessageToConsole(e);
+    }
+
+    @Test
+    public void exceedMaxCapacityShouldNotThrowError() {
+
+        // TODO: Check format on this exception
+
+        inventory = new Inventory();
+        basket = new Basket(new Inventory());
+
+        basket.changeMaxCapacity(2);
+        basket.add(new Coffee("COFC"));
+        basket.add(new Bagel("BAGE"));
+
+        // Check if basket.add() handles error correct (no exception)
+        Assertions.assertDoesNotThrow(() -> basket.add(new Bagel("BAGE")));
+    }
+
+
+
+    // User story #4: Change max capacity for basket
+//    @Test
+//    public void checkChangeMaxCapacity() {
+//        this.inventory = new com.booleanuk.core.Inventory();
+//        this.basket = new com.booleanuk.core.Basket(new com.booleanuk.core.Inventory());
+//
+//        basket.changeMaxCapacity(3);
+//        Assertions.assertEquals(3, basket.getMaxCapacity());
+//
+//        basket.changeMaxCapacity(12);
+//        Assertions.assertEquals(12, basket.getMaxCapacity());
+//    }
+//
+
+
+
 
     @Test
     public void addBagelAndFilling() {
@@ -68,4 +133,12 @@ public class BasketTest {
         Assertions.assertNull(basket.getAll().get(101));
         basket.printBasket();
     }
+
+    // TODO: add method for remove and chekc exception
+    // TODO: I need to set removeFromBasket() to 'protected' instead of 'private', is it ok?
+    // It's because I can't test private methods.
+    // And I want to test this exception
+    // If I just test the "parent method" remove() it will not throw an exception
+    // because I handle the exception with try/catch in remove()
+    // remove() then calls removeFromBasket() which is the function that can throw exceptions
 }

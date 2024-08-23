@@ -1,5 +1,7 @@
 package com.booleanuk.core;
 
+import com.booleanuk.core.basket.MaxCapacityException;
+
 import java.util.*;
 
 public class Basket {
