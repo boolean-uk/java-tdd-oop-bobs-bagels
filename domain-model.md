@@ -104,9 +104,55 @@ And here are the methods that will be used:
 | `deliverAndResetTotalCost(Double total)`                 | `Double`  | Deliver and resets the total cost value.                                              |
 | `applyDiscount(Basket basket, Integer bagelCounter)`     | `void`    | Find the number of the different discount sets and marks the bagels as discounted.    |
 
+------------------------------------------------------------------------------------------------------
 
-To make things simple, I just add the values of the discounts as final members in the 'Order' class.
-These will be named 'discount1', 'discount2' and  have the Double discount values hardcoded in them.
+# Extension 2: Receipts
+
+## User Story
+
+```
+As a member of the public,
+so I can get an overview of my order,
+Id like to recieve an receipt for my order.
+```
+
+### Domain Model - Extension 2
+
+The following classes will be used for the user story:
+
+| Classes       | Members        | Type                     |
+|---------------|----------------|--------------------------|
+| `Receipt`     | `order`        | `Order`                  |
+|               | `receiptItems` | `ArrayList<ReceiptItem>` |
+| `ReceiptItem` | `variant`      | `MenuCategory`           |
+|               | `name`         | `String`                 |
+|               | `quantity`     | `Integer`                |
+|               | `priceSum`     | `Double`                 |
+
+These are the methods in the Receipt class:
+
+| Method                             | Returns                                | Note                                                                                      |
+|------------------------------------|----------------------------------------|-------------------------------------------------------------------------------------------|
+| `printReceipt`                     | `void`                                 | Prints out the receipt in the same structure as the assignment description.               |
+| `fillReceiptItems`                 | `void`                                 | Fills the receiptItems list with items from the basket.                                   |
+| `groupByProductAndCount`           | `Map<MenuCategory, Map<String, Long>>` | Count and group variants together.                                                        |
+| `groupByProductAndPrice`           | `Map<MenuCategory, Double>`            | Sums the price for the different product groups.                                          |
+| `iterateMapsAndCreateReceiptItems` | `void`                                 | Iterate over the maps and create ReceiptItems.                                            |
+| `createReceiptItemAndAddToList`    | `void`                                 | Create the items and add them to the receiptItems arraylist.                              |
+| `getFormattedDate`                 | `String`                               | Helper method used to get the current date in a nice format (should be in a utils class). |
+
+
+The 'ReceiptItem' class includes getters for all the members. 
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
 
 
 
