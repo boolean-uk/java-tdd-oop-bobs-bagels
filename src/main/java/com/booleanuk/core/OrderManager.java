@@ -194,6 +194,22 @@ public class OrderManager {
 		return Double.valueOf(priceOfItemString);
 	}
 
+	public static String leftAlignStringWithPadding(String s, int pad){
+		return String.format("%" + pad + "s", s);
+	}
+	public static String rightAlignStringWithPadding(String s, int pad){
+		return String.format("%-" + pad + "s", s);
+	}
+	public static String centerAlignStringWithPadding(String s, int pad){
+		return String.format("%" + ((pad + s.length())/2) + "s", s); // only pads half to left. not center with padding on
+																	 // both sides
+	}
+
+	public static void main(String[] args) {
+		System.out.println(leftAlignStringWithPadding("Hello", 10));
+		System.out.println(rightAlignStringWithPadding("Hello", 10));
+		System.out.println(centerAlignStringWithPadding("Hello", 10));
+	}
 
 	// case: 10
 	public int getStockOfItem(Item item){
@@ -210,26 +226,26 @@ public class OrderManager {
 	public String getTotalDiscountRecieptString(){
 		Receipt r =  getTotalDiscountReciept();
 		ArrayList<String> recieptRaw = r.receipt;
-		String prettyReciept = "";
+		String prettyReceipt = "";
 
 		int itemLengthWithPadding = 23;
 		int quantityWithPadding = 2;
 		int priceWithPadding = 8;
 		int totalWidth = itemLengthWithPadding+quantityWithPadding+priceWithPadding;
 		String bobsString = "~~~Bob's Bagels~~~";
-		prettyReciept += String.format("%" + ((totalWidth + bobsString.length())/2) + "s", bobsString) + "\n";
+		prettyReceipt += centerAlignStringWithPadding(bobsString, totalWidth) + "\n";
 		String dateString = r.date.toLocalDate().toString() + "\n";
-		prettyReciept += String.format("%" + (((totalWidth + dateString.length())/2) +1) + "s", dateString);
+		prettyReceipt += centerAlignStringWithPadding(dateString, totalWidth);
 		String dateTime = r.date.format(DateTimeFormatter.ISO_TIME);
 		int a = dateTime.lastIndexOf('.');
 		dateTime = dateTime.substring(0, a);
-		prettyReciept += String.format("%" + (((totalWidth + dateTime.length())/2) )  + "s", dateTime);
+		prettyReceipt += centerAlignStringWithPadding(dateTime, totalWidth);
 
-		prettyReciept += "\n";
+		prettyReceipt += "\n";
 
 
 		String receiptBreak = "=".repeat(totalWidth);
-		prettyReciept += receiptBreak + "\n";
+		prettyReceipt += receiptBreak + "\n";
 
 //		padd each item and pretty-print
 		for(String str: recieptRaw){
@@ -242,40 +258,40 @@ public class OrderManager {
 
 			//  eg: Bagel: Onion          2         £ 0.98
 			String curLine = "";
-			String formattedType = String.format("%-" +itemLengthWithPadding + "s", type);
-			String formattedAmount = String.format("%-" + quantityWithPadding + "s", amount);
-			String fomrattedPrice = String.format("%" + priceWithPadding + "s", price);
+			String formattedType = rightAlignStringWithPadding(type, itemLengthWithPadding);
+			String formattedAmount = rightAlignStringWithPadding(amount, quantityWithPadding);
+			String fomrattedPrice = leftAlignStringWithPadding(price, priceWithPadding);
 			String formattedDiscount = "";
 
 			// eg: (-0.13)
 			if (discounted != ""){
-				formattedDiscount = String.format("%" + totalWidth + "s", discounted);
-				formattedDiscount = "\n" + formattedDiscount;
+				formattedDiscount = "\n" + leftAlignStringWithPadding(discounted, totalWidth);
 			}
 
 			curLine += formattedType + formattedAmount + fomrattedPrice + formattedDiscount;
-			prettyReciept += "\n" + curLine;
+			prettyReceipt += "\n" + curLine;
 		}
 		String bars = "―".repeat(totalWidth-bobsString.length() + 5);
-		prettyReciept += "\n" + bars;
+		prettyReceipt += "\n" + bars;
 
 		// sum saved
-		String sumStart = String.format("%-" + itemLengthWithPadding + "s", "Saved");
+		String sumStart =  rightAlignStringWithPadding("Saved", itemLengthWithPadding);
+
 		double sumSaved = getTotalCartPrice()-r.price;
 		String sumSavedStr = String.format("%.2f", sumSaved);
-		String sumSavedAmountPadded = String.format("%" + priceWithPadding + "s", "£ " + sumSavedStr);
-		prettyReciept += "\n" + sumStart + " ".repeat(quantityWithPadding) + sumSavedAmountPadded;
+		String sumSavedAmountPadded = leftAlignStringWithPadding("£ " + sumSavedStr, priceWithPadding);
+		prettyReceipt += "\n" + sumStart + " ".repeat(quantityWithPadding) + sumSavedAmountPadded;
 
 		// total sum
 		String totalSumPrice = String.format("%.2f", r.price);
 		String totalStart = String.format("%-" + itemLengthWithPadding + "s", "Total");
 		String totalSum = String.format("%" + priceWithPadding + "s", "£ " + totalSumPrice);
-		prettyReciept += "\n" + totalStart + " ".repeat(quantityWithPadding) + totalSum;
+		prettyReceipt += "\n" + totalStart + " ".repeat(quantityWithPadding) + totalSum;
 
 
-		prettyReciept += "\n" + receiptBreak + "\n";
+		prettyReceipt += "\n" + receiptBreak + "\n";
 
-		return prettyReciept;
+		return prettyReceipt;
 	}
 
 
