@@ -28,6 +28,7 @@ public class NormalReceipt implements Receipt{
         this.receiptLines.add(String.format("%-18s %3s %8s", itemName, +quantity, "$"+price));
     }
 
+
     public void getDiscountedSum(float sum) {
         this.totalSum = sum;
     }
