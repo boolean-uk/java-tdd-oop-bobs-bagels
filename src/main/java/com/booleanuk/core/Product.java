@@ -9,6 +9,7 @@ public abstract class Product {
     private SKU sku;
     private MenuCategory variant;
     private Boolean hasDiscount;
+    private int quantity;
 
     public Product(String name, Double price, SKU sku, MenuCategory variant) {
         this.name = name;
@@ -16,6 +17,7 @@ public abstract class Product {
         this.sku = sku;
         this.variant = variant;
         this.hasDiscount = false;
+        this.quantity = 1;
     }
 
     public Product() {}
@@ -42,5 +44,13 @@ public abstract class Product {
 
     public void setHasDiscount(Boolean discounted) {
         hasDiscount = discounted;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 }
