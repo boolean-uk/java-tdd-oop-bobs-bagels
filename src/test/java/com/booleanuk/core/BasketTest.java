@@ -141,4 +141,26 @@ public class BasketTest {
 
         Assertions.assertTrue(receiptFinal.contains(receiptExcerpt));
     }
+
+
+    // Extension 3 requirements tests
+
+    @Test
+    public void printingDiscountReceipt(){
+        Basket basket = new Basket();
+        Receipt receipt = new DiscountReceipt();
+        CashRegister register = new CashRegister(basket, receipt);
+        basket.setMaxBasketSize(25);
+
+        basket.addItem("BGLS", 6);
+        basket.addItem("BGLO", 13);
+        basket.addItem("FILC", 1);
+        basket.addItem("COFL", 1);
+        register.printReceipt();
+        String receiptFinal = register.receipt.getFinalReceipt().toString();
+
+        String receiptExcerpt = "                       (-$1.89)";
+
+        Assertions.assertTrue(receiptFinal.contains(receiptExcerpt));
+    }
 }

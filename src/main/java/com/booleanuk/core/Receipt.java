@@ -8,4 +8,5 @@ public interface Receipt {
     void createFinalReceipt();
     void printReceipt();
     ArrayList<String> getFinalReceipt();
+    void setTotalSaved(float totalSaved);
 }

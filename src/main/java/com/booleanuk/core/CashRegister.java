@@ -45,6 +45,7 @@ public class CashRegister {
         }
 
         receipt.getDiscountedSum(discountedSum);
+        receipt.setTotalSaved(totalDiscount);
 
         return "The sum of your order is: " + String.format("%.2f", discountedSum);
     }
@@ -80,10 +81,13 @@ public class CashRegister {
                 }
                 if (bagelOfferCount>0){
                     float totalDiscountPrice = sixOfferCount*2.49f + twelveOfferCount*3.99f;
+                    float priceWithoutDiscount = bagelOfferCount*bagel.getItemPrice();
+                    float saved = priceWithoutDiscount-totalDiscountPrice;
                     String fullName = bagel.getItemVariant() + " " + bagel.getItemName();
                     receipt.addReceiptLine(fullName, bagelOfferCount, totalDiscountPrice);
+                    receipt.addReceiptLine("", 0, saved);
+                    totalDiscount += saved;
                 }
-
             }
         }
     }
@@ -104,12 +108,16 @@ public class CashRegister {
             }
         }
         int coffeeBagelOffer = 0;
+
+        float coffeePrice = 0;
+        float bagelPrice = 0;
         while (bagelCount!=0 && coffeeCount!=0){
             for (HashMap.Entry<String, Integer> entry : basket.getBasketItems().entrySet()){
                 Item bagel = getMenuItem(entry.getKey());
 
                 if (bagel.getItemName().equals("Bagel") && entry.getValue()!= 0){
                     sum += (bagel.getItemPrice());
+                    bagelPrice = bagel.getItemPrice();
                     basket.removeItem(bagel.getItemSKU(), false);
                     break;
                 }
@@ -120,6 +128,7 @@ public class CashRegister {
 
                 if (coffee.getItemName().equals("Coffee") && entry2.getValue()!= 0){
                     sum += (coffee.getItemPrice());
+                    coffeePrice = coffee.getItemPrice();
                     discountedSum += 1.25f;
                     basket.removeItem(coffee.getItemSKU(), false);
                     coffeeBagelOffer++;
@@ -132,7 +141,11 @@ public class CashRegister {
 
         if (coffeeBagelOffer>0){
             String offerName = "Coffee & Bagel";
+            float originalSum = coffeePrice+bagelPrice;
+            float saved = originalSum - 1.25f;
             receipt.addReceiptLine(offerName, coffeeBagelOffer, 1.25f*coffeeBagelOffer);
+            receipt.addReceiptLine("", 0, saved);
+            totalDiscount+=saved;
         }
     }
 
