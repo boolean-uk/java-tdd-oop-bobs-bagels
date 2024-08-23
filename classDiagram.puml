@@ -1,0 +1,103 @@
+@startuml
+
+Class Menu {
+    - menu: List<Item>
+    - initializeMenu(): void
+    + getItemFromMenu(name: String): Item
+    + itemIsOnTheMenu(item: Item): boolean
+    + itemsAreEqual(item1: Item, item2: Item): boolean
+    + getFillingFromMenu(name: String): Filling
+    + selectItemFromMenu(): Item
+    + printMenu(): void
+    + printFillingMenu(): void
+}
+
+Class Basket {
+    - basket: HashMap<Item, Integer>
+    - maxBasketSize: int
+    - discount: int
+
+    - quantifyItemsInBasket(basketOverview: Map<String, Integer>): void
+    - basketIsFull(): boolean
+    - formatFillingPrint(bagel: Bagel): void
+    - printFilling(bagel: Bagel): void
+    - printItemsInBasketWithIndex(Map<Integer, Item>): void
+
+    + numberOfItemsInBasket(): int
+    + addItemToBasket(item: Item): String
+    + removeItemFromBasket(): String
+    + itemInBasket(): boolean
+    + changeBasketSize(newSize: Integer): void
+    + calculateDiscount(): void
+    + addBagelDiscount(basketOverview: Map<String,Integer>): void
+    + addCoffeeDiscount(basketOverview: Map<String, Integer>): void
+    + calculateBasketCost(): float
+    + getQuantityOfFillings(bagel: Bagel): HashMap<String, Integer>
+    + printItemsInBasket(): void
+
+}
+
+Interface Item {
+    + getSKU(): String
+    + getName(): String
+    + getPrice(): int
+}
+
+Class Bagel Implements Item {
+    - fillings: ArrayList<Filling>
+    - sku: String
+    - name: String
+    - price: int
+
+    + getFillings(): List<Filling>
+
+    + equals(o: Object): boolean
+    + hashCode(): int
+
+    + addFilling(filling: Filling): String
+    + addFillingsToBagel(input: Scanner): void
+}
+
+Class Coffee Implements Item {
+    - sku: String
+    - name: String
+    - price: int
+
+    + equals(o: Object): boolean
+    + hashCode(): int
+}
+
+
+Class Filling Implements Item {
+    - sku: String
+    - name: String
+    - price: int
+
+    + equals(o: Object): boolean
+    + hashCode(): int
+}
+
+
+Class Order {
+    - basket: Basket
+
+    - customerOrManager(input: Scanner): int
+    - customerMenu(input: Scanner): void
+    - managerMenu(input: Scanner): void
+
+    + order(): void
+}
+
+Class Receipt {
+    - basket: Basket
+    - receiptLines: ArrayList<String>
+
+    + printReceipt(): void
+    + createReceipt(): void
+    + addFillingToReceipt(bagel: Bagel): void
+}
+
+
+
+@enduml
+
