@@ -6,7 +6,9 @@ Bagel discount is priority over bagel + coffee discount. So if we have 5 bagels 
 
 If basket has 6 bagels and 3 of them has filling, it will give a discount on the bagels and not the filling. The price will be bagel with discount + the filling.
 
-## DiscountManager
+The reason why discountManager and Receipt is extending from ItemList is to easier get the price, type and name for each item in the basket.
+
+## DiscountManager extends ItemList
 | Variable                                | Method                                                | Scenario                                                                                                                          | Outcome                                                                                                                                                                                                                           |
 |-----------------------------------------|-------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | HashMap<String, Integer> discount       | calculateDiscounts(Basket basket)                     | Calculate if there is any discounts in the baskets                                                                                | The new price of all products with discounts, then put that discount into a discount HashMap with the quantity. For instance, 24 onion bagels = (12BagelDiscount, 2). Remove the quantity in basket and use discount map instead. |
@@ -19,16 +21,15 @@ If basket has 6 bagels and 3 of them has filling, it will give a discount on the
 
 
 
-## ReceiptManager
+## Receipt extends ItemList
+| Variable                                | Method                              | Scenario                                                                              | Outcome                                                          |
+|-----------------------------------------|-------------------------------------|---------------------------------------------------------------------------------------|------------------------------------------------------------------|
+| HashMap<String, Integer> basket;        | calculateBasket(): float            | Calculate the price of all items in basket                                            | a float value of the total price                                 |
+| HashMap<String, Float> discountBasket;  | calculateOriginalBasket(): float    | Calculate the price of basket before adding discount                                  |                                                                  |
+| DiscountManager discountManager;        | printOutReceipt(): float            | Print out the receipt and the return value is the total price                         | Receipt of the basket as a fine print and return the total price |
+| HashMap<String, Integer> numberOfItems; |                                     |                                                                                       |                                                                  |
+|                                         | checkBagelDiscountInBasket(): void  | Check if there is a bagelDiscount in basket, 6 bagels, 12 bagels, or bagel and coffee |                                                                  |
 
-| Variable | Method                                  | Scenario                                       | Outcome                          |
-|----------|-----------------------------------------|------------------------------------------------|----------------------------------|
-|          | countTotalReceipt(Basket basket): float | Count the price receipt of all items in basket | a float value of the total price |
-|          |                                         |                                                |                                  |
-|          | finePrintReceipt(Basket basket):        |                                                |                                  |
-|          |                                         |                                                |                                  |
-|          |                                         |                                                |                                  |
-|          |                                         |                                                |                                  |
 
 
 ![Picture of a receipt example](ReceiptImage.png)

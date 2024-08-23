@@ -114,7 +114,7 @@ public class BasketTest {
         basket.addItemToBasket(bagel);
         basket.addItemToBasket(coffee);
 
-        Assertions.assertEquals(5.7f, basket.countTotalValueOfItems());
+        Assertions.assertEquals(5.7f, basket.printOutReceiptOfBasket(), 0.001f);
 
     }
 

@@ -7,18 +7,16 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class DiscountManager {
+public class DiscountManager extends ItemList {
 
     HashMap<String, Integer> basket;
     HashMap<String, Float> discountBasket;
-    HashMap<String, String> typeList;
     HashMap<String, Integer> numberOfItems;
     ArrayList<String> bagelSKU;
     ArrayList<String> coffeeSKU;
     float totalPrice = 0;
 
     public DiscountManager() {
-        this.typeList = new ItemList().getTypeList();
         this.discountBasket = new HashMap<>();
         bagelSKU = new ArrayList<>();
         coffeeSKU = new ArrayList<>();
@@ -88,7 +86,7 @@ public class DiscountManager {
     }
 
     public void populateSKUList() {
-        for (Map.Entry<String, String> entry: typeList.entrySet()) {
+        for (Map.Entry<String, String> entry: getTypeList().entrySet()) {
             switch (entry.getValue()) {
                 case "Bagel" -> this.bagelSKU.add(entry.getKey());
                 case "Coffee" -> this.coffeeSKU.add(entry.getKey());

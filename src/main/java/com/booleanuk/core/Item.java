@@ -2,15 +2,13 @@ package com.booleanuk.core;
 
 import java.util.HashMap;
 
-public abstract class Item {
+public abstract class Item extends ItemList{
     private final String SKU;
     private float price;
     private String type;
     private String name;
-    private final ItemList itemList;
     public Item(String SKU) {
         this.SKU = SKU;
-        itemList = new ItemList();
         setPriceFromList();
         setTypeFromList();
         setNameFromList();
@@ -33,7 +31,7 @@ public abstract class Item {
     }
 
     private void setPriceFromList() {
-        HashMap<String, Float> priceList = itemList.getPriceList();
+        HashMap<String, Float> priceList = getPriceList();
         if(priceList.get(this.SKU) != null) {
             this.price = priceList.get(this.SKU);
         } else {
@@ -42,7 +40,7 @@ public abstract class Item {
     }
 
     private void setTypeFromList() {
-        HashMap<String, String> typeList = itemList.getTypeList();
+        HashMap<String, String> typeList = getTypeList();
         if(typeList.get(this.SKU) != null) {
             this.type = typeList.get(this.SKU);
         } else {
@@ -51,7 +49,7 @@ public abstract class Item {
     }
 
     private void setNameFromList() {
-        HashMap<String, String> nameList = itemList.getNameList();
+        HashMap<String, String> nameList = getNameList();
         if(nameList.get(this.SKU) != null) {
             this.name = nameList.get(this.SKU);
         } else {

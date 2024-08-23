@@ -18,18 +18,6 @@ Basket holds Coffee, Filling and Bagel but to know what filling your bagel has, 
 |                                              | getItemFromKey(String SKU)       | Get the key                                                    |                                      |
 
 
-## Class Item
-| Variables    | Method       | Scenario                        | Outcome               |
-|--------------|--------------|---------------------------------|-----------------------|
-| String SKU   | getPrice()   | Get the price of a type of item | The price             |
-| double Price |              |                                 | "Item does not exist" |
-| String type  | getItemSKU() | Get the SKU name of the item    | SKU                   |
-| String name  |              |                                 | "Item does not exist" |
-|              | getItemName  | Get the name of the item        | "Bagel - Onion"       |
-|              |              |                                 | "Item does not exist" |
-|              | getItemType  | Get the type of item            | "Bagel"               |
-
-
 ## Class ItemList
 
 | Variables                         | Method                       | Scenario                                                                                                                       | Outcome |
@@ -40,6 +28,17 @@ Basket holds Coffee, Filling and Bagel but to know what filling your bagel has, 
 |                                   | get...List()                 | Get price, type and name list of all items                                                                                     |         |
 |                                   |                              |                                                                                                                                |         |
 |                                   | getPriceFromList(String sku) | Get the price of an item depending on the SKU.                                                                                 |         |
+
+## Class Item extends ItemList
+| Variables    | Method       | Scenario                        | Outcome               |
+|--------------|--------------|---------------------------------|-----------------------|
+| String SKU   | getPrice()   | Get the price of a type of item | The price             |
+| double Price |              |                                 | "Item does not exist" |
+| String type  | getItemSKU() | Get the SKU name of the item    | SKU                   |
+| String name  |              |                                 | "Item does not exist" |
+|              | getItemName  | Get the name of the item        | "Bagel - Onion"       |
+|              |              |                                 | "Item does not exist" |
+|              | getItemType  | Get the type of item            | "Bagel"               |
 
 
 ## Class ItemFactory
@@ -67,21 +66,14 @@ Basket holds Coffee, Filling and Bagel but to know what filling your bagel has, 
 | Variables | Method | Scenario | Outcome |
 |-----------|--------|----------|---------|
 |           |        |          |         |
-|           |        |          |         |
-|           |        |          |         |
-|           |        |          |         |
-|           |        |          |         |
+
 
 ## Class Coffee extends Item
 | Variables | Method | Scenario | Outcome |
 |-----------|--------|----------|---------|
 |           |        |          |         |
-|           |        |          |         |
-|           |        |          |         |
-|           |        |          |         |
-|           |        |          |         |
 
 
-## Class diagram
+## Class diagram (With Extension)
 
 ![Class diagram of BoBs bagel](BobsBagelDiagram.drawio.png)

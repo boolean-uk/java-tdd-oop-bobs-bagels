@@ -8,10 +8,9 @@ import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Receipt {
+public class Receipt extends ItemList {
     HashMap<String, Float> discountBasket;
     HashMap<String, Integer> basket;
-    private ItemList itemList = new ItemList();
     private DiscountManager discountManager;
     private static final DecimalFormat df = new DecimalFormat("0.00");
 
@@ -26,7 +25,7 @@ public class Receipt {
         checkBagelDiscountInBasket();
         float totalPrice = 0;
         for (Map.Entry<String, Integer> kvp: this.basket.entrySet()) {
-            totalPrice += (itemList.getPriceFromList(kvp.getKey()) * kvp.getValue());
+            totalPrice += (getPriceFromList(kvp.getKey()) * kvp.getValue());
         }
         return  totalPrice + discountManager.totalValueOfDiscount();
     }
@@ -34,7 +33,7 @@ public class Receipt {
     public float calculateOriginalBasket() {
         float originalPrice = 0;
         for (Map.Entry<String, Integer> kvp: this.basket.entrySet()) {
-            originalPrice += (itemList.getPriceFromList(kvp.getKey()) * kvp.getValue());
+            originalPrice += (getPriceFromList(kvp.getKey()) * kvp.getValue());
         }
         return  originalPrice;
     }
@@ -43,13 +42,13 @@ public class Receipt {
     private void checkBagelDiscountInBasket() {
         for(Map.Entry <String, Integer> bagel: this.basket.entrySet()) {
             //Checks for bagel discount
-            while (bagel.getValue()  - 6 >= 0 && itemList.getTypeFromList(bagel.getKey()).equals("Bagel")) {
+            while (bagel.getValue()  - 6 >= 0 && getTypeFromList(bagel.getKey()).equals("Bagel")) {
                 //Loops if the bagels are bigger than 6 as 6 is the smallest discount you can get.
                 this.basket.replace(bagel.getKey(), bagel.getValue() - discountManager.checkBagelDiscount(this.basket));
             }
 
             for (Map.Entry<String, Integer> coffee: this.basket.entrySet()) {
-                if(bagel.getValue() > 0 && itemList.getTypeFromList(bagel.getKey()).equals("Bagel") && (coffee.getValue() > 0 && itemList.getTypeFromList(coffee.getKey()).equals("Coffee"))) {
+                if(bagel.getValue() > 0 && getTypeFromList(bagel.getKey()).equals("Bagel") && (coffee.getValue() > 0 && getTypeFromList(coffee.getKey()).equals("Coffee"))) {
 
                     //For every bagel that is more than 1 and less than 6 check if there is a coffee in the list still and add it to discountManager. This is O(n^n)...
                     //Checks if there are 1 more of bagel, then add bagelAndCoffeeDiscount the getValue of coffee
@@ -81,7 +80,7 @@ public class Receipt {
         System.out.println("----------------------------");
         for (Map.Entry<String, Integer> kvp : basket.entrySet()) {
             if(kvp.getValue() > 0) {
-                System.out.println(" " + itemList.getNameFromList(kvp.getKey()) + " \t\t\t  " + kvp.getValue() + "x $" + itemList.getPriceFromList(kvp.getKey()));
+                System.out.println(" " + getNameFromList(kvp.getKey()) + " " + getTypeFromList(kvp.getKey()) + " \t\t\t  " + kvp.getValue() + "x $" + getPriceFromList(kvp.getKey()));
             }
 
         }
@@ -91,15 +90,14 @@ public class Receipt {
                 String[] bagelCoffee = kvp.getKey().split(":");
                 String bagelSKU = bagelCoffee[0];
                 String coffeeSKU = bagelCoffee[1];
-                System.out.println(kvp);
-                System.out.println(" " + itemList.getNameFromList(bagelSKU) +" " + itemList.getTypeFromList(bagelSKU)+ " + \n " + itemList.getNameFromList(coffeeSKU) + " " + itemList.getTypeFromList(coffeeSKU) + "\t  " + kvp.getValue() + "x $" + discountManager.getDiscountPrice(kvp.getKey()));
-                float discountedBagelPrice = itemList.getPriceFromList(bagelSKU) * kvp.getValue() - discountManager.getDiscountPrice(kvp.getKey());
-                float discountedCoffeePrice = itemList.getPriceFromList(coffeeSKU) * kvp.getValue() - discountManager.getDiscountPrice(kvp.getKey());
+                System.out.println(" " + getNameFromList(bagelSKU) +" " + getTypeFromList(bagelSKU)+ " + \n " + getNameFromList(coffeeSKU) + " " + getTypeFromList(coffeeSKU) + "\t  " + kvp.getValue() + "x $" + discountManager.getDiscountPrice(kvp.getKey()));
+                float discountedBagelPrice = getPriceFromList(bagelSKU) * kvp.getValue() - discountManager.getDiscountPrice(kvp.getKey());
+                float discountedCoffeePrice = getPriceFromList(coffeeSKU) * kvp.getValue() - discountManager.getDiscountPrice(kvp.getKey());
                 System.out.println("\t\t\t\t   (-$"+ df.format(discountedBagelPrice + discountedCoffeePrice) +  ")" );
 
             }else {
-                System.out.println(" " + itemList.getNameFromList(kvp.getKey()) + " \t\t\t  " + kvp.getValue() + " $" + discountManager.getDiscountPrice(kvp.getKey()));
-                float discountedPrice = itemList.getPriceFromList(kvp.getKey()) * kvp.getValue() - discountManager.getDiscountPrice(kvp.getKey());
+                System.out.println(" " + getNameFromList(kvp.getKey()) + " \t\t\t  " + kvp.getValue() + " $" + discountManager.getDiscountPrice(kvp.getKey()));
+                float discountedPrice = getPriceFromList(kvp.getKey()) * kvp.getValue() - discountManager.getDiscountPrice(kvp.getKey());
                 System.out.println("\t\t\t\t   (-$"+ df.format(discountedPrice) +  ")" );
             }
         }
