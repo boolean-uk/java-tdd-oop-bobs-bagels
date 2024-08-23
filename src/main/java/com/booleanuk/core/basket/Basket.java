@@ -1,7 +1,10 @@
 package com.booleanuk.core.basket;
 
+import com.booleanuk.core.PriceCalculationVariant;
 import com.booleanuk.core.PriceCalculator;
+import com.booleanuk.core.inventory.FillingItem;
 import com.booleanuk.core.inventory.Inventory;
+import com.booleanuk.core.inventory.InventoryItem;
 import com.booleanuk.core.printgenerator.PrintBasketItems;
 import com.booleanuk.core.printgenerator.PrintGenerator;
 
@@ -119,7 +122,7 @@ public class Basket {
                 item.setId(bagelId);
 
                 // Update totalCost for thi Basket
-                this.updateTotalCost(item);
+                this.updateTotalCost(item, PriceCalculationVariant.ADDITION);
 
                 if (!fillingSKUs.isEmpty()) {
                     List<Integer> fillingIds = bagel.getLinkedFillingIds();
@@ -137,7 +140,7 @@ public class Basket {
                         count++;
 
                         // Update totalCost for thi Basket
-                        this.updateTotalCost(filling);
+                        this.updateTotalCost(filling, PriceCalculationVariant.ADDITION);
                     }
                 }
             } else {
@@ -145,7 +148,7 @@ public class Basket {
                 this.addToBasket(generalId, item);
 
                 // Update totalCost for thi Basket
-                this.updateTotalCost(item);
+                this.updateTotalCost(item, PriceCalculationVariant.ADDITION);
             }
 
         } catch (Exception e) {
@@ -156,18 +159,25 @@ public class Basket {
     public void remove(int itemId) {
 
         try {
-            // TODO: Could this be simplified?
-            // TODO: should throw exception if not exist, seperate intro function, just like with add
             BasketItem item = this.getBasketItem(itemId);
-            if (item.getClass().getName() == Bagel.class.getName()) {
+
+            // Class names
+            String thisItemClass = item.getClass().getName();
+            String BagelClass = Bagel.class.getName();
+
+            // Remove fillings if it is a Bagel
+            if (thisItemClass.equals(BagelClass)) {
+
                 Bagel bagel = (Bagel) item;
                 List<Integer> fillingIds = bagel.getLinkedFillingIds();
 
+                // Remove all fillings
                 for (int f_id : fillingIds) {
                     this.removeFromBasket(f_id);
                 }
             }
-            this.removeFromBasket(1);
+            this.removeFromBasket(itemId);
+
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
@@ -186,7 +196,7 @@ public class Basket {
         // TODO: Should I refactor? Feels like it's a poor solution regarding dependencies.
         // Check all PrintGenerator cases.
 
-        PrintGenerator basket = new PrintBasketItems(this.inventory, this.basketItems);
+        PrintGenerator basket = new PrintBasketItems(this.inventory, this.basketItems, this.getTotalCost());
         basket.print();
     }
 
@@ -200,15 +210,28 @@ public class Basket {
         this.maxCapacity = newMaxCapacity;
     }
 
-    private void updateTotalCost(BasketItem item) {
+    private void updateTotalCost(BasketItem item, PriceCalculationVariant option) {
 
-//        float itemPrice = inventory.getItem(item.getSKU()).getPrice();
         double itemPrice = inventory.getItem(item.getSKU()).getPrice();
-        this.totalCost+= itemPrice;
+
+        if (option == PriceCalculationVariant.ADDITION) {
+            this.totalCost += itemPrice;
+        } else if (option == PriceCalculationVariant.SUBTRACTION){
+            this.totalCost -= itemPrice;
+        }
     }
 
     public double getTotalCost() {
         // TODO Changed to double, this may be unnecessary now
-        return priceCalculator.round(this.totalCost, 2);
+
+        // TODO: Is it bad performance to loop like this?
+        // Should I instead keep track on the price everytime an item is added or removed?
+
+        float total = 0;
+        for (BasketItem item : this.basketItems.values()) {
+            InventoryItem inventoryItem = inventory.getItem(item.getSKU());
+            total += inventoryItem.getPrice();
+        }
+        return priceCalculator.round(total, 2);
     }
 }
