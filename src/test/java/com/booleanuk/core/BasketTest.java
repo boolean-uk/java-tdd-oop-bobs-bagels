@@ -56,7 +56,8 @@ public class BasketTest {
     @Test
     public void totalCostItemsInBasket(){
         Basket basket = new Basket();
-        CashRegister register = new CashRegister(basket);
+        Receipt receipt = new NormalReceipt();
+        CashRegister register = new CashRegister(basket, receipt);
 
         Assertions.assertEquals("Your basket is empty.", register.sumOrder());
 
@@ -81,7 +82,8 @@ public class BasketTest {
     @Test
     public void bagelDiscount(){
         Basket basket = new Basket();
-        CashRegister register = new CashRegister(basket);
+        Receipt receipt = new NormalReceipt();
+        CashRegister register = new CashRegister(basket, receipt);
         basket.setMaxBasketSize(25);
         basket.addItem("BGLO", 18);
         basket.addItem("BGLP", 1);
@@ -94,7 +96,8 @@ public class BasketTest {
     @Test
     public void bagelCoffeeDiscount(){
         Basket basket = new Basket();
-        CashRegister register = new CashRegister(basket);
+        Receipt receipt = new NormalReceipt();
+        CashRegister register = new CashRegister(basket, receipt);
 
         basket.addItem("BGLO", 2);
         basket.addItem("COFW", 1);
@@ -105,7 +108,8 @@ public class BasketTest {
     @Test
     public void allDiscounts(){
         Basket basket = new Basket();
-        CashRegister register = new CashRegister(basket);
+        Receipt receipt = new NormalReceipt();
+        CashRegister register = new CashRegister(basket, receipt);
         basket.setMaxBasketSize(25);
 
         basket.addItem("BGLS", 6);
@@ -114,5 +118,27 @@ public class BasketTest {
         basket.addItem("COFL", 1);
 
         Assertions.assertEquals("The sum of your order is: 7.85", register.sumOrder());
+    }
+
+
+    // Extension 2 requirements tests
+
+    @Test
+    public void printingReceipt(){
+        Basket basket = new Basket();
+        Receipt receipt = new NormalReceipt();
+        CashRegister register = new CashRegister(basket, receipt);
+        basket.setMaxBasketSize(25);
+
+        basket.addItem("BGLS", 6);
+        basket.addItem("BGLO", 13);
+        basket.addItem("FILC", 1);
+        basket.addItem("COFL", 1);
+        register.printReceipt();
+        String receiptFinal = register.receipt.getFinalReceipt().toString();
+
+        String receiptExcerpt = "Onion Bagel         12    $3.99";
+
+        Assertions.assertTrue(receiptFinal.contains(receiptExcerpt));
     }
 }

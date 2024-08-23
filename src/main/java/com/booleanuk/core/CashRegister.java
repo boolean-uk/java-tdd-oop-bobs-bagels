@@ -8,19 +8,24 @@ import static com.booleanuk.core.Menu.*;
 
 public class CashRegister {
     Basket basket;
+    Receipt receipt;
     private float sum = 0;
     private float discountedSum = 0;
     private float totalDiscount = 0;
 
-    public CashRegister(Basket basket){
+    public CashRegister(Basket basket, Receipt receipt){
         this.basket = basket;
+        this.receipt = receipt;
+    }
+
+    public void printReceipt(){
+        sumOrder();
+        receipt.createFinalReceipt();
+        receipt.printReceipt();
+
     }
 
     public String sumOrder() {
-        //HashMap<String, Integer> basketCopy = basket.getBasketItems();
-        HashMap<String, Integer> basketCopy;
-        basketCopy = basket.getBasketItems();
-
         sum = 0;
         discountedSum = 0;
         totalDiscount = 0;
@@ -39,7 +44,7 @@ public class CashRegister {
             getRemainingSum();
         }
 
-         basket.setBasketItems(basketCopy);
+        receipt.getDiscountedSum(discountedSum);
 
         return "The sum of your order is: " + String.format("%.2f", discountedSum);
     }
@@ -49,6 +54,9 @@ public class CashRegister {
             Item bagel = getMenuItem(entry.getKey());
 
             if (bagel.getItemName().equals("Bagel")){
+                int bagelOfferCount = 0;
+                int twelveOfferCount = 0;
+                int sixOfferCount = 0;
                 while (entry.getValue() >= 12){
                     sum += (bagel.getItemPrice() * 12);
                     discountedSum += 3.99f;
@@ -56,6 +64,8 @@ public class CashRegister {
                     for (int i = 0; i<12; i++){
                         basket.removeItem(bagel.getItemSKU(), false);
                     }
+                    bagelOfferCount += 12;
+                    twelveOfferCount++;
                 }
 
                 while (entry.getValue() >= 6){
@@ -65,7 +75,15 @@ public class CashRegister {
                     for (int i = 0; i<6; i++){
                         basket.removeItem(bagel.getItemSKU(), false);
                     }
+                    bagelOfferCount += 6;
+                    sixOfferCount++;
                 }
+                if (bagelOfferCount>0){
+                    float totalDiscountPrice = sixOfferCount*2.49f + twelveOfferCount*3.99f;
+                    String fullName = bagel.getItemVariant() + " " + bagel.getItemName();
+                    receipt.addReceiptLine(fullName, bagelOfferCount, totalDiscountPrice);
+                }
+
             }
         }
     }
@@ -85,7 +103,7 @@ public class CashRegister {
                 coffeeCount += entry.getValue();
             }
         }
-
+        int coffeeBagelOffer = 0;
         while (bagelCount!=0 && coffeeCount!=0){
             for (HashMap.Entry<String, Integer> entry : basket.getBasketItems().entrySet()){
                 Item bagel = getMenuItem(entry.getKey());
@@ -104,11 +122,17 @@ public class CashRegister {
                     sum += (coffee.getItemPrice());
                     discountedSum += 1.25f;
                     basket.removeItem(coffee.getItemSKU(), false);
+                    coffeeBagelOffer++;
                     break;
                 }
             }
             bagelCount--;
             coffeeCount--;
+        }
+
+        if (coffeeBagelOffer>0){
+            String offerName = "Coffee & Bagel";
+            receipt.addReceiptLine(offerName, coffeeBagelOffer, 1.25f*coffeeBagelOffer);
         }
     }
 
@@ -121,6 +145,8 @@ public class CashRegister {
 
                 sum += quantity*price;
                 discountedSum += quantity*price;
+                String fullName = item.getItemVariant() + " " + item.getItemName();
+                receipt.addReceiptLine(fullName, quantity, quantity*price);
 
                 for (int i = 0; i < quantity; i++){
                     basket.removeItem(entry.getKey(), false);
@@ -128,5 +154,4 @@ public class CashRegister {
             }
         }
     }
-
 }
