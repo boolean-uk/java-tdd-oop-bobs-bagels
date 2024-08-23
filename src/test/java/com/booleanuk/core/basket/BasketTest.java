@@ -49,6 +49,7 @@ public class BasketTest {
 
 
     // TODO: Add test for adding something that do not exist
+    // This is an inventory error, maybe add the test there.
 
 
     // User story #3: Throw exception when trying to add items and maxCapacity of basket is reached
@@ -98,6 +99,7 @@ public class BasketTest {
         Assertions.assertEquals(12, basket.getMaxCapacity());
     }
 
+    // User story #8: Add bagel with filling
     @Test
     public void addBagelAndFilling() {
         inventory = new Inventory();

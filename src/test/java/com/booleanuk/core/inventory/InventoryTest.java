@@ -37,6 +37,8 @@ public class InventoryTest {
         Assertions.assertEquals("BAGE", inventory.getItem("BAGE").getSKU());
     }
 
+    // User story #10: Can't add something that are not in the inventory / in stock
+    // TODO: This inventory don't keep track on number of items in stock, so it is infinite
     @Test
     public void throwExceptionWhenItemIsNotInInventory() {
         inventory = new Inventory();
@@ -56,6 +58,14 @@ public class InventoryTest {
         inventory = new Inventory();
         BagelItem bagel = (BagelItem) inventory.getItem("BAGE");
         Assertions.assertEquals(0.49, bagel.getPrice());
+    }
+
+    // User story #9: Get price of filling
+    @Test
+    public void getPriceOfFilling() {
+        inventory = new Inventory();
+        FillingItem filling = (FillingItem) inventory.getItem("FILB");
+        Assertions.assertEquals(0.12, filling.getPrice());
     }
 
     @Test
