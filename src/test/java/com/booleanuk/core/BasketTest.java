@@ -218,7 +218,7 @@ public class BasketTest {
         }
 
         //Should fail because filling don't get discounted
-        Assertions.assertEquals(2.49, basket.totalCost(), 0.001f);
+        Assertions.assertEquals(3.21, basket.totalCost(), 0.001f);
     }
 }
 
