@@ -197,6 +197,19 @@ public class BasketTest {
         Assertions.assertEquals(3.99, basket.totalCost());
     }
 
+    @Test
+    public void Test12For3Point99DiscountButWithFillings(){
+        Basket basket = new Basket();
+        basket.changeCapacity(20);
+
+        for(int i = 0; i < 12; i++){
+            basket.add("BGLO", "FILS");
+        }
+
+        //Should fail because the filling don't get discounted
+        Assertions.assertEquals(3.99, basket.totalCost());
+    }
+
 
 
 }
