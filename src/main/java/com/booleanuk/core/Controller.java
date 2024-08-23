@@ -15,6 +15,10 @@ public class Controller {
         put("FILX", new Triple<>("Filling", "Cream Cheese", 0.12f));
         put("FILS", new Triple<>("Filling", "Smoked Salmon", 0.12f));
         put("FILH", new Triple<>("Filling", "Ham", 0.12f));
+        put("COFB", new Triple<>("Coffee", "Black", 0.99f));
+        put("COFW", new Triple<>("Coffee", "White", 1.19f));
+        put("COFC", new Triple<>("Coffee", "Cappuccino", 1.29f));
+        put("COFL", new Triple<>("Coffee", "Latte", 1.29f));
     }};
     public static final Map<String, Triple<String, String, Float>> prices = Collections.unmodifiableMap(privatePrices);
     private Basket basket;
@@ -27,7 +31,7 @@ public class Controller {
     }
 
     public static void main(String[] args) {
-        int bSize = 12;
+        int bSize = 24;
         Controller controller = new Controller(new View(), new Basket(bSize), bSize);
 
         controller.start();
@@ -40,16 +44,43 @@ public class Controller {
             switch (chosenOption) {
                 case 1:
                     if (basket.size() < basketSize) {
-                        basket.addBagel(view.addBagel());
+                        Bagel b = view.addBagel();
+                        if (b != null) {
+                            basket.addProduct(b);
+                        }
                     } else {
                         view.basketFull();
                     }
                     break;
                 case 2:
-                    basket.removeBagel(view.chooseBagel(basket.getBagels()));
+                    if(basket.size() > 0) {
+                        basket.removeProduct(view.chooseBagel(basket.getProducts()));
+                    } else {
+                        view.emptyBasket();
+                    }
                     break;
                 case 3:
                     basket.setBasketSize(view.getNewBasketSize());
+                    break;
+                case 4:
+                    view.printPrice(basket.calculateCost());
+                    break;
+                case 5:
+                    if (basket.size() < basketSize) {
+                        Coffee c = view.addCoffee();
+                        if (c != null) {
+                            basket.addProduct(c);
+                        }
+                    } else {
+                        view.basketFull();
+                    }
+                    break;
+                case 12: // Testing case
+                    basket.addProduct(new Coffee(Controller.prices.get("COFB")));
+                    basket.addProduct(new Bagel(Controller.prices.get("BGLP"), Controller.prices.get("FILB")));
+                    for (int i = 0; i < 18; i++) {
+                        basket.addProduct(new Bagel(Controller.prices.get("BGLO"), Controller.prices.get("FILB")));
+                    }
                     break;
                 default:
                     keepRunning = false;
