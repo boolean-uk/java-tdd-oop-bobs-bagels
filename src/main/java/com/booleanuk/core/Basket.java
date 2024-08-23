@@ -14,6 +14,14 @@ public class Basket {
         this.basketItems = new HashMap<>();
     }
 
+    public HashMap<String, Integer> getBasketItems(){
+        return this.basketItems;
+    }
+
+    public void setBasketItems(HashMap<String, Integer> basketItems) {
+        this.basketItems = basketItems;
+    }
+
     public Boolean setMaxBasketSize(int size){
         if (size<0){
             return false;
@@ -45,9 +53,6 @@ public class Basket {
         return getBasketSize() == 0;
     }
 
-    public HashMap<String, Integer> getBasketItems(){
-        return this.basketItems;
-    }
 
     public String addItem(String itemId, int quantity) {
         if (getBasketSize() == maxBasketSize){

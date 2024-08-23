@@ -54,6 +54,23 @@ public class BasketTest {
     }
 
     @Test
+    public void totalCostItemsInBasket(){
+        Basket basket = new Basket();
+        CashRegister register = new CashRegister(basket);
+
+        Assertions.assertEquals("Your basket is empty.", register.sumOrder());
+
+        basket.addItem("BGLO", 2);
+        basket.addItem("BGLP", 1);
+        basket.addItem("FILE", 1);
+
+        Assertions.assertEquals("The sum of your order is: 1.49", register.sumOrder());
+
+        //basket.removeItem("FILE", false);
+        //Assertions.assertEquals("The sum of your order is: 1.37", register.sumOrder());
+    }
+
+    @Test
     public void getItemCost(){
         Menu menu = new Menu();
         Assertions.assertEquals("0.49", menu.getItemCost("BGLS"));
@@ -61,7 +78,6 @@ public class BasketTest {
 
 
     // Extension 1 requirements tests
-
     @Test
     public void bagelDiscount(){
         Basket basket = new Basket();
@@ -72,8 +88,6 @@ public class BasketTest {
         basket.addItem("COFB",1);
 
         Assertions.assertEquals("The sum of your order is: 7.73", register.sumOrder());
-
-
 
     }
 

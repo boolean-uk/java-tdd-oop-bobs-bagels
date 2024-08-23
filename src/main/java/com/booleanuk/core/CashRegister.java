@@ -1,6 +1,7 @@
 package com.booleanuk.core;
 
 import java.util.HashMap;
+import java.util.Map;
 
 import static com.booleanuk.core.Menu.*;
 
@@ -16,6 +17,13 @@ public class CashRegister {
     }
 
     public String sumOrder() {
+        //HashMap<String, Integer> basketCopy = basket.getBasketItems();
+        HashMap<String, Integer> basketCopy;
+        basketCopy = basket.getBasketItems();
+
+        sum = 0;
+        discountedSum = 0;
+        totalDiscount = 0;
 
         if (basket.isEmpty()) {
             return "Your basket is empty.";
@@ -30,6 +38,8 @@ public class CashRegister {
         if (!basket.isEmpty()) {
             getRemainingSum();
         }
+
+         basket.setBasketItems(basketCopy);
 
         return "The sum of your order is: " + String.format("%.2f", discountedSum);
     }
@@ -104,12 +114,18 @@ public class CashRegister {
 
     public void getRemainingSum(){
         for (HashMap.Entry<String, Integer> entry : basket.getBasketItems().entrySet()){
-            Item item = getMenuItem(entry.getKey());
-            int quantity = entry.getValue();
-            float price = item.getItemPrice();
+            if (entry.getValue() != 0){
+                Item item = getMenuItem(entry.getKey());
+                int quantity = entry.getValue();
+                float price = item.getItemPrice();
 
-            sum += quantity*price;
-            discountedSum += quantity*price;
+                sum += quantity*price;
+                discountedSum += quantity*price;
+
+                for (int i = 0; i < quantity; i++){
+                    basket.removeItem(entry.getKey(), false);
+                }
+            }
         }
     }
 
