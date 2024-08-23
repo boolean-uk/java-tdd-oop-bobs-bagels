@@ -151,6 +151,11 @@ public class Basket {
         basket.print();
     }
 
+    // TODO: I only use this for the test. Should I keep it or change the test?
+    public int getMaxCapacity() {
+        return this.maxCapacity;
+    }
+
     // TODO: Should I do a get/setfunctions on maxCapacity or is this ok?
     public void changeMaxCapacity(int newMaxCapacity) {
         this.maxCapacity = newMaxCapacity;

@@ -87,24 +87,18 @@ public class BasketTest {
         Assertions.assertDoesNotThrow(() -> basket.add(new Bagel("BAGE")));
     }
 
-
-
     // User story #4: Change max capacity for basket
-//    @Test
-//    public void checkChangeMaxCapacity() {
-//        this.inventory = new com.booleanuk.core.Inventory();
-//        this.basket = new com.booleanuk.core.Basket(new com.booleanuk.core.Inventory());
-//
-//        basket.changeMaxCapacity(3);
-//        Assertions.assertEquals(3, basket.getMaxCapacity());
-//
-//        basket.changeMaxCapacity(12);
-//        Assertions.assertEquals(12, basket.getMaxCapacity());
-//    }
-//
+    @Test
+    public void changeMaxCapacity() {
+        inventory = new Inventory();
+        basket = new Basket(new Inventory());
 
+        basket.changeMaxCapacity(3);
+        Assertions.assertEquals(3, basket.getMaxCapacity());
 
-
+        basket.changeMaxCapacity(12);
+        Assertions.assertEquals(12, basket.getMaxCapacity());
+    }
 
     @Test
     public void addBagelAndFilling() {
