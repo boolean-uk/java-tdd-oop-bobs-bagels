@@ -29,7 +29,6 @@ public class RecieptTest {
         int e = 6;
         int bc = 3;
 
-
         for(int i = 0; i < o; i++){
             basket.add("BGLO", "FILB");
             basket.add("BGLO");

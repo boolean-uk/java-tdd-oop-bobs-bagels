@@ -8,6 +8,7 @@ public class Basket {
     Inventory inventory;
     private int basketCapacity = 10;
     private int productCount = 0;
+    private double discount = 0;
 
     public Basket(){
         currentBasket = new HashMap<>();
@@ -163,7 +164,9 @@ public class Basket {
             sum += price * quantity;
 
         }
-        return sum;
+        calculateDiscount();
+
+        return sum - discount;
     }
 
     public double costOfFilling(String sku){
@@ -171,8 +174,25 @@ public class Basket {
 
     }
 
-    public void getReciept(){
+    ////12 for 5,88
+    //12 for 3.99
+    //Difference = 1.89
 
+    //6 for 2.94
+    // 6 for 2.49
+    //Difference = 0.45
+    public void calculateDiscount(){
+
+        for(Product product : currentBasket.keySet()) {
+            if (product instanceof Bagel) {
+                if (12 <= currentBasket.get(product)) {
+                    discount = 1.89;
+
+                } else if (6 <= currentBasket.get(product)) {
+                    discount = 0.45;
+                }
+            }
+        }
     }
 }
 

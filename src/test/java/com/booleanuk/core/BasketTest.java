@@ -182,9 +182,7 @@ public class BasketTest {
             basket.add("BGLO");
         }
 
-        basket.calculateDiscount();
-
-        Assertions.assertEquals(2.94, basket.totalCost(), 0.001f);
+        Assertions.assertEquals(2.49, basket.totalCost(), 0.001f);
     }
 
     @Test
@@ -196,9 +194,7 @@ public class BasketTest {
             basket.add("BGLO");
         }
 
-        basket.calculateDiscount();
-
-        Assertions.assertEquals(5.88, basket.totalCost());
+        Assertions.assertEquals(3.99, basket.totalCost());
     }
 
 
