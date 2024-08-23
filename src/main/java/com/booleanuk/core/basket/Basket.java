@@ -16,6 +16,7 @@ public class Basket {
     private int maxCapacity;
     private int size;
     private int idCount;
+    private double totalCost;
 
     public Basket(Inventory inventory) {
         this.inventory = inventory;
@@ -23,6 +24,7 @@ public class Basket {
         this.maxCapacity = 20;
         this.size = 0;
         this.idCount = 1;
+        this.totalCost = 0.0d;
     }
 
     // Auto create ID
@@ -60,7 +62,7 @@ public class Basket {
 
         // Fillings can not be added as an item itself
         // Fillings that belongs to a bagel have id's over 100
-        if (item.getClass().getName() == Filling.class.getName() && item.getId() < 100) {
+        if (item.getClass().getName().equals(Filling.class.getName()) && item.getId() < 100) {
             throw new InvalidBasketItemException("Fillings can't be added alone. Must belong to a bagel.");
         }
 
@@ -99,14 +101,23 @@ public class Basket {
         // If item is bagel, check if we can add more basket items
         // OR doesn't filling counts as items maybe hmmm
 
+        // TODO: Duplication code for updating id and totalCost
+
         try {
+
+            // TODO: Change to switch statement and create Coffe, Bagel, Filling Objects instead of BasketItems
 
             // If item is a Bagel, add all it's fillings to basket if they exist
             if (item.getClass().getName() == Bagel.class.getName()) {
                 Bagel bagel = (Bagel) item;
                 List<String> fillingSKUs = bagel.getLinkedFillingSKUs();
 
-                this.addToBasket(createId(), item);
+                int bagelId = createId();
+                this.addToBasket(bagelId, item);
+                item.setId(bagelId);
+
+                // Update totalCost for thi Basket
+                this.updateTotalCost(item);
 
                 if (!fillingSKUs.isEmpty()) {
                     List<Integer> fillingIds = bagel.getLinkedFillingIds();
@@ -114,13 +125,25 @@ public class Basket {
                     int count = 1;
                     for (String f_SKU : fillingSKUs) {
                         int fillingId = createFillingId(String.valueOf(count));
-                        this.addToBasket(fillingId, new BasketItem(f_SKU));
+
+                        BasketItem filling = new Filling(f_SKU); // TODO: Will not work if I change to filling
+                        filling.setId(fillingId);
+
+                        this.addToBasket(fillingId, filling);
                         fillingIds.add(fillingId);
+
                         count++;
+
+                        // Update totalCost for thi Basket
+                        this.updateTotalCost(filling);
                     }
                 }
             } else {
-                this.addToBasket(createId(), item);
+                int generalId = createId();
+                this.addToBasket(generalId, item);
+
+                // Update totalCost for thi Basket
+                this.updateTotalCost(item);
             }
 
         } catch (Exception e) {
@@ -173,5 +196,26 @@ public class Basket {
     // TODO: Should I do a get/setfunctions on maxCapacity or is this ok?
     public void changeMaxCapacity(int newMaxCapacity) {
         this.maxCapacity = newMaxCapacity;
+    }
+
+    private void updateTotalCost(BasketItem item) {
+
+        // TODO: Should I use float or double?
+        // change here or change on objects
+        // Now the object has float on price, and totalCost has double
+
+        float itemPrice = inventory.getItem(item.getSKU()).getPrice();
+        double newTotalCost = this.totalCost + itemPrice;
+
+        // Resource: https://www.baeldung.com/java-round-decimal-number
+        int numOfDecimals = 2;
+        double scale = Math.pow(10, numOfDecimals);
+        double rounded = Math.round(newTotalCost * scale) / scale;
+
+        this.totalCost = rounded;
+    }
+
+    public double getTotalCost() {
+        return this.totalCost;
     }
 }
