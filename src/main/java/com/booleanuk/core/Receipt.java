@@ -9,11 +9,12 @@ import java.util.Map;
 public class Receipt {
     private final Basket basket;
     private final ArrayList<String> receiptLines;
-    private final LocalDateTime time = LocalDateTime.now();
+    private final LocalDateTime time;
 
     public Receipt(Basket basket){
         this.basket = basket;
         this.receiptLines = new ArrayList<>();
+        this.time = LocalDateTime.now();
         createReceipt();
     }
 
