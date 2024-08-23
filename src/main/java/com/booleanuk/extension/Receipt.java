@@ -55,7 +55,7 @@ public class Receipt {
                 fullDiscount+=discountPrices[2];
             }
 
-            System.out.println("You saved a total of: £"+String.format("%.2f",fullDiscount)+" on this trip.");
+            System.out.println("You saved a total of: £"+String.format("%.2f",fullDiscount)+" on this purchase");
 
         }
 
