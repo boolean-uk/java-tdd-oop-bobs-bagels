@@ -31,10 +31,20 @@ public class Controller {
     }
 
     public static void main(String[] args) {
-        int bSize = 24;
+        int bSize = 50;
         Controller controller = new Controller(new View(), new Basket(bSize), bSize);
 
-        controller.start();
+        for (int i = 0; i < 14; i++) {
+            ArrayList<Triple<String, String, Float>> fillings = new ArrayList<>() {{
+                add(Controller.prices.get("FILE"));
+                add(Controller.prices.get("FILH"));
+            }};
+            controller.basket.addProduct(new Bagel(Controller.prices.get("BGLE"), fillings));
+            controller.basket.addProduct(new Bagel(Controller.prices.get("BGLP"), fillings));
+        }
+        controller.view.printReceipt(controller.basket.calculateCost(), controller.basket.findDiscount(), controller.basket.receiptInformation());
+
+//        controller.start();
     }
 
     private void start() {
@@ -75,6 +85,9 @@ public class Controller {
                         view.basketFull();
                     }
                     break;
+                case 6:
+//                    view.printReceipt(basket.receiptInformation());
+                    basket.clear();
                 case 12: // Testing case
                     basket.addProduct(new Coffee(Controller.prices.get("COFB")));
                     basket.addProduct(new Bagel(Controller.prices.get("BGLP"), Controller.prices.get("FILB")));

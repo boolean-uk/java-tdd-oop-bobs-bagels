@@ -11,4 +11,18 @@ public class Coffee implements Product{
     public float calculateCost() {
         return coffeeType.c();
     }
+
+    public Triple<String, String, Float> getCoffeeType() {
+        return coffeeType;
+    }
+
+    @Override
+    public String name() {
+        return coffeeType.b();
+    }
+
+    @Override
+    public float basicPrice() {
+        return coffeeType.c();
+    }
 }
