@@ -1,5 +1,7 @@
 package com.booleanuk.core;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -7,6 +9,7 @@ import java.util.Map;
 public class Receipt {
     private final Basket basket;
     private final ArrayList<String> receiptLines;
+    private final LocalDateTime time = LocalDateTime.now();
 
     public Receipt(Basket basket){
         this.basket = basket;
@@ -22,16 +25,19 @@ public class Receipt {
 
     public void createReceipt(){
         this.receiptLines.add("\t\t\t ~Bob's Bagels~");
+        String time = String.format("%-9s %10s", " ", this.time.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
+        this.receiptLines.add(time);
         this.receiptLines.add(String.format("%-15s %5s %10s", "Item", "Quantity", "Price"));
         this.receiptLines.add("-----------------------------------");
 
         Item item;
         int quantity;
-        String price = String.format("%.2f", (float)basket.getDiscount() /100);
+        String discount = String.format("%.2f", (float)basket.getDiscount() /100);
 
         for (Map.Entry<Item, Integer> entry : basket.getBasket().entrySet()){
             item = entry.getKey();
             quantity = entry.getValue();
+            String price = String.format("%.2f", ((float) item.getPrice() * quantity) /100);
 
             if (item instanceof Bagel){
                 this.receiptLines.add(String.format("%-15s %5s %13s", item.getName(), quantity, price + "$"));
@@ -44,7 +50,7 @@ public class Receipt {
         }
 
         this.receiptLines.add("-----------------------------------");
-        this.receiptLines.add(String.format("%-15s %5s %12s", "Discount", " ", "-" + price + "$"));
+        this.receiptLines.add(String.format("%-15s %5s %12s", "Discount", " ", "-" + discount + "$"));
         this.receiptLines.add(String.format("%-15s %5s %12s", "Total", " ", basket.calculateBasketCost()+"$"));
         this.receiptLines.add("\n");
         this.receiptLines.add(String.format("%-10s %10s", " ", "Thank you"));

@@ -36,7 +36,7 @@ public class Basket {
         return item.getName() + " added to basket.";
     }
 
-    // TODO: Move some of this to order
+
     public String removeItemFromBasket(){
         Map<Integer, Item> indexedBasket = new HashMap<>();
 
@@ -90,9 +90,6 @@ public class Basket {
 
     public int numberOfItemsInBasket() { return this.basket.size(); }
 
-
-
-    // TODO: Move this to order, receipt or somewhere else?
     private void formatFillingPrint(Bagel bagel) {
         HashMap<String, Integer> listOfFillings = this.getQuantityOfFillings(bagel);
         System.out.println("Fillings:");
@@ -141,8 +138,6 @@ public class Basket {
     }
 
 
-
-    // TODO: Possibly simplify if the bagels do not have to be the same variant.
     public void calculateDiscount(){
         Map<String, Integer> basketOverview = new HashMap<>();
 
@@ -157,7 +152,7 @@ public class Basket {
         }
     }
 
-    // TODO: Possibly superfluous if I refactor the above function to use the basket after changing to hashmap.
+
     public void quantifyItemsInBasket(Map<String, Integer> basketOverview){
         for (Map.Entry<Item, Integer> entry : basket.entrySet()){
             Item item = entry.getKey();
