@@ -90,6 +90,8 @@ public class Basket {
                 Bagel bagel = (Bagel) item;
                 List<String> fillingSKUs = bagel.getLinkedFillingSKUs();
 
+                this.addToBasket(createId(), item);
+
                 if (!fillingSKUs.isEmpty()) {
                     List<Integer> fillingIds = bagel.getLinkedFillingIds();
 
@@ -101,8 +103,10 @@ public class Basket {
                         count++;
                     }
                 }
+            } else {
+                this.addToBasket(createId(), item);
             }
-            this.addToBasket(createId(), item);
+
 
         } catch (Exception e) {
             System.out.println(e.getClass().getName() + ": " + e.getMessage());

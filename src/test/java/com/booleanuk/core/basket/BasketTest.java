@@ -35,15 +35,15 @@ public class BasketTest {
         basket.printBasket();
     }
 
-//    @Test
-//    public void addBagelAndFilling() {
-//        inventory = new Inventory();
-//        basket = new Basket(new Inventory());
-//
-//        basket.add(new Bagel("BAGE", Arrays.asList("FILS","FILB")));
-//        basket.printBasket();
-//
-//        Assertions.assertEquals("BAGE", basket.getAll().get(1).getSKU());
-//        Assertions.assertEquals("FILS", basket.getAll().get(101).getSKU());
-//    }
+    @Test
+    public void addBagelAndFilling() {
+        inventory = new Inventory();
+        basket = new Basket(new Inventory());
+
+        basket.add(new Bagel("BAGE", Arrays.asList("FILS","FILB")));
+        basket.printBasket();
+
+        Assertions.assertEquals("BAGE", basket.getAll().get(1).getSKU());
+        Assertions.assertEquals("FILS", basket.getAll().get(101).getSKU());
+    }
 }
