@@ -1,5 +1,6 @@
 package com.booleanuk.core.inventory;
 
+import com.booleanuk.core.BasketItem;
 import com.booleanuk.core.Coffee;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -47,6 +48,14 @@ public class InventoryTest {
         );
         Assertions.assertEquals("SKU 'HELLO' does not exist.", e.getMessage());
         printExceptionMessageToConsole(e);
+    }
+
+    // User story #7: Get price of bagel
+    @Test
+    public void getPriceOfBagel() {
+        inventory = new Inventory();
+        BagelItem bagel = (BagelItem) inventory.getItem("BAGE");
+        Assertions.assertEquals(0.49, bagel.getPrice());
     }
 
     @Test
