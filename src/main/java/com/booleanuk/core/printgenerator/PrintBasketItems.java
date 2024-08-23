@@ -1,9 +1,7 @@
 package com.booleanuk.core.printgenerator;
 
-import com.booleanuk.core.Product;
 import com.booleanuk.core.basket.BasketItem;
 import com.booleanuk.core.inventory.Inventory;
-import com.booleanuk.core.ProductName;
 import com.booleanuk.core.inventory.InventoryItem;
 
 import java.util.Map;

@@ -1,7 +1,5 @@
 package com.booleanuk.core.inventory;
 
-import com.booleanuk.core.BasketItem;
-import com.booleanuk.core.Coffee;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

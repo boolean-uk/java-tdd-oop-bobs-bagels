@@ -1,8 +1,6 @@
 package com.booleanuk.core.basket;
 
 
-import com.booleanuk.core.BasketItem;
-import com.booleanuk.core.BasketItemExistException;
 import com.booleanuk.core.inventory.Inventory;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;

@@ -1,6 +1,5 @@
 package com.booleanuk.core.basket;
 
-import com.booleanuk.core.BasketItemExistException;
 import com.booleanuk.core.PriceCalculator;
 import com.booleanuk.core.inventory.Inventory;
 import com.booleanuk.core.printgenerator.PrintBasketItems;
