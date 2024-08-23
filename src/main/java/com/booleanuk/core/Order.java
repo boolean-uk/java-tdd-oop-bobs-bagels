@@ -2,6 +2,7 @@ package com.booleanuk.core;
 
 import java.util.Scanner;
 
+import static com.booleanuk.core.Menu.printFillingMenu;
 import static com.booleanuk.core.Menu.selectItemFromMenu;
 
 public class Order {
@@ -74,6 +75,8 @@ public class Order {
                         break;
 
                     if (chosenItem instanceof Bagel bagel){
+                        printFillingMenu();
+                        System.out.println("Select fillings to add to your bagel, or press 0 to continue.");
                         bagel.addFillingsToBagel(input);
                         this.basket.addItemToBasket(bagel);
                         break;

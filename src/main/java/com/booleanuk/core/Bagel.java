@@ -58,11 +58,7 @@ public class Bagel implements Item {
             return "Invalid filling. Please try again";
     }
 
-    // TODO: Move some of this over to order
     public void addFillingsToBagel(Scanner input){
-        printFillingMenu();
-        System.out.println("Select fillings to add to your bagel, or press 0 to continue.");
-
         int selectedFilling;
         while (true){
             selectedFilling = input.nextInt();
