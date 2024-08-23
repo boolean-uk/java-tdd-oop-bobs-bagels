@@ -19,6 +19,8 @@ public class BasketTest {
         basket.printBasket();
     }
 
+    // User story #1: Add specific bagel
+    // Specific type is here to select SKU for specific bagel variant
     @Test
     public void addProductsToBasket() {
         inventory = new Inventory();
@@ -35,6 +37,10 @@ public class BasketTest {
         basket.printBasket();
     }
 
+    // TODO: Add test for adding something that do not exist
+
+    // TODO: Add test for maxcapacity error
+
     @Test
     public void addBagelAndFilling() {
         inventory = new Inventory();
@@ -45,5 +51,21 @@ public class BasketTest {
 
         Assertions.assertEquals("BAGE", basket.getAll().get(1).getSKU());
         Assertions.assertEquals("FILS", basket.getAll().get(101).getSKU());
+    }
+
+    // User story #2: Remove a bagel
+    @Test
+    public void removeBagelShouldAlsoRemoveFillings() {
+        inventory = new Inventory();
+        basket = new Basket(new Inventory());
+        basket.add(new Bagel("BAGE", Arrays.asList("FILS","FILB")));
+        basket.add(new Bagel("BAGE", Arrays.asList("FILS","FILB")));
+        basket.printBasket();
+
+        // TODO: Add test
+        basket.remove(1);
+        Assertions.assertEquals(null, basket.getAll().get(1));
+        Assertions.assertEquals(null, basket.getAll().get(101));
+        basket.printBasket();
     }
 }

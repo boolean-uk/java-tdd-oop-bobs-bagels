@@ -74,6 +74,13 @@ public class Basket {
         this.basketItems.put(item.getId(), item);
     }
 
+    protected void removeFromBasket(int itemId) {
+        if (basketItems.get(1) == null) {
+            throw new InvalidBasketItemException("Basket item with ID #" + itemId + ", doesn't exist.\nCan't remove from basket.");
+        }
+        this.basketItems.remove(itemId);
+    }
+
     /**
      * Add item to basket, auto creates ID.
      * @param item id
@@ -107,10 +114,25 @@ public class Basket {
                 this.addToBasket(createId(), item);
             }
 
-
         } catch (Exception e) {
             System.out.println(e.getClass().getName() + ": " + e.getMessage());
         }
+    }
+
+    public void remove(int itemId) {
+
+        // TODO: Could this be simplified?
+        // TODO: should throw exception if not exist, seperate intro function, just like with add
+        BasketItem item = this.basketItems.get(itemId);
+        if (item.getClass().getName() == Bagel.class.getName()) {
+            Bagel bagel = (Bagel) item;
+            List<Integer> fillingIds = bagel.getLinkedFillingIds();
+
+            for (int f_id : fillingIds) {
+                this.removeFromBasket(f_id);
+            }
+        }
+        this.removeFromBasket(1);
     }
 
     public Map<Integer, BasketItem> getAll() {
