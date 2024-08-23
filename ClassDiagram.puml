@@ -1,0 +1,63 @@
+@startuml
+
+
+interface Item{}
+
+enum Bagel implements Item{
+    Onion
+    Plain
+    Everything
+    Sesame
+}
+
+enum Coffee implements Item {
+    Black
+    White
+    Cappuccino
+    Latte
+}
+
+enum Filling implements Item {
+    Bacon
+    Egg
+    Creme Cheese
+    Smoked Salmon
+    Ham
+}
+
+class OrderManager {
+   'i've taken __name__ to mean static
+   -__storeItemInfo__: HashMap<Item, String[]>
+   -__storeItemStock__: HashMap<Item, Integer>
+   -__defaultMaxBagesl__:int
+   -__defaultMaxFillings__:int
+   -__defaultMaxCoffees__:int
+
+   - cart: HashMap<Item, Integer>
+   - maxCartSize: int
+
+   + openUpShopAndSetInventory() : void
+   + addItem(item : Item) : String
+   + removeItem(item : Item) : String
+   + getStockOfItem(item : Item) : int
+   + getPriceOfItem(item : Item) : double
+   + getTotalCartPrice() : double
+   + getTotalDiscountedPrice() : double
+   + getTotalDiscountRecieptString() : String
+   + getTotalDiscountReciept() : Receipt
+
+
+}
+
+class Receipt{
+    + receiptOrder: ArrayList<String>
+    + price: double
+    + date: LocalDateTime
+}
+
+OrderManager -- Item
+OrderManager -- Receipt
+OrderManager -- Coffee
+OrderManager -- Bagel
+OrderManager -- Filling
+@enduml

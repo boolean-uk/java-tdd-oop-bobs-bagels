@@ -1,4 +1,4 @@
-## Extension 3: Discount Receipts
+O## Extension 3: Discount Receipts
 
 While receipts are important, showing the customer their savings is even more important!
 
