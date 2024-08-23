@@ -10,10 +10,12 @@ public class PrintBasketItems extends PrintGenerator {
 
     private Inventory inventory;
     private Map<Integer, BasketItem> basketItems;
+    private double basketTotalCost;
 
-    public PrintBasketItems(Inventory inventory, Map<Integer, BasketItem> basketItems) {
+    public PrintBasketItems(Inventory inventory, Map<Integer, BasketItem> basketItems, double basketTotalCost) {
         this.inventory = inventory;
         this.basketItems = basketItems;
+        this.basketTotalCost = basketTotalCost;
     }
 
     @Override
@@ -55,7 +57,7 @@ public class PrintBasketItems extends PrintGenerator {
             System.out.println(divider);
             System.out.printf(
                     "%s %33s" + newLine,
-                    "Total cost: ", "$?.??"
+                    "Total cost: ", "$"+basketTotalCost
             );
         }
         System.out.println(divider);
