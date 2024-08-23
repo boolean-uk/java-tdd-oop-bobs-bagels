@@ -1,6 +1,6 @@
 package com.booleanuk.core;
 
-public enum CoffeeType implements Item {
+public enum Coffee implements Item {
     Black,
     White,
     Cappuccino,

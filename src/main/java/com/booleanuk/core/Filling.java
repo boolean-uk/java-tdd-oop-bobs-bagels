@@ -1,6 +1,6 @@
 package com.booleanuk.core;
 
-public enum FillingType implements Item {
+public enum Filling implements Item {
     Bacon,
     Egg,
     Cheese,
