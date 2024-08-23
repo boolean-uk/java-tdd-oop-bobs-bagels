@@ -64,8 +64,8 @@ public class BasketTest {
 
         // TODO: Add test
         basket.remove(1);
-        Assertions.assertEquals(null, basket.getAll().get(1));
-        Assertions.assertEquals(null, basket.getAll().get(101));
+        Assertions.assertNull(basket.getAll().get(1));
+        Assertions.assertNull(basket.getAll().get(101));
         basket.printBasket();
     }
 }
