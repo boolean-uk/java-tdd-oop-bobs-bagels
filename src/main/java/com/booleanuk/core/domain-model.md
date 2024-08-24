@@ -1,25 +1,29 @@
 # Domain Model
 
-## Enums
+## Package: enums
 | Classes          | Variables | Methods | Scenario | Output |
 |------------------|-----------|---------|----------|--------|
-| `ProductSKU`     |           |         |          |        |
-| `CoffeeVariant`  |           |         |          |        |
 | `BagelVariant`   |           |         |          |        |
+| `CoffeeVariant`  |           |         |          |        |
 | `FillingVariant` |           |         |          |        |
+| `ProductName`    |           |         |          |        |
 
-## Inventory
-| Classes     | Variables                       | Methods                                                         | Scenario                                               | Output     |
-|-------------|---------------------------------|-----------------------------------------------------------------|--------------------------------------------------------|------------|
-| `Inventory` | `- ArrayList<Product> products` |                                                                 |                                                        |            |
-|             |                                 | `-addProduct(String SKU, float price, Enum name, Enum variant)` | Add product to inventory.                              | -          |
-|             |                                 | `-fillInventory()`                                              | Initialize inventory with specified items.             |            |
-|             |                                 | `-getAllCoffee()`                                               | Get a list of all coffee products.                     | List       |
-|             |                                 | `-getAllBagels()`                                               | Get a list of all bagel products.                      | List       |
-|             |                                 | `-getAllFillings()`                                             | Get a list of all filling products.                    | List       |
-|             |                                 | `-calculateSKU(String productName, String productVariant)`      | Calculate SKU based on productName and productVariant. | String     |
-|             |                                 | `+getPrice(Enum productName, Enum productVariant)`              | Get price by providing SKU                             | float      |
-|             |                                 | `+printMenu()`                                                  | Print meny of all items in inventory.                  | Print text |
+## Package: calculators
+| Classes           | Variables | Methods | Scenario | Output |
+|-------------------|-----------|---------|----------|--------|
+| `PriceCalculator` |           |         |          |        |
+| `SKUCalculator`   |           |         |          |        |
+
+## Package: inventory
+| Classes     | Variables                                     | Methods                                                         | Scenario                                      | Output                       |
+|-------------|-----------------------------------------------|-----------------------------------------------------------------|-----------------------------------------------|------------------------------|
+| `Inventory` | `-Map<String, InventoryItem> inventoryItems ` |                                                                 |                                               |                              |
+|             | `-PrintGenerator menu`                        |                                                                 |                                               |                              |
+|             |                                               | `-fillInventory()`                                              | Initialize inventory with specified items.    |                              |
+|             |                                               | `+getAllItems()`                                                | Get all inventory items.                      | Map<String, InventoryItem>   |
+|             |                                               | `+getItem(String SKU)`                                          | If item is in inventory (valid SKU).          | InventoryItem                |
+|             |                                               |                                                                 | If item does not exist.                       | throw InventoryItemException |
+|             |                                               | `+printMenu()`                                                  | Print menu with all items from the inventory. | Print to console/terminal    |
 
 ## Basket
 | Classes  | Variables                       | Methods                                | Scenario                                                                                                      | Output          |
