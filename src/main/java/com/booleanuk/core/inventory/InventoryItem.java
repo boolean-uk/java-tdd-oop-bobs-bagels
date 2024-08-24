@@ -1,8 +1,8 @@
 package com.booleanuk.core.inventory;
 
-import com.booleanuk.core.PriceCalculator;
-import com.booleanuk.core.ProductName;
-import com.booleanuk.core.SKUCalculator;
+import com.booleanuk.core.calculators.PriceCalculator;
+import com.booleanuk.core.enums.ProductName;
+import com.booleanuk.core.calculators.SKUCalculator;
 
 public class InventoryItem {
 

@@ -1,4 +1,4 @@
-package com.booleanuk.core;
+package com.booleanuk.core.calculators;
 
 public class PriceCalculator {
 
@@ -21,4 +21,8 @@ public class PriceCalculator {
 
         return rounded;
     }
+
+//    public double combinationDiscount() {
+//
+//    }
 }

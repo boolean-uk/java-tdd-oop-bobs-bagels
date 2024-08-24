@@ -1,6 +1,6 @@
 package com.booleanuk.core.printgenerator;
 
-import com.booleanuk.core.ProductName;
+import com.booleanuk.core.enums.ProductName;
 import com.booleanuk.core.inventory.InventoryItem;
 
 import java.util.Map;

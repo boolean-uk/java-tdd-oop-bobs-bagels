@@ -1,6 +1,6 @@
 package com.booleanuk.core.basket;
 
-import com.booleanuk.core.PriceCalculator;
+import com.booleanuk.core.calculators.PriceCalculator;
 import com.booleanuk.core.inventory.Inventory;
 import com.booleanuk.core.inventory.InventoryItem;
 import com.booleanuk.core.printgenerator.PrintBasketItems;
@@ -26,7 +26,7 @@ public class Basket {
         this.maxCapacity = 20;
         this.size = 0;
         this.idCount = 1;
-        this.totalCost = 0.0f;
+        this.totalCost = 0.0f; //TODO: remove
         this.priceCalculator = new PriceCalculator();   // Should maybe have dependency injection instead.
     }
 

@@ -1,6 +1,6 @@
 package com.booleanuk.core.inventory;
 
-import com.booleanuk.core.ProductName;
+import com.booleanuk.core.enums.ProductName;
 
 public class BagelItem extends InventoryItem {
 
