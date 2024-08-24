@@ -79,6 +79,19 @@
 | `InvalidBasketItemException`   |                                         |                                             |                                                                                                                    |                                                  |
 | `MaxCapacityException`         |                                         |                                             |                                                                                                                    |                                                  |
 
+## Package: printgenerator
+| Classes                                       | Variables                                   | Methods                                                                 | Scenario                                | Output |
+|-----------------------------------------------|---------------------------------------------|-------------------------------------------------------------------------|-----------------------------------------|--------|
+| `PrintGenerator`                              |                                             | `printCenterTitle(String text, int totalWidth)`                         | Center test in console/terminal output. |        |
+|                                               | `                                           | `print()`                                                               |                                         |        |
+|                                               |                                             |                                                                         |                                         |        |
+| `PrintInventoryMenu` extends `PrintGenerator` | `Map<String, InventoryItem> inventoryItems` | `printMenuPart(ProductName productName, String title, int outputWidth)` |                                         |        |
+|                                               |                                             | @Override `print()`                                                     |                                         |        |
+|                                               |                                             |                                                                         |                                         |        |
+| `PrintBasketItems` extends `PrintGenerator`   | `Inventory inventory`                       |                                                                         |                                         |        |
+|                                               | `Map<Integer, BasketItem> basketItems`      |                                                                         |                                         |        |
+|                                               | `double basketTotalCost`                    |                                                                         |                                         |        |
+|                                               |                                             | @Override `print()`                                                     |                                         |        |
 
 # Class Diagram
 ## Diagram
