@@ -15,15 +15,32 @@
 | `SKUCalculator`   |           |         |          |        |
 
 ## Package: inventory
-| Classes     | Variables                                     | Methods                                                         | Scenario                                      | Output                       |
-|-------------|-----------------------------------------------|-----------------------------------------------------------------|-----------------------------------------------|------------------------------|
-| `Inventory` | `-Map<String, InventoryItem> inventoryItems ` |                                                                 |                                               |                              |
-|             | `-PrintGenerator menu`                        |                                                                 |                                               |                              |
-|             |                                               | `-fillInventory()`                                              | Initialize inventory with specified items.    |                              |
-|             |                                               | `+getAllItems()`                                                | Get all inventory items.                      | Map<String, InventoryItem>   |
-|             |                                               | `+getItem(String SKU)`                                          | If item is in inventory (valid SKU).          | InventoryItem                |
-|             |                                               |                                                                 | If item does not exist.                       | throw InventoryItemException |
-|             |                                               | `+printMenu()`                                                  | Print menu with all items from the inventory. | Print to console/terminal    |
+| Classes                                             | Variables                                     | Methods                                 | Scenario                                              | Output                       |
+|-----------------------------------------------------|-----------------------------------------------|-----------------------------------------|-------------------------------------------------------|------------------------------|
+| `Inventory`                                         | `-Map<String, InventoryItem> inventoryItems ` |                                         |                                                       |                              |
+|                                                     | `-PrintGenerator menu`                        |                                         |                                                       |                              |
+|                                                     |                                               | `-fillInventory()`                      | Initialize inventory with specified items.            |                              |
+|                                                     |                                               | `+getAllItems()`                        | Get all inventory items.                              | Map<String, InventoryItem>   |
+|                                                     |                                               | `+getItem(String SKU)`                  | If item is in inventory (valid SKU).                  | InventoryItem                |
+|                                                     |                                               |                                         | If item does not exist.                               | throw InventoryItemException |
+|                                                     |                                               | `+printMenu()`                          | Print menu with all items from the inventory.         | Print to console/terminal    |
+|                                                     |                                               |                                         |                                                       |                              |
+| `InventoryItem`                                     | `-String SKU`                                 | `+getSKU()`                             |                                                       | String                       |
+|                                                     |                                               | `#setSKU()`                             | Set SKU based on name and variant.                    | String                       |
+|                                                     | `-float price`                                | `+getPrice()`                           | Get price calculated with PriceCalculator.round().    | double                       |
+|                                                     |                                               | `#setPrice(float price)`                | Set price.                                            | -                            |
+|                                                     | `-ProductName name`                           | `+getName()`                            | Get product name.                                     | ProductName                  |
+|                                                     |                                               | `#setName()`                            | Set product name.                                     | ProductName                  |
+|                                                     | `-Enum variant`                               | `+getVariant(Enum variant)`             | Get product variant (DEFAULT, COFFE, BAGEL, FILLING). | Enum                         |
+|                                                     |                                               | `#setVariant()`                         | Set product variant.                                  | -                            |
+|                                                     | `-SKUCalculator skuCalculator`                |                                         |                                                       |                              |
+|                                                     | `-PriceCalculator priceCalculator`            |                                         |                                                       |                              |
+|                                                     |                                               |                                         |                                                       |                              |
+| `CoffeeItem` extends `InventoryItem`                | @Ovverride `+setName()`                       |                                         |                                                       | ProductName                  |
+| `BagelItem` extends `InventoryItem`                 | @Ovverride `+setName()`                       |                                         |                                                       | ProductName                  |
+| `FillingItem` extends `InventoryItem`               | @Ovverride `+setName()`                       |                                         |                                                       | ProductName                  |
+|                                                     |                                               |                                         |                                                       |                              |
+| `InventoryItemException` extends `RuntimeException` |                                               |                                         |                                                       |                              |
 
 ## Basket
 | Classes  | Variables                       | Methods                                | Scenario                                                                                                      | Output          |
