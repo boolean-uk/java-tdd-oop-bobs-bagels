@@ -2,8 +2,8 @@ package com.booleanuk.core.basket;
 
 public class BasketItem {
 
-    private String SKU;
     private int Id;
+    private String SKU;
 
     public BasketItem(String SKU) {
         this.Id = -1;
