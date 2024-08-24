@@ -17,7 +17,7 @@ public class Bagel extends BasketItem {
     public Bagel(String SKU, List<String> linkedFillingsSKUs) {
         super(SKU);
         this.linkedFillingSKUs = linkedFillingsSKUs;
-        linkedFillingIds = new ArrayList<>();
+        this.linkedFillingIds = new ArrayList<>();
     }
 
     public List<String> getLinkedFillingSKUs() {
