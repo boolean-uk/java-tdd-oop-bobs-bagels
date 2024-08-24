@@ -1,6 +1,8 @@
 package com.booleanuk.core.inventory;
 
-import com.booleanuk.core.*;
+import com.booleanuk.core.enums.BagelVariant;
+import com.booleanuk.core.enums.CoffeeVariant;
+import com.booleanuk.core.enums.FillingVariant;
 import com.booleanuk.core.printgenerator.PrintGenerator;
 import com.booleanuk.core.printgenerator.PrintInventoryMenu;
 
@@ -11,6 +13,8 @@ import java.util.Map;
 public class Inventory {
 
     private Map<String, InventoryItem> inventoryItems;
+    // Initialized locally
+    private PrintGenerator menu;
 
     public Inventory() {
         this.inventoryItems = new HashMap<>();
@@ -25,6 +29,14 @@ public class Inventory {
         // TODO: Is it okay to initialize the data here?
         // For a more general approach -> Use Dependency Injection:
         // make product list as input instead of creating it here.
+
+        // TODO: A bit weird approach to put it in a list first and then loop. Is it a better way?
+        // I do this because I auto-generate the SKU value in the superclass 'InventoryItem'.
+        // So I create all objects (BagelItem, CoffeItem, FillingItem) first, and store in a temporary list
+        // Then I loop through all items to get the SKU value for each
+        // I put the SKU value as the key in the HashMap 'inventoryItems'.
+        // (The SKU value is then both in the objects and as a key)
+
 
         // Create list with inventory items
         ArrayList<InventoryItem> items = new ArrayList<>();
@@ -69,10 +81,10 @@ public class Inventory {
 
     public void printMenu() {
 
-        // TODO: Should this be refactored, not initalize it here
-        // Problem if so is that I need the inventoryItems
+        // TODO: Should this be refactored, not initialize it here
+        // Problem if so is that I need to pass in the inventoryItems
 
-        PrintGenerator menu = new PrintInventoryMenu(this.inventoryItems);
+        menu = new PrintInventoryMenu(this.inventoryItems);
         menu.print();
     }
 }
