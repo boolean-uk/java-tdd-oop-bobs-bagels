@@ -14,19 +14,19 @@ public class Basket {
 
     private Inventory inventory;
     private Map<Integer, BasketItem> basketItems;
-    private int maxCapacity;
-    private int size;
     private int idCount;
-    private float totalCost;
+    private int size;
+    private int maxCapacity;
+
     private PriceCalculator priceCalculator;
+    private PrintGenerator basket;
 
     public Basket(Inventory inventory) {
         this.inventory = inventory;
         this.basketItems = new LinkedHashMap <>();      // LinkedHashMap because I want the items in the order they were added to the basket
-        this.maxCapacity = 20;
-        this.size = 0;
         this.idCount = 1;
-        this.totalCost = 0.0f; //TODO: remove
+        this.size = 0;
+        this.maxCapacity = 20;
         this.priceCalculator = new PriceCalculator();   // Should maybe have dependency injection instead.
     }
 
@@ -38,8 +38,10 @@ public class Basket {
         return itemId;
     }
 
+    // Auto create ID for fillings
     private int createFillingId(String idExtension) {
-        //TODO: How to make default variable like in python
+
+        // TODO: How to make default variable like in python
 
         // TODO: Should check if idExtension is valid
 
@@ -53,8 +55,39 @@ public class Basket {
         return Integer.parseInt(tmp);
     }
 
+    // Get Basket size
+    public int getSize() {
+        return size;
+    }
 
+    // Get max capacity, max amount of products allowed in basket.
+    // Fillings doesn't count as an item, and fillings can only be added together with a Bagel.
+    public int getMaxCapacity() {
+        return this.maxCapacity;
+    }
 
+    // Change max capacity
+    // TODO: Should make sure that newMaxCapacity is not a negative value
+    public void changeMaxCapacity(int newMaxCapacity) {
+        this.maxCapacity = newMaxCapacity;
+    }
+
+    // Get all basket items
+    public Map<Integer, BasketItem> getAll() {
+        return this.basketItems;
+    }
+
+    // Get basket item based on id.
+    protected BasketItem getBasketItem(int itemId) {
+        BasketItem item = this.basketItems.get(itemId);
+        if (item == null) {
+            throw new InvalidBasketItemException("Basket item with ID #" + itemId + ", doesn't exist. Can't remove from basket.");
+        }
+        return item;
+    }
+
+    // Inner function for add()
+    // Validates input
     protected void addToBasket(int itemId, BasketItem item) {
         // Validate input
         if (this.getSize() == maxCapacity) {
@@ -62,6 +95,7 @@ public class Basket {
         }
 
         // TODO: Add exception for when id already exist
+        // TODO: Can use 'instanceof' instead of checking class name?
 
         // Fillings can not be added as an item itself
         // Fillings that belongs to a bagel have id's over 100
@@ -71,33 +105,14 @@ public class Basket {
 
         // Set id if no exception has been thrown
         item.setId(itemId);
+
+        this.basketItems.put(item.getId(), item);
+
         // Update size of basket
         this.size++;
-        // Add item to basket
-        this.basketItems.put(item.getId(), item);
     }
 
-    protected void removeFromBasket(int itemId) {
-        if (basketItems.get(itemId) == null) {
-            throw new InvalidBasketItemException("Basket item with ID #" + itemId + ", doesn't exist. Can't remove from basket.");
-        }
-        this.basketItems.remove(itemId);
-    }
-
-    // TODO: Check where get item functionality is used and replace with this function
-    // This exception is trown both here and in the above method, how to reduce duplication in best way?
-    protected BasketItem getBasketItem(int itemId) {
-        BasketItem item = this.basketItems.get(itemId);
-        if (item == null) {
-            throw new InvalidBasketItemException("Basket item with ID #" + itemId + ", doesn't exist. Can't remove from basket.");
-        }
-        return item;
-    }
-
-    /**
-     * Add item to basket, auto creates ID.
-     * @param item id
-     */
+    // Add BasketItem (Coffee Bagel or Filling) to basket
     public void add(BasketItem item) {
 
         try {
@@ -145,6 +160,19 @@ public class Basket {
         }
     }
 
+    // Inner function for remove()
+    // Validates input
+    protected void removeFromBasket(int itemId) {
+        if (basketItems.get(itemId) == null) {
+            throw new InvalidBasketItemException("Basket item with ID #" + itemId + ", doesn't exist. Can't remove from basket.");
+        }
+        this.basketItems.remove(itemId);
+
+        // Update size of basket
+        this.size--;
+    }
+
+    // Remove item from basket based on id.
     public void remove(int itemId) {
 
         try {
@@ -172,33 +200,7 @@ public class Basket {
         }
     }
 
-    public Map<Integer, BasketItem> getAll() {
-        return this.basketItems;
-    }
-
-    public int getSize() {
-        return size;
-    }
-
-    public void printBasket() {
-
-        // TODO: Should I refactor? Feels like it's a poor solution regarding dependencies.
-        // Check all PrintGenerator cases.
-
-        PrintGenerator basket = new PrintBasketItems(this.inventory, this.basketItems, this.getTotalCost());
-        basket.print();
-    }
-
-    // TODO: I only use this for the test. Should I keep it or change the test?
-    public int getMaxCapacity() {
-        return this.maxCapacity;
-    }
-
-    // TODO: Should I do a get/setfunctions on maxCapacity or is this ok?
-    public void changeMaxCapacity(int newMaxCapacity) {
-        this.maxCapacity = newMaxCapacity;
-    }
-
+    // Get total cost of all items in basket
     public double getTotalCost() {
         // TODO Changed to double, this may be unnecessary now
 
@@ -211,5 +213,15 @@ public class Basket {
             total += inventoryItem.getPrice();
         }
         return priceCalculator.round(total, 2);
+    }
+
+    // Print basket with items and total cost.
+    public void printBasket() {
+
+        // TODO: Should I refactor? Feels like it's a poor solution regarding dependencies.
+        // Check all PrintGenerator cases.
+
+        basket = new PrintBasketItems(this.inventory, this.basketItems, this.getTotalCost());
+        basket.print();
     }
 }
