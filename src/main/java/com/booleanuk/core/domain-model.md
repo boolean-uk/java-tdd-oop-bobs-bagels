@@ -42,48 +42,43 @@
 |                                                     |                                               |                                         |                                                       |                              |
 | `InventoryItemException` extends `RuntimeException` |                                               |                                         |                                                       |                              |
 
-## Basket
-| Classes  | Variables                       | Methods                                | Scenario                                                                                                      | Output          |
-|----------|---------------------------------|----------------------------------------|---------------------------------------------------------------------------------------------------------------|-----------------|
-| `Basket` | `- static int idCount`          |                                        | "Fake autoincrement id". Counter which will be increased everytime a new product is added to the basket.      |                 |
-|          | `- ArrayList<Product> products` | `addCoffee(enum variant)`              | Add coffee with specified variant. Then run printBasket().                                                    |                 |
-|          |                                 |                                        | Can't add coffee.                                                                                             | throw exception |
-|          |                                 | `addBagel(enum variant, enum filling)` | Add bagel with specified variant and filling. At the moment just one filling can be added. run printBasket(). |                 |
-|          |                                 |                                        | Can't add bagel.                                                                                              | throw exception |
-|          |                                 | `remove(int ProduktId)`                | Product is in basket and can be removed.                                                                      | Show message    |
-|          |                                 |                                        | Product is not in basket and can not be removed.                                                              | throw exception |
-|          | `int maxCapacity`               | `changeCapacity(int newCapacity)`      | If newCapacity is more than 0.                                                                                | true            |
-|          |                                 |                                        | If newCapacity is less than 1.                                                                                | false           |
-|          | `float totalCost`               | `setTotalCost(float newTotalCost)`     |                                                                                                               |                 |
-|          |                                 | `getTotalCost()`                       | Get total cost of all products.                                                                               | float           |
-|          |                                 | `printBasket()`                        | Prints the content of the basket.                                                                             | Print text      |
-|          |                                 | `getAll()`                             | Get all products in basket.                                                                                   | List            |       
+## Package: basket
+| Classes                        | Variables                               | Methods                                     | Scenario                                                                                                           | Output                                           |
+|--------------------------------|-----------------------------------------|---------------------------------------------|--------------------------------------------------------------------------------------------------------------------|--------------------------------------------------|
+| `Basket(Inventory inventory)`  | `-Inventory inventory`                  |                                             |                                                                                                                    |                                                  |
+|                                | `-Map<Integer, BasketItem> basketItems` | `+getAll()`                                 | Get all basket items.                                                                                              | Map<Integer, BasketItem>                         |
+|                                |                                         | `#getBasketItem(int itemId)`                | If item exist.                                                                                                     | BasketItem                                       |
+|                                |                                         |                                             | If items doesn't exist.                                                                                            | throw InvalidBasketItemException                 |
+|                                |                                         | `#addToBasket(int itemId, BasketItem item)` | Inner function for add(), validates input. Add item to basket if possible.                                         |                                                  |
+|                                |                                         |                                             | If item can't be added, notify with error.                                                                         | MaxCapacityException, InvalidBasketItemException |
+|                                |                                         | `+add(BasketItem item)`                     | Make a request to `#addToBasket(int itemId, BasketItem item)`.                                                     | -                                                |
+|                                |                                         |                                             | If exception is thrown, handle exception.                                                                          | Print exception to console/terminal              |
+|                                |                                         | `#removeFromBasket(int itemId)`             | Inner function for remove(). If valid item id, remove item from basket.                                            |                                                  |
+|                                |                                         |                                             | if not valid item id, notify with error.                                                                           | InvalidBasketItemException                       |
+|                                |                                         | `+remove(int itemId)`                       | Make a request to  `#removeFromBasket(int itemId)`. Remove item if possible.                                       |                                                  |
+|                                |                                         |                                             | If exception is thrown, handle exception.                                                                          | Print exception to console/terminal              |
+|                                |                                         | `+getTotalCost()`                           | Get total cost of all items in basket.                                                                             | double                                           |
+|                                |                                         | `+printBasket()`                            | Print content of basket and total price.                                                                           | Print to console/terminal                        |
+|                                | `-int idCount`                          | `-createId()`                               | "Auto" creates Id for basket items except filling Ids. E.g. returns id 1.                                          | int                                              |
+|                                |                                         | `-createFillingId(String idExtension)`      | "Auto" creates id for filling based on the bagels id. E.g. Bagel id: 1, filling id: 101.                           | int                                              |
+|                                | `-int size`                             | `+getSize()`                                | Get the counted size of basket<br>(fillings doesn't count as an item and can only be added together with a Bagel). | int                                              |
+|                                | `-int maxCapacity`                      | `+getMaxCapacity()`                         | Get max capacity of basket.                                                                                        | int                                              |
+|                                |                                         | `+changeMaxCapacity(int newMaxCapacity)`    | Change max capacity.                                                                                               | -                                                |
+|                                | `-PriceCalculator priceCalculator`      |                                             |                                                                                                                    |                                                  |
+|                                | `-PrintGenerator basket`                |                                             |                                                                                                                    |                                                  |
+|                                |                                         |                                             |                                                                                                                    |                                                  |
+| `BasketItem(String SKU)`       | `-int Id`                               | `+setId(int itemId)`                        |                                                                                                                    |                                                  |
+|                                |                                         | `+getId(int itemId)`                        |                                                                                                                    | int                                              |
+|                                | `-String SKU`                           | `+getSKU()`                                 |                                                                                                                    | String                                           |
+|                                |                                         |                                             |                                                                                                                    |                                                  |
+| `Coffee` extends `BasketItem`  |                                         |                                             |                                                                                                                    |                                                  |
+| `Bagel` extends `BasketItem`   | `-List<String> linkedFillingSKUs`       | `+getLinkedFillingSKUs`                     | Get a list of inventory item SKU's that was added together with this bagel.                                        | List<String>                                     |
+|                                | `-List<Integer> linkedFillingIds`       | `getLinkedFillingIds`                       | Get a list of basket item ids' (the ids' of the fillings that belongs to this bagel).                              | List<Integer>                                                 |
+| `Filling` extends `BasketItem` |                                         |                                             |                                                                                                                    |                                                  |
+|                                |                                         |                                             |                                                                                                                    |                                                  |
+| `InvalidBasketItemException`   |                                         |                                             |                                                                                                                    |                                                  |
+| `MaxCapacityException`         |                                         |                                             |                                                                                                                    |                                                  |
 
-## Product
-| Classes   | Variables      | Methods      | Scenario                           | Output |
-|-----------|----------------|--------------|------------------------------------|--------|
-| `Product` | `int id`       |              |                                    |        |
-|           | `enum SKU`     |              |                                    |        |  
-|           | `float price`  |              |                                    |        |
-|           | `enum name`    |              |                                    |        |
-|           | `enum variant` |              |                                    |        |
-|           |                | `setSKU()`   | Set SKU based on name and variant. | -      |
-|           |                | `getPrice()` | Get price for this product.        | float  |
-
-## Coffee extends Product (Inherit)
-| Classes | Variables | Methods              | Scenario                            | Output |
-|---------|-----------|----------------------|-------------------------------------|--------|
-| `Coffe` |           | `@override setSKU()` |                                     |        |  
-
-## Bagel extends Product (Inherit)
-| Classes | Variables | Methods               | Scenario                            | Output |
-|---------|-----------|-----------------------|-------------------------------------|--------|
-| `Bagel` |           | `@override setSKU()`  |                                     |        |  
-
-## Filling extends Product (Inherit)
-| Classes   | Variables | Methods               | Scenario                            | Output |
-|-----------|-----------|-----------------------|-------------------------------------|--------|
-| `Filling` |           | `@override setSKU()`  |                                     |        |  
 
 # Class Diagram
 ## Diagram
