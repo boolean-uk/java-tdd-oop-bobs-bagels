@@ -3,6 +3,7 @@ package com.booleanuk.core.inventory;
 import com.booleanuk.core.enums.BagelVariant;
 import com.booleanuk.core.enums.CoffeeVariant;
 import com.booleanuk.core.enums.FillingVariant;
+import com.booleanuk.core.enums.ProductName;
 import com.booleanuk.core.printgenerator.PrintGenerator;
 import com.booleanuk.core.printgenerator.PrintInventoryMenu;
 
@@ -13,12 +14,14 @@ import java.util.Map;
 public class Inventory {
 
     private Map<String, InventoryItem> inventoryItems;
+    private ArrayList<SpecialOffer> specialOffers;
     // Initialized locally
     private PrintGenerator menu;
 
     public Inventory() {
         this.inventoryItems = new HashMap<>();
         fillInventory();
+        createSpecialOffers();
     }
 
     /**
@@ -64,8 +67,35 @@ public class Inventory {
         }
     }
 
+    // Create special offers
+    private void createSpecialOffers() {
+
+        specialOffers = new ArrayList<>();
+
+        // Special offers
+        SpecialOffer BAGOsixMultiPriceOffer = new SpecialOfferMultiPrice("BAGO", 6,2.49);
+        SpecialOffer BAGEsixMultiPriceOffer = new SpecialOfferMultiPrice("BAGE",6,2.49);
+        SpecialOffer BAGPtwelveMultiPriceOffer = new SpecialOfferMultiPrice("BAGP", 12,3.99);
+
+        ArrayList<ProductName> offerItems = new ArrayList<>() {{
+            add(ProductName.COFFEE);
+            add(ProductName.BAGEL);
+        }};
+        SpecialOffer coffeAndBagelOffer = new SpecialOfferCombination("COFB", offerItems, 1.25);
+
+        this.specialOffers.add(BAGOsixMultiPriceOffer);
+        this.specialOffers.add(BAGEsixMultiPriceOffer);
+        this.specialOffers.add(BAGPtwelveMultiPriceOffer);
+        this.specialOffers.add(coffeAndBagelOffer);
+    }
+
     public Map<String, InventoryItem> getAllItems() {
         return inventoryItems;
+    }
+
+    // Get all special offers
+    public ArrayList<SpecialOffer> getSpecialOffers() {
+        return specialOffers;
     }
 
     public InventoryItem getItem(String SKU) {
