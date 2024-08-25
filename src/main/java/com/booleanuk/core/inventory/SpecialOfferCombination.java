@@ -8,12 +8,12 @@ public class SpecialOfferCombination  extends SpecialOffer{
 
     private ArrayList<ProductName> offerItems;          // List of items that in combination generates an offer
 
-    public SpecialOfferCombination(String SKU, double offerPrice) {
-        super(SKU, offerPrice);
+    public SpecialOfferCombination(double offerPrice) {
+        super(offerPrice);
     }
 
-    public SpecialOfferCombination(String SKU, ArrayList<ProductName> offerItems, double offerPrice) {
-        super(SKU, offerPrice);
+    public SpecialOfferCombination(ArrayList<ProductName> offerItems, double offerPrice) {
+        super(offerPrice);
         this.offerItems = offerItems;
     }
 

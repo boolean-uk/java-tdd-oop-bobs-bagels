@@ -16,6 +16,8 @@ public class PriceCalculator {
 
     // Use double or float, float saves memory, double is easier to work with
 
+    private DiscountObjectMultiPrice discountObjectMultiPrice;
+
     public double round(float total, int numOfDecimals) {
 
         // TODO: Should I use float or double?
@@ -30,15 +32,74 @@ public class PriceCalculator {
         return rounded;
     }
 
+    public ArrayList<DiscountObjectMultiPrice> calculateSpecialOfferMultiPrice(Inventory inventory, Map<Integer, BasketItem> basketItems, ArrayList<SpecialOfferMultiPrice> specialOffers) {
+
+        ArrayList<DiscountObjectMultiPrice> discountList = new ArrayList<>();
+
+        // Store list of SKU with number of occurrences.
+        HashMap<String, Integer> skuOccurrences = new HashMap<>();
+        for (BasketItem item : basketItems.values()) {
+
+            String sku = item.getSKU();
+            if (skuOccurrences.get(sku) == null) {
+                skuOccurrences.put(sku, 1);
+            } else {
+                int numOfItems = skuOccurrences.get(sku);
+                skuOccurrences.put(sku, numOfItems + 1);
+            }
+        }
+
+        // Store Special Offers with the corresponding SKU as key in HashMap
+        HashMap<String, SpecialOfferMultiPrice> skuSpecialOfferPairs = new HashMap<>();
+        for (SpecialOfferMultiPrice offer : specialOffers) {
+            skuSpecialOfferPairs.put(offer.getSKU(), offer);
+        }
+
+        // Calculate discounts
+        for (Map.Entry<String, Integer> skuEntry : skuOccurrences.entrySet()) {
+
+            String sku = skuEntry.getKey();
+            int numOfBasketItems = skuEntry.getValue();
+            int minimumNumOfItems = skuSpecialOfferPairs.get(sku).getNumOfItems();      // Minimun number of items required to get an offer
+
+            // Count how many discounts
+            int numOfDiscounts = Math.floorDiv(numOfBasketItems, minimumNumOfItems);
+            int numOfDiscountItems = (numOfDiscounts * minimumNumOfItems);
+            int numOfOrdinaryItems = numOfBasketItems - numOfDiscountItems;
+
+            // Get ordinary price for the item, from the inventory
+            double itemPrice = inventory.getItem(sku).getPrice();
+            double ordinaryPrice = minimumNumOfItems * itemPrice;
+            double specialOfferPrice = skuSpecialOfferPairs.get(sku).getOfferPrice();
+            double diffPrice = ordinaryPrice - specialOfferPrice;
+
+            // Calculate total discount for this offer
+            // add to discount
+            double discountSum = numOfDiscounts * diffPrice;
+            discountSum = this.round((float) discountSum, 2); // TODO: Change fromm float to double
+            discountList.add(
+                    new DiscountObjectMultiPrice(
+                        sku,
+                        numOfDiscounts,
+                        numOfDiscountItems,
+                        discountSum,
+                        numOfOrdinaryItems
+                ));
+        }
+
+        return discountList;
+    }
+
     public double calculateDiscount(Inventory inventory, Map<Integer, BasketItem> basketItems, ArrayList<SpecialOffer> specialOffers) {
 
         double discount = 0;
+        ArrayList<DiscountObjectMultiPrice> discountObjectMultiPriceList = new ArrayList<>();
 
         // Convert special offers to Hashmap
         HashMap<String, SpecialOffer> specialOfferMap = new HashMap<>();
-        for (SpecialOffer s : specialOffers) {
-            specialOfferMap.put(s.getSKU(), s);
-        }
+//        for (SpecialOffer s : specialOffers) {
+//            specialOfferMap.put(s.getSKU(), s);
+//        }
 
         // Count occurrences of discount items
         HashMap<String, Integer> discountItems = new HashMap<>();
@@ -119,9 +180,75 @@ public class PriceCalculator {
 
                         if (productName == inventoryItem.getName()){
 
+                            if (offerItemOccurrences.get(productName) == null) {
+                                ArrayList<String> list = new ArrayList<>();
+                                list.add(b_SKU);
+
+                                offerItemOccurrences.put(productName, list);
+                            } else {
+                                ArrayList<String> list = offerItemOccurrences.get(productName);
+                                list.add(b_SKU);
+
+                                offerItemOccurrences.put(productName, list);
+                            }
                         }
                     }
                 }
+
+                // Find the list of least items, and save the size
+                int minItemSize = 0;
+                boolean isValidSpecialOffer = true;
+                for (ArrayList<String> skuList : offerItemOccurrences.values()) {
+
+                    // If one or more list of SKU's doesn't contain anything, no special offers available
+                    if (skuList.size() == 0) {
+                        isValidSpecialOffer = false;
+                        break;
+                    } else if (skuList.size() < minItemSize) {
+                        minItemSize = skuList.size();
+                    }
+                }
+
+
+                // Store the price for each offerItem into categories split by ProductName type
+                HashMap<ProductName, ArrayList<Double>> offerItemPrices = new HashMap<>();
+
+//                if (isValidSpecialOffer) {
+//
+//                    // Sort into ProductName, and store Price
+//                    for (ProductName productName : offerItems) {
+//
+//                        for (ArrayList<String> skuList : offerItemOccurrences.values()) {
+//
+//                            for (String sku : skuList) {
+//                                double price = inventory.getItem(sku).getPrice();
+//
+//                                if (offerItemPrices.get(sku) == null) {
+//                                    ArrayList<Double> list = new ArrayList<>();
+//                                    list.add(price);
+//
+//                                    offerItemPrices.put(sku, list);
+//                                } else {
+//                                    ArrayList<Double> list = offerItemPrices.get(sku);
+//                                    list.add(price);
+//
+//                                    offerItemPrices.put(sku, list);
+//                                }
+//                            }
+//                        }
+//                    }
+//
+//                    // Sort with the cheapest first
+//
+//                    // Loop minItemSize times
+//
+//                    // get ordinary price
+//
+//                    // Calculate difference
+//
+//                    //return discount
+//                }
+
 
 
             }

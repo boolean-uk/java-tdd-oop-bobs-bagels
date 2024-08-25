@@ -14,7 +14,8 @@ import java.util.Map;
 public class Inventory {
 
     private Map<String, InventoryItem> inventoryItems;
-    private ArrayList<SpecialOffer> specialOffers;
+    private ArrayList<SpecialOfferMultiPrice> specialOffersMultiPrice;
+    private ArrayList<SpecialOfferCombination> specialOffersCombination;
     // Initialized locally
     private PrintGenerator menu;
 
@@ -70,23 +71,24 @@ public class Inventory {
     // Create special offers
     private void createSpecialOffers() {
 
-        specialOffers = new ArrayList<>();
+        specialOffersMultiPrice = new ArrayList<>();
+        specialOffersCombination = new ArrayList<>();
 
-        // Special offers
-        SpecialOffer BAGOsixMultiPriceOffer = new SpecialOfferMultiPrice("BAGO", 6,2.49);
-        SpecialOffer BAGEsixMultiPriceOffer = new SpecialOfferMultiPrice("BAGE",6,2.49);
-        SpecialOffer BAGPtwelveMultiPriceOffer = new SpecialOfferMultiPrice("BAGP", 12,3.99);
+        // Special offers Multi-Price
+        SpecialOfferMultiPrice BAGOsixMultiPriceOffer = new SpecialOfferMultiPrice("BAGO", 6,2.49);
+        SpecialOfferMultiPrice BAGEsixMultiPriceOffer = new SpecialOfferMultiPrice("BAGE",6,2.49);
+        SpecialOfferMultiPrice BAGPtwelveMultiPriceOffer = new SpecialOfferMultiPrice("BAGP", 12,3.99);
+        this.specialOffersMultiPrice.add(BAGOsixMultiPriceOffer);
+        this.specialOffersMultiPrice.add(BAGEsixMultiPriceOffer);
+        this.specialOffersMultiPrice.add(BAGPtwelveMultiPriceOffer);
 
+        // Special offers Combination
         ArrayList<ProductName> offerItems = new ArrayList<>() {{
             add(ProductName.COFFEE);
             add(ProductName.BAGEL);
         }};
-        SpecialOffer coffeAndBagelOffer = new SpecialOfferCombination("COFB", offerItems, 1.25);
-
-        this.specialOffers.add(BAGOsixMultiPriceOffer);
-        this.specialOffers.add(BAGEsixMultiPriceOffer);
-        this.specialOffers.add(BAGPtwelveMultiPriceOffer);
-        this.specialOffers.add(coffeAndBagelOffer);
+        SpecialOfferCombination coffeAndBagelOffer = new SpecialOfferCombination(offerItems, 1.25);
+        this.specialOffersCombination.add(coffeAndBagelOffer);
     }
 
     public Map<String, InventoryItem> getAllItems() {
@@ -94,8 +96,20 @@ public class Inventory {
     }
 
     // Get all special offers
-    public ArrayList<SpecialOffer> getSpecialOffers() {
-        return specialOffers;
+    // TODO: Check this structure, dublication code
+//    public ArrayList<SpecialOffer> getSpecialOffers(SpecialOffer type) {
+//        if (type instanceof SpecialOfferMultiPrice) {
+//            return specialOffersMultiPrice;
+//        }
+//        return specialOffersCombination;
+//    }
+
+    public ArrayList<SpecialOfferMultiPrice> getSpecialOffersMultiPrice() {
+        return specialOffersMultiPrice;
+    }
+
+    public ArrayList<SpecialOfferCombination> getSpecialOffersCombination() {
+        return specialOffersCombination;
     }
 
     public InventoryItem getItem(String SKU) {
