@@ -6,6 +6,7 @@ import com.booleanuk.core.basket.BasketItem;
 import com.booleanuk.core.basket.Coffee;
 import com.booleanuk.core.inventory.Inventory;
 import com.booleanuk.core.inventory.SpecialOffer;
+import com.booleanuk.core.inventory.SpecialOfferCombination;
 import com.booleanuk.core.inventory.SpecialOfferMultiPrice;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -125,32 +126,84 @@ public class PriceCalculatorTest {
     }
 
 
-//
-//    @Test
-//    public void calculateCombinationDiscountShouldReturnDiscount() {
-//        inventory = new Inventory();
-//        ArrayList<SpecialOffer> specialOffers = inventory.getSpecialOffers();
-//
-//        basket = new Basket(new Inventory());
-//        basket.add(new Coffee("COFB"));
-//        basket.add(new Bagel("BAGE", Arrays.asList("FILS","FILB")));
-//        basket.add(new Bagel("BAGP"));
-//
-//        Map<Integer, BasketItem> basketItems = basket.getAll();
-//
-//        priceCalculator = new PriceCalculator();
-//        double discount = priceCalculator.calculateDiscount(inventory, basketItems, specialOffers);
-//
-//        // Special offer for COFB: Coffee + Bagel for 1.25
-//
-//
-//        // TODO: If special offers are added to other coffee types, this test will not work
-//        // Coffee + Cheapest Bagel = 0.99 + 0.39 = 1.38
-//        // Coffee + other Bagel = 0.99 + 0.49 = 1,48
-//
-//        // Should use discount on cheapest Bagel first
-//        Assertions.assertEquals(1.38, discount);
-//    }
+    // TODO: Test fillings
+
+    @Test
+    public void calculateCombinationDiscountShouldReturnDiscount() {
+        inventory = new Inventory();
+        ArrayList<SpecialOfferCombination> specialOffers = inventory.getSpecialOffersCombination();
+
+        basket = new Basket(new Inventory());
+        basket.add(new Coffee("COFB"));
+        basket.add(new Bagel("BAGE", Arrays.asList("FILS","FILB")));
+        basket.add(new Bagel("BAGP"));
+        basket.add(new Bagel("BAGE"));
+        basket.add(new Bagel("BAGO"));
+        Map<Integer, BasketItem> basketItems = basket.getAll();
+
+        // Setup calculation and print result
+        priceCalculator = new PriceCalculator();
+        ArrayList<DiscountObjectCombination> discountList = priceCalculator.calculateSpecialOfferCombination(
+                inventory, basketItems, specialOffers);
+
+        for (DiscountObjectCombination d : discountList) {
+            System.out.println("Offer items: "+d.getOfferItems() +
+                    " x"+d.getNumOfDiscounts()+" discounts" +
+                    ", discount: "+d.getDiscountSum());
+        }
+
+        // Special offer for COFB: Coffee + Bagel for 1.25
+        // BAGE 0.49
+        // BAGP 0.39
+        // COFB 0.99
+        // (cheapest combo) Ordinary price 0.99 + 0.39 = 1.38
+        // Ordinary - specialPrice 1.38 - 1.25 = 0.13
+        Assertions.assertEquals(1, discountList.get(0).getNumOfDiscounts());
+        Assertions.assertEquals(0.13, discountList.get(0).getDiscountSum());
+    }
+
+    @Test
+    public void calculateCombinationDiscountShouldReturnDiscounts() {
+        inventory = new Inventory();
+        ArrayList<SpecialOfferCombination> specialOffers = inventory.getSpecialOffersCombination();
+
+        basket = new Basket(new Inventory());
+        basket.add(new Coffee("COFB"));
+        basket.add(new Bagel("BAGE", Arrays.asList("FILS","FILB")));
+        basket.add(new Bagel("BAGP"));
+        basket.add(new Bagel("BAGE"));
+        basket.add(new Bagel("BAGO"));
+        basket.add(new Coffee("COFW"));
+        Map<Integer, BasketItem> basketItems = basket.getAll();
+
+        // Setup calculation and print result
+        priceCalculator = new PriceCalculator();
+        ArrayList<DiscountObjectCombination> discountList = priceCalculator.calculateSpecialOfferCombination(
+                inventory, basketItems, specialOffers);
+
+        for (DiscountObjectCombination d : discountList) {
+            System.out.println("Offer items: "+d.getOfferItems() +
+                    " x"+d.getNumOfDiscounts()+" discounts" +
+                    ", discount: "+d.getDiscountSum());
+        }
+
+        // Special offer for COFB: Coffee + Bagel for 1.25
+        // BAGE 0.49
+        // BAGP 0.39
+        // COFB 0.99
+        // COFW 1.19
+
+        // (combo 1) Ordinary price 0.99 + 0.39 = 1.38
+        // Ordinary - specialPrice 1.38 - 1.25 = 0.13
+
+        // (combo 2) Ordinary price 1.19 + 0.49 = 1.68
+        // Ordinary - specialPrice 1.68 - 1.25 = 0.43
+
+        // 0.13 + 0.43 = 0.56
+
+        Assertions.assertEquals(2, discountList.get(0).getNumOfDiscounts());
+        Assertions.assertEquals(0.56, discountList.get(0).getDiscountSum());
+    }
 
 
 
