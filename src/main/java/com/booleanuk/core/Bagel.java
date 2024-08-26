@@ -19,7 +19,7 @@ public class Bagel extends Product {
     @Override
     public String toString() {
         return super.toString()+
-                " filling=" + filling +
+                " filling= " + filling +
                 '}';
     }
 }
