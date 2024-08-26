@@ -114,7 +114,7 @@ public class View {
         }
         System.out.println("Choose a bagel");
         for (int i = 0; i < bagels.size(); i++) {
-            System.out.printf("%h. %s%n", i + 1, bagels.get(i).toString());
+            System.out.printf("%h. %s%n", i + 1, bagels.get(i).name());
         }
         System.out.println("Please write what you want");
         int output = getInt() - 1;
@@ -178,6 +178,6 @@ public class View {
         System.out.print("Total Cost");
         System.out.printf("%24.2f%n", totCost);
         System.out.print("Total Saved");
-        System.out.printf("%23.2f", totDisc);
+        System.out.printf("%23.2f%n", totDisc);
     }
 }

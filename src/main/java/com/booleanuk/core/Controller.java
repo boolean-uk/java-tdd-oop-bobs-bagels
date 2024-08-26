@@ -81,6 +81,29 @@ public class Controller {
                     keepRunning = false;
                     view.printExit();
                     break;
+                case 12:
+                    ArrayList<Triple<String, String, Float>> ingredients = new ArrayList<>();
+                    ingredients.add(Controller.prices.get("FILB"));
+                    for (int i = 0; i < 4; i++) {
+                        basket.addProduct(new Bagel(Controller.prices.get("BGLO"), ingredients));
+                    }
+                    ingredients.add(Controller.prices.get("FILC"));
+                    for (int i = 0; i < 4; i++) {
+                        basket.addProduct(new Bagel(Controller.prices.get("BGLE"), ingredients));
+                    }
+                    ingredients.add(Controller.prices.get("FILX"));
+                    for (int i = 0; i < 4; i++) {
+                        basket.addProduct(new Bagel(Controller.prices.get("BGLS"), ingredients));
+                    }
+                    ingredients.add(Controller.prices.get("FILS"));
+                    for (int i = 0; i < 4; i++) {
+                        basket.addProduct(new Bagel(Controller.prices.get("BGLP"), ingredients));
+                    }
+                    System.out.println("16 bagels added!");
+                    basket.addProduct(new Coffee(Controller.prices.get("COFC")));
+                    basket.addProduct(new Coffee(Controller.prices.get("COFB")));
+                    System.out.println("2 coffees added!");
+                    break;
                 default:
                     keepRunning = false;
                     view.printExit();
