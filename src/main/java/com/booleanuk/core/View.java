@@ -17,6 +17,7 @@ public class View {
         System.out.println("4. See total cost");
         System.out.println("5. Add Coffee");
         System.out.println("6. Get receipt and clear basket");
+        System.out.println("\n(For testing) 12. Add 16 bagels and 2 coffees of various types");
 
         return getInt();
     }
@@ -114,7 +115,7 @@ public class View {
         }
         System.out.println("Choose a bagel");
         for (int i = 0; i < bagels.size(); i++) {
-            System.out.printf("%h. %s%n", i + 1, bagels.get(i).name());
+            System.out.printf("%d. %s%n", i + 1, bagels.get(i).name());
         }
         System.out.println("Please write what you want");
         int output = getInt() - 1;
