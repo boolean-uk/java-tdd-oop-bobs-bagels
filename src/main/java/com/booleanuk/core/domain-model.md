@@ -94,28 +94,35 @@
 |                                | `-List<Integer> linkedFillingIds`       | `getLinkedFillingIds`                       | Get a list of basket item ids' (the ids' of the fillings that belongs to this bagel).                              | List<Integer>                                                 |
 | `Filling` extends `BasketItem` |                                         |                                             |                                                                                                                    |                                                  |
 |                                |                                         |                                             |                                                                                                                    |                                                  |
+| `BasketItemFormatted`          |                                         |                                             | (Extension 2 and 3)                                                                                                |                                                  |
+|                                |                                         |                                             |                                                                                                                    |                                                  |
 | `InvalidBasketItemException`   |                                         |                                             |                                                                                                                    |                                                  |
 | `MaxCapacityException`         |                                         |                                             |                                                                                                                    |                                                  |
 
 ## Package: printgenerator
-| Classes                                       | Variables                                   | Methods                                                                 | Scenario                                | Output |
-|-----------------------------------------------|---------------------------------------------|-------------------------------------------------------------------------|-----------------------------------------|--------|
-| `PrintGenerator`                              |                                             | `printCenterTitle(String text, int totalWidth)`                         | Center test in console/terminal output. |        |
-|                                               | `                                           | `print()`                                                               |                                         |        |
-|                                               |                                             |                                                                         |                                         |        |
-| `PrintInventoryMenu` extends `PrintGenerator` | `Map<String, InventoryItem> inventoryItems` | `printMenuPart(ProductName productName, String title, int outputWidth)` |                                         |        |
-|                                               |                                             | @Override `print()`                                                     |                                         |        |
-|                                               |                                             |                                                                         |                                         |        |
-| `PrintBasketItems` extends `PrintGenerator`   | `Inventory inventory`                       |                                                                         |                                         |        |
-|                                               | `Map<Integer, BasketItem> basketItems`      |                                                                         |                                         |        |
-|                                               | `double basketTotalCost`                    |                                                                         |                                         |        |
-|                                               |                                             | @Override `print()`                                                     |                                         |        |
+| Classes                                         | Variables                                   | Methods                                                                 | Scenario                                | Output |
+|-------------------------------------------------|---------------------------------------------|-------------------------------------------------------------------------|-----------------------------------------|--------|
+| `PrintGenerator`                                |                                             | `printCenterTitle(String text, int totalWidth)`                         | Center test in console/terminal output. |        |
+|                                                 | `                                           | `print()`                                                               |                                         |        |
+|                                                 |                                             |                                                                         |                                         |        |
+| `PrintInventoryMenu` extends `PrintGenerator`   | `Map<String, InventoryItem> inventoryItems` | `printMenuPart(ProductName productName, String title, int outputWidth)` |                                         |        |
+|                                                 |                                             | @Override `print()`                                                     |                                         |        |
+|                                                 |                                             |                                                                         |                                         |        |
+| `PrintBasketItems` extends `PrintGenerator`     | `Inventory inventory`                       |                                                                         |                                         |        |
+|                                                 | `Map<Integer, BasketItem> basketItems`      |                                                                         |                                         |        |
+|                                                 | `double basketTotalCost`                    |                                                                         |                                         |        |
+|                                                 |                                             | @Override `print()`                                                     |                                         |        |
+|                                                 |                                             |                                                                         |                                         |        |
+| `PrintReceipt` extends `PrintGenerator`         |                                             |                                                                         | (Extension 2)                           |        |
+| `PrintDiscountReceipt` extends `PrintGenerator` |                                             |                                                                         | (Extension 3)                            |        |
 
 # Class Diagram
-## Diagram
-TODO: UPDATE....
-![Class Diagram](/assets/images/gleek_class-diagram.png)
 
-## Code
-TODO: .....
+<!-- <img src="/assets/images/class_diagram_inventory.png" width="800">  
+<img src="/assets/images/class_diagram_basket.png" width="800">  
+<img src="/assets/images/class_diagram_printGenerator.png" width="800">  -->
+
+ ![Class Diagram](/assets/images/class_diagram_inventory.png) 
+ ![Class Diagram](/assets/images/class_diagram_basket.png) 
+ ![Class Diagram](/assets/images/class_diagram_printGenerator.png) 
 

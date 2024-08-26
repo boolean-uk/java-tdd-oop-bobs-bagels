@@ -198,20 +198,38 @@ public class BasketTest {
         for (int i = 0; i < 3; i++) {
             basket.add(new Bagel("COFB"));
         }
+        basket.add(new Bagel("BAGE", Arrays.asList("FILS","FILB")));
 
         basket.printReceipt();
 
-        // Everything Bagel, 6, 2.49
-        // TODO: How to add test here? Have test in priceCalculator
+        // NOTE Tests are in priceCalculator
     }
 
     // Extension 3
-//    @Test
-//    public void printDiscountReceipt() {
-//        inventory = new Inventory();
-//        basket = new Basket(new Inventory());
-//
-//        basket.printReceipt()
-//
-//    }
+    @Test
+    public void printDiscountReceipt() {
+        inventory = new Inventory();
+        basket = new Basket(new Inventory());
+        basket.changeMaxCapacity(40);
+
+        for (int i = 0; i < 2; i++) {
+            basket.add(new Bagel("BAGO"));
+        }
+
+        for (int i = 0; i < 12; i++) {
+            basket.add(new Bagel("BAGP"));
+        }
+
+        for (int i = 0; i < 6; i++) {
+            basket.add(new Bagel("BAGE"));
+        }
+
+        for (int i = 0; i < 3; i++) {
+            basket.add(new Bagel("COFB"));
+        }
+        basket.add(new Bagel("BAGE", Arrays.asList("FILS","FILB")));
+        basket.printDiscountReceipt();
+
+        // NOTE Tests are in priceCalculator
+    }
 }

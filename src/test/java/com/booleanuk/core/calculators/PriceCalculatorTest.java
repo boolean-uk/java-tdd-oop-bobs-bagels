@@ -209,5 +209,5 @@ public class PriceCalculatorTest {
     }
 
     // TODO:
-    // Check why BGLO doesn't exist - WRITE IN README THAT I HAVE DIFFERENT SKU's
+    // NOTE:  I have different SKU's than in the examples because I create SKU differently
 }

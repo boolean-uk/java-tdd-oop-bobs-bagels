@@ -1,4 +1,10 @@
 # Bob's Bagels OOP
+
+NOTES!
+- I have done Core and Extension 1-3
+- The classes printInventoryMenu and printInventoryBasket were created during the core part and are not a part of the requirements
+- I did overthink a lot in this exercise, I'm not happy with all parts at the end, I think it could be much more simplified.
+- There are some code duplications and I have commented "TODO:" on things I'm unsure about or things I think could be designed better.
  
 ## Core requirements
 - [x] #1 I'd like to add a specific type of bagel to my basket.
@@ -60,3 +66,34 @@ if discount is Coffe + Bagel = 1.33
 ```
 
 ## Extension 2
+
+### User Stories
+
+```
+1.
+As a customer,
+So I can see that the order is correct,
+I want to have a receipts what shows each item, the price, and how many of each item I ordered.  
+```
+
+```
+2.
+As a customer,
+So I can see an overview of my order,
+I want to see the total cost of my order the receipt. 
+```
+
+```
+3.
+As a customer,
+So I can know when I placed my order,
+I want to see the date and time for the order on the receipt. 
+```
+
+### Comments
+- Added printReceipt() in Basket
+- Added PrintReceipt which extends PrintGenerator
+
+## Extension 3
+- Added printDiscountReceipt() in Basket
+- Added PrintDiscountReceipt which extends PrintGenerator

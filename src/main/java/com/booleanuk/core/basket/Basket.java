@@ -3,9 +3,11 @@ package com.booleanuk.core.basket;
 import com.booleanuk.core.calculators.DiscountObjectCombination;
 import com.booleanuk.core.calculators.DiscountObjectMultiPrice;
 import com.booleanuk.core.calculators.PriceCalculator;
+import com.booleanuk.core.enums.ProductName;
 import com.booleanuk.core.inventory.Inventory;
 import com.booleanuk.core.inventory.InventoryItem;
 import com.booleanuk.core.printgenerator.PrintBasketItems;
+import com.booleanuk.core.printgenerator.PrintDiscountReceipt;
 import com.booleanuk.core.printgenerator.PrintGenerator;
 import com.booleanuk.core.printgenerator.PrintReceipt;
 
@@ -229,6 +231,8 @@ public class Basket {
         printGenerator.print();
     }
 
+
+    // TODO: Duplication of code, poor solution, should redo
     public void printReceipt() {
 
         ArrayList<DiscountObjectMultiPrice> itemsAndDiscounts = priceCalculator.calculateSpecialOfferMultiPrice(
@@ -255,9 +259,10 @@ public class Basket {
 
             InventoryItem inventoryItem = this.inventory.getItem(item.getSKU());
             String variant = inventoryItem.getVariant().toString();
-            String name = inventoryItem.getName().getString();
 
-            String combinedName = variant + " " + name;
+            String name = inventoryItem.getName().getString();
+            String combinedName = name + " ("+variant.toLowerCase()+")";
+
             int amount;
             double price;
             double discount = item.getDiscount();
@@ -289,11 +294,132 @@ public class Basket {
                 printableListItems.add(formattedItem);
                 totalCost += price;
             }
+        }
 
+        // Add fillings as separate list, half hardcoded
+        ArrayList<BasketItemFormatted> fillingsList = new ArrayList<>();
+        for (BasketItem item : this.basketItems.values()) {
+
+            InventoryItem inventoryItem = this.inventory.getItem(item.getSKU());
+            String variant = inventoryItem.getVariant().toString();
+            String name = inventoryItem.getName().getString();
+            double price = inventoryItem.getPrice();
+
+            if (inventoryItem.getName() == ProductName.FILLING) {
+
+                String combinedName = name + " ("+variant.toLowerCase()+")";
+
+                BasketItemFormatted formattedItem = new BasketItemFormatted(
+                        combinedName,
+                        1,
+                        price,
+                        0
+                );
+            }
+            totalCost += price;
         }
 
         totalCost = priceCalculator.round((float) totalCost, 2);
 
+        printGenerator = new PrintReceipt(
+                printableListItems,
+                totalCost
+        );
+
+        printGenerator.print();
+    }
+
+    public void printDiscountReceipt() {
+
+        ArrayList<DiscountObjectMultiPrice> itemsAndDiscounts = priceCalculator.calculateSpecialOfferMultiPrice(
+                this.inventory,
+                this.basketItems,
+                this.inventory.getSpecialOffersMultiPrice()
+        );
+        ArrayList<DiscountObjectCombination> additionalDiscounts = priceCalculator.calculateSpecialOfferCombination(
+                this.inventory,
+                this.basketItems,
+                this.inventory.getSpecialOffersCombination()
+        );
+
+
+        // Create a list of printable objects
+        // Calculates MultiPrice discounts
+        double totalCost = 0;
+        ArrayList<BasketItemFormatted> printableListItems = new ArrayList<>();
+        for (DiscountObjectMultiPrice item : itemsAndDiscounts) {
+
+            // TODO: Refactor, unnecessary calculation
+            boolean hasDiscountItems = item.getNumOfDiscountItems() != 0;
+            boolean hasOrdinaryItems = item.getNumOfOrdinaryItems() != 0;
+
+            InventoryItem inventoryItem = this.inventory.getItem(item.getSKU());
+            String variant = inventoryItem.getVariant().toString();
+
+            String name = inventoryItem.getName().getString();
+            String combinedName = name + " ("+variant.toLowerCase()+")";
+
+            int amount;
+            double price;
+            double discount;
+
+            if (hasDiscountItems) {
+                amount = item.getNumOfDiscountItems();
+                price = item.getPriceForDiscountItems();
+                discount = item.getDiscount();
+
+                BasketItemFormatted formattedItem = new BasketItemFormatted(
+                        combinedName,
+                        amount,
+                        price,
+                        discount
+                );
+                printableListItems.add(formattedItem);
+                totalCost += price;
+            }
+
+            if (hasOrdinaryItems) {
+                amount = item.getNumOfOrdinaryItems();
+                price = item.getPriceForOrdinaryItems();
+                discount = 0.0;
+
+                BasketItemFormatted formattedItem = new BasketItemFormatted(
+                        combinedName,
+                        amount,
+                        price,
+                        discount
+                );
+                printableListItems.add(formattedItem);
+                totalCost += price;
+            }
+        }
+
+        // Add fillings as separate list, half hardcoded
+        ArrayList<BasketItemFormatted> fillingsList = new ArrayList<>();
+        for (BasketItem item : this.basketItems.values()) {
+
+            InventoryItem inventoryItem = this.inventory.getItem(item.getSKU());
+            String variant = inventoryItem.getVariant().toString();
+            String name = inventoryItem.getName().getString();
+            double price = inventoryItem.getPrice();
+
+            if (inventoryItem.getName() == ProductName.FILLING) {
+
+                String combinedName = name + " ("+variant.toLowerCase()+")";
+
+                BasketItemFormatted formattedItem = new BasketItemFormatted(
+                        combinedName,
+                        1,
+                        price,
+                        0
+                );
+            }
+            totalCost += price;
+        }
+
+        totalCost = priceCalculator.round((float) totalCost, 2);
+
+        // TODO: Add combination offer
         // Calculate combination discounts
 //        int additionalDiscount = 0;
 //        for (DiscountObjectCombination item : additionalDiscounts) {
@@ -301,7 +427,7 @@ public class Basket {
 //        }
 //        totalCost = totalCost - additionalDiscount;
 
-        printGenerator = new PrintReceipt(
+        printGenerator = new PrintDiscountReceipt(
                 printableListItems,
                 totalCost
         );
