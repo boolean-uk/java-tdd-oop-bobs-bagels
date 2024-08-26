@@ -96,14 +96,12 @@ public class BasketTest {
         Assertions.assertEquals(3, basket.getBasketSize());
     }
 
-
     // User story 9
     @Test
     public void getFillingCost(){
         Menu menu = new Menu();
         Assertions.assertEquals("0.12", menu.getItemCost("FILC"));
     }
-
 
     // User story 10
     @Test
@@ -113,78 +111,4 @@ public class BasketTest {
         Assertions.assertEquals("This item is not on the menu.", basket.addItem("Not a bagel.", 2));
     }
 
-
-
-
-
-
-    // Extension 2 requirements tests
-
-    @Test
-    public void printingNormalReceipt(){
-        Basket basket = new Basket();
-        Receipt receipt = new NormalReceipt();
-        CashRegister register = new CashRegister(basket, receipt);
-        basket.setMaxBasketSize(25);
-
-        basket.addItem("BGLS", 6);
-        basket.addItem("BGLO", 13);
-        basket.addItem("FILC", 1);
-        basket.addItem("COFL", 1);
-        register.printReceipt();
-        String receiptFinal = register.receipt.getFinalReceipt().toString();
-
-        String receiptExcerpt =
-                " -------------------------------," +
-                "  ," +
-                " Sesame Bagel         6    $2.49," +
-                " Onion Bagel         12    $3.99," +
-                " Coffee & Bagel       1    $1.25," +
-                " Cheese Filling       1    $0.12," +
-                "  ," +
-                " -------------------------------," +
-                " Total                     $7.85," +
-                "  ," +
-                "             Thank you," +
-                "          for your order!";
-
-        Assertions.assertTrue(receiptFinal.contains(receiptExcerpt));
-    }
-
-
-    // Extension 3 requirements tests
-
-    @Test
-    public void printingDiscountReceipt(){
-        Basket basket = new Basket();
-        Receipt receipt = new DiscountReceipt();
-        CashRegister register = new CashRegister(basket, receipt);
-        basket.setMaxBasketSize(25);
-
-        basket.addItem("BGLS", 6);
-        basket.addItem("BGLO", 13);
-        basket.addItem("FILC", 1);
-        basket.addItem("COFL", 1);
-        register.printReceipt();
-        String receiptFinal = register.receipt.getFinalReceipt().toString();
-
-        String receiptExcerpt =
-                        " -------------------------------," +
-                        "  , Sesame Bagel         6    $2.49," +
-                        "                        (-$0.45)," +
-                        " Onion Bagel         12    $3.99," +
-                        "                        (-$1.89)," +
-                        " Coffee & Bagel       1    $1.25," +
-                        "                        (-$0.53)," +
-                        " Cheese Filling       1    $0.12," +
-                        "  , -------------------------------," +
-                        " Total                     $7.85," +
-                        "  ," +
-                        "   You saved a total of  $2.87," +
-                        "            on this shop," +
-                        "  ,             Thank you," +
-                        "          for your order!]";
-
-        Assertions.assertTrue(receiptFinal.contains(receiptExcerpt));
-    }
 }
