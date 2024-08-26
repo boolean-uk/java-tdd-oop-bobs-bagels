@@ -3,8 +3,6 @@ package com.booleanuk.core;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import static java.lang.Math.round;
-
 public class BasketTest {
 
     @Test
@@ -52,7 +50,6 @@ public class BasketTest {
         basket.addItem("BGLP");
         basket.addItem("BGLE");
         basket.addItem("BGLE");
-
 
         basket.addFilling("BGLE", "FILC");
         basket.addFilling("BGLE", "FILC");
@@ -108,12 +105,14 @@ public class BasketTest {
         basket.addItem("BGLP");
         basket.addItem("BGLP");
         basket.addItem("BGLP");
+        basket.addItem("BGLP");
+        basket.addItem("BGLP");
         basket.addFilling("BGLP", "FILC");
-        basket.addFilling("BGLP", "FILB");
+        basket.addFilling("BGLP", "FILC");
 
         double newTotal = basket.addDiscount();
 
-        Assertions.assertEquals(5.79, newTotal, 0.005d);
+        Assertions.assertEquals(6.72, newTotal, 0.005d);
     }
 
     @Test
@@ -130,8 +129,6 @@ public class BasketTest {
         basket.addItem("BGLP");
         basket.addItem("BGLP");
         basket.addItem("BGLP");
-        basket.addItem("BGLP");
-        basket.addItem("BGLP");
         basket.addItem("BGLE");
         basket.addItem("BGLE");
         basket.addItem("BGLE");
@@ -140,14 +137,18 @@ public class BasketTest {
         basket.addItem("BGLE");
         basket.addItem("BGLO");
         basket.addItem("BGLO");
+        basket.addItem("BGLO");
         basket.addItem("COFB");
         basket.addItem("COFB");
         basket.addItem("COFB");
+        basket.addFilling("BGLE", "FILB");
+        basket.addFilling("BGLE", "FILB");
 
 
         double newTotal = basket.addDiscount();
+        basket.printReceipt();
 
-        //Assertions.assertEquals(5.79, newTotal, 0.005d);
+        Assertions.assertEquals(9.95, newTotal, 0.005d);
     }
 
 

@@ -40,7 +40,6 @@ public class Basket {
             return false;
         }
 
-
         //TODO
         //Replace instanceof with just .equals(p.getName())
         for (Product p: inventory){
@@ -58,7 +57,7 @@ public class Basket {
                     }
                     return true;
                 }else{
-                    System.out.println("Cannot buy filling on it's own, add it to a bagel dummy");
+                    System.out.println("Cannot buy filling on it's own, add it to a bagel");
                     return false;
                 }
             }
@@ -92,7 +91,7 @@ public class Basket {
                 //found bagel, now see if filling is in inventory
                 for (Product filling: inventory){
                     if(filling.getSKU().equals(fillingSKU) && ((Bagel) p).getFilling() == null){
-                        System.out.println("Adding filling " + filling.getVariant() + " to bagel at a cost of " + filling.getPrice());
+                        System.out.println("Adding filling " + filling.getVariant() + " to " + p.getVariant() + " bagel at a cost of " + filling.getPrice());
                         ((Bagel) p).setFilling((Filling) filling);
                         totalPrice += filling.getPrice();
                         return true;
@@ -107,7 +106,6 @@ public class Basket {
     //TODO
     //REfactor addDiscount() to use helper methods and reduce code repetition
     public double addDiscount() {
-        System.out.println("Total price before discount " + totalPrice);
         int bagelCounter = 0;
         int coffeeCounter = 0;
         ArrayList<Bagel> discountedBagelsList = new ArrayList<>();
@@ -142,18 +140,14 @@ public class Basket {
             totalPrice+= 3.99; // For each 12 stack discount, add this price to the total
         }
 
-        System.out.println("After applying 12 stack discount, there are now " + bagelsAfterDiscount12 + " bagels left");
-
         if(bagelsAfterDiscount12 >= 6){
             //apply the 6 bagel discount
             for(int j = 0; j < 6; j++){
                 totalPrice -= discountedBagelsList.get(j).getPrice();
-                System.out.println("price deducted from " + discountedBagelsList.get(j));
             }
             totalPrice += 2.49;
             bagelsAfterDiscount12 -= 6;
         }
-        System.out.println("Bagels remaining " + bagelsAfterDiscount12);
 
         //Calculate coffee + bagel pairs for the remaining discounts
         for(int i = 0; i < bagelsAfterDiscount12; i++){
@@ -165,7 +159,6 @@ public class Basket {
         }
 
         System.out.println("Total price after discounts " + String.format("%.02f",totalPrice));
-        System.out.println("You saved a total of " + String.format("%.02f",totalPrice));
 
         return totalPrice;
     }
@@ -179,6 +172,7 @@ public class Basket {
         Map<String, Integer> fillingVariantCount = new HashMap<>();
         Map<String, Double> fillingVariantPrice = new HashMap<>();
 
+        System.out.println();
         System.out.println("  ~~~ Bob's Bagels ~~~   ");
         System.out.println("----------------------------");
 
@@ -201,7 +195,8 @@ public class Basket {
         printReceiptLines("Fillings", fillingVariantCount, fillingVariantPrice);
         printReceiptLines("Coffees", fillingVariantCount, fillingVariantPrice);
 
-        double originalPrice = calculateTotal(bagelVariantPrice) + calculateTotal(fillingVariantPrice) + calculateTotal(coffeeVariantPrice); //Recalculate undiscounted price (Not ideal solution)
+        double originalPrice = calculateTotal();
+        //double originalPrice = calculateTotal(bagelVariantPrice) + calculateTotal(fillingVariantPrice) + calculateTotal(coffeeVariantPrice); //Recalculate undiscounted price (Not ideal solution)
         double savings = originalPrice - totalPrice;
         System.out.println("----------------------------");
         System.out.println("Original price: $" + String.format("%.02f", originalPrice));
@@ -210,7 +205,6 @@ public class Basket {
         if(savings > 0){
             System.out.println("You saved a total of: $" + String.format("%.02f", savings) + " on this shop :)");
         }
-
     }
 
     private void addToMaps(Product p, Map<String, Integer> countMap, Map<String, Double> priceMap){
@@ -230,41 +224,18 @@ public class Basket {
         }
     }
 
-    private double calculateTotal(Map<String, Double> priceMap){
+    private double calculateTotal(){
         double total = 0;
-        for (double price : priceMap.values()){
-            total += price;
+        for (Product p: basketContent){
+            total += p.getPrice();
+            if(p.getName().equals("Bagel")){
+                if(((Bagel) p).getFilling()!= null){
+                    total += ((Bagel) p).getFilling().getPrice();
+                }
+
+            }
         }
         return total;
-    }
-
-
-    //Sanity check
-    public static void main(String[] args) {
-        Basket basket = new Basket();
-        basket.changeBasketSize(20);
-        basket.addItem("BGLP");
-        basket.addItem("BGLP");
-        basket.addItem("BGLP");
-        basket.addItem("BGLP");
-        basket.addItem("BGLP");
-        basket.addItem("BGLP");
-        basket.addItem("BGLP");
-        basket.addItem("BGLP");
-        basket.addItem("BGLP");
-        basket.addItem("BGLP");
-        basket.addItem("BGLP");
-        basket.addItem("BGLP");
-        basket.addItem("BGLP");
-        basket.addItem("BGLP");
-        basket.addItem("BGLP");
-        basket.addItem("BGLP");
-        basket.addItem("BGLO");
-        basket.addFilling("BGLP", "FILC");
-
-        double newPrice = basket.addDiscount();
-        basket.printReceipt();
-
     }
 
 
