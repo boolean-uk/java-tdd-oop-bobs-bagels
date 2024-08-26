@@ -10,6 +10,12 @@ public class DiscountObjectCombination {
     private int numOfDiscounts;
     private double discountSum;
 
+    public DiscountObjectCombination(ArrayList<ProductName> offerItems, int numOfDiscounts, double discountSum) {
+        this.offerItems = offerItems;
+        this.numOfDiscounts = numOfDiscounts;
+        this.discountSum = discountSum;
+    }
+
     public ArrayList<ProductName> getOfferItems() {
         return offerItems;
     }

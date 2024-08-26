@@ -32,11 +32,22 @@ public class PriceCalculator {
         return rounded;
     }
 
-    public ArrayList<DiscountObjectMultiPrice> calculateSpecialOfferMultiPrice(Inventory inventory, Map<Integer, BasketItem> basketItems, ArrayList<SpecialOfferMultiPrice> specialOffers) {
-
+    /**
+     * Calculate Multi-Price discounts and returns an ArrayList with
+     * all the items from the basket together with eventual discounts.
+     * @param inventory
+     * @param basketItems
+     * @param specialOffers
+     * @return
+     */
+    public ArrayList<DiscountObjectMultiPrice> calculateSpecialOfferMultiPrice(
+            Inventory inventory, Map<Integer,
+            BasketItem> basketItems,
+            ArrayList<SpecialOfferMultiPrice> specialOffers)
+    {
         ArrayList<DiscountObjectMultiPrice> discountList = new ArrayList<>();
 
-        // Store list of SKU with number of occurrences.
+        // Store list of SKU with number of occurrences (basket items).
         HashMap<String, Integer> skuOccurrences = new HashMap<>();
         for (BasketItem item : basketItems.values()) {
 
@@ -90,172 +101,119 @@ public class PriceCalculator {
         return discountList;
     }
 
-    public double calculateDiscount(Inventory inventory, Map<Integer, BasketItem> basketItems, ArrayList<SpecialOffer> specialOffers) {
+    /**
+     * Calculates Combination discounts, and returns an ArrayList of discount objects with:
+     * A list of included product names of the items in the combination offer. E.g. 'COFFEE, BAGEL'
+     * the total discount price
+     * the number of discounts
+     * @param inventory
+     * @param basketItems
+     * @param specialOffers
+     * @return
+     */
+    public ArrayList<DiscountObjectCombination> calculateSpecialOfferCombination(
+            Inventory inventory, Map<Integer,
+            BasketItem> basketItems,
+            ArrayList<SpecialOfferCombination> specialOffers)
+    {
+        ArrayList<DiscountObjectCombination> discountList = new ArrayList<>();
 
-        double discount = 0;
-        ArrayList<DiscountObjectMultiPrice> discountObjectMultiPriceList = new ArrayList<>();
+        // TODO: Could this be simplified?
 
-        // Convert special offers to Hashmap
-        HashMap<String, SpecialOffer> specialOfferMap = new HashMap<>();
-//        for (SpecialOffer s : specialOffers) {
-//            specialOfferMap.put(s.getSKU(), s);
-//        }
+        // Calculate special offers for each offer.
+        // E.g. if there exist more than one offer like 'Coffee + Bagel for 1.25', 'Juice + cookie for 0.5'
+        for (SpecialOfferCombination offer : specialOffers) {
 
-        // Count occurrences of discount items
-        HashMap<String, Integer> discountItems = new HashMap<>();
-        for (BasketItem item : basketItems.values()) {
+            ArrayList<ProductName> offerItems = offer.getOfferItems();
 
-            String key_sku = item.getSKU();
+            // Store an copy of an InventoryITem for each basket item, sorted into ProductNames (e.g. COFFEE, BAGEL),
+            // The ProductNames represents the combination of items that offer includes, e.g. 'Coffee + Bagel' offer.
+            HashMap<ProductName, ArrayList<InventoryItem>> itemsSortedByProductName = new HashMap<>();
+            for (ProductName productName : offerItems) {
+                for (BasketItem b : basketItems.values()) {
 
-            // Store the SKU as key, and count how many times it occurs for SKU's that have special offers
-            SpecialOffer offer = specialOfferMap.get(key_sku);
-            if (offer != null) {
+                    InventoryItem inventoryItem = inventory.getItem(b.getSKU());
 
-                if (discountItems.get(key_sku) == null) {
-                    discountItems.put(key_sku, 1);
-                } else {
-                    int numOfItems = discountItems.get(key_sku);
-                    discountItems.put(key_sku, numOfItems + 1);
-                }
-            }
-        }
+                    if (productName == inventoryItem.getName()){
 
-        for (Map.Entry<String, Integer> item : discountItems.entrySet()) {
+                        if (itemsSortedByProductName.get(productName) == null) {
+                            ArrayList<InventoryItem> list = new ArrayList<>();
+                            list.add(inventoryItem);
 
-            SpecialOffer offer = specialOfferMap.get(item.getKey());
+                            itemsSortedByProductName.put(productName, list);
+                        } else {
+                            ArrayList<InventoryItem> list = itemsSortedByProductName.get(productName);
+                            list.add(inventoryItem);
 
-            // The special price for the offer, and number of items in this basket that has that offer
-            double specialPrice = offer.getOfferPrice();
-            int numOfBasketItems = item.getValue();
-
-
-            //
-            // Multi-Price Offer
-            //
-            if (offer instanceof SpecialOfferMultiPrice) {
-
-                SpecialOfferMultiPrice multiPriceOffer = (SpecialOfferMultiPrice) offer;
-
-                // Get number of items required to get the offer
-                int minimumNumOfItems = multiPriceOffer.getNumOfItems();
-
-                if (numOfBasketItems < minimumNumOfItems) {
-                    // Too few items, no offer
-                    break;
-                }
-
-                // Count how many discounts
-                int numOfDiscounts = Math.floorDiv(numOfBasketItems, minimumNumOfItems);
-
-                // Get ordinary price for the item, from the inventory
-                double itemPrice = inventory.getItem(item.getKey()).getPrice();
-                double ordinaryPrice = minimumNumOfItems * itemPrice;
-                double diffPrice = ordinaryPrice - specialPrice;
-
-                // Calculate total discount for this offer
-                // add to discount
-                discount += numOfDiscounts * diffPrice;
-
-
-            //
-            // Combination Offer
-            //
-            } else if (offer instanceof SpecialOfferCombination) {
-
-                // TODO: I will assume that the offer Coffee + Bagel for 1.25, includes all coffee types and all bagel types.
-
-                SpecialOfferCombination combinationOffer = (SpecialOfferCombination) offer;
-
-                // Get combination of items required to get the offer
-                ArrayList<ProductName> offerItems = combinationOffer.getOfferItems();
-
-                // Store the number of occurrences for each offerItem (ProductName type)
-                HashMap<ProductName, ArrayList<String>> offerItemOccurrences = new HashMap<>();
-
-                for (ProductName productName : offerItems) {
-                    for (BasketItem b : basketItems.values()) {
-
-                        String b_SKU = b.getSKU();
-                        InventoryItem inventoryItem = inventory.getItem(b_SKU);
-
-                        if (productName == inventoryItem.getName()){
-
-                            if (offerItemOccurrences.get(productName) == null) {
-                                ArrayList<String> list = new ArrayList<>();
-                                list.add(b_SKU);
-
-                                offerItemOccurrences.put(productName, list);
-                            } else {
-                                ArrayList<String> list = offerItemOccurrences.get(productName);
-                                list.add(b_SKU);
-
-                                offerItemOccurrences.put(productName, list);
-                            }
+                            itemsSortedByProductName.put(productName, list);
                         }
                     }
                 }
+            }
 
-                // Find the list of least items, and save the size
-                int minItemSize = 0;
-                boolean isValidSpecialOffer = true;
-                for (ArrayList<String> skuList : offerItemOccurrences.values()) {
+            // Find the list of least items, and save the size
+            // This is to find how many offers the user will get based on the amount of
+            // combinations that exists in the basket
+            int minItemSize = -1;
+            boolean isValidSpecialOffer = true;
+            for (ArrayList<InventoryItem> itemList : itemsSortedByProductName.values()) {
 
-                    // If one or more list of SKU's doesn't contain anything, no special offers available
-                    if (skuList.size() == 0) {
-                        isValidSpecialOffer = false;
-                        break;
-                    } else if (skuList.size() < minItemSize) {
-                        minItemSize = skuList.size();
+                // If one or more list of basket items (inventory objects) doesn't contain anything,
+                // no special offers available
+                if (itemList.isEmpty()) {
+                    isValidSpecialOffer = false;
+                    break;
+
+                } else if (minItemSize == -1) {
+                    minItemSize = itemList.size();
+                } else if (itemList.size() < minItemSize) {
+                    minItemSize = itemList.size();
+                }
+            }
+
+            // Sort lists by price
+            // I assume that the offer will be valid on the cheapest products first
+            // Therefore I sort the lists by price
+            // Resource: https://www.geeksforgeeks.org/how-to-sort-an-arraylist-of-objects-by-property-in-java/
+            for (ArrayList<InventoryItem> itemList : itemsSortedByProductName.values()) {
+                itemList.sort((a, b) -> Double.compare(a.getPrice(), b.getPrice()));
+            }
+
+            // Caclucate discount
+            if (isValidSpecialOffer) {
+
+                int numOfDiscounts = 0;
+                double discount = 0.0;
+                double discountRounded = 0;
+                // Calculate number of discounts, and amount of discount
+                for (int i = 0; i < minItemSize; i++) {
+
+                    // Store the combination of items included in the offer
+                    // Starting with the cheapest ones.
+                    ArrayList<InventoryItem> combinationItems = new ArrayList<>();
+                    for (ArrayList<InventoryItem> itemList : itemsSortedByProductName.values()) {
+
+                        combinationItems.add(itemList.get(i));
                     }
+
+                    double ordinaryPrice = 0;
+                    for (InventoryItem item : combinationItems) {
+                        ordinaryPrice += item.getPrice();
+                    }
+                    double specialPrice = offer.getOfferPrice();
+                    double diffPrice = ordinaryPrice - specialPrice;
+
+                    // Update
+                    numOfDiscounts++;
+                    discount += diffPrice;
+                    discountRounded = this.round((float) discount, 2);
                 }
 
-
-                // Store the price for each offerItem into categories split by ProductName type
-                HashMap<ProductName, ArrayList<Double>> offerItemPrices = new HashMap<>();
-
-//                if (isValidSpecialOffer) {
-//
-//                    // Sort into ProductName, and store Price
-//                    for (ProductName productName : offerItems) {
-//
-//                        for (ArrayList<String> skuList : offerItemOccurrences.values()) {
-//
-//                            for (String sku : skuList) {
-//                                double price = inventory.getItem(sku).getPrice();
-//
-//                                if (offerItemPrices.get(sku) == null) {
-//                                    ArrayList<Double> list = new ArrayList<>();
-//                                    list.add(price);
-//
-//                                    offerItemPrices.put(sku, list);
-//                                } else {
-//                                    ArrayList<Double> list = offerItemPrices.get(sku);
-//                                    list.add(price);
-//
-//                                    offerItemPrices.put(sku, list);
-//                                }
-//                            }
-//                        }
-//                    }
-//
-//                    // Sort with the cheapest first
-//
-//                    // Loop minItemSize times
-//
-//                    // get ordinary price
-//
-//                    // Calculate difference
-//
-//                    //return discount
-//                }
-
-
-
+                discountList.add(new DiscountObjectCombination(offerItems, numOfDiscounts, discountRounded));
             }
+
         }
 
-        // TODO: instead of casting to float, change float to double in rest of the program
-
-        return this.round((float) discount, 2);
+        return discountList;
     }
 }
