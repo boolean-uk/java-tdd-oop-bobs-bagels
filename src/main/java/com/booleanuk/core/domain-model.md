@@ -9,10 +9,23 @@
 | `ProductName`    |           |         |          |        |
 
 ## Package: calculators
-| Classes           | Variables | Methods | Scenario | Output |
-|-------------------|-----------|---------|----------|--------|
-| `PriceCalculator` |           |         |          |        |
-| `SKUCalculator`   |           |         |          |        |
+| Classes                     | Variables                           | Methods                              | Scenario                                                                                                          | Output |
+|-----------------------------|-------------------------------------|--------------------------------------|-------------------------------------------------------------------------------------------------------------------|--------|
+| `DiscountObjectCombination` | `ArrayList<ProductName> offerItems` | `get/setOfferItems()`                | (Extension 1)                                                                                                     |        |
+|                             | `int numOfDiscounts`                | `get/setNumOfDiscounts()`            | (Extension 1)                                                                                                     |        |
+|                             | `double discountSum`                | `getDiscountSum()`                   | (Extension 1)                                                                                                     |        |
+|                             |                                     |                                      |                                                                                                                   |        |
+| `DiscountObjectMultiPrice`  | `String SKU`                        | `getSKU()`                           | (Extension 1)                                                                                                     |        |
+|                             | `int numberOfDiscounts`             | `getNumberOfDiscounts()`             | (Extension 1)                                                                                                     |        |
+|                             | `int numOfDiscountItems`            | `getNumOfDiscountItems()`            | (Extension 1)<br>Number of items for this SKU that is counted into the discount.<br>E.g.	6 items for '6 for 2.49' |        |
+|                             | `double discountSum`                | `getDiscount()`                      | (Extension 1)                                                                                                     |        |
+|                             | `int numOfOrdinaryItems`            | `getNumOfOrdinaryItems`              | (Extension 1)<br>Number of items for this SKU that doesn't have any discounts.                                    |        |
+|                             |                                     |                                      |                                                                                                                   |        |
+| `PriceCalculator`           |                                     | `calculateSpecialOfferMultiPrice()`  | (Extension 1)                                                                                                     |        |
+|                             |                                     | `calculateSpecialOfferCombination()` | (Extension 1)                                                                                                     |        |
+|                             |                                     |                                      |                                                                                                                   |        |
+| `SKUCalculator`             |                                     |                                      |                                                                                                                   |        |
+
 
 ## Package: inventory
 | Classes                                             | Variables                                     | Methods                                 | Scenario                                              | Output                       |
@@ -41,6 +54,11 @@
 | `FillingItem` extends `InventoryItem`               | @Ovverride `+setName()`                       |                                         |                                                       | ProductName                  |
 |                                                     |                                               |                                         |                                                       |                              |
 | `InventoryItemException` extends `RuntimeException` |                                               |                                         |                                                       |                              |
+|                                                     |                                               |                                         |                                                       |                              |
+| `SpecialOffer`                                      | `double offerPrice`                           |                                         | (Extension 1)                                         |                              |
+| `SpecialOfferCombination` extends `SpecialOffer`    | `ArrayList<ProductName> offerItems`           |                                         | (Extension 1)                                         |                              |
+| `SpecialOfferMultiPrice` extends `SpecialOffer`     | `String SKU`                                  |                                         | (Extension 1)                                         |                              |
+|                                                     | `int numOfItems`                              |                                         | (Extension 1)                                         |                              |
 
 ## Package: basket
 | Classes                        | Variables                               | Methods                                     | Scenario                                                                                                           | Output                                           |
