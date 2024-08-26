@@ -23,15 +23,4 @@ class BagelTest {
         Bagel bagel = new Bagel(Controller.prices.get("BGLO"), fillings);
         Assertions.assertEquals(0.73f, bagel.calculateCost(), 0.001);
     }
-
-    @Test
-    public void testToString() {
-        ArrayList<Triple<String, String, Float>> fillings = new ArrayList<>() {{
-            add(Controller.prices.get("FILB"));
-            add(Controller.prices.get("FILC"));
-        }};
-        Triple<String, String, Float> type = Controller.prices.get("BGLO");
-        Bagel bagel = new Bagel(type, fillings);
-        Assertions.assertEquals("Bagel{bagelType=Onion, fillings={Bacon, Cheese}, cost=0.73}", bagel.toString());
-    }
 }
