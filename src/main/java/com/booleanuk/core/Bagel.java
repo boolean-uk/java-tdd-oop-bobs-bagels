@@ -18,6 +18,7 @@ public class Bagel implements Product {
         this.fillings.addAll(fillings);
     }
 
+    @Override
     public float calculateCost() {
         return bagelType.c() + (float) fillings.stream().mapToDouble(Triple::c).sum();
     }
