@@ -40,24 +40,22 @@ public class Basket {
         } else if (bagels.size() >= 6) {
             return calculateDiscount(bagels, 6, 2.49f) + findDiscount();
         } else if (bagels.size() < unDiscountedProducts.size()) {
-            // Sort so Bagels are first, after that, sort by cost.
+            // Sort so Bagels are first, coffee after. After sort by cost, but coffee is sorted inversely.
             unDiscountedProducts.sort((o1, o2) -> switch (o1) {
                 case Bagel bagel when o2 instanceof Bagel ->
                         (int) (1000 * (((Bagel) o2).calculateBreadCost() - bagel.calculateBreadCost()));
                 case Coffee ignored when o2 instanceof Coffee ->
-                        (int) (1000 * (o2.calculateCost() - o1.calculateCost()));
+                        (int) (1000 * (o1.calculateCost() - o2.calculateCost()));
                 case Bagel ignored -> -1;
                 case null, default -> 1;
             });
 
 
-            int coffeeBagelDeals = (unDiscountedProducts.size() - Math.abs(unDiscountedProducts.size() - bagels.size()));
+            int coffeeSize = products.size() - bagels.size();
+            int coffeeBagelDeals = Math.min(bagels.size(), coffeeSize);
             float sumCost = 0.0f;
             for (int i = 0; i < coffeeBagelDeals; i++) {
-                unDiscountedProducts.removeFirst();
-            }
-            for (int i = 0; i < coffeeBagelDeals; i++) {
-                sumCost += unDiscountedProducts.get(i).calculateCost() + ((Bagel) bagels.get(i)).calculateBreadCost();
+                sumCost += unDiscountedProducts.get(unDiscountedProducts.size() - 1 - i).calculateCost() + ((Bagel) bagels.get(i)).calculateBreadCost();
             }
             return sumCost - 1.25f * coffeeBagelDeals;
         }
@@ -96,7 +94,8 @@ public class Basket {
         for (Product p: products) {
             sum += p.calculateCost();
         }
-        sum -= findDiscount();
+        float discount = findDiscount();
+        sum -= discount;
         unDiscountedProducts = new ArrayList<>(products);
         return sum;
     }
