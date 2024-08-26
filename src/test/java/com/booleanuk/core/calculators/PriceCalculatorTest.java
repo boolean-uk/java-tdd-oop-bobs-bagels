@@ -20,6 +20,9 @@ public class PriceCalculatorTest {
     Inventory inventory;
     Basket basket;
 
+    /**
+     * EXTENSION 1
+     */
     @Test
     public void calculateBagelOnionDicountShouldGetDiscount() {
         inventory = new Inventory();
@@ -205,11 +208,6 @@ public class PriceCalculatorTest {
         Assertions.assertEquals(0.56, discountList.get(0).getDiscountSum());
     }
 
-
-
-
-
     // TODO:
     // Check why BGLO doesn't exist - WRITE IN README THAT I HAVE DIFFERENT SKU's
-    // Work with calculateDiscount()
 }
