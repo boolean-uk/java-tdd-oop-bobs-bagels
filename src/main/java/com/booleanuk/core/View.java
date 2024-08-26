@@ -16,6 +16,7 @@ public class View {
         System.out.println("3. Change basket size");
         System.out.println("4. See total cost");
         System.out.println("5. Add Coffee");
+        System.out.println("6. Get receipt and clear basket");
 
         return getInt();
     }
