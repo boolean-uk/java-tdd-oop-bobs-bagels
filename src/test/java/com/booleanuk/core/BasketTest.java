@@ -110,6 +110,18 @@ class BasketTest {
     }
 
     @Test
+    public void testCalculateCostOn2BagelsAnd1Coffee() {
+        Basket basket = new Basket(12);
+        Bagel bagel1 = new Bagel(Controller.prices.get("BGLO"), Controller.prices.get("FILB"));
+        Bagel bagel2 = new Bagel(Controller.prices.get("BGLP"), Controller.prices.get("FILB"));
+        Coffee coffee = new Coffee(Controller.prices.get("COFC"));
+        basket.addProduct(bagel1);
+        basket.addProduct(bagel2);
+        basket.addProduct(coffee);
+        Assertions.assertEquals(1.88f, basket.calculateCost(), 0.001);
+    }
+
+    @Test
     public void testFindDiscountOn13Bagels() {
         Basket b = new Basket(24);
         b.addProduct(new Bagel(Controller.prices.get("BGLP"), Controller.prices.get("FILB")));
