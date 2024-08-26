@@ -1,7 +1,6 @@
 package com.booleanuk.core;
 
-import java.util.ArrayList;
-import java.util.Scanner;
+import java.util.*;
 
 public class View {
     private final Scanner scanner;
@@ -136,5 +135,48 @@ public class View {
 
     public void emptyBasket() {
         System.out.println("Your basket is empty.");
+    }
+
+    public void printReceipt(float totCost, float totDisc, Basket.ReceiptInfo info) {
+        Date now = new Date();
+        System.out.printf("~~~ Bob's Bagels ~~~\n" +
+                "\n" +
+                "    %tF %tT\n" +
+                "\n" +
+                "----------------------------\n" +
+                "\n\nLone Products:\n", now, now);
+        for (Product p: info.remaining()) {
+            System.out.printf("%-25s %8.2f%n", p.name(), p.basicPrice());
+        }
+        if (info.remaining().isEmpty()) {
+            System.out.println("None\n");
+        }
+
+
+        System.out.println("\nFillings:");
+        for (Map.Entry<String, Integer> item :info.fillings().entrySet()) {
+            System.out.printf("%-20s %4d %8.2f%n", item.getKey(), item.getValue(), item.getValue() * 0.12f);
+        }
+        if (info.fillings().entrySet().isEmpty()) {
+            System.out.println("None\n");
+        }
+        System.out.println("\nDeals:");
+        // HM<name, num>, price, discount
+        for (Triple<HashMap<String, Integer>, Float, Float> deal: info.deals()) {
+            for (Map.Entry<String, Integer> item : deal.a().entrySet()) {
+                System.out.printf("    %-16s %4d%n", item.getKey(), item.getValue());
+            }
+            System.out.printf("  Deal Cost %22.2f%n", deal.b());
+            System.out.printf("  Discount %23.2f%n%n", deal.c());
+
+        }
+        if (info.deals().isEmpty()) {
+            System.out.println("None\n");
+        }
+
+        System.out.print("Total Cost");
+        System.out.printf("%24.2f%n", totCost);
+        System.out.print("Total Saved");
+        System.out.printf("%23.2f", totDisc);
     }
 }

@@ -25,4 +25,22 @@ public class Bagel implements Product {
     public float calculateBreadCost() {
         return bagelType.c();
     }
+
+    public ArrayList<Triple<String, String, Float>> getFillings() {
+        return new ArrayList<>(fillings);
+    }
+
+    public Triple<String, String, Float> getBagelType() {
+        return bagelType;
+    }
+
+    @Override
+    public float basicPrice() {
+        return bagelType.c();
+    }
+
+    @Override
+    public String name() {
+        return bagelType.b() + " " + bagelType.a();
+    }
 }
