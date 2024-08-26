@@ -1,11 +1,15 @@
 package com.booleanuk.core.basket;
 
+import com.booleanuk.core.calculators.DiscountObjectCombination;
+import com.booleanuk.core.calculators.DiscountObjectMultiPrice;
 import com.booleanuk.core.calculators.PriceCalculator;
 import com.booleanuk.core.inventory.Inventory;
 import com.booleanuk.core.inventory.InventoryItem;
 import com.booleanuk.core.printgenerator.PrintBasketItems;
 import com.booleanuk.core.printgenerator.PrintGenerator;
+import com.booleanuk.core.printgenerator.PrintReceipt;
 
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -19,7 +23,7 @@ public class Basket {
     private int maxCapacity;
 
     private PriceCalculator priceCalculator;
-    private PrintGenerator basket;
+    private PrintGenerator printGenerator;
 
     public Basket(Inventory inventory) {
         this.inventory = inventory;
@@ -221,7 +225,87 @@ public class Basket {
         // TODO: Should I refactor? Feels like it's a poor solution regarding dependencies.
         // Check all PrintGenerator cases.
 
-        basket = new PrintBasketItems(this.inventory, this.basketItems, this.getTotalCost());
-        basket.print();
+        printGenerator = new PrintBasketItems(this.inventory, this.basketItems, this.getTotalCost());
+        printGenerator.print();
+    }
+
+    public void printReceipt() {
+
+        ArrayList<DiscountObjectMultiPrice> itemsAndDiscounts = priceCalculator.calculateSpecialOfferMultiPrice(
+                this.inventory,
+                this.basketItems,
+                this.inventory.getSpecialOffersMultiPrice()
+        );
+        ArrayList<DiscountObjectCombination> additionalDiscounts = priceCalculator.calculateSpecialOfferCombination(
+                this.inventory,
+                this.basketItems,
+                this.inventory.getSpecialOffersCombination()
+        );
+
+
+        // Create a list of printable objects
+        // Calculates MultiPrice discounts
+        double totalCost = 0;
+        ArrayList<BasketItemFormatted> printableListItems = new ArrayList<>();
+        for (DiscountObjectMultiPrice item : itemsAndDiscounts) {
+
+            // TODO: Refactor, unnecessary calculation
+            boolean hasDiscountItems = item.getNumOfDiscountItems() != 0;
+            boolean hasOrdinaryItems = item.getNumOfOrdinaryItems() != 0;
+
+            InventoryItem inventoryItem = this.inventory.getItem(item.getSKU());
+            String variant = inventoryItem.getVariant().toString();
+            String name = inventoryItem.getName().getString();
+
+            String combinedName = variant + " " + name;
+            int amount;
+            double price;
+            double discount = item.getDiscount();
+
+            if (hasDiscountItems) {
+                amount = item.getNumOfDiscountItems();
+                price = item.getPriceForDiscountItems();
+
+                BasketItemFormatted formattedItem = new BasketItemFormatted(
+                        combinedName,
+                        amount,
+                        price,
+                        discount
+                );
+                printableListItems.add(formattedItem);
+                totalCost += price;
+            }
+
+            if (hasOrdinaryItems) {
+                amount = item.getNumOfOrdinaryItems();
+                price = item.getPriceForOrdinaryItems();
+
+                BasketItemFormatted formattedItem = new BasketItemFormatted(
+                        combinedName,
+                        amount,
+                        price,
+                        discount
+                );
+                printableListItems.add(formattedItem);
+                totalCost += price;
+            }
+
+        }
+
+        totalCost = priceCalculator.round((float) totalCost, 2);
+
+        // Calculate combination discounts
+//        int additionalDiscount = 0;
+//        for (DiscountObjectCombination item : additionalDiscounts) {
+//            additionalDiscount += item.getDiscountSum();
+//        }
+//        totalCost = totalCost - additionalDiscount;
+
+        printGenerator = new PrintReceipt(
+                printableListItems,
+                totalCost
+        );
+
+        printGenerator.print();
     }
 }

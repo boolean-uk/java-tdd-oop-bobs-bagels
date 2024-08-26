@@ -67,35 +67,74 @@ public class PriceCalculator {
         }
 
         // Calculate discounts
+        int numOfDiscounts;
+        int numOfDiscountItems;
+        int numOfOrdinaryItems;
+        double priceForDiscountItems;
+        double priceForOrdinaryItems;
+        double discountSum;
         for (Map.Entry<String, Integer> skuEntry : skuOccurrences.entrySet()) {
 
             String sku = skuEntry.getKey();
+
             int numOfBasketItems = skuEntry.getValue();
-            int minimumNumOfItems = skuSpecialOfferPairs.get(sku).getNumOfItems();      // Minimun number of items required to get an offer
+            numOfOrdinaryItems = numOfBasketItems;      // If there is no discount items, all basket items with this SKU are ordinary items
 
-            // Count how many discounts
-            int numOfDiscounts = Math.floorDiv(numOfBasketItems, minimumNumOfItems);
-            int numOfDiscountItems = (numOfDiscounts * minimumNumOfItems);
-            int numOfOrdinaryItems = numOfBasketItems - numOfDiscountItems;
-
-            // Get ordinary price for the item, from the inventory
+            // Get standard price for item with this SKU
             double itemPrice = inventory.getItem(sku).getPrice();
-            double ordinaryPrice = minimumNumOfItems * itemPrice;
-            double specialOfferPrice = skuSpecialOfferPairs.get(sku).getOfferPrice();
-            double diffPrice = ordinaryPrice - specialOfferPrice;
+            priceForOrdinaryItems = numOfOrdinaryItems * itemPrice;     // If there is no discounts, this is the price for all items.
+            priceForOrdinaryItems = this.round((float) priceForOrdinaryItems, 2);
 
-            // Calculate total discount for this offer
-            // add to discount
-            double discountSum = numOfDiscounts * diffPrice;
-            discountSum = this.round((float) discountSum, 2); // TODO: Change fromm float to double
-            discountList.add(
-                    new DiscountObjectMultiPrice(
-                        sku,
-                        numOfDiscounts,
-                        numOfDiscountItems,
-                        discountSum,
-                        numOfOrdinaryItems
-                ));
+            if (skuSpecialOfferPairs.get(sku) != null) {
+
+                int minimumNumOfItems = skuSpecialOfferPairs.get(sku).getNumOfItems();      // Minimun number of items required to get an offer
+
+                // Count how many discounts
+                numOfDiscounts = Math.floorDiv(numOfBasketItems, minimumNumOfItems);
+                numOfDiscountItems = (numOfDiscounts * minimumNumOfItems);
+                numOfOrdinaryItems = numOfBasketItems - numOfDiscountItems;
+
+                // Calculate the discount price by subtraction ordinary price by special offer price
+                double ordinaryPrice = minimumNumOfItems * itemPrice;
+                double specialOfferPrice = skuSpecialOfferPairs.get(sku).getOfferPrice();
+                double diffPrice = ordinaryPrice - specialOfferPrice;
+
+                // Calculate total discount for this offer
+                // add to discount
+                discountSum = numOfDiscounts * diffPrice;
+                discountSum = this.round((float) discountSum, 2); // TODO: Change fromm float to double
+
+                priceForDiscountItems = numOfDiscounts * specialOfferPrice;
+                priceForOrdinaryItems = numOfOrdinaryItems * itemPrice;
+
+                priceForDiscountItems = this.round((float) priceForDiscountItems, 2);
+                priceForOrdinaryItems = this.round((float) priceForOrdinaryItems, 2);
+
+                discountList.add(
+                        new DiscountObjectMultiPrice(
+                                sku,
+                                numOfDiscounts,
+                                numOfDiscountItems,
+                                priceForDiscountItems,
+                                discountSum,
+                                numOfOrdinaryItems,
+                                priceForOrdinaryItems
+                        ));
+
+            } else {
+                discountList.add(
+                        new DiscountObjectMultiPrice(
+                                sku,
+                                0,
+                                0,
+                                0.0,
+                                0.0,
+                                numOfOrdinaryItems,
+                                priceForOrdinaryItems
+                        ));
+            }
+
+
         }
 
         return discountList;
