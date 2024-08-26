@@ -20,39 +20,39 @@ public class DiscountObjectMultiPrice {
         return SKU;
     }
 
-    public void setSKU(String SKU) {
-        this.SKU = SKU;
-    }
+//    public void setSKU(String SKU) {
+//        this.SKU = SKU;
+//    }
 
     public int getNumberOfDiscounts() {
         return numberOfDiscounts;
     }
 
-    public void setNumberOfDiscounts(int numberOfDiscounts) {
-        this.numberOfDiscounts = numberOfDiscounts;
-    }
+//    public void setNumberOfDiscounts(int numberOfDiscounts) {
+//        this.numberOfDiscounts = numberOfDiscounts;
+//    }
 
     public int getNumOfDiscountItems() {
         return numOfDiscountItems;
     }
 
-    public void setNumOfDiscountItems(int numOfDiscountItems) {
-        this.numOfDiscountItems = numOfDiscountItems;
-    }
+//    public void setNumOfDiscountItems(int numOfDiscountItems) {
+//        this.numOfDiscountItems = numOfDiscountItems;
+//    }
 
     public double getDiscount() {
         return discountSum;
     }
 
-    public void setDiscount(double discountSum) {
-        this.discountSum = discountSum;
-    }
+//    public void setDiscount(double discountSum) {
+//        this.discountSum = discountSum;
+//    }
 
     public int getNumOfOrdinaryItems() {
         return numOfOrdinaryItems;
     }
 
-    public void setNumOfOrdinaryItems(int numOfOrdinaryItems) {
-        this.numOfOrdinaryItems = numOfOrdinaryItems;
-    }
+//    public void setNumOfOrdinaryItems(int numOfOrdinaryItems) {
+//        this.numOfOrdinaryItems = numOfOrdinaryItems;
+//    }
 }
