@@ -1,8 +1,5 @@
 package com.booleanuk.extension;
 
-import com.booleanuk.extension.Bagel;
-import com.booleanuk.extension.Coffee;
-import com.booleanuk.extension.Filling;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
