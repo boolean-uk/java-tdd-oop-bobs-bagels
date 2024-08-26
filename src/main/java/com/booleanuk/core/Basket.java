@@ -47,9 +47,6 @@ public class Basket {
     }
 
     public boolean isEmpty(){
-        if (this.basketItems.isEmpty()){
-            return true;
-        }
         return getBasketSize() == 0;
     }
 

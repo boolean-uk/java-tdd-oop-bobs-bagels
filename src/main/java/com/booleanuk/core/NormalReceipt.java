@@ -29,7 +29,9 @@ public class NormalReceipt implements Receipt{
 
 
     public void addReceiptLine(String itemName, int quantity, float price) {
-        this.receiptLines.add(String.format("%-18s %3s %8s", itemName, quantity, "$"+price));
+        if (price != 0 && quantity != 0){
+            this.receiptLines.add(String.format("%-18s %3s %8s", itemName, quantity, "$"+price));
+        }
     }
 
 

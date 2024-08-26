@@ -1,7 +1,6 @@
 package com.booleanuk.core;
 
 import java.util.HashMap;
-import java.util.Map;
 
 import static com.booleanuk.core.Menu.*;
 
@@ -9,7 +8,6 @@ import static com.booleanuk.core.Menu.*;
 public class CashRegister {
     Basket basket;
     Receipt receipt;
-    private float sum = 0;
     private float discountedSum = 0;
     private float totalDiscount = 0;
 
@@ -26,7 +24,6 @@ public class CashRegister {
     }
 
     public String sumOrder() {
-        sum = 0;
         discountedSum = 0;
         totalDiscount = 0;
 
@@ -59,7 +56,6 @@ public class CashRegister {
                 int twelveOfferCount = 0;
                 int sixOfferCount = 0;
                 while (entry.getValue() >= 12){
-                    sum += (bagel.getItemPrice() * 12);
                     discountedSum += 3.99f;
 
                     for (int i = 0; i<12; i++){
@@ -70,7 +66,6 @@ public class CashRegister {
                 }
 
                 while (entry.getValue() >= 6){
-                    sum += (bagel.getItemPrice() * 6);
                     discountedSum += 2.49f;
 
                     for (int i = 0; i<6; i++){
@@ -116,7 +111,6 @@ public class CashRegister {
                 Item bagel = getMenuItem(entry.getKey());
 
                 if (bagel.getItemName().equals("Bagel") && entry.getValue()!= 0){
-                    sum += (bagel.getItemPrice());
                     bagelPrice = bagel.getItemPrice();
                     basket.removeItem(bagel.getItemSKU(), false);
                     break;
@@ -127,7 +121,6 @@ public class CashRegister {
                 Item coffee = getMenuItem(entry2.getKey());
 
                 if (coffee.getItemName().equals("Coffee") && entry2.getValue()!= 0){
-                    sum += (coffee.getItemPrice());
                     coffeePrice = coffee.getItemPrice();
                     discountedSum += 1.25f;
                     basket.removeItem(coffee.getItemSKU(), false);
@@ -156,7 +149,6 @@ public class CashRegister {
                 int quantity = entry.getValue();
                 float price = item.getItemPrice();
 
-                sum += quantity*price;
                 discountedSum += quantity*price;
                 String fullName = item.getItemVariant() + " " + item.getItemName();
                 receipt.addReceiptLine(fullName, quantity, quantity*price);
