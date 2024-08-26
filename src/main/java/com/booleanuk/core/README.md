@@ -2,6 +2,7 @@
 
 NOTES!
 - I have done Core and Extension 1-3
+- The domain model and class diagram are in [domain-model.md](domain-model.md)
 - The classes printInventoryMenu and printInventoryBasket were created during the core part and are not a part of the requirements
 - I did overthink a lot in this exercise, I'm not happy with all parts at the end, I think it could be much more simplified.
 - There are some code duplications and I have commented "TODO:" on things I'm unsure about or things I think could be designed better.

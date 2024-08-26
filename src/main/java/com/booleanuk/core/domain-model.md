@@ -122,6 +122,8 @@
 <img src="/assets/images/class_diagram_basket.png" width="800">  
 <img src="/assets/images/class_diagram_printGenerator.png" width="800">  -->
 
+NOTE! Some classes are excluded from the class diagram, and just included in the domain model.  
+
  ![Class Diagram](/assets/images/class_diagram_inventory.png) 
  ![Class Diagram](/assets/images/class_diagram_basket.png) 
  ![Class Diagram](/assets/images/class_diagram_printGenerator.png) 
