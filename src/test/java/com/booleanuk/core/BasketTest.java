@@ -101,7 +101,7 @@ public class BasketTest {
 
     @Test
     public void testAddItemThatDoesNotExist(){
-        Basket basket = new Basket(2, new Inventory());
+        Basket basket = new Basket(2, new Inventory()); // Maybe i can initilize this in the top so that i dont need to repeat.
         Item item1 = new Bagel("lo",0.49, "Bagel", Bagel.BagelVariant.ONION);
         Item item2 = new Bagel("lo",0.49, "Bagel", Bagel.BagelVariant.EVERYTHING);
         basket.addItem(item1);
@@ -138,7 +138,7 @@ public class BasketTest {
 
     @Test
     public void testIfInInventory() {
-        Inventory inventory = new Inventory(); // Ensure Inventory is properly initialized with items
+        Inventory inventory = new Inventory();
         Bagel bagel1 = new Bagel("BGLO", 0.49, "Bagel", Bagel.BagelVariant.ONION);
         Filling filling = new Filling("FILE", 0.12, "Filling", "Egg");
         Coffee coffee = new Coffee("COFC", 1.29, "Coffee", "Capuccino");
@@ -150,7 +150,7 @@ public class BasketTest {
 
     @Test
     public void testIfInInventoryNotExist() {
-        Inventory inventory = new Inventory(); // Ensure Inventory is properly initialized with items
+        Inventory inventory = new Inventory();
         Bagel bagel1 = new Bagel("Bol", 0.49, "Bagel", Bagel.BagelVariant.ONION);
         Filling filling = new Filling("hj", 0.12, "Filling", "Egg");
         Coffee coffee = new Coffee("lo", 1.29, "Coffee", "Capuccino");
