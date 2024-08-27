@@ -52,8 +52,6 @@ public class Basket {
         }
     }
 
-
-
     public BasketItem createBasketItem(String itemSku){
         InventoryItem mainItem =  inventory.getInventoryItemDetails(itemSku);
         if(mainItem != null){
@@ -66,7 +64,6 @@ public class Basket {
         }
 
     }
-
 
     public void addBasketItem (BasketItem item){
         if((this.basketQuantity+1) <= this.basketLimit){
@@ -88,7 +85,6 @@ public class Basket {
         }
     }
 
-    /* This isnt private because there is no frontend, if there was a front end then this would be private, and null checks for the return would be done on the front end*/
     public void getInventoryItemCost(String sku){
         InventoryItem item = this.inventory.getInventoryItemDetails(sku);
         if(!item.equals(null)){
@@ -132,5 +128,27 @@ public class Basket {
 
     }
 
+    public void printReceipt() {
+        DiscountCalculator discountCalculator = new DiscountCalculator(this.inventory);
+        Map<String, Double> discountToApply;
+        Map<String, Double> discount1 = discountCalculator.calculateDiscountAmounts1(basketItems);
+        Map<String, Double> discount2 = discountCalculator.calculateDiscountAmounts2(basketItems);
+        if(discount1.get("discountTotal") > discount2.get("discountTotal")){
+            discountToApply  = discount1;
+        }else{
+            discountToApply  = discount2;
+        }
+        System.out.println("Receipt:");
+        for (Map.Entry<Integer, BasketItem> entry : this.basketItems.entrySet()) {
+            int itemNumber = entry.getKey();
+            BasketItem item = entry.getValue();
+            System.out.println(itemNumber + ". " + item.toString());
+        }
+        System.out.printf("Total Price: $%.2f%n", this.getBasketPrice());
+        System.out.printf("12 Bagel deal discount: $%.2f%n", discountToApply.get("discount12BagelsAmount"));
+        System.out.printf("6 Bagel deal discount: $%.2f%n", discountToApply.get("discount6BagelsAmount"));
+        System.out.printf("Coffee and bagel deal discount: $%.2f%n", discountToApply.get("discountCoffeeBagelAmount"));
+        System.out.printf("Price to pay: $%.2f%n", this.getBasketPrice() - discountToApply.get("discountTotal"));
+    }
 
 }

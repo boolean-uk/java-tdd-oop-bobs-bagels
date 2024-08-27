@@ -51,4 +51,23 @@ public class BasketItem {
     public ArrayList<InventoryItem> getAddOns() {
         return addOns;
     }
+    public InventoryItem getItem(){
+        return this.item;
+    }
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(item.getVariant() + " "+ item.getName());
+        if (!addOns.isEmpty()) {
+            sb.append(" + ");
+            for (InventoryItem addOn : addOns) {
+                sb.append(addOn.getName()).append(", ");
+            }
+            // Remove trailing comma and space
+            sb.setLength(sb.length() - 2);
+        }
+        sb.append(" | $").append(price);
+        return sb.toString();
+    }
+
 }

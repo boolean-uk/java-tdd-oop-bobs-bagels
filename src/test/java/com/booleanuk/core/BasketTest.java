@@ -79,6 +79,27 @@ class BasketTest {
         basket.addBasketItem(item);
         Assertions.assertEquals(0.73, basket.getBasketItemCost(1));
     }
+    @Test
+    public void testPrintReceipt(){
+        Inventory inventory = new Inventory();
+        DiscountCalculator discountCalc = new DiscountCalculator(inventory);
+        Basket basket = new Basket();
+        basket.setBasketLimit(100);
+        BasketItem item = basket.createBasketItem("BGLO"); // 0.49
+        for (int i = 0; i < 12; i++) {
+            basket.addBasketItem(item);
+        }
+        item = basket.createBasketItem("BGLP"); // 0.39
+        for (int i = 0; i < 0; i++) {
+            basket.addBasketItem(item);
+        }
+        item = basket.createBasketItem("COFB"); // Black coffee
+        for (int i = 0; i < 9; i++) {
+            basket.addBasketItem(item);
+        }
+
+        basket.printReceipt();
+    }
 
 
 }
