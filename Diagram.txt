@@ -1,0 +1,36 @@
+Store
+	- inventory: Product[]
+	- orders: HashMap<String, Order> orders
+	- basketCapacity: int
+	+ contains(String): boolean
+	+ addProduct(Product, int): void
+	+ getPrice(String): int
+
+Product
+	- sku: String
+	- variant: String
+	- price: int
+
+Bagel
+	- filling: Filling
+
+Filling
+
+Coffee
+
+Order
+	- basket: HashMap<String, Integer>
+	- id: UUID
+	- price: int
+	+ addProduct(): void
+	+ removeProduct(): void
+	+ size(): int
+	+ contains(String): boolean
+	+ get(String): int
+	+ getPrice(): int
+
+Store-->Product
+Store-->Order
+Product--*>Bagel
+Product--*>Filling
+Product--*>Coffee
