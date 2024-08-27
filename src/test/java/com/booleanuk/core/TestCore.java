@@ -69,11 +69,11 @@ public class TestCore {
     }
 
     @Test
-    public void testOrderRemoveProductThrow() throws Exception {
+    public void testOrderRemoveProductNotInBasket() throws Exception{
         mainTest();
         Order order1 = new Order();
         order1.addProduct("BGLO", store);
-        Exception thrown = assertThrows(Exception.class, () -> order1.removeProduct("BGLP"));
+        Assertions.assertFalse(order1.removeProduct("BLGP"));
     }
 
     @Test
