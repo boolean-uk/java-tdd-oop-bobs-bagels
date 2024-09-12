@@ -38,3 +38,16 @@ Every Bagel is available for the `6 for 2.49` and `12 for 3.99` offer, but filli
 Update and extend your program to handle these orders at Bob's Bagels.
 
 Start with extracting useful stories and a functional domain model that represents these requirements.
+
+## User Stories
+
+```
+1. As a customer,
+So I can save money,
+I'd like to be able to get a discount on my bagels when I buy 6 or 12 of a bagel type.
+```
+```
+2. As a customer, 
+So I can save money,
+I'd like to be able to get a discount when I buy black coffee and a plain bagel together.
+```
