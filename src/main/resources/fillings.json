@@ -1,0 +1,38 @@
+[
+  {
+    "SKU": "FILB",
+    "price": 0.12,
+    "name": "Filling",
+    "variant": "Bacon"
+  },
+  {
+    "SKU": "FILE",
+    "price": 0.12,
+    "name": "Filling",
+    "variant": "Egg"
+  },
+  {
+    "SKU": "FILC",
+    "price": 0.12,
+    "name": "Filling",
+    "variant": "Cheese"
+  },
+  {
+    "SKU": "FILX",
+    "price": 0.12,
+    "name": "Filling",
+    "variant": "CreamCheese"
+  },
+  {
+    "SKU": "FILS",
+    "price": 0.12,
+    "name": "Filling",
+    "variant": "SmokedSalmon"
+  },
+  {
+    "SKU": "FILH",
+    "price": 0.12,
+    "name": "Filling",
+    "variant": "Ham"
+  }
+]
