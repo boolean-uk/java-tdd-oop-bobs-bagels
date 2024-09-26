@@ -20,7 +20,7 @@ Every Bagel is available for the `6 for 2.49` and `12 for 3.99` offer, but filli
 #### Example orders
 ```
 2x BGLO  = 0.98
-12x BGLP = 3.99
+12x BGLP = 3.99 6.48 + 2.5 + 1.29 = 10.27
 6x BGLE  = 2.49
 3x COF   = 2.97
            ----

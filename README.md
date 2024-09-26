@@ -3,7 +3,7 @@
 ![](./assets/bagels.jpg)
 
 ## Learning Objectives
-- Design a domain from user stories
+- Design a domain from user stories.
 - Use test driven development to build an application
 - Use object-oriented concepts to manage the complexity of the project
 
