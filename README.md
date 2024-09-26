@@ -1,5 +1,9 @@
 # Bob's Bagels - Object-oriented Programming
 
+# Receipt Example!!
+
+![](./assets/example_receipt.png)
+
 ![](./assets/bagels.jpg)
 
 ## Learning Objectives
@@ -22,6 +26,7 @@
 - This exercise **must** use multiple classes that interact with each other. You might start with one, but by the end of the unit you should have a few more. As you learn new OOP concepts, apply them to this exercise to improve your solution over time.
 
 ## User Stories
+
 
 ```
 1.
