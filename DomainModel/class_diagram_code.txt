@@ -1,0 +1,42 @@
+ Product:class
+	-SKU:String
+	-name:String
+	-price:double
+	-variant:String
+	-fillings:ArrayList<Filling>
+	+addFilling(String SKU):double
+	+getProductCost(String SKU):double
+
+Bagel:class
+Filling:class
+Coffee:class
+
+Bagel --> Product
+Filling --> Product
+Coffee --> Product
+
+Basket:class
+	-products:ArrayList<Product>
+	-productCounter:HashMap<String,Integer>
+	-capacity:int
+	+add(String SKU):boolean
+	+remove(String SKU):boolean
+	+getCapacity():int
+	+setCapacity(int capacity):void
+	+getTotalCost():double
+	+getAllFillings():ArrayList<Filling>
+	+printReceipt():boolean
+	+calculateSavings(String SKU, int productsDiscounted, BigDecimal discount):double
+
+Inventory:class
+	-products:HashMap<String,Product>
+	+productIsInStock(String SKU):boolean
+
+Receipt:class
+	-dateTime:String
+	-productsBought:ArrayList<String>
+
+SMS:class
+	-SMSContent:StringBuilder
+	-dateTime:String
+	+printSMS():boolean
