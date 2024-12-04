@@ -1,5 +1,7 @@
 plugins {
     id 'java'
+    id 'io.freefair.lombok' version '8.0.1'
+    id 'jacoco'
 }
 
 group 'com.booleanuk'
@@ -10,10 +12,17 @@ repositories {
 }
 
 dependencies {
+    implementation 'com.twilio.sdk:twilio:10.0.0-rc.1'
+    implementation 'io.github.cdimascio:dotenv-java:3.0.0'
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
 }
 
 test {
     useJUnitPlatform()
+    finalizedBy jacocoTestReport
+}
+
+jacocoTestReport {
+    dependsOn test
 }
