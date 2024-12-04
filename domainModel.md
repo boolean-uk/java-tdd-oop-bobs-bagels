@@ -1,0 +1,23 @@
+| Classes        | Attributes                         | Methods                            | Scenarios                                                              | Output                   |
+|----------------|------------------------------------|------------------------------------|------------------------------------------------------------------------|--------------------------|
+| ProductManager | HashMap<String, Product> inventory | getInventory()                     | Program needs to access inventory data (product type, name etc.)       | HashMap<String, Product> |
+|                | Basket basket                      | orderProduct(String variant)       | user wants to order a product (bagel or coffee)                        | boolean                  |
+|                |                                    | removeProduct(String variant)      | user wants to remove a product from the basket                         | boolean                  |
+|                |                                    | changeBasketCapacity(int capacity) | owner wants to change the capacity of users baskets                    | void                     |
+|                |                                    | getBasketCapacity()                | program needs to access current basket capacity                        | int                      |
+|                |                                    | getItems()                         | program needs to access items in the basket                            | ArrayList<Product>       |
+|                |                                    | getTotal()                         | program or user needs to know the total cost of products in the basket | double                   |
+|                |                                    | fillHashMapFromFile(String file)   | program needs to read current inventory data                           | HashMap<String, Product> |
+|                |                                    |                                    |                                                                        |                          |
+| Product        | String name                        | getName()                          | user needs to access product's name                                    | String                   |
+|                | double price                       | getPrice()                         | user needs to access product's price                                   | double                   |
+|                | String variant                     | getVariant()                       | user needs to access product's variant                                 | String                   |
+|                |                                    | toString()                         | program needs to output current name and variant                       | String                   |
+|                |                                    | toStringExtended()                 | user needs to see detailed data about the product                      | String                   |
+|                |                                    |                                    |                                                                        |                          |
+| Basket         | ArrayList<Product>                 | add(Product product)               | user wants to add a product to the basket                              | boolean                  |
+|                | int capacity                       | remove(Product product)            | user wants to remove a product from the basket                         | boolean                  |
+|                |                                    | total()                            | user wants to know the total cost of products in the basket            | double                   |
+|                |                                    | getCapacity()                      | user wants to know the current capacity of the basket                  | int                      |
+|                |                                    | setCapacty()                       | owner wants to set the capacity of baskets                             | boolean                  |
+|                |                                    | getList()                          | user wants to access the items in the basket                           | ArrayList<Product>       |
