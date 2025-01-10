@@ -60,3 +60,8 @@ This is the public interface that a customer or manager interacts with the Bob's
 | orderBagel(): void             |          | Let customer choose a bagel. Then, let customer add filling. |
 | orderCoffee(): void            |          | Let customer choose a variant.                               |
 | setBasketCapacity(): void      |          | Update the basket capacity for all baskets.                  |
+
+# Notes for myself (will be deleted later)
+- Basket methods protected?
+- method for counting total size of items (not strictly needed)?
+- Changing capacity of existing baskets doesn't make sense. Set individually to static value at construction time, make final?
