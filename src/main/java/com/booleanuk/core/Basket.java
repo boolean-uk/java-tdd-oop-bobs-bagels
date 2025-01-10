@@ -15,6 +15,14 @@ public class Basket {
         return items;
     }
 
+    public boolean getIsFull(){
+        return isFull;
+    }
+
+    public int getCapacity(){
+        return capacity;
+    }
+
     public void checkCapacity(){
         if (items.size() == capacity){
             isFull = true;

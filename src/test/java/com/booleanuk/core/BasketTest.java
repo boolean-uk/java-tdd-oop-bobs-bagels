@@ -35,13 +35,30 @@ public class BasketTest {
     }
 
     @Test
-    public void testCheckCapacity(){
-
+    public void testCheckCapacityFull(){
+        Basket basket = new Basket();
+        basket.checkCapacity();
+        Assertions.assertFalse(basket.getIsFull());
+        basket.addItem("BGLP");
+        basket.addItem("FILE");
+        basket.addItem("BGLP");
+        basket.addItem("FILE");
+        basket.addItem("BGLP");
+        basket.addItem("FILE");
+        basket.addItem("BGLP");
+        basket.addItem("FILE");
+        basket.addItem("BGLP");
+        basket.addItem("FILE");
+        basket.checkCapacity();
+        Assertions.assertTrue(basket.getIsFull());
     }
 
     @Test
     public void testChangeCapacity(){
-
+        Basket basket = new Basket();
+        Assertions.assertEquals(10, basket.getCapacity());
+        basket.changeCapacity(20);
+        Assertions.assertEquals(20, basket.getCapacity());
     }
 
     @Test
