@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class Basket {
     private Inventory inventory;
     private int capacity;
-    private ArrayList<Item> items;
+    private ArrayList<Item> items = new ArrayList<>();
 
     public Basket(Inventory inventory, int capacity) {
         this.inventory = inventory;

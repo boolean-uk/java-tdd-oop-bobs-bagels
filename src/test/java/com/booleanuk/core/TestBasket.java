@@ -37,4 +37,17 @@ public class TestBasket {
 
         Assertions.assertFalse(basket.addItem(item));
     }
+
+    @Test
+    void testRemoveItemThatExists() {
+        // add onion bagle to stock
+        Inventory inventory = new Inventory();
+        inventory.addStock(SKU.BGLO, 1);
+
+        Basket basket = new Basket(inventory, 5);
+        basket.addItem(new Item(SKU.BGLO));
+
+        Assertions.assertTrue(basket.removeItem(SKU.BGLO));
+        Assertions.assertFalse(inventory.checkStock(SKU.BGLO));
+    }
 }
