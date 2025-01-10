@@ -12,9 +12,10 @@ public class BasketTest {
     }
 
     @Test
-    public void canRemoveBagel() {
+    public void canAndDoesRemoveBagel() {
         Basket basket = new Basket();
         assertTrue(basket.addItem("BGLO", 0.49, "Bagel", "Onion"));
         assertTrue(basket.removeItem("BGLO"));
+        assertTrue(basket.getItems().size() == 0);
     }
 }
