@@ -37,10 +37,20 @@ public class BasketTest {
 
     @Test
     public void cannotAddPastCapacity() {
+        int originalCapacity = Basket.getCapacity();
         Basket.setCapacity(2);
         Basket basket = new Basket();
         basket.addItem("BGLO", 0.49, "Bagel", "Onion");
         basket.addItem("BGLO", 0.49, "Bagel", "Onion");
         assertFalse(basket.addItem("BGLO", 0.49, "Bagel", "Onion"));
+
+        // Reset the capacity, since it's static
+        Basket.setCapacity(originalCapacity);
+    }
+
+    @Test
+    public void costOfEmptyBasketShouldBeZero() {
+        Basket basket = new Basket();
+        assertEquals(0, basket.getTotalCost());
     }
 }

@@ -28,4 +28,8 @@ public class Basket {
     public static void setCapacity(int newCapacity) {
         capacity = newCapacity;
     }
+
+    public static int getCapacity() {
+        return capacity;
+    }
 }
