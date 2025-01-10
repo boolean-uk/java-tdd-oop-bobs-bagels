@@ -1,0 +1,20 @@
+Basket
+	- capasity: Integer
+	- totalCost: Double
+	- basketList: Hashmap<String, Item>
+	- stockList: Hashmap<String, Item>
+    + checkStock(): boolean
+	+ removeItem(item: Item): boolean
+	+ listOfItems(): Hashmap<String, Item>
+	+ getTotalCost(): Double
+	+ addItem(item: Item): boolean
+	+ isFull(): String
+	+ changeCapasity(capasity: Integer): Integer
+
+Item
+	- id: String
+	- price: Double
+	- Type: String
+	- Description: String
+	+ getPrice(item: Item): Double
+
