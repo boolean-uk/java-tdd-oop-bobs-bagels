@@ -63,6 +63,11 @@ public class BasketTest {
 
     @Test
     public void testTotalCost(){
+        Basket basket = new Basket();
+        basket.addItem("BGLP");
+        basket.addItem("FILE");
+        basket.addItem("COFB");
+        Assertions.assertEquals(1.5f, basket.totalCost());
     }
 
 }
