@@ -53,4 +53,13 @@ public class BasketTest {
         Basket basket = new Basket();
         assertEquals(0, basket.getTotalCost());
     }
+
+    @Test
+    public void totalCostShouldBeSomething() {
+        Basket basket = new Basket();
+        basket.addItem("BGLO", 0.49, "Bagel", "Onion");
+        basket.addItem("BGLO", 0.49, "Bagel", "Onion");
+        basket.addItem("BGLO", 0.49, "Bagel", "Onion");
+        assertEquals(1.47, basket.getTotalCost());
+    }
 }
