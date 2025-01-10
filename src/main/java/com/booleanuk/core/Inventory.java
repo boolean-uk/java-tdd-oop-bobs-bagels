@@ -3,7 +3,7 @@ package com.booleanuk.core;
 import java.util.HashMap;
 
 public class Inventory {
-    private HashMap<SKU, Integer> invMap;   
+    private HashMap<SKU, Integer> invMap = new HashMap<>();   
 
     boolean checkStock(SKU sku) {
         if (invMap.containsKey(sku) && invMap.get(sku) > 0) {
@@ -28,6 +28,12 @@ public class Inventory {
     }
 
     boolean removeStock(SKU sku, int amount) {
+        // if amount is more than in stock return false
+        if (!checkStock(sku) || amount > invMap.get(sku)) {
+            return false;
+        }
+
+        invMap.put(sku, invMap.get(sku) - amount);
         return true;
     }
 

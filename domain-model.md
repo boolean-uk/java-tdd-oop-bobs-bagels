@@ -25,7 +25,6 @@
 | addItem(Item item)   |                        | basket is full                              | return false                        |
 | removeItem(SKU sku)  |                        | item exists in basket                       | remove item from items, return true |
 | removeItem(SKU sku)  |                        | item doesn't exist in basket                | return false                        |
-| setCapacity(int cap) |                        |                                             | set capacity to cap                 |
 | getTotalCost()       |                        |                                             | return total cost of items          |
 | getItems()           |                        |                                             | return items                        |
 
