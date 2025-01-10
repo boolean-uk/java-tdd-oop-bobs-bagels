@@ -34,4 +34,12 @@ public class BasketTest {
         basket.removeItem("BGLP");
         assertNotEquals("BGLP", basket.getItems().getFirst().getSku());
     }
+
+    public void cannotAddPastCapacity() {
+        Basket.setCapacity(2);
+        Basket basket = new Basket();
+        basket.addItem("BGLO", 0.49, "Bagel", "Onion");
+        basket.addItem("BGLO", 0.49, "Bagel", "Onion");
+        assertFalse(basket.addItem("BGLO", 0.49, "Bagel", "Onion"));
+    }
 }
