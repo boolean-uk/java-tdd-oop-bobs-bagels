@@ -10,6 +10,7 @@
 | showAllFillings() |                             | There are fillings in the inventory    | String list of all fillings |
 |                   |                             | There are no fillings in the inventory | String error message        |
 |                   |                             |                                        |                             |
+| getter and setter |                             |                                        |                             |
 
 
 ## Inventory
