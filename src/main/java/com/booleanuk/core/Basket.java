@@ -21,6 +21,10 @@ public class Basket {
         return true;
     }
 
+    public double getTotalCost() {
+        return 0;
+    }
+
     public List<Item> getItems() {
         return items;
     }
