@@ -37,8 +37,8 @@ public class TestInventory {
         inventory.addStock(SKU.BGLE, 5);
 
         Assertions.assertTrue(inventory.removeStock(SKU.COFB, 5));
-        Assertions.assertTrue(inventory.removeStock(SKU.COFB, 8));
-        Assertions.assertFalse(inventory.checkStock(SKU.COFB));
+        Assertions.assertTrue(inventory.removeStock(SKU.BGLE, 5));
+        Assertions.assertFalse(inventory.checkStock(SKU.BGLE));
     }
 
     @Test
