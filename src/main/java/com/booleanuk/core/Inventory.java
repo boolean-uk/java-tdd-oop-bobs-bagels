@@ -7,6 +7,5 @@ public class Inventory {
     private HashMap<String, Item> stockList;
 
     public Inventory() {
-        stockList.put()
     }
 }

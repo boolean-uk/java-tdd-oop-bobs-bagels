@@ -1,5 +1,7 @@
 package com.booleanuk.core;
 
+import java.util.HashMap;
+
 public class Item {
     private String id;
     private double price;
