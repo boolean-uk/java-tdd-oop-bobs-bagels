@@ -10,24 +10,24 @@
 | Getters and setters |                     |          |        |
 
 ### Bagel
-#### Sesame
-#### Onion
-#### Everything
-#### Plain
+#### SesameBagel
+#### OnionBagel
+#### EverythingBagel
+#### PlainBagel
 
 ### Filling
-#### Ham
-#### Smoked Salmon
-#### Cream Cheese
-#### Cheese
-#### Egg
-#### Bacon
+#### HamFilling
+#### SmokedSalmonFilling
+#### CreamCheeseFilling
+#### CheeseFilling
+#### EggFilling
+#### BaconFilling
 
 ### Coffee
-#### Black
-#### White
-#### Cappuccino
-#### Latte
+#### BlackCoffee
+#### WhiteCoffee
+#### CappuccinoCoffee
+#### LatteCoffee
 
 ## Basket
 | Method                       | Member Variable       | Scenario                                           | Result                          |
