@@ -17,6 +17,7 @@
 
 | Method               | Variable               | Scenario                                    | Output                              |
 | -------------------- | ---------------------- | ------------------------------------------- | ----------------------------------- |
+|                      | Inventory inventory    |                                             |                                     |
 |                      | int capacity           |                                             |                                     |
 |                      | ArrayList\<Item> items |                                             |                                     |
 | addItem(Item item)   |                        | basket is not full and item is in inventory | add item to items, return true      |
