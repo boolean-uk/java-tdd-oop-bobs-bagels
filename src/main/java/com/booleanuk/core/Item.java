@@ -70,7 +70,6 @@ public class Item {
         }
     }
 
-
     public String getSku() {return sku;}
 
     public String getName() {return name;}

@@ -28,10 +28,13 @@
 |                                    |                          | Want to add item to full basket      | Informs about full basket      |
 | `void removeItem(String itemSku) ` |                          | Want to remove existing item         | Removes item from basket       |
 |                                    |                          | Want to remove non-existent item     | Inform about non-existing item |
-| `boolean checkCapacity() `         |                          | Want to check if basket is full      | Return isFull                  |
+| `void checkCapacity() `            |                          | Want to check if basket is full      | Updated isFull if needed       |
 | `void changeCapacity(int newCap) ` |                          | Want to change basket capacity       | Change capacity to newCap      |
 | `float totalCost() `               |                          | Want to know cost of basket          | Add together and return sum    |
-|                                    |                          |                                      |                                |
+| `boolean containsItem() `          |                          | Item is in basket                    | True                           |
+|                                    |                          | Item is not in basket                | False                          |
+| `boolean containsItem() `          |                          | Item is in basket                    | True                           |
+
 
 ## Inventory Class
 
