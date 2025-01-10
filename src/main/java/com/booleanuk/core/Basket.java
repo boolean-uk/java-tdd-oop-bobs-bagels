@@ -12,6 +12,7 @@ public class Basket {
     }
 
     public boolean removeItem(String sku) {
+        items.removeFirst();
         return true;
     }
 
