@@ -32,6 +32,6 @@ public class BasketTest {
         basket.addItem("BGLO", 0.49, "Bagel", "Onion");
         basket.addItem("BGLP", 0.39, "Bagel", "Plain");
         basket.removeItem("BGLP");
-        assertNotEquals("BGLP", basket.getItems().getFirst().getSKU());
+        assertNotEquals("BGLP", basket.getItems().getFirst().getSku());
     }
 }
