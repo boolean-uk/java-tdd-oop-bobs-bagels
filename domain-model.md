@@ -2,16 +2,16 @@
 
 ## Item
 
-| Method       | Variable       | Scenario | Output       |
-| ------------ | -------------- | -------- | ------------ |
-|              | SKU sku        |          |              |
-|              | float price    |          |              |
-|              | ItemType type  |          |              |
-|              | String variant |          |              |
-| getSku()     |                |          | return sku   |
-| getPrice()   |                |          | return price |
-| getType()    |                |          | return type  |
-| getVariant() |                |          | return price |
+| Method       | Variable       | Scenario | Output                 |
+| ------------ | -------------- | -------- | ---------------------- |
+|              | SKU sku        |          |                        |
+|              | float price    |          |                        |
+|              | ItemType type  |          |                        |
+|              | String variant |          |                        |
+| getSku()     |                |          | return sku             |
+| getPrice()   |                |          | return price           |
+| getType()    |                |          | return type            |
+| getVariant() |                |          | return price           |
 
 ## Basket
 
