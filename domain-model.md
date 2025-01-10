@@ -23,6 +23,7 @@
 |                                    | `ArrayList<Item> items ` |                                      |                                |
 |                                    | `boolean isFull `        |                                      |                                |
 |                                    | `int capacity `          |                                      |                                |
+|                                    |                          |                                      |                                |
 | `void addItem(String itemSku) `    |                          | Want to add item to basket with room | Adds item to basket            |
 |                                    |                          | Want to add item to full basket      | Informs about full basket      |
 | `void removeItem(String itemSku) ` |                          | Want to remove existing item         | Removes item from basket       |
