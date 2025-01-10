@@ -64,5 +64,11 @@ public class Basket {
         this.capacity = newCap;
     }
 
-
+    public float totalCost(){
+        float total = 0;
+        for (Item item : items){
+            total += item.getPrice();
+        }
+        return total;
+    }
 }

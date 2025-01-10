@@ -68,6 +68,12 @@ public class BasketTest {
         basket.addItem("FILE");
         basket.addItem("COFB");
         Assertions.assertEquals(1.5f, basket.totalCost());
+
+        Basket basket2 = new Basket();
+        basket2.addItem("COFB");
+        basket2.addItem("COFB");
+        basket2.addItem("COFB");
+        Assertions.assertEquals(2.97f, basket2.totalCost());
     }
 
 }
