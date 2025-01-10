@@ -73,3 +73,5 @@
 | addItems(ArrayList<Item> items)    |                                  |                                               | String "successfully added"   |
 | removeItem(Item item)              |                                  |                                               | String "successfully removed" |
 | removeItems(ArrayList<Item> items) |                                  |                                               | String "successfully removed" |
+
+![img.png](img.png)

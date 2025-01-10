@@ -45,8 +45,10 @@ public class InventoryTest {
     public void testIsInInventoryWhenThereIs(){
         Inventory inventory = new Inventory();
         Item ham = new HamFilling();
+        Item cheese = new CheeseFilling();
+        Item moreHam = new HamFilling();
 
-        inventory.addItems(fillInventory());
+        inventory.addItem(ham);
 
         Assertions.assertTrue(inventory.isInInventory(ham));
 
