@@ -4,7 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Basket {
+    private List<Item> items = new ArrayList<>();
+
     public boolean addItem(String sku, double price, String name, String variant) {
+        items.add(new Item());
         return true;
     }
 
@@ -13,6 +16,6 @@ public class Basket {
     }
 
     public List<Item> getItems() {
-        return new ArrayList<>();
+        return items;
     }
 }
