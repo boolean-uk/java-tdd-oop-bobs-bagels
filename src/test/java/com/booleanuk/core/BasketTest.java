@@ -10,4 +10,11 @@ public class BasketTest {
         Basket basket = new Basket();
         assertTrue(basket.addItem("BGLO", 0.49, "Bagel", "Onion"));
     }
+
+    @Test
+    public void canRemoveBagel() {
+        Basket basket = new Basket();
+        assertTrue(basket.addItem("BGLO", 0.49, "Bagel", "Onion"));
+        assertTrue(basket.removeItem("BGLO"));
+    }
 }
