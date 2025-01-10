@@ -50,4 +50,20 @@ public class TestBasket {
         Assertions.assertTrue(basket.removeItem(SKU.BGLO));
         Assertions.assertFalse(inventory.checkStock(SKU.BGLO));
     }
+
+    @Test
+    void testGetTotalCost() {
+        Inventory inventory = new Inventory();
+
+        inventory.addStock(SKU.BGLO,2);
+        inventory.addStock(SKU.COFB, 1);
+
+        Basket basket = new Basket(inventory, 5);
+        basket.addItem(new Item(SKU.BGLO));
+        basket.addItem(new Item(SKU.BGLO));
+        basket.addItem(new Item(SKU.COFB));
+
+        Assertions.assertEquals(1.97f, basket.getTotalCost());
+
+    }
 }
