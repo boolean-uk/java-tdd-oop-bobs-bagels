@@ -25,4 +25,13 @@ public class BasketTest {
         assertTrue(basket.removeItem("BGLO"));
         assertTrue(basket.getItems().isEmpty());
     }
+
+    @Test
+    public void removesCorrectBagel() {
+        Basket basket = new Basket();
+        basket.addItem("BGLO", 0.49, "Bagel", "Onion");
+        basket.addItem("BGLP", 0.39, "Bagel", "Plain");
+        basket.removeItem("BGLP");
+        assertNotEquals("BGLP", basket.getItems().getFirst().getSKU());
+    }
 }
