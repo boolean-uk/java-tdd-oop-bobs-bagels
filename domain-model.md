@@ -2,16 +2,16 @@
 
 ## Item
 
-| Method       | Variable       | Scenario | Output                 |
-| ------------ | -------------- | -------- | ---------------------- |
-|              | SKU sku        |          |                        |
-|              | float price    |          |                        |
-|              | ItemType type  |          |                        |
-|              | String variant |          |                        |
-| getSku()     |                |          | return sku             |
-| getPrice()   |                |          | return price           |
-| getType()    |                |          | return type            |
-| getVariant() |                |          | return price           |
+| Method       | Variable       | Scenario | Output       |
+| ------------ | -------------- | -------- | ------------ |
+|              | SKU sku        |          |              |
+|              | float price    |          |              |
+|              | String type    |          |              |
+|              | String variant |          |              |
+| getSku()     |                |          | return sku   |
+| getPrice()   |                |          | return price |
+| getType()    |                |          | return type  |
+| getVariant() |                |          | return price |
 
 ## Basket
 
@@ -26,6 +26,7 @@
 | removeItem(SKU sku)  |                        | item doesn't exist in basket                | return false                        |
 | setCapacity(int cap) |                        |                                             | set capacity to cap                 |
 | getTotalCost()       |                        |                                             | return total cost of items          |
+| getItems()           |                        |                                             | return items                        |
 
 ## Inventory
 
