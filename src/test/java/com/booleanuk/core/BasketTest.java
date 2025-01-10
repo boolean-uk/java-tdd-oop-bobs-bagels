@@ -35,6 +35,7 @@ public class BasketTest {
         assertNotEquals("BGLP", basket.getItems().getFirst().getSku());
     }
 
+    @Test
     public void cannotAddPastCapacity() {
         Basket.setCapacity(2);
         Basket basket = new Basket();
