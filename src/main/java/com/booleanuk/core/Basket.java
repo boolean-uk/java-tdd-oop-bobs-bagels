@@ -23,8 +23,20 @@ public class Basket {
 
 
         public boolean removeItem(String sku) {
-        items.removeFirst();
-        return true;
+        int indexToRemove = 0;
+        boolean foundItem = false;
+        for (int i=0; i<items.size(); i++) {
+            if (sku.equals(items.get(i).getSku())) {
+                indexToRemove = i;
+                foundItem = true;
+                break;
+            }
+        }
+        if (foundItem) {
+            items.remove(indexToRemove);
+            return true;
+        }
+        return false;
     }
 
     public double getTotalCost() {
