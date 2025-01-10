@@ -60,7 +60,9 @@ public class Basket {
         System.out.println("This item does not exist in the basket!");
     }
 
-
+    public void changeCapacity(int newCap){
+        this.capacity = newCap;
+    }
 
 
 }

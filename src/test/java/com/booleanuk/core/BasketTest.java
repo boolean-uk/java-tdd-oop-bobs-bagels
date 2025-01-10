@@ -35,7 +35,7 @@ public class BasketTest {
     }
 
     @Test
-    public void testCheckCapacityFull(){
+    public void testCheckCapacity(){
         Basket basket = new Basket();
         basket.checkCapacity();
         Assertions.assertFalse(basket.getIsFull());
@@ -63,7 +63,6 @@ public class BasketTest {
 
     @Test
     public void testTotalCost(){
-
     }
 
 }
