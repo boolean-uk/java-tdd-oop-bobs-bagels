@@ -7,6 +7,14 @@ public class Item {
     private String variant;
     private int size;
 
+    public Item(String sku, double price, String name, String variant, int size) {
+        this.sku = sku;
+        this.price = price;
+        this.name = name;
+        this.variant = variant;
+        this.size = size;
+    }
+
     public String getSku() {
         return sku;
     }
