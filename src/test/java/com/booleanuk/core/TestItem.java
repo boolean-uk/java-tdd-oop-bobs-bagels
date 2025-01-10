@@ -8,6 +8,7 @@ public class TestItem {
     void testCorrectVariableSetFromSku() {
         Item item = new Item(SKU.BGLO);
 
+        Assertions.assertEquals(SKU.BGLO, item.getSku());
         Assertions.assertEquals("Bagel", item.getType());
         Assertions.assertEquals(0.49f, item.getPrice());
         Assertions.assertEquals("Onion", item.getVariant());

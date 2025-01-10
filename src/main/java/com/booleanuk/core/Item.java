@@ -16,4 +16,20 @@ public class Item {
             variant = "Onion";
         } 
     }
+
+    SKU getSku() {
+        return sku;
+    }
+
+    float getPrice() {
+        return price;
+    }
+
+    String getType() {
+        return type;
+    }
+
+    String getVariant() {
+        return variant;
+    }
 }
