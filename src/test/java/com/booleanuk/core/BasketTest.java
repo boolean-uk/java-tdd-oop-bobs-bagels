@@ -9,6 +9,8 @@ public class BasketTest {
     public void addingItemsToBasket() {
         Basket basket = new Basket();
 
-        Assertions.assertTrue(basket.add(basket.stockList.get("BGLP")));
+        Assertions.assertFalse(basket.addToBasket("FILE"));
+
+        Assertions.assertTrue(basket.addToBasket("BGLO"));
     }
 }

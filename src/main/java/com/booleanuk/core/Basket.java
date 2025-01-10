@@ -1,13 +1,17 @@
 package com.booleanuk.core;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.regex.Pattern;
 
 public class Basket {
 
     private int capasity = 10;
     private double totalCost;
-    private HashMap<String, Item> basketList;
+    private String bagel = "BGLO";
+
+    private ArrayList<Item> basketList = new ArrayList<>();
     public HashMap<String, Item> stockList = new HashMap<>() {{
         Item bagelOnion = new Item("BGLO", 0.49, "Bagel", "Onion");
         put("BGLO", bagelOnion);
@@ -20,25 +24,53 @@ public class Basket {
         Item coffeeBlack = new Item("COFB", 0.99, "Coffee", "Black");
         put("COFB", coffeeBlack);
         Item coffeeWhite = new Item("COFW", 1.19, "Coffee", "White");
-        put("CFOW", coffeeWhite);
+        put("COFW", coffeeWhite);
         Item coffeeCapuccino = new Item("COFC", 1.29, "Coffee", "Capuccino");
         put("COFC", coffeeCapuccino);
         Item coffeeLatte = new Item("COFL", 1.29, "Coffee", "Latte");
-        put("BGLO", coffeeLatte);
+        put("COFL", coffeeLatte);
         Item fillBacon = new Item("FILB", 0.12, "Filling", "Bacon");
-        put("BGLO", fillBacon);
+        put("FILB", fillBacon);
         Item fillEgg = new Item("FILE", 0.12, "Filling", "Egg");
-        put("BGLO", fillEgg);
+        put("FILE", fillEgg);
         Item fillCheese = new Item("FILC", 0.12, "Filling", "Egg");
-        put("BGLO", fillCheese);
+        put("FILC", fillCheese);
         Item fillCream = new Item("FILX", 0.12, "Filling", "Cream Cheese");
-        put("BGLO", fillCream);
+        put("FILX", fillCream);
         Item fillSal = new Item("FILS", 0.12, "Filling", "Smoked Salmon");
-        put("BGLO", fillSal);
+        put("FILS", fillSal);
         Item fillHam = new Item("FILH", 0.12, "Filling", "Ham");
-        put("BGLO", fillHam);
+        put("FILH", fillHam);
     }};
 
     public Basket() {
+    }
+
+    public boolean addToBasket(String id) {
+        if (basketList.size() != capasity) {
+            if (stockList.containsKey(id)) {
+                if(id.substring(0,2).equals("FI")) {
+                    if(basketList.size() != 0) {
+                        for (int i = 0; i <= basketList.size(); i++) {
+                            if (basketList.get(i).getId().substring(0,2).equals("BG")) {
+                                basketList.add(stockList.get(id));
+                                return true;
+                            } else {
+                                System.out.println("You need a bagel to buy filling!");
+                                return false;
+                            }
+                        }
+                    } else {
+                        System.out.println("You can't just buy fillings!");
+                        return false;
+                    }
+                }
+                basketList.add(stockList.get(id));
+                return true;
+            } else {
+                return false;
+            }
+        }
+        return false;
     }
 }
