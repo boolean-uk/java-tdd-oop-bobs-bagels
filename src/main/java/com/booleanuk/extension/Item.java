@@ -69,7 +69,7 @@ public class Item {
         } else {
             throw new IllegalArgumentException("Invalid SKU: " + sku);
         }
- 
+
     }
 
     SKU getSku() {
@@ -86,5 +86,10 @@ public class Item {
 
     String getVariant() {
         return variant;
+    }
+
+    @Override
+    public String toString() {
+        return variant + " " + type;
     }
 }

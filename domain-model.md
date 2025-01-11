@@ -62,6 +62,7 @@ I'd like to see the time of my purchase listed on the receipt.
 
 | Method         | Variable         | Scenario | Output                    |
 | -------------- | ---------------- | -------- | ------------------------- |
-|                | ArrayList\<Item> |          |                           |
+|                | Basket basket    |          |                           |
+|                | String time      |          |                           |
 | printReceipt() |                  |          | print receipt to terminal |
 | getReceipt()   |                  |          | return receipt String     |
