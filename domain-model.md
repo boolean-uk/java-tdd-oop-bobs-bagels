@@ -63,3 +63,4 @@
 |                        | double checkCost(Item item)             |                                     | Return the cost of the specified item                                    |
 |                        |                                         |                                     |                                                                          |
 |                        | void addFilling(Bagel bagel)            |                                     | Fillings gets added to bagel, increase totalPrice by filling cost        |
+|                        | ArrayList<Item> getBasket()             |                                     | Returns contents of basket                                               |
