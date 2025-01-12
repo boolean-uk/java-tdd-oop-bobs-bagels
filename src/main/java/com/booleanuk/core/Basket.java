@@ -1,6 +1,7 @@
 package com.booleanuk.core;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Basket {
     private ArrayList<Item> items = new ArrayList<>();
@@ -47,7 +48,19 @@ public class Basket {
             return;
         }
         Item item = new Item(itemSku);
-        items.add(item);
+        System.out.println(item.getVariant() + " " + item.getName() + " price: $" + item.getPrice());
+        System.out.println("Do you want to " + item.getVariant()
+                + " " + item.getName() +" to the basket? (yes/no): ");
+
+        Scanner scanner = new Scanner(System.in);
+        String userInput = scanner.nextLine().trim().toLowerCase();
+
+        if (userInput.equals("yes")) {
+            items.add(item);
+            System.out.println(item.getVariant() + " " + item.getName() + " added to the basket.");
+        } else {
+            System.out.println(item.getVariant() + " " + item.getName() + " not added to the basket.");
+        }
     }
 
     public void removeItem(String itemSku){
