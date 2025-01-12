@@ -30,7 +30,7 @@ public class ItemFactoryTest {
     public void testNullCreation() {
         ItemFactory factory = new ItemFactory();
         Item item = factory.createItem("XXXX");
-        Assertions.assertNull(item); //Item should be a coffee because "COFB" is a coffee SKU
+        Assertions.assertNull(item); //Item should be a null because "XXXX" is not a valid SKU
     }
 
 }
