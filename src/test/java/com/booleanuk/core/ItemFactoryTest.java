@@ -26,4 +26,11 @@ public class ItemFactoryTest {
         Assertions.assertInstanceOf(Coffee.class, item); //Item should be a coffee because "COFB" is a coffee SKU
     }
 
+    @Test
+    public void testNullCreation() {
+        ItemFactory factory = new ItemFactory();
+        Item item = factory.createItem("XXXX");
+        Assertions.assertNull(item); //Item should be a coffee because "COFB" is a coffee SKU
+    }
+
 }

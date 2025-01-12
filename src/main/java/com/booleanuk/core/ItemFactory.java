@@ -33,8 +33,21 @@ public class ItemFactory {
         return (String) inventory.get(this.id).get(2);
     }
 
+    // create and return new instance of bagel, coffee or filling based on what the provided SKU (id) was
     public Item createItem(String id) {
-        return new Bagel("BGLP", 0.39, "Plain");
+        this.id = id;
+        if (this.inventory.containsKey(this.id)) {
+            if (this.id.startsWith("B")) {
+                return new Bagel(this.id, setPrice(), setDescription());
+
+            } else if (this.id.startsWith("C")) {
+                return new Coffee(this.id, setPrice(), setDescription());
+
+            } else if (this.id.startsWith("F")) {
+                return new Filling(this.id, setPrice(), setDescription());
+            }
+        }
+        return null;
     }
 
 }
