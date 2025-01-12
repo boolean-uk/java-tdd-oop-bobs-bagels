@@ -6,10 +6,24 @@ import org.junit.jupiter.api.Test;
 public class ItemFactoryTest {
 
     @Test
-    public void testItemCreation() {
+    public void testBagelCreation() {
         ItemFactory factory = new ItemFactory();
         Item item = factory.createItem("BGLP");
         Assertions.assertInstanceOf(Bagel.class, item); //Item should be a bagel because "BGLP" is a bagel SKU
 
     }
+    @Test
+    public void testFillingCreation() {
+        ItemFactory factory = new ItemFactory();
+        Item item = factory.createItem("FILB");
+        Assertions.assertInstanceOf(Filling.class, item); //Item should be a filling because "FILB" is a filling SKU
+    }
+
+    @Test
+    public void testCoffeeCreation() {
+        ItemFactory factory = new ItemFactory();
+        Item item = factory.createItem("COFB");
+        Assertions.assertInstanceOf(Coffee.class, item); //Item should be a coffee because "COFB" is a coffee SKU
+    }
+
 }
