@@ -14,4 +14,11 @@ public class BagelTest {
         Assertions.assertInstanceOf(Bagel.class, bagel);
     }
 
+    @Test
+    public void testFillingAttachment() {
+        Bagel bagel = new Bagel("BGLP", 0.39, "Plain");
+        Filling filling1 = new Filling("FILB", 0.12, "Bacon");
+        bagel.attachFilling(filling1);
+        Assertions.assertEquals(filling1, bagel.getAllFillings().getFirst());
+    }
 }
