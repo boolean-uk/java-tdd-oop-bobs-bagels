@@ -52,12 +52,12 @@
 # Basket class
 
 
-| Members                | Methods                                 | Scenario                            | Output/Result                                                            |
-|------------------------|-----------------------------------------|-------------------------------------|--------------------------------------------------------------------------|
-| ArrayList<Item> basket | boolean addToBasket(Item item)          | Basket at max capacity              | Don't add, return false                                                  |
-| int maxCapacity;       |                                         | Basket not at max capacity          | Add item to basket, increase totalPrice by price of item, return true    |
-| double totalPrice;     | boolean removeFromBasket(Item item)     | Item does not exist in basket       | Don't remove, return false                                               |
-|                        |                                         | Item in basket                      | Remove the item, decrease total totalPrice by price of item, return true |
-|                        | boolean changeCapacity(int newCapacity) | newCapacity is less than 1          | Don't change capacity, return false                                      |
-|                        |                                         | newCapacity is larger or equal to 1 | Update to new capacity, return true                                      |
-|                        | ArrayList<Item> getBasket()             |                                     | Returns contents of basket                                               |
+| Members                 | Methods                                 | Scenario                            | Output/Result                                                            |
+|-------------------------|-----------------------------------------|-------------------------------------|--------------------------------------------------------------------------|
+| ArrayList\<Item> basket | boolean addToBasket(Item item)          | Basket at max capacity              | Don't add, return false                                                  |
+| int maxCapacity;        |                                         | Basket not at max capacity          | Add item to basket, increase totalPrice by price of item, return true    |
+| double totalPrice;      | boolean removeFromBasket(Item item)     | Item does not exist in basket       | Don't remove, return false                                               |
+|                         |                                         | Item in basket                      | Remove the item, decrease total totalPrice by price of item, return true |
+|                         | boolean changeCapacity(int newCapacity) | newCapacity is less than 1          | Don't change capacity, return false                                      |
+|                         |                                         | newCapacity is larger or equal to 1 | Update to new capacity, return true                                      |
+|                         | ArrayList\<Item> getBasket()            |                                     | Returns contents of basket                                               |
