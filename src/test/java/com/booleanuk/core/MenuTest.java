@@ -1,5 +1,6 @@
 package com.booleanuk.core;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -42,6 +43,12 @@ public class MenuTest {
         add(hamFilling);
     }};
 
+    @Test
+    public void itemDontExistOnMenu(){
+        Menu menu = new Menu();
+        Item itemToCheck = new Item(0.10, "abc", "apple");
 
+        Assertions.assertEquals("Item dont exist on the menu!", menu.seePrice(itemToCheck));
+    }
 
 }
