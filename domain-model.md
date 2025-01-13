@@ -60,18 +60,8 @@
 | checkCostOfItem(Item item) |                                | Check cost of an item that exists                            | String "Price: " + price |
 |                            |                                | Check cost of an item that does not exist                    | String "No item found"   |
 |                            |                                |                                                              |                          |
+| isInInventory(Item item)   |                                | Search for an item currently in inventory                    | true                     |
+|                            |                                | Search for an item currently not in inventory                | false                    |
 
-## Inventory
 
-| Method                             | Member Variable                  | Scenario                                      | Result                        |
-|------------------------------------|----------------------------------|-----------------------------------------------|-------------------------------|
-|                                    | ArrayList<Item> currentInventory |                                               |                               |
-| isInInventory(Item item)           |                                  | Search for an item currently in inventory     | true                          |
-|                                    |                                  | Search for an item currently not in inventory | false                         |
-|                                    |                                  |                                               |                               |
-| addItem(Item item)                 |                                  |                                               | String "successfully added"   |
-| addItems(ArrayList<Item> items)    |                                  |                                               | String "successfully added"   |
-| removeItem(Item item)              |                                  |                                               | String "successfully removed" |
-| removeItems(ArrayList<Item> items) |                                  |                                               | String "successfully removed" |
 
-![img.png](img.png)
