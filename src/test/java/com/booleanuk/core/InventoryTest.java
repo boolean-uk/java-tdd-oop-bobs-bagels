@@ -9,25 +9,23 @@ public class InventoryTest {
     public void testAddStockItem(){
         Inventory inventory  = new Inventory();
         inventory.addStockItem("BGLP", 1);
-        inventory.addStockItem("FILE", 1);
-        Assertions.assertEquals(2, inventory.stock.size());
+        inventory.addStockItem("FILE", 3);
+        Assertions.assertEquals(2, inventory.getStockSize());
+        Assertions.assertEquals(3, inventory.getItemStock("FILE"));
+        Assertions.assertEquals(1, inventory.getItemStock("BGLP"));
     }
 
     @Test
     public void testRemoveStockItem(){
         Inventory inventory = new Inventory();
-        inventory.addStockItem("BGLP", 1);
+        inventory.addStockItem("BGLP", 3);
         inventory.addStockItem("FILE", 1);
-        Assertions.assertEquals(2, inventory.stock.size());
+        Assertions.assertEquals(2, inventory.getStockSize());
 
         inventory.removeStockItem("FILE", 1);
-        Assertions.assertEquals(1, inventory.stock.size());
+        inventory.removeStockItem("BGLP", 2);
+        Assertions.assertEquals(1, inventory.getStockSize());
+        Assertions.assertEquals(1, inventory.getItemStock("BGLP"));
     }
-
-    @Test
-    public void testCheckStock(){
-        Inventory inventory = new Inventory();
-        Assertions.assertEquals(1, inventory.checkStock());
-
-    }
+    
 }
