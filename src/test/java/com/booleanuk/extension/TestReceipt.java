@@ -27,8 +27,8 @@ public class TestReceipt {
                 + "    2021-03-16 21:38:44\n"
                 + "\n"
                 + "----------------------------\n"
-                + "Onion Bagel  2   $0.49\n"
                 + "Black Coffee 1   $0.99\n"
+                + "Onion Bagel  2   $0.49\n"
                 + "\n"
                 + "----------------------------\n"
                 + "Total            $1.97\n"
@@ -38,9 +38,9 @@ public class TestReceipt {
 
         expected = expected.replaceAll("\\s", "");
 
-        String result = receipt.getReceipt();
+        String result = receipt.getReceipt().replaceAll("\\s", "");
 
-        Assertions.assertEquals(expected, result.replaceAll("\\s", ""));
+        Assertions.assertEquals(expected, result);
 
     }
 }

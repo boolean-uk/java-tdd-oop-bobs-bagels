@@ -2,6 +2,7 @@ package com.booleanuk.extension;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Receipt {
@@ -25,12 +26,21 @@ public class Receipt {
         sb.append("----------------------------\n");
 
         HashMap<Item, Integer> itemMap = basket.getItemCounts();
+        ArrayList<String> itemLines = new ArrayList<>();
 
-        // add items to receipt
+        // add items to itemLines
         itemMap.forEach(
-                (item, count) -> sb.append(
+                (item, count) -> itemLines.add(
                         item.toString() + "\t" + Integer.toString(count) + "\t$" + String.valueOf(item.getPrice())
                                 + "\n"));
+
+        // sort itemLines
+        itemLines.sort(String::compareTo);
+
+        // add itemLines to receipt
+        for (String s : itemLines) {
+            sb.append(s);
+        }
 
         sb.append("\n");
         sb.append("----------------------------\n");
