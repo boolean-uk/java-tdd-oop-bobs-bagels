@@ -44,7 +44,7 @@ public class MenuTest {
     }};
 
     @Test
-    public void itemDontExistOnMenu(){
+    public void itemDontExistOnMenuSeePrice(){
         Menu menu = new Menu(itemsOnMenu);
         Item itemToCheck = new Item(0.10, "abc", "apple", "Filling");
 
@@ -52,7 +52,7 @@ public class MenuTest {
     }
 
     @Test
-    public void itemExistOnMenu(){
+    public void itemExistOnMenuSeePrice(){
         Menu menu = new Menu(itemsOnMenu);
         Item itemToCheck = new OnionBagel(0.49, "BGLO", "Onion", "Bagel"){};
 
@@ -74,6 +74,25 @@ public class MenuTest {
                                        "Ham, 0.12$" + "\n";
 
         Assertions.assertEquals(allFillingsWithPrices, menu.showAllFillingsWithCosts());
+    }
+
+
+
+
+    @Test
+    public void itemDontExistOnMenu(){
+        Menu menu = new Menu(itemsOnMenu);
+        Item itemToCheck = new Item(0.10, "abc", "apple", "Filling");
+
+        Assertions.assertFalse(menu.isContainedInInventory(itemToCheck));
+    }
+
+    @Test
+    public void itemExistOnMenu(){
+        Menu menu = new Menu(itemsOnMenu);
+        Item itemToCheck = new OnionBagel(0.49, "BGLO", "Onion", "Bagel"){};
+
+        Assertions.assertTrue(menu.isContainedInInventory(itemToCheck));
     }
 
 }
