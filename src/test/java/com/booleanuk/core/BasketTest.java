@@ -43,6 +43,15 @@ public class BasketTest {
     }
 
     @Test
+    public void testRemoveNonExistingItem() {
+        Basket basket = new Basket();
+        ItemFactory factory = new ItemFactory();
+        Item item = factory.createItem("BGLP"); //Item never gets added to basket
+        boolean successfullyRemoved = basket.removeItem(item);
+        Assertions.assertFalse(successfullyRemoved);
+    }
+
+    @Test
     public void testChangeCapacity() {
 
     }

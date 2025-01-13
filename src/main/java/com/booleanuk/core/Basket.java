@@ -17,8 +17,11 @@ public class Basket {
     }
 
     public boolean removeItem(Item item) {
-        this.basket.remove(item);
-        return true;
+        if (this.basket.contains(item)) {
+            this.basket.remove(item);
+            return true;
+        }
+        return false;
     }
 
     public boolean changeCapacity(int newCapacity) {
