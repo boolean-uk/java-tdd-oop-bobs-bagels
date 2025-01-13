@@ -8,8 +8,12 @@ public class Basket {
     private double totalCost = 0.0;
 
     public boolean addItem(Item item) {
-        this.basket.add(item);
-        return true;
+        if (this.basket.size() <= this.maxCapacity - 1) {
+            this.basket.add(item);
+            return true;
+        }
+        return false;
+
     }
 
     public boolean removeItem(Item item) {

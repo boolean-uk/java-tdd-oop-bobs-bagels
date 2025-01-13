@@ -14,7 +14,7 @@ public class Bagel extends Item{
     // Logic for making that happen is in the Basket class
     public boolean attachFilling(Filling filling) {
         System.out.println(this.fillings.size());
-        if (this.fillings.size() < this.maxFillings - 1) {
+        if (this.fillings.size() <= this.maxFillings - 1) {
             this.fillings.add(filling);
             return true;
         }

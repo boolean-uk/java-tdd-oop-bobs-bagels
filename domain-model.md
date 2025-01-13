@@ -61,6 +61,5 @@
 |                        | boolean changeCapacity(int newCapacity) | newCapacity is less than 1          | Don't change capacity, return false                                      |
 |                        |                                         | newCapacity is larger or equal to 1 | Update to new capacity, return true                                      |
 |                        | double checkCost(Item item)             |                                     | Return the cost of the specified item                                    |
-|                        |                                         |                                     |                                                                          |
 |                        | void addFilling(Bagel bagel)            |                                     | Fillings gets added to bagel, increase totalPrice by filling cost        |
 |                        | ArrayList<Item> getBasket()             |                                     | Returns contents of basket                                               |
