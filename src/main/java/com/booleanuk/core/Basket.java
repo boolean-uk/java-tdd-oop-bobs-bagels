@@ -69,6 +69,7 @@ public class Basket {
                 return false;
             }
         }
+        System.out.println("Cannot add more items!");
         return false;
     }
 
@@ -93,6 +94,9 @@ public class Basket {
     }
 
     public double getTotalCost() {
-
+        for (int i = 0; i < basketList.size(); i++) {
+            totalCost += basketList.get(i).getPrice();
+        }
+        return totalCost;
     }
 }

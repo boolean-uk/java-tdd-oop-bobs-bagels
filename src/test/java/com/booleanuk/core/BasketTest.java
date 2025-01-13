@@ -33,4 +33,15 @@ public class BasketTest {
 
         Assertions.assertEquals(basket.basketList, basket.listOfItems());
     }
+
+    @Test
+    public void getTotalPriceOfBasket() {
+        Basket basket = new Basket();
+        basket.addToBasket("BGLO");
+        basket.addToBasket("COFB");
+
+        Assertions.assertEquals(1.48, basket.getTotalCost());
+    }
+
+
 }
