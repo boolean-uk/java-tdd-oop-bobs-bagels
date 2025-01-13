@@ -77,4 +77,12 @@ public class BasketTest {
         Assertions.assertEquals(3.7, basket.totalCost());
     }
 
+    @Test
+    public void totalCostOfBasketWhenItIsEmpty(){
+        ArrayList<Item> emptyList = new ArrayList<>();
+        Basket basket = new Basket(emptyList, 6);
+
+        Assertions.assertEquals(0, basket.totalCost());
+    }
+
 }

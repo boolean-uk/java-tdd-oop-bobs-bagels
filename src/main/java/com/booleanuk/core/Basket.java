@@ -46,6 +46,10 @@ public class Basket {
     }
 
     public double totalCost(){
-        return 3.7;
+        double totalCost = 0;
+        for(Item item : this.itemsInBasket){
+            totalCost += item.getPrice();
+        }
+        return totalCost;
     }
 }
