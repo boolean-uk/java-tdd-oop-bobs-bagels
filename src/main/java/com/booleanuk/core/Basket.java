@@ -12,4 +12,7 @@ public class Basket {
     }
 
 
+    public String addItem(Item itemToAdd){
+        return "Basket is full!";
+    }
 }
