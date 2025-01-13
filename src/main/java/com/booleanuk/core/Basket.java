@@ -17,6 +17,7 @@ public class Basket {
     }
 
     public boolean removeItem(Item item) {
+        this.basket.remove(item);
         return true;
     }
 
