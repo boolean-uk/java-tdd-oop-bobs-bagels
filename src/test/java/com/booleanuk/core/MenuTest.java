@@ -59,4 +59,21 @@ public class MenuTest {
         Assertions.assertEquals("The item costs: " + itemToCheck.getPrice(), menu.seePrice(itemToCheck));
     }
 
+
+
+
+
+    @Test
+    public void allFillingsAreReturned(){
+        Menu menu = new Menu(itemsOnMenu);
+        String allFillingsWithPrices = "Bacon, 0.12$" + "\n" +
+                                       "Egg, 0.12$" + "\n" +
+                                       "Cheese, 0.12$" + "\n" +
+                                       "Cream Cheese, 0.12$" + "\n" +
+                                       "Smoked Salmon, 0.12$" + "\n" +
+                                       "Ham, 0.12$" + "\n";
+
+        Assertions.assertEquals(allFillingsWithPrices, menu.showAllFillingsWithCosts());
+    }
+
 }

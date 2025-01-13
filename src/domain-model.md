@@ -1,17 +1,17 @@
 # Bob's bagels
 
 ## Menu
-| Method                             | Member variable             | Scenario                                  | Result                    |
-|------------------------------------|-----------------------------|-------------------------------------------|---------------------------|
-|                                    | ArrayList<item> itemsOnMenu |                                           |                           |
-| seePrice(Item anItem)              |                             | The item exist in the inventory           | String show price         |
-|                                    |                             | The item dont exist in the inventory      | String error message      |
-|                                    |                             |                                           |                           |
-| showAllFillings()                  |                             | List all fillings in that are on the menu | ArrayList of all fillings |
-|                                    |                             |                                           |                           |
-|                                    |                             |                                           |                           |
-| isContainedInInventory(Item item)  |                             | item is contained in the inventory        | True                      |
-|                                    |                             | item is not contained in the inventory    | False                     |
+| Method                            | Member variable             | Scenario                                  | Result                    |
+|-----------------------------------|-----------------------------|-------------------------------------------|---------------------------|
+|                                   | ArrayList<item> itemsOnMenu |                                           |                           |
+| seePrice(Item anItem)             |                             | The item exist in the inventory           | String show price         |
+|                                   |                             | The item dont exist in the inventory      | String error message      |
+|                                   |                             |                                           |                           |
+| showAllFillingsWithCosts()        |                             | List all fillings in that are on the menu | ArrayList of all fillings |
+|                                   |                             |                                           |                           |
+|                                   |                             |                                           |                           |
+| isContainedInInventory(Item item) |                             | item is contained in the inventory        | True                      |
+|                                   |                             | item is not contained in the inventory    | False                     |
 
 
 ## Basket
