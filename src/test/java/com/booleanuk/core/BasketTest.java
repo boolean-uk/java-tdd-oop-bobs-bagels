@@ -16,6 +16,7 @@ public class BasketTest {
 
     @Test
     public void removingItemFromBasket() {
+        // Testing removing items that exist and does not exist
         Basket basket = new Basket();
         basket.addToBasket("BGLO");
         basket.addToBasket("COFB");
@@ -25,13 +26,15 @@ public class BasketTest {
         Assertions.assertEquals(1, basket.listOfItems().size());
     }
 
+
+
     @Test
     public void getListOfItems() {
         Basket basket = new Basket();
         basket.addToBasket("BGLO");
         basket.addToBasket("COFB");
 
-        Assertions.assertEquals(basket.basketList, basket.listOfItems());
+        Assertions.assertEquals(basket.getBasketList(), basket.listOfItems());
     }
 
     @Test

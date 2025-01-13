@@ -8,8 +8,9 @@ public class Basket {
     private int capasity = 10;
     private double totalCost;
 
-    public ArrayList<Item> basketList = new ArrayList<>();
-    public HashMap<String, Item> stockList = new HashMap<>() {{
+    private ArrayList<Item> basketList = new ArrayList<>();
+
+    private HashMap<String, Item> stockList = new HashMap<>() {{
         Item bagelOnion = new Item("BGLO", 0.49, "Bagel", "Onion");
         put("BGLO", bagelOnion);
         Item bagelPlain = new Item("BGLP", 0.39, "Bagel", "Plain");
@@ -51,6 +52,22 @@ public class Basket {
         this.capasity = capasity;
     }
 
+    public ArrayList<Item> getBasketList() {
+        return basketList;
+    }
+
+    public void setBasketList(ArrayList<Item> basketList) {
+        this.basketList = basketList;
+    }
+
+    public HashMap<String, Item> getStockList() {
+        return stockList;
+    }
+
+    public void setStockList(HashMap<String, Item> stockList) {
+        this.stockList = stockList;
+    }
+
     public boolean addToBasket(String id) {
         if (basketList.size() != capasity) {
             if (stockList.containsKey(id)) {
@@ -73,6 +90,7 @@ public class Basket {
                 basketList.add(stockList.get(id));
                 return true;
             } else {
+                System.out.println("Item does not exist in our inventory.");
                 return false;
             }
         }
@@ -108,6 +126,7 @@ public class Basket {
     }
 
     public int changeCapasity(int c) {
-        
+        this.capasity = c;
+        return c;
     }
 }
