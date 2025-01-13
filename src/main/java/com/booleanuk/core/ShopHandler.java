@@ -32,6 +32,16 @@ public class ShopHandler {
         return sb.toString();
     }
 
+    public String showFillings() {
+        StringBuilder sb = new StringBuilder();
+        for (Item item : stock) {
+            if (item.getName().equals("Filling")) {
+                sb.append(item.getVariant()).append("\n");
+            }
+        }
+        return sb.toString();
+    }
+
     public static List<Item> getStock() {
         return stock;
     }
