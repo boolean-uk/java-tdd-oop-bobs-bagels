@@ -69,4 +69,12 @@ public class BasketTest {
         Assertions.assertFalse(basket.changeSizeOfBasket(5));
     }
 
+
+    @Test
+    public void totalCostOfBasketWhenItIsNotEmpty(){
+        Basket basket = new Basket(itemsInBasket, 6);
+
+        Assertions.assertEquals(3.7, basket.totalCost());
+    }
+
 }
