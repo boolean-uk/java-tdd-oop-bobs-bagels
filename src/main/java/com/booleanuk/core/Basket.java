@@ -7,7 +7,6 @@ public class Basket {
 
     private int capasity = 10;
     private double totalCost;
-    private String bagel = "BGLO";
 
     public ArrayList<Item> basketList = new ArrayList<>();
     public HashMap<String, Item> stockList = new HashMap<>() {{
@@ -42,6 +41,14 @@ public class Basket {
     }};
 
     public Basket() {
+    }
+
+    public int getCapasity() {
+        return capasity;
+    }
+
+    public void setCapasity(int capasity) {
+        this.capasity = capasity;
     }
 
     public boolean addToBasket(String id) {
@@ -98,5 +105,9 @@ public class Basket {
             totalCost += basketList.get(i).getPrice();
         }
         return totalCost;
+    }
+
+    public int changeCapasity(int c) {
+        
     }
 }

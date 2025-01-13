@@ -43,5 +43,11 @@ public class BasketTest {
         Assertions.assertEquals(1.48, basket.getTotalCost());
     }
 
+    @Test
+    public void changeCapasityOfBasket() {
+        Basket basket = new Basket();
 
+        basket.changeCapasity(200);
+        Assertions.assertEquals(200, basket.getCapasity());
+    }
 }
