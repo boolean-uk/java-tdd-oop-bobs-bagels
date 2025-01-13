@@ -1,6 +1,7 @@
 package com.booleanuk.extension;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Basket {
     private Inventory inventory;
@@ -42,5 +43,27 @@ public class Basket {
 
     ArrayList<Item> getItems() {
         return items;
+    }
+
+    // count occurences for each item
+    HashMap<Item, Integer> getItemCounts() {
+        HashMap<Item, Integer> itemMap = new HashMap<>();
+        for (Item item : items) {
+            boolean itemExists = false;
+
+            // check if this item exists in map
+            for (Item key : itemMap.keySet()) {
+                if (key.getSku() == item.getSku()) {
+                    itemExists = true;
+                    itemMap.put(key, itemMap.get(key) + 1);
+                }
+            }
+
+            // if this is a new item
+            if (!itemExists) {
+                itemMap.put(item, 1);
+            }
+        }
+        return itemMap;
     }
 }
