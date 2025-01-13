@@ -15,7 +15,7 @@ public class Basket {
     public String add(Item item, Menu menu){
         String msg = "";
         if(!menu.isInMenu(item)){
-            msg = "Item not in inventory";
+            msg = "Item not on the menu";
             return msg;
         }
         if(items.size() >= basketSize){

@@ -42,7 +42,7 @@ public class BasketTest {
 
         Item item = new EggFilling();
 
-        Assertions.assertEquals("Item not in inventory", basket.add(item, menu));
+        Assertions.assertEquals("Item not on the menu", basket.add(item, menu));
     }
 
     @Test
