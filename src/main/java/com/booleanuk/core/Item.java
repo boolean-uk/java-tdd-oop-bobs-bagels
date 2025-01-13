@@ -15,6 +15,10 @@ public class Item {
         this.size = size;
     }
 
+    public Item(String sku, double price, String name, String variant) {
+        this(sku, price, name, variant, 1);
+    }
+
     public String getSku() {
         return sku;
     }
