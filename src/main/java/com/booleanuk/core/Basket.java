@@ -49,7 +49,7 @@ public class Basket {
         }
         Item item = new Item(itemSku);
         System.out.println(item.getVariant() + " " + item.getName() + " price: $" + item.getPrice());
-        System.out.println("Do you want to " + item.getVariant()
+        System.out.println("Do you want to add " + item.getVariant()
                 + " " + item.getName() +" to the basket? (yes/no): ");
 
         Scanner scanner = new Scanner(System.in);
