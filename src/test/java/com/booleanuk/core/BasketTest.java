@@ -38,4 +38,13 @@ public class BasketTest {
 
         Assertions.assertEquals(itemToAdd.getName() + " was added to your basket!", basket.addItem(itemToAdd));
     }
+
+    @Test
+    public void removingItemThatDoesNotExistInBasket(){
+        Basket basket = new Basket(itemsInBasket, 6);
+        Item itemToRemove = new OnionBagel(0.49, "BGLO", "Onion", "Bagel"){};
+
+        Assertions.assertEquals("Item do not exist in basket!", basket.removeItem(itemToRemove));
+    }
+
 }
