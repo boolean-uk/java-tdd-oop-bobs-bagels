@@ -21,6 +21,14 @@ public class Basket {
     }
 
     public String removeItem(Item itemToRemove){
+        for(Item item : itemsInBasket){
+            if(item.getName().equals(itemToRemove.getName())){
+                itemsInBasket.remove(item);
+                return itemToRemove.getName() + " was removed from the basket!";
+            }
+        }
         return "Item do not exist in basket!";
     }
+
+
 }
