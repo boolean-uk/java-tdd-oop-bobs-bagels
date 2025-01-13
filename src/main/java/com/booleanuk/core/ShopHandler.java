@@ -22,10 +22,33 @@ public class ShopHandler {
             new Item("FILS", 0.12, "Filling", "Smoked Salmon"),
             new Item("FILH", 0.12, "Filling", "Ham")
     ));
-    Scanner scanner;
+    private Scanner scanner;
+    private Basket basket;
 
     public ShopHandler() {
         this.scanner = new Scanner(System.in);
+        this.basket = new Basket();
+    }
+
+    public void placeOrder() {
+        while (true) {
+            String in;
+            do {
+                System.out.println("Do you want to add a bagel or coffee? (\"pay\" when done)");
+                in = scanner.next();
+            } while (!"bagel coffee pay".contains(in));
+            switch (in) {
+                case "bagel":
+                    orderBagel();
+                    break;
+                case "coffee":
+                    orderCoffee();
+                    break;
+                case "pay":
+                    System.out.println("Print receipt tbd. total cost " + basket.getTotalCost());
+                    return;
+            }
+        }
     }
 
     public String showItems() {
@@ -69,7 +92,96 @@ public class ShopHandler {
         return sb.toString();
     }
 
+    public void orderBagel() {
+        System.out.println("Select bagel variant:");
+        System.out.println(showBagels());
+        String in = "";
+        do {
+            in = this.scanner.next();
+        } while (!isValidBagel(in));
+        boolean success = basket.addItem(bagelFromVariant(in));
+        if (success) {
+            System.out.println("Add filling? Available fillings:");
+            System.out.println(showFillings());
+            do {
+                in = this.scanner.next();
+            } while(!isValidFilling(in) && !in.equals("no"));
+            if (!in.equals("no")) {
+                basket.addItem(fillingFromVariant(in));
+            }
+        } else {
+            System.out.println("Not able to add bagel to basket.");
+        }
+    }
 
+    public void orderCoffee() {
+        System.out.println("Select coffee variant:");
+        System.out.println(showCoffees());
+        String in = "";
+        do {
+            in = this.scanner.next();
+        } while (!isValidCoffee(in));
+        boolean success = basket.addItem(coffeeFromVariant(in));
+        if (success) {
+            System.out.println("Coffee added to basket.");
+        } else {
+            System.out.println("Not able to add coffee to basket.");
+        }
+    }
+
+    private Item bagelFromVariant(String variant) {
+        for (Item item : stock) {
+            if (item.getVariant().equals(variant)) {
+                return new Item(item.getSku(), item.getPrice(), item.getName(), item.getVariant());
+            }
+        }
+        return null;
+    }
+
+    private Item coffeeFromVariant(String variant) {
+        for (Item item : stock) {
+            if (item.getVariant().equals(variant)) {
+                return new Item(item.getSku(), item.getPrice(), item.getName(), item.getVariant());
+            }
+        }
+        return null;
+    }
+
+    private Item fillingFromVariant(String variant) {
+        for (Item item : stock) {
+            if (item.getVariant().equals(variant)) {
+                return new Item(item.getSku(), item.getPrice(), item.getName(), item.getVariant());
+            }
+        }
+        return null;
+    }
+
+    private static boolean isValidBagel(String variant) {
+        for (Item item: stock) {
+            if (item.getName().equals("Bagel") && item.getVariant().equals(variant)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private static boolean isValidCoffee(String variant) {
+        for (Item item: stock) {
+            if (item.getName().equals("Coffee") && item.getVariant().equals(variant)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private static boolean isValidFilling(String variant) {
+        for (Item item: stock) {
+            if (item.getName().equals("Filling") && item.getVariant().equals(variant)) {
+                return true;
+            }
+        }
+        return false;
+    }
 
     public static List<Item> getStock() {
         return stock;

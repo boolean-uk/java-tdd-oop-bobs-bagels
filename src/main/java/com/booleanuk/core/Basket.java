@@ -8,11 +8,23 @@ public class Basket {
     private List<Item> items = new ArrayList<>();
 
     public boolean addItem(String sku, double price, String name, String variant, int size) {
-        if (items.size() >= capacity) {
+        Item item = new Item(sku, price, name, variant, size);
+        return addItem(item);
+    }
+
+    public boolean addItem(Item item) {
+        if (canFitItem(item)) {
+            items.add(item);
+            return true;
+        }
+        return false;
+    }
+
+    public boolean canFitItem(Item item) {
+        if (items.size() + item.getSize() > capacity) {
             System.out.println("You cannot fit more items in your basket.");
             return false;
         }
-        items.add(new Item(sku, price, name, variant, size));
         return true;
     }
 
