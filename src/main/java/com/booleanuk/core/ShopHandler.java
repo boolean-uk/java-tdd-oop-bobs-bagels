@@ -3,9 +3,10 @@ package com.booleanuk.core;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Scanner;
 
 public class ShopHandler {
-    private static List<Item> stock = new ArrayList<>(Arrays.asList(
+    private static final List<Item> stock = new ArrayList<>(Arrays.asList(
             new Item("BGLO", 0.49, "Bagel", "Onion"),
             new Item("BGLP", 0.39, "Bagel", "Plain"),
             new Item("BGLE", 0.49, "Bagel", "Everything"),
@@ -21,8 +22,14 @@ public class ShopHandler {
             new Item("FILS", 0.12, "Filling", "Smoked Salmon"),
             new Item("FILH", 0.12, "Filling", "Ham")
     ));
+    Scanner scanner;
+
+    public ShopHandler() {
+        this.scanner = new Scanner(System.in);
+    }
 
     public String showItems() {
+        // Maybe this method isn't useful, may remove
         StringBuilder sb = new StringBuilder();
         for (Item item : stock) {
             if (!item.getName().equals("Filling")) {
@@ -41,6 +48,28 @@ public class ShopHandler {
         }
         return sb.toString();
     }
+
+    public String showBagels() {
+        StringBuilder sb = new StringBuilder();
+        for (Item item : stock) {
+            if (item.getName().equals("Bagel")) {
+                sb.append(item.getVariant()).append(item.getVariant().length() > 6 ? "\t" : "\t\t").append(item.getPrice()).append("\n");
+            }
+        }
+        return sb.toString();
+    }
+
+    public String showCoffees() {
+        StringBuilder sb = new StringBuilder();
+        for (Item item : stock) {
+            if (item.getName().equals("Coffee")) {
+                sb.append(item.getVariant()).append(item.getVariant().length() > 6 ? "\t" : "\t\t").append(item.getPrice()).append("\n");
+            }
+        }
+        return sb.toString();
+    }
+
+
 
     public static List<Item> getStock() {
         return stock;
