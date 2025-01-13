@@ -30,5 +30,7 @@ public class Basket {
         return "Item do not exist in basket!";
     }
 
-
+    public boolean changeSizeOfBasket(){
+        return true;
+    }
 }
