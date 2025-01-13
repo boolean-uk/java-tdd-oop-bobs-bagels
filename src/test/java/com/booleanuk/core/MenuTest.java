@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 public class MenuTest {
 
-    public ArrayList<Item> itemsOnMenu = new ArrayList<>(){{
+    private ArrayList<Item> itemsOnMenu = new ArrayList<>(){{
         // Adding the bagels
         Item onionBagel = new OnionBagel(0.49, "BGLO", "Onion", "Bagel"){};
         add(onionBagel);
