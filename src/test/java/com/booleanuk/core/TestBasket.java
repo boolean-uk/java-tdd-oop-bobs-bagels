@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 public class TestBasket {
-    @Test    
+    @Test
     void testAddItemBasketNotFullInStock() {
         // add onion bagle to stock
         Inventory inventory = new Inventory();
@@ -18,7 +18,7 @@ public class TestBasket {
         Assertions.assertEquals(SKU.BGLO, basket.getItems().get(0).getSku());
     }
 
-    @Test    
+    @Test
     void testAddItemNotInStock() {
         Inventory inventory = new Inventory();
         Basket basket = new Basket(inventory, 3);
@@ -28,7 +28,7 @@ public class TestBasket {
         Assertions.assertFalse(basket.addItem(item));
     }
 
-    @Test    
+    @Test
     void testAddItemFullBasket() {
         Inventory inventory = new Inventory();
         Basket basket = new Basket(inventory, 0);
@@ -48,14 +48,14 @@ public class TestBasket {
         basket.addItem(new Item(SKU.BGLO));
 
         Assertions.assertTrue(basket.removeItem(SKU.BGLO));
-        Assertions.assertFalse(inventory.checkStock(SKU.BGLO));
+        Assertions.assertTrue(inventory.checkStock(SKU.BGLO)); // check if item is added back to stock
     }
 
     @Test
     void testGetTotalCost() {
         Inventory inventory = new Inventory();
 
-        inventory.addStock(SKU.BGLO,2);
+        inventory.addStock(SKU.BGLO, 2);
         inventory.addStock(SKU.COFB, 1);
 
         Basket basket = new Basket(inventory, 5);

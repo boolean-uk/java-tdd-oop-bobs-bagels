@@ -26,6 +26,7 @@ public class Basket {
         for (int i = 0; i < items.size(); i++) {
             if (items.get(i).getSku() == sku) {
                 items.remove(i);
+                inventory.addStock(sku, 1);
                 return true;
             }
         }
