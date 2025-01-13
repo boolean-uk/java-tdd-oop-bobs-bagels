@@ -13,6 +13,10 @@ public class Basket {
 
 
     public String addItem(Item itemToAdd){
+        if(this.itemsInBasket.size() < this.size){
+            this.itemsInBasket.add(itemToAdd);
+            return itemToAdd.getName() + " was added to your basket!";
+        }
         return "Basket is full!";
     }
 }

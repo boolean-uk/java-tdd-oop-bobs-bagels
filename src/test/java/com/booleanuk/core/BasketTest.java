@@ -30,4 +30,12 @@ public class BasketTest {
 
         Assertions.assertEquals("Basket is full!", basket.addItem(itemToAdd));
     }
+
+    @Test
+    public void basketIsNotFullWhenAdding(){
+        Basket basket = new Basket(itemsInBasket, 10);
+        Item itemToAdd = new OnionBagel(0.49, "BGLO", "Onion", "Bagel"){};
+
+        Assertions.assertEquals(itemToAdd.getName() + " was added to your basket!", basket.addItem(itemToAdd));
+    }
 }
