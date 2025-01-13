@@ -15,20 +15,23 @@
 
 
 ## Basket
-| Method                          | Member variable               | Scenario                            | Result                      |
-|---------------------------------|-------------------------------|-------------------------------------|-----------------------------|
-| addItem(Item anItem)            | ArrayList<Item> itemsInBasket | basket is full                      | String Error message        |
-|                                 | int size                      | basket is not full                  | String success message      |
-|                                 |                               |                                     |                             |
-| removeItem(Item anItem)         |                               | item is not contained in basket     | String Error message        |
-|                                 |                               | item is contained in basket         | String success message      |
-|                                 |                               |                                     |                             |
-| changeSizeOfBasket(int newSize) |                               | entering acceptable size            | True                        |
-|                                 |                               | entering non-acceptable size        | False                       |
-|                                 |                               |                                     |                             |
-| totalCost()                     |                               | basket consists of more than 1 item | Double total cost of basket |
-|                                 |                               | basket dont consist any items       | 0                           |
-|                                 |                               |                                     |                             |
+| Method                          | Member variable               | Scenario                            | Result                                      |
+|---------------------------------|-------------------------------|-------------------------------------|---------------------------------------------|
+| addItem(Item anItem)            | ArrayList<Item> itemsInBasket | basket is full                      | String Error message                        |
+|                                 | int size                      | basket is not full                  | String success message                      |
+|                                 |                               |                                     |                                             |
+| removeItem(Item anItem)         |                               | item is not contained in basket     | String Error message                        |
+|                                 |                               | item is contained in basket         | String success message                      |
+|                                 |                               |                                     |                                             |
+| changeSizeOfBasket(int newSize) |                               | entering acceptable size            | True                                        |
+|                                 |                               | entering non-acceptable size        | False                                       |
+|                                 |                               |                                     |                                             |
+| totalCost()                     |                               | basket consists of more than 1 item | Double total cost of basket                 |
+|                                 |                               | basket dont consist any items       | 0                                           |
+|                                 |                               |                                     |                                             |
+| //EXTENSION                     |                               |                                     |                                             |
+| totalCostWithDiscounts()        |                               | discounts are received              | Double total cost of basket minus discounts |
+|                                 |                               | discounts are not received          | Double total cost of basket                 |
 
 
 ## Items
@@ -66,3 +69,4 @@
 |                     | String abbreviation |          |        |
 |                     | String name         |          |        |
 | getters and setters |                     |          |        |
+
