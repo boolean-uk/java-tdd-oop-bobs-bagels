@@ -31,6 +31,11 @@ public class Menu {
 
 
     public Boolean isContainedInInventory(Item itemToCheck){
-        return true;
+        for(Item anItem : itemsOnMenu){
+            if(anItem.getName().equals(itemToCheck.getName())){
+                return true;
+            }
+        }
+        return false;
     }
 }
