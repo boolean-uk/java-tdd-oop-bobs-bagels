@@ -37,6 +37,7 @@
 |                     | Double price        |          |        |
 |                     | String abbreviation |          |        |
 |                     | String name         |          |        |
+|                     | String typeOfItem   |          |        |
 | getters and setters |                     |          |        |
 
 
