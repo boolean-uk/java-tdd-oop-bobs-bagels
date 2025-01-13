@@ -61,7 +61,7 @@
 |                         | boolean changeCapacity(int newCapacity) | newCapacity is less than 1            | Don't change capacity, return false                                      |
 |                         |                                         | newCapacity is larger or equal to 1   | Update to new capacity, return true                                      |
 |                         | ArrayList\<Item> getBasket()            |                                       | Returns contents of basket                                               |
-|                         | void checkDiscounts()                   | No discount items in basket           | No discount given                                                        |
+|                         | double checkDiscounts()                 | No discount items in basket           | No discount given                                                        |
 |                         |                                         | 6 or more onion bagels in basket      | Apply discount per 6 onion bagels (total: 2.49)                          |
 |                         |                                         | 12 or more plain bagels in basket     | Apply discount per 12 plain bagels (total: 3.99)                         |
 |                         |                                         | 6 or more everything bagels in basket | Apply discount per 6 everything bagels (total: 2.49)                     |

@@ -1,10 +1,14 @@
 package com.booleanuk.extension;
 
+import jdk.jfr.Label;
+
+import java.security.cert.Extension;
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class Basket {
     private final ArrayList<Item> basket = new ArrayList<>();
-    private int maxCapacity = 5;
+    private int maxCapacity = 25;
     private double totalCost = 0.0;
 
     public boolean addItem(Item item) {
@@ -46,6 +50,10 @@ public class Basket {
 
     public int getMaxCapacity() {
         return this.maxCapacity;
+    }
+
+    public double checkDiscounts() {
+        return 0.0;
     }
 
 
