@@ -1,49 +1,40 @@
 # Bob's bagels
 
 ## Menu
-| Method            | Member variable             | Scenario                               | Result                      |
-|-------------------|-----------------------------|----------------------------------------|-----------------------------|
-|                   | ArrayList<item> itemsOnMenu |                                        |                             |
-| seePrice()        |                             | There are items in the inventory       | String show price           |
-|                   |                             | There are no items in the inventory    | String error message        |
-|                   |                             |                                        |                             |
-| showAllFillings() |                             | There are fillings in the inventory    | String list of all fillings |
-|                   |                             | There are no fillings in the inventory | String error message        |
-|                   |                             |                                        |                             |
-| getter and setter |                             |                                        |                             |
-
-
-## Inventory
-| Method                            | Member variable           | Scenario                               | Result |
-|-----------------------------------|---------------------------|----------------------------------------|--------|
-|                                   | Arraylist<Item> inventory |                                        |        |
-| getter and setter                 |                           |                                        |        |
-|                                   |                           |                                        |        |
-| isContainedInInventory(Item item) |                           | item is contained in the inventory     | true   |
-|                                   |                           | item ia not contained in the inventory | false  |
+| Method                             | Member variable             | Scenario                                  | Result                    |
+|------------------------------------|-----------------------------|-------------------------------------------|---------------------------|
+|                                    | ArrayList<item> itemsOnMenu |                                           |                           |
+| seePrice(Item anItem)              |                             | The item exist in the inventory           | String show price         |
+|                                    |                             | The item dont exist in the inventory      | String error message      |
+|                                    |                             |                                           |                           |
+| showAllFillings()                  |                             | List all fillings in that are on the menu | ArrayList of all fillings |
+|                                    |                             |                                           |                           |
+|                                    |                             |                                           |                           |
+| isContainedInInventory(Item item)  |                             | item is contained in the inventory        | True                      |
+|                                    |                             | item is not contained in the inventory    | False                     |
 
 
 ## Basket
-| Method                 | Member variable               | Scenario                            | Result                      |
-|------------------------|-------------------------------|-------------------------------------|-----------------------------|
-| addItem()              | ArrayList<Item> itemsInBasket | basket is full                      | String Error message        |
-|                        | int size                      | basket is not full                  | String success message      |
-|                        |                               |                                     |                             |
-| removeItem(Item aItem) |                               | item is not contained in basket     | String Error message        |
-|                        |                               | item is contained in basket         | String success message      |
-|                        |                               |                                     |                             |
-| changeSizeOfBasket()   |                               | entering acceptable size            | True                        |
-|                        |                               | entering non-acceptable size        | False                       |
-|                        |                               |                                     |                             |
-| totalCost()            |                               | basket consists of more than 1 item | double total cost of basket |
-|                        |                               | basket dont consist any items       | 0                           |
-|                        |                               |                                     |                             |
+| Method                  | Member variable               | Scenario                            | Result                      |
+|-------------------------|-------------------------------|-------------------------------------|-----------------------------|
+| addItem(Item anItem)    | ArrayList<Item> itemsInBasket | basket is full                      | String Error message        |
+|                         | int size                      | basket is not full                  | String success message      |
+|                         |                               |                                     |                             |
+| removeItem(Item anItem) |                               | item is not contained in basket     | String Error message        |
+|                         |                               | item is contained in basket         | String success message      |
+|                         |                               |                                     |                             |
+| changeSizeOfBasket()    |                               | entering acceptable size            | True                        |
+|                         |                               | entering non-acceptable size        | False                       |
+|                         |                               |                                     |                             |
+| totalCost()             |                               | basket consists of more than 1 item | Double total cost of basket |
+|                         |                               | basket dont consist any items       | 0                           |
+|                         |                               |                                     |                             |
 
 
 ## Items
 | Method              | Member Variable     | Scenario | Result |
 |---------------------|---------------------|----------|--------|
-|                     | Float price         |          |        |
+|                     | Double price        |          |        |
 |                     | String abbreviation |          |        |
 |                     | String name         |          |        |
 | getters and setters |                     |          |        |
