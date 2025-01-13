@@ -73,4 +73,8 @@ public class Basket {
         }
         return false;
     }
+
+    public boolean removeItem(String id) {
+        
+    }
 }
