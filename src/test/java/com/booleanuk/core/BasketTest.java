@@ -42,7 +42,7 @@ public class BasketTest {
     @Test
     public void removingItemThatDoesNotExistInBasket(){
         Basket basket = new Basket(itemsInBasket, 6);
-        Item itemToRemove = new OnionBagel(0.49, "BGLM", "Onion", "Bagel"){};
+        Item itemToRemove = new OnionBagel(0.49, "BGLO", "Tomato", "Bagel"){};
 
         Assertions.assertEquals("Item do not exist in basket!", basket.removeItem(itemToRemove));
     }
@@ -53,6 +53,13 @@ public class BasketTest {
         Item itemToRemove = new OnionBagel(0.49, "BGLO", "Onion", "Bagel"){};
 
         Assertions.assertEquals(itemToRemove.getName() + " was removed from the basket!", basket.removeItem(itemToRemove));
+    }
+
+    @Test
+    public void enteringAcceptableBasketSize(){
+        Basket basket = new Basket(itemsInBasket, 6);
+
+        Assertions.assertTrue(basket.changeSizeOfBasket());
     }
 
 }
