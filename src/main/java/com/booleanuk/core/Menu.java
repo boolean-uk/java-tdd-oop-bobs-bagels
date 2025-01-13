@@ -75,8 +75,8 @@ public class Menu {
         currentMenu.add(latte);
         Item bacon = new BaconFilling();
         currentMenu.add(bacon);
-        Item egg = new EggFilling();
-        currentMenu.add(egg);
+//        Item egg = new EggFilling();
+//        currentMenu.add(egg);
         Item cheese = new CheeseFilling();
         currentMenu.add(cheese);
         Item creamCheese = new CreamCheeseFilling();
