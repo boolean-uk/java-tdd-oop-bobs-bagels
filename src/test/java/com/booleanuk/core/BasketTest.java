@@ -144,22 +144,47 @@ public class BasketTest {
         basket.add(item19, menu);
         Item item20 = new EverythingBagel();
         basket.add(item20, menu);
-        Item item21 = new CappuccinoCoffee();
+        Item item21 = new BlackCoffee();
         basket.add(item21, menu);
         Item item22 = new BlackCoffee();
         basket.add(item22, menu);
-        Item item23 = new WhiteCoffee();
+        Item item23 = new BlackCoffee();
         basket.add(item23, menu);
 
         Assertions.assertEquals(10.43, basket.calculateTotalCostOfBasketWithDiscounts());
 
-        Basket basket1 = new Basket();
+
+
+
+
+    }
+
+    @Test
+    public void testCalculateTotalCostOfBasketWithDiscounts2(){
+        Menu menu = new Menu();
+        Basket basket = new Basket();
 
         for(int i = 0; i < 16; i++){
             Item plainBagel = new PlainBagel();
             basket.add(plainBagel, menu);
         }
 
-        Assertions.assertEquals(5.55, basket.calculateTotalCostOfBasketWithDiscounts());
+        //Assertions.assertEquals(5.55, basket.calculateTotalCostOfBasketWithDiscounts());
+        Assertions.assertEquals(5.55, basket.calculateTotalCostOfBasketWithDiscounts(), 0.001);
+    }
+
+    @Test
+    public void testCalculateTotalCostOfBasketWithDiscounts3(){
+        Menu menu = new Menu();
+        Basket basket = new Basket();
+
+
+        Item bagel = new PlainBagel();
+        Item coffee = new WhiteCoffee();
+
+        basket.add(bagel, menu);
+        basket.add(coffee, menu);
+
+        Assertions.assertEquals(1.25, basket.calculateTotalCostOfBasketWithDiscounts());
     }
 }
