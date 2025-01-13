@@ -7,44 +7,50 @@ public class BasketTest {
 
 
     @Test
-    public void testAddItemToBaketWhichIsNotFull(){
+    public void testAddItemToBasketWhichIsNotFull(){
         Basket basket = new Basket();
+        Menu menu = new Menu();
 
         Item item = new HamFilling();
 
-        Assertions.assertEquals("Successfully added", basket.add(item));
+        Assertions.assertEquals("Successfully added", basket.add(item, menu));
     }
 
     @Test
-    public void testAddItemToBaketWhichIsFull(){
+    public void testAddItemToBasketWhichIsFull(){
         Basket basket = new Basket();
+        Menu menu = new Menu();
 
         Item item = new PlainBagel();
-        basket.add(item);
+        basket.add(item, menu);
         Item item1 = new SesameBagel();
-        basket.add(item1);
+        basket.add(item1, menu);
         Item item2 = new EverythingBagel();
-        basket.add(item2);
+        basket.add(item2, menu);
         Item item3 = new OnionBagel();
-        basket.add(item3);
+        basket.add(item3, menu);
         Item item4 = new HamFilling();
 
 
-        Assertions.assertEquals("Basket is full", basket.add(item4));
+        Assertions.assertEquals("Basket is full", basket.add(item4, menu));
     }
 
     @Test
-    public void testAddItemToBaketWhichDoesNotExist(){
+    public void testAddItemTosBaketWhichDoesNotExist(){
         Basket basket = new Basket();
+        Menu menu = new Menu();
 
         Item item = new EggFilling();
 
-        Assertions.assertEquals("Item not in inventory", basket.add(item));
+        Assertions.assertEquals("Item not in inventory", basket.add(item, menu));
     }
 
     @Test
     public void testRemoveExistingItemFromBasket(){
         Basket basket = new Basket();
+        Menu menu = new Menu();
+        Item ham = new HamFilling();
+        basket.add(ham, menu);
 
         String item = "Ham";
 
@@ -66,7 +72,7 @@ public class BasketTest {
 
 
 
-        Assertions.assertTrue(basket.Resize(10));
+        Assertions.assertTrue(basket.resizeBasket(10));
     }
 
     @Test
@@ -75,17 +81,18 @@ public class BasketTest {
 
 
 
-        Assertions.assertFalse(basket.Resize(100));
+        Assertions.assertFalse(basket.resizeBasket(100));
     }
 
     @Test
     public void testCalculateTotalCostOfBasket(){
         Basket basket = new Basket();
+        Menu menu = new Menu();
 
         Item hamFilling = new HamFilling();
-        basket.add(hamFilling);
+        basket.add(hamFilling, menu);
         Item sesameBagel = new SesameBagel();
-        basket.add(sesameBagel);
+        basket.add(sesameBagel, menu);
 
         Assertions.assertEquals(0.12 + 0.49, basket.calculateTotalCostOfBasket());
     }

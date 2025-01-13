@@ -32,9 +32,6 @@
 ## Basket
 | Method                       | Member Variable       | Scenario                                           | Result                         |
 |------------------------------|-----------------------|----------------------------------------------------|--------------------------------|
-|                              | Double price          |                                                    |                                |
-|                              | String name           |                                                    |                                |
-|                              | String abbreviation   |                                                    |                                |
 |                              | ArrayList<Item> items |                                                    |                                |
 |                              | Int basketSize        |                                                    |                                |
 | add(Item item)               |                       | Adding an item to a basket which is not full       | String "successfully added"    |
@@ -47,8 +44,8 @@
 | resizeBasket(int newSize)    |                       | Resizing the basket to an accepted size            | true                           |
 |                              |                       | Resizing the basket to an unaccepted size          | false                          |
 |                              |                       |                                                    |                                |
-| calculateTotalCostOfBasket() |                       | Trying to calculate cost of a basket with items    | Int totalCost                  |
-|                              |                       | Trying to calculate cost of a basket with no items | Int 0                          |
+| calculateTotalCostOfBasket() |                       | Trying to calculate cost of a basket with items    | Double totalCost               |
+|                              |                       | Trying to calculate cost of a basket with no items | Double 0                       |
 
 ## Menu
 
