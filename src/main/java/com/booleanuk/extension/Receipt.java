@@ -31,7 +31,8 @@ public class Receipt {
         // add items to itemLines
         itemMap.forEach(
                 (item, count) -> itemLines.add(
-                        item.toString() + "\t" + Integer.toString(count) + "\t$" + String.valueOf(item.getPrice())
+                        item.toString() + "\t" + Integer.toString(count) + "\t$"
+                                + String.valueOf(item.getPrice() * itemMap.get(item))
                                 + "\n"));
 
         // sort itemLines
