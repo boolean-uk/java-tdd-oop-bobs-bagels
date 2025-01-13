@@ -30,4 +30,7 @@ public class Menu {
     }
 
 
+    public Boolean isContainedInInventory(Item itemToCheck){
+        return true;
+    }
 }
