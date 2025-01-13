@@ -18,4 +18,12 @@ public class Coffee extends Item {
     public void setDiscountBagel(Bagel discountBagel) {
         this.discountBagel = discountBagel;
     }
+
+    @Override
+    public int getSize() {
+        if (discountBagel == null) {
+            return super.getSize();
+        }
+        return super.getSize() + discountBagel.getSize();
+    }
 }
