@@ -3,13 +3,14 @@ package com.booleanuk.core;
 import java.util.ArrayList;
 
 public class Basket {
-    private ArrayList<Item> basket = new ArrayList<>();
+    private final ArrayList<Item> basket = new ArrayList<>();
     private int maxCapacity = 5;
     private double totalCost = 0.0;
 
     public boolean addItem(Item item) {
         if (this.basket.size() <= this.maxCapacity - 1) {
             this.basket.add(item);
+            this.totalCost += item.getPrice();
             return true;
         }
         return false;
@@ -19,6 +20,7 @@ public class Basket {
     public boolean removeItem(Item item) {
         if (this.basket.contains(item)) {
             this.basket.remove(item);
+            this.totalCost -= item.getPrice();
             return true;
         }
         return false;
@@ -32,14 +34,6 @@ public class Basket {
         return false;
     }
 
-    public double checkCost(Item item) {
-        return 0.0;
-    }
-
-    public void addFilling(Bagel bagel, Filling filling) {
-
-    }
-
     public ArrayList<Item> getBasket(){
         return this.basket;
     }
@@ -51,5 +45,6 @@ public class Basket {
     public int getMaxCapacity() {
         return this.maxCapacity;
     }
+
 
 }

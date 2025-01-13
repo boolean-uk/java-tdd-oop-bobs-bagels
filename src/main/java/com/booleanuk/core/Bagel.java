@@ -10,8 +10,7 @@ public class Bagel extends Item{
         super(id, price, description);
     }
 
-    // Allows fillings to be attached to bagels. Number of items in basket should be decreased by 1 if this is done
-    // Logic for making that happen is in the Basket class
+    // Allows up to only 3 fillings (let's not get silly here) to be attached to bagels
     public boolean attachFilling(Filling filling) {
         System.out.println(this.fillings.size());
         if (this.fillings.size() <= this.maxFillings - 1) {

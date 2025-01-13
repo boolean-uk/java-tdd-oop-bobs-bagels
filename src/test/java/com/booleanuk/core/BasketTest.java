@@ -14,7 +14,8 @@ public class BasketTest {
         Item item = factory.createItem("BGLP");
         boolean successfullyAdded = basket.addItem(item); // add item
         Assertions.assertTrue(successfullyAdded);
-        Assertions.assertEquals(item, basket.getBasket().getFirst());
+        Assertions.assertEquals(item, basket.getBasket().getFirst()); //Check that the added item is in the basket
+        Assertions.assertEquals(item.getPrice(), basket.getTotalCost()); //Check if the total increased by the item price
     }
 
     @Test
@@ -43,7 +44,8 @@ public class BasketTest {
         basket.addItem(item);
         boolean successfullyRemoved = basket.removeItem(item);
         Assertions.assertTrue(successfullyRemoved);
-        Assertions.assertFalse(basket.getBasket().contains(item));
+        Assertions.assertFalse(basket.getBasket().contains(item)); //check if the item is still in the basket
+        Assertions.assertEquals(0, basket.getTotalCost()); //Check if the price went down back to 0 after removing
     }
 
     @Test
@@ -63,7 +65,7 @@ public class BasketTest {
     public void testChangeCapacity() {
         Basket basket = new Basket(); //basket has capacity of 5 by default
         basket.changeCapacity(7);
-        Assertions.assertEquals(7, basket.getMaxCapacity());
+        Assertions.assertEquals(7, basket.getMaxCapacity()); //Check that the capacity was changed
     }
 
     @Test
@@ -74,18 +76,4 @@ public class BasketTest {
         Assertions.assertEquals(5, basket.getMaxCapacity()); // -1 is invalid so the capacity should not change
     }
 
-    @Test
-    public void testCheckCost() {
-
-    }
-
-    @Test
-    public void testAddFilling() {
-
-    }
-
-    @Test
-    public void testGetBasket() {
-
-    }
 }
