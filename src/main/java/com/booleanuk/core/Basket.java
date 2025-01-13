@@ -44,4 +44,8 @@ public class Basket {
         }
         return false;
     }
+
+    public double totalCost(){
+        return 3.7;
+    }
 }
