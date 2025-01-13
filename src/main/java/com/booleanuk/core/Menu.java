@@ -12,9 +12,34 @@ public class Menu {
         fillMenu();
     }
 
+    public String listAllFillingPrices(){
+        String pricingList = "";
+        for(Item item : currentMenu){
+            if(item.getAbbreviation().contains("FIL")){
+                pricingList += "Name: " + item.getName() + ", Price: " + item.getPrice() + "\n";
+            }
+
+
+        }
+        return pricingList;
+    }
+
+    public String checkCostOfItem(String itemName){
+        String price = "No item found";
+        for(Item item : currentMenu){
+            if(item.getName().equals(itemName)){
+                price = "Price: " + item.getPrice();
+                return price;
+            }
+
+        }
+        return price;
+
+    }
+
     public Boolean isInMenu(Item item){
         for(Item i : currentMenu){
-            if(Objects.equals(i.name, item.name)){
+            if(Objects.equals(i.getName(), item.getName())){
                 return true;
             }
         }

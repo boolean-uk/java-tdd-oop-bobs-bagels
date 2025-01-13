@@ -45,7 +45,13 @@ public class MenuTest {
     public void testListAllFillingPrices(){
         Menu menu = new Menu();
 
-        Assertions.assertEquals(" ", menu.listAllFillingPrices());
+        Assertions.assertEquals(
+                "Name: Bacon, Price: 0.12\n" +
+                "Name: Egg, Price: 0.12\n" +
+                "Name: Cheese, Price: 0.12\n" +
+                "Name: CreamCheese, Price: 0.12\n" +
+                "Name: SmokedSalmon, Price: 0.12\n" +
+                "Name: Ham, Price: 0.12\n", menu.listAllFillingPrices());
     }
 
     @Test
