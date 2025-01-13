@@ -1,7 +1,7 @@
 package com.booleanuk.core;
 
 public class EggFilling extends Filling{
-    public EggFilling(Double price, String abbreviation, String name){
-        super(price, abbreviation, name);
+    public EggFilling(Double price, String abbreviation, String name, String typeOfItem){
+        super(price, abbreviation, name, typeOfItem);
     }
 }

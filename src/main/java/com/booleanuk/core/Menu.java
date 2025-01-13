@@ -18,4 +18,14 @@ public class Menu {
 
         return "Item dont exist on the menu!";
     }
+
+    public String showAllFillingsWithCosts(){
+        String allFillingsWithPrices = "";
+        for(Item anItem : this.itemsOnMenu){
+            if(anItem.getTypeOfItem().equals("Filling")){
+                allFillingsWithPrices += anItem.getName() + ", " + anItem.getPrice() + "$\n";
+            }
+        }
+        return allFillingsWithPrices;
+    }
 }
