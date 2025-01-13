@@ -25,6 +25,7 @@ public class Basket {
     }
 
     public boolean changeCapacity(int newCapacity) {
+        this.maxCapacity = newCapacity;
         return true;
     }
 
