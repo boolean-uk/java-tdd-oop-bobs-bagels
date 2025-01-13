@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 public class MenuTest {
 
-    ArrayList<Item> itemsOnMenu = new ArrayList<>(){{
+    public ArrayList<Item> itemsOnMenu = new ArrayList<>(){{
         // Adding the bagels
         Item onionBagel = new OnionBagel(0.49, "BGLO", "Onion"){};
         add(onionBagel);
@@ -45,10 +45,18 @@ public class MenuTest {
 
     @Test
     public void itemDontExistOnMenu(){
-        Menu menu = new Menu();
+        Menu menu = new Menu(itemsOnMenu);
         Item itemToCheck = new Item(0.10, "abc", "apple");
 
         Assertions.assertEquals("Item dont exist on the menu!", menu.seePrice(itemToCheck));
+    }
+
+    @Test
+    public void itemExistOnMenu(){
+        Menu menu = new Menu(itemsOnMenu);
+        Item itemToCheck = new OnionBagel(0.49, "BGLO", "Onion"){};
+
+        Assertions.assertEquals("The item costs: " + itemToCheck.getPrice(), menu.seePrice(itemToCheck));
     }
 
 }
