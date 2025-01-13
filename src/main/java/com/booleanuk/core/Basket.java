@@ -25,8 +25,11 @@ public class Basket {
     }
 
     public boolean changeCapacity(int newCapacity) {
-        this.maxCapacity = newCapacity;
-        return true;
+        if (newCapacity > 0) {
+            this.maxCapacity = newCapacity;
+            return true;
+        }
+        return false;
     }
 
     public double checkCost(Item item) {

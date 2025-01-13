@@ -67,6 +67,14 @@ public class BasketTest {
     }
 
     @Test
+    public void testInvalidCapacity() {
+        Basket basket = new Basket();
+        boolean successfulChange = basket.changeCapacity(-1);
+        Assertions.assertFalse(successfulChange);
+        Assertions.assertEquals(5, basket.getMaxCapacity()); // -1 is invalid so the capacity should not change
+    }
+
+    @Test
     public void testCheckCost() {
 
     }
