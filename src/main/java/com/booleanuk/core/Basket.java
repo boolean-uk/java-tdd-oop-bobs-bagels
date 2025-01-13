@@ -19,4 +19,8 @@ public class Basket {
         }
         return "Basket is full!";
     }
+
+    public String removeItem(Item itemToRemove){
+        return "Item do not exist in basket!";
+    }
 }
