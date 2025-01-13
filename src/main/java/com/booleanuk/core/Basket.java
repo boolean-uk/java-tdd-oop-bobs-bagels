@@ -11,6 +11,13 @@ public class Basket {
         this.size = size;
     }
 
+    public void setItemsInBasket(ArrayList<Item> itemsInBasket) {
+        this.itemsInBasket = itemsInBasket;
+    }
+
+    public void setSize(int size) {
+        this.size = size;
+    }
 
     public String addItem(Item itemToAdd){
         if(this.itemsInBasket.size() < this.size){
@@ -30,7 +37,11 @@ public class Basket {
         return "Item do not exist in basket!";
     }
 
-    public boolean changeSizeOfBasket(){
-        return true;
+    public boolean changeSizeOfBasket(int newSize){
+        if(newSize > 0 && newSize >= this.itemsInBasket.size()){
+            setSize(newSize);
+            return true;
+        }
+        return false;
     }
 }

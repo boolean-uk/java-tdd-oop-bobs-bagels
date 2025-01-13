@@ -59,7 +59,14 @@ public class BasketTest {
     public void enteringAcceptableBasketSize(){
         Basket basket = new Basket(itemsInBasket, 6);
 
-        Assertions.assertTrue(basket.changeSizeOfBasket());
+        Assertions.assertTrue(basket.changeSizeOfBasket(8));
+    }
+
+    @Test
+    public void enteringANonAcceptableBasketSize(){
+        Basket basket = new Basket(itemsInBasket, 6);
+
+        Assertions.assertFalse(basket.changeSizeOfBasket(5));
     }
 
 }
