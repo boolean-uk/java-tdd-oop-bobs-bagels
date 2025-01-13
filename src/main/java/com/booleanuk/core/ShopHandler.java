@@ -92,7 +92,7 @@ public class ShopHandler {
         StringBuilder sb = new StringBuilder();
         for (Item item : stock) {
             if (item.getName().equals("Filling")) {
-                sb.append(item.getVariant()).append("\n");
+                sb.append(item.getVariant()).append(" (").append(item.getPrice()).append(")").append("\n");
             }
         }
         return sb.toString();
@@ -127,7 +127,7 @@ public class ShopHandler {
         } while (!isValidBagel(in));
         boolean success = basket.addItem(bagelFromVariant(in));
         if (success) {
-            System.out.println("Add filling (0.12) ([filling], no)? Available fillings:");
+            System.out.println("Add filling ([filling], no)? Available fillings:");
             System.out.println(showFillings());
             do {
                 in = this.scanner.next();
