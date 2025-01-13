@@ -18,7 +18,19 @@ public class BasketTest {
     public void removingItemFromBasket() {
         Basket basket = new Basket();
         basket.addToBasket("BGLO");
+        basket.addToBasket("COFB");
 
         Assertions.assertTrue(basket.removeItem("BGLO"));
+        Assertions.assertFalse(basket.removeItem("BGLO"));
+        Assertions.assertEquals(1, basket.listOfItems().size());
+    }
+
+    @Test
+    public void getListOfItems() {
+        Basket basket = new Basket();
+        basket.addToBasket("BGLO");
+        basket.addToBasket("COFB");
+
+        Assertions.assertEquals(basket.basketList, basket.listOfItems());
     }
 }

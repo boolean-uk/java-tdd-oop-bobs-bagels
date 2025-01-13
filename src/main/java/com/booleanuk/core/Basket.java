@@ -1,9 +1,7 @@
 package com.booleanuk.core;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
-import java.util.regex.Pattern;
 
 public class Basket {
 
@@ -11,7 +9,7 @@ public class Basket {
     private double totalCost;
     private String bagel = "BGLO";
 
-    private ArrayList<Item> basketList = new ArrayList<>();
+    public ArrayList<Item> basketList = new ArrayList<>();
     public HashMap<String, Item> stockList = new HashMap<>() {{
         Item bagelOnion = new Item("BGLO", 0.49, "Bagel", "Onion");
         put("BGLO", bagelOnion);
@@ -75,6 +73,26 @@ public class Basket {
     }
 
     public boolean removeItem(String id) {
-        
+        if(basketList.size() != 0) {
+            for (int i = 0; i < basketList.size(); i++) {
+                if (basketList.get(i).getId().equals(id)) {
+                    basketList.remove(i);
+                    return true;
+                } else {
+                    System.out.println("Item not in basket!");
+                    return false;
+                }
+            }
+        }
+        System.out.println("No items in basket!");
+        return false;
+    }
+
+    public ArrayList<Item> listOfItems() {
+        return basketList;
+    }
+
+    public double getTotalCost() {
+
     }
 }
