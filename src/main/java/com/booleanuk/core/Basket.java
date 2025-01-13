@@ -1,6 +1,8 @@
 package com.booleanuk.core;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class Basket {
 
@@ -62,5 +64,9 @@ public class Basket {
         }
 
         return total;
+    }
+
+    public Double calculateTotalCostOfBasketWithDiscounts(){
+
     }
 }
