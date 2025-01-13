@@ -42,6 +42,31 @@ public class MenuTest {
 //    }
 
     @Test
+    public void testListAllFillingPrices(){
+        Menu menu = new Menu();
+
+        Assertions.assertEquals(" ", menu.listAllFillingPrices());
+    }
+
+    @Test
+    public void testCheckCostOfItemThatDoesExist(){
+        Menu menu = new Menu();
+
+        String itemName = "Ham";
+
+        Assertions.assertEquals("Price: 0.12", menu.checkCostOfItem(itemName));
+    }
+
+    @Test
+    public void testCheckCostOfItemThatDoesNotExist(){
+        Menu menu = new Menu();
+
+        String itemName = "Sausage";
+
+        Assertions.assertEquals("No item found", menu.checkCostOfItem(itemName));
+    }
+
+    @Test
     public void testIsInInventoryWhenThereIs(){
         Menu menu = new Menu();
 

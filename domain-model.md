@@ -52,16 +52,16 @@
 
 ## Menu
 
-| Method                     | Member Variable                | Scenario                                                     | Result                   |
-|----------------------------|--------------------------------|--------------------------------------------------------------|--------------------------|
-|                            | ArrayList<Item> allUniqueItems |                                                              |                          |
-| listAllFillingPrices()     |                                | List all the filling prices in the Menu and are in inventory | ArrayList<String> prices |
-|                            |                                |                                                              |                          |
-| checkCostOfItem(Item item) |                                | Check cost of an item that exists                            | String "Price: " + price |
-|                            |                                | Check cost of an item that does not exist                    | String "No item found"   |
-|                            |                                |                                                              |                          |
-| isInInventory(Item item)   |                                | Search for an item currently in inventory                    | true                     |
-|                            |                                | Search for an item currently not in inventory                | false                    |
+| Method                           | Member Variable                | Scenario                                                     | Result                   |
+|----------------------------------|--------------------------------|--------------------------------------------------------------|--------------------------|
+|                                  | ArrayList<Item> allUniqueItems |                                                              |                          |
+| listAllFillingPrices()           |                                | List all the filling prices in the Menu and are in inventory | ArrayList<String> prices |
+|                                  |                                |                                                              |                          |
+| checkCostOfItem(String itemName) |                                | Check cost of an item that exists                            | String "Price: " + price |
+|                                  |                                | Check cost of an item that does not exist                    | String "No item found"   |
+|                                  |                                |                                                              |                          |
+| isInInventory(String itemName)   |                                | Search for an item currently in inventory                    | true                     |
+| isInInventory(String itemName)   |                                | Search for an item currently not in inventory                | false                    |
 
 
 
