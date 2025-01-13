@@ -34,9 +34,9 @@ public class ShopHandler {
         while (true) {
             String in;
             do {
-                System.out.println("Do you want to add a bagel or coffee? (\"pay\" when done)");
+                System.out.println("bagel/coffee/remove/pay");
                 in = scanner.next();
-            } while (!"bagel coffee pay".contains(in));
+            } while (!"bagel coffee remove pay".contains(in));
             switch (in) {
                 case "bagel":
                     orderBagel();
@@ -44,11 +44,37 @@ public class ShopHandler {
                 case "coffee":
                     orderCoffee();
                     break;
+                case "remove":
+                    removeItem();
+                    break;
                 case "pay":
                     System.out.println("Print receipt tbd. total cost " + basket.getTotalCost());
                     return;
             }
         }
+    }
+
+    public void removeItem() {
+        if (basket.getItems().isEmpty()) {
+            System.out.println("No items in basket.");
+            return;
+        }
+        System.out.println("Enter number of item to remove (0 to cancel):");
+        System.out.println(showBasket());
+        int in;
+        do {
+            in = scanner.nextInt();
+        } while (in < 0 || in > basket.getItems().size());
+        if (in == 0) return;
+        basket.removeItem(basket.getItems().get(in-1).getSku());
+    }
+
+    public String showBasket() {
+        StringBuilder sb = new StringBuilder();
+        for (Item item : basket.getItems()) {
+            sb.append(item.getName()).append(", ").append(item.getVariant()).append(", ").append(item.getPrice()).append("\n");
+        }
+        return sb.toString();
     }
 
     public String showItems() {
@@ -101,7 +127,7 @@ public class ShopHandler {
         } while (!isValidBagel(in));
         boolean success = basket.addItem(bagelFromVariant(in));
         if (success) {
-            System.out.println("Add filling? Available fillings:");
+            System.out.println("Add filling (0.12) ([filling], no)? Available fillings:");
             System.out.println(showFillings());
             do {
                 in = this.scanner.next();
