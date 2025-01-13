@@ -13,6 +13,7 @@ public class Basket {
             this.totalCost += item.getPrice();
             return true;
         }
+        System.out.println("Basket full!");
         return false;
 
     }
@@ -23,6 +24,7 @@ public class Basket {
             this.totalCost -= item.getPrice();
             return true;
         }
+        System.out.println("No such item in the basket!");
         return false;
     }
 
