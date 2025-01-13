@@ -22,22 +22,24 @@ public class BasketTest {
         Basket basket = new Basket();
         ItemFactory factory = new ItemFactory();
         Item item = factory.createItem("BGLP");
-        boolean successfullyAdded1 = basket.addItem(item);
-        boolean successfullyAdded2 = basket.addItem(item);
-        boolean successfullyAdded3 = basket.addItem(item);
-        boolean successfullyAdded4 = basket.addItem(item);
+        basket.addItem(item);
+        basket.addItem(item);
+        basket.addItem(item);
+        basket.addItem(item);
         boolean successfullyAdded5 = basket.addItem(item);
         boolean successfullyAdded6 = basket.addItem(item);
         Assertions.assertTrue(successfullyAdded5);
         Assertions.assertFalse(successfullyAdded6);
-
-
-
     }
 
     @Test
     public void testRemoveItem() {
-
+        Basket basket = new Basket();
+        ItemFactory factory = new ItemFactory();
+        Item item = factory.createItem("BGLP");
+        basket.addItem(item);
+        boolean successfullyRemoved = basket.removeItem(item);
+        Assertions.assertTrue(successfullyRemoved);
     }
 
     @Test
