@@ -34,6 +34,13 @@ public class BasketTest {
     }
 
     @Test
+    public void testRemoveItem() {
+        Assertions.assertTrue(basket.removeItem(coffee));
+        Assertions.assertTrue(basket.removeItem(bagel));
+        Assertions.assertTrue(basket.removeItem(filling));
+    }
+
+    @Test
     public void testGetTotalPrice() {
         ArrayList<Item> basketItems = new ArrayList<>() {{
             add(bagel);
