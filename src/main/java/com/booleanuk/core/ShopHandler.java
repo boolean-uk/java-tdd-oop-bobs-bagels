@@ -1,5 +1,7 @@
 package com.booleanuk.core;
 
+import com.booleanuk.extension.Bagel;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -140,6 +142,22 @@ public class ShopHandler {
         }
     }
 
+    public boolean orderBagel(String variant, String fillingVar) {
+        if (!isValidFilling(fillingVar) || !isValidBagel(variant)) {
+            return false;
+        }
+        Item bagel = bagelFromVariant(variant);
+        Item filling = fillingFromVariant(fillingVar);
+        return basket.addItem(bagel) && basket.addItem(filling);
+    }
+
+    public boolean orderBagel(String variant) {
+        if (!isValidBagel(variant)) {
+            return false;
+        }
+        return basket.addItem(bagelFromVariant(variant));
+    }
+
     public void orderCoffee() {
         System.out.println("Select coffee variant:");
         System.out.println(showCoffees());
@@ -153,6 +171,13 @@ public class ShopHandler {
         } else {
             System.out.println("Not able to add coffee to basket.");
         }
+    }
+
+    public boolean orderCoffee(String variant) {
+        if (!isValidCoffee(variant)) {
+            return false;
+        }
+        return basket.addItem(coffeeFromVariant(variant));
     }
 
     private Item bagelFromVariant(String variant) {

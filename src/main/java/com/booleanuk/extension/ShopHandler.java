@@ -25,9 +25,13 @@ public class ShopHandler {
     private Scanner scanner;
     private Basket basket;
 
-    public ShopHandler() {
-        this.scanner = new Scanner(System.in);
+    public ShopHandler(Scanner in) {
+        this.scanner = in;
         this.basket = new Basket();
+    }
+
+    public ShopHandler() {
+        this(new Scanner(System.in));
     }
 
     public void placeOrder() {
@@ -48,10 +52,29 @@ public class ShopHandler {
                     removeItem();
                     break;
                 case "pay":
-                    System.out.println("Print receipt tbd. total cost " + basket.getTotalCost());
+                    System.out.println("Print receipt tbd. total cost " + basket.getTotalCost() + " - " + calculateDiscounts() + " = " + (basket.getTotalCost() - calculateDiscounts()));
                     return;
             }
         }
+    }
+
+    public double calculateDiscounts() {
+        double totalDiscount = 0;
+        for (Item item : basket.getItems()) {
+            if (item.getName().equals("Coffee")) {
+                Coffee coffee = (Coffee) item;  // not nice!
+                totalDiscount += coffee.getPrice() + coffee.getDiscountBagel().getPrice() - 1.25;  // hardcoded
+            }
+        }
+        for (Item item : stock) {
+            if (item.getName().equals("Bagel")) {
+                String sku = item.getSku();
+                int n = basket.getItems().stream().filter(i -> i.getSku().equals(sku)).toList().size();
+                double discount = (12 * item.getPrice() * (n % 12)) + (6 * item.getPrice() * ((n - 12 * (n % 12)) % 6));  // don't do this pls
+                totalDiscount += discount;
+            }
+        }
+        return totalDiscount;
     }
 
     public void removeItem() {
@@ -126,6 +149,23 @@ public class ShopHandler {
             System.out.println("Not able to add bagel to basket.");
         }
     }
+
+    public boolean orderBagel(String variant, String filling) {
+        if (!isValidFilling(filling) || !isValidBagel(variant)) {
+            return false;
+        }
+        Bagel bagel = bagelFromVariant(variant);
+        bagel.setFilling(fillingFromVariant(filling));
+        return basket.addItem(bagel);
+    }
+
+    public boolean orderBagel(String variant) {
+        if (!isValidBagel(variant)) {
+            return false;
+        }
+        return basket.addItem(bagelFromVariant(variant));
+    }
+
     public Bagel selectBagel() {
         System.out.println("Select bagel variant:");
         System.out.println(showBagels());
@@ -169,6 +209,13 @@ public class ShopHandler {
         } else {
             System.out.println("Not able to add coffee to basket.");
         }
+    }
+
+    public boolean orderCoffee(String variant) {
+        if (!isValidCoffee(variant)) {
+            return false;
+        }
+        return basket.addItem(coffeeFromVariant(variant));
     }
 
     private Bagel bagelFromVariant(String variant) {
