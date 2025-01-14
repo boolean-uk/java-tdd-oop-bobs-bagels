@@ -1,7 +1,7 @@
 package com.booleanuk.extension;
 
 import org.junit.jupiter.api.Test;
-
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class ShopHandlerTest {
@@ -55,5 +55,14 @@ public class ShopHandlerTest {
                 assertTrue(list.contains(item.getVariant() + (item.getVariant().length() > 6 ? "\t" : "\t\t") + item.getPrice()));
             }
         }
+    }
+
+    @Test
+    public void multipackBagelsDiscount() {
+        ShopHandler sh = new ShopHandler();
+        for (int i=0; i<7; i++) {
+            sh.orderBagel("Onion");
+        }
+        assertEquals(0.45, sh.calculateDiscounts());
     }
 }
