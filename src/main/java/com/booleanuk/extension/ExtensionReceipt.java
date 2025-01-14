@@ -109,4 +109,60 @@ public class ExtensionReceipt {
         return Math.round(totalCost * 100.0) / 100.0;
     }
 
+
+
+
+    public double costWithDiscounts(){
+        int numBagel = 0;
+        double cost = 0;
+
+        for(Item item : itemsThatArePurchased.keySet()){
+            if(item.getAbbreviation().contains("BGL")){
+
+                for(int i = 0; i < itemsThatArePurchased.get(item); i++){
+                    numBagel++;
+                    if(numBagel == 12){
+                        numBagel = 0;
+                        cost -= 5*item.getPrice();
+                        cost += 1.50;
+                    } else if (numBagel == 6) {
+                        cost -= 5*item.getPrice();
+                        cost += 2.49;
+                    } else {
+                        cost += item.getPrice();
+                    }
+                }
+            } else {
+                cost += item.getPrice()*itemsThatArePurchased.get(item);
+            }
+        }
+        return Math.round(cost * 100.0) / 100.0;
+    }
+
+
+
+
+
+
+    /*
+    public String printReceipt(){
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("~~~ Bob's Bagels ~~~ \n\n");
+        stringBuilder.append(dateOfPurchase);
+        stringBuilder.append("\n----------------------------\n");
+
+        for(Item anItem : itemsThatArePurchased.keySet()){
+            stringBuilder.append(anItem.getName() + " " + anItem.getTypeOfItem() + " " + itemsThatArePurchased.get(anItem) + " " + (anItem.getPrice()*itemsThatArePurchased.get(anItem)) + "\n");
+        }
+
+        stringBuilder.append("\n----------------------------\n");
+        stringBuilder.append("Total " + "£" + totalCostWithDiscounts() + "\n");
+
+
+        stringBuilder.append("Thank you\n");
+        stringBuilder.append("for your order!");
+
+        System.out.println(stringBuilder);
+        return stringBuilder.toString();
+    }*/
 }
