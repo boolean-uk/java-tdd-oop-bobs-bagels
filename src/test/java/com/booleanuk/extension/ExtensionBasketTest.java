@@ -86,4 +86,18 @@ public class ExtensionBasketTest {
 
         Assertions.assertEquals(1.95, basket.totalCostWithDiscounts());
     }
+
+    @Test
+    public void coffeeAndBagelDiscountAreRecieved(){
+        ArrayList<Item> listOfItems = new ArrayList<>(){{
+            Item plainBagel = new PlainBagel(0.39, "BGLP", "Plain", "Bagel") {};
+            add(plainBagel);
+            Item blackCoffee = new BlackCoffee(0.99, "COFB", "Black", "Coffee"){};
+            add(blackCoffee);
+        }};
+        ExtensionBasket basket = new ExtensionBasket(listOfItems, 6);
+
+        Assertions.assertEquals(1.25, basket.totalCostWithDiscounts());
+    }
+
 }
