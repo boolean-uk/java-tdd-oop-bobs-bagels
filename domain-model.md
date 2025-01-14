@@ -1,7 +1,7 @@
 # Bagels domain model 
 
 
-## OrderManager class
+## OrderManager class ?
 | Methods                            | Member variables | Scenario                      | Result                    |
 |------------------------------------|------------------|-------------------------------|---------------------------|
 |                                    | String name?     |                               |                           |
@@ -22,14 +22,17 @@
 
 ## Basket class
 
-| Methods                          | Member variables                      | Scenario        | Results |
-|----------------------------------|---------------------------------------|-----------------|---------|
-|                                  | HashMap<String name, int price> items |                 |         |
-|                                  | int capacity ?                        |                 |         |
-| addItem(String item, int price)? |                                       | item added      | true    |
-|                                  |                                       | item not added  | false   |
-| getTotalCost()                   |                                       | gets total cost | int     |
-|                                  |                                       |                 |         |
+| Methods                            | Member variables           | Scenario         | Results |
+|------------------------------------|----------------------------|------------------|---------|
+|                                    | ArrayList<Item item> items |                  |         |
+|                                    | int capacity               |                  |         |
+| addItem(Item item)                 |                            | item added       | true    |
+|                                    |                            | item not added   | false   |
+| getTotalCost(ArrayList<Item item>) |                            | gets total cost  | int     |
+| deleteItem(Item item)              |                            | item deleted     | true    |
+|                                    |                            | item not deleted | false   |
+| setCapacity(int)                   |                            |                  |         |
+|                                    |                            |                  |         |
 
 
 ## Item class
@@ -43,13 +46,13 @@
 
 ## Inventory class
 
-| Methods             | member variables                 | scenario                         | result              |
-|---------------------|----------------------------------|----------------------------------|---------------------|
-|                     | Map<String SKU, Item item> items |                                  |                     |
-| getItem(String SKU) |                                  | item exists                      | Item object or null |
-|                     |                                  | item does not exist              | null                |
-| hasItem(String SKU) |                                  | item exists in inventory         | true                |
-|                     |                                  | item does not exist in inventory | false               |
+| Methods               | member variables                 | scenario                      | result                 |
+|-----------------------|----------------------------------|-------------------------------|------------------------|
+|                       | Map<String SKU, Item item> items |                               |                        |
+| getItem(String SKU)   |                                  | item exists                   | Item object or null    |
+|                       |                                  | item does not exist           | null                   |
+| printItem(String SKU) |                                  | inventory has items           | string of items        |
+|                       |                                  | inventory does not have items | string inventory empty |
 
 
 ## Bagel class inherits from item
