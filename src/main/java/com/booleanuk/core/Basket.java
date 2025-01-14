@@ -176,7 +176,7 @@ public class Basket {
         return boughtItems;
     }
 
-    public void printReceipt() {
+    public StringBuilder printReceipt() {
         StringBuilder sb = new StringBuilder();
         HashMap<String, Integer> list = receiptBuilder();
         DecimalFormat df = new DecimalFormat();
@@ -200,5 +200,6 @@ public class Basket {
         sb.append("\n----------------------------\n");
         sb.append("Total cost: " + df.format(getTotalCost())+"£\n");
         System.out.println(sb);
+        return sb;
     }
 }
