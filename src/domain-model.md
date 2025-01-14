@@ -75,11 +75,11 @@
 // EXTENSION
 ## Receipt
 
-| Method         | Member Variable                               | Scenario                          | Result                                      |
-|----------------|-----------------------------------------------|-----------------------------------|---------------------------------------------|
-|                | HashMap<Item, Quantity> itemsThatArePurchased |                                   |                                             |
-|                | DateTime dateOfPurchase                       |                                   |                                             |
-| printReceipt() |                                               | basket consists of atleast 1 item | String receipt returned and is also printed |
-|                |                                               | basket dont contain any items     | String Error message                        |
-|                |                                               |                                   |                                             |
-|                |                                               |                                   |                                             |
+| Method         | Member Variable                              | Scenario                          | Result                                      |
+|----------------|----------------------------------------------|-----------------------------------|---------------------------------------------|
+|                | HashMap<Item, Integer> itemsThatArePurchased |                                   |                                             |
+|                | String dateOfPurchase                        |                                   |                                             |
+| printReceipt() |                                              | basket consists of atleast 1 item | String receipt returned and is also printed |
+|                |                                              | basket dont contain any items     | String Error message                        |
+|                |                                              |                                   |                                             |
+|                |                                              |                                   |                                             |
