@@ -4,6 +4,8 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.HashMap;
+
 public class BasketTest {
     private Basket basket;
     private Item bagel;
@@ -12,17 +14,18 @@ public class BasketTest {
 
     @BeforeEach
     public void setUp() {
-        basket = new Basket(4);
-        bagel = new Item("BGLS", "Sesame", 0.49, "Bagel");
-        coffee = new Item("COFB", "Black", 0.99 , "Coffee");
-        filling = new Item("FILX", "Cream Cheese", 0.12, "Filling");
+        HashMap<String, Double> basketItems = new HashMap<>();
+        basket = new Basket(basketItems);
+        bagel = new Item("BGLS", 0.49, "Bagel", "Sesame");
+        coffee = new Item("COFB", 0.99, "Coffee" , "Black");
+        filling = new Item("FILX", 0.12, "Filling", "Cream Cheese");
     }
 
     @Test
     public void testAddItem() {
-        Assertions.assertTrue(basket.addItem(coffee));
-        Assertions.assertTrue(basket.addItem(bagel));
-        Assertions.assertTrue(basket.additem(filling));
+        Assertions.assertTrue(basket.addItem(coffee.getName(), coffee.getPrice()));
+        Assertions.assertTrue(basket.addItem(bagel.getName(), bagel.getPrice()));
+        Assertions.assertTrue(basket.addItem(filling.getName(), filling.getPrice()));
     }
 
 
