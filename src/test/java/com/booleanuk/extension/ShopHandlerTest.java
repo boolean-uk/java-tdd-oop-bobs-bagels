@@ -58,11 +58,38 @@ public class ShopHandlerTest {
     }
 
     @Test
-    public void multipackBagelsDiscount() {
+    public void sixpackBagelsDiscount() {
+        double delta = 0.0001;
         ShopHandler sh = new ShopHandler();
         for (int i=0; i<7; i++) {
             sh.orderBagel("Onion");
         }
-        assertEquals(0.45, sh.calculateDiscounts());
+        assertEquals(0.45, sh.calculateDiscounts(), delta);
+    }
+
+    @Test
+    public void dozenBagelsDiscount() {
+        double delta = 0.0001;
+        ShopHandler sh = new ShopHandler();
+        int oldCapacity = Basket.getCapacity();
+        Basket.setCapacity(20);
+        for (int i=0; i<13; i++) {
+            sh.orderBagel("Onion");
+        }
+        assertEquals(1.89, sh.calculateDiscounts(), delta);
+    Basket.setCapacity(oldCapacity);
+    }
+
+    @Test
+    public void dozenAndSixBagelsDiscount() {
+        double delta = 0.0001;
+        ShopHandler sh = new ShopHandler();
+        int oldCapacity = Basket.getCapacity();
+        Basket.setCapacity(20);
+        for (int i=0; i<19; i++) {
+            sh.orderBagel("Onion");
+        }
+        assertEquals(2.34, sh.calculateDiscounts(), delta);
+        Basket.setCapacity(oldCapacity);
     }
 }

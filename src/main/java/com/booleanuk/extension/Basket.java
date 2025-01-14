@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Basket {
-    private static int capacity = 5;
+    private static int capacity = 10;
     private List<Item> items = new ArrayList<>();
 
     public boolean addItem(String sku, double price, String name, String variant, int size) {
@@ -54,6 +54,10 @@ public class Basket {
     public double getTotalCost() {
         double totalCost = 0;
         for (Item item : items) {
+            if (item.getName().equals("Bagel"))
+                totalCost += ((Bagel) item).getFilling().getPrice();
+            else if (item.getName().equals("Coffee"))
+                totalCost += ((Coffee) item).getDiscountBagel().getPrice();
             totalCost += item.getPrice();
         }
         return totalCost;

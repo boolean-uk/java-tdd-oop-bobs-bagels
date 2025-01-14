@@ -17,4 +17,14 @@ public class Bagel extends Item {
     public Item getFilling() {
         return this.filling;
     }
+
+//    @Override
+//    public double getPrice() {
+//        if (filling == null) return getBasePrice();
+//        return super.getPrice() + filling.getPrice();
+//    }
+
+//    public double getBasePrice() {
+//        return super.getPrice();
+//    }
 }

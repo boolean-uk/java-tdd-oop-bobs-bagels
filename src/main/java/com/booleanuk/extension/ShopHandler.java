@@ -22,6 +22,9 @@ public class ShopHandler {
             new Item("FILS", 0.12, "Filling", "Smoked Salmon"),
             new Item("FILH", 0.12, "Filling", "Ham")
     ));
+
+    private static final double SIX_BAGEL_DISCOUNT = 2.49;
+    private static final double DOZEN_BAGEL_DISCOUNT = 3.99;
     private Scanner scanner;
     private Basket basket;
 
@@ -70,7 +73,10 @@ public class ShopHandler {
             if (item.getName().equals("Bagel")) {
                 String sku = item.getSku();
                 int n = basket.getItems().stream().filter(i -> i.getSku().equals(sku)).toList().size();
-                double discount = (12 * item.getPrice() * (n % 12)) + (6 * item.getPrice() * ((n - 12 * (n % 12)) % 6));  // don't do this pls
+                double discount = ((int) (n/12)) * item.getPrice() * 12  - ((int) n/12) * DOZEN_BAGEL_DISCOUNT;
+                int bagelsLeft = n % 12;
+                discount += ((int) (bagelsLeft/6)) * item.getPrice() * 6  - ((int) bagelsLeft/6) * SIX_BAGEL_DISCOUNT;
+                System.out.println(discount);
                 totalDiscount += discount;
             }
         }
