@@ -156,7 +156,10 @@ public class Basket {
         if(bagelCount != 0) {
             for (int i = 0; i < basketList.size(); i++) {
                 if (basketList.get(i).getId().substring(0,1).equals("B")) {
-                    totalDiscount += basketList.get(i).getPrice();
+                    for (int j = 0; j < bagelCount; i++) {
+                        totalDiscount += basketList.get(i).getPrice();
+                        bagelCount--;
+                    }
                 }
             }
         }
@@ -164,7 +167,10 @@ public class Basket {
         if(coffeeCount != 0) {
             for (int i = 0; i < basketList.size(); i++) {
                 if (basketList.get(i).getId().substring(0,1).equals("C")) {
-                    totalDiscount += basketList.get(i).getPrice();
+                    for (int j = 0; j < coffeeCount; i++) {
+                        totalDiscount += basketList.get(i).getPrice();
+                        coffeeCount--;
+                    }
                 }
             }
         }

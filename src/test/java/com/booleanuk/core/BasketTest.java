@@ -59,6 +59,15 @@ public class BasketTest {
     @Test
     public void testDiscountOnBasketList() {
         Basket basket = new Basket();
+
+        basket.changeCapasity(30);
+
+        basket.addToBasket("BGLO");
+        basket.addToBasket("BGLO");
+        basket.addToBasket("BGLO");
+        basket.addToBasket("BGLO");
+        basket.addToBasket("BGLO");
+        basket.addToBasket("BGLO");
         basket.addToBasket("BGLO");
         basket.addToBasket("BGLO");
         basket.addToBasket("BGLO");
@@ -74,13 +83,9 @@ public class BasketTest {
         basket.addToBasket("BGLO");
         basket.addToBasket("BGLO");
         basket.addToBasket("COFB");
-        basket.addToBasket("BGLO");
-        basket.addToBasket("BGLO");
-        basket.addToBasket("BGLO");
-        basket.addToBasket("BGLO");
-        basket.addToBasket("BGLO");
 
 
-        Assertions.assertEquals(7.73,basket.discountPrice());
+        //discount on 12 bagel, discount on 6 bagels, discount on bagel with coffee and one bagel
+        Assertions.assertEquals(8.22,basket.discountPrice());
     }
 }
