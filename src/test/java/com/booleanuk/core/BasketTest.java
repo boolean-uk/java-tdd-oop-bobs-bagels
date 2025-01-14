@@ -9,7 +9,8 @@ public class BasketTest {
 
     @Test
     public void testContainsItem(){
-        Basket basket = new Basket();
+        Inventory inventory = new Inventory();
+        Basket basket = new Basket(inventory);
         basket.getInventory().addStockItem("BGLP", 1);
         basket.getInventory().addStockItem("FILE", 1);
 
@@ -29,7 +30,8 @@ public class BasketTest {
 
     @Test
     public void testAddItem(){
-        Basket basket = new Basket();
+        Inventory inventory = new Inventory();
+        Basket basket = new Basket(inventory);
         basket.getInventory().addStockItem("BGLP", 1);
         basket.getInventory().addStockItem("FILE", 1);
 
@@ -46,7 +48,8 @@ public class BasketTest {
 
     @Test
     public void testRemoveItem(){
-        Basket basket = new Basket();
+        Inventory inventory = new Inventory();
+        Basket basket = new Basket(inventory);
         basket.getInventory().addStockItem("BGLP", 1);
         basket.getInventory().addStockItem("FILE", 1);
 
@@ -68,7 +71,8 @@ public class BasketTest {
 
     @Test
     public void testCheckCapacity(){
-        Basket basket = new Basket();
+        Inventory inventory = new Inventory();
+        Basket basket = new Basket(inventory);
         basket.getInventory().addStockItem("BGLP", 5);
         basket.getInventory().addStockItem("FILE", 5);
 
@@ -102,7 +106,8 @@ public class BasketTest {
 
     @Test
     public void testChangeCapacity(){
-        Basket basket = new Basket();
+        Inventory inventory = new Inventory();
+        Basket basket = new Basket(inventory);
         Assertions.assertEquals(10, basket.getCapacity());
         basket.changeCapacity(20);
         Assertions.assertEquals(20, basket.getCapacity());
@@ -110,10 +115,11 @@ public class BasketTest {
 
     @Test
     public void testTotalCost(){
-        Basket basket = new Basket();
+        Inventory inventory = new Inventory();
+        Basket basket = new Basket(inventory);
         basket.getInventory().addStockItem("BGLP", 1);
         basket.getInventory().addStockItem("FILE", 1);
-        basket.getInventory().addStockItem("COFB", 1);
+        basket.getInventory().addStockItem("COFB", 4);
 
 
         String inputYes = "yes\n";
@@ -125,8 +131,7 @@ public class BasketTest {
         basket.addItem("COFB");
         Assertions.assertEquals(1.5f, basket.totalCost());
 
-        Basket basket2 = new Basket();
-        basket2.getInventory().addStockItem("COFB", 3);
+        Basket basket2 = new Basket(inventory);
 
         System.setIn(new ByteArrayInputStream(inputYes.getBytes()));
         basket2.addItem("COFB");

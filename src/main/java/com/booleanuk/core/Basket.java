@@ -9,8 +9,9 @@ public class Basket {
     private boolean isFull;
     private Inventory inventory = new Inventory();
 
-    public Basket(){
+    public Basket(Inventory inventory){
         this.isFull = false;
+        this.inventory = inventory;
     }
 
     public Inventory getInventory(){
