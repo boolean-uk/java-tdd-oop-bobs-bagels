@@ -1,8 +1,8 @@
 package com.booleanuk.extension;
 
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 public class ShopHandlerTest {
     double delta = 0.0001;
@@ -117,6 +117,28 @@ public class ShopHandlerTest {
             sh.orderCoffee("Black");
         }
         assertEquals(10.43, sh.getCostAfterDiscounts(), delta);
+        Basket.setCapacity(oldCapacity);
+    }
+
+    @Test
+    public void nonemptyBasketPrintsNonemptyReceipt() {
+        ShopHandler sh = new ShopHandler();
+        int oldCapacity = Basket.getCapacity();
+        Basket.setCapacity(100);
+        sh.orderBagel("Onion");
+        sh.orderBagel("Onion");
+        for (int i=0; i<12; i++) {
+            sh.orderBagel("Plain");
+        }
+        for (int i=0; i<6; i++) {
+            sh.orderBagel("Everything");
+        }
+        for (int i=0; i<3; i++) {
+            sh.orderCoffee("Black");
+        }
+        sh.orderCoffee("Cappuccino", "Plain");
+        System.out.println(sh.showReceiptWithDiscounts());
+        assertNotEquals("", sh.showReceiptWithDiscounts());
         Basket.setCapacity(oldCapacity);
     }
 }
