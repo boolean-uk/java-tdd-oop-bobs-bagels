@@ -41,7 +41,6 @@
 | Methods                               | Variables                                    | Scenario                           | Output                          |
 |---------------------------------------|----------------------------------------------|------------------------------------|---------------------------------|
 |                                       | `HashMap<String item, int stock> inventory ` |                                    |                                 |
-| `boolean checkStock(String itemSku) ` |                                              | Want to check if there is stock    | Returns if item in stock or not |
 | `void addItem(String itemSku) `       |                                              | Want to add item to inventory      | Updates inventory               |
 | `void removeItem(String itemSku) `    |                                              | Want to remove item from inventory | Updates inventory               |
 
