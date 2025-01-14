@@ -1,19 +1,27 @@
 package com.booleanuk.core;
 
-import java.util.HashMap;
+import java.util.ArrayList;
 
 public class Basket {
-    protected HashMap<String, Double> items;
+    protected ArrayList<Item> basketItems;
 
-    public Basket(HashMap<String, Double> items) {
-        this.items = items;
+    public Basket(ArrayList<Item> items) {
+        this.basketItems = items;
     }
 
-    public boolean addItem(String item, double price) {
-        if (!items.containsKey(item)) {
-            items.put(item, price);
+    public boolean addItem(Item item) {
+        if (!basketItems.contains(item)) {
+            basketItems.add(item);
             return true;
         }
         return false;
+    }
+
+    public double getTotalPrice(ArrayList<Item> items) {
+        double total = 0.0;
+        for (Item item : items) {
+            total += item.getPrice();
+        }
+        return total;
     }
 }

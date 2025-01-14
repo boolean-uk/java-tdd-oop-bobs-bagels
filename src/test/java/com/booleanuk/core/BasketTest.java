@@ -40,7 +40,7 @@ public class BasketTest {
             add(coffee);
             add(filling);
         }};
-        Assertions.assertEquals(1.60, basket.getTotalprice(basketItems));
+        Assertions.assertEquals(1.60, basket.getTotalPrice(basketItems));
     }
 
 }
