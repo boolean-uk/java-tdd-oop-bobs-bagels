@@ -19,6 +19,7 @@ public class BasketTest {
             add(coffee);
             add(filling);
         }};
+
         basket = new Basket(basketItems);
         bagel = new Item("BGLS", 0.49, "Bagel", "Sesame");
         coffee = new Item("COFB", 0.99, "Coffee" , "Black");
@@ -50,6 +51,14 @@ public class BasketTest {
             add(filling);
         }};
         Assertions.assertEquals(1.60, basket.getTotalPrice(basketItems));
+    }
+
+    @Test
+    public void testSetCapacity(){
+        basket.setCapacity(2);
+        basket.addItem(bagel);
+        basket.addItem(coffee);
+        Assertions.assertFalse(basket.addItem(filling));
     }
 
 }
