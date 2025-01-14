@@ -53,4 +53,20 @@ public class BasketTest {
         basket.changeCapasity(200);
         Assertions.assertEquals(200, basket.getCapasity());
     }
+
+    @Test
+    public void testGetReceipt() {
+        Basket basket = new Basket();
+        basket.addToBasket("BGLO");
+        basket.addToBasket("BGLO");
+        basket.addToBasket("COFB");
+        basket.addToBasket("COFB");
+        basket.addToBasket("COFB");
+        basket.addToBasket("FILE");
+        basket.addToBasket("FILE");
+        basket.addToBasket("FILE");
+        basket.addToBasket("FILE");
+
+        basket.printReceipt();
+    }
 }
