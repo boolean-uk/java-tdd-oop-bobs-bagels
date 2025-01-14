@@ -17,6 +17,14 @@ public class Basket {
         return false;
     }
 
+    public boolean removeItem(Item item) {
+        if (basketItems.contains(item)) {
+            basketItems.remove(item);
+            return true;
+        }
+        return false;
+    }
+
     public double getTotalPrice(ArrayList<Item> items) {
         double total = 0.0;
         for (Item item : items) {

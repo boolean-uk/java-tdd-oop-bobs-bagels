@@ -5,7 +5,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class BasketTest {
     private Basket basket;
@@ -35,6 +34,9 @@ public class BasketTest {
 
     @Test
     public void testRemoveItem() {
+        basket.addItem(coffee);
+        basket.addItem(bagel);
+        basket.addItem(filling);
         Assertions.assertTrue(basket.removeItem(coffee));
         Assertions.assertTrue(basket.removeItem(bagel));
         Assertions.assertTrue(basket.removeItem(filling));
