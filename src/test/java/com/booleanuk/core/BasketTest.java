@@ -8,52 +8,46 @@ public class BasketTest {
     @Test
     public void addBagelCorrectlyTest() {
         Basket basket = new Basket();
-        basket.addBagel(new Item("BGLP"));
+        basket.addItem(SKU.BGLP);
         Assertions.assertEquals(1, basket.items.size());
-        Assertions.assertEquals("BGLP", basket.items.get(0));
+        Assertions.assertEquals(SKU.BGLP, basket.items.getFirst().SKU);
     }
 
     @Test
     public void addBagelCorrectlyTest2() {
         Basket basket = new Basket();
-        Assertions.assertTrue(basket.addBagel(new Item("BGLP")));
+        Assertions.assertTrue(basket.addItem(SKU.BGLP));
     }
 
     @Test
     public void addBagelIncorrectlyTest() {
         Basket basket = new Basket();
-        basket.addBagel(new Item("BGLP"));
+        basket.addItem(SKU.BGLP);
         Assertions.assertEquals(1, basket.items.size());
-        Assertions.assertNotEquals("BGLE", basket.items.get(0));
-    }
-
-    @Test
-    public void addBagelIncorrectlyTest2() {
-        Basket basket = new Basket();
-        Assertions.assertFalse(basket.addBagel(new Item("COFL")));
+        Assertions.assertNotEquals(SKU.BGLE, basket.items.getFirst().getSKU());
     }
 
     @Test
     public void removeBagelCorrectlyTest() {
         Basket basket = new Basket();
-        basket.addBagel(new Item("BGLP"));
+        basket.addItem(SKU.BGLP);
         Assertions.assertEquals(1, basket.items.size());
-        Assertions.assertTrue(basket.removeBagel("BGLP"));
+        Assertions.assertTrue(basket.removeBagel(SKU.BGLP));
         Assertions.assertEquals(0, basket.items.size());
     }
 
     @Test
     public void removeBagelIncorrectlyTest() {
         Basket basket = new Basket();
-        basket.addBagel(new Item("BGLP"));
-        Assertions.assertFalse(basket.removeBagel("BGLE"));
+        basket.addItem(SKU.BGLP);
+        Assertions.assertFalse(basket.removeBagel(SKU.BGLE));
     }
 
     @Test
     public void removeBagelIncorrectlyTest2() {
         Basket basket = new Basket();
-        basket.addBagel(new Item("BGLP"));
-        Assertions.assertFalse(basket.removeBagel("COFW"));
+        basket.addItem(SKU.BGLP);
+        Assertions.assertFalse(basket.removeBagel(SKU.COFW));
     }
 
     @Test
@@ -83,15 +77,15 @@ public class BasketTest {
     }
 
     @Test
-    public void changeCapacityIncorrectlyTest2() {
+    public void changeCapacityIncorrectlyTest3() {
         Basket basket = new Basket();
-        Item item1 = new Item("BGLP");
-        Item item2 = new Item("BGLO");
-        Item item3 = new Item("COFW");
-        basket.addBagel(item1);
-        basket.addBagel(item2);
-        basket.addBagel(item3);
-        float totalPrice = item1.checkBagelPrice() + item2.checkBagelPrice() + item3.checkBagelPrice();
+        Bagel bagel1 = new Bagel(SKU.BGLP);
+        Bagel bagel2 = new Bagel(SKU.BGLO);
+        Coffee coffee = new Coffee(SKU.COFW);
+        basket.addItem(bagel1.SKU);
+        basket.addItem(bagel2.SKU);
+        basket.addItem(coffee.SKU);
+        float totalPrice = bagel1.getPrice() + bagel2.getPrice() + coffee.getPrice();
         Assertions.assertEquals(totalPrice, basket.calculateCost());
     }
 }
