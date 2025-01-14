@@ -1,4 +1,7 @@
-package com.booleanuk.core;
+package com.booleanuk.extension;
+
+import com.booleanuk.core.Basket;
+import com.booleanuk.core.Item;
 
 import java.text.DecimalFormat;
 import java.time.format.DateTimeFormatter;

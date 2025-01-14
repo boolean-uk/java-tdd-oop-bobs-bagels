@@ -9,6 +9,7 @@ public class discountTest {
     @Test
     public void testDiscountOnBasketList() {
         Basket basket = new Basket();
+        Discount discount = new Discount();
 
         basket.changeCapasity(30);
 
@@ -35,6 +36,6 @@ public class discountTest {
         basket.addToBasket("COFB");
 
         //discount on 12 bagel, discount on 6 bagels, discount on bagel with coffee and one bagel
-        Assertions.assertEquals(8.22,basket.discountPrice());
+        Assertions.assertEquals(8.22,discount.discountPrice(basket));
     }
 }
