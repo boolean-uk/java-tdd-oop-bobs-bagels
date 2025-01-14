@@ -31,7 +31,7 @@ public class TestReceipt {
                 + "Onion Bagel  2   $0.98\n"
                 + "\n"
                 + "----------------------------\n"
-                + "Total            $1.97\n"
+                + "Total            $1.74\n"
                 + "\n"
                 + "        Thank you\n"
                 + "      for your order!";

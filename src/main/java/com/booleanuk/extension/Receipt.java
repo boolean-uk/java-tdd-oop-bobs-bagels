@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 public class Receipt {
     private Basket basket;
@@ -29,11 +30,17 @@ public class Receipt {
         ArrayList<String> itemLines = new ArrayList<>();
 
         // add items to itemLines
-        itemMap.forEach(
-                (item, count) -> itemLines.add(
-                        item.toString() + "\t" + Integer.toString(count) + "\t$"
-                                + String.valueOf(item.getPrice() * itemMap.get(item))
-                                + "\n"));
+        for (Map.Entry<Item, Integer> entry : itemMap.entrySet()) {
+            Item item = entry.getKey();
+            Integer count = entry.getValue();
+
+            // add string to receipt
+            itemLines.add(
+                    item.toString() + "\t" + Integer.toString(count) + "\t$"
+                            + String.valueOf(item.getPrice() * itemMap.get(item))
+                            + "\n");
+
+        }
 
         // sort itemLines
         itemLines.sort(String::compareTo);

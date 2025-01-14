@@ -61,9 +61,72 @@ public class TestBasketExtension {
         Basket basket = new Basket(inventory, 5);
         basket.addItem(new Bagel(SKU.BGLO));
         basket.addItem(new Bagel(SKU.BGLO));
-        basket.addItem(new Bagel(SKU.COFB));
+        basket.addItem(new Coffee(SKU.COFB));
 
-        Assertions.assertEquals(1.97f, basket.getTotalCost());
+        Assertions.assertEquals(1.74f, basket.getTotalCost());
+
+    }
+
+    @Test
+    void testGetTotalCost12bagels() {
+        Inventory inventory = new Inventory();
+
+        inventory.addStock(SKU.BGLO, 12);
+
+        Basket basket = new Basket(inventory, 12);
+        // add 12 onion bagels
+        for (int i = 0; i < 12; i++) {
+            basket.addItem(new Bagel(SKU.BGLO));
+        }
+
+        Assertions.assertEquals(3.99f, basket.getTotalCost());
+
+    }
+
+    @Test
+    void testGetTotalCost6bagels() {
+        Inventory inventory = new Inventory();
+
+        inventory.addStock(SKU.BGLO, 12);
+
+        Basket basket = new Basket(inventory, 12);
+        // add 12 onion bagels
+        for (int i = 0; i < 6; i++) {
+            basket.addItem(new Bagel(SKU.BGLO));
+        }
+
+        Assertions.assertEquals(2.49f, basket.getTotalCost());
+
+    }
+
+    @Test
+    void testGetTotalCost18bagels() {
+        Inventory inventory = new Inventory();
+
+        inventory.addStock(SKU.BGLO, 18);
+
+        Basket basket = new Basket(inventory, 18);
+        // add 12 onion bagels
+        for (int i = 0; i < 18; i++) {
+            basket.addItem(new Bagel(SKU.BGLO));
+        }
+
+        Assertions.assertEquals(6.93f, basket.getTotalCost());
+
+    }
+
+    @Test
+    void testGetTotalCostCoffeAndBagel() {
+        Inventory inventory = new Inventory();
+
+        inventory.addStock(SKU.BGLP, 1);
+        inventory.addStock(SKU.COFB, 1);
+
+        Basket basket = new Basket(inventory, 2);
+        basket.addItem(new Bagel(SKU.BGLP));
+        basket.addItem(new Coffee(SKU.COFB));
+
+        Assertions.assertEquals(1.25f, basket.getTotalCost());
 
     }
 }

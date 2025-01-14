@@ -2,6 +2,7 @@ package com.booleanuk.extension;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 public class Basket {
     private Inventory inventory;
@@ -35,9 +36,48 @@ public class Basket {
 
     float getTotalCost() {
         float total = 0f;
+        HashMap<Item, Integer> itemCounts = getItemCounts();
+
+        // count how many black coffees in basket
+        int nrOfBlackCoffees = 0;
         for (Item i : items) {
-            total += i.getPrice();
+            if (i.getSku() == SKU.COFB) {
+                nrOfBlackCoffees++;
+            }
         }
+
+        for (Map.Entry<Item, Integer> entry : itemCounts.entrySet()) {
+            Item item = entry.getKey();
+            Integer count = entry.getValue();
+
+            // check for bagel discount
+            if (item instanceof Bagel) {
+                if (count >= 12) {
+                    count -= 12;
+                    total += 3.99f + (item.getPrice() * count);
+                } else if (count >= 6) {
+                    count -= 6;
+                    total += 2.49f + (item.getPrice() * count);
+                } else {
+                    // check for black coffee
+                    while (nrOfBlackCoffees > 0 && count > 0) {
+                        nrOfBlackCoffees--;
+                        count--;
+                        total += 1.25f;
+                    }
+                    // add remaining bagels
+                    total += item.getPrice() * count;
+                }
+            } else {
+                if (item.getSku() != SKU.COFB)
+                    total += item.getPrice() * count;
+            }
+        }
+
+        // add remaining black coffees
+        total += 0.99f * nrOfBlackCoffees;
+
+        total = Math.round(total * 100) / 100.0f; // round to 2 decimals
         return total;
     }
 
