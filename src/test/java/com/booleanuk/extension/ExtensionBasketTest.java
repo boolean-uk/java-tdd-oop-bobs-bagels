@@ -1,12 +1,12 @@
-package com.booleanuk.core;
+package com.booleanuk.extension;
 
+import com.booleanuk.core.*;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 
-public class BasketTest {
-
+public class ExtensionBasketTest {
     private ArrayList<Item> itemsInBasket = new ArrayList<>(){{
         // Adding the bagels
         Item onionBagel1 = new OnionBagel(0.49, "BGLO", "Onion", "Bagel") {};
@@ -60,66 +60,30 @@ public class BasketTest {
         add(blackCoffee3);
     }};
 
+    // Extension 1
     @Test
-    public void basketIsFullWhenAdding(){
-        Basket basket = new Basket(itemsInBasket, 23);
-        Item itemToAdd = new OnionBagel(0.49, "BGLO", "Onion", "Bagel"){};
+    public void discountsAreRecieved(){
+        ExtensionBasket basket = new ExtensionBasket(itemsInBasket, 25);
 
-        Assertions.assertEquals("Basket is full!", basket.addItem(itemToAdd));
+        Assertions.assertEquals(10.43, basket.totalCostWithDiscounts());
     }
 
     @Test
-    public void basketIsNotFullWhenAdding(){
-        Basket basket = new Basket(itemsInBasket, 25);
-        Item itemToAdd = new OnionBagel(0.49, "BGLO", "Onion", "Bagel"){};
+    public void discountsAreNotRecieved(){
+        ArrayList<Item> listOfItems = new ArrayList<>(){{
+            Item plainBagel1 = new PlainBagel(0.39, "BGLP", "Plain", "Bagel") {};
+            add(plainBagel1);
+            Item plainBagel2 = new PlainBagel(0.39, "BGLP", "Plain", "Bagel") {};
+            add(plainBagel2);
+            Item plainBagel3 = new PlainBagel(0.39, "BGLP", "Plain", "Bagel") {};
+            add(plainBagel3);
+            Item plainBagel4 = new PlainBagel(0.39, "BGLP", "Plain", "Bagel") {};
+            add(plainBagel4);
+            Item plainBagel5 = new PlainBagel(0.39, "BGLP", "Plain", "Bagel") {};
+            add(plainBagel5);
+        }};
+        ExtensionBasket basket = new ExtensionBasket(listOfItems, 6);
 
-        Assertions.assertEquals(itemToAdd.getName() + " was added to your basket!", basket.addItem(itemToAdd));
+        Assertions.assertEquals(1.95, basket.totalCostWithDiscounts());
     }
-
-    @Test
-    public void removingItemThatDoesNotExistInBasket(){
-        Basket basket = new Basket(itemsInBasket, 25);
-        Item itemToRemove = new OnionBagel(0.49, "BGLO", "Tomato", "Bagel"){};
-
-        Assertions.assertEquals("Item do not exist in basket!", basket.removeItem(itemToRemove));
-    }
-
-    @Test
-    public void removingItemThatDoExistInBasket(){
-        Basket basket = new Basket(itemsInBasket, 25);
-        Item itemToRemove = new OnionBagel(0.49, "BGLO", "Onion", "Bagel"){};
-
-        Assertions.assertEquals(itemToRemove.getName() + " was removed from the basket!", basket.removeItem(itemToRemove));
-    }
-
-    @Test
-    public void enteringAcceptableBasketSize(){
-        Basket basket = new Basket(itemsInBasket, 25);
-
-        Assertions.assertTrue(basket.changeSizeOfBasket(24));
-    }
-
-    @Test
-    public void enteringANonAcceptableBasketSize(){
-        Basket basket = new Basket(itemsInBasket, 25);
-
-        Assertions.assertFalse(basket.changeSizeOfBasket(5));
-    }
-
-
-    @Test
-    public void totalCostOfBasketWhenItIsNotEmpty(){
-        Basket basket = new Basket(itemsInBasket, 25);
-
-        Assertions.assertEquals(11.57, basket.totalCost());
-    }
-
-    @Test
-    public void totalCostOfBasketWhenItIsEmpty(){
-        ArrayList<Item> emptyList = new ArrayList<>();
-        Basket basket = new Basket(emptyList, 6);
-
-        Assertions.assertEquals(0, basket.totalCost());
-    }
-
 }
