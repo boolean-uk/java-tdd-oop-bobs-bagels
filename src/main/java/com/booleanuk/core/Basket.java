@@ -11,12 +11,12 @@ public class Basket {
         this.basketItems = items;
     }
 
-    public boolean addItem(Item item) {
+    public String addItem(Item item) {
         if (!(basketItems.size() >= capacity)) {
             basketItems.add(item);
-            return true;
+            return "Item added successfully!";
         }
-        return false;
+        return "Basket is full!";
     }
 
     public boolean removeItem(Item item) {

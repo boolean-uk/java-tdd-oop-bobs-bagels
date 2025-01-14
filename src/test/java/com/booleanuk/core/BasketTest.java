@@ -28,9 +28,17 @@ public class BasketTest {
 
     @Test
     public void testAddItem() {
-        Assertions.assertTrue(basket.addItem(coffee));
-        Assertions.assertTrue(basket.addItem(bagel));
-        Assertions.assertTrue(basket.addItem(filling));
+        Assertions.assertEquals("Item added successfully!",basket.addItem(coffee));
+        Assertions.assertEquals("Item added successfully!",basket.addItem(bagel));
+        Assertions.assertEquals("Item added successfully!",basket.addItem(filling));
+    }
+
+    @Test
+    public void testAddItemToFullBasket() {
+        basket.setCapacity(2);
+        basket.addItem(bagel);
+        basket.addItem(filling);
+
     }
 
     @Test
@@ -58,7 +66,7 @@ public class BasketTest {
         basket.setCapacity(2);
         basket.addItem(bagel);
         basket.addItem(coffee);
-        Assertions.assertFalse(basket.addItem(filling));
+        Assertions.assertEquals("Basket is full!", basket.addItem(filling));
     }
 
 }
