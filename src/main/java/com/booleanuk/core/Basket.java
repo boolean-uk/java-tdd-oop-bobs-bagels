@@ -132,74 +132,17 @@ public class Basket {
         return c;
     }
 
-    public HashMap<String, Integer> receiptBuilder() {
-        HashMap<String, Integer> boughtItems = new HashMap<>();
-
-        int quantityBagel = 0;
-        int quantityFilling = 0;
-        int quantityCoffee = 0;
-
-        for (int i = 0; i < basketList.size(); i++) {
-            if (basketList.get(i).getId().substring(0,1).equals("B")) {
-                if (!boughtItems.containsKey(basketList.get(i).getDescription())) {
-                    quantityBagel++;
-                    boughtItems.put(basketList.get(i).getId(),quantityBagel);
-                } else {
-                    boughtItems.remove(basketList.get(i).getId(),quantityBagel);
-                    quantityBagel++;
-                    boughtItems.put(basketList.get(i).getId(), quantityBagel);
-                }
-            }
-
-            if (basketList.get(i).getId().substring(0,1).equals("F")) {
-                if (!boughtItems.containsKey(basketList.get(i).getDescription())) {
-                    quantityFilling++;
-                    boughtItems.put(basketList.get(i).getId(),quantityFilling);
-                } else {
-                    boughtItems.remove(basketList.get(i).getId(),quantityFilling);
-                    quantityFilling++;
-                    boughtItems.put(basketList.get(i).getId(), quantityFilling);
-                }
-            }
-
-            if (basketList.get(i).getId().substring(0,1).equals("C")) {
-                if (!boughtItems.containsKey(basketList.get(i).getDescription())) {
-                    quantityCoffee++;
-                    boughtItems.put(basketList.get(i).getId(),quantityCoffee);
-                } else {
-                    boughtItems.remove(basketList.get(i).getId(),quantityCoffee);
-                    quantityCoffee++;
-                    boughtItems.put(basketList.get(i).getId(), quantityCoffee);
-                }
+    public double discountPrice(ArrayList<Item> basketTempList) {
+        int bagelCount = 0;
+        int coffeeCount = 0;
+        for (int i = 0; i < basketTempList.size(); i++) {
+            if (basketTempList.get(i).getId().substring(0,1).equals("B")) {
+                bagelCount++;
+            } else if (basketTempList.get(i).getId().substring(0,1).equals("C")) {
+                coffeeCount++;
             }
         }
-        return boughtItems;
+        return 0;
     }
 
-    public StringBuilder printReceipt() {
-        StringBuilder sb = new StringBuilder();
-        HashMap<String, Integer> list = receiptBuilder();
-        DecimalFormat df = new DecimalFormat();
-        String desc = "";
-        String type = "";
-        double price = 0;
-
-        sb.append("~~~ Bob's Bagels ~~~\n");
-        sb.append(java.time.ZonedDateTime.now().format(DateTimeFormatter.ofPattern("MM/dd/yyyy hh:mm\n")));
-        sb.append("\n----------------------------\n");
-
-        for ( String name : list.keySet()) {
-            for (int i = 0; i < stockList.size(); i++) {
-                Item item = stockList.get(name);
-                price = item.getPrice();
-                desc = item.getDescription();
-                type = item.getType();
-            }
-            sb.append(desc + " " + type + " " +list.get(name).toString()+ " " + df.format(price*list.get(name)) + "£\n");
-        }
-        sb.append("\n----------------------------\n");
-        sb.append("Total cost: " + df.format(getTotalCost())+"£\n");
-        System.out.println(sb);
-        return sb;
-    }
 }

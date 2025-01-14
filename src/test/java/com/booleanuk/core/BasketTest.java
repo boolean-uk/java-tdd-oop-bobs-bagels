@@ -59,6 +59,9 @@ public class BasketTest {
     @Test
     public void testGetReceipt() {
         StringBuilder sb = new StringBuilder();
+        Basket basket = new Basket();
+        Receipt receipt = new Receipt();
+
         sb.append("~~~ Bob's Bagels ~~~\n");
         sb.append(java.time.ZonedDateTime.now().format(DateTimeFormatter.ofPattern("MM/dd/yyyy hh:mm\n")));
         sb.append("\n----------------------------\n");
@@ -68,7 +71,6 @@ public class BasketTest {
         sb.append("\n----------------------------\n");
         sb.append("Total cost: " + 4.43+"£\n");
 
-        Basket basket = new Basket();
         basket.addToBasket("BGLO");
         basket.addToBasket("BGLO");
         basket.addToBasket("COFB");
@@ -80,7 +82,7 @@ public class BasketTest {
         basket.addToBasket("FILE");
 
         //sb.compare return 0 if the stringbuilder contains same character sequence
-        Assertions.assertEquals(0, sb.compareTo(basket.printReceipt()));
+        Assertions.assertEquals(0, sb.compareTo(receipt.printReceipt(basket)));
     }
 
     @Test
