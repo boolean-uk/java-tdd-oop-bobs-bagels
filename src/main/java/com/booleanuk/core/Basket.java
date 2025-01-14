@@ -7,9 +7,14 @@ public class Basket {
     private ArrayList<Item> items = new ArrayList<>();
     private int capacity = 10;
     private boolean isFull;
+    private Inventory inventory = new Inventory();
 
     public Basket(){
         this.isFull = false;
+    }
+
+    public Inventory getInventory(){
+        return this.inventory;
     }
 
     public ArrayList<Item> getItems(){
@@ -47,6 +52,10 @@ public class Basket {
             System.out.println("Your basket is full, cant add item!");
             return;
         }
+        if (inventory.getItemStock(itemSku) == 0){
+            System.out.println("No stock left for chosen item!");
+            return;
+        }
         Item item = new Item(itemSku);
         System.out.println(item.getVariant() + " " + item.getName() + " price: $" + item.getPrice());
         System.out.println("Do you want to add " + item.getVariant()
@@ -57,6 +66,7 @@ public class Basket {
 
         if (userInput.equals("yes")) {
             items.add(item);
+            inventory.removeStockItem(itemSku, 1);
             System.out.println(item.getVariant() + " " + item.getName() + " added to the basket.");
         } else {
             System.out.println(item.getVariant() + " " + item.getName() + " not added to the basket.");
@@ -67,6 +77,7 @@ public class Basket {
         for (Item item : items){
             if (item.getSku().equals(itemSku)){
                 items.remove(item);
+                inventory.addStockItem(itemSku, 1);
                 return;
             }
         }
