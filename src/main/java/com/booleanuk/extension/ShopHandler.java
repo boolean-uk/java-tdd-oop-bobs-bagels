@@ -67,7 +67,8 @@ public class ShopHandler {
         for (Item item : basket.getItems()) {
             if (item.getName().equals("Coffee")) {
                 Coffee coffee = (Coffee) item;  // not nice!
-                totalDiscount += coffee.getPrice() + coffee.getDiscountBagel().getPrice() - COFFEE_DISCOUNT;
+                if (coffee.getDiscountBagel() != null)
+                    totalDiscount += coffee.getPrice() - COFFEE_DISCOUNT;
             }
         }
         for (Item item : stock) {
@@ -301,5 +302,13 @@ public class ShopHandler {
 
     public static List<Item> getStock() {
         return stock;
+    }
+
+    public double getCostBeforeDiscounts() {
+        return basket.getTotalCost();
+    }
+
+    public double getCostAfterDiscounts() {
+        return basket.getTotalCost() - calculateDiscounts();
     }
 }

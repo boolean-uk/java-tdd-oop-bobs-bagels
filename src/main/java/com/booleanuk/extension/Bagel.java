@@ -18,13 +18,9 @@ public class Bagel extends Item {
         return this.filling;
     }
 
-//    @Override
-//    public double getPrice() {
-//        if (filling == null) return getBasePrice();
-//        return super.getPrice() + filling.getPrice();
-//    }
-
-//    public double getBasePrice() {
-//        return super.getPrice();
-//    }
+    @Override
+    public double getPrice() {
+        if (filling == null) return super.getPrice();
+        return super.getPrice() + filling.getPrice();
+    }
 }

@@ -54,10 +54,6 @@ public class Basket {
     public double getTotalCost() {
         double totalCost = 0;
         for (Item item : items) {
-            if (item.getName().equals("Bagel"))
-                totalCost += ((Bagel) item).getFilling().getPrice();
-            else if (item.getName().equals("Coffee"))
-                totalCost += ((Coffee) item).getDiscountBagel().getPrice();
             totalCost += item.getPrice();
         }
         return totalCost;

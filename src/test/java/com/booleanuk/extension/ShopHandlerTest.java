@@ -100,5 +100,23 @@ public class ShopHandlerTest {
         assertEquals(0.23, sh.calculateDiscounts(), delta);
     }
 
-
+    @Test
+    public void comboTest() {
+        ShopHandler sh = new ShopHandler();
+        int oldCapacity = Basket.getCapacity();
+        Basket.setCapacity(100);
+        sh.orderBagel("Onion");
+        sh.orderBagel("Onion");
+        for (int i=0; i<12; i++) {
+            sh.orderBagel("Plain");
+        }
+        for (int i=0; i<6; i++) {
+            sh.orderBagel("Everything");
+        }
+        for (int i=0; i<3; i++) {
+            sh.orderCoffee("Black");
+        }
+        assertEquals(10.43, sh.getCostAfterDiscounts(), delta);
+        Basket.setCapacity(oldCapacity);
+    }
 }

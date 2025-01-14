@@ -26,4 +26,10 @@ public class Coffee extends Item {
         }
         return super.getSize() + discountBagel.getSize();
     }
+
+    @Override
+    public double getPrice() {
+        if (discountBagel == null) return super.getPrice();
+        return super.getPrice() + discountBagel.getPrice();
+    }
 }
