@@ -1,13 +1,12 @@
 package com.booleanuk.core;
 
 import java.text.DecimalFormat;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Basket {
 
-    private int capasity = 10;
+    private int capasity = 20;
     private double totalCost;
 
     private ArrayList<Item> basketList = new ArrayList<>();
@@ -50,24 +49,12 @@ public class Basket {
         return capasity;
     }
 
-    public void setCapasity(int capasity) {
-        this.capasity = capasity;
-    }
-
     public ArrayList<Item> getBasketList() {
         return basketList;
     }
 
-    public void setBasketList(ArrayList<Item> basketList) {
-        this.basketList = basketList;
-    }
-
     public HashMap<String, Item> getStockList() {
         return stockList;
-    }
-
-    public void setStockList(HashMap<String, Item> stockList) {
-        this.stockList = stockList;
     }
 
     public boolean addToBasket(String id) {
@@ -132,17 +119,55 @@ public class Basket {
         return c;
     }
 
-    public double discountPrice(ArrayList<Item> basketTempList) {
+    public double discountPrice() {
         int bagelCount = 0;
         int coffeeCount = 0;
-        for (int i = 0; i < basketTempList.size(); i++) {
-            if (basketTempList.get(i).getId().substring(0,1).equals("B")) {
+        for (int i = 0; i < basketList.size(); i++) {
+            if (basketList.get(i).getId().substring(0, 1).equals("B")) {
                 bagelCount++;
-            } else if (basketTempList.get(i).getId().substring(0,1).equals("C")) {
+            } else if (basketList.get(i).getId().substring(0, 1).equals("C")) {
                 coffeeCount++;
             }
         }
-        return 0;
-    }
 
+        int remain;
+        double totalDiscount = 0; 
+
+        remain = bagelCount / 12; // 18 = 1,5;
+        
+        if (remain >= 1) {
+            totalDiscount += 3.99;
+            bagelCount = bagelCount - 12;
+        }
+
+        remain = bagelCount / 6;
+
+        if(remain >= 1) {
+            totalDiscount += 2.49;
+            bagelCount = bagelCount - 6;
+        }
+
+        if (bagelCount >= 1 && coffeeCount >= 1) {
+            totalDiscount += 1.25;
+            bagelCount--;
+            coffeeCount--;
+        }
+
+        if(bagelCount != 0) {
+            for (int i = 0; i < basketList.size(); i++) {
+                if (basketList.get(i).getId().substring(0,1).equals("B")) {
+                    totalDiscount += basketList.get(i).getPrice();
+                }
+            }
+        }
+
+        if(coffeeCount != 0) {
+            for (int i = 0; i < basketList.size(); i++) {
+                if (basketList.get(i).getId().substring(0,1).equals("C")) {
+                    totalDiscount += basketList.get(i).getPrice();
+                }
+            }
+        }
+        return totalDiscount;
+    }
 }
