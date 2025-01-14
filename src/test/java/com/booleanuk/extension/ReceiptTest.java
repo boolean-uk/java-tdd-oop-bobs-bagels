@@ -1,5 +1,7 @@
-package com.booleanuk.core;
+package com.booleanuk.extension;
 
+import com.booleanuk.core.Basket;
+import com.booleanuk.core.Receipt;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
