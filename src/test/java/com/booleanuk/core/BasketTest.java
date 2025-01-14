@@ -45,10 +45,9 @@ public class BasketTest {
     public void testRemoveItem() {
         basket.addItem(coffee);
         basket.addItem(bagel);
-        basket.addItem(filling);
-        Assertions.assertTrue(basket.removeItem(coffee));
-        Assertions.assertTrue(basket.removeItem(bagel));
-        Assertions.assertTrue(basket.removeItem(filling));
+        Assertions.assertEquals("Item removed!",basket.removeItem(coffee));
+        Assertions.assertEquals("Item removed!",basket.removeItem(bagel));
+        Assertions.assertEquals("Could not remove - item was never in basket", basket.removeItem(filling));
     }
 
     @Test

@@ -19,12 +19,12 @@ public class Basket {
         return "Basket is full!";
     }
 
-    public boolean removeItem(Item item) {
+    public String removeItem(Item item) {
         if (basketItems.contains(item)) {
             basketItems.remove(item);
-            return true;
+            return "Item removed!";
         }
-        return false;
+        return "Could not remove - item was never in basket";
     }
 
     public double getTotalPrice(ArrayList<Item> items) {
