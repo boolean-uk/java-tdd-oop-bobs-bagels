@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 public class TestItem {
     @Test
     void testCorrectVariableSetFromSku() {
-        Item item = new Item(SKU.BGLO);
+        Item item = new Bagel(SKU.BGLO);
 
         Assertions.assertEquals(SKU.BGLO, item.getSku());
         Assertions.assertEquals("Bagel", item.getType());

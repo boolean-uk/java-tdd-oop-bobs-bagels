@@ -15,9 +15,9 @@ public class TestReceipt {
         inventory.addStock(SKU.COFB, 1);
 
         Basket basket = new Basket(inventory, 5);
-        basket.addItem(new Item(SKU.BGLO));
-        basket.addItem(new Item(SKU.BGLO));
-        basket.addItem(new Item(SKU.COFB));
+        basket.addItem(new Bagel(SKU.BGLO));
+        basket.addItem(new Bagel(SKU.BGLO));
+        basket.addItem(new Coffee(SKU.COFB));
 
         LocalDateTime time = LocalDateTime.of(2021, Month.MARCH, 16, 21, 38, 44);
         Receipt receipt = new Receipt(basket, time);

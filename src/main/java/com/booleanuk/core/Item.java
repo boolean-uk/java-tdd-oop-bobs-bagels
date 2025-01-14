@@ -1,6 +1,6 @@
 package com.booleanuk.core;
 
-public class Item {
+public abstract class Item {
     private SKU sku;
     private float price;
     private String type;
@@ -69,7 +69,6 @@ public class Item {
         } else {
             throw new IllegalArgumentException("Invalid SKU: " + sku);
         }
- 
     }
 
     SKU getSku() {

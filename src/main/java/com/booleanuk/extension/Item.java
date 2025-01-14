@@ -1,6 +1,6 @@
 package com.booleanuk.extension;
 
-public class Item {
+public abstract class Item {
     private SKU sku;
     private float price;
     private String type;

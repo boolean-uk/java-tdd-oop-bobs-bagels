@@ -12,7 +12,7 @@ public class TestBasket {
 
         Basket basket = new Basket(inventory, 3);
 
-        Item item = new Item(SKU.BGLO);
+        Item item = new Bagel(SKU.BGLO);
 
         Assertions.assertTrue(basket.addItem(item));
         Assertions.assertEquals(SKU.BGLO, basket.getItems().get(0).getSku());
@@ -23,7 +23,7 @@ public class TestBasket {
         Inventory inventory = new Inventory();
         Basket basket = new Basket(inventory, 3);
 
-        Item item = new Item(SKU.BGLO);
+        Item item = new Bagel(SKU.BGLO);
 
         Assertions.assertFalse(basket.addItem(item));
     }
@@ -33,7 +33,7 @@ public class TestBasket {
         Inventory inventory = new Inventory();
         Basket basket = new Basket(inventory, 0);
 
-        Item item = new Item(SKU.BGLO);
+        Item item = new Bagel(SKU.BGLO);
 
         Assertions.assertFalse(basket.addItem(item));
     }
@@ -45,7 +45,7 @@ public class TestBasket {
         inventory.addStock(SKU.BGLO, 1);
 
         Basket basket = new Basket(inventory, 5);
-        basket.addItem(new Item(SKU.BGLO));
+        basket.addItem(new Bagel(SKU.BGLO));
 
         Assertions.assertTrue(basket.removeItem(SKU.BGLO));
         Assertions.assertTrue(inventory.checkStock(SKU.BGLO)); // check if item is added back to stock
@@ -59,9 +59,9 @@ public class TestBasket {
         inventory.addStock(SKU.COFB, 1);
 
         Basket basket = new Basket(inventory, 5);
-        basket.addItem(new Item(SKU.BGLO));
-        basket.addItem(new Item(SKU.BGLO));
-        basket.addItem(new Item(SKU.COFB));
+        basket.addItem(new Bagel(SKU.BGLO));
+        basket.addItem(new Bagel(SKU.BGLO));
+        basket.addItem(new Bagel(SKU.COFB));
 
         Assertions.assertEquals(1.97f, basket.getTotalCost());
 
