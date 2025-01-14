@@ -85,4 +85,28 @@ public class ExtensionReceiptTest {
         Assertions.assertEquals(desiredOutput, receipt.printReceipt());
     }
 
+
+    @Test
+    public void discountsForSpecificItemAreReceived(){
+        HashMap<Item, Integer> listOfItems = new HashMap<>(){{
+            Item onionBagel = new OnionBagel(0.49, "BGLO", "Onion", "Bagel") {};
+            put(onionBagel, 6);
+        }};
+
+        ExtensionReceipt receipt = new ExtensionReceipt(listOfItems);
+
+        Assertions.assertEquals(2.49, receipt.costWithDiscounts());
+    }
+
+    @Test
+    public void discountsForSpecificItemAreNotReceived(){
+        HashMap<Item, Integer> listOfItems = new HashMap<>(){{
+            Item onionBagel = new OnionBagel(0.49, "BGLO", "Onion", "Bagel") {};
+            put(onionBagel, 5);
+        }};
+
+        ExtensionReceipt receipt = new ExtensionReceipt(listOfItems);
+
+        Assertions.assertEquals(2.45, receipt.costWithDiscounts());
+    }
 }
