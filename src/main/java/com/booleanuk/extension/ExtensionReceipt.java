@@ -112,30 +112,29 @@ public class ExtensionReceipt {
 
 
 
-    public double costWithDiscounts(){
+    public double costWithDiscounts(Item itemToCheck, int quantity){
         int numBagel = 0;
         double cost = 0;
 
-        for(Item item : itemsThatArePurchased.keySet()){
-            if(item.getAbbreviation().contains("BGL")){
+        if(itemToCheck.getAbbreviation().contains("BGL")){
 
-                for(int i = 0; i < itemsThatArePurchased.get(item); i++){
-                    numBagel++;
-                    if(numBagel == 12){
-                        numBagel = 0;
-                        cost -= 5*item.getPrice();
-                        cost += 1.50;
-                    } else if (numBagel == 6) {
-                        cost -= 5*item.getPrice();
-                        cost += 2.49;
-                    } else {
-                        cost += item.getPrice();
-                    }
+            for(int i = 0; i < quantity; i++){
+                numBagel++;
+                if(numBagel == 12){
+                    numBagel = 0;
+                    cost -= 5*itemToCheck.getPrice();
+                    cost += 1.50;
+                } else if (numBagel == 6) {
+                    cost -= 5*itemToCheck.getPrice();
+                    cost += 2.49;
+                } else {
+                    cost += itemToCheck.getPrice();
                 }
-            } else {
-                cost += item.getPrice()*itemsThatArePurchased.get(item);
             }
+        } else {
+            cost += itemToCheck.getPrice()*quantity;
         }
+
         return Math.round(cost * 100.0) / 100.0;
     }
 
@@ -144,7 +143,7 @@ public class ExtensionReceipt {
 
 
 
-    /*
+
     public String printReceipt(){
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("~~~ Bob's Bagels ~~~ \n\n");
@@ -164,5 +163,5 @@ public class ExtensionReceipt {
 
         System.out.println(stringBuilder);
         return stringBuilder.toString();
-    }*/
+    }
 }
