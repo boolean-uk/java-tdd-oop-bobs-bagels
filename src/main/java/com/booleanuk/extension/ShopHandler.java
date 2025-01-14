@@ -7,14 +7,14 @@ import java.util.Scanner;
 
 public class ShopHandler {
     private static final List<Item> stock = new ArrayList<>(Arrays.asList(
-            new Item("BGLO", 0.49, "Bagel", "Onion"),
-            new Item("BGLP", 0.39, "Bagel", "Plain"),
-            new Item("BGLE", 0.49, "Bagel", "Everything"),
-            new Item("BGLS", 0.49, "Bagel", "Sesame"),
-            new Item("COFB", 0.99, "Coffee", "Black"),
-            new Item("COFW", 1.19, "Coffee", "White"),
-            new Item("COFC", 1.29, "Coffee", "Cappuccino"),
-            new Item("COFL", 1.29, "Coffee", "Latte"),
+            new Bagel("BGLO", 0.49, "Bagel", "Onion"),
+            new Bagel("BGLP", 0.39, "Bagel", "Plain"),
+            new Bagel("BGLE", 0.49, "Bagel", "Everything"),
+            new Bagel("BGLS", 0.49, "Bagel", "Sesame"),
+            new Coffee("COFB", 0.99, "Coffee", "Black"),
+            new Coffee("COFW", 1.19, "Coffee", "White"),
+            new Coffee("COFC", 1.29, "Coffee", "Cappuccino"),
+            new Coffee("COFL", 1.29, "Coffee", "Latte"),
             new Item("FILB", 0.12, "Filling", "Bacon"),
             new Item("FILE", 0.12, "Filling", "Egg"),
             new Item("FILC", 0.12, "Filling", "Cheese"),
@@ -82,6 +82,81 @@ public class ShopHandler {
             }
         }
         return totalDiscount;
+    }
+
+    public String showReceiptWithDiscounts() {
+        double totalDiscount = 0;
+        StringBuilder sb = new StringBuilder();
+
+        sb.append("Bob's Bagels\n--------\n");
+
+        // Recursively collect all fillings
+        List<Item> fillings = new ArrayList<>();
+        for (Item item : basket.getItems()) {
+            if (item.getName().equals("Coffee")) {
+                Bagel b = ((Coffee) item).getDiscountBagel();
+                if (b != null) {
+                    Item f = b.getFilling();
+                    if (f != null) {
+                        fillings.add(f);
+                    }
+                }
+            } else if (item.getName().equals("Bagel")) {
+                Item f = ((Bagel) item).getFilling();
+                if (f != null) {
+                    fillings.add(f);
+                }
+            }
+        }
+
+        for (Item item : stock) {
+            String sku = item.getSku();
+
+            if (item.getName().equals("Filling")) {
+                int n = fillings.stream().filter(i -> i.getSku().equals(sku)).toList().size();
+                if (n > 0) {
+                    sb.append(n).append(" ").append(item.getName()).append(" ").append(item.getVariant()).append(" ").append(String.format("%.2f", item.getPrice() * n)).append("\n");
+                }
+            }
+
+            if (item.getName().equals("Coffee")) {
+                double discount = 0;
+                double price = 0;
+                List<Item> coffees = basket.getItems().stream().filter(i -> i.getSku().equals(sku)).toList();
+                for (Item coffee : coffees) {  // not nice!
+                    if (((Coffee) coffee).getDiscountBagel() != null) {
+                        discount += coffee.getPrice() - COFFEE_DISCOUNT;
+                        price += COFFEE_DISCOUNT;
+                        totalDiscount += discount;
+                    } else {
+                        price += coffee.getPrice();
+                    }
+                }
+                if (!coffees.isEmpty()) {
+                    sb.append(coffees.size()).append(" ").append(item.getName()).append(" ").append(item.getVariant()).append(" ").append(String.format("%.2f", price)).append("\n");
+                    if (discount > 0) {
+                        sb.append("(-").append(String.format("%.2f", discount)).append(")").append("\n");
+                    }
+                }
+            } else if (item.getName().equals("Bagel")) {
+                int n = basket.getItems().stream().filter(i -> i.getSku().equals(sku)).toList().size();
+                double discount = ((int) (n/12)) * item.getPrice() * 12  - ((int) n/12) * DOZEN_BAGEL_DISCOUNT;
+                int bagelsLeft = n % 12;
+                discount += ((int) (bagelsLeft/6)) * item.getPrice() * 6  - ((int) bagelsLeft/6) * SIX_BAGEL_DISCOUNT;
+                totalDiscount += discount;
+                if (n > 0) {
+                    sb.append(n).append(" ").append(item.getName()).append(" ").append(item.getVariant()).append(" ").append(String.format("%.2f", item.getPrice() * n - discount)).append("\n");
+                    if (discount > 0) {
+                        sb.append("(-").append(String.format("%.2f", discount)).append(")").append("\n");
+                    }
+                }
+            }
+        }
+        sb.append("--------\n")
+                .append("Total: ").append(String.format("%.2f", getCostAfterDiscounts()))
+                .append("\nSavings: ").append(String.format("%.2f", getCostBeforeDiscounts() - getCostAfterDiscounts()));
+
+        return sb.toString();
     }
 
     public void removeItem() {

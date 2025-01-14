@@ -137,8 +137,46 @@ public class ShopHandlerTest {
             sh.orderCoffee("Black");
         }
         sh.orderCoffee("Cappuccino", "Plain");
-        System.out.println(sh.showReceiptWithDiscounts());
         assertNotEquals("", sh.showReceiptWithDiscounts());
+        Basket.setCapacity(oldCapacity);
+    }
+
+    @Test
+    public void comboBasketPrintsNonemptyReceipt() {
+        ShopHandler sh = new ShopHandler();
+        int oldCapacity = Basket.getCapacity();
+        Basket.setCapacity(100);
+        sh.orderBagel("Onion", "Ham");
+        sh.orderBagel("Onion", "Ham");
+        for (int i=0; i<12; i++) {
+            sh.orderBagel("Plain", "Cheese");
+        }
+        for (int i=0; i<6; i++) {
+            sh.orderBagel("Everything");
+        }
+        for (int i=0; i<3; i++) {
+            sh.orderCoffee("Black");
+        }
+        sh.orderCoffee("Cappuccino", "Plain");
+//        System.out.println(sh.showReceiptWithDiscounts());
+        assertEquals(
+                """
+                        Bob's Bagels
+                        --------
+                        2 Bagel Onion 0.98
+                        12 Bagel Plain 3.99
+                        (-0.69)
+                        6 Bagel Everything 2.49
+                        (-0.45)
+                        3 Coffee Black 2.97
+                        1 Coffee Cappuccino 1.25
+                        (-0.43)
+                        12 Filling Cheese 1.44
+                        2 Filling Ham 0.24
+                        --------
+                        Total: 13.36
+                        Savings: 1.57"""
+                , sh.showReceiptWithDiscounts());
         Basket.setCapacity(oldCapacity);
     }
 }
