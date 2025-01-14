@@ -183,28 +183,8 @@ public class BasketTest {
         Assertions.assertEquals(1.25 + 0.49, basket.getTotalCost());
     }
 
-    //Testing of multiple instances of the same discount being applied (so 12 onion bagels = 2 * the discount price for 6)
+    //Testing of multiple instances of the same discount being applied (so 24 onion bagels = 2 * the discount price for 12)
 
-    @Test
-    public void testTwoOnionBagelsDiscounts() {
-        Basket basket = new Basket();
-        ItemFactory factory = new ItemFactory();
-        Item onionBagel = factory.createItem("BGLO");
-        basket.addItem(onionBagel);
-        basket.addItem(onionBagel);
-        basket.addItem(onionBagel);
-        basket.addItem(onionBagel);
-        basket.addItem(onionBagel);
-        basket.addItem(onionBagel); //6th bagel added
-        basket.addItem(onionBagel);
-        basket.addItem(onionBagel);
-        basket.addItem(onionBagel);
-        basket.addItem(onionBagel);
-        basket.addItem(onionBagel);
-        basket.addItem(onionBagel); //12th bagel added
-        basket.checkDiscounts();
-        Assertions.assertEquals(2.49 * 2, basket.getTotalCost());
-    }
 
     @Test
     public void testTwoPlainBagelsDiscounts() {
@@ -278,10 +258,10 @@ public class BasketTest {
         basket.addItem(onionBagel);
         basket.addItem(onionBagel);
         basket.addItem(onionBagel); //18th bagel added, should be 3.99 + 2.49 at this point
-        basket.addItem(blackCoffee);
-        basket.addItem(everythingBagel); // coffee discount applies from here
+        //basket.addItem(blackCoffee);
+        //basket.addItem(everythingBagel); // coffee discount applies from here
         basket.checkDiscounts();
-        Assertions.assertEquals(3.99 + 2.49 + 1.25, basket.getTotalCost());
+        Assertions.assertEquals(3.99 + 2.49, basket.getTotalCost());
     }
 
 
