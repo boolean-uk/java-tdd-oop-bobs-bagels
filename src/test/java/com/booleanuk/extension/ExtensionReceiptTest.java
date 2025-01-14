@@ -12,17 +12,18 @@ import java.util.HashMap;
 public class ExtensionReceiptTest {
     private HashMap<Item, Integer> itemsThatArePurchased = new HashMap<>(){{
         // Adding the bagels
+        Item blackCoffee = new BlackCoffee(0.99, "COFB", "Black", "Coffee"){};
+        put(blackCoffee, 3);
+
         Item onionBagel = new OnionBagel(0.49, "BGLO", "Onion", "Bagel") {};
         put(onionBagel, 2);
-
-        Item plainBagel = new PlainBagel(0.39, "BGLP", "Plain", "Bagel") {};
-        put(plainBagel, 12);
 
         Item everythingBagel = new EverythingBagel(0.49, "BGLE", "Everything", "Bagel") {};
         put(everythingBagel, 6);
 
-        Item blackCoffee = new BlackCoffee(0.99, "COFB", "Black", "Coffee"){};
-        put(blackCoffee, 3);
+        Item plainBagel = new PlainBagel(0.39, "BGLP", "Plain", "Bagel") {};
+        put(plainBagel, 12);
+
     }};
 
     // testing total cost once again since I had to adjust it when using a HashMap instead of arraylist
@@ -69,17 +70,17 @@ public class ExtensionReceiptTest {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String dateOfPurchase = sdf.format(new Date());
 
-        String desiredOutput = "~~~ Bob's Bagels ~~~ \n\n" +
-                                    dateOfPurchase +
+        String desiredOutput = "    ~~~ Bob's Bagels ~~~ \n\n" +
+                                     "     " +dateOfPurchase +
                                "\n----------------------------\n" +
-                               "Onion Bagel        2   £0.98\n" +
-                               "Plain Bagel        12  £3.99\n" +
-                               "Everything Bagel   6   £2.49\n" +
-                               "Coffee             3   £2.97\n" +
+                               "Everything Bagel          6   £2.49\n" +
+                               "Onion Bagel          2   £0.98\n" +
+                               "Plain Bagel          12   £3.99\n" +
+                               "Black Coffee          3   £2.97\n" +
                                "\n----------------------------\n" +
-                               "Total                 £10.43\n" +
-                               "Thank you\n" +
-                               "for your order!";
+                               "Total                  £10.43\n" +
+                               "        Thank you\n" +
+                               "      for your order!";
 
 
         Assertions.assertEquals(desiredOutput, receipt.printReceipt());

@@ -3,9 +3,7 @@ package com.booleanuk.extension;
 import com.booleanuk.core.Item;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
+import java.util.*;
 
 public class ExtensionReceipt {
     HashMap<Item, Integer> itemsThatArePurchased;
@@ -145,21 +143,30 @@ public class ExtensionReceipt {
 
 
     public String printReceipt(){
+        ArrayList<Item> keys = new ArrayList<>(itemsThatArePurchased.keySet());
+        Collections.sort(keys, new Comparator<Item>() {
+            @Override
+            public int compare(Item o1, Item o2) {
+                return o1.getAbbreviation().compareTo(o2.getAbbreviation());
+            }
+        });
+
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("~~~ Bob's Bagels ~~~ \n\n");
-        stringBuilder.append(dateOfPurchase);
+        stringBuilder.append("    ~~~ Bob's Bagels ~~~ \n\n");
+        stringBuilder.append("     "+dateOfPurchase);
         stringBuilder.append("\n----------------------------\n");
 
-        for(Item anItem : itemsThatArePurchased.keySet()){
-            stringBuilder.append(anItem.getName() + " " + anItem.getTypeOfItem() + " " + itemsThatArePurchased.get(anItem) + " " + (anItem.getPrice()*itemsThatArePurchased.get(anItem)) + "\n");
+        for(Item anItem : keys){
+            double price = costWithDiscounts(anItem, itemsThatArePurchased.get(anItem));
+            stringBuilder.append(anItem.getName() + " " + anItem.getTypeOfItem() + "          " + itemsThatArePurchased.get(anItem) + "   £" + price + "\n");
         }
 
         stringBuilder.append("\n----------------------------\n");
-        stringBuilder.append("Total " + "£" + totalCostWithDiscounts() + "\n");
+        stringBuilder.append("Total                  " + "£" + totalCostWithDiscounts() + "\n");
 
 
-        stringBuilder.append("Thank you\n");
-        stringBuilder.append("for your order!");
+        stringBuilder.append("        Thank you\n");
+        stringBuilder.append("      for your order!");
 
         System.out.println(stringBuilder);
         return stringBuilder.toString();
