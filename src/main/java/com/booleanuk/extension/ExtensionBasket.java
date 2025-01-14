@@ -20,9 +20,12 @@ public class ExtensionBasket {
         int numPlainBagel = 0;
         int numEverythingBagel = 0;
         int numSesameBagel = 0;
+        int numBagel = 0;
+        int numCoffee = 0;
 
         for(Item item : itemsInBasket){
             if(item.getAbbreviation().equals("BGL0")){
+                numBagel++;
                 numOnionBagel++;
                 if(numOnionBagel == 12){
                     numOnionBagel = 0;
@@ -36,6 +39,7 @@ public class ExtensionBasket {
                 }
 
             } else if (item.getAbbreviation().equals("BGLP")) {
+                numBagel++;
                 numPlainBagel++;
                 if(numPlainBagel == 12){
                     numPlainBagel = 0;
@@ -49,6 +53,7 @@ public class ExtensionBasket {
                 }
 
             } else if (item.getAbbreviation().equals("BGLE")) {
+                numBagel++;
                 numEverythingBagel++;
                 if(numEverythingBagel == 12){
                     numEverythingBagel = 0;
@@ -62,6 +67,7 @@ public class ExtensionBasket {
                 }
 
             } else if (item.getAbbreviation().equals("BGLS")) {
+                numBagel++;
                 numSesameBagel++;
                 if(numSesameBagel == 12){
                     numSesameBagel = 0;
@@ -74,11 +80,17 @@ public class ExtensionBasket {
                     totalCost += item.getPrice();
                 }
 
+            } else if (item.getAbbreviation().contains("COF")) {
+                numCoffee++;
+                totalCost += item.getPrice();
             } else{
                 totalCost += item.getPrice();
             }
 
 
+        }
+        if(numBagel == 1 && numCoffee == 1){
+            totalCost = 1.25;
         }
         double roundOff = Math.round(totalCost * 100.0) / 100.0;
         return roundOff;
