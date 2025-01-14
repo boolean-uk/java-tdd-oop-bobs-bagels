@@ -25,6 +25,7 @@ public class ShopHandler {
 
     private static final double SIX_BAGEL_DISCOUNT = 2.49;
     private static final double DOZEN_BAGEL_DISCOUNT = 3.99;
+    private static final double COFFEE_DISCOUNT = 1.25;
     private Scanner scanner;
     private Basket basket;
 
@@ -66,7 +67,7 @@ public class ShopHandler {
         for (Item item : basket.getItems()) {
             if (item.getName().equals("Coffee")) {
                 Coffee coffee = (Coffee) item;  // not nice!
-                totalDiscount += coffee.getPrice() + coffee.getDiscountBagel().getPrice() - 1.25;  // hardcoded
+                totalDiscount += coffee.getPrice() + coffee.getDiscountBagel().getPrice() - COFFEE_DISCOUNT;
             }
         }
         for (Item item : stock) {
@@ -76,7 +77,6 @@ public class ShopHandler {
                 double discount = ((int) (n/12)) * item.getPrice() * 12  - ((int) n/12) * DOZEN_BAGEL_DISCOUNT;
                 int bagelsLeft = n % 12;
                 discount += ((int) (bagelsLeft/6)) * item.getPrice() * 6  - ((int) bagelsLeft/6) * SIX_BAGEL_DISCOUNT;
-                System.out.println(discount);
                 totalDiscount += discount;
             }
         }
@@ -222,6 +222,27 @@ public class ShopHandler {
             return false;
         }
         return basket.addItem(coffeeFromVariant(variant));
+    }
+
+    public boolean orderCoffee(String coffeeVariant, String bagelVariant, String fillingVariant) {
+        if (!isValidCoffee(coffeeVariant) || !isValidBagel(bagelVariant) || !isValidFilling(fillingVariant)) {
+            return false;
+        }
+        Coffee coffee = coffeeFromVariant(coffeeVariant);
+        Bagel bagel = bagelFromVariant(bagelVariant);
+        bagel.setFilling(fillingFromVariant(fillingVariant));
+        coffee.setDiscountBagel(bagel);
+        return basket.addItem(coffee);
+    }
+
+    public boolean orderCoffee(String coffeeVariant, String bagelVariant) {
+        if (!isValidCoffee(coffeeVariant) || !isValidBagel(bagelVariant)) {
+            return false;
+        }
+        Coffee coffee = coffeeFromVariant(coffeeVariant);
+        Bagel bagel = bagelFromVariant(bagelVariant);
+        coffee.setDiscountBagel(bagel);
+        return basket.addItem(coffee);
     }
 
     private Bagel bagelFromVariant(String variant) {

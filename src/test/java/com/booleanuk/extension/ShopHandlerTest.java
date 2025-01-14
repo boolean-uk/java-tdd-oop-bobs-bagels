@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class ShopHandlerTest {
+    double delta = 0.0001;
     @Test
     public void showItemsShowsAllItemsThatAreNotFillings() {
         ShopHandler sh = new ShopHandler();
@@ -82,7 +83,6 @@ public class ShopHandlerTest {
 
     @Test
     public void dozenAndSixBagelsDiscount() {
-        double delta = 0.0001;
         ShopHandler sh = new ShopHandler();
         int oldCapacity = Basket.getCapacity();
         Basket.setCapacity(20);
@@ -92,4 +92,13 @@ public class ShopHandlerTest {
         assertEquals(2.34, sh.calculateDiscounts(), delta);
         Basket.setCapacity(oldCapacity);
     }
+
+    @Test
+    public void coffeeDiscount() {
+        ShopHandler sh = new ShopHandler();
+        sh.orderCoffee("Black", "Onion");
+        assertEquals(0.23, sh.calculateDiscounts(), delta);
+    }
+
+
 }
