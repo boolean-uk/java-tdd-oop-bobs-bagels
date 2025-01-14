@@ -75,11 +75,15 @@
 // EXTENSION
 ## Receipt
 
-| Method         | Member Variable                              | Scenario                          | Result                                      |
-|----------------|----------------------------------------------|-----------------------------------|---------------------------------------------|
-|                | HashMap<Item, Integer> itemsThatArePurchased |                                   |                                             |
-|                | String dateOfPurchase                        |                                   |                                             |
-| printReceipt() |                                              | basket consists of atleast 1 item | String receipt returned and is also printed |
-|                |                                              | basket dont contain any items     | String Error message                        |
-|                |                                              |                                   |                                             |
-|                |                                              |                                   |                                             |
+| Method                   | Member Variable                              | Scenario                          | Result                                      |
+|--------------------------|----------------------------------------------|-----------------------------------|---------------------------------------------|
+|                          | HashMap<Item, Integer> itemsThatArePurchased |                                   |                                             |
+|                          | String dateOfPurchase                        |                                   |                                             |
+| printReceipt()           |                                              | basket consists of atleast 1 item | String receipt returned and is also printed |
+|                          |                                              | basket dont contain any items     | String Error message                        |
+|                          |                                              |                                   |                                             |
+| totalCostWithDiscounts() |                                              | discounts are received            | Double total cost of basket minus discounts |
+|                          |                                              | discounts are not received        | Double total cost of basket                 |
+|                          |                                              |                                   |                                             |
+| costWithDiscounts()      |                                              | discounts are received            | Double cost of item minus discounts         |
+|                          |                                              | discounts are not received        | Double cost of item                         |

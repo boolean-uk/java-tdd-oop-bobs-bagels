@@ -25,6 +25,44 @@ public class ExtensionReceiptTest {
         put(blackCoffee, 3);
     }};
 
+    // testing total cost once again since I had to adjust it when using a HashMap instead of arraylist
+    @Test
+    public void discountsAreRecieved(){
+        ExtensionReceipt receipt = new ExtensionReceipt(itemsThatArePurchased);
+
+        Assertions.assertEquals(10.43, receipt.totalCostWithDiscounts());
+    }
+
+    // testing total cost once again since I had to adjust it when using a HashMap instead of arraylist
+    @Test
+    public void discountsAreNotRecieved(){
+        HashMap<Item, Integer> listOfItems = new HashMap<>(){{
+            Item plainBagel = new PlainBagel(0.39, "BGLP", "Plain", "Bagel") {};
+            put(plainBagel, 5);
+        }};
+
+        ExtensionReceipt receipt = new ExtensionReceipt(listOfItems);
+
+        Assertions.assertEquals(1.95, receipt.totalCostWithDiscounts());
+    }
+
+    // testing total cost once again since I had to adjust it when using a HashMap instead of arraylist
+    @Test
+    public void coffeeAndBagelDiscountAreRecieved(){
+        HashMap<Item, Integer> listOfItems = new HashMap<>(){{
+            Item plainBagel = new PlainBagel(0.39, "BGLP", "Plain", "Bagel") {};
+            put(plainBagel, 1);
+            Item blackCoffee = new BlackCoffee(0.99, "COFB", "Black", "Coffee"){};
+            put(blackCoffee, 1);
+        }};
+
+        ExtensionReceipt receipt = new ExtensionReceipt(listOfItems);
+
+        Assertions.assertEquals(1.25, receipt.totalCostWithDiscounts());
+    }
+
+
+// EXTENSION 2
     @Test
     public void correctReceiptIsPrinted(){
         ExtensionReceipt receipt = new ExtensionReceipt(itemsThatArePurchased);
@@ -34,9 +72,9 @@ public class ExtensionReceiptTest {
         String desiredOutput = "~~~ Bob's Bagels ~~~ \n\n" +
                                     dateOfPurchase +
                                "\n----------------------------\n" +
-                               "Onion Bagel        2   £0.98" +
-                               "Plain Bagel        12  £3.99" +
-                               "Everything Bagel   6   £2.49" +
+                               "Onion Bagel        2   £0.98\n" +
+                               "Plain Bagel        12  £3.99\n" +
+                               "Everything Bagel   6   £2.49\n" +
                                "Coffee             3   £2.97\n" +
                                "\n----------------------------\n" +
                                "Total                 £10.43\n" +
@@ -46,4 +84,5 @@ public class ExtensionReceiptTest {
 
         Assertions.assertEquals(desiredOutput, receipt.printReceipt());
     }
+
 }
