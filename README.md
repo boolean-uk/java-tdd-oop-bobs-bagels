@@ -97,9 +97,9 @@ I want customers to only be able to order things that we stock in our inventory.
 
 | SKU  | Price | Name    | Variant       |
 |------|-------|---------|---------------|
-| BGLO | 0.49  | Bagel   | Onion         |
 | BGLP | 0.39  | Bagel   | Plain         |
 | BGLE | 0.49  | Bagel   | Everything    |
+| BGLO | 0.49  | Bagel   | Onion         |
 | BGLS | 0.49  | Bagel   | Sesame        |
 | COFB | 0.99  | Coffee  | Black         |
 | COFW | 1.19  | Coffee  | White         |
