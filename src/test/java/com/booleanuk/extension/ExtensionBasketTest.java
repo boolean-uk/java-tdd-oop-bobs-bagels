@@ -4,6 +4,10 @@ import com.booleanuk.core.*;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 public class ExtensionBasketTest {
 
     @Test
@@ -95,7 +99,10 @@ public class ExtensionBasketTest {
     public void testCalculateTotalCostOfBasketWithDiscountsAndReceipt(){
         ExtensionBasket basket = new ExtensionBasket();
         Menu menu = new Menu();
-        Receipt receipt = new Receipt();
+        LocalDateTime now = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        String timestamp = now.format(formatter);
+
 
         Item item1 = new OnionBagel();
         basket.add(item1, menu);
@@ -144,9 +151,25 @@ public class ExtensionBasketTest {
         Item item23 = new BlackCoffee();
         basket.add(item23, menu);
 
-        String expectedReceipt = "";
+        String expectedReceipt =
+                "    ~~~ Bob's Bagels ~~~\n" +
+                "\n" +
+                "    "+ timestamp +"\n" +
+                "\n" +
+                "----------------------------\n" +
+                "\n" +
+                "Onion        2  £0.98\n" +
+                "Plain        12  £3.99\n" +
+                "Everything        6  £2.49\n" +
+                "Black        3  £2.97\n" +
+                "\n" +
+                "----------------------------\n" +
+                "Total                  £10.43\n" +
+                "\n" +
+                "        Thank you\n" +
+                "      for your order!";
 
-        Assertions.assertEquals(expectedReceipt, basket.calculateTotalCostOfBasketWithDiscounts(receipt));
+        Assertions.assertEquals(expectedReceipt, basket.calculateTotalCostOfBasketWithDiscountsAndReceipt());
 
 
     }
@@ -155,33 +178,32 @@ public class ExtensionBasketTest {
     public void testCalculateTotalCostOfBasketWithDiscounts2AndReceipt(){
         Menu menu = new Menu();
         ExtensionBasket basket = new ExtensionBasket();
-        Receipt receipt = new Receipt();
+        LocalDateTime now = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        String timestamp = now.format(formatter);
+
+
 
         for(int i = 0; i < 16; i++){
             Item plainBagel = new PlainBagel();
             basket.add(plainBagel, menu);
         }
 
-        String expectedReceipt = "";
+        String expectedReceipt =
+                "    ~~~ Bob's Bagels ~~~\n" +
+                "\n" +
+                "    " + timestamp + "\n" +
+                "\n" +
+                "----------------------------\n" +
+                "\n" +
+                "Plain        16  £5.55\n" +
+                "\n" +
+                "----------------------------\n" +
+                "Total                  £5.55\n" +
+                "\n" +
+                "        Thank you\n" +
+                "      for your order!";
 
-        Assertions.assertEquals(expectedReceipt, basket.calculateTotalCostOfBasketWithDiscounts(receipt), 0.001);
-    }
-
-    @Test
-    public void testCalculateTotalCostOfBasketWithDiscounts3AndReceipt(){
-        Menu menu = new Menu();
-        ExtensionBasket basket = new ExtensionBasket();
-        Receipt receipt = new Receipt();
-
-
-        Item bagel = new PlainBagel();
-        Item coffee = new WhiteCoffee();
-
-        basket.add(bagel, menu);
-        basket.add(coffee, menu);
-
-        String expectedReceipt = "";
-
-        Assertions.assertEquals(expectedReceipt, basket.calculateTotalCostOfBasketWithDiscounts(receipt));
+        Assertions.assertEquals(expectedReceipt, basket.calculateTotalCostOfBasketWithDiscountsAndReceipt());
     }
 }

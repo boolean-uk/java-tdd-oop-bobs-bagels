@@ -67,7 +67,7 @@ public class ExtensionBasket {
         return total;
     }
 
-    public Double calculateTotalCostOfBasketWithDiscounts(){
+    public double calculateTotalCostOfBasketWithDiscounts(){
         double total = 0;
         int numOfBagels = 0;
         int numOfPlainBagels = 0;
@@ -153,4 +153,12 @@ public class ExtensionBasket {
 
         return total;
     }
+
+    public String calculateTotalCostOfBasketWithDiscountsAndReceipt(){
+        Receipt receipt = new Receipt(items);
+        String outputReceipt = receipt.printReceipt();
+
+        return outputReceipt;
+    }
+
 }
