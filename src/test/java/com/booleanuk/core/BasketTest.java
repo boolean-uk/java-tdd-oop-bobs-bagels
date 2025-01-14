@@ -19,8 +19,8 @@ public class BasketTest {
             add(coffee);
             add(filling);
         }};
-
         basket = new Basket(basketItems);
+        basket.setCapacity(6);
         bagel = new Item("BGLS", 0.49, "Bagel", "Sesame");
         coffee = new Item("COFB", 0.99, "Coffee" , "Black");
         filling = new Item("FILX", 0.12, "Filling", "Cream Cheese");
