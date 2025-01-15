@@ -47,7 +47,6 @@ public class MenuTest {
 
         Assertions.assertEquals(
                 "Name: Bacon, Price: 0.12\n" +
-                "Name: Egg, Price: 0.12\n" +
                 "Name: Cheese, Price: 0.12\n" +
                 "Name: CreamCheese, Price: 0.12\n" +
                 "Name: SmokedSalmon, Price: 0.12\n" +

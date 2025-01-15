@@ -20,19 +20,16 @@ public class BasketTest {
     public void testAddItemToBasketWhichIsFull(){
         Basket basket = new Basket();
         Menu menu = new Menu();
-
         Item item = new PlainBagel();
-        basket.add(item, menu);
-        Item item1 = new SesameBagel();
-        basket.add(item1, menu);
-        Item item2 = new EverythingBagel();
-        basket.add(item2, menu);
-        Item item3 = new OnionBagel();
-        basket.add(item3, menu);
-        Item item4 = new HamFilling();
+        for(int i = 0; i < 100; i++){
+
+            basket.add(item, menu);
+        }
 
 
-        Assertions.assertEquals("Basket is full", basket.add(item4, menu));
+
+
+        Assertions.assertEquals("Basket is full", basket.add(item, menu));
     }
 
     @Test
