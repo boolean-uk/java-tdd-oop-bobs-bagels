@@ -1,0 +1,13 @@
+| Classes      | Variables                  | Methods                                   | Scenario                                         | Outcome                                         |
+|--------------|----------------------------|-------------------------------------------|--------------------------------------------------|-------------------------------------------------|
+| `Basket`     | `List<Bagel> bagels`       | `addBagel(Bagel bagel)`                   | there is space in bagels                         | bagel is added                                  |
+|              | `List<Bagel> bagels`       |                                           | there's no space in bagels                       | user notified that bagels has no space          |
+| `Controller` | `Basket basket, View view` | `basket.removeBagel(Bagel bagel)`         | view.removeBagel(...) specifies a specific bagel | specified bagel is removed                      |
+|              |                            |                                           | basket has no bagels                             | user is notified: no bagel to remove            |
+|              | `int basketSize`           | `changeBasketSize(int size)`              | basket has fewer bagels than size                | size is changed                                 |
+|              |                            |                                           | basket has more bagels than size                 | basket is emptied, then size is changed         |
+| `Basket`     |                            | `calculateCost()`                         | items in bagels                                  | cost is calculated and returned                 |
+|              |                            |                                           | bagels list empty                                | 0 is returned                                   |
+| `View`       |                            | `AddBagel(Hashmap<String, float> prices)` | user agrees to price                             | requested bagel is returned to controller       |
+|              |                            |                                           | user disagrees to price                          | no bagel is returned or added                   |
+|              |                            |                                           | user wants to add a bagel                        | all options+costs are displayed to choose from  |

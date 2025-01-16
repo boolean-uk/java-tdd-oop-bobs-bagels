@@ -1,0 +1,65 @@
+Controller
+	- view: View
+	- prices: HashMap<String, Triple<String, String, Float>>
+	- basket: Basket
+	- basketSize: int
+	+changeBasketSize(int size): void
+	+start(): void
+
+View
+	-scanner: Scanner
+	+mainMenu(): int
+	+getInt(): int
+	+addBagel: Bagel
+	+addCoffee(): Coffee
+	+chooseProduct: Product
+	+printReceipt(float totCost, float totDisc, ReceiptInfo info): void
+
+Basket
+	- products: ArrayList<Product>
+	- unDiscountedProducts: ArrayList<Product>
+	- basketSize: int
+	+addProduct(): void
+	+findDiscount: float
+	+calculateDiscount(ArrayList<Product> items, int num, float dis): float
+	+setBasketSize(int basketSize): void
+	+receiptInformation(): ReceiptInfo
+	+clear(): void
+
+Product:service
+	+calculateCost(): float
+	+name(): String
+	+basicPrice(): float
+
+Bagel
+	- bagelType: Triple<String, String, Float>
+	- fillings: ArrayList<Triple<String, String, Float>>
+	+calculateCost(): float
+	+name(): String
+	+basicPrice(): float
+	+calculateBreadCost(): float
+
+Coffee
+	- coffeeType: Triple<String, String, Float>
+	+calculateCost(): float
+	+name(): String
+	+basicPrice(): float
+	+getCoffeeType(): Triple<String, String, Float>
+
+ReceiptInfo
+	+ HashMap<String, Integer> fillings
+	+ ArrayList<Triple<Hashmap<String, Integer>, Float, Float>> deals
+	+ ArrayList<Product> remaining
+
+Triple<A a, B b, C c>
+
+Controller-->View
+Controller-->Basket
+Controller -.-> Triple<A a, B b, C c>
+Basket --> Product
+Basket -.-> ReceiptInfo
+ReceiptInfo --> Product
+Product --> Bagel
+Product --> Coffee
+Bagel -.-> Triple<A a, B b, C c>
+Coffee -.-> Triple<A a, B b, C c>
